@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>fpSup-Tap to Zoom — how to use it | fpSup</title>
+<meta name="description" content="Tap the SIGMA fp LCD to enlarge the preview around that point, including while recording.">
+<link rel="icon" href="../assets/favicon.ico" sizes="any">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<div class="langbar"><div class="lang" role="group" aria-label="Language / 語言 / 语言">
+<button type="button" data-set="en" aria-pressed="true">EN</button>
+<button type="button" data-set="cn" aria-pressed="false">中</button>
+<button type="button" data-set="zh" aria-pressed="false">繁</button>
+</div></div>
+<a class="back" href="../tools/card-composer/">&larr; fpSup-Merge</a>
+<header class="hero"><h1>fpSup-Tap to Zoom</h1>
+<p class="lede en">Tap the LCD to enlarge the live picture around that point; tap again to restore the full frame. Works during recording and leaves recorded files unchanged.</p><p class="lede zh">輕觸 LCD，以該點為中心放大即時畫面；再點一次還原全畫面。錄影中也可使用，錄下的檔案不變。</p>
+<p><span class="en">By </span><span class="zh">作者：</span><a href="https://elcacharrista.com">Jose Hurtado</a> · v0.1.0test · <span class="en">test build</span><span class="zh">測試版</span></p></header>
+<h2><span class="en">Install</span><span class="zh">安裝</span></h2>
+<p class="en">Select <b>Tap to Zoom</b> in <a href="../tools/card-composer/#install">fpSup-Merge</a> and follow its installation steps. SIGMA fp firmware Ver.5.02 only.</p>
+<p class="zh">在 <a href="../tools/card-composer/#install">fpSup-Merge</a> 勾選 <b>Tap to Zoom</b>，依頁面說明安裝。只支援 SIGMA fp 韌體 Ver.5.02。</p>
+<h2><span class="en">Touch and dial controls</span><span class="zh">觸控與轉盤操作</span></h2>
+<p class="en">The first tap zooms 2x. While zoomed, command dials select 2x, 4x or 8x and do not change exposure. The next tap restores the full frame and normal dial controls. Menus, Quick Set, playback and the camera’s own magnifier retain their usual touch handling.</p>
+<p class="zh">第一次觸控放大 2x。放大時，指令轉盤改為選擇 2x、4x 或 8x，不影響曝光。再點一次還原全畫面，轉盤也恢復原本功能。選單、Quick Set、播放與原廠放大檢視保留原有的觸控操作。</p>
+<h2><span class="en">Enable or return to touch AF</span><span class="zh">開啟或恢復觸控對焦</span></h2>
+<p><b>MENU → SHOOT 4 → Tap to Zoom</b> · ON / OFF</p>
+<p class="en">ON by default, in CINE and STILL. Choose OFF to give live-view taps back to touch autofocus. The setting is saved in <code>FPSUP.INI</code> on the card.</p>
+<p class="zh">CINE 與 STILL 預設為 ON。改成 OFF 後，即時檢視的觸控交還給觸控對焦。設定保存在卡上的 <code>FPSUP.INI</code>。</p>
+<h2><span class="en">Using both tools</span><span class="zh">搭配變形鏡頭預覽</span></h2>
+<p class="en">With <a href="desqueeze.html">Desqueeze</a>, the enlarged picture fills the screen and retains the desqueeze proportions. The amber lines still mark the original letterbox edges.</p>
+<p class="zh">與 <a href="desqueeze.html">Desqueeze</a> 同卡時，放大後填滿螢幕並保留還原比例；琥珀色線仍留在原本黑邊的位置。</p>
+<h2><span class="en">Known limits</span><span class="zh">已知限制</span></h2>
+<ul class="en"><li>This is a digital crop of the live-view picture. Pixels become visibly larger at 8x; the camera’s native magnifier remains available.</li><li>The author has not checked EVF, HDMI or the first tap immediately after a cold boot, before live view is rebuilt.</li><li>When upgrading from an early development card, remove <code>42MZOM.BIN</code> before installing this release.</li></ul>
+<ul class="zh"><li>這是即時畫面的數位裁切；8x 時像素會明顯變大，原廠放大檢視仍可使用。</li><li>作者尚未驗證 EVF、HDMI，以及冷開機後、即時畫面重建之前的第一次觸控。</li><li>從早期開發卡更新時，先移除 <code>42MZOM.BIN</code>。</li></ul>
+<h2><span class="en">Verification</span><span class="zh">驗證紀錄</span></h2>
+<p class="en">Jose reports camera tests on 2026-10-09 with Lossless, Gyro2, Res-Custom, RAW-View and both monitor tools. The fpSup integration checks the original file hashes, Merge downloads and loading under the current loader in offline emulation. See the original README for the author’s test details.</p>
+<p class="zh">JOSE 回報在 2026-10-09 與 Lossless、Gyro2、Res-Custom、RAW-View 及這兩項監看工具同卡實測。fpSup 整合核對原始檔案雜湊、Merge 下載內容，並以離線模擬檢查目前載入器的載入行為。作者的實測細節見原始 README。</p>
+<footer><p><a href="../">fpSup</a> · <a href="../tools/card-composer/">fpSup-Merge</a> · <a href="../releases/fpsup-tap-to-zoom-v0.1.0test/README.txt"><span class="en">Original README</span><span class="zh">原始 README</span></a> · <a href="https://elcacharrista.com">Jose Hurtado</a></p></footer>
+<script src="../assets/lang.js?v=7c49866d" defer></script>
+</body></html>

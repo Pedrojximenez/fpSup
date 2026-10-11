@@ -54,3 +54,10 @@ python3 -B -m unittest -v v3.test_boot_options
 `test_boot_options` 核對頁面內嵌八種配對與實際 builder 完全相同；實跑共用 ARM loader／stage2 與 v3 C 入口，核對啟動組合、
 暖啟動、Fast 命中／未命中、AutoRun 關閉、回退、關機還原、啟動畫面路徑及 SupManager 保存。
 離線模型替代韌體 I/O／配置／UI，不能證明實機時間或 flash 寫回。
+
+JOSE 的兩項監看工具已加入「監看與螢幕」：Desqueeze v0.1.4test
+(`41DSQZ.BIN`) 與 Tap to Zoom v0.1.0test (`42TAPZ.BIN`)。作者顯示
+Jose Hurtado，下載 README 同樣保留作者。原始 releases 完整保留，
+輸出使用本頁現行共用啟動配對，不改動產品 BIN。
+兩項 picture hook 使用 CHAIN 並依檔名順序載入；作者的實機驗證
+與我們對本次封裝的離線檢查分別記錄，不把作者的測試當成本機實測。

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>fpSup-Desqueeze — how to use it | fpSup</title>
+<meta name="description" content="Anamorphic preview for the SIGMA fp, with 1.33x, 1.6x and 2.0x factors.">
+<link rel="icon" href="../assets/favicon.ico" sizes="any">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<div class="langbar"><div class="lang" role="group" aria-label="Language / 語言 / 语言">
+<button type="button" data-set="en" aria-pressed="true">EN</button>
+<button type="button" data-set="cn" aria-pressed="false">中</button>
+<button type="button" data-set="zh" aria-pressed="false">繁</button>
+</div></div>
+<a class="back" href="../tools/card-composer/">&larr; fpSup-Merge</a>
+<header class="hero"><h1>fpSup-Desqueeze</h1>
+<p class="lede en">Restore anamorphic proportions in the preview at 1.33x, 1.6x or 2.0x. The full frame is letterboxed; recorded CinemaDNG files remain unchanged.</p><p class="lede zh">以 1.33x、1.6x 或 2.0x 還原變形鏡頭的預覽比例。完整畫面上下留黑邊，錄下的 CinemaDNG 檔案不變。</p>
+<p><span class="en">By </span><span class="zh">作者：</span><a href="https://elcacharrista.com">Jose Hurtado</a> · v0.1.4test · <span class="en">test build</span><span class="zh">測試版</span></p></header>
+<h2><span class="en">Install</span><span class="zh">安裝</span></h2>
+<p class="en">Select <b>Desqueeze</b> in <a href="../tools/card-composer/#install">fpSup-Merge</a> and follow its installation steps. SIGMA fp firmware Ver.5.02 only.</p>
+<p class="zh">在 <a href="../tools/card-composer/#install">fpSup-Merge</a> 勾選 <b>Desqueeze</b>，依頁面說明安裝。只支援 SIGMA fp 韌體 Ver.5.02。</p>
+<h2><span class="en">Choose the factor</span><span class="zh">選擇倍率</span></h2>
+<p><b>MENU → SHOOT 2 → Desqueeze</b> · Off / 1.33x / 1.6x / 2.0x</p>
+<p class="en">Available in CINE and STILL. Frame guides and the magnifier’s white frame follow the preview proportions. Amber lines mark the frame edges and a factor label appears under the battery indicator during live view and playing video.</p>
+<p class="zh">CINE 與 STILL 都可使用。構圖線與放大檢視的白框跟著預覽比例縮放。即時檢視及播放中的影片會以琥珀色線標示畫面邊緣，電池圖示下方顯示倍率。</p>
+<h2><span class="en">Remembered on the card</span><span class="zh">設定保存在卡上</span></h2>
+<p class="en">The factor is saved in <code>FPSUP.INI</code> on the card. This product does not change the camera’s saved settings.</p>
+<p class="zh">倍率保存在卡上的 <code>FPSUP.INI</code>；這項功能不改寫相機的保存設定。</p>
+<h2><span class="en">Using both tools</span><span class="zh">與觸控放大搭配</span></h2>
+<p class="en">You can also select <a href="tap-to-zoom.html">Tap to Zoom</a>. The enlarged picture fills the LCD while keeping the desqueeze proportions.</p>
+<p class="zh">可同時勾選 <a href="tap-to-zoom.html">Tap to Zoom</a>；放大後的畫面填滿 LCD，並保持還原比例。</p>
+<h2><span class="en">Known limits</span><span class="zh">已知限制</span></h2>
+<ul class="en"><li>EVF and HDMI have not yet been checked by the author.</li><li>The magnifier frame immediately after a cold boot is still unverified. Leaving the menu rebuilds the live view and refreshes the frame.</li><li>The native CINE magnifier’s 4x/8x switch can sometimes have no effect; the author has not traced that to Desqueeze.</li></ul>
+<ul class="zh"><li>作者尚未驗證 EVF 與 HDMI。</li><li>冷開機後、第一次進出選單之前，放大框是否已正確仍待驗證；離開選單會重建即時畫面並更新放大框。</li><li>CINE 的原廠放大檢視 4x/8x 切換有時沒有反應；作者尚未確認是否由 Desqueeze 引起。</li></ul>
+<h2><span class="en">Verification</span><span class="zh">驗證紀錄</span></h2>
+<p class="en">Jose reports camera tests on 2026-10-09 with Lossless, Gyro2, Res-Custom, RAW-View and both monitor tools. The fpSup integration checks the original file hashes, Merge downloads and loading under the current loader in offline emulation. See the original README for the author’s test details.</p>
+<p class="zh">JOSE 回報在 2026-10-09 與 Lossless、Gyro2、Res-Custom、RAW-View 及這兩項監看工具同卡實測。fpSup 整合核對原始檔案雜湊、Merge 下載內容，並以離線模擬檢查目前載入器的載入行為。作者的實測細節見原始 README。</p>
+<footer><p><a href="../">fpSup</a> · <a href="../tools/card-composer/">fpSup-Merge</a> · <a href="../releases/fpsup-desqueeze-v0.1.4test/README.txt"><span class="en">Original README</span><span class="zh">原始 README</span></a> · <a href="https://elcacharrista.com">Jose Hurtado</a></p></footer>
+<script src="../assets/lang.js?v=7c49866d" defer></script>
+</body></html>

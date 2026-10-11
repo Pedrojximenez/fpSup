@@ -18,7 +18,7 @@ global.document = {
   addEventListener: (name, fn) => handlers.set(name, fn),
 };
 const api = new Function(grab('compose') + grab('ui') +
-  '\nreturn {BOOT, CAT, DATA_OFF, compose, checks, picked:()=>picked};')();
+  '\nreturn {BOOT, CAT, DATA_OFF, compose, checks, readme, picked:()=>picked};')();
 const change = (dataset, checked) => handlers.get('change')({target:{dataset, checked}});
 const startup = () => el('startup').innerHTML;
 const checked = key => new RegExp(`data-boot="${key}" checked`).test(startup());
@@ -63,4 +63,19 @@ for (const [lang, label] of [['en','In development'], ['cn','开发中'], ['zh',
   assert(el('tiles').innerHTML.includes(`RES-Lab<span class="soon">${label}`));
   assert(!el('tiles').innerHTML.includes('data-id="res-lab"'));
 }
-console.log('passed: defaults, checkbox controls, all four boot choices, unchanged sup selections, download checks and pending RES-Lab in three languages');
+for (const id of ['desqueeze', 'tap-to-zoom']){
+  const p = api.CAT.products.find(p => p.id === id);
+  assert(p && p.author === 'Jose Hurtado' && p.category === 'monitor');
+  assert(el('tiles').innerHTML.includes(`data-id="${id}"`));
+  assert(el('tiles').innerHTML.includes(`../../guide/${id}.html`));
+  change({id}, true);
+}
+assert.deepStrictEqual(api.picked(), ['desqueeze', 'tap-to-zoom']);
+assert(api.checks(api.picked()).every(r => r.ok) && !el('dl').disabled);
+const monitorFiles = api.compose(api.picked()).files.filter(f => f.p);
+assert.deepStrictEqual(monitorFiles.map(f => f.name), ['fpSup/41DSQZ.BIN', 'fpSup/42TAPZ.BIN']);
+assert(el('tiles').innerHTML.includes('作者 <b>Jose Hurtado</b>'));
+assert(api.readme(api.picked()).includes('by Jose Hurtado'));
+for (const id of ['desqueeze', 'tap-to-zoom']) change({id}, false);
+assert(el('dl').disabled);
+console.log('passed: defaults, checkbox controls, all four boot choices, unchanged sup selections, download checks and pending RES-Lab in three languages, and Jose monitor selection/attribution');

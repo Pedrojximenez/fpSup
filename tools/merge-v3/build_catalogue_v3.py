@@ -61,7 +61,7 @@ SUP_RE = re.compile(r'^[0-9]{2}.+\.BIN$')
 CATEGORIES = ['format', 'focus', 'motion', 'monitor', 'development']
 # the page shows sups in this order (user 2026-10-07); the card's load order is
 # still the file names'
-ORDER = ['res-custom', 'res-lab', 'lossless', 'split-record', 'hdrx', 'af', 'gyro2', 'raw-view', 'screenflip', 'lut', 'usbshell']
+ORDER = ['res-custom', 'res-lab', 'lossless', 'split-record', 'hdrx', 'af', 'gyro2', 'raw-view', 'screenflip', 'desqueeze', 'tap-to-zoom', 'lut', 'usbshell']
 AUTHOR = ''
 PRODUCTS = {
     # og3k / og2k: not this round (user 2026-10-07) -- the OG line ships as
@@ -93,6 +93,15 @@ PRODUCTS = {
     'screenflip': dict(name='ScreenFlip',
                        summary=dict(en='Flip the rear screen 180°, mirror it, or both.',
                                     zh='背螢幕翻轉 180°、左右鏡像，或兩者。'), category='monitor', excl=[], author=AUTHOR, credits=[]),
+    # Jose Hurtado's original Loader v3 releases, kept byte-for-byte.
+    'desqueeze': dict(name='Desqueeze', category='monitor', excl=[],
+                      summary=dict(en='Anamorphic preview at 1.33x, 1.6x or 2.0x, with scaled frame guides and an amber indicator. Recorded files are unchanged.',
+                                   zh='變形鏡頭預覽以 1.33x、1.6x 或 2.0x 還原比例，構圖線跟著縮放並顯示琥珀色標記；錄下的檔案不變。'),
+                      author='Jose Hurtado', credits=[]),
+    'tap-to-zoom': dict(name='Tap to Zoom', category='monitor', excl=[],
+                        summary=dict(en='Tap the LCD to zoom around that point; dials select 2x, 4x or 8x and the next tap restores the full frame. Works while recording.',
+                                     zh='輕觸 LCD，以該點為中心放大；轉盤可選 2x、4x 或 8x，再點一次還原全畫面。錄影中也可使用。'),
+                        author='Jose Hurtado', credits=[]),
     'gyro2':      dict(name='Gyro2',
                        summary=dict(en='Gyro data inside every CinemaDNG frame; stabilise in DaVinci Resolve with the Gyroflow plugin (fpSup build).',
                                     zh='把陀螺儀資料寫進每一格 CinemaDNG,用 Gyroflow 的 DaVinci Resolve 插件(fpSup 版)防震。'), category='motion', excl=[], file='20GYR2.BIN',

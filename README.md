@@ -38,6 +38,7 @@ list the versions below.
 | product | version | what it does |
 |---|---|---|
 <!-- releases:begin:en -->
+| [`fpsup-desqueeze`](releases/fpsup-desqueeze-v0.1.4test/) | v0.1.4test | Anamorphic preview: the screen shows the picture desqueezed (1.33x, 1.6x or 2.0x) with the Frame Guide scaled and an amber indicator; the recorded CinemaDNG is unchanged. Test build. |
 | [`fpsup-gyro`](releases/fpsup-gyro-v1.14.1test/) | v1.14.1test | Writes Gyroflow .gcsv motion and .json lens files while recording CinemaDNG. This test build needs on-camera audio sync validation. |
 | [`fpsup-gyro-base`](releases/fpsup-gyro-base-v1.14.0/) | v1.14.0 | Writes the gyro and accelerometer as a raw .GYR in the root of the disk the take went to — every sample, nothing on the camera but the stream — converted afterwards in a browser. Same code as fpGyroSup v1.14.0. |
 | [`fpsup-gyro2`](releases/fpsup-gyro2-v0.1.0/) | v0.1.0 | Writes the fp's gyro and level data into every CinemaDNG frame; the Gyroflow (fpSup) plugin for DaVinci Resolve reads it from the frames and stabilises the clip, with no sync step. Works with Lossless. |
@@ -47,6 +48,7 @@ list the versions below.
 | [`fpsup-raw-view`](releases/fpsup-raw-view-v0.3.0test/) | v0.3.0test | RAW monitoring for CinemaDNG 12-bit: a RAW row in the COLOR menu makes the LCD show what will be recorded — recording gain in standby, sensor saturation as white, two latitude curves (SA/GA) mapped onto a 709 screen. The recorded RAW is not changed. Loader v3 card; settings are kept in its own file, not in the camera. Test build. |
 | [`fpsup-res-custom`](releases/fpsup-res-custom-v0.1.2test/) | v0.1.2test | Open Gate formats in one: OG2K, OG3K, OG3.5K, OG4K and S16 as extra movie resolutions in Settings and Quick Set, each a small data file in fpSup\RESCUS; the camera's own tables are not changed. Test. |
 | [`fpsup-screenflip`](releases/fpsup-screenflip-v0.1.0test/) | v0.1.0test | Flip the rear screen 180°, mirror it, or both — set separately for each custom display mode, applied when you switch into that mode. Test build. |
+| [`fpsup-tap-to-zoom`](releases/fpsup-tap-to-zoom-v0.1.0test/) | v0.1.0test | Tap to Zoom: tap the screen to zoom the live picture 2x around that point; the next tap returns to the full frame. While zoomed, the command dials pick 2x, 4x or 8x and never touch exposure. Works while recording; the file is unchanged. Stacks on Desqueeze. Test. |
 | [`fpsup-usbshell`](releases/fpsup-usbshell-v3.4.0test/) | v3.4.0test | The shell that answers `shl` over USB, parasitic on the camera's own PTP gadget so the firmware keeps owning the endpoints. |
 <!-- releases:end:en -->
 
@@ -154,6 +156,7 @@ Each page says what has been proven, what is being worked on, and what is open.
 | 產品 | 版本 | 做什麼 |
 |---|---|---|
 <!-- releases:begin:zh -->
+| [`fpsup-desqueeze`](releases/fpsup-desqueeze-v0.1.4test/) | v0.1.4test | 變形鏡頭預覽：螢幕以 1.33x、1.6x 或 2.0x 還原畫面比例，構圖線跟著縮放並顯示琥珀色標記；錄下的 CinemaDNG 不變。測試版。 |
 | [`fpsup-gyro`](releases/fpsup-gyro-v1.14.1test/) | v1.14.1test | 錄製 CinemaDNG 時寫出 Gyroflow 的 .gcsv 運動紀錄與 .json 鏡頭檔。此測試版的聲畫同步仍待實機驗證。 |
 | [`fpsup-gyro-base`](releases/fpsup-gyro-base-v1.14.0/) | v1.14.0 | 在錄影那顆磁碟的根目錄寫一個原始 .GYR(陀螺儀與加速度計每個樣本都在),機上只做串流,事後在瀏覽器轉換。與 fpGyroSup v1.14.0 同一份程式。 |
 | [`fpsup-gyro2`](releases/fpsup-gyro2-v0.1.0/) | v0.1.0 | 把 fp 的陀螺儀與水平儀資料寫進每一格 CinemaDNG;DaVinci Resolve 的 Gyroflow (fpSup) 外掛直接從畫面檔讀取並防震，不用手動同步。可與 Lossless 同卡。 |
@@ -163,6 +166,7 @@ Each page says what has been proven, what is being worked on, and what is open.
 | [`fpsup-raw-view`](releases/fpsup-raw-view-v0.3.0test/) | v0.3.0test | CinemaDNG 12-bit 的 RAW 監看:COLOR 選單多一列 RAW,螢幕顯示即將錄下的內容——待機用錄影增益、感光元件飽和即白、兩條寬容度曲線(SA/GA)映射到 709 螢幕。錄下的 RAW 不被改動。Loader v3 卡;設定存在自己的檔案,不寫相機設定。測試版。 |
 | [`fpsup-res-custom`](releases/fpsup-res-custom-v0.1.2test/) | v0.1.2test | Open Gate 各格式合一:OG2K、OG3K、OG3.5K、OG4K、S16 成為 Settings 與 QS 的錄影解析度新選項,每個格式是 fpSup\RESCUS 裡的一個小資料檔;不改相機原廠的任何表。測試版。 |
 | [`fpsup-screenflip`](releases/fpsup-screenflip-v0.1.0test/) | v0.1.0test | 背螢幕翻轉 180°、鏡像或兩者 —— 每個自訂顯示模式各自設定,切換進那個模式時才套用。測試版。 |
+| [`fpsup-tap-to-zoom`](releases/fpsup-tap-to-zoom-v0.1.0test/) | v0.1.0test | Tap to Zoom：輕觸螢幕即以該點為中心把即時畫面放大 2x，再點一次還原全畫面。放大時，指令轉盤可選 2x、4x 或 8x，不影響曝光。錄影中也可用，檔案不變。可與 Desqueeze 同卡。測試版。 |
 | [`fpsup-usbshell`](releases/fpsup-usbshell-v3.4.0test/) | v3.4.0test | 透過 USB 回應 `shl` 的 shell。寄生在相機自己的 PTP gadget 上,端點仍由韌體管。 |
 <!-- releases:end:zh -->
 
