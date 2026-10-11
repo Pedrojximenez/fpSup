@@ -77,7 +77,7 @@ def test_sup(sup_id, rows, block_size=None):
 
 
 class Camera:
-    def __init__(self, files, dirs, stale=None):
+    def __init__(self, files, dirs, stale=None, autorun=None):
         self.files, self.dirs = files, dirs
         self.img = IMAGE.read_bytes()
         mu = self.mu = Uc(UC_ARCH_ARM, UC_MODE_ARM)
@@ -87,7 +87,7 @@ class Camera:
         mu.mem_map(HEAP, HEAP_SIZE)
         mu.mem_map(STACK - 0x20000, 0x20000)
         mu.mem_map(DONE, 0x1000)
-        ar = B.autorun(pathlib.Path('/tmp'))
+        ar = autorun if autorun is not None else B.autorun(pathlib.Path('/tmp'))
         for a, v in B.loader_words(ar).items():
             mu.mem_write(a, struct.pack('<I', v))
         for a, v in (stale or {}).items():
@@ -267,13 +267,15 @@ class Camera:
         return self.call(CAVE_LOW)                 # the echo entry: `b load`
 
     def state(self):
-        objs = {o for o, _ in self.registered}
+        objs = {o - size for o, _ in self.registered for size, version in ((SVC_BYTES, 3), (SVC_BYTES + 4, 4))
+                if self.w(o - size) == version}
         assert len(objs) == 1, self.registered
-        return objs.pop() - SVC_BYTES
+        return objs.pop()
 
     def journal(self):
         st = self.state()
-        e, out = self.w(st + O_JBASE), []
+        delta = 4 if self.w(st) == 4 else 0
+        e, out = self.w(st + O_JBASE + delta), []
         while self.w(e):
             a, n = self.w(e), self.w(e + 4)
             out.append((a, n, bytes(self.mu.mem_read(e + 8, n))))
@@ -282,15 +284,17 @@ class Camera:
 
     def log(self):
         st = self.state()
+        delta = 4 if self.w(st) == 4 else 0
         out = []
-        for i in range(self.w(st + O_NLOG)):
-            r = st + O_LOG + LOG_BYTES * i
+        for i in range(self.w(st + O_NLOG + delta)):
+            r = st + O_LOG + delta + LOG_BYTES * i
             code, a, b = struct.unpack('<3I', self.mu.mem_read(r, 12))
             out.append((L.get(code, code), a, b, self.cstr(r + 12, 20)))
         return out
 
     def power_off(self):
-        obj = self.state() + O_POFF
+        st = self.state()
+        obj = st + O_POFF + (4 if self.w(st) == 4 else 0)
         vtbl = self.w(obj)
         return self.call(self.w(vtbl + 0xC), r0=obj, r1=4)
 
@@ -472,8 +476,8 @@ class LoaderV3Tests(unittest.TestCase):
         cam.boot()
         self.assertEqual(cam.draws, [('\\fpSup\\UI\\4.BIN', DRAW_PAUSED)] * 3)
         self.assertEqual(cam.w(DRAW), DRAW_STOCK)
-        from boot_splash import HOLD_MS
-        self.assertEqual(cam.slept, HOLD_MS)
+        self.assertEqual(cam.slept, 0)
+        self.assertNotIn('D_SLEEP', cam.calls)
         self.assertIn('UI_FORCE', cam.calls)
         i = len(cam.calls) - cam.calls[::-1].index('TICK') - 1           # LOAD_DONE_US
         self.assertLess(i, cam.calls.index('D_FILE'))
@@ -535,8 +539,10 @@ class LoaderV3Tests(unittest.TestCase):
         self.assertTrue(lines[-1].startswith('0E 00000001 '))           # DONE, one kept
 
     def test_padded_shell_sup_still_loads(self):
-        """Written over a longer file (mode 7 does not truncate), padded to it."""
-        sup = B.shell_sup(pad_to=len(B.shell_sup()) + 256)
+        """Historical padded sups remain readable; new builders emit real size."""
+        sup = bytearray(B.shell_sup()) + bytes(256)
+        struct.pack_into('<II', sup, 8, len(sup), len(sup))
+        sup = bytes(sup)
         cam = Camera(*card(('00SHELL.BIN', sup)))
         cam.boot()
         self.assertEqual(len(cam.tasks), 1)

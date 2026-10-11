@@ -19,6 +19,14 @@ entry:
     push    {r4, r5, r6, lr}            @ even count: 8-aligned at the call
     mov     r4, sp
     bic     sp, sp, #7
+#ifdef SL_FILE_OFFSET
+    /* Shared stage2 passes the resolved entry. Recover the OUTER VBIN so
+     * SupManager saves the entire boot envelope, including its FSDS tail. */
+    adr     r0, entry
+    movw    ip, #:lower16:SL_FILE_OFFSET
+    movt    ip, #:upper16:SL_FILE_OFFSET
+    sub     r0, r0, ip
+#endif
     adr     r3, strs                    @ struct strings { dir, self }
     adr     r1, dir_s
     str     r1, [r3]

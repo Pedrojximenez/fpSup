@@ -61,27 +61,27 @@ class BootChainTests(unittest.TestCase):
                                       [f'STORE_LEN={length}', 'STORE_MAGIC=0x12345678']))
                 # The complete executable part: reject unexpected control/stack
                 # changes, including changes inside the repeated copy loop.
-                self.assertEqual(code[:21], (
-                    0xE92D41F0, 0xE28F7048, 0xE8B70070, 0xE5940000,
-                    0xE1500005, 0x1A00000C, 0xE2841004, 0xE1A02006,
+                self.assertEqual(code[:25], (
+                    0xE92D41F0, 0xE1A0800D, 0xE3CDD007, 0xE28F7050,
+                    0xE8B70070, 0xE5940000, 0xE1500005, 0x1A00000D, 0xE2841004, 0xE1A02006,
                     0xE3005000 | length, 0xE491C004, 0xE482C004,
                     0xE2555004, 0x1AFFFFFB, 0xE8970030, 0xE12FFF34,
-                    0xE12FFF35, 0xE1A00006, 0xE8BD41F0, 0xE12FFF10,
-                    0xE3A00000, 0xE8BD81F0))
-                self.assertEqual(code[21:], (0xC3075264, 0x12345678,
+                    0xE12FFF35, 0xE1A00006, 0xE1A0D008, 0xE8BD41F0, 0xE12FFF10,
+                    0xE3A00000, 0xE1A0D008, 0xE8BD81F0))
+                self.assertEqual(code[25:], (0xC3075264, 0x12345678,
                                              LOADER_BASE, DCACHE, ICACHE))
                 # Magic mismatch skips copy/cache/tail and returns zero via pc.
-                self.assertEqual(branch_target(code[5], 5 * 4), 19 * 4)
+                self.assertEqual(branch_target(code[7], 7 * 4), 22 * 4)
                 # The matching path's sole loop performs no stack adjustment.
-                self.assertEqual(branch_target(code[12], 12 * 4), 9 * 4)
+                self.assertEqual(branch_target(code[14], 14 * 4), 11 * 4)
                 saved = [r for r in range(16) if code[0] & (1 << r)]
                 self.assertEqual(saved, [4, 5, 6, 7, 8, 14])
                 self.assertEqual(len(saved) * 4 % 8, 0)  # both cache calls aligned
-                for pop_at in (17, 20):  # hit restores lr; miss restores pc
+                for pop_at in (20, 24):  # hit restores lr; miss restores pc
                     restored = [r for r in range(16) if code[pop_at] & (1 << r)]
                     self.assertEqual(restored[:-1], saved[:-1])
                     self.assertEqual(len(restored), len(saved))
-                    self.assertEqual(restored[-1], 14 if pop_at == 17 else 15)
+                    self.assertEqual(restored[-1], 14 if pop_at == 20 else 15)
 
     def test_payload_update_does_not_change_autorun(self):
         with tempfile.TemporaryDirectory(prefix='boot-chain-test-') as tmp:
@@ -109,7 +109,7 @@ class BootChainTests(unittest.TestCase):
                     self.assertEqual(products[0][0], products[1][0])
                     self.assertNotEqual(products[0][1], products[1][1])
 
-    def test_bin_padding_uses_loader_capacity_without_changing_autorun(self):
+    def test_unpadded_files_use_loader_capacity_without_changing_autorun(self):
         import re
         source = (HERE / 'asm/loader.S').read_text()
         cap = int(re.search(r'^\.equ\s+MAXLEN,\s*(0x[0-9A-Fa-f]+)',
@@ -143,7 +143,9 @@ class BootChainTests(unittest.TestCase):
                     else:
                         self.assertEqual(used, wanted)
                         self.assertEqual(auto, baseline)
-                    self.assertEqual(len(blob), 32768 if used <= 32768 else cap)
+                    self.assertEqual(len(blob), used)
+                    self.assertNotIn(b'# pad -- see PAD_TO:', auto)
+                    self.assertTrue(auto.endswith(b'\n'))
                     self.assertFalse(any(blob[used:]))
 
 

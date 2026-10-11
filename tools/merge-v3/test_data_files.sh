@@ -5,10 +5,21 @@
 set -e
 HERE=$(cd "$(dirname "$0")" && pwd); REL="$HERE/../../releases"
 T=$(mktemp -d); trap 'rm -rf "$T"' EXIT
-for d in "$REL"/fpsup-*-v*; do ln -s "$d" "$T/$(basename "$d")"; done
+for d in "$REL"/fpsup-*-v*; do
+  case "$d" in */fpsup-res-custom-v*) continue;; esac
+  ln -s "$d" "$T/$(basename "$d")"
+done
 R="$T/fpsup-res-custom-v0.0.1test"; mkdir -p "$R/fpSup/RESCUS"
 SRC=$(ls -d "$REL"/fpsup-lossless-v0.2.0test)
 cp "$SRC/AutoRun.txt" "$R/"; cp -R "$SRC/fpSup/LOADER.BIN" "$SRC/fpSup/UI" "$R/fpSup/"
+python3 - "$R/AutoRun.txt" "$HERE" <<'PY'
+from pathlib import Path
+import sys
+sys.path.insert(0, str(Path(sys.argv[2]).parents[1] / 'fp_usb_shell'))
+from autorun_text import without_legacy_padding
+p = Path(sys.argv[1])
+p.write_bytes(without_legacy_padding(p.read_bytes()))
+PY
 cp "$SRC/fpSup/10LOSS.BIN" "$R/fpSup/32RESCUS.BIN"
 for f in OG3K S16 OG35K; do printf 'RCD1 %s' $f > "$R/fpSup/RESCUS/$f.RCD"; done
 ( cd "$R"; for f in AutoRun.txt fpSup/LOADER.BIN fpSup/UI/*.BIN fpSup/32RESCUS.BIN fpSup/RESCUS/*.RCD; do

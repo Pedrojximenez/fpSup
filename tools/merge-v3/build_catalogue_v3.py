@@ -17,11 +17,16 @@ refuses the pairs that would only ever end that way (EXCL below).
 
 This builder reads the newest frozen v3 release of every product in PRODUCTS,
 checks each file against its MANIFEST.txt, refuses if the shared files differ
-between the releases it picked, and embeds the bytes in template.html.  The
+between the releases it picked (ignoring only historical AutoRun filler),
+and embeds the bytes in template.html. The
 page re-hashes every file of the zip against these hashes before it offers
-the download.  The old fpSup.BIN page (tools/card-composer) is left alone.
+the download. Historical AutoRun filler is removed after manifest verification,
+before comparing shared commands. Released files on disk are never rewritten.
+Final Instant/Fast boot pairs are rebuilt from the maintained shared builder;
+product and data files retain their manifest-verified release bytes. The Res
+tools may instead come from a separately verified development snapshot.
 """
-import argparse, base64, datetime, hashlib, json, pathlib, re, subprocess, sys
+import argparse, base64, datetime, hashlib, json, pathlib, re, struct, subprocess, sys
 
 HERE = pathlib.Path(__file__).resolve().parent
 FPSUP = HERE.parent.parent
@@ -29,15 +34,17 @@ RELEASES = FPSUP / 'releases'
 TEMPLATE = HERE / 'template.html'
 GUIDE = FPSUP / 'guide'
 OUT = HERE / 'index.html'
-# The site's fpSup-Merge address is tools/card-composer/ (user 2026-10-08): the same
-# page is written there too; the older page lives in tools/card-composer/legacy/.
 SITE_COPY = HERE.parent / 'card-composer' / 'index.html'
+INPUTS = HERE / 'inputs' / 'res-custom-20261011'
+sys.path.insert(0, str(FPSUP / 'fp_usb_shell'))
+from autorun_text import without_legacy_padding
+from v3 import build_v3 as V3
 
 SHARED = ['AutoRun.txt', 'fpSup/LOADER.BIN'] + [f'fpSup/UI/{i}.BIN' for i in range(5)]
-SUP_RE = re.compile(r'^[0-9]{2}[A-Z0-9]{1,6}\.BIN$')
+SUP_RE = re.compile(r'^[0-9]{2}.+\.BIN$')
 
-# product -> page metadata.  Only listed products appear: res-lab is left out
-# (single-card, user 2026-10-07: not in this round).
+# product -> page metadata. Development Res tools are separate manifest-checked
+# snapshots; frozen releases are never rewritten to add virtual RCD support.
 #
 # category: the page's sections, in CATEGORIES order.
 # excl: pairs whose claims collide.  Symmetric (checked below).  The page still
@@ -54,7 +61,7 @@ SUP_RE = re.compile(r'^[0-9]{2}[A-Z0-9]{1,6}\.BIN$')
 CATEGORIES = ['format', 'focus', 'motion', 'monitor', 'development']
 # the page shows sups in this order (user 2026-10-07); the card's load order is
 # still the file names'
-ORDER = ['res-custom', 'lossless', 'split-record', 'hdrx', 'af', 'gyro2', 'raw-view', 'screenflip', 'lut', 'usbshell']
+ORDER = ['res-custom', 'res-lab', 'lossless', 'split-record', 'hdrx', 'af', 'gyro2', 'raw-view', 'screenflip', 'lut', 'usbshell']
 AUTHOR = ''
 PRODUCTS = {
     # og3k / og2k: not this round (user 2026-10-07) -- the OG line ships as
@@ -66,11 +73,16 @@ PRODUCTS = {
     'res-custom': dict(name='Res-Custom',
                        summary=dict(en='Custom recording resolutions in one sup: open gate OG2K, OG3K, OG3.5K, OG4K and S16.',
                                     zh='多種自訂錄影解析度合一:Open Gate OG2K、OG3K、OG3.5K、OG4K 與 S16。'), category='format', file='32RESCUS.BIN',
-                       excl=['og3k', 'og2k', 'formats', 'res-lab'],
+                       excl=['og3k', 'og2k', 'formats'],
                        data=dict(dir='RESCUS', ext='.RCD',
                                  names={'OG35K': 'OG3.5K'}),
                        author=AUTHOR, credits=['Jose Hurtado (the S16, OG3.5K and OG4K formats, used with his permission; the one-core, row-per-format design, the greyed-out options and the video clamp)'],
                        pending=True),
+    'res-lab': dict(name='RES-Lab', category='format', file='50RES-Lab v0.1.0test.BIN',
+                    excl=[], requires=['res-custom'], needs_manager=True, stage='dev', pending=True,
+                    summary=dict(en='Choose a sensor mode, crop and output size with a live diagram. Applies immediately; SAVE creates named RCD files.',
+                                 zh='搭配示意圖選擇感光元件模式、裁切與輸出尺寸，即時套用；SAVE 可另存具名 RCD。'),
+                    author=AUTHOR, credits=[]),
     'lossless':   dict(name='Lossless',
                        summary=dict(en="Lossless-compressed CinemaDNG, by the camera's own hardware codec.",
                                     zh='用相機內建的硬體編碼器錄無損壓縮 CinemaDNG。'), category='format', excl=[], author=AUTHOR, credits=['CorNy (found that a mixed clip needs its first frame uncompressed)']),
@@ -113,6 +125,88 @@ PRODUCTS = {
 
 def sha(b):
     return hashlib.sha256(b).hexdigest()
+
+
+def embedded(files):
+    return [dict(path=rel, size=len(b), sha256=sha(b), data=base64.b64encode(b).decode())
+            for rel, b in files.items()]
+
+
+def boot_options(shared):
+    """Frozen products stay exact; final boot packaging comes from the shared
+    builder. Every choice embeds a complete, independently hashed pair."""
+    for i, pixels in enumerate(V3.splash_frames()):
+        if shared[f'fpSup/UI/{i}.BIN'] != pixels:
+            raise SystemExit('released splash differs from the current shared boot artwork')
+    variants = {}
+    for manager in (False, True):
+        for instant in (False, True):
+            for fast in (False, True):
+                ar, loader, info = V3.boot_card(instant=instant, fast=fast, allsups=manager)
+                key = ('m1' if manager else '') + f'i{int(instant)}f{int(fast)}'
+                variants[key] = dict(info=dict(info, manager=manager), files=embedded({'AutoRun.txt': ar, 'fpSup/LOADER.BIN': loader}))
+    sys.path.insert(0, str(FPSUP / 'uishare/tab'))
+    import build_ft6
+    management, _ = build_ft6.data_file()
+    default = variants['i1f0']['files']
+    ui = embedded({rel: shared[rel] for rel in SHARED[2:]})
+    sources = [FPSUP / 'fp_usb_shell' / p for p in
+               ['build_autorun.py', 'asm/loader.S', 'asm/stage2.S', 'asm/store_boot.S',
+                'asm/abort.S', 'asm/splash_finish.S', 'v3/build_v3.py', 'v3/sloader_entry.S', 'v3/sloader.c', 'v3/allsups.c']]
+    sources += list((FPSUP / 'uishare/tab').glob('*.py'))
+    sources += list((FPSUP / 'uishare').glob('*.c')) + list((FPSUP / 'uishare').glob('*.h'))
+    return default + ui, dict(default=dict(instant=True, fast=False, manager=False), variants=variants,
+                             manager_files=embedded({'fpSup/UI/ALLSUPS.BIN': management}),
+                             sources={str(p.relative_to(FPSUP)): sha(p.read_bytes()) for p in sources})
+
+
+def input_products(directory):
+    """Read exact development snapshots; require every recorded file hash.
+    They are selectable builds, not a published version or a release rewrite.
+    """
+    if directory is None:
+        return []
+    meta = json.loads((directory / 'manifest.json').read_text())
+    verified = {}
+    for rel, expected in meta['files'].items():
+        if pathlib.PurePosixPath(rel).is_absolute() or '..' in pathlib.PurePosixPath(rel).parts:
+            raise SystemExit('invalid snapshot path: ' + rel)
+        b = (directory / rel).read_bytes()
+        if len(b) != expected['size'] or sha(b) != expected['sha256']:
+            raise SystemExit('snapshot does not match manifest: ' + rel)
+        verified[rel] = b
+    def sup_file(rel, expected_sid):
+        b = verified[rel]
+        magic, hlen, flen, block, entry, sid, version, service = struct.unpack_from('<8I', b)
+        if (magic != V3.SL_MAGIC or hlen != 32 or flen != len(b) or block < flen or
+                not 32 <= (entry & ~1) < flen or sid.to_bytes(4, 'little') != expected_sid.encode() or service > V3.SL_SVC_VERSION):
+            raise SystemExit('invalid snapshot sup: ' + rel)
+        return dict(size=len(b), sha256=sha(b), data=base64.b64encode(b).decode()), version
+    out = []
+    for key, entry in meta['products'].items():
+        spec = PRODUCTS[key]
+        if spec.get('stage') in ('dev', 'long'):
+            continue
+        payload, version = sup_file(entry['file'], 'RLAB' if key == 'res-lab' else 'RCUS')
+        filename = pathlib.PurePosixPath(entry['file'])
+        p = dict(id=key, name=filename.stem.lstrip('0123456789') if key == 'res-lab' else spec['name'], category=spec['category'], file=filename.name,
+                 excl=list(spec['excl']), requires=spec.get('requires', []), needs_manager=spec.get('needs_manager', False),
+                 author=spec['author'], credits=spec['credits'], release=f'fpsup-{key}-dev-r{version}',
+                 version=str(version),
+                 build_label=dict(en='Development build', zh='開發版'), date=meta['date'], about=spec['summary'], guide=guide(key),
+                 provenance=dict(manifest=str(directory.relative_to(HERE) / 'manifest.json') if directory.is_relative_to(HERE) else str(directory / 'manifest.json'),
+                                 source_sha256=meta['source_sha256']), data_files=[], support_files=[], **payload)
+        for rel in entry.get('data_files', []):
+            b = verified[rel]
+            target = 'fpSup/RESCUS/' + pathlib.PurePosixPath(rel).name
+            p['data_files'].append(dict(label=label(spec, target), **embedded({target:b})[0]))
+        for rel in entry.get('support_files', []):
+            target = 'fpSup/RESCUS/' + pathlib.PurePosixPath(rel).name
+            p['support_files'] += embedded({target:verified[rel]})
+        if entry.get('virtual'):
+            p['virtual'], _ = sup_file(entry['virtual'], 'RCUS')
+        out.append(p)
+    return out
 
 
 def version_key(q):
@@ -210,9 +304,11 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--releases', type=pathlib.Path, help='read releases from here (tests)')
     ap.add_argument('--out', type=pathlib.Path)
+    ap.add_argument('--inputs', type=pathlib.Path, help='manifest-checked development Res tools')
     a = ap.parse_args()
     RELEASES = a.releases or RELEASES
     OUT = a.out or OUT
+    inputs = a.inputs or (INPUTS if not a.releases else None)
     for k, spec in PRODUCTS.items():
         if k not in ORDER:
             raise SystemExit(f'{k}: not in ORDER')
@@ -224,7 +320,7 @@ def main():
 
     products, shared, skipped, pending = [], None, [], []
     for key, spec in PRODUCTS.items():
-        d = latest_v3(key)
+        d = None if spec.get('stage') in ('dev', 'long') else latest_v3(key)
         if d is None:
             skipped.append(key)
             # shown greyed out, not selectable: the user wants to see what is coming
@@ -237,6 +333,7 @@ def main():
             continue
         sup, files, data = load(key, d, spec)
         common = {rel: files[rel] for rel in SHARED}
+        common['AutoRun.txt'] = without_legacy_padding(common['AutoRun.txt'])
         if shared is None:
             shared, shared_from = common, d.name
         else:
@@ -260,6 +357,10 @@ def main():
                                          for rel in data]))
     if not products:
         raise SystemExit('no v3 release found')
+    for p in input_products(inputs):
+        products = [q for q in products if q['id'] != p['id']] + [p]
+        pending = [q for q in pending if q['id'] != p['id']]
+        skipped = [q for q in skipped if q != p['id']]
 
     # Simplified Chinese = the Traditional text through the site's own character
     # table (assets/lang.js), so there is still only one Chinese text to keep.
@@ -268,8 +369,8 @@ def main():
     t2s = dict(re.findall(r'"(.)":"(.)"', body))
     if len(t2s) < 500:
         raise SystemExit(f'assets/lang.js: only {len(t2s)} characters in MAP')
-    cat = dict(categories=CATEGORIES, t2s=t2s, shared=[dict(path=rel, size=len(shared[rel]), sha256=sha(shared[rel]),
-                            data=base64.b64encode(shared[rel]).decode()) for rel in SHARED],
+    boot_shared, boot = boot_options(shared)
+    cat = dict(categories=CATEGORIES, t2s=t2s, shared=boot_shared, boot=boot,
                products=sorted(products, key=lambda p: p['file']),
                pending=sorted(pending, key=lambda p: p['file']),
                order=ORDER)
@@ -278,9 +379,10 @@ def main():
         raise SystemExit('template.html must hold @@CATALOGUE@@ exactly once')
     # </script> cannot occur in base64 or in the ABOUT text we embed, but guard anyway.
     blob = json.dumps(cat, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
-    OUT.write_text(page.replace('@@CATALOGUE@@', blob), encoding='utf-8')
+    rendered = page.replace('@@CATALOGUE@@', blob)
+    OUT.write_text(rendered, encoding='utf-8')
     if not a.out:
-        SITE_COPY.write_text(page.replace('@@CATALOGUE@@', blob), encoding='utf-8')
+        SITE_COPY.write_text(rendered, encoding='utf-8')
 
     print(f'wrote {OUT} ({OUT.stat().st_size:,} B)')
     for p in cat['products']:

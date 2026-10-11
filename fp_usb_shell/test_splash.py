@@ -474,15 +474,12 @@ class SplashTests(unittest.TestCase):
             self.assertEqual(harness.u32(0xC0731000), 0x12345678,
                              'payload placement must precede completion')
             self.assertEqual(harness.u32(0xC072F6F8), 123456,
-                             'load timestamp must precede the display hold')
+                             'load timestamp must precede completion drawing')
             harness.events.append('draw')
             return 1 if ui_ok else 0
 
         def hold(args):
-            self.assertEqual(args[0], 2000)
-            self.assertEqual(harness.events, expected + ['draw'] * 3)
-            self.assertEqual(harness.u32(DRAW), initial_draw)
-            harness.events.append('hold')
+            self.fail('completion must restore the UI without a sleep call')
 
         def tick(args):
             harness.events.append('tick')
@@ -492,7 +489,7 @@ class SplashTests(unittest.TestCase):
             if address == DRAW:
                 self.assertEqual(initial_draw, DRAW_PAUSE)
                 self.assertEqual((size, value), (4, DRAW_ORIG))
-                self.assertEqual(harness.events, expected + ['draw'] * 3 + ['hold'])
+                self.assertEqual(harness.events, expected + ['draw'] * 3)
                 harness.events.append('restore')
             elif address == ECHO_SLOT:
                 self.assertEqual(mode, 'fast')
@@ -553,7 +550,7 @@ class SplashTests(unittest.TestCase):
             harness.callbacks[address] = lambda args, name=name: harness.events.append(name)
         harness.write_callback = on_write
         harness.execute(harness.STAGING + secs[0][2], harness.STAGING)
-        expected += ['draw'] * 3 + ['hold']
+        expected += ['draw'] * 3
         if initial_draw == DRAW_PAUSE:
             expected += ['restore', 'dcache', 'icache']
             expected += ['draw-manager', 'clear-0', 'clear-1', 'redraw']

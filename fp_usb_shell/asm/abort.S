@@ -50,7 +50,9 @@ entry:                                  /* (ctx, argc, argv), return ignored */
      * would have done it are among the ones about to be skipped.  We are
      * inside that handler, and writing the slot we were reached through is
      * safe -- the return address is already in lr. */
-    push    {r4, lr}
+    push    {r4, r5, r6, lr}
+    mov     r5, sp                      @ preserve the native caller's exact SP
+    bic     sp, sp, #7
     LDA     r0, ECHO_ORIG
     LDA     r1, ECHO_SLOT
     str     r0, [r1]
@@ -109,4 +111,5 @@ entry:                                  /* (ctx, argc, argv), return ignored */
     strb    r3, [r4, #AR_RUNNING]
 
 5:  mov     r0, #0
-    pop     {r4, pc}
+    mov     sp, r5
+    pop     {r4, r5, r6, pc}

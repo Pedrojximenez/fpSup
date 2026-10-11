@@ -105,12 +105,13 @@ struct sl_svc {
 #if defined(SL_ALLSUPS) || defined(SL_SVC_BUTTON)
     /* ---- version 4 (only the loader with SYSTEM page 6, allsups.c).  A sup
      * that uses it defines SL_SVC_BUTTON and checks version >= 4 first. ----
-     * The calling sup's cell in the All Sups grid hands it the AEL key: on
-     * AEL there, fn(arg) runs on the UI thread (return quickly; its return
-     * value is only shown in FT_Key's diagnostics).  `label`, if not 0, is
-     * what the footer says next to the AEL icon (ASCII, < 24 bytes, kept by
-     * pointer: put it in the sup's block).  What fn does is the sup's
-     * business.  A second call replaces the first. */
+     * Register the sup-owned More Settings handler. Manage Sups offers it
+     * only while the sup is loaded and enabled for the next boot. Selecting
+     * More Settings runs fn(arg) on the UI thread; return quickly. The sup
+     * owns its settings UI and persistence. The return value is diagnostic
+     * only (FT_Key). `label` is retained for ABI compatibility and borrowed
+     * by pointer: keep it resident. A second call replaces the first.
+     * r3g used this same ABI for AEL; r3h moves the entry into the popup. */
     int      (*button)(const struct sl_svc *, int (*fn)(void *arg), void *arg, const char *label);
 #endif
 };

@@ -121,7 +121,9 @@ _start:                                 /* runs as the borrowed echo handler:
  * `add rX, pc, #(label - label)` rather than `adr`: a label minus a label is a
  * constant the assembler folds, and this assembler resolves only R_ARM_CALL
  * and pc-relative literal loads.  The same idiom the loader's CALL macro uses. */
-    push    {r4-r8, lr}                 @ six words keep SP 8-byte aligned at calls
+    push    {r4-r8, lr}
+    mov     r8, sp                      @ echo callers can arrive four bytes off
+    bic     sp, sp, #7
 8:  add     r7, pc, #(0f - 8b - 8)
     ldmia   r7!, {r4, r5, r6}           @ STORE, STORE_MAGIC, CAVE_LOW
 
@@ -151,12 +153,14 @@ _start:                                 /* runs as the borrowed echo handler:
      * comparing the store's magic with the one it was built with -- a direct
      * question instead of a flag somebody has to remember to set. */
     mov     r0, r6
+    mov     sp, r8
     pop     {r4-r8, lr}
     bx      r0                          @ tail into the loader, in the echo
                                         @ handler's context, which is what it
                                         @ was built for
 
 9:  mov     r0, #0                      @ "nothing happened" -- the AutoRun
+    mov     sp, r8
     pop     {r4-r8, pc}                 @ carries on and loads the slow way
 
     .align  2

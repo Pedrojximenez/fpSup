@@ -79,7 +79,9 @@
  *
  * Returns to the first half in every case. */
 stage2:
-    push    {r4, r5, r6, r7, r8, r9, r10, lr}   @ an even count: the firmware LDRDs need 8-byte alignment
+    push    {r4, r5, r6, r7, r8, r9, r10, r11, lr}
+    mov     r11, sp                     @ native echo may arrive four bytes off
+    bic     sp, sp, #7                  @ align ALL helper and firmware calls
     mov     r6, r0
 
     /* Hand the cave's allocator a fresh start, before anybody can ask.
@@ -333,10 +335,27 @@ stage2:
     str     r1, [r0]
     bl      s2_publish
 1:
+#elif defined(LOADER_HOOK_OFF)
+    /* A new card may turn Instant off after a warm restart retained the old
+     * callsite. Remove only our known branch; preserve any foreign owner.
+     * Like arming this site, this intentional boot setting survives power-off. */
+    movw    r0, #:lower16:LH_SITE
+    movt    r0, #:upper16:LH_SITE
+    ldr     r1, [r0]
+    movw    r2, #:lower16:LH_BL
+    movt    r2, #:upper16:LH_BL
+    cmp     r1, r2
+    bne     1f
+    movw    r1, #0x00CC
+    movt    r1, #0xEB00                @ native bl 0xC03DA758
+    str     r1, [r0]
+    bl      s2_publish
+1:
 #endif
 .Ls2_done:
     mov     r0, #0
-    pop     {r4, r5, r6, r7, r8, r9, r10, pc}
+    mov     sp, r11
+    pop     {r4, r5, r6, r7, r8, r9, r10, r11, pc}
 
 /* --- one pass over the section table --------------------------------------
  * r6 = the buffer, r8 = 1 to place firmware destinations, 0 to place pool
@@ -684,7 +703,11 @@ lh_splash_pre:
 lsp_quiet:
     mov     r0, #0
     bx      lr
+#ifdef LH_SPLASH_PATH
+lsp_path:   .asciz  LH_SPLASH_PATH
+#else
 lsp_path:   .asciz  "\\FPSUPUI\\0.BIN"
+#endif
 lsp_zero:   .asciz  "0"
 lsp_w:      .asciz  "1024"
 lsp_h:      .asciz  "56"

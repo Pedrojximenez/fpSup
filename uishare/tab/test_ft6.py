@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""SYSTEM page 6's pages (ft6_page.py) offline, and the fake UI app the loader
+"""fpSup management pages offline, and the fake UI app the loader
 tests (fp_usb_shell/v3/test_allsups.py) run Loader v3's built-in page against:
 the stock NBR loader C05E84D8, the variable registry, subscription, the GUI's
 post queue and the file rename are Python; the rest of the image is real.
@@ -31,7 +31,8 @@ VAR_REGISTER, VAR_SUBSCRIBE, POST_INT, POST_STR, F_RENAME = (
 
 
 class Cam(T.Camera):
-    def __init__(self, files, dirs, nbr_result=0, new_name=F.MACHINE, grow=1, write_ok=True):
+    def __init__(self, files, dirs, nbr_result=0, new_name=F.MACHINE, grow=1, write_ok=True,
+                 machine_capacity=24):
         super().__init__(files, dirs)
         self.nbr_result, self.new_name, self.grow, self.write_ok = nbr_result, new_name, grow, write_ok
         self.nbr_calls, self.vars, self.subs, self.posts, self.renames = [], {}, [], [], []
@@ -50,7 +51,7 @@ class Cam(T.Camera):
         self.put(READER + 0x14, POOL_AT)
         self.put(READER + 0x24, 0xC18C0460)
         self.put(APP + 0xF8, STOCK_MACHINES)
-        self.put(APP + 0xFC, 24)
+        self.put(APP + 0xFC, machine_capacity)
         self.put(APP + 0x104, MACHS)
         for i in range(STOCK_MACHINES + 1):
             m = FAKE + 0x8000 + 0x40 * i
@@ -73,7 +74,11 @@ class Cam(T.Camera):
             self.subs.append((r0, self.cstr(r1), r2))
             return self._ret(0)
         if addr in (POST_INT, POST_STR):
-            self.posts.append((self.cstr(r1), self.cstr(r2, 256) if addr == POST_STR else r2))
+            name = self.cstr(r1)
+            value = self.cstr(r2, 256) if addr == POST_STR else r2
+            self.posts.append((name, value))
+            if name in self.vars:
+                self.vars[name] = (self.vars[name][0], value)
             return self._ret(0)
         if addr == F_RENAME:                          # nothing may rename a file now
             self.renames.append((self.cstr(r1),))
@@ -84,17 +89,38 @@ class Cam(T.Camera):
             sp = self.r(T.UC_ARM_REG_SP)
             self.nbr_calls.append(([r0, r1, r2, r3], sp, bytes(mu.mem_read(r1, r2))))
             if self.nbr_result == 0:
-                self.put(APP + 0x80, self.w(APP + 0x80) + 1)
+                if self.nbr_calls[-1][2].startswith(F.NBR.MAGIC):
+                    F.NBR.inspect(self.nbr_calls[-1][2])
+                    return self._ret(0)  # image resources add no screens/machines
+                count = self.w(APP + 0x80) + len(F.SL.native_rows(self.nbr_calls[-1][2]))
+                if count > self.w(APP + 0x84):
+                    # Explicit declared stub effect: stock registration can grow
+                    # the vector. This does not emulate the native allocator.
+                    cap = (count + 31) & ~31
+                    vector = self._alloc(4 * cap)
+                    mu.mem_write(vector, bytes(mu.mem_read(self.w(APP + 0x8C), 4 * self.w(APP + 0x80))))
+                    self.put(APP + 0x84, cap)
+                    self.put(APP + 0x8C, vector)
+                self.put(APP + 0x80, count)
                 n = self.w(APP + 0xF8)
                 if self.grow:
-                    self.put(MACHS + 4 * n, self.new_machine)
+                    vector = self.w(APP + 0x104)
+                    if n == self.w(APP + 0xFC):
+                        cap = (n + 32) & ~31
+                        grown = self._alloc(4 * cap)
+                        mu.mem_write(grown, bytes(mu.mem_read(vector, 4 * n)))
+                        vector = grown
+                        self.put(APP + 0xFC, cap)
+                        self.put(APP + 0x104, vector)
+                    self.put(vector + 4 * n, self.new_machine)
                     self.put(APP + 0xF8, n + 1)
                 self.put(r3, NEW_RD)
             return self._ret(self.nbr_result)
         return super()._hook(mu, addr, size, data)
 
     def machines(self):
-        return [self.cstr(self.w(self.w(MACHS + 4 * i) + 8)) for i in range(self.w(APP + 0xF8))]
+        vector = self.w(APP + 0x104)
+        return [self.cstr(self.w(self.w(vector + 4 * i) + 8)) for i in range(self.w(APP + 0xF8))]
 
     def press(self, k):
         """FT_Key = k, as the GUI tells its subscriber: fn(descriptor)."""

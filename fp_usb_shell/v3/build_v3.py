@@ -9,8 +9,9 @@ DIR/fpSup/.  The loader (stage 0) is the existing loader.S; only its path
 changes, so it is built by build_autorun.py exactly as today and its own BIN
 is thrown away.
 
-LOADER.BIN is a VBIN with no sections: loader.S checks "VBIN" and branches to
-+16 with r0 = the buffer.  What runs there is sloader_entry.S then sloader.c.
+loader_bin() builds the core as a VBIN with no sections. Final boot_card()
+packaging wraps it in shared stage2, including when both options are off so a
+previous warm Instant hook is removed. Frozen product cards stay unchanged.
 """
 import argparse, pathlib, re, shutil, struct, subprocess, sys, tempfile
 
@@ -109,7 +110,7 @@ def splash_defines():
             f'SPLASH_HEIGHT_TEXT="{HEIGHT}"', 'SPLASH_OFFSET_TEXT="0"']
 
 
-def loader_bin(extra_cflags=(), splash=True, allsups=False):
+def loader_bin(extra_cflags=(), splash=True, allsups=False, file_offset=None):
     """(LOADER.BIN bytes, info).  `splash`: carry the four-box completion.
     `allsups`: carry the built-in SYSTEM page 6 (allsups.c; its data is
     UI_DIR\\ALLSUPS_FILE, built by fpSup/uishare/tab/build_ft6.py --data)."""
@@ -117,7 +118,8 @@ def loader_bin(extra_cflags=(), splash=True, allsups=False):
         text = compile_c(pathlib.Path(t), extra_cflags, allsups)
     src = HERE / 'sloader_entry.S'
     strs = [f'SL_DIR="\\\\{SL_DIR}"', f'SL_SELF="{SL_SELF}"', *(splash_defines() if splash else []),
-            *([f'ALLSUPS_PATH="\\\\{SL_DIR}\\\\UI\\\\{ALLSUPS_FILE}"'] if allsups else [])]
+            *([f'ALLSUPS_PATH="\\\\{SL_DIR}\\\\UI\\\\{ALLSUPS_FILE}"'] if allsups else []),
+            *([f'SL_FILE_OFFSET={file_offset}'] if file_offset is not None else [])]
     c_base = symbols(src, ['C_BOOT=1', *strs])['c_base']
     defines = [f'C_BOOT={c_base + text.functions["sl_boot"]}', *strs]
     stub = assemble(src, defines)
@@ -132,16 +134,13 @@ def loader_bin(extra_cflags=(), splash=True, allsups=False):
                   'sl_boot': c_base + text.functions['sl_boot']}
 
 
-def make_sup(body, entry_off, sup_id, version=1, block_size=None, min_svc=1,
-             pad_to=0):
+def make_sup(body, entry_off, sup_id, version=1, block_size=None, min_svc=1):
     """A sup file: the 32-byte header, then `body`.  `entry_off` is from the
     first byte of the FILE (so header + offset into body), bit 0 = Thumb.
 
-    `pad_to`: zero-pad the file to at least this length.  The camera's open
-    mode 7 overwrites without truncating, so a file written over a longer one
-    keeps the old tail -- and the 加載器 refuses a header whose file_len is not
-    the size on the card.  Pass the size already on the card."""
-    file_len = max(SL_HEADER_LEN + len(body), pad_to)
+    File length is header + body + word alignment. Shorter hot updates delete
+    the old file first; the loader requires file_len to match the actual file."""
+    file_len = SL_HEADER_LEN + len(body)
     file_len += -file_len % 4
     block = block_size if block_size is not None else file_len
     if isinstance(sup_id, str):
@@ -153,6 +152,8 @@ def make_sup(body, entry_off, sup_id, version=1, block_size=None, min_svc=1,
 
 def autorun(out, extra=(), splash=True):
     """The AutoRun, from build_autorun.py --loader with the new path."""
+    if any(flag in extra for flag in ('--store-boot', '--loader-hook', '--loader-hook-off')):
+        raise BuildError('Instant/Fast require boot_card(): AutoRun and LOADER.BIN are one pair')
     anim = ['--four-box-bar', '--splash-dir', UI_DIR] if splash else ['--no-four-box-bar']
     with tempfile.TemporaryDirectory(prefix='slv3ar-') as t:
         tmp = pathlib.Path(t)
@@ -172,6 +173,47 @@ def splash_frames():
     return frames()
 
 
+def boot_card(*, instant=False, fast=False, splash=True, allsups=False, extra_cflags=()):
+    """A coherent (AutoRun, LOADER.BIN, info) pair. Instant uses the RAM
+    AutoRun hook; Fast uses the settings-store bootstrap. Both are emitted by
+    the maintained common builder, with v3 as its one returning entry.
+
+    The core retains its own VBIN header for its code length. The optional
+    disabled list follows the OUTER container so SupManager rewrites the
+    complete file rather than dropping the boot envelope.
+    """
+    flags = (['--loader-hook'] if instant else ['--loader-hook-off']) + (['--store-boot'] if fast else [])
+    anim = ['--four-box-bar', '--splash-dir', UI_DIR] if splash else ['--no-four-box-bar']
+    with tempfile.TemporaryDirectory(prefix='slv3boot-') as t:
+        tmp = pathlib.Path(t)
+        payload = tmp / 'core.bin'
+        offset = 0
+        for attempt in range(2):
+            core, info = loader_bin(extra_cflags, False, allsups, file_offset=offset)
+            tail = core[-(8 + 4 * DS_MAX):] if allsups else b''
+            payload.write_bytes(core[:-len(tail)] if tail else core)
+            cmd = [sys.executable, '-B', str(SHELL / 'build_autorun.py'), '--loader',
+                   '--no-shell', *anim, *flags, '--bin-name', f'{SL_DIR}\\\\{SL_SELF}',
+                   '--boot-bin', f'{payload}:16', '--out', str(tmp / 'AutoRun.txt')]
+            p = subprocess.run(cmd, capture_output=True, text=True)
+            if p.returncode:
+                raise BuildError('boot envelope failed:\n' + p.stderr + p.stdout)
+            blob = (tmp / f'{SL_DIR}\\\\{SL_SELF}').read_bytes()
+            magic, count, entry, size = struct.unpack_from('<4sIII', blob)
+            if magic != b'VBIN' or len(blob) != 16 + count * 8 + size:
+                raise BuildError('invalid shared boot envelope')
+            if attempt and entry != offset:
+                raise BuildError('boot envelope moved after resolving its file offset')
+            offset = entry
+        if blob[offset-16:] != payload.read_bytes():
+            raise BuildError('v3 core is not the last run-in-place section')
+        blob += tail
+        if len(blob) > 0xF000:
+            raise BuildError('boot envelope exceeds the common loader read cap')
+        return (tmp / 'AutoRun.txt').read_bytes(), blob, dict(info, bytes=len(blob),
+                core_entry=offset, sections=count, instant=instant, fast=fast)
+
+
 def stock(addr, n, image=None):
     img = image if image is not None else IMAGE.read_bytes()
     off = addr - 0xC0000000
@@ -180,7 +222,7 @@ def stock(addr, n, image=None):
     return img[off:off + n]
 
 
-def patch_sup(sup_id, rows, inner=b'', inner_entry=None, version=1, block_size=None, pad_to=0):
+def patch_sup(sup_id, rows, inner=b'', inner_entry=None, version=1, block_size=None):
     """A sup made of firmware patches (patch_sup.S), optionally followed by an
     inner entry.  rows: (address, new bytes, kind) -- the stock bytes come from
     the reference image -- or (address, bytes-to-claim, kind, 'claim') to claim
@@ -218,11 +260,10 @@ def patch_sup(sup_id, rows, inner=b'', inner_entry=None, version=1, block_size=N
     code = assemble(src, [f'INNER_OFF={inner_off}'])
     if len(code) != head:
         raise BuildError('patch_sup.S moved when the offset went in')
-    return make_sup(code + tabled + inner, SL_HEADER_LEN, sup_id, version, block_size,
-                    pad_to=pad_to)
+    return make_sup(code + tabled + inner, SL_HEADER_LEN, sup_id, version, block_size)
 
 
-def shell_sup(ep_patches=False, pad_to=0, burst15=False, noptp=True):
+def shell_sup(ep_patches=False, burst15=False, noptp=True):
     """The USB shell: worker.S's `spawn`, after the rendezvous block is zeroed and
     the interface patch is in -- the two things pass 1 used to place."""
     import patches
@@ -241,7 +282,7 @@ def shell_sup(ep_patches=False, pad_to=0, burst15=False, noptp=True):
         rows += [(a, struct.pack('<I', v), 2) for a, v, *_ in patches.BURST15]
     if noptp:      # the firmware's PTP receiver steals shell commands (patches.py)
         rows += [(a, struct.pack('<I', v), 2) for a, v, *_ in patches.NOPTP]
-    return patch_sup('SHEL', rows, code, symbols(worker)['spawn'], pad_to=pad_to)
+    return patch_sup('SHEL', rows, code, symbols(worker)['spawn'])
 
 
 def loader_words(autorun_text):
@@ -257,16 +298,27 @@ def main():
     ap.add_argument('--sup', action='append', default=[], type=pathlib.Path)
     ap.add_argument('--shell', action='store_true', help='add the USB shell as 00SHELL.BIN')
     ap.add_argument('--no-splash', action='store_true')
+    ap.add_argument('--allsups', action='store_true', help='include SYSTEM page 6 and its management UI data')
+    ap.add_argument('--instant-start', action='store_true', help='reuse the RAM loader after a power-switch restart')
+    ap.add_argument('--fast-start', action='store_true', help='store the bootstrap loader in camera settings')
     a = ap.parse_args()
-    vbin, info = loader_bin(splash=not a.no_splash)
+    ar, vbin, info = boot_card(instant=a.instant_start, fast=a.fast_start,
+                              splash=not a.no_splash, allsups=a.allsups)
     d = a.out / SL_DIR
     d.mkdir(parents=True, exist_ok=True)
     (d / SL_SELF).write_bytes(vbin)
-    (a.out / 'AutoRun.txt').write_bytes(autorun(a.out, splash=not a.no_splash))
+    (a.out / 'AutoRun.txt').write_bytes(ar)
     if not a.no_splash:
         (d / 'UI').mkdir(exist_ok=True)
         for i, px in enumerate(splash_frames()):
             (d / 'UI' / f'{i}.BIN').write_bytes(px)
+    if a.allsups:
+        sys.path.insert(0, str(FPSUP / 'uishare' / 'tab'))
+        import build_ft6
+        data, _ui_info = build_ft6.data_file()
+        (d / 'UI').mkdir(exist_ok=True)
+        (d / 'UI' / ALLSUPS_FILE).write_bytes(data)
+        info['management_data'] = len(data)
     if a.shell:
         (d / '00SHELL.BIN').write_bytes(shell_sup())
     for s in a.sup:

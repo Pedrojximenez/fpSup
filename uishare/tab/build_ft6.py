@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""SYSTEM page 6 ("All Sups"): \\fpSup\\UI\\ALLSUPS.BIN, the data of Loader v3's
+"""fpSup management: \\fpSup\\UI\\ALLSUPS.BIN, the data of Loader v3's
 built-in page (fpSup/fp_usb_shell/v3/allsups.c; LOADER.BIN with
 build_v3.loader_bin(allsups=True)).
 
     python3 -B fpSup/uishare/tab/build_ft6.py [-o ALLSUPS.BIN]
 
-Pages: ft6_page.py (FT_Y6, FT_LIST); pack format: sl_pages.py; the record of
+Pages: manage_page.py (home, management, information); pack format: sl_pages.py; the record of
 what was proven on the camera: projects/usb-shell-sup/notes/ALL_SUPS_MENU.md.
 (r1 / r2 were the stand-alone sup 90FTAB6.BIN; its cards are in
 projects/usb-shell-sup/cards/20261007-ft6-*.)
@@ -85,21 +85,45 @@ def build_pack(pages, machine=MACHINE, trans=TRANSITIONS, index_name=INDEX_NAME)
 
 # ---- Loader v3's built-in page: the data file ------------------------------------
 TAB_OFF, TAB_ROOM = 0, 128
-FT6_MAGIC = 0x54365446                      # "FT6T"
+FT6_MAGIC = 0x5A365446                      # "FT6Z": independent image resource reader
 STRING_SITES = (0xC05E5B58, 0xC05E61C8, 0xC05E61E0)
 
 
-ROWS = 17                                   # allsups.c FT6_ROWS: the language grid's cells
+ROWS = 32                                   # stored rows, independent of five visible slots
+VISIBLE = 5
 ROW_BYTES = 272                             # struct ft6_row
+
+
+def native_english_texts():
+    """Exact stock wording/markup, retaining the user's English-only UI choice.
+
+    This is build-time reuse of English.nloc, not a runtime language switch.
+    Custom Sup concepts retain their own labels instead of unrelated camera
+    firmware-update/format confirmations.
+    """
+    import nbr_stock
+    nbr = nbr_stock.StockNbr((ROOT / 'out/seg0_c0000000.bin').read_bytes())
+    return nbr.strings('English')
+
+
+NATIVE_ENGLISH = native_english_texts()
 TEXTS = ('Unload on restart', 'Load on restart', 'Load failed', 'Write failed',   # allsups.c T_UNLOAD .. T_BLANK
          '\\' + 'fpSup', '.BIN', '.OFF', ' ',
          # the footer's pieces (allsups.c ft6_foot): the localized Footer05's own icon markup
          '<!font_G_bt_ok_K153,CENTER>', '<!font_G_bt_AEL_K153,CENTER>', '<!font_G_bt_menu_K153,CENTER>',
-         '<!28sp,CENTER>', 'Uninstall', 'Install', 'Cancel')
+         '<!28sp,CENTER>', 'Disable', 'Enable', NATIVE_ENGLISH['Footer05'], 'Loader v3',
+         NATIVE_ENGLISH['Footer01'], NATIVE_ENGLISH['Footer02'],
+         '<!font_G_bt_rightleft_K153,CENTER>Page<!28sp,CENTER><!font_G_bt_menu_K153,CENTER>Back')
 # the product names (the user 2026-10-07), by the sup_id in each file's header;
 # a sup not here shows its file name without the load-order digits.
 PRODUCTS = {'SHEL': 'USB-Shell', 'GYR2': 'Gyro2', 'LOSS': 'Lossless', 'RCUS': 'RES-Custom',
             'RAWV': 'RAW-View', 'FLIP': 'Flip'}
+# Native size-44 Other_fontsetting name ink ends, relative to x=49. Measured
+# from the current camera's 1484/1485 screenshots; these accompany the same
+# six product labels as their build-time versions, not runtime font guesses.
+NAME_INK_END = {'SHEL': 150, 'GYR2': 90, 'LOSS': 126, 'RCUS': 191,
+                'RAWV': 161, 'FLIP': 53}
+VERSION_GAP = 12
 
 
 def versions():
@@ -124,16 +148,24 @@ def versions():
 VAR_INT, VAR_TEXT = 0, 2
 VAR_PARTS = 'RENGV'                         # registration order (allsups.c ft6_slot)
 BLOCK_STRINGS = 60                          # < ui_apply.c MAX_STRINGS (64)
-TAB_WORDS = 11 + len(TEXTS) + 3 + 4 + 3 + 7 + 5     # struct ft6_tab
-LIST_TRANSITIONS = ((PAGE, 'FT_LIST', 'FT_LIST'), ('FT_LIST', PAGE, 'Return'))
+TAB_WORDS = 11 + len(TEXTS) + 3 + 2 + 4 + 3 + 7 + 5 + 17 + 2 + VISIBLE
+LIST_TRANSITIONS = tuple(t for name in ('FT_LIST', 'FT_UPDATES', 'FT_CARD', 'FT_ABOUT')
+                         for t in ((PAGE, name, name), (name, PAGE, 'Return')))
 
 
 def variables():
-    import ft6_page as FP
+    import manage_page as MP
     # the posted ones first: red, green (allsups.c ft6_slot), then name, grey, version
-    return ([(VAR_INT, FP.KEY_VAR), (VAR_TEXT, FP.OK_VAR)] +
-            [(VAR_TEXT, FP.part_var(part, k)) for part in VAR_PARTS for k in range(1, ROWS + 1)] +
-            [(VAR_INT, FP.FOCUS_VAR)])
+    return ([(VAR_INT, MP.PAGE_KEY), (VAR_TEXT, 'FT_OK')] +
+            [(VAR_TEXT, MP.var(part, k)) for part in VAR_PARTS for k in range(1, VISIBLE + 1)] +
+            [(VAR_TEXT, MP.PAGE_TEXT), (VAR_TEXT, 'FT_Version')] +
+            [(VAR_INT, MP.var(part, k)) for part in ('Visible', 'Lock', 'Selected', 'More', 'Default', 'Choice')
+             for k in range(1, VISIBLE + 1)] +
+            [(VAR_INT, MP.FOCUS), (VAR_INT, MP.HOME_FOCUS), (VAR_INT, MP.var('InfoFocus', 0)),
+             (VAR_TEXT, 'FT_RightFooter')] +
+            [(VAR_INT, MP.var('VersionX', k)) for k in range(1, VISIBLE + 1)] +
+            [(VAR_INT, MP.var(part, k)) for part in ('TabVisible', 'TabActive', 'TabX', 'TabWidth')
+             for k in range(1, MP.PAGE_TABS + 1)])
 
 
 def data_file() -> tuple[bytes, dict]:
@@ -147,6 +179,8 @@ def data_file() -> tuple[bytes, dict]:
     (the entry points its address at soff[string#]); refs say which BE page
     field takes which string's offset."""
     import ft6_page as FP
+    import manage_page as MP
+    import manager_logo
     from ui import fpui
     img = (ROOT / 'out/MAIN_c0000000.bin').read_bytes()
     if SL.gui_id(img, BASE) != GUI_ID:
@@ -155,11 +189,16 @@ def data_file() -> tuple[bytes, dict]:
     if stock[0] != 0xEB000005:
         raise SystemExit('0xC056461C is not the stock bl FUN_c0564638')
     _img, pool = FP.stock_pool()
-    y6, refs6 = FP.build(img, pool)
-    lst, refsl = FP.build_grid(img, pool)
-    pack = build_pack([(PAGE, y6), ('FT_LIST', lst)], trans=TRANSITIONS + LIST_TRANSITIONS)
+    y6, refs6 = MP.build_home(img, pool)
+    lst, refsl = MP.build_manage(img, pool)
+    extra = [(name, MP.build_info(name, img, pool)) for name in MP.INFO]
+    pack = build_pack([(PAGE, y6), ('FT_LIST', lst)] + [(name, data[0]) for name, data in extra],
+                      trans=TRANSITIONS + LIST_TRANSITIONS)
+    logo_pack = NBR.build([NBR.Resource(name, name + '.xci', blob)
+                           for name, _color, blob in manager_logo.images()])
     rows = {n: o for n, o, _h in SL.native_rows(pack)}
     refs = [(rows[PAGE] + o, t) for o, t in refs6] + [(rows['FT_LIST'] + o, t) for o, t in refsl]
+    refs += [(rows[name] + o, t) for name, (_data, refs) in extra for o, t in refs]
     strings = list(dict.fromkeys(t for _o, t in refs))
     # A block is one layer, its offsets base, base + 1, ... in block order
     # (fpui.py), so one STRBASE -- of its first string -- says them all (a
@@ -194,21 +233,28 @@ def data_file() -> tuple[bytes, dict]:
     for sid, title in PRODUCTS.items():
         v = vers.get(sid)
         prod.append((struct.unpack('<I', sid.encode().ljust(4, b'\0'))[0],
-                     place(title.encode() + b'\0', 1), place(('v' + v).encode() + b'\0', 1) if v else 0))
-    prod_off = place(b''.join(struct.pack('<3I', *p) for p in prod))
+                     place(title.encode() + b'\0', 1), place(('v' + v).encode() + b'\0', 1) if v else 0,
+                     49 + NAME_INK_END[sid] + VERSION_GAP))
+    prod_off = place(b''.join(struct.pack('<4I', *p) for p in prod))
     soff_off = place(bytes(4 * len(strings)))
     refs_off = place(b''.join(struct.pack('<II', o, strings.index(t)) for o, t in refs))
     vars_off = place(b''.join(struct.pack('<II', ty, at) for (ty, _n), at in zip(variables(), names)))
     rows_off = place(bytes(ROWS * ROW_BYTES), 8)
+    logo_off = place(logo_pack, 8)
+    # load_builtin reads through pack_off + pack_len. Keep the page pack
+    # last so the independent image reader's bytes are resident as well.
     pack_off = place(pack, 8)
     tab = struct.pack('<11I', FT6_MAGIC, pack_off, len(pack), ui_off, len(blocks), len(strings), soff_off,
                       len(refs), refs_off, len(variables()), vars_off)
     tab += struct.pack(f'<{len(TEXTS)}I', *txt) + struct.pack('<III', rows_off, len(prod), prod_off)
+    tab += struct.pack('<II', logo_off, len(logo_pack))
     tab += struct.pack('<4I', *stock) + MACHINE.encode().ljust(12, b'\0')
     if len(tab) > 4 * TAB_WORDS:
         raise SystemExit('tab too big')
     out[:len(tab)] = tab
-    return bytes(out), {'ui': len(ui), 'pages': (len(y6), len(lst)), 'pack': len(pack), 'versions': vers,
+    return bytes(out), {'ui': len(ui), 'pages': {PAGE: len(y6), 'FT_LIST': len(lst),
+                                               **{name: len(data[0]) for name, data in extra}},
+                        'pack': len(pack), 'logo_pack': len(logo_pack), 'versions': vers,
                         'strings': strings, 'refs': len(refs), 'file': len(out)}
 
 

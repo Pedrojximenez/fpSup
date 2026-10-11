@@ -68,8 +68,10 @@ ui_begin:
     UI_CALL 0xC03E4270                 @ direct osdfile; no nested dispatcher
     subs r6, r6, #1
     bne 1b
+#if SPLASH_HOLD_MS > 0
     movw r0, #SPLASH_HOLD_MS
     UI_CALL 0xC03705D8                 @ native sleep(ms); yields, no new task
+#endif
     add sp, sp, #32
     UI_ADDR r0, 0xC0528700
     ldr r1, [r0]

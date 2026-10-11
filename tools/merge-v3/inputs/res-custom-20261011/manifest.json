@@ -1,0 +1,83 @@
+{
+  "date": "2026-10-11",
+  "source_sha256": {
+    "projects/open-gate/build/build_v3_reslab.py": "35b7584103d3074084f04cbe6c01ea08fd11cb2598ced33007a3c24f1643d327",
+    "projects/open-gate/build/rl_v3.c": "a7b1a8e2844348535a4f9c20047972f1797f02135bd4d796e1e508fd24e8daa9",
+    "projects/open-gate/build/sl_lab_page.py": "1fef2ebcc365190834d633baa011079530529f3904fe8ab7751c17e87f123e72",
+    "projects/open-gate/build/sl_b25_page.py": "e7694090711e5b69075b201dfbf213cb55dac07b4d5d9cb8957f92b591b01e60",
+    "projects/open-gate/build/sl_pages.py": "221c6f9285981473d294e131b906178989a9c6739061043ec4f033495b49d0fe",
+    "projects/open-gate/build/sl_lists.py": "db5f7e87999cc60e773ef1b9224a961c43db600bb8121ddbab681876d88dc32e",
+    "projects/open-gate/build/sl_lab_sidebar.py": "a396f5b6f378f10752dd5d9607a917d1ff835373193b9eaa5c0770bb10a4101f",
+    "projects/open-gate/build/imx410_block.py": "f330ddde0b0166e7195c0bb484af19d651db9fe8788fccd57e36484314959659",
+    "projects/open-gate/build/imx410_full.py": "73527ae3edb414ed60efe20d6be223ff0175434181884435e2682641bca62845",
+    "fpSup/uishare/ui_pool.c": "4ecb12d15a2eeebb2e052d3dbde104f5bc1fded3e99e3388f77e3bb8626b4cf3",
+    "projects/open-gate/build/sl_menu/sl_menu.c": "4bb53b6688d5f03888494c170f48359ffb777acd94ef28eef859f416edf62bf8",
+    "projects/open-gate/build/sl_menu/sl_modes.c": "36118d61fd47d74e76ae4b2bfb93c99c72e9a3839540d82dea2985dab2643b14",
+    "projects/open-gate/build/sl_menu/sl_menu.h": "001c3b8f0b0699bc3752877a68e05e48459e753187098abe0b1409104f4d0b4e",
+    "projects/open-gate/build/sl_menu/build_sl_menu.py": "e15c038facff690449c144528d21fb5a8d63a5ae18abb0d9a73f8e266c63205e",
+    "projects/open-gate/build/res-custom/ogc_layout.py": "7bab0be057d4f816062cb81039d140d3d916f4e6eea9f590ac231207dbb68dcf",
+    "projects/open-gate/build/res-custom/ogc_shims.S": "ef271ea015dd6b85b1bdf98730487c04787a64071d353affb1d1e840a8d06944",
+    "projects/open-gate/build/res-custom/rcd.py": "da18edd30340c18951a7c6f274ce3eac4785be3b750df72bd7baee2ff8a4d45a",
+    "projects/open-gate/build/res-custom/virtual_rcd.h": "78bb3f320d4af4610efbd6fca27d33d329e762b30cd301c06acfdf96f3739a17",
+    "projects/open-gate/build/res-custom/ogc_virtual.c": "27fe531e8b9b77d870e2fcbb0bfb9af5ceb46c63646cb57ade7eda72bf3da186",
+    "projects/open-gate/build/res-custom/ogc_binfilt.c": "4590c05f2884a1315b274a15c2db79ee697f4b0785945f6ed74d6b060319ef8e",
+    "projects/open-gate/build/res-custom/ogc.c": "0ad3d0c6e358bc8ad3a0b3067d461f314a0a7b06eb93fd957d19ec995c699bf9",
+    "projects/open-gate/build/res-custom/build_v3_rescustom.py": "2e0b1db92e66d5be40d244e8b43f676125bdcd7bcc9a9054d17eaa1ff4626475",
+    "fpSup/fp_usb_shell/v3/sloader.h": "433c38dd6dce0250e13db5b9235664786d13f83c55707243436d6afc6122eb4a",
+    "fpSup/fp_usb_shell/v3/sloader.c": "2e5c3326c282d22625875435e6010a75740e5dee2e853bb306d7a8c806a985e1",
+    "fpSup/fp_usb_shell/v3/build_v3.py": "027030c0ed689d3f53fe0608b2fd02085483cab9b38b0a8ccf0d36466a1e4ef6",
+    "projects/open-gate/build/res-custom/ogc_files.c": "bc00ff2abeab775f53f0e816eef700db7d621c9bbc4851348038ca671c2b5e90",
+    "projects/open-gate/build/res-custom/rc_files_page.py": "9d6af9f8637135641ba384d70ff13ac3b745c7a35dc6047d2886f13b0eeda2b5",
+    "fpSup/uishare/tab/manage_page.py": "6394d8b3c0993118ac33dfb0ae5f70b4f949373969cfa8b2e681805a55eb037e",
+    "fpSup/uishare/tab/ft6_page.py": "5efc4fa0a162013cba3941fb7cee1a532e30ff05d95c34f85d7d08f6c9bf8532",
+    "fpSup/fp_usb_shell/v3/allsups.c": "fbe4dbe763ddf7ce1a763886ac648d211068d4ded8ad5188a1e0b845815858fb",
+    "fpSup/uishare/tab/build_ft6.py": "75f3b0168b46d443635d532ed6641d392f5eb863c807c8f88f12977eaf220f4b",
+    "fpSup/tools/merge-v3/build_res_tools.py": "6d93810cfcfe9fcf5a44d10e1eb730b7a75557bf174e27b9595bc3f0ae0c2546"
+  },
+  "source_snapshot": {
+    "name": "res-tools-20261011-names",
+    "manifest_sha256": "3b5bf8547468b8b9de0c5738c8364bc195b677a37905bea83baca68a3eaab2cd"
+  },
+  "files": {
+    "res-custom/32RESCUS.BIN": {
+      "size": 179264,
+      "sha256": "3a6c8dffc038786ac54bfb850f40a6666a9d566565c5efad4c84a010c991ecb9"
+    },
+    "res-custom/RESCUS/OG2K.RCD": {
+      "size": 5216,
+      "sha256": "7beef10339d41f8cd39ecc9014cb32fd39b994457e61622b9638e33452dd218a"
+    },
+    "res-custom/RESCUS/OG35K.RCD": {
+      "size": 7788,
+      "sha256": "0d81f785bce9665937433bbdd06314c06523092876323dc0ce56bdab215e1cc7"
+    },
+    "res-custom/RESCUS/OG3K.RCD": {
+      "size": 4180,
+      "sha256": "5b3c7d266e68a89460bfeba96ee67a1e18a29e4ba14fbd7a4bdad127dce2f2ae"
+    },
+    "res-custom/RESCUS/OG4K.RCD": {
+      "size": 3900,
+      "sha256": "d3711c12c5b03234927f951c27826d9a095c4ed99d941cc54dcd3c88226689db"
+    },
+    "res-custom/RESCUS/S16.RCD": {
+      "size": 7132,
+      "sha256": "48740fbbd3dbcb3bf823d1ecdc8a9104e476efd61642142a3a4b221f598f5b15"
+    },
+    "res-custom/build.json": {
+      "size": 55143,
+      "sha256": "ccedefe5fa0254f5de2b2ae6a69d49e235716c57f6f8f2786583d57bb7984d18"
+    }
+  },
+  "products": {
+    "res-custom": {
+      "file": "res-custom/32RESCUS.BIN",
+      "data_files": [
+        "res-custom/RESCUS/OG2K.RCD",
+        "res-custom/RESCUS/OG35K.RCD",
+        "res-custom/RESCUS/OG3K.RCD",
+        "res-custom/RESCUS/OG4K.RCD",
+        "res-custom/RESCUS/S16.RCD"
+      ]
+    }
+  }
+}

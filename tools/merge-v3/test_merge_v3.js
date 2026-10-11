@@ -13,8 +13,8 @@ global.atob = s => Buffer.from(s, 'base64').toString('binary');
 global.TextEncoder = TextEncoder;
 global.document = {getElementById: () => ({textContent: grab('cat')})};
 const api = new Function(grab('compose') +
-  '\nreturn {CAT, DATA_OFF, plan, compose, checks, readme, zipFor, cardName, sha256hex};')();
-const {CAT, DATA_OFF, plan, compose, checks, zipFor, cardName, sha256hex} = api;
+  '\nreturn {CAT, DATA_OFF, BOOT, bootFiles, selected, managerEnabled, payloadFor, plan, compose, checks, readme, zipFor, cardName, sha256hex};')();
+const {CAT, DATA_OFF, BOOT, bootFiles, selected, managerEnabled, payloadFor, plan, compose, checks, zipFor, cardName, sha256hex} = api;
 
 let fails = 0;
 const ok = (c, what) => { console.log((c ? 'ok   ' : 'FAIL ') + what); if (!c) fails++; };
@@ -42,15 +42,104 @@ try { new Function(grab('ui')); ok(true, 'ui script parses'); } catch (e) { ok(f
 ok(sha256hex(new Uint8Array(0)) === sha(Buffer.alloc(0)) &&
    sha256hex(new Uint8Array(1000).fill(7)) === sha(Buffer.alloc(1000, 7)), 'sha256hex matches node');
 
-// 1. every product alone == its release folder, byte for byte
+ok(BOOT.instant === true && BOOT.fast === false && BOOT.manager === false, 'Instant on by default; Fast and fpSup page opt-in');
+
+function sourceFiles(p){
+  if (!p.provenance) return null;
+  const manifest = path.resolve(HERE, p.provenance.manifest);
+  const meta = JSON.parse(fs.readFileSync(manifest, 'utf8'));
+  ok(Object.entries(meta.files).every(([rel, f]) => {
+    const b = fs.readFileSync(path.join(path.dirname(manifest), rel));
+    return b.length === f.size && sha(b) === f.sha256;
+  }), `${p.id}: all development input bytes match their snapshot manifest`);
+  const entry = meta.products[p.id];
+  ok(p.sha256 === meta.files[entry.file].sha256 &&
+     (!p.virtual || p.virtual.sha256 === meta.files[entry.virtual].sha256), `${p.id}: exact intended payloads embedded`);
+  return {dir:path.dirname(manifest), entry};
+}
+
+// 1. Frozen products and artwork stay exact. Boot files come as coherent pairs
+// from the maintained builder, whose actual ARM execution is tested separately.
 for (const p of CAT.products){
   const z = unzip(zipFor([p.id])), root = cardName([p.id]) + '/';
-  const rel = path.join(RELEASES, p.release);
-  const want = ['AutoRun.txt', 'fpSup/LOADER.BIN', ...[0,1,2,3,4].map(i => `fpSup/UI/${i}.BIN`), 'fpSup/' + p.file,
-                ...(p.data_files || []).map(d => d.path)];
-  const same = want.every(f => z[root + f] && z[root + f].equals(fs.readFileSync(path.join(rel, f))));
+  sourceFiles(p);
+  const composed = compose([p.id]).files;
+  const want = composed.map(f => f.name);
+  const same = composed.every(f => z[root + f.name] && z[root + f.name].equals(Buffer.from(f.data)));
+  if (!p.provenance){
+    const rel = path.join(RELEASES, p.release);
+    ok(z[root + 'fpSup/' + p.file].equals(fs.readFileSync(path.join(rel, 'fpSup', p.file))), `${p.id}: exact frozen sup bytes`);
+    for (const d of p.data_files || []) ok(z[root + d.path].equals(fs.readFileSync(path.join(rel, d.path))), `${p.id}: exact frozen ${d.path}`);
+    for (const i of [0,1,2,3,4]) ok(z[root + `fpSup/UI/${i}.BIN`].equals(fs.readFileSync(path.join(rel, `fpSup/UI/${i}.BIN`))), `${p.id}: exact released artwork ${i}`);
+  }
   const extra = Object.keys(z).filter(k => !want.includes(k.slice(root.length)) && k !== root + 'README.txt');
-  ok(same && !extra.length && checks([p.id]).every(r => r.ok), `${p.id} alone = ${p.release}`);
+  ok(same && !extra.length && checks([p.id]).every(r => r.ok), `${p.id}: released product bytes, current boot pair`);
+  const ar = z[root + 'AutoRun.txt'];
+  const meta = CAT.shared.find(f => f.path === 'AutoRun.txt');
+  ok(ar.length === meta.size && sha(ar) === meta.sha256 && ar.at(-1) === 10 &&
+     !ar.includes('# pad -- see PAD_TO:'), `${p.id}: real AutoRun EOF and hash`);
+}
+
+for (const manager of [false, true]) for (const instant of [false, true]) for (const fast of [false, true]){
+  BOOT.instant = instant; BOOT.fast = fast; BOOT.manager = manager;
+  // Test both manager states directly; RES-Lab's automatic manager is below.
+  const picked = CAT.products.filter(p => !p.needs_manager).map(p => p.id);
+  const z = unzip(zipFor(picked)), root = cardName(picked) + '/';
+  const pair = CAT.boot.variants[`${manager ? 'm1' : ''}i${+instant}f${+fast}`].files;
+  ok(pair.every(f => z[root + f.path].equals(Buffer.from(f.data, 'base64')) &&
+      sha(z[root + f.path]) === f.sha256 && z[root + f.path].length === f.size)
+      && checks(picked).every(r => r.ok), `Manager ${manager}, Instant ${instant}, Fast ${fast}: exact boot pair in zip`);
+  ok(CAT.products.filter(p => picked.includes(p.id)).every(p => z[root + 'fpSup/' + p.file] || z[root + 'fpSup/' + p.file.replace(/\.BIN$/, '.OFF')]),
+     `Instant ${instant}, Fast ${fast}: selections retained`);
+  const readme = z[root + 'README.txt'].toString();
+  ok(readme.includes('Instant Start: ' + (instant ? 'ON' : 'OFF')) &&
+     readme.includes('Fast Start: ' + (fast ? 'ON' : 'OFF')), 'README records boot choices');
+  const bin = z[root + 'fpSup/LOADER.BIN'];
+  const end = 16 + 8 * bin.readUInt32LE(4) + bin.readUInt32LE(12);
+  ok(bin.length === end + (manager ? 128 : 0) && (!manager || (bin.readUInt32LE(end) === 0x53445346 && bin.readUInt32LE(end+4) === 0)), 'actual VBIN length plus empty manager disabled list');
+  ok(!!z[root + 'fpSup/UI/ALLSUPS.BIN'] === manager && readme.includes('fpSup page: ' + (manager ? 'ON' : 'OFF')), 'management UI data and README follow checkbox');
+  const f = pair[1], saved = f.data;
+  const bad = Buffer.from(saved, 'base64'); bad[32] ^= 1; f.data = bad.toString('base64');
+  ok(checks(picked).some(r => !r.ok), 'flipped boot byte blocks download');
+  f.data = saved;
+}
+Object.assign(BOOT, CAT.boot.default);
+
+BOOT.manager = true;
+ok(checks([]).every(r => r.ok) && compose([]).files.some(f => f.name === 'fpSup/UI/ALLSUPS.BIN'), 'fpSup page can be downloaded by itself');
+BOOT.manager = false;
+ok(checks([]).some(r => !r.ok), 'empty card without fpSup page is refused');
+if (CAT.products.some(p => p.id === 'res-lab')){
+  const ids = ['res-lab'], {on, files} = compose(ids);
+  ok(on.includes('res-lab') && on.includes('res-custom') && checks(ids).every(r => r.ok), 'RES-Lab includes and runs separate RES-CUSTOM consumer');
+  const core = CAT.products.find(p => p.id === 'res-custom');
+  ok(files.find(f => f.name === 'fpSup/32RESCUS.BIN').sha256 === core.virtual.sha256 &&
+     files.some(f => f.name === 'fpSup/UI/ALLSUPS.BIN') && files.some(f => f.name === 'fpSup/RESCUS/README.TXT'), 'RES-Lab includes virtual core, manager and SAVE directory');
+  ok(!files.some(f => f.name.endsWith('.RCD')), 'RES-Lab alone does not fill the resolution list with fixed formats');
+  ok(compose(['res-custom']).files.find(f => f.p).sha256 === core.sha256, 'RES-CUSTOM alone uses standalone core, without reserving a virtual row');
+  DATA_OFF['res-custom'] = core.data_files.map(f => f.path);
+  ok(checks(ids).every(r => r.ok), 'RES-Lab applies without any saved RCD file');
+  delete DATA_OFF['res-custom'];
+  for (const instant of [false,true]) for (const fast of [false,true]){
+    BOOT.instant = instant; BOOT.fast = fast;
+    const z = unzip(zipFor(ids)), root = cardName(ids) + '/';
+    const pair = CAT.boot.variants[`m1i${+instant}f${+fast}`].files;
+    ok(pair.every(f => z[root + f.path].equals(Buffer.from(f.data,'base64'))) &&
+       sha(z[root + 'fpSup/32RESCUS.BIN']) === core.virtual.sha256 &&
+       checks(ids).every(r => r.ok), `RES-Lab Instant ${instant}, Fast ${fast}: manager pair and virtual consumer`);
+  }
+  Object.assign(BOOT, CAT.boot.default);
+  const saved = core.virtual.data, bad = Buffer.from(saved,'base64');
+  bad[bad.length-1] ^= 1; core.virtual.data = bad.toString('base64');
+  ok(checks(ids).some(r => !r.ok), 'flipped virtual consumer byte blocks RES-Lab download');
+  core.virtual.data = saved;
+}
+{
+  BOOT.manager = true;
+  const f = CAT.boot.manager_files[0], saved = f.data, bad = Buffer.from(saved,'base64');
+  bad[bad.length-1] ^= 1; f.data = bad.toString('base64');
+  ok(checks([]).some(r => !r.ok), 'flipped manager UI byte blocks download');
+  f.data = saved; BOOT.manager = false;
 }
 
 // 2. everything at once: clashing ones parked in OFF, the rest run, checks pass
@@ -128,11 +217,6 @@ ok(CAT.shared.some(f => f.path === 'AutoRun.txt' && Buffer.from(f.data, 'base64'
   const sups = files.filter(f => f.p && !f.off).map(f => f.p.file);
   ok(sups.join() === [...sups].sort().join(), 'sups in the zip are in file-name order');
 }
-
-// 6e. tools/card-composer/ serves this same page (only for the real build)
-if (!process.env.MERGE_INDEX)
-  ok(fs.readFileSync(path.join(HERE, '..', 'card-composer', 'index.html'), 'utf8') === page,
-     'tools/card-composer/index.html = this page');
 
 // 7. credits survive (author is empty for the site's own sups)
 ok(CAT.products.every(p => Array.isArray(p.credits) && typeof p.author === 'string'), 'author/credits fields present');

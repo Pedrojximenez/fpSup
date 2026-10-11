@@ -87,7 +87,7 @@ enum {
  * a fixed size -- open mode 7 overwrites without truncating, so the file is
  * always exactly this long and an old tail can never survive. */
 #define LOG_FILE_BYTES 4096u
-#define ALLSUPS_MAGIC 0x54365446u      /* "FT6T": allsups.c's table, its data file's first word */
+#define ALLSUPS_MAGIC 0x5A365446u      /* "FT6Z": allsups.c's table, its data file's first word */
 /* LOADER.BIN's disabled list (SL_ALLSUPS; the user 2026-10-08: no renaming,
  * "紀錄在 loader_v3 的 bin 裡面"): DS_BYTES after the code, {DS_MAGIC, count,
  * sup_id x DS_MAX}.  The code length (VBIN +12) does not count it, so loader.S
@@ -462,7 +462,11 @@ static void load_one(struct state *st, u8 *s, const struct strings *str, const s
             logrec(st, L_DUP_ID, h->sup_id, 0, c->name);
             return;
         }
+#ifdef SL_ALLSUPS
+    if (st->nsups >= MAX_SUPS - 1u) { logrec(st, L_TOO_MANY, st->nsups, 0, c->name); return; }
+#else
     if (st->nsups >= MAX_SUPS) return;
+#endif
     u32 size = h->block_size, len = h->file_len, entry_off = h->entry_off, id = h->sup_id;
     u8 *block = mem_get(st->heap, size);
     if (!block) { logrec(st, L_NO_MEMORY, size, 0, c->name); return; }
@@ -679,10 +683,12 @@ static u32 sl_run(struct state *st, const struct strings *str)
 typedef u32 (*run_fn)(struct state *, const struct strings *);
 
 /* In the staging buffer.  `base` is the first byte of the code (the stub),
- * `vbin` the file the loader read, whose +0x0C says how long the code is. */
+ * `vbin` the entire file the loader read. The header immediately before
+ * `base` describes this C payload, even inside a shared-stage2 envelope. */
 u32 sl_boot(const u8 *vbin, u32 unhook, u32 base, const struct strings *str)
 {
-    u32 code = *(const u32 *)(vbin + 12);
+    (void)vbin;                                   /* used by SL_ALLSUPS */
+    u32 code = *(const u32 *)(uintptr_t)(base - 4u);
     u32 state_at = (code + 7) & ~7u;
     void *heap = mem_heap(0);                       /* class 0, USER */
     if (!heap) return 0;
@@ -702,14 +708,16 @@ u32 sl_boot(const u8 *vbin, u32 unhook, u32 base, const struct strings *str)
 #ifdef SL_ALLSUPS
     rs->allsups = (const char *)(res + ((u32)(uintptr_t)str->allsups - base));
     /* LOADER.BIN as read, before anything ran from it, and its disabled list */
-    st->file_len = 16u + code + DS_BYTES;
+    u32 envelope = 16u + 8u * *(const u32 *)(vbin + 4)
+                        + *(const u32 *)(vbin + 12);
+    st->file_len = envelope + DS_BYTES;
     st->file = mem_get(heap, st->file_len);
     if (st->file) {
         copy(st->file, vbin, st->file_len);
         /* the stub wrote its string pointers into its own `strs` before calling
          * here; the file has zeros there (sloader_entry.S: five words) */
         zero(st->file + ((u32)(uintptr_t)str - (u32)(uintptr_t)vbin), 5u * 4u);
-        u32 *d = (u32 *)(st->file + 16u + code);
+        u32 *d = (u32 *)(st->file + envelope);
         if (d[0] == DS_MAGIC && d[1] <= DS_MAX) st->dis = d;
     }
 #endif

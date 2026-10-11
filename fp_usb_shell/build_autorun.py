@@ -65,17 +65,15 @@ ap.add_argument('--banner', default='fpSup!',
                      '19 characters wide and the surface is wiped before this '
                      'is drawn, so anything up to that length is safe')
 ap.add_argument('--no-pad', action='store_true',
-                help='do not pad to a fixed length. Only safe when whatever writes '
-                     'the card removes the old file first -- putfile cannot, the '
-                     'Mac can. Saves the camera parsing five hundred lines of '
-                     'filler on every boot.')
+                help='compatibility flag; output is always unpadded. '
+                     'Shorter updates must delete the old file before writing.')
 ap.add_argument('--strip-comments', action=argparse.BooleanOptionalAction, default=True,
                 help='(default on; --no-strip-comments keeps them) '
                      'drop every comment line from the script.  The firmware shell '
                      'reads the file a character at a time and sleeps 1 ms after '
                      'each printable one (0xC04215F4 bl 0xC0421770, delay(1)), '
                      'comments included -- three thousand of them before the '
-                     'loader starts.  The padding after the commands stays.')
+                     'loader starts.')
 ap.add_argument('--fast-echo', action=argparse.BooleanOptionalAction, default=True,
                 help='(default on since 2026-10-04, every card; --no-fast-echo for '
                      'the old timing) '
@@ -139,14 +137,16 @@ ap.add_argument('--four-box-bar', action=argparse.BooleanOptionalAction, default
                 help='(default on for every --loader card since 2026-10-04, single '
                      'ones too; --no-four-box-bar for the old text display) '
                      'four-box splash: white fp, '
-                     'reference pink Sup, transparent background, restore native UI 2 seconds after '
-                     'loading. Requires --loader and the generated FPSUPUI folder. '
+                     'reference pink Sup, transparent background, restore native UI as soon as '
+                     'loading finishes. Requires --loader and the generated FPSUPUI folder. '
                      '--banner applies only to the legacy text display.')
 ap.add_argument('--loader-hook', action='store_true',
                 help='journal every firmware word stage2 overwrites, write them '
                      'back at power-off, and point 0xC03DA420 (the call that '
                      'starts the AutoRun) at the loader, so a warm boot loads '
                      'without the AutoRun.  See LOADER_V2.md')
+ap.add_argument('--loader-hook-off', action='store_true',
+                help='disable a previous RAM loader hook if its callsite still points at our loader')
 ap.add_argument('--loader-hook-mark', type=lambda s: int(s, 0), default=None,
                 metavar='ADDR',
                 help='debug: stage2 writes the journal block address to ADDR+8, '
@@ -162,6 +162,8 @@ if args.four_box_bar is None:
     args.four_box_bar = bool(args.loader and not args.boot_call)
 if args.loader_hook and not args.loader:
     ap.error('--loader-hook requires --loader')
+if args.loader_hook_off and (not args.loader or args.loader_hook):
+    ap.error('--loader-hook-off requires --loader and excludes --loader-hook')
 if args.four_box_bar and not args.loader:
     ap.error('--four-box-bar requires --loader')
 if args.four_box_bar and args.boot_call:
@@ -519,7 +521,7 @@ w("# that has not run yet, so no stale instruction-cache line can shadow them.")
 w("#")
 if splash:
     w("# Experimental four-box splash: transparent fpSup logo and four progress squares.")
-    w("# Stage2 fills the fourth box after loading, holds for 2 seconds, restores UI.")
+    w("# Stage2 fills the fourth box after loading, then restores UI immediately.")
     w("# Keep FPSUPUI/0.BIN through 4.BIN beside this script and fpSup.BIN.")
 else:
     w("# The screen reads fpSup[........]0 through fpSup[########]100 while this runs")
@@ -939,7 +941,7 @@ if args.loader:
     _sd.append('LH_RESTORE=1')
     if args.loader_hook_mark is not None and not args.loader_hook:
         _sd.append(f'LH_MARK=0x{args.loader_hook_mark:08X}')
-    if args.loader_hook:
+    if args.loader_hook or args.loader_hook_off:
         # The loader's +4 is the hook entry; stage2 checks the word there before
         # it arms anything, so the word has to come from the loader this build
         # actually wrote.
@@ -949,8 +951,9 @@ if args.loader:
             sys.exit(f'loader +4 is 0x{_lh_word:08X}, not a branch to the hook')
         _lh_site = 0xC03DA420
         _lh_bl = 0xEB000000 | (((_lh_at - _lh_site - 8) >> 2) & 0xFFFFFF)
-        _sd += ['LOADER_HOOK=1', f'LH_ENTRY_AT=0x{_lh_at:08X}',
+        _sd += ['LOADER_HOOK=1' if args.loader_hook else 'LOADER_HOOK_OFF=1', f'LH_ENTRY_AT=0x{_lh_at:08X}',
                 f'LH_ENTRY_WORD=0x{_lh_word:08X}', f'LH_BL=0x{_lh_bl:08X}']
+    if args.loader_hook:
         if args.loader_hook_mark is not None:
             _sd.append(f'LH_MARK=0x{args.loader_hook_mark:08X}')
         # The warm path skips the AutoRun and its banner; stage2 draws it --
@@ -962,9 +965,12 @@ if args.loader:
         else:
             _sd.append('LH_SPLASH=1')
     if splash:
+        _asset_c = splash.asset_dir.replace('\\', '\\\\')
         _sd += ['SPLASH_FINISH=1', f'SPLASH_HOLD_MS={SPLASH_HOLD_MS}',
                 f'SPLASH_WIDTH_TEXT="{SPLASH_WIDTH}"',
-                f'SPLASH_HEIGHT_TEXT="{SPLASH_HEIGHT}"', 'SPLASH_OFFSET_TEXT="0"']
+                f'SPLASH_HEIGHT_TEXT="{SPLASH_HEIGHT}"', 'SPLASH_OFFSET_TEXT="0"',
+                f'SPLASH_PATH="\\\\{_asset_c}\\\\4.BIN"',
+                f'LH_SPLASH_PATH="\\\\{_asset_c}\\\\0.BIN"']
     stage2 = assemble(HERE / 'asm' / 'stage2.S', _sd)
     verify_stage2_cache_publish(stage2)
     secs = [(0, stage2)]
@@ -1095,18 +1101,13 @@ if args.loader:
         entry = 0
     binblob = struct.pack('<4sIII', b'VBIN', len(secs), entry, len(body)) + table + body
     binpath = DEST.parent / args.bin_name
-    # Match fpSup-Merge: retain 32 KiB output for existing small cards, and pad
-    # larger cards to the loader's read cap. Padding is not a payload limit.
-    # The loader now owns a separate staging buffer, not a shared-pool window.
-    # putfile cannot truncate; descriptor lengths exclude any old padded tail.
-    BIN_PAD = 32768
+    # Emit the actual container, retaining only section alignment. Shorter
+    # card updates delete the previous file; file-length padding is obsolete.
     read_cap = args.read_cap or _equ(HERE / 'asm/loader.S', 'MAXLEN')
-    if read_cap is None or read_cap < BIN_PAD:
-        sys.exit('loader MAXLEN is missing or smaller than the default BIN padding')
+    if read_cap is None or read_cap <= 0:
+        sys.exit('loader MAXLEN is missing or invalid')
     if len(binblob) > read_cap:
         sys.exit(f'binary is {len(binblob)} bytes, past loader MAXLEN {read_cap}')
-    padded = BIN_PAD if len(binblob) <= BIN_PAD else read_cap
-    binblob += b'\x00' * (padded - len(binblob))
     binpath.write_bytes(binblob)
     if splash:
         asset_path = DEST.parent / (args.splash_dir or ASSET_NAME).replace('\\', '/')
@@ -1126,11 +1127,9 @@ if args.strip_comments:
 if args.fast_echo:
     # The restore goes in front of the first line that hands the echo handler
     # to our own code (the cave, 0xC07xxxxx): the store bootstrap on the fast
-    # path, the loader on the slow one -- either becomes the worker and never
-    # returns, so nothing after that `echo` runs (2026-10-04: a restore at the
-    # end, then one before the loader's hand-off, left the NOP in place on nine
-    # boots; every other word landed).  Three times, like every must-land
-    # `mem set` here.
+    # path, the loader on the slow one. Restore before hand-off as well as
+    # retaining the normal cleanup after the returning loader. Three writes,
+    # like every must-land `mem set` here.
     restore = [f'mem set 0x{ECHO_SLEEP_AT:08X} 0x{ECHO_SLEEP_STOCK:08X}'] * 3
     handoff = f'mem set 0x{ECHO_SLOT:08X} 0x'
     at = next((i for i, l in enumerate(lines) if l.startswith(handoff)
@@ -1138,23 +1137,7 @@ if args.fast_echo:
     lines = ([f'mem set 0x{ECHO_SLEEP_AT:08X} 0x{ARM_NOP:08X}'] + lines[:at] + restore + lines[at:])
 text = '\n'.join(lines) + '\n'
 
-# Pad to a fixed length.
-#
-# `putfile` opens with mode 7, which creates and overwrites but does NOT
-# truncate: writing a shorter file leaves the tail of the longer one behind it.
-# The loader build is ten kilobytes against the old eighteen, so the card ended
-# up holding the new script followed by four hundred `mem set` commands from the
-# previous one -- which would have written the old worker straight over the
-# loader, after the loader had already been hooked. Every version being the same
-# length makes that impossible, whichever way the size goes.
-PAD_TO = 32768
-if len(text) > PAD_TO:
-    sys.exit(f'script is {len(text)} bytes, past the {PAD_TO} everything is padded to')
-if not args.no_pad:
-    filler = '# pad -- see PAD_TO: mode 7 overwrites but does not truncate\n'
-    while len(text) + len(filler) <= PAD_TO:
-        text += filler
-    text += '#' * (PAD_TO - len(text) - 1) + '\n' 
+# No filler after cleanup: the interpreter returns at the real EOF.
 DEST_DEFAULT.parent.mkdir(exist_ok=True)
 DEST.write_text(text)
 

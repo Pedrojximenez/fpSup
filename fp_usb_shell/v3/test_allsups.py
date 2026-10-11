@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Loader v3's built-in SYSTEM page 6 (allsups.c) under unicorn: the real
+"""Loader v3's built-in fpSup management (allsups.c) under unicorn: the real
 loader.S and a LOADER.BIN built with allsups=True load \\fpSup\\UI\\ALLSUPS.BIN
 from a card, against the real image.  The UI app is test_ft6's fake (the stock
 NBR loader C05E84D8 is Python); uishare's string layer and the page-id layer
@@ -18,6 +18,7 @@ sys.path.insert(0, str(HERE))
 sys.path.insert(0, str(TAB))
 import test_ft6 as F6                                         # noqa: E402 (fake app, sys.path)
 import build_ft6 as FT                                        # noqa: E402
+import manager_logo as LOGO                                   # noqa: E402
 import build_v3 as B                                          # noqa: E402
 import test_v3 as T                                           # noqa: E402
 
@@ -98,7 +99,7 @@ def card_sups():
     rel = T.test_sup('TREL', [(T.SITE_A, T.word(img, T.SITE_A), 9, 0)])
     dis = T.test_sup('DSBL', [])                          # on the disabled list (DIS_CARD)
     return [('10TEST.BIN', loss), ('20BAD.BIN', b'NOPE' * 8), ('30OLD.OFF', ok), ('40REL.BIN', rel),
-            ('50DIS.BIN', dis)]
+            ('50DIS.BIN', dis), ('55EXTRA.BIN', T.test_sup('EXTR', []))]
 
 
 KEY_OK = 1000 + 1 * 10 + 1          # written, the list found at boot (allsups.c)
@@ -109,22 +110,52 @@ def parts(cam, k):
     return tuple(v[f'FT_{p}{k}'][1] for p in 'NGVRE')
 
 
+def check_tabs(test, cam, pages, active):
+    """Visible tabs cover the screen once, with one current page highlight."""
+    v = cam.vars
+    tabs = [k for k in range(1, 8) if v[f'FT_TabVisible{k}'][1]]
+    test.assertEqual(tabs, list(range(1, pages + 1)))
+    test.assertEqual([k for k in tabs if v[f'FT_TabActive{k}'][1]], [active])
+    edge = 0
+    for k in tabs:
+        test.assertEqual(v[f'FT_TabX{k}'][1], edge)
+        width = v[f'FT_TabWidth{k}'][1]
+        test.assertGreater(width, 0)
+        edge += width
+    test.assertEqual(edge, 1024)
+
+
 class AllSupsTests(unittest.TestCase):
     def test_loads_last_as_the_loader(self):
         cam = boot()
         self.assertEqual(lines(cam), ['FT6 s=00'])
         loaded = [name for code, _a, _b, name in cam.log() if code == 'LOADED']
         self.assertEqual(loaded[-1], 'LOADER.BIN')
-        (r, sp, pack), = cam.nbr_calls
+        (image_args, image_sp, image_pack), (r, sp, pack) = cam.nbr_calls
+        self.assertEqual(image_args[0], F6.APP)
+        self.assertEqual(image_args[3], 0, 'image reader keeps its own filename pool')
+        self.assertEqual(image_sp & 7, 0)
+        self.assertEqual({r['name'] for r in FT.NBR.inspect(image_pack)['resources']},
+                         {name for name, _color, _blob in LOGO.images()})
         self.assertEqual(r[0], F6.APP)
         self.assertEqual(sp & 7, 0)
         self.assertEqual(cam.machines()[0], FT.MACHINE)
         self.assertNotEqual(cam.w(F6.SITE), 0xEB000005)
 
+    def test_normal_full_screen_vector_is_left_to_the_native_registrar(self):
+        cam = boot(machine_capacity=F6.STOCK_MACHINES)
+        self.assertEqual(lines(cam), ['FT6 s=00'])
+        self.assertEqual(cam.w(F6.APP + 0x80), 226)
+        self.assertGreaterEqual(cam.w(F6.APP + 0x84), 226)
+        self.assertNotEqual(cam.w(F6.APP + 0x8C), F6.SCREENS)
+        self.assertNotEqual(cam.w(F6.APP + 0x104), F6.MACHS)
+        self.assertEqual(cam.machines()[0], FT.MACHINE, 'priority after native vector growth')
+        self.assertEqual(len(cam.nbr_calls), 2, 'image pack and all five pages use separate readers')
+
     def test_every_private_field_gets_its_layer_offset(self):
         from ui import chain
         cam = boot()
-        (_r, _sp, pack), = cam.nbr_calls
+        _r, _sp, pack = cam.nbr_calls[-1]
         offs = soff(cam)
         for text, off in offs.items():
             self.assertGreaterEqual(off, 0x40000000, text)
@@ -140,104 +171,187 @@ class AllSupsTests(unittest.TestCase):
 
     def test_the_list_and_its_variables(self):
         cam = boot(sups=card_sups())
-        v = cam.vars
-        self.assertEqual(v['FT_Key'], (0, 0))
-        self.assertEqual(v['FT_Focus'], (0, 0))
+        self.assertEqual(cam.vars['FT_Key'], (0, 0))
+        self.assertEqual(cam.vars['FT_Focus'], (0, 3451))
         ver = 'v' + built()['dinfo']['versions']['LOSS']
-        self.assertEqual(parts(cam, 1), ('Lossless', ' ', ver, ' ', ' '), 'loaded: white name, version')
-        self.assertEqual(parts(cam, 2), (' ', 'BAD', ' ', 'Load failed', ' '), 'no header: file name, grey')
-        self.assertEqual(parts(cam, 3), (' ', 'OLD', ' ', ' ', ' '), 'off: grey, no digits')
-        self.assertEqual(parts(cam, 4), (' ', 'REL', ' ', 'Load failed', ' '), 'entered, answered RELEASE')
-        self.assertEqual(parts(cam, 5), ('DIS', ' ', ' ', ' ', ' '), 'the list is empty: it loaded')
-        for k in range(6, 18):
-            self.assertEqual(parts(cam, k), (' ',) * 5)
-        self.assertEqual(len([n for n in v if n.startswith('FT_')]), 2 + 5 * 17 + 1)
-        self.assertEqual(list(v)[:4], ['FT_Key', 'FT_OK', 'FT_R1', 'FT_R2'], 'the posted ones registered first')
-        self.assertIn(('RELEASED', 1, 0, '40REL.BIN'), log(cam))
-        for obj, name, fn in cam.subs:
-            self.assertEqual(obj, F6.GUI_OBJECT)
-            self.assertTrue(fn & 1, f'{name}: a Thumb subscriber')
+        self.assertEqual(parts(cam, 1), ('Lossless', ' ', ver, ' ', ' '))
+        self.assertEqual(parts(cam, 2), (' ', 'BAD', ' ', 'Load failed', ' '))
+        self.assertEqual(parts(cam, 3), (' ', 'OLD', ' ', ' ', ' '))
+        self.assertEqual(parts(cam, 4), (' ', 'REL', ' ', 'Load failed', ' '))
+        self.assertEqual(cam.vars['FT_PageText'][1], '1 / 2')
+        self.assertEqual(len(cam.vars), 96)
+        check_tabs(self, cam, 2, 1)
+        self.assertEqual(cam.vars['FT_VersionX1'][1], 187, 'version follows the native Lossless name width')
+        self.assertEqual(sorted(n for _o, n, _f in cam.subs),
+                         sorted(['FT_Focus', 'FT_Key'] +
+                                [f'FT_{kind}{k}' for kind in ('Choice', 'Selected') for k in range(1, 6)]))
+        for _o, _n, fn in cam.subs:
+            self.assertTrue(fn & 1, 'Thumb subscribers')
 
-    def test_the_footer_follows_the_cursor(self):
-        cam = boot(sups=card_sups(), vbin=loader_with(['DSBL']))
-        ok, ins, none = (f'<!font_G_bt_ok_K153,CENTER>{w}<!28sp,CENTER><!font_G_bt_menu_K153,CENTER>Cancel'
-                         for w in ('Uninstall', 'Install', '')) 
-        none = '<!font_G_bt_menu_K153,CENTER>Cancel'
-        self.assertEqual(cam.vars['FT_OK'][1], ok, 'cell 1 at boot: a loaded sup')
-        self.assertEqual(sorted(n for _o, n, _f in cam.subs), ['FT_Focus', 'FT_Key'])
-        for focus, want in ((4, ins), (1, none), (2, none), (0, ok), (5, none), (16, none)):
-            cam.posts.clear()
-            cam.notify('FT_Focus', focus)
-            self.assertEqual(cam.posts, [('FT_OK', want)], focus)
-        cam.posts.clear()
-        cam.press(1)                                          # uninstalled: OK now installs
-        self.assertIn(('FT_OK', ins), cam.posts)
+    def test_res_lab_name_and_version_come_from_filename(self):
+        self.assertNotIn('RLAB', FT.PRODUCTS)
+        cam = boot(sups=[('50RES-Lab v0.1.0test.BIN', T.test_sup('RLAB', []))])
+        self.assertEqual(parts(cam, 1), ('RES-Lab v0.1.0test', ' ', ' ', ' ', ' '))
+        cam.notify('FT_Choice1', 1)
+        self.assertEqual(parts(cam, 1)[0], 'RES-Lab v0.1.0test')
+        self.assertEqual(parts(cam, 1)[3], 'Unload on restart')
 
-    def test_a_sup_takes_its_cells_ael(self):
-        from armasm import assemble
-        btn = B.make_sup(assemble(HERE / 'button_sup.S'), B.SL_HEADER_LEN, 'BTNS', min_svc=1)
-        cam = boot(sups=card_sups() + [('60BTN.BIN', btn)])
-        foot6 = ('<!font_G_bt_ok_K153,CENTER>Uninstall<!28sp,CENTER>'
-                 '<!font_G_bt_AEL_K153,CENTER>Settings<!28sp,CENTER><!font_G_bt_menu_K153,CENTER>Cancel')
-        cam.posts.clear()
-        cam.notify('FT_Focus', 5)
-        self.assertEqual(cam.posts, [('FT_OK', foot6)], 'cell 6 (60BTN) offers AEL')
-        for n in (1, 2):
-            cam.posts.clear()
-            cam.press(100 + 6)
-            self.assertEqual(cam.posts, [('FT_Key', 2000 + 6 + 100 * n)], 'its handler ran, answered n')
-        cam.posts.clear()
-        cam.press(100 + 1)                                   # Lossless took nothing: nothing runs
-        self.assertEqual(cam.posts, [('FT_Key', 2000 + 1 - 100)])
-        self.assertEqual(disabled(cam.written.get('\\fpSup\\LOADER.BIN', built()['vbin'])), [],
-                         'AEL is not OK: nothing went on the list')
-
-    def test_a_sup_on_the_list_is_not_loaded(self):
-        cam = boot(sups=card_sups(), vbin=loader_with(['DSBL']))
-        self.assertIn((19, struct.unpack('<I', b'DSBL')[0], 0, '50DIS.BIN'), log(cam))   # L_DISABLED
-        self.assertNotIn('50DIS.BIN', [n for c, _a, _b, n in cam.log() if c in ('LOADED', 'RELEASED')])
-        self.assertEqual(parts(cam, 5), (' ', 'DIS', ' ', ' ', ' '), 'grey, nothing pending')
-
-    def test_pressing_a_cell_writes_the_list_into_loader_bin(self):
-        cam = boot(sups=card_sups(), vbin=loader_with(['DSBL']))
+    def test_explicit_choices_write_only_the_selected_sup(self):
         original = loader_with(['DSBL'])
-        steps = [(1, ['DSBL', 'LOSS'], 'Unload on restart', ' '),       # loaded -> off at the next boot
-                 (1, ['DSBL'], ' ', ' '),                        # and back
-                 (5, [], ' ', 'Load on restart'),                      # on the list -> on at the next boot
-                 (4, ['TREL'], ' ', ' '),                        # failed: off (nothing to say)
-                 (4, [], 'Load failed', ' ')]
-        for k, want, red, green in steps:
-            cam.posts.clear()
-            cam.press(k)
-            got = cam.written['\\fpSup\\LOADER.BIN']
-            self.assertEqual(len(got), len(original), 'the same length: no tail can survive')
-            self.assertEqual(got[:-(8 + 4 * B.DS_MAX)], original[:-(8 + 4 * B.DS_MAX)], 'only the list changes')
-            self.assertEqual(sorted(disabled(got)), sorted(want), k)
-            self.assertEqual(cam.posts[:2], [(f'FT_R{k}', red), (f'FT_E{k}', green)])
-            self.assertEqual(cam.posts[2][0], 'FT_OK')
-            self.assertEqual(cam.posts[3], ('FT_Key', KEY_OK))
-        self.assertEqual(cam.renames, [], 'no file is renamed')
-        for k in (0, 2, 3, 6, 17, 18):          # no header id, a .OFF file, blank cells, past the cells
-            cam.posts.clear()
-            before = cam.written['\\fpSup\\LOADER.BIN']
-            cam.press(k)
-            self.assertEqual(cam.posts, [], k)
-            self.assertEqual(cam.written['\\fpSup\\LOADER.BIN'], before, k)
+        cam = boot(sups=card_sups(), vbin=original)
+        cam.notify('FT_Choice1', 1)             # Disable loaded Lossless
+        first = cam.written[SELF_PATH]
+        self.assertEqual(sorted(disabled(first)), ['DSBL', 'LOSS'])
+        self.assertEqual(first[:-(8 + 4 * B.DS_MAX)], original[:-(8 + 4 * B.DS_MAX)])
+        self.assertEqual(len(first), len(original))
+        ver = 'v' + built()['dinfo']['versions']['LOSS']
+        self.assertEqual(parts(cam, 1)[3], 'Unload on restart')
+        self.assertEqual(parts(cam, 1)[2], ver, 'version stays beside the name during pending changes')
+        self.assertEqual(cam.vars['FT_Default1'][1], 1)
+        cam.notify('FT_Choice1', 1)             # Disable again stays disabled
+        self.assertEqual(cam.written[SELF_PATH], first)
+        cam.notify('FT_Choice1', 0)
+        self.assertEqual(disabled(cam.written[SELF_PATH]), ['DSBL'])
+        self.assertEqual(parts(cam, 5)[:2], (' ', 'DIS'))
+        cam.notify('FT_Choice5', 0)
+        self.assertEqual(disabled(cam.written[SELF_PATH]), [])
+        self.assertEqual(parts(cam, 5)[4], 'Load on restart')
+        cam.press(11)                          # second page, slot 1 = EXTR
+        cam.notify('FT_Choice1', 1)
+        self.assertEqual(disabled(cam.written[SELF_PATH]), ['EXTR'])
+        cam.notify('FT_Choice1', 0)
+        for slot in (2, 3, 4, 5):
+            self.assertEqual(parts(cam, slot), (' ',) * 5)
+            self.assertEqual(cam.vars[f'FT_Visible{slot}'][1], 0)
+            self.assertEqual(cam.vars[f'FT_Lock{slot}'][1], 1)
+            before = cam.written[SELF_PATH]
+            cam.notify(f'FT_Choice{slot}', 1)
+            self.assertEqual(cam.written[SELF_PATH], before)
+        self.assertEqual(cam.renames, [])
 
-    def test_a_failed_write_says_so_and_keeps_the_list(self):
+    def test_more_settings_is_forwarded_only_while_enabled_and_loaded(self):
+        from armasm import assemble
+        btn = B.make_sup(assemble(HERE / 'button_sup.S'), B.SL_HEADER_LEN, 'BTNS')
+        sups = card_sups() + [('60BTN.BIN', btn)]
+        cam = boot(sups=sups)
+        cam.press(11)                          # BTN = second page slot 2
+        self.assertEqual(cam.vars['FT_Selected2'][1], 0)
+        self.assertEqual(cam.vars['FT_More2'][1], 1)
+        cam.notify('FT_Choice2', 2)
+        self.assertEqual(cam.vars['FT_Key'][1], 2107)
+        self.assertNotIn(SELF_PATH, cam.written, 'settings does not change boot configuration')
+        cam.notify('FT_Choice2', 1)
+        self.assertEqual(cam.vars['FT_Selected2'][1], 1)
+        self.assertEqual(cam.vars['FT_More2'][1], 0)
+        cam.notify('FT_Choice2', 2)             # stale/forged choice cannot run provider
+        self.assertEqual(cam.vars['FT_Key'][1], 0)
+        cam.notify('FT_Choice2', 0)
+        cam.notify('FT_Choice2', 2)
+        self.assertEqual(cam.vars['FT_Key'][1], 2207, 'loaded provider still owns the callback')
+        cold = boot(sups=sups, vbin=loader_with(['BTNS']))
+        cold.press(11); cold.notify('FT_Choice2', 0)
+        self.assertEqual(cold.vars['FT_More2'][1], 0, 'Enable schedules next boot; no provider loaded')
+        cold.notify('FT_Choice2', 2)
+        self.assertEqual(cold.vars['FT_Key'][1], 0)
+
+    def test_audio_style_settings_hint_tracks_popup_selection_and_cancel(self):
+        from armasm import assemble
+        btn = B.make_sup(assemble(HERE / 'button_sup.S'), B.SL_HEADER_LEN, 'BTNS')
+        cam = boot(sups=card_sups() + [('60BTN.BIN', btn)])
+        cam.press(11)
+        cam.press(22)                           # popup slot 2, enabled selection
+        self.assertEqual(cam.vars['FT_RightFooter'][1], FT.NATIVE_ENGLISH['Footer02'])
+        self.assertEqual(cam.vars['FT_OK'][1], FT.NATIVE_ENGLISH['Footer05'])
+        self.assertEqual(cam.vars['FT_Version'][1], ' ')
+        cam.notify('FT_Selected2', 1)           # highlight Disable, without confirming
+        self.assertEqual(cam.vars['FT_RightFooter'][1], ' ')
+        self.assertEqual(cam.vars['FT_More2'][1], 0)
+        cam.notify('FT_Choice2', 2)             # Right must not open settings from Disable
+        self.assertEqual(cam.vars['FT_Key'][1], 0)
+        self.assertNotIn(SELF_PATH, cam.written)
+        cam.notify('FT_Selected2', 0)
+        cam.notify('FT_Choice2', 2)
+        self.assertEqual(cam.vars['FT_Key'][1], 2107)
+        cam.press(20)                          # close/cancel popup
+        self.assertEqual(cam.vars['FT_RightFooter'][1], ' ')
+        self.assertIn('Loader v3', cam.vars['FT_Version'][1])
+        self.assertEqual(cam.vars['FT_OK'][1], FT.NATIVE_ENGLISH['Footer01'])
+        cam.notify('FT_Focus', 3451)
+        self.assertIn('Page', cam.vars['FT_OK'][1])
+        self.assertNotIn('Select', cam.vars['FT_OK'][1])
+
+    def test_a_failed_write_rolls_back_the_persistent_list(self):
         cam = boot(sups=card_sups(), write_ok=False)
-        self.assertEqual(cam.posts, [('FT_Key', 3100 + 0)], 'boot: 3000 + list found x 100 + subscribe (0)')
-        cam.posts.clear()
-        cam.press(1)
-        self.assertEqual([p for p in cam.posts if p[0] != 'FT_OK'],
-                         [('FT_R1', 'Write failed'), ('FT_E1', ' '), ('FT_Key', 1000 + 6 * 10 + 1)])
+        cam.notify('FT_Choice1', 1)
+        self.assertEqual(parts(cam, 1)[3], 'Write failed')
+        self.assertEqual(parts(cam, 1)[2], 'v' + built()['dinfo']['versions']['LOSS'])
+        self.assertEqual(cam.vars['FT_Default1'][1], 0)
+        self.assertEqual(cam.vars['FT_Key'][1], 6)
         cam.write_ok = True
-        cam.press(5)                                      # 50DIS is not on the list: it loaded
-        self.assertEqual(disabled(cam.written['\\fpSup\\LOADER.BIN']), ['DSBL'], 'LOSS was not left on it')
+        cam.notify('FT_Choice5', 1)
+        self.assertEqual(disabled(cam.written[SELF_PATH]), ['DSBL'], 'failed LOSS change was rolled back')
+
+    def test_pagination_reaches_every_sup_including_past_seventeen(self):
+        sups = [(f'{i:02}SUP.BIN', T.test_sup(f'T{i:03}', [])) for i in range(1, 33)]
+        cam = boot(sups=sups)
+        self.assertEqual(lines(cam), ['FT6 s=00'], 'management keeps its own slot at loader capacity')
+        self.assertEqual(cam.vars['FT_PageText'][1], '1 / 7')
+        cam.press(10)
+        self.assertEqual(cam.vars['FT_PageText'][1], '1 / 7')
+        for page in range(7):
+            self.assertEqual(cam.vars['FT_PageText'][1], f'{page + 1} / 7')
+            check_tabs(self, cam, 7, page + 1)
+            for slot in range(1, 6):
+                if page * 5 + slot > 32:
+                    self.assertEqual(cam.vars[f'FT_Visible{slot}'][1], 0)
+                    continue
+                # Query selected file's unique sup_id through its persisted Disable.
+                cam.notify(f'FT_Choice{slot}', 1)
+                self.assertIn(f'T{page * 5 + slot:03}', disabled(cam.written[SELF_PATH]))
+                cam.notify(f'FT_Choice{slot}', 0)
+            self.assertEqual(cam.vars['FT_Focus'][1], 3451, 'paging preserves the title focus')
+            cam.press(11)
+        self.assertEqual(cam.vars['FT_PageText'][1], '7 / 7')
+        cam.press(10)
+        self.assertEqual(cam.vars['FT_PageText'][1], '6 / 7')
+
+    def test_no_sup_and_legacy_rows_are_not_switchable(self):
+        empty = boot()
+        empty.press(11); empty.press(10)
+        self.assertEqual(empty.vars['FT_PageText'][1], ' ')
+        check_tabs(self, empty, 1, 1)
+        for k in range(1, 6):
+            self.assertEqual(empty.vars[f'FT_Visible{k}'][1], 0)
+            empty.notify(f'FT_Choice{k}', 1)
+        self.assertNotIn(SELF_PATH, empty.written)
+        cam = boot(sups=card_sups())
+        for k in (2, 3):
+            cam.notify(f'FT_Choice{k}', 1)
+        self.assertNotIn(SELF_PATH, cam.written, 'invalid header and legacy OFF are read-only')
+
+    def test_fifth_slot_has_its_own_choice_and_selection_callbacks(self):
+        from armasm import assemble
+        btn = B.make_sup(assemble(HERE / 'button_sup.S'), B.SL_HEADER_LEN, 'BTNS')
+        sups = [(f'{k}0BASE.BIN', T.test_sup(f'BS{k}X', [])) for k in range(1, 5)]
+        cam = boot(sups=sups + [('50BTN.BIN', btn)])
+        self.assertEqual(cam.vars['FT_PageText'][1], ' ', 'single-page lists hide the count')
+        cam.press(25)
+        self.assertEqual(cam.vars['FT_RightFooter'][1], FT.NATIVE_ENGLISH['Footer02'])
+        cam.notify('FT_Selected5', 1)
+        self.assertEqual(cam.vars['FT_More5'][1], 0)
+        cam.notify('FT_Choice5', 2)
+        self.assertEqual(cam.vars['FT_Key'][1], 0)
+        cam.notify('FT_Selected5', 0)
+        cam.notify('FT_Choice5', 2)
+        self.assertEqual(cam.vars['FT_Key'][1], 2105)
+        cam.notify('FT_Choice5', 1)
+        self.assertEqual(disabled(cam.written[SELF_PATH]), ['BTNS'])
+        cam.notify('FT_Choice5', 0)
+        self.assertEqual(disabled(cam.written[SELF_PATH]), [])
 
     def test_page_ids(self):
         cam = boot()
-        for name in ('FT_Y6', 'FT_LIST'):
+        for name in ('FT_Y6', 'FT_LIST', 'FT_UPDATES', 'FT_CARD', 'FT_ABOUT'):
             self.assertEqual(cam.page_id(name), FT.GUI_ID)
         img = T.IMAGE.read_bytes()
         import sl_pages as SL
@@ -282,11 +396,19 @@ class AllSupsTests(unittest.TestCase):
         for site in (F6.SITE,) + FT.STRING_SITES:
             self.assertEqual(cam.w(site), T.word(img, site), hex(site))
 
-    def test_without_allsups_the_loader_is_byte_for_byte_the_releases(self):
-        import hashlib
+    def test_without_allsups_restores_the_ui_without_waiting(self):
+        # Frozen releases keep their original loader. New builds intentionally
+        # remove its splash hold while keeping the plain loader independent.
         vbin, _ = B.loader_bin()
-        self.assertEqual(hashlib.sha256(vbin).hexdigest()[:8], '41f3218a',
-                         'the v3 releases share this LOADER.BIN (sigmafp-re-45, 2026-10-07)')
+        files, dirs = T.card()
+        files[SELF_PATH] = vbin
+        cam = T.Camera(files, dirs, stale={T.DRAW: T.DRAW_PAUSED})
+        cam.boot()
+        self.assertEqual(cam.slept, 0)
+        self.assertNotIn('D_SLEEP', cam.calls)
+        self.assertEqual(cam.w(T.DRAW), T.DRAW_STOCK)
+        self.assertIn('UI_FORCE', cam.calls)
+        self.assertNotIn(DATA_PATH, cam.opened)
 
 
 if __name__ == '__main__':

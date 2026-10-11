@@ -1,34 +1,16 @@
-/* Loader v3's built-in page: SYSTEM page 6, "All Sups" (projects/usb-shell-sup/
- * notes/ALL_SUPS_MENU.md).  Compiled into LOADER.BIN in one unit after sloader.c
- * (build_v3.py, allsups=True); sloader.c enters it as a sup of its own, last,
- * under the name LOADER.BIN, so its claims, its uishare string layer and its
- * log lines are in the books like any sup's (sigmafp-re-70, 2026-10-07).
+/* Loader v3's optional fpSup management area.
+ * Built with sloader.c and uishare in one position-independent compilation
+ * unit. The loader enters it last, so it can list the other Sups' outcomes.
+ * UI data lives in \fpSup\UI\ALLSUPS.BIN (build_ft6.py); FT6Z includes
+ * five visible slots with separate name, version and status fields.
  *
- * The data -- this table, the FPUI block, the texts, the NBR pack with FT_Y6
- * and FT_LIST -- is \fpSup\UI\ALLSUPS.BIN (fpSup/uishare/tab/build_ft6.py
- * --data), not LOADER.BIN.  The mechanism was proven on the camera as the
- * stand-alone sup 90FTAB6.BIN (r1, r2c) and inside the loader (r3a):
- *
- *   1 claims: 0xC056461C CHAIN, the three string sites SHARED_UI; an 8-byte
- *     cave veneer                                       (refused: RELEASE)
- *   2 uia_apply: the string layer goes up; every STRBASE (relocated here to
- *     the table's offset array, the block's hash redone) hands one private
- *     string's offset to it
- *   3 the private strings' fields in the pages (big-endian); the list: every
- *     *.BIN and *.OFF in \fpSup but this loader, what the books say became
- *     of it; the private variables (FT_Key, FT_N1..FT_N17, FT_Focus) registered with
- *     the list as their first values; FT_Key subscribed
- *   4 the pack through the stock loader C05E84D8 after register_pages' checks;
- *     the new reader takes the stock reader's pool; the new machine goes to
- *     app+0xF4 slot 0
- *   5 the page-id layer at 0xC056461C: "FT_..." -> MainY5's GUI id
- * From 2 on the data block stays: KEEP.
- *
- * A row's Right / OK writes FT_Key = its number.  allsups_key (UI thread)
- * renames that file NAME.BIN <-> NAME.OFF (the shell's `fl rename`: file
- * object, open mode 7, C0366508) and posts the cell's new text. */
+ * The loader owns navigation and next-boot Enable/Disable. Sups own their
+ * More Settings callback and persistence. No file renames or live unload.
+ * Claims/string layers and the FT_ page-id hook follow the camera-proven
+ * r3g mechanism; navigation and popup callbacks are camera-validated.
+ */
 
-#define FT6_MAGIC   0x54365446u        /* "FT6T" (= sloader.c ALLSUPS_MAGIC) */
+#define FT6_MAGIC   0x5A365446u        /* "FT6Z" (= sloader.c ALLSUPS_MAGIC) */
 #define GUI_SITE    0xC056461Cu
 #define GUI_NEXT0   0xC0564638u
 #define GUI_OBJECT_AT 0xC37B7048u
@@ -38,7 +20,6 @@
 #define VAR_SUBSCRIBE 0xC0560FB0u      /* ARM: (GUI object, name, fn) -- fn(descriptor) on the UI thread */
 #define POST_INT    0xC0593F30u        /* ARM: (0, name, value) queued to the GUI */
 #define POST_STR    0xC0593FE0u        /* ARM: (0, name, text) -- the GUI keeps the pointer */
-#define F_RENAME    0xC0366508u        /* ARM: (file object, new path), 0 = failed */
 #define FILE_OBJECT_BYTES 0x1000u
 #define DESC_VALUE  0x08u
 
@@ -55,10 +36,12 @@
 #define READER_BASE     0x24u
 #define MACH_NAME       0x08u
 
-#define FT6_ROWS    17u                /* build_ft6.ROWS: the language grid's cells */
+#define FT6_ROWS    32u                /* stored rows, independent of visible slots */
+#define FT6_VISIBLE 5u
+#define FT6_PAGES   5u
 enum { T_UNLOAD, T_LOAD, T_FAILED, T_ERROR, T_DIR, T_BIN, T_OFF_EXT, T_BLANK,
-       T_I_OK, T_I_AEL, T_I_MENU, T_SP, T_W_UNINSTALL, T_W_INSTALL, T_W_CANCEL, T_COUNT };
-#define AEL_BASE    100u               /* ft6_page.AEL_BASE: AEL on cell k writes FT_Key = 100 + k */
+       T_I_OK, T_I_AEL, T_I_MENU, T_SP, T_W_UNINSTALL, T_W_INSTALL, T_POPUP_FOOTER, T_VERSION, T_FOOTER,
+       T_MORE_HINT, T_PAGE_HINT, T_COUNT };
 enum { P_NAME, P_GREY, P_VER, P_RED, P_GREEN, P_COUNT };   /* ft6_page.CELL_PARTS */
 enum { BOOT_ON, BOOT_OFF, BOOT_FAILED };
 
@@ -73,7 +56,8 @@ struct ft6_row {
     uint32_t boot, bin, err;           /* this boot; on at the next (not on the list); the write failed */
     uint32_t id, legacy;               /* its sup_id (0: none read); a NAME.OFF file (not switchable) */
     uint32_t sup;                      /* 1 + its index in the books when it loaded, else 0 */
-    char foot[196];                    /* FT_OK for this cell: the GUI keeps the pointer */
+    uint32_t version_x;                /* inline version's native position binding */
+    char reserved[192];                /* 272-byte row stride retained */
 };
 struct ft6_tab {                       /* build_ft6.py data_file(): the same words  */
     uint32_t magic, pack_off, pack_len;
@@ -83,12 +67,16 @@ struct ft6_tab {                       /* build_ft6.py data_file(): the same wor
     uint32_t n_vars, vars_off;         /* {type, name}: FT_Key, FT_<part><k> by part, FT_Focus */
     uint32_t txt[T_COUNT];             /* data offsets of the fixed texts           */
     uint32_t rows_off;                 /* FT6_ROWS x struct ft6_row, zero in the file */
-    uint32_t n_prod, prod_off;         /* {sup_id, name, version}: data offsets      */
+    uint32_t n_prod, prod_off;         /* {sup_id, name, version, version_x}         */
+    uint32_t logo_off, logo_len;       /* own NBR reader: retain its image filename pool */
     uint32_t stock[4];                 /* GUI site, then the three string sites     */
     char machine[12];                  /* "TransFtTab": no .rodata here             */
     uint32_t status, ven, rd, app, mach, ui_result, ui_op;
     uint32_t n_rows, fobj, keys;       /* run time                                  */
     uint32_t st, path;                 /* the loader's state; "\fpSup\LOADER.BIN"     */
+    uint32_t page;                     /* zero-based, focus stays on the title */
+    char pager[64];                    /* persistent: POST_STR borrows its pointer */
+    uint32_t popup, selected[FT6_VISIBLE], header;
 };
 
 typedef uint32_t (*fn3)(uint32_t, uint32_t, uint32_t);
@@ -184,7 +172,7 @@ static uint32_t ft6_part_of(uint32_t slot)
 }
 /* 0 FT_Key, 1 FT_OK, then the cells' parts, FT_Focus last (build_ft6.variables) */
 #define VAR_OK 1u
-static uint32_t ft6_vi(uint32_t p, uint32_t k) { return 2u + ft6_slot(p) * FT6_ROWS + (k - 1u); }
+static uint32_t ft6_vi(uint32_t p, uint32_t k) { return 2u + ft6_slot(p) * FT6_VISIBLE + (k - 1u); }
 
 /* What cell part p shows (the user 2026-10-07): the product's name white when
  * it loaded this boot, grey when not; small, its version; red "Unload on
@@ -196,12 +184,14 @@ static const char *ft6_part(uint8_t *block, const struct ft6_row *r, uint32_t p)
     if (!r->base[0]) return ft6_text(block, T_BLANK);
     if (p == P_NAME) return r->boot == BOOT_ON ? r->disp : ft6_text(block, T_BLANK);
     if (p == P_GREY) return r->boot != BOOT_ON ? r->disp : ft6_text(block, T_BLANK);
+    uint32_t red = r->err ? T_ERROR : r->boot == BOOT_ON && !r->bin ? T_UNLOAD
+                 : r->boot == BOOT_FAILED && r->bin ? T_FAILED : T_BLANK;
+    uint32_t green = !r->err && r->boot == BOOT_OFF && r->bin ? T_LOAD : T_BLANK;
     if (p == P_VER) return r->ver ? (const char *)(block + r->ver) : ft6_text(block, T_BLANK);
     if (p == P_RED)
-        t = r->err ? T_ERROR : r->boot == BOOT_ON && !r->bin ? T_UNLOAD
-          : r->boot == BOOT_FAILED && r->bin ? T_FAILED : T_BLANK;
+        t = red;
     if (p == P_GREEN)
-        t = !r->err && r->boot == BOOT_OFF && r->bin ? T_LOAD : T_BLANK;
+        t = green;
     return ft6_text(block, t);
 }
 
@@ -211,11 +201,13 @@ static void ft6_name(uint8_t *block, struct ft6_row *r, uint32_t id)
 {
     struct ft6_tab *t = (struct ft6_tab *)block;
     const char *n = r->base;
+    r->version_x = 49u;
     for (uint32_t i = 0; id && i < t->n_prod; i++) {
-        uintptr_t e = (uintptr_t)(block + t->prod_off) + 12u * i;
+        uintptr_t e = (uintptr_t)(block + t->prod_off) + 16u * i;
         if (rd32(e) != id) continue;
         n = (const char *)(block + rd32(e + 4));
         r->ver = rd32(e + 8);
+        r->version_x = rd32(e + 12);
         copy(r->disp, n, slen(n) + 1);
         return;
     }
@@ -264,90 +256,203 @@ static uint32_t ft6_disable(struct ft6_tab *t, uint32_t id, uint32_t off)
     return ok;                                  /* 1 written; 2 no list, 3 no id, 4 full, 5 open, 6 write */
 }
 
-/* Cell r's footer (the user 2026-10-08): "[OK] Uninstall" for a sup on at the
- * next boot, "[OK] Install" for one off, nothing for a cell with nothing to
- * switch; "[AEL] <its label>" when the sup took the key (svc->button);
- * "[MENU] Cancel". */
-static void ft6_foot(uint8_t *block, struct state *st, struct ft6_row *r)
+/* Variable layout shared with build_ft6.variables(). */
+#define VAR_PAGE (2u + P_COUNT * FT6_VISIBLE)
+#define VAR_VERSION (VAR_PAGE + 1u)
+#define VAR_VISIBLE (VAR_VERSION + 1u)
+#define VAR_LOCK (VAR_VISIBLE + FT6_VISIBLE)
+#define VAR_SELECTED (VAR_LOCK + FT6_VISIBLE)
+#define VAR_MORE (VAR_SELECTED + FT6_VISIBLE)
+#define VAR_DEFAULT (VAR_MORE + FT6_VISIBLE)
+#define VAR_CHOICE (VAR_DEFAULT + FT6_VISIBLE)
+#define VAR_FOCUS (VAR_CHOICE + FT6_VISIBLE)
+#define VAR_RIGHT_FOOTER (VAR_FOCUS + 3u)
+#define VAR_VERSION_X (VAR_RIGHT_FOOTER + 1u)
+#define FT6_TABS ((FT6_ROWS + FT6_VISIBLE - 1u) / FT6_VISIBLE)
+#define VAR_TAB_VISIBLE (VAR_VERSION_X + FT6_VISIBLE)
+#define VAR_TAB_ACTIVE (VAR_TAB_VISIBLE + FT6_TABS)
+#define VAR_TAB_X (VAR_TAB_ACTIVE + FT6_TABS)
+#define VAR_TAB_WIDTH (VAR_TAB_X + FT6_TABS)
+#define HEADER_FOCUS 3451u
+
+static uint32_t ft6_tabvalue(struct ft6_tab *t, uint32_t i)
 {
-    char *p = r->foot, *end = r->foot + sizeof r->foot - 1;
-    const char *parts[8];
-    uint32_t n = 0;
-    if (r->id && !r->legacy) {
-        parts[n++] = ft6_text(block, T_I_OK);
-        parts[n++] = ft6_text(block, r->bin ? T_W_UNINSTALL : T_W_INSTALL);
-        parts[n++] = ft6_text(block, T_SP);
-    }
-    if (r->sup && st->btn_fn[r->sup - 1u]) {
-        parts[n++] = ft6_text(block, T_I_AEL);
-        if (st->btn_label[r->sup - 1u]) parts[n++] = st->btn_label[r->sup - 1u];
-        parts[n++] = ft6_text(block, T_SP);
-    }
-    parts[n++] = ft6_text(block, T_I_MENU);
-    parts[n++] = ft6_text(block, T_W_CANCEL);
-    for (uint32_t i = 0; i < n; i++)
-        for (const char *q = parts[i]; *q && p < end; q++) *p++ = *q;
-    *p = 0;
+    uint32_t n = 1u + (t->n_rows ? (t->n_rows - 1u) / FT6_VISIBLE : 0u);
+    /* Cortex-A9's standalone loader has no runtime division library. */
+    uint32_t width = n == 1u ? 1024u : n == 2u ? 512u : n == 3u ? 341u
+                   : n == 4u ? 256u : n == 5u ? 204u : n == 6u ? 170u : 146u;
+    uint32_t group = (i - VAR_TAB_VISIBLE) / FT6_TABS;
+    uint32_t k = (i - VAR_TAB_VISIBLE) % FT6_TABS;
+    return group == 0u ? k < n
+         : group == 1u ? k == t->page
+         : group == 2u ? width * k
+         : k + 1u == n ? 1024u - width * k : width;
 }
 
-static const char *ft6_footer(uint8_t *block, uint32_t k)
+static struct ft6_row *ft6_visible(uint8_t *block, uint32_t k)
 {
-    if (!k || k > FT6_ROWS) return ft6_text(block, T_BLANK);
-    return ft6_rows(block)[k - 1u].foot;       /* a cell past the list: "[MENU] Cancel" */
+    struct ft6_tab *t = (struct ft6_tab *)block;
+    uint32_t i = t->page * FT6_VISIBLE + k - 1u;
+    return k && k <= FT6_VISIBLE && i < t->n_rows ? &ft6_rows(block)[i] : 0;
 }
 
-/* FT_Focus's subscriber (UI thread): the grid's cursor moved to cell value+1 */
+static uint32_t ft6_more(struct ft6_tab *t, struct ft6_row *r)
+{
+    struct state *st = (struct state *)(uintptr_t)t->st;
+    return r && r->bin && r->boot == BOOT_ON && r->sup && st->btn_fn[r->sup - 1u];
+}
+
+static uint32_t ft6_meta(uint8_t *block, uint32_t group, uint32_t k)
+{
+    struct ft6_tab *t = (struct ft6_tab *)block;
+    struct ft6_row *r = ft6_visible(block, k);
+    return group == VAR_VISIBLE ? !!r
+         : group == VAR_LOCK ? (!r || !r->id || r->legacy)
+         : group == VAR_MORE ? !!ft6_more(t, r)
+         : (r && !r->bin ? 1u : 0u);
+}
+
+/* Audio's two choices: only enabled+loaded providers get a Right hint. */
+static void ft6_hint(uint8_t *block)
+{
+    struct ft6_tab *t = (struct ft6_tab *)block;
+    uint32_t more = 0;
+    for (uint32_t k = 1; k <= FT6_VISIBLE; k++) {
+        uint32_t eligible = !!ft6_more(t, ft6_visible(block, k));
+        if (t->popup == k) {
+            eligible = eligible && t->selected[k - 1u] == 0u;
+            more = eligible;
+        }
+        FW(POST_INT, fn3)(0, (uint32_t)(uintptr_t)ft6_var(block, VAR_MORE + k - 1u), eligible);
+    }
+    FW(POST_STR, fn3)(0, (uint32_t)(uintptr_t)ft6_var(block, VAR_OK),
+        (uint32_t)(uintptr_t)ft6_text(block, t->popup ? T_POPUP_FOOTER : t->header ? T_PAGE_HINT : T_FOOTER));
+    FW(POST_STR, fn3)(0, (uint32_t)(uintptr_t)ft6_var(block, VAR_RIGHT_FOOTER),
+        (uint32_t)(uintptr_t)ft6_text(block, more ? T_MORE_HINT : T_BLANK));
+    FW(POST_STR, fn3)(0, (uint32_t)(uintptr_t)ft6_var(block, VAR_VERSION),
+        (uint32_t)(uintptr_t)ft6_text(block, more ? T_BLANK : T_VERSION));
+}
+
+static uint32_t ft6_selected(uintptr_t desc, uint32_t k)
+{
+    uint8_t *block = (uint8_t *)(uintptr_t)ft6_ctx;
+    if (!block) return 0;
+    struct ft6_tab *t = (struct ft6_tab *)block;
+    t->selected[k - 1u] = rd32(desc + DESC_VALUE);
+    ft6_hint(block);
+    return 0;
+}
+static uint32_t allsups_selected1(uintptr_t d) { return ft6_selected(d, 1); }
+static uint32_t allsups_selected2(uintptr_t d) { return ft6_selected(d, 2); }
+static uint32_t allsups_selected3(uintptr_t d) { return ft6_selected(d, 3); }
+static uint32_t allsups_selected4(uintptr_t d) { return ft6_selected(d, 4); }
+static uint32_t allsups_selected5(uintptr_t d) { return ft6_selected(d, 5); }
+
 static uint32_t allsups_focus(uintptr_t desc)
 {
     uint8_t *block = (uint8_t *)(uintptr_t)ft6_ctx;
-    uint32_t v = rd32(desc + DESC_VALUE);
-    if (!block || v >= FT6_ROWS) return 0;
-    FW(POST_STR, fn3)(0, (uint32_t)(uintptr_t)ft6_var(block, VAR_OK), (uint32_t)(uintptr_t)ft6_footer(block, v + 1u));
+    if (!block) return 0;
+    ((struct ft6_tab *)block)->header = rd32(desc + DESC_VALUE) == HEADER_FOCUS;
+    ft6_hint(block);
     return 0;
 }
 
-/* FT_Key's subscriber (UI thread): put row k's sup on the list or take it
- * off (no file is renamed: the user 2026-10-08 -- a running sup writes back to
- * its own file at power-off, and a renamed one left a stub), post its texts */
+static void ft6_pager(struct ft6_tab *t)
+{
+    char *p = t->pager;
+    if (t->n_rows <= FT6_VISIBLE) {
+        *p++ = ' '; *p = 0;
+        return;
+    }
+    *p++ = '1' + t->page; *p++ = ' '; *p++ = '/'; *p++ = ' ';
+    *p++ = '1' + (t->n_rows ? (t->n_rows - 1u) / FT6_VISIBLE : 0u);
+    *p = 0;
+}
+
+static void ft6_refresh(uint8_t *block)
+{
+    struct ft6_tab *t = (struct ft6_tab *)block;
+    ft6_pager(t);
+    FW(POST_STR, fn3)(0, (uint32_t)(uintptr_t)ft6_var(block, VAR_PAGE), (uint32_t)(uintptr_t)t->pager);
+    for (uint32_t i = VAR_TAB_VISIBLE; i < VAR_TAB_WIDTH + FT6_TABS; i++)
+        FW(POST_INT, fn3)(0, (uint32_t)(uintptr_t)ft6_var(block, i), ft6_tabvalue(t, i));
+    for (uint32_t k = 1; k <= FT6_VISIBLE; k++) {
+        struct ft6_row *r = ft6_visible(block, k);
+        FW(POST_INT, fn3)(0, (uint32_t)(uintptr_t)ft6_var(block, VAR_VERSION_X + k - 1u),
+                         r ? r->version_x : 49u);
+        for (uint32_t p = 0; p < P_COUNT; p++)
+            FW(POST_STR, fn3)(0, (uint32_t)(uintptr_t)ft6_var(block, ft6_vi(p, k)),
+                             (uint32_t)(uintptr_t)(r ? ft6_part(block, r, p) : ft6_text(block, T_BLANK)));
+        for (uint32_t g = VAR_VISIBLE; g <= VAR_DEFAULT; g += FT6_VISIBLE)
+            FW(POST_INT, fn3)(0, (uint32_t)(uintptr_t)ft6_var(block, g + k - 1u), ft6_meta(block, g, k));
+        t->selected[k - 1u] = ft6_meta(block, VAR_SELECTED, k);
+    }
+    ft6_hint(block);
+}
+
+/* Only title Left/Right writes FT_Key. Sup Right/OK opens a native popup. */
 static uint32_t allsups_key(uintptr_t desc)
 {
     uint8_t *block = (uint8_t *)(uintptr_t)ft6_ctx;
-    struct ft6_tab *t = (struct ft6_tab *)block;
-    uint32_t k = rd32(desc + DESC_VALUE);
     if (!block) return 0;
-    if (k > AEL_BASE && k <= AEL_BASE + t->n_rows) {  /* AEL: the cell's sup decides */
-        struct ft6_row *a = &ft6_rows(block)[k - AEL_BASE - 1u];
-        struct state *st = (struct state *)(uintptr_t)t->st;
-        int (*fn)(void *) = a->sup ? st->btn_fn[a->sup - 1u] : 0;
-        int ret = fn ? fn(st->btn_arg[a->sup - 1u]) : -1;
-        /* FT_Key back past the cells: 2000 + the cell + its handler's answer x 100
-         * (gui geti FT_Key); no handler: 2000 + the cell - 100 */
-        FW(POST_INT, fn3)(0, (uint32_t)(uintptr_t)ft6_var(block, 0),
-                          2000u + (k - AEL_BASE) + (uint32_t)(ret * 100));
+    struct ft6_tab *t = (struct ft6_tab *)block;
+    uint32_t key = rd32(desc + DESC_VALUE);
+    uint32_t last = t->n_rows ? (t->n_rows - 1u) / FT6_VISIBLE : 0u;
+    if (key == 30u || key == 31u) {
+        t->header = key == 31u;
+        t->popup = 0;
+        ft6_hint(block);
+        FW(POST_INT, fn3)(0, (uint32_t)(uintptr_t)ft6_var(block, 0), 0);
         return 0;
     }
-    if (!k || k > t->n_rows) return 0;
-    struct ft6_row *r = &ft6_rows(block)[k - 1];
-    if (r->legacy || !r->id) return 0;           /* nothing to put on the list */
-    t->keys++;
-    uint32_t rc = ft6_disable(t, r->id, r->bin), ok = rc == 1u;
-    r->err = !ok;
-    if (ok) r->bin = !r->bin;
-    ft6_foot(block, (struct state *)(uintptr_t)t->st, r);
-    for (uint32_t p = P_RED; p <= P_GREEN; p++)
-        FW(POST_STR, fn3)(0, (uint32_t)(uintptr_t)ft6_var(block, ft6_vi(p, k)),
-                          (uint32_t)(uintptr_t)ft6_part(block, r, p));
-    /* FT_Key back to "no row" -- a number past the cells, so the same row
-     * writes a change; it says what happened (gui geti FT_Key):
-     * 1000 + ft6_disable's code x 10 + the list was found at boot */
-    FW(POST_STR, fn3)(0, (uint32_t)(uintptr_t)ft6_var(block, VAR_OK), (uint32_t)(uintptr_t)ft6_footer(block, k));
-    FW(POST_INT, fn3)(0, (uint32_t)(uintptr_t)ft6_var(block, 0),
-                      1000u + rc * 10u + (((struct state *)(uintptr_t)t->st)->dis ? 1u : 0u));
+    if (key >= 20u && key <= 20u + FT6_VISIBLE) {
+        t->popup = key - 20u;
+        ft6_hint(block);
+        FW(POST_INT, fn3)(0, (uint32_t)(uintptr_t)ft6_var(block, 0), 0);
+        return 0;
+    }
+    if (key != 10u && key != 11u) return 0;
+    if (key == 10u && t->page) t->page--;
+    if (key == 11u && t->page < last) t->page++;
+    ft6_refresh(block);
+    FW(POST_INT, fn3)(0, (uint32_t)(uintptr_t)ft6_var(block, 0), 0);
     return 0;
 }
 
-/* Every *.BIN and *.OFF in \fpSup but this loader, sorted, at most FT6_ROWS:
- * what the books say became of each. */
+static uint32_t ft6_choice(uintptr_t desc, uint32_t k)
+{
+    uint8_t *block = (uint8_t *)(uintptr_t)ft6_ctx;
+    if (!block) return 0;
+    struct ft6_tab *t = (struct ft6_tab *)block;
+    struct ft6_row *r = ft6_visible(block, k);
+    uint32_t choice = rd32(desc + DESC_VALUE), rc = 0;
+    if (r && r->id && !r->legacy) {
+        if (choice <= 1u) {                  /* explicit Enable / Disable, never toggle */
+            if (r->bin == choice || r->err) {
+                rc = ft6_disable(t, r->id, choice);
+                r->err = rc != 1u;
+                if (!r->err) r->bin = !choice;
+                t->keys++;
+            }
+        } else if (choice == 2u && t->selected[k - 1u] == 0u && ft6_more(t, r)) {
+            struct state *st = (struct state *)(uintptr_t)t->st;
+            int ret = st->btn_fn[r->sup - 1u](st->btn_arg[r->sup - 1u]);
+            rc = 2000u + t->page * FT6_VISIBLE + k + (uint32_t)(ret * 100);
+        }
+    }
+    ft6_refresh(block);
+    FW(POST_INT, fn3)(0, (uint32_t)(uintptr_t)ft6_var(block, VAR_CHOICE + k - 1u), 255u);
+    FW(POST_INT, fn3)(0, (uint32_t)(uintptr_t)ft6_var(block, 0), rc);
+    return 0;
+}
+static uint32_t allsups_choice1(uintptr_t d) { return ft6_choice(d, 1); }
+static uint32_t allsups_choice2(uintptr_t d) { return ft6_choice(d, 2); }
+static uint32_t allsups_choice3(uintptr_t d) { return ft6_choice(d, 3); }
+static uint32_t allsups_choice4(uintptr_t d) { return ft6_choice(d, 4); }
+static uint32_t allsups_choice5(uintptr_t d) { return ft6_choice(d, 5); }
+
+/* Every *.BIN and *.OFF in \fpSup but this loader, sorted, at most FT6_ROWS.
+ * Visible UI slots are independent of this storage bound. */
 static uint32_t ft6_list(struct state *st, uint8_t *block, u8 *s)
 {
     struct ft6_row *rows = ft6_rows(block);
@@ -410,34 +515,53 @@ static uint32_t ft6_list(struct state *st, uint8_t *block, u8 *s)
                 if (st->dis[2 + j] == rows[i].id) { rows[i].boot = BOOT_OFF; rows[i].bin = 0; }
     }
     for (u32 i = n; i < FT6_ROWS; i++) zero(&rows[i], sizeof rows[i]);    /* past the list: blank */
-    for (u32 i = 0; i < FT6_ROWS; i++) ft6_foot(block, st, &rows[i]);
     return n;
 }
 
-/* FT_Key (int 0), FT_N<k> (the cells' texts), FT_Focus (int 0, the grid's
- * cursor): memory only */
+/* Fixed slot variables; page changes only replace values, never grow UI objects. */
 static uint32_t ft6_variables(uint8_t *block, uintptr_t app)
 {
     struct ft6_tab *t = (struct ft6_tab *)block;
-    struct ft6_row *rows = ft6_rows(block);
+    ft6_pager(t);
     for (uint32_t i = 0; i < t->n_vars; i++) {
-        uint32_t def[3];
+        uint32_t def[3], value = 0;
         def[0] = rd32((uintptr_t)(block + t->vars_off + 8u * i));
         def[1] = (uint32_t)(uintptr_t)ft6_var(block, i);
-        def[2] = !def[0] ? 0u                                      /* an int: FT_Key, FT_Focus */
-               : i == VAR_OK ? (uint32_t)(uintptr_t)ft6_footer(block, 1u)
-               : (uint32_t)(uintptr_t)ft6_part(block, &rows[(i - 2u) % FT6_ROWS], ft6_part_of((i - 2u) / FT6_ROWS));
+        if (i >= 2u && i < VAR_PAGE) {
+            struct ft6_row *r = ft6_visible(block, 1u + (i - 2u) % FT6_VISIBLE);
+            value = (uint32_t)(uintptr_t)(r ? ft6_part(block, r, ft6_part_of((i - 2u) / FT6_VISIBLE)) : ft6_text(block, T_BLANK));
+        } else if (i == VAR_PAGE) value = (uint32_t)(uintptr_t)t->pager;
+        else if (i == VAR_VERSION) value = (uint32_t)(uintptr_t)ft6_text(block, T_VERSION);
+        else if (i >= VAR_VISIBLE && i < VAR_CHOICE)
+            value = ft6_meta(block, VAR_VISIBLE + ((i - VAR_VISIBLE) / FT6_VISIBLE) * FT6_VISIBLE,
+                            1u + (i - VAR_VISIBLE) % FT6_VISIBLE);
+        else if (i >= VAR_CHOICE && i < VAR_FOCUS) value = 255u;
+        else if (i == VAR_RIGHT_FOOTER) value = (uint32_t)(uintptr_t)ft6_text(block, T_BLANK);
+        else if (i >= VAR_VERSION_X && i < VAR_VERSION_X + FT6_VISIBLE) {
+            struct ft6_row *r = ft6_visible(block, 1u + i - VAR_VERSION_X);
+            value = r ? r->version_x : 49u;
+        }
+        else if (i >= VAR_TAB_VISIBLE && i < VAR_TAB_WIDTH + FT6_TABS)
+            value = ft6_tabvalue(t, i);
+        else if (i >= VAR_FOCUS) value = HEADER_FOCUS;
+        else if (i == VAR_OK) value = (uint32_t)(uintptr_t)ft6_text(block, T_FOOTER);
+        if (i >= VAR_SELECTED && i < VAR_SELECTED + FT6_VISIBLE)
+            t->selected[i - VAR_SELECTED] = value;
+        def[2] = value;
         if (FW(VAR_REGISTER, fn3)((uint32_t)app, 1, (uint32_t)(uintptr_t)def)) return 90u + i;
     }
-    uint32_t sub = FW(VAR_SUBSCRIBE, fn3)(GUI_OBJECT_AT, (uint32_t)(uintptr_t)ft6_var(block, 0),
-                                          (uint32_t)(uintptr_t)&allsups_key);
-    FW(VAR_SUBSCRIBE, fn3)(GUI_OBJECT_AT, (uint32_t)(uintptr_t)ft6_var(block, t->n_vars - 1u),
-                           (uint32_t)(uintptr_t)&allsups_focus);
-    /* DEBUG (camera r3e3): what boot did, readable with `gui geti FT_Key`:
-     * 3000 + the list found x 100 + the subscription's answer (low byte) */
-    struct state *st = (struct state *)(uintptr_t)t->st;
-    FW(POST_INT, fn3)(0, (uint32_t)(uintptr_t)ft6_var(block, 0),
-                      3000u + (st && st->dis ? 100u : 0u) + (sub & 0xFFu));
+    FW(VAR_SUBSCRIBE, fn3)(GUI_OBJECT_AT, (uint32_t)(uintptr_t)ft6_var(block, 0), (uint32_t)(uintptr_t)&allsups_key);
+    for (uint32_t k = 0; k < FT6_VISIBLE; k++) {
+        uintptr_t fn = k == 0 ? (uintptr_t)&allsups_choice1 : k == 1 ? (uintptr_t)&allsups_choice2
+                     : k == 2 ? (uintptr_t)&allsups_choice3 : k == 3 ? (uintptr_t)&allsups_choice4
+                     : (uintptr_t)&allsups_choice5;
+        FW(VAR_SUBSCRIBE, fn3)(GUI_OBJECT_AT, (uint32_t)(uintptr_t)ft6_var(block, VAR_CHOICE + k), fn);
+        fn = k == 0 ? (uintptr_t)&allsups_selected1 : k == 1 ? (uintptr_t)&allsups_selected2
+           : k == 2 ? (uintptr_t)&allsups_selected3 : k == 3 ? (uintptr_t)&allsups_selected4
+           : (uintptr_t)&allsups_selected5;
+        FW(VAR_SUBSCRIBE, fn3)(GUI_OBJECT_AT, (uint32_t)(uintptr_t)ft6_var(block, VAR_SELECTED + k), fn);
+    }
+    FW(VAR_SUBSCRIBE, fn3)(GUI_OBJECT_AT, (uint32_t)(uintptr_t)ft6_var(block, VAR_FOCUS), (uint32_t)(uintptr_t)&allsups_focus);
     return 0;
 }
 
@@ -455,9 +579,16 @@ static uint32_t ft6_register(uint8_t *block, struct ft6_tab *t)
     reader = rd32(screen + SCREEN_READER);
     if (bad(reader) || rd32(reader + READER_BASE) != NBU_BASE_AT || rd32(reader + READER_APP) != app)
         return 4;
-    if (rd32(app + APP_SCREENS_N) + 1u >= rd32(app + APP_SCREENS_CAP)) return 5;   /* two pages */
+    /* Image properties are decoded lazily. They must retain their own pool;
+     * only the separate page reader below adopts the shared stock pool. */
+    if (FW(NBR_LOAD, fn4)((uint32_t)app, (uint32_t)(uintptr_t)(block + t->logo_off), t->logo_len, 0))
+        return 6;
+    /* The stock NBR registrar grows its screen vector when needed (native
+     * UI skill 8g). Reject corrupt bookkeeping, not a normal full vector:
+     * the camera's observed 221/224 cannot hold all five pages without growth. */
+    if (rd32(app + APP_SCREENS_N) > rd32(app + APP_SCREENS_CAP)) return 5;
     n0 = rd32(app + APP_MACH_N);
-    if (n0 >= rd32(app + APP_MACH_CAP)) return 5;
+    if (n0 > rd32(app + APP_MACH_CAP)) return 5;    /* normal full vector grows natively */
     if (FW(NBR_LOAD, fn4)((uint32_t)app, (uint32_t)(uintptr_t)(block + t->pack_off), t->pack_len,
                           (uint32_t)(uintptr_t)&rdr))
         return 6;

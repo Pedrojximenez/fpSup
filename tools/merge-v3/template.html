@@ -44,6 +44,9 @@ section{margin-bottom:22px}
 section h2{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
 section h2 span{text-transform:none;letter-spacing:0;font-weight:400}
 section>p.sub{color:var(--dim);font-size:.84rem;margin:-6px 0 10px}
+.boot-option{display:flex;align-items:flex-start;gap:12px;padding:10px 14px;background:var(--panel);border:1px solid var(--line);border-radius:6px;margin-bottom:8px;cursor:pointer}
+.boot-option input{accent-color:var(--sig);width:16px;height:16px;margin:4px 0 0;flex:none;cursor:pointer}
+.boot-option b{font-size:.9rem}.boot-option small{display:block;color:var(--dim);font-size:.83rem;margin-top:3px}
 details.dev>summary{cursor:pointer;list-style:none;font-family:var(--mono);font-size:.72rem;
   text-transform:uppercase;letter-spacing:.11em;color:var(--dim);font-weight:600;margin-bottom:10px}
 details.dev>summary::before{content:"▸ "}
@@ -128,20 +131,9 @@ header .lang{position:absolute;top:0;right:0}
 /* In the hero: smaller, so the two buttons read as a shortcut rather than as the
    point of the page. Some people arrive only wanting the Discord invite or the
    Ko-fi link, and they should not have to scroll past the whole funnel to find it. */
-/* Switch to the older fpSup-Merge (tools/card-composer has the same bar) */
-.pageswitch{display:flex;margin:0 0 18px;border:1px solid var(--line);border-radius:4px;overflow:hidden;
-  width:max-content;max-width:100%;font-family:var(--mono);font-size:.78rem}
-.pageswitch a{padding:6px 12px;text-decoration:none;color:var(--dim);background:var(--panel)}
-.pageswitch a + a{border-left:1px solid var(--line)}
-.pageswitch a[aria-current="page"]{background:var(--sig-soft);color:var(--sig);font-weight:600}
-.pageswitch a:hover{color:var(--ink)}
 </style>
 </head>
 <body>
-<nav class="pageswitch" aria-label="fpSup-Merge">
-  <a href="../card-composer/" aria-current="page" data-t="swNew"></a>
-  <a href="../card-composer/legacy/" data-t="swOld"></a>
-</nav>
 <header>
   <div class="lang" role="group" aria-label="Language / 語言 / 语言">
     <button type="button" data-lang="en">EN</button>
@@ -172,6 +164,7 @@ header .lang{position:absolute;top:0;right:0}
 </header>
 <div class="cols">
   <main>
+    <section id="startup"></section>
     <div id="tiles"></div>
   </main>
   <aside>
@@ -290,26 +283,44 @@ const clashes = (a, b) => a !== b && (byId(a).excl.includes(b) || byId(b).excl.i
    All Sups menu lists both kinds from the one folder). */
 function plan(picked){
   const on = [], off = [];
-  for (const id of picked){
+  for (const id of selected(picked)){
     const by = on.filter(q => clashes(id, q));
     (by.length ? off : on).push(id);
   }
-  return {on, off, conflict: id => picked.filter(q => clashes(id, q))};
+  return {on, off, conflict: id => selected(picked).filter(q => clashes(id, q))};
 }
 
-/* Which of a product's data files go on the card.  DATA_OFF[id] holds the
-   ones the user unticked; everything else is in (default: all). */
+function selected(picked){
+  const out = [...picked];
+  for (let i = 0; i < out.length; i++)
+    for (const id of (byId(out[i]).requires || [])) if (!out.includes(id)) out.push(id);
+  return out;
+}
+
+/* Explicit products default to all their data files. A dependency adds only
+   its core unless the user ticks data files; RES-Lab needs no saved RCD. */
 const DATA_OFF = {};
+const BOOT = {...CAT.boot.default};
+const managerRequired = picked => selected(picked).some(id => byId(id).needs_manager);
+const managerEnabled = picked => BOOT.manager || managerRequired(picked);
+const bootKey = picked => `${managerEnabled(picked) ? 'm1' : ''}i${+BOOT.instant}f${+BOOT.fast}`;
+const bootFiles = (picked = []) => CAT.boot.variants[bootKey(picked)].files
+  .concat(CAT.shared.filter(s => !['AutoRun.txt', 'fpSup/LOADER.BIN'].includes(s.path)))
+  .concat(managerEnabled(picked) ? CAT.boot.manager_files : []);
+const payloadFor = (p, picked) => p.virtual && plan(picked).on.includes('res-lab') ? p.virtual : p;
 const offName = f => f.replace(/\.BIN$/i, '.OFF');
-const dataChosen = p => (p.data_files || []).filter(d => !(DATA_OFF[p.id] || []).includes(d.path));
+const dataExcluded = (p, picked) => DATA_OFF[p.id] ||
+  (!picked.includes(p.id) ? (p.data_files || []).map(d => d.path) : []);
+const dataChosen = (p, picked) => (p.data_files || []).filter(d => !dataExcluded(p, picked).includes(d.path));
 
 /* The card for a selection: [{name, data, sha256}] in zip order, sups in the
    loader's name order. */
 function compose(picked){
   const {on, off} = plan(picked);
-  const files = CAT.shared.map(s => ({name: s.path, data: b64(s.data), sha256: s.sha256}));
+  const files = bootFiles(picked).map(s => ({name: s.path, data: b64(s.data), sha256: s.sha256}));
   for (const p of CAT.products){                                   // CAT is in file order
-    if (on.includes(p.id)) files.push({name: 'fpSup/' + p.file, data: b64(p.data), sha256: p.sha256, p});
+    const payload = payloadFor(p, picked);
+    if (on.includes(p.id)) files.push({name: 'fpSup/' + p.file, data: b64(payload.data), sha256: payload.sha256, p});
   }
   for (const p of CAT.products){
     if (off.includes(p.id)) files.push({name: 'fpSup/' + offName(p.file), data: b64(p.data), sha256: p.sha256, p, off: true});
@@ -318,8 +329,10 @@ function compose(picked){
      folder even when the sup is parked: the loader never reads subfolders, so
      switching sups is still moving one .BIN. */
   for (const p of CAT.products){
-    if (!picked.includes(p.id)) continue;
-    for (const d of dataChosen(p))
+    if (!selected(picked).includes(p.id)) continue;
+    for (const d of dataChosen(p, picked))
+      files.push({name: d.path, data: b64(d.data), sha256: d.sha256, dataOf: p});
+    for (const d of (p.support_files || []))
       files.push({name: d.path, data: b64(d.data), sha256: d.sha256, dataOf: p});
   }
   return {on, off, files};
@@ -329,11 +342,13 @@ function compose(picked){
    a failure; two sups that would both run and clash would be. */
 function checks(picked){
   const out = [], {on, files} = compose(picked);
-  out.push({ok: on.length > 0, what: 'at least one sup runs'});
-  for (const id of picked){
+  out.push({ok: on.length > 0 || managerEnabled(picked), what: 'at least one sup or the fpSup page'});
+  for (const id of selected(picked)){
     const p = byId(id);
-    if ((p.data_files || []).length)
-      out.push({ok: dataChosen(p).length > 0, what: `${p.name}: at least one data file`});
+    if ((p.data_files || []).length && !on.includes('res-lab'))
+      out.push({ok: dataChosen(p, picked).length > 0, what: `${p.name}: at least one data file`});
+    if (on.includes(id)) for (const required of (p.requires || []))
+      out.push({ok: on.includes(required), what: `${p.name}: ${byId(required).name} runs`});
   }
   for (const a of on) for (const b of on)
     if (a < b && clashes(a, b)) out.push({ok: false, what: `${byId(a).name} and ${byId(b).name} both run`});
@@ -355,9 +370,9 @@ function checks(picked){
 }
 
 function cardName(picked){
-  const ids = CAT.products.filter(p => picked.includes(p.id)).map(p => p.id);
-  if (ids.length === 1) return byId(ids[0]).release;
-  return 'fpsup-v3-' + ids.join('+');
+  const ids = CAT.products.filter(p => selected(picked).includes(p.id)).map(p => p.id);
+  const name = ids.length === 1 ? byId(ids[0]).release : 'fpsup-v3-' + (ids.join('+') || 'manager');
+  return name + (managerEnabled(picked) ? '-fpSup' : '') + (BOOT.instant ? '-IS' : '') + (BOOT.fast ? '-FS' : '');
 }
 
 function readme(picked){
@@ -366,12 +381,18 @@ function readme(picked){
     'firmware: SIGMA fp Ver.5.02 only', '',
     'Copy everything in this folder to the root of the SD card.',
     'The loader loads fpSup\\NN*.BIN in name order; it skips every folder inside fpSup.',
-    'Diagnostics: \\fpSup\\LOAD.LOG', '', 'RUNS (fpSup\\):'];
+    'Diagnostics: \\fpSup\\LOAD.LOG', '',
+    'Instant Start: ' + (BOOT.instant ? 'ON (power-switch restart reuses the RAM loader)' : 'OFF'),
+    'Fast Start: ' + (BOOT.fast ? 'ON (first boot stores the loader in camera settings; cold boots use a shorter AutoRun)' : 'OFF'),
+    'fpSup page: ' + (managerEnabled(picked) ? 'ON (manage Sups in the camera menu; Enable/Disable applies after restart)' : 'OFF'),
+    '', 'RUNS (fpSup\\):'];
+  if (selected(picked).includes('res-lab')) L.push('  RES-Lab includes RES-CUSTOM and the fpSup page; edits apply without SAVE.',
+    '  SAVE creates named RCD files; RES-CUSTOM manages which files appear in Resolution and QS.');
   const who = p => [p.author && 'by ' + p.author, p.credits.length && 'thanks to ' + p.credits.join(', ')]
     .filter(Boolean).map(x => '  -- ' + x).join('');
   for (const p of CAT.products.filter(p => on.includes(p.id))){
     L.push(`  ${p.file.padEnd(12)} ${p.release}${who(p)}`);
-    const ds = dataChosen(p);
+    const ds = dataChosen(p, picked);
     if (ds.length) L.push(`  ${''.padEnd(12)} data: ${ds.map(d => d.label).join(', ')}`);
   }
   if (off.length){
@@ -401,8 +422,13 @@ const T = {
   zh: {
     intro: '勾選要放進同一張卡的 sup,下載 zip,把裡面資料夾的內容全部複製到 SD 卡根目錄。Loader v3 卡是一個資料夾：每個 sup 一個檔案，合併就是放在一起。只支援 Ver.5.02。',
     card: '卡片內容', hashes: '檔案雜湊',
+    startup: '啟動', instant: '瞬間啟動', instantHint: '預設開啟，電源開關重啟時直接載入。',
+    fast: '快速啟動', fastHint: '勾選以加速冷開機；首次使用會把啟動程式存入相機設定區。',
+    manager: 'fpSup 管理頁', managerHint: '在相機選單開啟 Sup 設定、啟用或停用；啟用清單於重開機後生效。',
+    managerNeeded: 'RES-Lab 的設定入口需要此頁面，已自動加入。',
+    required: n => `自動加入：${n} 需要此項。`,
+    labNeeds: '自動帶入 RES-CUSTOM 與 fpSup 管理頁；預設不加入固定解析度，可另外勾選。',
     kofi: '在 Ko-fi 支持我',
-    swNew: 'fpSup-Merge v3(新版)', swOld: '舊格式的卡(舊版)',
     install: '安裝說明',
     /* Andy_hal9000's tip (no per-character AutoRun delay) is the first line of
        every v3 card's AutoRun, so the thanks is always shown -- the old page
@@ -420,7 +446,7 @@ const T = {
     upcoming: ['開發中', '還不能選，先讓你知道接下來有什麼'],
     motion: ['陀螺儀與後製', '錄影時記下的資料，給後製用'],
     development: ['開發用', '一般拍攝不需要'],
-    dl: '下載 zip', pick: '先勾選至少一個 sup',
+    dl: '下載 zip', pick: '先勾選一個 sup 或 fpSup 管理頁',
     by: '作者', thanks: '致謝', soon: '尚未發行', dev: '開發中', long: '長期開發', updated: '更新', formats: '要放進卡的格式', guide: '更多說明',
     clash: n => `與 ${n} 衝突：放在卡上但不啟用(.OFF)`,
     clashOn: n => `與 ${n} 衝突：此項啟用,${n} 存成 .OFF`,
@@ -431,8 +457,13 @@ const T = {
   en: {
     intro: 'Tick the sups for one card, download the zip, and copy what is inside its folder to the SD card root. A Loader v3 card is a folder: one file per sup, so merging is putting them together. Ver.5.02 only.',
     card: 'Card contents', hashes: 'File hashes',
+    startup: 'Start-up', instant: 'Instant Start', instantHint: 'On by default. Loads directly after a power-switch restart.',
+    fast: 'Fast Start', fastHint: 'Tick to speed up cold starts. The first boot stores the loader in camera settings.',
+    manager: 'fpSup menu page', managerHint: 'Open Sup settings and enable or disable Sups in the camera menu. Restart to apply the enable list.',
+    managerNeeded: 'Included automatically: RES-Lab opens its settings through this page.',
+    required: n => `Included automatically: required by ${n}.`,
+    labNeeds: 'Includes RES-CUSTOM and the fpSup menu page. Fixed resolutions are optional and start unticked.',
     kofi: 'supMe on Ko-fi',
-    swNew: 'fpSup-Merge v3 (new)', swOld: 'Older cards',
     install: 'Install',
     flash: '⚡ Thanks to our Flash, <b>Andy_hal9000</b>, whose tip cut start-up from 11.5 s to 3 s, on every card.',
     steps: [
@@ -447,7 +478,7 @@ const T = {
     upcoming: ['In development', 'Not selectable yet: what is coming next'],
     motion: ['Gyro & post', 'Data recorded with the clip, for post'],
     development: ['Development', 'Not needed for shooting'],
-    dl: 'Download zip', pick: 'Tick at least one sup',
+    dl: 'Download zip', pick: 'Tick a sup or the fpSup menu page',
     by: 'By', thanks: 'Thanks to', soon: 'Not released yet', dev: 'In development', long: 'Long-term development', updated: 'updated', formats: 'Formats to put on the card', guide: 'More',
     clash: n => `Clashes with ${n}: on the card but off (.OFF)`,
     clashOn: n => `Clashes with ${n}: this one runs, ${n} is saved as .OFF`,
@@ -486,8 +517,8 @@ function byline(p, t){
 }
 
 function dataChips(p, t){
-  if (!(p.data_files || []).length || !picked.includes(p.id)) return '';
-  const offs = DATA_OFF[p.id] || [];
+  if (!(p.data_files || []).length || !selected(picked).includes(p.id)) return '';
+  const offs = dataExcluded(p, picked);
   return `<div class="data" role="group" aria-label="${esc(t.formats)}">${p.data_files.map(d => {
     const on = !offs.includes(d.path);
     return `<label class="${on ? 'on' : ''}"><input type="checkbox" data-file="${esc(d.path)}" data-of="${p.id}" ${on ? 'checked' : ''}>${esc(d.label)}</label>`;
@@ -495,7 +526,8 @@ function dataChips(p, t){
 }
 
 function tile(p, t, pl){
-  const ticked = picked.includes(p.id), parked = pl.off.includes(p.id);
+  const ticked = selected(picked).includes(p.id), parked = pl.off.includes(p.id);
+  const neededBy = selected(picked).filter(id => (byId(id).requires || []).includes(p.id));
   const others = picked.filter(q => clashes(p.id, q)).map(q => byId(q).name).join(', ');
   const potential = !ticked && CAT.products.some(q => clashes(p.id, q.id))
     ? CAT.products.filter(q => clashes(p.id, q.id)).map(q => q.name).join(', ') : '';
@@ -506,9 +538,11 @@ function tile(p, t, pl){
       : `<span class="warn">${esc(t.clashOn(others))}</span>`;
   else if (potential) warn = `<span class="hint">⚠ ${esc(t.clash(potential).split(':')[0])}</span>`;
   return `<div class="tile${ticked ? (parked ? ' parked' : ' on') : ''}">
-    <input type="checkbox" id="c-${p.id}" data-id="${p.id}" ${ticked ? 'checked' : ''}>
-    <label class="name" for="c-${p.id}">${esc(p.name)}<span class="m">v${esc(p.version)} · ${esc(t.updated)} ${esc(p.date)}</span></label>
+    <input type="checkbox" id="c-${p.id}" data-id="${p.id}" ${ticked ? 'checked' : ''} ${neededBy.length ? 'disabled' : ''}>
+    <label class="name" for="c-${p.id}">${esc(p.name)}<span class="m">${p.build_label ? esc(about({about:p.build_label})) : 'v' + esc(p.version)} · ${esc(t.updated)} ${esc(p.date)}</span></label>
     <span class="desc">${esc(about(p) || p.about.en || '')}</span>
+    ${neededBy.length ? `<span class="hint">${esc(t.required(neededBy.map(id => byId(id).name).join(', ')))}</span>` : ''}
+    ${p.id === 'res-lab' ? `<span class="hint">${esc(t.labNeeds)}</span>` : ''}
     ${dataChips(p, t)}
     ${warn}
     ${more(p, t)}
@@ -533,6 +567,9 @@ function render(){
   document.querySelectorAll('[data-t]').forEach(el => { el.textContent = t[el.dataset.t]; });
   $('#steps').innerHTML = t.steps.map(x => `<li>${x}</li>`).join('');   // our own strings, not data
   $("#thanks").innerHTML = t.flash;
+  $('#startup').innerHTML = `<h2>${esc(t.startup)}</h2>` + ['instant', 'fast'].map(k =>
+    `<label class="boot-option"><input type="checkbox" data-boot="${k}" ${BOOT[k] ? 'checked' : ''}><span><b>${esc(t[k])}</b><small>${esc(t[k + 'Hint'])}</small></span></label>`).join('')
+    + `<label class="boot-option"><input type="checkbox" data-boot="manager" ${managerEnabled(picked) ? 'checked' : ''} ${managerRequired(picked) ? 'disabled' : ''}><span><b>${esc(t.manager)}</b><small>${esc(managerRequired(picked) ? t.managerNeeded : t.managerHint)}</small></span></label>`;
   document.querySelectorAll('[data-lang]').forEach(b => b.setAttribute('aria-pressed', b.dataset.lang === lang));
 
   const openDev = !!document.querySelector('details.dev[open]') || picked.some(id => byId(id).category === 'development');
@@ -548,7 +585,7 @@ function render(){
     const pend = (CAT.pending || []).filter(p => p.category === c && !upcoming(p)).sort(byRank);
     if (!ps.length && !pend.length) return '';
     const [title, sub] = t[c] || [c, ''];
-    const n = ps.filter(p => picked.includes(p.id)).length;
+    const n = ps.filter(p => selected(picked).includes(p.id)).length;
     const body = ps.map(p => tile(p, t, pl)).join('') + pend.map(p => pendingTile(p, t)).join('');
     if (c === 'development')
       return `<details class="dev"${openDev ? ' open' : ''}><summary>${esc(title)} — ${esc(sub)}</summary>${body}</details>`;
@@ -563,8 +600,10 @@ function render(){
   const {files} = compose(picked);
   const run = files.filter(f => f.p && !f.off);
   const off = files.filter(f => f.off);
-  $('#tree').innerHTML = picked.length
+  const ready = selected(picked).length || managerEnabled(picked);
+  $('#tree').innerHTML = ready
     ? ['AutoRun.txt', 'README.txt', 'fpSup/', '  LOADER.BIN', '  UI/0..4.BIN',
+       ...(managerEnabled(picked) ? ['  UI/ALLSUPS.BIN'] : []),
        ...run.map(f => `<span class="new">  ${esc(f.p.file)}</span>`),
        ...[...new Set(files.filter(f => f.dataOf).map(f => f.name.split('/')[1]))].flatMap(dir =>
          [`<span class="new">  ${esc(dir)}/</span>`,
@@ -577,7 +616,7 @@ function render(){
 
   const st = $('#status'), dl = $('#dl');
   dl.textContent = t.dl;
-  if (!picked.length){ dl.disabled = true; st.textContent = ''; st.className = 'status'; return; }
+  if (!ready){ dl.disabled = true; st.textContent = ''; st.className = 'status'; return; }
   const res = checks(picked), bad = res.find(r => !r.ok);
   dl.disabled = !!bad;
   st.className = 'status ' + (bad ? 'bad' : 'ok');
@@ -600,14 +639,20 @@ document.addEventListener('click', e => {
   }
 });
 document.addEventListener('change', e => {
+  const boot = e.target.dataset && e.target.dataset.boot;
+  if (['instant', 'fast', 'manager'].includes(boot)){
+    if (boot === 'manager' && managerRequired(picked)) return render();
+    BOOT[boot] = e.target.checked; return render();
+  }
   const f = e.target.dataset && e.target.dataset.file;
   if (f){
-    const of = e.target.dataset.of, cur = DATA_OFF[of] || [];
+    const of = e.target.dataset.of, cur = dataExcluded(byId(of), picked);
     DATA_OFF[of] = e.target.checked ? cur.filter(x => x !== f) : [...cur, f];
     return render();
   }
   const id = e.target.dataset && e.target.dataset.id;
   if (!id) return;
+  if (!e.target.checked && selected(picked).some(q => (byId(q).requires || []).includes(id))) return render();
   picked = e.target.checked ? [...picked, id] : picked.filter(x => x !== id);
   render();
 });
