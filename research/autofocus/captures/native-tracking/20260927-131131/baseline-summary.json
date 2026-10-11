@@ -1,0 +1,855 @@
+{
+  "schema": "fp.native-observer.preflight/v1",
+  "camera_ram_writes": 0,
+  "camera_ram_writes_scope": "direct host writes and injected payloads only",
+  "native_handler_internal_writes_audited": false,
+  "lens_commands": 0,
+  "retries": 0,
+  "installation_performed": false,
+  "deployment_ready": false,
+  "memory_ownership_verified": false,
+  "stack_headroom_verified": false,
+  "source_coherence_verified": false,
+  "geometry_eligible": false,
+  "confirmation_authorized": false,
+  "motion_authorized": false,
+  "blocks": {
+    "echo_before": {
+      "address": "0xC0BAC2F8",
+      "words": [
+        3225262496
+      ],
+      "bytes_hex": "a0993dc0",
+      "coherent_snapshot": false
+    },
+    "capture_guard_before": {
+      "address": "0xC30338C8",
+      "words": [
+        0,
+        0,
+        65536
+      ],
+      "bytes_hex": "000000000000000000000100",
+      "coherent_snapshot": false
+    },
+    "shutter_gate_before": {
+      "address": "0xC3033A6C",
+      "words": [
+        0
+      ],
+      "bytes_hex": "00000000",
+      "coherent_snapshot": false
+    },
+    "hook_af": {
+      "address": "0xC028E310",
+      "words": [
+        3959321858
+      ],
+      "bytes_hex": "0275feeb",
+      "coherent_snapshot": false
+    },
+    "hook_lens": {
+      "address": "0xC0340458",
+      "words": [
+        3942692030
+      ],
+      "bytes_hex": "beb400eb",
+      "coherent_snapshot": false
+    },
+    "hook_face": {
+      "address": "0xC05AB348",
+      "words": [
+        3959421292
+      ],
+      "bytes_hex": "6cf9ffeb",
+      "coherent_snapshot": false
+    },
+    "hook_aat": {
+      "address": "0xC05AB8C8",
+      "words": [
+        3942657290
+      ],
+      "bytes_hex": "0a2d00eb",
+      "coherent_snapshot": false
+    },
+    "af_terminal_pre_forward_context": {
+      "address": "0xC028E2F8",
+      "words": [
+        3818913823,
+        3958842239,
+        3959321236,
+        3808433908,
+        3766554637,
+        3818921984,
+        3959321858,
+        3808495952,
+        3813409597,
+        3958772571,
+        3813670912,
+        167772165
+      ],
+      "bytes_hex": "1f00a0e37f23f7eb9472feebf41600e30d1081e00020a0e30275feeb500901e33d034ce35b13f6eb000050e30500000a",
+      "coherent_snapshot": false
+    },
+    "af_terminal_pre_forward_callee_entry_guard": {
+      "address": "0xC022B720",
+      "words": [
+        3912057200,
+        3785375744,
+        3785379841,
+        3785383938
+      ],
+      "bytes_hex": "70412de90040a0e10150a0e10260a0e1",
+      "coherent_snapshot": false
+    },
+    "af_terminal_pre_forward_callee_return_guard": {
+      "address": "0xC022B79C",
+      "words": [
+        3904733552
+      ],
+      "bytes_hex": "7081bde8",
+      "coherent_snapshot": false
+    },
+    "native_l_final_event_set_return_context": {
+      "address": "0xC0340448",
+      "words": [
+        3785359364,
+        3942645893,
+        3800301636,
+        3818917889,
+        3942692030,
+        3851685908,
+        3813736449,
+        324075522,
+        436207618,
+        3851685896,
+        3800301620,
+        3942695089
+      ],
+      "bytes_hex": "0400a0e1850000eb440084e20110a0e3beb400eb141094e5010051e3020051130200001a081094e5340084e2b1c000eb",
+      "coherent_snapshot": false
+    },
+    "native_l_final_event_set_return_callee_entry_guard": {
+      "address": "0xC036D758",
+      "words": [
+        3912056880,
+        3785375744,
+        3785379841,
+        3851681792
+      ],
+      "bytes_hex": "30402de90040a0e10150a0e1000094e5",
+      "coherent_snapshot": false
+    },
+    "native_l_final_event_set_return_callee_return_guard": {
+      "address": "0xC036D788",
+      "words": [
+        3904733232
+      ],
+      "bytes_hex": "3080bde8",
+      "coherent_snapshot": false
+    },
+    "face_parser_publication_return_context": {
+      "address": "0xC05AB32C",
+      "words": [
+        3800301572,
+        3818917888,
+        3959422577,
+        3855888388,
+        3813867520,
+        436207617,
+        3785359364,
+        3959421292,
+        3800891404,
+        3818917890,
+        3957953501,
+        3800948558,
+        3904736752
+      ],
+      "bytes_hex": "040084e20010a0e371feffeb0430d4e5000053e30100001a0400a0e16cf9ffeb0c008de20210a0e3dd93e9eb4edf8de2f08dbde8",
+      "coherent_snapshot": false
+    },
+    "face_parser_publication_return_callee_entry_guard": {
+      "address": "0xC05A9900",
+      "words": [
+        3912056848,
+        3808445560,
+        3812638720,
+        3763195908
+      ],
+      "bytes_hex": "10402de9784400e3004040e304d04de0",
+      "coherent_snapshot": false
+    },
+    "face_parser_publication_return_callee_return_guard": {
+      "address": "0xC05A99C4",
+      "words": [
+        3904733200
+      ],
+      "bytes_hex": "1080bde8",
+      "coherent_snapshot": false
+    },
+    "aat_color_run_return_context": {
+      "address": "0xC05AB8B8",
+      "words": [
+        3818917889,
+        3818921984,
+        3785359361,
+        3942658807,
+        3942657290,
+        3813670912,
+        60821505,
+        329256960,
+        3785359361,
+        3904733200
+      ],
+      "bytes_hex": "0110a0e30020a0e30100a0e1f73200eb0a2d00eb000050e30110a0030010a0130100a0e11080bde8",
+      "coherent_snapshot": false
+    },
+    "aat_color_run_return_callee_entry_guard": {
+      "address": "0xC05B6CF8",
+      "words": [
+        3912060912,
+        3796750468,
+        3818913792,
+        3851223044
+      ],
+      "bytes_hex": "f04f2de984d04de20000a0e304008de5",
+      "coherent_snapshot": false
+    },
+    "aat_color_run_return_callee_return_guard": {
+      "address": "0xC05B7364",
+      "words": [
+        3904737264
+      ],
+      "bytes_hex": "f08fbde8",
+      "coherent_snapshot": false
+    },
+    "worker_allocations": {
+      "address": "0xC072F050",
+      "words": [
+        1157855616,
+        1048576,
+        1158904256
+      ],
+      "bytes_hex": "8079034500001000c0791345",
+      "coherent_snapshot": false
+    },
+    "legacy_logger_pool": {
+      "address": "0xC3757A7C",
+      "words": [
+        0
+      ],
+      "bytes_hex": "00000000",
+      "coherent_snapshot": false
+    },
+    "cave_bump_raw": {
+      "address": "0xC072E060",
+      "words": [
+        3228754020
+      ],
+      "bytes_hex": "64e072c0",
+      "coherent_snapshot": false
+    },
+    "boot_timestamps_raw": {
+      "address": "0xC072F6F4",
+      "words": [
+        0,
+        15340463
+      ],
+      "bytes_hex": "00000000af13ea00",
+      "coherent_snapshot": false
+    },
+    "legacy_parameter_region_prefix": {
+      "address": "0xC072F700",
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "bytes_hex": "00000000000000000000000000000000",
+      "coherent_snapshot": false
+    },
+    "legacy_handler_region_prefix": {
+      "address": "0xC072FC00",
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "bytes_hex": "00000000000000000000000000000000",
+      "coherent_snapshot": false
+    },
+    "native_l_selector": {
+      "address": "0xC3476408",
+      "words": [
+        1
+      ],
+      "bytes_hex": "01000000",
+      "coherent_snapshot": false
+    },
+    "native_l_object": {
+      "address": "0xC3476414",
+      "words": [
+        3233345260,
+        8122,
+        500,
+        8122,
+        25920,
+        0,
+        8122,
+        25920,
+        1,
+        0,
+        0,
+        0,
+        0,
+        3,
+        3224632720,
+        3233386696,
+        3,
+        22,
+        23,
+        25,
+        3224767608,
+        3276163456,
+        3276267324
+      ],
+      "bytes_hex": "eceeb8c0ba1f0000f4010000ba1f00004065000000000000ba1f00004065000001000000000000000000000000000000000000000300000090fd33c0c890b9c003000000160000001700000019000000780c36c0804946c33cdf47c3",
+      "coherent_snapshot": false
+    },
+    "face_manager_prefix": {
+      "address": "0xC37CCA9C",
+      "words": [
+        3269438208,
+        0,
+        2,
+        257
+      ],
+      "bytes_hex": "00abdfc2000000000200000001010000",
+      "coherent_snapshot": false
+    },
+    "face_initialization_guard": {
+      "address": "0xC37CCA8C",
+      "words": [
+        1
+      ],
+      "bytes_hex": "01000000",
+      "coherent_snapshot": false
+    },
+    "face_group0": {
+      "address": "0xC37CCAAC",
+      "words": [
+        113,
+        34,
+        82,
+        82,
+        113,
+        34,
+        82,
+        82,
+        0,
+        1,
+        100000,
+        82,
+        1,
+        169,
+        53,
+        16,
+        16,
+        169,
+        53,
+        16,
+        16,
+        0,
+        0,
+        143,
+        14,
+        1,
+        136,
+        48,
+        16,
+        16,
+        136,
+        48,
+        16,
+        16,
+        0,
+        0,
+        628,
+        16,
+        1
+      ],
+      "bytes_hex": "71000000220000005200000052000000710000002200000052000000520000000000000001000000a08601005200000001000000a9000000350000001000000010000000a900000035000000100000001000000000000000000000008f0000000e0000000100000088000000300000001000000010000000880000003000000010000000100000000000000000000000740200001000000001000000",
+      "coherent_snapshot": false
+    },
+    "aat_model_and_states": {
+      "address": "0xC37CDFA8",
+      "words": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "bytes_hex": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "coherent_snapshot": false
+    },
+    "aat_backends_and_selector": {
+      "address": "0xC37CD340",
+      "words": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "bytes_hex": "00000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "coherent_snapshot": false
+    },
+    "aat_publication": {
+      "address": "0xC3033E00",
+      "words": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "bytes_hex": "00000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "coherent_snapshot": false
+    },
+    "face_menu_storage_guard": {
+      "address": "0xC31AE3A8",
+      "words": [
+        1
+      ],
+      "bytes_hex": "01000000",
+      "coherent_snapshot": false
+    },
+    "face_menu_selector_before": {
+      "address": "0xC31B954C",
+      "words": [
+        0
+      ],
+      "bytes_hex": "00000000",
+      "coherent_snapshot": false
+    },
+    "face_menu_primary": {
+      "address": "0xC31B3758",
+      "words": [
+        2
+      ],
+      "bytes_hex": "02000000",
+      "coherent_snapshot": false
+    },
+    "face_menu_alternate": {
+      "address": "0xC31B9020",
+      "words": [
+        2
+      ],
+      "bytes_hex": "02000000",
+      "coherent_snapshot": false
+    },
+    "detection_configuration": {
+      "address": "0xC358E260",
+      "words": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3282316476,
+        3269436516
+      ],
+      "bytes_hex": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000bc2ca4c364a4dfc2",
+      "coherent_snapshot": false
+    },
+    "detection_configuration_guard": {
+      "address": "0xC358E2B8",
+      "words": [
+        1
+      ],
+      "bytes_hex": "01000000",
+      "coherent_snapshot": false
+    },
+    "face_manager_context": {
+      "address": "0xC37CCDB8",
+      "words": [
+        320,
+        240,
+        0,
+        0,
+        320,
+        180,
+        1,
+        160
+      ],
+      "bytes_hex": "40010000f0000000000000000000000040010000b400000001000000a0000000",
+      "coherent_snapshot": false
+    },
+    "face_raw_header_and_first_record": {
+      "address": "0xC37CCF10",
+      "words": [
+        1,
+        18974416,
+        154,
+        75,
+        154,
+        75,
+        82,
+        100000,
+        0,
+        1
+      ],
+      "bytes_hex": "01000000d08621019a0000004b0000009a0000004b00000052000000a08601000000000001000000",
+      "coherent_snapshot": false
+    },
+    "face_status_head": {
+      "address": "0xC3033AC4",
+      "words": [
+        0,
+        2,
+        257,
+        113,
+        34,
+        82,
+        82,
+        113,
+        34,
+        82,
+        82,
+        0,
+        1,
+        100000,
+        82,
+        1,
+        169,
+        53,
+        16,
+        16,
+        169,
+        53,
+        16,
+        16,
+        0,
+        0,
+        625,
+        14,
+        1,
+        137,
+        48,
+        16,
+        16,
+        137,
+        48,
+        16,
+        16,
+        0,
+        0,
+        936,
+        16,
+        1
+      ],
+      "bytes_hex": "00000000020000000101000071000000220000005200000052000000710000002200000052000000520000000000000001000000a08601005200000001000000a9000000350000001000000010000000a90000003500000010000000100000000000000000000000710200000e0000000100000089000000300000001000000010000000890000003000000010000000100000000000000000000000a80300001000000001000000",
+      "coherent_snapshot": false
+    },
+    "face_status_context": {
+      "address": "0xC3033DDC",
+      "words": [
+        320,
+        240,
+        0,
+        0,
+        320,
+        180,
+        1,
+        160
+      ],
+      "bytes_hex": "40010000f0000000000000000000000040010000b400000001000000a0000000",
+      "coherent_snapshot": false
+    },
+    "face_display_observer_head": {
+      "address": "0xC3433C58",
+      "words": [
+        0,
+        2,
+        257,
+        113,
+        34,
+        82,
+        82,
+        113,
+        34,
+        82,
+        82,
+        0,
+        1,
+        100000,
+        82,
+        1,
+        169,
+        53,
+        16,
+        16,
+        169,
+        53,
+        16,
+        16,
+        0,
+        0,
+        794,
+        14,
+        1,
+        137,
+        48,
+        16,
+        16,
+        137,
+        48,
+        16,
+        16,
+        0,
+        0,
+        963,
+        16,
+        1
+      ],
+      "bytes_hex": "00000000020000000101000071000000220000005200000052000000710000002200000052000000520000000000000001000000a08601005200000001000000a9000000350000001000000010000000a900000035000000100000001000000000000000000000001a0300000e0000000100000089000000300000001000000010000000890000003000000010000000100000000000000000000000c30300001000000001000000",
+      "coherent_snapshot": false
+    },
+    "face_display_observer_context": {
+      "address": "0xC3433F70",
+      "words": [
+        320,
+        240,
+        0,
+        0,
+        320,
+        180,
+        1,
+        160
+      ],
+      "bytes_hex": "40010000f0000000000000000000000040010000b400000001000000a0000000",
+      "coherent_snapshot": false
+    },
+    "face_renderer_head": {
+      "address": "0xC3434474",
+      "words": [
+        0,
+        2,
+        257,
+        113,
+        34,
+        82,
+        82,
+        113,
+        34,
+        82,
+        82,
+        0,
+        1,
+        100000,
+        82,
+        1,
+        169,
+        52,
+        16,
+        16,
+        169,
+        52,
+        16,
+        16,
+        0,
+        0,
+        890,
+        14,
+        1,
+        137,
+        48,
+        16,
+        16,
+        137,
+        48,
+        16,
+        16,
+        0,
+        0,
+        815,
+        16,
+        1
+      ],
+      "bytes_hex": "00000000020000000101000071000000220000005200000052000000710000002200000052000000520000000000000001000000a08601005200000001000000a9000000340000001000000010000000a900000034000000100000001000000000000000000000007a0300000e00000001000000890000003000000010000000100000008900000030000000100000001000000000000000000000002f0300001000000001000000",
+      "coherent_snapshot": false
+    },
+    "face_renderer_context": {
+      "address": "0xC343478C",
+      "words": [
+        320,
+        240,
+        0,
+        0,
+        320,
+        180,
+        1,
+        160
+      ],
+      "bytes_hex": "40010000f0000000000000000000000040010000b400000001000000a0000000",
+      "coherent_snapshot": false
+    },
+    "face_renderer_extra": {
+      "address": "0xC34348E4",
+      "words": [
+        2
+      ],
+      "bytes_hex": "02000000",
+      "coherent_snapshot": false
+    },
+    "face_renderer_object": {
+      "address": "0xC3435A54",
+      "words": [
+        3275972716,
+        3275972872,
+        0,
+        0,
+        3275965544,
+        0,
+        3275965556,
+        3233102792,
+        1
+      ],
+      "bytes_hex": "6c6043c3086143c30000000000000000684443c300000000744443c3c83bb5c001000000",
+      "coherent_snapshot": false
+    },
+    "face_display_suppression_word": {
+      "address": "0xC30338E8",
+      "words": [
+        0
+      ],
+      "bytes_hex": "00000000",
+      "coherent_snapshot": false
+    },
+    "face_display_observer_controls": {
+      "address": "0xC3426318",
+      "words": [
+        0,
+        0,
+        1
+      ],
+      "bytes_hex": "000000000000000001000000",
+      "coherent_snapshot": false
+    },
+    "face_menu_selector_after": {
+      "address": "0xC31B954C",
+      "words": [
+        0
+      ],
+      "bytes_hex": "00000000",
+      "coherent_snapshot": false
+    },
+    "echo_after": {
+      "address": "0xC0BAC2F8",
+      "words": [
+        3225262496
+      ],
+      "bytes_hex": "a0993dc0",
+      "coherent_snapshot": false
+    },
+    "capture_guard_after": {
+      "address": "0xC30338C8",
+      "words": [
+        0,
+        0,
+        65536
+      ],
+      "bytes_hex": "000000000000000000000100",
+      "coherent_snapshot": false
+    },
+    "shutter_gate_after": {
+      "address": "0xC3033A6C",
+      "words": [
+        0
+      ],
+      "bytes_hex": "00000000",
+      "coherent_snapshot": false
+    }
+  },
+  "tasks": {
+    "AfMgr": "id    108\ntask  c036ee50\nstksz 0x4000\nistk  c3b265cc\nr[ 0] 00000000\nr[ 1] c3000094\nr[ 2] c30000a0\nr[ 3] c3003fe8\nr[ 4] c3012368\nr[ 5] 00000001\nr[ 6] 00000010\nr[ 7] c3000098\nr[ 8] 0000010b\nr[ 9] 6c6c6c6c\nr[10] 60000013\nr[11] c3b263f8\nr[12] 7a7a7a7a\npc    c000408c\ncpsr  7a7a7a7a\nmode  00000000\nlr    7a7a7a7a\nssp   c3b262ac\nusp   6c6c6c6c\n====== stack dump 0 byte ======\naddr=C3B262AC , size=0\n",
+    "LensFocs": "id    25\ntask  c03405c0\nstksz 0x2000\nistk  c3a1d4ac\nr[ 0] 00000000\nr[ 1] c3000094\nr[ 2] c30000a0\nr[ 3] c300151c\nr[ 4] c3013a20\nr[ 5] c3000098\nr[ 6] 60000013\nr[ 7] c3a1d454\nr[ 8] 19191919\nr[ 9] 19191919\nr[10] ffffffff\nr[11] c3a1d420\nr[12] 45039980\npc    c00048dc\ncpsr  7a7a7a7a\nmode  00000000\nlr    c01e77b5\nssp   c3a1d328\nusp   19191919\n====== stack dump 0 byte ======\naddr=C3A1D328 , size=0\n",
+    "Tracking": "id    64\ntask  c036ee50\nstksz 0x2000\nistk  c3aac2ec\nr[ 0] 00000000\nr[ 1] c3000094\nr[ 2] c30000a0\nr[ 3] c3002938\nr[ 4] c3013ccc\nr[ 5] c3000098\nr[ 6] 60000013\nr[ 7] c3aac274\nr[ 8] 40404040\nr[ 9] 40404040\nr[10] ffffffff\nr[11] c3aac240\nr[12] 45039980\npc    c00048dc\ncpsr  7a7a7a7a\nmode  00000000\nlr    c01e77b5\nssp   c3aac148\nusp   40404040\n====== stack dump 0 byte ======\naddr=C3AAC148 , size=0\n",
+    "FdTsk": "id    63\ntask  c0672d89\nstksz 0x1400\nistk  c3aaa2e4\nr[ 0] 00000000\nr[ 1] c3000094\nr[ 2] c30000a0\nr[ 3] 0047de5d\nr[ 4] c3011c68\nr[ 5] 01000000\nr[ 6] 00000001\nr[ 7] c3000098\nr[ 8] 3f3f3f3f\nr[ 9] 3f3f3f3f\nr[10] 60000013\nr[11] c3aa9db8\nr[12] 45039980\npc    c000408c\ncpsr  7a7a7a7a\nmode  00000000\nlr    c01e77b5\nssp   c3aa9ca0\nusp   3f3f3f3f\n====== stack dump 0 byte ======\naddr=C3AA9CA0 , size=0\n",
+    "EyeDtctn": "id    62\ntask  c036ee50\nstksz 0x1000\nistk  c3aa8edc\nr[ 0] 00000000\nr[ 1] c3000094\nr[ 2] c30000a0\nr[ 3] c3002830\nr[ 4] c3013ca8\nr[ 5] c3000098\nr[ 6] 60000013\nr[ 7] c3aa8e98\nr[ 8] 3e3e3e3e\nr[ 9] 3e3e3e3e\nr[10] ffffffff\nr[11] c3aa8e64\nr[12] 45039980\npc    c00048dc\ncpsr  7a7a7a7a\nmode  00000000\nlr    c01e77b5\nssp   c3aa8d6c\nusp   3e3e3e3e\n====== stack dump 0 byte ======\naddr=C3AA8D6C , size=0\n"
+  },
+  "settings": {
+    "menu SetFocusPosition": "215 158 595 365",
+    "menu SetFocusMode": "0",
+    "menu SetFocusArea": "2",
+    "menu SetFocusAreaSize": "3"
+  },
+  "subject_path_checked": true,
+  "host_status": "OK name=fpshd version=3.0.0 protocol=1 frame=64 payload=44 transport=EP01-EP82 iface=0 camera=open seq=35240\n",
+  "version": "model       = w71c1 \nxc version  = V91 \nrel version = 5.02.0.V91  \ngit hash    = 13aa621060efff11aaba9b21ad925005302605cf ",
+  "subject_observations": [],
+  "capture_guard_after": [
+    0,
+    0,
+    65536
+  ],
+  "shutter_gate_after": 0,
+  "settings_after": {
+    "menu SetFocusPosition": "215 158 595 365",
+    "menu SetFocusMode": "0",
+    "menu SetFocusArea": "2",
+    "menu SetFocusAreaSize": "3"
+  },
+  "settings_equal": true,
+  "capture_idle_at_both_observations": true,
+  "worker_publication_raw": {
+    "pool": 1157855616,
+    "size": 1048576,
+    "code": 1158904256
+  },
+  "worker_and_legacy_pool_differ": true,
+  "native_l_layout_matches": true,
+  "face_manager_vtable_matches": true,
+  "aat_backend_vtables_match": false,
+  "status": "read-complete",
+  "limits": [
+    "No pointer/size establishes a free allocation or DMA lease.",
+    "No direct RAM writes or setters are sent; native command internals may update caches or locks.",
+    "skdump with zero length reads task metadata/registers, not stack high-water or future headroom.",
+    "Sequential mem-get chunks are not producer-atomic or exposure-aligned.",
+    "No focus, settlement, subject identity or valid scale is inferred."
+  ]
+}

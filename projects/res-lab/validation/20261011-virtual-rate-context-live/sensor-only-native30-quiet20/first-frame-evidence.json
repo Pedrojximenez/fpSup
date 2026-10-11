@@ -1,0 +1,78 @@
+{
+  "file": "A001_089-000001.DNG",
+  "sha256": "74694be16356793f37000d53a6bec634e1aa2c436ccc7d33cbd2b61fc6c0fa46",
+  "bytes": 1095168,
+  "tiff_offset": 0,
+  "main_ifd": {
+    "NewSubfileType": 0,
+    "ImageWidth": 1008,
+    "ImageLength": 672,
+    "BitsPerSample": 12,
+    "Compression": 1,
+    "StripOffsets": 78848,
+    "StripByteCounts": 1016064,
+    "BlackLevel": [
+      "262144/1024",
+      "262144/1024",
+      "262144/1024",
+      "262144/1024"
+    ],
+    "WhiteLevel": 4095,
+    "DefaultCropOrigin": [
+      8,
+      5
+    ],
+    "DefaultCropSize": [
+      992,
+      662
+    ],
+    "BaselineExposure": "2378/1024",
+    "FrameRate": "30000/1001"
+  },
+  "ifds": [
+    {
+      "ExposureTime": "1/320",
+      "ISO": 2500
+    },
+    {
+      "NewSubfileType": 0,
+      "ImageWidth": 1008,
+      "ImageLength": 672,
+      "BitsPerSample": 12,
+      "Compression": 1,
+      "StripOffsets": 78848,
+      "StripByteCounts": 1016064,
+      "BlackLevel": [
+        "262144/1024",
+        "262144/1024",
+        "262144/1024",
+        "262144/1024"
+      ],
+      "WhiteLevel": 4095,
+      "DefaultCropOrigin": [
+        8,
+        5
+      ],
+      "DefaultCropSize": [
+        992,
+        662
+      ],
+      "BaselineExposure": "2378/1024",
+      "FrameRate": "30000/1001"
+    }
+  ],
+  "raw_shape": [
+    672,
+    1008
+  ],
+  "raw_min": 219,
+  "raw_max": 883,
+  "raw_mean": 397.2104901856576,
+  "sampling": "first frame only; camera disconnected before remaining reads",
+  "filename_date": "20261011",
+  "directory_date": "20261012",
+  "limitations": [
+    "No full-sequence corruption or sustained-rate verdict.",
+    "Sensor timing239.76 is configured; physical exposure cadence is unmeasured."
+  ]
+}

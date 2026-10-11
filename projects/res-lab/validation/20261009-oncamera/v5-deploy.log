@@ -1,0 +1,26 @@
+  stage  451296 bytes in 0.002s (279.3 MB/s)      
+  verify 451296 bytes in 0.001s (324.0 MB/s)      
+  stage  451296 bytes in 0.02s (29.7 MB/s), MEM1, read back whole          
+  code   304/304 B  2.0 KiB/s   verify 304/304 B  484 KiB/s   verify 304 bytes in 0.0s (256 KiB/s)      
+  code   304 bytes in 0.2s (1.5 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  code   412/412 B  135.2 KiB/s   verify 412/412 B  707 KiB/s   verify 412 bytes in 0.0s (357 KiB/s)      
+  code   412 bytes in 0.0s (78.0 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 451296 bytes in 0.001s (326.8 MB/s)      
+  local   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/cards/20261009-virtual-rcd-v5/debug/fpSup/50RESLAB.BIN  451296 bytes
+  remote  \fpSup\50RESLAB.BIN  mode 0x7
+  buffer  0x450629C0, file object 0x450D0CA0
+  proof   region takes writes and still holds them a second later
+  restored echo -> 0xC03D99A0
+  reply   putfile: written
+  status  2 — written
+  open    1     write  1   (both are flags, not counts)
+  WARNING 50RESLAB.BIN did not appear in dir
+  remote  \fpSup\50RESLAB.BIN  451296 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x53B00980 (455392 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 451296 of 451296
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/v5-readback/50RESLAB.BIN
+Verified \fpSup\50RESLAB.BIN 451296

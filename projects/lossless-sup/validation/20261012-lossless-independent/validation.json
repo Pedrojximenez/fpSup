@@ -1,0 +1,39 @@
+{
+  "all_passed": true,
+  "tests": 74,
+  "skipped": 0,
+  "suites": {
+    "lossless": {
+      "tests": 60,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "stopfix": {
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "integration": {
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "lossless_has_stopfix_references": false,
+  "lossless_tests_import_stopfix": false,
+  "lossless_builder_and_runtime_require_stopfix": false,
+  "binary_identical_to_previously_verified_split": true,
+  "binary_sha256": "a24e1dde7e973c423f32c3b1c30a42acd039fa2fddebc83c27674e911de3ba9f",
+  "package_bins": [
+    "fpSup/10LOSS.BIN"
+  ],
+  "zip": {
+    "file": "lossless-module-only-20261012.zip",
+    "sha256": "f80d4c539ce5df7a042bd5cdfdd5e2a37ef46f41a59a37f1dde0962969e2b5e5"
+  },
+  "camera_tested": false,
+  "written_to_card": false
+}

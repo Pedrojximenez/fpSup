@@ -1,0 +1,85 @@
+{
+ "schema_version": 1,
+ "kind": "static_the_codec_is_event_driven_and_can_be_driven_asynchronously",
+ "date": "2026-09-29",
+ "scope": "STATIC ONLY, capstone over out/MAIN_c0000000.bin, Thumb where the 0xC062F/0xC0630 range demands it. No camera. Every item is [C]; static reading has misled this project before and this ABI must be confirmed live before anything drives the engine with it.",
+ "why": "the target architecture needs the encode to proceed while later frames pass through. F_ENC blocks for 13.7 ms, so the question was whether that blocking is inherent or just the driver's choice.",
+ "the_answer": "it is the driver's choice. The hardware raises a completion event per BAND and the driver waits for it in a loop. Nothing needs a new task.",
+ "the_chain": {
+  "F_ENC 0xC05A6920": "a thin wrapper: memsets a 0x14 struct, copies the caller's encStruct fields 0x00/0x04/0x0C/0x10, translates encStruct[8] through C03D9668, then blx 0xC062F6F8 (ARM -> THUMB) and maps its 0 to 1.",
+  "0xC062F6F8": "the driver, Thumb. Computes the tile count into 0xC302CDEC, computes the declared length as round_up(engine[0x14], 1024) + engine[0x10] where engine = 0xC302CDD4 - and 0xC302CDD4+0xC is the very word this project read live as 0x305000 on 2026-09-28. Builds a 0x30-byte request at sp+0x3C, installs the firmware's own completion callback 0xC062FCB1 at request+0x2C, then loops once per BAND.",
+  "the band loop": [
+   "bl C062FE98(&request) -> C062FFF8(&request): the submit",
+   "compute a timeout, floored at 100",
+   "blx C0016C08(flgid, 5, 1, &pattern, timeout): twai_flg. waiptn 5 is bits 1 and 4 - exactly the bits the callback sets - and wfmode 1 is TWF_ORW",
+   "blx C00169C8(flgid, 0): clr_flg. NOT a wait; an earlier reading of this session had it backwards",
+   "E_TMOUT is -50 and the loop retries on it"
+  ],
+  "the callback 0xC062FCB0": "tests bit 2 of its status and calls C0016B9C(flgid, 4) on error or C0016B9C(flgid, 1) on success - set_flg. The flag id is at [0xC2F2E60C].",
+  "the submit C062FFF8": "an ordinary Thumb function taking the request pointer. It writes the engine's registers at 0x300D0040 itself and memcpies the whole 0x30-byte request to 0xC37CF884. So driving the engine needs NO register-level work from us - only this call."
+ },
+ "the_depth_code_table_C062FE40": {
+  "0": "12 bits per sample - what every probe in this project has passed",
+  "1": "14 bits",
+  "2": "16 bits",
+  "3": "10 bits",
+  "other": "0, i.e. refused",
+  "why_it_matters": "supporting 10-bit UHD is this one field, not a per-format template. The operator said so before this was read and was right: the header comes from the frame itself and tools/trailing_ifd.py already appends the new IFD."
+ },
+ "the_asynchronous_recipe_this_permits": [
+  "build the 0x30-byte request for one band",
+  "call C062FFF8(&request) and RETURN to the writer without waiting",
+  "on a later writer call, poll with twai_flg(flgid, 5, 1, &pattern, small timeout); not set means return again",
+  "set means clr_flg(flgid, 0), then build and submit the next band",
+  "no new task, no register-level driving, no reimplemented completion callback"
+ ],
+ "what_is_still_needed": [
+  "the per-band geometry arithmetic inside 0xC062F6F8's loop, which is mechanical to transcribe from the listing",
+  "the request's remaining fields: 0x14/0x18/0x1C/0x20/0x24 come from engine 0xC302CDD4 +0x00/+0x04/+0x08/+0x0C/+0x14 and the computed declared length",
+  "live confirmation of ALL of it. Nothing here has run."
+ ],
+ "why_contention_is_not_a_concern": "the operator pointed out that a still cannot be taken while recording, and CinemaDNG recording does not compress, so the lossless engine has no other user during a clip. The earlier worry about sharing the engine with the firmware's own driver was unfounded.",
+ "camera_accessed": false,
+ "deployable": false,
+ "live_stage_one_20260929": {
+  "scope": "ON THE CAMERA, authorised. FHD RAW12 clip, probe PHASE 11 stage one: F_INIT only, nothing submitted. The reduced 1536x736 geometry with 512x368 tiles and depth code 0, source and destination both inside the retained 4 MiB block.",
+  "result": "F_INIT returned 1 and the engine's parameter block was read back.",
+  "measured": {
+   "+0x00": "0x85177000 = the source we passed (0x45177000) PLUS 0x40000000",
+   "+0x04": "0x0019E000 = 1,695,744 = 12 * 1536 * 736 / 8, the SOURCE LENGTH - this field's purpose was unknown until now",
+   "+0x08": "0x85317000 = the destination we passed (0x45317000), also uncached-translated",
+   "+0x0C": "0x0019E000, the declared length = round_up(source, 1024); the value tools/codec_request.py computes for this geometry",
+   "+0x10": "0x45568000 = the size table we passed, NOT translated",
+   "+0x14": "0x18 = 24 = 6 tiles * 4 bytes"
+  },
+  "what_this_confirms": [
+   "the field mapping the static reading assumed, in full",
+   "F_INIT translates the two DATA pointers to the uncached alias and leaves the table pointer cached - which nothing in the listing had made explicit",
+   "the declared length this module computes from geometry matches the engine's own, at a SECOND geometry now (the first was 0x305000 at FHD)"
+  ],
+  "the_surprise_that_matters": {
+   "what": "[0xC2F2E60C] read 0xFFFFFFD6 = -42 = E_NOEXS. The event flag the driver waits on DOES NOT EXIST after F_INIT alone.",
+   "consequence": "an asynchronous submit that waits on that id before the driver's own path has created it would wait on nothing. Stage two cannot just submit and poll; it has to establish who creates the flag and when. C062F440, called at the top of C062F6F8, is the candidate, or the first F_ENC.",
+   "why_stage_one_existed": "exactly this. Nothing in the disassembly said the flag was created lazily."
+  },
+  "two_defects_of_mine_this_run": {
+   "the_release_path": "PHASE 11 was not in the exclusion list, so its first frame fell into the device's release path and F_FREE handed the 4 MiB block back. Every later frame then read its record area out of memory the allocator had given to someone else, and the 'engine fields' of the first attempt were another owner's pixels. Fixed by excluding PHASE 11; a test now asserts that no block-retaining phase can reach F_FREE at all, for all ten of them.",
+   "the_uninitialised_record": "the record area sits in the retained block, which the allocator does not zero, so the stage word started as leftover bytes and the phase read it as 'already submitted' and never ran its first-frame path once. The host now clears and stamps the area with a magic before arming, and the probe refuses to work without it."
+  },
+  "unexplained": "S_COUNT reached 104 across those runs although the re-arm ceiling is cmp #8 and is present in the image, which was verified byte-identical on the camera. Not explained, not guessed at; the fixed run's count was not checked against it.",
+  "camera_accessed": true,
+  "deployable": false
+ },
+ "corrections": [
+  {
+   "date": "2026-09-29",
+   "what_was_wrong": "the_asynchronous_recipe_this_permits lists build-request, submit, poll, clr_flg, next band -- and omits the two steps without which nothing ever completes.",
+   "the_missing_steps": [
+    "OPEN the device first: C062FEE9(). It powers the codec, clocks it, and installs plus ENABLES IRQ 0x29 whose handler C0630431 is the only thing that calls the completion callback. Its install latch 0xC37CF878 read 0 live, so this had never happened.",
+    "START the engine after the submit: C062FEB1() -> C0630208, which sets the GO bit [0x300D0000] |= 2. C062FFF8 only PROGRAMS the registers."
+   ],
+   "also_wrong": "'the submit C062FFF8: an ordinary Thumb function' understates it -- C0630178..C0630202 is its own second half, and it is also what installs the callback at [0xC37CF880] from request+0x2C and latches the owner word 0xC37CF87C to 1.",
+   "proven_by": "ledger-live-async-encode-proven-20260929.json, stage 3, polls 1, pattern 1, 26,073 microseconds, destination holding ff d8 ff c3"
+  }
+ ]
+}

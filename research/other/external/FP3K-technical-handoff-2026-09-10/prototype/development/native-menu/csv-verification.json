@@ -1,0 +1,73 @@
+{
+  "cases": [
+    {
+      "case": "stock",
+      "columns": [
+        "NO",
+        "TEXT",
+        "Popup",
+        "IMAGE",
+        "Enabled",
+        "Enabled2"
+      ],
+      "rows": [
+        {
+          "NO": "1",
+          "TEXT": "0313",
+          "Popup": "Popup",
+          "IMAGE": "blank",
+          "Enabled": "1",
+          "Enabled2": "2"
+        },
+        {
+          "NO": "2",
+          "TEXT": "0314",
+          "Popup": "Popup",
+          "IMAGE": "blank",
+          "Enabled": "1",
+          "Enabled2": "2"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case": "three-choice",
+      "columns": [
+        "NO",
+        "TEXT",
+        "IMAGE",
+        "Enabled",
+        "Enabled2"
+      ],
+      "rows": [
+        {
+          "NO": "1",
+          "TEXT": "0313",
+          "IMAGE": "blank",
+          "Enabled": "1",
+          "Enabled2": "2"
+        },
+        {
+          "NO": "2",
+          "TEXT": "0314",
+          "IMAGE": "blank",
+          "Enabled": "1",
+          "Enabled2": "2"
+        },
+        {
+          "NO": "3",
+          "TEXT": "3K 3000x2000",
+          "IMAGE": "",
+          "Enabled": "1",
+          "Enabled2": "2"
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "native_parser": "0xc05f57c8",
+  "mocked": [
+    "bounded allocator"
+  ],
+  "limitations": "Parsing verified, not native rendering or safe capture activation. Popup column removal must match the specific list bindings."
+}

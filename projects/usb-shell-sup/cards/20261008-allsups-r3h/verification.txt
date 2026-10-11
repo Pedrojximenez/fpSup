@@ -1,0 +1,4 @@
+Exact saved LOADER.BIN, ALLSUPS.BIN and AutoRun stage-0 words executed in Unicorn.
+FT6 s=00; 51 private variables; empty list page 1/1; aligned calls; full screen/machine vectors accepted; GUI and all string hook sites restored on power-off.
+Offline only: NBR registration, file API and GUI post queue are stubbed. Camera rendering and physical button behavior remain unverified.
+66 baseline loader/boot/restore tests passed; 16 final management tests passed; 9 native page tests passed; 4 isolated mutations detected.

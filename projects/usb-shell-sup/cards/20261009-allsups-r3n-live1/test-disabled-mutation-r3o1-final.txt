@@ -1,0 +1,22 @@
+test_unfinished_features_cannot_dispatch_a_request (__main__.BrokenHome) ... 
+======================================================================
+FAIL: test_unfinished_features_cannot_dispatch_a_request (__main__.BrokenHome) (page='FT_Y6', row=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/uishare/tab/test_manage_page.py", line 109, in test_unfinished_features_cannot_dispatch_a_request
+    self.assertTrue(all(F.u32(r, 16) == 0 for r in events))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_unfinished_features_cannot_dispatch_a_request (__main__.BrokenHome) (page='FT_Y6', row=2)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/uishare/tab/test_manage_page.py", line 109, in test_unfinished_features_cannot_dispatch_a_request
+    self.assertTrue(all(F.u32(r, 16) == 0 for r in events))
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 1 test in 0.449s
+
+FAILED (failures=2)
+Expected fault rejected: unfinished home actions regained dispatch

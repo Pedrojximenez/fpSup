@@ -1,0 +1,124 @@
+{
+  "firmware_sha256": "92a8ee993f6c3d66c251e88d45a2ccd5135c6cf7342717784321c2ed506e2fb4",
+  "cases": [
+    {
+      "raster": [
+        6064,
+        4042
+      ],
+      "packed_pixels": 42893704,
+      "row_bytes": 10612,
+      "final_row_bytes": 10628,
+      "strip_byte_counts": 42893720,
+      "write_payload_512": 42893824,
+      "native_strip_byte_counts": 42893720,
+      "native_plane_code8_bytes": 49021400,
+      "native_plane_code7_bytes": 36766056,
+      "ifd": {
+        "width": 6064,
+        "height": 4042,
+        "bits_per_sample": 14,
+        "compression": 1,
+        "strip_byte_counts": 42893720,
+        "white_level": 16383
+      }
+    },
+    {
+      "raster": [
+        5712,
+        3216
+      ],
+      "packed_pixels": 32147136,
+      "row_bytes": 9996,
+      "final_row_bytes": 9996,
+      "strip_byte_counts": 32147136,
+      "write_payload_512": 32147456,
+      "native_strip_byte_counts": 32147136,
+      "native_plane_code8_bytes": 36739608,
+      "native_plane_code7_bytes": 27554712,
+      "ifd": {
+        "width": 5712,
+        "height": 3216,
+        "bits_per_sample": 14,
+        "compression": 1,
+        "strip_byte_counts": 32147136,
+        "white_level": 16383
+      }
+    },
+    {
+      "raster": [
+        4176,
+        2174
+      ],
+      "packed_pixels": 15887592,
+      "row_bytes": 7308,
+      "final_row_bytes": 7308,
+      "strip_byte_counts": 15887592,
+      "write_payload_512": 15887872,
+      "native_strip_byte_counts": 15887592,
+      "native_plane_code8_bytes": 18157272,
+      "native_plane_code7_bytes": 13617960,
+      "ifd": {
+        "width": 4176,
+        "height": 2174,
+        "bits_per_sample": 14,
+        "compression": 1,
+        "strip_byte_counts": 15887592,
+        "white_level": 16383
+      }
+    },
+    {
+      "raster": [
+        3968,
+        2640
+      ],
+      "packed_pixels": 18332160,
+      "row_bytes": 6944,
+      "final_row_bytes": 6952,
+      "strip_byte_counts": 18332168,
+      "write_payload_512": 18332672,
+      "native_strip_byte_counts": 18332168,
+      "native_plane_code8_bytes": 20951064,
+      "native_plane_code7_bytes": 15713304,
+      "ifd": {
+        "width": 3968,
+        "height": 2640,
+        "bits_per_sample": 14,
+        "compression": 1,
+        "strip_byte_counts": 18332168,
+        "white_level": 16383
+      }
+    }
+  ],
+  "cross_field_controls": [
+    {
+      "size_enum": 0,
+      "tag_enum": 0,
+      "strip_byte_counts": 13617936,
+      "bits_per_sample": 12
+    },
+    {
+      "size_enum": 0,
+      "tag_enum": 1,
+      "strip_byte_counts": 13617936,
+      "bits_per_sample": 14
+    },
+    {
+      "size_enum": 1,
+      "tag_enum": 0,
+      "strip_byte_counts": 15887592,
+      "bits_per_sample": 12
+    },
+    {
+      "size_enum": 1,
+      "tag_enum": 1,
+      "strip_byte_counts": 15887592,
+      "bits_per_sample": 14
+    }
+  ],
+  "limits": [
+    "IFD tag sink, descriptor getters and DataMgr registry lookup are test doubles",
+    "recording descriptor construction is not executed",
+    "DMA, pixel packing, actual file write and live recording are not executed"
+  ]
+}

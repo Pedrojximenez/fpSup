@@ -1,0 +1,15 @@
+Sigma fp Ver.5.02 GUI resource-parser boot timing probe
+
+AutoRun.txt bytes=32768 sha256=3638e3ae5559fef61e0cf57d2defdab04bbc4bd23bb144b3001c331e0fd054c6
+VSHL.BIN bytes=32768 sha256=230b080b44643f05bf11a83f49406a2ead55bce0de7aebdfc217c91cc823d126
+appendobs.S bytes=76 sha256=c7878141b861ee5364f7114ba419844766f25a945ea924519eef32146e426dd7
+reference_firmware bytes=49482954 sha256=92a8ee993f6c3d66c251e88d45a2ccd5135c6cf7342717784321c2ed506e2fb4
+commands=210 budget=560 measured_limit=648
+vshl_sections=2 entry=0xC072F188
+payload=0xC0733000..0xC073304C
+cursor=0xC07330F0 initial=0xC0733100
+log=0xC0733100..0xC0734000 slot=12 capacity=320
+hook=0xC05E2CA8 stock=0x4605B530 thumb_bw=0xB9AAF150
+effect=observation only; no OG3K or capture-setting patches
+order=appendobs payload, cursor initialisation, Thumb hook, USB-shell loader
+restore=remove both card files, restore the prior matched set, cold boot

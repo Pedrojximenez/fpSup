@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "kind": "live_g2_512x368_encode_discard",
+  "date": "2026-09-23",
+  "operator_scope": "live camera, encode output discarded; the written clip is the stock uncompressed CinemaDNG",
+  "camera": {
+    "model": "w71c1",
+    "firmware": "5.02.0.V91",
+    "git_hash": "13aa621060efff11aaba9b21ad925005302605cf",
+    "media": "SD",
+    "backend": "stock CinemaDNG writer",
+    "boot_id": 20603521
+  },
+  "source": {
+    "commit": null,
+    "worktree_dirty": null,
+    "git_available": false,
+    "files": {
+      "fpSup/raw/lossless_codec/single_frame_encode_discard_probe.S": "c13ab9f0a8f2ad74140fa7cb87e4ae2234d9be1c266754f9fde051f8ecf32fcb",
+      "fpSup/raw/lossless_codec/exact_writer_scratch_preflight.S": "b7425b2097d98407894a333134c8bb7e073522c9a1eee1cb84e46a6dd6c68bb6",
+      "fpSup/raw/lossless_codec/exact_writer_power_preflight.S": "755aa84d11fd1a01ce9d23055df756d3bf568468315e0ba8148627bb0cfe868a",
+      "fpSup/raw/lossless_codec/single_frame_codec_probe.py": "5821ebb1be9dac2f46cdd9c534a6396d6c6f1b1a97af6982fa725dd6bd8e50ab",
+      "fpSup/raw/lossless_codec/probe_placement.py": "c73c5d5e555b6eb20d7a84f15a296f39d9101e9b0501f58a42518f995020363d"
+    }
+  },
+  "hook": {
+    "site": "0xC0722AFC",
+    "original": "0xEBFDE061",
+    "installed": "0xEB002EE2",
+    "restored": "0xEBFDE061",
+    "context_guard": "six words at 0xC0722AF0..0xC0722B04 verified"
+  },
+  "lease": {
+    "kind": "cave claim, the only path; no fixed-address fallback exists",
+    "code": "0xC072E68C",
+    "code_bytes": 1792,
+    "state": "0xC072ED8C",
+    "state_bytes": 256,
+    "publication": "rom-dcache-icache/callfn/v1, after the writes and before the hook",
+    "publication_returns": {
+      "0xC000E91C": "nonzero and varying; not a status",
+      "0xC000EABC": 0
+    }
+  },
+  "profile": {
+    "geometry": "1936x1090",
+    "bit_depth": 12,
+    "fps": "24000/1001",
+    "predictor": 1,
+    "tile": "512x368",
+    "tiles": 12,
+    "padded_samples": 2260992,
+    "arena_bytes": 4063232,
+    "table_offset": "0x3E1000",
+    "temp_table_offset": "0x3E1400"
+  },
+  "scene": "single fixture: static indoor scene, fixed exposure, low noise. NOT the five-fixture matrix section 2.4 requires.",
+  "frames": {
+    "entered": 1,
+    "finished": 1,
+    "written_compressed": 0
+  },
+  "timing": {
+    "elapsed_us": 13652,
+    "budget_24p_us": 41708,
+    "fraction_of_budget": 0.327,
+    "headroom": 3.06,
+    "mpix_per_second": 154.6,
+    "scope": "F_ENC call latency only"
+  },
+  "per_frame": {
+    "compressed_bytes": 1386496,
+    "ratio": 2.283,
+    "tile_sizes": [
+      71288,
+      123173,
+      133359,
+      88116,
+      91305,
+      131008,
+      165622,
+      120042,
+      102725,
+      113451,
+      136318,
+      110089
+    ],
+    "tile_sum_matches_total": true
+  },
+  "integrity": {
+    "init_return": 1,
+    "encode_return": 1,
+    "size_return": 1,
+    "stage": 8,
+    "error": 0,
+    "guards": "intact",
+    "engine": "idle",
+    "block_released": true,
+    "sampled_source_markers_unchanged": true,
+    "source_bytes_compared": 16,
+    "source_bytes_total": 3244544,
+    "full_source_hash_available": false
+  },
+  "notes": [
+    "Three defects were found and fixed during this stage. exact_writer_scratch_preflight.S still carried the old 0x305000 layout after the encode probe moved to 0x3E0000, so scratch wrote its guards where encode would not look for them. exact_writer_power_preflight.S and the scratch source still used .equ STATE, so the first claimed build failed to assemble - the same half-converted shape cave.py records for getfile.S. And status/restore read the fixed state address, reporting a probe that had in fact fired.",
+    "The camera came back from the power cycle set to OG3K, so the first fire refused with ERR_LENGTH on a 0x3F3800 segment. Movie size was set to FHD in RAM only; no menu save was issued."
+  ],
+  "explicitly_established": [
+    {
+      "level": "L",
+      "claim": "512x368 predictor-1 encoding works in the movie writer context: init, encode and size all returned success"
+    },
+    {
+      "level": "L",
+      "claim": "one frame of this fixture took 13,652 us, 32.7% of the 23.976 budget"
+    },
+    {
+      "level": "L",
+      "claim": "the twelve tile sizes sum exactly to the reported total, 1,386,496 bytes"
+    },
+    {
+      "level": "L",
+      "claim": "the bound-derived arena holds this output with 2,676,736 bytes to spare"
+    },
+    {
+      "level": "L",
+      "claim": "the cave-claim path with mandatory cache publication works end to end: claim, publish, arm, fire, self-restore, release"
+    }
+  ],
+  "explicitly_not_established": [
+    "G2 as a whole: section 2.4 requires five fixtures of rising entropy and only one was run",
+    "dark field, high ISO, high frequency detail and motion/scene-cut fixtures",
+    "ratio variability; this single static scene says nothing about the spread",
+    "worst-case time or worst-case output on the camera",
+    "sustained running: one frame, not a burst and not a clip",
+    "full source-buffer integrity; 16 of 3,244,544 bytes were compared",
+    "writing a compressed frame to the card",
+    "that the camera's Huffman table matches the model the bound is built on"
+  ]
+}

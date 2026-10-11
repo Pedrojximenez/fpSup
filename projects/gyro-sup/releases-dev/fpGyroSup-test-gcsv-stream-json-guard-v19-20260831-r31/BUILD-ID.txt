@@ -1,0 +1,38 @@
+fpGyroSup r31 non-dropping paced JSON finalization guard
+Build date: 2026-08-31
+Camera/firmware: SIGMA fp Ver.5.02
+Build type: release AutoRun, no USB shell
+Base: exact r30 writer-private raw snapshot pipeline
+
+Observed reason for this build:
+- r30 A001_001 recorded 673 continuous DNG frames and a complete newline-
+  terminated GCSV with 59,261 gyro rows and 1,185 sparse accel rows.
+- The GCSV had no malformed row, no timestamp reversal and no interval over
+  0.994 ms, but A001_001.json was absent after a normal stop and shutdown.
+- Static inspection found that the PGEN event queue retries JSON only twelve
+  times back-to-back.  On the twelfth failure it consumes the event, decrements
+  the pending count and consequently releases the recording/power lock exactly
+  as if JSON had succeeded.
+
+Only functional change from r30:
+- The JSON-failure edge no longer enters the twelve-attempt drop path.
+- It closes the temporary lens-query session, yields for 50 ms and returns with
+  the same event pending.  The next cooperative writer pass retries it.
+- Only a successful JSON build sets the JSON-complete bit and allows the event
+  to be consumed.  A persistent failure therefore intentionally keeps the
+  recording and shutdown protection active instead of silently losing JSON.
+
+Explicitly unchanged:
+- r30 VSHL writer-private 32 KiB snapshot and early producer-slot release.
+- 2,500 Hz gyro capture, sparse approximately 50 Hz accel rows, 64 KiB GCSV
+  writes, 5 ms writer yield, native clip lifecycle and task priorities.
+- GCSV formatter, JSON builder, JSON success path and all media APIs.
+- No GYR file, sensor decimation or recording-time diagnostic write.
+
+Safety and binary verification:
+- AutoRun.txt and VSHL.BIN are byte-for-byte identical to r30.
+- The old PGEN `blo 0x3ac` at body+0x490 is the sole changed old instruction.
+- A 40-byte tail performs the existing lens-session cleanup, one 50 ms yield
+  and branches to the existing common return.  PGEN grows from 7,516 to 7,556
+  bytes and remains far below its fixed 64 KiB loader window.
+- Experimental hardware build; not fp-gyro-sup-v1.1.

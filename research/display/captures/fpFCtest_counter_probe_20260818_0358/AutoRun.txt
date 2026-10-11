@@ -1,0 +1,87 @@
+# SIGMA fp Ver.5.02 RAW/false-color callback counter probe
+# 1 pulse=start; 2 pulses=hooks armed; one long pulse=test saved/restored.
+# RAM-only; records counters, never reads or modifies RAW pixels.
+mem set 0xc0429f18 0xe92d48f0
+mem set 0xc057db98 0xe92d4ef0
+display monitor 0 1
+display colorbar 1 0
+ctrl sleep 700
+display colorbar 0 0
+ctrl sleep 400
+mem set 0xc072de64 0xe92d48f0
+mem set 0xc072de68 0xe30ec500
+mem set 0xc072de6c 0xe34cc072
+mem set 0xc072de70 0xe59c1004
+mem set 0xc072de74 0xe2811001
+mem set 0xc072de78 0xe58c1004
+mem set 0xc072de7c 0xe58c0008
+mem set 0xc072de80 0xe1a01100
+mem set 0xc072de84 0xe3a02101
+mem set 0xc072de88 0xe0811002
+mem set 0xc072de8c 0xe58c100c
+mem set 0xc072de90 0xe59c2010
+mem set 0xc072de94 0xe1510002
+mem set 0xc072de98 0x358c1010
+mem set 0xc072de9c 0xe59c2014
+mem set 0xc072dea0 0xe1510002
+mem set 0xc072dea4 0x858c1014
+mem set 0xc072dea8 0xe309cf1c
+mem set 0xc072deac 0xe34cc042
+mem set 0xc072deb0 0xe12fff1c
+mem set 0xc072deb4 0xe320f000
+mem set 0xc072deb8 0xe320f000
+mem set 0xc072debc 0xe320f000
+mem set 0xc072dec0 0xe320f000
+mem set 0xc072dec4 0xe320f000
+mem set 0xc072dec8 0xe320f000
+mem set 0xc072decc 0xe320f000
+mem set 0xc072ded0 0xe320f000
+mem set 0xc072ded4 0xe320f000
+mem set 0xc072ded8 0xe320f000
+mem set 0xc072dedc 0xe320f000
+mem set 0xc072dee0 0xe320f000
+mem set 0xc072dee4 0xe92d4ef0
+mem set 0xc072dee8 0xe30ec500
+mem set 0xc072deec 0xe34cc072
+mem set 0xc072def0 0xe58c3028
+mem set 0xc072def4 0xe59c3018
+mem set 0xc072def8 0xe2833001
+mem set 0xc072defc 0xe58c3018
+mem set 0xc072df00 0xe58c001c
+mem set 0xc072df04 0xe58c1020
+mem set 0xc072df08 0xe58c2024
+mem set 0xc072df0c 0xe59c3028
+mem set 0xc072df10 0xe30dcb9c
+mem set 0xc072df14 0xe34cc057
+mem set 0xc072df18 0xe12fff1c
+mem set 0xc072e500 0x31504346
+mem set 0xc072e504 0x00000000
+mem set 0xc072e508 0x00000000
+mem set 0xc072e50c 0x00000000
+mem set 0xc072e510 0xffffffff
+mem set 0xc072e514 0x00000000
+mem set 0xc072e518 0x00000000
+mem set 0xc072e51c 0x00000000
+mem set 0xc072e520 0x00000000
+mem set 0xc072e524 0x00000000
+mem set 0xc072e528 0x00000000
+mem set 0xc072e52c 0x00050201
+mem save \FCPCODE.BIN 0xc072de64,,0xb8
+mem set 0xc0429f18 0xea0c0fd1
+mem set 0xc057db98 0xea06c0d1
+display colorbar 1 0
+ctrl sleep 500
+display colorbar 0 0
+ctrl sleep 300
+display colorbar 1 0
+ctrl sleep 500
+display colorbar 0 0
+# Observation window: leave Live View running and toggle stock False Color once.
+ctrl sleep 45000
+mem set 0xc0429f18 0xe92d48f0
+mem set 0xc057db98 0xe92d4ef0
+ctrl sleep 200
+mem save \FCPROBE.BIN 0xc072e500,,0x40
+display colorbar 1 0
+ctrl sleep 1200
+display colorbar 0 0

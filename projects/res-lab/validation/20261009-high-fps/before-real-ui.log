@@ -1,0 +1,15 @@
+F
+======================================================================
+FAIL: test_real_installer_dynamic_high_rates_and_stock_restore (test_virtual_rcd_rates.RateUITests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_virtual_rcd_rates.py", line 86, in test_real_installer_dynamic_high_rates_and_stock_restore
+    cam = self.boot()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_virtual_rcd_rates.py", line 67, in boot
+    self.assertEqual(cam.w(cam.s()+V.L.S['VR_UI']), 1)
+AssertionError: 0 != 1
+
+----------------------------------------------------------------------
+Ran 1 test in 18.448s
+
+FAILED (failures=1)

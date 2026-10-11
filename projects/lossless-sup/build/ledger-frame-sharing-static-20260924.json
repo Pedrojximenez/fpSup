@@ -1,0 +1,67 @@
+{
+ "schema_version": 1,
+ "kind": "offline_static_trace_of_raw_frame_buffer_sharing",
+ "date": "2026-09-24",
+ "operator_scope": "offline only. No camera.",
+ "answers": "NATIVE_BUFFER_PATTERNS.md section 4 item 2: copy-back overwrites the whole of frame[0x68]. Does anything else hold that buffer?",
+ "verdict": "SHARING IS REAL AND THE MOVIE PATH IS NOT SETTLED BY READING. A read-only live survey is prepared instead.",
+ "clones_share_the_buffer": {
+  "level": "C",
+  "chain": [
+   "Dup2 @ 0xC0374BF0 builds a clone with FUN_c0380628, which allocates a 0x111C-byte frame object and fills it with FUN_c0373dd0.",
+   "FUN_c0373dd0 @ 0xC0373DD0 is a field-by-field copy, and its loop copies the whole block from +0x68 up to +0x128. That block holds the RAW buffer pointers.",
+   "So a clone does NOT get its own allocation: it carries the owner's frame[0x68]. Dup2 then sets clone[0x1118] = owner[0x10FC] and owner[0x1114] += 1, and FUN_c03777b8 frees the original allocation only after the last reference."
+  ],
+  "consequence": "if a clone exists, overwriting frame[0x68] corrupts what that clone reads."
+ },
+ "how_many_clones": {
+  "level": "C",
+  "chain": [
+   "FUN_c0374ee8 @ 0xC0374EE8 is the only caller of Dup2. It first calls FUN_c0397cd8, then loops `for (i = 0; i < frame[0x1C0]; i++) Dup2(...)`.",
+   "FUN_c0397cd8 @ 0xC0397CD8 sets frame[0x1C0] = 1 unconditionally, and only raises it from bracketing/continuous settings when frame[4] is 0 or 9.",
+   "FUN_c037a990, the allocation, branches on the same frame[4]: 2, 4, 7 and a default. The CinemaDNG branch is frame[4] == 2, which is NOT 0 or 9."
+  ],
+  "so": "on a frame[4] == 2 capture the requested clone count stays at its default of 1, which is not zero."
+ },
+ "whether_the_movie_path_clones_at_all": {
+  "level": "C",
+  "claim": "NOT SETTLED. FUN_c0374ee8 has two call sites and they differ.",
+  "sites": [
+   {
+    "where": "vbuf @ 0xC0379E08, call at 0xC037A2D4",
+    "guard": "if (param_1[0xA0] == 9) FUN_c0374ee8(...) - gated on a mode"
+   },
+   {
+    "where": "dbfull @ 0xC0397E60, call at 0xC03986D0",
+    "guard": "NOT gated on that check. The nearby if (frame[4] == 9) guards only the lines above the call."
+   }
+  ],
+  "why_i_stopped": "Settling this by reading means tracing dbfull's control flow and establishing that the CinemaDNG movie path does or does not reach it. That is expensive, and the answer is directly observable at the site we already hook."
+ },
+ "the_read_only_live_survey_that_answers_it": {
+  "level": "P",
+  "where": "exact_flush_writer_probe.S, extended 2026-09-24",
+  "what_it_reads": {
+   "frame[0x04]": "capture kind - confirms whether the movie path really is frame[4] == 2",
+   "frame[0x68]": "the RAW buffer",
+   "frame[0x128]": "header bytes",
+   "frame[0x10FC]": "frame id",
+   "frame[0x1110]": "clones MADE",
+   "frame[0x1114]": "reference count",
+   "frame[0x1118]": "owner id; 0 means this frame is the owner",
+   "frame[0x1C0]": "clones REQUESTED",
+   "derived": "frame[0x68] == seg[0], i.e. is the buffer the writer registered the one this frame owns"
+  },
+  "decides": "refcount 1, clones made 0 and owner id 0 would mean the writer's buffer has a single holder when the flush runs, and copy-back writes into something nobody else reads. Anything else means copy-back needs a different answer.",
+  "cost": "one recording, read-only. No codec, no allocation, no write to the frame or the DNG. The probe self-restores.",
+  "guarded": "tests assert the survey contains no store outside our own state block, and that it is skipped on a null frame. Both were mutation-checked."
+ },
+ "explicitly_not_established": [
+  "whether the CinemaDNG movie path reaches dbfull's ungated call to FUN_c0374ee8",
+  "what param_1[0xA0] == 9 selects in vbuf",
+  "what frame[4] actually is during movie recording - inferred as 2 from the allocation branch, not observed",
+  "whether a clone, if one exists, reads the buffer AFTER our hook runs or only before it"
+ ],
+ "camera_accessed": false,
+ "deployable": false
+}

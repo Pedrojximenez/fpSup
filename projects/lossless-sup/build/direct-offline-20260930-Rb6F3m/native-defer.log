@@ -1,0 +1,27 @@
+test_busy_creator_queues_later_raw_in_order (__main__.NativeDeferContractTests) ... ok
+test_closed_codec_irq_does_not_invent_completion (__main__.NativeDeferContractTests) ... ok
+test_codec_error_irq_resets_then_sets_error_flag_without_movie_task (__main__.NativeDeferContractTests) ... ok
+test_codec_success_irq_sets_flag_without_movie_task_dispatch (__main__.NativeDeferContractTests) ... ok
+test_dropping_native_irq_callback_is_detected (__main__.NativeDeferContractTests) ... ok
+test_event8_advances_without_reclaiming_the_frame (__main__.NativeDeferContractTests) ... ok
+test_event9_reclaims_and_advances_even_after_event8 (__main__.NativeDeferContractTests) ... ok
+test_fifo_active_guard_mutation_is_detected (__main__.NativeDeferContractTests) ... ok
+test_global_drain_targets_pending_b_without_state_or_fifo_test (__main__.NativeDeferContractTests) ... ok
+test_late_duplicate_completion_advances_unrelated_active_frame (__main__.NativeDeferContractTests) ... ok
+test_movie_metadata_precedes_real_creator_enqueue (__main__.NativeDeferContractTests) ... ok
+test_movie_task_event29_reaches_thr_teardown_before_registry_drain (__main__.NativeDeferContractTests) ... ok
+test_native_completion_reclaims_then_dispatches_next_once (__main__.NativeDeferContractTests) ... ok
+test_other_stop_classifier_does_not_wait_for_pending_b (__main__.NativeDeferContractTests) ... ok
+test_pending_state_b_is_not_an_explicit_registry_release_lease (__main__.NativeDeferContractTests) ... ok
+test_pre_enqueue_skip_does_not_block_later_creator_but_is_not_a_hold (__main__.NativeDeferContractTests) ... ok
+test_split_native_pending_prefix_then_later_enqueue_keeps_creator_free (__main__.NativeDeferContractTests) ... ok
+test_stop_check_executes_cleanup_before_classifying_pending (__main__.NativeDeferContractTests) ... ok
+test_stop_classification_distinguishes_pending_and_written_states (__main__.NativeDeferContractTests) ... ok
+test_stop_cleanup_retains_native_pending_b_but_targets_raw_state8 (__main__.NativeDeferContractTests) ... ok
+test_stop_state8_cleanup_mutation_is_detected (__main__.NativeDeferContractTests) ... ok
+test_unknown_execution_fails_closed (__main__.NativeDeferContractTests) ... ok
+
+----------------------------------------------------------------------
+Ran 22 tests in 0.639s
+
+OK

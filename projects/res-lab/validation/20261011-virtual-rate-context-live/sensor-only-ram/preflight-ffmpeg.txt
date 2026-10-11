@@ -1,0 +1,15 @@
+[in#0/avfoundation @ 0x7870808000] Stream #0: not enough frames to estimate rate; consider increasing probesize
+Input #0, avfoundation, from 'AVerMedia ExtremeCap UVC:none':
+  Duration: N/A, start: 320238.355067, bitrate: N/A
+  Stream #0:0: Video: rawvideo (UYVY / 0x59565955), uyvy422, 1920x1080, 1000k tbr, 1000k tbn, start 320238.355067
+Stream mapping:
+  Stream #0:0 -> #0:0 (rawvideo (native) -> rawvideo (native))
+Press [q] to stop, [?] for help
+Output #0, rawvideo, to '/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/sensor-only-ram/preflight.rgb':
+  Metadata:
+    encoder         : Lavf63.1.101
+  Stream #0:0: Video: rawvideo (RGB[24] / 0x18424752), rgb24(pc, gbr/unknown/unknown, progressive), 1024x576, q=2-31, 14155776000 kb/s, 1000k fps, 1000k tbn
+    Metadata:
+      encoder         : Lavc63.1.101 rawvideo
+[out#0/rawvideo @ 0x787147e280] video:41472KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.000000%
+frame=   24 fps=0.0 q=-0.0 Lsize=   41472KiB time=00:00:00.00 bitrate=14155776000.0kbits/s dup=32965 drop=0 speed=0.000603x elapsed=0:00:00.03    

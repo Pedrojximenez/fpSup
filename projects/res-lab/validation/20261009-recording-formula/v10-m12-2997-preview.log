@@ -1,0 +1,6 @@
+screen: LV_CINE_MEDIUM
+screen: LV_CINE_MEDIUM
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-recording-formula/trial_recording.py", line 31, in <module>
+    r['before']=snapshot();assert r['before']['fps_state']['VRATE']==want
+AssertionError

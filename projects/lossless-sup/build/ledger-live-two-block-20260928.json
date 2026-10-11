@@ -1,0 +1,104 @@
+{
+ "schema_version": 1,
+ "kind": "live_two_block_lifecycle_first_run",
+ "date": "2026-09-28",
+ "operator_scope": "ON THE CAMERA, authorised by the operator. USB shell, CINE mode, FHD CinemaDNG, SD card. Scope agreed in advance: stop after acquire-second; do NOT arm the bound probe.",
+ "camera": {
+  "model": "w71c1",
+  "rel_version": "5.02.0.V91",
+  "git_hash": "13aa621060efff11aaba9b21ad925005302605cf",
+  "app_current": 2,
+  "SetMovRecFormat": 0,
+  "SetMovRecFormat_meaning": "CinemaDNG, established THIS session: one host-triggered clip added \\CINEMA\\A001_117, so format 0 writes CinemaDNG and the hooked writer path is the one in use",
+  "SetMovRecSize": 2,
+  "SetMovCinemaDNGQuality": 0,
+  "SetMovFramerate": 3,
+  "card": "sd0, 119 GiB, 74 GiB free (62%), 116 clip folders before this session"
+ },
+ "pre_placement_reads": {
+  "cave_arena": "0xC072E064..0xC072EFB4, 980 words, ALL ZERO - no gyro logger, no leftovers",
+  "hook_site": "0xC0722AFC = 0xEBFDE061 (stock, unarmed)",
+  "state_block": "0xC072E764..0xC072E864, all zero",
+  "claims": {
+   "lossless.codec.code": "0xC072E064 (1,792 B)",
+   "lossless.codec.state": "0xC072E764 (256 B)"
+  }
+ },
+ "results": {
+  "power_preflight": {
+   "verdict": "PASS",
+   "magic": "0x52575050",
+   "stage": 7,
+   "error": 0,
+   "hook": "self-restored"
+  },
+  "scratch_preflight": {
+   "verdict": "PASS",
+   "magic": "0x434F4C41",
+   "stage": 7,
+   "error": 0,
+   "hook": "self-restored",
+   "allocator": "0xC3073A5C",
+   "handle_a": "0x45178000",
+   "alloc_end": "0x45578000",
+   "guards": "all four hold 0xA55AA55A"
+  },
+  "lifecycle_record_A": {
+   "written_by": "exact_writer_scratch_preflight.S, at the allocation site - FIRST LIVE RUN of this code",
+   "magic": "0x4546494C",
+   "role": 1,
+   "allocator": "0xC3073A5C",
+   "handle": "0x45178000",
+   "bytes": 4194304,
+   "end": "0x45578000",
+   "acquired_tick": 748390776,
+   "acquired_seq": 1,
+   "purpose": "WORK",
+   "state": "held",
+   "mark_in_block": "0x4E574F42 + 0x45178000 at handle+0x3FC000 - the block names itself",
+   "cross_check": "every field agrees with the state block independently"
+  },
+  "acquire_second": {
+   "ran_via": "callfn in task context, 604 bytes at 0xC072E064 - FIRST LIVE RUN of this routine",
+   "status": 0,
+   "handle_b": "0x45578400",
+   "end_b": "0x45978400",
+   "bytes": 4194304,
+   "allocator": "0xC3073A5C (the same allocator object as A)",
+   "acquired_tick": 859533545,
+   "purpose": "SRCE",
+   "state": "held",
+   "mark_in_block": "0x4E574F42 + 0x45578400 - names itself",
+   "block_A_held_tick_updated": "748390776 -> 859533481, so the still-held check ran and recorded",
+   "adjacency": "the allocator returned B immediately after A: A ends 0x45578000, B starts 0x45578400, a 1,024-byte gap. This is the boundary case an off-by-one in the disjointness check would fail, and the DEVICE's own check passed it.",
+   "incidental_timing": "record A verified at tick 859533481, record B written at 859533545 - 64 microseconds for F_ALLOC + F_GET + mark write + mark readback + the record. Not a budget measurement, just what the two ticks say."
+  },
+  "camera_left_in": {
+   "hook": "0xEBFDE061, stock; nothing armed",
+   "held": "TWO 4 MiB blocks, 0x45178000 and 0x45578400, both recorded held",
+   "release": "OWED. Not performed, because the agreed scope ended here",
+   "state_block": "phase 1, stage 7, error 0, free_done 0, encode_entered 0"
+  }
+ },
+ "what_this_establishes": [
+  "both allocations now have a lifecycle the CAMERA wrote: allocator, handle, capacity, acquisition tick, invocation, purpose and held state, plus a mark inside each block naming that block.",
+  "the second block's handle was never typed by a host. It does not appear on any command line; the probe reads it from the record.",
+  "the device-side disjointness check works at its hardest case, adjacency with a 1 KiB gap.",
+  "the still-held evidence is real: block A's held_tick advanced when the acquire step checked it."
+ ],
+ "what_this_does_NOT_establish": [
+  "the bound probe was NOT armed and no encode was attempted. Nothing here says anything about the engine's declared output length.",
+  "release has not been exercised live. The reclaim half of the lifecycle is still only proven offline.",
+  "one run each. No repeat, no other mode, no sustained behaviour.",
+  "the 64 microseconds is an incidental difference between two clock readings, not a measured cost."
+ ],
+ "two_host_side_faults_of_mine_this_session": {
+  "wedged_the_shell": "I issued about 28 `menu` queries in one loop to find the recording format; the USB worker wedged with LIBUSB_ERROR_TIMEOUT moved=0/64 while the camera stayed enumerated. The skill warns against chaining many commands in one run. Recovery was a USB replug plus `pkill -9 -f fpshd` and one fresh daemon. Later runs sent a handful of commands with 0.8 s gaps and had no trouble.",
+  "wrong_inference_about_power": "after the replug the cave was zero and the hook stock, and I concluded the camera runs on USB bus power so unplugging power-cycles it. The operator had cold-booted it themselves. Withdrawn.",
+  "an_earlier_recording_failure": "before the wedge, a MOV pulse and an S2 pulse both left is_recording at 0 and wrote no clip. After the cold boot the same MOV pulse worked first time. The best available explanation is that the USB worker was already degrading and silently dropped the key events; not established, and not counted as a mode or card problem - the card had 74 GiB free."
+ },
+ "a_one_off_not_explained": "the first publish of the session reported 0xC000EABC (I-cache invalidate) as DID NOT RETURN, then five consecutive calls afterwards returned cleanly, as did every publish after the cold boot. It was the first invalidate of that boot, but it was also shortly before the wedge, so 'first of boot' is not established as the cause. The D-cache half succeeded and the arena had never been executed, so the placed image's visibility did not depend on it.",
+ "camera_accessed": true,
+ "deployable": false,
+ "next_step_requires": "a decision: arm bound-probe-two (one clip, non-destructive, seg never written) or release both blocks. Both blocks stay held until one or the other happens, or until a power cycle."
+}

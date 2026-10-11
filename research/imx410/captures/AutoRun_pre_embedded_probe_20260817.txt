@@ -1,0 +1,80 @@
+# SIGMA fp Ver.5.02 - hold capture before StillCreateRaw and dump DMA raw
+# Manual shutter: wait 5 seconds after the first pulse, then take ONE still.
+# Start cue: 1 color-bar pulse. Raw+DNG completion cue: 2 pulses.
+# RAM-only; cold boot restores executable RAM.
+
+display monitor 0 1
+display colorbar 1 0
+ctrl sleep 700
+display colorbar 0 0
+ctrl sleep 400
+
+# Result area: raw_ptr, hold_entered, release, mode, bit_type, frame_count.
+mem set 0xC072E500 0xDEADBEEF
+mem set 0xC072E504 0x00000000
+mem set 0xC072E508 0x00000000
+mem set 0xC072E50C 0xDEADBEEF
+mem set 0xC072E510 0xDEADBEEF
+mem set 0xC072E514 0xDEADBEEF
+
+# AcqEndTrans wrapper: call original, record raw metadata, then sleep in 100 ms
+# intervals until AutoRun finishes the full mem save and sets release=1.
+mem set 0xC072DE64 0xE92D4070
+mem set 0xC072DE68 0xE1A04001
+mem set 0xC072DE6C 0xE308CA38
+mem set 0xC072DE70 0xE34CC031
+mem set 0xC072DE74 0xE12FFF3C
+mem set 0xC072DE78 0xE5945030
+mem set 0xC072DE7C 0xE30E6500
+mem set 0xC072DE80 0xE34C6072
+mem set 0xC072DE84 0xE5865000
+mem set 0xC072DE88 0xE3A00001
+mem set 0xC072DE8C 0xE5860004
+mem set 0xC072DE90 0xE5940014
+mem set 0xC072DE94 0xE586000C
+mem set 0xC072DE98 0xE5940018
+mem set 0xC072DE9C 0xE5860010
+mem set 0xC072DEA0 0xE5940024
+mem set 0xC072DEA4 0xE5860014
+mem set 0xC072DEA8 0xE5960008
+mem set 0xC072DEAC 0xE3500000
+mem set 0xC072DEB0 0x1A000004
+mem set 0xC072DEB4 0xE3A00064
+mem set 0xC072DEB8 0xE300C5D8
+mem set 0xC072DEBC 0xE34CC037
+mem set 0xC072DEC0 0xE12FFF3C
+mem set 0xC072DEC4 0xEAFFFFF7
+mem set 0xC072DEC8 0xE8BD8070
+
+# Disable inline ISP WDD/BDD table use and sensor-side PDAF setup.
+mem set 0xC03183F4 0xE3A02000
+mem set 0xC0318414 0xE3A02000
+mem set 0xC0318434 0xE3A02000
+# Guard against later CPU-side phase-pixel interpolation.
+mem set 0xC030FB20 0xE12FFF1E
+
+# Activate normal single-frame post-DMA callsite last.
+mem set 0xC0315DD4 0xEB106022
+
+# The patches above finish well before this window. Wait 5 seconds after the
+# initial pulse, then press the physical shutter once. The hook will hold the
+# capture task while this independent AutoRun task continues its countdown.
+ctrl sleep 20000
+
+# While capture task is held, StillCreateRaw cannot begin.
+mem save \PRESHOT.BIN 0x5F900C00,,0x03000000
+mem save \HOLDMETA.BIN 0xC072E500,,0x20
+mem save \HOLDHOOK.BIN 0xC072DE64,,0x68
+
+# Release capture task; normal StillCreateRaw/DNG processing resumes.
+mem set 0xC072E508 0x00000001
+ctrl sleep 8000
+mem save \HOLDEND.BIN 0xC072E500,,0x20
+
+display colorbar 1 0
+ctrl sleep 700
+display colorbar 0 0
+ctrl sleep 400
+display colorbar 1 0
+ctrl sleep 700
+display colorbar 0 0

@@ -1,0 +1,68 @@
+{
+  "kind": "offline_host_regression_after_binding_ops_port",
+  "date": "2026-09-20",
+  "camera_accessed": false,
+  "usb_accessed": false,
+  "installed": false,
+  "deployable": false,
+  "suites": {
+    "control_ui": {
+      "tests": 32,
+      "passed": true,
+      "skipped": 0
+    },
+    "binding_coordinator": {
+      "tests": 30,
+      "passed": true,
+      "skipped": 0
+    },
+    "menu_candidate": {
+      "tests": 35,
+      "passed": true,
+      "skipped": 0
+    },
+    "fixed_recipe": {
+      "tests": 8,
+      "passed": true,
+      "skipped": 0
+    },
+    "native_binding_ops_port": {
+      "tests": 23,
+      "passed": true,
+      "skipped": 0
+    }
+  },
+  "reader_lease_groups": 53,
+  "not_rerun_requires_unicorn": [
+    "fpSup/lossless/native/test_native_variable.py (23 original-instruction cases)",
+    "research/ui/tools/native_variable_probe (18 cases)",
+    "research/ui/tools/native_page_probe (16 cases)",
+    "research/ui/tools/native_control_probe (14 cases)"
+  ],
+  "unicorn_available": false,
+  "mutation_check": {
+    "description": "Four deliberate port defects were injected into a scratch copy; the new suite caught every one.",
+    "mutations": [
+      "keep FPL_READY_UI from the facts provider",
+      "drop the held-exclusion requirement in unsubscribe",
+      "report drain proven when no quiescence provider exists",
+      "allow a nested native notification through to policy"
+    ],
+    "scenarios_that_failed": [
+      1,
+      7,
+      8,
+      9,
+      11,
+      12,
+      17
+    ]
+  },
+  "source_hashes": {
+    "fpSup/lossless/native/native_port.c": "e2eec5fe3c798e854c63b9510ee82e3386542def9026d485a1fb88adf89dd9c4",
+    "fpSup/lossless/native/native_port.h": "4e912576c3cd70e26e6a5954d4ae6c8172d5ace287836d76ba7721dd7ae7a48a",
+    "fpSup/lossless/native/port_fixture.c": "bc5ace983f4ce396f985276c733884215ac34efb64e445851045416164ae999f",
+    "fpSup/lossless/native/test_native_port.py": "f60df437942d5098f092954ab39b58c1908441d62bf93cc4ca289191ed8e38ce"
+  },
+  "reader_lease_candidate": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/build/mainb2-pure-fixed-20260916"
+}

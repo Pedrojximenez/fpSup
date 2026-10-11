@@ -1,0 +1,9 @@
+Final UI source: uishare/tab/manage_page.py; four focused management-page tests passed on r3h7.
+During this trial, 16 management loader tests and 9 native/legacy UI tests were rerun and passed after the first UI repair. Subsequent UI revisions passed the four focused tests.
+Before this hardware trial: 66 baseline loader/boot/restore tests, 16 management tests, 9 native/legacy UI tests and 4 isolated fault mutations passed. Loader bytes did not change during the trial.
+Hardware: six shell reboots; real screen vector 226/232; machine vector 18/24; five new pages entered.
+Hardware: two-page boundaries/focus, empty-row hiding, Enable/Disable persistence across reboot, More Settings counting callback, three information-page entries and MENU returns passed.
+Final camera LOADER.BIN, ALLSUPS.BIN and AutoRun.txt full readbacks match the candidate byte for byte. FSDS count=0 and remaining slots zero. Original six product Sups remain; temporary 60BTN.BIN removed.
+Final camera: FT_Y6, Manage Sups focused, is_recording=0. Native MENU re-entry returns to MainY5; Right reaches FT_Y6.
+Not exercised: physical power-switch warm cycles, recording, AF/lens tests, product Sup-owned settings pages, network/QR update, SD formatting/restore.
+Evidence: ../20261008-allsups-r3h-live1/RESULTS.md and final-readback.json.

@@ -1,0 +1,49 @@
+fpGyroSup r27 ordered three-slot 16 KiB raw-block A/B build
+Build date: 2026-08-31
+Camera/firmware: SIGMA fp Ver.5.02
+Build type: release AutoRun, no USB shell
+Base: r26 compact three-slot logger + r23 four-digit formatter
+
+Reason for this build:
+- r26 proved that the three-slot logger works when its resident image ends below
+  the suspected 0xC072EF00 boundary: A001_023 produced continuous DNG plus valid
+  GCSV and JSON.
+- A later run stopped around fifteen seconds.  A001_002 contains 451 continuous
+  DNG frames (15.048 s) and complete sidecars.  Its active-video GCSV interval
+  has no gap over 10 ms; the one 520.978 ms gap begins after the DNG interval,
+  during native finalization.
+- r27 tests whether the 32 KiB formatter transaction is too bursty for the
+  CinemaDNG pipeline.  It changes only raw-slot size and matching bounds.
+
+Only r27 pipeline change:
+- The ordered A/B/C queue uses three 16 KiB raw slots instead of three 32 KiB
+  slots.  Each carries at most 1,916 gyro samples, about 0.7664 s at 2,500 Hz.
+- With one FILLING slot, the other two provide about 1.5328 s of back-pressure
+  headroom; all three together hold about 2.2992 s.
+- A remains at state+0x1000.  B remains at +0x30000 and C moves to +0x34000,
+  ending at +0x38000 with 32 KiB of guard before the diagnostic region.
+- Producer EMPTY-only ownership, sequence ordering and stop-time READY rescan
+  are unchanged.
+
+Explicitly unchanged:
+- Gyro input remains 2,500 Hz; no sensor-rate change or decimation.
+- GCSV text still uses complete-line 64 KiB F_WRITE calls with a 5 ms yield.
+- r23 four-digit lookup, fused gyro formatter and cached accel text remain.
+- Native lifecycle, recording/power lock, JSON generation and task priority are
+  unchanged.  No GYR file is created.
+- Memory remains fixed and independent of recording duration.
+
+Interpretation:
+- If r27 records past the r26 fifteen-second stop point, raw transaction length
+  was material.  Then test 60 seconds and compare GCSV gaps with r26/r23.
+- If it still stops at approximately the same point, raw-slot size is not the
+  cause; the next isolated variable is the 64 KiB recording-time media call.
+- A smaller queue may shed GCSV samples sooner during a long media stall.  That
+  trade-off must be measured rather than hidden.
+
+Verification:
+- All 56 format, queue, layout, lifecycle and safety tests pass.
+- Resident logger remains 3,712 bytes, ending at 0xC072EEE4: 28 bytes below the
+  conservative 0xC072EF00 boundary.
+- PGEN pool code remains 47,736 bytes and 47,752 bytes on card.
+- Experimental isolation build; not fp-gyro-sup-v1.1.

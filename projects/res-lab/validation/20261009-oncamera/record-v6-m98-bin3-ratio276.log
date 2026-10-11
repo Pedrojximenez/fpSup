@@ -1,0 +1,48 @@
+screen: LV_CINE_MEDIUM
+  code   412/412 B  7.7 KiB/s   verify 412/412 B  818 KiB/s   verify 412 bytes in 0.0s (387 KiB/s)      
+  code   412 bytes in 0.1s (3.9 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 131072 bytes in 0.002s (63.4 MB/s)      
+  remote  \CINEMA\A001_006\A001_006_20261009_000001.DNG  131072 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x53B00980 (135168 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 135168 of 131072
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/A001_006-first-frame-header.dng
+{
+  "clip": "A001_006",
+  "started": true,
+  "stopped": true,
+  "expected_size": [
+    992,
+    360
+  ],
+  "main_ifd": {
+    "NewSubfileType": 0,
+    "ImageWidth": 1008,
+    "ImageLength": 370,
+    "BitsPerSample": 12,
+    "Compression": 1,
+    "StripOffsets": 78848,
+    "StripByteCounts": 559440,
+    "BlackLevel": [
+      "262145/1024",
+      "262145/1024",
+      "262145/1024",
+      "262145/1024"
+    ],
+    "WhiteLevel": 4095,
+    "DefaultCropOrigin": [
+      8,
+      5
+    ],
+    "DefaultCropSize": [
+      992,
+      360
+    ],
+    "BaselineExposure": "0/1024",
+    "FrameRate": "50000/1000"
+  },
+  "size_matches": true
+}

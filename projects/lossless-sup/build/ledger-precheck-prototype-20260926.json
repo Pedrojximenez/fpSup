@@ -1,0 +1,136 @@
+{
+ "schema_version": 1,
+ "kind": "offline_compression_predictor_prototype_and_first_calibration",
+ "date": "2026-09-26",
+ "operator_scope": "offline only. No camera. Ground truth from the host encoder on real and synthetic frames.",
+ "asked_for": "a simple, fast predictor to prevent a frame from being sent down a path it cannot survive",
+ "verdict": "IT WORKS ON ORDINARY CONTENT AND IS DEFEATABLE BY CONSTRUCTION. Fit to choose between two recoverable paths; NOT fit to authorise zero-copy, where being wrong destroys the frame.",
+ "the_asymmetry_that_governs_everything": {
+  "copy_back": "decides AFTER the encode, from the size table. A wrong guess costs nothing.",
+  "zero_copy": "the codec writes over the source, so by the time the size is known the source is gone.",
+  "false_negative": "one unnecessary copy. Harmless.",
+  "false_positive": "one destroyed frame. Unrecoverable.",
+  "consequence": "a predictor that can be wrong cannot guard an operation that cannot be undone. It can only choose between paths that are both correct."
+ },
+ "the_host_encoder_is_now_a_ground_truth_generator": {
+  "level": "H",
+  "claim": "research/slimRAW/ljenc.py reproduces the camera's tile sizes",
+  "evidence": "against the camera's own twelve sizes for A001_090 frame 1: nine identical, three within three bytes, and the twelfth 454 smaller - which is the 457 zero bytes the camera pads onto the last tile. Sum 1,396,285 against 1,396,736, a 0.03% difference that is entirely that padding.",
+  "consequence": "any stock frame plus this encoder is a calibration point, and no camera session is needed to make more."
+ },
+ "design": {
+  "sampling": "12 tiles x 4 windows x 2 rows x 128 samples = 12,288 residuals, 0.54% of the frame",
+  "residual": "d = raw[y][x] - raw[y][x-2], two columns left because adjacent columns are different CFA components",
+  "histogram": "13 bins, one per JPEG magnitude category, kept per column component",
+  "score": "Huffman code lengths derived FROM the sampled histogram, then bits/sample = sum(p[k] * (len[k] + k)). No calibrated constant table, so there is nothing to fit.",
+  "estimate": "padded_samples * bits / 8, plus 96 bytes per tile"
+ },
+ "first_calibration": {
+  "note": "eleven cases is not a calibration. Four of the real frames are the same scene and exposure, so this is about two independent conditions plus constructed extremes. No threshold follows from it.",
+  "rows": [
+   {
+    "case": "A001_090 frame 1 (camera)",
+    "actual": 1396285,
+    "predicted": 1423611,
+    "err_percent": 1.96
+   },
+   {
+    "case": "A001_090 frame 2",
+    "actual": 1396423,
+    "predicted": 1424507,
+    "err_percent": 2.01
+   },
+   {
+    "case": "A001_090 frame 3",
+    "actual": 1396223,
+    "predicted": 1424576,
+    "err_percent": 2.03
+   },
+   {
+    "case": "A001_084 frame 1",
+    "actual": 1365198,
+    "predicted": 1439158,
+    "err_percent": 5.42
+   },
+   {
+    "case": "flat",
+    "actual": 283596,
+    "predicted": 283776,
+    "err_percent": 0.06
+   },
+   {
+    "case": "gradient",
+    "actual": 828966,
+    "predicted": 831360,
+    "err_percent": 0.29
+   },
+   {
+    "case": "alternating-extremes",
+    "actual": 283620,
+    "predicted": 283776,
+    "err_percent": 0.06
+   },
+   {
+    "case": "uniform-noise",
+    "actual": 3468006,
+    "predicted": 3568452,
+    "err_percent": 2.9
+   },
+   {
+    "case": "flat-with-noisy-patch",
+    "actual": 538994,
+    "predicted": 535603,
+    "err_percent": -0.63
+   },
+   {
+    "case": "noise-only-on-the-sampled-rows",
+    "actual": 358820,
+    "predicted": 3565853,
+    "err_percent": 893.77
+   },
+   {
+    "case": "noise-off-the-sampled-rows",
+    "actual": 3426342,
+    "predicted": 283776,
+    "err_percent": -91.72
+   }
+  ],
+  "on_ordinary_content": "+0.06% to +5.42%, never under. The worst case that matters, uniform noise at 3.47 MB, is over-estimated to 3.57 MB and would correctly be routed away from zero-copy.",
+  "worst_under_estimate": -91.72
+ },
+ "two_defects_found_by_adversarial_testing": [
+  {
+   "defect": "the sample-position rotation was a no-op",
+   "detail": "fy came from ((i + seq) % WINDOWS_PER_TILE), and as i runs 0..3 that covers the same four positions for EVERY seq. The sampler read identical rows on every frame. A frame with noise everywhere except those rows scored a perfect 1.000 bits per sample on all six seq values tried.",
+   "fix": "the offset is now a golden-ratio walk that moves the set; the same frame is caught at +2.2% to +4.6% on every other seq",
+   "residual_exposure": "seq 0 still fails on a frame built against seq 0. Rotation reduces the exposure from always-blind to blind-on-the-frames-a-pattern-happens-to-miss. It does not remove it."
+  },
+  {
+   "defect": "I compared predicted PAYLOAD against actual FILE bytes",
+   "detail": "the payload estimate excludes each tile's own JPEG header, and the actual includes it, which manufactured a systematic under-estimate of about 12 x 81 bytes and made flat content look like a false positive",
+   "fix": "the comparison uses predicted_file_bytes"
+  }
+ ],
+ "what_this_means_for_zero_copy": [
+  "A predictor cannot authorise it. The failure mode is not a margin to be widened - it is total (-91.7%) and confident, and no sampling fraction below 100% removes it.",
+  "The thing that COULD authorise it is a hardware bound rather than a guess: F_INIT takes nine words of which [6] is the output pointer and [7] the size table, and the other seven are unknown. If one of them is an output cap, the engine stops on its own and no prediction is needed.",
+  "Until then zero-copy is a candidate for content already known to compress, not a general path, and copy-back remains the correct default because its decision is made after the fact."
+ ],
+ "where_the_predictor_IS_fit": [
+  "the adaptive-mixed decision ROADMAP already contemplates: is this frame worth compressing at all. Being wrong there costs space or time, both recoverable.",
+  "telemetry and shadow-mode logging, per COMPRESSION_PRECHECK section 8 step 5"
+ ],
+ "explicitly_not_established": [
+  "any threshold. Eleven cases, two independent real conditions.",
+  "the cost of running it on the camera. This is host Python; the note's precheck_us was never measured and the sampling has not been written in ARM.",
+  "behaviour on the scenes COMPRESSION_PRECHECK section 8 step 3 requires: correctly-exposed high ISO, shadow noise, local texture, scene cuts, grouped by clip so adjacent frames do not fake generalisation",
+  "whether row-correlated sensor patterns - readout banding, rolling shutter artefacts - resemble the adversarial case closely enough to matter in practice. Not tested, and 'real content will not do that' is the assumption that fails once and destroys a frame."
+ ],
+ "sources": [
+  "tools/compression_precheck.py",
+  "tools/calibrate_precheck.py",
+  "tools/test_compression_precheck.py"
+ ],
+ "camera_accessed": false,
+ "deployable": false
+}

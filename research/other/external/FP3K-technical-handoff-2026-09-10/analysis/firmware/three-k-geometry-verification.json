@@ -1,0 +1,153 @@
+{
+  "payload_bytes": 492,
+  "payload_sha256": "86962614345637ca9a96ef0b6fca4e22d8adbad34da56e5c962ea76afb8e17d3",
+  "cases": [
+    {
+      "case": "success",
+      "index": null,
+      "status": 16,
+      "table_write_count": 6,
+      "passed": true
+    },
+    {
+      "case": "corrupt_body",
+      "index": null,
+      "status": 2,
+      "table_write_count": 0,
+      "passed": true
+    },
+    {
+      "case": "rollback",
+      "index": null,
+      "status": 5,
+      "table_write_count": 12,
+      "passed": true
+    },
+    {
+      "case": "wrong_stock",
+      "index": 0,
+      "status": 4,
+      "table_write_count": 0,
+      "passed": true
+    },
+    {
+      "case": "wrong_stock",
+      "index": 1,
+      "status": 4,
+      "table_write_count": 0,
+      "passed": true
+    },
+    {
+      "case": "wrong_stock",
+      "index": 2,
+      "status": 4,
+      "table_write_count": 0,
+      "passed": true
+    },
+    {
+      "case": "wrong_stock",
+      "index": 3,
+      "status": 4,
+      "table_write_count": 0,
+      "passed": true
+    },
+    {
+      "case": "wrong_stock",
+      "index": 4,
+      "status": 4,
+      "table_write_count": 0,
+      "passed": true
+    },
+    {
+      "case": "wrong_stock",
+      "index": 5,
+      "status": 4,
+      "table_write_count": 0,
+      "passed": true
+    },
+    {
+      "case": "busy",
+      "index": 0,
+      "status": 3,
+      "table_write_count": 0,
+      "passed": true
+    },
+    {
+      "case": "busy",
+      "index": 1,
+      "status": 3,
+      "table_write_count": 0,
+      "passed": true
+    },
+    {
+      "case": "busy",
+      "index": 2,
+      "status": 3,
+      "table_write_count": 0,
+      "passed": true
+    },
+    {
+      "case": "busy",
+      "index": 3,
+      "status": 3,
+      "table_write_count": 0,
+      "passed": true
+    },
+    {
+      "case": "busy",
+      "index": 4,
+      "status": 3,
+      "table_write_count": 0,
+      "passed": true
+    },
+    {
+      "case": "became_busy",
+      "index": null,
+      "status": 3,
+      "table_write_count": 0,
+      "passed": true
+    },
+    {
+      "case": "already_applied",
+      "index": null,
+      "status": 4,
+      "table_write_count": 0,
+      "passed": true
+    }
+  ],
+  "table_entries": [
+    {
+      "address": "0xc0be3f54",
+      "expected": 3856,
+      "replacement": 3032
+    },
+    {
+      "address": "0xc0be441c",
+      "expected": 2170,
+      "replacement": 2020
+    },
+    {
+      "address": "0xc0be2c34",
+      "expected": 3840,
+      "replacement": 3000
+    },
+    {
+      "address": "0xc0be30fc",
+      "expected": 2160,
+      "replacement": 2000
+    },
+    {
+      "address": "0xc0be35c4",
+      "expected": 3856,
+      "replacement": 3032
+    },
+    {
+      "address": "0xc0be3a8c",
+      "expected": 2170,
+      "replacement": 2020
+    }
+  ],
+  "scope": "Cropped3K geometry validation only. Stock sensor readout and ratios retained. Not full-height recording.",
+  "validation": "16 guard/failure cases; all306 processing rows checked after successful patch; descriptor and byte-count checked. No firmware function stubs.",
+  "limitations": "Hardware not tested. No DMA, sensor, image-quality, file I/O, power-loss or instruction-loading fault model. Bootstrap checksum cannot guarantee safety if bootstrap itself is corrupted."
+}

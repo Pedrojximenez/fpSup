@@ -1,0 +1,14 @@
+test_corrupt_readback_is_refused (__main__.Check) ... FAIL
+
+======================================================================
+FAIL: test_corrupt_readback_is_refused (__main__.Check)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_v3_reslab_mutations.py", line 25, in test_corrupt_readback_is_refused
+    self.assertEqual(cam.export(), 5, 'corrupt readback must report failure')
+AssertionError: 1 != 5 : corrupt readback must report failure
+
+----------------------------------------------------------------------
+Ran 1 test in 35.170s
+
+FAILED (failures=1)

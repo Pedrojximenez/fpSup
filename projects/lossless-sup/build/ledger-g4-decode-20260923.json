@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "kind": "offline_contract_artifact_decodes",
+  "date": "2026-09-23",
+  "operator_scope": "offline; no camera. G4 step 1 decode condition",
+  "camera": {
+    "model": "w71c1",
+    "firmware": "5.02.0.V91",
+    "note": "target of the contract; nothing was run on it"
+  },
+  "source": {
+    "commit": null,
+    "worktree_dirty": null,
+    "git_available": false,
+    "files": {
+      "projects/lossless-sup/tools/canonical_header.py": "f3aa6caf664b6f1d95e1680a9e2345926395d0a0ca82742e8559b8d30c873cec",
+      "projects/lossless-sup/tools/test_canonical_header.py": "769a362fa00b76d4898d740bad434606500f654218e4976cc0cb71e22cb17091",
+      "projects/lossless-sup/tools/mkcompressed_safe.py": "1a71bfc9497ede4b0958a841984cb14551e7ca2bc07d4de026cf1af2e8ae5742",
+      "projects/lossless-sup/tools/run_trial.py": "5f7790d66a2eea78294082b840b384e039c2328b7b8a8ca052b07fd5ae855aae"
+    }
+  },
+  "profile": {
+    "geometry": "1936x1090",
+    "tile": "512x368",
+    "tiles": 12,
+    "predictor": 1,
+    "bit_depth": 12
+  },
+  "per_frame": {
+    "fixtures": [
+      {
+        "file": "A001_083_FHD_f01.DNG",
+        "tiles": 12,
+        "payload": 1181354,
+        "ratio": 2.68,
+        "header_identical": true,
+        "samples": 2110240,
+        "equal": true
+      },
+      {
+        "file": "A001_083_FHD_f07.DNG",
+        "tiles": 12,
+        "payload": 1181665,
+        "ratio": 2.679,
+        "header_identical": true,
+        "samples": 2110240,
+        "equal": true
+      },
+      {
+        "file": "A001_083_FHD_f13.DNG",
+        "tiles": 12,
+        "payload": 1181894,
+        "ratio": 2.679,
+        "header_identical": true,
+        "samples": 2110240,
+        "equal": true
+      },
+      {
+        "file": "A001_001_20260817_000001.DNG",
+        "tiles": 12,
+        "payload": 1226179,
+        "ratio": 2.582,
+        "header_identical": true,
+        "samples": 2110240,
+        "equal": true
+      },
+      {
+        "file": "A001_001_20260817_000002.DNG",
+        "tiles": 12,
+        "payload": 1222591,
+        "ratio": 2.589,
+        "header_identical": true,
+        "samples": 2110240,
+        "equal": true
+      }
+    ],
+    "ratio_range": [
+      2.582,
+      2.68
+    ]
+  },
+  "integrity": {
+    "decoder": "LibRaw 0.22.1 via rawpy 0.27.0",
+    "samples_per_frame": 2110240,
+    "fixtures": 5,
+    "all_headers_identical_to_host_builder": true,
+    "all_samples_equal": true
+  },
+  "notes": [
+    "The five fixtures are host-encoded, not camera-encoded. The camera's own tile sizes from 2026-09-23 were used separately to build and verify a segment 0, but the camera's blobs were discarded by the probe and so cannot be decoded."
+  ],
+  "explicitly_established": [
+    {
+      "level": "H",
+      "claim": "a file assembled from the contract's segment 0 plus the encoder's tile blobs decodes under LibRaw with all 2,110,240 samples equal to the source, across five stock FHD fixtures"
+    },
+    {
+      "level": "H",
+      "claim": "the contract and mkcompressed_safe.py produce byte-identical segment 0 for every fixture tested"
+    },
+    {
+      "level": "H",
+      "claim": "an unpadded file decodes: the 512-byte tail alignment the host trial adds is not needed for readability, so the camera writer should not pad"
+    },
+    {
+      "level": "H",
+      "claim": "host compression ratios for these fixtures fall between 2.58 and 2.68 at 512x368"
+    }
+  ],
+  "explicitly_not_established": [
+    "that the camera writer can emit this segment 0; nothing camera-side was written",
+    "readability in Resolve, Adobe or any NLE; only LibRaw was used",
+    "in-camera playback, which the stock CinemaDngPlay parser cannot do for tiled Compression=7",
+    "the 12 non-pixel tail bytes the stock file carries after its raster",
+    "any geometry other than 512x368, or any frame the camera itself encoded",
+    "that LibRaw's reading of this layout matches what the DNG spec requires"
+  ]
+}

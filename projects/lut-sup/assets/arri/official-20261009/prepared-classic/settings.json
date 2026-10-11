@@ -1,0 +1,52 @@
+{
+  "schema": "fpSup-LUT-settings-1",
+  "name": "ARRI ALEXA Classic 709 (K1S1)",
+  "input_space": "ARRI Wide Gamut 3 / LogC3 / Full Range",
+  "output_space": "Rec.709 D65 / Gamma 2.4 / Full Range",
+  "strength": 1.0,
+  "interpolation": "tetrahedral",
+  "source_sha256": "29212a71808ab22f2819b904b3730fa4231b5841d883e43ec17610096dc38879",
+  "source_bytes": 970314,
+  "cube": {
+    "title": "",
+    "source_sha256": "29212a71808ab22f2819b904b3730fa4231b5841d883e43ec17610096dc38879",
+    "size1d": 0,
+    "size3d": 33,
+    "range1d": [
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        1.0,
+        1.0,
+        1.0
+      ]
+    ],
+    "range3d": [
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        1.0,
+        1.0,
+        1.0
+      ]
+    ]
+  },
+  "on_camera_ready": false,
+  "table_order": "blue outer, green middle, red inner, RGB channel",
+  "assets": {
+    "source.cube": {
+      "bytes": 970314,
+      "sha256": "29212a71808ab22f2819b904b3730fa4231b5841d883e43ec17610096dc38879"
+    },
+    "cube3d.f32le": {
+      "bytes": 431244,
+      "sha256": "997d813b64ba2cc995e28cc538bcc592d7505081806a84eb04d9852ce008e6b9"
+    }
+  }
+}

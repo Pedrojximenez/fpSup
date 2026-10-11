@@ -1,0 +1,232 @@
+{
+  "verification_date": "2026-10-04",
+  "status": "PASS",
+  "scope": "Offline exact-artifact verification only; no rebuild, camera operation or card deployment.",
+  "method": "Reconstructed each loader from that package's actual AutoRun.txt; executed its exact fpSup.BIN and embedded lossless.bin with each build.json's layout, c_base and C entries. Current harness source-symbol assembly was used only for offsets, not replacement payload bytes.",
+  "command": "python3 -B /private/tmp/fpl-exact-stop-diag.zM6k6i/verify.py /Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/build/testcard-20261004-stop-diag/plain-og3k-r2 /Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/build/testcard-20261004-stop-diag/debug-og3k-r2 /Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/build/testcard-20261004-stop-diag/fast-og3k-r2",
+  "verifier_sha256": "e108c205da7bc30a63e350c338a3218e14b63b92e6ffd8c5c19e6569b9e3d51f",
+  "archived_verifier": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/build/testcard-20261004-stop-diag/verify_exact_r2.py",
+  "replay_command": "python3 -B /Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/build/testcard-20261004-stop-diag/verify_exact_r2.py /Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/build/testcard-20261004-stop-diag/plain-og3k-r2 /Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/build/testcard-20261004-stop-diag/debug-og3k-r2 /Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/build/testcard-20261004-stop-diag/fast-og3k-r2",
+  "runtime": "Child-isolated Unicorn execution; scoped JIT escalation after sandbox SIGILL. Each child bounded to 150 seconds; initial 60-second plain run timed out without an assertion failure and was not counted as a pass.",
+  "counts": {
+    "exact_packages": 3,
+    "plain_helper_tests": 23,
+    "debug_helper_tests": 23,
+    "fast_helper_tests": 0,
+    "helper_tests_total": 46,
+    "precise_mutation_tests_per_helper_suite": 5
+  },
+  "same_source_facts": {
+    "equal": true,
+    "source_hash_entries": 19,
+    "blob_facts_equal": true,
+    "all_19_current_source_hashes_match_build_facts": true
+  },
+  "autorun_r1_to_r2": [
+    {
+      "configuration": "plain-og3k",
+      "byte_identical": true,
+      "sha256": "5dc89b8506e8ce408276a9eab61fbb9fda94d4a194b65f2fd17c9e410b8fe642"
+    },
+    {
+      "configuration": "debug-og3k",
+      "byte_identical": true,
+      "sha256": "5dc89b8506e8ce408276a9eab61fbb9fda94d4a194b65f2fd17c9e410b8fe642"
+    },
+    {
+      "configuration": "fast-og3k",
+      "byte_identical": true,
+      "sha256": "b00ce0dc23fbee33d46267798c417c43800818d951b4da0d3e671de7809d9665"
+    }
+  ],
+  "interpretation": "The AutoRun comparison is only r1 versus r2 produced from the same current local loader configuration. It does not establish compatibility with a previously released AutoRun; local loader/FS3 changes predate this payload optimization.",
+  "artifacts": [
+    {
+      "directory": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/build/testcard-20261004-stop-diag/plain-og3k-r2",
+      "status": "PASS",
+      "tests": [
+        "test_a_full_cave_arms_nothing",
+        "test_arrive_calls_an_unknown_vtable_target_untouched",
+        "test_arrive_without_a_take_is_the_original_enqueue",
+        "test_clip_stores_the_size_through_the_displaced_store",
+        "test_discard_records_one_popped_frame_then_calls_original_once",
+        "test_end_runs_the_displaced_push_and_continues_into_the_original",
+        "test_event_observation_preserves_displaced_load_flags_and_both_stack_alignments",
+        "test_every_site_branches_to_its_veneer_and_every_veneer_to_its_shim",
+        "test_flush_keeps_every_argument_for_the_real_flush",
+        "test_init_starts_the_codec_task_at_the_resident_task_shim",
+        "test_it_allocates_its_own_user_block_copies_publishes_then_arms",
+        "test_mutation_discarding_writer_high_word_is_caught",
+        "test_mutation_omitting_displaced_load_is_caught",
+        "test_mutation_omitting_event_alignment_is_caught",
+        "test_mutation_omitting_rec_alignment_is_caught",
+        "test_mutation_reading_shim_lr_instead_of_clear_caller_is_caught",
+        "test_play_does_the_displaced_load_and_returns_through_lr",
+        "test_pool_runs_the_displaced_push_and_continues_into_the_original",
+        "test_rec_passes_any_other_request_to_the_original",
+        "test_rec_resets_diagnostics_when_lossless_is_off",
+        "test_stop_runs_the_displaced_push_and_continues_into_the_original",
+        "test_the_sites_are_journaled_by_stage2_before_the_entry",
+        "test_writer_observes_full_return_and_restores_both_stack_alignments"
+      ],
+      "hashes": {
+        "AutoRun.txt": "5dc89b8506e8ce408276a9eab61fbb9fda94d4a194b65f2fd17c9e410b8fe642",
+        "build_autorun.log": "b5882274aee78d4ba824a5c7a20e735b7404cbdd814e8f277edf6199e39eefaa",
+        "fpSup.BIN": "c3958e0d485d5a4c5c0850e0cc30da0e673150266eb68c4207ec2b5bcd30d129",
+        "layout.json": "95892ba805918c1c06ecce87709fbcfb7fa2d089b9b5eb4f83840ba8b108b9f8",
+        "lossless.bin": "275c5475838fc4e7c730dc43b016138cbd88a281ebef5abef8ef60d3ef7cc73a"
+      },
+      "section_count": 100,
+      "entry_order": [
+        "lossless",
+        "opengate"
+      ],
+      "entry_addresses_or_offsets": [
+        "0x3fa4",
+        "0xc0731600"
+      ],
+      "journaled_lossless_sites": 10,
+      "installed": {
+        "rec": "0xeb0e2b25",
+        "arrive": "0xeb0e881d",
+        "stop": "0xea0e54b9",
+        "flush": "0xeb0e22f9",
+        "play": "0xeb05b47a",
+        "clip": "0xeb05c0ba",
+        "end": "0xea05ac83",
+        "pool": "0xea05ace5",
+        "event": "0xea0e88e9",
+        "discard": "0xeb0ec06f"
+      },
+      "poweroff_restore_invocations": 2,
+      "all_lossless_sites_restored": true,
+      "exact_launcher_sha256": "275c5475838fc4e7c730dc43b016138cbd88a281ebef5abef8ef60d3ef7cc73a",
+      "loader_from_actual_autorun": true,
+      "firmware_main_sha256": "92a8ee993f6c3d66c251e88d45a2ccd5135c6cf7342717784321c2ed506e2fb4",
+      "limits": [
+        "USB shell and OpenGate entry bodies were stubbed; their order/ABI was executed.",
+        "No codec, real scheduler, storage, hardware or UI lifetime validation.",
+        "No comparison to released AutoRun compatibility; local shared loader includes FS3 changes.",
+        "Loader cold/echo path tested; retained-image/settings fast paths not covered here."
+      ]
+    },
+    {
+      "directory": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/build/testcard-20261004-stop-diag/debug-og3k-r2",
+      "status": "PASS",
+      "tests": [
+        "test_a_full_cave_arms_nothing",
+        "test_arrive_calls_an_unknown_vtable_target_untouched",
+        "test_arrive_without_a_take_is_the_original_enqueue",
+        "test_clip_stores_the_size_through_the_displaced_store",
+        "test_discard_records_one_popped_frame_then_calls_original_once",
+        "test_end_runs_the_displaced_push_and_continues_into_the_original",
+        "test_event_observation_preserves_displaced_load_flags_and_both_stack_alignments",
+        "test_every_site_branches_to_its_veneer_and_every_veneer_to_its_shim",
+        "test_flush_keeps_every_argument_for_the_real_flush",
+        "test_init_starts_the_codec_task_at_the_resident_task_shim",
+        "test_it_allocates_its_own_user_block_copies_publishes_then_arms",
+        "test_mutation_discarding_writer_high_word_is_caught",
+        "test_mutation_omitting_displaced_load_is_caught",
+        "test_mutation_omitting_event_alignment_is_caught",
+        "test_mutation_omitting_rec_alignment_is_caught",
+        "test_mutation_reading_shim_lr_instead_of_clear_caller_is_caught",
+        "test_play_does_the_displaced_load_and_returns_through_lr",
+        "test_pool_runs_the_displaced_push_and_continues_into_the_original",
+        "test_rec_passes_any_other_request_to_the_original",
+        "test_rec_resets_diagnostics_when_lossless_is_off",
+        "test_stop_runs_the_displaced_push_and_continues_into_the_original",
+        "test_the_sites_are_journaled_by_stage2_before_the_entry",
+        "test_writer_observes_full_return_and_restores_both_stack_alignments"
+      ],
+      "hashes": {
+        "AutoRun.txt": "5dc89b8506e8ce408276a9eab61fbb9fda94d4a194b65f2fd17c9e410b8fe642",
+        "build_autorun.log": "76c15a24d2fcd47f904a20beb7ab197f79a6afd46986c37c50ed7f0bd13dce1d",
+        "fpSup.BIN": "661a4c2cf6cd83e5325fbbe41b1d2a2f06fc27c014241d1d4249836e81f86711",
+        "layout.json": "95892ba805918c1c06ecce87709fbcfb7fa2d089b9b5eb4f83840ba8b108b9f8",
+        "lossless.bin": "275c5475838fc4e7c730dc43b016138cbd88a281ebef5abef8ef60d3ef7cc73a"
+      },
+      "section_count": 103,
+      "entry_order": [
+        "usb-shell",
+        "lossless",
+        "opengate"
+      ],
+      "entry_addresses_or_offsets": [
+        "0x830",
+        "0x46ec",
+        "0xc0731600"
+      ],
+      "journaled_lossless_sites": 10,
+      "installed": {
+        "rec": "0xeb0e2b25",
+        "arrive": "0xeb0e881d",
+        "stop": "0xea0e54b9",
+        "flush": "0xeb0e22f9",
+        "play": "0xeb05b47a",
+        "clip": "0xeb05c0ba",
+        "end": "0xea05ac83",
+        "pool": "0xea05ace5",
+        "event": "0xea0e88e9",
+        "discard": "0xeb0ec06f"
+      },
+      "poweroff_restore_invocations": 2,
+      "all_lossless_sites_restored": true,
+      "exact_launcher_sha256": "275c5475838fc4e7c730dc43b016138cbd88a281ebef5abef8ef60d3ef7cc73a",
+      "loader_from_actual_autorun": true,
+      "firmware_main_sha256": "92a8ee993f6c3d66c251e88d45a2ccd5135c6cf7342717784321c2ed506e2fb4",
+      "limits": [
+        "USB shell and OpenGate entry bodies were stubbed; their order/ABI was executed.",
+        "No codec, real scheduler, storage, hardware or UI lifetime validation.",
+        "No comparison to released AutoRun compatibility; local shared loader includes FS3 changes.",
+        "Loader cold/echo path tested; retained-image/settings fast paths not covered here."
+      ]
+    },
+    {
+      "directory": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/build/testcard-20261004-stop-diag/fast-og3k-r2",
+      "status": "PASS",
+      "tests": [],
+      "hashes": {
+        "AutoRun.txt": "b00ce0dc23fbee33d46267798c417c43800818d951b4da0d3e671de7809d9665",
+        "build_autorun.log": "4165f2ef6e032991d642576ede24889d61ecab6d2449f871ca058607c2b97e13",
+        "fpSup.BIN": "e46b292140e4e15e27e96a103f3d5d462b8dd3f54b888f0cfab2fce0d274c5f0",
+        "layout.json": "95892ba805918c1c06ecce87709fbcfb7fa2d089b9b5eb4f83840ba8b108b9f8",
+        "lossless.bin": "275c5475838fc4e7c730dc43b016138cbd88a281ebef5abef8ef60d3ef7cc73a"
+      },
+      "section_count": 104,
+      "entry_order": [
+        "usb-shell",
+        "lossless",
+        "opengate"
+      ],
+      "entry_addresses_or_offsets": [
+        "0xaa8",
+        "0x4964",
+        "0xc0731600"
+      ],
+      "journaled_lossless_sites": 10,
+      "installed": {
+        "rec": "0xeb0e2b25",
+        "arrive": "0xeb0e881d",
+        "stop": "0xea0e54b9",
+        "flush": "0xeb0e22f9",
+        "play": "0xeb05b47a",
+        "clip": "0xeb05c0ba",
+        "end": "0xea05ac83",
+        "pool": "0xea05ace5",
+        "event": "0xea0e88e9",
+        "discard": "0xeb0ec06f"
+      },
+      "poweroff_restore_invocations": 2,
+      "all_lossless_sites_restored": true,
+      "exact_launcher_sha256": "275c5475838fc4e7c730dc43b016138cbd88a281ebef5abef8ef60d3ef7cc73a",
+      "loader_from_actual_autorun": true,
+      "firmware_main_sha256": "92a8ee993f6c3d66c251e88d45a2ccd5135c6cf7342717784321c2ed506e2fb4",
+      "limits": [
+        "USB shell and OpenGate entry bodies were stubbed; their order/ABI was executed.",
+        "No codec, real scheduler, storage, hardware or UI lifetime validation.",
+        "No comparison to released AutoRun compatibility; local shared loader includes FS3 changes.",
+        "Loader cold/echo path tested; retained-image/settings fast paths not covered here."
+      ]
+    }
+  ]
+}

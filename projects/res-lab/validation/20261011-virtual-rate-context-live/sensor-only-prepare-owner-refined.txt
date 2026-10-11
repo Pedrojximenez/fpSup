@@ -1,0 +1,15 @@
+screen: LV_CINE_MEDIUM
+  tagged 16380/52744 B  3051 KiB/s   tagged 32760/52744 B  2056 KiB/s   tagged 49140/52744 B  2191 KiB/s   tagged 52744/52744 B  1985 KiB/s   tagged 52744 bytes in 0.0s (1874 KiB/s)      
+  tagged 116/116 B  139 KiB/s   tagged 116 bytes in 0.0s (70 KiB/s)      
+  tagged 116/116 B  183 KiB/s   tagged 116 bytes in 0.0s (75 KiB/s)      
+  tagged 80/80 B  74 KiB/s   tagged 80 bytes in 0.0s (40 KiB/s)      
+  tagged 104/104 B  120 KiB/s   tagged 104 bytes in 0.0s (50 KiB/s)      
+  tagged 60/60 B  37 KiB/s   tagged 60 bytes in 0.0s (25 KiB/s)      
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/sensor_only_ram.py", line 149, in <module>
+    prepare()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/sensor_only_ram.py", line 111, in prepare
+    old = owned(r, False)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/sensor_only_ram.py", line 70, in owned
+    assert bulk == 0x4000000, hex(bulk)
+AssertionError: 0x400000

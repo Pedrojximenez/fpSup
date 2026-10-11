@@ -1,0 +1,5 @@
+mem save \START.bin 0xC0000600,,0x100
+display hdmi_edid 1080_60
+menu SetHdmiOutputInfo 0
+pic 3ddnr 1
+mem save \DONE.bin 0xC0000600,,0x100

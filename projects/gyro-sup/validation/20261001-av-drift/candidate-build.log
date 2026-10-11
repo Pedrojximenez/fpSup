@@ -1,0 +1,14 @@
+binary : fpSup.BIN  32768 bytes, 8 section(s), entry 0x0000041C
+worker : none -- no task either, the loader runs in the callback
+start  : echo handler 0xC0BAC2F8 -> 0xC072DE64 (loader)
+patches: 0 firmware (-), 3 screen
+wrote  : /Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/validation/20261001-av-drift/candidate/AutoRun.txt  169 lines  sha256=87e84ae0aa27f98a
+clean  : 118 commands, no dumps and no diagnostics
+
+        0xC0058310      4  hook site mode
+        0xC03790B8      4  hook site start
+        0xC038C484      4  hook site stop
+        0xC050D4C8      4  hook site accel
+
+  /Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/validation/20261001-av-drift/candidate/AutoRun.txt  612 commands
+  /Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/validation/20261001-av-drift/candidate/fpSup.BIN  32768 bytes

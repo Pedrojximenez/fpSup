@@ -1,0 +1,4 @@
+interface:
+  display_name: "SIGMA fp 離線模擬"
+  short_description: "SIGMA fp ARM boot, hook, and journal emulation checks"
+  default_prompt: "Use $fp-unicorn-emulation to validate the changed SIGMA fp code offline and report what remains unverified on the camera."

@@ -1,0 +1,26 @@
+fpGyroSup GCSV 32 KiB media-call A/B r14
+Build date: 2026-08-31
+Camera/firmware: SIGMA fp Ver.5.02
+Build type: release AutoRun, no USB shell
+Base: r13 decimal fast path
+
+Single change from r13:
+- TEXT_FLUSH is 0x8000 (32 KiB) instead of 0x4000 (16 KiB).
+- The 5 ms cooperative yield after every F_WRITE remains.
+
+Reason:
+- A001_003 proved the decimal fast path exact and clean but improved a one-minute
+  GCSV only from about 11 s to 9 s.
+- Its 5,385,809-byte GCSV needs about 329 16 KiB calls or 165 32 KiB calls.
+- The historical unsafe extreme was 256 KiB per call. This tests one conservative
+  doubling after native CinemaDNG finalise, not a return to long volume holds.
+
+Unchanged:
+- Unsigned timestamp and exact /100 decimal fast path.
+- Native MovieSaving transaction and GYR/GCSV/JSON order.
+- AutoRun.txt and VSHL.BIN are byte-for-byte v1.1/r13.
+- Native lifecycle enabled; boot recovery disabled.
+
+Verification:
+- 39 unit/safety tests pass.
+- PGEN pool code: 7,688 bytes; 7,704 bytes on card.

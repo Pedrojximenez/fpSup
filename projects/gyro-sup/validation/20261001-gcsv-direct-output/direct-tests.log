@@ -1,0 +1,11 @@
+...............
+----------------------------------------------------------------------
+Ran 15 tests in 38.350s
+
+OK
+
+Command: python3 -B -m unittest test_gcsv_direct test_gcsv_yield
+Process exit code: 0
+Tests run: 15
+Skipped: 0
+Execution: actual ARM under Unicorn with native firmware calls stubbed; no camera access.

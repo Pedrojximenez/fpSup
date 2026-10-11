@@ -1,0 +1,14 @@
+{
+  "offline_only": true,
+  "camera_ready": false,
+  "tests": 16,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "firmware_sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622",
+  "sources": {
+    "page_probe.py": "6ed5592bde0cc7dbc01e8200fefdcfd2ac1cbd9a14c54fb89c124d4966d6e29d",
+    "test_page_probe.py": "1ce70aa2ad2034d4a758e0aab38a8cbb0e0cc83d876d6cc79115361b04ff6399"
+  },
+  "limits": "Synthetic RAM, component sizes, arena, opaque app preflight, register-screen, root release and root-owner services; scripted parser only in selector tests. Native renderer/allocator/Lua/OS/device not run."
+}

@@ -1,0 +1,39 @@
+{
+  "card": "/Users/dido/Developer.localized/SIGMAfp_re/projects/sensor-lab/cards/20261004-b25-menu-r85-raw14-preflight/debug",
+  "bin_sha256": "fc8858c366658a91feced84e1617d4deb0f95891a1c922916445d74d7dc07866",
+  "manifest_sha256": "da98c7f09aca33325fc384f573fc02448ddc827201f9a045b55da7e2b9731b2e",
+  "autorun_sha256": "5dc89b8506e8ce408276a9eab61fbb9fda94d4a194b65f2fd17c9e410b8fe642",
+  "picker_matrix": {
+    "valid": 20,
+    "unsupported": 68
+  },
+  "rec_guard": {
+    "accepted_events": [
+      3,
+      15,
+      35
+    ],
+    "mismatch_cells": [
+      "axis-rate",
+      "recipe-snapshot",
+      "recipe-valid",
+      "pickok",
+      "bitlatch",
+      "fpslatch",
+      "entry-class",
+      "entry-profile",
+      "entry-donor",
+      "entry-timing",
+      "actual-timing"
+    ],
+    "unsupported_full_height": [
+      0,
+      141
+    ],
+    "stock_pass_events": [
+      4,
+      3
+    ]
+  },
+  "physical_recording_verified": false
+}

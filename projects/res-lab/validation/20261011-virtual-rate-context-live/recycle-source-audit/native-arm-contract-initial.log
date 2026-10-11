@@ -1,0 +1,62 @@
+test_event8_advance_is_required_to_queue_next_writer (__main__.Contracts) ... FAIL
+test_native_fifo_keeps_event8_and9_behind_earlier_headers (__main__.Contracts) ... FAIL
+test_ssd_bulk_retains_addresses_and_splits_at_64k (__main__.Contracts) ... FAIL
+
+======================================================================
+FAIL: test_event8_advance_is_required_to_queue_next_writer (__main__.Contracts)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/test_native_recycle_contract.py", line 146, in test_event8_advance_is_required_to_queue_next_writer
+    self.assertEqual(cam.call(0xc037dd50, OBJECT, 83, 1), 1)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/test_native_recycle_contract.py", line 67, in call
+    self.mu.emu_start(p | int(thumb), STOP+4, count=20000)
+  File "/Users/dido/Library/Python/3.9/lib/python/site-packages/unicorn/unicorn_py3/unicorn.py", line 769, in emu_start
+    raise self._hook_exception
+  File "/Users/dido/Library/Python/3.9/lib/python/site-packages/unicorn/unicorn_py3/unicorn.py", line 363, in wrapper
+    return func(uc, *args, **kwargs)
+  File "/Users/dido/Library/Python/3.9/lib/python/site-packages/unicorn/unicorn_py3/unicorn.py", line 1063, in __hook_code_cb
+    callback(uc, address, size, user_data)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/test_native_recycle_contract.py", line 48, in code
+    assert mu.reg_read(R.UC_ARM_REG_SP) % 8 == 0
+AssertionError
+
+======================================================================
+FAIL: test_native_fifo_keeps_event8_and9_behind_earlier_headers (__main__.Contracts)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/test_native_recycle_contract.py", line 94, in test_native_fifo_keeps_event8_and9_behind_earlier_headers
+    self.assertEqual(cam.call(0xc00045b8, queue, p), 0)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/test_native_recycle_contract.py", line 67, in call
+    self.mu.emu_start(p | int(thumb), STOP+4, count=20000)
+  File "/Users/dido/Library/Python/3.9/lib/python/site-packages/unicorn/unicorn_py3/unicorn.py", line 769, in emu_start
+    raise self._hook_exception
+  File "/Users/dido/Library/Python/3.9/lib/python/site-packages/unicorn/unicorn_py3/unicorn.py", line 363, in wrapper
+    return func(uc, *args, **kwargs)
+  File "/Users/dido/Library/Python/3.9/lib/python/site-packages/unicorn/unicorn_py3/unicorn.py", line 1063, in __hook_code_cb
+    callback(uc, address, size, user_data)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/test_native_recycle_contract.py", line 48, in code
+    assert mu.reg_read(R.UC_ARM_REG_SP) % 8 == 0
+AssertionError
+
+======================================================================
+FAIL: test_ssd_bulk_retains_addresses_and_splits_at_64k (__main__.Contracts)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/test_native_recycle_contract.py", line 175, in test_ssd_bulk_retains_addresses_and_splits_at_64k
+    cam.call(0xc0670690, OBJECT, thumb=True)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/test_native_recycle_contract.py", line 67, in call
+    self.mu.emu_start(p | int(thumb), STOP+4, count=20000)
+  File "/Users/dido/Library/Python/3.9/lib/python/site-packages/unicorn/unicorn_py3/unicorn.py", line 769, in emu_start
+    raise self._hook_exception
+  File "/Users/dido/Library/Python/3.9/lib/python/site-packages/unicorn/unicorn_py3/unicorn.py", line 363, in wrapper
+    return func(uc, *args, **kwargs)
+  File "/Users/dido/Library/Python/3.9/lib/python/site-packages/unicorn/unicorn_py3/unicorn.py", line 1063, in __hook_code_cb
+    callback(uc, address, size, user_data)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/test_native_recycle_contract.py", line 56, in code
+    assert any(a <= p < b for a, b in self.ranges), f'unmodeled ROM {p:#x}'
+AssertionError: unmodeled ROM 0xc0670440
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.042s
+
+FAILED (failures=3)

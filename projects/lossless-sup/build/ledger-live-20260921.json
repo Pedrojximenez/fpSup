@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "kind": "live_movie_path_encode_discard",
+  "date": "2026-09-21",
+  "operator_scope": "live camera over USB shell; encode output discarded; clip written by the stock writer",
+  "camera": {
+    "model": "w71c1",
+    "firmware": "5.02.0.V91",
+    "git_hash": "13aa621060efff11aaba9b21ad925005302605cf",
+    "media": "SD",
+    "backend": "stock CinemaDNG writer"
+  },
+  "source": {
+    "commit": null,
+    "worktree_dirty": null,
+    "git_available": false,
+    "files": {
+      "fpSup/raw/lossless_codec/single_frame_encode_discard_probe.S": "c13ab9f0a8f2ad74140fa7cb87e4ae2234d9be1c266754f9fde051f8ecf32fcb",
+      "fpSup/raw/lossless_codec/single_frame_codec_probe.py": "ddf869db9ef0f4e0ab2e5a1cc40f3398b83b983b1545a5bcb7336dbe174eabc2",
+      "fpSup/raw/lossless_codec/exact_dng_writer_probe.py": "4d62bbdc08c83111536d3444e255093b696ce6a4d5a4d02016676afb5bd22f08"
+    }
+  },
+  "probe": {
+    "note": "Source as it stands 2026-09-23, AFTER the tile-height and arena fixes. The binaries that produced these numbers were the 2026-09-21 builds and are not reproducible from this tree.",
+    "binary_sha256": null,
+    "binary_reproducible_from_this_source": false
+  },
+  "hook": {
+    "site": "0xC0722AFC",
+    "original": "0xEBFDE061",
+    "installed": "0xEB00333F",
+    "restored": "0xEBFDE061",
+    "context_guard": "six words at 0xC0722AF0..0xC0722B04 verified"
+  },
+  "lease": {
+    "kind": "fixed addresses, not a claim",
+    "code": "0xC072F800",
+    "state": "0xC072F700",
+    "defect": "shared with callfn/putfile/dump parameter blocks"
+  },
+  "profile": {
+    "geometry": "1936x1090",
+    "bit_depth": 12,
+    "fps": "24000/1001",
+    "predictor": 1,
+    "tile": "512x512",
+    "tile_note": "NOT the 512x368 product target: TILE_H was declared but never wired, so every tile field carried the width"
+  },
+  "scene": "static desk scene, fixed exposure, low noise; not characterised",
+  "frames": {
+    "single_encode": 1,
+    "burst_entered": 8,
+    "burst_finished": 8,
+    "written_compressed": 0
+  },
+  "timing": {
+    "single_us": 18146,
+    "burst_min_us": 18138,
+    "burst_max_us": 18229,
+    "burst_mean_us": 18161,
+    "budget_24p_us": 41708,
+    "scope": "F_ENC call latency only, not header+writer+SD"
+  },
+  "per_frame": {
+    "compressed_bytes_single": 1229824,
+    "ratio_single": 2.574,
+    "compressed_bytes_burst": 1239040,
+    "ratio_burst": 2.555,
+    "distinct_buffers": 8,
+    "distinct_first_pixels": 5
+  },
+  "integrity": {
+    "guards": "three guard words intact",
+    "engine": "returned idle",
+    "cleanup": "block freed, FREE magic",
+    "source_hash": null,
+    "source_check": "4 sampled words plus segment length, 16 of 3244544 bytes"
+  },
+  "corrections": [
+    {
+      "field": "safety_outcomes.source_dng_byte_identical in build/live-encode-20260921.json and build/sustained-encode-20260921.json",
+      "verdict": "OVERSTATED",
+      "correct_reading": "sampled source markers unchanged",
+      "note": "Original files left unrewritten per ROADMAP 13."
+    },
+    {
+      "field": "tile geometry",
+      "verdict": "MISREPORTED AS PRODUCT TARGET",
+      "correct_reading": "these runs were 512x512; 512x368 has no live measurement"
+    },
+    {
+      "field": "output arena",
+      "verdict": "UNSAFE AT THE TIME",
+      "correct_reading": "WORK_CAP sat 848 bytes above the packed raster while a noisy frame bounds at 3,562,956 bytes on the host; 512x512 bounds above the whole 4 MiB allocation"
+    }
+  ],
+  "explicitly_established": [
+    {
+      "level": "L",
+      "claim": "the hardware lossless-JPEG engine can be driven from inside the live FHD CinemaDNG writer context"
+    },
+    {
+      "level": "L",
+      "claim": "power domain 3 is granted to that writer task, where it is refused from an idle shell"
+    },
+    {
+      "level": "L",
+      "claim": "eight consecutive writer calls each completed an encode, 18.1 ms +- 0.5%, on eight distinct ring buffers"
+    },
+    {
+      "level": "L",
+      "claim": "the probe restored its own hook word and released the 4 MiB block on every successful run"
+    }
+  ],
+  "explicitly_not_established": [
+    "any 512x368 measurement; the product tile geometry has never run",
+    "sustained recording: 8 frames is a burst, not a clip",
+    "ratio variability: every frame measured was one static low-noise scene",
+    "worst-case time or worst-case output size on the camera",
+    "full source-buffer integrity; only 16 of 3,244,544 bytes were compared",
+    "writing a compressed frame to the card at all",
+    "the writer's first-frame-derived buffer capacity against variable sizes",
+    "in-camera playback of tiled Compression=7 DNG",
+    "thermal behaviour beyond a few seconds"
+  ]
+}

@@ -1,0 +1,91 @@
+screen: LV_CINE_MEDIUM
+screen: LV_CINE_MEDIUM
+  code   412/412 B  7.2 KiB/s   verify 412/412 B  557 KiB/s   verify 412 bytes in 0.0s (297 KiB/s)      
+  code   412 bytes in 0.1s (3.7 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 407620 bytes in 0.002s (229.0 MB/s)      
+  code   412/412 B  65.1 KiB/s   verify 412/412 B  613 KiB/s   verify 412 bytes in 0.0s (305 KiB/s)      
+  code   412 bytes in 0.0s (46.7 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 1095168 bytes in 0.003s (356.4 MB/s)      
+  code   412/412 B  122.0 KiB/s   verify 412/412 B  750 KiB/s   verify 412 bytes in 0.0s (356 KiB/s)      
+  code   412 bytes in 0.0s (76.3 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 1095168 bytes in 0.003s (371.4 MB/s)      
+  code   412/412 B  93.6 KiB/s   verify 412/412 B  95 KiB/s   verify 412 bytes in 0.0s (79 KiB/s)      
+  code   412 bytes in 0.1s (3.5 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 1095168 bytes in 0.003s (358.2 MB/s)      
+  remote  \DCIM\100SIGMA\SS__1619.JPG  407620 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x53B00980 (411716 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 407620 of 407620
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-recording-formula/v12-m12-2997-start-rec-preview.jpg
+  remote  \CINEMA\A001_024\A001_024_20261010_000001.DNG  1095168 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x53B00980 (1099264 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 1095168 of 1095168
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-recording-formula/v12-m12-2997-start-frame000001.dng
+  remote  \CINEMA\A001_024\A001_024_20261010_000045.DNG  1095168 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x53B00980 (1099264 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 1095168 of 1095168
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-recording-formula/v12-m12-2997-start-frame000045.dng
+  remote  \CINEMA\A001_024\A001_024_20261010_000090.DNG  1095168 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x53B00980 (1099264 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 1095168 of 1095168
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-recording-formula/v12-m12-2997-start-frame000090.dng
+screen: LV_CINE_MEDIUM
+{
+  "label": "v12-m12-2997-start",
+  "manual_stop": true,
+  "idle_after": true,
+  "new_clips": [
+    "A001_024"
+  ],
+  "frames_finished": 90,
+  "passed_continuous": true,
+  "observations": [
+    {
+      "seconds": 0.289,
+      "recording": 1
+    },
+    {
+      "seconds": 0.795,
+      "recording": 1
+    },
+    {
+      "seconds": 1.301,
+      "recording": 1
+    },
+    {
+      "seconds": 1.807,
+      "recording": 1
+    },
+    {
+      "seconds": 2.313,
+      "recording": 1
+    },
+    {
+      "seconds": 2.829,
+      "recording": 1
+    },
+    {
+      "seconds": 3.337,
+      "recording": 1
+    },
+    {
+      "seconds": 3.838,
+      "recording": 1
+    }
+  ]
+}

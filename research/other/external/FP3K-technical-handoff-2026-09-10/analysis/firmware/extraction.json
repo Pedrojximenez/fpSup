@@ -1,0 +1,40 @@
+{
+  "source_sha256": "c9fa76f32f523bb2dc9a3fbda39418c31573cab6a1aa5c56d28c371862066ed8",
+  "source_size": 25692160,
+  "segments": [
+    {
+      "name": "MAIN",
+      "file": "MAIN_c0000000.bin",
+      "header_offset": 288,
+      "load_address": 3221225472,
+      "uncompressed_size": 49245696,
+      "compressed_offset": 768,
+      "compressed_size": 24382976,
+      "compressed_consumed": 24382524,
+      "final_match_bytes_beyond_size_hex": "ff",
+      "compressed_byte_sum": 2754904842,
+      "checksum_verified": true,
+      "sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622"
+    },
+    {
+      "name": "DAT1",
+      "file": "DAT1_c2ef6e00.bin",
+      "header_offset": 312,
+      "load_address": 3270471168,
+      "uncompressed_size": 236032,
+      "compressed_offset": 24383744,
+      "compressed_size": 119808,
+      "compressed_consumed": 119367,
+      "final_match_bytes_beyond_size_hex": "ffffffff",
+      "compressed_byte_sum": 13591911,
+      "checksum_verified": true,
+      "sha256": "0dcaca8f5441fe4ddc6ed801cb888e325df4e76006e4f53a1c3219809b22ce7b"
+    }
+  ],
+  "upstream_address_cross_checks": {
+    "0xc0000000": "18f09fe5",
+    "0xc0bac2f8": "a0993dc0",
+    "0xc00d0794": "d76f04fa",
+    "0xc0cf3740": "03060101"
+  }
+}

@@ -1,0 +1,157 @@
+{
+  "payload_sha256": "8cf489ef8ad5e4c8723adac4dd421f6943a5d4f6338c030f70148764901b243e",
+  "cases": [
+    {
+      "case": "standby-inactive",
+      "passed": true
+    },
+    {
+      "case": "standby-active",
+      "passed": true
+    },
+    {
+      "case": "standby-other-channel",
+      "passed": true
+    },
+    {
+      "case": "standby-other-owner",
+      "passed": true
+    },
+    {
+      "case": "standby-wrong-pointer",
+      "passed": true
+    },
+    {
+      "case": "standby-changed-size",
+      "passed": true
+    },
+    {
+      "case": "standby-changed-format",
+      "passed": true
+    },
+    {
+      "case": "record-inactive",
+      "passed": true
+    },
+    {
+      "case": "record-active",
+      "passed": true
+    },
+    {
+      "case": "record-other-channel",
+      "passed": true
+    },
+    {
+      "case": "record-other-owner",
+      "passed": true
+    },
+    {
+      "case": "record-wrong-pointer",
+      "passed": true
+    },
+    {
+      "case": "record-changed-size",
+      "passed": true
+    },
+    {
+      "case": "record-changed-format",
+      "passed": true
+    }
+  ],
+  "pool_cases": [
+    {
+      "case": "standby",
+      "before": [
+        3,
+        2709528,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        4,
+        0,
+        0,
+        0,
+        1,
+        0,
+        2,
+        2193416,
+        0,
+        0
+      ],
+      "after": [
+        3,
+        2709528,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        4,
+        0,
+        0,
+        0,
+        1,
+        0,
+        2,
+        2193416,
+        0,
+        0
+      ],
+      "passed": true
+    },
+    {
+      "case": "record",
+      "before": [
+        3,
+        4064296,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        4,
+        0,
+        0,
+        0,
+        1,
+        0,
+        2,
+        2580488,
+        0,
+        0
+      ],
+      "after": [
+        3,
+        4064296,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        4,
+        0,
+        0,
+        0,
+        1,
+        0,
+        2,
+        2193416,
+        0,
+        0
+      ],
+      "passed": true
+    }
+  ],
+  "output": [
+    1620,
+    1080
+  ],
+  "trace_sha256": "006aa8721725e7d961cecc94c2b481d5da3dfa0b49cb6cd52e90e55ff951e92e",
+  "limitations": "Installed ARM hook, stock accessor fallback and stock channel-copy routine executed. Policy objects are reconstructed from native constructors; templates are observed camera values. Upstream selection lifecycle, actual allocation, compositor, LCD aspect and visual framing are not emulated."
+}

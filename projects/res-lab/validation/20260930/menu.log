@@ -1,0 +1,15 @@
+  ok   test_a_chosen_mode_greys_everything_it_cannot_do
+  ok   test_auto_greys_nothing_and_that_is_not_an_approximation
+  ok   test_csv_set_enabled_keeps_the_length_and_flips_both_columns
+  ok   test_csv_set_enabled_refuses_a_wrong_row_count
+  ok   test_fourteen_bit_modes_offer_only_fourteen
+  ok   test_media_never_gates_the_menu
+  ok   test_mode_axis_zero_means_auto_so_acq_cannot_be_forced
+  ok   test_open_gate_fourteen_bit_has_no_legal_menu_rate
+  ok   test_rate_ceiling_is_the_blanking_budget_not_a_table
+  ok   test_solver_menu_includes_raw14_and_tenth_rate
+  ok   test_standby_mode_eight_would_contradict_fully_open
+  ok   test_the_frame_rate_class_hook_site_is_stock
+  ok   test_the_tenth_rate_row_is_open_in_the_full_variant
+
+13/13 passed

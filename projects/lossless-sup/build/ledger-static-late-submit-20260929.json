@@ -1,0 +1,75 @@
+{
+ "schema_version": 1,
+ "kind": "static_per_frame_write_path_and_late_submit_candidates",
+ "date": "2026-09-29",
+ "scope": "STATIC ONLY, capstone over out/MAIN_c0000000.bin. No camera. Static reading has misled this project before (the writer vtable was read 8 bytes off), so each item is [C] and needs live confirmation.",
+ "question": "the target architecture hijacks one frame, compresses it asynchronously while later frames pass through natively, then hands the finished buffer to CDNG as a late frame. That needs two mechanisms nobody had located: a legal way to NOT write a frame now, and a way to submit a finished buffer later with the right file number.",
+ "the_per_frame_write_path": {
+  "C037E0F8(ctx, frame)": "the per-frame handler. NO direct BL callers - dispatched through a function pointer.",
+  "gate": "ldr r2,[r4,#4]; cmp r2,#1; bne skip. frame[0x04] is the capture kind, and C1 measured kind 1 on the CinemaDNG path. A frame whose kind is not 1 does not reach the writer at all.",
+  "then": "C03A4C88() -> the manager singleton at 0xC359BE4C; C0699638(obj,1) -> the third argument; C03A5348(manager, frame, x).",
+  "C03A5348": "builds the writer object on ITS OWN STACK and initialises it from frame+0x1030, then 0xC03A5490 bl C069ADE0 writes it. So the descriptor the writer consumes lives ON THE FRAME at +0x1030; the stack node is a copy of it.",
+  "after": "frame[0x1104] = 0xD at submit, 0x12 later from the card layer (2026-09-28's finding)."
+ },
+ "candidate_1_a_legal_skip": {
+  "what": "frame[0x04] != 1 means the frame is never handed to the CinemaDNG writer.",
+  "why_it_looks_legal": "it is the firmware's own gate, not a forged return or a zero-length node - which BUFFER_RESEARCH §8.1 explicitly forbids.",
+  "not_established": "whether a frame skipped this way is still accounted for downstream: the state machine, the frame's own release, the file count and the completion balance were not traced. A skip that leaks a frame object or unbalances completions is not a skip.",
+  "VERDICT": "ELIMINATED",
+  "why_eliminated": "frame[0x04] is the capture kind, fixed when the frame is produced, and the not-kind-1 path at 0xC037E58C tests frame[0x0C] and then LOGS AN ERROR via C0011100 (file string + line 0xC45) when frame[0x128] - the header bytes - is non-zero. A CinemaDNG frame has header bytes, so forcing a kind-1 frame down that path puts it in a state that path treats as an error. The kind is a type selector, not a skip switch."
+ },
+ "candidate_2_the_file_number_is_a_parameter": {
+  "what": "the per-frame filename is built from `_%06d.%s` at 0xC0B55C46, and the number is read at 0xC030AD4C from naming_obj[0x3C].",
+  "who_sets_it": "0xC030B140 stores it from a CALLER'S ARGUMENT (sp[0x14]) in C030B068(r0, r1), which also has no direct callers.",
+  "why_it_matters": "the number is not a write-order counter incremented inside the writer. A late frame can in principle carry its own number, which is what makes an out-of-order compressed frame land in the right file.",
+  "ruled_out_by_inspection": "the +1/-1 pairs on [r5,#0x3C] at 0xC0302458 and 0xC03026BC are list element counts - they sit immediately after doubly-linked-list splicing - not frame numbers."
+ },
+ "what_this_changes_in_the_plan": [
+  "no per-format IFD templates are needed: the design keeps each frame's OWN header and appends a new IFD, which tools/trailing_ifd.py already produces and verified on 2026-09-27. The earlier request for one sample DNG per recording format was based on a wrong reading of the architecture and is withdrawn.",
+  "the synchronous in-hook encode every existing probe performs is the wrong shape for this architecture. The hijack must return and let the pipeline run.",
+  "the node patch at the flush site is not the natural redirect point; frame+0x1030 is."
+ ],
+ "next_specific_question": "find the firmware's OWN clean-abandon path for a frame: the write-error branch at 0xC03A5558 is by definition a legal 'frame not written but still accounted for', so whatever it calls is the shape a legal skip must take. Trace it and the five teardown calls that precede the 0x12 store, rather than synthesising a skip out of internal steps. Static, no camera.",
+ "camera_accessed": false,
+ "deployable": false,
+ "candidate_3_the_skip_shape_after_two_eliminations": {
+  "manager_layout_confirmed_by_its_constructor": {
+   "+0x00": "field, zeroed",
+   "+0x04 and +0x08": "TWO observer pointers, memset to 0",
+   "+0x0C": "byte flag, the one the write-failure branch tests",
+   "+0x0D": "the AGGREGATION flag - independent static corroboration of the live 2026-09-24 finding that settings[0x9C] (Media Write Mode) lands here, and 0xC0378B14 shows the setter being called with settings[0x9C]",
+   "+0x10": "field",
+   "+0x14": "the once-guard C03A4C88 uses"
+  },
+  "the_observer_list_is_never_populated": {
+   "evidence": "the manager's whole method range 0xC03A4C00..0xC03A5350 contains READS of [r0,#4] and [r0,#8] and no stores; the constructor zeroes both; and the manager pointer does not escape the module - all seven users of C03A4C88 pass it only to the manager's own methods.",
+   "consequence": "C03A52D0 iterates two nulls and calls nothing, so the per-frame success/failure flag it carries has NO consumer on this firmware. The earlier worry - that a deliberate skip would report a failure and might abort the clip - is probably unfounded.",
+   "hedge": "absence of a store in the range scanned. A registration compiled elsewhere with the manager arriving by some path not traced would overturn it."
+  },
+  "where_the_result_IS_checked": "C03A5348's RETURN VALUE. The caller at 0xC037E520 stores it and does cmp/bls against 0: a zero return means nothing was written and takes the 0xC037E58C path, which logs an error when frame[0x128] (header bytes) is non-zero.",
+  "the_skip_shape_this_leaves": "do not call the real flush, return non-zero. That is the 'forged success return' BUFFER_RESEARCH §8.1 forbids - but two of the three reasons it gives are now eliminated: C069ADE0 opens, writes and closes the file itself, so not calling it creates NO file rather than an empty one; and the completion observers are empty. What remains is the third reason: a GAP in the _%06d frame numbering.",
+  "next_question": "who increments the _%06d number (naming_obj[0x3C] is set from a caller's argument at 0xC030B140), and whether a gap in the sequence is tolerated by the camera's own playback and by the clip's metadata. Static, no camera."
+ },
+ "live_test_skip_one_frame": {
+  "scope": "ON THE CAMERA, authorised. FHD RAW12 verified. The probe skipped exactly one flush call - the third - and did not re-arm. Two runs.",
+  "run_1_skip_only": {
+   "measured": "entries 3, passed_through 2, skipped frame id 2, buffer 0x54135400, its state on the way in 0x0C, hook self-restored",
+   "outcome": "THE RECORDING TERMINATED IMMEDIATELY. The clip folder A001_151 was created (frames 0 and 1 were written), then recording stopped. The camera was fine afterwards; the next clip recorded normally."
+  },
+  "run_2_skip_plus_write_0x12": {
+   "change": "the skip also wrote frame[0x1104] = 0x12, the terminal state the card layer writes, so the manager's reclaim path at 0xC03A11F0 could take the frame's buffer back",
+   "measured": "entries 3, skipped frame id 38, wrote_0x12_ourselves true",
+   "outcome": "IDENTICAL. The recording terminated immediately again."
+  },
+  "what_this_establishes": [
+   "the camera does NOT tolerate a writer call that produces no file: it ends the clip.",
+   "it is not a buffer leak. Writing the terminal state that releases the frame's buffer changed nothing.",
+   "it is not the flush's status: r0=r1=0 is the SUCCESS value on the aggregated path and the probe returned it.",
+   "it is not the byte count: C03A5348 computes its return before the write (header bytes plus the payload rounded to 512) so it was non-zero either way.",
+   "it is not the completion observers: manager+4 and +8 are never populated."
+  ],
+  "not_established": "what does stop it. The remaining candidates are the file creation itself (C069ADE0 opens, writes and closes the file, so a skipped call creates none) and a per-frame counter or watchdog above this layer.",
+  "incidental": "frame ids are a global counter across clips, not per clip: 2 in the first run and 38 in the second.",
+  "consequence_for_the_architecture": "hijack-and-submit-late cannot be built on 'do not write this frame'. Every writer call has to produce a file. That points at a strict FIFO instead of a skip: each call writes the OLDEST frame still in hand - compressed if its encode has finished, otherwise that same frame uncompressed - so the order is preserved, no file is missing, no frame is duplicated, and the clip is simply delayed by the FIFO depth. No skip mechanism is needed at all."
+ }
+}

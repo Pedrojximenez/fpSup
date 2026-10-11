@@ -1,0 +1,18 @@
+test_binning_recipe_survives_save_commit_and_real_driver_shims (test_reslab_controls.ControlsTests) ... FAIL
+
+======================================================================
+FAIL: test_binning_recipe_survives_save_commit_and_real_driver_shims (test_reslab_controls.ControlsTests)
+----------------------------------------------------------------------
+rcd.RcdError: FIELD: 
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_reslab_controls.py", line 137, in test_binning_recipe_survives_save_commit_and_real_driver_shims
+    with self.assertRaisesRegex(rcd.RcdError,'BINFILT'):rcd.decode(bad)
+AssertionError: "BINFILT" does not match "FIELD: "
+
+----------------------------------------------------------------------
+Ran 1 test in 27.316s
+
+FAILED (failures=1)

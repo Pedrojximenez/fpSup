@@ -1,0 +1,26 @@
+PASS og3k-standalone-release: 0xC0731600
+PASS og3k-standalone-debug: 0x00000828 -> 0xC0731600
+PASS og3k-combined-release: 0x00003FDC -> 0xC0731600
+PASS og3k-guard-off-standalone: entry 0
+PASS og3k-combined-debug: 0x00000830 -> 0x00004F3C -> 0xC0731600
+PASS og3k-combined-fast-debug: 0x00000970 -> 0x0000507C -> 0xC0731600
+PASS og3k-guard-off-combined: 0x00000810 -> 0x00004BD0
+PASS og2k-standalone-release: 0xC0731600
+PASS og2k-standalone-debug: 0x00000828 -> 0xC0731600
+PASS og2k-combined-release: 0x0000442C -> 0xC0731600
+PASS og2k-combined-debug: 0x00000830 -> 0x0000538C -> 0xC0731600
+PASS og2k-combined-fast-debug: 0x00000970 -> 0x000054CC -> 0xC0731600
+PASS og2k-guard-off-standalone: entry 0
+PASS og2k-guard-off-combined: 0x00000810 -> 0x00005020
+PASS same AutoRun, different BIN entry: plain
+PASS same AutoRun, different BIN entry: debug
+PASS same AutoRun, different BIN entry: fast-debug
+PASS catalogue-og3k-frozen-plain
+PASS catalogue-og3k-frozen-shell
+PASS catalogue-og3k-source-plain
+PASS catalogue-og3k-source-shell
+PASS catalogue-og2k-frozen-plain
+PASS catalogue-og2k-frozen-shell
+PASS catalogue-og2k-source-plain
+PASS catalogue-og2k-source-shell
+PASS 14 build cases, 3 AutoRun comparisons, 8 catalogue references: /private/tmp/reslab-header-inner-entry-check

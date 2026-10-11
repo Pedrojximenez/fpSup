@@ -1,0 +1,26 @@
+# SIGMA fp Ver.5.02 - read-only SLVS-EC receiver MMIO snapshot
+# Start cue: one color-bar pulse. Completed: two pulses.
+# No receiver/sensor writes and no capture-mode switch.
+
+display monitor 0 1
+display colorbar 1 0
+ctrl sleep 700
+display colorbar 0 0
+ctrl sleep 400
+
+# Allow live view and SLVS-EC link training to settle.
+ctrl sleep 7000
+
+# 8b/10b SLVS-EC PHY/protocol receiver.
+mem save \SLVPHY00.BIN 0x300E1000,,0x00001000
+
+# Sensor timing, line/frame assembler, protocol status and link control.
+mem save \SLVASM00.BIN 0x30100000,,0x00001000
+
+display colorbar 1 0
+ctrl sleep 700
+display colorbar 0 0
+ctrl sleep 400
+display colorbar 1 0
+ctrl sleep 700
+display colorbar 0 0

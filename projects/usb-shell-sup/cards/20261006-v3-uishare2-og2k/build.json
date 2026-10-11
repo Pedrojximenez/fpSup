@@ -1,0 +1,336 @@
+{
+ "product": "fpSup-OG2K, Loader v3 sup",
+ "file": "30OG2K.BIN",
+ "sup_id": "OG2K",
+ "version": 1,
+ "card": false,
+ "from_card": null,
+ "sha256": "3c18f885592fb3a5d201b79151763854e9f54211535b35e3fde5b6ffdf0a5940",
+ "facts": {
+  "img_off": 10752,
+  "fpui_off": 35936,
+  "file_len": 36388,
+  "scratch_off": 36388,
+  "claims": 28,
+  "fixes": 12,
+  "hooks": 17,
+  "target": "og2k",
+  "label": "OG2K",
+  "entry": 3671,
+  "tab_off": 9716,
+  "text": 9682,
+  "block": 36480,
+  "image": 25184,
+  "fpui": 452,
+  "ui_code": 6280,
+  "pack": 4704,
+  "v3_growth": 45,
+  "pic_proof_ogv": "0x10000000",
+  "hooks_list": [
+   {
+    "site": "0xC043A19C",
+    "to": "0xC0732400",
+    "kind": "BL"
+   },
+   {
+    "site": "0xC0437B48",
+    "to": "0xC0731A00",
+    "kind": "B"
+   },
+   {
+    "site": "0xC005C020",
+    "to": "0xC0731800",
+    "kind": "B"
+   },
+   {
+    "site": "0xC005BE58",
+    "to": "0xC0731400",
+    "kind": "B"
+   },
+   {
+    "site": "0xC0306EA0",
+    "to": "0xC0731B00",
+    "kind": "B"
+   },
+   {
+    "site": "0xC0306EEC",
+    "to": "0xC0731B40",
+    "kind": "B"
+   },
+   {
+    "site": "0xC0437E98",
+    "to": "0xC0731D00",
+    "kind": "B"
+   },
+   {
+    "site": "0xC043BE68",
+    "to": "0xC0732200",
+    "kind": "B"
+   },
+   {
+    "site": "0xC03A6DD8",
+    "to": "0xC0732900",
+    "kind": "B"
+   },
+   {
+    "site": "0xC02092CC",
+    "to": "0xC0730A00",
+    "kind": "BL"
+   },
+   {
+    "site": "0xC0218AEC",
+    "to": "0xC0730A00",
+    "kind": "BL"
+   },
+   {
+    "site": "0xC0219260",
+    "to": "0xC0730A00",
+    "kind": "BL"
+   },
+   {
+    "site": "0xC03AA568",
+    "to": "0xC0730A00",
+    "kind": "BL"
+   },
+   {
+    "site": "0xC043CCF8",
+    "to": "0xC0730800",
+    "kind": "B"
+   },
+   {
+    "site": "0xC05E84D8",
+    "to": "0xC0732C84",
+    "kind": "Thumb B.W"
+   },
+   {
+    "site": "0xC05E6400",
+    "to": "0xC0732EF0",
+    "kind": "Thumb B.W"
+   },
+   {
+    "site": "0xC05D90F0",
+    "to": "0xC0732D74",
+    "kind": "Thumb B.W"
+   }
+  ],
+  "claims_list": [
+   {
+    "address": "0xC043A19C",
+    "bytes": 4,
+    "kind": "EXCL",
+    "writes": false
+   },
+   {
+    "address": "0xC0437B48",
+    "bytes": 4,
+    "kind": "EXCL",
+    "writes": false
+   },
+   {
+    "address": "0xC005C020",
+    "bytes": 4,
+    "kind": "EXCL",
+    "writes": false
+   },
+   {
+    "address": "0xC005BE58",
+    "bytes": 4,
+    "kind": "EXCL",
+    "writes": false
+   },
+   {
+    "address": "0xC0306EA0",
+    "bytes": 4,
+    "kind": "EXCL",
+    "writes": false
+   },
+   {
+    "address": "0xC0306EEC",
+    "bytes": 4,
+    "kind": "EXCL",
+    "writes": false
+   },
+   {
+    "address": "0xC0437E98",
+    "bytes": 4,
+    "kind": "EXCL",
+    "writes": false
+   },
+   {
+    "address": "0xC043BE68",
+    "bytes": 4,
+    "kind": "EXCL",
+    "writes": false
+   },
+   {
+    "address": "0xC03A6DD8",
+    "bytes": 4,
+    "kind": "EXCL",
+    "writes": false
+   },
+   {
+    "address": "0xC02092CC",
+    "bytes": 4,
+    "kind": "EXCL",
+    "writes": false
+   },
+   {
+    "address": "0xC0218AEC",
+    "bytes": 4,
+    "kind": "EXCL",
+    "writes": false
+   },
+   {
+    "address": "0xC0219260",
+    "bytes": 4,
+    "kind": "EXCL",
+    "writes": false
+   },
+   {
+    "address": "0xC03AA568",
+    "bytes": 4,
+    "kind": "EXCL",
+    "writes": false
+   },
+   {
+    "address": "0xC043CCF8",
+    "bytes": 4,
+    "kind": "EXCL",
+    "writes": false
+   },
+   {
+    "address": "0xC05E84D8",
+    "bytes": 4,
+    "kind": "EXCL",
+    "writes": false
+   },
+   {
+    "address": "0xC05E6400",
+    "bytes": 4,
+    "kind": "EXCL",
+    "writes": false
+   },
+   {
+    "address": "0xC05D90F0",
+    "bytes": 4,
+    "kind": "EXCL",
+    "writes": false
+   },
+   {
+    "address": "0xC0BDB9CC",
+    "bytes": 4,
+    "kind": "EXCL",
+    "writes": false
+   },
+   {
+    "address": "0xC0BDBC28",
+    "bytes": 4,
+    "kind": "EXCL",
+    "writes": false
+   },
+   {
+    "address": "0xC0BDBC60",
+    "bytes": 4,
+    "kind": "EXCL",
+    "writes": false
+   },
+   {
+    "address": "0xC0BDBC8C",
+    "bytes": 4,
+    "kind": "EXCL",
+    "writes": false
+   },
+   {
+    "address": "0xC0BDBC90",
+    "bytes": 4,
+    "kind": "EXCL",
+    "writes": false
+   },
+   {
+    "address": "0xC0BDBC94",
+    "bytes": 4,
+    "kind": "EXCL",
+    "writes": false
+   },
+   {
+    "address": "0xC0B599A4",
+    "bytes": 8,
+    "kind": "EXCL",
+    "writes": false
+   },
+   {
+    "address": "0xC05E5B58",
+    "bytes": 4,
+    "kind": "SHARED_UI",
+    "writes": false
+   },
+   {
+    "address": "0xC05E5BEC",
+    "bytes": 4,
+    "kind": "SHARED_UI",
+    "writes": false
+   },
+   {
+    "address": "0xC05E61C8",
+    "bytes": 4,
+    "kind": "SHARED_UI",
+    "writes": false
+   },
+   {
+    "address": "0xC05E61E0",
+    "bytes": 4,
+    "kind": "SHARED_UI",
+    "writes": false
+   }
+  ],
+  "patches": [],
+  "dropped_stock_writes": 34,
+  "restore": "0xC0731600",
+  "uia_apply_off": 45,
+  "cave0": "0xC0730000",
+  "table": "0xC0731000",
+  "fmt_keys": [
+   "OG2K23_98",
+   "OG2K24",
+   "OG2K25",
+   "OG2K30",
+   "OG2K48",
+   "OG2K50",
+   "OG2K60",
+   "OG2K100"
+  ],
+  "aliases": "0xC073335C",
+  "flag": "0xC0731C08",
+  "fmtlatch": "0xC0731C20",
+  "donor_timing": "0xC0B599A0",
+  "gtab_words": [
+   "0xC0BDB9CC",
+   "0xC0BDBC28",
+   "0xC0BDBC60",
+   "0xC0BDBC8C",
+   "0xC0BDBC90",
+   "0xC0BDBC94",
+   "0xC0B599A4"
+  ]
+ },
+ "sources": {
+  "projects/open-gate/build/build_v3_og.py": "b7de7e43aaa673a95451d37c2573f8f52d0fdb9fe2cdbd5fa79a45fe2f28df5f",
+  "projects/open-gate/build/og_v3.c": "efecd83572fda38cca5d445374320b7d717b0c4667c0bf28394803c312369129",
+  "projects/open-gate/build/og_pic.inc": "60b54d4669ee8f851f12d6c2fc323facc75a85a93376a3d7d164bb3fc17a1998",
+  "projects/open-gate/build/og3k_plan.py": "5c112a7355f9c5d716d094a621d3016bbc2a5ab5776a7bbe7c2e28933bbcc27b",
+  "projects/open-gate/build/build_og3k_ui_candidate.py": "b8d6df49ff143dbd0e75f682f90694d0829100367ed1ab3005083f9dcfc7260a",
+  "projects/open-gate/build/og3k_ui.S": "ce529f5847d2f7e4fb538d37cb1614b57c966571803acb0c4d3fbdc1ba0fb17c",
+  "projects/open-gate/build/fmttable.S": "fbcbf95ff39c6a3ecccd3a959afeff2bdd1f1711695a061b4633deefe624e5e7",
+  "projects/open-gate/build/og3kfps.S": "4af6f07456bbd545b161dcef4b09bac14e9949ea48112ea9ca633f4fb90a479b",
+  "projects/open-gate/build/og3kname.S": "f82cc544fc90089bd2ee43a65cab5141d679a328feb91e519878afbe2c938374",
+  "projects/open-gate/build/og3ksel.S": "55d9189eceb1fa2e533c425caafcc3999257f9655925c56a2a8076527e4d6d9d",
+  "projects/open-gate/build/og3kaspect.S": "cc832fc3d705eda1a5eccf6bdb271185d9a7a4f57ea27fc8af45af0b7df714ab",
+  "projects/open-gate/build/og3kaspect2.S": "aa6603e0434de1a40e2fd2503b7c8e9cd81d65553a4adaef7f83f4337b59a67f",
+  "projects/open-gate/build/og3kout.S": "c69c2fc3331559bbb02a2deeb4b24fcb29d5b345ff62b2fc4d901a5c6b85e2d1",
+  "projects/open-gate/build/og3kcanvas.S": "c387f8b48ad6ed977fe8cddd068cf194faec723958efde8a38898744fce4c594",
+  "projects/open-gate/build/og3kpbsel.S": "8cd971dd53b7c9da1978bfc91eca86a883dc9c02f7a4e8a502e1ccc892590a51",
+  "projects/open-gate/build/og3kgs.S": "a8497c68062bd03fcb03a28f22953d68db695a431482f770cb42dfc6ade91eca",
+  "projects/open-gate/build/og3kfmt.S": "b0f00af41573f62049cb5255f79dcc02f2a73439f8eec6f4b8734474fca90dba",
+  "projects/open-gate/build/og3krestore.S": "e8475c7eadc8c5f82d1be818742a4a2e5244f6a1571ba569e9d643cae3835365"
+ }
+}

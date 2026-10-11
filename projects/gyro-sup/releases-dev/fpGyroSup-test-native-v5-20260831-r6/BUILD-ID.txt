@@ -1,0 +1,9 @@
+fpGyroSup native lifecycle v5 r6
+Build date: 2026-08-31 Asia/Taipei
+Purpose: hybrid native descriptor/finalize with proven MovieRecording start gate
+Streaming: bounded 16 KiB A/B blocks; no whole-take RAM accumulation
+DMA-pool exclusive instructions: none in native logger/PGEN images
+PGEN recovery: disabled
+Initial card to test: release-card
+Test scope: one manually stopped 40-second CinemaDNG take to SD only
+r5 status: withdrawn after reproducible native stop near 20 seconds

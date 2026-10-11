@@ -1,0 +1,21 @@
+  local   projects/res-lab/cards/20261009-virtual-rcd-v1/debug/fpSup/32RESCUS.BIN  73216 bytes
+  remote  \fpSup\32RESCUS.BIN  mode 0x7
+  buffer  0x450629C0, file object 0x450747C0
+  proof   region takes writes and still holds them a second later
+  restored echo -> 0xC03D99A0
+  reply   putfile: written
+  status  2 — written
+  open    1     write  1   (both are flags, not counts)
+  WARNING 32RESCUS.BIN did not appear in dir
+
+  stage  73216 bytes in 0.001s (92.4 MB/s)      
+
+  verify 73216 bytes in 0.000s (167.2 MB/s)      
+
+  stage  73216 bytes in 0.01s (5.5 MB/s), MEM1, read back whole          
+
+  code   304/304 B  5.0 KiB/s 
+  verify 304/304 B  578 KiB/s 
+  verify 304 bytes in 0.0s (115 KiB/s)      
+
+  code   304 bytes in 0.1s (2.5 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          

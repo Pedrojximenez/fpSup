@@ -1,0 +1,47 @@
+[
+  {
+    "time": "2026-10-09T14:11:11.501951",
+    "command": "status get app_current",
+    "reply": "app_current -> 2\n\n"
+  },
+  {
+    "time": "2026-10-09T14:11:11.502598",
+    "command": "status get is_recording",
+    "reply": "is_recording -> 0\n\n"
+  },
+  {
+    "time": "2026-10-09T14:11:11.505567",
+    "command": "menu SetRecMode",
+    "reply": "1\n\n"
+  },
+  {
+    "time": "2026-10-09T14:11:11.506293",
+    "command": "menu SetMovRecSize",
+    "reply": "2\n\n"
+  },
+  {
+    "time": "2026-10-09T14:11:11.507522",
+    "command": "imager mode_now",
+    "reply": "imager mode_now \r\nNo ,mode                         ,enum,bit,size     ,frame ,fps ,aspect ,crop,\n053,MONIT1_60                    ,0008, 12,2016x1344,016683,0060,  3: 2 ,full,\r\nshutter:00010002,gain:001170\r\nframe_count:00380844,trans_count:00380823\r\ngain_state: through\r\nsmall_raw\r\nbase_size h:2016 v:1344\r\nraw_zoom  h:1024 v:1024\r\nhvbin     h:0001 v:0001\r\nbef_size  h:2016 v:1344\r\noffset    h:0000 v:0000\r\nv_down_sample    v:0001\r\n"
+  },
+  {
+    "time": "2026-10-09T14:11:11.510990",
+    "command": "dir \\",
+    "reply": "                                          .\n2026/10/07  10:20:36 <DIR>                .Spotlight-V100\n2026/10/08  23:42:08 <DIR>                DCIM\n2026/10/07  20:25:26 <DIR>                fpSup\n2026/10/07  20:26:02                 4096 ._fpSup\n2025/12/31  08:00:00                32768 AutoRun.txt\n2026/10/07  20:26:02                 4096 ._AutoRun.txt\n2026/10/07  15:00:02 <DIR>                .Trashes\n2026/10/08  12:29:26 <DIR>                CINEMA\n2026/10/08  19:14:12 <DIR>                .fseventsd\n"
+  },
+  {
+    "time": "2026-10-09T14:11:11.513113",
+    "command": "dir \\fpSup",
+    "reply": "                                          .\n2025/12/31  08:00:00                47680 32RESCUS.BIN\n2026/10/07  20:26:02                 4096 ._32RESCUS.BIN\n2026/10/07  20:25:26 <DIR>                UI\n2026/10/07  20:26:02                 4096 ._UI\n2026/10/09  12:52:34                27668 LOADER.BIN\n2026/10/07  20:26:02                 4096 ._LOADER.BIN\n2025/12/31  08:00:00                 4208 20GYR2.BIN\n2026/10/07  20:26:02                 4096 ._20GYR2.BIN\n2026/10/08  13:28:36                38644 45RAWV.BIN\n2026/10/07  20:26:02                 4096 ._45RAWV.BIN\n2026/10/08  13:24:08                25936 40FLIP.BIN\n2026/10/07  20:26:02                 4096 ._40FLIP.BIN\n2026/10/08  12:28:26                70944 10LOSS.BIN\n2026/10/07  20:26:02                 4096 ._10LOSS.BIN\n2025/12/31  08:00:00                 4552 00SHELL.BIN\n2026/10/07  20:26:02                 4096 ._00SHELL.BIN\n2026/10/07  20:25:26 <DIR>                RESCUS\n2026/10/07  20:26:02                 4096 ._RESCUS\n2026/10/09  12:26:22                 4096 LOAD.LOG\n"
+  },
+  {
+    "time": "2026-10-09T14:11:11.513683",
+    "command": "mem get 0xC0BAC2F8,,4",
+    "reply": "get : A:0xc0bac2f8, D:0xC03D99A0\n\n"
+  },
+  {
+    "time": "2026-10-09T14:11:11.514234",
+    "command": "mem get 0xC072F050,,12",
+    "reply": "get : A:0xc072f050, D:0x450529C0\nget : A:0xc072f054, D:0x00100000\nget : A:0xc072f058, D:0x45152A00\n\n"
+  }
+]

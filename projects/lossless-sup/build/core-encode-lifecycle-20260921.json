@@ -1,0 +1,58 @@
+{
+  "kind": "offline_core_path_encode_lifecycle",
+  "date": "2026-09-21",
+  "camera_accessed": false,
+  "usb_accessed": false,
+  "armed": false,
+  "deployable": false,
+  "change": "PHASE=2 consume-and-free encode for the live FHD CinemaDNG writer hook",
+  "images": {
+    "encode_design_phase1": {
+      "bytes": 1268,
+      "end": "0xC072FCF4",
+      "unchanged": true,
+      "live": false
+    },
+    "encode_live_phase2": {
+      "bytes": 1420,
+      "end": "0xC072FD8C",
+      "limit": "0xC072FE00",
+      "live_capable": true,
+      "never_run": true
+    }
+  },
+  "instruction_level_checks": {
+    "phase2_calls_F_ALLOC": false,
+    "phase2_calls_F_GET": false,
+    "phase2_calls_F_FREE": true,
+    "phase2_calls_codec_and_tick": true
+  },
+  "release_policy": {
+    "adopted_encode_not_entered": "free",
+    "adopted_encode_succeeded": "free",
+    "encode_entered_without_success": "retain; power-cycle to reclaim"
+  },
+  "tests": {
+    "suite": "test_single_frame_codec_probe.py",
+    "passed": 27,
+    "new": 8,
+    "mutations_caught": [
+      "weakened arming gate",
+      "unconditional free"
+    ]
+  },
+  "known_rate_reference": {
+    "source": "research/imaging-hw/notes/HW_LOSSLESS_JPEG_CODEC.md",
+    "measured": "169.7 Mpix/s, stills path, 2026-08-30, one sample",
+    "fhd24p_need": "50 Mpix/s",
+    "uhd24p_need": "199 Mpix/s",
+    "movie_path_rate": null
+  },
+  "remaining_before_a_product": [
+    "run the three stages on the camera",
+    "sustained multi-frame encode",
+    "first-frame-derived buffer capacity vs variable compressed size",
+    "writer/header integration",
+    "in-camera playback of tiled lossless DNG"
+  ]
+}

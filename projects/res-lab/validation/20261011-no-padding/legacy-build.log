@@ -1,0 +1,43 @@
+  shell      10 sections  entry 0x000003F4  "fpSup-Shell-v3.3.0!"
+  lossless   10 sections  entry 0x000003EC  "fpSup-LL-v0.1.2test!"
+  gyro        8 sections  entry 0x00000410  "fpSup-Gyro-v1.14.0!"
+  gyro-base   8 sections  entry 0x00000410  "fpSup-Base-v1.14.0!"
+  og3k       89 sections  entry 0x00005A4C  "fpSup-OG3K-v0.2.8a!"
+  og2k       89 sections  entry 0x00005E9C  "fpSup-OG2K-v0.1.5a!"
+  raw-view   52 sections  entry 0x00008454  "fpSup-RAW-v0.2.3test!"
+  read cap 0xF000..0x1F000: loader words 0xC072DE84/0xC072DF04, magic 0xC072F758, stage2 +128
+  template plain      116 commands
+  template shell      116 commands
+  template shellpush  116 commands
+  note: shell shipped with the older loader; the page composes the current shared loader
+  note: lossless shipped with the older loader; the page composes the current shared loader
+  note: gyro shipped with the older loader; the page composes the current shared loader
+  note: gyro-base shipped with the older loader; the page composes the current shared loader
+  note: og3k shipped with the older loader; the page composes the current shared loader
+  note: og2k shipped with the older loader; the page composes the current shared loader
+  note: raw-view shipped with the older loader; the page composes the current shared loader
+
+  OK    shell payload
+  --    shell AutoRun.txt (shipped with the older loader)
+  OK    lossless payload
+  --    lossless AutoRun.txt (shipped with the older loader)
+  OK    gyro payload
+  --    gyro AutoRun.txt (shipped with the older loader)
+  OK    gyro-base payload
+  --    gyro-base AutoRun.txt (shipped with the older loader)
+  OK    og3k payload
+  --    og3k AutoRun.txt (shipped with the older loader)
+  OK    og2k payload
+  --    og2k AutoRun.txt (shipped with the older loader)
+  OK    raw-view payload
+  --    raw-view AutoRun.txt (shipped with the older loader)
+  OK    gyro+og3k          == og3k_gyro_release [byte-identical]
+  OK    shell+gyro+og3k    == og3k_gyro (dev) [same sections + ordered entries]
+  OK    gyro+og2k          == og2k_gyro (rebuilt) [byte-identical]
+  OK    shell+gyro+og2k    == og2k_gyro (rebuilt, dev) [same sections + ordered entries]
+  OK    AutoRun plain      == og3k_gyro_release
+  OK    AutoRun shell      == og3k_gyro (dev)
+  js     3 script blocks parse
+
+  wrote  /Users/dido/Developer.localized/SIGMAfp_re/fpSup/tools/card-composer/index.html  640,755 bytes
+  refs   built and discarded (merged cards never land in the tree)

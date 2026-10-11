@@ -1,0 +1,173 @@
+{
+ "schema_version": 1,
+ "kind": "offline_static_trace_of_the_cinemadng_write_chain",
+ "date": "2026-09-24",
+ "operator_scope": "offline only. No camera, no card, no hook armed. Reading the existing full decompilation in out/decomp/full and the firmware image out/seg0_c0000000.bin.",
+ "why": "BUFFER_DESIGN 8 item 1 asks for a read-only correlation of register -> submit -> release. The release half was the open question; the candidates FUN_c063f380 / FUN_c063f140 were named as candidates, not verified.",
+ "sources": {
+  "decompilation": "out/decomp/full/blk_c03.c, blk_c06.c, blk_c07.c",
+  "image": "out/seg0_c0000000.bin (base 0xC0000000)",
+  "cross_read": [
+   "fpSup/gyro/ring_task.inc.S",
+   "fpSup/gyro/writer_core.inc.S",
+   "fpSup/gyro/imu_stream.inc.S",
+   "research/imaging-hw/notes/HW_LOSSLESS_JPEG_CODEC.md"
+  ]
+ },
+ "chain": {
+  "register": {
+   "function": "FUN_c069ac88",
+   "call_sites": [
+    "0xC0722810",
+    "0xC0722898",
+    "0xC0722A58",
+    "0xC0722AFC",
+    "0xC0722E68",
+    "0xC0722F00"
+   ],
+   "our_hook_site": "0xC0722AFC",
+   "containing_function": "XC_StillFileFormatDng::v19 @ 0xC0722A68",
+   "effect": "stores {buffer, length, kind} into a linked node list on the writer object; copies no bytes"
+  },
+  "submit": {
+   "function": "FUN_c069ade0",
+   "call_sites": [
+    "0xC037EB6C",
+    "0xC037EFCC",
+    "0xC03A5490"
+   ],
+   "containing_functions": {
+    "0xC037EB6C": "XC_StillCreateFile::v4 @ 0xC037E0F8",
+    "0xC037EFCC": "XC_StillCreateFile::v4 @ 0xC037E0F8",
+    "0xC03A5490": "FUN_c03a5348 @ 0xC03A5348"
+   },
+   "body": [
+    "FUN_c0365e90 ctor",
+    "FUN_c0365fb0 open (mode 0x406 / 0x806 / 0x1806)",
+    "walk the node list, copy each non-zero {ptr,len} into a 16-word stack array",
+    "FUN_c0366168 scatter write",
+    "FUN_c0366020 close",
+    "XC_MediaFile::v0 dtor"
+   ],
+   "returns": "the 64-bit total of the node lengths"
+  },
+  "write_wrapper": {
+   "scatter": "FUN_c0366168 -> vtable +0x18",
+   "plain": "FUN_c03660e8 -> vtable +0x14 (this is the F_WRITE the gyro logger uses)",
+   "shape": "both are identical: FUN_c0010298 acquire -> vtable call -> FUN_c00102d0 release"
+  },
+  "sdcard": {
+   "function": "XC_MediaFileSdCard::v6 @ 0xC03689C8",
+   "calls": "FUN_c063c970(handle, &desc, &scatter_list, &status)"
+  },
+  "lowest_traced": {
+   "function": "FUN_c063c970 @ 0xC063C970",
+   "body": [
+    "FUN_c01f8e8c(sem, 1, 0xFFFFFFFF)",
+    "FUN_c063ab60 build request",
+    "FUN_c063a708",
+    "FUN_c06412a0 issue",
+    "FUN_c063aef8 store status",
+    "FUN_c01f8cdc(sem, 1)"
+   ]
+  }
+ },
+ "tkos_service_ids": {
+  "method": "every TK-OS stub carries its 32-bit service id at stub+0x20; read directly from the image",
+  "verified_against": {
+   "0xC01F8B74": "0x80290300 (rcv_mbx, matches the gyro notes)",
+   "0xC01F8D00": "0x80130100 (slp_tsk, matches the gyro notes)"
+  },
+  "new": {
+   "0xC01F8E8C": "0x80190300 -> service 0x19, three args: wai_sem(id, cnt, tmout)",
+   "0xC01F8CDC": "0x80180200 -> service 0x18, two args: sig_sem(id, cnt)"
+  },
+  "grouping_argument": "0x16/0x17/0x18/0x19 = cre/del/sig/wai sem mirrors 0x26-0x29 cre/del/snd/rcv mbx and 0x20-0x24 for flags"
+ },
+ "explicitly_established": [
+  {
+   "level": "C",
+   "claim": "FUN_c069ade0 opens, writes and CLOSES one file per call, and FUN_c03a5348 builds the writer object on its own stack, fills it through vtable +0x54 and consumes it with FUN_c069ade0 before returning. Registration and submission are therefore the same task, the same stack and the same call - there is no cross-task window between them."
+  },
+  {
+   "level": "C",
+   "claim": "FUN_c069ade0 copies each node's {pointer, length} into a 16-word stack array before writing. The writer object and its node list die with FUN_c03a5348's frame; whatever holds our buffer pointer after the submit is the lower layer's request, not the node list."
+  },
+  {
+   "level": "C",
+   "claim": "that stack array is auStack_6c[16] = eight {pointer, length} pairs. Eight segments per file is a hard structural limit, matching the assert at eight already noted."
+  },
+  {
+   "level": "C",
+   "claim": "the scatter write FUN_c0366168 (vtable +0x18) and the plain write FUN_c03660e8 (vtable +0x14, the one the gyro logger calls) are the same wrapper around the same lock. They are one funnel."
+  },
+  {
+   "level": "C",
+   "claim": "FUN_c063c970 holds a semaphore with an infinite timeout across the issue: 0xC01F8E8C is service 0x19 wai_sem and 0xC01F8CDC is service 0x18 sig_sem, read from stub+0x20 and cross-checked against two service ids the gyro notes already established."
+  },
+  {
+   "level": "C",
+   "claim": "the gyro logger frees its block immediately after its write call returns (bl writer_put; bl writer_release), on the stated belief that the call returning means the card has seen the data."
+  },
+  {
+   "level": "I",
+   "claim": "gyro is safe from the G5 failure by timing margin, not because it has solved the fence: its blocks are 0.8 s apart with eight of them, against our 41.7 ms. Its release rule must not be copied at frame rate."
+  }
+ ],
+ "explicitly_not_established": [
+  "that the semaphore in FUN_c063c970 bounds the card transfer rather than the submission. G3 measured 3,244,544 bytes returned in 372 us = 8.7 GB/s, which no SD card sustains, so the bytes had NOT reached the card when FUN_c069ade0 returned. The static reading alone would have suggested otherwise and the live measurement overrules it.",
+  "where the queue between submit and card actually is. FUN_c06412a0 and below were not traced; Ghidra's parameter typing there is a guess (it reads param_2[1] == 0x3a, a ':' path check, on what the caller passes as a request structure).",
+  "whether a completion for that queued request is reported anywhere, and to whom",
+  "whether FUN_c069ade0's close does anything that bounds the transfer",
+  "the two candidates BUFFER_DESIGN 5 names, FUN_c063f380 and FUN_c063f140: neither appears in this chain. They remain unverified and are not the path traced here."
+ ],
+ "consequences": [
+  "The release fence is NOT the return of FUN_c069ade0. BUFFER_DESIGN 5's refusal to treat the 372 us submit return as a reuse notification is correct and is now also correct for the close.",
+  "One structural fact does change the design space: because the node list is copied into a stack array at submit time and the writer object dies with the frame, there is nothing per-frame to hold or release at the node level. The lifetime question is entirely below FUN_c0366168.",
+  "The gyro logger's slot array - eight separately allocated blocks, a job descriptor carrying which block to free, a priority-6 task blocking on a mailbox, modelled on AudioFileWriter - is proven on this camera under recording load and is the shape BUFFER_DESIGN 2 wants. Its RELEASE RULE is not."
+ ],
+ "safety_cross_check": {
+  "claim": "allocator class 10 is RAW, the CinemaDNG frame buffer; the gyro project traced a week-long freeze to movRec's class 10 allocation failing",
+  "our_probe": "single_frame_encode_discard_probe.S asks F_ALLOC with r0 = 0 (USER), the same class the gyro logger and AutoRun use",
+  "verdict": "no conflict"
+ },
+ "camera_accessed": false,
+ "deployable": false,
+ "corrections": [
+  {
+   "date": "2026-09-24",
+   "found_by": "notes/NATIVE_BUFFER_PATTERNS.md, written by the user the same day",
+   "original_fields_unchanged": true,
+   "status": "THE DOWNSTREAM CHAIN IN THIS ENTRY IS WRONG AND IS WITHDRAWN. The entry is kept for traceability only, per that note's instruction.",
+   "root_cause": "I read the media vtable as starting with methods at +0x00. Its first two words are a header: at 0xC0B972C4 they are 0x00000000 and 0xC0B9731C, and methods begin at +0x08. I also took the decompiler's vN naming, which is by address order, to be the slot index. Both errors shifted me by the same 8 bytes.",
+   "verified_by_me_after_the_correction": {
+    "vtable_at_0xC0B972C4": {
+     "+0x00": "0x00000000",
+     "+0x04": "0xC0B9731C (typeinfo)",
+     "+0x14": "0xC03685B0 plain write",
+     "+0x18": "0xC03686C0 scatter write - THE REAL ONE",
+     "+0x20": "0xC03689C8 - what I traced, a different method"
+    },
+    "C03686C0_body": "calls FUN_c063b898(&desc, param_2, &status), from the decompilation",
+    "cookie_instructions": "0xC03A5488..0xC03A5490 = E1A01004 E28D0020 EB0BD652 = mov r1,r4; add r0,sp,#0x20; bl C069ADE0",
+    "cross_check_i_should_have_used": "the gyro notes already give vtable offsets correctly (F_STAMP = XC_MediaFileSdCard::v13 at vtable +0x3C, and +0x3C is indeed 0xC0369310)"
+   },
+   "what_is_withdrawn": [
+    "the sdcard and lowest_traced entries in `chain`: XC_MediaFileSdCard::v6 @ 0xC03689C8 and FUN_c063c970 are NOT on the CinemaDNG scatter path",
+    "the explicitly_not_established line claiming FUN_c063f380 and FUN_c063f140 do not appear in this chain. They DO: C0366168 -> C03686C0 -> C063B898 -> C063F380, and C063F140 -> C0646C60 -> per-cookie C03A55D0",
+    "the wai_sem/sig_sem finding is a true reading of FUN_c063c970, but FUN_c063c970 is not on this path, so it says nothing about the CinemaDNG write",
+    "the [I] claim that the gyro logger is safe only by timing margin. NATIVE_BUFFER_PATTERNS.md section 5 shows plain write takes a different route, C03685B0 -> C063B818 -> C063F898, which can trigger C063F140 first. G3's scatter-path delay cannot be used to assert anything about gyro's plain writes."
+   ],
+   "what_still_stands": [
+    "the register half: FUN_c069ac88 at 0xC0722AFC inside XC_StillFileFormatDng::v19 stores {buffer,length,kind} and copies no bytes",
+    "the six call sites of FUN_c069ac88 and the three of FUN_c069ade0, and their containing functions",
+    "FUN_c069ade0 opens, writes and closes one file per call, and FUN_c03a5348 builds the writer on its own stack and consumes it before returning - register and submit are the same task, stack and call",
+    "the node list is copied into a stack array at submit time, so nothing at the node level outlives the frame",
+    "that stack array is eight {pointer, length} pairs, a hard structural limit",
+    "the allocator class cross-check: our probe asks class 0 USER, not class 10 RAW"
+   ],
+   "superseded_by": "notes/NATIVE_BUFFER_PATTERNS.md",
+   "evidence_level": "C"
+  }
+ ]
+}

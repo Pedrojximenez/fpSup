@@ -1,0 +1,32 @@
+mem get 0xC072F6F8,,4
+get : A:0xc072f6f8, D:0x007DAB18
+
+
+mem get 0xC0528700,,4
+get : A:0xc0528700, D:0xE92D4BF0
+
+
+mem get 0xC0BAC2F8,,4
+get : A:0xc0bac2f8, D:0xC03D99A0
+
+
+mem get 0xC2F211DC,,4
+get : A:0xc2f211dc, D:0x00000002
+
+
+mem get 0xC2F20FE4,,16
+get : A:0xc2f20fe4, D:0xC000EE60
+get : A:0xc2f20fe8, D:0xC03DA158
+get : A:0xc2f20fec, D:0x00000000
+get : A:0xc2f20ff0, D:0x00000000
+
+mem get 0xC2F21008,,16
+get : A:0xc2f21008, D:0xC000EE60
+get : A:0xc2f2100c, D:0xC03DA7A8
+get : A:0xc2f21010, D:0xC03DA7C8
+get : A:0xc2f21014, D:0xC3756A14
+
+status get is_recording
+is_recording -> 0
+
+

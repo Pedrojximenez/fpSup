@@ -1,0 +1,56 @@
+{
+  "emulator": "Unicorn 2.1.4",
+  "native_function": "0xC0320AB0",
+  "native_mode_lookup": "0xC0320F60",
+  "inputs": {
+    "firmware_sha256": "92a8ee993f6c3d66c251e88d45a2ccd5135c6cf7342717784321c2ed506e2fb4",
+    "mode_csv_sha256": "e64d025341edc9d3d619fb96e4cfe28119b7a3d9079fc12e07c66ad066d315db",
+    "register_order_sha256": "7a8369088223dd941ed4eff3a1a5f1886017bac237a59c9eb5e7bc2dd7402bb5",
+    "planner_sha256": "6bf75360d7e9120d1822b97bd480fa164af78041baff39e1019ff1d2dd86f0e9",
+    "verifier_sha256": "7b1df0626244e4f91c01778f64dd19c9f112de5626847dde032d5f49cc71db6f",
+    "synthetic_config_sha256": "e1cc6ba7bf322dcc40ab47273a6839e365e8a5efac089bff5c17b766dfff59c0",
+    "stock_m143_receiver_record_sha256": "f1b8eba4eadd7fe02a8718532ae653d0b27389e4251b843cac7e4e6b0f8fcc09",
+    "candidate_m141_receiver_record_sha256": "a44a8f9f385ce2313aedf0546da8e9f5be7edfc6463f2206dcfbc9370179fff9",
+    "receiver_patch_fixture_sha256": "80430d04689d65c5b728db68ce527ac62ced1c13b22d9e80a1945fb829b9c452"
+  },
+  "verification_bundle_sha256": "53018c7b747710fe89762cdcfb7409b38ff97965f1ccba38d1ead8b837159bf1",
+  "synthetic_config": {
+    "kind": "deterministic nonzero emulator fixture; not a camera capture",
+    "bytes": 60
+  },
+  "cases": [
+    {
+      "requested_mode": 143,
+      "expected_index": 56,
+      "native_index": 56,
+      "hit": true
+    },
+    {
+      "requested_mode": 141,
+      "expected_index": 54,
+      "native_index": 54,
+      "hit": true
+    }
+  ],
+  "consumers": [
+    {
+      "name": "A",
+      "channel": 1,
+      "argument_hex": "01000000fe001200f20701004b7095badf000400294e73980400040000000000fa00fa00000000000a000a0000000000120012000000000003030000bde2072c00000000"
+    },
+    {
+      "name": "B",
+      "channel": 1,
+      "argument_hex": "01000000fe001200f20701004b7095badf000400294e73980400040000000000fa00fa00000000000a000a0000000000120012000000000003030000bde2072c00000000"
+    }
+  ],
+  "source_model_match": true,
+  "native_report_verified": true,
+  "result": "PASS: native mode lookup hit the exact M143/M141 rows; under the same synthetic config, both consumers' 68-byte arguments match the source model and the candidate receiver-derived bytes match stock M143",
+  "limitations": [
+    "Config-derived bytes use a synthetic fixture, not stock or camera-captured state.",
+    "Only receiver lookup and argument construction are exercised.",
+    "Sensor writes, timing, input windows, electrical link, transition concurrency, RAW packing, allocation, and writer behavior are not emulated."
+  ],
+  "camera_touched": false
+}

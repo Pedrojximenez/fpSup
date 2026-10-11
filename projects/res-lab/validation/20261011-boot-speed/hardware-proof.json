@@ -1,0 +1,24 @@
+{
+  "standby": true,
+  "loader_bytes": 27652,
+  "loader_sha256": "ecae97aff1c484d878f1ae5c277bc1b9607860f49601c4832c08da97ff0b801a",
+  "full_readback_equal": true,
+  "load_start_us": 3346261,
+  "load_done_us": 8235800,
+  "load_elapsed_us": 4889539,
+  "native_draw_restored": true,
+  "echo_restored": true,
+  "active_autorun_sample": {
+    "seconds_since_reboot_reply": 61.847618,
+    "depth": 2,
+    "line_callback": "0xC03DA7A8",
+    "context": "0xC3756A14"
+  },
+  "finished_autorun_sample": {
+    "seconds_since_reboot_reply": 112.358911,
+    "depth": 1,
+    "line_callback": "0xC03DA158"
+  },
+  "boot_scope": "one USB-attached software reboot; reply IO disconnect expected; exact power-on and LCD timing unmeasured",
+  "daemon_pid": 22493
+}

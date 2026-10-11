@@ -1,0 +1,79 @@
+{
+  "candidate": "r3n19",
+  "files": {
+    "AutoRun.txt": {
+      "bytes": 32768,
+      "sha256": "0c5107fff1262ad8ca3bb675329b71c80926c8b35cdd40931b387639b45edbf0"
+    },
+    "fpSup/LOADER.BIN": {
+      "bytes": 27668,
+      "sha256": "07907bb42890968fa813431adb56bf5819b705186e2b0924744761e26876d07f"
+    },
+    "fpSup/UI/ALLSUPS.BIN": {
+      "bytes": 347740,
+      "sha256": "90285cdaabc058f6728dc12922f139a063cbc26a75262470209432c44fac3101"
+    }
+  },
+  "source": {
+    "fpSup/uishare/tab/manage_page.py": {
+      "bytes": 32117,
+      "sha256": "91fc004da7d7f761f8ee51089e5fb689c7f75ba4b0581c5fb57c4f878f7e66e7"
+    },
+    "fpSup/uishare/tab/manager_logo.py": {
+      "bytes": 3620,
+      "sha256": "9404dc83f5020ed97ec4ec293aba87dfdfa9b1142e1d3fc0484c0568a2ce767c"
+    },
+    "fpSup/uishare/tab/build_ft6.py": {
+      "bytes": 12914,
+      "sha256": "75f3b0168b46d443635d532ed6641d392f5eb863c807c8f88f12977eaf220f4b"
+    },
+    "fpSup/uishare/tab/test_manage_page.py": {
+      "bytes": 5890,
+      "sha256": "59104a20bb4da9e461cddd241012d7c098f804d8f37f96ad30b74daefeee23a0"
+    },
+    "fpSup/uishare/tab/test_ft6.py": {
+      "bytes": 14232,
+      "sha256": "1cdedb4897b799357b13ee111ead075e9e26e2a1cf3feacf9bb6eb1008197879"
+    },
+    "fpSup/fp_usb_shell/v3/allsups.c": {
+      "bytes": 31704,
+      "sha256": "fbe4dbe763ddf7ce1a763886ac648d211068d4ded8ad5188a1e0b845815858fb"
+    },
+    "fpSup/fp_usb_shell/v3/sloader.c": {
+      "bytes": 29551,
+      "sha256": "07cf9c9ec13ce5ba78498a3c80e95b395baf1e8c376668f749174566a6ca4f7b"
+    },
+    "fpSup/fp_usb_shell/v3/test_allsups.py": {
+      "bytes": 18596,
+      "sha256": "0de5b72679fc5b542052fc64cb5642f5a3b15f1bf175dc968aa59af043221e17"
+    },
+    "fpSup/fp_usb_shell/v3/build_v3.py": {
+      "bytes": 13355,
+      "sha256": "99cf0cf37e267df5e7ff78971ae91de488c3218954c0c321bb427c9db963325a"
+    },
+    "logo2.png": {
+      "bytes": 1853539,
+      "sha256": "5785bbf1d0e255ffbd893389d52e8e53932ae742e8f7f88e48d487767c79b8e1"
+    }
+  },
+  "deployment": "UI only; management Loader and AutoRun exactly match r3n14",
+  "native_reference": [
+    "1520",
+    "1521",
+    "1522"
+  ],
+  "tests": {
+    "native": {
+      "count": 11,
+      "seconds": 17.966,
+      "result": "passed"
+    },
+    "management": {
+      "count": 18,
+      "seconds": 83.27,
+      "result": "passed"
+    },
+    "source_rebuild": "ALLSUPS.BIN exact-byte match"
+  },
+  "camera": "UI write/readback passed, single reboot sent; final visual checks pending"
+}

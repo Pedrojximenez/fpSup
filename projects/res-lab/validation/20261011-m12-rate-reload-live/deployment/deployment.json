@@ -1,0 +1,34 @@
+{
+  "phase": "verified",
+  "candidate": "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/cards/20261011-m12-rate-reload/debug/fpSup/32RESCUS.BIN",
+  "files": {
+    "AutoRun.txt": {
+      "bytes": 4666,
+      "before_sha256": "2e77dfe3529006d2cb95ac01e206048efe495493434c05f1ed8fad4ecd22bf96",
+      "unchanged": true
+    },
+    "LOADER.BIN": {
+      "bytes": 29276,
+      "before_sha256": "2535b983a03f12b54ca107bb9d59591506b928c60ee07835676020f261e311b3",
+      "unchanged": true
+    },
+    "32RESCUS.BIN": {
+      "bytes": 182720,
+      "before_sha256": "3c5427f4b029a1fe818bea4d3092c4b554a5ca93079cdddd16b22640a370133c"
+    },
+    "50RESLAB.BIN": {
+      "bytes": 609720,
+      "before_sha256": "dad8226db751fe10c2cac1f2f21269cc746957c7aacc5b19bec83dd027da155f",
+      "unchanged": true
+    }
+  },
+  "camera_rebooted": false,
+  "reason": "User authorizes on-camera testing of reviewed rate-notification candidate",
+  "cfg_kind": "validated_saved_record",
+  "preserved_cfg_sha256": "5c24c16e1186f0f3cbb3a41104b8e148637c62aa51db22d5422c1da9699a8a62",
+  "installed_sha256": "a28babd6f65a1086bf401d1fed09a162090079ce478e6c4d88d37bd463669641",
+  "card_updated": true,
+  "running_consumer_still_v38": true,
+  "camera_reboot_requested_once": true,
+  "boot_usb_blocker": "Verified SIGMA interface 0 claimant pid 62526, ptpcamerad; auto-review refused termination pending explicit consent."
+}

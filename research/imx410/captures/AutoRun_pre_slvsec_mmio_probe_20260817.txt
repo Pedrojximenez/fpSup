@@ -1,0 +1,27 @@
+# SIGMA fp Ver.5.02 - read-only IMX410/runtime probe
+# Start cue: one color-bar pulse. Completed: two pulses.
+# No sensor register writes, no executable patch, no capture-mode switch.
+
+display monitor 0 1
+display colorbar 1 0
+ctrl sleep 700
+display colorbar 0 0
+ctrl sleep 400
+
+# Allow sensor and acquisition objects to finish initialization.
+ctrl sleep 5000
+
+# Sensor object/pointers and live configuration.
+mem save \IMXOBJ00.BIN 0xC343B500,,0x00001000
+mem save \IMXCFG00.BIN 0xC2F1E000,,0x00001000
+
+# Complete IMX410 static configuration and all 70 register modes.
+mem save \IMXTBL00.BIN 0xC0B5F800,,0x0000C000
+
+display colorbar 1 0
+ctrl sleep 700
+display colorbar 0 0
+ctrl sleep 400
+display colorbar 1 0
+ctrl sleep 700
+display colorbar 0 0

@@ -1,0 +1,135 @@
+{
+  "kind": "LIVE_sustained_movie_path_encode",
+  "date": "2026-09-21",
+  "camera": {
+    "model": "w71c1",
+    "firmware": "5.02.0.V91"
+  },
+  "frames_requested": 8,
+  "frames_processed": 8,
+  "hook_entries": 8,
+  "design": "PHASE=3 re-arms the hook only at the very end of each frame, so every risky instruction runs with the site unhooked, as in the one-shot image. Two independent ceilings (frames_done and total hook entries) plus an error stop bound the loop.",
+  "records": [
+    {
+      "frame": 0,
+      "elapsed_us": 18142,
+      "mpix_per_s": 116.3,
+      "compressed_bytes": 1239040,
+      "ratio": 2.555,
+      "buffer": "0x53B02C00",
+      "first_pixel": "0x124C2112"
+    },
+    {
+      "frame": 1,
+      "elapsed_us": 18173,
+      "mpix_per_s": 116.1,
+      "compressed_bytes": 1239040,
+      "ratio": 2.555,
+      "buffer": "0x53E1D000",
+      "first_pixel": "0x124D2112"
+    },
+    {
+      "frame": 2,
+      "elapsed_us": 18152,
+      "mpix_per_s": 116.3,
+      "compressed_bytes": 1239040,
+      "ratio": 2.555,
+      "buffer": "0x54137400",
+      "first_pixel": "0x124B2112"
+    },
+    {
+      "frame": 3,
+      "elapsed_us": 18138,
+      "mpix_per_s": 116.3,
+      "compressed_bytes": 1239040,
+      "ratio": 2.555,
+      "buffer": "0x54451800",
+      "first_pixel": "0x124C2112"
+    },
+    {
+      "frame": 4,
+      "elapsed_us": 18165,
+      "mpix_per_s": 116.2,
+      "compressed_bytes": 1239040,
+      "ratio": 2.555,
+      "buffer": "0x5476BC00",
+      "first_pixel": "0x124B2112"
+    },
+    {
+      "frame": 5,
+      "elapsed_us": 18229,
+      "mpix_per_s": 115.8,
+      "compressed_bytes": 1239040,
+      "ratio": 2.555,
+      "buffer": "0x54A86000",
+      "first_pixel": "0x124D2112"
+    },
+    {
+      "frame": 6,
+      "elapsed_us": 18142,
+      "mpix_per_s": 116.3,
+      "compressed_bytes": 1239040,
+      "ratio": 2.555,
+      "buffer": "0x54DA0400",
+      "first_pixel": "0x124D3112"
+    },
+    {
+      "frame": 7,
+      "elapsed_us": 18150,
+      "mpix_per_s": 116.3,
+      "compressed_bytes": 1239040,
+      "ratio": 2.555,
+      "buffer": "0x550BA800",
+      "first_pixel": "0x124E3112"
+    }
+  ],
+  "summary": {
+    "elapsed_us_min": 18138,
+    "elapsed_us_max": 18229,
+    "elapsed_us_mean": 18161,
+    "frame_budget_24p_us": 41708,
+    "worst_frame_fraction_of_budget": 0.437,
+    "sustained_headroom": 2.29,
+    "compressed_bytes": 1239040,
+    "ratio": 2.555
+  },
+  "frames_were_distinct": {
+    "distinct_buffers": 8,
+    "distinct_first_pixels": 5,
+    "note": "Eight evenly spaced ring buffers; the pixel data varies."
+  },
+  "open_question": {
+    "observation": "All eight frames compressed to byte-identical 1,239,040 even though the source frames differ.",
+    "not_a_stale_table": "The per-tile breakdown differs from the earlier one-shot run (94184 vs 93017 for tile 0), so the size table does track real encoding.",
+    "likely_benign": "Lossless JPEG codes residuals by magnitude category; a static low-noise scene can leave every tile's coded length unchanged. Consistent, not proven.",
+    "decisive_test": "Change the scene substantially during the run."
+  },
+  "safety_outcomes": {
+    "hook_restored": true,
+    "block_released": true,
+    "error": 0,
+    "camera_responsive_after": true,
+    "battery_pull_needed": false,
+    "source_dng_byte_identical": true
+  },
+  "still_not_established": [
+    "ratio variability across real content; every frame so far is one static scene",
+    "worst-case time and ratio",
+    "more than 8 consecutive frames",
+    "writing the compressed result into the DNG",
+    "first-frame-derived buffer capacity vs variable compressed size",
+    "in-camera playback"
+  ],
+  "corrections": [
+    {
+      "date": "2026-09-23",
+      "field": "safety_outcomes.source_dng_byte_identical",
+      "verdict": "OVERSTATED",
+      "correct_reading": "sampled source markers unchanged",
+      "what_was_compared": "4 words: TIFF magic, first pixel word, last pixel word, plus the segment length",
+      "bytes_compared": 16,
+      "bytes_total": 3244544,
+      "note": "The original field is left exactly as recorded. ROADMAP 13 keeps historical evidence unrewritten so the original claim stays visible; the ledger carries the corrected reading."
+    }
+  ]
+}

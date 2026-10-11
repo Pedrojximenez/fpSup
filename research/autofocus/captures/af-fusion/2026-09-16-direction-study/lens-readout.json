@@ -1,0 +1,33 @@
+{
+  "started_at": "2026-09-16T05:59:12.561689+08:00",
+  "mode": "native-cached-read-and-convert-only",
+  "transcript": [
+    {
+      "command": "lens getfpos",
+      "reply": "OK lens getfpos 10707\\n\n"
+    },
+    {
+      "command": "lens getfedge 0",
+      "reply": "OK lens getfedge 2147483647\\n\n"
+    },
+    {
+      "command": "lens getfedge 1",
+      "reply": "OK lens getfedge 300\\n\n"
+    },
+    {
+      "command": "lens cnvfpos 2147483647",
+      "reply": "OK lens cnvfpos 6276\\n\n"
+    },
+    {
+      "command": "lens cnvfpos 300",
+      "reply": "OK lens cnvfpos 10706\\n\n"
+    }
+  ],
+  "position_step_for_conversion_only": 100,
+  "lens_movement_requested": false,
+  "host_status": "OK name=fpshd version=3.0.0 protocol=1 frame=64 payload=44 transport=EP01-EP82 iface=0 camera=open seq=6663\n",
+  "version_reply": "OK model       = w71c1 \\nxc version  = V91 \\nrel version = 5.02.0.V91  \\ngit hash    = 13aa621060efff11aaba9b21ad925005302605cf \\n\n",
+  "status": "readout-incomplete",
+  "error": "RuntimeError('current +/-100 is outside converted nominal edge range')",
+  "finished_at": "2026-09-16T05:59:12.565031+08:00"
+}

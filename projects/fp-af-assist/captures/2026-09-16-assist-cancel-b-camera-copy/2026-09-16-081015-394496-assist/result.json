@@ -1,0 +1,138 @@
+{
+  "version": "0.1",
+  "method": "bounded_settled_H_contrast",
+  "status": "cancelled",
+  "reason": "cancel_requested",
+  "confirmed": false,
+  "optical_focus_verified": false,
+  "initial_position": null,
+  "selected_position": null,
+  "final_position": 10707,
+  "last_verified_position": 10707,
+  "observations": [
+    {
+      "position": 10707,
+      "h": 7932.0,
+      "l": 31402,
+      "gain": [
+        117,
+        985,
+        131,
+        0
+      ],
+      "context": [
+        "fp-5.02/background-processing-mode-0/area-0",
+        1,
+        4294967295,
+        0,
+        0,
+        0,
+        0,
+        1,
+        2,
+        0,
+        1,
+        [
+          117,
+          225,
+          8333,
+          2164
+        ],
+        [
+          10,
+          4
+        ],
+        [
+          "448 277 128 128",
+          "0",
+          "0",
+          "3"
+        ],
+        "capture_idle",
+        "not_optically_validated"
+      ],
+      "valid": true,
+      "purpose": "initial"
+    }
+  ],
+  "moves": [],
+  "events": [
+    {
+      "kind": "observation",
+      "sample": {
+        "position": 10707,
+        "h": 7932.0,
+        "l": 31402,
+        "gain": [
+          117,
+          985,
+          131,
+          0
+        ],
+        "context": [
+          "fp-5.02/background-processing-mode-0/area-0",
+          1,
+          4294967295,
+          0,
+          0,
+          0,
+          0,
+          1,
+          2,
+          0,
+          1,
+          [
+            117,
+            225,
+            8333,
+            2164
+          ],
+          [
+            10,
+            4
+          ],
+          [
+            "448 277 128 128",
+            "0",
+            "0",
+            "3"
+          ],
+          "capture_idle",
+          "not_optically_validated"
+        ],
+        "valid": true,
+        "purpose": "initial"
+      }
+    },
+    {
+      "kind": "finished",
+      "status": "cancelled",
+      "reason": "cancel_requested"
+    }
+  ],
+  "quadratic_target": null,
+  "stop": {
+    "verified": true,
+    "request": {
+      "requested": false,
+      "reason": "no owned pending movement"
+    },
+    "completion": {
+      "native_done": true,
+      "position": 10707
+    },
+    "optical_stop_verified": false
+  },
+  "limits": {
+    "radius": 100,
+    "max_step": 100,
+    "max_moves": 12,
+    "improvement": 0.03,
+    "allowed_positions": [
+      10607,
+      10807
+    ]
+  },
+  "error_type": "_Cancelled",
+  "cleanup_complete": true
+}

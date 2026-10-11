@@ -1,0 +1,337 @@
+{
+  "files": [
+    {
+      "path": "/Users/dido/Developer.localized/SIGMAfp_re/codex/fp-colormatrix-ab-20260923/Timeline 1_01_00_02_04.tif",
+      "sha256": "2804b2518cb121028137448c0da7f0b75a7117b259b0f13a34b914af2396b1fe",
+      "width": 2000,
+      "height": 1334,
+      "dtype": "uint16",
+      "has_ICC_profile": false,
+      "has_TransferFunction": false,
+      "has_WhitePoint": false,
+      "has_PrimaryChromaticities": false
+    },
+    {
+      "path": "/Users/dido/Developer.localized/SIGMAfp_re/codex/fp-colormatrix-ab-20260923/Timeline 1_01_00_06_27.tif",
+      "sha256": "96c9613ecb4cb3268b3e02957776171619f0fe520dea46f5c41cfcb4b83afc36",
+      "width": 2000,
+      "height": 1334,
+      "dtype": "uint16",
+      "has_ICC_profile": false,
+      "has_TransferFunction": false,
+      "has_WhitePoint": false,
+      "has_PrimaryChromaticities": false
+    }
+  ],
+  "mapping_assumption": "earlier timeline = A; later = B",
+  "active_rows": [
+    104,
+    1230
+  ],
+  "pixel_difference": {
+    "MAE_codes16": 799.4288975725295,
+    "RMSE_codes16": 1195.542387402381,
+    "P95_abs_codes16": 2495.999999999998,
+    "P99_abs_codes16": 3968.0000000000005,
+    "max_abs_codes16": 16768.0
+  },
+  "caveat": "Stored TIFF values; output gamut/transfer not verified by file tags.",
+  "earlier": {
+    "min_RGB": [
+      128,
+      192,
+      128
+    ],
+    "max_RGB": [
+      42944,
+      44928,
+      44608
+    ],
+    "mean_RGB": [
+      14277.71421669627,
+      14466.31653285968,
+      13412.820404973358
+    ],
+    "zero_fraction_RGB": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "max_code_fraction_RGB": [
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "later": {
+    "min_RGB": [
+      0,
+      192,
+      0
+    ],
+    "max_RGB": [
+      41344,
+      45376,
+      44864
+    ],
+    "mean_RGB": [
+      14082.543431616341,
+      14561.474046181173,
+      12421.309271758437
+    ],
+    "zero_fraction_RGB": [
+      4.4404973357015985e-06,
+      0.0,
+      0.12687166962699822
+    ],
+    "max_code_fraction_RGB": [
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "training_samples": 191570,
+  "spatial_holdout_samples": 191923,
+  "fits": {
+    "linear": {
+      "B_from_A_column_vector_matrix": [
+        [
+          1.8004381369607037,
+          -0.7527047889154912,
+          -0.04964561100911361
+        ],
+        [
+          -0.2086742714318253,
+          1.267011915203303,
+          -0.05839074964243231
+        ],
+        [
+          -0.25981588045760506,
+          -0.8937296441698874,
+          2.1543000276197457
+        ]
+      ],
+      "eigenvalues_real_imag": [
+        [
+          0.999595857626471,
+          0.0
+        ],
+        [
+          2.0117568165762933,
+          0.0
+        ],
+        [
+          2.2103974055809887,
+          0.0
+        ]
+      ],
+      "neutral_111_output": [
+        0.9980877370360989,
+        0.9999468941290455,
+        1.0007545029922533
+      ],
+      "matrix_determinant": 4.4449849149686536,
+      "training_design_rank": 3,
+      "training_design_condition": 105.58085214473141,
+      "spatial_holdout": {
+        "MAE_codes16": 73.15688493796931,
+        "RMSE_codes16": 144.02505696309237,
+        "P95_abs_codes16": 221.15080704868384,
+        "P99_abs_codes16": 469.60053968136737,
+        "max_abs_codes16": 6817.352120842287
+      },
+      "affine_spatial_holdout": {
+        "MAE_codes16": 73.41377849169889,
+        "RMSE_codes16": 142.13136496438273,
+        "P95_abs_codes16": 223.42640271464273,
+        "P99_abs_codes16": 457.03673870513154,
+        "max_abs_codes16": 6645.449828855496
+      },
+      "affine_offset_in_decoded_domain": [
+        -0.0002964755677410561,
+        -8.182969958595172e-05,
+        0.0012161114197290158
+      ]
+    },
+    "sRGB": {
+      "B_from_A_column_vector_matrix": [
+        [
+          1.7746836368933048,
+          -0.699428508252506,
+          -0.07585363811870001
+        ],
+        [
+          -0.2111511619479333,
+          1.2795169582212669,
+          -0.06781191396053517
+        ],
+        [
+          -0.21300908785036757,
+          -0.7094186464444434,
+          1.9223332011186482
+        ]
+      ],
+      "eigenvalues_real_imag": [
+        [
+          1.0002612901732477,
+          0.0
+        ],
+        [
+          1.9839048757442896,
+          0.0
+        ],
+        [
+          1.9923676303156828,
+          0.0
+        ]
+      ],
+      "neutral_111_output": [
+        0.9994014905220987,
+        1.0005538823127984,
+        0.9999054668238373
+      ],
+      "matrix_determinant": 3.953700649327278,
+      "training_design_rank": 3,
+      "training_design_condition": 73.21305677221466,
+      "spatial_holdout": {
+        "MAE_codes16": 52.68019155173876,
+        "RMSE_codes16": 160.4086753261493,
+        "P95_abs_codes16": 104.65583259103136,
+        "P99_abs_codes16": 612.8011080230468,
+        "max_abs_codes16": 6375.175803829053
+      },
+      "affine_spatial_holdout": {
+        "MAE_codes16": 53.69328383924196,
+        "RMSE_codes16": 154.3600240270445,
+        "P95_abs_codes16": 121.05990838907947,
+        "P99_abs_codes16": 530.3293203873651,
+        "max_abs_codes16": 6613.907758136306
+      },
+      "affine_offset_in_decoded_domain": [
+        8.787435902042411e-05,
+        4.360286268031893e-06,
+        0.00015551689216782743
+      ]
+    },
+    "2.2": {
+      "B_from_A_column_vector_matrix": [
+        [
+          1.771526859638133,
+          -0.6929234452317573,
+          -0.07987465986361925
+        ],
+        [
+          -0.21131576422470236,
+          1.2804320453241964,
+          -0.06861584482441552
+        ],
+        [
+          -0.20713528418932642,
+          -0.7050894289253747,
+          1.9123676023705842
+        ]
+      ],
+      "eigenvalues_real_imag": [
+        [
+          1.000094133124403,
+          0.0
+        ],
+        [
+          1.9821161871042556,
+          0.006794136434065962
+        ],
+        [
+          1.9821161871042556,
+          -0.006794136434065962
+        ]
+      ],
+      "neutral_111_output": [
+        0.9987287545427563,
+        1.0005004362750785,
+        1.000142889255883
+      ],
+      "matrix_determinant": 3.929200572583354,
+      "training_design_rank": 3,
+      "training_design_condition": 67.82632481066939,
+      "spatial_holdout": {
+        "MAE_codes16": 119.13862031998845,
+        "RMSE_codes16": 584.699286772631,
+        "P95_abs_codes16": 170.56355759655506,
+        "P99_abs_codes16": 3478.405287618852,
+        "max_abs_codes16": 9629.04814348142
+      },
+      "affine_spatial_holdout": {
+        "MAE_codes16": 119.23973606853671,
+        "RMSE_codes16": 539.2087835768509,
+        "P95_abs_codes16": 307.7619865086952,
+        "P99_abs_codes16": 2763.155642232086,
+        "max_abs_codes16": 9920.476880883065
+      },
+      "affine_offset_in_decoded_domain": [
+        0.00013315800973755495,
+        1.6455587959459136e-05,
+        0.0002570265987185
+      ]
+    },
+    "2.4": {
+      "B_from_A_column_vector_matrix": [
+        [
+          1.7676125494482466,
+          -0.6887425852302915,
+          -0.07947207918177102
+        ],
+        [
+          -0.21204599279943057,
+          1.281889390958123,
+          -0.0691674471744199
+        ],
+        [
+          -0.19859758631708394,
+          -0.6960430843661679,
+          1.895946215352768
+        ]
+      ],
+      "eigenvalues_real_imag": [
+        [
+          1.0004470796564389,
+          0.0
+        ],
+        [
+          1.972500538051349,
+          0.008981481096673374
+        ],
+        [
+          1.972500538051349,
+          -0.008981481096673374
+        ]
+      ],
+      "neutral_111_output": [
+        0.9993978850361841,
+        1.0006759509842726,
+        1.001305544669516
+      ],
+      "matrix_determinant": 3.8925785545966423,
+      "training_design_rank": 3,
+      "training_design_condition": 64.85483811104467,
+      "spatial_holdout": {
+        "MAE_codes16": 147.02501544366908,
+        "RMSE_codes16": 719.7728976382189,
+        "P95_abs_codes16": 220.7260013676716,
+        "P99_abs_codes16": 4465.269340824855,
+        "max_abs_codes16": 12401.498971898362
+      },
+      "affine_spatial_holdout": {
+        "MAE_codes16": 153.50839989426288,
+        "RMSE_codes16": 668.2020121488207,
+        "P95_abs_codes16": 481.1652483153524,
+        "P99_abs_codes16": 3759.2723613243998,
+        "max_abs_codes16": 12727.275018726861
+      },
+      "affine_offset_in_decoded_domain": [
+        0.00012989599114588974,
+        1.7775517116256515e-05,
+        0.00020724294050256909
+      ]
+    }
+  }
+}

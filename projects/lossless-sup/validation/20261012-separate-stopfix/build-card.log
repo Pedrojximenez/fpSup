@@ -1,0 +1,39 @@
+built into /Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/validation/20261012-separate-stopfix/candidate-card
+{
+ "c_base": 3136,
+ "c_text": 38588,
+ "menu_off": 41728,
+ "menu_len": 30844,
+ "blob_len": 72576,
+ "state_off": 72576,
+ "state_bytes": 215168,
+ "block_bytes": 290816,
+ "entries": {
+  "fpl_card_init": 1,
+  "fpl_card_rec": 1521,
+  "fpl_card_arrive": 4835,
+  "fpl_card_stop": 7515,
+  "fpl_card_flush": 8925,
+  "fpl_card_task": 13981,
+  "fpl_card_play": 16805,
+  "fpl_card_clip": 18079,
+  "fpl_card_play_end": 18831,
+  "fpl_card_play_pool": 18617,
+  "fpl_card_written": 12655,
+  "fpl_card_event": 13443,
+  "fpl_card_discard": 13697,
+  "fpl_card_bulk": 12437
+ },
+ "symbols": {
+  "entry": 0,
+  "claims": 2948,
+  "settings": 2932,
+  "c_base": 3136,
+  "task_shim": 2808,
+  "g_card": 2820,
+  "flush_real": 2880,
+  "discard_real": 2896,
+  "stop_resume": 2876,
+  "play_next": 2908
+ }
+}

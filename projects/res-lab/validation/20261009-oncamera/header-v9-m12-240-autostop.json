@@ -1,0 +1,63 @@
+{
+  "clip": "A001_008",
+  "main_ifd": {
+    "NewSubfileType": 0,
+    "ImageWidth": 1008,
+    "ImageLength": 672,
+    "BitsPerSample": 12,
+    "Compression": 1,
+    "StripOffsets": 78848,
+    "StripByteCounts": 1016064,
+    "BlackLevel": [
+      "262124/1024",
+      "262124/1024",
+      "262124/1024",
+      "262124/1024"
+    ],
+    "WhiteLevel": 4095,
+    "DefaultCropOrigin": [
+      8,
+      5
+    ],
+    "DefaultCropSize": [
+      992,
+      662
+    ],
+    "BaselineExposure": "2378/1024",
+    "FrameRate": "120000/1001"
+  },
+  "ifds": [
+    {
+      "ExposureTime": "1/250",
+      "ISO": 500
+    },
+    {
+      "NewSubfileType": 0,
+      "ImageWidth": 1008,
+      "ImageLength": 672,
+      "BitsPerSample": 12,
+      "Compression": 1,
+      "StripOffsets": 78848,
+      "StripByteCounts": 1016064,
+      "BlackLevel": [
+        "262124/1024",
+        "262124/1024",
+        "262124/1024",
+        "262124/1024"
+      ],
+      "WhiteLevel": 4095,
+      "DefaultCropOrigin": [
+        8,
+        5
+      ],
+      "DefaultCropSize": [
+        992,
+        662
+      ],
+      "BaselineExposure": "2378/1024",
+      "FrameRate": "120000/1001"
+    }
+  ],
+  "automatic_stop": true,
+  "recording_on_not_observed": true
+}

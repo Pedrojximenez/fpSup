@@ -1,0 +1,82 @@
+{
+  "schema": "fp.native-observer.preflight-analysis/v1",
+  "camera_ram_writes": 0,
+  "lens_commands": 0,
+  "hook_installations": 0,
+  "firmware_build": "13aa621060efff11aaba9b21ad925005302605cf",
+  "four_hook_words_match": true,
+  "twelve_context_guards_match": true,
+  "echo_original_before_after": true,
+  "settings_unchanged": true,
+  "capture_idle_at_both_observations": true,
+  "native_l_layout_matches": true,
+  "cached_lens_position_raw": 10663,
+  "worker_pool": "0x45037980",
+  "worker_pool_bytes": 1048576,
+  "worker_code": "0x451379c0",
+  "legacy_pool": "0x0",
+  "cave_bump": "0xc072e064",
+  "live_boot_done_raw": 15340463,
+  "host_register_boot_raw": 14652409,
+  "host_claims_match_boot": false,
+  "face_manager_initialized_raw": 1,
+  "face_group0_all_zero": true,
+  "aat_backend_vtables_match": false,
+  "aat_model_all_zero": true,
+  "native_stack_text_bytes": 9490,
+  "native_stack_possible_capacity_truncation": false,
+  "stack_targets": {
+    "LensFocs": {
+      "task_id": 25,
+      "stack_bytes": 8192,
+      "reported_max_used_bytes": 868,
+      "reported_unused_sentinel_bytes": 7324,
+      "observer_workload_verified": false
+    },
+    "EyeDtctn": {
+      "task_id": 62,
+      "stack_bytes": 4096,
+      "reported_max_used_bytes": 368,
+      "reported_unused_sentinel_bytes": 3728,
+      "observer_workload_verified": false
+    },
+    "FdTsk": {
+      "task_id": 63,
+      "stack_bytes": 5120,
+      "reported_max_used_bytes": 160,
+      "reported_unused_sentinel_bytes": 4960,
+      "observer_workload_verified": false
+    },
+    "Tracking": {
+      "task_id": 64,
+      "stack_bytes": 8192,
+      "reported_max_used_bytes": 420,
+      "reported_unused_sentinel_bytes": 7772,
+      "observer_workload_verified": false
+    },
+    "AfMgr": {
+      "task_id": 108,
+      "stack_bytes": 16384,
+      "reported_max_used_bytes": 9104,
+      "reported_unused_sentinel_bytes": 7280,
+      "observer_workload_verified": false
+    }
+  },
+  "task_register_printout_trusted": false,
+  "native_snapshot_coherent": false,
+  "geometry_eligible": false,
+  "confirmation_authorized": false,
+  "motion_authorized": false,
+  "deployment_ready": false,
+  "exchange_events": 64,
+  "failed_events": 0,
+  "evidence_sha256": {
+    "native-preflight.jsonl": "a952cb327e5bda223058fca0ebea4658fc3025c12371b7157ed7612201db6047",
+    "connection.json": "6434cec9bd967c5cbcb55655101d09cf26c31afa5c77354e71a3602203ee446f",
+    "host-cave-register.json": "a0ff738a9ccaacef8b95a65121f5a4d2a1a7997464773020f60a4dc839bc7c4d",
+    "offline-regression.json": "da4167a12f8263a168f505d53ff47652b0f34c7fbdc9b1c77f0b67c58e948200",
+    "native-subject-decoded.json": "13cb42cfe247b8395db0434412887de86dca8117cdd2d0e68e0302498141fe69",
+    "offline-regression.log": "88252cc2987dda52001bc9b23d157af5025e2cc7e01e428b6c540b9f682b8c77",
+    "native-stack-check.json": "5a6ff7a92d637b362884bd5d10e39e984bf8ceb3c132650de1414940f05a1165"
+  }
+}

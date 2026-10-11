@@ -1,0 +1,54 @@
+  code   412/412 B  5.8 KiB/s   verify 412/412 B  728 KiB/s   verify 412 bytes in 0.0s (309 KiB/s)      
+  code   412 bytes in 0.1s (3.1 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 330135 bytes in 0.001s (271.0 MB/s)      
+  code   412/412 B  77.9 KiB/s   verify 412/412 B  354 KiB/s   verify 412 bytes in 0.0s (223 KiB/s)      
+  code   412 bytes in 0.0s (48.8 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 1095168 bytes in 0.003s (332.4 MB/s)      
+  code   412/412 B  98.9 KiB/s   verify 412/412 B  655 KiB/s   verify 412 bytes in 0.0s (319 KiB/s)      
+  code   412 bytes in 0.0s (63.8 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 1095168 bytes in 0.003s (362.8 MB/s)      
+  code   412/412 B  109.3 KiB/s   verify 412/412 B  679 KiB/s   verify 412 bytes in 0.0s (361 KiB/s)      
+  code   412 bytes in 0.0s (66.6 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 1095168 bytes in 0.004s (301.9 MB/s)      
+  remote  \DCIM\100SIGMA\SS__1605.JPG  330135 bytes, mode 0x1
+  buffer  from the firmware, file object 0x45064E00
+  reply   getfile: read
+  buffer  0x53B00980 (334231 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 330135 of 330135
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-recording-formula/v10-m12-2997-preview-baseline-rec-preview.jpg
+  remote  \CINEMA\A001_014\A001_014_20261009_000001.DNG  1095168 bytes, mode 0x1
+  buffer  from the firmware, file object 0x45064E00
+  reply   getfile: read
+  buffer  0x53B00980 (1099264 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 1095168 of 1095168
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-recording-formula/v10-m12-2997-preview-baseline-frame000001.dng
+  remote  \CINEMA\A001_014\A001_014_20261009_000080.DNG  1095168 bytes, mode 0x1
+  buffer  from the firmware, file object 0x45064E00
+  reply   getfile: read
+  buffer  0x53B00980 (1099264 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 1095168 of 1095168
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-recording-formula/v10-m12-2997-preview-baseline-frame000080.dng
+  remote  \CINEMA\A001_014\A001_014_20261009_000160.DNG  1095168 bytes, mode 0x1
+  buffer  from the firmware, file object 0x45064E00
+  reply   getfile: read
+  buffer  0x53B00980 (1099264 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 1095168 of 1095168
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-recording-formula/v10-m12-2997-preview-baseline-frame000160.dng
+{
+  "label": "v10-m12-2997-preview-baseline",
+  "previews": [
+    "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-recording-formula/v10-m12-2997-preview-baseline-rec-preview.jpg"
+  ],
+  "frames_finished": 160,
+  "passed_continuous": true,
+  "capture_requested": 3,
+  "capture_delivered": 1
+}

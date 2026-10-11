@@ -1,0 +1,16 @@
+{
+  "visible_fault": true,
+  "observation": "Central vertical scale mismatch remains; native channel0 FPS30 was read between fresh REC checks at1.060s.",
+  "inspected_fault_samples": [
+    65,
+    66,
+    68,
+    70,
+    72
+  ],
+  "engine_entry": 30,
+  "rank": 27972,
+  "raw_frames_finished": 1,
+  "standby_after": true,
+  "limits": "Short startup/stop transition, not sustained recording; native reads are independent scalars."
+}

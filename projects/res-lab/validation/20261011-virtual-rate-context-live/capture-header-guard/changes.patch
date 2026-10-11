@@ -1,0 +1,41 @@
+--- v16/ogc.c
++++ v17/ogc.c
+@@ -456,6 +456,29 @@
+     return e;
+ }
+ 
++/* Header-copy eligibility follows the selected capture entry, not only the
++ * menu rate. Section12 can run M12 at240/280 on an ordinary carrier (VRATE=0).
++ * Keep the legacy canvas and batch selectors separate: broadening those here
++ * would silently replace p13's processing fields and the native64MiB batch. */
++static u32 m12_header_entry(u8 *S)
++{
++    u32 e = m12_high_entry(S);
++    if (e) return e;
++    if (SW(S, S_FLAG) != 1u || !SW(S, S_PICKOK) || SW(S, S_BITLATCH) != BD12 || SW(S, S_VRATE)) return 0;
++    u32 row = SW(S, S_CUR), off = SW(S, S_LAST_ENT), first = SW(S, S_ENTS);
++    if (!row || row > SW(S, S_NROWS) || off < first ||
++        off - first >= SW(S, S_NENT) * ENT_SIZE || ((off - first) & (ENT_SIZE - 1u))) return 0;
++    e = (u32)(uintptr_t)S + off;
++    u32 r = rowp(S, row - 1u), v = W(e + ENT_VM);
++    if (!W(r + ROW_ON) || W(e + ENT_ROW) + 1u != row || W(e + ENT_VRATE) ||
++        W(r + ROW_AW) != 992u || W(r + ROW_AH) != 662u || v >= SW(S, S_NVM)) return 0;
++    u32 vm = vmp(S, v), nom = W(e + ENT_NOMINAL), fps = W(e + ENT_ENGFPS);
++    if (W(vm + VM_DONOR) != 12u || W(vm + VM_ID) != W(e + ENT_MODE) ||
++        fps != SW(S, S_FPSLATCH) ||
++        !((nom == 240u && fps == 0x436FC29Fu) || (nom == 280u && fps == 0x438BDC32u))) return 0;
++    return e;
++}
++
+ /* 64 MiB needs about 61 M12 DNGs before committing, leaving too little of
+  * the 96-descriptor pool to cover media completion latency at 280p. A 4 MiB
+  * batch is the existing lossless path's lower bound. Change the native local
+@@ -474,7 +497,7 @@
+     if (caller != 0xC038C780u) return 0;
+     SW(S, S_HDR_COPY_CALLS)++;
+     SW(S, S_HDR_COPY_WHY) = 1;
+-    if (!params || (params & 3u) || !m12_high_entry(S)) return 0;
++    if (!params || (params & 3u) || !m12_header_entry(S)) return 0;
+     SW(S, S_HDR_COPY_WHY) = 2;
+     u32 src = W(params), dst = W(params + 4u), n = W(params + 8u);
+     SW(S, S_HDR_COPY_SRC) = src;

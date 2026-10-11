@@ -1,0 +1,33 @@
+test_five_native_popups_with_private_choices_and_numbered_pages (test_rescustom_files_page.FilePage) ... FAIL
+test_native_allocation_graph_and_dynamic_text_components (test_rescustom_files_page.FilePage) ... ERROR
+test_only_consumer_variables_are_written_by_file_controls (test_rescustom_files_page.FilePage) ... ok
+test_return_to_manager_uses_original_state_matcher (test_rescustom_files_page.FilePage) ... ok
+test_empty_selection_persists_and_rescustom_needs_no_producer (test_reslab_saved_rows.SavedRows) ... ok
+test_enable_assertion_detects_disconnected_consumer_callback (test_reslab_saved_rows.SavedRows) ... ok
+test_failed_persistence_and_recording_do_not_change_selection (test_reslab_saved_rows.SavedRows) ... ok
+test_full_list_save_then_rescustom_chooses_and_reboots_into_native_qs (test_reslab_saved_rows.SavedRows) ... ok
+test_paginated_choices_do_not_alias_hidden_files_or_more_settings (test_reslab_saved_rows.SavedRows) ... ok
+test_standalone_all_files_off_keeps_manager_and_stock_recording (test_reslab_saved_rows.SavedRows) ... /Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/res-custom/build_v3_rescustom.py:2: DeprecationWarning: invalid escape sequence \R
+  """res-custom: the multi-format OpenGate core and its format data files, for Loader v3.
+ok
+
+======================================================================
+ERROR: test_native_allocation_graph_and_dynamic_text_components (test_rescustom_files_page.FilePage)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_rescustom_files_page.py", line 38, in test_native_allocation_graph_and_dynamic_text_components
+    for name,owner,component in binds:self.assertEqual(component,draws[owner],name)
+KeyError: 33545
+
+======================================================================
+FAIL: test_five_native_popups_with_private_choices_and_numbered_pages (test_rescustom_files_page.FilePage)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_rescustom_files_page.py", line 65, in test_five_native_popups_with_private_choices_and_numbered_pages
+    self.assertTrue({'RES-CUSTOM','Enable','Disable'}<=labels)
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 10 tests in 307.432s
+
+FAILED (failures=1, errors=1)

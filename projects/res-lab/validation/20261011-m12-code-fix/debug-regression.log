@@ -1,0 +1,15 @@
+test_contract_abi_and_status (test_virtual_rcd.VirtualTests) ... ok
+test_shutdown_restores_claimed_words (test_virtual_rcd.VirtualTests) ... ok
+test_settings_page_matches_reference_and_keeps_rate_variants (unittest.loader._FailedTest) ... ERROR
+test_live_view_stop_commit_start_and_uhd_setter (test_virtual_rcd.VirtualTests) ... ok
+test_repeating_a_rate_and_changing_native_carrier_do_not_extra_reload (test_reslab_rate_commit.RateCommitTests) ... ok
+
+======================================================================
+ERROR: test_settings_page_matches_reference_and_keeps_rate_variants (unittest.loader._FailedTest)
+----------------------------------------------------------------------
+AttributeError: type object 'VirtualTests' has no attribute 'test_settings_page_matches_reference_and_keeps_rate_variants'
+
+----------------------------------------------------------------------
+Ran 5 tests in 130.210s
+
+FAILED (errors=1)

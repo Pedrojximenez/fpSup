@@ -1,0 +1,514 @@
+{
+  "payload_sha256": "8cf489ef8ad5e4c8723adac4dd421f6943a5d4f6338c030f70148764901b243e",
+  "cases": [
+    {
+      "case": "select3K-and-exit-0",
+      "passed": true
+    },
+    {
+      "case": "select3K-and-exit-1",
+      "passed": true
+    },
+    {
+      "case": "busy-0xc343b58c",
+      "passed": true
+    },
+    {
+      "case": "busy-0xc3476609",
+      "passed": true
+    },
+    {
+      "case": "busy-0xc347e08f",
+      "passed": true
+    },
+    {
+      "case": "busy-0xc358e140",
+      "passed": true
+    },
+    {
+      "case": "busy-0xc35a952c",
+      "passed": true
+    },
+    {
+      "case": "unsupported-format",
+      "passed": true
+    },
+    {
+      "case": "unsupported-quality",
+      "passed": true
+    },
+    {
+      "case": "unsupported-rate",
+      "passed": true
+    },
+    {
+      "case": "unsupported-crop",
+      "passed": true
+    },
+    {
+      "case": "unsupported-media",
+      "passed": true
+    },
+    {
+      "case": "invalid-index-3",
+      "passed": true
+    },
+    {
+      "case": "invalid-index-4294967295",
+      "passed": true
+    },
+    {
+      "case": "setting-restores-set_resolution",
+      "passed": true
+    },
+    {
+      "case": "busy-blocks-set_resolution",
+      "passed": true
+    },
+    {
+      "case": "setting-restores-set_format",
+      "passed": true
+    },
+    {
+      "case": "busy-blocks-set_format",
+      "passed": true
+    },
+    {
+      "case": "setting-restores-set_quality",
+      "passed": true
+    },
+    {
+      "case": "busy-blocks-set_quality",
+      "passed": true
+    },
+    {
+      "case": "setting-restores-set_rate",
+      "passed": true
+    },
+    {
+      "case": "busy-blocks-set_rate",
+      "passed": true
+    },
+    {
+      "case": "setting-restores-set_crop",
+      "passed": true
+    },
+    {
+      "case": "busy-blocks-set_crop",
+      "passed": true
+    },
+    {
+      "case": "setting-restores-set_media",
+      "passed": true
+    },
+    {
+      "case": "busy-blocks-set_media",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-0-False",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-0-True",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-1-False",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-1-True",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-2-False",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-2-True",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-3-False",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-3-True",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-4-False",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-4-True",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-5-False",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-5-True",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-6-False",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-6-True",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-7-False",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-7-True",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-8-False",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-8-True",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-9-False",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-9-True",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-10-False",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-10-True",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-11-False",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-11-True",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-12-False",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-12-True",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-13-False",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-13-True",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-14-False",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-14-True",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-15-False",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-15-True",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-16-False",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-16-True",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-17-False",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-17-True",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-18-False",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-18-True",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-19-False",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-19-True",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-20-False",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-20-True",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-21-False",
+      "passed": true
+    },
+    {
+      "case": "table-mismatch-21-True",
+      "passed": true
+    },
+    {
+      "case": "cache-race-0-False",
+      "passed": true
+    },
+    {
+      "case": "cache-race-0-True",
+      "passed": true
+    },
+    {
+      "case": "cache-race-1-False",
+      "passed": true
+    },
+    {
+      "case": "cache-race-1-True",
+      "passed": true
+    },
+    {
+      "case": "cache-race-2-False",
+      "passed": true
+    },
+    {
+      "case": "cache-race-2-True",
+      "passed": true
+    },
+    {
+      "case": "cache-race-3-False",
+      "passed": true
+    },
+    {
+      "case": "cache-race-3-True",
+      "passed": true
+    },
+    {
+      "case": "rollback-False-0x0",
+      "passed": true
+    },
+    {
+      "case": "rollback-False-0x80",
+      "passed": true
+    },
+    {
+      "case": "rollback-False-0xc0",
+      "passed": true
+    },
+    {
+      "case": "rollback-True-0x0",
+      "passed": true
+    },
+    {
+      "case": "rollback-True-0x80",
+      "passed": true
+    },
+    {
+      "case": "rollback-True-0xc0",
+      "passed": true
+    },
+    {
+      "case": "install-preflight-0xc057a6a0",
+      "passed": true
+    },
+    {
+      "case": "install-preflight-0xc05931d0",
+      "passed": true
+    },
+    {
+      "case": "install-preflight-0xc005c020",
+      "passed": true
+    },
+    {
+      "case": "install-preflight-0xc005be58",
+      "passed": true
+    },
+    {
+      "case": "install-preflight-0xc005bef0",
+      "passed": true
+    },
+    {
+      "case": "install-preflight-0xc005c0b8",
+      "passed": true
+    },
+    {
+      "case": "install-preflight-0xc005bb60",
+      "passed": true
+    },
+    {
+      "case": "install-preflight-0xc0062ec8",
+      "passed": true
+    },
+    {
+      "case": "install-preflight-0xc05824d0",
+      "passed": true
+    },
+    {
+      "case": "install-preflight-0xc059c640",
+      "passed": true
+    },
+    {
+      "case": "install-preflight-0xc059c9f0",
+      "passed": true
+    },
+    {
+      "case": "install-preflight-0xc05e84d8",
+      "passed": true
+    },
+    {
+      "case": "install-preflight-0xc05e6400",
+      "passed": true
+    },
+    {
+      "case": "install-preflight-0xc05e5b58",
+      "passed": true
+    },
+    {
+      "case": "install-preflight-0xc0437e98",
+      "passed": true
+    },
+    {
+      "case": "install-preflight-0xc0306ea0",
+      "passed": true
+    },
+    {
+      "case": "install-preflight-0xc0f8e7ec",
+      "passed": true
+    },
+    {
+      "case": "install-preflight-0xc1a709bc",
+      "passed": true
+    },
+    {
+      "case": "install-preflight-0xc0be3f54",
+      "passed": true
+    },
+    {
+      "case": "install-preflight-0xc0be441c",
+      "passed": true
+    },
+    {
+      "case": "install-preflight-0xc0be2c34",
+      "passed": true
+    },
+    {
+      "case": "install-preflight-0xc0be30fc",
+      "passed": true
+    },
+    {
+      "case": "install-preflight-0xc0be35c4",
+      "passed": true
+    },
+    {
+      "case": "install-preflight-0xc0be3a8c",
+      "passed": true
+    },
+    {
+      "case": "install-preflight-0xc0be1914",
+      "passed": true
+    },
+    {
+      "case": "install-preflight-0xc0be1ddc",
+      "passed": true
+    },
+    {
+      "case": "install-preflight-0xc0b5b6c8",
+      "passed": true
+    },
+    {
+      "case": "install-preflight-0xc0b5b6d8",
+      "passed": true
+    },
+    {
+      "case": "install-preflight-0xc0b5b6e8",
+      "passed": true
+    },
+    {
+      "case": "install-preflight-0xc0b5b714",
+      "passed": true
+    },
+    {
+      "case": "install-preflight-0xc0b5d43c",
+      "passed": true
+    },
+    {
+      "case": "install-preflight-0xc0b5d440",
+      "passed": true
+    },
+    {
+      "case": "install-preflight-0xc0b5d444",
+      "passed": true
+    },
+    {
+      "case": "install-preflight-0xc0b5d450",
+      "passed": true
+    },
+    {
+      "case": "install-preflight-0xc0b59d0c",
+      "passed": true
+    },
+    {
+      "case": "install-preflight-0xc0b59d10",
+      "passed": true
+    },
+    {
+      "case": "install-preflight-0xc0bdb9cc",
+      "passed": true
+    },
+    {
+      "case": "install-preflight-0xc0bdcc94",
+      "passed": true
+    },
+    {
+      "case": "install-preflight-0xc0bdbe3c",
+      "passed": true
+    },
+    {
+      "case": "install-preflight-0xc0bdab1c",
+      "passed": true
+    },
+    {
+      "case": "install-checksum",
+      "passed": true
+    },
+    {
+      "case": "install-rollback",
+      "passed": true
+    },
+    {
+      "case": "install-range-rollback",
+      "passed": true
+    }
+  ],
+  "limitations": "Native entry branches, trampolines, interrupt masking, UI enum mapping, table transactions and rollback executed. Settings backing operations, filesystem/media routing and UI queue delivery mocked. No real camera timing, DMA, cross-core execution, resource caching or on-screen rendering verified."
+}

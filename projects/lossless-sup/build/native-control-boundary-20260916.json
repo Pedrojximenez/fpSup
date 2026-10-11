@@ -1,0 +1,143 @@
+{
+  "runtime_ready": false,
+  "firmware_sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622",
+  "source_sha256": "2f606d5568650b7bc1db889693f82fe0f2178d43bd7cff0805778964c4065399",
+  "native_intervals": [
+    [
+      "0xc05fbfb8",
+      "0xc05fc126"
+    ],
+    [
+      "0xc05d63a8",
+      "0xc05d63d2"
+    ],
+    [
+      "0xc05d6878",
+      "0xc05d68a4"
+    ],
+    [
+      "0xc05fad48",
+      "0xc05fad60"
+    ],
+    [
+      "0xc05fadcc",
+      "0xc05fb018"
+    ],
+    [
+      "0xc06012d0",
+      "0xc0601400"
+    ]
+  ],
+  "stubs": {
+    "0xc05d6400": "property_get",
+    "0xc05e9550": "timer",
+    "0xc05e93a8": "dispatch",
+    "0xc05d6038": "integer_core",
+    "0xc05d64e0": "float_core",
+    "0xc05d7148": "userdata",
+    "0xc0601140": "property_sync",
+    "0xc05fa998": "value_event",
+    "0xc0015058": "memset",
+    "0xc06011f0": "integer_only_normalization",
+    "0xc05e9440": "held_key_count",
+    "0xc05e9468": "held_key_at"
+  },
+  "cases": [
+    {
+      "name": "keypress_mask_0",
+      "pass": true,
+      "dispatch_count": 0,
+      "native_steps": 60
+    },
+    {
+      "name": "keypress_mask_1",
+      "pass": true,
+      "dispatch_count": 1,
+      "native_steps": 73
+    },
+    {
+      "name": "mask_zero_does_not_cancel_existing_repeat_phase3",
+      "pass": true,
+      "dispatch_count": 1,
+      "native_steps": 96
+    },
+    {
+      "name": "integer_core_wrapper_ABI",
+      "pass": true,
+      "boundary": {
+        "service": "integer_core",
+        "args": [
+          268439552,
+          0,
+          1,
+          0
+        ],
+        "property": 1,
+        "raw_value": 7
+      },
+      "native_steps": 16
+    },
+    {
+      "name": "float_core_wrapper_ABI",
+      "pass": true,
+      "boundary": {
+        "service": "float_core",
+        "args": [
+          268439552,
+          0,
+          1,
+          0
+        ],
+        "property": 1,
+        "raw_value": 1065353216
+      },
+      "native_steps": 16
+    },
+    {
+      "name": "max_zero_clamps_loop_0_value_-1.0",
+      "pass": true,
+      "native_steps": 88
+    },
+    {
+      "name": "max_zero_clamps_loop_0_value_0.0",
+      "pass": true,
+      "native_steps": 93
+    },
+    {
+      "name": "max_zero_clamps_loop_0_value_1.0",
+      "pass": true,
+      "native_steps": 92
+    },
+    {
+      "name": "max_zero_clamps_loop_0_value_2.0",
+      "pass": true,
+      "native_steps": 92
+    },
+    {
+      "name": "max_zero_clamps_loop_1_value_-1.0",
+      "pass": true,
+      "native_steps": 116
+    },
+    {
+      "name": "max_zero_clamps_loop_1_value_0.0",
+      "pass": true,
+      "native_steps": 121
+    },
+    {
+      "name": "max_zero_clamps_loop_1_value_1.0",
+      "pass": true,
+      "native_steps": 120
+    },
+    {
+      "name": "max_zero_clamps_loop_1_value_2.0",
+      "pass": true,
+      "native_steps": 120
+    },
+    {
+      "name": "lower_max_one_to_zero_clamps_current_one",
+      "pass": true,
+      "native_steps": 117
+    }
+  ],
+  "passed": 14
+}

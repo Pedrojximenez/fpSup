@@ -1,0 +1,149 @@
+test_a_missed_rename_is_caught (test_sl_lab_page.LabPage) ... ok
+test_each_field_has_its_arrows (test_sl_lab_page.LabPage) ... ok
+test_four_tabs (test_sl_lab_page.LabPage)
+The tab bar grows to FILTER / MODES / OUTPUT / NAME (tabs4): value 0..3, ... ok
+test_lab_lists_carry_the_donor_columns (test_sl_lab_page.LabPage) ... ok
+test_list_templates_name_their_own_row (test_sl_lab_page.LabPage)
+r23/r24: the item template still named the stock List 14 / ListItem 15 ... ok
+test_lists_fit_and_popups_start_at_the_top (test_sl_lab_page.LabPage) ... ok
+test_local_ids_unique_per_object (test_sl_lab_page.LabPage)
+d6: a grown cursor pair took local id 17 = the List's model clip; focusing ... ok
+test_no_markup_characters_in_list_text (test_sl_lab_page.LabPage)
+r24 / r26: focusing a row whose list read ">= 23.98p" took the camera down. ... ok
+test_no_stock_frame_guide_variable (test_sl_lab_page.LabPage) ... ok
+test_no_submenu_width (test_sl_lab_page.LabPage)
+r25: stock's submenu_width objects sized the popups ~240 px wide. ... ok
+test_panel_row_edits_in_place (test_sl_lab_page.LabPage)
+The date / time page's way (the user, 2026-10-03): the panel row's Right / OK ... ok
+test_panel_variables_are_private (test_sl_lab_page.LabPage) ... /Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_sl_lab_page.py:465: ResourceWarning: unclosed file <_io.TextIOWrapper name='/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/sl_menu/sl_menu.c' mode='r' encoding='UTF-8'>
+  src = open(P.HERE / "sl_menu/sl_menu.c").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_refs (test_sl_lab_page.LabPage) ... ok
+test_step_rows_change_in_place (test_sl_lab_page.LabPage)
+FILTER's four rows, MODE and Ratio (the user, 2026-10-03): Right 'dst + 1' and ... ok
+test_summaries_are_the_options (test_sl_lab_page.LabPage) ... ok
+test_summary_shows_text_not_icons (test_sl_lab_page.LabPage)
+r23: every row's summary was the frame-guide icon (an empty box). ... ok
+test_tab_captions_are_text (test_sl_lab_page.LabPage)
+FILTER / MODES / OUTPUT replace stock's caption images: centred drawTexts ... ok
+test_tabs_hold_their_rows (test_sl_lab_page.LabPage) ... ok
+test_the_crop_row_edits_in_place (test_sl_lab_page.LabPage)
+OUTPUT's Crop row: Right / OK write SL_O_Key 15 and focus its editor E2, ... ok
+test_the_data_rate_row (test_sl_lab_page.LabPage)
+Under Ratio: a step row over the rates (SL_O_RFps), its summary a ... ok
+test_the_mode_diagram (test_sl_lab_page.LabPage)
+MODE's tab: green over red outlines over the sensor's filled block, the green / ... ok
+test_the_mode_row_follows_the_camera (test_sl_lab_page.LabPage)
+MODE: the SL_MODE list (written on the camera); the List, MenuItem_Select ... ok
+test_the_panel_line_reads_evenly (test_sl_lab_page.LabPage)
+Camera r38/r39: "1x1" dimmed while the row was focused (stock's ratio ... ok
+test_titles_are_literal (test_sl_lab_page.LabPage) ... ok
+test_a_missing_return_is_caught (test_sl_pages.Pack)
+Mutation: build without the Return transition. ... ok
+test_machine_counts_match_its_records (test_sl_pages.Pack) ... ok
+test_native_index (test_sl_pages.Pack) ... ok
+test_native_switches (test_sl_pages.Pack) ... ok
+test_python_reading (test_sl_pages.Pack) ... ok
+test_small (test_sl_pages.Pack) ... ok
+test_a_block_without_nbr_still_installs (sl_menu.test_sl_menu.MenuTests) ... ok
+test_a_camera_whose_objects_differ_gets_nothing (sl_menu.test_sl_menu.MenuTests) ... ok
+test_a_damaged_or_foreign_block (sl_menu.test_sl_menu.MenuTests) ... ok
+test_a_pages_ref_past_the_pack_is_refused (sl_menu.test_sl_menu.MenuTests) ... ok
+test_a_registration_that_fails_switches_nothing (sl_menu.test_sl_menu.MenuTests) ... ok
+test_a_stale_tail_after_an_unpadded_block_is_ignored (sl_menu.test_sl_menu.MenuTests)
+The block is written unpadded; putfile over an older, longer fpSup.BIN ... ok
+test_a_variable_of_another_type_switches_nothing (sl_menu.test_sl_menu.MenuTests) ... ok
+test_an_existing_variable_is_used_not_registered_again (sl_menu.test_sl_menu.MenuTests) ... ok
+test_dynamic_install_defers_private_page_until_hooks_arm (sl_menu.test_sl_menu.MenuTests) ... ok
+test_installs_and_every_private_string_resolves (sl_menu.test_sl_menu.MenuTests) ... ok
+test_no_file_truncated_file_or_none_past_the_loader (sl_menu.test_sl_menu.MenuTests) ... ok
+test_only_b2_5_changes (sl_menu.test_sl_menu.MenuTests) ... ok
+test_seven_integers_registered_zero_with_resident_names (sl_menu.test_sl_menu.MenuTests) ... ok
+test_shares_the_pool_with_another_sup (sl_menu.test_sl_menu.MenuTests) ... ok
+test_size_page_strings_resolve_in_the_pages_pack (sl_menu.test_sl_menu.MenuTests)
+(v4) the SIZE sub page's private strings sit in the pages pack: flagged ... ok
+test_the_file_is_read_once_and_the_object_destroyed (sl_menu.test_sl_menu.MenuTests) ... ok
+test_the_page_is_switched_last_and_once (sl_menu.test_sl_menu.MenuTests) ... ok
+test_the_pages_pack_is_recorded_not_registered (sl_menu.test_sl_menu.MenuTests) ... ok
+test_the_private_nbr_is_recorded_not_registered (sl_menu.test_sl_menu.MenuTests) ... ok
+test_too_little_room (sl_menu.test_sl_menu.MenuTests) ... ok
+test_every_mutation_is_caught (sl_menu.test_sl_menu.MutationTests) ... ok
+test_a_full_screen_vector_is_not_grown (sl_menu.test_sl_modes.Modes) ... ok
+test_a_full_state_machine_vector_is_not_grown (sl_menu.test_sl_modes.Modes) ... ok
+test_a_list_not_found_is_not_touched (sl_menu.test_sl_modes.Modes) ... ok
+test_a_mode_chosen_resets_the_output (sl_menu.test_sl_modes.Modes)
+MODE row changed (SL_M_Sel): the largest output at AUTO, binning 1 x 1, ... ok
+test_a_model_that_is_not_modelcsv_is_not_touched (sl_menu.test_sl_modes.Modes) ... ok
+test_a_reader_of_another_app_registers_nothing (sl_menu.test_sl_modes.Modes) ... ok
+test_a_refused_pack_is_not_retried (sl_menu.test_sl_modes.Modes) ... ok
+test_an_instance_already_there_is_not_loaded_again (sl_menu.test_sl_modes.Modes) ... ok
+test_an_unsolvable_budget_cell_drops_the_mode (sl_menu.test_sl_modes.Modes)
+With the shipped tables every cell a mode reaches is solvable, so this ... ok
+test_any_rate_scan_is_the_union_and_bad_index_lists_nothing (sl_menu.test_sl_modes.Modes) ... ok
+test_auto_is_the_area_shape (sl_menu.test_sl_modes.Modes)
+AUTO holds the shape of the sensor area the mode covers, not its raster's ... ok
+test_auto_raw_and_the_squeezes (sl_menu.test_sl_modes.Modes)
+AUTO keeps the readout's shape (both sides scaled alike), a squeeze is AUTO ... ok
+test_counts (sl_menu.test_sl_modes.Modes) ... ok
+test_donor_timing_comes_from_the_stock_copy (sl_menu.test_sl_modes.Modes) ... ok
+test_every_failing_step_stops_there (sl_menu.test_sl_modes.Modes) ... ok
+test_every_mutation_is_caught (sl_menu.test_sl_modes.Modes) ... ok
+test_exact_steps (sl_menu.test_sl_modes.Modes)
+W = num t, H = den t, W x16, H even: the step per ratio. ... ok
+test_filter_fps_is_the_only_rate_narrowing_of_modes (sl_menu.test_sl_modes.Modes)
+Any and explicit FILTER FPS keep the same MODE rows as the user's ... ok
+test_filter_narrows_the_mode_list (sl_menu.test_sl_modes.Modes)
+FILTER's rows narrow the MODE list for the menu bit depth, across ... ok
+test_live_view_follows_the_shape (sl_menu.test_sl_modes.Modes)
+Camera r69: M7 (16:9) squeezed in live view, the six preview profiles ... ok
+test_mode_0_is_listed_only_when_it_solves (sl_menu.test_sl_modes.Modes)
+M0 shares AXIS's 'auto' value: listed when its own conditions pass, ... ok
+test_no_pages_in_the_file_registers_nothing (sl_menu.test_sl_modes.Modes) ... ok
+test_no_pages_no_panel (sl_menu.test_sl_modes.Modes) ... ok
+test_no_settings_manager_touches_nothing (sl_menu.test_sl_modes.Modes) ... ok
+test_no_static_name_is_a_field_name (sl_menu.test_sl_modes.Modes)
+The ARM build prefixes sl_modes.c's statics (sl_modes__x), and a field ... ok
+test_not_installed_touches_nothing (sl_menu.test_sl_modes.Modes) ... ok
+test_nothing_matching_is_one_greyed_row (sl_menu.test_sl_modes.Modes) ... ok
+test_only_user_fps_changed_does_not_rebuild (sl_menu.test_sl_modes.Modes) ... ok
+test_pages_register_once_and_take_the_shared_pool (sl_menu.test_sl_modes.Modes) ... ok
+test_rate240_changes_the_readout_but_not_the_mode_list (sl_menu.test_sl_modes.Modes) ... ok
+test_ratio_names (sl_menu.test_sl_modes.Modes)
+Every label names its shape, or a decimal (the user): full-width 16:9 is ... ok
+test_record_settings_follow_the_mode (sl_menu.test_sl_modes.Modes)
+The record settings' Frame rate and Bit depth rows grey (0,0) what the ... ok
+test_rewrites_the_model_to_the_scan (sl_menu.test_sl_modes.Modes) ... ok
+test_scan_is_the_recipes_acceptance (sl_menu.test_sl_modes.Modes) ... ok
+test_the_crop_goes_back_to_zero (sl_menu.test_sl_modes.Modes)
+A ratio held (AUTO; 2.76:1 steps 1104 px): every Down makes the cut asked for ... ok
+test_the_crop_row (sl_menu.test_sl_modes.Modes)
+Crop: pixels cut from the readout, centred (the user): its editor writes ... ok
+test_the_data_rate (sl_menu.test_sl_modes.Modes)
+W x H x bits x fps / 8 in MB/s, from the bit-depth and frame-rate settings. ... ok
+test_the_hidden_15_fps_does_not_narrow_the_list (sl_menu.test_sl_modes.Modes) ... ok
+test_the_interface_is_judged_by_its_slots_not_its_address (sl_menu.test_sl_modes.Modes)
+r10 on camera: the interface was not at 0xC2E01DB0 and nothing was written. ... ok
+test_the_list_follows_bit_depth_but_not_the_user_rate (sl_menu.test_sl_modes.Modes)
+sl_menu_live follows bit depth. The user's FPS changes the readout, ... ok
+test_the_mode_diagram (sl_menu.test_sl_modes.Modes)
+White = the sensor drawn 420 x 280 at (40, 180); green = the area the chosen ... ok
+test_the_mode_row_text_and_cap (sl_menu.test_sl_modes.Modes)
+SL_ModeMax = rows - 1 (the lists' caps), SL_M_Text = the chosen row's ... ok
+test_the_panel_declares_our_profile (sl_menu.test_sl_modes.Modes)
+OUTPUT -> our own profile row (sl_modes.c declare_post): every field the ... ok
+test_the_panel_drives_axis (sl_menu.test_sl_modes.Modes)
+OUTPUT -> AXIS (sl_modes.c axis_post): raster / mode = the chosen mode, ... ok
+test_the_panel_is_edited_in_place (sl_menu.test_sl_modes.Modes)
+OUTPUT's info panel, the date / time page's way: subscribed once with the ... ok
+test_the_ratio_holds_width_and_height (sl_menu.test_sl_modes.Modes)
+The Ratio row (sl_lists SCALE_ROWS) really holds W:H (the user): the edited ... ok
+test_the_ratio_row_maximizes (sl_menu.test_sl_modes.Modes)
+The Ratio row moved: the output is the largest at the new ratio (the user ... ok
+test_the_record_envelope (sl_menu.test_sl_modes.Modes)
+The envelope seam, at the old per-side stock maximum (4176 x 2182): the ... ok
+
+----------------------------------------------------------------------
+Ran 99 tests in 201.029s
+
+OK

@@ -1,0 +1,45 @@
+  code   412/412 B  2.4 KiB/s   verify 412/412 B  714 KiB/s   verify 412 bytes in 0.0s (329 KiB/s)      
+  code   412 bytes in 0.2s (1.8 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 452512 bytes in 0.002s (227.6 MB/s)      
+  stage  452768 bytes in 0.002s (244.3 MB/s)      
+  verify 452768 bytes in 0.002s (292.3 MB/s)      
+  stage  452768 bytes in 0.00s (118.9 MB/s), MEM1, read back whole          
+  code   304/304 B  38.0 KiB/s   verify 304/304 B  315 KiB/s   verify 304 bytes in 0.0s (186 KiB/s)      
+  code   304 bytes in 0.0s (28.6 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  code   412/412 B  3.6 KiB/s   verify 412/412 B  689 KiB/s   verify 412 bytes in 0.0s (343 KiB/s)      
+  code   412 bytes in 0.1s (3.5 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 452768 bytes in 0.002s (295.5 MB/s)      
+  remote  \fpSup\50RESLAB.BIN  452512 bytes, mode 0x1
+  buffer  from the firmware, file object 0x45064E00
+  reply   getfile: read
+  buffer  0x53B00980 (456608 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 452512 of 452512
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-recording-formula/v11-before-50RESLAB.BIN
+  local   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/cards/20261009-virtual-rcd-v11/debug/fpSup/50RESLAB.BIN  452768 bytes
+  remote  \fpSup\50RESLAB.BIN  mode 0x7
+  buffer  0x45064E00, file object 0x450D36A0
+  proof   region takes writes and still holds them a second later
+  restored echo -> 0xC03D99A0
+  reply   putfile: written
+  status  2 — written
+  open    1     write  1   (both are flags, not counts)
+  WARNING 50RESLAB.BIN did not appear in dir
+  remote  \fpSup\50RESLAB.BIN  452768 bytes, mode 0x1
+  buffer  from the firmware, file object 0x45064E00
+  reply   getfile: read
+  buffer  0x53B00980 (456864 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 452768 of 452768
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-recording-formula/v11-installed-50RESLAB.BIN
+{
+  "target": "\\fpSup\\50RESLAB.BIN",
+  "card": "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/cards/20261009-virtual-rcd-v11/debug",
+  "phase": "verified",
+  "backup_sha256": "ff089b2ba3bbe302c9dcb27f555976c7ccf8f382db3d43b26ad5e2551db87eb3",
+  "bytes": 452768,
+  "sha256": "579c224cdca865e03630998bf0ec097d1cbd4bd4b5af5857fd28d67d4bf12e5e",
+  "passed": true
+}

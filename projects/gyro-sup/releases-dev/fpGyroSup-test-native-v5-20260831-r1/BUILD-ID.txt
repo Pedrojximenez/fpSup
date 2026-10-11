@@ -1,0 +1,39 @@
+fpGyroSup-test-native-v5-20260831-r1
+
+Purpose: on-camera AutoRun test of the native CDNG/MOV lifecycle
+Camera firmware: SIGMA fp Ver.5.02 only
+Build type: release / no USB shell
+Lifecycle: native (required)
+GYR format: v5
+Source commit: 8352786699ea2ee332eabc04ee1e224f4ce1dda2
+Source tree: dirty test snapshot; source hashes are listed below
+
+Build results:
+  AutoRun.txt  7722 bytes, 219 lines
+  VSHL.BIN     8192 bytes
+  PGEN.BIN     9728 bytes (9712 bytes code)
+  logger       3852 / 3920 bytes
+  PGEN post    +0x284
+  PGEN gcsv    +0x1F64
+
+Verification:
+  21/21 host tests passed
+  VSHL logger section equals a fresh logger.S assembly
+  VSHL hook is the final section
+  PGEN equals a fresh native-lifecycle build
+  git diff --check passed
+
+Build-input SHA-256:
+  fb3206b1492f0729e88571c1990969acaa78db45401bd4d06e3d95ece4bb7cb6  fp_usb_shell/armasm.py
+  cb43bce23bc53a91d6365ddfef785bfdcbcf9fda7e92f9ee3ab98855d76f1ffa  fp_usb_shell/build_autorun.py
+  00d2e15b4afff9e4a70e135a67e7e45de45bccf48e1e8ae1098b1cd8a89c666f  fp_usb_shell/templates/loader.S
+  79966eb73d5f3d455d207530a60a6436313bb457e912cfdcf2a0b35d2af6b608  fp_usb_shell/templates/park.S
+  3ce8ea7ca402cc5d5b3c64196e2a61ed056f75f6a0fa319fc4650090c13f88f8  gyro/build_card.py
+  344dbac395f84cba5c174664d089dddfa27443820781806cdab6fd1d4cdc5a16  gyro/build_pgen.py
+  3056b556f7129be95829844a17d2b88d3c66771c7b1c3ac4188e0764b06842fc  gyro/gcsvgen.S
+  7ba0acc4088864f785d91c387cde0ac4876cb73c6772f6a0c11c51856f428789  gyro/lifecycle.inc.S
+  6ef18f448cea4da6083542d45349f30fc02cc9a5a7d90864f638d4d76acecc39  gyro/logger.S
+  4d3f362f338a14687da60e9434dea08309705a953fc058cb800561c4e030a08d  gyro/makecard.py
+  2d221a69436fb06b90971c29aaf445136efccd01e8f455e3de5aae5279616200  gyro/pgenload.S
+  737287c7f49f648fe8eccf549b08be0ffe6e35a723731eb3c59c74289a33914c  gyro/profilegen.S
+  4a0bc2555065529930fc8f3f0a88b23a8246fa41d3695cb1bac4e4bba88c0671  gyro/recovery.inc.S

@@ -1,0 +1,2101 @@
+{
+  "takes": [
+    {
+      "clip": "A001_277",
+      "source": "/Volumes/Untitled/CINEMA/A001_277",
+      "count": 1,
+      "numbers_contiguous": true,
+      "files": [
+        {
+          "name": "A001_277_20261011.WAV",
+          "bytes": 12288,
+          "mtime": 1791724396.0,
+          "sha256": "f7545c187af5660f150a9a0b835d5e8cb65ec07092aff0745bcdf3dbe325d243"
+        },
+        {
+          "name": "A001_277_20261011_000001.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724396.0,
+          "sha256": "a1a28c95b5be21e85353e7f8b18300dc18a09086418b815af805c7bc44bd5e52",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "SPP_metadata.xmp",
+          "bytes": 296,
+          "mtime": 1791724396.0,
+          "sha256": "88749dc2281f92fe2d9d19a54d30df1b9e13f340673b00fad99aa81df36037f5"
+        }
+      ],
+      "samples": [
+        {
+          "file": "A001_277_20261011_000001.DNG",
+          "number": 1,
+          "tiff_offset": 0,
+          "parsed_relative_to_tiff": true,
+          "main_ifd": {
+            "NewSubfileType": 0,
+            "ImageWidth": 1008,
+            "ImageLength": 672,
+            "BitsPerSample": 12,
+            "Compression": 1,
+            "StripOffsets": 78848,
+            "StripByteCounts": 1016064,
+            "BlackLevel": [
+              "262144/1024",
+              "262144/1024",
+              "262144/1024",
+              "262144/1024"
+            ],
+            "WhiteLevel": 4095,
+            "DefaultCropOrigin": [
+              8,
+              5
+            ],
+            "DefaultCropSize": [
+              992,
+              662
+            ],
+            "BaselineExposure": "2378/1024",
+            "FrameRate": "30000/1001"
+          },
+          "ifds": [
+            {
+              "ExposureTime": "1/320",
+              "ISO": 2500
+            },
+            {
+              "NewSubfileType": 0,
+              "ImageWidth": 1008,
+              "ImageLength": 672,
+              "BitsPerSample": 12,
+              "Compression": 1,
+              "StripOffsets": 78848,
+              "StripByteCounts": 1016064,
+              "BlackLevel": [
+                "262144/1024",
+                "262144/1024",
+                "262144/1024",
+                "262144/1024"
+              ],
+              "WhiteLevel": 4095,
+              "DefaultCropOrigin": [
+                8,
+                5
+              ],
+              "DefaultCropSize": [
+                992,
+                662
+              ],
+              "BaselineExposure": "2378/1024",
+              "FrameRate": "30000/1001"
+            }
+          ],
+          "declared_strip_end_from_tiff": 1094912,
+          "tiff_base_plus_declared_strip_end": 1094912,
+          "file_bytes": 1095168
+        }
+      ],
+      "extras": [
+        {
+          "file": "A001_277_20261011.WAV",
+          "rate": 48000,
+          "audio_frames": 2837,
+          "seconds": 0.059104166666666666,
+          "channels": 2
+        },
+        {
+          "file": "SPP_metadata.xmp"
+        }
+      ],
+      "tiff_offset_counts": {
+        "0": 1
+      }
+    },
+    {
+      "clip": "A001_278",
+      "source": "/Volumes/Untitled/CINEMA/A001_278",
+      "count": 94,
+      "numbers_contiguous": true,
+      "files": [
+        {
+          "name": "A001_278_20261011.WAV",
+          "bytes": 114688,
+          "mtime": 1791724400.0,
+          "sha256": "797aec0e695178b7363c6273d4653b56a530439239c65ef5ab6213d02e46a8f6"
+        },
+        {
+          "name": "A001_278_20261011_000001.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724399.0,
+          "sha256": "86a0d48a25311aa43aa5297b94861aeab8b94a46631348d514dee24970591a22",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000002.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724399.0,
+          "sha256": "5ccb8900d142098e3106b85cb77300276a7e4dd17cb9049b0874d17fb892c529",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000003.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724399.0,
+          "sha256": "db1b49ce5f6b99b83347864506a9cdaf4d1df340a45b5b9a36be0fd24f609e44",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000004.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "8fc4384292f6011afd7bfad60e381210d67d07c920fffc5df1fc6f2c2c4299c9",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000005.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "be316d5c0eae331ae82b3bcdbab75f27fc446666cee318ad47b59743bac9de77",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000006.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "b6297baf0294eb571e294cc66a01bb596c003c7fac718439cf4e2ea2d18691a3",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000007.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "4e60f4041ea6f91516331d5b7c70f8e2daec5a892ec0d82eb5bc3f797615045b",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000008.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "b63610f13a67ac3c1f34e8f990b20a755f9133716fdc54636cf19a8d0716ea01",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000009.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "f1dde9b7518ec76bc814c4122353a4f7a7a914edee0bcd6b8fe95d5c4cf11abb",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000010.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "87928227f5e5c257c36cde7e29bc4c1adf617f9083b513086a1ae8839e7342f8",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000011.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "77d40b7c813b399209d83d821768d41f1c46d1564a9b65522a1f651b4da0c400",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000012.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "4eec21abca46b349b01af65366b5e55c8c12008340202b4c832c77bdf9f541d0",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000013.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "e2fa9aa5e4611a8cce1b76d5d6ed0249a5fc39f89ca61ec55bd5d813afed36dc",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000014.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "a725421932c458aab668ab6a845e104cf9f91dd5b2cb8c688d35c1e10e627866",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000015.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "9200f45c99f2f071019e372f7eb5008b29bfcd4858613a124649e72a64c74419",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000016.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "b8401b65cad8042a570434b0e7ee7ec1962aee49c223ad08bd95f89d5121aab2",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000017.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "f853beadb4b8378bd47e7a9ca71f003cb26a6ed0c06033ec6ef3655f27228254",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000018.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "6e2823a3cb6f169a5494119d2a36574f3962a13fd089c4ff2e3f1634650fead4",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000019.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "edbada6c9cd4cb666f3ad97f48cc386d3e999e68996bed76c920a908af6a7238",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000020.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "8bccca4b1db93fcb2d18017203992ee7c4df2481c69744f2b43f568f6fe67b2a",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000021.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "528d5ec629f8089ab7cc7aafe2c2e688b62c91080979c55bf92c84857ebe228f",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000022.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "204fec903f3dae764f01d71b4e6c65e8a2da6cfbeb0f8da70fda50510d13870d",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000023.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "fe0f15e876fee2949821fefcc681b209e6aaf3824a1cd69c7239d5491b921ec7",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000024.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "4d58fb290578fb7261757781bf1888a3c66f3fb9770d0bcf6ffdc9e2e590286f",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000025.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "b3ecb446187670e1f0a5b4c4cbae3cd63ae1c0ee352c5940a927b9a7f6e8ae69",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000026.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "db579d5e5f447ec3b19687155d5a6f331df4b2f25f67c5e301c88595f3846a9a",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000027.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "73908fb7bb77e6e97330ecaafef4416b1a269bf309bbcd069f3e58b901579cc8",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000028.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "5850217f6cbc0c5df99807c90994bb2f2a45d4725d2f8c9f34fc279da994d1ef",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000029.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "1eebf4039baae38c419fca21bffcb985c4096c456a37eb3d30b414b49631f58c",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000030.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "fabfc376384957950089802e36c4e605ff4e50f4ccbc641d3aff844c67fb017e",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000031.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "46e7ba335ab7aa00c34d118bcae5abe0659a86111548ce120273d5459e5b7e6b",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000032.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "fa3aa69b0ccdbe6bf6ede1f99e458ffcb847244d38b466f73bd24b75629329ab",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000033.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "af7d816c15c904daa027ef080ac18574cb4dd1ff52a815c4e6fda34821dce5d7",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000034.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "40cd3e5db0c717906d748c67983e7a1084fd8befbb04e7879cbc0c81c8411d1e",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000035.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "a370a55a067d9754b9fa6dbd57578088775300a0ee4faf395ca05e5b3c3e42dd",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000036.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "b68b5f9d711c7826d62f84ba671387890fd9aea6687609eaad790ea66016a82b",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000037.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "ae5cf556414cc783af535f17e246b1ebe2f4ac013047b59ed2895912176d88b5",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000038.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "c03a188b3145a7ab0d59e51c77d7207124f9539d845e7fae37568b2e33411537",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000039.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "b1ecae50dbe462e7c92b75a585709844bc747796e5b6b811ad331683d9aa8104",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000040.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "7d9ba1d4efdcc9cc84ac13941ee05f36712b573b0938431f8f4530dfbba91584",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000041.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "9de96fe01b4ae18925d81d40f407629e5e7e20d63ca38fb9399330791e33bd27",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000042.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "324185fda880f461069fdebe5c8246d46d447f3a1c1fc36b4d25a298bfcf515f",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000043.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "758d45b9fc0a3d8794ce53701c1c2781796aee7a1b6cad48d77c12f71da3e0b9",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000044.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "323a15c17b5fa9f5c8ad2adf5dd4a6699a597360934e4f687a013a8a26d65ca9",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000045.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "3de158e4ee8d27798e8a100cba5c046c81e5b5e48b701b597b52b5bff0f0fef6",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000046.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "31b23502d1ad1503a727bec824ee059f1afa28bc1939c6fc23017ec27b0e6f4b",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000047.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "844239955426f8248c643791d83c82c91973366a24158d2257d736da67871991",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000048.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "8e13404ccfbbc4219b4a5810cffbff634b737ddadbef9052eceeddd6fa313530",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000049.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "c570e16de919e74ba6e45310794d8acf383b0a0858a8d38fa1a7d2941ef2876f",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000050.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "1b66a1c22520813caf87d4a8eb70dbe86b8266b2380d6f2d431371a6e49cbbbc",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000051.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "21391f4e55a0db379d036f31ce6ff8d676a772388acfe04a614a5534954fc195",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000052.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "8dee26c82b877e5816dd4882b161a0670ef5fb217fba7b80984b6e5cfa9060ea",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000053.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "253320ed4094e21b7620cdc70ff8fa42b026be0888eab2417518a361d2fdff01",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000054.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "6ecb102f6eb3987ec41198c314ae7eb14ec56204e1cbb065a4fab001476d69ca",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000055.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "d703c6cce0c08ef62d035562410fbf5781f94fe6c9a6ea70d8b44ed12d48500b",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000056.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "c3a7aaed0055b819a7ce7966bf64add75cd7a6eb6ade6d924c95a5714070675c",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000057.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "89ff37ee8d6522d9ec097a5bdcbed1ed840e805cbd11524a31e9849bb15e4ba4",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000058.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "463498fa712e60f4533971ff28c6ae762f01012fa5bbb6474d845fbd325135c8",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000059.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "225a4d6a5f9a15f94c057a51234ef7a2518368376003b06c7b7c8667dc26b11c",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000060.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "094b2c8fa8dba8342dac436866fccb9532aba1cc8a1b94a6614940061197dfb5",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000061.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "4b19019021c1d7450009dd17799698f2a0aa315583925536653c8ee6d2065c16",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000062.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "2a8fd688b2a45bca786c2e8c35c01cb8ae18c734751657ca67832b6859d40eff",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000063.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "2733036b3f8c183f7838aeef2d27eba73138d0aa0eaac395cefaf855988d3266",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000064.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "8ae24da20a673677d768657ca18f05a059e9a51f64e78b3079de02a21b462657",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000065.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "4a41bbc172ae75504f46f366ce17d9f3191130f93489eda1a5b0f7309eebbcc9",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000066.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "2df7bd2a3667245427df39bff4bae41f2fd985a6d3127f843b7808d5bda20e64",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000067.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "d8f34479ee6b8bf79e6e1fb9eb27ca0a1663fb3776ce84fa3c39c5f4ad0b01ea",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000068.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "b93771423f5e5ec354215dd5e1bd5d4ffa667b6cbc636317695611e083ad2eeb",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000069.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "959266b6dad11ef5bf962aa708f250dcc2095aac27a4069623c3e49c6039a349",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000070.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "ba72e116f22b0899b859da0a11226c0234521b75fb6d9fcefb890052f65924e0",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000071.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "693e4effba6dd0daca8c43845f9fab081edcf0709daa1f95e33dc53263431e6e",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000072.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "eeb24e8d940bbe9ca75ff094f9af6ddcafd9269aa4f50f73386857df5ace9c81",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000073.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "fb9aa2854c85181bc04d681f0467baf1b8eed665d6929677f77b5df466baae97",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000074.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "cd783a387fc6150e944a6fbb399c849a213acda5b31c351b3ff9503ea39c0e00",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000075.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "08bbe8547deac2a165b59c38012dac53cf2f02d4068fb7165d4e931212ab3680",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000076.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "881be7b4cc75b2823d0004493d34d1e07eaa23d189f974606262449b6b2be7e7",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000077.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "3e04ca26e324f0c13b9a3a358134d2e8ba646dde566d51e72da5e6ef18376a00",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000078.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "4debc27491172922c99f07897ae3dea0be7bce607067f3c3c2e1bb48e52bdfe6",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000079.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "f90ad02b2a9c4f87dd754f50b7134d3e33a6a472997759ea46cd86695d485188",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000080.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "7cd9cc110b8ee871ae2cd843f0142210d8323c59fad6492b9afdfb6b99ed33ad",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000081.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "883df81095f81741bc4b9747716b433e1a2543e97a8f8f3a33aa871b6699606a",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000082.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "f8c004ccf9c9c90394ca6435e5005967fa05a3a9a2b3de3840f9977523e593c3",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000083.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "2024a9373d84367bc95e3a448055ce171ef90d378ff2e103ef449fceba309511",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000084.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "60e48564909a6f3e2276d6c35452e67fc5817c8417cd8ee5e1e6e1daf01e3ff9",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000085.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "247d5d1b424ad539d11478029b23205d93bfcf2ee7da76a5051f48dc94acf81a",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000086.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "27a902b783182294dce609066b5da3d03bab79887b068336fb3b1c2f9224e250",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000087.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "a6a24b71fb2db335c92ab026a37f59a8aa5fa1f4f4650fd9ee23024af2f208f5",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000088.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "311bbf29967078f459d128d35d655df0a82e8ac184b90de51199c2f1cd01911c",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000089.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "a170c401351e97737a43aa006289d22561bfd37f0844d9f516532a7e73945378",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000090.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "69c3662fa3cca3e061a91ec5463c03fcd4d12755e99d3d60559f1a9249ee958c",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000091.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "482d8292033bb20ec1341f8b480ea5d8a49726e643f56b3a5b2f44b48d0bae7a",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000092.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "da6c3d2584803caa8fb6133815da6794206b32e5e3e262fafcb3ddb52bc18251",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000093.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "8274510feceadf3d41407d4406ea132a5476b5953b17190a3b14c67197af6dce",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_278_20261011_000094.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724400.0,
+          "sha256": "1bc16450742ca6cb1c334a33b83e857bd125456a76057fe9d6144a33bbd0576b",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "SPP_metadata.xmp",
+          "bytes": 298,
+          "mtime": 1791724400.0,
+          "sha256": "7760f16659ea2c606ffcd8acdf6af617cac59d980a640dbdd0769f9692e02809"
+        }
+      ],
+      "samples": [
+        {
+          "file": "A001_278_20261011_000001.DNG",
+          "number": 1,
+          "tiff_offset": 0,
+          "parsed_relative_to_tiff": true,
+          "main_ifd": {
+            "NewSubfileType": 0,
+            "ImageWidth": 1008,
+            "ImageLength": 672,
+            "BitsPerSample": 12,
+            "Compression": 1,
+            "StripOffsets": 78848,
+            "StripByteCounts": 1016064,
+            "BlackLevel": [
+              "262144/1024",
+              "262144/1024",
+              "262144/1024",
+              "262144/1024"
+            ],
+            "WhiteLevel": 4095,
+            "DefaultCropOrigin": [
+              8,
+              5
+            ],
+            "DefaultCropSize": [
+              992,
+              662
+            ],
+            "BaselineExposure": "2378/1024",
+            "FrameRate": "30000/1001"
+          },
+          "ifds": [
+            {
+              "ExposureTime": "1/320",
+              "ISO": 2500
+            },
+            {
+              "NewSubfileType": 0,
+              "ImageWidth": 1008,
+              "ImageLength": 672,
+              "BitsPerSample": 12,
+              "Compression": 1,
+              "StripOffsets": 78848,
+              "StripByteCounts": 1016064,
+              "BlackLevel": [
+                "262144/1024",
+                "262144/1024",
+                "262144/1024",
+                "262144/1024"
+              ],
+              "WhiteLevel": 4095,
+              "DefaultCropOrigin": [
+                8,
+                5
+              ],
+              "DefaultCropSize": [
+                992,
+                662
+              ],
+              "BaselineExposure": "2378/1024",
+              "FrameRate": "30000/1001"
+            }
+          ],
+          "declared_strip_end_from_tiff": 1094912,
+          "tiff_base_plus_declared_strip_end": 1094912,
+          "file_bytes": 1095168
+        },
+        {
+          "file": "A001_278_20261011_000047.DNG",
+          "number": 47,
+          "tiff_offset": 19456,
+          "parsed_relative_to_tiff": true,
+          "main_ifd": {
+            "NewSubfileType": 0,
+            "ImageWidth": 1008,
+            "ImageLength": 672,
+            "BitsPerSample": 12,
+            "Compression": 1,
+            "StripOffsets": 78848,
+            "StripByteCounts": 1016064,
+            "BlackLevel": [
+              "262144/1024",
+              "262144/1024",
+              "262144/1024",
+              "262144/1024"
+            ],
+            "WhiteLevel": 4095,
+            "DefaultCropOrigin": [
+              8,
+              5
+            ],
+            "DefaultCropSize": [
+              992,
+              662
+            ],
+            "BaselineExposure": "2378/1024",
+            "FrameRate": "30000/1001"
+          },
+          "ifds": [
+            {
+              "ExposureTime": "1/320",
+              "ISO": 2500
+            },
+            {
+              "NewSubfileType": 0,
+              "ImageWidth": 1008,
+              "ImageLength": 672,
+              "BitsPerSample": 12,
+              "Compression": 1,
+              "StripOffsets": 78848,
+              "StripByteCounts": 1016064,
+              "BlackLevel": [
+                "262144/1024",
+                "262144/1024",
+                "262144/1024",
+                "262144/1024"
+              ],
+              "WhiteLevel": 4095,
+              "DefaultCropOrigin": [
+                8,
+                5
+              ],
+              "DefaultCropSize": [
+                992,
+                662
+              ],
+              "BaselineExposure": "2378/1024",
+              "FrameRate": "30000/1001"
+            }
+          ],
+          "declared_strip_end_from_tiff": 1094912,
+          "tiff_base_plus_declared_strip_end": 1114368,
+          "file_bytes": 1095168
+        },
+        {
+          "file": "A001_278_20261011_000094.DNG",
+          "number": 94,
+          "tiff_offset": 65536,
+          "parsed_relative_to_tiff": true,
+          "main_ifd": {
+            "NewSubfileType": 0,
+            "ImageWidth": 1008,
+            "ImageLength": 672,
+            "BitsPerSample": 12,
+            "Compression": 1,
+            "StripOffsets": 78848,
+            "StripByteCounts": 1016064,
+            "BlackLevel": [
+              "262144/1024",
+              "262144/1024",
+              "262144/1024",
+              "262144/1024"
+            ],
+            "WhiteLevel": 4095,
+            "DefaultCropOrigin": [
+              8,
+              5
+            ],
+            "DefaultCropSize": [
+              992,
+              662
+            ],
+            "BaselineExposure": "2378/1024",
+            "FrameRate": "30000/1001"
+          },
+          "ifds": [
+            {
+              "ExposureTime": "1/320",
+              "ISO": 2500
+            },
+            {
+              "NewSubfileType": 0,
+              "ImageWidth": 1008,
+              "ImageLength": 672,
+              "BitsPerSample": 12,
+              "Compression": 1,
+              "StripOffsets": 78848,
+              "StripByteCounts": 1016064,
+              "BlackLevel": [
+                "262144/1024",
+                "262144/1024",
+                "262144/1024",
+                "262144/1024"
+              ],
+              "WhiteLevel": 4095,
+              "DefaultCropOrigin": [
+                8,
+                5
+              ],
+              "DefaultCropSize": [
+                992,
+                662
+              ],
+              "BaselineExposure": "2378/1024",
+              "FrameRate": "30000/1001"
+            }
+          ],
+          "declared_strip_end_from_tiff": 1094912,
+          "tiff_base_plus_declared_strip_end": 1160448,
+          "file_bytes": 1095168
+        }
+      ],
+      "extras": [
+        {
+          "file": "A001_278_20261011.WAV",
+          "rate": 48000,
+          "audio_frames": 28437,
+          "seconds": 0.5924375,
+          "channels": 2
+        },
+        {
+          "file": "SPP_metadata.xmp"
+        }
+      ],
+      "tiff_offset_counts": {
+        "0": 29,
+        "19456": 22,
+        "65536": 43
+      }
+    },
+    {
+      "clip": "A001_279",
+      "source": "/Volumes/Untitled/CINEMA/A001_279",
+      "count": 94,
+      "numbers_contiguous": true,
+      "files": [
+        {
+          "name": "A001_279_20261011.WAV",
+          "bytes": 122880,
+          "mtime": 1791724404.0,
+          "sha256": "cf0fc227c0323f15775b176fb57d44fb539158c2c1689c746a6a9da32530e27c"
+        },
+        {
+          "name": "A001_279_20261011_000001.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724403.0,
+          "sha256": "7b0fe2261584df19a1ecb2112484f2e8586850e1c018ba4a0b27cfd16e4dda18",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000002.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724403.0,
+          "sha256": "445f5750ae0c2aaa63920179088f2833b9fedc205e7f46b916d585aa0dd06a03",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000003.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724403.0,
+          "sha256": "147cffdcdbad6f42dffc75eaff85ab891407ffbf57340f31e2c0d66d23d31e97",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000004.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724403.0,
+          "sha256": "fbadfd40cf9bf0eabcb1a874a6df66ff57ea51def5fe0cf3fa63d61ae4e94de2",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000005.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "180c15f7ee50a9e9bee5affa89efe6338ff6f176afe7867e2b64dad137bfbc27",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000006.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "81ec57d20aaa2889dac0defd32cb927e52b111258c1732d51e7d9a90d1f3888a",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000007.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "76a38cd335740bbf375f61b1f320eec90d5bbc8c5fdda9e089b1ca0fa7bc22ba",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000008.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "6846cb591a7c75f0974f49ddfd41abf04f5cd553326576e952ff996b444033b8",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000009.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "342dc541356f4a163ea40a8ff67b4efaa2376b5a5e6af8408d0de3fd149bf471",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000010.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "ba421f56117be573fd815f7af95d3ee808badf7269664384ce5aa76c1e1b3e98",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000011.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "d610ce07f567135e0d855346b2422ab41f1f406b70f54776b2345317892d9b9b",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000012.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "d409d35f1aa4fc24d23be90f540b3d364db718b85c9404bc50913746b2154791",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000013.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "cad6b628b0e41acdf8b2221cfc2cfdb29d5d5f9116058d790a385c571ac34ad9",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000014.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "02650d99c29a1009ebb57440d9d0fabb92c963d5b8a779520d8cb42a8b87c1ed",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000015.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "d394fd9a9ad88cec86fdf31ae4712371a45737a7668397b92e2902c8ba6128c9",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000016.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "86ff7efa7602dfcb6f17febf7e6b81fe2cac2c81151fbbd0ea60231ae8bcf319",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000017.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "e87240abf9715bd98156a0532a95c9db2b91e8348a61c82c0bcca59e9c3384bf",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000018.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "0943212c4240149f74cb35c9cb053a245db7a64c435945d9b144ec4e179dce2b",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000019.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "ffa99f891727ec3ac09f3714b45f1eba8ea98e3bbf0df6fe13791518b2fb3127",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000020.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "f5e94c0a62bb2a195072009a614022e22ec577f537f797ad4be67b6ad42bf645",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000021.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "7a92db5ccbd8e56813e91baaba6602e6310e4ee3bb7ea36c4294259f6be14455",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000022.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "d06c2a960c44b554b350818503eccb853d74c0d5c1815a60627e264e1a55ecf3",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000023.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "8c7889bbc80f72e90be2fad374fad2f296ce3ac1d0a1f949ddb13b32baed8c1a",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000024.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "580dc8066b1cd4827bc42467df7feff7164084dca2d0c023f6d41a571f387527",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000025.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "451f19f020363201ab6ebd147cf4f775218f6d7c96e2ac1af9231b9d22b2c6fb",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000026.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "35e570e87d08cd1823030e4d7757f5ae580f89ac6470ac7951d5cc7ca677b43b",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000027.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "df6864b2ac025c913a09d3a4945600386cc167f836ff8d9260ee5892b03e0c0b",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000028.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "4e2f2e53c6dc097db7c30ee2a156d045b79bd67d6d8aea6793604220785d0fe3",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000029.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "a30248839c789a715b5c8fdc94e70cc45c8f00e40e7a66d9727c42365dedcc85",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000030.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "d7ccb71a9b51a1815ff72e827909456cc84e0cbd30d27bad643e614cc2c742a1",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000031.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "a6919038b456e802f5136a83ed9feb3ff04e578715672f2b6b75d11e74ac36c4",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000032.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "bf7d3b2705a6c8bfa1759e6074d2bd9d1580218f0aa541a7dfaeb7963f6d8af2",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000033.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "fe2947de0fd24b03ed1029bf4b8a852cac3a8b9654f28c309f5d4ff006310aff",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000034.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "d3738cc697f60f686429ed0dd18e2b1c5cb8999d1832a5e92a37e881fcd46063",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000035.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "f46877787f3a9fe9e429f6d8b529317881d1b989d5da2c38ec24ea35a4d5cf09",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000036.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "eca194a81a6fee1701c55d883be464604711fe1b2abd3eb26441052f9f85e2fb",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000037.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "d862e98cb156a3df6e1489c7a0acfeb5a2bf7d059caf1524aa84c424858b8ca8",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000038.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "b6f4ec39a59766967cf607ecf63f3494496b06053acb8ac8a3c5397901f69f60",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000039.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "d5eca6cee110f3bea21166b27e0c9ac35e3a567a0c4cc7282d4819cc935f67ed",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000040.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "185f831cc3bea1dc9f738d80a2cc85fdf12a117f5040571d682265b4a3d6bd01",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000041.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "274568a0ec43df631cc7a9ebbdfde445c1a64379896481cfcfd20c81be90eed9",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000042.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "26c268868fd343fd83f14d2be7fae81d2bf6921b04bf0899412e4bbab90cb718",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000043.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "2a4a69ce74c485b5405a413245e42860c4d36af2446d9bc91cc15c8275fedf8f",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000044.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "ad6f05d30808b4071080d34e6712d04b1aecbd4f5e13568b63c768a17b9888c0",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000045.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "849f49207ccab6bfdb9c69c8e5d3a0c9b30faa9dd3ee2ec98899ffcd8959e11b",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000046.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "c41948ff14f23b8fd8f0663801530fd5fe6d2ddd432078e992919c47c46fcfa3",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000047.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "aa84a15fa1815af0702946d00fb984756dccc9933ddb4ff0bf5f88e0587bfca6",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000048.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "4342097673179aa286994513b866d2d9a34fc9d867dc85adca96dabe6e5e4c63",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000049.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "173b90a183b88ec1cee299d3b1923c8d7ff04ae41fee920ee1087bd45f5811ab",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000050.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "c9fad3bf8dd24faa3acef3bc7b56ea9cd806a2668aa3df2f7db77f22160326fa",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000051.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "043ce05c03ce0e51416ba1c30e9db8b143c52d7ac98e756c525a6bfd2fe17976",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000052.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "5f561710844afd5ac540982a0880947cf8db02b5f04e4174a1776a85fa92266d",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000053.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "5e50867bb0b8ac6986754c0458fe39c039b7a3c4568fd60da0ad19ae03794b46",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000054.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "95a269f0fce9b7806e30a81e6d3c4dab5c6e65f433b1de8ea55ba5c4f23719b0",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000055.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "eb5ca80baafa345184eda3c0491e7ba5f5d52253e6c87ea6b5a31d714dd6a0af",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000056.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "4c1b8d6afee350b24f0d104bb412484ad29922acfbb8de0b88a5f4c762a0e675",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000057.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "33060e926d4bd427ea9ea38af8a35698cedba64056cc92166f4e9bddecd3d64b",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000058.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "3efb501382f7587ba7c716ef632957f632bc9f29f304c204eb9deb6ecd8f4ca3",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000059.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "c55deab9c85f6c3f28c2bc28afbbd7d5c960d9cffd0f0084aa7ec1b009fe1ac9",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000060.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "a4c6ace60d4e4ac4bbdecb33925cfeec83172a851dfcf305208f2978a0b3f3f6",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000061.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "81bb090c24c04b88c97a55459a045376128dddebe393c80ba038c6e8ce2a40f9",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000062.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "e135b7b04d7c697347d9dbd0731e50e90ac88041c5860763dfc7ec31316a9d1e",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000063.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "156964976c784f6feef73cefa077495843dc5a1e61367c3a1411699677acdb49",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000064.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "f3d11775e9677586e91c1f1dd9df936004f5cd8d021d5bfe1c876f8239181c76",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000065.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "128db14a27d9e0a9f743c804efb77b71d8c3b7862e0f8a0b60e0b0752d676314",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000066.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "28f0f0d8e62600abbfefecf3d5cc4160d61d323ea7ab5cd963fe88b278a9f7bc",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000067.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "932eca43954341ff093aee289fee19dc7a25c84570068bf8114df5c47d69cce6",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000068.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "ceb21e802d000b24d8fe4864e2498cdc11e7e17f087273a1a69409af620e60d2",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000069.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "58cc41ed2c2f8b50049678b78a80b58dbbd0b6a223fc1e158835078b600feb1e",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000070.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "78ff9029324ff234ccd84272d3f0d547f969147bac616d70bfe075a5e012415b",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000071.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "2de4c9b40986cc93cd3d33e2396ecc284778c687739e1065d85c42b4f1fd48db",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000072.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "9cd2274e9c3a14388de40bb50db98b9d371f2b915bc6afcf5457465e0ec2742e",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000073.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "0058ec6824f892be1e6cb13c30790c28cf15c07e436bf7fa92e480ba0e5c5199",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000074.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "bccffca8e06f8017b6d6617117a76769d776debd25440814f8664ac966b95995",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000075.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "6eac0a41857d030de0c1b8506cdf998bcfbde0179f74e9dd6030bae2fa035357",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000076.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "d8e3b16d24fe0be35bc5c129e9c04018bd0ec08d4745236f8d4e784f211211d3",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000077.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "c68016a23d0c866b1ab074e7ad3b8bc9e780e53489b59bd33e6878ee512eb4a1",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000078.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "7140bde9d65da39d75be0e4cda9bc6e39a34eb8b092fb0d6c3df39913ab4c7d8",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000079.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "0adaf1390fc9cd8483d4d792f661b48c695a64ddff1d5c2808c9ef51be045a8e",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000080.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "358c2b642e717d92db1329c0c67e61d78cabe109810304dbc8f44419cb4d6a22",
+          "tiff_offset": 19456,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000081.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "ec897c395e20f294ffc81910dc534adb3131855eb1e4d734e45584ee9ff74ae4",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000082.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "0c12d0bae61a2fc9f7ebe4a6402e3252ffafa6de9c3c5c35e9ea3dae238e4d96",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000083.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "b0cc2a6cf3ca10c3366eda272dab5795f427e05a8502bb4b5722bebe5f6ca654",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000084.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "160d09ef56f3428285c5b124b2ecf4d0976759a0024780a6f346f11185ad110b",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000085.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "143655f4d99edbe5cff3dfd693412938ebb4e29494de2f3fa0e8792af69a4e54",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000086.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "0b8fc8b4ea728802e168ccddf39e6af9bfd146e9339b30a8eea92b868ade4f11",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000087.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "314a3772fd427636b8a7eb2e34b1cf6d704965a3ee2817a21483d82f9875530d",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000088.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "01572e3a9106b0b81db7b8747cdfca3c9f27d5748277aee4019d31f5c51e3435",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000089.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "99164a043d987bae6246189b96dccb1f1d8f711593c73cba64857b9acd8065d3",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000090.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "12b75b4774617759ac6a702b9d304dbb6c1bad7aad9efa27983547738c740ed8",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000091.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "b415454f528b390f9140de13ee8d8e3c31ddc36ffc504fa780ae7485d3fc3075",
+          "tiff_offset": 65536,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000092.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "12e5e3e3787dd3a238ce109655621e4fc875364958e112b66ab06b011fb8610c",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000093.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "28f07b1f4025fd02d32a774df080f50c5843a33282fc4ca8e53831a8bc70bf73",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "A001_279_20261011_000094.DNG",
+          "bytes": 1095168,
+          "mtime": 1791724404.0,
+          "sha256": "474097c2c9939ed70015747df1a8b7e970861fdb43cf646ab0b4a214818f579b",
+          "tiff_offset": 0,
+          "prefix_all_zero": true
+        },
+        {
+          "name": "SPP_metadata.xmp",
+          "bytes": 298,
+          "mtime": 1791724404.0,
+          "sha256": "f18336cad0885735a3619ab3521bdb11eb949a817ec77195979ba01f7e7ae361"
+        }
+      ],
+      "samples": [
+        {
+          "file": "A001_279_20261011_000001.DNG",
+          "number": 1,
+          "tiff_offset": 0,
+          "parsed_relative_to_tiff": true,
+          "main_ifd": {
+            "NewSubfileType": 0,
+            "ImageWidth": 1008,
+            "ImageLength": 672,
+            "BitsPerSample": 12,
+            "Compression": 1,
+            "StripOffsets": 78848,
+            "StripByteCounts": 1016064,
+            "BlackLevel": [
+              "262144/1024",
+              "262144/1024",
+              "262144/1024",
+              "262144/1024"
+            ],
+            "WhiteLevel": 4095,
+            "DefaultCropOrigin": [
+              8,
+              5
+            ],
+            "DefaultCropSize": [
+              992,
+              662
+            ],
+            "BaselineExposure": "2378/1024",
+            "FrameRate": "30000/1001"
+          },
+          "ifds": [
+            {
+              "ExposureTime": "1/320",
+              "ISO": 2500
+            },
+            {
+              "NewSubfileType": 0,
+              "ImageWidth": 1008,
+              "ImageLength": 672,
+              "BitsPerSample": 12,
+              "Compression": 1,
+              "StripOffsets": 78848,
+              "StripByteCounts": 1016064,
+              "BlackLevel": [
+                "262144/1024",
+                "262144/1024",
+                "262144/1024",
+                "262144/1024"
+              ],
+              "WhiteLevel": 4095,
+              "DefaultCropOrigin": [
+                8,
+                5
+              ],
+              "DefaultCropSize": [
+                992,
+                662
+              ],
+              "BaselineExposure": "2378/1024",
+              "FrameRate": "30000/1001"
+            }
+          ],
+          "declared_strip_end_from_tiff": 1094912,
+          "tiff_base_plus_declared_strip_end": 1094912,
+          "file_bytes": 1095168
+        },
+        {
+          "file": "A001_279_20261011_000047.DNG",
+          "number": 47,
+          "tiff_offset": 19456,
+          "parsed_relative_to_tiff": true,
+          "main_ifd": {
+            "NewSubfileType": 0,
+            "ImageWidth": 1008,
+            "ImageLength": 672,
+            "BitsPerSample": 12,
+            "Compression": 1,
+            "StripOffsets": 78848,
+            "StripByteCounts": 1016064,
+            "BlackLevel": [
+              "262144/1024",
+              "262144/1024",
+              "262144/1024",
+              "262144/1024"
+            ],
+            "WhiteLevel": 4095,
+            "DefaultCropOrigin": [
+              8,
+              5
+            ],
+            "DefaultCropSize": [
+              992,
+              662
+            ],
+            "BaselineExposure": "2378/1024",
+            "FrameRate": "30000/1001"
+          },
+          "ifds": [
+            {
+              "ExposureTime": "1/320",
+              "ISO": 2500
+            },
+            {
+              "NewSubfileType": 0,
+              "ImageWidth": 1008,
+              "ImageLength": 672,
+              "BitsPerSample": 12,
+              "Compression": 1,
+              "StripOffsets": 78848,
+              "StripByteCounts": 1016064,
+              "BlackLevel": [
+                "262144/1024",
+                "262144/1024",
+                "262144/1024",
+                "262144/1024"
+              ],
+              "WhiteLevel": 4095,
+              "DefaultCropOrigin": [
+                8,
+                5
+              ],
+              "DefaultCropSize": [
+                992,
+                662
+              ],
+              "BaselineExposure": "2378/1024",
+              "FrameRate": "30000/1001"
+            }
+          ],
+          "declared_strip_end_from_tiff": 1094912,
+          "tiff_base_plus_declared_strip_end": 1114368,
+          "file_bytes": 1095168
+        },
+        {
+          "file": "A001_279_20261011_000094.DNG",
+          "number": 94,
+          "tiff_offset": 0,
+          "parsed_relative_to_tiff": true,
+          "main_ifd": {
+            "NewSubfileType": 0,
+            "ImageWidth": 1008,
+            "ImageLength": 672,
+            "BitsPerSample": 12,
+            "Compression": 1,
+            "StripOffsets": 78848,
+            "StripByteCounts": 1016064,
+            "BlackLevel": [
+              "262144/1024",
+              "262144/1024",
+              "262144/1024",
+              "262144/1024"
+            ],
+            "WhiteLevel": 4095,
+            "DefaultCropOrigin": [
+              8,
+              5
+            ],
+            "DefaultCropSize": [
+              992,
+              662
+            ],
+            "BaselineExposure": "2378/1024",
+            "FrameRate": "30000/1001"
+          },
+          "ifds": [
+            {
+              "ExposureTime": "1/320",
+              "ISO": 2500
+            },
+            {
+              "NewSubfileType": 0,
+              "ImageWidth": 1008,
+              "ImageLength": 672,
+              "BitsPerSample": 12,
+              "Compression": 1,
+              "StripOffsets": 78848,
+              "StripByteCounts": 1016064,
+              "BlackLevel": [
+                "262144/1024",
+                "262144/1024",
+                "262144/1024",
+                "262144/1024"
+              ],
+              "WhiteLevel": 4095,
+              "DefaultCropOrigin": [
+                8,
+                5
+              ],
+              "DefaultCropSize": [
+                992,
+                662
+              ],
+              "BaselineExposure": "2378/1024",
+              "FrameRate": "30000/1001"
+            }
+          ],
+          "declared_strip_end_from_tiff": 1094912,
+          "tiff_base_plus_declared_strip_end": 1094912,
+          "file_bytes": 1095168
+        }
+      ],
+      "extras": [
+        {
+          "file": "A001_279_20261011.WAV",
+          "rate": 48000,
+          "audio_frames": 30485,
+          "seconds": 0.6351041666666667,
+          "channels": 2
+        },
+        {
+          "file": "SPP_metadata.xmp"
+        }
+      ],
+      "tiff_offset_counts": {
+        "0": 29,
+        "19456": 22,
+        "65536": 43
+      }
+    }
+  ],
+  "limitations": "User reports automatic early stop. Exact per-take actions and native stop logs are unavailable; the frame counts and tags do not independently prove vbuf, sensor cadence, durable writes or absence of mosaic. No full HDMI recording was captured for these manual SSD takes."
+}

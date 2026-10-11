@@ -1,0 +1,7 @@
+splash : FPSUPUI/  193536 bytes; hardware untested; keep beside AutoRun.txt and fpSup.BIN
+binary : fpSup.BIN  32768 bytes, 313 section(s), entry 0xC0731600
+worker : none -- no task either, the loader runs in the callback
+start  : echo handler 0xC0BAC2F8 -> 0xC072DE64 (loader)
+patches: 0 firmware (-), 0 screen
+wrote  : /Users/dido/Developer.localized/SIGMAfp_re/projects/sensor-lab/cards/20260930-240-menu-r4/fast-plain-alternate-axis/AutoRun.txt  215 lines  sha256=8383a3b22d08068a
+clean  : 148 commands, no dumps and no diagnostics

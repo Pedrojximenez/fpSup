@@ -1,0 +1,47 @@
+fpGyroSup r28 three-slot 32 KiB + 32 KiB media-call isolation build
+Build date: 2026-08-31
+Camera/firmware: SIGMA fp Ver.5.02
+Build type: release AutoRun, no USB shell
+Base: r26 compact three-slot logger + r23 four-digit formatter
+
+Reason for this build:
+- r26's three 32 KiB slots retained 99.980% of active-video samples in two
+  takes, but the camera stopped around 15--16 seconds.
+- r27 halved all three raw slots to 16 KiB.  A001_003 still stopped after 430
+  DNG frames (14.348 s), while active-video GCSV completeness fell to
+  98.226619% with nine gaps over 10 ms and a 42.878 ms maximum.
+- Raw-slot size therefore does not control the stop point.  r28 restores r26's
+  deeper queue and isolates the duration of each recording-time media call.
+
+Only r28 change from r26:
+- GCSV-only streaming TEXT_FLUSH is 32 KiB instead of 64 KiB.
+- Each synchronous F_WRITE holds the filesystem/card path for a shorter period;
+  the existing 5 ms cooperative yield still follows every call.
+- The non-streaming post-read converter remains at 64 KiB because it runs after
+  recording and is not part of this A/B.
+
+Restored/unchanged:
+- Three ordered 32 KiB raw slots, 3,836 gyro samples or 1.5344 s per slot.
+- Producer claims only EMPTY; writer consumes the lowest READY sequence; stop
+  publication performs an acquire barrier and READY rescan.
+- Gyro remains 2,500 Hz with no decimation or sensor register change.
+- r23 four-digit lookup, fused gyro formatter and cached accel text remain.
+- Native lifecycle, recording/power lock, JSON generation and task priority are
+  unchanged.  No GYR file is created.
+- VSHL.BIN is byte-for-byte identical to r26.  Only PGEN.BIN changes.
+
+Interpretation:
+- If r28 records beyond 30 seconds, long 64 KiB filesystem holds were starving
+  CinemaDNG even though the GCSV queue itself remained healthy.
+- If it still stops around 15 seconds, neither raw-block size nor media-call
+  size controls the stop.  The next structural step is CDNG-aware scheduling or
+  writer throttling, not another buffer-size change.
+- 32 KiB doubles media-call frequency.  The r23 formatter and three-slot queue
+  must therefore also retain active-video completeness near r26's 99.98%.
+
+Verification:
+- All 56 format, conditional-layout, queue, lifecycle and safety tests pass.
+- Resident logger is 3,712 bytes, ending at 0xC072EEE4: 28 bytes below the
+  conservative 0xC072EF00 boundary.
+- PGEN pool code is 47,736 bytes and 47,752 bytes on card.
+- Experimental isolation build; not fp-gyro-sup-v1.1.

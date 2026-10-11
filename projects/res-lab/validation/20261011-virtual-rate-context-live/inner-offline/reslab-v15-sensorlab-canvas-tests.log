@@ -1,0 +1,88 @@
+test_full_old_240_profile_and_280_geometry (__main__.SensorLabCanvas) ... archived r10 full65 words reproduced 23976 native configuration {'class': 2, 'field58': 4, 'flag14': 1} route {'enabled': [0, 1, 0], 'mux': [1, 4], 'main_zoom': [2048, 1024], 'secondary_zoom': [1024, 1024], 'record': 0}
+archived r10 full65 words reproduced 27972 native configuration {'class': 2, 'field58': 4, 'flag14': 1} route {'enabled': [0, 1, 0], 'mux': [1, 4], 'main_zoom': [2048, 1024], 'secondary_zoom': [1024, 1024], 'record': 0}
+ok
+test_low_rates_and_rejected_entries_keep_existing_profile (__main__.SensorLabCanvas) ... FAIL
+
+======================================================================
+FAIL: test_low_rates_and_rejected_entries_keep_existing_profile (__main__.SensorLabCanvas)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/test_sensorlab_canvas.py", line 90, in test_low_rates_and_rejected_entries_keep_existing_profile
+    self.assertEqual(got,want)
+AssertionError: Lists differ: [1008[157 chars], 0, 1, 1, 0, 0, 0, 0, 0, 0, 1024, 1024, 2000,[55 chars]4736] != [1008[157 chars], 0, 0, 1, 0, 0, 0, 0, 0, 0, 1024, 1024, 2000,[55 chars]4736]
+
+First differing element 44:
+1
+0
+
+  [1008,
+   672,
+   0,
+   2000,
+   672,
+   0,
+   0,
+   1,
+   1984,
+   992,
+   662,
+   662,
+   1114636288,
+   0,
+   1,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   1024,
+   2048,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   7,
+   7,
+   0,
+   0,
+   1,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+-  1,
++  0,
+   1,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   1024,
+   1024,
+   2000,
+   1008,
+   672,
+   672,
+   0,
+   0,
+   2,
+   2016,
+   672,
+   1077936128,
+   1086324736]
+
+----------------------------------------------------------------------
+Ran 2 tests in 63.585s
+
+FAILED (failures=1)

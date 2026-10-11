@@ -1,0 +1,34 @@
+fpGyroSup GCSV-only streaming optimization experiment r16
+Build date: 2026-08-31
+Camera/firmware: SIGMA fp Ver.5.02
+Build type: release AutoRun, no USB shell
+Base: r15 GCSV-only native lifecycle
+
+Recording path:
+- The 2500 Hz callback still only copies raw samples into the proven two 16 KiB
+  RAM halves. It performs no formatting and no media calls.
+- The existing writer task remains the only GCSV formatter and media caller.
+- Complete GCSV lines now accumulate to 64 KiB, approximately one synchronous
+  write per 0.766-second raw block instead of two.
+- The five millisecond cooperative yield after a media call remains unchanged.
+- No GYR file is opened, written, read back or recovered in this build.
+
+Hot-path changes from r15:
+- Accelerometer ASCII is rebuilt only when the roughly 47 Hz cache advances;
+  the held text is copied into the intervening 2500 Hz gyro rows.
+- Ephemeral RAM blocks skip the bit-at-a-time GYR CRC in the GCSV-only build.
+- The fixed accelerometer zone is consumed in place instead of being byte-copied
+  into a GYR payload that will never exist.
+- Native lifecycle, JSON generation, task priority and callback boundaries are
+  intentionally unchanged, so this A/B isolates sustained throughput.
+
+Memory and duration:
+- RAM use remains fixed and does not grow with recording duration.
+- 64 KiB text plus complete-line slop fits well below the next pool region.
+- The two raw halves remain 16 KiB each; no larger ring masks a sustained loss.
+
+Verification:
+- 46 unit, exact-format, layout and safety tests pass.
+- Stream logger: 3,620 bytes, ending at 0xC072EE88 below 0xC072EFB4.
+- PGEN pool code: 7,484 bytes; 7,500 bytes on card.
+- This is an experimental hardware build, not fp-gyro-sup-v1.1.

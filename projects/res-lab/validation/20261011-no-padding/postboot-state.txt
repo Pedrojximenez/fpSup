@@ -1,0 +1,39 @@
+status get is_recording
+is_recording -> 0
+
+
+mem get 0xC2F211DC,,4
+get : A:0xc2f211dc, D:0x00000001
+
+
+mem get 0xC2F20FE8,,4
+get : A:0xc2f20fe8, D:0xC03DA158
+
+
+mem get 0xC04215F4,,4
+get : A:0xc04215f4, D:0xEB00005D
+
+
+mem get 0xC0528700,,4
+get : A:0xc0528700, D:0xE92D4BF0
+
+
+mem get 0xC0BAC2F8,,4
+get : A:0xc0bac2f8, D:0xC03D99A0
+
+
+mem get 0xC072F6F8,,4
+get : A:0xc072f6f8, D:0x007DDB54
+
+
+dir \
+                                          .
+2026/10/07  10:20:36 <DIR>                .Spotlight-V100
+2026/10/10  11:59:52 <DIR>                CINEMA
+2026/10/07  20:25:26 <DIR>                fpSup
+2026/10/07  20:26:02                 4096 ._fpSup
+2026/10/11  02:32:38                 3561 AutoRun.txt
+2026/10/07  20:26:02                 4096 ._AutoRun.txt
+2026/10/07  15:00:02 <DIR>                .Trashes
+2026/10/10  18:14:18 <DIR>                DCIM
+

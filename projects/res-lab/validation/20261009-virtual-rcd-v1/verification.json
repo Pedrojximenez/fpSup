@@ -1,0 +1,60 @@
+{
+  "date": "2026-10-09",
+  "hardware_access": false,
+  "physical_card_writes": false,
+  "tests": {
+    "plain-tests.log": {
+      "tests": 19,
+      "result": "OK",
+      "seconds": 392.965,
+      "skipped": 0
+    },
+    "debug-tests.log": {
+      "tests": 3,
+      "result": "OK",
+      "seconds": 42.448,
+      "skipped": 0
+    },
+    "rescustom-regression.log": {
+      "tests": 65,
+      "result": "OK",
+      "seconds": 366.034,
+      "skipped": 0
+    },
+    "legacy-followup.log": {
+      "tests": 3,
+      "result": "OK",
+      "seconds": 233.276,
+      "skipped": 0
+    },
+    "boot-entry-chain.json": {
+      "build_cases": 14,
+      "autorun_comparisons": 3,
+      "catalogue_references": 8,
+      "failures": 0
+    },
+    "mutations.json": {
+      "detected": 2,
+      "emulator_errors": 0
+    }
+  },
+  "legacy_menu_initial": {
+    "tests": 90,
+    "passed": 89,
+    "import_errors": 1,
+    "resolved_by": [
+      "legacy-import-followup.log",
+      "legacy-followup.log"
+    ]
+  },
+  "artifact_audit": "artifact-audit.json",
+  "test_source_sha256": {
+    "projects/open-gate/build/test_virtual_rcd.py": "24f776cbda643aee2758d17b1e7443a4f376095731b33dbd4a3006c0ac221dab",
+    "projects/open-gate/build/mutate_virtual_rcd.py": "8eeab78df931644f7af70a74d9188f516466fdcd50fc6432821c4ad8086c9383",
+    "projects/open-gate/build/res-custom/test_v3_rescustom.py": "c7abe4349809517766d55d5bcd639f184a8deb560f138b7aa27498409f233794"
+  },
+  "firmware_sha256": {
+    "out/MAIN_c0000000.bin": "92a8ee993f6c3d66c251e88d45a2ccd5135c6cf7342717784321c2ed506e2fb4",
+    "out/seg0_c0000000.bin": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622"
+  }
+}

@@ -1,0 +1,72 @@
+SIGMA fp — fpSup-Formats, six resolutions in one menu (v0.3.0a)
+banner: fpSup-Fmt-v0.3.0a!
+firmware: SIGMA fp Ver.5.02 only
+
+AutoRun.txt  32,772B  sha256=0ab3d3009cb3883e842b97d3f8431275fe4d9022fec49a443bf753f1ef7ee109
+fpSup.BIN    32,768B  sha256=e0b22de9e4699396a30af124f1038f820055c02ec9b2aee2579fe90443542caa
+
+Built 2026-09-28 with fp_usb_shell/build_autorun.py --loader --no-shell (loader and stage2 of
+2026-09-25: journal of every firmware word outside the cave, written back at power-off).
+AutoRun 118 commands; it differs from fpsup-og3k-v0.2.6a's AutoRun.txt only in the three
+banner lines.  stage2 is byte for byte the one in fpsup-og3k-v0.2.6a (864 B).
+
+payload magic: VBIN
+payload sections: 106 = stage2 (in file) + 105 placed sections, 22,736 B of payload
+payload entry: none (0).  The boot-time apply runs from the canvas hook, ~600 frames after
+  the card loads; no entry, no pool, no task, no power-off routine of its own.
+USB shell: absent.  fpSup.BIN is byte for byte the camera-tested rc10
+  (Releases/fpsup-formats-v0.3.0rc10, AutoRun sha256=ed78b700f768f0c1…, banner fpSup-Fmt-v0.3.0rc!); only the
+  AutoRun banner text changed for the release.  A debug twin with the current shell can be
+  made with pack_release.py --debug; none is published.
+
+Lineage.  The 105 sections are, byte for byte and in the same order, the sections of the
+research card 20260928-og3k-registry-rel10 (fpSup.BIN sha256=415953a9…) minus its ten USB-shell
+sections.  rel10 = format set `formats_rel.py` (S16, OG2K, OG3K, OG3.5K; enums 5, 7, 4, 9) on
+the six-row UI base 20260928-og3k-menu6-s16d (build_ui6.py with UI_STATES; sha256=35e5a322…),
+registry code v4p (build_reg.py).  Nothing was reassembled for this release.
+repack: projects/open-gate/build/registry/pack_release.py (research tree).
+
+Sections by kind (addresses are ARM virtual, image base 0xC0000000):
+  cave 0xC072FB00..0xC0734C84 (not journaled): picker table 0xC072FB00 (32 keys: 4 formats x
+    8 rates), tokens 0xC0730440 (S16, OG2K, OG3K, OG35K), routines 0xC0730500..0xC07328C0
+    (regfrmax 0xC0730500, regcropeff 0xC0730600, regcropstate 0xC0730680, regfmt 0xC0730800,
+    regnom 0xC0730A00, regsel 0xC0731800, regname 0xC0731A00, regaspect2 0xC0731B40, regout
+    0xC0731D00, regaspect 0xC0731F00, regapply 0xC0731F60, regfrclass 0xC07322A0, regcanvas
+    0xC0732400, regseltail 0xC0732760, reggs 0xC0732900, cropnocache stub 0xC07304E0),
+    column/stock/value tables 0xC0730C10..0xC0731240 (48 setter cells: donors p13 and p171,
+    16 cells each incl. k19/k20 and k49/k50, six preview heights, padding), registry
+    0xC0731240 (7 x 0x40: four rows + stock + two empty), canvas lists 0xC0731400 (record,
+    playback, S16 standby), flags 0xC0731C00..0xC0731C30, enum pair table 0xC0731C40 (six
+    pairs), UI state 0xC0732700, UI runtime 0xC0732C84 (7,512 B)
+  outside the cave (journaled, restored at power-off): UI pack 0xC0793060 (6,956 B), CSV text
+    0xC0F8E7EC (92 B), long menu CSV 0xC12C7CF8 (156 B), NBR directory entry 0xC0D4DE04 (8 B),
+    Settings controller max 0xC1A709BC (5.0), 32 PARAM words 0xC0BD9A2C..0xC0BE1DE4 (as in
+    fpsup-og3k), crop descriptor vtable word 0xC07426F8, resolution refresh list 0xC0CDC058
+    (ROM; its RAM copy is written by the canvas hook at run time), enum converter code words
+    0xC06BDA3C/40/48
+  hook words (branches into the cave, placed last):
+    C005C020 resolution setter, C043CCF8 format picker, C0437B48 name emitter, C043A19C canvas,
+    C0306EA0 / C0306EEC aspect, C0437E98 output descriptor, C03A6DD8 gain, C043D258,
+    C0437AF8, C043BE68, C02092CC, C0218AEC, C0219260, C03AA568, C05E84D8, C05E6400, C05E5B58
+    (as in v0.1.0a), C04A121C regfrclass (frame-rate list state by the row's max rate),
+    C00A87E4 regfrmax (frame-rate normaliser cap), C04A1788 regcropstate (Crop Mode greyed),
+    C00A93BC regcropeff (Crop Mode effectively off), C005C054 regseltail (after a resolution
+    change: apply + change event on the resolution and crop records; crop toggled once when
+    the standby look changes so Quick Set rebuilds the live view).
+
+Reading a section map: python3 -c 'import struct;d=open("fpSup.BIN","rb").read();
+  n=struct.unpack_from("<I",d,4)[0];print([struct.unpack_from("<II",d,16+8*i) for i in range(n)])'
+
+camera log:
+  rc1..rc10 (2026-09-28, same payload lineage, the operator's fp + Samsung T5 SSD):
+    rc3  six rows, tiles, strip, S16/OG2K/OG3K/OG3.5K clips right (crop then 3440x2298)
+    rc4  rates greyed with the SSD mounted; crop 3456x2308 (origin centred)
+    rc5  OG2K/OG3K capped at 100 / 119.88 greyed (119.88 fell back to UHD30)
+    rc6  OG3.5K window 6062x4040: first-frame Bayer flip gone (5/5 clips); T5 table
+    rc7  OG3K capped at 59.94; rates OK
+    rc9  live view follows row changes inside Quick Set (crop toggle)
+    rc10 toggle only when the standby look changes; BIN identical to this file
+  THIS EXACT FILE: 2026-09-28 operator: "parece que funciona" (details of which checks below
+    were covered not yet recorded).  Planned list: boot to the banner, six rows, one clip per row, ten cycles
+    boot / no REC / power off with the switch / boot with the card, boot over another card,
+    battery pull with OG3.5K saved then REC, UHD and FHD after OG3.5K.

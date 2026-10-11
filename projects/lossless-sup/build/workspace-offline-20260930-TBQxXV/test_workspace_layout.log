@@ -1,0 +1,19 @@
+test_arm_freestanding_compilation_has_no_runtime_helpers (__main__.WorkspaceLayoutTests) ... ok
+test_bad_geometry_and_depth_are_refused_without_output_changes (__main__.WorkspaceLayoutTests) ... ok
+test_fhd_copy_covers_native_length_rounding_tail (__main__.WorkspaceLayoutTests) ... ok
+test_format_matrix_and_optional_source_copy (__main__.WorkspaceLayoutTests) ... ok
+test_largest_arithmetic_plan_fits_without_address_space_wrap_claim (__main__.WorkspaceLayoutTests) ... ok
+test_layout_abi_has_no_readiness_or_pointer_fields (__main__.WorkspaceLayoutTests) ... ok
+test_metadata_is_caller_sized_not_a_fixed_header (__main__.WorkspaceLayoutTests) ... ok
+test_metadata_rounding_and_total_overflow_are_refused (__main__.WorkspaceLayoutTests) ... ok
+test_mutations_are_caught (__main__.WorkspaceLayoutTests) ... ok
+test_null_output_and_noncanonical_copy_flag (__main__.WorkspaceLayoutTests) ... ok
+test_planning_14bit_does_not_enable_the_existing_control (__main__.WorkspaceLayoutTests) ... ok
+test_six_k_14bit_is_not_limited_to_16_mib (__main__.WorkspaceLayoutTests) ... ok
+test_tile_edge_geometry_does_not_claim_native_request_eligibility (__main__.WorkspaceLayoutTests) ... ok
+test_zero_metadata_and_borrowed_source_are_explicit_empty_spans (__main__.WorkspaceLayoutTests) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 1.714s
+
+OK

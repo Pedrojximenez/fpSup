@@ -1,0 +1,37 @@
+{
+  "recorded_at": "2026-10-12T00:33:30.456508+08:00",
+  "result": "Failed native12 comparison; stopped early with drain/display mismatch. No sustained capture validation.",
+  "processing_rate_during": {
+    "address": "0xc31df574",
+    "word": 1106247680,
+    "fps": 30.0
+  },
+  "native_recording_zero": true,
+  "hdmi_standby": false,
+  "stop_key_sent": false,
+  "mode_restored": false,
+  "pending": "Resolved by user power restart; native12 word and four rate words cleared. See hdmi-off-h2-selected.json.",
+  "files": [
+    {
+      "path": "native-m12-identity-quiet20/hdmi.rgb",
+      "bytes": 1592524800,
+      "sha256": "cd0489a7216a63697d0f99c2cb66a06992f1a37ac689f70527f58f65be1b988a"
+    },
+    {
+      "path": "native-m12-identity-quiet20/trial.json",
+      "bytes": 10435,
+      "sha256": "e80231e93060a942c7b2c05780a2e51dc9162cd3428d2eaf7982653f52c4423f"
+    },
+    {
+      "path": "native-m12-identity-return.rgb",
+      "bytes": 42467328,
+      "sha256": "bbd9f864129a713876a92647db467b5641f25c0682ea0e8350c29b02a1ffe12a"
+    },
+    {
+      "path": "native-m12-identity-stalled-return.json",
+      "bytes": 583,
+      "sha256": "d78e4ffa0fa01c1d2eb9c7210133be61f3f6b5ea245708a9796bdc46aec0bab9"
+    }
+  ],
+  "recovery_verified": true
+}

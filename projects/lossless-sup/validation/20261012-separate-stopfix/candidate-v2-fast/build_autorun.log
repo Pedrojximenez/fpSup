@@ -1,0 +1,7 @@
+splash : FPSUPUI/  193536 bytes; hardware untested; keep beside AutoRun.txt and fpSup.BIN
+binary : fpSup.BIN  46836 bytes, 22 section(s), entry 0x0000B6A0
+worker : 3912 bytes = 432 bootstrap (runs in the staging buffer) + 3480 copied to an allocation of its own
+start  : echo handler 0xC0BAC2F8 -> 0xC072DE64 (loader)
+patches: 1 firmware (iface), 0 screen
+wrote  : /Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/validation/20261012-separate-stopfix/candidate-v2-fast/AutoRun.txt  220 lines  sha256=6c6b566e9d8866be
+clean  : 152 commands, no dumps and no diagnostics

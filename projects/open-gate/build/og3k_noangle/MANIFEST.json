@@ -1,0 +1,789 @@
+{
+  "status": "debug candidate; predecessor FHD/UHD/OG3K resolution selection and short record start/stop transitions passed on camera; CINE/STILL switching and warm restart were not tested; the previous single-callsite shutter-angle fix failed a confirmed FHD/OG3K camera comparison; after the revised four-callsite and I-cache fixes, a battery-out 29.97/180-degree FHD/OG3K live-view comparison received a provisional visual pass; exact readback and the other frame rates remain pending",
+  "firmware": "SIGMA fp 5.02",
+  "firmware_sha256": "92a8ee993f6c3d66c251e88d45a2ccd5135c6cf7342717784321c2ed506e2fb4",
+  "ui_prefix_bytes": 49245696,
+  "ui_prefix_sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622",
+  "base_opengate_writes": 745,
+  "angle_fps_fix": {
+    "status": "previous single-callsite build failed on camera; revised four-callsite plus I-cache build received a provisional visual pass after a battery-out cold boot at 29.97/180 degrees; exact readback and other frame rates remain pending",
+    "scope": "four local BL callsites in shutter-angle conversion/metadata/resolution-sync paths share one narrow wrapper; shutter-speed path unchanged",
+    "callsite_count": 0,
+    "hooks": [],
+    "hook_address": "0xC02092CC",
+    "stock_word": "0xEB048D1F",
+    "stock_target": "0xC032C750",
+    "payload_address": "0xC0730A00",
+    "previous_hardware_result": {
+      "candidate": "single-callsite predecessor",
+      "result": "failed",
+      "conditions": "confirmed real FHD and OG3K modes; idle live view",
+      "fhd_shutter_us": 16663,
+      "og3k_shutter_us": 6411,
+      "gain_unchanged": true
+    },
+    "revised_hardware_result": {
+      "result": "provisional visual pass",
+      "conditions": "battery-out cold boot; real FHD and OG3K; 29.97 fps; 180 degrees; idle live view; no recording",
+      "reported_by": "camera operator",
+      "exact_shell_readback": false,
+      "other_frame_rates_tested": false
+    },
+    "runtime_source": "FLAG==1 plus exact mode98 timing tuple at 0xC0B59540",
+    "stock_getter_called_first": true,
+    "unknown_or_mixed_timing": "fail open to stock getter result",
+    "nominal_fps": {
+      "OG3K23_98": 24,
+      "OG3K24": 24,
+      "OG3K25": 25,
+      "OG3K30": 30,
+      "OG3K48": 48,
+      "OG3K50": 50,
+      "OG3K60": 60,
+      "OG3K100": 100
+    },
+    "static_shared_mode_or_photo_fields_written": false,
+    "mode98_timing_restored_when_resolution_leaves_og3k": true,
+    "cine_still_transition": "hardware pending; select FHD or UHD before leaving CINE until tested",
+    "warm_restart": "not tested or supported; battery-out cold boot is the only accepted baseline"
+  },
+  "ui": {
+    "code_address": "0xC0732C84",
+    "code_bytes": 5940,
+    "code_sha256": "c8b7bb738e39ebb6d4908452567b4565001f1c45fd7ce29bfa17a0f20ff263eb",
+    "state_address": "0xC0732700",
+    "state_bytes": 72,
+    "state_layout": {
+      "resource_context": "+0x00 u32",
+      "pack_status": "+0x04 u32 (0 new, 1 ready, 2 loading, 3 failed)",
+      "pack_native_result": "+0x08 u32",
+      "post_install_stock_records": "+0x0C u32",
+      "exact_copy_calls": "+0x10 u32",
+      "last_stock_record_address": "+0x14 u32",
+      "unique_exact_hit_bitmap": "+0x18, 45 bytes, one bit per sorted record"
+    },
+    "pack_address": "0xC0793060",
+    "pack_bytes": 3732,
+    "pack_sha256": "c199170c0701d2f26520f89cd90b0731e552452f1f8bedd9e772b157ca50fe05",
+    "records": {
+      "records": 360,
+      "edit_bytes": 188,
+      "maximum_record_bytes": 488
+    },
+    "selection": {
+      "groups": [
+        {
+          "address": "0xc228c346",
+          "name": "20_MV_Resolution",
+          "old_end": 33,
+          "new_end": 66,
+          "clips": [
+            "0xc2291d6c",
+            "0xc2294ee6",
+            "0xc2297124",
+            "0xc22981d0",
+            "0xc229c28c",
+            "0xc229d528",
+            "0xc229eb4b",
+            "0xc229f6ce",
+            "0xc22a0886",
+            "0xc22a0b2d"
+          ]
+        },
+        {
+          "address": "0xc228cd3e",
+          "name": "21_MV_Resolution",
+          "old_end": 33,
+          "new_end": 66,
+          "clips": [
+            "0xc2297542",
+            "0xc229c7f0",
+            "0xc229ef99",
+            "0xc229fb1c",
+            "0xc22a0438",
+            "0xc22a103d",
+            "0xc22a1741",
+            "0xc22a1e73"
+          ]
+        },
+        {
+          "address": "0xc22a3433",
+          "name": "20_MV_Resolution",
+          "old_end": 33,
+          "new_end": 66,
+          "clips": [
+            "0xc22a8e59",
+            "0xc22abfd3",
+            "0xc22ae211",
+            "0xc22af2bd",
+            "0xc22b3379",
+            "0xc22b4615",
+            "0xc22b5c38",
+            "0xc22b67bb",
+            "0xc22b7973",
+            "0xc22b7c1a"
+          ]
+        },
+        {
+          "address": "0xc22a3e2b",
+          "name": "21_MV_Resolution",
+          "old_end": 33,
+          "new_end": 66,
+          "clips": [
+            "0xc22ae62f",
+            "0xc22b38dd",
+            "0xc22b6086",
+            "0xc22b6c09",
+            "0xc22b7525",
+            "0xc22b812a",
+            "0xc22b882e",
+            "0xc22b8f60"
+          ]
+        },
+        {
+          "address": "0xc22ba520",
+          "name": "20_MV_Resolution",
+          "old_end": 33,
+          "new_end": 66,
+          "clips": [
+            "0xc22bff46",
+            "0xc22c30c0",
+            "0xc22c52fe",
+            "0xc22c63aa",
+            "0xc22ca466",
+            "0xc22cb702",
+            "0xc22ccd25",
+            "0xc22cd8a8",
+            "0xc22cea60",
+            "0xc22ced07"
+          ]
+        },
+        {
+          "address": "0xc22baf18",
+          "name": "21_MV_Resolution",
+          "old_end": 33,
+          "new_end": 66,
+          "clips": [
+            "0xc22c571c",
+            "0xc22ca9ca",
+            "0xc22cd173",
+            "0xc22cdcf6",
+            "0xc22ce612",
+            "0xc22cf217",
+            "0xc22cf91b",
+            "0xc22d004d"
+          ]
+        },
+        {
+          "address": "0xc22d160d",
+          "name": "20_MV_Resolution",
+          "old_end": 33,
+          "new_end": 66,
+          "clips": [
+            "0xc22d7033",
+            "0xc22da1ad",
+            "0xc22dc3eb",
+            "0xc22dd497",
+            "0xc22e1553",
+            "0xc22e27ef",
+            "0xc22e3e12",
+            "0xc22e4995",
+            "0xc22e5b4d",
+            "0xc22e5df4"
+          ]
+        },
+        {
+          "address": "0xc22d2005",
+          "name": "21_MV_Resolution",
+          "old_end": 33,
+          "new_end": 66,
+          "clips": [
+            "0xc22dc809",
+            "0xc22e1ab7",
+            "0xc22e4260",
+            "0xc22e4de3",
+            "0xc22e56ff",
+            "0xc22e6304",
+            "0xc22e6a08",
+            "0xc22e713a"
+          ]
+        },
+        {
+          "address": "0xc22e86fa",
+          "name": "20_MV_Resolution",
+          "old_end": 33,
+          "new_end": 66,
+          "clips": [
+            "0xc22ee120",
+            "0xc22f129a",
+            "0xc22f34d8",
+            "0xc22f4584",
+            "0xc22f8640",
+            "0xc22f98dc",
+            "0xc22faeff",
+            "0xc22fba82",
+            "0xc22fcc3a",
+            "0xc22fcee1"
+          ]
+        },
+        {
+          "address": "0xc22e90f2",
+          "name": "21_MV_Resolution",
+          "old_end": 33,
+          "new_end": 66,
+          "clips": [
+            "0xc22f38f6",
+            "0xc22f8ba4",
+            "0xc22fb34d",
+            "0xc22fbed0",
+            "0xc22fc7ec",
+            "0xc22fd3f1",
+            "0xc22fdaf5",
+            "0xc22fe227"
+          ]
+        },
+        {
+          "address": "0xc22ff7e7",
+          "name": "20_MV_Resolution",
+          "old_end": 33,
+          "new_end": 66,
+          "clips": [
+            "0xc230520d",
+            "0xc2308387",
+            "0xc230a5c5",
+            "0xc230b671",
+            "0xc230f72d",
+            "0xc23109c9",
+            "0xc2311fec",
+            "0xc2312b6f",
+            "0xc2313d27",
+            "0xc2313fce"
+          ]
+        },
+        {
+          "address": "0xc23001df",
+          "name": "21_MV_Resolution",
+          "old_end": 33,
+          "new_end": 66,
+          "clips": [
+            "0xc230a9e3",
+            "0xc230fc91",
+            "0xc231243a",
+            "0xc2312fbd",
+            "0xc23138d9",
+            "0xc23144de",
+            "0xc2314be2",
+            "0xc2315314"
+          ]
+        },
+        {
+          "address": "0xc23168d4",
+          "name": "20_MV_Resolution",
+          "old_end": 33,
+          "new_end": 66,
+          "clips": [
+            "0xc231c2fa",
+            "0xc231f474",
+            "0xc23216b2",
+            "0xc232275e",
+            "0xc232681a",
+            "0xc2327ab6",
+            "0xc23290d9",
+            "0xc2329c5c",
+            "0xc232ae14",
+            "0xc232b0bb"
+          ]
+        },
+        {
+          "address": "0xc23172cc",
+          "name": "21_MV_Resolution",
+          "old_end": 33,
+          "new_end": 66,
+          "clips": [
+            "0xc2321ad0",
+            "0xc2326d7e",
+            "0xc2329527",
+            "0xc232a0aa",
+            "0xc232a9c6",
+            "0xc232b5cb",
+            "0xc232bccf",
+            "0xc232c401"
+          ]
+        },
+        {
+          "address": "0xc232d9c1",
+          "name": "20_MV_Resolution",
+          "old_end": 33,
+          "new_end": 66,
+          "clips": [
+            "0xc23333e7",
+            "0xc2336561",
+            "0xc233879f",
+            "0xc233984b",
+            "0xc233d907",
+            "0xc233eba3",
+            "0xc23401c6",
+            "0xc2340d49",
+            "0xc2341f01",
+            "0xc23421a8"
+          ]
+        },
+        {
+          "address": "0xc232e3b9",
+          "name": "21_MV_Resolution",
+          "old_end": 33,
+          "new_end": 66,
+          "clips": [
+            "0xc2338bbd",
+            "0xc233de6b",
+            "0xc2340614",
+            "0xc2341197",
+            "0xc2341ab3",
+            "0xc23426b8",
+            "0xc2342dbc",
+            "0xc23434ee"
+          ]
+        },
+        {
+          "address": "0xc23b4692",
+          "name": "20_MV_Resolution",
+          "old_end": 33,
+          "new_end": 66,
+          "clips": [
+            "0xc23ba459",
+            "0xc23bd738",
+            "0xc23c15ce",
+            "0xc23c4372",
+            "0xc23c5904",
+            "0xc23c760b",
+            "0xc23c840e",
+            "0xc23c90aa",
+            "0xc23c9d37"
+          ]
+        },
+        {
+          "address": "0xc23b4794",
+          "name": "21_MV_Resolution",
+          "old_end": 33,
+          "new_end": 66,
+          "clips": [
+            "0xc23baaad",
+            "0xc23c4454",
+            "0xc23c767f",
+            "0xc23c8482",
+            "0xc23c9036",
+            "0xc23c9dab",
+            "0xc23ca567",
+            "0xc23cacdd"
+          ]
+        },
+        {
+          "address": "0xc23cc275",
+          "name": "20_MV_Resolution",
+          "old_end": 33,
+          "new_end": 66,
+          "clips": [
+            "0xc23d1c2c",
+            "0xc23d4da3",
+            "0xc23d6fd1",
+            "0xc23d807d",
+            "0xc23dc06b",
+            "0xc23dd307",
+            "0xc23de92a",
+            "0xc23df4ad",
+            "0xc23e0665",
+            "0xc23e0920"
+          ]
+        },
+        {
+          "address": "0xc23ccc6d",
+          "name": "21_MV_Resolution",
+          "old_end": 33,
+          "new_end": 66,
+          "clips": [
+            "0xc23d73ef",
+            "0xc23dc5cf",
+            "0xc23ded78",
+            "0xc23df8fb",
+            "0xc23e0217",
+            "0xc23e0e30",
+            "0xc23e1548",
+            "0xc23e1c8e"
+          ]
+        },
+        {
+          "address": "0xc24e778d",
+          "name": "20_MV_Resolution",
+          "old_end": 33,
+          "new_end": 66,
+          "clips": [
+            "0xc24ed725",
+            "0xc24f0a4b",
+            "0xc24f48f1",
+            "0xc24f7763",
+            "0xc24f8cf5",
+            "0xc24fa9fc",
+            "0xc24fb7ff",
+            "0xc24fc49b",
+            "0xc24fd114"
+          ]
+        },
+        {
+          "address": "0xc24e788f",
+          "name": "21_MV_Resolution",
+          "old_end": 33,
+          "new_end": 66,
+          "clips": [
+            "0xc24edd79",
+            "0xc24f7845",
+            "0xc24faa70",
+            "0xc24fb873",
+            "0xc24fc427",
+            "0xc24fd188",
+            "0xc24fd930",
+            "0xc24fe092"
+          ]
+        },
+        {
+          "address": "0xc25000f2",
+          "name": "20_MV_Resolution",
+          "old_end": 33,
+          "new_end": 66,
+          "clips": [
+            "0xc250608a",
+            "0xc25093b0",
+            "0xc250d256",
+            "0xc25100c8",
+            "0xc251165a",
+            "0xc2513361",
+            "0xc2514164",
+            "0xc2514e00",
+            "0xc2515a79"
+          ]
+        },
+        {
+          "address": "0xc25001f4",
+          "name": "21_MV_Resolution",
+          "old_end": 33,
+          "new_end": 66,
+          "clips": [
+            "0xc25066de",
+            "0xc25101aa",
+            "0xc25133d5",
+            "0xc25141d8",
+            "0xc2514d8c",
+            "0xc2515aed",
+            "0xc2516295",
+            "0xc25169f7"
+          ]
+        },
+        {
+          "address": "0xc2518a57",
+          "name": "20_MV_Resolution",
+          "old_end": 33,
+          "new_end": 66,
+          "clips": [
+            "0xc251e9ef",
+            "0xc2521d15",
+            "0xc2525bbb",
+            "0xc2528a2d",
+            "0xc2529fbf",
+            "0xc252bcc6",
+            "0xc252cac9",
+            "0xc252d765",
+            "0xc252e3de"
+          ]
+        },
+        {
+          "address": "0xc2518b59",
+          "name": "21_MV_Resolution",
+          "old_end": 33,
+          "new_end": 66,
+          "clips": [
+            "0xc251f043",
+            "0xc2528b0f",
+            "0xc252bd3a",
+            "0xc252cb3d",
+            "0xc252d6f1",
+            "0xc252e452",
+            "0xc252ebfa",
+            "0xc252f35c"
+          ]
+        },
+        {
+          "address": "0xc25313bc",
+          "name": "20_MV_Resolution",
+          "old_end": 33,
+          "new_end": 66,
+          "clips": [
+            "0xc2537354",
+            "0xc253a67a",
+            "0xc253e520",
+            "0xc2541392",
+            "0xc2542924",
+            "0xc254462b",
+            "0xc254542e",
+            "0xc25460ca",
+            "0xc2546d43"
+          ]
+        },
+        {
+          "address": "0xc25314be",
+          "name": "21_MV_Resolution",
+          "old_end": 33,
+          "new_end": 66,
+          "clips": [
+            "0xc25379a8",
+            "0xc2541474",
+            "0xc254469f",
+            "0xc25454a2",
+            "0xc2546056",
+            "0xc2546db7",
+            "0xc254755f",
+            "0xc2547cc1"
+          ]
+        },
+        {
+          "address": "0xc2549d21",
+          "name": "20_MV_Resolution",
+          "old_end": 33,
+          "new_end": 66,
+          "clips": [
+            "0xc254fcb9",
+            "0xc2552fdf",
+            "0xc2556e85",
+            "0xc2559cf7",
+            "0xc255b289",
+            "0xc255cf90",
+            "0xc255dd93",
+            "0xc255ea2f",
+            "0xc255f6a8"
+          ]
+        },
+        {
+          "address": "0xc2549e23",
+          "name": "21_MV_Resolution",
+          "old_end": 33,
+          "new_end": 66,
+          "clips": [
+            "0xc255030d",
+            "0xc2559dd9",
+            "0xc255d004",
+            "0xc255de07",
+            "0xc255e9bb",
+            "0xc255f71c",
+            "0xc255fec4",
+            "0xc2560626"
+          ]
+        },
+        {
+          "address": "0xc2562686",
+          "name": "20_MV_Resolution",
+          "old_end": 33,
+          "new_end": 66,
+          "clips": [
+            "0xc256861e",
+            "0xc256b944",
+            "0xc256f7ea",
+            "0xc257265c",
+            "0xc2573bee",
+            "0xc25758f5",
+            "0xc25766f8",
+            "0xc2577394",
+            "0xc257800d"
+          ]
+        },
+        {
+          "address": "0xc2562788",
+          "name": "21_MV_Resolution",
+          "old_end": 33,
+          "new_end": 66,
+          "clips": [
+            "0xc2568c72",
+            "0xc257273e",
+            "0xc2575969",
+            "0xc257676c",
+            "0xc2577320",
+            "0xc2578081",
+            "0xc2578829",
+            "0xc2578f8b"
+          ]
+        },
+        {
+          "address": "0xc257afeb",
+          "name": "20_MV_Resolution",
+          "old_end": 33,
+          "new_end": 66,
+          "clips": [
+            "0xc2580f83",
+            "0xc25842a9",
+            "0xc258814f",
+            "0xc258afc1",
+            "0xc258c553",
+            "0xc258e25a",
+            "0xc258f05d",
+            "0xc258fcf9",
+            "0xc2590972"
+          ]
+        },
+        {
+          "address": "0xc257b0ed",
+          "name": "21_MV_Resolution",
+          "old_end": 33,
+          "new_end": 66,
+          "clips": [
+            "0xc25815d7",
+            "0xc258b0a3",
+            "0xc258e2ce",
+            "0xc258f0d1",
+            "0xc258fc85",
+            "0xc25909e6",
+            "0xc259118e",
+            "0xc25918f0"
+          ]
+        },
+        {
+          "address": "0xc2593950",
+          "name": "20_MV_Resolution",
+          "old_end": 33,
+          "new_end": 66,
+          "clips": [
+            "0xc25998e8",
+            "0xc259cc0e",
+            "0xc25a0ab4",
+            "0xc25a3926",
+            "0xc25a4eb8",
+            "0xc25a6bbf",
+            "0xc25a79c2",
+            "0xc25a865e",
+            "0xc25a92d7"
+          ]
+        },
+        {
+          "address": "0xc2593a52",
+          "name": "21_MV_Resolution",
+          "old_end": 33,
+          "new_end": 66,
+          "clips": [
+            "0xc2599f3c",
+            "0xc25a3a08",
+            "0xc25a6c33",
+            "0xc25a7a36",
+            "0xc25a85ea",
+            "0xc25a934b",
+            "0xc25a9af3",
+            "0xc25aa255"
+          ]
+        }
+      ],
+      "kinds": {
+        "summary-label": 1,
+        "state-end": 36,
+        "layout-keys": 315,
+        "literal-delta": 6,
+        "QS-limit": 2
+      },
+      "archived_parser_cases": 360
+    },
+    "assets": [
+      {
+        "name": "OG3K_QS",
+        "width": 86,
+        "height": 49,
+        "bytes": 1564,
+        "sha256": "bca87e51bf0ab02fd273b5ebc5dd3919a1a94e8fd08d0342e16d2e2aa14c937c"
+      },
+      {
+        "name": "OG3K_SET",
+        "width": 86,
+        "height": 74,
+        "bytes": 864,
+        "sha256": "59f025f747af234e0c5732b4f2be91ebe825d279d3535f0fabc8612c5597637b"
+      },
+      {
+        "name": "OG3K_FONT",
+        "width": 150,
+        "height": 38,
+        "bytes": 849,
+        "sha256": "f7cfa8d504e04139ce5f8e44f471043cdd5dae88701e67bdf437eb3ec7480083"
+      }
+    ],
+    "hooks": [
+      {
+        "address": "0xC05E5B58",
+        "stock": "0x3FFFF1B1",
+        "entry": "ui_string",
+        "target": "0xC0732D64",
+        "original": "0xC0732DC0"
+      },
+      {
+        "address": "0xC05E84D8",
+        "stock": "0xB086B500",
+        "entry": "ui_load",
+        "target": "0xC0732C84",
+        "original": "0xC0732D54"
+      },
+      {
+        "address": "0xC05E6400",
+        "stock": "0x4FF0E92D",
+        "entry": "ui_record",
+        "target": "0xC0732DD0",
+        "original": "0xC07331CC"
+      }
+    ]
+  },
+  "package": {
+    "autorun_commands": 195,
+    "autorun_sha256": "a2dd03504ba2144cb6864f6037beb0e36e733fb715d54d85116a135cbc9d2430",
+    "vshl_sections": 77,
+    "vshl_used_bytes": 15140,
+    "vshl_sha256": "61da0408f412ae7237655517be963a1acb4f8829f364d936bea7ab4fea77d7ea",
+    "stage2_cache_sync": {
+      "when": "after every VSHL section has been placed and before entry",
+      "sequence": [
+        "D-cache clean/invalidate",
+        "whole I-cache invalidate"
+      ]
+    }
+  },
+  "validation": {
+    "stock_record_bytes": "all 360 source records match the pinned firmware",
+    "write_order": "all payload/data/state sections precede every hook section; UI string and loader hooks precede the NBU record hook, which is armed last",
+    "loader_cache_sync": "stage2 completes all section writes, then performs D-cache clean/invalidate followed by whole I-cache invalidate before entry",
+    "private_resources": "NBR structure and all three XCI decodes checked offline",
+    "timing_gate": "same-firmware v0.3.2 is a hardware precedent, not a timing guarantee; decode the unique exact-hit bitmap after opening each target screen",
+    "runtime_ownership": {
+      "ranges": [
+        "0xC0732700..0xC0732748 state",
+        "0xC0732C84..0xC07343B8 resident code",
+        "0xC0793060..0xC0793EF4 private NBR"
+      ],
+      "incompatible_diagnostics": [
+        "projects/open-gate/build/size_ctl.py",
+        "projects/open-gate/build/cfgring.S",
+        "projects/open-gate/build/cfgsnap.S",
+        "projects/open-gate/build/dimlog.S",
+        "projects/open-gate/build/entlog.S",
+        "projects/open-gate/build/entseq.S",
+        "projects/open-gate/build/keyring.S",
+        "projects/open-gate/build/keyseq.S",
+        "projects/open-gate/build/proflog.S",
+        "projects/open-gate/build/profseq.S",
+        "projects/open-gate/build/zoomlog.S",
+        "projects/open-gate/build/og3ktile.py",
+        "projects/open-gate/build/livepatch.py",
+        "projects/open-gate/build/appendobs_ctl.py",
+        "projects/open-gate/build/elemobs_ctl.py",
+        "projects/open-gate/build/xcitrace_ctl.py",
+        "research/ui/tools/appendobs_ctl.py",
+        "research/ui/tools/elemobs_ctl.py",
+        "research/ui/tools/xcitrace_ctl.py",
+        "research/ui/tools/build_appendobs_boot_probe.py"
+      ],
+      "safe_draw_measurement": "firmware built-in `gui image log`",
+      "safe_screen_capture": "firmware built-in `display capture`"
+    },
+    "runtime_cave": "0xC0793060 pack range is zero in the firmware image; the connected-camera preboot gate also found all 933 words zero in standby, Quick Set, and menu",
+    "camera": "hardware results are intentionally external to the reproducible build; see ui_runtime_candidate/camera_postboot/MANIFEST.md"
+  }
+}

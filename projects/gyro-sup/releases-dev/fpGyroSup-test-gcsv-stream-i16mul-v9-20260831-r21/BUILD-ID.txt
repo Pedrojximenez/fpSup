@@ -1,0 +1,45 @@
+fpGyroSup GCSV-only r17 + bounded put_i16 multiply experiment r21
+Build date: 2026-08-31
+Camera/firmware: SIGMA fp Ver.5.02
+Build type: release AutoRun, no USB shell
+Base: exact archived r17 buffered streaming binary path
+
+Reason for this build:
+- r20 did not improve robustness: A001_013 retained 98.156295% of expected rows
+  and contained two isolated gaps of about 0.56 seconds.
+- Later tests may also have involved more camera movement.  Larger gyro values
+  enter put_i16's >=100 path more often, up to three times on every 2,500 Hz
+  row, so that is a motion-sensitive computation target.
+- r20 was fully removed first.  Rebuilt AutoRun, VSHL and PGEN then matched the
+  archived r17 files byte for byte before this isolated change began.
+
+Only r21 change:
+- put_i16 uses a sensor-range-specific 32-bit reciprocal multiply for /100.
+- For every possible magnitude 0..32768, the exact quotient is
+      floor(n / 100) = (n * 0x147B) >> 19
+- The previous 64-bit UMULL and two-instruction 32-bit constant load are
+  replaced by one MOVW, one ordinary MUL and one shift.
+- This path is used only when an axis magnitude is at least 100.  It therefore
+  targets the extra formatter cost seen during movement without changing the
+  timestamp formatter, decimal text, precision, buffering or card writes.
+
+Unchanged r17 pipeline:
+- The r17 put_uint timestamp formatter is restored exactly; r20's /1000 code
+  and 4 KiB triplet table are absent.
+- Two fixed 32 KiB raw A/B halves; memory use is independent of take length.
+- The writer formats and writes complete-line chunks at 64 KiB with a 5 ms
+  cooperative yield.
+- The 2,500 Hz callback only copies raw data.
+- Native lifecycle, transaction lock, JSON generation and task priority are
+  unchanged.  No GYR file is created by this stream.
+
+Verification:
+- All 47 unit, exact-format, layout and safety tests pass.
+- Every signed sensor value from -32768 through +32768 is compared against
+  Python decimal output; every result is identical.
+- The 16-bit reciprocal is exhaustively exercised across all 32,769 possible
+  magnitudes, including every /100 boundary and the +32768 edge case.
+- AutoRun and VSHL are byte-identical to archived r17.
+- PGEN pool code is 7,484 bytes; 7,500 bytes on card, four bytes smaller than
+  r17.  Only PGEN carries this formatter change.
+- This is an experimental hardware build, not fp-gyro-sup-v1.1.

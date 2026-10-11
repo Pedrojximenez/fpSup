@@ -1,0 +1,52 @@
+  stage  75264 bytes in 0.001s (100.1 MB/s)      
+  verify 75264 bytes in 0.001s (149.0 MB/s)      
+  stage  75264 bytes in 0.02s (4.6 MB/s), MEM1, read back whole          
+  code   304/304 B  1.7 KiB/s   verify 304/304 B  601 KiB/s   verify 304 bytes in 0.0s (294 KiB/s)      
+  code   304 bytes in 0.4s (0.7 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  code   412/412 B  92.5 KiB/s   verify 412/412 B  685 KiB/s   verify 412 bytes in 0.0s (346 KiB/s)      
+  code   412 bytes in 0.0s (61.2 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 75264 bytes in 0.000s (166.1 MB/s)      
+  local   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-high-fps/32RESCUS-install.BIN  75264 bytes
+  remote  \fpSup\32RESCUS.BIN  mode 0x7
+  buffer  0x45062D40, file object 0x45075340
+  proof   region takes writes and still holds them a second later
+  restored echo -> 0xC03D99A0
+  reply   putfile: written
+  status  2 — written
+  open    1     write  1   (both are flags, not counts)
+  WARNING 32RESCUS.BIN did not appear in dir
+  remote  \fpSup\32RESCUS.BIN  75264 bytes, mode 0x1
+  buffer  from the firmware, file object 0x45062D40
+  reply   getfile: read
+  buffer  0x5F900980 (79360 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 75264 of 75264
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-high-fps/installed-32RESCUS.BIN
+Verified 32RESCUS.BIN 75264
+  stage  452448 bytes in 0.002s (246.3 MB/s)      
+  verify 452448 bytes in 0.001s (308.0 MB/s)      
+  stage  452448 bytes in 0.00s (116.5 MB/s), MEM1, read back whole          
+  code   304/304 B  64.1 KiB/s   verify 304/304 B  455 KiB/s   verify 304 bytes in 0.0s (208 KiB/s)      
+  code   304 bytes in 0.0s (41.1 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  code   412/412 B  68.5 KiB/s   verify 412/412 B  615 KiB/s   verify 412 bytes in 0.0s (205 KiB/s)      
+  code   412 bytes in 0.0s (42.0 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 452448 bytes in 0.001s (328.8 MB/s)      
+  local   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/cards/20261009-virtual-rcd-v8/debug/fpSup/50RESLAB.BIN  452448 bytes
+  remote  \fpSup\50RESLAB.BIN  mode 0x7
+  buffer  0x45062D40, file object 0x450D14A0
+  proof   region takes writes and still holds them a second later
+  restored echo -> 0xC03D99A0
+  reply   putfile: written
+  status  2 — written
+  open    1     write  1   (both are flags, not counts)
+  WARNING 50RESLAB.BIN did not appear in dir
+  remote  \fpSup\50RESLAB.BIN  452448 bytes, mode 0x1
+  buffer  from the firmware, file object 0x45062D40
+  reply   getfile: read
+  buffer  0x5F900980 (456544 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 452448 of 452448
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-high-fps/installed-50RESLAB.BIN
+Verified 50RESLAB.BIN 452448

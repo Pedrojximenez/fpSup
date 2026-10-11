@@ -1,0 +1,31 @@
+test_empty_selection_persists_and_rescustom_needs_no_producer (test_reslab_saved_rows.SavedRows) ... ok
+test_failed_persistence_and_recording_do_not_change_selection (test_reslab_saved_rows.SavedRows) ... ok
+test_empty_name_uses_auto_and_invalid_or_reserved_name_never_writes (test_reslab_save_names.SaveNameTests) ... ok
+test_filter_expansion_publishes_range_before_stable_selection (test_reslab_save_names.SaveNameTests) ... ok
+test_name_keys_and_save_do_not_change_geometry_or_active_consumer (test_reslab_save_names.SaveNameTests) ... ok
+test_save_page_has_only_name_and_save_controls_mode_is_read_only (test_reslab_save_names.SaveNameTests) ... ok
+test_short_and_seven_character_names_resources_and_consumer_load (test_reslab_save_names.SaveNameTests) ... ok
+test_auto_commit_assertion_detects_missing_callback (test_reslab_sidebar.SidebarTests) ... ok
+test_crop_shape_and_independent_lens_composition (test_reslab_sidebar.SidebarTests) ... ok
+test_native_sidebar_page_and_save_is_third_tab (test_reslab_sidebar.SidebarTests) ... ok
+test_numeric_edit_commits_on_done_without_apply (test_reslab_sidebar.SidebarTests) ... ok
+test_ordinary_mode_lens_and_custom_policy (test_reslab_sidebar.SidebarTests) ... ok
+test_recording_rejects_auto_commit_and_keeps_old_geometry (test_reslab_sidebar.SidebarTests) ... ok
+test_rescustom_loads_saved_geometry (test_reslab_sidebar.SidebarTests) ... ok
+test_save_exports_current_recipe_and_preserves_active_virtual (test_reslab_sidebar.SidebarTests) ... ok
+test_save_rejects_short_write_corruption_and_tail (test_reslab_sidebar.SidebarTests) ... ok
+test_saved_files_reserve_virtual_row_at_next_boot (test_reslab_sidebar.SidebarTests) ... ok
+test_real_installer_dynamic_high_rates_and_stock_restore (test_virtual_rcd_rates.RateUITests) ... M12 0xc057a6f8 239.76p: native commit, timing, canvas passed
+M12 0xc057a6f8 279.72p: native commit, timing, canvas passed
+M12 0xc05821b8 239.76p: native commit, timing, canvas passed
+M12 0xc05821b8 279.72p: native commit, timing, canvas passed
+M9 0xc057a6f8 239.76p: native commit, timing, canvas passed
+M9 0xc057a6f8 279.72p: native commit, timing, canvas passed
+M9 0xc05821b8 239.76p: native commit, timing, canvas passed
+M9 0xc05821b8 279.72p: native commit, timing, canvas passed
+ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 699.085s
+
+OK

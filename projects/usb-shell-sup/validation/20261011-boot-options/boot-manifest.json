@@ -1,0 +1,160 @@
+{
+  "page_sha256": "0a3f7db0ffd9a5e0fd14d4926ac9204c89920e2a2622a740858481d7cbf22a28",
+  "default": {
+    "instant": true,
+    "fast": false
+  },
+  "sources": {
+    "fp_usb_shell/build_autorun.py": "f9832d428cecad23be3c055d48f5733d3bb32b53c2348854ef2de872b09e6590",
+    "fp_usb_shell/asm/loader.S": "14eb66a80d6222f2b4b7b497877e6e553a2f45dfee376da41d8193527cf41a17",
+    "fp_usb_shell/asm/stage2.S": "4f446ace9ffadef27c8cabe59d86c2fa08f5ec0cbf53561b44651a000be9d2e5",
+    "fp_usb_shell/asm/store_boot.S": "f104f6a7bb222b69ab65074c9f8a054fd1552f696e8cd6f40e627216e3894135",
+    "fp_usb_shell/asm/abort.S": "46e6a31c0e7303fc59f587a63f423899740e3ef96e55a162267ecf5f5271f46f",
+    "fp_usb_shell/asm/splash_finish.S": "00de013ffa8ff1044655e68f952e0c03792482c4c317300ba5ab7c3730cd8b83",
+    "fp_usb_shell/v3/build_v3.py": "027030c0ed689d3f53fe0608b2fd02085483cab9b38b0a8ccf0d36466a1e4ef6",
+    "fp_usb_shell/v3/sloader_entry.S": "b4fa97b67c5ecf2451337c3364a20b96e2f009bd820399ead4af4fcffe1b7b2a",
+    "fp_usb_shell/v3/sloader.c": "2e5c3326c282d22625875435e6010a75740e5dee2e853bb306d7a8c806a985e1"
+  },
+  "variants": {
+    "i0f0": {
+      "info": {
+        "stub": 224,
+        "c_text": 6694,
+        "bytes": 8248,
+        "sl_boot": 225,
+        "core_entry": 1328,
+        "sections": 2,
+        "instant": false,
+        "fast": false
+      },
+      "files": [
+        {
+          "path": "AutoRun.txt",
+          "size": 3561,
+          "sha256": "889800fa363c75bfe0d9da43da82312276388a8929748ce05221ce0da931bb4c"
+        },
+        {
+          "path": "fpSup/LOADER.BIN",
+          "size": 8248,
+          "sha256": "3c9a6b36687dfc21d4764d61ff190b1222efd9a84f5aa4277fb52527eb751534"
+        }
+      ]
+    },
+    "i0f1": {
+      "info": {
+        "stub": 224,
+        "c_text": 6694,
+        "bytes": 8568,
+        "sl_boot": 225,
+        "core_entry": 1648,
+        "sections": 3,
+        "instant": false,
+        "fast": true
+      },
+      "files": [
+        {
+          "path": "AutoRun.txt",
+          "size": 4666,
+          "sha256": "2e77dfe3529006d2cb95ac01e206048efe495493434c05f1ed8fad4ecd22bf96"
+        },
+        {
+          "path": "fpSup/LOADER.BIN",
+          "size": 8568,
+          "sha256": "33ab64ba9e45ff75c6b1ab3eaf6df7839db4a86998857327eca667c2b6df5030"
+        }
+      ]
+    },
+    "i1f0": {
+      "info": {
+        "stub": 224,
+        "c_text": 6694,
+        "bytes": 8528,
+        "sl_boot": 225,
+        "core_entry": 1608,
+        "sections": 2,
+        "instant": true,
+        "fast": false
+      },
+      "files": [
+        {
+          "path": "AutoRun.txt",
+          "size": 3561,
+          "sha256": "889800fa363c75bfe0d9da43da82312276388a8929748ce05221ce0da931bb4c"
+        },
+        {
+          "path": "fpSup/LOADER.BIN",
+          "size": 8528,
+          "sha256": "ab34813df3c9a662d54085cddc8373adb584ee8664ff60d0c4371456eaa55cd1"
+        }
+      ]
+    },
+    "i1f1": {
+      "info": {
+        "stub": 224,
+        "c_text": 6694,
+        "bytes": 8848,
+        "sl_boot": 225,
+        "core_entry": 1928,
+        "sections": 3,
+        "instant": true,
+        "fast": true
+      },
+      "files": [
+        {
+          "path": "AutoRun.txt",
+          "size": 4666,
+          "sha256": "2e77dfe3529006d2cb95ac01e206048efe495493434c05f1ed8fad4ecd22bf96"
+        },
+        {
+          "path": "fpSup/LOADER.BIN",
+          "size": 8848,
+          "sha256": "f9f041babf0613f05265f9fda283caf3855f075c8b65c45c690a37d2f8dfbb32"
+        }
+      ]
+    }
+  },
+  "products": [
+    {
+      "id": "usbshell",
+      "release": "fpsup-usbshell-v3.4.0test",
+      "file": "00SHELL.BIN",
+      "size": 4552,
+      "sha256": "b1c2823ed0ef46de67ddbac7bb71ba3c34617f0a25d93dfcf76b14e8224f742b"
+    },
+    {
+      "id": "lossless",
+      "release": "fpsup-lossless-v0.2.0test",
+      "file": "10LOSS.BIN",
+      "size": 70944,
+      "sha256": "ad984ce65a025d7acfbf968d0a7c3e43ef94bc89085af6b3a522374e7e9f8137"
+    },
+    {
+      "id": "gyro2",
+      "release": "fpsup-gyro2-v0.1.0",
+      "file": "20GYR2.BIN",
+      "size": 4208,
+      "sha256": "cbf91f8c36efb6481329000b6736cda26eb0781fe9c8acfa1cd5f7c073a0f8d5"
+    },
+    {
+      "id": "res-custom",
+      "release": "fpsup-res-custom-v0.1.2test",
+      "file": "32RESCUS.BIN",
+      "size": 47680,
+      "sha256": "87bd6a9436f48b880d9766b1860597fc570e0d3d7b9669599b8a1f80e229acf9"
+    },
+    {
+      "id": "screenflip",
+      "release": "fpsup-screenflip-v0.1.0test",
+      "file": "40FLIP.BIN",
+      "size": 25936,
+      "sha256": "cc3d4c0502755185e2bca0c8f8e8fb45351b0d70c50b6cc72c0a85a89f746913"
+    },
+    {
+      "id": "raw-view",
+      "release": "fpsup-raw-view-v0.3.0test",
+      "file": "45RAWV.BIN",
+      "size": 38644,
+      "sha256": "701532fe8bcb2a7c374b891bff83f80105d36b579b5c1dc95fc4130cfddcf71c"
+    }
+  ]
+}

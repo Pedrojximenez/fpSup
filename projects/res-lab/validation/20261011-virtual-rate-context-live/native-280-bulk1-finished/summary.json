@@ -1,0 +1,49 @@
+{
+  "origin_us": 4070053261,
+  "vbuf_ms": 1209.046,
+  "vbuf_payload": [
+    1145328897,
+    4294967295,
+    94,
+    84681
+  ],
+  "before_vbuf": {
+    "submitted": 2,
+    "completed": 1,
+    "released": 0
+  },
+  "first_written_frames": [
+    {
+      "slot": 83,
+      "submit_ms": 931.741,
+      "complete_ms": 1054.658,
+      "release_ms": 1293.7,
+      "complete_to_release_ms": 239.042
+    },
+    {
+      "slot": 84,
+      "submit_ms": 1054.939,
+      "complete_ms": 1286.149,
+      "release_ms": 1807.442,
+      "complete_to_release_ms": 521.293
+    },
+    {
+      "slot": 85,
+      "submit_ms": 1286.348,
+      "complete_ms": 1298.566,
+      "release_ms": 1807.54,
+      "complete_to_release_ms": 508.974
+    }
+  ],
+  "limitations": "DEBUG changes scheduling; header bracket includes Gyro2 and native DMA; callbacks/releases are not durable-media or no-mosaic proof.",
+  "header_bracket_ms": {
+    "min": 0.554,
+    "median": 4.557,
+    "max": 64.738
+  },
+  "sensor_callbacks": {
+    "count": 191,
+    "median_gap_us": 3575.0,
+    "limitation": "callback cadence does not establish exposure or complete recorded frames"
+  }
+}

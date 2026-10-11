@@ -1,0 +1,100 @@
+#!/usr/bin/env python3
+"""Build Gyro2 as a loader v3 sup.
+
+    python3 -B build.py            -> build/20GYR2.BIN
+
+Uses fpSup's v3 helpers read-only (make_sup, the reference image) and its
+assembler; nothing in fpSup is written.
+"""
+import pathlib, re, struct, sys
+
+HERE = pathlib.Path(__file__).resolve().parent
+ROOT = HERE.parents[1]
+V3 = ROOT / 'fpSup' / 'fp_usb_shell' / 'v3'
+sys.path.insert(0, str(V3))
+sys.path.insert(0, str(V3.parent))
+
+import build_v3 as B                       # noqa: E402
+from armasm import assemble                # noqa: E402
+
+SRC = HERE / 'src' / 'gyr2.S'
+OUT = HERE / 'build' / '20GYR2.BIN'
+SUP_ID = 'GYR2'
+VERSION = 0x00000004                       # two buffers: level drains, frames slice
+
+SITE = 0xC038C77C
+ACCEL_SITE = 0xC050D4C8
+
+
+class BuildError(RuntimeError):
+    pass
+
+
+def equ(name, src=SRC):
+    m = re.search(rf'^\.equ\s+{name},\s*(0x[0-9A-Fa-f]+|\d+)', pathlib.Path(src).read_text(), re.M)
+    if not m:
+        raise BuildError(f'{name} not found in {SRC.name}')
+    return int(m.group(1), 0)
+
+
+def build(src=SRC):
+    """(file bytes, info).  `src`: another copy of the source (mutation tests)."""
+    code = assemble(src)
+    image = B.IMAGE.read_bytes()
+    stock = B.stock(SITE, 4, image)
+    if equ('SITE', src) != SITE:
+        raise BuildError('SITE in the source and the build disagree')
+    # The claim hands the loader the stock word from this file: it must be
+    # the reference image's, or a warm restart could "repair" to a wrong word.
+    marker = struct.pack('<I', 0xFAF5BD03)
+    if stock != marker:
+        raise BuildError(f'the image has {stock.hex()} at {SITE:#x}, not blx #0xC00FBB90')
+    if code.count(marker) != 1:
+        raise BuildError('the stock word must appear exactly once (site_stock)')
+    accel = struct.pack('<I', 0xE3A02000)
+    if B.stock(ACCEL_SITE, 4, image) != accel:
+        raise BuildError(f'the image has {B.stock(ACCEL_SITE, 4, image).hex()} at {ACCEL_SITE:#x}, not mov r2, #0')
+    if equ('ACCEL_SITE', src) != ACCEL_SITE:
+        raise BuildError('ACCEL_SITE in the source and the build disagree')
+    # Position independence: no word in the code may point into the code as
+    # if it sat at 0 -- armasm already refuses relocations other than local
+    # bl and pc-relative ldr, so absolute self-pointers cannot be emitted.
+    body = code
+    # The gyro and level buffers sit past the file; the loader zeroes them.
+    file_len = B.SL_HEADER_LEN + len(body)
+    file_len += -file_len % 4
+    try:
+        bss = equ('GLOG_N', src) * 6 + equ('ELOG_N', src) * 12
+        try:
+            bss += equ('VLOG_N', src) * 8           # the Vd ring
+        except BuildError:
+            pass
+    except BuildError:                       # an older stage (P0-P3): no buffers
+        bss = None
+    block = None if bss is None else file_len + 8 + bss   # + 8: gbuf is 8-aligned
+    sup = B.make_sup(body, B.SL_HEADER_LEN, SUP_ID, version=VERSION, block_size=block)
+    return sup, {'code': len(code), 'file': len(sup), 'block': block or len(sup)}
+
+
+def main():
+    import argparse, hashlib, json
+    ap = argparse.ArgumentParser()
+    ap.add_argument('--out', type=pathlib.Path, help='write DIR/20GYR2.BIN and DIR/build.json (for fpSup/tools/release_v3.py)')
+    a = ap.parse_args()
+    sup, info = build()
+    out = a.out / OUT.name if a.out else OUT
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_bytes(sup)
+    if a.out:
+        root = HERE.parents[1]
+        sources = [HERE / 'build.py', SRC]
+        (a.out / 'build.json').write_text(json.dumps({
+            'product': 'fpSup-Gyro2, Loader v3 sup', 'file': OUT.name, 'sup_id': SUP_ID,
+            'version': VERSION, 'sha256': hashlib.sha256(sup).hexdigest(), 'facts': info,
+            'sources': {str(p.relative_to(root)): hashlib.sha256(p.read_bytes()).hexdigest() for p in sources},
+        }, indent=1) + '\n')
+    print(f'{out}: {info["file"]} bytes (code {info["code"]}), block {info["block"]}')
+
+
+if __name__ == '__main__':
+    main()

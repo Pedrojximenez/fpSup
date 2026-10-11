@@ -1,0 +1,9 @@
+test_unfinished_features_cannot_dispatch_a_request (test_manage_page.ManagementPageTests) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.333s
+
+OK
+Traceback (most recent call last):
+  File "<stdin>", line 9, in <module>
+AssertionError: Fault allowing unfinished home actions escaped verification

@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "kind": "live_camera_bitstream_is_lossless",
+  "date": "2026-09-23",
+  "operator_scope": "live camera; encode retained, payload read back, block released. The clip on the card is stock uncompressed and was not modified.",
+  "camera": {
+    "model": "w71c1",
+    "firmware": "5.02.0.V91",
+    "git_hash": "13aa621060efff11aaba9b21ad925005302605cf",
+    "media": "SD",
+    "boot_id": 14381000
+  },
+  "source": {
+    "commit": null,
+    "worktree_dirty": null,
+    "git_available": false,
+    "files": {
+      "projects/lossless-sup/tools/verify_camera_payload.py": "a20dffbab52a09a422b04bed88875a88d918575e5577cd44eeff6ea1a36758de",
+      "projects/lossless-sup/tools/canonical_header.py": "f3aa6caf664b6f1d95e1680a9e2345926395d0a0ca82742e8559b8d30c873cec",
+      "fpSup/raw/lossless_codec/single_frame_encode_discard_probe.S": "7cbe05be655dfb47b3d978ce41235bb97ab9059cb0d43c6eb0e7ee534858b664",
+      "fpSup/raw/lossless_codec/single_frame_codec_probe.py": "2d80db00c355b363b846cac543613523c09217a3b62ed2ada8e4ee23a77ffd0a"
+    }
+  },
+  "profile": {
+    "geometry": "1936x1090",
+    "tile": "512x368",
+    "tiles": 12,
+    "predictor": 1,
+    "bit_depth": 12
+  },
+  "frames": {
+    "entered": 1,
+    "finished": 1,
+    "retained": true
+  },
+  "timing": {
+    "elapsed_us": 13667,
+    "budget_24p_us": 41708
+  },
+  "per_frame": {
+    "compressed_bytes": 1284096,
+    "ratio": 2.465,
+    "tile_sizes": [
+      72609,
+      101986,
+      117400,
+      83461,
+      90813,
+      136022,
+      140265,
+      89668,
+      114692,
+      126798,
+      124052,
+      86330
+    ]
+  },
+  "integrity": {
+    "frame_identified_by": "first and last pixel words, 0x100D6110 / 0x56A11958",
+    "frame": "\\CINEMA\\A001_274\\A001_274_20260923_000001.DNG",
+    "decoder": "LibRaw 0.22.1 via rawpy 0.27.0",
+    "samples": 2110240,
+    "samples_equal": true,
+    "source_sample_sha256": "56b2b8c3e56c95f7f4163db6f19e14c0c8dc5cc66b3b45e5e95b930984f8e191",
+    "decoded_sample_sha256": "56b2b8c3e56c95f7f4163db6f19e14c0c8dc5cc66b3b45e5e95b930984f8e191",
+    "block_released": true,
+    "free_recorded": "FREE"
+  },
+  "notes": [
+    "The framing check earned its place on its first live use: it refused the assembly because tile 11 did not end with EOI at its declared length. That was not a bug but a property of the camera's output -- the final tile is padded to align the total -- and the check is now written to allow zero padding after EOI and nothing else.",
+    "release did not recognise a block retained by a --keep encode, because the arming guard it reused only knows the scratch phase. Fixed during the session."
+  ],
+  "explicitly_established": [
+    {
+      "level": "L",
+      "claim": "the camera's own hardware lossless-JPEG bitstream decodes to exactly the source frame: 2,110,240 samples, identical SHA-256. The engine's output is genuinely lossless."
+    },
+    {
+      "level": "L",
+      "claim": "the canonical segment 0 contract works with camera-produced tiles, not just host-encoded ones"
+    },
+    {
+      "level": "L",
+      "claim": "the camera lays its tiles contiguously from the arena base: all twelve SOI markers sit exactly at the cumulative offsets, delta zero"
+    },
+    {
+      "level": "L",
+      "claim": "the camera rounds the LAST tile's declared byte count up so the payload total is 512-byte aligned; 11 zero bytes follow the final EOI and 1,284,096 is 2,508 x 512"
+    },
+    {
+      "level": "L",
+      "claim": "three DRAM windows alias the same memory and all show the codec's output: the 0x4 handle, the 0x8 view the shell worker calls uncached, and the 0xC cached alias"
+    },
+    {
+      "level": "L",
+      "claim": "--keep retains the block and release frees it and records FREE, with the hook restored and the shell alive afterwards"
+    }
+  ],
+  "explicitly_not_established": [
+    "that CPU writes are visible to the SD DMA: the window comparison was inconclusive by construction, because both views agreed and the cache need never have held those lines",
+    "that the shell worker's 0x8-plus-dsb idiom applies to the card path; it is proven for USB DMA, which is a different engine",
+    "anything about writing a compressed frame to the card; this run only read memory back",
+    "more than one frame, one scene, one geometry",
+    "whether the 11-byte tail rounding is fixed at 512 or derived from something else",
+    "in-camera playback, which remains impossible for tiled Compression=7"
+  ]
+}

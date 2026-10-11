@@ -1,0 +1,78 @@
+{
+ "schema_version": 1,
+ "kind": "live_attempt_to_disable_sd_aggregation",
+ "date": "2026-09-24",
+ "operator_scope": "live camera. Read-only flush probe armed twice and self-restored both times. One menu setting changed and restored. One word of stock RAM written and later overwritten by the firmware itself. NO clip was written, no codec ran, no file deleted, nothing saved to FlashValue.",
+ "camera": {
+  "model": "w71c1",
+  "firmware": "5.02.0.V91",
+  "git_hash": "13aa621060efff11aaba9b21ad925005302605cf",
+  "media": "SD",
+  "app_current": 2,
+  "mode": "CINE, FHD RAW12 24p"
+ },
+ "goal": "test ledger-aggregation-off-path-20260924.json: with SD aggregation off, is the write synchronous, so that a single arena would be correct?",
+ "verdict": "NOT TESTED. Aggregation could not be turned off. The hypothesis is neither confirmed nor refuted.",
+ "addresses_established": {
+  "cinemadng_manager_singleton": "0xC359BE4C (from FUN_c03a4c88)",
+  "manager_init_flag": "0xC359BE58 byte 0 (+0x0C)",
+  "manager_aggregation_flag": "0xC359BE59 (+0x0D)",
+  "settings_block_pointer": "0xC3075230 (= singleton 0xC30751D4 + 0x5C)",
+  "settings_block": "0xC3074BE8",
+  "media_write_mode_slot": "0xC3074C84 (= settings + 0x9C)"
+ },
+ "measured": [
+  {
+   "level": "L",
+   "claim": "menu SetMediaWriteMode reads 1, and settings+0x9C reads 1. The camera was in the aggregating position, which is consistent with G3 and G5 having run there."
+  },
+  {
+   "level": "L",
+   "claim": "menu SetMediaWriteMode 0 returns OK and reads back 0, but settings+0x9C stays 1. The shell command changes the menu item's own value; it does NOT refresh the slot the CinemaDNG code reads. Opening and closing the menu did not refresh it either."
+  },
+  {
+   "level": "L",
+   "claim": "writing settings+0x9C = 0 directly does not hold. After one recording the slot read 1 again while the menu value was still 0, so MenuItemMediaWriteMode::v3 re-ran during the recording and wrote 1 despite the menu item being 0."
+  },
+  {
+   "level": "L",
+   "claim": "therefore a gating item forces the flag on. MenuItemMediaWriteMode::v3 sets the byte to 1 unconditionally when a gating item's value is 0, and only otherwise to (this item's value == 1). On this camera the gating branch is taken."
+  },
+  {
+   "level": "L",
+   "claim": "manager+0x0D read 1 both before and after the attempt, and the flush time was unchanged: 365 us on the first run and 356 us on the second, against 372 us recorded on 2026-09-23. All three are the same measurement."
+  },
+  {
+   "level": "L",
+   "claim": "the second run's probe fired on a genuine CinemaDNG frame: node_count 1, node_length 0x318200 = 3,244,544, node_buffer 0x53B02C00, DNG magic 0x002A4949, all nine shape flags, self-restored."
+  },
+  {
+   "level": "L",
+   "claim": "LIVE CONFIRMATION of the movie cookie: flush_arg1 = 0xC3540F94, a RAM pointer, not 0. This independently confirms NATIVE_BUFFER_PATTERNS.md section 2 on hardware and refutes the earlier 'DNG path cookie is 0' reading."
+  }
+ ],
+ "static_support_gathered_in_the_same_session": [
+  {
+   "level": "C",
+   "claim": "FUN_c0366790, which installs the aggregation, has exactly one caller, at 0xC03A5144 inside FUN_c03a5050. FUN_c03667e0, which disables it, has exactly one caller, at 0xC03A5208 inside FUN_c03a5190. So aggregation is installed once per CinemaDNG init and torn down at each stop."
+  }
+ ],
+ "operational_notes": [
+  "exact_flush_writer_probe.py restore only restores the hook word. The cave claim and its contents survive, and a second arm is refused because the regions are not zero. Clearing them took 145 individual mem set calls; four words needed a retry before they read back zero. The cave is a bump allocator with no release, so claims last until reboot.",
+  "menu save / setting save were NOT used at any point, so FlashValue is untouched and a battery pull restores everything."
+ ],
+ "explicitly_not_established": [
+  "whether the write is synchronous with aggregation off. This session could not reach that state.",
+  "which menu item is the gating item. MenuItemMediaWriteMode::v3 obtains it through (vtable +0x354) on the global _DAT_c31caa80; that slot was not traced.",
+  "whether the gating condition is a mode, a card property, a resolution, or another user setting",
+  "anything about G5 under a different setting: G5 was deliberately NOT re-run, because under aggregation on it would only reproduce the known failure at the cost of a real clip"
+ ],
+ "camera_left_as_found": {
+  "menu_SetMediaWriteMode": 1,
+  "settings_0x9C": 1,
+  "hook_0xC03A5490": "0xEB0BD652 original",
+  "is_recording": 0,
+  "note": "the cave still holds the flush probe's code and state from the second arm; it is inert, the hook is restored, and a power cycle clears it"
+ },
+ "deployable": false
+}

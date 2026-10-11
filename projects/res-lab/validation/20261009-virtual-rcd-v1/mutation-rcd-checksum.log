@@ -1,0 +1,14 @@
+test_bad_checksum_rejected_without_changing_active_tables (test_virtual_rcd.VirtualTests) ... FAIL
+
+======================================================================
+FAIL: test_bad_checksum_rejected_without_changing_active_tables (test_virtual_rcd.VirtualTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_virtual_rcd.py", line 253, in test_bad_checksum_rejected_without_changing_active_tables
+    self.assertEqual(cam.dispatch(2,ident),6)
+AssertionError: 0 != 6
+
+----------------------------------------------------------------------
+Ran 1 test in 16.672s
+
+FAILED (failures=1)

@@ -1,0 +1,58 @@
+{
+  "plain": {
+    "candidate": {
+      "commands": 106,
+      "display_commands": 20,
+      "mem_set": 79
+    },
+    "legacy": {
+      "commands": 104,
+      "display_commands": 31,
+      "mem_set": 72
+    }
+  },
+  "debug": {
+    "candidate": {
+      "commands": 106,
+      "display_commands": 20,
+      "mem_set": 79
+    },
+    "legacy": {
+      "commands": 104,
+      "display_commands": 31,
+      "mem_set": 72
+    }
+  },
+  "fast": {
+    "candidate": {
+      "commands": 142,
+      "display_commands": 20,
+      "mem_set": 111,
+      "fast_hit_commands": 58,
+      "fast_hit_display_commands": 20
+    },
+    "legacy": {
+      "commands": 169,
+      "display_commands": 64,
+      "mem_set": 102,
+      "fast_hit_commands": 69,
+      "fast_hit_display_commands": 37
+    }
+  },
+  "fast-debug": {
+    "candidate": {
+      "commands": 142,
+      "display_commands": 20,
+      "mem_set": 111,
+      "fast_hit_commands": 58,
+      "fast_hit_display_commands": 20
+    },
+    "legacy": {
+      "commands": 169,
+      "display_commands": 64,
+      "mem_set": 102,
+      "fast_hit_commands": 69,
+      "fast_hit_display_commands": 37
+    }
+  }
+}

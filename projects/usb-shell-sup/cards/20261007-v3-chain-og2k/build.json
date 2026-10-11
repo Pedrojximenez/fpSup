@@ -1,0 +1,355 @@
+{
+ "product": "fpSup-OG2K, Loader v3 sup",
+ "file": "30OG2K.BIN",
+ "sup_id": "OG2K",
+ "version": 1,
+ "card": false,
+ "from_card": null,
+ "sha256": "8d388902797ade545ad59926cc19539d82ce169b9be705cb43c3a3d7a29712bb",
+ "facts": {
+  "img_off": 13184,
+  "fpui_off": 33664,
+  "file_len": 52572,
+  "scratch_off": 52572,
+  "claims": 25,
+  "fixes": 8,
+  "hooks": 14,
+  "target": "og2k",
+  "label": "OG2K",
+  "entry": 4659,
+  "tab_off": 12208,
+  "text": 12174,
+  "block": 52672,
+  "image": 20480,
+  "fpui": 18908,
+  "pack": 4712,
+  "images": [
+   "30OG2K_QS",
+   "30OG2K_SET",
+   "30OG2K_FONT"
+  ],
+  "enum": 4,
+  "v3_growth": 117,
+  "pic_proof_ogv": "0x10000000",
+  "hooks_list": [
+   {
+    "site": "0xC043A19C",
+    "to": "0xC0732400",
+    "kind": "BL",
+    "next": "0xC073011C",
+    "replay": "0xC073265C"
+   },
+   {
+    "site": "0xC0437B48",
+    "to": "0xC0731A00",
+    "kind": "B",
+    "next": "0xC0730108",
+    "replay": "0xC0731ABC"
+   },
+   {
+    "site": "0xC005C020",
+    "to": "0xC0731800",
+    "kind": "B",
+    "next": "0xC073010C",
+    "replay": "0xC0731960"
+   },
+   {
+    "site": "0xC005BE58",
+    "to": "0xC0731400",
+    "kind": "B",
+    "next": "0xC0730128",
+    "replay": "0xC073153C"
+   },
+   {
+    "site": "0xC0306EA0",
+    "to": "0xC0730200",
+    "kind": "B",
+    "next": "0xC0730110",
+    "replay": "0xC0730244"
+   },
+   {
+    "site": "0xC0306EEC",
+    "to": "0xC0730280",
+    "kind": "B",
+    "next": "0xC0730114",
+    "replay": "0xC07302C4"
+   },
+   {
+    "site": "0xC0437E98",
+    "to": "0xC0731D00",
+    "kind": "B",
+    "next": "0xC0730118",
+    "replay": "0xC0731EF4"
+   },
+   {
+    "site": "0xC043BE68",
+    "to": "0xC0732200",
+    "kind": "B",
+    "next": "0xC0730120",
+    "replay": "0xC0732290"
+   },
+   {
+    "site": "0xC03A6DD8",
+    "to": "0xC0732900",
+    "kind": "B",
+    "next": "0xC0730124",
+    "replay": "0xC0732958"
+   },
+   {
+    "site": "0xC02092CC",
+    "to": "0xC0730A00",
+    "kind": "BL",
+    "next": "0xC0730104",
+    "replay": "0x00000000"
+   },
+   {
+    "site": "0xC0218AEC",
+    "to": "0xC0730A00",
+    "kind": "BL",
+    "next": "0xC0730104",
+    "replay": "0x00000000"
+   },
+   {
+    "site": "0xC0219260",
+    "to": "0xC0730A00",
+    "kind": "BL",
+    "next": "0xC0730104",
+    "replay": "0x00000000"
+   },
+   {
+    "site": "0xC03AA568",
+    "to": "0xC0730A00",
+    "kind": "BL",
+    "next": "0xC0730104",
+    "replay": "0x00000000"
+   },
+   {
+    "site": "0xC043CCF8",
+    "to": "0xC0730800",
+    "kind": "B",
+    "next": "0xC0730100",
+    "replay": "0xC0730950"
+   }
+  ],
+  "claims_list": [
+   {
+    "address": "0xC043A19C",
+    "bytes": 4,
+    "kind": "CHAIN",
+    "writes": false
+   },
+   {
+    "address": "0xC0437B48",
+    "bytes": 4,
+    "kind": "CHAIN",
+    "writes": false
+   },
+   {
+    "address": "0xC005C020",
+    "bytes": 4,
+    "kind": "CHAIN",
+    "writes": false
+   },
+   {
+    "address": "0xC005BE58",
+    "bytes": 4,
+    "kind": "CHAIN",
+    "writes": false
+   },
+   {
+    "address": "0xC0306EA0",
+    "bytes": 4,
+    "kind": "CHAIN",
+    "writes": false
+   },
+   {
+    "address": "0xC0306EEC",
+    "bytes": 4,
+    "kind": "CHAIN",
+    "writes": false
+   },
+   {
+    "address": "0xC0437E98",
+    "bytes": 4,
+    "kind": "CHAIN",
+    "writes": false
+   },
+   {
+    "address": "0xC043BE68",
+    "bytes": 4,
+    "kind": "CHAIN",
+    "writes": false
+   },
+   {
+    "address": "0xC03A6DD8",
+    "bytes": 4,
+    "kind": "CHAIN",
+    "writes": false
+   },
+   {
+    "address": "0xC02092CC",
+    "bytes": 4,
+    "kind": "CHAIN",
+    "writes": false
+   },
+   {
+    "address": "0xC0218AEC",
+    "bytes": 4,
+    "kind": "CHAIN",
+    "writes": false
+   },
+   {
+    "address": "0xC0219260",
+    "bytes": 4,
+    "kind": "CHAIN",
+    "writes": false
+   },
+   {
+    "address": "0xC03AA568",
+    "bytes": 4,
+    "kind": "CHAIN",
+    "writes": false
+   },
+   {
+    "address": "0xC043CCF8",
+    "bytes": 4,
+    "kind": "CHAIN",
+    "writes": false
+   },
+   {
+    "address": "0xC0BDB9CC",
+    "bytes": 4,
+    "kind": "CHAIN",
+    "writes": false
+   },
+   {
+    "address": "0xC0BDBC28",
+    "bytes": 4,
+    "kind": "CHAIN",
+    "writes": false
+   },
+   {
+    "address": "0xC0BDBC60",
+    "bytes": 4,
+    "kind": "CHAIN",
+    "writes": false
+   },
+   {
+    "address": "0xC0BDBC8C",
+    "bytes": 4,
+    "kind": "CHAIN",
+    "writes": false
+   },
+   {
+    "address": "0xC0BDBC90",
+    "bytes": 4,
+    "kind": "CHAIN",
+    "writes": false
+   },
+   {
+    "address": "0xC0BDBC94",
+    "bytes": 4,
+    "kind": "CHAIN",
+    "writes": false
+   },
+   {
+    "address": "0xC0B599A4",
+    "bytes": 8,
+    "kind": "EXCL",
+    "writes": false
+   },
+   {
+    "address": "0xC05E5B58",
+    "bytes": 4,
+    "kind": "SHARED_UI",
+    "writes": false
+   },
+   {
+    "address": "0xC05E5BEC",
+    "bytes": 4,
+    "kind": "SHARED_UI",
+    "writes": false
+   },
+   {
+    "address": "0xC05E61C8",
+    "bytes": 4,
+    "kind": "SHARED_UI",
+    "writes": false
+   },
+   {
+    "address": "0xC05E61E0",
+    "bytes": 4,
+    "kind": "SHARED_UI",
+    "writes": false
+   }
+  ],
+  "patches": [],
+  "dropped_stock_writes": 34,
+  "restore": "0xC0731600",
+  "uia_apply_off": 63,
+  "cave0": "0xC0730000",
+  "table": "0xC0731000",
+  "fmt_keys": [
+   "OG2K23_98",
+   "OG2K24",
+   "OG2K25",
+   "OG2K30",
+   "OG2K48",
+   "OG2K50",
+   "OG2K60",
+   "OG2K100"
+  ],
+  "flag": "0xC0731C08",
+  "fmtlatch": "0xC0731C20",
+  "donor_timing": "0xC0B599A0",
+  "gtab_words": [
+   "0xC0BDB9CC",
+   "0xC0BDBC28",
+   "0xC0BDBC60",
+   "0xC0BDBC8C",
+   "0xC0BDBC90",
+   "0xC0BDBC94",
+   "0xC0B599A4"
+  ]
+ },
+ "sources": {
+  "projects/open-gate/build/build_v3_og.py": "de91c259889c81fc1165cf50249a86141f02761eaf9fbc8d888278bf8623a247",
+  "projects/open-gate/build/og_v3.c": "81a952f85631983435409bad4fc6e6684aab19fba44ddb68ce183046c65bccf4",
+  "projects/open-gate/build/og_pic.inc": "3be1b6fa6189d229e54a1e43a03135040dca04768844216202de002526da9613",
+  "projects/open-gate/build/og3k_plan.py": "5055b12d36692f21e994ea707208f8b4360cb4c6bc74bfeb7e7fbe3a15958f26",
+  "projects/open-gate/build/build_og3k_ui_candidate.py": "5e73fc39f1ef9998796403cd57eb441f0eb16a79e863f2ce1b554ccfb724d8b1",
+  "projects/open-gate/build/fmttable.S": "46e8ceef6e8189b9bebba45626f60d67526328ab88d2e766db16713f02b1c6ab",
+  "projects/open-gate/build/og3kfps.S": "6af5c197e6808a4af9a60eb4fec3aff23ea63dc6adcf5b2954c53a0254bce481",
+  "projects/open-gate/build/og3kname.S": "3e202e0e07368925d59aa7d9cd2baf7fbbdcc07a38df680ee9f2fb0741379b20",
+  "projects/open-gate/build/og3ksel.S": "2700b415aa430ad6178244be6e66d9fb8e53c8c87a6d5b007a1ba67bc1ec6968",
+  "projects/open-gate/build/og3kaspect.S": "f527d48418395cb53bb039e22bd85b076221a21c1f27ef8e670606a515a22fd6",
+  "projects/open-gate/build/og3kaspect2.S": "b2a4dffd81589934808aa5789dc8b1007b5b1aab0cbc1c3e7369dad8152ea84d",
+  "projects/open-gate/build/og3kout.S": "4e8ca1635e657f6d438bdca21287eca1272446f2b293f3696004d5c172524c27",
+  "projects/open-gate/build/og3kcanvas.S": "e9823fcc216ce4d94be1b02194d7ad66b67adad829a25c9f74946985dd80bf04",
+  "projects/open-gate/build/og3kpbsel.S": "12f04b0e1ce2dd00081932d461b53ed550952e95a5b9de596fb8f6da1e840389",
+  "projects/open-gate/build/og3kgs.S": "66e9368e4b9c6233fad7f4d6ece0fc2415d52035a839b4fa54b32212a9bbbba3",
+  "projects/open-gate/build/og3kfmt.S": "ff5d205bf6718a14466fb047acb9a4527411f1bf9314e5f23c7f25049b28d1ea",
+  "projects/open-gate/build/og3krestore.S": "e8475c7eadc8c5f82d1be818742a4a2e5244f6a1571ba569e9d643cae3835365",
+  "fpSup/uishare/fv_handler.S": "ca3a8844aeb31297e1369c863565ba8746bd093fa92fdbfda42c4792a18c3f0c",
+  "fpSup/uishare/qs_apply.c": "6dfec7ae1b86f1d7f06e88e87ce4f6fa9b39e714cde589e2143e92bfa5c9fa85",
+  "fpSup/uishare/qs_apply.h": "7e814aaf2928db1d855c973f19abb47ab61207bb1f10ff0085c49ba47550e369",
+  "fpSup/uishare/qs_layer.S": "c2686aea60e460cec7f528eeede681eca081efcceb499db5b5945407e0382829",
+  "fpSup/uishare/qs_layer.c": "33aa5106e9fe7916d6ec88d1d4d43cf67f953ee08e611e779dd5c1312909dd82",
+  "fpSup/uishare/qs_layer.h": "1cbd56aee0e4e6e8485c96a3bf9d6b11a09df0ee4b8cbea4514665d7cfa8ad2f",
+  "fpSup/uishare/section.S": "4d6d116b4582c10e2b62b0995246f779d7f2388047e440d210d66da22bcfca38",
+  "fpSup/uishare/ui_apply.c": "4b6bad26312cfe102477f159cab5e7e34198176c1a9bcacf300b19d7c6fe432d",
+  "fpSup/uishare/ui_apply.h": "17b18c4047b039909f11e3a1a3b92a7cb6dbf8a20a50596f6644661417871b75",
+  "fpSup/uishare/ui_apply_fixture.c": "0015d435d25bf441e5f9701f32b245d1a5b6c934a5e08e9f17352d1275fae22a",
+  "fpSup/uishare/ui_pool.c": "2d1a27f1b44381dd71f4574d0f8b8572c5d27ae2ed61aff270f6cbea88e3943d",
+  "fpSup/uishare/ui_pool.h": "1dd5cb6868cc42bd9b096d4c73f2f6d89563c21f8f1b48e8bc13ac0fc6bebbe1",
+  "fpSup/uishare/ui_pool_fixture.c": "b60c914608d3d758aa5d868676a2fc9993a09c84c0f675fd72ffbbf58c85a9a2",
+  "fpSup/uishare/ui_strings.S": "65bcad4745d8e5446b40cb8d32ae0cc540fe0b0ef6b5b57c3287c67066ae947b",
+  "fpSup/uishare/ui_strings_code.h": "87edc6b18e1375989ab9d518aa46f426ba8175d9864cf47e9dba75d0222f62d0",
+  "fpSup/uishare/ui/__init__.py": "5642a4646eed1615405edd3b0cc269fefb3c3ff7399fd3f568854a2522b51384",
+  "fpSup/uishare/ui/chain.py": "16cab0e78918629844a1ce0a36e72f791b57fe22501da6a44f33f1e247a61632",
+  "fpSup/uishare/ui/fpui.py": "31b26e6d3f5e9bc3ffcd33b2e3c8080e0656c94c43da2899f08934a1b30ad4be",
+  "fpSup/uishare/ui/options.py": "f756a4a483d7617ea887db7f46553c54781b6f0d93d5b7f4780f3731ebbea158",
+  "fpSup/uishare/ui/qs.py": "51888acdd74031d296984335a3a27234750cb912aa38885ffb46be58874a747a",
+  "fpSup/uishare/ui/rows.py": "faa4d6c2003eca1c210b5dc463cf1c3d2bef01db4e7715415da9e3120f7ac1f5"
+ }
+}

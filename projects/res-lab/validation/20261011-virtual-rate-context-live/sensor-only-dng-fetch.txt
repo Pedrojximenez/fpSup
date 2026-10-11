@@ -1,0 +1,16 @@
+screen: LV_CINE_MEDIUM
+  code   412/412 B  5.7 KiB/s   verify 412/412 B  582 KiB/s   verify 412 bytes in 0.0s (164 KiB/s)      
+  code   412 bytes in 0.2s (1.7 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  remote  \CINEMA\A001_089\A001_089_20261012_000001.DNG  1095168 bytes, mode 0x1
+  buffer  from the firmware, file object 0x45062FC0
+  reply   getfile: FAILED, read status at 0xC072F708
+  buffer  0x53B00980 (1099264 bytes asked for)
+  status  3 — open returned 0
+  open    0   read 0   actual 0 of 1095168
+  buffer  handed back
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/fetch_trial_frames.py", line 50, in <module>
+    if __name__=='__main__':main()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/fetch_trial_frames.py", line 44, in main
+    rc=getter.main();assert rc==0
+AssertionError

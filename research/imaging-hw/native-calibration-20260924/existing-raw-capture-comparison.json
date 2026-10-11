@@ -1,0 +1,1469 @@
+{
+  "purpose": "Existing sequential captures: test consistency, not prove RAW mode invariance",
+  "method": {
+    "rawpy": "0.27.0",
+    "processing": "raw_image only, no demosaic, color matrix, profile, white balance or tone processing",
+    "channels": [
+      "R",
+      "G1",
+      "G2",
+      "B"
+    ],
+    "registration_image": "2x2 same-channel mean in CFA planes = 4x4 original Bayer sampling grid; average green for translation only",
+    "comparison": "black subtraction then 32x32 original Bayer block means, exclude edge/dark/clipped blocks; no absolute exposure normalization because settings identical",
+    "chromatic_ratio_change": "(target_R_or_B / mean(target_G1,target_G2)) / (reference_R_or_B / mean(reference_G1,reference_G2)), computed per block before median",
+    "WB": "0010\u201313 have exactly equal AsShotNeutral; multiplying all by its reciprocal would cancel in reported ratios, so no WB was applied",
+    "registration_model_limit": "global translation only, not rotation/parallax/local object motion",
+    "source_files_modified": false
+  },
+  "files": {
+    "_SDI0010.DNG": {
+      "path": "/Users/dido/Developer.localized/SIGMAfp_re/research/imaging-hw/color-characterisation/captures/_SDI0010.DNG",
+      "file_sha256": "1bd172b324db659366d052d1664cf9a875e0426580589732603776ea3b69f64c",
+      "metadata": {
+        "SourceFile": "/Users/dido/Developer.localized/SIGMAfp_re/research/imaging-hw/color-characterisation/captures/_SDI0010.DNG",
+        "ExifIFD:ISO": 800,
+        "ExifIFD:ExposureTime": 0.008,
+        "ExifIFD:FNumber": 1.4,
+        "ExifIFD:ExposureCompensation": 0,
+        "Sigma:ExposureCompensation": 0,
+        "Sigma:ExposureMode": "M",
+        "ExifIFD:ExposureMode": 1,
+        "ExifIFD:ExposureProgram": 1,
+        "ExifIFD:MeteringMode": 5,
+        "Sigma:MeteringMode": 8,
+        "Sigma:WhiteBalance": "Auto",
+        "ExifIFD:WhiteBalance": 0,
+        "Sigma:PictureMode": "OFF",
+        "SubIFD:BlackLevel": "1024 1024 1024 1024",
+        "SubIFD:WhiteLevel": 16383,
+        "IFD0:BitsPerSample": "8 8 8",
+        "SubIFD:BitsPerSample": 14,
+        "SubIFD1:BitsPerSample": "8 8 8",
+        "SubIFD2:BitsPerSample": "8 8 8",
+        "IFD0:Compression": 7,
+        "SubIFD:Compression": 7,
+        "SubIFD1:Compression": 7,
+        "SubIFD2:Compression": 7,
+        "IFD0:PhotometricInterpretation": 6,
+        "SubIFD:PhotometricInterpretation": 32803,
+        "SubIFD1:PhotometricInterpretation": 6,
+        "SubIFD2:PhotometricInterpretation": 6,
+        "IFD0:ImageWidth": 160,
+        "SubIFD:ImageWidth": 6064,
+        "SubIFD1:ImageWidth": 6000,
+        "SubIFD2:ImageWidth": 640,
+        "IFD0:ImageHeight": 120,
+        "SubIFD:ImageHeight": 4042,
+        "SubIFD1:ImageHeight": 4000,
+        "SubIFD2:ImageHeight": 480,
+        "SubIFD:ActiveArea": "0 0 4042 6064",
+        "SubIFD:DefaultCropOrigin": "32 21",
+        "SubIFD:DefaultCropSize": "6000 4000",
+        "SubIFD:CFARepeatPatternDim": "2 2",
+        "Composite:CFAPattern": "2 2 0 1 1 2",
+        "IFD0:AsShotNeutral": "0.4942084942 1 0.5089463221",
+        "Sigma:CameraCalibration": "1.04334366321564 0 0 0 1 0 0 0 1.0193452835083",
+        "IFD0:ColorMatrix1": "1.4902 -0.7069 -0.2292 -1.1733 2.271 0.0503 0.0856 -0.314 1.6274",
+        "IFD0:ColorMatrix2": "1.5288 -0.7252 -0.2352 -0.9692 1.876 0.0415 0.0354 -0.1298 0.673",
+        "ExifIFD:DateTimeOriginal": "2026:08:15 03:40:40",
+        "ExifIFD:CreateDate": "2026:08:15 03:40:40",
+        "ExifIFD:LensModel": "28mm F1.4 DG HSM | Art 019                                  ",
+        "ExifIFD:FocalLength": 28,
+        "Sigma:SerialNumber": 91411817,
+        "ExifIFD:SerialNumber": 91411817
+      },
+      "raw": {
+        "shape": [
+          4042,
+          6064
+        ],
+        "dtype": "uint16",
+        "bayer_sha256": "a5d833cda3f206f8d606cec24755d9e8d88f95c0658b1e482bc0f26792acaaaa",
+        "raw_pattern": [
+          [
+            0,
+            1
+          ],
+          [
+            3,
+            2
+          ]
+        ],
+        "color_desc": "RGBG",
+        "black_levels_by_color_index": [
+          1024,
+          1024,
+          1024,
+          1024
+        ],
+        "white_level": 16383,
+        "rawpy_sizes": {
+          "raw_height": 4042,
+          "raw_width": 6064,
+          "height": 4042,
+          "width": 6064,
+          "top_margin": 0,
+          "left_margin": 0,
+          "iheight": 4042,
+          "iwidth": 6064,
+          "pixel_aspect": 1.0,
+          "flip": 0,
+          "crop_left_margin": 32,
+          "crop_top_margin": 22,
+          "crop_width": 6000,
+          "crop_height": 3999
+        },
+        "camera_whitebalance": [
+          2.0234375,
+          1.0,
+          1.9648438692092896,
+          0.0
+        ],
+        "whole_image_mean_black_subtracted_RG1G2B": [
+          726.2233427311384,
+          1397.0974459794845,
+          1397.325873512812,
+          697.6086750400478
+        ]
+      }
+    },
+    "_SDI0011.DNG": {
+      "path": "/Users/dido/Developer.localized/SIGMAfp_re/research/imaging-hw/color-characterisation/captures/_SDI0011.DNG",
+      "file_sha256": "1a169e9f5e245bff085617e6b60d4a2dbb2bffb6ec3d09121dc246bfe05fcc3e",
+      "metadata": {
+        "SourceFile": "/Users/dido/Developer.localized/SIGMAfp_re/research/imaging-hw/color-characterisation/captures/_SDI0011.DNG",
+        "ExifIFD:ISO": 800,
+        "ExifIFD:ExposureTime": 0.008,
+        "ExifIFD:FNumber": 1.4,
+        "ExifIFD:ExposureCompensation": 0,
+        "Sigma:ExposureCompensation": 0,
+        "Sigma:ExposureMode": "M",
+        "ExifIFD:ExposureMode": 1,
+        "ExifIFD:ExposureProgram": 1,
+        "ExifIFD:MeteringMode": 5,
+        "Sigma:MeteringMode": 8,
+        "Sigma:WhiteBalance": "Auto",
+        "ExifIFD:WhiteBalance": 0,
+        "Sigma:PictureMode": "PowderBlue",
+        "SubIFD:BlackLevel": "1024 1024 1024 1024",
+        "SubIFD:WhiteLevel": 16383,
+        "IFD0:BitsPerSample": "8 8 8",
+        "SubIFD:BitsPerSample": 14,
+        "SubIFD1:BitsPerSample": "8 8 8",
+        "SubIFD2:BitsPerSample": "8 8 8",
+        "IFD0:Compression": 7,
+        "SubIFD:Compression": 7,
+        "SubIFD1:Compression": 7,
+        "SubIFD2:Compression": 7,
+        "IFD0:PhotometricInterpretation": 6,
+        "SubIFD:PhotometricInterpretation": 32803,
+        "SubIFD1:PhotometricInterpretation": 6,
+        "SubIFD2:PhotometricInterpretation": 6,
+        "IFD0:ImageWidth": 160,
+        "SubIFD:ImageWidth": 6064,
+        "SubIFD1:ImageWidth": 6000,
+        "SubIFD2:ImageWidth": 640,
+        "IFD0:ImageHeight": 120,
+        "SubIFD:ImageHeight": 4042,
+        "SubIFD1:ImageHeight": 4000,
+        "SubIFD2:ImageHeight": 480,
+        "SubIFD:ActiveArea": "0 0 4042 6064",
+        "SubIFD:DefaultCropOrigin": "32 21",
+        "SubIFD:DefaultCropSize": "6000 4000",
+        "SubIFD:CFARepeatPatternDim": "2 2",
+        "Composite:CFAPattern": "2 2 0 1 1 2",
+        "IFD0:AsShotNeutral": "0.4942084942 1 0.5089463221",
+        "Sigma:CameraCalibration": "1.04334366321564 0 0 0 1 0 0 0 1.0193452835083",
+        "IFD0:ColorMatrix1": "1.4643 -0.7511 -0.5102 -0.333 1.1711 -0.0604 -0.0748 0.1634 0.5867",
+        "IFD0:ColorMatrix2": "0.8252 -0.2044 -0.1744 -0.4961 1.1648 0.0631 -0.1137 0.1581 0.3549",
+        "ExifIFD:DateTimeOriginal": "2026:08:15 03:40:46",
+        "ExifIFD:CreateDate": "2026:08:15 03:40:46",
+        "ExifIFD:LensModel": "28mm F1.4 DG HSM | Art 019                                  ",
+        "ExifIFD:FocalLength": 28,
+        "Sigma:SerialNumber": 91411817,
+        "ExifIFD:SerialNumber": 91411817
+      },
+      "raw": {
+        "shape": [
+          4042,
+          6064
+        ],
+        "dtype": "uint16",
+        "bayer_sha256": "7bacc0e1e231de3256298db1adb68f5c6a26c49b9fe738f5068700e7bb0226b9",
+        "raw_pattern": [
+          [
+            0,
+            1
+          ],
+          [
+            3,
+            2
+          ]
+        ],
+        "color_desc": "RGBG",
+        "black_levels_by_color_index": [
+          1024,
+          1024,
+          1024,
+          1024
+        ],
+        "white_level": 16383,
+        "rawpy_sizes": {
+          "raw_height": 4042,
+          "raw_width": 6064,
+          "height": 4042,
+          "width": 6064,
+          "top_margin": 0,
+          "left_margin": 0,
+          "iheight": 4042,
+          "iwidth": 6064,
+          "pixel_aspect": 1.0,
+          "flip": 0,
+          "crop_left_margin": 32,
+          "crop_top_margin": 22,
+          "crop_width": 6000,
+          "crop_height": 3999
+        },
+        "camera_whitebalance": [
+          2.0234375,
+          1.0,
+          1.9648438692092896,
+          0.0
+        ],
+        "whole_image_mean_black_subtracted_RG1G2B": [
+          726.9136681924228,
+          1398.188201326703,
+          1398.4082452520304,
+          697.953429459018
+        ]
+      }
+    },
+    "_SDI0012.DNG": {
+      "path": "/Users/dido/Developer.localized/SIGMAfp_re/research/imaging-hw/color-characterisation/captures/_SDI0012.DNG",
+      "file_sha256": "e8f354e9cb306992f2dc67df0f2e90329f04bcb3237af14b653850ebf91b6a0c",
+      "metadata": {
+        "SourceFile": "/Users/dido/Developer.localized/SIGMAfp_re/research/imaging-hw/color-characterisation/captures/_SDI0012.DNG",
+        "ExifIFD:ISO": 800,
+        "ExifIFD:ExposureTime": 0.008,
+        "ExifIFD:FNumber": 1.4,
+        "ExifIFD:ExposureCompensation": 0,
+        "Sigma:ExposureCompensation": 0,
+        "Sigma:ExposureMode": "M",
+        "ExifIFD:ExposureMode": 1,
+        "ExifIFD:ExposureProgram": 1,
+        "ExifIFD:MeteringMode": 5,
+        "Sigma:MeteringMode": 8,
+        "Sigma:WhiteBalance": "Auto",
+        "ExifIFD:WhiteBalance": 0,
+        "Sigma:PictureMode": "TealAndOrange",
+        "SubIFD:BlackLevel": "1024 1024 1024 1024",
+        "SubIFD:WhiteLevel": 16383,
+        "IFD0:BitsPerSample": "8 8 8",
+        "SubIFD:BitsPerSample": 14,
+        "SubIFD1:BitsPerSample": "8 8 8",
+        "SubIFD2:BitsPerSample": "8 8 8",
+        "IFD0:Compression": 7,
+        "SubIFD:Compression": 7,
+        "SubIFD1:Compression": 7,
+        "SubIFD2:Compression": 7,
+        "IFD0:PhotometricInterpretation": 6,
+        "SubIFD:PhotometricInterpretation": 32803,
+        "SubIFD1:PhotometricInterpretation": 6,
+        "SubIFD2:PhotometricInterpretation": 6,
+        "IFD0:ImageWidth": 160,
+        "SubIFD:ImageWidth": 6064,
+        "SubIFD1:ImageWidth": 6000,
+        "SubIFD2:ImageWidth": 640,
+        "IFD0:ImageHeight": 120,
+        "SubIFD:ImageHeight": 4042,
+        "SubIFD1:ImageHeight": 4000,
+        "SubIFD2:ImageHeight": 480,
+        "SubIFD:ActiveArea": "0 0 4042 6064",
+        "SubIFD:DefaultCropOrigin": "32 21",
+        "SubIFD:DefaultCropSize": "6000 4000",
+        "SubIFD:CFARepeatPatternDim": "2 2",
+        "Composite:CFAPattern": "2 2 0 1 1 2",
+        "IFD0:AsShotNeutral": "0.4942084942 1 0.5089463221",
+        "Sigma:CameraCalibration": "1.04334366321564 0 0 0 1 0 0 0 1.0193452835083",
+        "IFD0:ColorMatrix1": "1.4643 -0.7511 -0.5102 -0.333 1.1711 -0.0604 -0.0748 0.1634 0.5867",
+        "IFD0:ColorMatrix2": "0.8252 -0.2044 -0.1744 -0.4961 1.1648 0.0631 -0.1137 0.1581 0.3549",
+        "ExifIFD:DateTimeOriginal": "2026:08:15 03:40:51",
+        "ExifIFD:CreateDate": "2026:08:15 03:40:51",
+        "ExifIFD:LensModel": "28mm F1.4 DG HSM | Art 019                                  ",
+        "ExifIFD:FocalLength": 28,
+        "Sigma:SerialNumber": 91411817,
+        "ExifIFD:SerialNumber": 91411817
+      },
+      "raw": {
+        "shape": [
+          4042,
+          6064
+        ],
+        "dtype": "uint16",
+        "bayer_sha256": "5333f0815fae7624f1df047aebf4b2316b56b15ecc934a39fff0fbb52b9677a0",
+        "raw_pattern": [
+          [
+            0,
+            1
+          ],
+          [
+            3,
+            2
+          ]
+        ],
+        "color_desc": "RGBG",
+        "black_levels_by_color_index": [
+          1024,
+          1024,
+          1024,
+          1024
+        ],
+        "white_level": 16383,
+        "rawpy_sizes": {
+          "raw_height": 4042,
+          "raw_width": 6064,
+          "height": 4042,
+          "width": 6064,
+          "top_margin": 0,
+          "left_margin": 0,
+          "iheight": 4042,
+          "iwidth": 6064,
+          "pixel_aspect": 1.0,
+          "flip": 0,
+          "crop_left_margin": 32,
+          "crop_top_margin": 22,
+          "crop_width": 6000,
+          "crop_height": 3999
+        },
+        "camera_whitebalance": [
+          2.0234375,
+          1.0,
+          1.9648438692092896,
+          0.0
+        ],
+        "whole_image_mean_black_subtracted_RG1G2B": [
+          726.1881877815914,
+          1396.7113820713641,
+          1396.873056358108,
+          697.0528177748417
+        ]
+      }
+    },
+    "_SDI0013.DNG": {
+      "path": "/Users/dido/Developer.localized/SIGMAfp_re/research/imaging-hw/color-characterisation/captures/_SDI0013.DNG",
+      "file_sha256": "ab7e0f1d31d8a26299aa2d165594f960af7f4aa7ff3ac43b80affeddef9952a0",
+      "metadata": {
+        "SourceFile": "/Users/dido/Developer.localized/SIGMAfp_re/research/imaging-hw/color-characterisation/captures/_SDI0013.DNG",
+        "ExifIFD:ISO": 800,
+        "ExifIFD:ExposureTime": 0.008,
+        "ExifIFD:FNumber": 1.4,
+        "ExifIFD:ExposureCompensation": 0,
+        "Sigma:ExposureCompensation": 0,
+        "Sigma:ExposureMode": "M",
+        "ExifIFD:ExposureMode": 1,
+        "ExifIFD:ExposureProgram": 1,
+        "ExifIFD:MeteringMode": 5,
+        "Sigma:MeteringMode": 8,
+        "Sigma:WhiteBalance": "Auto",
+        "ExifIFD:WhiteBalance": 0,
+        "Sigma:PictureMode": "Standard",
+        "SubIFD:BlackLevel": "1024 1024 1024 1024",
+        "SubIFD:WhiteLevel": 16383,
+        "IFD0:BitsPerSample": "8 8 8",
+        "SubIFD:BitsPerSample": 14,
+        "SubIFD1:BitsPerSample": "8 8 8",
+        "SubIFD2:BitsPerSample": "8 8 8",
+        "IFD0:Compression": 7,
+        "SubIFD:Compression": 7,
+        "SubIFD1:Compression": 7,
+        "SubIFD2:Compression": 7,
+        "IFD0:PhotometricInterpretation": 6,
+        "SubIFD:PhotometricInterpretation": 32803,
+        "SubIFD1:PhotometricInterpretation": 6,
+        "SubIFD2:PhotometricInterpretation": 6,
+        "IFD0:ImageWidth": 160,
+        "SubIFD:ImageWidth": 6064,
+        "SubIFD1:ImageWidth": 6000,
+        "SubIFD2:ImageWidth": 640,
+        "IFD0:ImageHeight": 120,
+        "SubIFD:ImageHeight": 4042,
+        "SubIFD1:ImageHeight": 4000,
+        "SubIFD2:ImageHeight": 480,
+        "SubIFD:ActiveArea": "0 0 4042 6064",
+        "SubIFD:DefaultCropOrigin": "32 21",
+        "SubIFD:DefaultCropSize": "6000 4000",
+        "SubIFD:CFARepeatPatternDim": "2 2",
+        "Composite:CFAPattern": "2 2 0 1 1 2",
+        "IFD0:AsShotNeutral": "0.4942084942 1 0.5089463221",
+        "Sigma:CameraCalibration": "1.04334366321564 0 0 0 1 0 0 0 1.0193452835083",
+        "IFD0:ColorMatrix1": "1.4643 -0.7511 -0.5102 -0.333 1.1711 -0.0604 -0.0748 0.1634 0.5867",
+        "IFD0:ColorMatrix2": "0.8252 -0.2044 -0.1744 -0.4961 1.1648 0.0631 -0.1137 0.1581 0.3549",
+        "ExifIFD:DateTimeOriginal": "2026:08:15 03:40:55",
+        "ExifIFD:CreateDate": "2026:08:15 03:40:55",
+        "ExifIFD:LensModel": "28mm F1.4 DG HSM | Art 019                                  ",
+        "ExifIFD:FocalLength": 28,
+        "Sigma:SerialNumber": 91411817,
+        "ExifIFD:SerialNumber": 91411817
+      },
+      "raw": {
+        "shape": [
+          4042,
+          6064
+        ],
+        "dtype": "uint16",
+        "bayer_sha256": "59f8c512a0236744001b3686b0728a1f40b2a0de372f8b2a0fb3a4ea010a9bf8",
+        "raw_pattern": [
+          [
+            0,
+            1
+          ],
+          [
+            3,
+            2
+          ]
+        ],
+        "color_desc": "RGBG",
+        "black_levels_by_color_index": [
+          1024,
+          1024,
+          1024,
+          1024
+        ],
+        "white_level": 16383,
+        "rawpy_sizes": {
+          "raw_height": 4042,
+          "raw_width": 6064,
+          "height": 4042,
+          "width": 6064,
+          "top_margin": 0,
+          "left_margin": 0,
+          "iheight": 4042,
+          "iwidth": 6064,
+          "pixel_aspect": 1.0,
+          "flip": 0,
+          "crop_left_margin": 32,
+          "crop_top_margin": 22,
+          "crop_width": 6000,
+          "crop_height": 3999
+        },
+        "camera_whitebalance": [
+          2.0234375,
+          1.0,
+          1.9648438692092896,
+          0.0
+        ],
+        "whole_image_mean_black_subtracted_RG1G2B": [
+          726.2169363830179,
+          1396.8707771891184,
+          1397.085877148777,
+          697.1360652136733
+        ]
+      }
+    },
+    "_SDI5625.DNG": {
+      "path": "/Users/dido/Developer.localized/SIGMAfp_re/research/imaging-hw/color-characterisation/captures/_SDI5625.DNG",
+      "file_sha256": "0e2d43289d2fbcf420fc8c704a1fa507e7c94503932e4513a62614781939934e",
+      "metadata": {
+        "SourceFile": "/Users/dido/Developer.localized/SIGMAfp_re/research/imaging-hw/color-characterisation/captures/_SDI5625.DNG",
+        "ExifIFD:ISO": 2000,
+        "ExifIFD:ExposureTime": 0.01666666667,
+        "ExifIFD:FNumber": 4.5,
+        "ExifIFD:ExposureCompensation": 0,
+        "Sigma:ExposureCompensation": 0,
+        "Sigma:ExposureMode": "A",
+        "ExifIFD:ExposureMode": 0,
+        "ExifIFD:ExposureProgram": 3,
+        "ExifIFD:MeteringMode": 5,
+        "Sigma:MeteringMode": 8,
+        "Sigma:WhiteBalance": "Auto(Natural)",
+        "ExifIFD:WhiteBalance": 0,
+        "Sigma:PictureMode": "PowderBlue",
+        "SubIFD:BlackLevel": "1024 1024 1024 1024",
+        "SubIFD:WhiteLevel": 16383,
+        "IFD0:BitsPerSample": "8 8 8",
+        "SubIFD:BitsPerSample": 14,
+        "SubIFD1:BitsPerSample": "8 8 8",
+        "SubIFD2:BitsPerSample": "8 8 8",
+        "IFD0:Compression": 7,
+        "SubIFD:Compression": 7,
+        "SubIFD1:Compression": 7,
+        "SubIFD2:Compression": 7,
+        "IFD0:PhotometricInterpretation": 6,
+        "SubIFD:PhotometricInterpretation": 32803,
+        "SubIFD1:PhotometricInterpretation": 6,
+        "SubIFD2:PhotometricInterpretation": 6,
+        "IFD0:ImageWidth": 160,
+        "SubIFD:ImageWidth": 6064,
+        "SubIFD1:ImageWidth": 6000,
+        "SubIFD2:ImageWidth": 640,
+        "IFD0:ImageHeight": 120,
+        "SubIFD:ImageHeight": 4042,
+        "SubIFD1:ImageHeight": 4000,
+        "SubIFD2:ImageHeight": 480,
+        "SubIFD:ActiveArea": "0 0 4042 6064",
+        "SubIFD:DefaultCropOrigin": "32 21",
+        "SubIFD:DefaultCropSize": "6000 4000",
+        "SubIFD:CFARepeatPatternDim": "2 2",
+        "Composite:CFAPattern": "2 2 0 1 1 2",
+        "IFD0:AsShotNeutral": "0.4604316547 1 0.5765765766",
+        "Sigma:CameraCalibration": "1.04334366321564 0 0 0 1 0 0 0 1.0193452835083",
+        "IFD0:ColorMatrix1": "1.4643 -0.7511 -0.5102 -0.333 1.1711 -0.0604 -0.0748 0.1634 0.5867",
+        "IFD0:ColorMatrix2": "0.8252 -0.2044 -0.1744 -0.4961 1.1648 0.0631 -0.1137 0.1581 0.3549",
+        "ExifIFD:DateTimeOriginal": "2026:06:28 19:00:35",
+        "ExifIFD:CreateDate": "2026:06:28 19:00:35",
+        "ExifIFD:LensModel": "VILTROX AF 28mm F4.5 L                                      ",
+        "ExifIFD:FocalLength": 28,
+        "Sigma:SerialNumber": 91411817,
+        "ExifIFD:SerialNumber": 91411817
+      },
+      "raw": {
+        "shape": [
+          4042,
+          6064
+        ],
+        "dtype": "uint16",
+        "bayer_sha256": "f961e3227c7ab7cc22af884868df55d18b9fd7a3a8c6497e1fdf379d8d67eed0",
+        "raw_pattern": [
+          [
+            0,
+            1
+          ],
+          [
+            3,
+            2
+          ]
+        ],
+        "color_desc": "RGBG",
+        "black_levels_by_color_index": [
+          1024,
+          1024,
+          1024,
+          1024
+        ],
+        "white_level": 16383,
+        "rawpy_sizes": {
+          "raw_height": 4042,
+          "raw_width": 6064,
+          "height": 4042,
+          "width": 6064,
+          "top_margin": 0,
+          "left_margin": 0,
+          "iheight": 4042,
+          "iwidth": 6064,
+          "pixel_aspect": 1.0,
+          "flip": 0,
+          "crop_left_margin": 32,
+          "crop_top_margin": 22,
+          "crop_width": 6000,
+          "crop_height": 3999
+        },
+        "camera_whitebalance": [
+          2.171875,
+          1.0,
+          1.734375,
+          0.0
+        ],
+        "whole_image_mean_black_subtracted_RG1G2B": [
+          333.0516391869539,
+          738.2279513329042,
+          738.4140908651768,
+          430.7483417846125
+        ]
+      }
+    },
+    "_SDI5626.DNG": {
+      "path": "/Users/dido/Developer.localized/SIGMAfp_re/research/imaging-hw/color-characterisation/captures/_SDI5626.DNG",
+      "file_sha256": "c60622bdcf45215d74d8dd0bf16e5da4afeb39109bd55503b52b4222d0a6988d",
+      "metadata": {
+        "SourceFile": "/Users/dido/Developer.localized/SIGMAfp_re/research/imaging-hw/color-characterisation/captures/_SDI5626.DNG",
+        "ExifIFD:ISO": 1250,
+        "ExifIFD:ExposureTime": 0.01666666667,
+        "ExifIFD:FNumber": 4.5,
+        "ExifIFD:ExposureCompensation": 0,
+        "Sigma:ExposureCompensation": 0,
+        "Sigma:ExposureMode": "A",
+        "ExifIFD:ExposureMode": 0,
+        "ExifIFD:ExposureProgram": 3,
+        "ExifIFD:MeteringMode": 5,
+        "Sigma:MeteringMode": 8,
+        "Sigma:WhiteBalance": "Auto(Natural)",
+        "ExifIFD:WhiteBalance": 0,
+        "Sigma:PictureMode": "OFF",
+        "SubIFD:BlackLevel": "1024 1024 1024 1024",
+        "SubIFD:WhiteLevel": 16383,
+        "IFD0:BitsPerSample": "8 8 8",
+        "SubIFD:BitsPerSample": 14,
+        "SubIFD1:BitsPerSample": "8 8 8",
+        "SubIFD2:BitsPerSample": "8 8 8",
+        "IFD0:Compression": 7,
+        "SubIFD:Compression": 7,
+        "SubIFD1:Compression": 7,
+        "SubIFD2:Compression": 7,
+        "IFD0:PhotometricInterpretation": 6,
+        "SubIFD:PhotometricInterpretation": 32803,
+        "SubIFD1:PhotometricInterpretation": 6,
+        "SubIFD2:PhotometricInterpretation": 6,
+        "IFD0:ImageWidth": 160,
+        "SubIFD:ImageWidth": 6064,
+        "SubIFD1:ImageWidth": 6000,
+        "SubIFD2:ImageWidth": 640,
+        "IFD0:ImageHeight": 120,
+        "SubIFD:ImageHeight": 4042,
+        "SubIFD1:ImageHeight": 4000,
+        "SubIFD2:ImageHeight": 480,
+        "SubIFD:ActiveArea": "0 0 4042 6064",
+        "SubIFD:DefaultCropOrigin": "32 21",
+        "SubIFD:DefaultCropSize": "6000 4000",
+        "SubIFD:CFARepeatPatternDim": "2 2",
+        "Composite:CFAPattern": "2 2 0 1 1 2",
+        "IFD0:AsShotNeutral": "0.4421416235 1 0.5601750547",
+        "Sigma:CameraCalibration": "1.04334366321564 0 0 0 1 0 0 0 1.0193452835083",
+        "IFD0:ColorMatrix1": "1.4902 -0.7069 -0.2292 -1.1733 2.271 0.0503 0.0856 -0.314 1.6274",
+        "IFD0:ColorMatrix2": "1.5288 -0.7252 -0.2352 -0.9692 1.876 0.0415 0.0354 -0.1298 0.673",
+        "ExifIFD:DateTimeOriginal": "2026:06:28 19:01:25",
+        "ExifIFD:CreateDate": "2026:06:28 19:01:25",
+        "ExifIFD:LensModel": "VILTROX AF 28mm F4.5 L                                      ",
+        "ExifIFD:FocalLength": 28,
+        "Sigma:SerialNumber": 91411817,
+        "ExifIFD:SerialNumber": 91411817
+      },
+      "raw": {
+        "shape": [
+          4042,
+          6064
+        ],
+        "dtype": "uint16",
+        "bayer_sha256": "d8224e49ad75258ab0fb4798e8dda5e25cf955bf3f07d1d0c6d6173bd0ebfd6c",
+        "raw_pattern": [
+          [
+            0,
+            1
+          ],
+          [
+            3,
+            2
+          ]
+        ],
+        "color_desc": "RGBG",
+        "black_levels_by_color_index": [
+          1024,
+          1024,
+          1024,
+          1024
+        ],
+        "white_level": 16383,
+        "rawpy_sizes": {
+          "raw_height": 4042,
+          "raw_width": 6064,
+          "height": 4042,
+          "width": 6064,
+          "top_margin": 0,
+          "left_margin": 0,
+          "iheight": 4042,
+          "iwidth": 6064,
+          "pixel_aspect": 1.0,
+          "flip": 6,
+          "crop_left_margin": 32,
+          "crop_top_margin": 22,
+          "crop_width": 6000,
+          "crop_height": 3999
+        },
+        "camera_whitebalance": [
+          2.26171875,
+          1.0,
+          1.78515625,
+          0.0
+        ],
+        "whole_image_mean_black_subtracted_RG1G2B": [
+          314.0831642098337,
+          709.3783970486671,
+          709.1131793607752,
+          395.56502942716253
+        ]
+      }
+    },
+    "A_original.DNG": {
+      "path": "/Users/dido/Developer.localized/SIGMAfp_re/codex/fp-colormatrix-ab-20260923/A_original.DNG",
+      "file_sha256": "8b838d0a27b5a8a11a39ff903933793930706b7a6b46f7a4ef8e08a400e2c324",
+      "metadata": {
+        "SourceFile": "/Users/dido/Developer.localized/SIGMAfp_re/codex/fp-colormatrix-ab-20260923/A_original.DNG",
+        "ExifIFD:ISO": 100,
+        "ExifIFD:ExposureTime": 0.01666666667,
+        "ExifIFD:FNumber": 1.4,
+        "ExifIFD:ExposureCompensation": 0,
+        "Sigma:ExposureCompensation": 0,
+        "Sigma:ExposureMode": "M",
+        "ExifIFD:ExposureMode": 1,
+        "ExifIFD:ExposureProgram": 1,
+        "ExifIFD:MeteringMode": 5,
+        "Sigma:MeteringMode": 8,
+        "Sigma:WhiteBalance": "ColorTemp",
+        "ExifIFD:WhiteBalance": 1,
+        "Sigma:PictureMode": "OFF",
+        "IFD0:BlackLevel": "255.9785156 255.9785156 255.9785156 255.9785156",
+        "IFD0:WhiteLevel": 4095,
+        "IFD0:BitsPerSample": 12,
+        "IFD0:Compression": 1,
+        "IFD0:PhotometricInterpretation": 32803,
+        "IFD0:ImageWidth": 1936,
+        "IFD0:ImageHeight": 1090,
+        "IFD0:ActiveArea": "0 0 1090 1936",
+        "IFD0:DefaultCropOrigin": "8 5",
+        "IFD0:DefaultCropSize": "1920 1080",
+        "IFD0:CFARepeatPatternDim": "2 2",
+        "Composite:CFAPattern": "2 2 0 1 1 2",
+        "IFD0:AsShotNeutral": "0.5130260521 1 0.583143508",
+        "Sigma:CameraCalibration": "1.04334366321564 0 0 0 1 0 0 0 1.0193452835083",
+        "IFD0:ColorMatrix1": "1.4902 -0.7069 -0.2292 -1.1733 2.271 0.0503 0.0856 -0.314 1.6274",
+        "IFD0:ColorMatrix2": "1.5288 -0.7252 -0.2352 -0.9692 1.876 0.0415 0.0354 -0.1298 0.673",
+        "ExifIFD:DateTimeOriginal": "2026:08:17 22:26:11",
+        "ExifIFD:CreateDate": "2026:08:17 22:26:11",
+        "ExifIFD:LensModel": "28mm F1.4 DG HSM | Art 019                                  ",
+        "ExifIFD:FocalLength": 28,
+        "Sigma:SerialNumber": 91411817,
+        "ExifIFD:SerialNumber": 91411817
+      },
+      "raw": {
+        "shape": [
+          1090,
+          1936
+        ],
+        "dtype": "uint16",
+        "bayer_sha256": "53113d0dcb10c375d3a7b0578a43d546f897d734e788cd99846cc524a8b5cf91",
+        "raw_pattern": [
+          [
+            0,
+            1
+          ],
+          [
+            3,
+            2
+          ]
+        ],
+        "color_desc": "RGBG",
+        "black_levels_by_color_index": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "white_level": 4095,
+        "rawpy_sizes": {
+          "raw_height": 1090,
+          "raw_width": 1936,
+          "height": 1090,
+          "width": 1936,
+          "top_margin": 0,
+          "left_margin": 0,
+          "iheight": 1090,
+          "iwidth": 1936,
+          "pixel_aspect": 1.0,
+          "flip": 0,
+          "crop_left_margin": 8,
+          "crop_top_margin": 6,
+          "crop_width": 1920,
+          "crop_height": 1079
+        },
+        "camera_whitebalance": [
+          1.94921875,
+          1.0,
+          1.7148436307907104,
+          0.0
+        ],
+        "whole_image_mean_black_subtracted_RG1G2B": [
+          155.11737622260975,
+          322.34984267192357,
+          322.31991242702253,
+          172.55103684888923
+        ]
+      }
+    }
+  },
+  "registered_pairs": [
+    {
+      "reference": "_SDI0010.DNG",
+      "target": "_SDI0011.DNG",
+      "target_displacement_original_Bayer_yx": [
+        -0.17821880006341342,
+        0.33417584205935635
+      ],
+      "phase_correlation_peak": 0.8619577630778723,
+      "unregistered": {
+        "valid_blocks": 13269,
+        "median_ratio_RG1G2B": [
+          1.0007790327072144,
+          1.0008107423782349,
+          1.0006707906723022,
+          1.0005618333816528
+        ],
+        "ratio_percentiles_05_95_RG1G2B": [
+          [
+            0.9637957453727722,
+            0.9646195769309998,
+            0.9643249273300171,
+            0.9642778158187866
+          ],
+          [
+            1.0391899585723876,
+            1.0387681245803833,
+            1.038390326499939,
+            1.0388186693191528
+          ]
+        ],
+        "zero_intercept_least_squares_slope_RG1G2B": [
+          1.000244140625,
+          0.9999278783798218,
+          0.9999221563339233,
+          0.9997247457504272
+        ],
+        "median_R_over_G_and_B_over_G_ratio": [
+          1.0001089572906494,
+          0.9997876882553101
+        ],
+        "rms_residual_after_per_channel_gain_ADU": [
+          27.193965911865234,
+          57.460174560546875,
+          57.35963821411133,
+          30.339717864990234
+        ],
+        "pearson_RG1G2B": [
+          0.9969269959153736,
+          0.997476816557359,
+          0.9974820711431917,
+          0.9978527910740762
+        ],
+        "low_texture_blocks": 7657,
+        "low_texture_median_ratio_RG1G2B": [
+          1.000100016593933,
+          1.0000733137130737,
+          1.000076174736023,
+          0.9997919797897339
+        ]
+      },
+      "registered": {
+        "valid_blocks": 13275,
+        "median_ratio_RG1G2B": [
+          1.0006514725833002,
+          1.0007322661887736,
+          1.0005557792568769,
+          1.0005082938305498
+        ],
+        "ratio_percentiles_05_95_RG1G2B": [
+          [
+            0.9649893764465962,
+            0.9656452355782557,
+            0.9654703620900627,
+            0.965356909880805
+          ],
+          [
+            1.0383084011228292,
+            1.037700480850876,
+            1.037566070818683,
+            1.0373874487497246
+          ]
+        ],
+        "zero_intercept_least_squares_slope_RG1G2B": [
+          1.000223224790568,
+          0.9998882423230917,
+          0.9998953100344654,
+          0.9996875525653031
+        ],
+        "median_R_over_G_and_B_over_G_ratio": [
+          1.0001322789461604,
+          0.9997883553026298
+        ],
+        "rms_residual_after_per_channel_gain_ADU": [
+          26.248223491420873,
+          55.4166772132773,
+          55.29427634923019,
+          29.081832109956217
+        ],
+        "pearson_RG1G2B": [
+          0.9971389369998248,
+          0.9976548810373409,
+          0.9976621067477042,
+          0.998028264219493
+        ],
+        "low_texture_blocks": 7657,
+        "low_texture_median_ratio_RG1G2B": [
+          1.0002105891136865,
+          1.0001410813878233,
+          1.000095494915857,
+          0.9998655279365022
+        ]
+      },
+      "Bayer_samples_identical": false
+    },
+    {
+      "reference": "_SDI0010.DNG",
+      "target": "_SDI0012.DNG",
+      "target_displacement_original_Bayer_yx": [
+        -0.1404133048932446,
+        0.17586650181481733
+      ],
+      "phase_correlation_peak": 0.9235824041469,
+      "unregistered": {
+        "valid_blocks": 13276,
+        "median_ratio_RG1G2B": [
+          1.0009503364562988,
+          1.0010236501693726,
+          1.0007165670394897,
+          1.0006628036499023
+        ],
+        "ratio_percentiles_05_95_RG1G2B": [
+          [
+            0.9664414823055267,
+            0.9669996351003647,
+            0.9665837436914444,
+            0.9662994146347046
+          ],
+          [
+            1.0326757431030273,
+            1.032108724117279,
+            1.0317100286483765,
+            1.0316090285778046
+          ]
+        ],
+        "zero_intercept_least_squares_slope_RG1G2B": [
+          0.9993175268173218,
+          0.9992561936378479,
+          0.9991974830627441,
+          0.998978853225708
+        ],
+        "median_R_over_G_and_B_over_G_ratio": [
+          1.000051498413086,
+          0.9996751546859741
+        ],
+        "rms_residual_after_per_channel_gain_ADU": [
+          23.57253646850586,
+          49.68294906616211,
+          49.658756256103516,
+          26.1433048248291
+        ],
+        "pearson_RG1G2B": [
+          0.9976885112343266,
+          0.9981129534078086,
+          0.9981123028693497,
+          0.9984052508447596
+        ],
+        "low_texture_blocks": 7657,
+        "low_texture_median_ratio_RG1G2B": [
+          1.001741647720337,
+          1.0019099712371826,
+          1.0019376277923584,
+          1.0013682842254639
+        ]
+      },
+      "registered": {
+        "valid_blocks": 13277,
+        "median_ratio_RG1G2B": [
+          1.0010263206938785,
+          1.0010359625276837,
+          1.0009123717766348,
+          1.0006115554009303
+        ],
+        "ratio_percentiles_05_95_RG1G2B": [
+          [
+            0.9669925059593741,
+            0.9677490227805184,
+            0.9674107511356941,
+            0.9671132766054791
+          ],
+          [
+            1.03209744146255,
+            1.0314417341963684,
+            1.031195094943293,
+            1.0308614483500946
+          ]
+        ],
+        "zero_intercept_least_squares_slope_RG1G2B": [
+          0.9992977962888148,
+          0.9992270256374817,
+          0.9991762062242763,
+          0.9989523818751197
+        ],
+        "median_R_over_G_and_B_over_G_ratio": [
+          1.0000430375301061,
+          0.9996794867911089
+        ],
+        "rms_residual_after_per_channel_gain_ADU": [
+          23.0838846915272,
+          48.61291493644301,
+          48.577295433007386,
+          25.46546112073045
+        ],
+        "pearson_RG1G2B": [
+          0.9977831722701628,
+          0.9981937411150246,
+          0.998193930823183,
+          0.9984867311971841
+        ],
+        "low_texture_blocks": 7657,
+        "low_texture_median_ratio_RG1G2B": [
+          1.0017781832192958,
+          1.0019741248551912,
+          1.0019541903868905,
+          1.0013936653293911
+        ]
+      },
+      "Bayer_samples_identical": false
+    },
+    {
+      "reference": "_SDI0010.DNG",
+      "target": "_SDI0013.DNG",
+      "target_displacement_original_Bayer_yx": [
+        -0.2954057053900126,
+        0.3405037416732683
+      ],
+      "phase_correlation_peak": 0.830202500013935,
+      "unregistered": {
+        "valid_blocks": 13294,
+        "median_ratio_RG1G2B": [
+          1.0001686811447144,
+          1.0000568628311157,
+          1.000040054321289,
+          0.9995157718658447
+        ],
+        "ratio_percentiles_05_95_RG1G2B": [
+          [
+            0.9816668450832366,
+            0.9800009220838547,
+            0.9789689719676972,
+            0.9784479528665543
+          ],
+          [
+            1.0177343785762787,
+            1.0207218050956726,
+            1.0198804199695588,
+            1.0214143872261046
+          ]
+        ],
+        "zero_intercept_least_squares_slope_RG1G2B": [
+          0.999853789806366,
+          0.9998282790184021,
+          0.9997990131378174,
+          0.9993596076965332
+        ],
+        "median_R_over_G_and_B_over_G_ratio": [
+          1.0002087354660034,
+          0.9995192289352417
+        ],
+        "rms_residual_after_per_channel_gain_ADU": [
+          12.150320053100586,
+          25.513668060302734,
+          25.28618621826172,
+          14.131428718566895
+        ],
+        "pearson_RG1G2B": [
+          0.9993877185765879,
+          0.9995038221904659,
+          0.9995121961737035,
+          0.999535083440498
+        ],
+        "low_texture_blocks": 7659,
+        "low_texture_median_ratio_RG1G2B": [
+          1.000467300415039,
+          1.000346064567566,
+          1.0003483295440674,
+          0.9996755719184875
+        ]
+      },
+      "registered": {
+        "valid_blocks": 13304,
+        "median_ratio_RG1G2B": [
+          1.0002237208016111,
+          1.0000885216188067,
+          1.000044992984979,
+          0.9995792296720578
+        ],
+        "ratio_percentiles_05_95_RG1G2B": [
+          [
+            0.9874964475186313,
+            0.9867555929364333,
+            0.9858903698674656,
+            0.9854255857720445
+          ],
+          [
+            1.0123487115424081,
+            1.0133163590936,
+            1.0123369803681068,
+            1.0137213193134438
+          ]
+        ],
+        "zero_intercept_least_squares_slope_RG1G2B": [
+          0.9998296505169739,
+          0.9997866017370759,
+          0.9997697643217476,
+          0.9993274178309731
+        ],
+        "median_R_over_G_and_B_over_G_ratio": [
+          1.000186752418882,
+          0.9995390515075371
+        ],
+        "rms_residual_after_per_channel_gain_ADU": [
+          8.601867991233991,
+          17.7609348809234,
+          17.35521138044859,
+          9.590375241149927
+        ],
+        "pearson_RG1G2B": [
+          0.9996934523100707,
+          0.9997597869448702,
+          0.9997702430012295,
+          0.9997859980780887
+        ],
+        "low_texture_blocks": 7659,
+        "low_texture_median_ratio_RG1G2B": [
+          1.0005128477845169,
+          1.0003957034291857,
+          1.000396343961951,
+          0.9997292041015371
+        ]
+      },
+      "Bayer_samples_identical": false
+    },
+    {
+      "reference": "_SDI0011.DNG",
+      "target": "_SDI0012.DNG",
+      "target_displacement_original_Bayer_yx": [
+        0.033015892682680584,
+        -0.13403443833620388
+      ],
+      "phase_correlation_peak": 0.9523311462274562,
+      "unregistered": {
+        "valid_blocks": 13287,
+        "median_ratio_RG1G2B": [
+          0.9979860186576843,
+          0.9981067776679993,
+          0.9981146454811096,
+          0.997937023639679
+        ],
+        "ratio_percentiles_05_95_RG1G2B": [
+          [
+            0.9729619801044465,
+            0.9735779345035553,
+            0.9733105719089508,
+            0.9729425966739654
+          ],
+          [
+            1.0268498539924622,
+            1.026214563846588,
+            1.02608882188797,
+            1.0260968327522277
+          ]
+        ],
+        "zero_intercept_least_squares_slope_RG1G2B": [
+          0.9988158941268921,
+          0.9990810751914978,
+          0.9990218877792358,
+          0.9990034103393555
+        ],
+        "median_R_over_G_and_B_over_G_ratio": [
+          0.9999712705612183,
+          0.9998626112937927
+        ],
+        "rms_residual_after_per_channel_gain_ADU": [
+          19.059473037719727,
+          39.916961669921875,
+          40.01748275756836,
+          20.99190330505371
+        ],
+        "pearson_RG1G2B": [
+          0.9984862030661893,
+          0.9987802993179481,
+          0.9987731712405207,
+          0.9989722023307271
+        ],
+        "low_texture_blocks": 7682,
+        "low_texture_median_ratio_RG1G2B": [
+          0.9990953207015991,
+          0.9991112947463989,
+          0.9990359544754028,
+          0.9991085529327393
+        ]
+      },
+      "registered": {
+        "valid_blocks": 13288,
+        "median_ratio_RG1G2B": [
+          0.997964967667452,
+          0.9980752392928942,
+          0.998145273575203,
+          0.9979992589967301
+        ],
+        "ratio_percentiles_05_95_RG1G2B": [
+          [
+            0.9731663283316052,
+            0.9738164110968351,
+            0.9735509547839543,
+            0.9732125141992847
+          ],
+          [
+            1.0265760428171231,
+            1.026002955446035,
+            1.0258149153064908,
+            1.0257999017380013
+          ]
+        ],
+        "zero_intercept_least_squares_slope_RG1G2B": [
+          0.9987729899970671,
+          0.9990362234648956,
+          0.9989786369844477,
+          0.998957806907245
+        ],
+        "median_R_over_G_and_B_over_G_ratio": [
+          0.9999601720158845,
+          0.9998805485581486
+        ],
+        "rms_residual_after_per_channel_gain_ADU": [
+          18.913101884900556,
+          39.606648590088525,
+          39.704990948316464,
+          20.82187591312476
+        ],
+        "pearson_RG1G2B": [
+          0.9985092512383468,
+          0.998799086276371,
+          0.998792234826191,
+          0.9989885112031268
+        ],
+        "low_texture_blocks": 7682,
+        "low_texture_median_ratio_RG1G2B": [
+          0.9991254507865286,
+          0.9990535594885463,
+          0.9990265285142957,
+          0.9991178369740443
+        ]
+      },
+      "Bayer_samples_identical": false
+    },
+    {
+      "reference": "_SDI0011.DNG",
+      "target": "_SDI0013.DNG",
+      "target_displacement_original_Bayer_yx": [
+        -0.09905055659568712,
+        0.005279812624765153
+      ],
+      "phase_correlation_peak": 0.9546394630098585,
+      "unregistered": {
+        "valid_blocks": 13280,
+        "median_ratio_RG1G2B": [
+          0.9991909861564636,
+          0.9990347623825073,
+          0.9990441203117371,
+          0.9988672733306885
+        ],
+        "ratio_percentiles_05_95_RG1G2B": [
+          [
+            0.962752702832222,
+            0.9634227246046067,
+            0.9633005529642105,
+            0.963163435459137
+          ],
+          [
+            1.0370881140232087,
+            1.0364214718341827,
+            1.0362854301929474,
+            1.0357688307762145
+          ]
+        ],
+        "zero_intercept_least_squares_slope_RG1G2B": [
+          0.9990007877349854,
+          0.9993021488189697,
+          0.9992721080780029,
+          0.9990505576133728
+        ],
+        "median_R_over_G_and_B_over_G_ratio": [
+          1.000018835067749,
+          0.9996962547302246
+        ],
+        "rms_residual_after_per_channel_gain_ADU": [
+          26.239713668823242,
+          55.46178436279297,
+          55.48686599731445,
+          29.120101928710938
+        ],
+        "pearson_RG1G2B": [
+          0.997136808420875,
+          0.9976490979949016,
+          0.997645536411145,
+          0.99802147859206
+        ],
+        "low_texture_blocks": 7682,
+        "low_texture_median_ratio_RG1G2B": [
+          0.999703049659729,
+          0.9995187520980835,
+          0.9996107816696167,
+          0.9989685416221619
+        ]
+      },
+      "registered": {
+        "valid_blocks": 13279,
+        "median_ratio_RG1G2B": [
+          0.9992627813336359,
+          0.999036836611122,
+          0.9990809405089818,
+          0.9988184312317681
+        ],
+        "ratio_percentiles_05_95_RG1G2B": [
+          [
+            0.9628212894339054,
+            0.9636013841671138,
+            0.9634720927173747,
+            0.9633258598021599
+          ],
+          [
+            1.0370095520933105,
+            1.0363277512820974,
+            1.03620313042647,
+            1.0356778635990882
+          ]
+        ],
+        "zero_intercept_least_squares_slope_RG1G2B": [
+          0.9989869162842074,
+          0.9992895570519433,
+          0.999263751481139,
+          0.9990424975161438
+        ],
+        "median_R_over_G_and_B_over_G_ratio": [
+          1.0000161621134176,
+          0.9997127975041658
+        ],
+        "rms_residual_after_per_channel_gain_ADU": [
+          26.192107062308605,
+          55.34930086867188,
+          55.37365467839819,
+          29.05848842664456
+        ],
+        "pearson_RG1G2B": [
+          0.9971462286560959,
+          0.9976579753277248,
+          0.9976544200422953,
+          0.9980293693124415
+        ],
+        "low_texture_blocks": 7682,
+        "low_texture_median_ratio_RG1G2B": [
+          0.9997430056212857,
+          0.9995619221570504,
+          0.9996331040356088,
+          0.9990114821124126
+        ]
+      },
+      "Bayer_samples_identical": false
+    },
+    {
+      "reference": "_SDI0012.DNG",
+      "target": "_SDI0013.DNG",
+      "target_displacement_original_Bayer_yx": [
+        -0.13407332055514326,
+        0.14072258204535826
+      ],
+      "phase_correlation_peak": 0.9332598318170506,
+      "unregistered": {
+        "valid_blocks": 13287,
+        "median_ratio_RG1G2B": [
+          0.9990746974945068,
+          0.9991278052330017,
+          0.9990963935852051,
+          0.9993021488189697
+        ],
+        "ratio_percentiles_05_95_RG1G2B": [
+          [
+            0.9720024406909943,
+            0.9725201070308686,
+            0.9724535286426544,
+            0.9722329616546631
+          ],
+          [
+            1.031002700328827,
+            1.0297062277793885,
+            1.029896903038025,
+            1.0299553632736207
+          ]
+        ],
+        "zero_intercept_least_squares_slope_RG1G2B": [
+          1.000130534172058,
+          1.000172734260559,
+          1.0002031326293945,
+          1.0000070333480835
+        ],
+        "median_R_over_G_and_B_over_G_ratio": [
+          1.0000728368759155,
+          0.9998670816421509
+        ],
+        "rms_residual_after_per_channel_gain_ADU": [
+          20.806081771850586,
+          43.773956298828125,
+          43.80570602416992,
+          22.98931884765625
+        ],
+        "pearson_RG1G2B": [
+          0.9982003675668576,
+          0.998537166421582,
+          0.9985342056908082,
+          0.9987688007176643
+        ],
+        "low_texture_blocks": 7622,
+        "low_texture_median_ratio_RG1G2B": [
+          0.9987510442733765,
+          0.9986536502838135,
+          0.9986811876296997,
+          0.998557448387146
+        ]
+      },
+      "registered": {
+        "valid_blocks": 13287,
+        "median_ratio_RG1G2B": [
+          0.99920597051963,
+          0.9992507246895767,
+          0.9992418127654077,
+          0.9992731546473705
+        ],
+        "ratio_percentiles_05_95_RG1G2B": [
+          [
+            0.9723959980258161,
+            0.9729824977790895,
+            0.9728876045757687,
+            0.9728019985611718
+          ],
+          [
+            1.0306218566948089,
+            1.0292850231546902,
+            1.0295370881034196,
+            1.0295002326153846
+          ]
+        ],
+        "zero_intercept_least_squares_slope_RG1G2B": [
+          1.0001086515494109,
+          1.0001458265615735,
+          1.000180123859935,
+          0.9999781268429196
+        ],
+        "median_R_over_G_and_B_over_G_ratio": [
+          1.0000825598103578,
+          0.9998664272313222
+        ],
+        "rms_residual_after_per_channel_gain_ADU": [
+          20.509721289150836,
+          43.14402265362231,
+          43.17246482352762,
+          22.620853616498078
+        ],
+        "pearson_RG1G2B": [
+          0.9982506610807194,
+          0.9985784771101639,
+          0.9985756983719813,
+          0.998807521819767
+        ],
+        "low_texture_blocks": 7621,
+        "low_texture_median_ratio_RG1G2B": [
+          0.998786916792858,
+          0.9986792181823904,
+          0.9987100390193943,
+          0.9986267140192413
+        ]
+      },
+      "Bayer_samples_identical": false
+    }
+  ]
+}

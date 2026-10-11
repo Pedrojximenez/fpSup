@@ -1,0 +1,39 @@
+{
+  "all_passed": true,
+  "tests": 112,
+  "skipped": 0,
+  "suites": {
+    "ordinary": {
+      "tests": 72,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "trace": {
+      "tests": 36,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "fast": {
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "stopfix_separate": true,
+  "stopfix_original_bytes_unchanged": true,
+  "lossless_standalone_works": true,
+  "stopfix_standalone_works": true,
+  "both_load_orders_tested": true,
+  "production_source_hashes_match_builds": true,
+  "paired_card_bytes_match_test_inputs": true,
+  "autorun_unchanged": true,
+  "zip": {
+    "file": "lossless-stopfix-separate-20261012.zip",
+    "sha256": "c6cdb6d218df5468913111b52806c6af63b137bb9100c46b9d19c66e30231d8b"
+  },
+  "camera_tested": false,
+  "written_to_card": false
+}

@@ -1,0 +1,72 @@
+{
+  "time": "2026-10-09T04:22:57.747336+00:00",
+  "reads": {
+    "0xc0075cf4": [
+      3944407415
+    ],
+    "0xc072e2d8": [
+      3844075524,
+      1160952056,
+      4026595551,
+      1160953836
+    ],
+    "0xc0313244": [
+      3943722011
+    ],
+    "0xc2f1a064": [
+      3232996480,
+      9,
+      1160960000,
+      35
+    ],
+    "0xc072f6f8": [
+      5827449
+    ]
+  },
+  "errors": {},
+  "status": "OK name=fpshd version=3.2.0 protocol=1 frame=64 payload=44 transport=EP01-EP82 iface=0 camera=open seq=2153 ep83=host_candidate upload=UP01-probed mem=MEM1-probed quarantine=0 fault=none",
+  "menu": 12,
+  "recording": 0,
+  "transcript": [
+    {
+      "time_utc": "2026-10-09T04:22:57.747657+00:00",
+      "command": "STATUS",
+      "reply": "OK name=fpshd version=3.2.0 protocol=1 frame=64 payload=44 transport=EP01-EP82 iface=0 camera=open seq=2153 ep83=host_candidate upload=UP01-probed mem=MEM1-probed quarantine=0 fault=none"
+    },
+    {
+      "time_utc": "2026-10-09T04:22:57.748136+00:00",
+      "command": "TMO 1500 SHL mem get 0xC0075CF4,,0x4",
+      "reply": "OK get : A:0xc0075cf4, D:0xEB1AE177\\n"
+    },
+    {
+      "time_utc": "2026-10-09T04:22:57.748731+00:00",
+      "command": "TMO 1500 SHL mem get 0xC072E2D8,,0x10",
+      "reply": "OKX 676574203A20413A307863303732653264382C20443A307845353146463030340A676574203A20413A307863303732653264632C20443A307834353332423846380A676574203A20413A307863303732653265302C20443A307846303030463844460A676574203A20413A307863303732653265342C20443A307834353332424645430A"
+    },
+    {
+      "time_utc": "2026-10-09T04:22:57.749122+00:00",
+      "command": "TMO 1500 SHL mem get 0xC0313244,,0x4",
+      "reply": "OK get : A:0xc0313244, D:0xEB106C1B\\n"
+    },
+    {
+      "time_utc": "2026-10-09T04:22:57.749517+00:00",
+      "command": "TMO 1500 SHL mem get 0xC2F1A064,,0x10",
+      "reply": "OKX 676574203A20413A307863326631613036342C20443A307843304233394338300A676574203A20413A307863326631613036382C20443A307830303030303030390A676574203A20413A307863326631613036632C20443A307834353332443830300A676574203A20413A307863326631613037302C20443A307830303030303032330A"
+    },
+    {
+      "time_utc": "2026-10-09T04:22:57.749846+00:00",
+      "command": "TMO 1500 SHL mem get 0xC072F6F8,,0x4",
+      "reply": "OK get : A:0xc072f6f8, D:0x0058EB79\\n"
+    },
+    {
+      "time_utc": "2026-10-09T04:22:57.750306+00:00",
+      "command": "TMO 1500 SHL menu SetColorMode",
+      "reply": "OK 12\\n"
+    },
+    {
+      "time_utc": "2026-10-09T04:22:57.750742+00:00",
+      "command": "TMO 1500 SHL status get is_recording",
+      "reply": "OK is_recording -> 0\\n"
+    }
+  ]
+}

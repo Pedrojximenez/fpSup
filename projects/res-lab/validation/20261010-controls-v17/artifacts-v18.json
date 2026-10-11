@@ -1,0 +1,48 @@
+{
+  "card": "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/cards/20261010-controls-v18",
+  "files": {
+    "plain": {
+      "AutoRun.txt": {
+        "bytes": 32768,
+        "sha256": "0c5107fff1262ad8ca3bb675329b71c80926c8b35cdd40931b387639b45edbf0"
+      },
+      "fpSup/LOADER.BIN": {
+        "bytes": 27668,
+        "sha256": "07907bb42890968fa813431adb56bf5819b705186e2b0924744761e26876d07f"
+      },
+      "fpSup/50RESLAB.BIN": {
+        "bytes": 606240,
+        "sha256": "c2cc4628ca08d0ac6b3221fcd17d4b940adfd14df41cc2f1bdc946a2773b1104"
+      },
+      "fpSup/32RESCUS.BIN": {
+        "bytes": 77120,
+        "sha256": "ae82bcf8b8ab2b9f78319e24908805ca6020ac01a7def80d686c1735eada6556"
+      }
+    },
+    "debug": {
+      "AutoRun.txt": {
+        "bytes": 32768,
+        "sha256": "0c5107fff1262ad8ca3bb675329b71c80926c8b35cdd40931b387639b45edbf0"
+      },
+      "fpSup/LOADER.BIN": {
+        "bytes": 27668,
+        "sha256": "07907bb42890968fa813431adb56bf5819b705186e2b0924744761e26876d07f"
+      },
+      "fpSup/50RESLAB.BIN": {
+        "bytes": 606240,
+        "sha256": "c2cc4628ca08d0ac6b3221fcd17d4b940adfd14df41cc2f1bdc946a2773b1104"
+      },
+      "fpSup/32RESCUS.BIN": {
+        "bytes": 77120,
+        "sha256": "ae82bcf8b8ab2b9f78319e24908805ca6020ac01a7def80d686c1735eada6556"
+      }
+    }
+  },
+  "source_verified": true,
+  "loader_unchanged": true,
+  "plain_debug_products_identical": true,
+  "dev4_executable_equivalence": {
+    "producer_end": 30672,
+    "consumer_entire_file": true
+  }
+}

@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/inspect_runtime.py", line 56, in <module>
+    r=snapshot()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/inspect_runtime.py", line 23, in snapshot
+    ep=arm_b(0xC043CCF8);assert 0xc072e064<=ep<0xc072efb4
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/inspect_runtime.py", line 10, in arm_b
+    w=pf.mem_get(site)[0]
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/putfile.py", line 394, in mem_get
+    out = sh(f'mem get 0x{addr:08X},,0x{count * 4:X}')
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/live_camera.py", line 36, in checked_sh
+    raise RuntimeError(f'Uncertain outcome; command will not be replayed: {line}: {reply}')
+RuntimeError: Uncertain outcome; command will not be replayed: mem get 0xC043CCF8,,0x4: ERR shl claim iface 0 rc=-3(LIBUSB_ERROR_ACCESS)
+

@@ -1,0 +1,47 @@
+{
+  "final_coverage_passed": 286,
+  "skipped": 0,
+  "all_final_checks_passed": true,
+  "host": {
+    "cases": 181,
+    "initial_passed": 180,
+    "test_harness_fix_rechecked": 1,
+    "logs": [
+      "host-tests.log",
+      "host-mutation-recheck.log"
+    ]
+  },
+  "ordinary": {
+    "cases": 68,
+    "initial_passed": 67,
+    "test_harness_fix_rechecked": 1,
+    "logs": [
+      "ordinary-emulation.log",
+      "ordinary-recheck-emulation.log"
+    ]
+  },
+  "trace": {
+    "cases": 33,
+    "passed": true,
+    "log": "trace-emulation.log"
+  },
+  "fast": {
+    "cases": 4,
+    "passed": true,
+    "log": "fast-emulation.log"
+  },
+  "initial_harness_issues": [
+    "Updated obsolete lane mutation seam",
+    "Use registered power-off object, not optional LH_MARK pointer"
+  ],
+  "production_sources_match_builds": true,
+  "v3_shared_loader_unchanged": true,
+  "zip": {
+    "file": "lossless-bulk-stop-20261012.zip",
+    "sha256": "55f33352201bdf291c43729bb25c8476f750262ddcf9f7043c6e8494746ee826",
+    "content_matches_candidate_card": true
+  },
+  "camera_tested": false,
+  "written_to_card": false,
+  "hardware_limits": "See report.txt; no worst-case timing, DMA or registry-busy guarantee."
+}

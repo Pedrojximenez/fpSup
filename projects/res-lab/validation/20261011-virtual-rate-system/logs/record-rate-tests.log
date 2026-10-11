@@ -1,0 +1,16 @@
+test_hook_is_journalled_restored_and_missing_hook_is_detected (test_reslab_record_rate.RecordRateTests) ... FAIL
+test_selected_sensor_cadence_reaches_dng_rational (test_reslab_record_rate.RecordRateTests) ... ok
+test_unpicked_inactive_and_changed_carrier_keep_native_rate (test_reslab_record_rate.RecordRateTests) ... ok
+
+======================================================================
+FAIL: test_hook_is_journalled_restored_and_missing_hook_is_detected (test_reslab_record_rate.RecordRateTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_reslab_record_rate.py", line 107, in test_hook_is_journalled_restored_and_missing_hook_is_detected
+    self.assertEqual(self.rate(cam), (280000, 1001))
+AssertionError: AssertionError not raised
+
+----------------------------------------------------------------------
+Ran 3 tests in 94.755s
+
+FAILED (failures=1)

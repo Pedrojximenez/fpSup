@@ -1,0 +1,121 @@
+{
+  "purpose": "ColorMatrix metadata response test, not calibrated color",
+  "source": "/Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/captures/fpGFTest_stage4_20260817_2226/CINEMA/A001_001/A001_001_20260817_000249.DNG",
+  "A": "/Users/dido/Developer.localized/SIGMAfp_re/codex/fp-colormatrix-ab-20260923/A_original.DNG",
+  "B": "/Users/dido/Developer.localized/SIGMAfp_re/codex/fp-colormatrix-ab-20260923/B_matrix_probe.DNG",
+  "source_sha256": "8b838d0a27b5a8a11a39ff903933793930706b7a6b46f7a4ef8e08a400e2c324",
+  "A_sha256": "8b838d0a27b5a8a11a39ff903933793930706b7a6b46f7a4ef8e08a400e2c324",
+  "B_sha256": "609e8e56db18e37765939c66297a71462c3775d327242134d5e85dd61ad943c3",
+  "file_size_bytes": 3244544,
+  "A_identical_to_original": true,
+  "B_changed_bytes": 137,
+  "B_only_changes_existing_colormatrix_payloads": true,
+  "all_other_bytes_identical": true,
+  "raw_strips": [
+    {
+      "offset": 78848,
+      "length": 3165372
+    }
+  ],
+  "raw_payload_sha256_A": "8bee54820bf5d3b1e213d4076e7a7165a9efe9140865379b390e56cad4863336",
+  "raw_payload_sha256_B": "8bee54820bf5d3b1e213d4076e7a7165a9efe9140865379b390e56cad4863336",
+  "matrices": {
+    "50721": {
+      "name": "ColorMatrix1",
+      "payload_offset": 1042,
+      "payload_length": 72,
+      "calibration_white_XYZ": [
+        1.0985,
+        1.0,
+        0.35585
+      ],
+      "A": [
+        [
+          1.4902,
+          -0.7069,
+          -0.2292
+        ],
+        [
+          -1.1733,
+          2.271,
+          0.0503
+        ],
+        [
+          0.0856,
+          -0.314,
+          1.6274
+        ]
+      ],
+      "B": [
+        [
+          0.7451,
+          0.07081194,
+          -0.1146
+        ],
+        [
+          -0.58665,
+          1.6355146,
+          0.02515
+        ],
+        [
+          0.0428,
+          0.02257094,
+          0.8137
+        ]
+      ],
+      "B_denominator": 100000000,
+      "endpoint_camera_white_max_abs_error": 5.000000025123796e-09,
+      "determinant_A": 4.13835182951,
+      "determinant_B": 1.0345879556070638
+    },
+    "50722": {
+      "name": "ColorMatrix2",
+      "payload_offset": 1114,
+      "payload_length": 72,
+      "calibration_white_XYZ": [
+        0.95047,
+        1.0,
+        1.08883
+      ],
+      "A": [
+        [
+          1.5288,
+          -0.7252,
+          -0.2352
+        ],
+        [
+          -0.9692,
+          1.876,
+          0.0415
+        ],
+        [
+          0.0354,
+          -0.1298,
+          0.673
+        ]
+      ],
+      "B": [
+        [
+          0.7644,
+          -0.12670714,
+          -0.1176
+        ],
+        [
+          -0.4846,
+          1.43799546,
+          0.02075
+        ],
+        [
+          0.0177,
+          0.25341461,
+          0.3365
+        ]
+      ],
+      "B_denominator": 100000000,
+      "endpoint_camera_white_max_abs_error": 3.999999997894577e-09,
+      "determinant_A": 1.450356871768,
+      "determinant_B": 0.3625892176478383
+    }
+  },
+  "Resolve_test_performed": false
+}

@@ -1,0 +1,29 @@
+{
+  "old_card": "projects/res-lab/cards/20261010-save-v35/debug",
+  "new_card": "projects/res-lab/cards/20261010-files-v37/debug",
+  "phase": "verified",
+  "consumer_settings_preserved": {
+    "sha256": "587351affab169b7d8690fa54c3ddccbf953d8ce25e10c9a7835b1cf462643de",
+    "label": "A9",
+    "stock": 2,
+    "flags": 0,
+    "checksum_valid": true
+  },
+  "files": [
+    {
+      "name": "50RESLAB.BIN",
+      "bytes": 609720,
+      "sha256": "dad8226db751fe10c2cac1f2f21269cc746957c7aacc5b19bec83dd027da155f",
+      "candidate_sha256": "dad8226db751fe10c2cac1f2f21269cc746957c7aacc5b19bec83dd027da155f",
+      "backup_sha256": "dad8226db751fe10c2cac1f2f21269cc746957c7aacc5b19bec83dd027da155f"
+    },
+    {
+      "name": "32RESCUS.BIN",
+      "bytes": 182336,
+      "sha256": "ebe886e3af087612504b40a127fbf0dc0ce1d24c8d43b63e529968601c9938c8",
+      "candidate_sha256": "b816bbf959fa6771cc22536e7a60431901bcd7ffdc4f3b097b4844982a2781a3",
+      "backup_sha256": "587351affab169b7d8690fa54c3ddccbf953d8ce25e10c9a7835b1cf462643de"
+    }
+  ],
+  "passed": true
+}

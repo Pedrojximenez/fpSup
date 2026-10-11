@@ -1,0 +1,266 @@
+{
+ "product": "res-lab (Sensor Lab), Loader v3 sup",
+ "file": "50RESLAB.BIN",
+ "sup_id": "RLAB",
+ "version": 1,
+ "card": true,
+ "sha256": "ec621a9431e10c42819c631cc2687b9f2b97dc5c2e6b00adee46d1aafc70c1e0",
+ "facts": {
+  "text": 20578,
+  "tab_off": 20616,
+  "img_off": 64640,
+  "area_off": 97408,
+  "state_off": 466896,
+  "state_bytes": 1588,
+  "scratch_off": 468488,
+  "file_len": 466896,
+  "block": 468672,
+  "entry": 14969,
+  "slmp": 365392,
+  "claims": 297,
+  "journal_bytes": 21508,
+  "claim_bytes": 19132,
+  "static_words": 4594,
+  "runtime_words": 146,
+  "runtime_runs": 74,
+  "pointer_pairs": [
+   [
+    "0xc06cb6dc",
+    "0xc06cb6e0",
+    "0xc0730100"
+   ],
+   [
+    "0xc0063528",
+    "0xc006352c",
+    "0xc0730000"
+   ],
+   [
+    "0xc06bdb0c",
+    "0xc06bdb10",
+    "0xc07301c0"
+   ],
+   [
+    "0xc06bd7cc",
+    "0xc06bd7d0",
+    "0xc0731c8c"
+   ]
+  ],
+  "core_hooks": [
+   [
+    "0xc005bf28",
+    "0xc07312a0",
+    0
+   ],
+   [
+    "0xc02ca1c0",
+    "0xc07323a0",
+    1
+   ],
+   [
+    "0xc02ca21c",
+    "0xc07323a0",
+    1
+   ],
+   [
+    "0xc0325228",
+    "0xc0735000",
+    0
+   ],
+   [
+    "0xc032ddf0",
+    "0xc0735600",
+    1
+   ],
+   [
+    "0xc032de70",
+    "0xc0735800",
+    1
+   ],
+   [
+    "0xc043a19c",
+    "0xc0732400",
+    1
+   ],
+   [
+    "0xc0306ea0",
+    "0xc0730640",
+    0
+   ],
+   [
+    "0xc0306eec",
+    "0xc07306b0",
+    0
+   ],
+   [
+    "0xc03a6dd8",
+    "0xc0732900",
+    0
+   ],
+   [
+    "0xc02092cc",
+    "0xc0730a00",
+    1
+   ],
+   [
+    "0xc0218aec",
+    "0xc0730a00",
+    1
+   ],
+   [
+    "0xc0219260",
+    "0xc0730a00",
+    1
+   ],
+   [
+    "0xc03aa568",
+    "0xc0730a00",
+    1
+   ],
+   [
+    "0xc00c9bd0",
+    "0xc0730b00",
+    0
+   ],
+   [
+    "0xc005c020",
+    "0xc0731800",
+    0
+   ],
+   [
+    "0xc0437b48",
+    "0xc0731a00",
+    0
+   ],
+   [
+    "0xc005be58",
+    "0xc0731400",
+    0
+   ],
+   [
+    "0xc0437e98",
+    "0xc0731d00",
+    0
+   ],
+   [
+    "0xc04a121c",
+    "0xc0732a20",
+    0
+   ],
+   [
+    "0xc00a87e4",
+    "0xc0732aa0",
+    0
+   ],
+   [
+    "0xc00a8858",
+    "0xc0732c10",
+    0
+   ],
+   [
+    "0xc057a6f8",
+    "0xc0732b20",
+    0
+   ],
+   [
+    "0xc05821b8",
+    "0xc0732ba0",
+    0
+   ],
+   [
+    "0xc043ccf8",
+    "0xc0734c84",
+    0
+   ]
+  ],
+  "late_hooks": [
+   [
+    "0xc059b2f8",
+    "0xc0731310",
+    0
+   ],
+   [
+    "0xc059ba10",
+    "0xc0731510",
+    0
+   ],
+   [
+    "0xc05931d0",
+    "0xc0730b80",
+    0
+   ],
+   [
+    "0xc059c640",
+    "0xc0730bb8",
+    0
+   ],
+   [
+    "0xc059c9f0",
+    "0xc0731c50",
+    0
+   ],
+   [
+    "0xc057a6a0",
+    "0xc07309c8",
+    0
+   ],
+   [
+    "0xc05824d0",
+    "0xc0731cc0",
+    0
+   ],
+   [
+    "0xc057a5f0",
+    "0xc0734f40",
+    0
+   ],
+   [
+    "0xc056461c",
+    "0xc0732960",
+    1
+   ],
+   [
+    "0xc05e82f0",
+    "0xc0731ab0",
+    2
+   ]
+  ],
+  "fixups": [
+   "0xc07300d8"
+  ],
+  "pc_relative_pairs": 142,
+  "pic_proof_ogv": "0x10000000",
+  "restore": "0xc0731600",
+  "mark": "0xc0730380",
+  "fmt_code": "0xc0734c84",
+  "core_offsets": {
+   "axis": 9360,
+   "gtab": 8448,
+   "flag": 7176,
+   "coltab": 9840,
+   "asptab": 1568,
+   "recipe": 9408,
+   "ratetab": 1024,
+   "tmgtab": 1168,
+   "rate240": 7240,
+   "mark": 896,
+   "fmt_code": 19588,
+   "binfilt": 7344,
+   "core_magic": 32764
+  },
+  "layout0": "0xc0730000",
+  "test_page": "lab",
+  "state_fields": {
+   "result": 0,
+   "app": 4,
+   "reader": 8,
+   "entry": 12,
+   "page": 16,
+   "nbr": 1028,
+   "nbr_len": 1032,
+   "excl_rate": 1036,
+   "excl_bit": 1040,
+   "core_base": 1540
+  },
+  "install_off": 33
+ }
+}

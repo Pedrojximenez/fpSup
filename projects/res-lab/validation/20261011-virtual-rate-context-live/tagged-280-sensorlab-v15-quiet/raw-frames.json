@@ -1,0 +1,200 @@
+{
+  "clip": "A001_085",
+  "size": 1095168,
+  "requested": 94,
+  "finished": 94,
+  "transport": "source-address tagged read_bulk",
+  "standby_proof": "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/before-dng-read-tagged-280-sensorlab-v15-quiet.png",
+  "sampling": "first/middle/last, not full sequence",
+  "frames": [
+    {
+      "number": 1,
+      "path": "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/tagged-280-sensorlab-v15-quiet/A001_085-000001.DNG",
+      "sha256": "5a2fe81679a4ed358d7596653afedc7f610c0f223e833823fb023768c4e942e7",
+      "main_ifd": {
+        "NewSubfileType": 0,
+        "ImageWidth": 1008,
+        "ImageLength": 672,
+        "BitsPerSample": 12,
+        "Compression": 1,
+        "StripOffsets": 78848,
+        "StripByteCounts": 1016064,
+        "BlackLevel": [
+          "262017/1024",
+          "262017/1024",
+          "262017/1024",
+          "262017/1024"
+        ],
+        "WhiteLevel": 4095,
+        "DefaultCropOrigin": [
+          8,
+          5
+        ],
+        "DefaultCropSize": [
+          992,
+          662
+        ],
+        "BaselineExposure": "2378/1024",
+        "FrameRate": "280000/1001"
+      },
+      "ifds": [
+        {
+          "ExposureTime": "1/320",
+          "ISO": 2500
+        },
+        {
+          "NewSubfileType": 0,
+          "ImageWidth": 1008,
+          "ImageLength": 672,
+          "BitsPerSample": 12,
+          "Compression": 1,
+          "StripOffsets": 78848,
+          "StripByteCounts": 1016064,
+          "BlackLevel": [
+            "262017/1024",
+            "262017/1024",
+            "262017/1024",
+            "262017/1024"
+          ],
+          "WhiteLevel": 4095,
+          "DefaultCropOrigin": [
+            8,
+            5
+          ],
+          "DefaultCropSize": [
+            992,
+            662
+          ],
+          "BaselineExposure": "2378/1024",
+          "FrameRate": "280000/1001"
+        }
+      ]
+    },
+    {
+      "number": 47,
+      "path": "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/tagged-280-sensorlab-v15-quiet/A001_085-000047.DNG",
+      "sha256": "1e370e6e0e8f692c559a53253c34d65fddfe295ed47660b21930b0ebca6c31ab",
+      "main_ifd": {
+        "NewSubfileType": 0,
+        "ImageWidth": 1008,
+        "ImageLength": 672,
+        "BitsPerSample": 12,
+        "Compression": 1,
+        "StripOffsets": 78848,
+        "StripByteCounts": 1016064,
+        "BlackLevel": [
+          "262182/1024",
+          "262182/1024",
+          "262182/1024",
+          "262182/1024"
+        ],
+        "WhiteLevel": 4095,
+        "DefaultCropOrigin": [
+          8,
+          5
+        ],
+        "DefaultCropSize": [
+          992,
+          662
+        ],
+        "BaselineExposure": "2378/1024",
+        "FrameRate": "280000/1001"
+      },
+      "ifds": [
+        {
+          "ExposureTime": "1/320",
+          "ISO": 2500
+        },
+        {
+          "NewSubfileType": 0,
+          "ImageWidth": 1008,
+          "ImageLength": 672,
+          "BitsPerSample": 12,
+          "Compression": 1,
+          "StripOffsets": 78848,
+          "StripByteCounts": 1016064,
+          "BlackLevel": [
+            "262182/1024",
+            "262182/1024",
+            "262182/1024",
+            "262182/1024"
+          ],
+          "WhiteLevel": 4095,
+          "DefaultCropOrigin": [
+            8,
+            5
+          ],
+          "DefaultCropSize": [
+            992,
+            662
+          ],
+          "BaselineExposure": "2378/1024",
+          "FrameRate": "280000/1001"
+        }
+      ]
+    },
+    {
+      "number": 94,
+      "path": "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/tagged-280-sensorlab-v15-quiet/A001_085-000094.DNG",
+      "sha256": "b9da58ee1344fd4c0cb57069e43332aa2734a7ff9ca9dbe349140aded6bda1b9",
+      "main_ifd": {
+        "NewSubfileType": 0,
+        "ImageWidth": 1008,
+        "ImageLength": 672,
+        "BitsPerSample": 12,
+        "Compression": 1,
+        "StripOffsets": 78848,
+        "StripByteCounts": 1016064,
+        "BlackLevel": [
+          "262190/1024",
+          "262190/1024",
+          "262190/1024",
+          "262190/1024"
+        ],
+        "WhiteLevel": 4095,
+        "DefaultCropOrigin": [
+          8,
+          5
+        ],
+        "DefaultCropSize": [
+          992,
+          662
+        ],
+        "BaselineExposure": "2378/1024",
+        "FrameRate": "280000/1001"
+      },
+      "ifds": [
+        {
+          "ExposureTime": "1/320",
+          "ISO": 2500
+        },
+        {
+          "NewSubfileType": 0,
+          "ImageWidth": 1008,
+          "ImageLength": 672,
+          "BitsPerSample": 12,
+          "Compression": 1,
+          "StripOffsets": 78848,
+          "StripByteCounts": 1016064,
+          "BlackLevel": [
+            "262190/1024",
+            "262190/1024",
+            "262190/1024",
+            "262190/1024"
+          ],
+          "WhiteLevel": 4095,
+          "DefaultCropOrigin": [
+            8,
+            5
+          ],
+          "DefaultCropSize": [
+            992,
+            662
+          ],
+          "BaselineExposure": "2378/1024",
+          "FrameRate": "280000/1001"
+        }
+      ]
+    }
+  ]
+}

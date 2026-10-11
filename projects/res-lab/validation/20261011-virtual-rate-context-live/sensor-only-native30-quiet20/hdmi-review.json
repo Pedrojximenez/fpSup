@@ -1,0 +1,21 @@
+{
+  "frames": 900,
+  "overlay_spans": [
+    {
+      "state": "STBY",
+      "first": 0,
+      "last": 31
+    },
+    {
+      "state": "REC",
+      "first": 32,
+      "last": 116
+    },
+    {
+      "state": "STBY",
+      "first": 117,
+      "last": 899
+    }
+  ],
+  "limitation": "HDMI overlay durations approximate30Hz host frames; not a measurement of physical sensor cadence."
+}

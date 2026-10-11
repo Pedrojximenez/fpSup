@@ -1,0 +1,161 @@
+test_bin_padding_uses_loader_capacity_without_changing_autorun (test_boot_chain.BootChainTests) ... ok
+test_loader_publishes_before_stage2_normal_and_profile (test_boot_chain.BootChainTests) ... ok
+test_payload_update_does_not_change_autorun (test_boot_chain.BootChainTests) ... ok
+test_store_hit_and_miss_preserve_stack_and_return (test_boot_chain.BootChainTests) ... ok
+test_autorun_path_is_unchanged (test_loader_hook.FourBoxOnTheHookTests) ... ok
+test_warm_path_pauses_paints_frame0_then_finishes_and_restores (test_loader_hook.FourBoxOnTheHookTests) ... ok
+test_banner_does_not_wait_when_late_already (test_loader_hook.LoaderHookTests) ... FAIL
+test_banner_is_drawn_after_the_load (test_loader_hook.LoaderHookTests) ... FAIL
+test_echo_entry_arms_the_hook (test_loader_hook.LoaderHookTests) ... ok
+test_foreign_loader_is_not_armed (test_loader_hook.LoaderHookTests) ... ok
+test_hook_loads_and_skips_the_autorun (test_loader_hook.LoaderHookTests) ... ok
+test_journal_holds_stock_words_and_only_outside_the_cave (test_loader_hook.LoaderHookTests) ... FAIL
+test_no_file_starts_the_autorun_as_the_firmware_would (test_loader_hook.LoaderHookTests) ... ok
+test_power_off_puts_every_word_back_but_the_hook (test_loader_hook.LoaderHookTests) ... ok
+test_entry_receives_aligned_stack_and_own_address (test_loader_hook.PlainCardRestoreTests) ... ok
+test_restores_at_power_off_but_does_not_arm (test_loader_hook.PlainCardRestoreTests) ... FAIL
+test_another_script_is_not_mistaken_for_the_autorun (test_loader_hook.ThreeWayBootTests) ... ok
+test_autorun_path_arms_the_abort (test_loader_hook.ThreeWayBootTests) ... ok
+test_garbage_depth_is_not_walked (test_loader_hook.ThreeWayBootTests) ... ok
+test_hook_path_leaves_echo_alone_and_seeds_the_store (test_loader_hook.ThreeWayBootTests) ... ok
+test_asset_four_independent_fills_and_brand_colors (test_splash.SplashTests) ... ok
+test_first_frame_replaces_full_top_row_and_keeps_progress_files_small (test_splash.SplashTests) ... ok
+test_four_states_each_seed_all_three_buffers (test_splash.SplashTests) ... test_loader_failures_return_to_unconditional_ui_restoration (test_splash.SplashTests) ... ok
+test_native_finish_does_not_overwrite_a_foreign_draw_hook (test_splash.SplashTests) ... ok
+test_opt_in_loader_fits_fast_store_and_legacy_mode_stays_available (test_splash.SplashTests) ... test_pause_precedes_published_first_frame_and_tail_restores_without_bin (test_splash.SplashTests) ... ok
+test_payload_only_updates_keep_autorun_and_art_identical (test_splash.SplashTests) ... ok
+test_stage2_finishes_after_both_passes_and_returns_with_ui_restored (test_splash.SplashTests) ... ok
+
+======================================================================
+FAIL: test_banner_does_not_wait_when_late_already (test_loader_hook.LoaderHookTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/test_loader_hook.py", line 265, in test_banner_does_not_wait_when_late_already
+    self.assertEqual(cam.slept, 0)
+AssertionError: 2000 != 0
+
+======================================================================
+FAIL: test_banner_is_drawn_after_the_load (test_loader_hook.LoaderHookTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/test_loader_hook.py", line 254, in test_banner_is_drawn_after_the_load
+    self.assertEqual([(n, a) for n, a, _ in cam.draws], want)
+AssertionError: Lists differ: [('D_FILE', ('\\FPSUPUI\\0.BIN', '0', '0', '10[360 chars] 0))] != [('D_TEXT', ('fpSup!',)), ('D_OSD', ('1',)), ([81 chars]',))]
+
+First differing element 0:
+('D_FILE', ('\\FPSUPUI\\0.BIN', '0', '0', '1024', '56', '0'))
+('D_TEXT', ('fpSup!',))
+
+First list contains 1 additional elements.
+First extra element 6:
+('UI_FORCE', (257, 4294967295, 0))
+
++ [('D_TEXT', ('fpSup!',)),
++  ('D_OSD', ('1',)),
++  ('D_TEXT', ('fpSup!',)),
++  ('D_OSD', ('1',)),
++  ('D_TEXT', ('fpSup!',)),
++  ('D_OSD', ('1',))]
+- [('D_FILE', ('\\FPSUPUI\\0.BIN', '0', '0', '1024', '56', '0')),
+-  ('D_FILE', ('\\FPSUPUI\\0.BIN', '0', '0', '1024', '56', '0')),
+-  ('D_FILE', ('\\FPSUPUI\\0.BIN', '0', '0', '1024', '56', '0')),
+-  ('D_FILE', ('\\FPSUPUI\\4.BIN', '0', '0', '176', '56', '0')),
+-  ('D_FILE', ('\\FPSUPUI\\4.BIN', '0', '0', '176', '56', '0')),
+-  ('D_FILE', ('\\FPSUPUI\\4.BIN', '0', '0', '176', '56', '0')),
+-  ('UI_FORCE', (257, 4294967295, 0))]
+
+======================================================================
+FAIL: test_journal_holds_stock_words_and_only_outside_the_cave (test_loader_hook.LoaderHookTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/test_loader_hook.py", line 230, in test_journal_holds_stock_words_and_only_outside_the_cave
+    self.assertEqual([(a, n) for a, n, _ in got],
+AssertionError: Lists differ: [(323[68 chars]4805596, 4), (3234805656, 4), (3234805660, 4), (3226633984, 4)] != [(323[68 chars]4805596, 4), (3234805656, 4), (3234805660, 4)]
+
+First list contains 1 additional elements.
+First extra element 7:
+(3226633984, 4)
+
+  [(3234805568, 4),
+   (3234805632, 4),
+   (3234805636, 4),
+   (3234805592, 4),
+   (3234805596, 4),
+   (3234805656, 4),
+-  (3234805660, 4),
+?                 ^
+
++  (3234805660, 4)]
+?                 ^
+
+-  (3226633984, 4)]
+
+======================================================================
+FAIL: test_restores_at_power_off_but_does_not_arm (test_loader_hook.PlainCardRestoreTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/test_loader_hook.py", line 404, in test_restores_at_power_off_but_does_not_arm
+    self.assertEqual(cam.draws, [])
+AssertionError: Lists differ: [('D_FILE', ('\\FPSUPUI\\4.BIN', '0', '0',[175 chars]888)] != []
+
+First list contains 3 additional elements.
+First extra element 0:
+('D_FILE', ('\\FPSUPUI\\4.BIN', '0', '0', '176', '56', '0'), 3912059888)
+
++ []
+- [('D_FILE', ('\\FPSUPUI\\4.BIN', '0', '0', '176', '56', '0'), 3912059888),
+-  ('D_FILE', ('\\FPSUPUI\\4.BIN', '0', '0', '176', '56', '0'), 3912059888),
+-  ('D_FILE', ('\\FPSUPUI\\4.BIN', '0', '0', '176', '56', '0'), 3912059888)]
+
+======================================================================
+FAIL: test_four_states_each_seed_all_three_buffers (test_splash.SplashTests) (mode='ordinary')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/test_splash.py", line 307, in test_four_states_each_seed_all_three_buffers
+    self.assertLess(len([line for line in pair[0]['lines'] if line.startswith('display ')]),
+AssertionError: 12 not less than 12
+
+======================================================================
+FAIL: test_four_states_each_seed_all_three_buffers (test_splash.SplashTests) (mode='debug')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/test_splash.py", line 307, in test_four_states_each_seed_all_three_buffers
+    self.assertLess(len([line for line in pair[0]['lines'] if line.startswith('display ')]),
+AssertionError: 12 not less than 12
+
+======================================================================
+FAIL: test_four_states_each_seed_all_three_buffers (test_splash.SplashTests) (mode='fast')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/test_splash.py", line 307, in test_four_states_each_seed_all_three_buffers
+    self.assertLess(len([line for line in pair[0]['lines'] if line.startswith('display ')]),
+AssertionError: 12 not less than 12
+
+======================================================================
+FAIL: test_opt_in_loader_fits_fast_store_and_legacy_mode_stays_available (test_splash.SplashTests) (mode='ordinary')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/test_splash.py", line 352, in test_opt_in_loader_fits_fast_store_and_legacy_mode_stays_available
+    self.assertFalse((self.legacy[mode]['path'] / 'FPSUPUI').exists())
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_opt_in_loader_fits_fast_store_and_legacy_mode_stays_available (test_splash.SplashTests) (mode='debug')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/test_splash.py", line 352, in test_opt_in_loader_fits_fast_store_and_legacy_mode_stays_available
+    self.assertFalse((self.legacy[mode]['path'] / 'FPSUPUI').exists())
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_opt_in_loader_fits_fast_store_and_legacy_mode_stays_available (test_splash.SplashTests) (mode='fast')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/test_splash.py", line 352, in test_opt_in_loader_fits_fast_store_and_legacy_mode_stays_available
+    self.assertFalse((self.legacy[mode]['path'] / 'FPSUPUI').exists())
+AssertionError: True is not false
+
+----------------------------------------------------------------------
+Ran 29 tests in 9.945s
+
+FAILED (failures=10)

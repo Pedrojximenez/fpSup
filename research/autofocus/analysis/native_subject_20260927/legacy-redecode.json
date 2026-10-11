@@ -1,0 +1,179 @@
+{
+  "schema": "fp.subject.legacy-redecode-audit/v1",
+  "offline_only": true,
+  "camera_touched": false,
+  "capture_integrity_at_acquisition_verified": false,
+  "decoder_schema": "sigma-fp-af-fusion/v7",
+  "files": 15,
+  "records": 3538,
+  "all_original_binaries_unchanged": true,
+  "files_with_decode_errors": 0,
+  "sources": [
+    {
+      "source": "research/autofocus/captures/af-fusion/2026-09-16-032506/samples.bin",
+      "sha256_before": "e5a9b239bd486cc69b918fa2f0bdc5bec64d867cc21c51a0dd32d68d9856f4fb",
+      "records": 199,
+      "binary_versions": {
+        "1": 199
+      },
+      "geometry_eligible_records": 0,
+      "decoded_subject_cues": 0,
+      "sha256_after": "e5a9b239bd486cc69b918fa2f0bdc5bec64d867cc21c51a0dd32d68d9856f4fb"
+    },
+    {
+      "source": "research/autofocus/captures/af-fusion/2026-09-16-dma-copy-100hz/samples.bin",
+      "sha256_before": "2e697735ee8fdb07e27280355571ef6938b67b40c05e62a8f8fba9b8298fa1b0",
+      "records": 300,
+      "binary_versions": {
+        "2": 300
+      },
+      "geometry_eligible_records": 0,
+      "decoded_subject_cues": 0,
+      "sha256_after": "2e697735ee8fdb07e27280355571ef6938b67b40c05e62a8f8fba9b8298fa1b0"
+    },
+    {
+      "source": "research/autofocus/captures/af-fusion/2026-09-16-iso100-a/samples.bin",
+      "sha256_before": "e96c93e947ebb47c0eccb41c9d8e32881b9a3bb7cb78ff84af221db105dc54cc",
+      "records": 60,
+      "binary_versions": {
+        "1": 60
+      },
+      "geometry_eligible_records": 0,
+      "decoded_subject_cues": 0,
+      "sha256_after": "e96c93e947ebb47c0eccb41c9d8e32881b9a3bb7cb78ff84af221db105dc54cc"
+    },
+    {
+      "source": "research/autofocus/captures/af-fusion/2026-09-16-iso100-b/samples.bin",
+      "sha256_before": "8a113ee78dd81297206fd85d5e57ef142122ad3125e9037652a0901299a323af",
+      "records": 56,
+      "binary_versions": {
+        "1": 56
+      },
+      "geometry_eligible_records": 0,
+      "decoded_subject_cues": 0,
+      "sha256_after": "8a113ee78dd81297206fd85d5e57ef142122ad3125e9037652a0901299a323af"
+    },
+    {
+      "source": "research/autofocus/captures/af-fusion/2026-09-16-iso100-v5/samples.bin",
+      "sha256_before": "14f62fd73c85540a1a030510f87154c1f9cb89db59b4ee2b70691847cc5bbbde",
+      "records": 60,
+      "binary_versions": {
+        "2": 60
+      },
+      "geometry_eligible_records": 0,
+      "decoded_subject_cues": 0,
+      "sha256_after": "14f62fd73c85540a1a030510f87154c1f9cb89db59b4ee2b70691847cc5bbbde"
+    },
+    {
+      "source": "research/autofocus/captures/af-fusion/2026-09-16-iso12800-a/samples.bin",
+      "sha256_before": "25d09c1c8fbe72eceb6db86898a4162083b143ddca2ee47f9b131af9241af5b5",
+      "records": 1,
+      "binary_versions": {
+        "1": 1
+      },
+      "geometry_eligible_records": 0,
+      "decoded_subject_cues": 0,
+      "sha256_after": "25d09c1c8fbe72eceb6db86898a4162083b143ddca2ee47f9b131af9241af5b5"
+    },
+    {
+      "source": "research/autofocus/captures/af-fusion/2026-09-16-iso12800-b/samples.bin",
+      "sha256_before": "710a30e2ad9210b723041b790502b35ae25e52503477e9395261ebb5bbb14d5e",
+      "records": 60,
+      "binary_versions": {
+        "1": 60
+      },
+      "geometry_eligible_records": 0,
+      "decoded_subject_cues": 0,
+      "sha256_after": "710a30e2ad9210b723041b790502b35ae25e52503477e9395261ebb5bbb14d5e"
+    },
+    {
+      "source": "research/autofocus/captures/af-fusion/2026-09-16-iso12800-c/samples.bin",
+      "sha256_before": "3144d8c2a1f22bb076bad9bf67d12699cb9454b711a59f0967587eff93040df1",
+      "records": 60,
+      "binary_versions": {
+        "2": 60
+      },
+      "geometry_eligible_records": 0,
+      "decoded_subject_cues": 0,
+      "sha256_after": "3144d8c2a1f22bb076bad9bf67d12699cb9454b711a59f0967587eff93040df1"
+    },
+    {
+      "source": "research/autofocus/captures/af-fusion/2026-09-16-iso800-a/samples.bin",
+      "sha256_before": "b181c45a9de2c753749a99b0e4d2d3da8738255914564bd14a5c011ff0bcab29",
+      "records": 56,
+      "binary_versions": {
+        "1": 56
+      },
+      "geometry_eligible_records": 0,
+      "decoded_subject_cues": 0,
+      "sha256_after": "b181c45a9de2c753749a99b0e4d2d3da8738255914564bd14a5c011ff0bcab29"
+    },
+    {
+      "source": "research/autofocus/captures/af-fusion/2026-09-16-repeat-a/samples.bin",
+      "sha256_before": "01d395ecadde8ab776537e85d52f247f2d953d68cd009bac1621358dedc90564",
+      "records": 597,
+      "binary_versions": {
+        "2": 597
+      },
+      "geometry_eligible_records": 0,
+      "decoded_subject_cues": 0,
+      "sha256_after": "01d395ecadde8ab776537e85d52f247f2d953d68cd009bac1621358dedc90564"
+    },
+    {
+      "source": "research/autofocus/captures/af-fusion/2026-09-16-repeat-b/samples.bin",
+      "sha256_before": "e6d4dadf904275aba2babdc32495f9c3096d9c760ae8aa1be5b034bce88d3df6",
+      "records": 599,
+      "binary_versions": {
+        "2": 599
+      },
+      "geometry_eligible_records": 0,
+      "decoded_subject_cues": 0,
+      "sha256_after": "e6d4dadf904275aba2babdc32495f9c3096d9c760ae8aa1be5b034bce88d3df6"
+    },
+    {
+      "source": "research/autofocus/captures/af-fusion/2026-09-16-repeat-c/samples.bin",
+      "sha256_before": "cb0507f97b0905ca2feeb12597e1f94663afe2be15995247efed32e3dabdf879",
+      "records": 599,
+      "binary_versions": {
+        "2": 599
+      },
+      "geometry_eligible_records": 0,
+      "decoded_subject_cues": 0,
+      "sha256_after": "cb0507f97b0905ca2feeb12597e1f94663afe2be15995247efed32e3dabdf879"
+    },
+    {
+      "source": "research/autofocus/captures/af-fusion/2026-09-16-right-touch-a/samples.bin",
+      "sha256_before": "c924dec248061d610de1eccf20c1a93012b03937e78e45b28a7cf991d7000709",
+      "records": 60,
+      "binary_versions": {
+        "2": 60
+      },
+      "geometry_eligible_records": 0,
+      "decoded_subject_cues": 0,
+      "sha256_after": "c924dec248061d610de1eccf20c1a93012b03937e78e45b28a7cf991d7000709"
+    },
+    {
+      "source": "research/autofocus/captures/af-fusion/2026-09-16-s1-right-a/samples.bin",
+      "sha256_before": "c613f9a802fcf54bbc6b56eb65335edd00adc0e15228306850f41b036d781e81",
+      "records": 239,
+      "binary_versions": {
+        "2": 239
+      },
+      "geometry_eligible_records": 0,
+      "decoded_subject_cues": 0,
+      "sha256_after": "c613f9a802fcf54bbc6b56eb65335edd00adc0e15228306850f41b036d781e81"
+    },
+    {
+      "source": "research/autofocus/captures/af-fusion/2026-09-16-s1-right-b/samples.bin",
+      "sha256_before": "44d31db5b2c462e214c74fd169c0cd106270dfd2207f22142c5848d8a79df32d",
+      "records": 592,
+      "binary_versions": {
+        "2": 592
+      },
+      "geometry_eligible_records": 0,
+      "decoded_subject_cues": 0,
+      "sha256_after": "44d31db5b2c462e214c74fd169c0cd106270dfd2207f22142c5848d8a79df32d"
+    }
+  ],
+  "decoder_sha256": "138cd3fea708b68c08f3193f42dfcc97c56ec4001a33abd0f1d2c3c9d5c3d2c0"
+}

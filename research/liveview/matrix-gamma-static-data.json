@@ -1,0 +1,432 @@
+{
+  "scope": "offline static bytes, not live active register snapshot",
+  "sources": {
+    "/Users/dido/Developer.localized/SIGMAfp_re/out/seg0_c0000000.bin": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622",
+    "/Users/dido/Developer.localized/SIGMAfp_re/out/seg1_c2ef6e00.bin": "0dcaca8f5441fe4ddc6ed801cb888e325df4e76006e4f53a1c3219809b22ce7b"
+  },
+  "defaults": {
+    "IGAMMA_control": {
+      "address": "0xc2f0c008",
+      "uint32": [
+        4095,
+        1,
+        4095
+      ]
+    },
+    "IGAMMA_knots": {
+      "address": "0xc2f0c014",
+      "uint32": [
+        128,
+        256,
+        384,
+        512,
+        640,
+        768,
+        896,
+        1024,
+        1280,
+        1536,
+        1792,
+        2048,
+        2304,
+        2560,
+        2816,
+        3072,
+        3328,
+        3584,
+        3840,
+        3968,
+        4096,
+        4226,
+        4436,
+        4608,
+        4778,
+        4948,
+        5120
+      ]
+    },
+    "RGBLMAT": {
+      "address": "0xc2f0c080",
+      "uint32": [
+        512,
+        0,
+        0,
+        512,
+        0,
+        0,
+        512,
+        0,
+        0,
+        512,
+        0,
+        0,
+        512,
+        0,
+        0,
+        512,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "PSTIGAM_knots": {
+      "address": "0xc2f0c0d8",
+      "uint32": [
+        128,
+        256,
+        384,
+        512,
+        640,
+        768,
+        896,
+        1024,
+        1280,
+        1536,
+        1792,
+        2048,
+        2304,
+        2560,
+        2816,
+        3072,
+        3328,
+        3584,
+        3840,
+        3968,
+        4096,
+        4608,
+        5120,
+        5632,
+        6144,
+        7168,
+        8192
+      ]
+    },
+    "GAM_GS_GAMDEC": {
+      "address": "0xc2f13094",
+      "uint32": [
+        64,
+        0,
+        0,
+        64,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "GAM_BAS": {
+      "address": "0xc2f13124",
+      "uint32": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "pq_resources": [
+    {
+      "root": "0xc0b38acc",
+      "fields": {
+        "0x100": {
+          "pointer": "0xc0b3912c",
+          "count": 1,
+          "rows": [
+            {
+              "address": "0xc0b3912c",
+              "threshold": 100,
+              "bytes": [
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        "0x108": {
+          "pointer": "0xc0b39134",
+          "count": 1,
+          "rows": [
+            {
+              "address": "0xc0b39134",
+              "threshold": 100,
+              "bytes": [
+                64,
+                0,
+                64,
+                0
+              ]
+            }
+          ]
+        },
+        "0x180": {
+          "pointer": "0xc0b39a08",
+          "count": 79,
+          "selected_rows": [
+            {
+              "id": 41,
+              "enabled_byte": 1,
+              "update_byte": 1,
+              "reserved": 0
+            },
+            {
+              "id": 43,
+              "enabled_byte": 0,
+              "update_byte": 0,
+              "reserved": 0
+            },
+            {
+              "id": 44,
+              "enabled_byte": 0,
+              "update_byte": 0,
+              "reserved": 0
+            },
+            {
+              "id": 45,
+              "enabled_byte": 0,
+              "update_byte": 0,
+              "reserved": 0
+            },
+            {
+              "id": 50,
+              "enabled_byte": 1,
+              "update_byte": 1,
+              "reserved": 0
+            },
+            {
+              "id": 51,
+              "enabled_byte": 1,
+              "update_byte": 1,
+              "reserved": 0
+            },
+            {
+              "id": 52,
+              "enabled_byte": 1,
+              "update_byte": 0,
+              "reserved": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "root": "0xc0b3efdc",
+      "fields": {
+        "0x100": {
+          "pointer": "0xc3424edc",
+          "count": 1,
+          "note": "RAM pointer; initializer provenance in report; not captured"
+        },
+        "0x108": {
+          "pointer": "0xc3424ee4",
+          "count": 1,
+          "note": "RAM pointer; initializer provenance in report; not captured"
+        },
+        "0x180": {
+          "pointer": "0xc0b3f5c4",
+          "count": 79,
+          "selected_rows": [
+            {
+              "id": 41,
+              "enabled_byte": 1,
+              "update_byte": 1,
+              "reserved": 0
+            },
+            {
+              "id": 43,
+              "enabled_byte": 0,
+              "update_byte": 0,
+              "reserved": 0
+            },
+            {
+              "id": 44,
+              "enabled_byte": 0,
+              "update_byte": 0,
+              "reserved": 0
+            },
+            {
+              "id": 45,
+              "enabled_byte": 0,
+              "update_byte": 0,
+              "reserved": 0
+            },
+            {
+              "id": 50,
+              "enabled_byte": 1,
+              "update_byte": 1,
+              "reserved": 0
+            },
+            {
+              "id": 51,
+              "enabled_byte": 1,
+              "update_byte": 1,
+              "reserved": 0
+            },
+            {
+              "id": 52,
+              "enabled_byte": 1,
+              "update_byte": 0,
+              "reserved": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "root": "0xc0b3f83c",
+      "fields": {
+        "0x100": {
+          "pointer": "0xc3425284",
+          "count": 1,
+          "note": "RAM pointer; initializer provenance in report; not captured"
+        },
+        "0x108": {
+          "pointer": "0xc342528c",
+          "count": 1,
+          "note": "RAM pointer; initializer provenance in report; not captured"
+        },
+        "0x180": {
+          "pointer": "0xc0b3fdfc",
+          "count": 79,
+          "selected_rows": [
+            {
+              "id": 41,
+              "enabled_byte": 1,
+              "update_byte": 1,
+              "reserved": 0
+            },
+            {
+              "id": 43,
+              "enabled_byte": 0,
+              "update_byte": 0,
+              "reserved": 0
+            },
+            {
+              "id": 44,
+              "enabled_byte": 0,
+              "update_byte": 0,
+              "reserved": 0
+            },
+            {
+              "id": 45,
+              "enabled_byte": 0,
+              "update_byte": 0,
+              "reserved": 0
+            },
+            {
+              "id": 50,
+              "enabled_byte": 1,
+              "update_byte": 1,
+              "reserved": 0
+            },
+            {
+              "id": 51,
+              "enabled_byte": 1,
+              "update_byte": 1,
+              "reserved": 0
+            },
+            {
+              "id": 52,
+              "enabled_byte": 1,
+              "update_byte": 0,
+              "reserved": 0
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

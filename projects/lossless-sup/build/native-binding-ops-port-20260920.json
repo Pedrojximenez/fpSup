@@ -1,0 +1,49 @@
+{
+  "kind": "host_executed_native_binding_ops_port",
+  "passed": true,
+  "tests_run": 23,
+  "skipped": 0,
+  "scenarios": 22,
+  "each_scenario_runs": [
+    "host -O2 in-process",
+    "asan+ubsan -O1 executable"
+  ],
+  "camera_accessed": false,
+  "deployable": false,
+  "native_call_layer": "substituted on host; separately executed into original instructions by test_native_variable.py",
+  "rendering_proved": false,
+  "ready_ui_claimable": false,
+  "exclusion_provider_required": true,
+  "quiescence_provider_required": true,
+  "undefined_symbols": [
+    "fp_nv_init",
+    "fp_nv_inspect",
+    "fp_nv_read",
+    "fp_nv_register_off",
+    "fp_nv_set_canonical",
+    "fp_nv_subscribe",
+    "fp_nv_unsubscribe_locked",
+    "fpl_binding_notify"
+  ],
+  "requires_relocated_rodata": true,
+  "source_hashes": {
+    "control.c": "791516174718f6c4f7b19fc0d859abe9f3e1c4bd935398c5956265423ee19dc5",
+    "ui_control.c": "88f0431e15c753aa5bfa3c70ea946fc1300ff745b8d92d2549fa40eb41e3deef",
+    "binding/binding.c": "df2439658db275f5ca2d6ff05469d955b2163287bed70dbb4c02df8816f3df47",
+    "native/native_port.c": "e2eec5fe3c798e854c63b9510ee82e3386542def9026d485a1fb88adf89dd9c4",
+    "native/port_fixture.c": "bc5ace983f4ce396f985276c733884215ac34efb64e445851045416164ae999f",
+    "native/native_port.h": "4e912576c3cd70e26e6a5954d4ae6c8172d5ace287836d76ba7721dd7ae7a48a",
+    "binding/binding.h": "4eda432c964d0de26e40f40b6e76c5aa9c771a92bad1e7f4a3903ac134236897",
+    "native/native_variable.h": "beb1da79e81babd162af56134b9231d07da6cde0002f61bc47a893b90504a4ac",
+    "ui_control.h": "0af299ffd4a9085edc81f1ed742b72baed7694178d95364f6846e59afd1666f3",
+    "control.h": "e59d29f4f8e6aec65f86c27d0d15ec7ec99e429c127a51bc82ac1fe3019276cd"
+  },
+  "test_sha256": "f60df437942d5098f092954ab39b58c1908441d62bf93cc4ca289191ed8e38ce",
+  "remaining": [
+    "native page/row installation and rendering",
+    "choice permission port",
+    "notification exclusion and source-event quiescence providers",
+    "persistent preference",
+    "REC/codec/writer/header/playback"
+  ]
+}

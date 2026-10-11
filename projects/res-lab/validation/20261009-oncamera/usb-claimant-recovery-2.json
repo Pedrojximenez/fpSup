@@ -1,0 +1,9 @@
+{
+  "pid": 64174,
+  "command": "/usr/libexec/ptpcamerad",
+  "evidence": "usb-service-full-after-reboot-2.plist: SIGMA fp interface 0 UsbExclusiveOwner",
+  "signals": [
+    "SIGTERM",
+    "SIGKILL"
+  ]
+}

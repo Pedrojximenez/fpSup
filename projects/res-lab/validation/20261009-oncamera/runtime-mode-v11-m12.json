@@ -1,0 +1,146 @@
+{
+  "endpoint": "0xc072e260",
+  "consumer_base": "0x451188c0",
+  "consumer_state": "0x4512a840",
+  "registry": {
+    "magic": 826495574,
+    "abi": 2,
+    "lock": 0,
+    "provider": 0,
+    "generation": 0,
+    "result": 0,
+    "detail": 0,
+    "count": 1,
+    "packs": 0,
+    "asset_used": 0,
+    "row": 5
+  },
+  "consumer": {
+    "flag": 0,
+    "current": 0,
+    "res_value": 2,
+    "format_latch": 0,
+    "nrows": 6,
+    "nentries": 56,
+    "nmodes": 8
+  },
+  "selected": 0,
+  "rows": [
+    {
+      "index": 0,
+      "on": 1,
+      "width": 2000,
+      "height": 1334,
+      "stock": 2,
+      "menu_row": 2,
+      "pack": "0x45139bc0",
+      "label": "OG2K",
+      "ui_result": 1
+    },
+    {
+      "index": 1,
+      "on": 1,
+      "width": 3456,
+      "height": 2304,
+      "stock": 3,
+      "menu_row": 3,
+      "pack": "0x4513b180",
+      "label": "OG35K",
+      "ui_result": 1
+    },
+    {
+      "index": 2,
+      "on": 1,
+      "width": 3008,
+      "height": 2000,
+      "stock": 2,
+      "menu_row": 4,
+      "pack": "0x4513ce80",
+      "label": "OG3K",
+      "ui_result": 1
+    },
+    {
+      "index": 3,
+      "on": 1,
+      "width": 3840,
+      "height": 2560,
+      "stock": 3,
+      "menu_row": 5,
+      "pack": "0x4513e100",
+      "label": "OG4K",
+      "ui_result": 1
+    },
+    {
+      "index": 4,
+      "on": 1,
+      "width": 2096,
+      "height": 1238,
+      "stock": 2,
+      "menu_row": 6,
+      "pack": "0x4513f140",
+      "label": "S16",
+      "ui_result": 1
+    },
+    {
+      "index": 5,
+      "on": 1,
+      "width": 3008,
+      "height": 2000,
+      "stock": 2,
+      "menu_row": 7,
+      "pack": "0x45128908",
+      "label": "VRC000",
+      "ui_result": 1
+    }
+  ],
+  "producer_base": "0x452b9980",
+  "producer_state": "0x45328220",
+  "producer": {
+    "result": 1,
+    "app": 3331322648,
+    "reader": 3332398568,
+    "entry": 3332533760,
+    "page": 1160515116,
+    "nbr": 1160635920,
+    "nbr_len": 2708,
+    "core_base": 1160510528,
+    "pages_state": 1,
+    "out_w": 992,
+    "out_h": 662,
+    "ro_w": 2016,
+    "ro_h": 672,
+    "ro_sx": 3,
+    "ro_sy": 6,
+    "bin_h": 1,
+    "bin_v": 1,
+    "axis_armed": 1,
+    "modes_rows": 2,
+    "mode_sel": 1,
+    "canvas_valid": 1,
+    "crop_w": 0,
+    "crop_h": 0,
+    "ratio": 0,
+    "edit_field": 0,
+    "editing": 0
+  },
+  "mode_ids": [
+    9,
+    12
+  ],
+  "loaded_headers": {
+    "32RESCUS.BIN": {
+      "file_len": 76288,
+      "block_size": 746688,
+      "id": 1398096722,
+      "version": 4,
+      "min_services": 3
+    },
+    "50RESLAB.BIN": {
+      "file_len": 452768,
+      "block_size": 720896,
+      "id": 1111575634,
+      "version": 8,
+      "min_services": 3
+    }
+  }
+}

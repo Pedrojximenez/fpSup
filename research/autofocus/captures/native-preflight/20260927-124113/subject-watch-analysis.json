@@ -1,0 +1,316 @@
+{
+  "schema": "fp.subject-path-diagnostic/v1",
+  "input_capture": "subject-watch-preflight.jsonl",
+  "scope": "Sequential raw RAM observation only; no frame/exposure/optical validation",
+  "observations": [
+    {
+      "index": 0,
+      "host_before_ns": 917859458,
+      "host_after_ns": 986718125,
+      "runtime_guard_raw": 1,
+      "runtime_identity_matches": true,
+      "runtime_face_eye_tracking_bytes": [
+        1,
+        1,
+        0
+      ],
+      "raw_face_count": 0,
+      "raw_header_second_word_uninterpreted": 18993616,
+      "manager_face_ready_bytes": [
+        0,
+        1
+      ],
+      "status_face_ready_bytes": [
+        0,
+        1
+      ],
+      "renderer_face_ready_bytes": [
+        0,
+        1
+      ],
+      "face_xywh_raw": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "face_valid_byte": 0,
+      "geometry_eligible": false
+    },
+    {
+      "index": 1,
+      "host_before_ns": 1241950041,
+      "host_after_ns": 1319346916,
+      "runtime_guard_raw": 1,
+      "runtime_identity_matches": true,
+      "runtime_face_eye_tracking_bytes": [
+        1,
+        1,
+        0
+      ],
+      "raw_face_count": 0,
+      "raw_header_second_word_uninterpreted": 18974416,
+      "manager_face_ready_bytes": [
+        0,
+        1
+      ],
+      "status_face_ready_bytes": [
+        0,
+        1
+      ],
+      "renderer_face_ready_bytes": [
+        0,
+        1
+      ],
+      "face_xywh_raw": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "face_valid_byte": 0,
+      "geometry_eligible": false
+    },
+    {
+      "index": 2,
+      "host_before_ns": 1572949833,
+      "host_after_ns": 1657767500,
+      "runtime_guard_raw": 1,
+      "runtime_identity_matches": true,
+      "runtime_face_eye_tracking_bytes": [
+        1,
+        1,
+        0
+      ],
+      "raw_face_count": 0,
+      "raw_header_second_word_uninterpreted": 18993616,
+      "manager_face_ready_bytes": [
+        0,
+        1
+      ],
+      "status_face_ready_bytes": [
+        0,
+        1
+      ],
+      "renderer_face_ready_bytes": [
+        0,
+        1
+      ],
+      "face_xywh_raw": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "face_valid_byte": 0,
+      "geometry_eligible": false
+    },
+    {
+      "index": 3,
+      "host_before_ns": 1910563833,
+      "host_after_ns": 1992284333,
+      "runtime_guard_raw": 1,
+      "runtime_identity_matches": true,
+      "runtime_face_eye_tracking_bytes": [
+        1,
+        1,
+        0
+      ],
+      "raw_face_count": 0,
+      "raw_header_second_word_uninterpreted": 18936016,
+      "manager_face_ready_bytes": [
+        0,
+        1
+      ],
+      "status_face_ready_bytes": [
+        0,
+        1
+      ],
+      "renderer_face_ready_bytes": [
+        0,
+        1
+      ],
+      "face_xywh_raw": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "face_valid_byte": 0,
+      "geometry_eligible": false
+    },
+    {
+      "index": 4,
+      "host_before_ns": 2247345083,
+      "host_after_ns": 2321325250,
+      "runtime_guard_raw": 1,
+      "runtime_identity_matches": true,
+      "runtime_face_eye_tracking_bytes": [
+        1,
+        1,
+        0
+      ],
+      "raw_face_count": 0,
+      "raw_header_second_word_uninterpreted": 18974416,
+      "manager_face_ready_bytes": [
+        0,
+        1
+      ],
+      "status_face_ready_bytes": [
+        0,
+        1
+      ],
+      "renderer_face_ready_bytes": [
+        0,
+        1
+      ],
+      "face_xywh_raw": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "face_valid_byte": 0,
+      "geometry_eligible": false
+    },
+    {
+      "index": 5,
+      "host_before_ns": 2574556083,
+      "host_after_ns": 2646078291,
+      "runtime_guard_raw": 1,
+      "runtime_identity_matches": true,
+      "runtime_face_eye_tracking_bytes": [
+        1,
+        1,
+        0
+      ],
+      "raw_face_count": 0,
+      "raw_header_second_word_uninterpreted": 18993616,
+      "manager_face_ready_bytes": [
+        0,
+        1
+      ],
+      "status_face_ready_bytes": [
+        0,
+        1
+      ],
+      "renderer_face_ready_bytes": [
+        0,
+        1
+      ],
+      "face_xywh_raw": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "face_valid_byte": 0,
+      "geometry_eligible": false
+    },
+    {
+      "index": 6,
+      "host_before_ns": 2899511291,
+      "host_after_ns": 2967720208,
+      "runtime_guard_raw": 1,
+      "runtime_identity_matches": true,
+      "runtime_face_eye_tracking_bytes": [
+        1,
+        1,
+        0
+      ],
+      "raw_face_count": 0,
+      "raw_header_second_word_uninterpreted": 18974416,
+      "manager_face_ready_bytes": [
+        0,
+        1
+      ],
+      "status_face_ready_bytes": [
+        0,
+        1
+      ],
+      "renderer_face_ready_bytes": [
+        0,
+        1
+      ],
+      "face_xywh_raw": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "face_valid_byte": 0,
+      "geometry_eligible": false
+    },
+    {
+      "index": 7,
+      "host_before_ns": 3222791458,
+      "host_after_ns": 3305465833,
+      "runtime_guard_raw": 1,
+      "runtime_identity_matches": true,
+      "runtime_face_eye_tracking_bytes": [
+        1,
+        1,
+        0
+      ],
+      "raw_face_count": 0,
+      "raw_header_second_word_uninterpreted": 18936016,
+      "manager_face_ready_bytes": [
+        0,
+        1
+      ],
+      "status_face_ready_bytes": [
+        0,
+        1
+      ],
+      "renderer_face_ready_bytes": [
+        0,
+        1
+      ],
+      "face_xywh_raw": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "face_valid_byte": 0,
+      "geometry_eligible": false
+    }
+  ],
+  "host_observation_span_seconds": 2.387606375,
+  "sample_count": 8,
+  "samples_with_nonzero_raw_face_count": 0,
+  "samples_with_nonzero_parsed_face_valid": 0,
+  "samples_with_runtime_face_and_eye_enabled": 8,
+  "samples_with_runtime_tracking_enabled": 0,
+  "initial_three_display_heads_equal": true,
+  "initial_display_face_ready_bytes": [
+    0,
+    1
+  ],
+  "initial_renderer_submitted_count_raw": 0,
+  "initial_renderer_identity_matches": true,
+  "face_menu_storage_guard_raw": 1,
+  "menu_selector_before_byte": 0,
+  "menu_selector_after_byte": 0,
+  "stored_face_mode_bank0_raw": 2,
+  "stored_face_mode_bank1_raw": 2,
+  "applied_face_menu_enum": null,
+  "aat_backend_model_publication_all_zero": true,
+  "geometry_eligible": false,
+  "independent_optical_reference": null,
+  "visible_box_confirmed": null,
+  "performance_claim": null,
+  "direct_camera_ram_writes": 0,
+  "native_handler_internal_writes_audited": false,
+  "lens_commands": 0,
+  "hook_installations": 0,
+  "settings_unchanged_within_capture": true,
+  "capture_idle_at_both_observations": true,
+  "evidence_sha256": {
+    "subject-path-preflight.jsonl": "ffd7557a760165810ac5404758fb8443974962c4add21393a72d50db959bf641",
+    "subject-path-summary.json": "d0abffe66ee9dae155b10e7220c1192731f8b6cdefbd075590e1660cc309de9b",
+    "subject-watch-preflight.jsonl": "4993727417c8db603cc52745c004ecd1365e1a73cb90d8bd880496c7887fec15",
+    "subject-watch-summary.json": "7b88050e9b14f162e7b1b46df7784aa8edfc11666e65891d4bf735df313a3e1d",
+    "subject-watch-offline-tests.log": "32d0190ff6a66b7c390bc29609e2c97f317e53b72cd8c5b3ae46c95c5e6f76b1"
+  }
+}

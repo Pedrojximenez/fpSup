@@ -1,0 +1,32 @@
+{
+  "phase": "verified",
+  "candidate": "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/cards/20261011-virtual-header-inner/plain-capture-header-v17/fpSup/32RESCUS.BIN",
+  "files": {
+    "AutoRun.txt": {
+      "bytes": 4666,
+      "before_sha256": "2e77dfe3529006d2cb95ac01e206048efe495493434c05f1ed8fad4ecd22bf96",
+      "unchanged": true
+    },
+    "LOADER.BIN": {
+      "bytes": 29276,
+      "before_sha256": "7b78041d80ddf9a74f751c4d38366a5ae8fa4184ff5d41494f2f345d7d25d95b",
+      "unchanged": true
+    },
+    "32RESCUS.BIN": {
+      "bytes": 185536,
+      "before_sha256": "fd79f490655d4411f487eee5264e3a74108e268173f1406c0643ac57e2cefef3"
+    },
+    "50RESLAB.BIN": {
+      "bytes": 609720,
+      "before_sha256": "dad8226db751fe10c2cac1f2f21269cc746957c7aacc5b19bec83dd027da155f",
+      "unchanged": true
+    }
+  },
+  "camera_rebooted": false,
+  "reason": "Authorized M12 repair: CPU header on H2 capture240/native30, preserving geometry and native batch",
+  "cfg_kind": "validated_saved_record",
+  "preserved_cfg_sha256": "c3b20d1b85726bc932f376927c30b4cac851f83c04adf7226a78640739c5d334",
+  "installed_sha256": "3281a66e0bb968b1daddef8ec936d53d037f62275de530a448482da4e5609f05",
+  "card_updated": true,
+  "running_consumer_still_v16": true
+}

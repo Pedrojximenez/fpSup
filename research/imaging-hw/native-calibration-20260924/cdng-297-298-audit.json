@@ -1,0 +1,528 @@
+{
+  "purpose": "Verify actual OFF/Standard CinemaDNG profile selection",
+  "originals_modified": false,
+  "rom_sha256": "92a8ee993f6c3d66c251e88d45a2ccd5135c6cf7342717784321c2ed506e2fb4",
+  "scope": "FHD 12-bit files with Software SIGMA fp Ver.5.02.0.V91; not every camera mode or firmware",
+  "sequences": {
+    "A001_297": {
+      "directory": "/Users/dido/Movies/fpSup/color area/A001_297",
+      "frame_count": 98,
+      "first_frame": "/Users/dido/Movies/fpSup/color area/A001_297/A001_297_20260924_000001.DNG",
+      "last_frame": "/Users/dido/Movies/fpSup/color area/A001_297/A001_297_20260924_000098.DNG",
+      "first_frame_sha256": "99adbcb147bd1bb78185dcfd032e89f3743394615ad6899534e2f3803835ddd1",
+      "metadata_first_frame": {
+        "SourceFile": "/Users/dido/Movies/fpSup/color area/A001_297/A001_297_20260924_000001.DNG",
+        "IFD0:Software": "SIGMA fp Ver.5.02.0.V91",
+        "Sigma:PictureMode": "OFF",
+        "ExifIFD:ISO": 800,
+        "ExifIFD:ExposureTime": 0.01666666667,
+        "ExifIFD:FNumber": 2,
+        "ExifIFD:FocalLength": 40,
+        "ExifIFD:LensModel": "LUMIX S 40/F2                                               ",
+        "IFD0:AsShotNeutral": "0.5130260521 1 0.583143508",
+        "Sigma:CameraCalibration": "1.04334366321564 0 0 0 1 0 0 0 1.0193452835083",
+        "Sigma:SerialNumber": 91411817,
+        "ExifIFD:SerialNumber": 91411817,
+        "IFD0:FrameRate": 29.97002997,
+        "IFD0:BaselineExposure": 3,
+        "IFD0:BlackLevel": "255.9921875 255.9921875 255.9921875 255.9921875",
+        "IFD0:WhiteLevel": 4095,
+        "IFD0:BitsPerSample": 12,
+        "IFD0:ImageWidth": 1936,
+        "IFD0:ImageHeight": 1090,
+        "IFD0:DefaultCropSize": "1920 1080",
+        "ExifIFD:DateTimeOriginal": "2026:09:24 04:14:25"
+      },
+      "body_calibration_float32": [
+        [
+          1.0433436632156372,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0193452835083008
+        ]
+      ],
+      "matrix_checks": {
+        "ColorMatrix1": {
+          "stored": [
+            [
+              1.4902,
+              -0.7069,
+              -0.2292
+            ],
+            [
+              -1.1733,
+              2.271,
+              0.0503
+            ],
+            [
+              0.0856,
+              -0.314,
+              1.6274
+            ]
+          ],
+          "OFF_writer_payload_exact": true,
+          "normal_writer_payload_exact": false,
+          "A_payload_exact": true,
+          "C_payload_exact": false
+        },
+        "ColorMatrix2": {
+          "stored": [
+            [
+              1.5288,
+              -0.7252,
+              -0.2352
+            ],
+            [
+              -0.9692,
+              1.876,
+              0.0415
+            ],
+            [
+              0.0354,
+              -0.1298,
+              0.673
+            ]
+          ],
+          "OFF_writer_payload_exact": true,
+          "normal_writer_payload_exact": false,
+          "A_payload_exact": true,
+          "C_payload_exact": false
+        }
+      },
+      "tag_variants_all_frames": {
+        "ColorMatrix1": {
+          "7e262e6f7fdb1f7015e80f88fc3ec519fcde187d5f1d61eb67ed0de06d458a4b": 98
+        },
+        "ColorMatrix2": {
+          "1674568234266a6dcbe9eaec4428f20cbbc64397cbc60b61ca827aa31e29841f": 98
+        },
+        "AsShotNeutral": {
+          "c1dcd1ab3e75a24b681b7b2151aeb399fba55e70e0c31b48d1cb30fe721a00a7": 98
+        },
+        "CalibrationIlluminant1": {
+          "d94e7f1e9bb1f8a9b90996ba12c461b84956f0e7f230145cc594c2f80b067aa0": 98
+        },
+        "CalibrationIlluminant2": {
+          "78b4be1f9eeef9da65c393e4385f67edd142709b400ca7d900bd952e0c3cf727": 98
+        },
+        "ProfileHueSatMapDims": {
+          "93705d60293f8ced0d3c479ddb805d2fc5383900b5c064445e15df3e459d4f0a": 98
+        },
+        "ProfileHueSatMapData1": {
+          "efeeec5a1e3e4b6d0aea3410e89997ba1c5d37c4a909563a9b9c541e4e8dc299": 98
+        },
+        "ProfileHueSatMapData2": {
+          "efeeec5a1e3e4b6d0aea3410e89997ba1c5d37c4a909563a9b9c541e4e8dc299": 98
+        },
+        "ProfileToneCurve": {
+          "65fb4f2998a95b4a1c184e8f582f394ab7fb903a5a7d173c89d6c21168508d2a": 98
+        },
+        "BlackLevel": {
+          "0e65cb97d289612d8a00c302412260f70c5d6539bd78bd49cc9905fe3a829bed": 6,
+          "111014774496bc098fb9b1116de78416c709eea96e8f47cece11eff92f47e5ff": 1,
+          "e6116f542a8b5cb7cda4ee05a4356249403dff1b5733ba8137d734f5937d1476": 5,
+          "09906ce9cb1015bb8c6c9c9d724efe6fbc611ea7f3cbfd3c6f302d9e1e88107f": 5,
+          "431c7605fb15e1ad4fce68fcd15efa3ba9e2554a2de01201e3cc728ea9a0e0db": 1,
+          "b8879764c70cad38ab8a19fb6d0c2be30f714da51a2e8f184e091fa3b6184250": 2,
+          "17f3d17c90b436f917ca86ccce2f34c6d304fee3d8042f9c77c9897c73317606": 3,
+          "28589b9c203a230dcfc5eca0c17dee686f9195739857d22e179b8e2bfaf323dd": 3,
+          "57195ded6f53bd8989d9846b33714664014ebced3d4a52f52f184f8b774c54d7": 1,
+          "fdf504eff49a1b058d99eb5a3232ed9144dcaf543f5d4d359fc03fd8ad4354e1": 3,
+          "e8d4754b2546e975f1d4449582ef87b29c29ef862481bc28aecb56ad0f3d6b1f": 6,
+          "80f530b8e09b0313848c9693eda815225dbe9f5551414330d2c7783a8fa71010": 2,
+          "46e56ea41ff51f1ff0c583caff31c9e541d50398d8bd1f1a2c31bc8ef84f67b0": 1,
+          "6886a320f1095716b58be61b71de0bf2b23ae12364ffa1590eb6724099dc448c": 1,
+          "1f036cce84c04f382037ca0a6568e6e8ec6d5c20914b4474f56b26fa67a6e461": 2,
+          "19434f47019ff85cce189c18b05805660848ffbaeeab000dcda989f9ad71c5fd": 2,
+          "aafea97dea9c122bc1ccd8a5262d003c22d22d4dce4f65750e1e07db6b9287c0": 1,
+          "8bacad3e0d98939159ac0009b64d70a7b5012a0c048fb363c9e5abe7da11c601": 3,
+          "8dd0a9f7ba2ef7a749dc23cb5903007a8c831d035dd773c9263d0a2a609b154e": 4,
+          "d7a4ba7ad8afd39559bfca715c91a2c74b52c10b66b458a947ea8efaec405a51": 2,
+          "3befedf829df98c789b937ecebb654e43538bc88b6de4683ceee4a4a8e760cb6": 2,
+          "3ebe5475c32a43fa5c17f3c9dff21ec630d91c5659df9b7510dbca92e6366ec4": 2,
+          "10ef208d5581c68e31e6a608060612e2e6404f99637c56a1f3f6c15515530182": 5,
+          "9fc1ba191997883dd2c18204daa78526546465ee535b2c4595320eb041021cf3": 2,
+          "66cbbfed5ae611667df6af9fe8375cd760c8b30609a66cce32bdc92e991b49d0": 2,
+          "c92210900b090c3af84c4f37723954dce962daf83629981d62cd4c1997db4d3a": 1,
+          "9dcdf8c456a1829d6d9413cee0b03c7188751572ba571a737058903cd2e25f14": 2,
+          "ba90f43632775c765475b9c643a3f160bd67d6f42b805ef9cb6528e439d31a6a": 1,
+          "89bc8c6c296da5c70aa2506fb894559030749d354c5f631b27acd68d50717028": 4,
+          "755f3531a72f990c9d45aee85dbcdc123412f0b7f42435d15a6c74fbbc71546a": 1,
+          "95658ab7b35c950afeef2c773cf8c820a93366ead507dae47fffc2ceccbc895f": 2,
+          "8392eb08de41c11ac16f132deb9d7b43222dce4fbd863547204f3c6de5473223": 1,
+          "2b6ab4216fa4ad6d8d7d332d7cd722a812c45d098b44bd6865fc6c40de7c304d": 1,
+          "b844609d3d2162ff49b25c5a16ea6c1c7fa1562dc5e2aab680a22dc2bc2576a6": 1,
+          "7915764344a45b53a5ed16d68df542e7a9cc14e09b70e7f1c5a88b3ca02df761": 1,
+          "9ca331f250de58ea4ab83b11d844a7d771d33e97903acb49090524e7f979777d": 1,
+          "956260c82d0be268f42c57864d3196cc93fea8c74ace2ece562ed71781686b05": 3,
+          "1868b3cffa2f3d1b9050d489eebe2ea19ae378c648843f937313934bc5ceb289": 1,
+          "5b0488284905cab48b94cc4aed79608086048ac73a931bbede1b3d887ae278b0": 3,
+          "0dca8d242186d9a1e844034e8eb552888551a73b2ce9bfb13e853ad37da1a07b": 1,
+          "ccffeb46ac26486db2055a4d10c7447bb48b295884c080be566b9555217741ed": 2,
+          "9ae01a5916aec112a97b3956b97563f64b101b085b9467275dab1ea09704ed78": 1,
+          "de87de6c5a6df3ec4ecc0cb4600959c46fd7552c340974a5e203eda22d2cae9c": 2,
+          "fcf188138f7a4c99e0d97e7ab76d2960151c5a1190d3ef7eb38aee34653b13ba": 1,
+          "2a5fffab7d0112296bf90770af431a917c12cdda0ffa4ad6fc1800a2c5fe33b2": 1
+        },
+        "WhiteLevel": {
+          "d8e73950377ccd9739830d542821f6083bf88b04b80b58d93e84cfa924a78c13": 98
+        },
+        "OpcodeList3": {
+          "cc6c6176fa9869d080aa231db4096db3bf10e76029bd640dcc1132dbc2a39bdb": 98
+        },
+        "BaselineExposure": {
+          "96dcedeef90c2252addb9273844388f3d6648804ead4f5c0cef284f40be27601": 98
+        }
+      },
+      "profile_first_frame": {
+        "ProfileHueSatMapData1": {
+          "entries": 72,
+          "nonidentity_entries": 0,
+          "min_HSV": [
+            0.0,
+            1.0,
+            1.0
+          ],
+          "max_HSV": [
+            0.0,
+            1.0,
+            1.0
+          ]
+        },
+        "ProfileHueSatMapData2": {
+          "entries": 72,
+          "nonidentity_entries": 0,
+          "min_HSV": [
+            0.0,
+            1.0,
+            1.0
+          ],
+          "max_HSV": [
+            0.0,
+            1.0,
+            1.0
+          ]
+        },
+        "ProfileToneCurve": {
+          "points": 128,
+          "identity": true,
+          "sample_near_input_0_3": [
+            0.302978515625,
+            0.302978515625
+          ]
+        }
+      }
+    },
+    "A001_298": {
+      "directory": "/Users/dido/Movies/fpSup/color area/A001_298",
+      "frame_count": 122,
+      "first_frame": "/Users/dido/Movies/fpSup/color area/A001_298/A001_298_20260924_000001.DNG",
+      "last_frame": "/Users/dido/Movies/fpSup/color area/A001_298/A001_298_20260924_000122.DNG",
+      "first_frame_sha256": "464aa3b00ef8b46d17127d21e36c2f652b4c406493d30f1e48b40a1df38ab471",
+      "metadata_first_frame": {
+        "SourceFile": "/Users/dido/Movies/fpSup/color area/A001_298/A001_298_20260924_000001.DNG",
+        "IFD0:Software": "SIGMA fp Ver.5.02.0.V91",
+        "Sigma:PictureMode": "Standard",
+        "ExifIFD:ISO": 800,
+        "ExifIFD:ExposureTime": 0.01666666667,
+        "ExifIFD:FNumber": 2,
+        "ExifIFD:FocalLength": 40,
+        "ExifIFD:LensModel": "LUMIX S 40/F2                                               ",
+        "IFD0:AsShotNeutral": "0.5130260521 1 0.583143508",
+        "Sigma:CameraCalibration": "1.04334366321564 0 0 0 1 0 0 0 1.0193452835083",
+        "Sigma:SerialNumber": 91411817,
+        "ExifIFD:SerialNumber": 91411817,
+        "IFD0:FrameRate": 29.97002997,
+        "IFD0:BaselineExposure": 3,
+        "IFD0:BlackLevel": "256.0253906 256.0253906 256.0253906 256.0253906",
+        "IFD0:WhiteLevel": 4095,
+        "IFD0:BitsPerSample": 12,
+        "IFD0:ImageWidth": 1936,
+        "IFD0:ImageHeight": 1090,
+        "IFD0:DefaultCropSize": "1920 1080",
+        "ExifIFD:DateTimeOriginal": "2026:09:24 04:16:16"
+      },
+      "body_calibration_float32": [
+        [
+          1.0433436632156372,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0193452835083008
+        ]
+      ],
+      "matrix_checks": {
+        "ColorMatrix1": {
+          "stored": [
+            [
+              1.4643,
+              -0.7511,
+              -0.5102
+            ],
+            [
+              -0.333,
+              1.1711,
+              -0.0604
+            ],
+            [
+              -0.0748,
+              0.1634,
+              0.5867
+            ]
+          ],
+          "OFF_writer_payload_exact": false,
+          "normal_writer_payload_exact": true,
+          "A_payload_exact": false,
+          "C_payload_exact": true
+        },
+        "ColorMatrix2": {
+          "stored": [
+            [
+              0.8252,
+              -0.2044,
+              -0.1744
+            ],
+            [
+              -0.4961,
+              1.1648,
+              0.0631
+            ],
+            [
+              -0.1137,
+              0.1581,
+              0.3549
+            ]
+          ],
+          "OFF_writer_payload_exact": false,
+          "normal_writer_payload_exact": true,
+          "A_payload_exact": false,
+          "C_payload_exact": true
+        }
+      },
+      "tag_variants_all_frames": {
+        "ColorMatrix1": {
+          "ef6d1b7dcff8dd88cf37ba9bf2c129b2e5281435245ddda466ec739b426af42a": 122
+        },
+        "ColorMatrix2": {
+          "fe32315360949e04f374f7a27402d6377e913f3b9404d7f0d24eae0c2ce1d71e": 122
+        },
+        "AsShotNeutral": {
+          "c1dcd1ab3e75a24b681b7b2151aeb399fba55e70e0c31b48d1cb30fe721a00a7": 122
+        },
+        "CalibrationIlluminant1": {
+          "d94e7f1e9bb1f8a9b90996ba12c461b84956f0e7f230145cc594c2f80b067aa0": 122
+        },
+        "CalibrationIlluminant2": {
+          "78b4be1f9eeef9da65c393e4385f67edd142709b400ca7d900bd952e0c3cf727": 122
+        },
+        "ProfileHueSatMapDims": {
+          "93705d60293f8ced0d3c479ddb805d2fc5383900b5c064445e15df3e459d4f0a": 122
+        },
+        "ProfileHueSatMapData1": {
+          "b80c37c6342a161482340a45db6570ac7645a3e22ef7cc7b63d3771602316360": 122
+        },
+        "ProfileHueSatMapData2": {
+          "0e7e5eed6b003fdcf77da3a9e8a439bc23bc664706c0880e40c1ad2f7f7560bd": 122
+        },
+        "ProfileToneCurve": {
+          "b3afd859fde1a6688628c2c6ed3ce0d6a3086ddfc44fdacb672bddd9bb5a4425": 122
+        },
+        "BlackLevel": {
+          "29082e14475c2a47d228b329e515f45896ff6ec2bf59ccc15687cf0c6cf677b2": 3,
+          "b01b725db43d97cb384295c83fa2110c188468fcfa900f1eb5571b67c0c4fece": 4,
+          "1508e08ca69b038de4859e83f406d3f5a5b49fd48de6ce2c591aa89977c563fc": 4,
+          "3befedf829df98c789b937ecebb654e43538bc88b6de4683ceee4a4a8e760cb6": 4,
+          "ccffeb46ac26486db2055a4d10c7447bb48b295884c080be566b9555217741ed": 3,
+          "ee61431ff3a4152f1f93d8b36a324510b24db173d80ba15b735018e186dcd116": 2,
+          "28589b9c203a230dcfc5eca0c17dee686f9195739857d22e179b8e2bfaf323dd": 6,
+          "e6116f542a8b5cb7cda4ee05a4356249403dff1b5733ba8137d734f5937d1476": 4,
+          "89bc8c6c296da5c70aa2506fb894559030749d354c5f631b27acd68d50717028": 5,
+          "92b80277eca46e82a5ada10468a17dc252392812ab8046dfd5bbb49636378911": 2,
+          "5b0488284905cab48b94cc4aed79608086048ac73a931bbede1b3d887ae278b0": 1,
+          "0e65cb97d289612d8a00c302412260f70c5d6539bd78bd49cc9905fe3a829bed": 7,
+          "431c7605fb15e1ad4fce68fcd15efa3ba9e2554a2de01201e3cc728ea9a0e0db": 3,
+          "3ebe5475c32a43fa5c17f3c9dff21ec630d91c5659df9b7510dbca92e6366ec4": 3,
+          "09906ce9cb1015bb8c6c9c9d724efe6fbc611ea7f3cbfd3c6f302d9e1e88107f": 3,
+          "c32ef932a0933105c9b6466d437e7bcd855c04802c1cf442375c9ac8a2349c6a": 1,
+          "8a1b37bf070c7b487b70146e4b44fc38bb1f96b04a301997c273bb63d1e74bfe": 6,
+          "9fc1ba191997883dd2c18204daa78526546465ee535b2c4595320eb041021cf3": 2,
+          "8bacad3e0d98939159ac0009b64d70a7b5012a0c048fb363c9e5abe7da11c601": 4,
+          "956260c82d0be268f42c57864d3196cc93fea8c74ace2ece562ed71781686b05": 5,
+          "adc14e4dc93c2bf2a822992967f4bb0bbd06cf70c63679df7c898a97d431b792": 1,
+          "1f036cce84c04f382037ca0a6568e6e8ec6d5c20914b4474f56b26fa67a6e461": 4,
+          "57195ded6f53bd8989d9846b33714664014ebced3d4a52f52f184f8b774c54d7": 2,
+          "19260f402b125851b32d0c78fd8f5a37b4fae37f78bea1c767e35510cb1460d4": 2,
+          "1d97da47ca300948e36e380f848657db8f5654c94d3495592e5c51bfa2a4e855": 2,
+          "0dca8d242186d9a1e844034e8eb552888551a73b2ce9bfb13e853ad37da1a07b": 2,
+          "d7a4ba7ad8afd39559bfca715c91a2c74b52c10b66b458a947ea8efaec405a51": 4,
+          "572e06f99a3799f8ddac0c8a441a1c57c1cee5a33842a0bf4ae7f96cfe764657": 2,
+          "8392eb08de41c11ac16f132deb9d7b43222dce4fbd863547204f3c6de5473223": 1,
+          "9ae01a5916aec112a97b3956b97563f64b101b085b9467275dab1ea09704ed78": 2,
+          "311f0bba744e25d4a0a3e8740006824e301ce4361ae217091cfab1915ea0f973": 1,
+          "95658ab7b35c950afeef2c773cf8c820a93366ead507dae47fffc2ceccbc895f": 1,
+          "b8173933387bb57dfd5921bda20f110b33ab1e6daf9f55801dd12a576a64a320": 1,
+          "9d8bb5f8b9ab5eeb0daf9ac717eaedfe2ac6b1d9cac17f18da364982aded9022": 3,
+          "80b241968b695bcc8087dc4a4185aff623c84c08a631e071beafef3bdff831e8": 1,
+          "17f3d17c90b436f917ca86ccce2f34c6d304fee3d8042f9c77c9897c73317606": 3,
+          "46e56ea41ff51f1ff0c583caff31c9e541d50398d8bd1f1a2c31bc8ef84f67b0": 3,
+          "755f3531a72f990c9d45aee85dbcdc123412f0b7f42435d15a6c74fbbc71546a": 2,
+          "7126258e873e270a7c16fa8dd9c28418ec4b9fa02b3907cb855ed0a180d43b6b": 1,
+          "e8d4754b2546e975f1d4449582ef87b29c29ef862481bc28aecb56ad0f3d6b1f": 1,
+          "80f530b8e09b0313848c9693eda815225dbe9f5551414330d2c7783a8fa71010": 3,
+          "2a5fffab7d0112296bf90770af431a917c12cdda0ffa4ad6fc1800a2c5fe33b2": 1,
+          "9dcdf8c456a1829d6d9413cee0b03c7188751572ba571a737058903cd2e25f14": 2,
+          "b8879764c70cad38ab8a19fb6d0c2be30f714da51a2e8f184e091fa3b6184250": 1,
+          "9ca331f250de58ea4ab83b11d844a7d771d33e97903acb49090524e7f979777d": 2,
+          "d83bd67fbc670add9dfea4ce15052ece5c7b0f109e6b1accd490ec3e539882de": 1,
+          "b844609d3d2162ff49b25c5a16ea6c1c7fa1562dc5e2aab680a22dc2bc2576a6": 1
+        },
+        "WhiteLevel": {
+          "d8e73950377ccd9739830d542821f6083bf88b04b80b58d93e84cfa924a78c13": 122
+        },
+        "OpcodeList3": {
+          "0e32b23e7a10215615b6a00a83fd3b942aa985b55287726e24e4a6f520633f3c": 110,
+          "82bf9f7fe31878a719ca595193041dd3d64508510d544cfe8cad8f5a2fa3cac7": 4,
+          "105665cfccf8024a06bb2d1435cdd74a99e4ebff4738af31200e5226bd1a1f0f": 1,
+          "f61fda72c91a499dc39421699e272f99425a2164078e6221198b91b9f50beb7b": 1,
+          "d254e896cd9568d37840d412f72cfc815fa4ed8c70e906d2a4e6b6a503499d27": 1,
+          "b3a258ead0d88035a97cb6217b659a58a1014d17068674266f696b85cd619563": 1,
+          "8a08a98521dc300f0510a889d6239cd0aba6a1337cda8d39946ab2d94ba1dd03": 1,
+          "72f3d64535fa584f97ed3d3c6541be8c816a43230ae77b7fa40a7a5976172331": 1,
+          "96ce10abf34aa1bfc397f6bee0b7fb965e5778470a3b822a6e235cf0ffe45d0b": 1,
+          "577e07369d254e1ea209ee83c2c029349b0d57704f69e861c3e1a475526be734": 1
+        },
+        "BaselineExposure": {
+          "96dcedeef90c2252addb9273844388f3d6648804ead4f5c0cef284f40be27601": 122
+        }
+      },
+      "profile_first_frame": {
+        "ProfileHueSatMapData1": {
+          "entries": 72,
+          "nonidentity_entries": 71,
+          "min_HSV": [
+            -20.0,
+            0.9244444370269775,
+            0.9861111044883728
+          ],
+          "max_HSV": [
+            10.0,
+            1.2999999523162842,
+            1.2999999523162842
+          ]
+        },
+        "ProfileHueSatMapData2": {
+          "entries": 72,
+          "nonidentity_entries": 71,
+          "min_HSV": [
+            -20.0,
+            0.8870000243186951,
+            1.0
+          ],
+          "max_HSV": [
+            4.0,
+            1.2999999523162842,
+            1.3324999809265137
+          ]
+        },
+        "ProfileToneCurve": {
+          "points": 128,
+          "identity": false,
+          "sample_near_input_0_3": [
+            0.302978515625,
+            0.52117919921875
+          ]
+        }
+      }
+    }
+  },
+  "not_tested": [
+    "Resolve rendering of these new sequences",
+    "absolute color accuracy",
+    "full RAW pixel processing invariance"
+  ],
+  "first_frame_root_ifd_tag_differences": [
+    {
+      "tag": 306,
+      "name": null,
+      "in_off": true,
+      "in_standard": true
+    },
+    {
+      "tag": 50714,
+      "name": "BlackLevel",
+      "in_off": true,
+      "in_standard": true
+    },
+    {
+      "tag": 50721,
+      "name": "ColorMatrix1",
+      "in_off": true,
+      "in_standard": true
+    },
+    {
+      "tag": 50722,
+      "name": "ColorMatrix2",
+      "in_off": true,
+      "in_standard": true
+    },
+    {
+      "tag": 50740,
+      "name": null,
+      "in_off": true,
+      "in_standard": true
+    },
+    {
+      "tag": 50781,
+      "name": null,
+      "in_off": true,
+      "in_standard": true
+    },
+    {
+      "tag": 50938,
+      "name": "ProfileHueSatMapData1",
+      "in_off": true,
+      "in_standard": true
+    },
+    {
+      "tag": 50939,
+      "name": "ProfileHueSatMapData2",
+      "in_off": true,
+      "in_standard": true
+    },
+    {
+      "tag": 50940,
+      "name": "ProfileToneCurve",
+      "in_off": true,
+      "in_standard": true
+    },
+    {
+      "tag": 51022,
+      "name": "OpcodeList3",
+      "in_off": true,
+      "in_standard": true
+    },
+    {
+      "tag": 51043,
+      "name": null,
+      "in_off": true,
+      "in_standard": true
+    }
+  ]
+}

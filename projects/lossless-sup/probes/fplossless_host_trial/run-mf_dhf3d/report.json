@@ -1,0 +1,75 @@
+{
+  "scope": "host TIFF/RAW-format verification only; no camera, playback or hardware timing claim",
+  "run_directory": "/Users/dido/Developer.localized/SIGMAfp_re/codex/fplossless_host_trial/run-mf_dhf3d",
+  "builder": "/Users/dido/Developer.localized/SIGMAfp_re/research/slimRAW/mkcompressed.py",
+  "builder_source_hashes_before": {
+    "/Users/dido/Developer.localized/SIGMAfp_re/research/slimRAW/mkcompressed.py": "c2af838ffa860402372996f052a6ca902fe6eef49e5aca4064094ad3d51445e1",
+    "/Users/dido/Developer.localized/SIGMAfp_re/research/slimRAW/tiff.py": "1c242f755dd8308aaf853e3a6690c60206f8f201e599dc231a1ab2490badbc16",
+    "/Users/dido/Developer.localized/SIGMAfp_re/research/slimRAW/tilegeom.py": "e6fbc7f90e27f6ad80ce4c14e60a516f3c5a5279673831d7fbce115c2eb5b5f3",
+    "/Users/dido/Developer.localized/SIGMAfp_re/research/slimRAW/ljenc.py": "3bb4e158ec6eaf25eb753f2ae86ca1c22485f683084edb4e028fd3ed90ca4c05",
+    "/Users/dido/Developer.localized/SIGMAfp_re/research/slimRAW/ljcost.py": "7c9d986bd5cde62cf14244c016ee493bf96249979a0833a2958608586deb473c"
+  },
+  "builder_sources_unchanged": true,
+  "tile": [
+    512,
+    368
+  ],
+  "predictor": 1,
+  "file_align": 512,
+  "files": [
+    {
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/codex/evidence/opengate_ev_bug_20260914/dng/A001_083_FHD_f07.DNG",
+      "source_bytes": 3244544,
+      "source_sha256_before": "1f7aa8bb512d73de109eeb2683c2d616352ca281ac234df239a899ea7eda3c2f",
+      "output": null,
+      "output_bytes": null,
+      "ratio_source_over_output": null,
+      "output_sha256": null,
+      "status": "REJECTED",
+      "reason": "StripByteCounts does not match tightly packed RAW12",
+      "source_sha256_after": "1f7aa8bb512d73de109eeb2683c2d616352ca281ac234df239a899ea7eda3c2f",
+      "source_unchanged": true
+    },
+    {
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/captures/fpGFTest_pre_stage4_20260817_2207/CINEMA/A001_001/A001_001_20260817_000001.DNG",
+      "source_bytes": 3244544,
+      "source_sha256_before": "be24301255b9a2f33e96f99d8a70370bd99233db6b5052a8317d04b60fe70314",
+      "output": null,
+      "output_bytes": null,
+      "ratio_source_over_output": null,
+      "output_sha256": null,
+      "status": "REJECTED",
+      "reason": "StripByteCounts does not match tightly packed RAW12",
+      "source_sha256_after": "be24301255b9a2f33e96f99d8a70370bd99233db6b5052a8317d04b60fe70314",
+      "source_unchanged": true
+    },
+    {
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/captures/fpGFTest_pre_stage4_20260817_2207/CINEMA/A001_002/A001_002_20260817_000001.DNG",
+      "source_bytes": 3244544,
+      "source_sha256_before": "f2c50bc0b728c7ee2ac7c40ca4f54cc4c0351288dec0a92b74861a3bcfba49af",
+      "output": null,
+      "output_bytes": null,
+      "ratio_source_over_output": null,
+      "output_sha256": null,
+      "status": "REJECTED",
+      "reason": "StripByteCounts does not match tightly packed RAW12",
+      "source_sha256_after": "f2c50bc0b728c7ee2ac7c40ca4f54cc4c0351288dec0a92b74861a3bcfba49af",
+      "source_unchanged": true
+    },
+    {
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/captures/fpGFTest_stage4_20260817_2226/CINEMA/A001_001/A001_001_20260817_000249.DNG",
+      "source_bytes": 3244544,
+      "source_sha256_before": "8b838d0a27b5a8a11a39ff903933793930706b7a6b46f7a4ef8e08a400e2c324",
+      "output": null,
+      "output_bytes": null,
+      "ratio_source_over_output": null,
+      "output_sha256": null,
+      "status": "REJECTED",
+      "reason": "StripByteCounts does not match tightly packed RAW12",
+      "source_sha256_after": "8b838d0a27b5a8a11a39ff903933793930706b7a6b46f7a4ef8e08a400e2c324",
+      "source_unchanged": true
+    }
+  ],
+  "pass_count": 0,
+  "all_passed": false
+}

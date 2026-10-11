@@ -1,0 +1,14 @@
+ERROR
+
+======================================================================
+ERROR: setUpClass (test_rescustom_files_page.FilePage)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_rescustom_files_page.py", line 18, in setUpClass
+    if at is None:at=cls.pool.append(name)
+AttributeError: 'Pool' object has no attribute 'append'
+
+----------------------------------------------------------------------
+Ran 0 tests in 0.155s
+
+FAILED (errors=1)

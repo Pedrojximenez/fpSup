@@ -1,0 +1,1712 @@
+{
+  "schema": "fp.af-notes-relocation/v1",
+  "date": "2026-09-27",
+  "canonical_project": "projects/fp-af-assist",
+  "scope": "Active AF-specific narrative notes; programs, raw evidence and immutable archives stay in place.",
+  "moved_count": 57,
+  "moves": [
+    {
+      "from": "research/autofocus/notes/AF_AE_INTERNALS.md",
+      "to": "projects/fp-af-assist/notes/research/AF_AE_INTERNALS.md",
+      "original_sha256": "d28d40487ecd1ab858653c5d184899f66cd25b378025220de1ef5506fd843313",
+      "relocated_sha256": "03a275d3116fbabc39023068f91d442fc94bd11ad33225aa23a848ec94953192",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/autofocus/notes/AF_COMPLETE.md",
+      "to": "projects/fp-af-assist/notes/research/AF_COMPLETE.md",
+      "original_sha256": "d545161c2402a9b7475094d7b8fdaffb4edda047a2043880f61c8650279e6e3a",
+      "relocated_sha256": "bc5eb0ba2c4b3a13697d2dda9f4f7be6e8eafb6f8d44b6337397f2a88385bf9d",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/autofocus/notes/AF_DESIGN_REFERENCE.md",
+      "to": "projects/fp-af-assist/notes/research/AF_DESIGN_REFERENCE.md",
+      "original_sha256": "bac43ed20623c59de1dae6c7bf923160f644a7d0fc74812e9100412f47712c23",
+      "relocated_sha256": "bac43ed20623c59de1dae6c7bf923160f644a7d0fc74812e9100412f47712c23",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/autofocus/notes/AF_FUSION_TOOL_USAGE.md",
+      "to": "projects/fp-af-assist/notes/research/AF_FUSION_TOOL_USAGE.md",
+      "original_sha256": "44ac34cd9f22b328224112f23418b94441489ae75041f4c849505611e0bc0948",
+      "relocated_sha256": "c547d0133a992850ca37a687dac6f1ef0d37a842ccb0d574e5dd7e1057be2a35",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/autofocus/notes/AF_LIVE_STATE_MAP.md",
+      "to": "projects/fp-af-assist/notes/research/AF_LIVE_STATE_MAP.md",
+      "original_sha256": "5a9632595378ab3d782211dc861315cdea09b865a98fd8796735b2cf7adefb88",
+      "relocated_sha256": "5a9632595378ab3d782211dc861315cdea09b865a98fd8796735b2cf7adefb88",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/autofocus/notes/AUTOFOCUS.md",
+      "to": "projects/fp-af-assist/notes/research/AUTOFOCUS.md",
+      "original_sha256": "f44dd085c8b011d1f8e02519ba4f9b354eef5675354f9a66a93e135e29d39a4a",
+      "relocated_sha256": "f44dd085c8b011d1f8e02519ba4f9b354eef5675354f9a66a93e135e29d39a4a",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/autofocus/notes/CROSSCAM_PDAF_FEASIBILITY_2026-09-27.md",
+      "to": "projects/fp-af-assist/notes/research/CROSSCAM_PDAF_FEASIBILITY_2026-09-27.md",
+      "original_sha256": "efcdf443478eee746df3348fe1b0b2e508141b5769a23b133c2cd1187c4d39bb",
+      "relocated_sha256": "a12860688c3f164f13d1091efa157beaecf9faf7355e6502f030e1c19ffe9083",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/autofocus/notes/DFD_VIA_AF_STATS.md",
+      "to": "projects/fp-af-assist/notes/research/DFD_VIA_AF_STATS.md",
+      "original_sha256": "45fd1ae11101b050e0356977f78f04e053d36daab50de3020da9428c6c93aac6",
+      "relocated_sha256": "45fd1ae11101b050e0356977f78f04e053d36daab50de3020da9428c6c93aac6",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/autofocus/notes/FACE_EYE_AF.md",
+      "to": "projects/fp-af-assist/notes/research/FACE_EYE_AF.md",
+      "original_sha256": "b9e7a3936aff2e51707a680ca178203a8168a1b9bc6cdc4c1dd675cd82c51c65",
+      "relocated_sha256": "11226ed9ec0f5cd028d412d848374c26b4ce275c20787b0d37a9860ff72dd17b",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/autofocus/notes/FOCUS_DISTANCE_PRINCIPLE.md",
+      "to": "projects/fp-af-assist/notes/research/FOCUS_DISTANCE_PRINCIPLE.md",
+      "original_sha256": "f6ca31dfc8637ffde445cfcf9ea1efc649688cee018135ae1fc38f64edac47d5",
+      "relocated_sha256": "f6ca31dfc8637ffde445cfcf9ea1efc649688cee018135ae1fc38f64edac47d5",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/autofocus/notes/FOCUS_POSITION_DOMAIN.md",
+      "to": "projects/fp-af-assist/notes/research/FOCUS_POSITION_DOMAIN.md",
+      "original_sha256": "e0741e16eb634445aec25ac19a44a9ff430eb0e3d8402c8e6c013bbb5c705d56",
+      "relocated_sha256": "e0741e16eb634445aec25ac19a44a9ff430eb0e3d8402c8e6c013bbb5c705d56",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/autofocus/notes/FP_AAT_ACTIVATION_2026-09-27.md",
+      "to": "projects/fp-af-assist/notes/research/FP_AAT_ACTIVATION_2026-09-27.md",
+      "original_sha256": "0d151b328ec871b319cc5905be2afeb9bd1326dda61e7a3b94d91f9dc2b64fda",
+      "relocated_sha256": "602ca80bc2c6670deed04a126dded0a23ba4b287095b31f1bd17376856897267",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/autofocus/notes/FP_AF_CAPTURE_GUARD_CORRECTION_2026-09-16.md",
+      "to": "projects/fp-af-assist/notes/research/FP_AF_CAPTURE_GUARD_CORRECTION_2026-09-16.md",
+      "original_sha256": "9c077af106048147ee70162f601c078d8d747088eaae942474caa8865948edce",
+      "relocated_sha256": "9c077af106048147ee70162f601c078d8d747088eaae942474caa8865948edce",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/autofocus/notes/FP_AF_COLLECTOR_WORKER_POOL_GUARD_2026-09-27.md",
+      "to": "projects/fp-af-assist/notes/research/FP_AF_COLLECTOR_WORKER_POOL_GUARD_2026-09-27.md",
+      "original_sha256": "20619c1bef69786bdf2d4249c15b642f9851640eb58ba27c00a2a2c37309d397",
+      "relocated_sha256": "20619c1bef69786bdf2d4249c15b642f9851640eb58ba27c00a2a2c37309d397",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/autofocus/notes/FP_AF_DIRECTION_DIAGNOSTICS_2026-09-16.md",
+      "to": "projects/fp-af-assist/notes/research/FP_AF_DIRECTION_DIAGNOSTICS_2026-09-16.md",
+      "original_sha256": "b8da86fb828c96199904c45bfb70273c26def50d03721477184791760adb7bbb",
+      "relocated_sha256": "005f11d2339f2d7360dc60e2fff94dd73cc3cb955f1805b038566fd2df4407bb",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/autofocus/notes/FP_AF_FIRMWARE_INTERVENTION_MAP_2026-09-27.md",
+      "to": "projects/fp-af-assist/notes/research/FP_AF_FIRMWARE_INTERVENTION_MAP_2026-09-27.md",
+      "original_sha256": "dcdfe95b518052c7349645001c0a7456d8a882b6aace2bdcde6746333caccb8c",
+      "relocated_sha256": "72e25867e73ceebdbfbf6853ffd039f2ce9350709e87d5a40c9294bffb349ac4",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/autofocus/notes/FP_AF_PUBLICATION_HOOK_CANDIDATES_2026-09-16.md",
+      "to": "projects/fp-af-assist/notes/research/FP_AF_PUBLICATION_HOOK_CANDIDATES_2026-09-16.md",
+      "original_sha256": "6068b541fd3e89898f042e016d02466af50527299b58dcdc7e2ff080041f0e15",
+      "relocated_sha256": "76100ce140e654751d8cee20beec2f80228ddb7318fc7ec9f39e67e8119191f1",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/autofocus/notes/FP_AF_REPEATABILITY_2026-09-16.md",
+      "to": "projects/fp-af-assist/notes/research/FP_AF_REPEATABILITY_2026-09-16.md",
+      "original_sha256": "f2f19756c9d3b6419c6b93dd43c28ed233bbf1f57bbe06c8cab94ad7861971ca",
+      "relocated_sha256": "dd07ed60c03cb18187d5a3d715d7cad4a6142279ea545ed94aca1ed6ffd88ead",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/autofocus/notes/FP_AF_STATS_FRESHNESS_2026-09-16.md",
+      "to": "projects/fp-af-assist/notes/research/FP_AF_STATS_FRESHNESS_2026-09-16.md",
+      "original_sha256": "abaa5f0342ab2e82e63421489f553b50e0be28fbc0b90d6ebd49b5af806ec55a",
+      "relocated_sha256": "abaa5f0342ab2e82e63421489f553b50e0be28fbc0b90d6ebd49b5af806ec55a",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/autofocus/notes/FP_AUTOFOCUS_GEOMETRY_DFD_PLAN_2026-09-16.md",
+      "to": "projects/fp-af-assist/notes/research/FP_AUTOFOCUS_GEOMETRY_DFD_PLAN_2026-09-16.md",
+      "original_sha256": "3999d0889b94e9555cc36b29a3a0a7c124ecd7640878f9152ea30ca161c85af4",
+      "relocated_sha256": "3999d0889b94e9555cc36b29a3a0a7c124ecd7640878f9152ea30ca161c85af4",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/autofocus/notes/FP_CINE_AAT_ACTIVATION_2026-09-27.md",
+      "to": "projects/fp-af-assist/notes/research/FP_CINE_AAT_ACTIVATION_2026-09-27.md",
+      "original_sha256": "ea2fd4fb1fa43f407d47a2b8c698f2e1bcec906fb881ce113a60636e18eea4d5",
+      "relocated_sha256": "ea2fd4fb1fa43f407d47a2b8c698f2e1bcec906fb881ce113a60636e18eea4d5",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/autofocus/notes/FP_CINE_GEOMETRY_INPUTS_2026-09-27.md",
+      "to": "projects/fp-af-assist/notes/research/FP_CINE_GEOMETRY_INPUTS_2026-09-27.md",
+      "original_sha256": "486b145f7f72d88f06e132ad7859c7c67caae8c7266ddb407c5e49a1ba138e77",
+      "relocated_sha256": "4af5734b824fd92538e95a2dc5ca7354f93afc5ad9e7cf58a305b5381c1f231d",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/autofocus/notes/FP_FACE_DISPLAY_SOURCE_2026-09-27.md",
+      "to": "projects/fp-af-assist/notes/research/FP_FACE_DISPLAY_SOURCE_2026-09-27.md",
+      "original_sha256": "fc018a1a04a890e720ab633c34c45ff8b0852e151079617e029a7d5e17647ed5",
+      "relocated_sha256": "fc018a1a04a890e720ab633c34c45ff8b0852e151079617e029a7d5e17647ed5",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/autofocus/notes/FP_FACE_ENABLE_STATE_2026-09-27.md",
+      "to": "projects/fp-af-assist/notes/research/FP_FACE_ENABLE_STATE_2026-09-27.md",
+      "original_sha256": "18e8c2a00760d53293f633084167ac31ea34c2c5d16a98830efa80ca8646bbbf",
+      "relocated_sha256": "18e8c2a00760d53293f633084167ac31ea34c2c5d16a98830efa80ca8646bbbf",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/autofocus/notes/FP_FOCUS_DRIVE_GATE_AUDIT_2026-09-16.md",
+      "to": "projects/fp-af-assist/notes/research/FP_FOCUS_DRIVE_GATE_AUDIT_2026-09-16.md",
+      "original_sha256": "86dabdf252ae6e282d991fd8f345294691f328764ba7ce719daf0dd090c9acbd",
+      "relocated_sha256": "570adea9e521cb421fdef58cba60e089247b0959bb3b3198c45e9e0d8148fed6",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/autofocus/notes/FP_GEOMETRY_DFD_FUSION_2026-09-27.md",
+      "to": "projects/fp-af-assist/notes/research/FP_GEOMETRY_DFD_FUSION_2026-09-27.md",
+      "original_sha256": "4f666a6dd5546cba28b82c4d15a167ef21112a48b6561cabd256db00fc299f87",
+      "relocated_sha256": "4f666a6dd5546cba28b82c4d15a167ef21112a48b6561cabd256db00fc299f87",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/autofocus/notes/FP_NATIVE_FOCUS_CONTROL_2026-09-16.md",
+      "to": "projects/fp-af-assist/notes/research/FP_NATIVE_FOCUS_CONTROL_2026-09-16.md",
+      "original_sha256": "4d939ad40f078f200c3084ddda991d5299a397121bdfb229c52d61680b7d350e",
+      "relocated_sha256": "619f6a45bb47ed79b95c8dffd4ee25a2dba117c064eae47085ce52ddf0d20f3d",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/autofocus/notes/FP_NATIVE_TASK_STACK_DIAGNOSTIC_2026-09-27.md",
+      "to": "projects/fp-af-assist/notes/research/FP_NATIVE_TASK_STACK_DIAGNOSTIC_2026-09-27.md",
+      "original_sha256": "53cb8db24012798fbce39b6cd42d6031523c858cac7f5589275e110239aa605f",
+      "relocated_sha256": "8f654e5f7dd9eab8dcd13da60314318f61bd35cda3659581e982ecd6202c22c1",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/autofocus/notes/FP_ORIGINAL_AF_TRIAL_2026-09-16.md",
+      "to": "projects/fp-af-assist/notes/research/FP_ORIGINAL_AF_TRIAL_2026-09-16.md",
+      "original_sha256": "976c042c04f5e5d9bc6f1e8cd9682655556747664665dd42a1c0fee17c7d75a8",
+      "relocated_sha256": "251dbe942f93383ee68d2c4a2a6619c882d695464c9b9216474dc794334be265",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/autofocus/notes/FP_TRACKING_SETTINGS_LEASE_2026-09-27.md",
+      "to": "projects/fp-af-assist/notes/research/FP_TRACKING_SETTINGS_LEASE_2026-09-27.md",
+      "original_sha256": "032823c60448a409588af883231f4a3a96876dea41c65520a2d1d64261d40bc4",
+      "relocated_sha256": "032823c60448a409588af883231f4a3a96876dea41c65520a2d1d64261d40bc4",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/autofocus/notes/NON_PDAF_CAMERA_REFERENCE_2026-09-27.md",
+      "to": "projects/fp-af-assist/notes/research/NON_PDAF_CAMERA_REFERENCE_2026-09-27.md",
+      "original_sha256": "06a6ff5654096e07adb32747f5a11b79da282568c88ce7dbc76d3c3917e8ca31",
+      "relocated_sha256": "40cd474c38c82e73a46e6c7b2a7b18c061d1dbdc654663c35a756a184622ac00",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/autofocus/notes/PDAF_RAW_PATTERN_ANALYSIS_2026-08-17.md",
+      "to": "projects/fp-af-assist/notes/research/PDAF_RAW_PATTERN_ANALYSIS_2026-08-17.md",
+      "original_sha256": "27934777ad62bb035c8b5bedf77c8b216bbbe1c1d2dd64bfbb6dc4bf2ecb1cfc",
+      "relocated_sha256": "27934777ad62bb035c8b5bedf77c8b216bbbe1c1d2dd64bfbb6dc4bf2ecb1cfc",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/autofocus/notes/PTP_FOCUS.md",
+      "to": "projects/fp-af-assist/notes/research/PTP_FOCUS.md",
+      "original_sha256": "b0c0a4d592ed51002ed0a1e73b2a99a0419cd614ca047576a9b9524d04e29554",
+      "relocated_sha256": "b0c0a4d592ed51002ed0a1e73b2a99a0419cd614ca047576a9b9524d04e29554",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/autofocus/notes/PTP_FOCUS_RECORDING.md",
+      "to": "projects/fp-af-assist/notes/research/PTP_FOCUS_RECORDING.md",
+      "original_sha256": "7647d0f166db993bb47ed716fa7a304ff70d915f46ea9bc75c6a3137d46f88ab",
+      "relocated_sha256": "7647d0f166db993bb47ed716fa7a304ff70d915f46ea9bc75c6a3137d46f88ab",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/autofocus/notes/SIGMA_FP_PDAF_INVESTIGATION_REPORT_2026-08-18.md",
+      "to": "projects/fp-af-assist/notes/research/SIGMA_FP_PDAF_INVESTIGATION_REPORT_2026-08-18.md",
+      "original_sha256": "6427191a93bf447db4b515cbb00420d5a78ee4c7114a3b7342210bd73f01d85c",
+      "relocated_sha256": "6427191a93bf447db4b515cbb00420d5a78ee4c7114a3b7342210bd73f01d85c",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/autofocus/notes/ZCAM_AF_REFERENCE_2026-09-27.md",
+      "to": "projects/fp-af-assist/notes/research/ZCAM_AF_REFERENCE_2026-09-27.md",
+      "original_sha256": "4031b949f6d3f0ebdb34d3436be1d65edfe961836ad6a1aed728c4849d17ba8c",
+      "relocated_sha256": "8fe6d2dbf83f9bf7cbe1559876bbc9920d0d93aa4be401df9e43b1d5f84be563",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "fpSup/focus/geometry/NATIVE_CONFIRMATION_AUDIT.md",
+      "to": "projects/fp-af-assist/notes/geometry/NATIVE_CONFIRMATION_AUDIT.md",
+      "original_sha256": "a5d5f2dfaf1009a43eb337db8dded325cc3a365485d1add7817517d4ba8103a7",
+      "relocated_sha256": "f9d9168b4263ce9b57c8eddec82610b1b8ccd88d5554d4b46d8c10d188fcb646",
+      "old_path": "relative-symlink-for-historical-line-citations"
+    },
+    {
+      "from": "fpSup/focus/geometry/NATIVE_HOOK_PLAN.md",
+      "to": "projects/fp-af-assist/notes/geometry/NATIVE_HOOK_PLAN.md",
+      "original_sha256": "d14af1b13b3731337a02b720dd25d4ef17500efe59676f5aca8db7a6e5b5569c",
+      "relocated_sha256": "f6e6bf8e82fe14dbccb73af793e09c8df298508ab2f2f83802cdfd044672bc96",
+      "old_path": "relative-symlink-for-historical-line-citations"
+    },
+    {
+      "from": "fpSup/focus/geometry/NATIVE_INPUT_AUDIT.md",
+      "to": "projects/fp-af-assist/notes/geometry/NATIVE_INPUT_AUDIT.md",
+      "original_sha256": "59826dc582affa0d0566160d9a04a97db161bd87f123f2c79bc13c123fd5f01c",
+      "relocated_sha256": "bf95eecc1eacf32076ddf9fb7a96e461802feb8c9def1af1199cc7b9c404a661",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "fpSup/focus/geometry/OFFLINE_INTEGRATION.md",
+      "to": "projects/fp-af-assist/notes/geometry/OFFLINE_INTEGRATION.md",
+      "original_sha256": "779fe55dff41748b5d7773565970c0ff5b2873539ff7f615a689e8fb8b0cc4aa",
+      "relocated_sha256": "c197e766a52e6e6e9080071daee4fa4b5efaf5d0af837aeef32755052d89069b",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "fpSup/focus/geometry/README.md",
+      "to": "projects/fp-af-assist/notes/geometry/README.md",
+      "original_sha256": "ccaf6b79962c2cecf680aa30c69ef2b3f4d533e2f56d3c8b4a0b3ef398319e33",
+      "relocated_sha256": "956ccb19c73a6e613756e5283286aafc93f1f421f2a024b8b06b1ab53dbced95",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "fpSup/focus/geometry/VALIDATION.md",
+      "to": "projects/fp-af-assist/notes/geometry/VALIDATION.md",
+      "original_sha256": "a04ff30e6a224060424da7a96b02daac1cdbed5098310309e9574d587fe21870",
+      "relocated_sha256": "a835bcfb911158b1e23f565e57bf702c8fde8fcd93da5fe526a41c38b9b405f3",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "fpSup/focus/dfd/HOOKPUSH.md",
+      "to": "projects/fp-af-assist/notes/dfd/HOOKPUSH.md",
+      "original_sha256": "bba71b97543e028b3ce0c351fc22b9f539b178277eb5d78551a871b9afda2939",
+      "relocated_sha256": "adb1f91efecb48b72e6c0411b82406503238cb8a4df42bd0cc764adf110c84d2",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "fpSup/focus/dfd/README.md",
+      "to": "projects/fp-af-assist/notes/dfd/README.md",
+      "original_sha256": "5c39be5e36de0f63a1d404d8a3cbab90fbdf99b37180a3a6e646224708b891f4",
+      "relocated_sha256": "647a671628646c5faee63424d0f070ca4a9207b1938d23c825eda63c1bccbaa9",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "fpSup/focus/lens/LENS_QUERY.md",
+      "to": "projects/fp-af-assist/notes/lens/LENS_QUERY.md",
+      "original_sha256": "2c83dcddb03b45d593c8353cf187683e89781359ebf38b66dfe6ee1a99430794",
+      "relocated_sha256": "8853138ff231926a7961ad194c600b1ec46ba6a8a50bd95b1f46fba9c0e3a6d1",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "fpSup/focus/README.md",
+      "to": "projects/fp-af-assist/notes/firmware/FOCUS_OVERVIEW.md",
+      "original_sha256": "497a03044ed6bce6b0cec4347cc8d6bbcb2ec768a1ec4d270263710c921cbce5",
+      "relocated_sha256": "1ba59d64ee12a402055c5ae05a54c9a744b3bd52f085ad7e5ee50040214d2995",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "fpSup/projects/focus-sup.md",
+      "to": "projects/fp-af-assist/notes/firmware/FOCUS_SUP.md",
+      "original_sha256": "54de4ffebf5e71ec5ed5953581ccaaa387527b8da5b44d45c016497451424201",
+      "relocated_sha256": "3b7fbd11ac7b9d27ad04731ff47b27a794f78be73cbecd1ad9650667ac70dd17",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/autofocus/analysis/native_subject_20260927/README.md",
+      "to": "projects/fp-af-assist/notes/evidence/analysis-native_subject_20260927.md",
+      "original_sha256": "ec0a03cd1a8d117f102e1b688e3095fa60d83ea1ac343505af4b388b7d2c61a2",
+      "relocated_sha256": "d1c099f702fd88e91bd374f04125fe9441e1a7395a3d73e41b109d529ae70715",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/autofocus/analysis/zcam_af_20260927/README.md",
+      "to": "projects/fp-af-assist/notes/evidence/analysis-zcam_af_20260927.md",
+      "original_sha256": "aac99209f5c61958d2a0d534e6d35b182c3f0499f65eec958a7362a22cfdba6c",
+      "relocated_sha256": "258530b8ca30b456019c35fff52b779e95c9e7fa91b66b10f726aa165917340b",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/autofocus/captures/af-fusion/2026-09-16-iso100-v5/README.md",
+      "to": "projects/fp-af-assist/notes/evidence/capture-af-fusion-2026-09-16-iso100-v5.md",
+      "original_sha256": "62c265ed111ab0c8a3abc1bf34bf1a5ff4483b4f10b8b0bb7ed7505101ca9f45",
+      "relocated_sha256": "2381a84a067351e8f096e70b26b63088b84a4839aba9eaa6377071c87f1f622c",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/autofocus/captures/native-preflight/20260927-121028/README.md",
+      "to": "projects/fp-af-assist/notes/evidence/capture-native-preflight-20260927-121028.md",
+      "original_sha256": "4f5d8b1fc8fec7cb2b6698d81477876b59d12bd76ee26edf3f250a695831cd5d",
+      "relocated_sha256": "1837e4ebb68d65b7ecd3cc03ab346d2bfaab89405ad966fc8ebb82fcd1b15619",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/autofocus/captures/native-preflight/20260927-124113/README.md",
+      "to": "projects/fp-af-assist/notes/evidence/capture-native-preflight-20260927-124113.md",
+      "original_sha256": "7f4f42aee590f68cf52edea26464783c55c8f95e44957fb455912f5272a80676",
+      "relocated_sha256": "d3b766c10c2d7a8e674b8e87073d64dac4d93cee471ffc0a1a127e38e263f05f",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/autofocus/fp-af-explainer/README.md",
+      "to": "projects/fp-af-assist/notes/legacy/FP_AF_EXPLAINER.md",
+      "original_sha256": "9e2cbfc2449afe5850b7873171125a8b5f9fb801eb2d4803846c81d512aae774",
+      "relocated_sha256": "6f6fffe07a4c1b2d20954517ce23197453458eb293c68dbb55bdd92e483ea83e",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/lens/notes/SOP_LENS_EXTRACT.md",
+      "to": "projects/fp-af-assist/notes/lens/SOP_LENS_EXTRACT.md",
+      "original_sha256": "b6d94276cf77701530eba43b20d5c7ffdc1f5cb61c2df8b28a9bd67afadcdac9",
+      "relocated_sha256": "b205b50cb36f80466b58033d77ca312abfd3c521ef1af6f3b96ac4a28c82fbd0",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/lens/notes/LENS_DATA_ACCESS.md",
+      "to": "projects/fp-af-assist/notes/lens/LENS_DATA_ACCESS.md",
+      "original_sha256": "dab10b990c08eb33b4eaf4925f95f0e1112c50b7e88a8ce76ff7d200ed8eeb55",
+      "relocated_sha256": "4e657661a7e4f74618f53e02ffdce7342f6585fad026de15b59ff02c2a1292b0",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/lens/notes/AUTORUN_LENSDUMP.md",
+      "to": "projects/fp-af-assist/notes/lens/AUTORUN_LENSDUMP.md",
+      "original_sha256": "e7fe5e48ec209dda4277ff5692082ad5950f746d2e42016d7d00664d70b631b5",
+      "relocated_sha256": "c5e3043d4beb86eb125d578bf8419acc7d927c5925fed44ee9a6bf8c2da61f10",
+      "old_path": "redirect-only"
+    },
+    {
+      "from": "research/lens/notes/LENS_BLOCK_API.md",
+      "to": "projects/fp-af-assist/notes/lens/LENS_BLOCK_API.md",
+      "original_sha256": "079f7f0e8cc106d6f9bab80c9fa7576975388232c850a963e97d70c239de3542",
+      "relocated_sha256": "a499d5b656fd847aef8e39867db61363f849a085e2f4912119a86f398f4a449e",
+      "old_path": "redirect-only"
+    }
+  ],
+  "reference_updates": [
+    {
+      "path": "projects/fp-af-assist/notes/research/AF_AE_INTERNALS.md",
+      "replacements": [
+        {
+          "old": "`DAT_c3291958`",
+          "new": "../../../../research/autofocus/notes/`DAT_c3291958`"
+        }
+      ]
+    },
+    {
+      "path": "projects/fp-af-assist/notes/research/AF_COMPLETE.md",
+      "replacements": [
+        {
+          "old": "mm,遞減,首值=∞",
+          "new": "../../../../research/autofocus/notes/mm,遞減,首值=∞"
+        },
+        {
+          "old": "遞增",
+          "new": "../../../../research/autofocus/notes/遞增"
+        }
+      ]
+    },
+    {
+      "path": "projects/fp-af-assist/notes/research/AF_FUSION_TOOL_USAGE.md",
+      "replacements": [
+        {
+          "old": "../captures/native-preflight/20260927-124113/README.md",
+          "new": "../evidence/capture-native-preflight-20260927-124113.md"
+        },
+        {
+          "old": "../../../fpSup/focus/geometry/NATIVE_INPUT_AUDIT.md",
+          "new": "../geometry/NATIVE_INPUT_AUDIT.md"
+        },
+        {
+          "old": "../af_subject_observation.py",
+          "new": "../../../../research/autofocus/af_subject_observation.py"
+        },
+        {
+          "old": "../../../fpSup/focus/geometry/NATIVE_CONFIRMATION_AUDIT.md",
+          "new": "../geometry/NATIVE_CONFIRMATION_AUDIT.md"
+        }
+      ]
+    },
+    {
+      "path": "projects/fp-af-assist/notes/research/CROSSCAM_PDAF_FEASIBILITY_2026-09-27.md",
+      "replacements": [
+        {
+          "old": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/notes/SIGMA_FP_PDAF_INVESTIGATION_REPORT_2026-08-18.md:171",
+          "new": "/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/research/SIGMA_FP_PDAF_INVESTIGATION_REPORT_2026-08-18.md:171"
+        }
+      ]
+    },
+    {
+      "path": "projects/fp-af-assist/notes/research/FACE_EYE_AF.md",
+      "replacements": [
+        {
+          "old": "../../../fpSup/focus/geometry/NATIVE_INPUT_AUDIT.md",
+          "new": "../geometry/NATIVE_INPUT_AUDIT.md"
+        },
+        {
+          "old": "退化近零",
+          "new": "../../../../research/autofocus/notes/退化近零"
+        }
+      ]
+    },
+    {
+      "path": "projects/fp-af-assist/notes/research/FP_AAT_ACTIVATION_2026-09-27.md",
+      "replacements": [
+        {
+          "old": "../captures/native-preflight/20260927-124113/README.md",
+          "new": "../evidence/capture-native-preflight-20260927-124113.md"
+        }
+      ]
+    },
+    {
+      "path": "projects/fp-af-assist/notes/research/FP_AF_DIRECTION_DIAGNOSTICS_2026-09-16.md",
+      "replacements": [
+        {
+          "old": "../af_fusion_direction_replay.py",
+          "new": "../../../../research/autofocus/af_fusion_direction_replay.py"
+        },
+        {
+          "old": "../captures/af-fusion/2026-09-16-direction-study/direction-analysis.json",
+          "new": "../../../../research/autofocus/captures/af-fusion/2026-09-16-direction-study/direction-analysis.json"
+        },
+        {
+          "old": "../captures/af-fusion/2026-09-16-direction-study/lens-readout.json",
+          "new": "../../../../research/autofocus/captures/af-fusion/2026-09-16-direction-study/lens-readout.json"
+        },
+        {
+          "old": "../test_af_fusion_direction_replay.py",
+          "new": "../../../../research/autofocus/test_af_fusion_direction_replay.py"
+        },
+        {
+          "old": "../test_af_fusion_lens_readout.py",
+          "new": "../../../../research/autofocus/test_af_fusion_lens_readout.py"
+        }
+      ]
+    },
+    {
+      "path": "projects/fp-af-assist/notes/research/FP_AF_FIRMWARE_INTERVENTION_MAP_2026-09-27.md",
+      "replacements": [
+        {
+          "old": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/notes/AF_AE_INTERNALS.md:182",
+          "new": "/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/research/AF_AE_INTERNALS.md:182"
+        },
+        {
+          "old": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/notes/FP_AF_PUBLICATION_HOOK_CANDIDATES_2026-09-16.md:142",
+          "new": "/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/research/FP_AF_PUBLICATION_HOOK_CANDIDATES_2026-09-16.md:142"
+        },
+        {
+          "old": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/notes/FP_AF_PUBLICATION_HOOK_CANDIDATES_2026-09-16.md",
+          "new": "/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/research/FP_AF_PUBLICATION_HOOK_CANDIDATES_2026-09-16.md"
+        }
+      ]
+    },
+    {
+      "path": "projects/fp-af-assist/notes/research/FP_AF_PUBLICATION_HOOK_CANDIDATES_2026-09-16.md",
+      "replacements": [
+        {
+          "old": "../../../out/decomp/full/blk_c02.c",
+          "new": "../../../../out/decomp/full/blk_c02.c"
+        },
+        {
+          "old": "../../../out/decomp/full/blk_c02.c",
+          "new": "../../../../out/decomp/full/blk_c02.c"
+        },
+        {
+          "old": "../../../out/decomp/full/blk_c02.c",
+          "new": "../../../../out/decomp/full/blk_c02.c"
+        },
+        {
+          "old": "../../../out/decomp/full/blk_c02.c",
+          "new": "../../../../out/decomp/full/blk_c02.c"
+        },
+        {
+          "old": "../../../out/decomp/full/blk_c03.c",
+          "new": "../../../../out/decomp/full/blk_c03.c"
+        },
+        {
+          "old": "../../../out/decomp/full/blk_c01.c",
+          "new": "../../../../out/decomp/full/blk_c01.c"
+        },
+        {
+          "old": "../../../out/decomp/full/blk_c02.c",
+          "new": "../../../../out/decomp/full/blk_c02.c"
+        },
+        {
+          "old": "../../../out/decomp/full/blk_c03.c",
+          "new": "../../../../out/decomp/full/blk_c03.c"
+        },
+        {
+          "old": "../../../out/decomp/full/blk_c00.c",
+          "new": "../../../../out/decomp/full/blk_c00.c"
+        },
+        {
+          "old": "../../../out/decomp/full/blk_c02.c",
+          "new": "../../../../out/decomp/full/blk_c02.c"
+        }
+      ]
+    },
+    {
+      "path": "projects/fp-af-assist/notes/research/FP_AF_REPEATABILITY_2026-09-16.md",
+      "replacements": [
+        {
+          "old": "../af_fusion_history_analyze.py",
+          "new": "../../../../research/autofocus/af_fusion_history_analyze.py"
+        },
+        {
+          "old": "../test_af_fusion_history_analyze.py",
+          "new": "../../../../research/autofocus/test_af_fusion_history_analyze.py"
+        },
+        {
+          "old": "../captures/af-fusion/2026-09-16-repeat-a/manifest.json",
+          "new": "../../../../research/autofocus/captures/af-fusion/2026-09-16-repeat-a/manifest.json"
+        },
+        {
+          "old": "../captures/af-fusion/2026-09-16-repeat-a/native-history.json",
+          "new": "../../../../research/autofocus/captures/af-fusion/2026-09-16-repeat-a/native-history.json"
+        },
+        {
+          "old": "../captures/af-fusion/2026-09-16-repeat-a/native-history-recheck.json",
+          "new": "../../../../research/autofocus/captures/af-fusion/2026-09-16-repeat-a/native-history-recheck.json"
+        },
+        {
+          "old": "../captures/af-fusion/2026-09-16-repeat-b/manifest.json",
+          "new": "../../../../research/autofocus/captures/af-fusion/2026-09-16-repeat-b/manifest.json"
+        },
+        {
+          "old": "../captures/af-fusion/2026-09-16-repeat-b/native-history.json",
+          "new": "../../../../research/autofocus/captures/af-fusion/2026-09-16-repeat-b/native-history.json"
+        },
+        {
+          "old": "../captures/af-fusion/2026-09-16-repeat-c/manifest.json",
+          "new": "../../../../research/autofocus/captures/af-fusion/2026-09-16-repeat-c/manifest.json"
+        },
+        {
+          "old": "../captures/af-fusion/2026-09-16-repeat-c/native-history.json",
+          "new": "../../../../research/autofocus/captures/af-fusion/2026-09-16-repeat-c/native-history.json"
+        }
+      ]
+    },
+    {
+      "path": "projects/fp-af-assist/notes/research/FP_CINE_GEOMETRY_INPUTS_2026-09-27.md",
+      "replacements": [
+        {
+          "old": "../af_subject_observation.py",
+          "new": "../../../../research/autofocus/af_subject_observation.py"
+        },
+        {
+          "old": "../../../fpSup/focus/geometry/observer_decode.py",
+          "new": "../../../../fpSup/focus/geometry/observer_decode.py"
+        },
+        {
+          "old": "../../../fpSup/focus/geometry/geometry.h",
+          "new": "../../../../fpSup/focus/geometry/geometry.h"
+        },
+        {
+          "old": "../../../fpSup/focus/geometry/geometry.c",
+          "new": "../../../../fpSup/focus/geometry/geometry.c"
+        },
+        {
+          "old": "../../../fpSup/focus/geometry/geometry.c",
+          "new": "../../../../fpSup/focus/geometry/geometry.c"
+        },
+        {
+          "old": "../../../fpSup/focus/geometry/replay.py",
+          "new": "../../../../fpSup/focus/geometry/replay.py"
+        },
+        {
+          "old": "../../../fpSup/focus/geometry/confirm_join.h",
+          "new": "../../../../fpSup/focus/geometry/confirm_join.h"
+        },
+        {
+          "old": "../../../out/decomp/full/blk_c05.c",
+          "new": "../../../../out/decomp/full/blk_c05.c"
+        },
+        {
+          "old": "../af_subject_observation.py",
+          "new": "../../../../research/autofocus/af_subject_observation.py"
+        },
+        {
+          "old": "../../../out/decomp/full/blk_c05.c",
+          "new": "../../../../out/decomp/full/blk_c05.c"
+        },
+        {
+          "old": "../../../out/decomp/full/blk_c05.c",
+          "new": "../../../../out/decomp/full/blk_c05.c"
+        },
+        {
+          "old": "../../../fpSup/focus/geometry/geometry.c",
+          "new": "../../../../fpSup/focus/geometry/geometry.c"
+        },
+        {
+          "old": "../../../fpSup/focus/geometry/README.md",
+          "new": "../geometry/README.md"
+        },
+        {
+          "old": "../../../fpSup/focus/geometry/geometry.h",
+          "new": "../../../../fpSup/focus/geometry/geometry.h"
+        },
+        {
+          "old": "../../../fpSup/focus/geometry/geometry.c",
+          "new": "../../../../fpSup/focus/geometry/geometry.c"
+        },
+        {
+          "old": "../../../fpSup/focus/geometry/geometry.h",
+          "new": "../../../../fpSup/focus/geometry/geometry.h"
+        },
+        {
+          "old": "../../../fpSup/focus/geometry/test_geometry.py",
+          "new": "../../../../fpSup/focus/geometry/test_geometry.py"
+        },
+        {
+          "old": "../../../fpSup/focus/geometry/test_confirm_join.py",
+          "new": "../../../../fpSup/focus/geometry/test_confirm_join.py"
+        },
+        {
+          "old": "../test_af_subject_observation.py",
+          "new": "../../../../research/autofocus/test_af_subject_observation.py"
+        }
+      ]
+    },
+    {
+      "path": "projects/fp-af-assist/notes/research/FP_FOCUS_DRIVE_GATE_AUDIT_2026-09-16.md",
+      "replacements": [
+        {
+          "old": "../../../projects/fp-af-assist/README.md",
+          "new": "../../README.md"
+        },
+        {
+          "old": "../af_fusion_lens_readout.py",
+          "new": "../../../../research/autofocus/af_fusion_lens_readout.py"
+        },
+        {
+          "old": "../captures/af-fusion/2026-09-16-direction-study/lens-readout.json",
+          "new": "../../../../research/autofocus/captures/af-fusion/2026-09-16-direction-study/lens-readout.json"
+        }
+      ]
+    },
+    {
+      "path": "projects/fp-af-assist/notes/research/FP_NATIVE_FOCUS_CONTROL_2026-09-16.md",
+      "replacements": [
+        {
+          "old": "../../../projects/fp-af-assist/notes/VALIDATION_2026-09-16.md",
+          "new": "../VALIDATION_2026-09-16.md"
+        }
+      ]
+    },
+    {
+      "path": "projects/fp-af-assist/notes/research/FP_NATIVE_TASK_STACK_DIAGNOSTIC_2026-09-27.md",
+      "replacements": [
+        {
+          "old": "../captures/native-preflight/20260927-121028/native-preflight.jsonl",
+          "new": "../../../../research/autofocus/captures/native-preflight/20260927-121028/native-preflight.jsonl"
+        },
+        {
+          "old": "../../../out/decomp/full/blk_c00.c#L795",
+          "new": "../../../../out/decomp/full/blk_c00.c#L795"
+        },
+        {
+          "old": "../../../out/decomp/full/blk_c00.c#L823",
+          "new": "../../../../out/decomp/full/blk_c00.c#L823"
+        },
+        {
+          "old": "../../../out/decomp/full/blk_c04.c#L11209",
+          "new": "../../../../out/decomp/full/blk_c04.c#L11209"
+        },
+        {
+          "old": "../captures/native-preflight/20260927-121028/native-stack-check.json",
+          "new": "../../../../research/autofocus/captures/native-preflight/20260927-121028/native-stack-check.json"
+        }
+      ]
+    },
+    {
+      "path": "projects/fp-af-assist/notes/research/FP_ORIGINAL_AF_TRIAL_2026-09-16.md",
+      "replacements": [
+        {
+          "old": "../captures/af-fusion/2026-09-16-s1-right-a/manifest.json",
+          "new": "../../../../research/autofocus/captures/af-fusion/2026-09-16-s1-right-a/manifest.json"
+        },
+        {
+          "old": "../captures/af-fusion/2026-09-16-dma-copy-100hz/manifest.json",
+          "new": "../../../../research/autofocus/captures/af-fusion/2026-09-16-dma-copy-100hz/manifest.json"
+        },
+        {
+          "old": "../captures/af-fusion/2026-09-16-s1-right-b/manifest.json",
+          "new": "../../../../research/autofocus/captures/af-fusion/2026-09-16-s1-right-b/manifest.json"
+        },
+        {
+          "old": "../captures/af-fusion/2026-09-16-s1-right-b/events.jsonl",
+          "new": "../../../../research/autofocus/captures/af-fusion/2026-09-16-s1-right-b/events.jsonl"
+        },
+        {
+          "old": "../captures/af-fusion/2026-09-16-s1-right-b/native-history.json",
+          "new": "../../../../research/autofocus/captures/af-fusion/2026-09-16-s1-right-b/native-history.json"
+        }
+      ]
+    },
+    {
+      "path": "projects/fp-af-assist/notes/research/NON_PDAF_CAMERA_REFERENCE_2026-09-27.md",
+      "replacements": [
+        {
+          "old": "../../../panasonic_imx410/notes/PANASONIC_IMX410.md",
+          "new": "../../../../panasonic_imx410/notes/PANASONIC_IMX410.md"
+        },
+        {
+          "old": "../../../panasonic_imx410/S5/sections.csv",
+          "new": "../../../../panasonic_imx410/S5/sections.csv"
+        },
+        {
+          "old": "../../../panasonic_imx410/S1H/sections.csv",
+          "new": "../../../../panasonic_imx410/S1H/sections.csv"
+        },
+        {
+          "old": "../../../other_imx410/notes/OTHER_IMX410.md",
+          "new": "../../../../other_imx410/notes/OTHER_IMX410.md"
+        },
+        {
+          "old": "../../../other_imx410/leica_sl2s/out/lfu_directory.json",
+          "new": "../../../../other_imx410/leica_sl2s/out/lfu_directory.json"
+        },
+        {
+          "old": "../../../bmcc6k/notes/BMCC6K_FIRMWARE.md",
+          "new": "../../../../bmcc6k/notes/BMCC6K_FIRMWARE.md"
+        },
+        {
+          "old": "../../../bmcc6k/analysis-20260924/bmcc6k-decompile-20260924/README.md",
+          "new": "../../../../bmcc6k/analysis-20260924/bmcc6k-decompile-20260924/README.md"
+        },
+        {
+          "old": "../../../bmcc6k/analysis-20260924/bmcc6k-decompile-20260924/payload_audit/extracted/payload/public_html/control/swagger/Camera/LensControl.yaml",
+          "new": "../../../../bmcc6k/analysis-20260924/bmcc6k-decompile-20260924/payload_audit/extracted/payload/public_html/control/swagger/Camera/LensControl.yaml"
+        },
+        {
+          "old": "../../../bmcc6k/analysis-20260924/bmcc6k-decompile-20260924/payload_audit/extracted/payload/apps/Autofocus.elf_encrypted",
+          "new": "../../../../bmcc6k/analysis-20260924/bmcc6k-decompile-20260924/payload_audit/extracted/payload/apps/Autofocus.elf_encrypted"
+        },
+        {
+          "old": "../../../bmcc6k/analysis-20260924/bmcc6k-decompile-20260924/host_audit/libCameraPlugin_symbols.txt",
+          "new": "../../../../bmcc6k/analysis-20260924/bmcc6k-decompile-20260924/host_audit/libCameraPlugin_symbols.txt"
+        }
+      ]
+    },
+    {
+      "path": "projects/fp-af-assist/notes/research/ZCAM_AF_REFERENCE_2026-09-27.md",
+      "replacements": [
+        {
+          "old": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/analysis/zcam_af_20260927/README.md",
+          "new": "/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/evidence/analysis-zcam_af_20260927.md"
+        }
+      ]
+    },
+    {
+      "path": "projects/fp-af-assist/notes/geometry/NATIVE_CONFIRMATION_AUDIT.md",
+      "replacements": [
+        {
+          "old": "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/focus/geometry/NATIVE_INPUT_AUDIT.md:5",
+          "new": "/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/geometry/NATIVE_INPUT_AUDIT.md:5"
+        },
+        {
+          "old": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/notes/FP_NATIVE_FOCUS_CONTROL_2026-09-16.md:77",
+          "new": "/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/research/FP_NATIVE_FOCUS_CONTROL_2026-09-16.md:77"
+        }
+      ]
+    },
+    {
+      "path": "projects/fp-af-assist/notes/geometry/NATIVE_HOOK_PLAN.md",
+      "replacements": [
+        {
+          "old": "native_hook_sites.json",
+          "new": "../../../../fpSup/focus/geometry/native_hook_sites.json"
+        },
+        {
+          "old": "native_observer.S",
+          "new": "../../../../fpSup/focus/geometry/native_observer.S"
+        },
+        {
+          "old": "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/focus/geometry/NATIVE_CONFIRMATION_AUDIT.md:111",
+          "new": "/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/geometry/NATIVE_CONFIRMATION_AUDIT.md:111"
+        }
+      ]
+    },
+    {
+      "path": "projects/fp-af-assist/notes/geometry/NATIVE_INPUT_AUDIT.md",
+      "replacements": [
+        {
+          "old": "../../../research/autofocus/notes/AF_FUSION_TOOL_USAGE.md#61-幾何用主體資料契約",
+          "new": "../research/AF_FUSION_TOOL_USAGE.md#61-幾何用主體資料契約"
+        },
+        {
+          "old": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/notes/FACE_EYE_AF.md:39",
+          "new": "/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/research/FACE_EYE_AF.md:39"
+        },
+        {
+          "old": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/notes/FP_AF_STATS_FRESHNESS_2026-09-16.md:181",
+          "new": "/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/research/FP_AF_STATS_FRESHNESS_2026-09-16.md:181"
+        },
+        {
+          "old": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/notes/FP_AF_REPEATABILITY_2026-09-16.md:33",
+          "new": "/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/research/FP_AF_REPEATABILITY_2026-09-16.md:33"
+        }
+      ]
+    },
+    {
+      "path": "projects/fp-af-assist/notes/geometry/OFFLINE_INTEGRATION.md",
+      "replacements": [
+        {
+          "old": "../../../research/autofocus/captures/native-preflight/20260927-121028/README.md",
+          "new": "../evidence/capture-native-preflight-20260927-121028.md"
+        },
+        {
+          "old": "native_hook_sites.json",
+          "new": "../../../../fpSup/focus/geometry/native_hook_sites.json"
+        },
+        {
+          "old": "../../SUP_BUILD_RULES.md",
+          "new": "../../../../fpSup/SUP_BUILD_RULES.md"
+        }
+      ]
+    },
+    {
+      "path": "projects/fp-af-assist/notes/geometry/README.md",
+      "replacements": [
+        {
+          "old": "../../../research/autofocus/captures/native-preflight/20260927-121028/README.md",
+          "new": "../evidence/capture-native-preflight-20260927-121028.md"
+        },
+        {
+          "old": "../../../research/autofocus/af_subject_observation.py",
+          "new": "../../../../research/autofocus/af_subject_observation.py"
+        },
+        {
+          "old": "geometry.h",
+          "new": "../../../../fpSup/focus/geometry/geometry.h"
+        },
+        {
+          "old": "../../../projects/fp-af-assist/notes/FP_AF_FIRMWARE_ROADMAP_2026-09-27.md",
+          "new": "../FP_AF_FIRMWARE_ROADMAP_2026-09-27.md"
+        }
+      ]
+    },
+    {
+      "path": "projects/fp-af-assist/notes/geometry/VALIDATION.md",
+      "replacements": [
+        {
+          "old": "validation/integration-summary.json",
+          "new": "../../../../fpSup/focus/geometry/validation/integration-summary.json"
+        },
+        {
+          "old": "validation/join-arm-manifest.json",
+          "new": "../../../../fpSup/focus/geometry/validation/join-arm-manifest.json"
+        },
+        {
+          "old": "validation/join-replay-summary.json",
+          "new": "../../../../fpSup/focus/geometry/validation/join-replay-summary.json"
+        },
+        {
+          "old": "validation/observer-build-manifest.json",
+          "new": "../../../../fpSup/focus/geometry/validation/observer-build-manifest.json"
+        },
+        {
+          "old": "validation/join-fuzz.json",
+          "new": "../../../../fpSup/focus/geometry/validation/join-fuzz.json"
+        },
+        {
+          "old": "validation/arm-manifest.json",
+          "new": "../../../../fpSup/focus/geometry/validation/arm-manifest.json"
+        },
+        {
+          "old": "validation/replay-summary.json",
+          "new": "../../../../fpSup/focus/geometry/validation/replay-summary.json"
+        },
+        {
+          "old": "fixtures/synthetic_motion.jsonl",
+          "new": "../../../../fpSup/focus/geometry/fixtures/synthetic_motion.jsonl"
+        }
+      ]
+    },
+    {
+      "path": "projects/fp-af-assist/notes/dfd/README.md",
+      "replacements": [
+        {
+          "old": "../../projects/focus-sup.md",
+          "new": "../firmware/FOCUS_SUP.md"
+        },
+        {
+          "old": "../../fp_usb_shell/",
+          "new": "../../../../fpSup/fp_usb_shell"
+        },
+        {
+          "old": "../../fp_usb_shell/camera/oneshot.S",
+          "new": "../../../../fpSup/fp_usb_shell/camera/oneshot.S"
+        },
+        {
+          "old": "../../fp_usb_shell/",
+          "new": "../../../../fpSup/fp_usb_shell"
+        },
+        {
+          "old": "../../fp_usb_shell/camera/oneshot.S",
+          "new": "../../../../fpSup/fp_usb_shell/camera/oneshot.S"
+        }
+      ]
+    },
+    {
+      "path": "projects/fp-af-assist/notes/firmware/FOCUS_OVERVIEW.md",
+      "replacements": [
+        {
+          "old": "../projects/focus-sup.md",
+          "new": "FOCUS_SUP.md"
+        },
+        {
+          "old": "../projects/focus-sup.md",
+          "new": "FOCUS_SUP.md"
+        },
+        {
+          "old": "geometry/README.md",
+          "new": "../geometry/README.md"
+        },
+        {
+          "old": "geometry/README.md",
+          "new": "../geometry/README.md"
+        },
+        {
+          "old": "dfd/",
+          "new": "../../../../fpSup/focus/dfd"
+        },
+        {
+          "old": "lens/",
+          "new": "../../../../fpSup/focus/lens"
+        }
+      ]
+    },
+    {
+      "path": "projects/fp-af-assist/notes/firmware/FOCUS_SUP.md",
+      "replacements": [
+        {
+          "old": "../focus/geometry/README.md",
+          "new": "../geometry/README.md"
+        },
+        {
+          "old": "../focus/geometry/README.md",
+          "new": "../geometry/README.md"
+        },
+        {
+          "old": "../focus/geometry/NATIVE_INPUT_AUDIT.md",
+          "new": "../geometry/NATIVE_INPUT_AUDIT.md"
+        },
+        {
+          "old": "../focus/lens/",
+          "new": "../../../../fpSup/focus/lens"
+        },
+        {
+          "old": "../focus/dfd/",
+          "new": "../../../../fpSup/focus/dfd"
+        },
+        {
+          "old": "../focus/lens/",
+          "new": "../../../../fpSup/focus/lens"
+        },
+        {
+          "old": "../focus/dfd/",
+          "new": "../../../../fpSup/focus/dfd"
+        }
+      ]
+    },
+    {
+      "path": "projects/fp-af-assist/notes/evidence/analysis-native_subject_20260927.md",
+      "replacements": [
+        {
+          "old": "../../af_fusion_collector.py",
+          "new": "../../../../research/autofocus/af_fusion_collector.py"
+        },
+        {
+          "old": "../../af_subject_observation.py",
+          "new": "../../../../research/autofocus/af_subject_observation.py"
+        },
+        {
+          "old": "legacy-redecode.json",
+          "new": "../../../../research/autofocus/analysis/native_subject_20260927/legacy-redecode.json"
+        },
+        {
+          "old": "../../../../fpSup/focus/geometry/NATIVE_CONFIRMATION_AUDIT.md",
+          "new": "../geometry/NATIVE_CONFIRMATION_AUDIT.md"
+        }
+      ]
+    },
+    {
+      "path": "projects/fp-af-assist/notes/evidence/analysis-zcam_af_20260927.md",
+      "replacements": [
+        {
+          "old": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/notes/ZCAM_AF_REFERENCE_2026-09-27.md",
+          "new": "/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/research/ZCAM_AF_REFERENCE_2026-09-27.md"
+        }
+      ]
+    },
+    {
+      "path": "projects/fp-af-assist/notes/evidence/capture-native-preflight-20260927-121028.md",
+      "replacements": [
+        {
+          "old": "../../../notes/FP_NATIVE_TASK_STACK_DIAGNOSTIC_2026-09-27.md",
+          "new": "../research/FP_NATIVE_TASK_STACK_DIAGNOSTIC_2026-09-27.md"
+        },
+        {
+          "old": "../../../notes/FP_AF_COLLECTOR_WORKER_POOL_GUARD_2026-09-27.md",
+          "new": "../research/FP_AF_COLLECTOR_WORKER_POOL_GUARD_2026-09-27.md"
+        }
+      ]
+    },
+    {
+      "path": "projects/fp-af-assist/notes/evidence/capture-native-preflight-20260927-124113.md",
+      "replacements": [
+        {
+          "old": "../../../notes/FP_FACE_ENABLE_STATE_2026-09-27.md",
+          "new": "../research/FP_FACE_ENABLE_STATE_2026-09-27.md"
+        },
+        {
+          "old": "../../../notes/FP_FACE_DISPLAY_SOURCE_2026-09-27.md",
+          "new": "../research/FP_FACE_DISPLAY_SOURCE_2026-09-27.md"
+        }
+      ]
+    },
+    {
+      "path": "SIGMA_FP_PRODUCT_ROADMAP.md",
+      "replacements": [
+        {
+          "old": "research/autofocus/notes/FP_AUTOFOCUS_GEOMETRY_DFD_PLAN_2026-09-16.md",
+          "new": "projects/fp-af-assist/notes/research/FP_AUTOFOCUS_GEOMETRY_DFD_PLAN_2026-09-16.md",
+          "count": 1
+        },
+        {
+          "old": "research/autofocus/notes/FP_AF_DIRECTION_DIAGNOSTICS_2026-09-16.md",
+          "new": "projects/fp-af-assist/notes/research/FP_AF_DIRECTION_DIAGNOSTICS_2026-09-16.md",
+          "count": 1
+        },
+        {
+          "old": "research/autofocus/notes/FP_NATIVE_FOCUS_CONTROL_2026-09-16.md",
+          "new": "projects/fp-af-assist/notes/research/FP_NATIVE_FOCUS_CONTROL_2026-09-16.md",
+          "count": 1
+        },
+        {
+          "old": "research/autofocus/notes/FP_AF_REPEATABILITY_2026-09-16.md",
+          "new": "projects/fp-af-assist/notes/research/FP_AF_REPEATABILITY_2026-09-16.md",
+          "count": 1
+        },
+        {
+          "old": "research/autofocus/notes/AF_AE_INTERNALS.md",
+          "new": "projects/fp-af-assist/notes/research/AF_AE_INTERNALS.md",
+          "count": 1
+        },
+        {
+          "old": "research/autofocus/notes/FACE_EYE_AF.md",
+          "new": "projects/fp-af-assist/notes/research/FACE_EYE_AF.md",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "fpSup/README.md",
+      "replacements": [
+        {
+          "old": "projects/focus-sup.md",
+          "new": "../projects/fp-af-assist/notes/firmware/FOCUS_SUP.md"
+        },
+        {
+          "old": "projects/focus-sup.md",
+          "new": "../projects/fp-af-assist/notes/firmware/FOCUS_SUP.md"
+        }
+      ]
+    },
+    {
+      "path": "projects/fp-af-assist/notes/TRANSPORT_AUDIT_2026-09-16.md",
+      "replacements": [
+        {
+          "old": "../../../research/autofocus/notes/FP_NATIVE_FOCUS_CONTROL_2026-09-16.md#instruction-cache-publication",
+          "new": "research/FP_NATIVE_FOCUS_CONTROL_2026-09-16.md#instruction-cache-publication"
+        }
+      ]
+    },
+    {
+      "path": "projects/fp-af-assist/notes/HOOK_ABI_AUDIT_2026-09-16.md",
+      "replacements": [
+        {
+          "old": "../../../research/autofocus/notes/FP_AF_PUBLICATION_HOOK_CANDIDATES_2026-09-16.md",
+          "new": "research/FP_AF_PUBLICATION_HOOK_CANDIDATES_2026-09-16.md"
+        }
+      ]
+    },
+    {
+      "path": "projects/fp-af-assist/notes/HOOK_SAMPLING_PLAN_2026-09-16.md",
+      "replacements": [
+        {
+          "old": "../../../research/autofocus/notes/FP_AF_PUBLICATION_HOOK_CANDIDATES_2026-09-16.md",
+          "new": "research/FP_AF_PUBLICATION_HOOK_CANDIDATES_2026-09-16.md"
+        }
+      ]
+    },
+    {
+      "path": "projects/fp-af-assist/notes/HOOK_LIFECYCLE_AUDIT_2026-09-16.md",
+      "replacements": [
+        {
+          "old": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/notes/FP_AF_PUBLICATION_HOOK_CANDIDATES_2026-09-16.md",
+          "new": "/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/research/FP_AF_PUBLICATION_HOOK_CANDIDATES_2026-09-16.md"
+        }
+      ]
+    },
+    {
+      "path": "projects/fp-af-assist/notes/FP_AF_FIRMWARE_ROADMAP_2026-09-27.md",
+      "replacements": [
+        {
+          "old": "../../../fpSup/focus/geometry/OFFLINE_INTEGRATION.md",
+          "new": "geometry/OFFLINE_INTEGRATION.md"
+        },
+        {
+          "old": "../../../fpSup/focus/geometry/VALIDATION.md",
+          "new": "geometry/VALIDATION.md"
+        },
+        {
+          "old": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/notes/FP_GEOMETRY_DFD_FUSION_2026-09-27.md",
+          "new": "/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/research/FP_GEOMETRY_DFD_FUSION_2026-09-27.md"
+        },
+        {
+          "old": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/notes/CROSSCAM_PDAF_FEASIBILITY_2026-09-27.md",
+          "new": "/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/research/CROSSCAM_PDAF_FEASIBILITY_2026-09-27.md"
+        },
+        {
+          "old": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/notes/ZCAM_AF_REFERENCE_2026-09-27.md",
+          "new": "/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/research/ZCAM_AF_REFERENCE_2026-09-27.md"
+        },
+        {
+          "old": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/notes/NON_PDAF_CAMERA_REFERENCE_2026-09-27.md",
+          "new": "/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/research/NON_PDAF_CAMERA_REFERENCE_2026-09-27.md"
+        },
+        {
+          "old": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/notes/FP_AF_FIRMWARE_INTERVENTION_MAP_2026-09-27.md",
+          "new": "/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/research/FP_AF_FIRMWARE_INTERVENTION_MAP_2026-09-27.md"
+        },
+        {
+          "old": "../../../research/autofocus/notes/FP_AAT_ACTIVATION_2026-09-27.md",
+          "new": "research/FP_AAT_ACTIVATION_2026-09-27.md"
+        }
+      ]
+    },
+    {
+      "path": "projects/fp-af-assist/notes/FP_AF_DEVELOPMENT_STATUS_2026-09-27.md",
+      "replacements": [
+        {
+          "old": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/notes/FP_GEOMETRY_DFD_FUSION_2026-09-27.md",
+          "new": "/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/research/FP_GEOMETRY_DFD_FUSION_2026-09-27.md"
+        },
+        {
+          "old": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/notes/FP_AF_REPEATABILITY_2026-09-16.md:33",
+          "new": "/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/research/FP_AF_REPEATABILITY_2026-09-16.md:33"
+        },
+        {
+          "old": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/notes/FP_AF_DIRECTION_DIAGNOSTICS_2026-09-16.md:21",
+          "new": "/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/research/FP_AF_DIRECTION_DIAGNOSTICS_2026-09-16.md:21"
+        },
+        {
+          "old": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/notes/SIGMA_FP_PDAF_INVESTIGATION_REPORT_2026-08-18.md:8",
+          "new": "/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/research/SIGMA_FP_PDAF_INVESTIGATION_REPORT_2026-08-18.md:8"
+        },
+        {
+          "old": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/notes/CROSSCAM_PDAF_FEASIBILITY_2026-09-27.md",
+          "new": "/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/research/CROSSCAM_PDAF_FEASIBILITY_2026-09-27.md"
+        },
+        {
+          "old": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/notes/FACE_EYE_AF.md:113",
+          "new": "/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/research/FACE_EYE_AF.md:113"
+        },
+        {
+          "old": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/notes/FACE_EYE_AF.md:67",
+          "new": "/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/research/FACE_EYE_AF.md:67"
+        },
+        {
+          "old": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/notes/FACE_EYE_AF.md:159",
+          "new": "/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/research/FACE_EYE_AF.md:159"
+        },
+        {
+          "old": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/notes/FP_AUTOFOCUS_GEOMETRY_DFD_PLAN_2026-09-16.md:255",
+          "new": "/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/research/FP_AUTOFOCUS_GEOMETRY_DFD_PLAN_2026-09-16.md:255"
+        },
+        {
+          "old": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/notes/FP_AF_DIRECTION_DIAGNOSTICS_2026-09-16.md:47",
+          "new": "/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/research/FP_AF_DIRECTION_DIAGNOSTICS_2026-09-16.md:47"
+        },
+        {
+          "old": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/notes/FP_AF_CAPTURE_GUARD_CORRECTION_2026-09-16.md:33",
+          "new": "/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/research/FP_AF_CAPTURE_GUARD_CORRECTION_2026-09-16.md:33"
+        },
+        {
+          "old": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/notes/AF_FUSION_TOOL_USAGE.md",
+          "new": "/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/research/AF_FUSION_TOOL_USAGE.md"
+        },
+        {
+          "old": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/notes/FP_AUTOFOCUS_GEOMETRY_DFD_PLAN_2026-09-16.md",
+          "new": "/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/research/FP_AUTOFOCUS_GEOMETRY_DFD_PLAN_2026-09-16.md"
+        },
+        {
+          "old": "fpSup/projects/focus-sup.md",
+          "new": "projects/fp-af-assist/notes/firmware/FOCUS_SUP.md",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "projects/fp-af-assist/README.md",
+      "replacements": [
+        {
+          "old": "../../research/autofocus/notes/FP_NATIVE_FOCUS_CONTROL_2026-09-16.md",
+          "new": "notes/research/FP_NATIVE_FOCUS_CONTROL_2026-09-16.md"
+        },
+        {
+          "old": "../../research/autofocus/notes/FP_AF_STATS_FRESHNESS_2026-09-16.md",
+          "new": "notes/research/FP_AF_STATS_FRESHNESS_2026-09-16.md"
+        },
+        {
+          "old": "../../research/autofocus/notes/FP_AF_CAPTURE_GUARD_CORRECTION_2026-09-16.md",
+          "new": "notes/research/FP_AF_CAPTURE_GUARD_CORRECTION_2026-09-16.md"
+        }
+      ]
+    },
+    {
+      "path": "fpSup/projects/bridge.md",
+      "replacements": [
+        {
+          "old": "focus-sup.md",
+          "new": "../../projects/fp-af-assist/notes/firmware/FOCUS_SUP.md"
+        },
+        {
+          "old": "focus-sup.md",
+          "new": "../../projects/fp-af-assist/notes/firmware/FOCUS_SUP.md"
+        }
+      ]
+    },
+    {
+      "path": "projects/fp-af-assist/handoff/skills/fp-usb-shell/SKILL.md",
+      "replacements": [
+        {
+          "old": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/notes/FP_NATIVE_FOCUS_CONTROL_2026-09-16.md",
+          "new": "/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/research/FP_NATIVE_FOCUS_CONTROL_2026-09-16.md"
+        }
+      ]
+    },
+    {
+      "path": "projects/fp-af-assist/handoff/skills/sigma-fp-af-research/SKILL.md",
+      "replacements": [
+        {
+          "old": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/notes/AF_FUSION_TOOL_USAGE.md",
+          "new": "/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/research/AF_FUSION_TOOL_USAGE.md"
+        },
+        {
+          "old": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/notes/FP_ORIGINAL_AF_TRIAL_2026-09-16.md",
+          "new": "/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/research/FP_ORIGINAL_AF_TRIAL_2026-09-16.md"
+        },
+        {
+          "old": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/notes/AF_FUSION_TOOL_USAGE.md",
+          "new": "/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/research/AF_FUSION_TOOL_USAGE.md"
+        },
+        {
+          "old": "research/autofocus/notes/FP_AF_PUBLICATION_HOOK_CANDIDATES_2026-09-16.md",
+          "new": "projects/fp-af-assist/notes/research/FP_AF_PUBLICATION_HOOK_CANDIDATES_2026-09-16.md",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "projects/fp-af-assist/handoff/INDEX.md",
+      "replacements": [
+        {
+          "old": "research/autofocus/notes/SIGMA_FP_PDAF_INVESTIGATION_REPORT_2026-08-18.md",
+          "new": "projects/fp-af-assist/notes/research/SIGMA_FP_PDAF_INVESTIGATION_REPORT_2026-08-18.md",
+          "count": 1
+        },
+        {
+          "old": "research/autofocus/notes/FP_AF_PUBLICATION_HOOK_CANDIDATES_2026-09-16.md",
+          "new": "projects/fp-af-assist/notes/research/FP_AF_PUBLICATION_HOOK_CANDIDATES_2026-09-16.md",
+          "count": 1
+        },
+        {
+          "old": "research/autofocus/notes/FP_AF_CAPTURE_GUARD_CORRECTION_2026-09-16.md",
+          "new": "projects/fp-af-assist/notes/research/FP_AF_CAPTURE_GUARD_CORRECTION_2026-09-16.md",
+          "count": 1
+        },
+        {
+          "old": "research/autofocus/notes/FP_AUTOFOCUS_GEOMETRY_DFD_PLAN_2026-09-16.md",
+          "new": "projects/fp-af-assist/notes/research/FP_AUTOFOCUS_GEOMETRY_DFD_PLAN_2026-09-16.md",
+          "count": 1
+        },
+        {
+          "old": "research/autofocus/notes/FP_AF_DIRECTION_DIAGNOSTICS_2026-09-16.md",
+          "new": "projects/fp-af-assist/notes/research/FP_AF_DIRECTION_DIAGNOSTICS_2026-09-16.md",
+          "count": 1
+        },
+        {
+          "old": "research/autofocus/notes/FP_FOCUS_DRIVE_GATE_AUDIT_2026-09-16.md",
+          "new": "projects/fp-af-assist/notes/research/FP_FOCUS_DRIVE_GATE_AUDIT_2026-09-16.md",
+          "count": 1
+        },
+        {
+          "old": "research/autofocus/notes/PDAF_RAW_PATTERN_ANALYSIS_2026-08-17.md",
+          "new": "projects/fp-af-assist/notes/research/PDAF_RAW_PATTERN_ANALYSIS_2026-08-17.md",
+          "count": 1
+        },
+        {
+          "old": "research/autofocus/notes/FP_NATIVE_FOCUS_CONTROL_2026-09-16.md",
+          "new": "projects/fp-af-assist/notes/research/FP_NATIVE_FOCUS_CONTROL_2026-09-16.md",
+          "count": 1
+        },
+        {
+          "old": "research/autofocus/notes/FP_AF_STATS_FRESHNESS_2026-09-16.md",
+          "new": "projects/fp-af-assist/notes/research/FP_AF_STATS_FRESHNESS_2026-09-16.md",
+          "count": 1
+        },
+        {
+          "old": "research/autofocus/notes/FP_ORIGINAL_AF_TRIAL_2026-09-16.md",
+          "new": "projects/fp-af-assist/notes/research/FP_ORIGINAL_AF_TRIAL_2026-09-16.md",
+          "count": 1
+        },
+        {
+          "old": "research/autofocus/notes/FP_AF_REPEATABILITY_2026-09-16.md",
+          "new": "projects/fp-af-assist/notes/research/FP_AF_REPEATABILITY_2026-09-16.md",
+          "count": 1
+        },
+        {
+          "old": "research/autofocus/notes/FOCUS_DISTANCE_PRINCIPLE.md",
+          "new": "projects/fp-af-assist/notes/research/FOCUS_DISTANCE_PRINCIPLE.md",
+          "count": 1
+        },
+        {
+          "old": "research/autofocus/notes/FOCUS_POSITION_DOMAIN.md",
+          "new": "projects/fp-af-assist/notes/research/FOCUS_POSITION_DOMAIN.md",
+          "count": 1
+        },
+        {
+          "old": "research/autofocus/notes/AF_FUSION_TOOL_USAGE.md",
+          "new": "projects/fp-af-assist/notes/research/AF_FUSION_TOOL_USAGE.md",
+          "count": 1
+        },
+        {
+          "old": "research/autofocus/notes/AF_DESIGN_REFERENCE.md",
+          "new": "projects/fp-af-assist/notes/research/AF_DESIGN_REFERENCE.md",
+          "count": 1
+        },
+        {
+          "old": "research/autofocus/notes/PTP_FOCUS_RECORDING.md",
+          "new": "projects/fp-af-assist/notes/research/PTP_FOCUS_RECORDING.md",
+          "count": 1
+        },
+        {
+          "old": "research/autofocus/notes/AF_LIVE_STATE_MAP.md",
+          "new": "projects/fp-af-assist/notes/research/AF_LIVE_STATE_MAP.md",
+          "count": 1
+        },
+        {
+          "old": "research/autofocus/notes/DFD_VIA_AF_STATS.md",
+          "new": "projects/fp-af-assist/notes/research/DFD_VIA_AF_STATS.md",
+          "count": 1
+        },
+        {
+          "old": "research/autofocus/notes/AF_AE_INTERNALS.md",
+          "new": "projects/fp-af-assist/notes/research/AF_AE_INTERNALS.md",
+          "count": 1
+        },
+        {
+          "old": "research/autofocus/notes/AF_COMPLETE.md",
+          "new": "projects/fp-af-assist/notes/research/AF_COMPLETE.md",
+          "count": 1
+        },
+        {
+          "old": "research/autofocus/notes/FACE_EYE_AF.md",
+          "new": "projects/fp-af-assist/notes/research/FACE_EYE_AF.md",
+          "count": 1
+        },
+        {
+          "old": "research/autofocus/notes/AUTOFOCUS.md",
+          "new": "projects/fp-af-assist/notes/research/AUTOFOCUS.md",
+          "count": 1
+        },
+        {
+          "old": "research/autofocus/notes/PTP_FOCUS.md",
+          "new": "projects/fp-af-assist/notes/research/PTP_FOCUS.md",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "projects/fp-af-assist/CONTINUE_HERE.md",
+      "replacements": [
+        {
+          "old": "../../research/autofocus/notes/FP_AAT_ACTIVATION_2026-09-27.md",
+          "new": "notes/research/FP_AAT_ACTIVATION_2026-09-27.md"
+        },
+        {
+          "old": "../../research/autofocus/captures/native-preflight/20260927-124113/README.md",
+          "new": "notes/evidence/capture-native-preflight-20260927-124113.md"
+        },
+        {
+          "old": "../../research/autofocus/captures/native-preflight/20260927-121028/README.md",
+          "new": "notes/evidence/capture-native-preflight-20260927-121028.md"
+        },
+        {
+          "old": "../../research/autofocus/notes/FP_AF_COLLECTOR_WORKER_POOL_GUARD_2026-09-27.md",
+          "new": "notes/research/FP_AF_COLLECTOR_WORKER_POOL_GUARD_2026-09-27.md"
+        },
+        {
+          "old": "../../fpSup/focus/geometry/OFFLINE_INTEGRATION.md",
+          "new": "notes/geometry/OFFLINE_INTEGRATION.md"
+        },
+        {
+          "old": "../../fpSup/focus/geometry/VALIDATION.md",
+          "new": "notes/geometry/VALIDATION.md"
+        },
+        {
+          "old": "../../fpSup/focus/geometry/README.md",
+          "new": "notes/geometry/README.md"
+        },
+        {
+          "old": "../../fpSup/focus/geometry/VALIDATION.md",
+          "new": "notes/geometry/VALIDATION.md"
+        },
+        {
+          "old": "../../fpSup/focus/geometry/NATIVE_INPUT_AUDIT.md",
+          "new": "notes/geometry/NATIVE_INPUT_AUDIT.md"
+        },
+        {
+          "old": "../../fpSup/focus/geometry/NATIVE_CONFIRMATION_AUDIT.md",
+          "new": "notes/geometry/NATIVE_CONFIRMATION_AUDIT.md"
+        },
+        {
+          "old": "../../research/autofocus/notes/FP_GEOMETRY_DFD_FUSION_2026-09-27.md",
+          "new": "notes/research/FP_GEOMETRY_DFD_FUSION_2026-09-27.md"
+        }
+      ]
+    },
+    {
+      "path": "INDEX.md",
+      "replacements": [
+        {
+          "old": "research/autofocus/notes/CROSSCAM_PDAF_FEASIBILITY_2026-09-27.md",
+          "new": "projects/fp-af-assist/notes/research/CROSSCAM_PDAF_FEASIBILITY_2026-09-27.md"
+        },
+        {
+          "old": "research/autofocus/notes/ZCAM_AF_REFERENCE_2026-09-27.md",
+          "new": "projects/fp-af-assist/notes/research/ZCAM_AF_REFERENCE_2026-09-27.md"
+        },
+        {
+          "old": "research/autofocus/notes/NON_PDAF_CAMERA_REFERENCE_2026-09-27.md",
+          "new": "projects/fp-af-assist/notes/research/NON_PDAF_CAMERA_REFERENCE_2026-09-27.md"
+        },
+        {
+          "old": "research/autofocus/notes/FP_AF_FIRMWARE_INTERVENTION_MAP_2026-09-27.md",
+          "new": "projects/fp-af-assist/notes/research/FP_AF_FIRMWARE_INTERVENTION_MAP_2026-09-27.md"
+        },
+        {
+          "old": "research/autofocus/notes/FP_GEOMETRY_DFD_FUSION_2026-09-27.md",
+          "new": "projects/fp-af-assist/notes/research/FP_GEOMETRY_DFD_FUSION_2026-09-27.md"
+        },
+        {
+          "old": "research/autofocus/notes/AF_AE_INTERNALS.md",
+          "new": "projects/fp-af-assist/notes/research/AF_AE_INTERNALS.md"
+        },
+        {
+          "old": "research/autofocus/notes/AF_COMPLETE.md",
+          "new": "projects/fp-af-assist/notes/research/AF_COMPLETE.md"
+        },
+        {
+          "old": "research/autofocus/notes/AF_DESIGN_REFERENCE.md",
+          "new": "projects/fp-af-assist/notes/research/AF_DESIGN_REFERENCE.md"
+        },
+        {
+          "old": "research/autofocus/notes/AF_LIVE_STATE_MAP.md",
+          "new": "projects/fp-af-assist/notes/research/AF_LIVE_STATE_MAP.md"
+        },
+        {
+          "old": "research/autofocus/notes/AUTOFOCUS.md",
+          "new": "projects/fp-af-assist/notes/research/AUTOFOCUS.md"
+        },
+        {
+          "old": "research/autofocus/notes/DFD_VIA_AF_STATS.md",
+          "new": "projects/fp-af-assist/notes/research/DFD_VIA_AF_STATS.md"
+        },
+        {
+          "old": "research/autofocus/notes/FACE_EYE_AF.md",
+          "new": "projects/fp-af-assist/notes/research/FACE_EYE_AF.md"
+        },
+        {
+          "old": "research/autofocus/notes/FP_AUTOFOCUS_GEOMETRY_DFD_PLAN_2026-09-16.md",
+          "new": "projects/fp-af-assist/notes/research/FP_AUTOFOCUS_GEOMETRY_DFD_PLAN_2026-09-16.md"
+        },
+        {
+          "old": "research/autofocus/notes/FP_ORIGINAL_AF_TRIAL_2026-09-16.md",
+          "new": "projects/fp-af-assist/notes/research/FP_ORIGINAL_AF_TRIAL_2026-09-16.md"
+        },
+        {
+          "old": "research/autofocus/notes/FP_AF_REPEATABILITY_2026-09-16.md",
+          "new": "projects/fp-af-assist/notes/research/FP_AF_REPEATABILITY_2026-09-16.md"
+        },
+        {
+          "old": "research/autofocus/notes/FP_AF_DIRECTION_DIAGNOSTICS_2026-09-16.md",
+          "new": "projects/fp-af-assist/notes/research/FP_AF_DIRECTION_DIAGNOSTICS_2026-09-16.md"
+        },
+        {
+          "old": "research/autofocus/notes/FP_FOCUS_DRIVE_GATE_AUDIT_2026-09-16.md",
+          "new": "projects/fp-af-assist/notes/research/FP_FOCUS_DRIVE_GATE_AUDIT_2026-09-16.md"
+        },
+        {
+          "old": "research/autofocus/notes/FP_NATIVE_FOCUS_CONTROL_2026-09-16.md",
+          "new": "projects/fp-af-assist/notes/research/FP_NATIVE_FOCUS_CONTROL_2026-09-16.md"
+        },
+        {
+          "old": "research/autofocus/notes/FP_AF_STATS_FRESHNESS_2026-09-16.md",
+          "new": "projects/fp-af-assist/notes/research/FP_AF_STATS_FRESHNESS_2026-09-16.md"
+        },
+        {
+          "old": "research/autofocus/notes/FP_AF_PUBLICATION_HOOK_CANDIDATES_2026-09-16.md",
+          "new": "projects/fp-af-assist/notes/research/FP_AF_PUBLICATION_HOOK_CANDIDATES_2026-09-16.md"
+        },
+        {
+          "old": "research/autofocus/notes/FP_AF_CAPTURE_GUARD_CORRECTION_2026-09-16.md",
+          "new": "projects/fp-af-assist/notes/research/FP_AF_CAPTURE_GUARD_CORRECTION_2026-09-16.md"
+        },
+        {
+          "old": "research/autofocus/notes/AF_FUSION_TOOL_USAGE.md",
+          "new": "projects/fp-af-assist/notes/research/AF_FUSION_TOOL_USAGE.md"
+        },
+        {
+          "old": "research/autofocus/notes/FOCUS_DISTANCE_PRINCIPLE.md",
+          "new": "projects/fp-af-assist/notes/research/FOCUS_DISTANCE_PRINCIPLE.md"
+        },
+        {
+          "old": "research/autofocus/notes/FOCUS_POSITION_DOMAIN.md",
+          "new": "projects/fp-af-assist/notes/research/FOCUS_POSITION_DOMAIN.md"
+        },
+        {
+          "old": "research/autofocus/notes/PDAF_RAW_PATTERN_ANALYSIS_2026-08-17.md",
+          "new": "projects/fp-af-assist/notes/research/PDAF_RAW_PATTERN_ANALYSIS_2026-08-17.md"
+        },
+        {
+          "old": "research/autofocus/notes/PTP_FOCUS.md",
+          "new": "projects/fp-af-assist/notes/research/PTP_FOCUS.md"
+        },
+        {
+          "old": "research/autofocus/notes/PTP_FOCUS_RECORDING.md",
+          "new": "projects/fp-af-assist/notes/research/PTP_FOCUS_RECORDING.md"
+        },
+        {
+          "old": "research/autofocus/notes/SIGMA_FP_PDAF_INVESTIGATION_REPORT_2026-08-18.md",
+          "new": "projects/fp-af-assist/notes/research/SIGMA_FP_PDAF_INVESTIGATION_REPORT_2026-08-18.md"
+        }
+      ]
+    },
+    {
+      "path": "research/imx410/notes/OTHER_CAMERAS_IMX410_2026-09-26.md",
+      "replacements": [
+        {
+          "old": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/notes/NON_PDAF_CAMERA_REFERENCE_2026-09-27.md",
+          "new": "/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/research/NON_PDAF_CAMERA_REFERENCE_2026-09-27.md"
+        },
+        {
+          "old": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/notes/CROSSCAM_PDAF_FEASIBILITY_2026-09-27.md",
+          "new": "/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/research/CROSSCAM_PDAF_FEASIBILITY_2026-09-27.md"
+        }
+      ]
+    },
+    {
+      "path": "research/liveview/preview-reduction-audit.md",
+      "replacements": [
+        {
+          "old": "../autofocus/captures/af-fusion/2026-09-16-iso100-v5/README.md#independent-mode-query",
+          "new": "../../projects/fp-af-assist/notes/evidence/capture-af-fusion-2026-09-16-iso100-v5.md#independent-mode-query"
+        }
+      ]
+    },
+    {
+      "path": "research/liveview/capture-evidence.md",
+      "replacements": [
+        {
+          "old": "research/autofocus/captures/af-fusion/2026-09-16-iso100-v5/README.md",
+          "new": "projects/fp-af-assist/notes/evidence/capture-af-fusion-2026-09-16-iso100-v5.md",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "INDEX.md",
+      "replacements": [
+        {
+          "old": "research/lens/notes/AUTORUN_LENSDUMP.md",
+          "new": "projects/fp-af-assist/notes/lens/AUTORUN_LENSDUMP.md"
+        },
+        {
+          "old": "research/lens/notes/LENS_BLOCK_API.md",
+          "new": "projects/fp-af-assist/notes/lens/LENS_BLOCK_API.md"
+        },
+        {
+          "old": "research/lens/notes/LENS_DATA_ACCESS.md",
+          "new": "projects/fp-af-assist/notes/lens/LENS_DATA_ACCESS.md"
+        },
+        {
+          "old": "research/lens/notes/SOP_LENS_EXTRACT.md",
+          "new": "projects/fp-af-assist/notes/lens/SOP_LENS_EXTRACT.md"
+        }
+      ]
+    },
+    {
+      "path": "projects/fp-af-assist/notes/FP_AF_DEVELOPMENT_STATUS_2026-09-27.md",
+      "replacements": [
+        {
+          "old": "/Users/dido/Developer.localized/SIGMAfp_re/research/lens/notes/SOP_LENS_EXTRACT.md:56",
+          "new": "/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/lens/SOP_LENS_EXTRACT.md:56"
+        }
+      ]
+    },
+    {
+      "path": "projects/fp-af-assist/handoff/INDEX.md",
+      "replacements": [
+        {
+          "old": "research/lens/notes/SOP_LENS_EXTRACT.md",
+          "new": "projects/fp-af-assist/notes/lens/SOP_LENS_EXTRACT.md",
+          "count": 1
+        },
+        {
+          "old": "research/lens/notes/LENS_DATA_ACCESS.md",
+          "new": "projects/fp-af-assist/notes/lens/LENS_DATA_ACCESS.md",
+          "count": 1
+        },
+        {
+          "old": "research/lens/notes/AUTORUN_LENSDUMP.md",
+          "new": "projects/fp-af-assist/notes/lens/AUTORUN_LENSDUMP.md",
+          "count": 1
+        },
+        {
+          "old": "research/lens/notes/LENS_BLOCK_API.md",
+          "new": "projects/fp-af-assist/notes/lens/LENS_BLOCK_API.md",
+          "count": 1
+        }
+      ]
+    }
+  ],
+  "archives_not_rewritten": true,
+  "camera_operations": 0,
+  "notes": "Old locations contain navigation only, except two relative symlinks preserving manifest line citations. Source and evidence files were not edited. Existing malformed array prose was clarified and the historical oneshot link corrected to its current templates path."
+}

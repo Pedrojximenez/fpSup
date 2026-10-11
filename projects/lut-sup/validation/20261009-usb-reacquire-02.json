@@ -1,0 +1,10 @@
+{
+  "time": "2026-10-09T04:30:07.881133+00:00",
+  "pid": 59684,
+  "process": "dido Fri Oct  9 12:06:32 2026     /usr/libexec/ptpcamerad",
+  "reason": "same verified PTP claimant ignored prior SIGTERM",
+  "action": "one SIGKILL, no loop",
+  "camera_mutations": false,
+  "TMO 1500 SHL status get is_recording": "OK is_recording -> 0\\n",
+  "STATUS": "OK name=fpshd version=3.2.0 protocol=1 frame=64 payload=44 transport=EP01-EP82 iface=0 camera=open seq=2344 ep83=host_candidate upload=UP01-probed mem=MEM1-probed quarantine=0 fault=none"
+}

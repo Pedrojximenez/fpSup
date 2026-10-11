@@ -1,0 +1,92 @@
+#!/usr/bin/env python3
+"""Small, dependency-free client for the local FPShell daemon."""
+
+import argparse
+import json
+import os
+import socket
+import sys
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="FPShell local daemon client")
+    parser.add_argument(
+        "--socket",
+        default=os.environ.get("FPSHELL_SOCKET", "/tmp/fpshell.sock"),
+        help="daemon Unix socket (default: FPSHELL_SOCKET or /tmp/fpshell.sock)",
+    )
+    parser.add_argument("--timeout", type=float, default=65.0, help="response timeout in seconds")
+    parser.add_argument("--json", action="store_true", dest="json_output")
+    subcommands = parser.add_subparsers(dest="command", required=True)
+    subcommands.add_parser("status", help="show daemon state without using USB")
+    subcommands.add_parser("info", help="show protocol capabilities without using USB")
+    subcommands.add_parser("ping", help="perform one camera transaction")
+    echo = subcommands.add_parser("echo", help="echo UTF-8 data through the camera")
+    echo.add_argument("text", nargs="*", help="text, at most 44 encoded bytes")
+    subcommands.add_parser("quit", help="stop the local daemon")
+    return parser.parse_args()
+
+
+def make_request(args: argparse.Namespace) -> str:
+    if args.command == "status":
+        return "STATUS"
+    if args.command == "info":
+        return "INFO"
+    if args.command == "ping":
+        return "PING"
+    if args.command == "echo":
+        payload = " ".join(args.text)
+        if any(character in payload for character in ("\0", "\r", "\n")):
+            raise ValueError("echo payload cannot contain NUL, CR, or LF")
+        if len(payload.encode("utf-8")) > 44:
+            raise ValueError("echo payload exceeds 44 UTF-8 bytes")
+        return "ECHO " + payload
+    return "QUIT"
+
+
+def exchange(path: str, timeout: float, request: str) -> str:
+    if timeout <= 0:
+        raise ValueError("timeout must be greater than zero")
+    with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as client:
+        client.settimeout(timeout)
+        client.connect(path)
+        client.sendall(request.encode("utf-8") + b"\n")
+        response = bytearray()
+        while not response.endswith(b"\n"):
+            chunk = client.recv(4096)
+            if not chunk:
+                break
+            response.extend(chunk)
+            if len(response) > 64 * 1024:
+                raise ValueError("daemon response exceeds 64 KiB")
+    if not response:
+        raise OSError("daemon closed the connection without a response")
+    return response.decode("utf-8", errors="replace").strip()
+
+
+def emit_json(value: dict) -> None:
+    print(json.dumps(value, ensure_ascii=False, separators=(",", ":")))
+
+
+def main() -> int:
+    args = parse_args()
+    request = ""
+    try:
+        request = make_request(args)
+        response = exchange(args.socket, args.timeout, request)
+        ok = response.startswith("OK ")
+        if args.json_output:
+            emit_json({"ok": ok, "request": request, "response": response})
+        else:
+            print(response)
+        return 0 if ok else 1
+    except (OSError, ValueError) as error:
+        if args.json_output:
+            emit_json({"ok": False, "request": request, "error": str(error)})
+        else:
+            print(f"fpshell: {error}", file=sys.stderr)
+        return 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

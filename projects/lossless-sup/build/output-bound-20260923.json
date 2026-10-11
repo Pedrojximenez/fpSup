@@ -1,0 +1,128 @@
+{
+ "kind": "offline_worst_case_output_bound",
+ "date": "2026-09-23",
+ "roadmap_item": "ROADMAP P0-3 / \u5de5\u4f5c\u5305 2",
+ "camera_accessed": false,
+ "deployable": false,
+ "why": "Lossless JPEG expands on high-entropy input. The arena was sized from the packed raster (848 bytes of headroom), so an overrun destroyed the size table before the post-hoc sum could read it. Capacity is now enforced before the fact.",
+ "model": {
+  "source": "research/slimRAW/ljcost.py",
+  "cost_per_sample": "huffman(category) + category extra bits",
+  "max_category_12bit": 12,
+  "bits_per_sample_bound": 13.9998,
+  "derivation": "max over category distributions of E[SSSS] + H(p) + 1",
+  "caveat": "Models optimal per-image Huffman. A fixed table in the camera's encoder could exceed it; unverified."
+ },
+ "measured_host": {
+  "flat_2048": {
+   "bytes": 394368,
+   "bits_per_sample": 1.5,
+   "ratio": 8.026
+  },
+  "alt_extremes": {
+   "bytes": 3546684,
+   "bits_per_sample": 13.45
+  },
+  "uniform_noise_worst_of_6_seeds": {
+   "bytes": 3562956,
+   "bits_per_sample": 13.507,
+   "ratio": 0.888
+  },
+  "note": "Noise EXPANDS to 1.126x the packed raster."
+ },
+ "bounds": {
+  "512x368": {
+   "tiles": 12,
+   "cols": 4,
+   "rows": 3,
+   "padded_width": 2048,
+   "padded_height": 1104,
+   "padded_samples": 2260992,
+   "active_samples": 2110240,
+   "bits_per_sample": 13.9998,
+   "payload_bytes": 3956687,
+   "marker_bytes": 1152,
+   "bound_bytes": 3957839,
+   "packed_raster_bytes": 3165360,
+   "expansion_vs_raster": 1.2504
+  },
+  "512x512": {
+   "tiles": 12,
+   "cols": 4,
+   "rows": 3,
+   "padded_width": 2048,
+   "padded_height": 1536,
+   "padded_samples": 3145728,
+   "active_samples": 2110240,
+   "bits_per_sample": 13.9998,
+   "payload_bytes": 5504955,
+   "marker_bytes": 1152,
+   "bound_bytes": 5506107,
+   "packed_raster_bytes": 3165360,
+   "expansion_vs_raster": 1.7395
+  },
+  "256x256": {
+   "tiles": 40,
+   "cols": 8,
+   "rows": 5,
+   "padded_width": 2048,
+   "padded_height": 1280,
+   "padded_samples": 2621440,
+   "active_samples": 2110240,
+   "bits_per_sample": 13.9998,
+   "payload_bytes": 4587463,
+   "marker_bytes": 3840,
+   "bound_bytes": 4591303,
+   "packed_raster_bytes": 3165360,
+   "expansion_vs_raster": 1.4505
+  }
+ },
+ "decision": {
+  "product_geometry": "512x368",
+  "arena_bytes": 4063232,
+  "bound_bytes": 3957832,
+  "margin_bytes": 105400,
+  "margin_fraction": 0.0266,
+  "final_table_offset": 4067328,
+  "temp_table_offset": 4068352,
+  "allocation": 4194304,
+  "512x512_verdict": "REFUSED at build time: bounds at 5,506,098 B, above the entire 4 MiB allocation. Every live measurement before 2026-09-23 used this geometry."
+ },
+ "previous_layout": {
+  "work_cap": 3166208,
+  "table_offset": 3170304,
+  "headroom_over_raster_bytes": 848,
+  "table_reachable_by_overrun": true
+ },
+ "tests": {
+  "suite": "fpSup/raw/lossless_codec/test_single_frame_codec_probe.py",
+  "passed": 43,
+  "enforcement": "build_image refuses any encode kind whose bound exceeds the arena; a test restores the old arena and asserts all three builds refuse"
+ },
+ "source_hashes": {
+  "projects/lossless-sup/tools/output_bound.py": "5bc0a2fed5d43dec54f498e23dca35931de9576a4a2d1fd347f23de9db998d71",
+  "fpSup/raw/lossless_codec/single_frame_encode_discard_probe.S": "cae9125156a721182a8cf77e696c2387645bed81a6ef1cb6da5fca24296fe59e",
+  "fpSup/raw/lossless_codec/single_frame_codec_probe.py": "e63ea1f8135b41f9000e997f8a36507bdba97649a85f452a5f192ec06a996b3d"
+ },
+ "still_open": [
+  "the camera's actual Huffman table is unknown; the bound models optimal coding",
+  "the padding contract is decoded from edge tiles, not proven; padding is bounded at full cost here rather than relying on the cheaper reading",
+  "no live 512x368 measurement exists yet (ROADMAP G2)"
+ ],
+ "corrections": [
+  {
+   "date": "2026-09-24",
+   "found_by": "BUFFER_RESEARCH.md 4.3, which names a 7-byte drift between two estimates",
+   "original_fields_unchanged": true,
+   "what_was_wrong": "Nothing recorded here. This entry carried the tool's number, 3,957,839. The drift was on the other side: single_frame_codec_probe.py inlined the model's 13.999823... as the literal 13.9998 and then TRUNCATED the product with int() instead of taking a ceiling. Both roundings went the same way, so the build-time gate that is supposed to REFUSE an unsafe geometry was computing 3,957,832 - seven bytes BELOW the bound recorded here. A gate that is the permissive copy of a bound is not a gate.",
+   "what_changed": "Both implementations now call one integer formula: padded_samples * BOUND_BITS // 8 + tiles * 96, with BOUND_BITS = 14, the smallest integer above the numerical supremum 13.999823879015727. No float enters the arithmetic, so the two cannot drift by a rounding. At 512x368 the bound is now 3,957,888 B, 49 B above the value recorded here and 56 B above what the probe was using.",
+   "does_not_change": "The MODEL is unchanged and still excludes entropy-coded FF 00 byte stuffing, so this remains a bound for the modelled contract, not a proof about the hardware. The 2.30% margin against the compressed capacity of 4,048,896 B is therefore still optimistic.",
+   "superseded_numbers": {
+    "probe_bound_bytes_512x368": 3957832,
+    "tool_bound_bytes_512x368": 3957839,
+    "now": 3957888
+   },
+   "evidence_level": "H"
+  }
+ ]
+}

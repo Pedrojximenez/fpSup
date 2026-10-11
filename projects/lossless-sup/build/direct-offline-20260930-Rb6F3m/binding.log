@@ -1,0 +1,35 @@
+test_arm_softfloat_compilation (test_binding.BindingTests) ... ok
+test_close_menu_then_record (test_binding.BindingTests) ... ok
+test_context_failure (test_binding.BindingTests) ... ok
+test_default_off (test_binding.BindingTests) ... ok
+test_failed_cancel_releases_exclusion (test_binding.BindingTests) ... ok
+test_foreign_subscriber (test_binding.BindingTests) ... ok
+test_fresh_producer_context (test_binding.BindingTests) ... ok
+test_generation_exhaustion (test_binding.BindingTests) ... ok
+test_initial_publish_failure (test_binding.BindingTests) ... ok
+test_invalid_integer_restored (test_binding.BindingTests) ... ok
+test_no_live_session_reset (test_binding.BindingTests) ... ok
+test_notification_exclusion_before_cancel (test_binding.BindingTests) ... ok
+test_postregister_lookup_failure (test_binding.BindingTests) ... ok
+test_private_choice_only (test_binding.BindingTests) ... ok
+test_publish_echo_reentry (test_binding.BindingTests) ... ok
+test_publish_failure_rolls_back (test_binding.BindingTests) ... ok
+test_read_failure (test_binding.BindingTests) ... ok
+test_readiness_never_invented (test_binding.BindingTests) ... ok
+test_reap_read_failure (test_binding.BindingTests) ... ok
+test_recording_locked (test_binding.BindingTests) ... ok
+test_recovery_redraw_failure (test_binding.BindingTests) ... ok
+test_register_failure_no_retry (test_binding.BindingTests) ... ok
+test_registry_replaced (test_binding.BindingTests) ... ok
+test_still_preserves_preference (test_binding.BindingTests) ... ok
+test_subscribe_failure_retains_ticket (test_binding.BindingTests) ... ok
+test_unknown_variable_not_adopted (test_binding.BindingTests) ... ok
+test_unready_on_restored (test_binding.BindingTests) ... ok
+test_unsubscribe_failure_no_retry (test_binding.BindingTests) ... ok
+test_unsubscribe_is_not_quiescence (test_binding.BindingTests) ... ok
+test_wrong_page_no_side_effects (test_binding.BindingTests) ... ok
+
+----------------------------------------------------------------------
+Ran 30 tests in 0.377s
+
+OK

@@ -1,0 +1,27 @@
+screen: LV_CINE_MEDIUM
+  tagged 16380/52744 B  1937 KiB/s   tagged 32760/52744 B  2499 KiB/s   tagged 49140/52744 B  2121 KiB/s   tagged 52744/52744 B  2111 KiB/s   tagged 52744 bytes in 0.0s (2049 KiB/s)      
+  tagged 116/116 B  142 KiB/s   tagged 116 bytes in 0.0s (74 KiB/s)      
+  tagged 116/116 B  1 KiB/s   tagged 116 bytes in 0.1s (1 KiB/s)      
+  tagged 80/80 B  77 KiB/s   tagged 80 bytes in 0.0s (40 KiB/s)      
+  tagged 104/104 B  164 KiB/s   tagged 104 bytes in 0.0s (79 KiB/s)      
+  tagged 60/60 B  48 KiB/s   tagged 60 bytes in 0.0s (20 KiB/s)      
+screen: LV_CINE_MEDIUM
+  tagged 16380/52744 B  3016 KiB/s   tagged 32760/52744 B  1870 KiB/s   tagged 49140/52744 B  2160 KiB/s   tagged 52744/52744 B  1992 KiB/s   tagged 52744 bytes in 0.0s (1880 KiB/s)      
+  tagged 116/116 B  119 KiB/s   tagged 116 bytes in 0.0s (60 KiB/s)      
+  tagged 116/116 B  118 KiB/s   tagged 116 bytes in 0.0s (65 KiB/s)      
+  tagged 80/80 B  109 KiB/s   tagged 80 bytes in 0.0s (57 KiB/s)      
+  tagged 104/104 B  170 KiB/s   tagged 104 bytes in 0.0s (81 KiB/s)      
+  tagged 60/60 B  49 KiB/s   tagged 60 bytes in 0.0s (26 KiB/s)      
+screen: LV_CINE_MEDIUM
+  tagged 16380/52744 B  2549 KiB/s   tagged 32760/52744 B  2504 KiB/s   tagged 49140/52744 B  2234 KiB/s   tagged 52744/52744 B  2250 KiB/s   tagged 52744 bytes in 0.0s (2171 KiB/s)      
+  tagged 116/116 B  160 KiB/s   tagged 116 bytes in 0.0s (26 KiB/s)      
+  tagged 116/116 B  154 KiB/s   tagged 116 bytes in 0.0s (76 KiB/s)      
+  tagged 80/80 B  113 KiB/s   tagged 80 bytes in 0.0s (57 KiB/s)      
+  tagged 104/104 B  142 KiB/s   tagged 104 bytes in 0.0s (78 KiB/s)      
+  tagged 60/60 B  87 KiB/s   tagged 60 bytes in 0.0s (47 KiB/s)      
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/record_native_m12_identity.py", line 63, in <module>
+    record_trial.main(historical_check=check,stop_after=20,frame_count=900,rate_probe=rate_probe)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/record_trial.py", line 236, in main
+    assert proof['standby_after'],'REC=0 but no HDMI STBY; no file tools or further trial'
+AssertionError: REC=0 but no HDMI STBY; no file tools or further trial

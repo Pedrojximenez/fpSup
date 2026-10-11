@@ -1,0 +1,160 @@
+{
+  "passed": true,
+  "tests_run": 15,
+  "tests_skipped": 0,
+  "unicorn_version": "2.1.4",
+  "seg0_sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622",
+  "firmware_rx": true,
+  "only_synthetic_ram_writable": true,
+  "instruction_limit_per_call": 20000,
+  "timeout_us_per_call": 250000,
+  "executed_native_functions": {
+    "app_lookup": [
+      "0xC05DCA88",
+      "0xC05DCAB6"
+    ],
+    "get_registry": [
+      "0xC05D9EB0",
+      "0xC05D9EB8"
+    ],
+    "map_append": [
+      "0xC05ED248",
+      "0xC05ED294"
+    ],
+    "map_lookup": [
+      "0xC05ED3B8",
+      "0xC05ED45A"
+    ],
+    "map_reserve": [
+      "0xC05ED1F0",
+      "0xC05ED246"
+    ],
+    "map_sort": [
+      "0xC05ED2B0",
+      "0xC05ED3B8"
+    ],
+    "map_sort_key": [
+      "0xC05ED298",
+      "0xC05ED2B0"
+    ],
+    "name_hash_fnv1a": [
+      "0xC05E9DE8",
+      "0xC05E9E0A"
+    ],
+    "register": [
+      "0xC05DB308",
+      "0xC05DB412"
+    ],
+    "registry_lookup": [
+      "0xC05DB418",
+      "0xC05DB42E"
+    ],
+    "vector_append": [
+      "0xC05D74A8",
+      "0xC05D74D2"
+    ],
+    "vector_get": [
+      "0xC05D7528",
+      "0xC05D7530"
+    ],
+    "vector_grow": [
+      "0xC05D75B8",
+      "0xC05D75E8"
+    ]
+  },
+  "stubbed_services": {
+    "lua_wrapper": "0xC05DB868",
+    "strcmp": "0xC0013E2C",
+    "allocator_alloc": "0x20000000",
+    "allocator_free": "0x20000010",
+    "allocator_realloc": "0x20000020"
+  },
+  "observed_service_addresses": [
+    "0x20000000",
+    "0x20000010",
+    "0x20000020",
+    "0xC0013E2C",
+    "0xC05DB868"
+  ],
+  "original_lua_executed": false,
+  "original_allocator_executed": false,
+  "registry_initialization": "synthetic layout, not original resource parser/VarData initialization",
+  "camera_accessed": false,
+  "hook_installed": false,
+  "runtime_ready": false,
+  "observations": {
+    "success": {
+      "vector_count": 1,
+      "vector_capacity": 4,
+      "vector_pointer": 268451840,
+      "map_capacity": 4,
+      "map_count": 1,
+      "map_entries": 268451856,
+      "map_indices": 268451904,
+      "map_sorted": 1,
+      "live_allocations": 4,
+      "lua_stub_names": [
+        "MV_fpLossless"
+      ]
+    },
+    "lua_failure_descriptor_leak": {
+      "vector_count": 0,
+      "vector_capacity": 4,
+      "vector_pointer": 268451840,
+      "map_capacity": 4,
+      "map_count": 0,
+      "map_entries": 268451856,
+      "map_indices": 268451904,
+      "map_sorted": 1,
+      "live_allocations": 4,
+      "lua_stub_names": []
+    },
+    "vector_failure_lua_not_rolled_back": {
+      "vector_count": 0,
+      "vector_capacity": 0,
+      "vector_pointer": 268451840,
+      "map_capacity": 4,
+      "map_count": 0,
+      "map_entries": 268451856,
+      "map_indices": 268451904,
+      "map_sorted": 1,
+      "live_allocations": 3,
+      "lua_stub_names": [
+        "MV_fpLossless"
+      ]
+    },
+    "map_first_growth_failure": {
+      "vector_count": 1,
+      "vector_capacity": 4,
+      "vector_pointer": 268451840,
+      "map_capacity": 2,
+      "map_count": 2,
+      "map_entries": 268451856,
+      "map_indices": 268451888,
+      "map_sorted": 0,
+      "live_allocations": 4,
+      "lua_stub_names": [
+        "MV_fpLossless"
+      ]
+    },
+    "map_second_growth_failure": {
+      "vector_count": 1,
+      "vector_capacity": 4,
+      "vector_pointer": 268451840,
+      "map_capacity": 2,
+      "map_count": 2,
+      "map_entries": 268451936,
+      "map_indices": 268451888,
+      "map_sorted": 0,
+      "live_allocations": 4,
+      "lua_stub_names": [
+        "MV_fpLossless"
+      ]
+    }
+  },
+  "canonical_harness": "/Users/dido/Developer.localized/SIGMAfp_re/research/ui/tools/native_variable_probe/registry_probe.py",
+  "test_entrypoint": "/Users/dido/Developer.localized/SIGMAfp_re/research/ui/tools/native_variable_probe/test_registry_probe.py",
+  "validation_date_local": "2026-09-15",
+  "host_jit_execution_permission_required": true,
+  "handoff_gate": "Offline native registry mechanism verified with synthetic initialization and stubbed Lua/allocator. Original Lua/heap/lifecycle, private UI binding and transactional failure handling remain unverified; no camera deployment."
+}

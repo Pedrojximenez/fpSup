@@ -1,0 +1,39 @@
+  code   412/412 B  7.1 KiB/s   verify 412/412 B  860 KiB/s   verify 412 bytes in 0.0s (402 KiB/s)      
+  code   412 bytes in 0.1s (3.8 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 32768 bytes in 0.000s (74.3 MB/s)      
+  code   412/412 B  120.2 KiB/s   verify 412/412 B  847 KiB/s   verify 412 bytes in 0.0s (393 KiB/s)      
+  code   412 bytes in 0.0s (74.1 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 76288 bytes in 0.000s (174.2 MB/s)      
+  code   412/412 B  120.4 KiB/s   verify 412/412 B  600 KiB/s   verify 412 bytes in 0.0s (306 KiB/s)      
+  code   412 bytes in 0.0s (70.6 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 27668 bytes in 0.000s (96.7 MB/s)      
+  remote  \AutoRun.txt  32768 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x53B00980 (36864 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 32768 of 32768
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261010-sidebar-v13/deployment-v13-checked/before-AutoRun.txt
+  remote  \fpSup\32RESCUS.BIN  76288 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x53B00980 (80384 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 76288 of 76288
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261010-sidebar-v13/deployment-v13-checked/before-32RESCUS.BIN
+  remote  \fpSup\LOADER.BIN  27668 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x53B00980 (31764 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 27668 of 27668
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261010-sidebar-v13/deployment-v13-checked/before-LOADER.BIN
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261010-sidebar-v13/deploy_camera.py", line 78, in <module>
+    main()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261010-sidebar-v13/deploy_camera.py", line 52, in main
+    assert actual == expected, f'Unknown existing {relative}'
+AssertionError: Unknown existing fpSup/LOADER.BIN

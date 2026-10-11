@@ -1,0 +1,49 @@
+{
+  "files": {
+    "plain/AutoRun.txt": {
+      "bytes": 3561,
+      "sha256": "889800fa363c75bfe0d9da43da82312276388a8929748ce05221ce0da931bb4c"
+    },
+    "plain/fpSup/LOADER.BIN": {
+      "bytes": 27664,
+      "sha256": "8bf7f13c72f62a7ca9ddefc92d02afdffb9054bed3d9c43656e94eea14869511"
+    },
+    "plain/fpSup/50RES-Lab v0.1.0test.BIN": {
+      "bytes": 609720,
+      "sha256": "dad8226db751fe10c2cac1f2f21269cc746957c7aacc5b19bec83dd027da155f"
+    },
+    "plain/fpSup/32RESCUS.BIN": {
+      "bytes": 183488,
+      "sha256": "c63f197f389afc596f8853407216386fb8f0440876843f3bd7659e792ef03be9"
+    },
+    "debug/AutoRun.txt": {
+      "bytes": 3561,
+      "sha256": "889800fa363c75bfe0d9da43da82312276388a8929748ce05221ce0da931bb4c"
+    },
+    "debug/fpSup/LOADER.BIN": {
+      "bytes": 27664,
+      "sha256": "8bf7f13c72f62a7ca9ddefc92d02afdffb9054bed3d9c43656e94eea14869511"
+    },
+    "debug/fpSup/50RES-Lab v0.1.0test.BIN": {
+      "bytes": 609720,
+      "sha256": "dad8226db751fe10c2cac1f2f21269cc746957c7aacc5b19bec83dd027da155f"
+    },
+    "debug/fpSup/32RESCUS.BIN": {
+      "bytes": 183488,
+      "sha256": "c63f197f389afc596f8853407216386fb8f0440876843f3bd7659e792ef03be9"
+    }
+  },
+  "unchanged": {
+    "plain/AutoRun.txt": true,
+    "plain/fpSup/LOADER.BIN": true,
+    "plain/fpSup/50RES-Lab v0.1.0test.BIN": true,
+    "debug/AutoRun.txt": true,
+    "debug/fpSup/LOADER.BIN": true,
+    "debug/fpSup/50RES-Lab v0.1.0test.BIN": true
+  },
+  "tests": {
+    "record-rate-tests.log": "4 passed,132.464s",
+    "baseline-context.log": "v11 rejected: recorder getter entered interactive settings",
+    "notification-regression.log": "1 passed,64.897s; both native callbacks"
+  }
+}

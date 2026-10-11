@@ -1,0 +1,1309 @@
+{
+  "mode_count": 70,
+  "cases": 142800,
+  "issues": {
+    "data_rate_does_not_match_record_matrix": 108336
+  },
+  "examples": [
+    {
+      "mode": 0,
+      "raw": [
+        6064,
+        4042
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "bin": [
+        1,
+        1
+      ],
+      "ratio": 0,
+      "crop_requested": [
+        0,
+        0
+      ],
+      "output_requested": [
+        6064,
+        4042
+      ],
+      "lead": 0,
+      "result": [
+        6048,
+        4032,
+        1,
+        1,
+        0,
+        0,
+        0,
+        2000,
+        1334,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        6064,
+        4042,
+        2016,
+        1344,
+        1,
+        2000,
+        6048,
+        1334,
+        4032,
+        16,
+        1,
+        0,
+        1023,
+        1023,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1023,
+        1023,
+        2016,
+        6064,
+        1344,
+        4042,
+        6064,
+        4042,
+        1065353216,
+        1065353216
+      ],
+      "errors": [
+        "data_rate_does_not_match_record_matrix"
+      ]
+    },
+    {
+      "mode": 0,
+      "raw": [
+        6064,
+        4042
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "bin": [
+        1,
+        1
+      ],
+      "ratio": 0,
+      "crop_requested": [
+        0,
+        0
+      ],
+      "output_requested": [
+        6064,
+        4042
+      ],
+      "lead": 1,
+      "result": [
+        6048,
+        4032,
+        1,
+        1,
+        0,
+        0,
+        0,
+        2000,
+        1334,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        6064,
+        4042,
+        2016,
+        1344,
+        1,
+        2000,
+        6048,
+        1334,
+        4032,
+        16,
+        1,
+        0,
+        1023,
+        1023,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1023,
+        1023,
+        2016,
+        6064,
+        1344,
+        4042,
+        6064,
+        4042,
+        1065353216,
+        1065353216
+      ],
+      "errors": [
+        "data_rate_does_not_match_record_matrix"
+      ]
+    },
+    {
+      "mode": 0,
+      "raw": [
+        6064,
+        4042
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "bin": [
+        1,
+        1
+      ],
+      "ratio": 0,
+      "crop_requested": [
+        0,
+        0
+      ],
+      "output_requested": [
+        3024,
+        2020
+      ],
+      "lead": 0,
+      "result": [
+        3024,
+        2020,
+        1,
+        1,
+        0,
+        0,
+        0,
+        2000,
+        1334,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        3040,
+        2030,
+        2016,
+        1344,
+        1,
+        2000,
+        3024,
+        1334,
+        2020,
+        16,
+        1,
+        0,
+        1023,
+        2042,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1023,
+        2038,
+        2016,
+        3040,
+        1344,
+        2030,
+        6064,
+        4042,
+        1065353216,
+        1065353216
+      ],
+      "errors": [
+        "data_rate_does_not_match_record_matrix"
+      ]
+    },
+    {
+      "mode": 0,
+      "raw": [
+        6064,
+        4042
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "bin": [
+        1,
+        1
+      ],
+      "ratio": 0,
+      "crop_requested": [
+        0,
+        0
+      ],
+      "output_requested": [
+        3024,
+        2020
+      ],
+      "lead": 1,
+      "result": [
+        3024,
+        2016,
+        1,
+        1,
+        0,
+        0,
+        0,
+        2000,
+        1334,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        3040,
+        2026,
+        2016,
+        1344,
+        1,
+        2000,
+        3024,
+        1334,
+        2016,
+        16,
+        1,
+        0,
+        1023,
+        2042,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1023,
+        2042,
+        2016,
+        3040,
+        1344,
+        2026,
+        6064,
+        4042,
+        1065353216,
+        1065353216
+      ],
+      "errors": [
+        "data_rate_does_not_match_record_matrix"
+      ]
+    },
+    {
+      "mode": 0,
+      "raw": [
+        6064,
+        4042
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "bin": [
+        1,
+        1
+      ],
+      "ratio": 0,
+      "crop_requested": [
+        3024,
+        2020
+      ],
+      "output_requested": [
+        6064,
+        4042
+      ],
+      "lead": 0,
+      "result": [
+        3024,
+        2012,
+        1,
+        1,
+        3024,
+        2020,
+        0,
+        1008,
+        670,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        6064,
+        4042,
+        1024,
+        680,
+        1,
+        1008,
+        3024,
+        670,
+        2012,
+        16,
+        1,
+        0,
+        1023,
+        1023,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1023,
+        1023,
+        1024,
+        6064,
+        680,
+        4042,
+        6064,
+        4042,
+        1065353216,
+        1065353216
+      ],
+      "errors": [
+        "data_rate_does_not_match_record_matrix"
+      ]
+    },
+    {
+      "mode": 0,
+      "raw": [
+        6064,
+        4042
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "bin": [
+        1,
+        1
+      ],
+      "ratio": 0,
+      "crop_requested": [
+        3024,
+        2020
+      ],
+      "output_requested": [
+        6064,
+        4042
+      ],
+      "lead": 1,
+      "result": [
+        3024,
+        2012,
+        1,
+        1,
+        3024,
+        2020,
+        0,
+        1008,
+        670,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        6064,
+        4042,
+        1024,
+        680,
+        1,
+        1008,
+        3024,
+        670,
+        2012,
+        16,
+        1,
+        0,
+        1023,
+        1023,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1023,
+        1023,
+        1024,
+        6064,
+        680,
+        4042,
+        6064,
+        4042,
+        1065353216,
+        1065353216
+      ],
+      "errors": [
+        "data_rate_does_not_match_record_matrix"
+      ]
+    },
+    {
+      "mode": 0,
+      "raw": [
+        6064,
+        4042
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "bin": [
+        1,
+        1
+      ],
+      "ratio": 0,
+      "crop_requested": [
+        3024,
+        2020
+      ],
+      "output_requested": [
+        3024,
+        2020
+      ],
+      "lead": 0,
+      "result": [
+        3024,
+        2012,
+        1,
+        1,
+        3024,
+        2020,
+        0,
+        1008,
+        670,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        6064,
+        4042,
+        1024,
+        680,
+        1,
+        1008,
+        3024,
+        670,
+        2012,
+        16,
+        1,
+        0,
+        1023,
+        1023,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1023,
+        1023,
+        1024,
+        6064,
+        680,
+        4042,
+        6064,
+        4042,
+        1065353216,
+        1065353216
+      ],
+      "errors": [
+        "data_rate_does_not_match_record_matrix"
+      ]
+    },
+    {
+      "mode": 0,
+      "raw": [
+        6064,
+        4042
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "bin": [
+        1,
+        1
+      ],
+      "ratio": 0,
+      "crop_requested": [
+        3024,
+        2020
+      ],
+      "output_requested": [
+        3024,
+        2020
+      ],
+      "lead": 1,
+      "result": [
+        3024,
+        2012,
+        1,
+        1,
+        3024,
+        2020,
+        0,
+        1008,
+        670,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        6064,
+        4042,
+        1024,
+        680,
+        1,
+        1008,
+        3024,
+        670,
+        2012,
+        16,
+        1,
+        0,
+        1023,
+        1023,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1023,
+        1023,
+        1024,
+        6064,
+        680,
+        4042,
+        6064,
+        4042,
+        1065353216,
+        1065353216
+      ],
+      "errors": [
+        "data_rate_does_not_match_record_matrix"
+      ]
+    },
+    {
+      "mode": 0,
+      "raw": [
+        6064,
+        4042
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "bin": [
+        1,
+        1
+      ],
+      "ratio": 0,
+      "crop_requested": [
+        6000,
+        0
+      ],
+      "output_requested": [
+        6064,
+        4042
+      ],
+      "lead": 0,
+      "result": [
+        48,
+        32,
+        1,
+        1,
+        6000,
+        0,
+        0,
+        16,
+        1026,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        6064,
+        42,
+        32,
+        1036,
+        1,
+        16,
+        48,
+        1026,
+        32,
+        16,
+        1,
+        0,
+        1023,
+        1023,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1023,
+        98547,
+        32,
+        6064,
+        1036,
+        42,
+        6064,
+        4042,
+        1065353216,
+        1065353216
+      ],
+      "errors": [
+        "data_rate_does_not_match_record_matrix"
+      ]
+    },
+    {
+      "mode": 0,
+      "raw": [
+        6064,
+        4042
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "bin": [
+        1,
+        1
+      ],
+      "ratio": 0,
+      "crop_requested": [
+        6000,
+        0
+      ],
+      "output_requested": [
+        6064,
+        4042
+      ],
+      "lead": 1,
+      "result": [
+        48,
+        32,
+        1,
+        1,
+        6000,
+        0,
+        0,
+        16,
+        1026,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        6064,
+        42,
+        32,
+        1036,
+        1,
+        16,
+        48,
+        1026,
+        32,
+        16,
+        1,
+        0,
+        1023,
+        1023,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1023,
+        98547,
+        32,
+        6064,
+        1036,
+        42,
+        6064,
+        4042,
+        1065353216,
+        1065353216
+      ],
+      "errors": [
+        "data_rate_does_not_match_record_matrix"
+      ]
+    },
+    {
+      "mode": 0,
+      "raw": [
+        6064,
+        4042
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "bin": [
+        1,
+        1
+      ],
+      "ratio": 0,
+      "crop_requested": [
+        6000,
+        0
+      ],
+      "output_requested": [
+        16,
+        2
+      ],
+      "lead": 0,
+      "result": [
+        16,
+        10,
+        1,
+        1,
+        6000,
+        0,
+        0,
+        16,
+        673,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        3024,
+        20,
+        32,
+        683,
+        1,
+        16,
+        16,
+        673,
+        10,
+        16,
+        1,
+        0,
+        1023,
+        2048,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1023,
+        206950,
+        32,
+        3024,
+        683,
+        20,
+        6064,
+        4042,
+        1065353216,
+        1065353216
+      ],
+      "errors": [
+        "data_rate_does_not_match_record_matrix"
+      ]
+    },
+    {
+      "mode": 0,
+      "raw": [
+        6064,
+        4042
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "bin": [
+        1,
+        1
+      ],
+      "ratio": 0,
+      "crop_requested": [
+        6000,
+        0
+      ],
+      "output_requested": [
+        16,
+        2
+      ],
+      "lead": 1,
+      "result": [
+        16,
+        10,
+        1,
+        1,
+        6000,
+        0,
+        0,
+        16,
+        673,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        3024,
+        20,
+        32,
+        683,
+        1,
+        16,
+        16,
+        673,
+        10,
+        16,
+        1,
+        0,
+        1023,
+        2048,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1023,
+        206950,
+        32,
+        3024,
+        683,
+        20,
+        6064,
+        4042,
+        1065353216,
+        1065353216
+      ],
+      "errors": [
+        "data_rate_does_not_match_record_matrix"
+      ]
+    }
+  ],
+  "modes": {
+    "0": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1828
+      }
+    },
+    "97": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1812
+      }
+    },
+    "98": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1676
+      }
+    },
+    "3": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1812
+      }
+    },
+    "121": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1812
+      }
+    },
+    "6": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1814
+      }
+    },
+    "122": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1814
+      }
+    },
+    "95": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1828
+      }
+    },
+    "100": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1814
+      }
+    },
+    "7": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1812
+      }
+    },
+    "123": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1812
+      }
+    },
+    "102": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1758
+      }
+    },
+    "124": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1758
+      }
+    },
+    "101": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1812
+      }
+    },
+    "108": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1758
+      }
+    },
+    "27": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1611
+      }
+    },
+    "115": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1611
+      }
+    },
+    "88": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1296
+      }
+    },
+    "116": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1296
+      }
+    },
+    "106": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1611
+      }
+    },
+    "125": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1611
+      }
+    },
+    "107": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1296
+      }
+    },
+    "126": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1296
+      }
+    },
+    "109": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1611
+      }
+    },
+    "110": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1296
+      }
+    },
+    "58": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1611
+      }
+    },
+    "89": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1611
+      }
+    },
+    "103": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1296
+      }
+    },
+    "118": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1296
+      }
+    },
+    "104": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1611
+      }
+    },
+    "105": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1296
+      }
+    },
+    "111": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1611
+      }
+    },
+    "127": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1611
+      }
+    },
+    "112": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1296
+      }
+    },
+    "128": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1296
+      }
+    },
+    "113": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1611
+      }
+    },
+    "114": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1296
+      }
+    },
+    "139": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1329
+      }
+    },
+    "56": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1329
+      }
+    },
+    "140": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1196
+      }
+    },
+    "11": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1676
+      }
+    },
+    "117": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1676
+      }
+    },
+    "12": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1196
+      }
+    },
+    "129": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1824
+      }
+    },
+    "130": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1800
+      }
+    },
+    "131": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1351
+      }
+    },
+    "132": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1296
+      }
+    },
+    "133": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1296
+      }
+    },
+    "134": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1277
+      }
+    },
+    "10": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1770
+      }
+    },
+    "135": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1611
+      }
+    },
+    "136": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1296
+      }
+    },
+    "8": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1329
+      }
+    },
+    "9": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1196
+      }
+    },
+    "141": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1828
+      }
+    },
+    "142": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1812
+      }
+    },
+    "143": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1676
+      }
+    },
+    "144": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1824
+      }
+    },
+    "145": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1800
+      }
+    },
+    "146": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1351
+      }
+    },
+    "147": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1329
+      }
+    },
+    "148": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1329
+      }
+    },
+    "149": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1329
+      }
+    },
+    "150": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1329
+      }
+    },
+    "151": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1812
+      }
+    },
+    "152": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1758
+      }
+    },
+    "218": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1611
+      }
+    },
+    "219": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1296
+      }
+    },
+    "220": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1611
+      }
+    },
+    "221": {
+      "cases": 2040,
+      "issues": {
+        "data_rate_does_not_match_record_matrix": 1296
+      }
+    }
+  },
+  "seconds": 6.463,
+  "passed": false
+}

@@ -1,0 +1,818 @@
+# ============================================================================
+# OG3K — SIGMA fp 3:2 open gate, 3032x2012 record / 3000x2000 DNG crop
+# ============================================================================
+#
+# 韌體 Ver.5.02 專用,沒有執行期版本守衛。全部是冷開機的 RAM 補丁:
+# 把 AutoRun.txt 移除或改名,然後完整斷電重開,就回到原廠。
+#
+# 選單:MENU → 紀錄設定 → 解析度,以及 QS → RES.,都會多出第三列 OG3K。
+# 原廠的 UHD 與 FHD 兩列完全保留,三者可任意順序切換。
+#
+# 八個格率(全部用原廠自己的時序,0 ppm 誤差):
+#   23.976 24 25 29.97 48 50 59.94  → 感測器 mode 98(安靜類比組)
+#   100                             → 感測器 mode 117
+#
+# 做法不是改感測器模式表,而是一張格式表加一個 picker hook —— 要加模式只要
+# 加一筆,不必再動韌體的表。
+#
+# 已知缺陷:錄影時 live view 右側會有一條細空隙,空隙裡是前一幀的殘影。
+# 待機與半按都正常。成因是錄影開始後有一段 latch 的版面會重新以左上角對齊,
+# 那段程式還沒找到;可見尺寸用 -4% 補償把空隙壓到最小。
+# 錄下來的檔案不受影響。詳見 notes/LIVE_VIEW_DISPLAY_CHAIN.md。
+# ============================================================================
+
+# --- 螢幕 ---------------------------------------------------------------
+display monitor 0 1
+display osd 1 0x00000000
+display osd 1 0x00000000
+display text fpSup[........]000
+display osd 1
+display text fpSup[........]000
+display osd 1
+# 發射器比對:寬
+mem set 0xC0BCFE80 0x00000BD8
+# 發射器比對:高
+mem set 0xC0BCFE84 0x000007DC
+# "OG3K" 字串
+mem set 0xC0730C00 0x4B33474F
+mem set 0xC0730C04 0x00000000
+# movw r4, #lo
+mem set 0xC0437C34 0xE3004C00
+# movt r4, #hi
+mem set 0xC0437C38 0xE34C4073
+# 控制器上限 BE float 2.0
+mem set 0xC1A709BC 0x00000040
+# 解析度名的函式指標 → og3kname
+mem set 0xC0BE44DC 0xC0731A00
+# 選單 CSV
+mem set 0xC0F8E7EC 0x4EBFBBEF
+mem set 0xC0F8E7F0 0x45542C4F
+mem set 0xC0F8E7F4 0x492C5458
+mem set 0xC0F8E7F8 0x4547414D
+mem set 0xC0F8E7FC 0x616E452C
+mem set 0xC0F8E800 0x64656C62
+mem set 0xC0F8E804 0x616E452C
+mem set 0xC0F8E808 0x64656C62
+mem set 0xC0F8E80C 0x2C310A32
+mem set 0xC0F8E810 0x33313330
+mem set 0xC0F8E814 0x616C622C
+mem set 0xC0F8E818 0x312C6B6E
+mem set 0xC0F8E81C 0x320A322C
+mem set 0xC0F8E820 0x3133302C
+mem set 0xC0F8E824 0x6C622C34
+mem set 0xC0F8E828 0x2C6B6E61
+mem set 0xC0F8E82C 0x0A322C31
+mem set 0xC0F8E830 0x474F2C33
+mem set 0xC0F8E834 0x33204B33
+mem set 0xC0F8E838 0x78383030
+mem set 0xC0F8E83C 0x30303032
+mem set 0xC0F8E840 0x2C312C2C
+mem set 0xC0F8E844 0x00000032
+# 格式表 OG3K23_98
+mem set 0xC0731000 0x00000005
+mem set 0xC0731004 0x000000B0
+mem set 0xC0731008 0x00000062
+mem set 0xC073100C 0xC0731014
+mem set 0xC0731010 0xC0B59540
+mem set 0xC0731014 0x4B33474F
+mem set 0xC0731018 0x395F3332
+mem set 0xC073101C 0x00000038
+mem set 0xC0731020 0x00000000
+mem set 0xC0731024 0x024901BD
+mem set 0xC0731028 0x00041A5C
+mem set 0xC073102C 0x00000000
+# 格式表 OG3K24
+mem set 0xC0731030 0x00000005
+mem set 0xC0731034 0x000001AF
+mem set 0xC0731038 0x00000062
+mem set 0xC073103C 0xC0731044
+mem set 0xC0731040 0xC0B59540
+mem set 0xC0731044 0x4B33474F
+mem set 0xC0731048 0x00003432
+mem set 0xC073104C 0x00000000
+mem set 0xC0731050 0x00000000
+mem set 0xC0731054 0x047901BD
+display text fpSup[#.......]012
+display osd 1
+display text fpSup[#.......]012
+display osd 1
+mem set 0xC0731058 0x00041A54
+mem set 0xC073105C 0x00000000
+# 格式表 OG3K25
+mem set 0xC0731060 0x00000005
+mem set 0xC0731064 0x000000B4
+mem set 0xC0731068 0x00000062
+mem set 0xC073106C 0xC0731074
+mem set 0xC0731070 0xC0B59540
+mem set 0xC0731074 0x4B33474F
+mem set 0xC0731078 0x00003532
+mem set 0xC073107C 0x00000000
+mem set 0xC0731080 0x00000000
+mem set 0xC0731084 0x01C201C2
+mem set 0xC0731088 0x00041900
+mem set 0xC073108C 0x00000000
+# 格式表 OG3K30
+mem set 0xC0731090 0x00000005
+mem set 0xC0731094 0x000000AF
+mem set 0xC0731098 0x00000062
+mem set 0xC073109C 0xC07310A4
+mem set 0xC07310A0 0xC0B59540
+mem set 0xC07310A4 0x4B33474F
+mem set 0xC07310A8 0x00003033
+mem set 0xC07310AC 0x00000000
+mem set 0xC07310B0 0x00000000
+mem set 0xC07310B4 0x02DF01BD
+mem set 0xC07310B8 0x00041516
+mem set 0xC07310BC 0x00000000
+# 格式表 OG3K48
+mem set 0xC07310C0 0x00000005
+mem set 0xC07310C4 0x000001AE
+mem set 0xC07310C8 0x00000062
+mem set 0xC07310CC 0xC07310D4
+mem set 0xC07310D0 0xC0B59540
+mem set 0xC07310D4 0x4B33474F
+mem set 0xC07310D8 0x00003834
+mem set 0xC07310DC 0x00000000
+mem set 0xC07310E0 0x00000000
+mem set 0xC07310E4 0x031B01BD
+mem set 0xC07310E8 0x00040D2A
+mem set 0xC07310EC 0x00000000
+# 格式表 OG3K50
+mem set 0xC07310F0 0x00000005
+mem set 0xC07310F4 0x000000AE
+mem set 0xC07310F8 0x00000062
+mem set 0xC07310FC 0xC0731104
+mem set 0xC0731100 0xC0B59540
+mem set 0xC0731104 0x4B33474F
+mem set 0xC0731108 0x00003035
+mem set 0xC073110C 0x00000000
+mem set 0xC0731110 0x00000000
+mem set 0xC0731114 0x01C201C2
+mem set 0xC0731118 0x00040C80
+mem set 0xC073111C 0x00000000
+# 格式表 OG3K60
+mem set 0xC0731120 0x00000005
+mem set 0xC0731124 0x000000AD
+mem set 0xC0731128 0x00000062
+display text fpSup[##......]024
+display osd 1
+display text fpSup[##......]024
+display osd 1
+mem set 0xC073112C 0xC0731134
+mem set 0xC0731130 0xC0B59540
+mem set 0xC0731134 0x4B33474F
+mem set 0xC0731138 0x00003036
+mem set 0xC073113C 0x00000000
+mem set 0xC0731140 0x00000000
+mem set 0xC0731144 0x040B01BD
+mem set 0xC0731148 0x00040A8A
+mem set 0xC073114C 0x00000000
+# 格式表 OG3K100
+mem set 0xC0731150 0x00000005
+mem set 0xC0731154 0x000000B2
+mem set 0xC0731158 0x00000075
+mem set 0xC073115C 0xC0731164
+mem set 0xC0731160 0xC0B59A20
+mem set 0xC0731164 0x4B33474F
+mem set 0xC0731168 0x00303031
+mem set 0xC073116C 0x00000000
+mem set 0xC0731170 0x00000000
+mem set 0xC0731174 0x010E014A
+mem set 0xC0731178 0x00040886
+mem set 0xC073117C 0x00000000
+# 格式表終止
+mem set 0xC0731180 0x00000000
+mem set 0xC0731184 0x00000000
+mem set 0xC0731188 0x00000000
+mem set 0xC073118C 0x00000000
+mem set 0xC0731190 0x00000000
+mem set 0xC0731194 0x00000000
+mem set 0xC0731198 0x00000000
+mem set 0xC073119C 0x00000000
+mem set 0xC07311A0 0x00000000
+mem set 0xC07311A4 0x00000000
+mem set 0xC07311A8 0x00000000
+mem set 0xC07311AC 0x00000000
+# fmttable payload
+mem set 0xC0730800 0xE92D5018
+mem set 0xC0730804 0xE301C000
+mem set 0xC0730808 0xE34CC073
+mem set 0xC073080C 0xE59C3014
+mem set 0xC0730810 0xE3530000
+mem set 0xC0730814 0x0A000015
+mem set 0xC0730818 0xE5924000
+mem set 0xC073081C 0xE1530004
+mem set 0xC0730820 0x1A000003
+mem set 0xC0730824 0xE59C3018
+mem set 0xC0730828 0xE5924004
+mem set 0xC073082C 0xE1530004
+mem set 0xC0730830 0x0A000001
+mem set 0xC0730834 0xE28CC030
+mem set 0xC0730838 0xEAFFFFF3
+mem set 0xC073083C 0xE59C3010
+mem set 0xC0730840 0xE59C4024
+mem set 0xC0730844 0xE5834004
+mem set 0xC0730848 0xE59C4028
+mem set 0xC073084C 0xE5834008
+display text fpSup[###.....]036
+display osd 1
+display text fpSup[###.....]036
+display osd 1
+mem set 0xC0730850 0xE3004700
+mem set 0xC0730854 0xE34C4073
+mem set 0xC0730858 0xE5943000
+mem set 0xC073085C 0xE2833001
+mem set 0xC0730860 0xE5843000
+mem set 0xC0730864 0xE1A0000C
+mem set 0xC0730868 0xE8BD5018
+mem set 0xC073086C 0xE12FFF1E
+mem set 0xC0730870 0xE8BD5018
+mem set 0xC0730874 0xE92D4CF0
+mem set 0xC0730878 0xE30CCCFC
+mem set 0xC073087C 0xE34CC043
+mem set 0xC0730880 0xE12FFF1C
+# og3kname payload
+mem set 0xC0731A00 0xE301CC08
+mem set 0xC0731A04 0xE34CC073
+mem set 0xC0731A08 0xE59CC000
+mem set 0xC0731A0C 0xE35C0000
+mem set 0xC0731A10 0x0A00000D
+mem set 0xC0731A14 0xE92D401C
+mem set 0xC0731A18 0xE5923008
+mem set 0xC0731A1C 0xE592400C
+mem set 0xC0731A20 0xE300CBD8
+mem set 0xC0731A24 0xE582C008
+mem set 0xC0731A28 0xE300C7DC
+mem set 0xC0731A2C 0xE582C00C
+mem set 0xC0731A30 0xE307CB48
+mem set 0xC0731A34 0xE34CC043
+mem set 0xC0731A38 0xE12FFF3C
+mem set 0xC0731A3C 0xE8BD401C
+mem set 0xC0731A40 0xE5823008
+mem set 0xC0731A44 0xE582400C
+mem set 0xC0731A48 0xE12FFF1E
+mem set 0xC0731A4C 0xE307CB48
+mem set 0xC0731A50 0xE34CC043
+mem set 0xC0731A54 0xE12FFF1C
+# rowpatch_og3k payload
+mem set 0xC072F800 0xE92D500F
+mem set 0xC072F804 0xE301CC08
+mem set 0xC072F808 0xE34CC073
+mem set 0xC072F80C 0xE59C3000
+mem set 0xC072F810 0xE3530000
+mem set 0xC072F814 0x0A000035
+mem set 0xC072F818 0xE284105C
+mem set 0xC072F81C 0xE30FCA00
+mem set 0xC072F820 0xE34CC072
+mem set 0xC072F824 0xE5913000
+mem set 0xC072F828 0xE3000790
+mem set 0xC072F82C 0xE1530000
+mem set 0xC072F830 0x1A00002E
+mem set 0xC072F834 0xE5913004
+mem set 0xC072F838 0xE3000442
+mem set 0xC072F83C 0xE1530000
+mem set 0xC072F840 0x1A00002A
+mem set 0xC072F844 0xE59C0000
+display text fpSup[####....]048
+display osd 1
+display text fpSup[####....]048
+display osd 1
+mem set 0xC072F848 0xE3500000
+mem set 0xC072F84C 0x1A000006
+mem set 0xC072F850 0xE58C5004
+mem set 0xC072F854 0xE30000D8
+mem set 0xC072F858 0xE7913000
+mem set 0xC072F85C 0xE58C3008
+mem set 0xC072F860 0xE30000E0
+mem set 0xC072F864 0xE7913000
+mem set 0xC072F868 0xE58C300C
+mem set 0xC072F86C 0xE3003BD8
+mem set 0xC072F870 0xE3000000
+mem set 0xC072F874 0xE7813000
+mem set 0xC072F878 0xE30037DC
+mem set 0xC072F87C 0xE3000004
+mem set 0xC072F880 0xE7813000
+mem set 0xC072F884 0xE3003BC0
+mem set 0xC072F888 0xE3000024
+mem set 0xC072F88C 0xE7813000
+mem set 0xC072F890 0xE30037D0
+mem set 0xC072F894 0xE300002C
+mem set 0xC072F898 0xE7813000
+mem set 0xC072F89C 0xE3003BD8
+mem set 0xC072F8A0 0xE30000D8
+mem set 0xC072F8A4 0xE7813000
+mem set 0xC072F8A8 0xE30037DC
+mem set 0xC072F8AC 0xE30000E0
+mem set 0xC072F8B0 0xE7813000
+mem set 0xC072F8B4 0xE3003BD8
+mem set 0xC072F8B8 0xE30000DC
+mem set 0xC072F8BC 0xE7813000
+mem set 0xC072F8C0 0xE30037DC
+mem set 0xC072F8C4 0xE30000E4
+mem set 0xC072F8C8 0xE7813000
+mem set 0xC072F8CC 0xE3003BD8
+mem set 0xC072F8D0 0xE30000F4
+mem set 0xC072F8D4 0xE7813000
+mem set 0xC072F8D8 0xE30037DC
+mem set 0xC072F8DC 0xE30000F8
+mem set 0xC072F8E0 0xE7813000
+mem set 0xC072F8E4 0xE59C3000
+mem set 0xC072F8E8 0xE2833001
+mem set 0xC072F8EC 0xE58C3000
+mem set 0xC072F8F0 0xE8BD500F
+mem set 0xC072F8F4 0xE1A00004
+mem set 0xC072F8F8 0xE12FFF1E
+# og3ksel payload
+mem set 0xC0731800 0xE92D503C
+mem set 0xC0731804 0xE301CC00
+mem set 0xC0731808 0xE34CC073
+mem set 0xC073180C 0xE59C3000
+mem set 0xC0731810 0xE2833001
+mem set 0xC0731814 0xE58C3000
+mem set 0xC0731818 0xE58C1004
+mem set 0xC073181C 0xE3510004
+display text fpSup[#####...]060
+display osd 1
+display text fpSup[#####...]060
+display osd 1
+mem set 0xC0731820 0x03A03001
+mem set 0xC0731824 0x13A03000
+mem set 0xC0731828 0xE301CC08
+mem set 0xC073182C 0xE34CC073
+mem set 0xC0731830 0xE58C3000
+mem set 0xC0731834 0xE302C100
+mem set 0xC0731838 0xE34CC073
+mem set 0xC073183C 0xE59C4000
+mem set 0xC0731840 0xE3510004
+mem set 0xC0731844 0x03003536
+mem set 0xC0731848 0x13003465
+mem set 0xC073184C 0xE3A05000
+mem set 0xC0731850 0xE1550004
+mem set 0xC0731854 0x2A000004
+mem set 0xC0731858 0xE08C2105
+mem set 0xC073185C 0xE5922004
+mem set 0xC0731860 0xE5823000
+mem set 0xC0731864 0xE2855001
+mem set 0xC0731868 0xEAFFFFF8
+mem set 0xC073186C 0xE8BD503C
+mem set 0xC0731870 0xE92D4070
+mem set 0xC0731874 0xE30CC024
+mem set 0xC0731878 0xE34CC005
+mem set 0xC073187C 0xE12FFF1C
+# og3kaspect payload
+mem set 0xC0731B00 0xE301CC08
+mem set 0xC0731B04 0xE34CC073
+mem set 0xC0731B08 0xE59CC000
+mem set 0xC0731B0C 0xE35C0000
+mem set 0xC0731B10 0x13A00002
+mem set 0xC0731B14 0x03A00003
+mem set 0xC0731B18 0xE306CEA4
+mem set 0xC0731B1C 0xE34CC030
+mem set 0xC0731B20 0xE12FFF1C
+# og3kaspect2 payload
+mem set 0xC0731B40 0xE301CC08
+mem set 0xC0731B44 0xE34CC073
+mem set 0xC0731B48 0xE59CC000
+mem set 0xC0731B4C 0xE35C0000
+mem set 0xC0731B50 0x13A00002
+mem set 0xC0731B54 0x03A00003
+mem set 0xC0731B58 0xE306CEF0
+mem set 0xC0731B5C 0xE34CC030
+mem set 0xC0731B60 0xE12FFF1C
+# og3kout payload
+mem set 0xC0731D00 0xE92D503C
+mem set 0xC0731D04 0xE301CC08
+mem set 0xC0731D08 0xE34CC073
+mem set 0xC0731D0C 0xE59CC000
+mem set 0xC0731D10 0xE35C0000
+mem set 0xC0731D14 0x0A000055
+mem set 0xC0731D18 0xE3510000
+mem set 0xC0731D1C 0x0A000002
+mem set 0xC0731D20 0xE3510002
+mem set 0xC0731D24 0x0A000009
+mem set 0xC0731D28 0xEA000050
+display text fpSup[######..]072
+display osd 1
+display text fpSup[######..]072
+display osd 1
+mem set 0xC0731D2C 0xE302C000
+mem set 0xC0731D30 0xE34CC073
+mem set 0xC0731D34 0xE59C2000
+mem set 0xC0731D38 0xE3520000
+mem set 0xC0731D3C 0x1A000027
+mem set 0xC0731D40 0xE3004654
+mem set 0xC0731D44 0xE300538F
+mem set 0xC0731D48 0xE3003438
+mem set 0xC0731D4C 0xEA000007
+mem set 0xC0731D50 0xE302C030
+mem set 0xC0731D54 0xE34CC073
+mem set 0xC0731D58 0xE59C2000
+mem set 0xC0731D5C 0xE3520000
+mem set 0xC0731D60 0x1A00001E
+mem set 0xC0731D64 0xE3004140
+mem set 0xC0731D68 0xE30050B4
+mem set 0xC0731D6C 0xE30030D5
+mem set 0xC0731D70 0xE7902181
+mem set 0xC0731D74 0xE300E000
+mem set 0xC0731D78 0xE34CE000
+mem set 0xC0731D7C 0xE152000E
+mem set 0xC0731D80 0x3A00001E
+mem set 0xC0731D84 0xE300E000
+mem set 0xC0731D88 0xE34CE400
+mem set 0xC0731D8C 0xE152000E
+mem set 0xC0731D90 0x2A00001A
+mem set 0xC0731D94 0xE592E000
+mem set 0xC0731D98 0xE15E0004
+mem set 0xC0731D9C 0x1A000017
+mem set 0xC0731DA0 0xE592E004
+mem set 0xC0731DA4 0xE15E0005
+mem set 0xC0731DA8 0x1A000014
+mem set 0xC0731DAC 0xE1A04003
+mem set 0xC0731DB0 0xE1A05002
+mem set 0xC0731DB4 0xE3A02000
+mem set 0xC0731DB8 0xE7953002
+mem set 0xC0731DBC 0xE08CE002
+mem set 0xC0731DC0 0xE58E3004
+mem set 0xC0731DC4 0xE2822004
+mem set 0xC0731DC8 0xE352002C
+mem set 0xC0731DCC 0x3AFFFFF9
+mem set 0xC0731DD0 0xE58C4008
+mem set 0xC0731DD4 0xE58C4018
+mem set 0xC0731DD8 0xE3A04001
+mem set 0xC0731DDC 0xE58C4000
+mem set 0xC0731DE0 0xE3022060
+mem set 0xC0731DE4 0xE34C2073
+mem set 0xC0731DE8 0xE5923000
+mem set 0xC0731DEC 0xE2833001
+mem set 0xC0731DF0 0xE5823000
+mem set 0xC0731DF4 0xE28C0004
+mem set 0xC0731DF8 0xE8BD503C
+mem set 0xC0731DFC 0xE12FFF1E
+display text fpSup[#######.]084
+display osd 1
+display text fpSup[#######.]084
+display osd 1
+mem set 0xC0731E00 0xE302C070
+mem set 0xC0731E04 0xE34CC073
+mem set 0xC0731E08 0xE59C3000
+mem set 0xC0731E0C 0xE3A04000
+mem set 0xC0731E10 0xE1540003
+mem set 0xC0731E14 0x0A00000A
+mem set 0xC0731E18 0xE08CE104
+mem set 0xC0731E1C 0xE08EE184
+mem set 0xC0731E20 0xE59E5004
+mem set 0xC0731E24 0xE1550001
+mem set 0xC0731E28 0x1A000003
+mem set 0xC0731E2C 0xE59E5008
+mem set 0xC0731E30 0xE592E000
+mem set 0xC0731E34 0xE155000E
+mem set 0xC0731E38 0x0A00000C
+mem set 0xC0731E3C 0xE2844001
+mem set 0xC0731E40 0xEAFFFFF2
+mem set 0xC0731E44 0xE3530006
+mem set 0xC0731E48 0x2A000008
+mem set 0xC0731E4C 0xE08CE103
+mem set 0xC0731E50 0xE08EE183
+mem set 0xC0731E54 0xE58E1004
+mem set 0xC0731E58 0xE5924000
+mem set 0xC0731E5C 0xE58E4008
+mem set 0xC0731E60 0xE5924004
+mem set 0xC0731E64 0xE58E400C
+mem set 0xC0731E68 0xE2833001
+mem set 0xC0731E6C 0xE58C3000
+mem set 0xC0731E70 0xE8BD503C
+mem set 0xC0731E74 0xE92D4030
+mem set 0xC0731E78 0xE307CE9C
+mem set 0xC0731E7C 0xE34CC043
+mem set 0xC0731E80 0xE12FFF1C
+# og3ksel 計次歸零
+mem set 0xC0731C00 0x00000000
+# og3ksel 最後 enum 歸零
+mem set 0xC0731C04 0x00000000
+# OG3K 旗標 = 0(開機時未選)
+mem set 0xC0731C08 0x00000000
+# og3kout idx0 模板未建置
+mem set 0xC0732000 0x00000000
+# og3kout idx2 模板未建置
+mem set 0xC0732030 0x00000000
+# og3kout 命中數歸零
+mem set 0xC0732060 0x00000000
+# og3kout 拒絕環歸零
+mem set 0xC0732070 0x00000000
+# 格式表命中數歸零
+mem set 0xC0730700 0x00000000
+# 畫布計次歸零
+mem set 0xC072FA00 0x00000000
+# 預覽位址表:筆數
+mem set 0xC0732100 0x00000006
+# 預覽位址表 [0]
+mem set 0xC0732104 0xC0BDB9CC
+# 預覽位址表 [1]
+mem set 0xC0732108 0xC0BDBC28
+# 預覽位址表 [2]
+mem set 0xC073210C 0xC0BDBC60
+# 預覽位址表 [3]
+mem set 0xC0732110 0xC0BDBC8C
+# 預覽位址表 [4]
+mem set 0xC0732114 0xC0BDBC90
+# 預覽位址表 [5]
+mem set 0xC0732118 0xC0BDBC94
+# hook 畫布幾何
+mem set 0xC043A19C 0xEB0BD597
+# hook 解析度 setter
+mem set 0xC005C020 0xEA1B55F6
+# hook 長寬比 C0306EA0
+mem set 0xC0306EA0 0xEA10AB16
+# hook 長寬比 C0306EEC
+mem set 0xC0306EEC 0xEA10AB13
+display text fpSup[#######.]087
+display osd 1
+display text fpSup[#######.]087
+display osd 1
+# hook 主輸出描述子
+mem set 0xC0437E98 0xEA0BE798
+# hook picker(最後 arm)
+mem set 0xC043CCF8 0xEA0BCEC0
+display text fpSup[########]100
+display osd 1
+display text fpSup[########]100
+display osd 1
+display text OG3K!
+display osd 1
+display text OG3K!
+display osd 1
+display text OG3K!
+display osd 1
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+# pad: 固定大小,避免非截斷式覆寫留下舊指令
+######################################################

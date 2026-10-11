@@ -1,0 +1,19 @@
+screen: LV_CINE_MEDIUM
+  tagged 16380/50436 B  2057 KiB/s   tagged 32760/50436 B  1937 KiB/s   tagged 49140/50436 B  1986 KiB/s   tagged 50436/50436 B  1924 KiB/s   tagged 50436 bytes in 0.0s (1845 KiB/s)      
+  tagged 116/116 B  161 KiB/s   tagged 116 bytes in 0.0s (81 KiB/s)      
+  tagged 116/116 B  161 KiB/s   tagged 116 bytes in 0.0s (90 KiB/s)      
+screen: LV_CINE_MEDIUM
+  tagged 16380/50436 B  2223 KiB/s   tagged 32760/50436 B  2008 KiB/s   tagged 49140/50436 B  2104 KiB/s   tagged 50436/50436 B  2084 KiB/s   tagged 50436 bytes in 0.0s (1961 KiB/s)      
+  tagged 116/116 B  134 KiB/s   tagged 116 bytes in 0.0s (71 KiB/s)      
+  tagged 116/116 B  189 KiB/s   tagged 116 bytes in 0.0s (92 KiB/s)      
+{
+  "label": "reload-280-eightbit-observe",
+  "new_clips": [
+    "A001_050"
+  ],
+  "stop_sent": false,
+  "spontaneous_stop": true,
+  "standby_after": true,
+  "phase": "captured",
+  "record_log": "slot=1, cnt=3/600\nsize=131072*978816(119GB), free=80%, exFAT, UHS-II\ntime       : 2026/10/11 15:16:48 \nrec factor : Nothing \nui factor  : Nothing \nbattery    : OK \ntemp(BAT)  : OK \ntemp(BODY) : OK \ntemp(LCD)  : OK \ntemp(CMOS) : OK \nfile-size=757248, bulk-size=67108864(88.6)\nreq_cnt=94, fin_cnt=94, vbuf/94/131769, raw1\nrequest  ,finish   ,diff,gap ,reqcnt,fincnt,diff,sdb,MB/s\n     1130,     1425, 295,1130,     3,     1,   2,  1,   7\n     1686,     2158, 472, 261,    89,     4,  85,  5, 137\n     2159,     2183,  24,   1,    94,    89,   5,  6, 189\n"
+}

@@ -1,0 +1,42 @@
+gui seti SL_F_Bit 1
+OK:SL_F_Bit <- 1
+
+
+gui seti SL_F_Fps 4
+OK:SL_F_Fps <- 4
+
+
+gui gets SL_M_Tab
+OK:SL_M_Tab -> MODES (68)
+
+
+gui gets SL_M_Text
+OK:SL_M_Text -> M144 3968x2640
+
+
+mem get 0x4534FCA4,,4
+get : A:0x4534fca4, D:0x00000044
+
+
+mem get 0x4534FCC8,,80
+get : A:0x4534fcc8, D:0x645F8190
+get : A:0x4534fccc, D:0x7C7B067A
+get : A:0x4534fcd0, D:0x9765918E
+get : A:0x4534fcd4, D:0x0379986C
+get : A:0x4534fcd8, D:0x82616607
+get : A:0x4534fcdc, D:0x737E7D0A
+get : A:0x4534fce0, D:0x928F8574
+get : A:0x4534fce4, D:0xDB6EDA6D
+get : A:0x4534fce8, D:0xDC876B6A
+get : A:0x4534fcec, D:0x581BDD88
+get : A:0x4534fcf0, D:0x7F848362
+get : A:0x4534fcf4, D:0x71765980
+get : A:0x4534fcf8, D:0x68706F72
+get : A:0x4534fcfc, D:0x3A0B7569
+get : A:0x4534fd00, D:0x93868B67
+get : A:0x4534fd04, D:0x96959408
+get : A:0x4534fd08, D:0x0C098C38
+get : A:0x4534fd0c, D:0x00000000
+get : A:0x4534fd10, D:0xC6D4ADC8
+get : A:0x4534fd14, D:0xC6D4AE74
+

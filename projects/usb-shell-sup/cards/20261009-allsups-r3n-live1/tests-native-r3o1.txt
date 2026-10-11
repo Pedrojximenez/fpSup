@@ -1,0 +1,37 @@
+...........
+======================================================================
+FAIL: test_unfinished_features_cannot_dispatch_a_request (test_manage_page.ManagementPageTests) (page='FT_UPDATES', row=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/uishare/tab/test_manage_page.py", line 110, in test_unfinished_features_cannot_dispatch_a_request
+    self.assertFalse(any(F.u32(r, 0) == 0x10009
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_unfinished_features_cannot_dispatch_a_request (test_manage_page.ManagementPageTests) (page='FT_UPDATES', row=2)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/uishare/tab/test_manage_page.py", line 110, in test_unfinished_features_cannot_dispatch_a_request
+    self.assertFalse(any(F.u32(r, 0) == 0x10009
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_unfinished_features_cannot_dispatch_a_request (test_manage_page.ManagementPageTests) (page='FT_CARD', row=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/uishare/tab/test_manage_page.py", line 110, in test_unfinished_features_cannot_dispatch_a_request
+    self.assertFalse(any(F.u32(r, 0) == 0x10009
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_unfinished_features_cannot_dispatch_a_request (test_manage_page.ManagementPageTests) (page='FT_ABOUT', row=2)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/uishare/tab/test_manage_page.py", line 110, in test_unfinished_features_cannot_dispatch_a_request
+    self.assertFalse(any(F.u32(r, 0) == 0x10009
+AssertionError: True is not false
+
+----------------------------------------------------------------------
+Ran 12 tests in 18.651s
+
+FAILED (failures=4)

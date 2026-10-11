@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/live_camera.py", line 130, in <module>
+    shot(sys.argv[2])
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/live_camera.py", line 57, in shot
+    before = listing()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/live_camera.py", line 51, in listing
+    out = checked_sh(r'dir \DCIM\100SIGMA')
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/live_camera.py", line 34, in checked_sh
+    raise RuntimeError(f'Uncertain outcome; command will not be replayed: {line}: {reply}')
+RuntimeError: Uncertain outcome; command will not be replayed: dir \DCIM\100SIGMA: ERR shl cmd rc=-7(LIBUSB_ERROR_TIMEOUT) moved=0/64
+

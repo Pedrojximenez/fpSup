@@ -1,0 +1,46 @@
+fpGyroSup r26 compact three-slot resident logger isolation build
+Build date: 2026-08-31
+Camera/firmware: SIGMA fp Ver.5.02
+Build type: release AutoRun, no USB shell
+
+Purpose:
+- r25 cold-boot test A001_021 produced 311 continuous CinemaDNG frames but no
+  GCSV, JSON or GYR.  This rules out stale tasks, the r24 back-pressure probe
+  and the PGEN change: r25 already used the exact successful r23 PGEN.
+- r25's 3,776-byte resident logger ended at 0xC072EF24.  That is inside the
+  documented parking-stub allowance but crosses the newly suspected hidden
+  boundary at 0xC072EF00 by 36 bytes.
+- r26 preserves the ordered three-slot algorithm and only compacts its
+  resident code to test that boundary directly.
+
+Configuration:
+- Three fixed 32 KiB raw slots; producer claims only EMPTY slots and the writer
+  consumes the lowest READY sequence.
+- Producer and writer share one slot-offset table instead of carrying two
+  copies.  The READY scan and producer ring walk are instruction-equivalent
+  compact forms.
+- Slot state remains the ownership boundary.  Invalid C-slot metadata is no
+  longer cleared redundantly when C_STATE is set to EMPTY; it is initialized
+  before the slot can be published READY.
+- r23 four-digit lookup, fused gyro formatter, 64 KiB complete-line writes and
+  5 ms pacing are unchanged.
+- No back-pressure probe and no GYR recovery path.
+- PGEN.BIN is byte-for-byte identical to successful r23, SHA-256
+  3e729c0babe1fa0c9dad22e3e7292c8412d30f931b0717fe10c30f6696c0fcea.
+
+Interpretation:
+- If r26 creates GCSV and JSON, the resident logger crossed a real hidden
+  0xC072EF00 boundary in r24/r25; the three-slot queue itself is viable.
+- If neither file appears, the remaining suspect is three-slot resident
+  behavior or another earlier limit, not PGEN, probe state or warm boot.
+
+Verification:
+- All 56 format, queue, layout, lifecycle and safety tests pass.
+- Resident logger is 3,712 bytes, ending at 0xC072EEE4: 28 bytes below the
+  conservative 0xC072EF00 boundary and 208 bytes before the parking stub.
+- Compared with r25, resident code is 64 bytes smaller without changing the
+  queue capacity or card-write policy.
+- PGEN pool code is 47,736 bytes and 47,752 bytes on card, exactly r23.
+- AutoRun is byte-identical to r23/r25.  VSHL contains the compact three-slot
+  logger.
+- Experimental isolation build; not fp-gyro-sup-v1.1.

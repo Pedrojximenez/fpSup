@@ -1,0 +1,395 @@
+#!/usr/bin/env python3
+"""Gyro2 stage P0 under unicorn: the real loader v3 (fpSup's sloader, as the
+AutoRun spells it) loads 20GYR2.BIN from a card, then the hooked DMA call is
+run against real fp CinemaDNG headers placed in a template buffer.
+
+    python3 -B -m unittest test_gyr2
+
+Emulated only.  What this cannot tell: whether the camera's DMA sees the
+cleaned lines, the real tag-manager/request layouts at run time, timing in
+the MovRec task, and anything the stubbed DMA does differently.
+"""
+import pathlib, struct, sys, unittest
+
+HERE = pathlib.Path(__file__).resolve().parent
+ROOT = HERE.parents[1]
+V3 = ROOT / 'fpSup' / 'fp_usb_shell' / 'v3'
+sys.path.insert(0, str(HERE))
+sys.path.insert(0, str(V3))
+sys.path.insert(0, str(V3.parent))
+
+import test_v3 as V                        # noqa: E402  (fpSup, read-only)
+import build as G                          # noqa: E402
+
+try:
+    from unicorn.arm_const import (UC_ARM_REG_R0, UC_ARM_REG_R4, UC_ARM_REG_R5, UC_ARM_REG_R6,
+                                   UC_ARM_REG_R7, UC_ARM_REG_R8, UC_ARM_REG_R9, UC_ARM_REG_R10,
+                                   UC_ARM_REG_R11, UC_ARM_REG_SP, UC_ARM_REG_LR)
+except ImportError:                        # pragma: no cover
+    pass
+
+SITE, DMA, AFTER = 0xC038C77C, 0xC00FBB90, 0xC038C780
+MAGIC = b'FSGP'
+GAP = 64
+
+CAPTURES = ROOT / 'projects'
+SAMPLES = {
+    # name: path relative to projects/; the zero tail sizes are what find_tail must see
+    'fhd': 'gyro-sup/captures/fpGFTest_pre_stage4_20260817_2207/CINEMA/A001_001/A001_001_20260817_000244.DNG',
+    'og2k_small_tail': 'sensor-lab/build/og2k_3x3_20260924/A001_009/A001_009_20260924_000016.DNG',
+    'og3k120_moved_makernote': 'open-gate/captures/og3k120-defect-A001_182/A001_182_20260927_000001.DNG',
+}
+
+
+def find_sample(rel):
+    p = CAPTURES / rel
+    if p.exists():
+        return p
+    hits = list(ROOT.glob('**/' + pathlib.Path(rel).name))
+    hits = [h for h in hits if 'worktrees' not in h.parts]
+    return hits[0] if hits else None
+
+
+def header_of(path):
+    """The bytes the firmware's template holds: everything before the RAW."""
+    data = path.read_bytes()[:0x20000]
+    ifd = struct.unpack_from('<I', data, 4)[0]
+    n = struct.unpack_from('<H', data, ifd)[0]
+    for k in range(n):
+        tag, typ, cnt, val = struct.unpack_from('<HHII', data, ifd + 2 + 12 * k)
+        if tag == 0x111:
+            return data[:val]
+    raise ValueError('no StripOffsets')
+
+
+def expected_tail(hdr):
+    """Independent decode: (aligned offset of the 0x200 area's trailing zeros, their length)."""
+    def entries(off):
+        n = struct.unpack_from('<H', hdr, off)[0]
+        return {t: (ty, c, v) for t, ty, c, v in
+                (struct.unpack_from('<HHII', hdr, off + 2 + 12 * k) for k in range(n))}
+    root = entries(struct.unpack_from('<I', hdr, 4)[0])
+    exif = entries(root[0x8769][2])
+    _, mn_len, mn_off = exif[0x927C]
+    assert hdr[mn_off:mn_off + 8] == b'SIGMA\0\0\0'
+    mn = entries(mn_off + 10)
+    _, a_len, a_off = mn[0x200]
+    end = a_off + a_len
+    assert end <= mn_off + mn_len
+    i = end
+    while i > a_off and hdr[i - 1] == 0:
+        i -= 1
+    start = (i + 3) & ~3
+    return start, end - start
+
+
+class Cam(V.Camera):
+    """test_v3's camera plus the DMA the hook forwards to."""
+
+    def __init__(self, *a, **k):
+        super().__init__(*a, **k)
+        self.mu.mem_write(DMA, b'\x70\x47')            # bx lr (Thumb), as test_v3 does for its stubs
+        self.dmas = []
+
+    def _hook(self, mu, addr, size, data):
+        if addr == DMA:
+            r0 = self.r(UC_ARM_REG_R0)
+            src, dst, n, flags = struct.unpack('<4I', mu.mem_read(r0, 16))
+            self.dmas.append((r0, src, dst, n, flags, self.r(UC_ARM_REG_LR)))
+            mu.mem_write(dst, bytes(mu.mem_read(src, n)))
+            return self._ret(0)
+        return super()._hook(mu, addr, size, data)
+
+
+def sup_bytes(src=None):
+    import os
+    src = src or os.environ.get('GYR2_SRC')      # mutate.py points this at a mutated copy
+    sup, _ = G.build(src) if src else G.build()
+    return sup
+
+
+@unittest.skipIf(V.Uc is None or not V.IMAGE.exists(), 'needs unicorn and the image')
+class Load(unittest.TestCase):
+    def boot(self, *sups, stale=None):
+        files, dirs = V.card(*sups)
+        cam = Cam(files, dirs, stale=stale)
+        cam.boot()
+        return cam
+
+    def test_loads_and_hooks_the_dma_call_through_a_veneer(self):
+        cam = self.boot(('20GYR2.BIN', sup_bytes()))
+        names = [e for e in cam.log() if e[0] in ('LOADED', 'RELEASED')]
+        self.assertEqual(names[-1][0], 'LOADED', cam.log())
+        site = cam.w(SITE)
+        self.assertEqual(site >> 24, 0xEB, f'{site:#x} is not BL')
+        off = (site & 0xFFFFFF) << 2
+        veneer = (SITE + 8 + (off - (1 << 26) if off & (1 << 25) else off)) & 0xFFFFFFFF
+        self.assertTrue(V.cave.CAVE_ARENA <= veneer < V.cave.CAVE_ARENA_END)
+        self.assertEqual(cam.w(veneer), 0xE51FF004)
+        hook = cam.w(veneer + 4)
+        self.assertTrue(V.HEAP <= hook < V.HEAP + V.HEAP_SIZE, f'{hook:#x}')
+        # the layer below is the firmware's own DMA, as a Thumb target
+        self.assertIn((SITE, 4, struct.pack('<I', 0xFAF5BD03)), cam.journal())
+
+    def test_stacks_on_an_earlier_chain_layer(self):
+        other = 0xEB000000 | (((0xC072EF00 - (SITE + 8)) >> 2) & 0xFFFFFF)   # BL somewhere
+        first = V.test_sup('ZZZ1', [(SITE, 0xFAF5BD03, 1, other)])
+        cam = self.boot(('10OTHER.BIN', first), ('20GYR2.BIN', sup_bytes()))
+        kinds = [e[0] for e in cam.log()]
+        self.assertEqual(kinds.count('LOADED'), 2, cam.log())
+        self.assertNotIn('RELEASED', kinds)
+        self.assertNotEqual(cam.w(SITE), other, 'Gyro2 should be the outer layer')
+        # run the hook with a bad template: it must forward to the layer below
+        state = run_frame(cam, b'\0' * 0x400, count=1)
+        self.assertEqual(state['pc_after'], 0xC072EF00)
+
+    def test_an_exclusive_owner_makes_it_back_off_and_write_nothing(self):
+        owner = V.test_sup('ZZZ2', [(SITE, 0xFAF5BD03, 2, 0)])          # EXCL, claim only
+        cam = self.boot(('10OWNER.BIN', owner), ('20GYR2.BIN', sup_bytes()))
+        self.assertEqual(cam.w(SITE), 0xFAF5BD03)
+        self.assertIn('RELEASED', [e[0] for e in cam.log()])
+
+    def test_loads_beside_the_v3_lossless_sup_without_sharing_a_site(self):
+        loss = ROOT / 'projects/usb-shell-sup/cards/20261006-v3-step2-lossless/fpSup/10LOSS.BIN'
+        if not loss.exists():
+            self.skipTest('no v3 lossless card on this machine')
+        cam = self.boot(('10LOSS.BIN', loss.read_bytes()), ('20GYR2.BIN', sup_bytes()))
+        loaded = [e[3] for e in cam.log() if e[0] == 'LOADED']
+        self.assertEqual(loaded, ['10LOSS.BIN', '20GYR2.BIN'])
+        sites = [a for a, _, _ in cam.journal()]
+        self.assertEqual(sites.count(SITE), 1, 'only Gyro2 claims the header DMA')
+        # lossless takes the frame at the save call after the header copy
+        self.assertIn(0xC038BFF0, sites)
+        self.assertEqual(cam.w(SITE) >> 24, 0xEB)
+
+    def test_a_stale_hook_from_a_missed_power_off_is_repaired_then_rehooked(self):
+        stale = {SITE: 0xEB000001}
+        cam = self.boot(('20GYR2.BIN', sup_bytes()), stale=stale)
+        self.assertEqual(cam.w(SITE) >> 24, 0xEB)
+        self.assertNotEqual(cam.w(SITE), 0xEB000001)
+        self.assertIn('REPAIRED', [e[0] for e in cam.log()])
+
+
+def run_frame(cam, template_or_buf, count, req_frame=0x55, src=None, dst=None, n=None):
+    """Execute the site with the registers the firmware has there.  Returns a dict."""
+    mu = cam.mu
+    if src is None:
+        n = len(template_or_buf)
+        src = cam._alloc(n, 32)
+        mu.mem_write(src, bytes(template_or_buf))
+        dst = cam._alloc(n, 32)
+    req = getattr(cam, '_req', None) or cam._alloc(0x1200)
+    tag = getattr(cam, '_tag', None) or cam._alloc(0x200)
+    cam._req, cam._tag = req, tag
+    cam.put(req + 0x10FC, req_frame)
+    cam.put(tag + 0x174, count)
+    desc = V.STACK - 0x3000
+    mu.mem_write(desc, struct.pack('<4I', src, dst, n, 0x01000000))
+    sentinels = {UC_ARM_REG_R4: 0x44440004, UC_ARM_REG_R7: 0x77770007, UC_ARM_REG_R8: 0x88880008,
+                 UC_ARM_REG_R9: 0x99990009, UC_ARM_REG_R10: 0xAAAA000A, UC_ARM_REG_R11: 0xBBBB000B}
+    for reg, v in sentinels.items():
+        mu.reg_write(reg, v)
+    mu.reg_write(UC_ARM_REG_R5, req)
+    mu.reg_write(UC_ARM_REG_R6, tag)
+    mu.reg_write(UC_ARM_REG_R0, desc)
+    sp = V.STACK - 0x2000
+    mu.reg_write(UC_ARM_REG_SP, sp)
+    before = len(cam.dmas)
+    stop = {}
+
+    def until(mu_, addr, size, _):
+        if addr in (AFTER, 0xC072EF00):
+            stop['pc'] = addr
+            mu_.emu_stop()
+    h = mu.hook_add(V.UC_HOOK_CODE, until)
+    try:
+        mu.emu_start(SITE, 0, count=2_000_000)
+    finally:
+        mu.hook_del(h)
+        if cam.error:
+            raise cam.error
+    regs_ok = all(mu.reg_read(r) == v for r, v in sentinels.items()) and \
+        mu.reg_read(UC_ARM_REG_R5) == req and mu.reg_read(UC_ARM_REG_R6) == tag
+    return {'src': src, 'dst': dst, 'n': n, 'desc': desc, 'dmas': cam.dmas[before:],
+            'pc_after': stop.get('pc'), 'sp': mu.reg_read(UC_ARM_REG_SP), 'sp0': sp,
+            'regs_ok': regs_ok, 'tmpl': bytes(mu.mem_read(src, n)),
+            'frame': bytes(mu.mem_read(dst, n))}
+
+
+def block_at(buf, off):
+    f = struct.unpack_from('<4s11I16s', buf, off)
+    keys = ['magic', 'version', 'tag_count', 'req_frame', 'tick', 'frames', 'toff', 'tlen',
+            'src', 'dst', 'len', 'boot', 'pattern']
+    return dict(zip(keys, f))
+
+
+@unittest.skipIf(V.Uc is None or not V.IMAGE.exists(), 'needs unicorn and the image')
+class Frames(unittest.TestCase):
+    def camera(self):
+        files, dirs = V.card(('20GYR2.BIN', sup_bytes()))
+        cam = Cam(files, dirs)
+        cam.boot()
+        return cam
+
+    def sample(self, key):
+        p = find_sample(SAMPLES[key])
+        if p is None:
+            self.skipTest(f'sample {key} not on this machine')
+        return header_of(p)
+
+    def test_every_sample_gets_the_block_where_an_independent_decode_puts_it(self):
+        for key in SAMPLES:
+            with self.subTest(key):
+                hdr = self.sample(key)
+                toff, tlen = expected_tail(hdr)
+                cam = self.camera()
+                s = run_frame(cam, hdr, count=1, req_frame=7)
+                self.assertEqual(s['pc_after'], AFTER)
+                self.assertEqual(len(s['dmas']), 1)
+                d = s['dmas'][0]
+                self.assertEqual(d[:5], (s['desc'], s['src'], s['dst'], s['n'], 0x01000000))
+                self.assertEqual(d[5], AFTER, 'the DMA must return to the firmware, not to us')
+                self.assertTrue(s['regs_ok'])
+                self.assertEqual(s['sp'], s['sp0'])
+                woff = toff + GAP
+                b = block_at(s['frame'], woff)
+                self.assertEqual(b['magic'], MAGIC)
+                self.assertEqual((b['version'], b['tag_count'], b['req_frame'], b['frames']), (1, 1, 7, 1))
+                self.assertEqual((b['toff'], b['tlen']), (toff, tlen))
+                self.assertEqual((b['src'], b['dst'], b['len']), (s['src'], s['dst'], s['n']))
+                self.assertEqual(b['pattern'], bytes(range(0xA0, 0xB0)))
+                # nothing else in the header changed
+                self.assertEqual(s['frame'][:woff] + s['frame'][woff + 64:], hdr[:woff] + hdr[woff + 64:])
+                self.assertEqual(s['frame'], s['tmpl'], 'the frame is the template, block included')
+
+    def test_later_frames_update_the_same_place(self):
+        hdr = self.sample('fhd')
+        toff, _ = expected_tail(hdr)
+        cam = self.camera()
+        s1 = run_frame(cam, hdr, count=1, req_frame=10)
+        s2 = run_frame(cam, None, count=2, req_frame=11, src=s1['src'], dst=s1['dst'], n=s1['n'])
+        s3 = run_frame(cam, None, count=3, req_frame=12, src=s1['src'], dst=s1['dst'], n=s1['n'])
+        b2, b3 = block_at(s2['frame'], toff + GAP), block_at(s3['frame'], toff + GAP)
+        self.assertEqual((b2['tag_count'], b2['req_frame'], b2['frames']), (2, 11, 2))
+        self.assertEqual((b3['tag_count'], b3['req_frame'], b3['frames']), (3, 12, 3))
+        self.assertGreater(b3['tick'], b2['tick'])
+        self.assertEqual(s3['frame'].count(MAGIC), 1)
+
+    def test_a_new_take_parses_again(self):
+        hdr = self.sample('fhd')
+        cam = self.camera()
+        s1 = run_frame(cam, hdr, count=1)
+        run_frame(cam, None, count=2, src=s1['src'], dst=s1['dst'], n=s1['n'])
+        # next take: the template is serialized again (the block is gone) and
+        # the vendor area is longer this time, so the tail moved
+        other = bytearray(hdr)
+        toff, tlen = expected_tail(hdr)
+        other[toff:toff + 40] = b'\x11' * 40
+        cam.mu.mem_write(s1['src'], bytes(other))
+        s = run_frame(cam, None, count=1, src=s1['src'], dst=s1['dst'], n=s1['n'])
+        ntoff, ntlen = expected_tail(bytes(other))
+        self.assertGreater(ntoff, toff)
+        b = block_at(s['frame'], ntoff + GAP)
+        self.assertEqual((b['magic'], b['frames'], b['toff']), (MAGIC, 1, ntoff))
+
+    def test_a_pause_starts_a_new_take_even_when_the_counter_runs_on(self):
+        hdr = self.sample('fhd')
+        cam = self.camera()
+        s1 = run_frame(cam, hdr, count=3)
+        run_frame(cam, None, count=4, src=s1['src'], dst=s1['dst'], n=s1['n'])
+        other = bytearray(hdr)
+        toff, _ = expected_tail(hdr)
+        other[toff:toff + 40] = b'\x11' * 40          # the next take's vendor data is longer
+        cam.mu.mem_write(s1['src'], bytes(other))
+        cam.now += 2_000_000                            # two seconds between takes
+        s = run_frame(cam, None, count=5, src=s1['src'], dst=s1['dst'], n=s1['n'])
+        ntoff, _ = expected_tail(bytes(other))
+        b = block_at(s['frame'], ntoff + GAP)
+        self.assertEqual((b['magic'], b['frames'], b['toff']), (MAGIC, 1, ntoff))
+
+    def test_a_place_that_is_not_ours_is_left_alone_and_the_dma_still_runs(self):
+        hdr = self.sample('fhd')
+        toff, _ = expected_tail(hdr)
+        cam = self.camera()
+        s1 = run_frame(cam, hdr, count=1)
+        # someone else wrote into the same spot after our first frame
+        cam.mu.mem_write(s1['src'] + toff + GAP, b'XXXX' + b'\x22' * 60)
+        tail_after = bytes(cam.mu.mem_read(s1['src'], s1['n']))
+        s = run_frame(cam, None, count=2, src=s1['src'], dst=s1['dst'], n=s1['n'])
+        self.assertEqual(len(s['dmas']), 1)
+        # it re-parsed: the foreign bytes are now "vendor data", the tail
+        # starts after them, and the block went there instead
+        ntoff, _ = expected_tail(tail_after)
+        self.assertEqual(s['frame'][toff + GAP:toff + GAP + 4], b'XXXX')
+        self.assertEqual(block_at(s['frame'], ntoff + GAP)['magic'], MAGIC)
+
+    def test_garbage_templates_are_skipped_but_still_copied(self):
+        cam = self.camera()
+        for junk in (b'\0' * 0x400, b'MM\0\x2a' + b'\0' * 0x3FC, b'II*\0\x08\0\0\0' + b'\xFF' * 0x3F8):
+            with self.subTest(junk[:8]):
+                s = run_frame(cam, junk, count=1)
+                self.assertEqual(len(s['dmas']), 1)
+                self.assertEqual(s['frame'], junk)
+                self.assertEqual(s['pc_after'], AFTER)
+                self.assertTrue(s['regs_ok'])
+
+    def test_a_tail_too_short_for_the_block_is_skipped(self):
+        hdr = bytearray(self.sample('fhd'))
+        toff, tlen = expected_tail(bytes(hdr))
+        hdr[toff:toff + tlen - 100] = b'\x33' * (tlen - 100)     # leave 100 zero bytes
+        end = toff + tlen
+        # and make what follows the MakerNote zero too, so only the length
+        # check -- not the emptiness check -- stands between the block and
+        # the next tag's data
+        hdr[end:end + 256] = b'\0' * 256
+        cam = self.camera()
+        s = run_frame(cam, bytes(hdr), count=1)
+        self.assertEqual(s['frame'], bytes(hdr))
+        self.assertNotIn(MAGIC, s['frame'])
+
+
+@unittest.skipIf(V.Uc is None or not V.IMAGE.exists(), 'needs unicorn and the image')
+class Verifier(unittest.TestCase):
+    """verify_probe.py against frames the emulated hook produced."""
+
+    def frames(self, n, skip=None, reorder=False):
+        import tempfile, verify_probe
+        p = find_sample(SAMPLES['fhd'])
+        if p is None:
+            self.skipTest('no sample')
+        whole = p.read_bytes()
+        hdr = header_of(p)
+        files, dirs = V.card(('20GYR2.BIN', sup_bytes()))
+        cam = Cam(files, dirs)
+        cam.boot()
+        s = run_frame(cam, hdr, count=1, req_frame=94)
+        outs = [s['frame']]
+        for k in range(2, n + 1):
+            s = run_frame(cam, None, count=k, req_frame=(93 + k) % 96, src=s['src'], dst=s['dst'], n=s['n'])
+            outs.append(s['frame'])
+        if skip is not None:
+            outs[skip] = hdr                      # that frame lost its block
+        if reorder:
+            outs[1], outs[2] = outs[2], outs[1]
+        d = pathlib.Path(tempfile.mkdtemp(prefix='gyr2-clip-'))
+        for i, h in enumerate(outs):
+            (d / f'A001_001_20261006_{i:06d}.DNG').write_bytes(h + whole[len(h):len(h) + 4096])
+        return verify_probe, sorted(d.iterdir())
+
+    def test_a_good_clip_passes(self):
+        vp, paths = self.frames(5)
+        problems, rows = vp.check(paths)
+        self.assertEqual(problems, [])
+        self.assertEqual([b['req_frame'] for _, b in rows], [94, 95, 0, 1, 2])   # wraps like the camera's
+
+    def test_a_missing_block_and_a_swap_are_reported(self):
+        vp, paths = self.frames(5, skip=3)
+        problems, _ = vp.check(paths)
+        self.assertTrue(any('no probe block' in p for p in problems), problems)
+        vp, paths = self.frames(5, reorder=True)
+        problems, _ = vp.check(paths)
+        self.assertTrue(any('request index' in p for p in problems), problems)
+
+
+if __name__ == '__main__':
+    unittest.main()

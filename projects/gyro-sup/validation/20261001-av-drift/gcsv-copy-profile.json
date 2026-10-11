@@ -1,0 +1,221 @@
+{
+  "scope": "Actual default assembled gcsv_format plus gcsv_last; no yield define; synthetic 2048-record inputs. Counts are ARM instruction/memory-operation counts, not timing or actual CPU cycles.",
+  "blob_sha256": "91dca49db60ebfc629a7912a6ddad0a215e0067d7610f958a43387fa7b054259",
+  "blob_bytes": 14328,
+  "cases": [
+    {
+      "case": "small_axes_start",
+      "records": 2048,
+      "gyro_records": 2008,
+      "accel_records": 40,
+      "output_bytes": 23266,
+      "counts": {
+        "all_arm_instructions": 400398,
+        "held_write_bytes": 16064,
+        "held_write_instructions": 4016,
+        "put_u32_instructions": 213512,
+        "put_u32_calls": 8152,
+        "numeric_scratch_write_bytes": 13066,
+        "numeric_scratch_write_instructions": 10060,
+        "numeric_copy_loop_instructions": 52264,
+        "numeric_scratch_read_bytes": 13066,
+        "numeric_scratch_read_instructions": 13066,
+        "held_read_bytes": 12048,
+        "held_read_instructions": 6024,
+        "numeric_copy_loop_instruction_share": 0.13053012252808455
+      }
+    },
+    {
+      "case": "extreme_axes_later",
+      "records": 2048,
+      "gyro_records": 2008,
+      "accel_records": 40,
+      "output_bytes": 56984,
+      "counts": {
+        "all_arm_instructions": 777126,
+        "held_write_bytes": 16064,
+        "held_write_instructions": 4016,
+        "put_u32_instructions": 584216,
+        "put_u32_calls": 8152,
+        "numeric_scratch_write_bytes": 44776,
+        "numeric_scratch_write_instructions": 26464,
+        "numeric_copy_loop_instructions": 179104,
+        "numeric_scratch_read_bytes": 44776,
+        "numeric_scratch_read_instructions": 44776,
+        "held_read_bytes": 12048,
+        "held_read_instructions": 6024,
+        "numeric_copy_loop_instruction_share": 0.2304697050413961
+      }
+    }
+  ],
+  "individual_u32": [
+    {
+      "value": 0,
+      "digits": 1,
+      "counts": {
+        "all_arm_instructions": 20,
+        "put_u32_instructions": 20,
+        "put_u32_calls": 1,
+        "numeric_scratch_write_bytes": 1,
+        "numeric_scratch_write_instructions": 1,
+        "numeric_copy_loop_instructions": 4,
+        "numeric_scratch_read_bytes": 1,
+        "numeric_scratch_read_instructions": 1
+      }
+    },
+    {
+      "value": 9,
+      "digits": 1,
+      "counts": {
+        "all_arm_instructions": 20,
+        "put_u32_instructions": 20,
+        "put_u32_calls": 1,
+        "numeric_scratch_write_bytes": 1,
+        "numeric_scratch_write_instructions": 1,
+        "numeric_copy_loop_instructions": 4,
+        "numeric_scratch_read_bytes": 1,
+        "numeric_scratch_read_instructions": 1
+      }
+    },
+    {
+      "value": 10,
+      "digits": 2,
+      "counts": {
+        "all_arm_instructions": 26,
+        "put_u32_instructions": 26,
+        "put_u32_calls": 1,
+        "numeric_scratch_write_bytes": 2,
+        "numeric_scratch_write_instructions": 1,
+        "numeric_copy_loop_instructions": 8,
+        "numeric_scratch_read_bytes": 2,
+        "numeric_scratch_read_instructions": 2
+      }
+    },
+    {
+      "value": 99,
+      "digits": 2,
+      "counts": {
+        "all_arm_instructions": 26,
+        "put_u32_instructions": 26,
+        "put_u32_calls": 1,
+        "numeric_scratch_write_bytes": 2,
+        "numeric_scratch_write_instructions": 1,
+        "numeric_copy_loop_instructions": 8,
+        "numeric_scratch_read_bytes": 2,
+        "numeric_scratch_read_instructions": 2
+      }
+    },
+    {
+      "value": 100,
+      "digits": 3,
+      "counts": {
+        "all_arm_instructions": 43,
+        "put_u32_instructions": 43,
+        "put_u32_calls": 1,
+        "numeric_scratch_write_bytes": 3,
+        "numeric_scratch_write_instructions": 2,
+        "numeric_copy_loop_instructions": 12,
+        "numeric_scratch_read_bytes": 3,
+        "numeric_scratch_read_instructions": 3
+      }
+    },
+    {
+      "value": 999,
+      "digits": 3,
+      "counts": {
+        "all_arm_instructions": 43,
+        "put_u32_instructions": 43,
+        "put_u32_calls": 1,
+        "numeric_scratch_write_bytes": 3,
+        "numeric_scratch_write_instructions": 2,
+        "numeric_copy_loop_instructions": 12,
+        "numeric_scratch_read_bytes": 3,
+        "numeric_scratch_read_instructions": 3
+      }
+    },
+    {
+      "value": 1000,
+      "digits": 4,
+      "counts": {
+        "all_arm_instructions": 49,
+        "put_u32_instructions": 49,
+        "put_u32_calls": 1,
+        "numeric_scratch_write_bytes": 4,
+        "numeric_scratch_write_instructions": 2,
+        "numeric_copy_loop_instructions": 16,
+        "numeric_scratch_read_bytes": 4,
+        "numeric_scratch_read_instructions": 4
+      }
+    },
+    {
+      "value": 9999,
+      "digits": 4,
+      "counts": {
+        "all_arm_instructions": 49,
+        "put_u32_instructions": 49,
+        "put_u32_calls": 1,
+        "numeric_scratch_write_bytes": 4,
+        "numeric_scratch_write_instructions": 2,
+        "numeric_copy_loop_instructions": 16,
+        "numeric_scratch_read_bytes": 4,
+        "numeric_scratch_read_instructions": 4
+      }
+    },
+    {
+      "value": 10000,
+      "digits": 5,
+      "counts": {
+        "all_arm_instructions": 66,
+        "put_u32_instructions": 66,
+        "put_u32_calls": 1,
+        "numeric_scratch_write_bytes": 5,
+        "numeric_scratch_write_instructions": 3,
+        "numeric_copy_loop_instructions": 20,
+        "numeric_scratch_read_bytes": 5,
+        "numeric_scratch_read_instructions": 5
+      }
+    },
+    {
+      "value": 32768,
+      "digits": 5,
+      "counts": {
+        "all_arm_instructions": 66,
+        "put_u32_instructions": 66,
+        "put_u32_calls": 1,
+        "numeric_scratch_write_bytes": 5,
+        "numeric_scratch_write_instructions": 3,
+        "numeric_copy_loop_instructions": 20,
+        "numeric_scratch_read_bytes": 5,
+        "numeric_scratch_read_instructions": 5
+      }
+    },
+    {
+      "value": 999999,
+      "digits": 6,
+      "counts": {
+        "all_arm_instructions": 72,
+        "put_u32_instructions": 72,
+        "put_u32_calls": 1,
+        "numeric_scratch_write_bytes": 6,
+        "numeric_scratch_write_instructions": 3,
+        "numeric_copy_loop_instructions": 24,
+        "numeric_scratch_read_bytes": 6,
+        "numeric_scratch_read_instructions": 6
+      }
+    },
+    {
+      "value": 4294967295,
+      "digits": 10,
+      "counts": {
+        "all_arm_instructions": 118,
+        "put_u32_instructions": 118,
+        "put_u32_calls": 1,
+        "numeric_scratch_write_bytes": 10,
+        "numeric_scratch_write_instructions": 5,
+        "numeric_copy_loop_instructions": 40,
+        "numeric_scratch_read_bytes": 10,
+        "numeric_scratch_read_instructions": 10
+      }
+    }
+  ]
+}

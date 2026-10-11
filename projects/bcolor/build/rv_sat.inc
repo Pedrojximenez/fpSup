@@ -1,0 +1,8 @@
+/* 由 build_bcolor.py 產生,勿手改 */
+.equ NMAT, 4
+.equ NCM, 3
+sat_tab:
+    .word 0x00000024, 0xFED002C5, 0x0270006B, 0xFFC0FFD0, 0x002102BF, 0x0000FF20   /* FC / video */
+    .word 0x00000024, 0xFEC9038A, 0x0329FFAD, 0xFF2BFFAC, 0xFFF802E1, 0x0000FF27   /* BC / video */
+    .word 0x00000024, 0xFF8C0243, 0x02590031, 0xFFF3FFB4, 0xFFEA02CC, 0x0000FF4A   /* FC / extended */
+    .word 0x00000024, 0xFFAC02E1, 0x030DFF73, 0xFF6EFF85, 0xFFAF02F7, 0x0000FF5A   /* BC / extended */

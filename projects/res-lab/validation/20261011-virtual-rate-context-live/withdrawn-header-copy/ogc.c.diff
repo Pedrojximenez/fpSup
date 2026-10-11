@@ -1,0 +1,44 @@
+--- 
++++ 
+@@ -429,6 +429,33 @@
+     return 1;
+ }
+ 
++/* Development candidate: native traces show the recorder's FIFO spending
++ * milliseconds in C00FBB90 for each small DNG header, delaying write submission
++ * and descriptor release past vbuf. Use the firmware's synchronous CPU memcpy
++ * for an exact native-owned header in the uncached MEM1 domain. Pixel payload,
++ * file assembly, callbacks and descriptor ownership stay with the firmware.
++ * No settings getter, allocation, DMA control or notification in this path. */
++u32 ogc_hdrcopy(u8 *S, u32 params)
++{
++    if (!params || !SW(S, S_FLAG) || !SW(S, S_PICKOK) || !SW(S, S_CUR) || !SW(S, S_VR_UI)) return 0;
++    u32 off = SW(S, S_LAST_ENT), first = SW(S, S_ENTS), rank = SW(S, S_VRATE);
++    if (rank != 23976u && rank != 27972u) return 0;
++    if (off < first || off - first >= SW(S, S_NENT) * ENT_SIZE || ((off - first) & (ENT_SIZE - 1u))) return 0;
++    u32 e = (u32)(uintptr_t)S + off;
++    if (W(e + ENT_VRATE) != rank || W(e + ENT_ROW) + 1u != SW(S, S_CUR)) return 0;
++    u32 src = W(params), dst = W(params + 4), n = W(params + 8);
++    SW(S, S_HDR_COPY_SRC) = src;
++    SW(S, S_HDR_COPY_DST) = dst;
++    SW(S, S_HDR_COPY_BYTES) = n;
++    if (!n || n > 0x20000u || W(params + 12) || src != W(0xC358DBA8u) || n != W(0xC358DBA4u)) return 0;
++    if ((src | dst | n) & 3u) return 0;
++    if (src < 0x45000000u || dst < 0x45000000u || src > 0x60000000u - n || dst > 0x60000000u - n) return 0;
++    if (src < dst + n && dst < src + n) return 0;
++    ((fw3)0xC00FBDE0u)(dst, src, n);
++    SW(S, S_HDR_COPY_HITS)++;
++    return 1;
++}
++
+ enum { VT_TV = 0, VT_ANGLIST = 1, VT_ANGTV = 2 };
+ 
+ /* VT_TV: the slowest shutter's 1/n (0 = the firmware's own); VT_ANGLIST: the
+@@ -2479,6 +2506,7 @@
+     SW(S, FN_AC38) = (u32)(uintptr_t)&ogc_ac38;
+     SW(S, FN_FPS) = (u32)(uintptr_t)&ogc_fps;
+     SW(S, FN_RECRATE) = (u32)(uintptr_t)&ogc_recrate;
++    SW(S, FN_HDRCOPY) = (u32)(uintptr_t)&ogc_hdrcopy;
+     SW(S, FN_CMT) = (u32)(uintptr_t)&ogc_cmt;
+     SW(S, FN_SAVE) = (u32)(uintptr_t)&ogc_save;
+     SW(S, FN_QSREC) = (u32)(uintptr_t)&ogc_qsrec;

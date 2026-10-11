@@ -1,0 +1,136 @@
+diff --git a/gyro/build_base_card.py b/gyro/build_base_card.py
+index 0d39ad6..3a8674a 100644
+--- a/gyro/build_base_card.py
++++ b/gyro/build_base_card.py
+@@ -195,7 +195,7 @@ def sections(edition='base'):
+     return out
+ 
+ 
+-def launch(edition):
++def launch(edition, *, format_yield=False):
+     """The logger's bootstrap with the edition's writer appended to it.
+ 
+     One destination-zero section: stage2 leaves it where the file landed and
+@@ -207,6 +207,10 @@ def launch(edition):
+     the USB deploy uses, so the two blobs are the same bytes.
+     """
+     src, defines = EDITIONS[edition]
++    if format_yield:
++        if edition != 'gcsv':
++            raise ValueError('format yielding is a GCSV diagnostic only')
++        defines = (*defines, 'FPGYRO_FORMAT_YIELD_RECORDS=128')
+     code = assemble(HERE / src, defines)
+     code = R.patch_offsets(code, symbols(HERE / src, defines))
+     code += b'\x00' * (-len(code) % 4)
+@@ -269,6 +273,10 @@ def main():
+     ap = argparse.ArgumentParser()
+     ap.add_argument('--out', type=pathlib.Path, default=None)
+     ap.add_argument('--edition', choices=sorted(EDITIONS), default='base')
++    ap.add_argument('--format-yield', action='store_true',
++                    help='experimental GCSV audio-drift comparison: yield for '
++                         '1 ms after at most 128 records while formatting; '
++                         'keeps one card write per block, not a verified fix')
+     ap.add_argument('--store-boot', action='store_true',
+                     help='keep the loader in the camera\'s settings block, so '
+                          'every boot after the first is twenty-six commands. '
+@@ -309,6 +317,10 @@ def main():
+                     help='override the screen banner; a merged card is not '
+                          'the edition on its own and should not claim to be')
+     a = ap.parse_args()
++    if a.format_yield and a.edition != 'gcsv':
++        ap.error('--format-yield requires --edition gcsv')
++    if a.format_yield and a.out is None:
++        ap.error('--format-yield requires a separate --out directory')
+     out = a.out or (HERE / 'release' / a.edition)
+     secs = sections(a.edition)
+     # sections() no longer ends with an entry section -- the entry is the
+@@ -362,7 +374,7 @@ def main():
+     # its first byte.  build_autorun puts it in the file and names it in the
+     # header -- or, on a card that also carries the shell, in the trampoline
+     # that calls both.
+-    boot_blob, writer_len = launch(a.edition)
++    boot_blob, writer_len = launch(a.edition, format_yield=a.format_yield)
+     bf = tmp / 'gsup_launch.bin'
+     bf.write_bytes(boot_blob)
+     cmd += ['--boot-bin', f'{bf}:0']
+@@ -381,8 +393,17 @@ def main():
+     for at, blob, why in sorted(secs):
+         where = ('pool + 0x%05X' % at) if at < 0x40000000 else '0x%08X' % at
+         print(f'  {where:>16s}  {len(blob):5d}  {why}')
+-    (out / 'README.txt').write_text(
+-        READMES[a.edition].format(version=a.version))
++    readme = READMES[a.edition].format(version=a.version)
++    if a.format_yield:
++        readme = (
++            'EXPERIMENTAL AUDIO-DRIFT COMPARISON -- NOT A VERIFIED FIX\n\n'
++            'GCSV formatting yields for 1 ms after at most 128 records.\n'
++            'Writer priority and one card write per block are unchanged.\n'
++            'Compare original DNG/WAV start/end sync against a control built\n'
++            'from the same source. No on-camera audio-integrity claim is made.\n'
++            'The general release description below is not test evidence for\n'
++            'this candidate.\n\n' + readme)
++    (out / 'README.txt').write_text(readme)
+     vshl = out / 'fpSup.BIN'
+     autorun = out / 'AutoRun.txt'
+     print(f'\n  {autorun}  {len(autorun.read_text().splitlines())} commands')
+diff --git a/gyro/gcsv_rows.S b/gyro/gcsv_rows.S
+index 01241e7..0b6e230 100644
+--- a/gyro/gcsv_rows.S
++++ b/gyro/gcsv_rows.S
+@@ -49,6 +49,14 @@
+  * more for the reading, then a newline.  Fifty-four; sixty-four with room. */
+ .equ ROW_MAX,        64
+ 
++/* Optional scheduling diagnostic.  Keep the default and Base unchanged. */
++#if defined(FPGYRO_FORMAT_YIELD_RECORDS) && !defined(FPGYRO_EDITION_BASE)
++#if FPGYRO_FORMAT_YIELD_RECORDS < 1 || FPGYRO_FORMAT_YIELD_RECORDS > 65535
++#error FPGYRO_FORMAT_YIELD_RECORDS must be between 1 and 65535
++#endif
++#define GCSV_FORMAT_YIELD 1
++#endif
++
+ /* ------------------------------------------------------------------ digits */
+ 
+ /* Two decimal digits an entry, little-endian, so one strh emits both. */
+@@ -292,6 +300,10 @@ gcsv_emit:
+     .global gcsv_format
+ gcsv_format:
+     push    {r4, r5, r6, r7, r8, lr}
++#ifdef GCSV_FORMAT_YIELD
++    push    {r9, r10}                  @ preserve alignment at native calls
++    movw    r9, #FPGYRO_FORMAT_YIELD_RECORDS
++#endif
+     mov     r4, r0
+     mov     r5, r1
+     mov     r6, r2
+@@ -332,7 +344,20 @@ gcsv_format:
+     str     r0, [r8, #8]
+ 
+ 4:  add     r4, r4, #8
++gcsv_record_consumed:
+     sub     r5, r5, #1
++#ifdef GCSV_FORMAT_YIELD
++    /* No producer or media lock is held here.  Keep accumulating the same
++     * text buffer: writer_put still makes one write for the whole block. */
++    subs    r9, r9, #1
++    bne     1b
++    mov     r0, #1                     @ zero is not a scheduler yield
++    movw    ip, #:lower16:TK_DLY_TSK
++    movt    ip, #:upper16:TK_DLY_TSK
++gcsv_format_delay:
++    blx     ip
++    movw    r9, #FPGYRO_FORMAT_YIELD_RECORDS
++#endif
+     b       1b
+ 
+ 2:  /* Send the held row out with no reading, if there is one. */
+@@ -352,6 +377,9 @@ gcsv_format:
+ 
+ 9:  mov     r0, r6
+     mov     r1, r5                      @ what is left, not what was taken
++#ifdef GCSV_FORMAT_YIELD
++    pop     {r9, r10}
++#endif
+     pop     {r4, r5, r6, r7, r8, lr}
+     bx      lr
+ 

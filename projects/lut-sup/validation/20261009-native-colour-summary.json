@@ -1,0 +1,1332 @@
+{
+  "source_report": "projects/lut-sup/validation/20261009-native-mode-trial-05/report.json",
+  "source_report_sha256": "b3322e62c3e5c15e1c277e2c1d0aadb21f4292b449b6d4d22272978d52f5d816",
+  "source_ROM_sha256": "92a8ee993f6c3d66c251e88d45a2ccd5135c6cf7342717784321c2ed506e2fb4",
+  "status": "native-color-mode-trial-complete",
+  "original_state": {
+    "color_mode": 12,
+    "app_current": 2,
+    "is_recording": 0,
+    "stored_record_mode": 1,
+    "applied_record_mode": 1,
+    "relative_gain": 1170,
+    "boot_id": 4040737
+  },
+  "final_state": {
+    "color_mode": 12,
+    "app_current": 2,
+    "is_recording": 0,
+    "stored_record_mode": 1,
+    "applied_record_mode": 1,
+    "relative_gain": 1170,
+    "boot_id": 4040737
+  },
+  "restored": true,
+  "reference_unstable_excluded": {
+    "bank0_CUVAREA": [
+      "0x30211048",
+      "0x3021104c",
+      "0x30211050",
+      "0x30211054",
+      "0x30211058",
+      "0x3021105c"
+    ]
+  },
+  "OFF_first_vs_final_equal": true,
+  "samples": [
+    {
+      "enum": 12,
+      "name": "OFF",
+      "stable_changed_blocks": {},
+      "unstable_during_same_mode": {
+        "bank0_CUVAREA": [
+          "0x30211048",
+          "0x3021104c",
+          "0x30211050",
+          "0x30211054",
+          "0x30211058",
+          "0x3021105c"
+        ]
+      },
+      "RGBLMAT_2_diagonal_first_q9": [
+        512,
+        0,
+        0,
+        512,
+        0,
+        0,
+        512,
+        0,
+        0
+      ],
+      "exact_ROM_matrix_matches": [
+        {
+          "record": 12,
+          "key": "0x1"
+        },
+        {
+          "record": 13,
+          "key": "0x10"
+        },
+        {
+          "record": 14,
+          "key": "0x16"
+        },
+        {
+          "record": 15,
+          "key": "0x2"
+        },
+        {
+          "record": 16,
+          "key": "0x11"
+        },
+        {
+          "record": 17,
+          "key": "0x12"
+        },
+        {
+          "record": 18,
+          "key": "0x13"
+        },
+        {
+          "record": 19,
+          "key": "0x17"
+        },
+        {
+          "record": 20,
+          "key": "0x14"
+        },
+        {
+          "record": 21,
+          "key": "0x15"
+        },
+        {
+          "record": 34,
+          "key": "0x24"
+        }
+      ]
+    },
+    {
+      "enum": 0,
+      "name": "Standard",
+      "stable_changed_blocks": {
+        "bank0_RGBLMAT": [
+          {
+            "address": "0x30210cc8",
+            "off": "0x200",
+            "mode": "0x278"
+          },
+          {
+            "address": "0x30210ccc",
+            "off": "0x0",
+            "mode": "0x7e407a4"
+          },
+          {
+            "address": "0x30210cd0",
+            "off": "0x200",
+            "mode": "0x286"
+          },
+          {
+            "address": "0x30210cd4",
+            "off": "0x0",
+            "mode": "0x77a0000"
+          },
+          {
+            "address": "0x30210cd8",
+            "off": "0x200",
+            "mode": "0x236"
+          },
+          {
+            "address": "0x30210cdc",
+            "off": "0x0",
+            "mode": "0x7ca0000"
+          }
+        ],
+        "bank0_YCMAT": [
+          {
+            "address": "0x30210e78",
+            "off": "0x10003aa",
+            "mode": "0x10003fa"
+          },
+          {
+            "address": "0x30210e7c",
+            "off": "0x3d60100",
+            "mode": "0x3c80100"
+          }
+        ]
+      },
+      "unstable_during_same_mode": {
+        "bank0_PSTIGAM": [
+          "0x30210d18"
+        ],
+        "bank0_APSUP": [
+          "0x30210fbc",
+          "0x30210fc0",
+          "0x30210fc8",
+          "0x30210fcc",
+          "0x30210fd0"
+        ]
+      },
+      "RGBLMAT_2_diagonal_first_q9": [
+        632,
+        -92,
+        -28,
+        646,
+        0,
+        -134,
+        566,
+        0,
+        -54
+      ],
+      "exact_ROM_matrix_matches": [
+        {
+          "record": 11,
+          "key": "0x23"
+        }
+      ]
+    },
+    {
+      "enum": 1,
+      "name": "native_enum_1",
+      "stable_changed_blocks": {
+        "bank0_RGBLMAT": [
+          {
+            "address": "0x30210cc8",
+            "off": "0x200",
+            "mode": "0x249"
+          },
+          {
+            "address": "0x30210ccc",
+            "off": "0x0",
+            "mode": "0x7fb07bc"
+          },
+          {
+            "address": "0x30210cd0",
+            "off": "0x200",
+            "mode": "0x246"
+          },
+          {
+            "address": "0x30210cd4",
+            "off": "0x0",
+            "mode": "0x7c107f9"
+          },
+          {
+            "address": "0x30210cd8",
+            "off": "0x200",
+            "mode": "0x231"
+          },
+          {
+            "address": "0x30210cdc",
+            "off": "0x0",
+            "mode": "0x7d407fb"
+          }
+        ],
+        "bank0_YCMAT": [
+          {
+            "address": "0x30210e78",
+            "off": "0x10003aa",
+            "mode": "0x10003f9"
+          },
+          {
+            "address": "0x30210e7c",
+            "off": "0x3d60100",
+            "mode": "0x3bd0100"
+          }
+        ]
+      },
+      "unstable_during_same_mode": {},
+      "RGBLMAT_2_diagonal_first_q9": [
+        585,
+        -68,
+        -5,
+        582,
+        -7,
+        -63,
+        561,
+        -5,
+        -44
+      ],
+      "exact_ROM_matrix_matches": [
+        {
+          "record": 0,
+          "key": "0x3"
+        }
+      ]
+    },
+    {
+      "enum": 2,
+      "name": "native_enum_2",
+      "stable_changed_blocks": {
+        "bank0_RGBLMAT": [
+          {
+            "address": "0x30210cc8",
+            "off": "0x200",
+            "mode": "0x202"
+          },
+          {
+            "address": "0x30210ccc",
+            "off": "0x0",
+            "mode": "0x7ff07ff"
+          },
+          {
+            "address": "0x30210cd0",
+            "off": "0x200",
+            "mode": "0x202"
+          },
+          {
+            "address": "0x30210cd4",
+            "off": "0x0",
+            "mode": "0x7ff07ff"
+          },
+          {
+            "address": "0x30210cd8",
+            "off": "0x200",
+            "mode": "0x202"
+          },
+          {
+            "address": "0x30210cdc",
+            "off": "0x0",
+            "mode": "0x7ff07ff"
+          }
+        ],
+        "bank0_YCMAT": [
+          {
+            "address": "0x30210e78",
+            "off": "0x10003aa",
+            "mode": "0x10003f2"
+          },
+          {
+            "address": "0x30210e7c",
+            "off": "0x3d60100",
+            "mode": "0x3fe0100"
+          }
+        ]
+      },
+      "unstable_during_same_mode": {
+        "bank0_PSTIGAM": [
+          "0x30210d4c"
+        ]
+      },
+      "RGBLMAT_2_diagonal_first_q9": [
+        514,
+        -1,
+        -1,
+        514,
+        -1,
+        -1,
+        514,
+        -1,
+        -1
+      ],
+      "exact_ROM_matrix_matches": [
+        {
+          "record": 1,
+          "key": "0x5"
+        }
+      ]
+    },
+    {
+      "enum": 3,
+      "name": "native_enum_3",
+      "stable_changed_blocks": {
+        "bank0_RGBLMAT": [
+          {
+            "address": "0x30210cc8",
+            "off": "0x200",
+            "mode": "0x257"
+          },
+          {
+            "address": "0x30210ccc",
+            "off": "0x0",
+            "mode": "0x7e407c5"
+          },
+          {
+            "address": "0x30210cd0",
+            "off": "0x200",
+            "mode": "0x277"
+          },
+          {
+            "address": "0x30210cd4",
+            "off": "0x0",
+            "mode": "0x78e07fb"
+          },
+          {
+            "address": "0x30210cd8",
+            "off": "0x200",
+            "mode": "0x25a"
+          },
+          {
+            "address": "0x30210cdc",
+            "off": "0x0",
+            "mode": "0x7aa07fc"
+          }
+        ],
+        "bank0_YCMAT": [
+          {
+            "address": "0x30210e78",
+            "off": "0x10003aa",
+            "mode": "0x10003f8"
+          },
+          {
+            "address": "0x30210e7c",
+            "off": "0x3d60100",
+            "mode": "0x3b50100"
+          }
+        ]
+      },
+      "unstable_during_same_mode": {
+        "bank0_IGAMMA": [
+          "0x30210c90"
+        ],
+        "bank0_GAM_BAS": [
+          "0x30210dfc"
+        ],
+        "bank0_APSUP": [
+          "0x30210fc8",
+          "0x30210fcc",
+          "0x30210fd0",
+          "0x30210fd4"
+        ]
+      },
+      "RGBLMAT_2_diagonal_first_q9": [
+        599,
+        -59,
+        -28,
+        631,
+        -5,
+        -114,
+        602,
+        -4,
+        -86
+      ],
+      "exact_ROM_matrix_matches": [
+        {
+          "record": 2,
+          "key": "0x6"
+        }
+      ]
+    },
+    {
+      "enum": 4,
+      "name": "native_enum_4",
+      "stable_changed_blocks": {
+        "bank0_RGBLMAT": [
+          {
+            "address": "0x30210cc8",
+            "off": "0x200",
+            "mode": "0x26e"
+          },
+          {
+            "address": "0x30210ccc",
+            "off": "0x0",
+            "mode": "0x7ea07a8"
+          },
+          {
+            "address": "0x30210cd0",
+            "off": "0x200",
+            "mode": "0x2a5"
+          },
+          {
+            "address": "0x30210cd4",
+            "off": "0x0",
+            "mode": "0x77b07e0"
+          },
+          {
+            "address": "0x30210cd8",
+            "off": "0x200",
+            "mode": "0x22b"
+          },
+          {
+            "address": "0x30210cdc",
+            "off": "0x0",
+            "mode": "0x7d907fc"
+          }
+        ],
+        "bank0_YCMAT": [
+          {
+            "address": "0x30210e78",
+            "off": "0x10003aa",
+            "mode": "0x10003fe"
+          },
+          {
+            "address": "0x30210e7c",
+            "off": "0x3d60100",
+            "mode": "0x3c40100"
+          }
+        ]
+      },
+      "unstable_during_same_mode": {},
+      "RGBLMAT_2_diagonal_first_q9": [
+        622,
+        -88,
+        -22,
+        677,
+        -32,
+        -133,
+        555,
+        -4,
+        -39
+      ],
+      "exact_ROM_matrix_matches": [
+        {
+          "record": 3,
+          "key": "0x7"
+        }
+      ]
+    },
+    {
+      "enum": 5,
+      "name": "native_enum_5",
+      "stable_changed_blocks": {
+        "bank0_RGBLMAT": [
+          {
+            "address": "0x30210cc8",
+            "off": "0x200",
+            "mode": "0x21d"
+          },
+          {
+            "address": "0x30210ccc",
+            "off": "0x0",
+            "mode": "0x7ff07fc"
+          },
+          {
+            "address": "0x30210cd0",
+            "off": "0x200",
+            "mode": "0x1b2"
+          },
+          {
+            "address": "0x30210cd4",
+            "off": "0x0",
+            "mode": "0x7f30067"
+          },
+          {
+            "address": "0x30210cd8",
+            "off": "0x200",
+            "mode": "0xd6"
+          },
+          {
+            "address": "0x30210cdc",
+            "off": "0x0",
+            "mode": "0x98000a"
+          }
+        ],
+        "bank0_YCMAT": [
+          {
+            "address": "0x30210e78",
+            "off": "0x10003aa",
+            "mode": "0x16a0061"
+          },
+          {
+            "address": "0x30210e7c",
+            "off": "0x3d60100",
+            "mode": "0x38600bf"
+          }
+        ]
+      },
+      "unstable_during_same_mode": {
+        "bank0_PSTIGAM": [
+          "0x30210d18",
+          "0x30210d1c",
+          "0x30210d20",
+          "0x30210d24"
+        ]
+      },
+      "RGBLMAT_2_diagonal_first_q9": [
+        541,
+        -4,
+        -1,
+        434,
+        103,
+        -13,
+        214,
+        10,
+        152
+      ],
+      "exact_ROM_matrix_matches": [
+        {
+          "record": 4,
+          "key": "0x8"
+        }
+      ]
+    },
+    {
+      "enum": 6,
+      "name": "TealOrange",
+      "stable_changed_blocks": {
+        "bank0_RGBLMAT": [
+          {
+            "address": "0x30210cc8",
+            "off": "0x200",
+            "mode": "0x2ff"
+          },
+          {
+            "address": "0x30210ccc",
+            "off": "0x0",
+            "mode": "0x785077c"
+          },
+          {
+            "address": "0x30210cd0",
+            "off": "0x200",
+            "mode": "0x148"
+          },
+          {
+            "address": "0x30210cd4",
+            "off": "0x0",
+            "mode": "0xfa07be"
+          },
+          {
+            "address": "0x30210cd8",
+            "off": "0x200",
+            "mode": "0x2f1"
+          },
+          {
+            "address": "0x30210cdc",
+            "off": "0x0",
+            "mode": "0x7b5075a"
+          }
+        ],
+        "bank0_YCMAT": [
+          {
+            "address": "0x30210e78",
+            "off": "0x10003aa",
+            "mode": "0x10b03a9"
+          },
+          {
+            "address": "0x30210e7c",
+            "off": "0x3d60100",
+            "mode": "0x3d90103"
+          }
+        ]
+      },
+      "unstable_during_same_mode": {},
+      "RGBLMAT_2_diagonal_first_q9": [
+        767,
+        -132,
+        -123,
+        328,
+        -66,
+        250,
+        753,
+        -166,
+        -75
+      ],
+      "exact_ROM_matrix_matches": [
+        {
+          "record": 5,
+          "key": "0xa"
+        }
+      ]
+    },
+    {
+      "enum": 7,
+      "name": "native_enum_7",
+      "stable_changed_blocks": {
+        "bank0_RGBLMAT": [
+          {
+            "address": "0x30210cc8",
+            "off": "0x200",
+            "mode": "0x29c"
+          },
+          {
+            "address": "0x30210ccc",
+            "off": "0x0",
+            "mode": "0x7e807d6"
+          },
+          {
+            "address": "0x30210cd0",
+            "off": "0x200",
+            "mode": "0x22a"
+          },
+          {
+            "address": "0x30210cd4",
+            "off": "0x0",
+            "mode": "0x7d70000"
+          },
+          {
+            "address": "0x30210cd8",
+            "off": "0x200",
+            "mode": "0x206"
+          },
+          {
+            "address": "0x30210cdc",
+            "off": "0x0",
+            "mode": "0x7f00000"
+          }
+        ],
+        "bank0_YCMAT": [
+          {
+            "address": "0x30210e78",
+            "off": "0x10003aa",
+            "mode": "0x10003fb"
+          },
+          {
+            "address": "0x30210e7c",
+            "off": "0x3d60100",
+            "mode": "0x3bb0100"
+          }
+        ]
+      },
+      "unstable_during_same_mode": {
+        "bank0_PSTIGAM": [
+          "0x30210d4c"
+        ]
+      },
+      "RGBLMAT_2_diagonal_first_q9": [
+        668,
+        -42,
+        -24,
+        554,
+        0,
+        -41,
+        518,
+        0,
+        -16
+      ],
+      "exact_ROM_matrix_matches": [
+        {
+          "record": 6,
+          "key": "0xb"
+        }
+      ]
+    },
+    {
+      "enum": 8,
+      "name": "native_enum_8",
+      "stable_changed_blocks": {
+        "bank0_RGBLMAT": [
+          {
+            "address": "0x30210cc8",
+            "off": "0x200",
+            "mode": "0x289"
+          },
+          {
+            "address": "0x30210ccc",
+            "off": "0x0",
+            "mode": "0x7f40783"
+          },
+          {
+            "address": "0x30210cd0",
+            "off": "0x200",
+            "mode": "0x25d"
+          },
+          {
+            "address": "0x30210cd4",
+            "off": "0x0",
+            "mode": "0x7ab07f8"
+          },
+          {
+            "address": "0x30210cd8",
+            "off": "0x200",
+            "mode": "0x21f"
+          },
+          {
+            "address": "0x30210cdc",
+            "off": "0x0",
+            "mode": "0x7e607fb"
+          }
+        ],
+        "bank0_YCMAT": [
+          {
+            "address": "0x30210e78",
+            "off": "0x10003aa",
+            "mode": "0x10003e4"
+          },
+          {
+            "address": "0x30210e7c",
+            "off": "0x3d60100",
+            "mode": "0x3c60100"
+          }
+        ]
+      },
+      "unstable_during_same_mode": {},
+      "RGBLMAT_2_diagonal_first_q9": [
+        649,
+        -125,
+        -12,
+        605,
+        -8,
+        -85,
+        543,
+        -5,
+        -26
+      ],
+      "exact_ROM_matrix_matches": [
+        {
+          "record": 7,
+          "key": "0xc"
+        }
+      ]
+    },
+    {
+      "enum": 9,
+      "name": "FOVBlue",
+      "stable_changed_blocks": {
+        "bank0_RGBLMAT": [
+          {
+            "address": "0x30210cc8",
+            "off": "0x200",
+            "mode": "0x210"
+          },
+          {
+            "address": "0x30210ccc",
+            "off": "0x0",
+            "mode": "0x7f00000"
+          },
+          {
+            "address": "0x30210cd0",
+            "off": "0x200",
+            "mode": "0x2aa"
+          },
+          {
+            "address": "0x30210cd4",
+            "off": "0x0",
+            "mode": "0x7560000"
+          },
+          {
+            "address": "0x30210cd8",
+            "off": "0x200",
+            "mode": "0x242"
+          },
+          {
+            "address": "0x30210cdc",
+            "off": "0x0",
+            "mode": "0x7be0000"
+          }
+        ],
+        "bank0_YCMAT": [
+          {
+            "address": "0x30210e78",
+            "off": "0x10003aa",
+            "mode": "0x10003fc"
+          },
+          {
+            "address": "0x30210e7c",
+            "off": "0x3d60100",
+            "mode": "0x3ba0100"
+          }
+        ]
+      },
+      "unstable_during_same_mode": {},
+      "RGBLMAT_2_diagonal_first_q9": [
+        528,
+        0,
+        -16,
+        682,
+        0,
+        -170,
+        578,
+        0,
+        -66
+      ],
+      "exact_ROM_matrix_matches": [
+        {
+          "record": 9,
+          "key": "0xe"
+        }
+      ]
+    },
+    {
+      "enum": 10,
+      "name": "native_enum_10",
+      "stable_changed_blocks": {
+        "bank0_RGBLMAT": [
+          {
+            "address": "0x30210cc8",
+            "off": "0x200",
+            "mode": "0x241"
+          },
+          {
+            "address": "0x30210ccc",
+            "off": "0x0",
+            "mode": "0x7b8"
+          },
+          {
+            "address": "0x30210cd0",
+            "off": "0x200",
+            "mode": "0x20d"
+          },
+          {
+            "address": "0x30210cd4",
+            "off": "0x0",
+            "mode": "0x7f3"
+          },
+          {
+            "address": "0x30210cd8",
+            "off": "0x200",
+            "mode": "0x217"
+          },
+          {
+            "address": "0x30210cdc",
+            "off": "0x0",
+            "mode": "0x7e90000"
+          }
+        ],
+        "bank0_YCMAT": [
+          {
+            "address": "0x30210e78",
+            "off": "0x10003aa",
+            "mode": "0x10003a8"
+          },
+          {
+            "address": "0x30210e7c",
+            "off": "0x3d60100",
+            "mode": "0x3a60100"
+          }
+        ]
+      },
+      "unstable_during_same_mode": {
+        "bank0_APSUP": [
+          "0x30210fbc",
+          "0x30210fc8",
+          "0x30210fcc",
+          "0x30210fd0",
+          "0x30210fd4"
+        ]
+      },
+      "RGBLMAT_2_diagonal_first_q9": [
+        577,
+        -72,
+        0,
+        525,
+        -13,
+        0,
+        535,
+        0,
+        -23
+      ],
+      "exact_ROM_matrix_matches": [
+        {
+          "record": 10,
+          "key": "0xf"
+        }
+      ]
+    },
+    {
+      "enum": 11,
+      "name": "native_enum_11",
+      "stable_changed_blocks": {
+        "bank0_YCMAT": [
+          {
+            "address": "0x30210e78",
+            "off": "0x10003aa",
+            "mode": "0x10003fa"
+          },
+          {
+            "address": "0x30210e7c",
+            "off": "0x3d60100",
+            "mode": "0x3c80100"
+          }
+        ],
+        "bank0_CSUP": [
+          {
+            "address": "0x30211098",
+            "off": "0x210348",
+            "mode": "0x348"
+          },
+          {
+            "address": "0x3021109c",
+            "off": "0x20370",
+            "mode": "0x370"
+          },
+          {
+            "address": "0x302110a0",
+            "off": "0x2203c0",
+            "mode": "0x3c0"
+          }
+        ],
+        "bank0_C_SAT_C": [
+          {
+            "address": "0x30211280",
+            "off": "0x31a0100",
+            "mode": "0x4000400"
+          },
+          {
+            "address": "0x30211284",
+            "off": "0x3d6039a",
+            "mode": "0x4000400"
+          },
+          {
+            "address": "0x30211288",
+            "off": "0x40003f6",
+            "mode": "0x4000400"
+          },
+          {
+            "address": "0x302112a4",
+            "off": "0x5a01c0",
+            "mode": "0x0"
+          },
+          {
+            "address": "0x302112a8",
+            "off": "0x160026",
+            "mode": "0x0"
+          },
+          {
+            "address": "0x302112ac",
+            "off": "0xa",
+            "mode": "0x0"
+          }
+        ]
+      },
+      "unstable_during_same_mode": {
+        "bank0_CEQ_YGAM": [
+          "0x30212160"
+        ]
+      },
+      "RGBLMAT_2_diagonal_first_q9": [
+        512,
+        0,
+        0,
+        512,
+        0,
+        0,
+        512,
+        0,
+        0
+      ],
+      "exact_ROM_matrix_matches": [
+        {
+          "record": 12,
+          "key": "0x1"
+        },
+        {
+          "record": 13,
+          "key": "0x10"
+        },
+        {
+          "record": 14,
+          "key": "0x16"
+        },
+        {
+          "record": 15,
+          "key": "0x2"
+        },
+        {
+          "record": 16,
+          "key": "0x11"
+        },
+        {
+          "record": 17,
+          "key": "0x12"
+        },
+        {
+          "record": 18,
+          "key": "0x13"
+        },
+        {
+          "record": 19,
+          "key": "0x17"
+        },
+        {
+          "record": 20,
+          "key": "0x14"
+        },
+        {
+          "record": 21,
+          "key": "0x15"
+        },
+        {
+          "record": 34,
+          "key": "0x24"
+        }
+      ]
+    },
+    {
+      "enum": 13,
+      "name": "PowderBlue",
+      "stable_changed_blocks": {
+        "bank0_RGBLMAT": [
+          {
+            "address": "0x30210cc8",
+            "off": "0x200",
+            "mode": "0x1f8"
+          },
+          {
+            "address": "0x30210ccc",
+            "off": "0x0",
+            "mode": "0x7de07ff"
+          },
+          {
+            "address": "0x30210cd0",
+            "off": "0x200",
+            "mode": "0x12f"
+          },
+          {
+            "address": "0x30210cd4",
+            "off": "0x0",
+            "mode": "0x43008e"
+          },
+          {
+            "address": "0x30210cd8",
+            "off": "0x200",
+            "mode": "0x210"
+          },
+          {
+            "address": "0x30210cdc",
+            "off": "0x0",
+            "mode": "0x7670079"
+          }
+        ],
+        "bank0_YCMAT": [
+          {
+            "address": "0x30210e78",
+            "off": "0x10003aa",
+            "mode": "0x10f03d3"
+          },
+          {
+            "address": "0x30210e7c",
+            "off": "0x3d60100",
+            "mode": "0x3ea01a4"
+          }
+        ]
+      },
+      "unstable_during_same_mode": {
+        "bank0_CEQ_CLIP": [
+          "0x30212264"
+        ]
+      },
+      "RGBLMAT_2_diagonal_first_q9": [
+        504,
+        -1,
+        -34,
+        303,
+        142,
+        67,
+        528,
+        121,
+        -153
+      ],
+      "exact_ROM_matrix_matches": [
+        {
+          "record": 8,
+          "key": "0xd"
+        }
+      ]
+    },
+    {
+      "enum": 14,
+      "name": "native_enum_14",
+      "stable_changed_blocks": {
+        "bank0_RGBLMAT": [
+          {
+            "address": "0x30210cb0",
+            "off": "0x200",
+            "mode": "0x8e"
+          },
+          {
+            "address": "0x30210cb4",
+            "off": "0x0",
+            "mode": "0x44012e"
+          },
+          {
+            "address": "0x30210cb8",
+            "off": "0x200",
+            "mode": "0x12e"
+          },
+          {
+            "address": "0x30210cbc",
+            "off": "0x0",
+            "mode": "0x44008e"
+          },
+          {
+            "address": "0x30210cc0",
+            "off": "0x200",
+            "mode": "0x44"
+          },
+          {
+            "address": "0x30210cc4",
+            "off": "0x0",
+            "mode": "0x12e008e"
+          },
+          {
+            "address": "0x30210cc8",
+            "off": "0x200",
+            "mode": "0x8e"
+          },
+          {
+            "address": "0x30210ccc",
+            "off": "0x0",
+            "mode": "0x44012e"
+          },
+          {
+            "address": "0x30210cd0",
+            "off": "0x200",
+            "mode": "0x12e"
+          },
+          {
+            "address": "0x30210cd4",
+            "off": "0x0",
+            "mode": "0x44008e"
+          },
+          {
+            "address": "0x30210cd8",
+            "off": "0x200",
+            "mode": "0x44"
+          },
+          {
+            "address": "0x30210cdc",
+            "off": "0x0",
+            "mode": "0x12e008e"
+          }
+        ],
+        "bank0_APSUP": [
+          {
+            "address": "0x30210fcc",
+            "off": "0x1cc",
+            "mode": "0x401cc"
+          },
+          {
+            "address": "0x30210fd0",
+            "off": "0x1023a",
+            "mode": "0x4023a"
+          }
+        ],
+        "bank0_CSUP": [
+          {
+            "address": "0x30211098",
+            "off": "0x210348",
+            "mode": "0x348"
+          },
+          {
+            "address": "0x3021109c",
+            "off": "0x20370",
+            "mode": "0x370"
+          },
+          {
+            "address": "0x302110a0",
+            "off": "0x2203c0",
+            "mode": "0x3c0"
+          }
+        ],
+        "bank0_C_SAT_C": [
+          {
+            "address": "0x30211280",
+            "off": "0x31a0100",
+            "mode": "0x4000400"
+          },
+          {
+            "address": "0x30211284",
+            "off": "0x3d6039a",
+            "mode": "0x4000400"
+          },
+          {
+            "address": "0x30211288",
+            "off": "0x40003f6",
+            "mode": "0x4000400"
+          },
+          {
+            "address": "0x302112a4",
+            "off": "0x5a01c0",
+            "mode": "0x0"
+          },
+          {
+            "address": "0x302112a8",
+            "off": "0x160026",
+            "mode": "0x0"
+          },
+          {
+            "address": "0x302112ac",
+            "off": "0xa",
+            "mode": "0x0"
+          }
+        ]
+      },
+      "unstable_during_same_mode": {
+        "bank0_APSUP": [
+          "0x30210ff4",
+          "0x30210ff8"
+        ]
+      },
+      "RGBLMAT_2_diagonal_first_q9": [
+        142,
+        302,
+        68,
+        302,
+        142,
+        68,
+        68,
+        142,
+        302
+      ],
+      "exact_ROM_matrix_matches": [
+        {
+          "record": 23,
+          "key": "0x19"
+        }
+      ]
+    },
+    {
+      "enum": 15,
+      "name": "native_enum_15",
+      "stable_changed_blocks": {
+        "bank0_RGBLMAT": [
+          {
+            "address": "0x30210cc8",
+            "off": "0x200",
+            "mode": "0x2b4"
+          },
+          {
+            "address": "0x30210ccc",
+            "off": "0x0",
+            "mode": "0x7c607e6"
+          },
+          {
+            "address": "0x30210cd0",
+            "off": "0x200",
+            "mode": "0x242"
+          },
+          {
+            "address": "0x30210cd4",
+            "off": "0x0",
+            "mode": "0x7c507f9"
+          },
+          {
+            "address": "0x30210cd8",
+            "off": "0x200",
+            "mode": "0x203"
+          },
+          {
+            "address": "0x30210cdc",
+            "off": "0x0",
+            "mode": "0x7980016"
+          }
+        ]
+      },
+      "unstable_during_same_mode": {
+        "bank0_C_SAT_C": [
+          "0x3021129c",
+          "0x302112a0",
+          "0x302112a4",
+          "0x302112a8",
+          "0x302112ac"
+        ],
+        "bank0_CEQ_CLIP": [
+          "0x30212230",
+          "0x30212234"
+        ]
+      },
+      "RGBLMAT_2_diagonal_first_q9": [
+        692,
+        -26,
+        -58,
+        578,
+        -7,
+        -59,
+        515,
+        22,
+        -104
+      ],
+      "exact_ROM_matrix_matches": [
+        {
+          "record": 32,
+          "key": "0x9"
+        }
+      ]
+    }
+  ],
+  "method": "Only words equal in all three same-mode reads and all four OFF reads enter stable_changed_blocks. Sequential native reads, not atomic frames. No pixel measurement.",
+  "direct_memory_writes": false,
+  "injected_code": false,
+  "new_cube_applied": false,
+  "camera_file_written": false,
+  "recording_started": false
+}

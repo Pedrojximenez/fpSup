@@ -1,0 +1,108 @@
+diff --git a/gyro/gcsvgen.S b/gyro/gcsvgen.S
+index 6f7d2e4..5e5c0ee 100644
+--- a/gyro/gcsvgen.S
++++ b/gyro/gcsvgen.S
+@@ -45,6 +45,11 @@
+                                      the stream is continuous; 0 = first block.  Lives
+                                      in the dormant third slot record's unused +4 word
+                                      (0x1DC): two-slot only, never S_C_STATE at 0x1D8. */
++.equ ST_ORIGIN,       0x58        /* r41: TickTimer when the gcsv was opened, i.e. when
++                                   * the first DNG was confirmed -- the take's t=0.
++                                   * (0x1F8; 0x1E4..0x1F4 belong to the observer) */
++.equ ST_ROW_START,    0x5C        /* r41: text pointer at the start of the current row,
++                                   * so a row that predates the origin can be unwritten */
+ .equ ST_PREV_DROPPED, 0x40        /* S_DROPPED as of the previous block (0x1E0, dormant
+                                      S_C_FIRST in two-slot).  Unchanged = the grid is
+                                      continuous, whatever the anchor's latency.         */
+@@ -78,6 +83,8 @@
+ .equ F_CLOSE,         0xC0366020
+ .equ F_DTOR,          0xC0365ED0
+ .equ F_SEEK,          0xC03661E0
++.equ F_EXIF_ORIENT,   0xC00C9B48  /* EXIF Orientation from the attitude sensor: 1/3/6/8 */
++.equ GCSV_ORIENT_OFF, 76          /* "xyz" inside gcsv_head1                          */
+ .equ ACCEL_CACHE,     0xC377790C  /* i16 X, Y, Z, axis-remapped by the firmware */
+ .equ ACCEL_REC,       12          /* u32 us, i16 x, i16 y, i16 z, i16 pad       */
+ #ifdef FPGYRO_GCSV_STREAM
+@@ -663,6 +670,30 @@ gcsv_stream_path_id:
+     mov     r1, r5
+     bl      put_str
+     mov     r5, r0
++    /* r40: the IMU is bolted to the sensor, but the frame that reaches the
++     * stabiliser is rotated the way the DNG Orientation tag says (Resolve does
++     * it for the Gyroflow OFX; Gyroflow's own DNG preview does too), so the
++     * IMU->camera mapping has to rotate with it.  Ask the same firmware getter
++     * the DNG writer uses (1 normal, 3 upside down, 6 rotate 90 CW, 8 rotate
++     * 90 CCW) and patch the three letters in the header just written.
++     * 8 -> Yxz was confirmed end to end (Resolve + Gyroflow OFX on A001_014:
++     * residual motion 2.52 -> 0.37 px, xyz 2.35); 6 -> yXz by headless render
++     * of A001_015; 3 -> XYz follows by symmetry and is untested. */
++    ldr_addr ip, F_EXIF_ORIENT
++    blx     ip
++    adr     r1, gcsv_orient_table
++    cmp     r0, #3
++    addeq   r1, r1, #3
++    cmp     r0, #6
++    addeq   r1, r1, #6
++    cmp     r0, #8
++    addeq   r1, r1, #9
++    ldrb    r2, [r1]
++    strb    r2, [r6, #GCSV_ORIENT_OFF]
++    ldrb    r2, [r1, #1]
++    strb    r2, [r6, #GCSV_ORIENT_OFF + 1]
++    ldrb    r2, [r1, #2]
++    strb    r2, [r6, #GCSV_ORIENT_OFF + 2]
+     add     r0, r10, #O_PATH
+     add     r0, r0, #6
+     mov     r1, r5
+@@ -691,10 +722,22 @@ gcsv_stream_header_tail:
+     str     r0, [r7, #ST_NEXT_EXPECT]
+     str     r0, [r7, #ST_PREV_DROPPED]
+     bl      gcsv_stream_acc_refresh
++    /* r41: the timeline's origin is now, not the callback's attach.  The writer
++     * opens the gcsv only once O_LC_STATE is 4 (first DNG confirmed), so this
++     * TickTimer read is within ~15 ms of the first frame existing on the card,
++     * and Gyroflow's default "rough gyro offset 0" is right for every take.
++     * Rows recorded before this instant are formatted and then unwritten. */
++    movw    ip, #0xB6E0
++    movt    ip, #0xC002
++    blx     ip
++    str     r0, [r7, #ST_ORIGIN]
+     mov     r0, #1
+     dmb     ish
+     str     r0, [r7, #ST_OPEN]
+     b       gcsv_stream_return
++gcsv_orient_table:
++    .ascii  "xyzXYzyXzYxz"              /* EXIF 1, 3, 6, 8 -- within adr range of the open path */
++    .align  2
+ 
+ gcsv_stream_block:
+     mov     r4, r1
+@@ -726,8 +769,9 @@ gcsv_stream_block:
+     cmp     r8, r0
+     bhi     gcsv_stream_fail
+     ldr     r9, [r4, #8]
+-    ldr     r11, [r10, #S_START_US]
+-    sub     r9, r9, r11                  @ unsigned time since record start
++    add     r11, r10, #O_STREAM_STATE
++    ldr     r11, [r11, #ST_ORIGIN]       @ r41: time since the first DNG, not since attach
++    sub     r9, r9, r11                  @ (negative, as signed, for pre-origin rows)
+ 
+     /* Seam continuity.  Each block's anchor comes from the callback's TickTimer
+      * read, which trails the last sample by its own latency (0..1 ms), so block
+@@ -823,6 +867,7 @@ gcsv_stream_seeded:
+ gcsv_stream_sample:
+     cmp     r8, #0
+     beq     gcsv_stream_acc_tail
++    str     r5, [r11, #ST_ROW_START]     @ r41: remember where this row's text starts
+ 
+     /* 1250 Hz output: average two adjacent 2500 Hz samples per row.  This is a
+      * two-tap anti-alias box filter, not decimation-by-drop: (s0+s1)>>1 halts
+@@ -949,6 +994,8 @@ gcsv_stream_acc_fourcol:
+ gcsv_stream_acc_newline:
+     mov     r0, #10
+     strb    r0, [r5], #1
++    cmp     r9, #0                       @ r41: a row from before the first DNG is
++    ldrlt   r5, [r11, #ST_ROW_START]     @ unwritten -- state advanced, text discarded
+ 
+     cmp     r8, #2                       @ same test the head used: pair vs lone tail
+     blo     gcsv_stream_step_one

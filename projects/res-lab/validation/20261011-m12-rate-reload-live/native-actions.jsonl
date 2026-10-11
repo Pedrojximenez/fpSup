@@ -1,0 +1,634 @@
+{"time": "2026-10-11T14:17:22.519870", "command": "status get is_recording", "reply": "ERR shl cmd rc=-4(LIBUSB_ERROR_NO_DEVICE) moved=0/64\n"}
+{"time": "2026-10-11T14:21:36.150069", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T14:21:58.931974", "command": "gui geti MV_FrameRate", "reply": "OK:MV_FrameRate -> 9\n\n"}
+{"time": "2026-10-11T14:21:58.932435", "command": "gui geti EXCL_FrameRate", "reply": "OK:EXCL_FrameRate -> 0\n\n"}
+{"time": "2026-10-11T14:21:58.933045", "command": "menu SetMovFramerate", "reply": "7\n\n"}
+{"time": "2026-10-11T14:21:58.933712", "command": "menu SetMovCinemaDNGQuality", "reply": "0\n\n"}
+{"time": "2026-10-11T14:21:58.936475", "command": "sdcard slot", "reply": "slot now slot = sd0\n\n"}
+{"time": "2026-10-11T14:21:58.937791", "command": "dir", "reply": "                                          .\n2026/10/07  10:20:36 <DIR>                .Spotlight-V100\n2026/10/10  11:59:52 <DIR>                CINEMA\n2026/10/10  11:38:46 <DIR>                fpSup\n2026/10/10  11:39:22                 4096 ._fpSup\n2025/12/31  08:00:00                 4666 AutoRun.txt\n2026/10/10  11:39:22                 4096 ._AutoRun.txt\n2026/10/07  15:00:02 <DIR>                .Trashes\n2026/10/10  18:14:18 <DIR>                DCIM\n2026/10/10  11:39:46 <DIR>                .fseventsd\n"}
+{"time": "2026-10-11T14:21:58.945575", "command": "dir \\fpSup", "reply": "                                          .\n2026/10/11  13:09:10               182720 32RESCUS.BIN\n2026/10/10  11:39:20                 4096 ._32RESCUS.BIN\n2026/10/10  11:38:46 <DIR>                UI\n2026/10/10  11:39:20                 4096 ._UI\n2025/12/31  08:00:00                29276 LOADER.BIN\n2026/10/10  11:39:20                 4096 ._LOADER.BIN\n2025/12/31  08:00:00                 4208 20GYR2.BIN\n2026/10/10  11:39:20                 4096 ._20GYR2.BIN\n2026/10/11  11:29:04                38644 45RAWV.BIN\n2026/10/10  11:39:20                 4096 ._45RAWV.BIN\n2025/12/31  08:00:00                25936 40FLIP.BIN\n2026/10/10  11:39:20                 4096 ._40FLIP.BIN\n2026/10/11  13:11:24                70944 10LOSS.BIN\n2026/10/10  11:39:22                 4096 ._10LOSS.BIN\n2025/12/31  08:00:00                 4552 00SHELL.BIN\n2026/10/10  11:39:22                 4096 ._00SHELL.BIN\n2026/10/10  11:38:46 <DIR>                RESCUS\n2026/10/10  11:39:22                 4096 ._RESCUS\n2025/12/31  08:00:00               609720 50RESLAB.BIN\n2026/10/10  11:39:22                 4096 ._50RESLAB.BIN\n2026/10/11  13:09:24                 4096 LOAD.LOG\n"}
+{"time": "2026-10-11T14:21:58.946719", "command": "rec log-out", "reply": "slot=5, cnt=4/600\nsize=524288*3906772(1907GB), free=41%, exFAT, 5000Mbps\ntime       : 2026/10/11 13:12:19 \nrec factor : Nothing \nui factor  : Nothing \nbattery    : OK \ntemp(BAT)  : OK \ntemp(BODY) : OK \ntemp(LCD)  : OK \ntemp(CMOS) : OK \nfile-size=1095168, bulk-size=67108864(61.3)\nreq_cnt=94, fin_cnt=94, vbuf/94/539394, raw1\nrequest  ,finish   ,diff,gap ,reqcnt,fincnt,diff,sdb,MB/s\n     1535,     1626,  91,1535,     5,     1,   4,  1,  60\n     1857,     2030, 173, 231,    48,     6,  42,  7, 272\n     2052,     2224, 172,  22,    91,    48,  43, 49, 280\n     2226,     2242,  16,   2,    94,    91,   3, 50, 273\n"}
+{"time": "2026-10-11T14:22:50.691761", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T14:22:50.692327", "command": "sdcard slot", "reply": "slot now slot = sd0\n\n"}
+{"time": "2026-10-11T14:22:50.696890", "command": "dir \\fpSup", "reply": "                                          .\n2026/10/11  13:09:10               182720 32RESCUS.BIN\n2026/10/10  11:39:20                 4096 ._32RESCUS.BIN\n2026/10/10  11:38:46 <DIR>                UI\n2026/10/10  11:39:20                 4096 ._UI\n2025/12/31  08:00:00                29276 LOADER.BIN\n2026/10/10  11:39:20                 4096 ._LOADER.BIN\n2025/12/31  08:00:00                 4208 20GYR2.BIN\n2026/10/10  11:39:20                 4096 ._20GYR2.BIN\n2026/10/11  11:29:04                38644 45RAWV.BIN\n2026/10/10  11:39:20                 4096 ._45RAWV.BIN\n2025/12/31  08:00:00                25936 40FLIP.BIN\n2026/10/10  11:39:20                 4096 ._40FLIP.BIN\n2026/10/11  13:11:24                70944 10LOSS.BIN\n2026/10/10  11:39:22                 4096 ._10LOSS.BIN\n2025/12/31  08:00:00                 4552 00SHELL.BIN\n2026/10/10  11:39:22                 4096 ._00SHELL.BIN\n2026/10/10  11:38:46 <DIR>                RESCUS\n2026/10/10  11:39:22                 4096 ._RESCUS\n2025/12/31  08:00:00               609720 50RESLAB.BIN\n2026/10/10  11:39:22                 4096 ._50RESLAB.BIN\n2026/10/11  13:09:24                 4096 LOAD.LOG\n"}
+{"time": "2026-10-11T14:22:50.698470", "command": "dir", "reply": "                                          .\n2026/10/07  10:20:36 <DIR>                .Spotlight-V100\n2026/10/10  11:59:52 <DIR>                CINEMA\n2026/10/10  11:38:46 <DIR>                fpSup\n2026/10/10  11:39:22                 4096 ._fpSup\n2025/12/31  08:00:00                 4666 AutoRun.txt\n2026/10/10  11:39:22                 4096 ._AutoRun.txt\n2026/10/07  15:00:02 <DIR>                .Trashes\n2026/10/10  18:14:18 <DIR>                DCIM\n2026/10/10  11:39:46 <DIR>                .fseventsd\n"}
+{"time": "2026-10-11T14:22:50.699132", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T14:22:52.191129", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T14:22:52.427375", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T14:22:52.622610", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T14:22:53.123098", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T14:22:54.195415", "command": "dir \\fpSup", "reply": "                                          .\n2026/10/11  13:09:10               182720 32RESCUS.BIN\n2026/10/10  11:39:20                 4096 ._32RESCUS.BIN\n2026/10/10  11:38:46 <DIR>                UI\n2026/10/10  11:39:20                 4096 ._UI\n2025/12/31  08:00:00                29276 LOADER.BIN\n2026/10/10  11:39:20                 4096 ._LOADER.BIN\n2025/12/31  08:00:00                 4208 20GYR2.BIN\n2026/10/10  11:39:20                 4096 ._20GYR2.BIN\n2026/10/11  11:29:04                38644 45RAWV.BIN\n2026/10/10  11:39:20                 4096 ._45RAWV.BIN\n2025/12/31  08:00:00                25936 40FLIP.BIN\n2026/10/10  11:39:20                 4096 ._40FLIP.BIN\n2026/10/11  13:11:24                70944 10LOSS.BIN\n2026/10/10  11:39:22                 4096 ._10LOSS.BIN\n2025/12/31  08:00:00                 4552 00SHELL.BIN\n2026/10/10  11:39:22                 4096 ._00SHELL.BIN\n2026/10/10  11:38:46 <DIR>                RESCUS\n2026/10/10  11:39:22                 4096 ._RESCUS\n2025/12/31  08:00:00               609720 50RESLAB.BIN\n2026/10/10  11:39:22                 4096 ._50RESLAB.BIN\n2026/10/11  13:09:24                 4096 LOAD.LOG\n"}
+{"time": "2026-10-11T14:22:54.428459", "command": "dir \\fpSup", "reply": "                                          .\n2026/10/11  14:23:52               183104 32RESCUS.BIN\n2026/10/10  11:39:20                 4096 ._32RESCUS.BIN\n2026/10/10  11:38:46 <DIR>                UI\n2026/10/10  11:39:20                 4096 ._UI\n2025/12/31  08:00:00                29276 LOADER.BIN\n2026/10/10  11:39:20                 4096 ._LOADER.BIN\n2025/12/31  08:00:00                 4208 20GYR2.BIN\n2026/10/10  11:39:20                 4096 ._20GYR2.BIN\n2026/10/11  11:29:04                38644 45RAWV.BIN\n2026/10/10  11:39:20                 4096 ._45RAWV.BIN\n2025/12/31  08:00:00                25936 40FLIP.BIN\n2026/10/10  11:39:20                 4096 ._40FLIP.BIN\n2026/10/11  13:11:24                70944 10LOSS.BIN\n2026/10/10  11:39:22                 4096 ._10LOSS.BIN\n2025/12/31  08:00:00                 4552 00SHELL.BIN\n2026/10/10  11:39:22                 4096 ._00SHELL.BIN\n2026/10/10  11:38:46 <DIR>                RESCUS\n2026/10/10  11:39:22                 4096 ._RESCUS\n2025/12/31  08:00:00               609720 50RESLAB.BIN\n2026/10/10  11:39:22                 4096 ._50RESLAB.BIN\n2026/10/11  13:09:24                 4096 LOAD.LOG\n"}
+{"time": "2026-10-11T14:22:54.433432", "command": "dir \\fpSup", "reply": "                                          .\n2026/10/11  14:23:52               183104 32RESCUS.BIN\n2026/10/10  11:39:20                 4096 ._32RESCUS.BIN\n2026/10/10  11:38:46 <DIR>                UI\n2026/10/10  11:39:20                 4096 ._UI\n2025/12/31  08:00:00                29276 LOADER.BIN\n2026/10/10  11:39:20                 4096 ._LOADER.BIN\n2025/12/31  08:00:00                 4208 20GYR2.BIN\n2026/10/10  11:39:20                 4096 ._20GYR2.BIN\n2026/10/11  11:29:04                38644 45RAWV.BIN\n2026/10/10  11:39:20                 4096 ._45RAWV.BIN\n2025/12/31  08:00:00                25936 40FLIP.BIN\n2026/10/10  11:39:20                 4096 ._40FLIP.BIN\n2026/10/11  13:11:24                70944 10LOSS.BIN\n2026/10/10  11:39:22                 4096 ._10LOSS.BIN\n2025/12/31  08:00:00                 4552 00SHELL.BIN\n2026/10/10  11:39:22                 4096 ._00SHELL.BIN\n2026/10/10  11:38:46 <DIR>                RESCUS\n2026/10/10  11:39:22                 4096 ._RESCUS\n2025/12/31  08:00:00               609720 50RESLAB.BIN\n2026/10/10  11:39:22                 4096 ._50RESLAB.BIN\n2026/10/11  13:09:24                 4096 LOAD.LOG\n"}
+{"time": "2026-10-11T14:22:54.434343", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T14:22:54.636076", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T14:22:54.746296", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T14:22:54.882953", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T14:23:34.861592", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T14:23:35.269050", "command": "reboot", "reply": "ERR shl frame0 rc=-1(LIBUSB_ERROR_IO) moved=0/64\n"}
+{"time": "2026-10-11T14:24:02.281733", "command": "status get is_recording", "reply": "ERR shl claim iface 0 rc=-3(LIBUSB_ERROR_ACCESS)\n"}
+{"time": "2026-10-11T14:52:59.069571", "command": "gui geti SL_LabTab", "reply": "OK:SL_LabTab -> 1\n\n"}
+{"time": "2026-10-11T14:52:59.070070", "command": "gui geti SL_M_Sel", "reply": "OK:SL_M_Sel -> 1\n\n"}
+{"time": "2026-10-11T14:52:59.070669", "command": "gui geti MV_FrameRate", "reply": "OK:MV_FrameRate -> 9\n\n"}
+{"time": "2026-10-11T14:52:59.071304", "command": "gui geti MV_Resolution", "reply": "OK:MV_Resolution -> 7\n\n"}
+{"time": "2026-10-11T14:52:59.127784", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T14:52:59.288567", "command": "gui geti MV_FrameRate", "reply": "OK:MV_FrameRate -> 9\n\n"}
+{"time": "2026-10-11T14:52:59.288943", "command": "gui geti EXCL_FrameRate", "reply": "OK:EXCL_FrameRate -> 0\n\n"}
+{"time": "2026-10-11T14:52:59.289452", "command": "menu SetMovFramerate", "reply": "7\n\n"}
+{"time": "2026-10-11T14:52:59.290059", "command": "menu SetMovCinemaDNGQuality", "reply": "0\n\n"}
+{"time": "2026-10-11T14:53:36.539297", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T14:53:36.594304", "command": "gui geti MV_FrameRate", "reply": "OK:MV_FrameRate -> 9\n\n"}
+{"time": "2026-10-11T14:53:36.594696", "command": "gui geti EXCL_FrameRate", "reply": "OK:EXCL_FrameRate -> 0\n\n"}
+{"time": "2026-10-11T14:53:36.595189", "command": "menu SetMovFramerate", "reply": "7\n\n"}
+{"time": "2026-10-11T14:53:36.595627", "command": "menu SetMovCinemaDNGQuality", "reply": "0\n\n"}
+{"time": "2026-10-11T14:53:37.024520", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T14:53:37.586105", "command": "key MENUON", "reply": "\n"}
+{"time": "2026-10-11T14:53:37.899173", "command": "key MENUOFF", "reply": "\n"}
+{"time": "2026-10-11T14:53:46.000699", "command": "gui geti MENU_Level2", "reply": "OK:MENU_Level2 -> 4765\n\n"}
+{"time": "2026-10-11T14:53:46.001137", "command": "gui geti B2_n5_ListFocus4", "reply": "OK:B2_n5_ListFocus4 -> 9\n\n"}
+{"time": "2026-10-11T14:54:18.234301", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T14:54:18.302110", "command": "key LEFTON", "reply": "\n"}
+{"time": "2026-10-11T14:54:18.425796", "command": "key LEFTOFF", "reply": "\n"}
+{"time": "2026-10-11T14:54:19.148317", "command": "key LEFTON", "reply": "\n"}
+{"time": "2026-10-11T14:54:19.274161", "command": "key LEFTOFF", "reply": "\n"}
+{"time": "2026-10-11T14:54:19.997820", "command": "key LEFTON", "reply": "\n"}
+{"time": "2026-10-11T14:54:20.121674", "command": "key LEFTOFF", "reply": "\n"}
+{"time": "2026-10-11T14:54:20.844730", "command": "key LEFTON", "reply": "\n"}
+{"time": "2026-10-11T14:54:20.969891", "command": "key LEFTOFF", "reply": "\n"}
+{"time": "2026-10-11T14:54:45.497080", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T14:54:45.497748", "command": "key UPON", "reply": "\n"}
+{"time": "2026-10-11T14:54:45.623767", "command": "key UPOFF", "reply": "\n"}
+{"time": "2026-10-11T14:54:46.282485", "command": "key UPON", "reply": "\n"}
+{"time": "2026-10-11T14:54:46.408262", "command": "key UPOFF", "reply": "\n"}
+{"time": "2026-10-11T14:54:47.385713", "command": "key LEFTON", "reply": "\n"}
+{"time": "2026-10-11T14:54:47.508556", "command": "key LEFTOFF", "reply": "\n"}
+{"time": "2026-10-11T14:55:13.017959", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T14:55:13.406701", "command": "key LEFTON", "reply": "\n"}
+{"time": "2026-10-11T14:55:13.532393", "command": "key LEFTOFF", "reply": "\n"}
+{"time": "2026-10-11T14:55:14.562758", "command": "key LEFTON", "reply": "\n"}
+{"time": "2026-10-11T14:55:14.688608", "command": "key LEFTOFF", "reply": "\n"}
+{"time": "2026-10-11T14:55:15.891231", "command": "key LEFTON", "reply": "\n"}
+{"time": "2026-10-11T14:55:16.017083", "command": "key LEFTOFF", "reply": "\n"}
+{"time": "2026-10-11T14:55:17.194504", "command": "key LEFTON", "reply": "\n"}
+{"time": "2026-10-11T14:55:17.320408", "command": "key LEFTOFF", "reply": "\n"}
+{"time": "2026-10-11T14:55:18.284506", "command": "key LEFTON", "reply": "\n"}
+{"time": "2026-10-11T14:55:18.406328", "command": "key LEFTOFF", "reply": "\n"}
+{"time": "2026-10-11T14:55:19.766438", "command": "key LEFTON", "reply": "\n"}
+{"time": "2026-10-11T14:55:19.887817", "command": "key LEFTOFF", "reply": "\n"}
+{"time": "2026-10-11T14:55:20.919798", "command": "key LEFTON", "reply": "\n"}
+{"time": "2026-10-11T14:55:21.044710", "command": "key LEFTOFF", "reply": "\n"}
+{"time": "2026-10-11T14:55:22.072132", "command": "key LEFTON", "reply": "\n"}
+{"time": "2026-10-11T14:55:22.193249", "command": "key LEFTOFF", "reply": "\n"}
+{"time": "2026-10-11T14:55:23.244346", "command": "key LEFTON", "reply": "\n"}
+{"time": "2026-10-11T14:55:23.367420", "command": "key LEFTOFF", "reply": "\n"}
+{"time": "2026-10-11T14:55:24.025397", "command": "key DOWNON", "reply": "\n"}
+{"time": "2026-10-11T14:55:24.150945", "command": "key DOWNOFF", "reply": "\n"}
+{"time": "2026-10-11T14:56:07.924909", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T14:56:07.925570", "command": "key DOWNON", "reply": "\n"}
+{"time": "2026-10-11T14:56:08.051360", "command": "key DOWNOFF", "reply": "\n"}
+{"time": "2026-10-11T14:56:09.391803", "command": "key RIGHTON", "reply": "\n"}
+{"time": "2026-10-11T14:56:09.517653", "command": "key RIGHTOFF", "reply": "\n"}
+{"time": "2026-10-11T14:56:10.240973", "command": "gui geti MENU_Level2", "reply": "OK:MENU_Level2 -> 4247\n\n"}
+{"time": "2026-10-11T14:56:10.241581", "command": "gui geti MV_FrameRate", "reply": "OK:MV_FrameRate -> 9\n\n"}
+{"time": "2026-10-11T14:58:39.504044", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T14:58:39.504766", "command": "key DOWNON", "reply": "\n"}
+{"time": "2026-10-11T14:58:39.635499", "command": "key DOWNOFF", "reply": "\n"}
+{"time": "2026-10-11T14:58:40.290514", "command": "key DOWNON", "reply": "\n"}
+{"time": "2026-10-11T14:58:40.467760", "command": "key DOWNOFF", "reply": "\n"}
+{"time": "2026-10-11T14:58:41.130623", "command": "key DOWNON", "reply": "\n"}
+{"time": "2026-10-11T14:58:41.261279", "command": "key DOWNOFF", "reply": "\n"}
+{"time": "2026-10-11T14:58:41.981961", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T14:58:41.984407", "command": "gui geti MENU_Level2", "reply": "OK:MENU_Level2 -> 4434\n\n"}
+{"time": "2026-10-11T14:58:41.984940", "command": "key RIGHTON", "reply": "\n"}
+{"time": "2026-10-11T14:58:42.175439", "command": "key RIGHTOFF", "reply": "\n"}
+{"time": "2026-10-11T14:58:42.830127", "command": "gui geti B2_n5_ListFocus4", "reply": "OK:B2_n5_ListFocus4 -> 9\n\n"}
+{"time": "2026-10-11T14:58:42.830782", "command": "key UPON", "reply": "\n"}
+{"time": "2026-10-11T14:58:42.961493", "command": "key UPOFF", "reply": "\n"}
+{"time": "2026-10-11T14:58:43.618291", "command": "gui geti B2_n5_ListFocus4", "reply": "OK:B2_n5_ListFocus4 -> 8\n\n"}
+{"time": "2026-10-11T14:58:43.707711", "command": "key OKON", "reply": "\n"}
+{"time": "2026-10-11T14:58:43.838288", "command": "key OKOFF", "reply": "\n"}
+{"time": "2026-10-11T14:58:44.494618", "command": "gui geti MV_FrameRate", "reply": "OK:MV_FrameRate -> 8\n\n"}
+{"time": "2026-10-11T14:58:44.557390", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T14:58:44.627408", "command": "key MENUON", "reply": "\n"}
+{"time": "2026-10-11T14:58:44.910960", "command": "key MENUOFF", "reply": "\n"}
+{"time": "2026-10-11T14:58:45.628369", "command": "key MENUON", "reply": "\n"}
+{"time": "2026-10-11T14:58:45.811867", "command": "key MENUOFF", "reply": "\n"}
+{"time": "2026-10-11T14:59:02.403083", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T14:59:02.904742", "command": "key MENUON", "reply": "\n"}
+{"time": "2026-10-11T14:59:03.199867", "command": "key MENUOFF", "reply": "\n"}
+{"time": "2026-10-11T14:59:03.922168", "command": "gui geti MV_FrameRate", "reply": "OK:MV_FrameRate -> 8\n\n"}
+{"time": "2026-10-11T15:00:18.977040", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:00:20.241434", "command": "key MENUON", "reply": "\n"}
+{"time": "2026-10-11T15:00:21.051224", "command": "key MENUOFF", "reply": "\n"}
+{"time": "2026-10-11T15:00:47.631839", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:00:47.683748", "command": "gui geti MV_FrameRate", "reply": "OK:MV_FrameRate -> 8\n\n"}
+{"time": "2026-10-11T15:00:47.684058", "command": "gui geti EXCL_FrameRate", "reply": "OK:EXCL_FrameRate -> 0\n\n"}
+{"time": "2026-10-11T15:00:47.684439", "command": "menu SetMovFramerate", "reply": "7\n\n"}
+{"time": "2026-10-11T15:00:47.684889", "command": "menu SetMovCinemaDNGQuality", "reply": "0\n\n"}
+{"time": "2026-10-11T15:00:48.155276", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:00:48.158614", "command": "status get app_current", "reply": "app_current -> 2\n\n"}
+{"time": "2026-10-11T15:00:48.160396", "command": "sdcard slot", "reply": "slot now slot = sd0\n\n"}
+{"time": "2026-10-11T15:00:48.171992", "command": "dir \\CINEMA", "reply": "                                          .\n2026/10/10  12:33:14 <DIR>                A001_001\n2026/10/10  12:34:24 <DIR>                A001_002\n2026/10/10  12:35:10 <DIR>                A001_003\n2026/10/10  12:36:24 <DIR>                A001_004\n2026/10/10  12:36:46 <DIR>                A001_005\n2026/10/10  12:37:14 <DIR>                A001_006\n2026/10/10  12:37:42 <DIR>                A001_007\n2026/10/10  12:37:56 <DIR>                A001_008\n2026/10/10  12:38:06 <DIR>                A001_009\n2026/10/10  12:38:18 <DIR>                A001_010\n2026/10/10  12:39:20 <DIR>                A001_011\n2026/10/10  12:42:52 <DIR>                A001_012\n2026/10/10  13:00:44 <DIR>                A001_013\n2026/10/10  13:01:52 <DIR>                A001_014\n2026/10/10  16:59:26 <DIR>                A001_015\n2026/10/11  01:54:00 <DIR>                A001_016\n2026/10/11  03:51:02 <DIR>                A001_017\n2026/10/11  04:11:16 <DIR>                A001_018\n2026/10/11  04:12:42 <DIR>                A001_019\n2026/10/11  04:13:00 <DIR>                A001_020\n2026/10/11  04:13:14 <DIR>                A001_021\n2026/10/11  08:47:10 <DIR>                A001_022\n2026/10/11  09:31:58 <DIR>                A001_023\n2026/10/11  10:35:26 <DIR>                A001_024\n2026/10/11  10:41:34 <DIR>                A001_025\n2026/10/11  10:42:50 <DIR>                A001_026\n2026/10/11  10:45:58 <DIR>                A001_027\n2026/10/11  11:01:08 <DIR>                A001_028\n2026/10/11  11:07:38 <DIR>                A001_029\n2026/10/11  11:38:50 <DIR>                A001_030\n2026/10/11  11:40:42 <DIR>                A001_031\n2026/10/11  11:49:24 <DIR>                A001_032\n2026/10/11  11:52:18 <DIR>                A001_033\n2026/10/11  11:58:42 <DIR>                A001_034\n2026/10/11  12:23:36 <DIR>                A001_035\n2026/10/11  12:25:52 <DIR>                A001_036\n2026/10/11  12:32:06 <DIR>                A001_037\n2026/10/11  12:35:18 <DIR>                A001_038\n2026/10/11  13:03:18 <DIR>                A001_039\n2026/10/11  13:07:06 <DIR>                A001_040\n2026/10/11  13:07:10 <DIR>                A001_041\n2026/10/11  13:08:56 <DIR>                A001_042\n2026/10/11  13:10:40 <DIR>                A001_043\n2026/10/11  14:31:38 <DIR>                A001_044\n2026/10/11  14:31:58 <DIR>                A001_045\n"}
+{"time": "2026-10-11T15:00:49.572969", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:00:49.610386", "command": "key MOVON", "reply": "\n"}
+{"time": "2026-10-11T15:00:49.735155", "command": "key MOVOFF", "reply": "\n"}
+{"time": "2026-10-11T15:00:49.735762", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:49.784050", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:49.835170", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:49.877513", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:49.925819", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:49.976940", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:50.051583", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:50.102667", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:50.149780", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:50.201072", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:50.252308", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:50.303422", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:50.510716", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:50.627485", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:50.754229", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:50.795848", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:50.862670", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:50.911426", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:51.046605", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:51.096050", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:51.153132", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:51.203873", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:51.245370", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:51.363564", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:51.413521", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:51.471564", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:51.563082", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:51.611954", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:51.661298", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:51.712290", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:51.762018", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:51.812480", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:51.861962", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:51.912037", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:51.963685", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:52.080077", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:52.187883", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:52.305757", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:52.371033", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:52.422199", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:52.514002", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:52.556121", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:52.672683", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:52.796612", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:52.897867", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:52.989955", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:53.048100", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:53.156052", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:53.206097", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:53.256027", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:53.315376", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:53.473985", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:53.523987", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:53.631109", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:53.631776", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:00:53.647681", "command": "key MOVON", "reply": "\n"}
+{"time": "2026-10-11T15:00:53.770786", "command": "key MOVOFF", "reply": "\n"}
+{"time": "2026-10-11T15:00:53.771705", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:00:59.827322", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:00:59.828388", "command": "rec log-out", "reply": "slot=1, cnt=8/600\nsize=131072*978816(119GB), free=81%, exFAT, UHS-II\ntime       : 2026/10/11 15:01:53 \nrec factor : Nothing \nui factor  : Button \nbattery    : OK \ntemp(BAT)  : OK \ntemp(BODY) : OK \ntemp(LCD)  : OK \ntemp(CMOS) : OK \nfile-size=1095168, bulk-size=67108864(61.3)\nreq_cnt=400, fin_cnt=400, key\nrequest  ,finish   ,diff,gap ,reqcnt,fincnt,diff,sdb,MB/s\n     1070,     1314, 244,1070,    57,     1,  56,  6, 255\n     1523,     1773, 250, 209,   114,    57,  57,  5, 254\n     1978,     2225, 247, 205,   171,   114,  57,  5, 257\n     2433,     2679, 246, 208,   228,   171,  57,  5, 258\n     2891,     3136, 245, 212,   285,   228,  57,  5, 259\n     3344,     3592, 248, 208,   342,   285,  57,  5, 256\n     3801,     4064, 263, 209,   399,   342,  57, 36, 241\n     4076,     4233, 157,  12,   400,   400,   0, 37,   6\n"}
+{"time": "2026-10-11T15:00:59.839138", "command": "dir \\CINEMA", "reply": "                                          .\n2026/10/10  12:33:14 <DIR>                A001_001\n2026/10/10  12:34:24 <DIR>                A001_002\n2026/10/10  12:35:10 <DIR>                A001_003\n2026/10/10  12:36:24 <DIR>                A001_004\n2026/10/10  12:36:46 <DIR>                A001_005\n2026/10/10  12:37:14 <DIR>                A001_006\n2026/10/10  12:37:42 <DIR>                A001_007\n2026/10/10  12:37:56 <DIR>                A001_008\n2026/10/10  12:38:06 <DIR>                A001_009\n2026/10/10  12:38:18 <DIR>                A001_010\n2026/10/10  12:39:20 <DIR>                A001_011\n2026/10/10  12:42:52 <DIR>                A001_012\n2026/10/10  13:00:44 <DIR>                A001_013\n2026/10/10  13:01:52 <DIR>                A001_014\n2026/10/10  16:59:26 <DIR>                A001_015\n2026/10/11  01:54:00 <DIR>                A001_016\n2026/10/11  03:51:02 <DIR>                A001_017\n2026/10/11  04:11:16 <DIR>                A001_018\n2026/10/11  04:12:42 <DIR>                A001_019\n2026/10/11  04:13:00 <DIR>                A001_020\n2026/10/11  04:13:14 <DIR>                A001_021\n2026/10/11  08:47:10 <DIR>                A001_022\n2026/10/11  09:31:58 <DIR>                A001_023\n2026/10/11  10:35:26 <DIR>                A001_024\n2026/10/11  10:41:34 <DIR>                A001_025\n2026/10/11  10:42:50 <DIR>                A001_026\n2026/10/11  10:45:58 <DIR>                A001_027\n2026/10/11  11:01:08 <DIR>                A001_028\n2026/10/11  11:07:38 <DIR>                A001_029\n2026/10/11  11:38:50 <DIR>                A001_030\n2026/10/11  11:40:42 <DIR>                A001_031\n2026/10/11  11:49:24 <DIR>                A001_032\n2026/10/11  11:52:18 <DIR>                A001_033\n2026/10/11  11:58:42 <DIR>                A001_034\n2026/10/11  12:23:36 <DIR>                A001_035\n2026/10/11  12:25:52 <DIR>                A001_036\n2026/10/11  12:32:06 <DIR>                A001_037\n2026/10/11  12:35:18 <DIR>                A001_038\n2026/10/11  13:03:18 <DIR>                A001_039\n2026/10/11  13:07:06 <DIR>                A001_040\n2026/10/11  13:07:10 <DIR>                A001_041\n2026/10/11  13:08:56 <DIR>                A001_042\n2026/10/11  13:10:40 <DIR>                A001_043\n2026/10/11  14:31:38 <DIR>                A001_044\n2026/10/11  14:31:58 <DIR>                A001_045\n2026/10/11  15:01:48 <DIR>                A001_046\n"}
+{"time": "2026-10-11T15:00:59.945319", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:00:59.994513", "command": "gui geti MV_FrameRate", "reply": "OK:MV_FrameRate -> 8\n\n"}
+{"time": "2026-10-11T15:00:59.994799", "command": "gui geti EXCL_FrameRate", "reply": "OK:EXCL_FrameRate -> 0\n\n"}
+{"time": "2026-10-11T15:00:59.995760", "command": "menu SetMovFramerate", "reply": "7\n\n"}
+{"time": "2026-10-11T15:00:59.996326", "command": "menu SetMovCinemaDNGQuality", "reply": "0\n\n"}
+{"time": "2026-10-11T15:01:51.798438", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:01:52.296347", "command": "key MENUON", "reply": "\n"}
+{"time": "2026-10-11T15:01:53.101233", "command": "key MENUOFF", "reply": "\n"}
+{"time": "2026-10-11T15:01:54.427997", "command": "key RIGHTON", "reply": "\n"}
+{"time": "2026-10-11T15:01:54.553811", "command": "key RIGHTOFF", "reply": "\n"}
+{"time": "2026-10-11T15:01:55.209931", "command": "key DOWNON", "reply": "\n"}
+{"time": "2026-10-11T15:01:55.336449", "command": "key DOWNOFF", "reply": "\n"}
+{"time": "2026-10-11T15:01:55.992577", "command": "key DOWNON", "reply": "\n"}
+{"time": "2026-10-11T15:01:56.118368", "command": "key DOWNOFF", "reply": "\n"}
+{"time": "2026-10-11T15:01:56.772574", "command": "key DOWNON", "reply": "\n"}
+{"time": "2026-10-11T15:01:56.954562", "command": "key DOWNOFF", "reply": "\n"}
+{"time": "2026-10-11T15:01:57.672612", "command": "gui geti MENU_Level2", "reply": "OK:MENU_Level2 -> 4254\n\n"}
+{"time": "2026-10-11T15:02:22.182684", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:02:22.183382", "command": "key DOWNON", "reply": "\n"}
+{"time": "2026-10-11T15:02:22.304453", "command": "key DOWNOFF", "reply": "\n"}
+{"time": "2026-10-11T15:02:22.962508", "command": "key DOWNON", "reply": "\n"}
+{"time": "2026-10-11T15:02:23.088225", "command": "key DOWNOFF", "reply": "\n"}
+{"time": "2026-10-11T15:02:23.800115", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:02:23.803144", "command": "gui geti MENU_Level2", "reply": "OK:MENU_Level2 -> 4247\n\n"}
+{"time": "2026-10-11T15:02:23.859282", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:02:24.328405", "command": "key MENUON", "reply": "\n"}
+{"time": "2026-10-11T15:02:25.134499", "command": "key MENUOFF", "reply": "\n"}
+{"time": "2026-10-11T15:02:27.053021", "command": "key MENUON", "reply": "\n"}
+{"time": "2026-10-11T15:02:27.861496", "command": "key MENUOFF", "reply": "\n"}
+{"time": "2026-10-11T15:03:04.657146", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:03:05.024734", "command": "gui geti MV_FrameRate", "reply": "OK:MV_FrameRate -> 8\n\n"}
+{"time": "2026-10-11T15:03:05.025023", "command": "gui geti EXCL_FrameRate", "reply": "OK:EXCL_FrameRate -> 0\n\n"}
+{"time": "2026-10-11T15:03:05.025686", "command": "menu SetMovFramerate", "reply": "7\n\n"}
+{"time": "2026-10-11T15:03:05.026051", "command": "menu SetMovCinemaDNGQuality", "reply": "0\n\n"}
+{"time": "2026-10-11T15:03:05.483866", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:03:05.484315", "command": "status get app_current", "reply": "app_current -> 2\n\n"}
+{"time": "2026-10-11T15:03:30.311907", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:03:30.815385", "command": "key MENUON", "reply": "\n"}
+{"time": "2026-10-11T15:03:31.616455", "command": "key MENUOFF", "reply": "\n"}
+{"time": "2026-10-11T15:03:32.954845", "command": "key RIGHTON", "reply": "\n"}
+{"time": "2026-10-11T15:03:33.079831", "command": "key RIGHTOFF", "reply": "\n"}
+{"time": "2026-10-11T15:03:33.736745", "command": "gui geti MENU_Level2", "reply": "OK:MENU_Level2 -> 4247\n\n"}
+{"time": "2026-10-11T15:03:33.737424", "command": "key DOWNON", "reply": "\n"}
+{"time": "2026-10-11T15:03:33.861911", "command": "key DOWNOFF", "reply": "\n"}
+{"time": "2026-10-11T15:03:34.516070", "command": "gui geti MENU_Level2", "reply": "OK:MENU_Level2 -> 4297\n\n"}
+{"time": "2026-10-11T15:03:34.516664", "command": "key DOWNON", "reply": "\n"}
+{"time": "2026-10-11T15:03:34.714571", "command": "key DOWNOFF", "reply": "\n"}
+{"time": "2026-10-11T15:03:35.365483", "command": "gui geti MENU_Level2", "reply": "OK:MENU_Level2 -> 4254\n\n"}
+{"time": "2026-10-11T15:03:35.366043", "command": "key DOWNON", "reply": "\n"}
+{"time": "2026-10-11T15:03:35.491930", "command": "key DOWNOFF", "reply": "\n"}
+{"time": "2026-10-11T15:03:36.143688", "command": "gui geti MENU_Level2", "reply": "OK:MENU_Level2 -> 4434\n\n"}
+{"time": "2026-10-11T15:03:36.144334", "command": "key RIGHTON", "reply": "\n"}
+{"time": "2026-10-11T15:03:36.325213", "command": "key RIGHTOFF", "reply": "\n"}
+{"time": "2026-10-11T15:03:36.980980", "command": "gui geti B2_n5_ListFocus4", "reply": "OK:B2_n5_ListFocus4 -> 8\n\n"}
+{"time": "2026-10-11T15:03:36.981649", "command": "key DOWNON", "reply": "\n"}
+{"time": "2026-10-11T15:03:37.108152", "command": "key DOWNOFF", "reply": "\n"}
+{"time": "2026-10-11T15:03:37.763887", "command": "gui geti B2_n5_ListFocus4", "reply": "OK:B2_n5_ListFocus4 -> 9\n\n"}
+{"time": "2026-10-11T15:03:37.853349", "command": "key OKON", "reply": "\n"}
+{"time": "2026-10-11T15:03:37.976956", "command": "key OKOFF", "reply": "\n"}
+{"time": "2026-10-11T15:03:38.631411", "command": "gui geti MV_FrameRate", "reply": "OK:MV_FrameRate -> 9\n\n"}
+{"time": "2026-10-11T15:03:38.698668", "command": "key MENUON", "reply": "\n"}
+{"time": "2026-10-11T15:03:39.501550", "command": "key MENUOFF", "reply": "\n"}
+{"time": "2026-10-11T15:03:40.216817", "command": "key MENUON", "reply": "\n"}
+{"time": "2026-10-11T15:03:41.101060", "command": "key MENUOFF", "reply": "\n"}
+{"time": "2026-10-11T15:04:23.828383", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:04:23.982194", "command": "gui geti MV_FrameRate", "reply": "OK:MV_FrameRate -> 9\n\n"}
+{"time": "2026-10-11T15:04:23.982464", "command": "gui geti EXCL_FrameRate", "reply": "OK:EXCL_FrameRate -> 0\n\n"}
+{"time": "2026-10-11T15:04:23.982953", "command": "menu SetMovFramerate", "reply": "7\n\n"}
+{"time": "2026-10-11T15:04:23.983366", "command": "menu SetMovCinemaDNGQuality", "reply": "0\n\n"}
+{"time": "2026-10-11T15:04:24.445535", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:04:24.445952", "command": "status get app_current", "reply": "app_current -> 2\n\n"}
+{"time": "2026-10-11T15:04:24.446482", "command": "sdcard slot", "reply": "slot now slot = sd0\n\n"}
+{"time": "2026-10-11T15:04:24.450263", "command": "dir \\CINEMA", "reply": "                                          .\n2026/10/10  12:33:14 <DIR>                A001_001\n2026/10/10  12:34:24 <DIR>                A001_002\n2026/10/10  12:35:10 <DIR>                A001_003\n2026/10/10  12:36:24 <DIR>                A001_004\n2026/10/10  12:36:46 <DIR>                A001_005\n2026/10/10  12:37:14 <DIR>                A001_006\n2026/10/10  12:37:42 <DIR>                A001_007\n2026/10/10  12:37:56 <DIR>                A001_008\n2026/10/10  12:38:06 <DIR>                A001_009\n2026/10/10  12:38:18 <DIR>                A001_010\n2026/10/10  12:39:20 <DIR>                A001_011\n2026/10/10  12:42:52 <DIR>                A001_012\n2026/10/10  13:00:44 <DIR>                A001_013\n2026/10/10  13:01:52 <DIR>                A001_014\n2026/10/10  16:59:26 <DIR>                A001_015\n2026/10/11  01:54:00 <DIR>                A001_016\n2026/10/11  03:51:02 <DIR>                A001_017\n2026/10/11  04:11:16 <DIR>                A001_018\n2026/10/11  04:12:42 <DIR>                A001_019\n2026/10/11  04:13:00 <DIR>                A001_020\n2026/10/11  04:13:14 <DIR>                A001_021\n2026/10/11  08:47:10 <DIR>                A001_022\n2026/10/11  09:31:58 <DIR>                A001_023\n2026/10/11  10:35:26 <DIR>                A001_024\n2026/10/11  10:41:34 <DIR>                A001_025\n2026/10/11  10:42:50 <DIR>                A001_026\n2026/10/11  10:45:58 <DIR>                A001_027\n2026/10/11  11:01:08 <DIR>                A001_028\n2026/10/11  11:07:38 <DIR>                A001_029\n2026/10/11  11:38:50 <DIR>                A001_030\n2026/10/11  11:40:42 <DIR>                A001_031\n2026/10/11  11:49:24 <DIR>                A001_032\n2026/10/11  11:52:18 <DIR>                A001_033\n2026/10/11  11:58:42 <DIR>                A001_034\n2026/10/11  12:23:36 <DIR>                A001_035\n2026/10/11  12:25:52 <DIR>                A001_036\n2026/10/11  12:32:06 <DIR>                A001_037\n2026/10/11  12:35:18 <DIR>                A001_038\n2026/10/11  13:03:18 <DIR>                A001_039\n2026/10/11  13:07:06 <DIR>                A001_040\n2026/10/11  13:07:10 <DIR>                A001_041\n2026/10/11  13:08:56 <DIR>                A001_042\n2026/10/11  13:10:40 <DIR>                A001_043\n2026/10/11  14:31:38 <DIR>                A001_044\n2026/10/11  14:31:58 <DIR>                A001_045\n2026/10/11  15:01:48 <DIR>                A001_046\n"}
+{"time": "2026-10-11T15:04:25.780164", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:04:25.815377", "command": "key MOVON", "reply": "\n"}
+{"time": "2026-10-11T15:04:25.944379", "command": "key MOVOFF", "reply": "\n"}
+{"time": "2026-10-11T15:04:25.948887", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:04:25.994733", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:04:26.040260", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:04:26.086344", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:04:26.132764", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:04:26.180885", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:04:26.227302", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:04:26.378016", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:04:26.424304", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:04:26.532670", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:04:26.578077", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:04:26.625677", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:04:27.446165", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:04:27.448571", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:04:36.089596", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:04:36.090615", "command": "rec log-out", "reply": "slot=1, cnt=3/600\nsize=131072*978816(119GB), free=81%, exFAT, UHS-II\ntime       : 2026/10/11 15:05:27 \nrec factor : Nothing \nui factor  : Nothing \nbattery    : OK \ntemp(BAT)  : OK \ntemp(BODY) : OK \ntemp(LCD)  : OK \ntemp(CMOS) : OK \nfile-size=1095168, bulk-size=67108864(61.3)\nreq_cnt=94, fin_cnt=94, vbuf/94/88194, raw1\nrequest  ,finish   ,diff,gap ,reqcnt,fincnt,diff,sdb,MB/s\n     1303,     1458, 155,1303,     5,     1,   4,  1,  35\n     1707,     2176, 469, 249,    62,     6,  56,  7, 133\n     2187,     2338, 151,  11,    94,    62,  32, 63, 239\n"}
+{"time": "2026-10-11T15:04:36.105045", "command": "dir \\CINEMA", "reply": "                                          .\n2026/10/10  12:33:14 <DIR>                A001_001\n2026/10/10  12:34:24 <DIR>                A001_002\n2026/10/10  12:35:10 <DIR>                A001_003\n2026/10/10  12:36:24 <DIR>                A001_004\n2026/10/10  12:36:46 <DIR>                A001_005\n2026/10/10  12:37:14 <DIR>                A001_006\n2026/10/10  12:37:42 <DIR>                A001_007\n2026/10/10  12:37:56 <DIR>                A001_008\n2026/10/10  12:38:06 <DIR>                A001_009\n2026/10/10  12:38:18 <DIR>                A001_010\n2026/10/10  12:39:20 <DIR>                A001_011\n2026/10/10  12:42:52 <DIR>                A001_012\n2026/10/10  13:00:44 <DIR>                A001_013\n2026/10/10  13:01:52 <DIR>                A001_014\n2026/10/10  16:59:26 <DIR>                A001_015\n2026/10/11  01:54:00 <DIR>                A001_016\n2026/10/11  03:51:02 <DIR>                A001_017\n2026/10/11  04:11:16 <DIR>                A001_018\n2026/10/11  04:12:42 <DIR>                A001_019\n2026/10/11  04:13:00 <DIR>                A001_020\n2026/10/11  04:13:14 <DIR>                A001_021\n2026/10/11  08:47:10 <DIR>                A001_022\n2026/10/11  09:31:58 <DIR>                A001_023\n2026/10/11  10:35:26 <DIR>                A001_024\n2026/10/11  10:41:34 <DIR>                A001_025\n2026/10/11  10:42:50 <DIR>                A001_026\n2026/10/11  10:45:58 <DIR>                A001_027\n2026/10/11  11:01:08 <DIR>                A001_028\n2026/10/11  11:07:38 <DIR>                A001_029\n2026/10/11  11:38:50 <DIR>                A001_030\n2026/10/11  11:40:42 <DIR>                A001_031\n2026/10/11  11:49:24 <DIR>                A001_032\n2026/10/11  11:52:18 <DIR>                A001_033\n2026/10/11  11:58:42 <DIR>                A001_034\n2026/10/11  12:23:36 <DIR>                A001_035\n2026/10/11  12:25:52 <DIR>                A001_036\n2026/10/11  12:32:06 <DIR>                A001_037\n2026/10/11  12:35:18 <DIR>                A001_038\n2026/10/11  13:03:18 <DIR>                A001_039\n2026/10/11  13:07:06 <DIR>                A001_040\n2026/10/11  13:07:10 <DIR>                A001_041\n2026/10/11  13:08:56 <DIR>                A001_042\n2026/10/11  13:10:40 <DIR>                A001_043\n2026/10/11  14:31:38 <DIR>                A001_044\n2026/10/11  14:31:58 <DIR>                A001_045\n2026/10/11  15:01:48 <DIR>                A001_046\n2026/10/11  15:05:24 <DIR>                A001_047\n"}
+{"time": "2026-10-11T15:04:36.105776", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:04:36.261575", "command": "gui geti MV_FrameRate", "reply": "OK:MV_FrameRate -> 9\n\n"}
+{"time": "2026-10-11T15:04:36.261913", "command": "gui geti EXCL_FrameRate", "reply": "OK:EXCL_FrameRate -> 0\n\n"}
+{"time": "2026-10-11T15:04:36.262427", "command": "menu SetMovFramerate", "reply": "7\n\n"}
+{"time": "2026-10-11T15:04:36.262971", "command": "menu SetMovCinemaDNGQuality", "reply": "0\n\n"}
+{"time": "2026-10-11T15:05:31.425055", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:05:31.919145", "command": "key MENUON", "reply": "\n"}
+{"time": "2026-10-11T15:05:32.724946", "command": "key MENUOFF", "reply": "\n"}
+{"time": "2026-10-11T15:05:34.049904", "command": "key RIGHTON", "reply": "\n"}
+{"time": "2026-10-11T15:05:34.175674", "command": "key RIGHTOFF", "reply": "\n"}
+{"time": "2026-10-11T15:05:34.833492", "command": "gui geti MENU_Level2", "reply": "OK:MENU_Level2 -> 4434\n\n"}
+{"time": "2026-10-11T15:05:34.834124", "command": "key RIGHTON", "reply": "\n"}
+{"time": "2026-10-11T15:05:35.007333", "command": "key RIGHTOFF", "reply": "\n"}
+{"time": "2026-10-11T15:05:35.661790", "command": "gui geti B2_n5_ListFocus4", "reply": "OK:B2_n5_ListFocus4 -> 9\n\n"}
+{"time": "2026-10-11T15:05:35.662501", "command": "key DOWNON", "reply": "\n"}
+{"time": "2026-10-11T15:05:35.790702", "command": "key DOWNOFF", "reply": "\n"}
+{"time": "2026-10-11T15:05:36.444309", "command": "gui geti B2_n5_ListFocus4", "reply": "OK:B2_n5_ListFocus4 -> 10\n\n"}
+{"time": "2026-10-11T15:05:36.529291", "command": "key OKON", "reply": "\n"}
+{"time": "2026-10-11T15:05:36.655191", "command": "key OKOFF", "reply": "\n"}
+{"time": "2026-10-11T15:05:37.307441", "command": "gui geti MV_FrameRate", "reply": "OK:MV_FrameRate -> 10\n\n"}
+{"time": "2026-10-11T15:05:37.330027", "command": "key MENUON", "reply": "\n"}
+{"time": "2026-10-11T15:05:38.135910", "command": "key MENUOFF", "reply": "\n"}
+{"time": "2026-10-11T15:05:38.848240", "command": "key MENUON", "reply": "\n"}
+{"time": "2026-10-11T15:05:39.749137", "command": "key MENUOFF", "reply": "\n"}
+{"time": "2026-10-11T15:05:44.686072", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:05:44.733825", "command": "gui geti MV_FrameRate", "reply": "OK:MV_FrameRate -> 10\n\n"}
+{"time": "2026-10-11T15:05:44.734243", "command": "gui geti EXCL_FrameRate", "reply": "OK:EXCL_FrameRate -> 0\n\n"}
+{"time": "2026-10-11T15:05:44.735267", "command": "menu SetMovFramerate", "reply": "7\n\n"}
+{"time": "2026-10-11T15:05:44.735960", "command": "menu SetMovCinemaDNGQuality", "reply": "0\n\n"}
+{"time": "2026-10-11T15:05:45.092362", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:05:45.092765", "command": "status get app_current", "reply": "app_current -> 2\n\n"}
+{"time": "2026-10-11T15:05:45.093266", "command": "sdcard slot", "reply": "slot now slot = sd0\n\n"}
+{"time": "2026-10-11T15:05:45.097548", "command": "dir \\CINEMA", "reply": "                                          .\n2026/10/10  12:33:14 <DIR>                A001_001\n2026/10/10  12:34:24 <DIR>                A001_002\n2026/10/10  12:35:10 <DIR>                A001_003\n2026/10/10  12:36:24 <DIR>                A001_004\n2026/10/10  12:36:46 <DIR>                A001_005\n2026/10/10  12:37:14 <DIR>                A001_006\n2026/10/10  12:37:42 <DIR>                A001_007\n2026/10/10  12:37:56 <DIR>                A001_008\n2026/10/10  12:38:06 <DIR>                A001_009\n2026/10/10  12:38:18 <DIR>                A001_010\n2026/10/10  12:39:20 <DIR>                A001_011\n2026/10/10  12:42:52 <DIR>                A001_012\n2026/10/10  13:00:44 <DIR>                A001_013\n2026/10/10  13:01:52 <DIR>                A001_014\n2026/10/10  16:59:26 <DIR>                A001_015\n2026/10/11  01:54:00 <DIR>                A001_016\n2026/10/11  03:51:02 <DIR>                A001_017\n2026/10/11  04:11:16 <DIR>                A001_018\n2026/10/11  04:12:42 <DIR>                A001_019\n2026/10/11  04:13:00 <DIR>                A001_020\n2026/10/11  04:13:14 <DIR>                A001_021\n2026/10/11  08:47:10 <DIR>                A001_022\n2026/10/11  09:31:58 <DIR>                A001_023\n2026/10/11  10:35:26 <DIR>                A001_024\n2026/10/11  10:41:34 <DIR>                A001_025\n2026/10/11  10:42:50 <DIR>                A001_026\n2026/10/11  10:45:58 <DIR>                A001_027\n2026/10/11  11:01:08 <DIR>                A001_028\n2026/10/11  11:07:38 <DIR>                A001_029\n2026/10/11  11:38:50 <DIR>                A001_030\n2026/10/11  11:40:42 <DIR>                A001_031\n2026/10/11  11:49:24 <DIR>                A001_032\n2026/10/11  11:52:18 <DIR>                A001_033\n2026/10/11  11:58:42 <DIR>                A001_034\n2026/10/11  12:23:36 <DIR>                A001_035\n2026/10/11  12:25:52 <DIR>                A001_036\n2026/10/11  12:32:06 <DIR>                A001_037\n2026/10/11  12:35:18 <DIR>                A001_038\n2026/10/11  13:03:18 <DIR>                A001_039\n2026/10/11  13:07:06 <DIR>                A001_040\n2026/10/11  13:07:10 <DIR>                A001_041\n2026/10/11  13:08:56 <DIR>                A001_042\n2026/10/11  13:10:40 <DIR>                A001_043\n2026/10/11  14:31:38 <DIR>                A001_044\n2026/10/11  14:31:58 <DIR>                A001_045\n2026/10/11  15:01:48 <DIR>                A001_046\n2026/10/11  15:05:24 <DIR>                A001_047\n"}
+{"time": "2026-10-11T15:05:46.476110", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:05:46.509748", "command": "key MOVON", "reply": "\n"}
+{"time": "2026-10-11T15:05:46.643976", "command": "key MOVOFF", "reply": "\n"}
+{"time": "2026-10-11T15:05:46.644979", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:05:46.694937", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:05:46.741717", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:05:46.852727", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:05:46.899134", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:05:46.950995", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:05:47.034372", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:05:47.152696", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:05:47.200585", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:05:47.256578", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:05:47.307632", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:05:48.192606", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:05:48.196349", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:05:56.721659", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:05:56.722649", "command": "rec log-out", "reply": "slot=1, cnt=3/600\nsize=131072*978816(119GB), free=81%, exFAT, UHS-II\ntime       : 2026/10/11 15:06:48 \nrec factor : Nothing \nui factor  : Nothing \nbattery    : OK \ntemp(BAT)  : OK \ntemp(BODY) : OK \ntemp(LCD)  : OK \ntemp(CMOS) : OK \nfile-size=1095168, bulk-size=67108864(61.3)\nreq_cnt=94, fin_cnt=94, vbuf/94/88091, raw1\nrequest  ,finish   ,diff,gap ,reqcnt,fincnt,diff,sdb,MB/s\n     1119,     1484, 365,1119,     3,     1,   2,  1,   9\n     1731,     2203, 472, 247,    60,     4,  56,  5, 132\n     2215,     2379, 164,  12,    94,    60,  34, 61, 233\n"}
+{"time": "2026-10-11T15:05:56.743678", "command": "dir \\CINEMA", "reply": "                                          .\n2026/10/10  12:33:14 <DIR>                A001_001\n2026/10/10  12:34:24 <DIR>                A001_002\n2026/10/10  12:35:10 <DIR>                A001_003\n2026/10/10  12:36:24 <DIR>                A001_004\n2026/10/10  12:36:46 <DIR>                A001_005\n2026/10/10  12:37:14 <DIR>                A001_006\n2026/10/10  12:37:42 <DIR>                A001_007\n2026/10/10  12:37:56 <DIR>                A001_008\n2026/10/10  12:38:06 <DIR>                A001_009\n2026/10/10  12:38:18 <DIR>                A001_010\n2026/10/10  12:39:20 <DIR>                A001_011\n2026/10/10  12:42:52 <DIR>                A001_012\n2026/10/10  13:00:44 <DIR>                A001_013\n2026/10/10  13:01:52 <DIR>                A001_014\n2026/10/10  16:59:26 <DIR>                A001_015\n2026/10/11  01:54:00 <DIR>                A001_016\n2026/10/11  03:51:02 <DIR>                A001_017\n2026/10/11  04:11:16 <DIR>                A001_018\n2026/10/11  04:12:42 <DIR>                A001_019\n2026/10/11  04:13:00 <DIR>                A001_020\n2026/10/11  04:13:14 <DIR>                A001_021\n2026/10/11  08:47:10 <DIR>                A001_022\n2026/10/11  09:31:58 <DIR>                A001_023\n2026/10/11  10:35:26 <DIR>                A001_024\n2026/10/11  10:41:34 <DIR>                A001_025\n2026/10/11  10:42:50 <DIR>                A001_026\n2026/10/11  10:45:58 <DIR>                A001_027\n2026/10/11  11:01:08 <DIR>                A001_028\n2026/10/11  11:07:38 <DIR>                A001_029\n2026/10/11  11:38:50 <DIR>                A001_030\n2026/10/11  11:40:42 <DIR>                A001_031\n2026/10/11  11:49:24 <DIR>                A001_032\n2026/10/11  11:52:18 <DIR>                A001_033\n2026/10/11  11:58:42 <DIR>                A001_034\n2026/10/11  12:23:36 <DIR>                A001_035\n2026/10/11  12:25:52 <DIR>                A001_036\n2026/10/11  12:32:06 <DIR>                A001_037\n2026/10/11  12:35:18 <DIR>                A001_038\n2026/10/11  13:03:18 <DIR>                A001_039\n2026/10/11  13:07:06 <DIR>                A001_040\n2026/10/11  13:07:10 <DIR>                A001_041\n2026/10/11  13:08:56 <DIR>                A001_042\n2026/10/11  13:10:40 <DIR>                A001_043\n2026/10/11  14:31:38 <DIR>                A001_044\n2026/10/11  14:31:58 <DIR>                A001_045\n2026/10/11  15:01:48 <DIR>                A001_046\n2026/10/11  15:05:24 <DIR>                A001_047\n2026/10/11  15:06:46 <DIR>                A001_048\n"}
+{"time": "2026-10-11T15:05:56.746918", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:05:56.929049", "command": "gui geti MV_FrameRate", "reply": "OK:MV_FrameRate -> 10\n\n"}
+{"time": "2026-10-11T15:05:56.929356", "command": "gui geti EXCL_FrameRate", "reply": "OK:EXCL_FrameRate -> 0\n\n"}
+{"time": "2026-10-11T15:05:56.932733", "command": "menu SetMovFramerate", "reply": "7\n\n"}
+{"time": "2026-10-11T15:05:56.933215", "command": "menu SetMovCinemaDNGQuality", "reply": "0\n\n"}
+{"time": "2026-10-11T15:11:08.753436", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:11:09.425354", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:11:09.425916", "command": "sdcard slot", "reply": "slot now slot = sd0\n\n"}
+{"time": "2026-10-11T15:11:09.427285", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:11:10.431185", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:11:11.184268", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:11:11.861343", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:11:12.491693", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:11:13.439848", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:11:14.075770", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:11:14.700172", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:11:15.560942", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:12:58.259978", "command": "gui geti MV_FrameRate", "reply": "OK:MV_FrameRate -> 10\n\n"}
+{"time": "2026-10-11T15:12:58.260491", "command": "gui geti MENU_Level2", "reply": "OK:MENU_Level2 -> 4434\n\n"}
+{"time": "2026-10-11T15:13:14.940243", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:13:15.437130", "command": "key MENUON", "reply": "\n"}
+{"time": "2026-10-11T15:13:16.243031", "command": "key MENUOFF", "reply": "\n"}
+{"time": "2026-10-11T15:13:17.575742", "command": "key RIGHTON", "reply": "\n"}
+{"time": "2026-10-11T15:13:17.701601", "command": "key RIGHTOFF", "reply": "\n"}
+{"time": "2026-10-11T15:13:18.359528", "command": "gui geti MENU_Level2", "reply": "OK:MENU_Level2 -> 4434\n\n"}
+{"time": "2026-10-11T15:13:18.360168", "command": "key UPON", "reply": "\n"}
+{"time": "2026-10-11T15:13:18.549524", "command": "key UPOFF", "reply": "\n"}
+{"time": "2026-10-11T15:13:19.202188", "command": "gui geti MENU_Level2", "reply": "OK:MENU_Level2 -> 4254\n\n"}
+{"time": "2026-10-11T15:13:19.202742", "command": "key UPON", "reply": "\n"}
+{"time": "2026-10-11T15:13:19.328514", "command": "key UPOFF", "reply": "\n"}
+{"time": "2026-10-11T15:13:19.982643", "command": "gui geti MENU_Level2", "reply": "OK:MENU_Level2 -> 4297\n\n"}
+{"time": "2026-10-11T15:13:19.983174", "command": "gui geti MENU_Level2", "reply": "OK:MENU_Level2 -> 4297\n\n"}
+{"time": "2026-10-11T15:13:19.983655", "command": "key RIGHTON", "reply": "\n"}
+{"time": "2026-10-11T15:13:20.116331", "command": "key RIGHTOFF", "reply": "\n"}
+{"time": "2026-10-11T15:13:20.774242", "command": "gui geti B2_n5_ListFocus1", "reply": "OK:B2_n5_ListFocus1 -> -442503144\n\n"}
+{"time": "2026-10-11T15:13:20.774785", "command": "gui geti B2_n5_ListFocus2", "reply": "OK:B2_n5_ListFocus2 -> -442503144\n\n"}
+{"time": "2026-10-11T15:13:20.776419", "command": "gui geti B2_n5_ListFocus3", "reply": "OK:B2_n5_ListFocus3 -> -442503144\n\n"}
+{"time": "2026-10-11T15:13:20.776924", "command": "gui geti B2_n5_ListFocus4", "reply": "OK:B2_n5_ListFocus4 -> 10\n\n"}
+{"time": "2026-10-11T15:13:56.416392", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:13:56.418628", "command": "gui geti MENU_Level2", "reply": "OK:MENU_Level2 -> 4297\n\n"}
+{"time": "2026-10-11T15:13:56.419104", "command": "key UPON", "reply": "\n"}
+{"time": "2026-10-11T15:13:56.542606", "command": "key UPOFF", "reply": "\n"}
+{"time": "2026-10-11T15:13:57.195718", "command": "key UPON", "reply": "\n"}
+{"time": "2026-10-11T15:13:57.320716", "command": "key UPOFF", "reply": "\n"}
+{"time": "2026-10-11T15:13:58.059467", "command": "key OKON", "reply": "\n"}
+{"time": "2026-10-11T15:13:58.185537", "command": "key OKOFF", "reply": "\n"}
+{"time": "2026-10-11T15:13:58.841535", "command": "menu SetMovImageQuality", "reply": "not found command \"SetMovImageQuality\"\n\n"}
+{"time": "2026-10-11T15:13:59.305686", "command": "key MENUON", "reply": "\n"}
+{"time": "2026-10-11T15:14:00.109515", "command": "key MENUOFF", "reply": "\n"}
+{"time": "2026-10-11T15:14:01.823416", "command": "key MENUON", "reply": "\n"}
+{"time": "2026-10-11T15:14:02.672667", "command": "key MENUOFF", "reply": "\n"}
+{"time": "2026-10-11T15:14:17.579624", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:14:17.623861", "command": "gui geti MV_FrameRate", "reply": "OK:MV_FrameRate -> 10\n\n"}
+{"time": "2026-10-11T15:14:17.624165", "command": "gui geti EXCL_FrameRate", "reply": "OK:EXCL_FrameRate -> 0\n\n"}
+{"time": "2026-10-11T15:14:17.624603", "command": "menu SetMovFramerate", "reply": "7\n\n"}
+{"time": "2026-10-11T15:14:17.624978", "command": "menu SetMovCinemaDNGQuality", "reply": "4\n\n"}
+{"time": "2026-10-11T15:14:28.339340", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:14:28.390035", "command": "gui geti MV_FrameRate", "reply": "OK:MV_FrameRate -> 10\n\n"}
+{"time": "2026-10-11T15:14:28.390329", "command": "gui geti EXCL_FrameRate", "reply": "OK:EXCL_FrameRate -> 0\n\n"}
+{"time": "2026-10-11T15:14:28.391270", "command": "menu SetMovFramerate", "reply": "7\n\n"}
+{"time": "2026-10-11T15:14:28.391844", "command": "menu SetMovCinemaDNGQuality", "reply": "4\n\n"}
+{"time": "2026-10-11T15:14:28.816184", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:14:28.816642", "command": "status get app_current", "reply": "app_current -> 2\n\n"}
+{"time": "2026-10-11T15:14:44.623782", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:14:44.777216", "command": "gui geti MV_FrameRate", "reply": "OK:MV_FrameRate -> 10\n\n"}
+{"time": "2026-10-11T15:14:44.777602", "command": "gui geti EXCL_FrameRate", "reply": "OK:EXCL_FrameRate -> 0\n\n"}
+{"time": "2026-10-11T15:14:44.778178", "command": "menu SetMovFramerate", "reply": "7\n\n"}
+{"time": "2026-10-11T15:14:44.778730", "command": "menu SetMovCinemaDNGQuality", "reply": "4\n\n"}
+{"time": "2026-10-11T15:14:45.128785", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:14:45.129159", "command": "status get app_current", "reply": "app_current -> 2\n\n"}
+{"time": "2026-10-11T15:14:45.129653", "command": "sdcard slot", "reply": "slot now slot = sd0\n\n"}
+{"time": "2026-10-11T15:14:45.143370", "command": "dir \\CINEMA", "reply": "                                          .\n2026/10/10  12:33:14 <DIR>                A001_001\n2026/10/10  12:34:24 <DIR>                A001_002\n2026/10/10  12:35:10 <DIR>                A001_003\n2026/10/10  12:36:24 <DIR>                A001_004\n2026/10/10  12:36:46 <DIR>                A001_005\n2026/10/10  12:37:14 <DIR>                A001_006\n2026/10/10  12:37:42 <DIR>                A001_007\n2026/10/10  12:37:56 <DIR>                A001_008\n2026/10/10  12:38:06 <DIR>                A001_009\n2026/10/10  12:38:18 <DIR>                A001_010\n2026/10/10  12:39:20 <DIR>                A001_011\n2026/10/10  12:42:52 <DIR>                A001_012\n2026/10/10  13:00:44 <DIR>                A001_013\n2026/10/10  13:01:52 <DIR>                A001_014\n2026/10/10  16:59:26 <DIR>                A001_015\n2026/10/11  01:54:00 <DIR>                A001_016\n2026/10/11  03:51:02 <DIR>                A001_017\n2026/10/11  04:11:16 <DIR>                A001_018\n2026/10/11  04:12:42 <DIR>                A001_019\n2026/10/11  04:13:00 <DIR>                A001_020\n2026/10/11  04:13:14 <DIR>                A001_021\n2026/10/11  08:47:10 <DIR>                A001_022\n2026/10/11  09:31:58 <DIR>                A001_023\n2026/10/11  10:35:26 <DIR>                A001_024\n2026/10/11  10:41:34 <DIR>                A001_025\n2026/10/11  10:42:50 <DIR>                A001_026\n2026/10/11  10:45:58 <DIR>                A001_027\n2026/10/11  11:01:08 <DIR>                A001_028\n2026/10/11  11:07:38 <DIR>                A001_029\n2026/10/11  11:38:50 <DIR>                A001_030\n2026/10/11  11:40:42 <DIR>                A001_031\n2026/10/11  11:49:24 <DIR>                A001_032\n2026/10/11  11:52:18 <DIR>                A001_033\n2026/10/11  11:58:42 <DIR>                A001_034\n2026/10/11  12:23:36 <DIR>                A001_035\n2026/10/11  12:25:52 <DIR>                A001_036\n2026/10/11  12:32:06 <DIR>                A001_037\n2026/10/11  12:35:18 <DIR>                A001_038\n2026/10/11  13:03:18 <DIR>                A001_039\n2026/10/11  13:07:06 <DIR>                A001_040\n2026/10/11  13:07:10 <DIR>                A001_041\n2026/10/11  13:08:56 <DIR>                A001_042\n2026/10/11  13:10:40 <DIR>                A001_043\n2026/10/11  14:31:38 <DIR>                A001_044\n2026/10/11  14:31:58 <DIR>                A001_045\n2026/10/11  15:01:48 <DIR>                A001_046\n2026/10/11  15:05:24 <DIR>                A001_047\n2026/10/11  15:06:46 <DIR>                A001_048\n"}
+{"time": "2026-10-11T15:14:46.468895", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:14:46.503775", "command": "key MOVON", "reply": "\n"}
+{"time": "2026-10-11T15:14:46.633034", "command": "key MOVOFF", "reply": "\n"}
+{"time": "2026-10-11T15:14:46.635204", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:14:46.689864", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:14:46.738251", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:14:46.786314", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:14:46.835320", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:14:46.882808", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:14:46.943476", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:14:46.986613", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:14:47.096831", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:14:47.143386", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:14:47.190467", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:14:47.236738", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:14:47.347460", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:14:48.148676", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:14:48.151219", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:14:56.734257", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:14:56.735220", "command": "rec log-out", "reply": "slot=1, cnt=3/600\nsize=131072*978816(119GB), free=80%, exFAT, UHS-II\ntime       : 2026/10/11 15:15:48 \nrec factor : Nothing \nui factor  : Nothing \nbattery    : OK \ntemp(BAT)  : OK \ntemp(BODY) : OK \ntemp(LCD)  : OK \ntemp(CMOS) : OK \nfile-size=757248, bulk-size=67108864(88.6)\nreq_cnt=94, fin_cnt=94, vbuf/94/131884, raw1\nrequest  ,finish   ,diff,gap ,reqcnt,fincnt,diff,sdb,MB/s\n     1366,     1441,  75,1366,     4,     1,   3,  1,  40\n     1692,     2173, 481, 251,    90,     5,  85,  6, 135\n     2174,     2191,  17,   1,    94,    90,   4,  7, 222\n"}
+{"time": "2026-10-11T15:14:56.748324", "command": "dir \\CINEMA", "reply": "                                          .\n2026/10/10  12:33:14 <DIR>                A001_001\n2026/10/10  12:34:24 <DIR>                A001_002\n2026/10/10  12:35:10 <DIR>                A001_003\n2026/10/10  12:36:24 <DIR>                A001_004\n2026/10/10  12:36:46 <DIR>                A001_005\n2026/10/10  12:37:14 <DIR>                A001_006\n2026/10/10  12:37:42 <DIR>                A001_007\n2026/10/10  12:37:56 <DIR>                A001_008\n2026/10/10  12:38:06 <DIR>                A001_009\n2026/10/10  12:38:18 <DIR>                A001_010\n2026/10/10  12:39:20 <DIR>                A001_011\n2026/10/10  12:42:52 <DIR>                A001_012\n2026/10/10  13:00:44 <DIR>                A001_013\n2026/10/10  13:01:52 <DIR>                A001_014\n2026/10/10  16:59:26 <DIR>                A001_015\n2026/10/11  01:54:00 <DIR>                A001_016\n2026/10/11  03:51:02 <DIR>                A001_017\n2026/10/11  04:11:16 <DIR>                A001_018\n2026/10/11  04:12:42 <DIR>                A001_019\n2026/10/11  04:13:00 <DIR>                A001_020\n2026/10/11  04:13:14 <DIR>                A001_021\n2026/10/11  08:47:10 <DIR>                A001_022\n2026/10/11  09:31:58 <DIR>                A001_023\n2026/10/11  10:35:26 <DIR>                A001_024\n2026/10/11  10:41:34 <DIR>                A001_025\n2026/10/11  10:42:50 <DIR>                A001_026\n2026/10/11  10:45:58 <DIR>                A001_027\n2026/10/11  11:01:08 <DIR>                A001_028\n2026/10/11  11:07:38 <DIR>                A001_029\n2026/10/11  11:38:50 <DIR>                A001_030\n2026/10/11  11:40:42 <DIR>                A001_031\n2026/10/11  11:49:24 <DIR>                A001_032\n2026/10/11  11:52:18 <DIR>                A001_033\n2026/10/11  11:58:42 <DIR>                A001_034\n2026/10/11  12:23:36 <DIR>                A001_035\n2026/10/11  12:25:52 <DIR>                A001_036\n2026/10/11  12:32:06 <DIR>                A001_037\n2026/10/11  12:35:18 <DIR>                A001_038\n2026/10/11  13:03:18 <DIR>                A001_039\n2026/10/11  13:07:06 <DIR>                A001_040\n2026/10/11  13:07:10 <DIR>                A001_041\n2026/10/11  13:08:56 <DIR>                A001_042\n2026/10/11  13:10:40 <DIR>                A001_043\n2026/10/11  14:31:38 <DIR>                A001_044\n2026/10/11  14:31:58 <DIR>                A001_045\n2026/10/11  15:01:48 <DIR>                A001_046\n2026/10/11  15:05:24 <DIR>                A001_047\n2026/10/11  15:06:46 <DIR>                A001_048\n2026/10/11  15:15:46 <DIR>                A001_049\n"}
+{"time": "2026-10-11T15:14:56.749015", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:14:56.820579", "command": "gui geti MV_FrameRate", "reply": "OK:MV_FrameRate -> 10\n\n"}
+{"time": "2026-10-11T15:14:56.821175", "command": "gui geti EXCL_FrameRate", "reply": "OK:EXCL_FrameRate -> 0\n\n"}
+{"time": "2026-10-11T15:14:56.821672", "command": "menu SetMovFramerate", "reply": "7\n\n"}
+{"time": "2026-10-11T15:14:56.822105", "command": "menu SetMovCinemaDNGQuality", "reply": "4\n\n"}
+{"time": "2026-10-11T15:15:44.547695", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:15:44.594419", "command": "gui geti MV_FrameRate", "reply": "OK:MV_FrameRate -> 10\n\n"}
+{"time": "2026-10-11T15:15:44.594890", "command": "gui geti EXCL_FrameRate", "reply": "OK:EXCL_FrameRate -> 0\n\n"}
+{"time": "2026-10-11T15:15:44.595506", "command": "menu SetMovFramerate", "reply": "7\n\n"}
+{"time": "2026-10-11T15:15:44.596055", "command": "menu SetMovCinemaDNGQuality", "reply": "4\n\n"}
+{"time": "2026-10-11T15:15:44.950677", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:15:44.951021", "command": "status get app_current", "reply": "app_current -> 2\n\n"}
+{"time": "2026-10-11T15:15:44.952158", "command": "sdcard slot", "reply": "slot now slot = sd0\n\n"}
+{"time": "2026-10-11T15:15:44.958710", "command": "dir \\CINEMA", "reply": "                                          .\n2026/10/10  12:33:14 <DIR>                A001_001\n2026/10/10  12:34:24 <DIR>                A001_002\n2026/10/10  12:35:10 <DIR>                A001_003\n2026/10/10  12:36:24 <DIR>                A001_004\n2026/10/10  12:36:46 <DIR>                A001_005\n2026/10/10  12:37:14 <DIR>                A001_006\n2026/10/10  12:37:42 <DIR>                A001_007\n2026/10/10  12:37:56 <DIR>                A001_008\n2026/10/10  12:38:06 <DIR>                A001_009\n2026/10/10  12:38:18 <DIR>                A001_010\n2026/10/10  12:39:20 <DIR>                A001_011\n2026/10/10  12:42:52 <DIR>                A001_012\n2026/10/10  13:00:44 <DIR>                A001_013\n2026/10/10  13:01:52 <DIR>                A001_014\n2026/10/10  16:59:26 <DIR>                A001_015\n2026/10/11  01:54:00 <DIR>                A001_016\n2026/10/11  03:51:02 <DIR>                A001_017\n2026/10/11  04:11:16 <DIR>                A001_018\n2026/10/11  04:12:42 <DIR>                A001_019\n2026/10/11  04:13:00 <DIR>                A001_020\n2026/10/11  04:13:14 <DIR>                A001_021\n2026/10/11  08:47:10 <DIR>                A001_022\n2026/10/11  09:31:58 <DIR>                A001_023\n2026/10/11  10:35:26 <DIR>                A001_024\n2026/10/11  10:41:34 <DIR>                A001_025\n2026/10/11  10:42:50 <DIR>                A001_026\n2026/10/11  10:45:58 <DIR>                A001_027\n2026/10/11  11:01:08 <DIR>                A001_028\n2026/10/11  11:07:38 <DIR>                A001_029\n2026/10/11  11:38:50 <DIR>                A001_030\n2026/10/11  11:40:42 <DIR>                A001_031\n2026/10/11  11:49:24 <DIR>                A001_032\n2026/10/11  11:52:18 <DIR>                A001_033\n2026/10/11  11:58:42 <DIR>                A001_034\n2026/10/11  12:23:36 <DIR>                A001_035\n2026/10/11  12:25:52 <DIR>                A001_036\n2026/10/11  12:32:06 <DIR>                A001_037\n2026/10/11  12:35:18 <DIR>                A001_038\n2026/10/11  13:03:18 <DIR>                A001_039\n2026/10/11  13:07:06 <DIR>                A001_040\n2026/10/11  13:07:10 <DIR>                A001_041\n2026/10/11  13:08:56 <DIR>                A001_042\n2026/10/11  13:10:40 <DIR>                A001_043\n2026/10/11  14:31:38 <DIR>                A001_044\n2026/10/11  14:31:58 <DIR>                A001_045\n2026/10/11  15:01:48 <DIR>                A001_046\n2026/10/11  15:05:24 <DIR>                A001_047\n2026/10/11  15:06:46 <DIR>                A001_048\n2026/10/11  15:15:46 <DIR>                A001_049\n"}
+{"time": "2026-10-11T15:15:46.320393", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:15:46.377198", "command": "key MOVON", "reply": "\n"}
+{"time": "2026-10-11T15:15:46.504150", "command": "key MOVOFF", "reply": "\n"}
+{"time": "2026-10-11T15:15:46.507713", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:15:46.571693", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:15:46.632201", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:15:46.693648", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:15:46.743485", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:15:46.817819", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:15:46.875700", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:15:47.104315", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:15:47.916244", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:15:47.926895", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:15:56.565800", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:15:56.566702", "command": "rec log-out", "reply": "slot=1, cnt=3/600\nsize=131072*978816(119GB), free=80%, exFAT, UHS-II\ntime       : 2026/10/11 15:16:48 \nrec factor : Nothing \nui factor  : Nothing \nbattery    : OK \ntemp(BAT)  : OK \ntemp(BODY) : OK \ntemp(LCD)  : OK \ntemp(CMOS) : OK \nfile-size=757248, bulk-size=67108864(88.6)\nreq_cnt=94, fin_cnt=94, vbuf/94/131769, raw1\nrequest  ,finish   ,diff,gap ,reqcnt,fincnt,diff,sdb,MB/s\n     1130,     1425, 295,1130,     3,     1,   2,  1,   7\n     1686,     2158, 472, 261,    89,     4,  85,  5, 137\n     2159,     2183,  24,   1,    94,    89,   5,  6, 189\n"}
+{"time": "2026-10-11T15:15:56.579020", "command": "dir \\CINEMA", "reply": "                                          .\n2026/10/10  12:33:14 <DIR>                A001_001\n2026/10/10  12:34:24 <DIR>                A001_002\n2026/10/10  12:35:10 <DIR>                A001_003\n2026/10/10  12:36:24 <DIR>                A001_004\n2026/10/10  12:36:46 <DIR>                A001_005\n2026/10/10  12:37:14 <DIR>                A001_006\n2026/10/10  12:37:42 <DIR>                A001_007\n2026/10/10  12:37:56 <DIR>                A001_008\n2026/10/10  12:38:06 <DIR>                A001_009\n2026/10/10  12:38:18 <DIR>                A001_010\n2026/10/10  12:39:20 <DIR>                A001_011\n2026/10/10  12:42:52 <DIR>                A001_012\n2026/10/10  13:00:44 <DIR>                A001_013\n2026/10/10  13:01:52 <DIR>                A001_014\n2026/10/10  16:59:26 <DIR>                A001_015\n2026/10/11  01:54:00 <DIR>                A001_016\n2026/10/11  03:51:02 <DIR>                A001_017\n2026/10/11  04:11:16 <DIR>                A001_018\n2026/10/11  04:12:42 <DIR>                A001_019\n2026/10/11  04:13:00 <DIR>                A001_020\n2026/10/11  04:13:14 <DIR>                A001_021\n2026/10/11  08:47:10 <DIR>                A001_022\n2026/10/11  09:31:58 <DIR>                A001_023\n2026/10/11  10:35:26 <DIR>                A001_024\n2026/10/11  10:41:34 <DIR>                A001_025\n2026/10/11  10:42:50 <DIR>                A001_026\n2026/10/11  10:45:58 <DIR>                A001_027\n2026/10/11  11:01:08 <DIR>                A001_028\n2026/10/11  11:07:38 <DIR>                A001_029\n2026/10/11  11:38:50 <DIR>                A001_030\n2026/10/11  11:40:42 <DIR>                A001_031\n2026/10/11  11:49:24 <DIR>                A001_032\n2026/10/11  11:52:18 <DIR>                A001_033\n2026/10/11  11:58:42 <DIR>                A001_034\n2026/10/11  12:23:36 <DIR>                A001_035\n2026/10/11  12:25:52 <DIR>                A001_036\n2026/10/11  12:32:06 <DIR>                A001_037\n2026/10/11  12:35:18 <DIR>                A001_038\n2026/10/11  13:03:18 <DIR>                A001_039\n2026/10/11  13:07:06 <DIR>                A001_040\n2026/10/11  13:07:10 <DIR>                A001_041\n2026/10/11  13:08:56 <DIR>                A001_042\n2026/10/11  13:10:40 <DIR>                A001_043\n2026/10/11  14:31:38 <DIR>                A001_044\n2026/10/11  14:31:58 <DIR>                A001_045\n2026/10/11  15:01:48 <DIR>                A001_046\n2026/10/11  15:05:24 <DIR>                A001_047\n2026/10/11  15:06:46 <DIR>                A001_048\n2026/10/11  15:15:46 <DIR>                A001_049\n2026/10/11  15:16:44 <DIR>                A001_050\n"}
+{"time": "2026-10-11T15:15:56.579742", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:15:56.738803", "command": "gui geti MV_FrameRate", "reply": "OK:MV_FrameRate -> 10\n\n"}
+{"time": "2026-10-11T15:15:56.739159", "command": "gui geti EXCL_FrameRate", "reply": "OK:EXCL_FrameRate -> 0\n\n"}
+{"time": "2026-10-11T15:15:56.739936", "command": "menu SetMovFramerate", "reply": "7\n\n"}
+{"time": "2026-10-11T15:15:56.740504", "command": "menu SetMovCinemaDNGQuality", "reply": "4\n\n"}
+{"time": "2026-10-11T15:19:16.943690", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:19:16.949524", "command": "menu SetMovCinemaDNGQuality", "reply": "4\n\n"}
+{"time": "2026-10-11T15:19:17.439591", "command": "key MENUON", "reply": "\n"}
+{"time": "2026-10-11T15:19:18.245563", "command": "key MENUOFF", "reply": "\n"}
+{"time": "2026-10-11T15:19:19.569106", "command": "key RIGHTON", "reply": "\n"}
+{"time": "2026-10-11T15:19:19.690599", "command": "key RIGHTOFF", "reply": "\n"}
+{"time": "2026-10-11T15:19:20.347280", "command": "gui geti MENU_Level2", "reply": "OK:MENU_Level2 -> 4297\n\n"}
+{"time": "2026-10-11T15:19:20.347994", "command": "key RIGHTON", "reply": "\n"}
+{"time": "2026-10-11T15:19:20.492580", "command": "key RIGHTOFF", "reply": "\n"}
+{"time": "2026-10-11T15:19:21.144258", "command": "key DOWNON", "reply": "\n"}
+{"time": "2026-10-11T15:19:21.270071", "command": "key DOWNOFF", "reply": "\n"}
+{"time": "2026-10-11T15:19:21.922040", "command": "key DOWNON", "reply": "\n"}
+{"time": "2026-10-11T15:19:22.057761", "command": "key DOWNOFF", "reply": "\n"}
+{"time": "2026-10-11T15:19:22.797531", "command": "key OKON", "reply": "\n"}
+{"time": "2026-10-11T15:19:22.923425", "command": "key OKOFF", "reply": "\n"}
+{"time": "2026-10-11T15:19:23.579303", "command": "menu SetMovCinemaDNGQuality", "reply": "0\n\n"}
+{"time": "2026-10-11T15:19:23.579838", "command": "key DOWNON", "reply": "\n"}
+{"time": "2026-10-11T15:19:23.767991", "command": "key DOWNOFF", "reply": "\n"}
+{"time": "2026-10-11T15:19:24.422588", "command": "key DOWNON", "reply": "\n"}
+{"time": "2026-10-11T15:19:24.548653", "command": "key DOWNOFF", "reply": "\n"}
+{"time": "2026-10-11T15:19:25.200438", "command": "gui geti MENU_Level2", "reply": "OK:MENU_Level2 -> 4434\n\n"}
+{"time": "2026-10-11T15:19:25.200973", "command": "key RIGHTON", "reply": "\n"}
+{"time": "2026-10-11T15:19:25.378205", "command": "key RIGHTOFF", "reply": "\n"}
+{"time": "2026-10-11T15:19:26.029674", "command": "gui geti B2_n5_ListFocus4", "reply": "OK:B2_n5_ListFocus4 -> 10\n\n"}
+{"time": "2026-10-11T15:19:26.030288", "command": "key UPON", "reply": "\n"}
+{"time": "2026-10-11T15:19:26.156004", "command": "key UPOFF", "reply": "\n"}
+{"time": "2026-10-11T15:19:26.810946", "command": "gui geti B2_n5_ListFocus4", "reply": "OK:B2_n5_ListFocus4 -> 9\n\n"}
+{"time": "2026-10-11T15:19:26.811654", "command": "key UPON", "reply": "\n"}
+{"time": "2026-10-11T15:19:26.937435", "command": "key UPOFF", "reply": "\n"}
+{"time": "2026-10-11T15:19:27.593292", "command": "gui geti B2_n5_ListFocus4", "reply": "OK:B2_n5_ListFocus4 -> 8\n\n"}
+{"time": "2026-10-11T15:19:27.659528", "command": "key OKON", "reply": "\n"}
+{"time": "2026-10-11T15:19:27.785672", "command": "key OKOFF", "reply": "\n"}
+{"time": "2026-10-11T15:19:28.437015", "command": "gui geti MV_FrameRate", "reply": "OK:MV_FrameRate -> 8\n\n"}
+{"time": "2026-10-11T15:19:28.460284", "command": "key MENUON", "reply": "\n"}
+{"time": "2026-10-11T15:19:29.265265", "command": "key MENUOFF", "reply": "\n"}
+{"time": "2026-10-11T15:19:29.945132", "command": "key MENUON", "reply": "\n"}
+{"time": "2026-10-11T15:19:30.829421", "command": "key MENUOFF", "reply": "\n"}
+{"time": "2026-10-11T15:20:00.997175", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:20:01.048146", "command": "gui geti MV_FrameRate", "reply": "OK:MV_FrameRate -> 8\n\n"}
+{"time": "2026-10-11T15:20:01.048601", "command": "gui geti EXCL_FrameRate", "reply": "OK:EXCL_FrameRate -> 0\n\n"}
+{"time": "2026-10-11T15:20:01.049088", "command": "menu SetMovFramerate", "reply": "7\n\n"}
+{"time": "2026-10-11T15:20:01.049579", "command": "menu SetMovCinemaDNGQuality", "reply": "0\n\n"}
+{"time": "2026-10-11T15:20:01.393442", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:20:01.393814", "command": "status get app_current", "reply": "app_current -> 2\n\n"}
+{"time": "2026-10-11T15:20:01.395062", "command": "sdcard slot", "reply": "slot now slot = sd0\n\n"}
+{"time": "2026-10-11T15:20:01.399476", "command": "dir \\CINEMA", "reply": "                                          .\n2026/10/10  12:33:14 <DIR>                A001_001\n2026/10/10  12:34:24 <DIR>                A001_002\n2026/10/10  12:35:10 <DIR>                A001_003\n2026/10/10  12:36:24 <DIR>                A001_004\n2026/10/10  12:36:46 <DIR>                A001_005\n2026/10/10  12:37:14 <DIR>                A001_006\n2026/10/10  12:37:42 <DIR>                A001_007\n2026/10/10  12:37:56 <DIR>                A001_008\n2026/10/10  12:38:06 <DIR>                A001_009\n2026/10/10  12:38:18 <DIR>                A001_010\n2026/10/10  12:39:20 <DIR>                A001_011\n2026/10/10  12:42:52 <DIR>                A001_012\n2026/10/10  13:00:44 <DIR>                A001_013\n2026/10/10  13:01:52 <DIR>                A001_014\n2026/10/10  16:59:26 <DIR>                A001_015\n2026/10/11  01:54:00 <DIR>                A001_016\n2026/10/11  03:51:02 <DIR>                A001_017\n2026/10/11  04:11:16 <DIR>                A001_018\n2026/10/11  04:12:42 <DIR>                A001_019\n2026/10/11  04:13:00 <DIR>                A001_020\n2026/10/11  04:13:14 <DIR>                A001_021\n2026/10/11  08:47:10 <DIR>                A001_022\n2026/10/11  09:31:58 <DIR>                A001_023\n2026/10/11  10:35:26 <DIR>                A001_024\n2026/10/11  10:41:34 <DIR>                A001_025\n2026/10/11  10:42:50 <DIR>                A001_026\n2026/10/11  10:45:58 <DIR>                A001_027\n2026/10/11  11:01:08 <DIR>                A001_028\n2026/10/11  11:07:38 <DIR>                A001_029\n2026/10/11  11:38:50 <DIR>                A001_030\n2026/10/11  11:40:42 <DIR>                A001_031\n2026/10/11  11:49:24 <DIR>                A001_032\n2026/10/11  11:52:18 <DIR>                A001_033\n2026/10/11  11:58:42 <DIR>                A001_034\n2026/10/11  12:23:36 <DIR>                A001_035\n2026/10/11  12:25:52 <DIR>                A001_036\n2026/10/11  12:32:06 <DIR>                A001_037\n2026/10/11  12:35:18 <DIR>                A001_038\n2026/10/11  13:03:18 <DIR>                A001_039\n2026/10/11  13:07:06 <DIR>                A001_040\n2026/10/11  13:07:10 <DIR>                A001_041\n2026/10/11  13:08:56 <DIR>                A001_042\n2026/10/11  13:10:40 <DIR>                A001_043\n2026/10/11  14:31:38 <DIR>                A001_044\n2026/10/11  14:31:58 <DIR>                A001_045\n2026/10/11  15:01:48 <DIR>                A001_046\n2026/10/11  15:05:24 <DIR>                A001_047\n2026/10/11  15:06:46 <DIR>                A001_048\n2026/10/11  15:15:46 <DIR>                A001_049\n2026/10/11  15:16:44 <DIR>                A001_050\n"}
+{"time": "2026-10-11T15:20:02.761547", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:20:02.819553", "command": "key MOVON", "reply": "\n"}
+{"time": "2026-10-11T15:20:02.942834", "command": "key MOVOFF", "reply": "\n"}
+{"time": "2026-10-11T15:20:02.944205", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:20:02.992412", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:20:03.044417", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:20:03.092473", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:20:03.142366", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:20:03.192811", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:20:03.242482", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:20:03.295739", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:20:03.483708", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:20:03.533848", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:20:03.583757", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:20:03.763050", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:20:03.821934", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:20:03.884352", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:20:03.947448", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:20:04.004619", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:20:04.122851", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:20:04.179212", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:20:04.185012", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:20:12.974067", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:20:12.974801", "command": "rec log-out", "reply": "slot=1, cnt=2/600\nsize=131072*978816(119GB), free=80%, exFAT, UHS-II\ntime       : 2026/10/11 15:21:04 \nrec factor : Nothing \nui factor  : Nothing \nbattery    : OK \ntemp(BAT)  : OK \ntemp(BODY) : OK \ntemp(LCD)  : OK \ntemp(CMOS) : OK \nfile-size=1095168, bulk-size=67108864(61.3)\nreq_cnt=94, fin_cnt=94, vbuf/94/87833, raw1\nrequest  ,finish   ,diff,gap ,reqcnt,fincnt,diff,sdb,MB/s\n      913,     1367, 454, 913,    57,     1,  56,  1, 137\n     1640,     2023, 383, 273,    94,    58,  36, 59, 105\n"}
+{"time": "2026-10-11T15:20:12.987961", "command": "dir \\CINEMA", "reply": "                                          .\n2026/10/10  12:33:14 <DIR>                A001_001\n2026/10/10  12:34:24 <DIR>                A001_002\n2026/10/10  12:35:10 <DIR>                A001_003\n2026/10/10  12:36:24 <DIR>                A001_004\n2026/10/10  12:36:46 <DIR>                A001_005\n2026/10/10  12:37:14 <DIR>                A001_006\n2026/10/10  12:37:42 <DIR>                A001_007\n2026/10/10  12:37:56 <DIR>                A001_008\n2026/10/10  12:38:06 <DIR>                A001_009\n2026/10/10  12:38:18 <DIR>                A001_010\n2026/10/10  12:39:20 <DIR>                A001_011\n2026/10/10  12:42:52 <DIR>                A001_012\n2026/10/10  13:00:44 <DIR>                A001_013\n2026/10/10  13:01:52 <DIR>                A001_014\n2026/10/10  16:59:26 <DIR>                A001_015\n2026/10/11  01:54:00 <DIR>                A001_016\n2026/10/11  03:51:02 <DIR>                A001_017\n2026/10/11  04:11:16 <DIR>                A001_018\n2026/10/11  04:12:42 <DIR>                A001_019\n2026/10/11  04:13:00 <DIR>                A001_020\n2026/10/11  04:13:14 <DIR>                A001_021\n2026/10/11  08:47:10 <DIR>                A001_022\n2026/10/11  09:31:58 <DIR>                A001_023\n2026/10/11  10:35:26 <DIR>                A001_024\n2026/10/11  10:41:34 <DIR>                A001_025\n2026/10/11  10:42:50 <DIR>                A001_026\n2026/10/11  10:45:58 <DIR>                A001_027\n2026/10/11  11:01:08 <DIR>                A001_028\n2026/10/11  11:07:38 <DIR>                A001_029\n2026/10/11  11:38:50 <DIR>                A001_030\n2026/10/11  11:40:42 <DIR>                A001_031\n2026/10/11  11:49:24 <DIR>                A001_032\n2026/10/11  11:52:18 <DIR>                A001_033\n2026/10/11  11:58:42 <DIR>                A001_034\n2026/10/11  12:23:36 <DIR>                A001_035\n2026/10/11  12:25:52 <DIR>                A001_036\n2026/10/11  12:32:06 <DIR>                A001_037\n2026/10/11  12:35:18 <DIR>                A001_038\n2026/10/11  13:03:18 <DIR>                A001_039\n2026/10/11  13:07:06 <DIR>                A001_040\n2026/10/11  13:07:10 <DIR>                A001_041\n2026/10/11  13:08:56 <DIR>                A001_042\n2026/10/11  13:10:40 <DIR>                A001_043\n2026/10/11  14:31:38 <DIR>                A001_044\n2026/10/11  14:31:58 <DIR>                A001_045\n2026/10/11  15:01:48 <DIR>                A001_046\n2026/10/11  15:05:24 <DIR>                A001_047\n2026/10/11  15:06:46 <DIR>                A001_048\n2026/10/11  15:15:46 <DIR>                A001_049\n2026/10/11  15:16:44 <DIR>                A001_050\n2026/10/11  15:21:02 <DIR>                A001_051\n"}
+{"time": "2026-10-11T15:20:12.988504", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:20:13.037054", "command": "gui geti MV_FrameRate", "reply": "OK:MV_FrameRate -> 8\n\n"}
+{"time": "2026-10-11T15:20:13.037452", "command": "gui geti EXCL_FrameRate", "reply": "OK:EXCL_FrameRate -> 0\n\n"}
+{"time": "2026-10-11T15:20:13.037880", "command": "menu SetMovFramerate", "reply": "7\n\n"}
+{"time": "2026-10-11T15:20:13.038231", "command": "menu SetMovCinemaDNGQuality", "reply": "0\n\n"}
+{"time": "2026-10-11T15:21:20.437397", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:21:20.487377", "command": "gui geti MV_FrameRate", "reply": "OK:MV_FrameRate -> 8\n\n"}
+{"time": "2026-10-11T15:21:20.487703", "command": "gui geti EXCL_FrameRate", "reply": "OK:EXCL_FrameRate -> 0\n\n"}
+{"time": "2026-10-11T15:21:20.488093", "command": "menu SetMovFramerate", "reply": "7\n\n"}
+{"time": "2026-10-11T15:21:20.488449", "command": "menu SetMovCinemaDNGQuality", "reply": "0\n\n"}
+{"time": "2026-10-11T15:21:20.903749", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:21:20.904203", "command": "status get app_current", "reply": "app_current -> 2\n\n"}
+{"time": "2026-10-11T15:21:20.904714", "command": "sdcard slot", "reply": "slot now slot = sd0\n\n"}
+{"time": "2026-10-11T15:21:20.908549", "command": "dir \\CINEMA", "reply": "                                          .\n2026/10/10  12:33:14 <DIR>                A001_001\n2026/10/10  12:34:24 <DIR>                A001_002\n2026/10/10  12:35:10 <DIR>                A001_003\n2026/10/10  12:36:24 <DIR>                A001_004\n2026/10/10  12:36:46 <DIR>                A001_005\n2026/10/10  12:37:14 <DIR>                A001_006\n2026/10/10  12:37:42 <DIR>                A001_007\n2026/10/10  12:37:56 <DIR>                A001_008\n2026/10/10  12:38:06 <DIR>                A001_009\n2026/10/10  12:38:18 <DIR>                A001_010\n2026/10/10  12:39:20 <DIR>                A001_011\n2026/10/10  12:42:52 <DIR>                A001_012\n2026/10/10  13:00:44 <DIR>                A001_013\n2026/10/10  13:01:52 <DIR>                A001_014\n2026/10/10  16:59:26 <DIR>                A001_015\n2026/10/11  01:54:00 <DIR>                A001_016\n2026/10/11  03:51:02 <DIR>                A001_017\n2026/10/11  04:11:16 <DIR>                A001_018\n2026/10/11  04:12:42 <DIR>                A001_019\n2026/10/11  04:13:00 <DIR>                A001_020\n2026/10/11  04:13:14 <DIR>                A001_021\n2026/10/11  08:47:10 <DIR>                A001_022\n2026/10/11  09:31:58 <DIR>                A001_023\n2026/10/11  10:35:26 <DIR>                A001_024\n2026/10/11  10:41:34 <DIR>                A001_025\n2026/10/11  10:42:50 <DIR>                A001_026\n2026/10/11  10:45:58 <DIR>                A001_027\n2026/10/11  11:01:08 <DIR>                A001_028\n2026/10/11  11:07:38 <DIR>                A001_029\n2026/10/11  11:38:50 <DIR>                A001_030\n2026/10/11  11:40:42 <DIR>                A001_031\n2026/10/11  11:49:24 <DIR>                A001_032\n2026/10/11  11:52:18 <DIR>                A001_033\n2026/10/11  11:58:42 <DIR>                A001_034\n2026/10/11  12:23:36 <DIR>                A001_035\n2026/10/11  12:25:52 <DIR>                A001_036\n2026/10/11  12:32:06 <DIR>                A001_037\n2026/10/11  12:35:18 <DIR>                A001_038\n2026/10/11  13:03:18 <DIR>                A001_039\n2026/10/11  13:07:06 <DIR>                A001_040\n2026/10/11  13:07:10 <DIR>                A001_041\n2026/10/11  13:08:56 <DIR>                A001_042\n2026/10/11  13:10:40 <DIR>                A001_043\n2026/10/11  14:31:38 <DIR>                A001_044\n2026/10/11  14:31:58 <DIR>                A001_045\n2026/10/11  15:01:48 <DIR>                A001_046\n2026/10/11  15:05:24 <DIR>                A001_047\n2026/10/11  15:06:46 <DIR>                A001_048\n2026/10/11  15:15:46 <DIR>                A001_049\n2026/10/11  15:16:44 <DIR>                A001_050\n2026/10/11  15:21:02 <DIR>                A001_051\n"}
+{"time": "2026-10-11T15:21:22.282410", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:21:22.314995", "command": "key MOVON", "reply": "\n"}
+{"time": "2026-10-11T15:21:22.441506", "command": "key MOVOFF", "reply": "\n"}
+{"time": "2026-10-11T15:21:26.294783", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:21:26.298294", "command": "status get is_recording", "reply": "is_recording -> 1\n\n"}
+{"time": "2026-10-11T15:21:26.301862", "command": "key MOVON", "reply": "\n"}
+{"time": "2026-10-11T15:21:26.425510", "command": "key MOVOFF", "reply": "\n"}
+{"time": "2026-10-11T15:21:26.426248", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:21:32.550366", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:21:32.551340", "command": "rec log-out", "reply": "slot=1, cnt=7/600\nsize=131072*978816(119GB), free=80%, exFAT, UHS-II\ntime       : 2026/10/11 15:22:26 \nrec factor : Nothing \nui factor  : Button \nbattery    : OK \ntemp(BAT)  : OK \ntemp(BODY) : OK \ntemp(LCD)  : OK \ntemp(CMOS) : OK \nfile-size=1095168, bulk-size=67108864(61.3)\nreq_cnt=388, fin_cnt=388, key\nrequest  ,finish   ,diff,gap ,reqcnt,fincnt,diff,sdb,MB/s\n     1122,     1371, 249,1122,    57,     1,  56,  6, 250\n     1580,     1832, 252, 209,   114,    57,  57,  5, 252\n     2038,     2287, 249, 206,   171,   114,  57,  5, 255\n     2498,     2748, 250, 211,   228,   171,  57,  5, 254\n     2960,     3209, 249, 212,   285,   228,  57,  5, 255\n     3417,     3668, 251, 208,   342,   285,  57,  5, 253\n     3784,     4017, 233, 116,   388,   342,  46, 48, 220\n"}
+{"time": "2026-10-11T15:21:32.676330", "command": "dir \\CINEMA", "reply": "                                          .\n2026/10/10  12:33:14 <DIR>                A001_001\n2026/10/10  12:34:24 <DIR>                A001_002\n2026/10/10  12:35:10 <DIR>                A001_003\n2026/10/10  12:36:24 <DIR>                A001_004\n2026/10/10  12:36:46 <DIR>                A001_005\n2026/10/10  12:37:14 <DIR>                A001_006\n2026/10/10  12:37:42 <DIR>                A001_007\n2026/10/10  12:37:56 <DIR>                A001_008\n2026/10/10  12:38:06 <DIR>                A001_009\n2026/10/10  12:38:18 <DIR>                A001_010\n2026/10/10  12:39:20 <DIR>                A001_011\n2026/10/10  12:42:52 <DIR>                A001_012\n2026/10/10  13:00:44 <DIR>                A001_013\n2026/10/10  13:01:52 <DIR>                A001_014\n2026/10/10  16:59:26 <DIR>                A001_015\n2026/10/11  01:54:00 <DIR>                A001_016\n2026/10/11  03:51:02 <DIR>                A001_017\n2026/10/11  04:11:16 <DIR>                A001_018\n2026/10/11  04:12:42 <DIR>                A001_019\n2026/10/11  04:13:00 <DIR>                A001_020\n2026/10/11  04:13:14 <DIR>                A001_021\n2026/10/11  08:47:10 <DIR>                A001_022\n2026/10/11  09:31:58 <DIR>                A001_023\n2026/10/11  10:35:26 <DIR>                A001_024\n2026/10/11  10:41:34 <DIR>                A001_025\n2026/10/11  10:42:50 <DIR>                A001_026\n2026/10/11  10:45:58 <DIR>                A001_027\n2026/10/11  11:01:08 <DIR>                A001_028\n2026/10/11  11:07:38 <DIR>                A001_029\n2026/10/11  11:38:50 <DIR>                A001_030\n2026/10/11  11:40:42 <DIR>                A001_031\n2026/10/11  11:49:24 <DIR>                A001_032\n2026/10/11  11:52:18 <DIR>                A001_033\n2026/10/11  11:58:42 <DIR>                A001_034\n2026/10/11  12:23:36 <DIR>                A001_035\n2026/10/11  12:25:52 <DIR>                A001_036\n2026/10/11  12:32:06 <DIR>                A001_037\n2026/10/11  12:35:18 <DIR>                A001_038\n2026/10/11  13:03:18 <DIR>                A001_039\n2026/10/11  13:07:06 <DIR>                A001_040\n2026/10/11  13:07:10 <DIR>                A001_041\n2026/10/11  13:08:56 <DIR>                A001_042\n2026/10/11  13:10:40 <DIR>                A001_043\n2026/10/11  14:31:38 <DIR>                A001_044\n2026/10/11  14:31:58 <DIR>                A001_045\n2026/10/11  15:01:48 <DIR>                A001_046\n2026/10/11  15:05:24 <DIR>                A001_047\n2026/10/11  15:06:46 <DIR>                A001_048\n2026/10/11  15:15:46 <DIR>                A001_049\n2026/10/11  15:16:44 <DIR>                A001_050\n2026/10/11  15:21:02 <DIR>                A001_051\n2026/10/11  15:22:20 <DIR>                A001_052\n"}
+{"time": "2026-10-11T15:21:32.677074", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:21:32.834117", "command": "gui geti MV_FrameRate", "reply": "OK:MV_FrameRate -> 8\n\n"}
+{"time": "2026-10-11T15:21:32.834603", "command": "gui geti EXCL_FrameRate", "reply": "OK:EXCL_FrameRate -> 0\n\n"}
+{"time": "2026-10-11T15:21:32.835058", "command": "menu SetMovFramerate", "reply": "7\n\n"}
+{"time": "2026-10-11T15:21:32.835977", "command": "menu SetMovCinemaDNGQuality", "reply": "0\n\n"}
+{"time": "2026-10-11T15:21:53.538645", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:21:54.035001", "command": "key MENUON", "reply": "\n"}
+{"time": "2026-10-11T15:21:54.839856", "command": "key MENUOFF", "reply": "\n"}
+{"time": "2026-10-11T15:21:56.168253", "command": "key RIGHTON", "reply": "\n"}
+{"time": "2026-10-11T15:21:56.289978", "command": "key RIGHTOFF", "reply": "\n"}
+{"time": "2026-10-11T15:21:56.945903", "command": "gui geti MENU_Level2", "reply": "OK:MENU_Level2 -> 4434\n\n"}
+{"time": "2026-10-11T15:21:56.946608", "command": "key RIGHTON", "reply": "\n"}
+{"time": "2026-10-11T15:21:57.143488", "command": "key RIGHTOFF", "reply": "\n"}
+{"time": "2026-10-11T15:21:57.799509", "command": "gui geti B2_n5_ListFocus4", "reply": "OK:B2_n5_ListFocus4 -> 8\n\n"}
+{"time": "2026-10-11T15:21:57.800220", "command": "key DOWNON", "reply": "\n"}
+{"time": "2026-10-11T15:21:57.929749", "command": "key DOWNOFF", "reply": "\n"}
+{"time": "2026-10-11T15:21:58.584643", "command": "gui geti B2_n5_ListFocus4", "reply": "OK:B2_n5_ListFocus4 -> 9\n\n"}
+{"time": "2026-10-11T15:21:58.673516", "command": "key OKON", "reply": "\n"}
+{"time": "2026-10-11T15:21:58.799491", "command": "key OKOFF", "reply": "\n"}
+{"time": "2026-10-11T15:21:59.451692", "command": "gui geti MV_FrameRate", "reply": "OK:MV_FrameRate -> 9\n\n"}
+{"time": "2026-10-11T15:21:59.478414", "command": "key MENUON", "reply": "\n"}
+{"time": "2026-10-11T15:22:00.284392", "command": "key MENUOFF", "reply": "\n"}
+{"time": "2026-10-11T15:22:00.963209", "command": "key MENUON", "reply": "\n"}
+{"time": "2026-10-11T15:22:01.864155", "command": "key MENUOFF", "reply": "\n"}
+{"time": "2026-10-11T15:22:16.550835", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:22:16.603030", "command": "gui geti MV_FrameRate", "reply": "OK:MV_FrameRate -> 9\n\n"}
+{"time": "2026-10-11T15:22:16.603388", "command": "gui geti EXCL_FrameRate", "reply": "OK:EXCL_FrameRate -> 0\n\n"}
+{"time": "2026-10-11T15:22:16.603843", "command": "menu SetMovFramerate", "reply": "7\n\n"}
+{"time": "2026-10-11T15:22:16.604242", "command": "menu SetMovCinemaDNGQuality", "reply": "0\n\n"}
+{"time": "2026-10-11T15:22:17.064698", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:22:17.065051", "command": "status get app_current", "reply": "app_current -> 2\n\n"}
+{"time": "2026-10-11T15:22:17.065553", "command": "sdcard slot", "reply": "slot now slot = sd0\n\n"}
+{"time": "2026-10-11T15:22:17.070859", "command": "dir \\CINEMA", "reply": "                                          .\n2026/10/10  12:33:14 <DIR>                A001_001\n2026/10/10  12:34:24 <DIR>                A001_002\n2026/10/10  12:35:10 <DIR>                A001_003\n2026/10/10  12:36:24 <DIR>                A001_004\n2026/10/10  12:36:46 <DIR>                A001_005\n2026/10/10  12:37:14 <DIR>                A001_006\n2026/10/10  12:37:42 <DIR>                A001_007\n2026/10/10  12:37:56 <DIR>                A001_008\n2026/10/10  12:38:06 <DIR>                A001_009\n2026/10/10  12:38:18 <DIR>                A001_010\n2026/10/10  12:39:20 <DIR>                A001_011\n2026/10/10  12:42:52 <DIR>                A001_012\n2026/10/10  13:00:44 <DIR>                A001_013\n2026/10/10  13:01:52 <DIR>                A001_014\n2026/10/10  16:59:26 <DIR>                A001_015\n2026/10/11  01:54:00 <DIR>                A001_016\n2026/10/11  03:51:02 <DIR>                A001_017\n2026/10/11  04:11:16 <DIR>                A001_018\n2026/10/11  04:12:42 <DIR>                A001_019\n2026/10/11  04:13:00 <DIR>                A001_020\n2026/10/11  04:13:14 <DIR>                A001_021\n2026/10/11  08:47:10 <DIR>                A001_022\n2026/10/11  09:31:58 <DIR>                A001_023\n2026/10/11  10:35:26 <DIR>                A001_024\n2026/10/11  10:41:34 <DIR>                A001_025\n2026/10/11  10:42:50 <DIR>                A001_026\n2026/10/11  10:45:58 <DIR>                A001_027\n2026/10/11  11:01:08 <DIR>                A001_028\n2026/10/11  11:07:38 <DIR>                A001_029\n2026/10/11  11:38:50 <DIR>                A001_030\n2026/10/11  11:40:42 <DIR>                A001_031\n2026/10/11  11:49:24 <DIR>                A001_032\n2026/10/11  11:52:18 <DIR>                A001_033\n2026/10/11  11:58:42 <DIR>                A001_034\n2026/10/11  12:23:36 <DIR>                A001_035\n2026/10/11  12:25:52 <DIR>                A001_036\n2026/10/11  12:32:06 <DIR>                A001_037\n2026/10/11  12:35:18 <DIR>                A001_038\n2026/10/11  13:03:18 <DIR>                A001_039\n2026/10/11  13:07:06 <DIR>                A001_040\n2026/10/11  13:07:10 <DIR>                A001_041\n2026/10/11  13:08:56 <DIR>                A001_042\n2026/10/11  13:10:40 <DIR>                A001_043\n2026/10/11  14:31:38 <DIR>                A001_044\n2026/10/11  14:31:58 <DIR>                A001_045\n2026/10/11  15:01:48 <DIR>                A001_046\n2026/10/11  15:05:24 <DIR>                A001_047\n2026/10/11  15:06:46 <DIR>                A001_048\n2026/10/11  15:15:46 <DIR>                A001_049\n2026/10/11  15:16:44 <DIR>                A001_050\n2026/10/11  15:21:02 <DIR>                A001_051\n2026/10/11  15:22:20 <DIR>                A001_052\n"}
+{"time": "2026-10-11T15:22:18.392619", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:22:18.473490", "command": "key MOVON", "reply": "\n"}
+{"time": "2026-10-11T15:22:18.600156", "command": "key MOVOFF", "reply": "\n"}
+{"time": "2026-10-11T15:22:22.401712", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:22:22.402876", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:22:28.645894", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:22:28.646952", "command": "rec log-out", "reply": "slot=1, cnt=3/600\nsize=131072*978816(119GB), free=80%, exFAT, UHS-II\ntime       : 2026/10/11 15:23:20 \nrec factor : Nothing \nui factor  : Nothing \nbattery    : OK \ntemp(BAT)  : OK \ntemp(BODY) : OK \ntemp(LCD)  : OK \ntemp(CMOS) : OK \nfile-size=1095168, bulk-size=67108864(61.3)\nreq_cnt=94, fin_cnt=94, vbuf/94/87331, raw1\nrequest  ,finish   ,diff,gap ,reqcnt,fincnt,diff,sdb,MB/s\n     1352,     1464, 112,1352,     5,     1,   4,  1,  48\n     1711,     2187, 476, 247,    62,     6,  56,  7, 131\n     2201,     2348, 147,  14,    94,    62,  32, 63, 245\n"}
+{"time": "2026-10-11T15:22:28.662857", "command": "dir \\CINEMA", "reply": "                                          .\n2026/10/10  12:33:14 <DIR>                A001_001\n2026/10/10  12:34:24 <DIR>                A001_002\n2026/10/10  12:35:10 <DIR>                A001_003\n2026/10/10  12:36:24 <DIR>                A001_004\n2026/10/10  12:36:46 <DIR>                A001_005\n2026/10/10  12:37:14 <DIR>                A001_006\n2026/10/10  12:37:42 <DIR>                A001_007\n2026/10/10  12:37:56 <DIR>                A001_008\n2026/10/10  12:38:06 <DIR>                A001_009\n2026/10/10  12:38:18 <DIR>                A001_010\n2026/10/10  12:39:20 <DIR>                A001_011\n2026/10/10  12:42:52 <DIR>                A001_012\n2026/10/10  13:00:44 <DIR>                A001_013\n2026/10/10  13:01:52 <DIR>                A001_014\n2026/10/10  16:59:26 <DIR>                A001_015\n2026/10/11  01:54:00 <DIR>                A001_016\n2026/10/11  03:51:02 <DIR>                A001_017\n2026/10/11  04:11:16 <DIR>                A001_018\n2026/10/11  04:12:42 <DIR>                A001_019\n2026/10/11  04:13:00 <DIR>                A001_020\n2026/10/11  04:13:14 <DIR>                A001_021\n2026/10/11  08:47:10 <DIR>                A001_022\n2026/10/11  09:31:58 <DIR>                A001_023\n2026/10/11  10:35:26 <DIR>                A001_024\n2026/10/11  10:41:34 <DIR>                A001_025\n2026/10/11  10:42:50 <DIR>                A001_026\n2026/10/11  10:45:58 <DIR>                A001_027\n2026/10/11  11:01:08 <DIR>                A001_028\n2026/10/11  11:07:38 <DIR>                A001_029\n2026/10/11  11:38:50 <DIR>                A001_030\n2026/10/11  11:40:42 <DIR>                A001_031\n2026/10/11  11:49:24 <DIR>                A001_032\n2026/10/11  11:52:18 <DIR>                A001_033\n2026/10/11  11:58:42 <DIR>                A001_034\n2026/10/11  12:23:36 <DIR>                A001_035\n2026/10/11  12:25:52 <DIR>                A001_036\n2026/10/11  12:32:06 <DIR>                A001_037\n2026/10/11  12:35:18 <DIR>                A001_038\n2026/10/11  13:03:18 <DIR>                A001_039\n2026/10/11  13:07:06 <DIR>                A001_040\n2026/10/11  13:07:10 <DIR>                A001_041\n2026/10/11  13:08:56 <DIR>                A001_042\n2026/10/11  13:10:40 <DIR>                A001_043\n2026/10/11  14:31:38 <DIR>                A001_044\n2026/10/11  14:31:58 <DIR>                A001_045\n2026/10/11  15:01:48 <DIR>                A001_046\n2026/10/11  15:05:24 <DIR>                A001_047\n2026/10/11  15:06:46 <DIR>                A001_048\n2026/10/11  15:15:46 <DIR>                A001_049\n2026/10/11  15:16:44 <DIR>                A001_050\n2026/10/11  15:21:02 <DIR>                A001_051\n2026/10/11  15:22:20 <DIR>                A001_052\n2026/10/11  15:23:16 <DIR>                A001_053\n"}
+{"time": "2026-10-11T15:22:28.663599", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:22:28.819722", "command": "gui geti MV_FrameRate", "reply": "OK:MV_FrameRate -> 9\n\n"}
+{"time": "2026-10-11T15:22:28.820072", "command": "gui geti EXCL_FrameRate", "reply": "OK:EXCL_FrameRate -> 0\n\n"}
+{"time": "2026-10-11T15:22:28.820589", "command": "menu SetMovFramerate", "reply": "7\n\n"}
+{"time": "2026-10-11T15:22:28.821113", "command": "menu SetMovCinemaDNGQuality", "reply": "0\n\n"}
+{"time": "2026-10-11T15:24:49.773837", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:24:49.932765", "command": "gui geti MV_FrameRate", "reply": "OK:MV_FrameRate -> 9\n\n"}
+{"time": "2026-10-11T15:24:49.933303", "command": "gui geti EXCL_FrameRate", "reply": "OK:EXCL_FrameRate -> 0\n\n"}
+{"time": "2026-10-11T15:24:49.933926", "command": "menu SetMovFramerate", "reply": "7\n\n"}
+{"time": "2026-10-11T15:24:49.934499", "command": "menu SetMovCinemaDNGQuality", "reply": "0\n\n"}
+{"time": "2026-10-11T15:24:50.290825", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:24:50.298238", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:24:50.298639", "command": "status get app_current", "reply": "app_current -> 2\n\n"}
+{"time": "2026-10-11T15:24:50.299266", "command": "sdcard slot", "reply": "slot now slot = sd0\n\n"}
+{"time": "2026-10-11T15:24:50.304604", "command": "dir \\CINEMA", "reply": "                                          .\n2026/10/10  12:33:14 <DIR>                A001_001\n2026/10/10  12:34:24 <DIR>                A001_002\n2026/10/10  12:35:10 <DIR>                A001_003\n2026/10/10  12:36:24 <DIR>                A001_004\n2026/10/10  12:36:46 <DIR>                A001_005\n2026/10/10  12:37:14 <DIR>                A001_006\n2026/10/10  12:37:42 <DIR>                A001_007\n2026/10/10  12:37:56 <DIR>                A001_008\n2026/10/10  12:38:06 <DIR>                A001_009\n2026/10/10  12:38:18 <DIR>                A001_010\n2026/10/10  12:39:20 <DIR>                A001_011\n2026/10/10  12:42:52 <DIR>                A001_012\n2026/10/10  13:00:44 <DIR>                A001_013\n2026/10/10  13:01:52 <DIR>                A001_014\n2026/10/10  16:59:26 <DIR>                A001_015\n2026/10/11  01:54:00 <DIR>                A001_016\n2026/10/11  03:51:02 <DIR>                A001_017\n2026/10/11  04:11:16 <DIR>                A001_018\n2026/10/11  04:12:42 <DIR>                A001_019\n2026/10/11  04:13:00 <DIR>                A001_020\n2026/10/11  04:13:14 <DIR>                A001_021\n2026/10/11  08:47:10 <DIR>                A001_022\n2026/10/11  09:31:58 <DIR>                A001_023\n2026/10/11  10:35:26 <DIR>                A001_024\n2026/10/11  10:41:34 <DIR>                A001_025\n2026/10/11  10:42:50 <DIR>                A001_026\n2026/10/11  10:45:58 <DIR>                A001_027\n2026/10/11  11:01:08 <DIR>                A001_028\n2026/10/11  11:07:38 <DIR>                A001_029\n2026/10/11  11:38:50 <DIR>                A001_030\n2026/10/11  11:40:42 <DIR>                A001_031\n2026/10/11  11:49:24 <DIR>                A001_032\n2026/10/11  11:52:18 <DIR>                A001_033\n2026/10/11  11:58:42 <DIR>                A001_034\n2026/10/11  12:23:36 <DIR>                A001_035\n2026/10/11  12:25:52 <DIR>                A001_036\n2026/10/11  12:32:06 <DIR>                A001_037\n2026/10/11  12:35:18 <DIR>                A001_038\n2026/10/11  13:03:18 <DIR>                A001_039\n2026/10/11  13:07:06 <DIR>                A001_040\n2026/10/11  13:07:10 <DIR>                A001_041\n2026/10/11  13:08:56 <DIR>                A001_042\n2026/10/11  13:10:40 <DIR>                A001_043\n2026/10/11  14:31:38 <DIR>                A001_044\n2026/10/11  14:31:58 <DIR>                A001_045\n2026/10/11  15:01:48 <DIR>                A001_046\n2026/10/11  15:05:24 <DIR>                A001_047\n2026/10/11  15:06:46 <DIR>                A001_048\n2026/10/11  15:15:46 <DIR>                A001_049\n2026/10/11  15:16:44 <DIR>                A001_050\n2026/10/11  15:21:02 <DIR>                A001_051\n2026/10/11  15:22:20 <DIR>                A001_052\n2026/10/11  15:23:16 <DIR>                A001_053\n"}
+{"time": "2026-10-11T15:24:51.655001", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:24:51.707626", "command": "key MOVON", "reply": "\n"}
+{"time": "2026-10-11T15:24:51.834079", "command": "key MOVOFF", "reply": "\n"}
+{"time": "2026-10-11T15:24:55.656514", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:24:55.657429", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:25:01.897068", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:25:01.898379", "command": "rec log-out", "reply": "slot=1, cnt=8/600\nsize=131072*978816(119GB), free=80%, exFAT, UHS-II\ntime       : 2026/10/11 15:25:53 \nrec factor : Nothing \nui factor  : Nothing \nbattery    : OK \ntemp(BAT)  : OK \ntemp(BODY) : OK \ntemp(LCD)  : OK \ntemp(CMOS) : OK \nfile-size=1095168, bulk-size=67108864(61.3)\nreq_cnt=94, fin_cnt=94, vbuf/94/87228, raw1\nrequest  ,finish   ,diff,gap ,reqcnt,fincnt,diff,sdb,MB/s\n     1133,     1339, 206,1133,     5,     1,   4,  1,  26\n     1567,     1844, 277, 228,    20,     6,  14,  7,  59\n     1849,     1916,  67,   5,    34,    20,  14, 21, 245\n     1921,     1987,  66,   5,    48,    34,  14, 35, 248\n     1990,     2056,  66,   3,    62,    48,  14, 49, 248\n     2063,     2129,  66,   7,    77,    62,  15, 63, 265\n     2134,     2200,  66,   5,    91,    77,  14, 78, 248\n     2201,     2218,  17,   1,    94,    91,   3, 79, 257\n"}
+{"time": "2026-10-11T15:25:01.912459", "command": "dir \\CINEMA", "reply": "                                          .\n2026/10/10  12:33:14 <DIR>                A001_001\n2026/10/10  12:34:24 <DIR>                A001_002\n2026/10/10  12:35:10 <DIR>                A001_003\n2026/10/10  12:36:24 <DIR>                A001_004\n2026/10/10  12:36:46 <DIR>                A001_005\n2026/10/10  12:37:14 <DIR>                A001_006\n2026/10/10  12:37:42 <DIR>                A001_007\n2026/10/10  12:37:56 <DIR>                A001_008\n2026/10/10  12:38:06 <DIR>                A001_009\n2026/10/10  12:38:18 <DIR>                A001_010\n2026/10/10  12:39:20 <DIR>                A001_011\n2026/10/10  12:42:52 <DIR>                A001_012\n2026/10/10  13:00:44 <DIR>                A001_013\n2026/10/10  13:01:52 <DIR>                A001_014\n2026/10/10  16:59:26 <DIR>                A001_015\n2026/10/11  01:54:00 <DIR>                A001_016\n2026/10/11  03:51:02 <DIR>                A001_017\n2026/10/11  04:11:16 <DIR>                A001_018\n2026/10/11  04:12:42 <DIR>                A001_019\n2026/10/11  04:13:00 <DIR>                A001_020\n2026/10/11  04:13:14 <DIR>                A001_021\n2026/10/11  08:47:10 <DIR>                A001_022\n2026/10/11  09:31:58 <DIR>                A001_023\n2026/10/11  10:35:26 <DIR>                A001_024\n2026/10/11  10:41:34 <DIR>                A001_025\n2026/10/11  10:42:50 <DIR>                A001_026\n2026/10/11  10:45:58 <DIR>                A001_027\n2026/10/11  11:01:08 <DIR>                A001_028\n2026/10/11  11:07:38 <DIR>                A001_029\n2026/10/11  11:38:50 <DIR>                A001_030\n2026/10/11  11:40:42 <DIR>                A001_031\n2026/10/11  11:49:24 <DIR>                A001_032\n2026/10/11  11:52:18 <DIR>                A001_033\n2026/10/11  11:58:42 <DIR>                A001_034\n2026/10/11  12:23:36 <DIR>                A001_035\n2026/10/11  12:25:52 <DIR>                A001_036\n2026/10/11  12:32:06 <DIR>                A001_037\n2026/10/11  12:35:18 <DIR>                A001_038\n2026/10/11  13:03:18 <DIR>                A001_039\n2026/10/11  13:07:06 <DIR>                A001_040\n2026/10/11  13:07:10 <DIR>                A001_041\n2026/10/11  13:08:56 <DIR>                A001_042\n2026/10/11  13:10:40 <DIR>                A001_043\n2026/10/11  14:31:38 <DIR>                A001_044\n2026/10/11  14:31:58 <DIR>                A001_045\n2026/10/11  15:01:48 <DIR>                A001_046\n2026/10/11  15:05:24 <DIR>                A001_047\n2026/10/11  15:06:46 <DIR>                A001_048\n2026/10/11  15:15:46 <DIR>                A001_049\n2026/10/11  15:16:44 <DIR>                A001_050\n2026/10/11  15:21:02 <DIR>                A001_051\n2026/10/11  15:22:20 <DIR>                A001_052\n2026/10/11  15:23:16 <DIR>                A001_053\n2026/10/11  15:25:50 <DIR>                A001_054\n"}
+{"time": "2026-10-11T15:25:01.913238", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T15:25:01.963228", "command": "gui geti MV_FrameRate", "reply": "OK:MV_FrameRate -> 9\n\n"}
+{"time": "2026-10-11T15:25:01.963569", "command": "gui geti EXCL_FrameRate", "reply": "OK:EXCL_FrameRate -> 0\n\n"}
+{"time": "2026-10-11T15:25:01.964132", "command": "menu SetMovFramerate", "reply": "7\n\n"}
+{"time": "2026-10-11T15:25:01.964731", "command": "menu SetMovCinemaDNGQuality", "reply": "0\n\n"}
+{"time": "2026-10-11T15:25:02.001189", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}

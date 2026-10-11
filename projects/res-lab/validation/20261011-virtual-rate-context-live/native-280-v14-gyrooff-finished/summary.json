@@ -1,0 +1,54 @@
+{
+  "origin_us": 734869154,
+  "vbuf_ms": 1018.552,
+  "vbuf_payload": [
+    1145328897,
+    4294967295,
+    101,
+    82148
+  ],
+  "before_vbuf": {
+    "submitted": 17,
+    "completed": 14,
+    "released": 7
+  },
+  "first_written_frames": [
+    {
+      "slot": 55,
+      "raw_buffer": "0x53b00c00",
+      "submit_ms": 673.226,
+      "complete_ms": 928.241,
+      "release_ms": 942.38,
+      "complete_to_release_ms": 14.139
+    },
+    {
+      "slot": 56,
+      "raw_buffer": "0x53c0e400",
+      "submit_ms": 683.62,
+      "complete_ms": 928.257,
+      "release_ms": 943.284,
+      "complete_to_release_ms": 15.027
+    },
+    {
+      "slot": 57,
+      "raw_buffer": "0x53d1bc00",
+      "submit_ms": 694.472,
+      "complete_ms": 928.269,
+      "release_ms": 944.371,
+      "complete_to_release_ms": 16.102
+    }
+  ],
+  "expected_headers": 101,
+  "header_context": "v14 CPU copy, Gyro2 disabled; stock outer word verified FAF5BD03",
+  "limitations": "DEBUG changes scheduling; header context is supplied from the verified trial; callbacks/releases are not durable-media or no-mosaic proof.",
+  "header_bracket_ms": {
+    "min": 0.637,
+    "median": 2.149,
+    "max": 5.955
+  },
+  "sensor_callbacks": {
+    "count": 111,
+    "median_gap_us": 3574.0,
+    "limitation": "callback cadence does not establish exposure or complete recorded frames"
+  }
+}

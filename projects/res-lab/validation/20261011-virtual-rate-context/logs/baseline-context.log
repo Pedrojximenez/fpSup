@@ -1,0 +1,20 @@
+F
+======================================================================
+FAIL: test_record_header_does_not_enter_interactive_settings (test_reslab_record_rate.RecordRateTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_reslab_record_rate.py", line 111, in test_record_header_does_not_enter_interactive_settings
+    self.assertEqual(calls, [], 'record-header path entered interactive settings')
+AssertionError: Lists differ: [3221584616, 3221602544] != []
+
+First list contains 2 additional elements.
+First extra element 0:
+3221584616
+
+- [3221584616, 3221602544]
++ [] : record-header path entered interactive settings
+
+----------------------------------------------------------------------
+Ran 1 test in 32.049s
+
+FAILED (failures=1)

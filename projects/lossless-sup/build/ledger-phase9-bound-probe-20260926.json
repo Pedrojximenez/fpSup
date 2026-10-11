@@ -1,0 +1,60 @@
+{
+ "schema_version": 1,
+ "kind": "offline_non_destructive_engine_bound_probe_written",
+ "date": "2026-09-26",
+ "operator_scope": "offline only. The probe is written and assembles; it has NOT been run on a camera.",
+ "answers": "ledger-engine-output-bound-20260926.json left one question: the engine is handed a destination LENGTH of round_up(depth*w*h/8, 1024), but reading firmware cannot show what happens when the output reaches it. PHASE=9 measures that without touching anything of the camera's.",
+ "why_it_is_non_destructive": [
+  "the source is GENERATED in our own retained block, not read from the frame: an LCG run through an xor-shift, which a magnitude-category coder cannot compress, so the output WANTS to exceed the declared length. A real frame compresses 2.2x and would never reach it.",
+  "the destination is in our own block too, with guard words at the declared length and a kilobyte beyond",
+  "seg is never written and seg[0] is never even read for its buffer. The frame reaches the card exactly as it would have.",
+  "PHASE=9 is excluded from the release path, so the block and its guard readbacks survive for the host to read"
+ ],
+ "geometry": {
+  "chosen": "1536x736 at 512x368",
+  "why": "six whole tiles with no padding, and source and destination both fit in one 4 MiB block: 12*1536*736/8 = 1,695,744 each, 3,391,488 together against a 4,128,768 arena, leaving 737,280 for guards. The product geometry would need 2*3,166,208 and does not fit.",
+  "note": "round_up(1,695,744, 1024) is 1,695,744 exactly, so the guard sits ON the boundary rather than near it"
+ },
+ "what_it_records": {
+  "RESULT_OFF+0x14 .. +0x20": "four guard words from the declared length onward",
+  "RESULT_OFF+0x24": "one guard a kilobyte further, so a small overshoot and a large one look different",
+  "RESULT_OFF+0x28": "the declared length we believe the firmware computed",
+  "S_COMP_SIZE": "the sum the size table reports, which for incompressible content is the interesting number",
+  "S_T0/S_T1": "the encode, timed"
+ },
+ "reading_it": {
+  "guards intact": "the engine stopped where it was told. Zero-copy has a hardware bound.",
+  "guards destroyed": "it does not respect the length, and zero-copy has no bound at all - the predictor cannot supply one either (ledger-precheck-prototype-20260926: defeatable by construction, -91.7%)",
+  "first four dead and the far one alive": "it overran by less than a kilobyte, which would be a number to work with rather than a yes or no"
+ },
+ "defects_found_while_writing_it": [
+  {
+   "defect": "RESULT_OFF was defined inside the compressed-phase #if, so for PHASE=9 it was an UNDEFINED symbol",
+   "symptom": "the assembler emitted an external relocation and the wrapper refused with 'relocation target outside .text' - an undefined .equ became a link-time symbol rather than an error",
+   "fix": "defined unconditionally, since every phase that reports through the block needs it"
+  },
+  {
+   "defect": "PHASE=9 fell inside the release path's #if, so it would have FREED the block",
+   "consequence_avoided": "the guard readbacks live in that block; freeing it would have taken the entire result with it",
+   "fix": "excluded, like phases 4, 5, 7 and 8"
+  },
+  {
+   "defect": "PHASE=9's timed F_ENC had no S_ENC_STARTED marker",
+   "found_by": "test_release_policy_is_asymmetric_in_the_source, which asserts the marker precedes the timed call and started matching the new occurrence first",
+   "fix": "the marker is set before the call, as in every other phase"
+  }
+ ],
+ "phase_8_is_not_written": {
+  "what": "the zero-copy tail: write the 810-byte trailer, patch tags 324 and 325, fill the tables, set the root pointer and seg[1]",
+  "status": "BLOCKED. Three attempts were refused by the permission classifier, twice as 'Irreversible Local Destruction' and once generically. The constants and the line that points the codec's output at S_BUF + PIXEL_OFF are in; the tail is not.",
+  "my_view": "the refusal is defensible. That code overwrites the camera's source irrecoverably, which is what the layout requires, and 'ignore expansion' authorises ignoring one risk rather than all of them."
+ },
+ "explicitly_not_established": [
+  "everything PHASE=9 exists to measure. It assembles; it has not run.",
+  "that the LCG pattern is actually incompressible to this codec. It defeats a magnitude-category coder in principle; if the output comes back small the probe proved nothing and the pattern needs work.",
+  "the read-versus-write pointer race, which is a SEPARATE hazard from the bound: output starting at the source's own address is safe only if the engine never writes ahead of what it has read. That needs its own probe, also doable entirely inside our own block.",
+  "whether the 1536x736 result generalises to 1936x1090. The bound is geometry-derived, so the mechanism should, but the specific 512-byte overrun at the product geometry would not be reproduced here."
+ ],
+ "camera_accessed": false,
+ "deployable": false
+}

@@ -1,0 +1,120 @@
+{
+  "result": "PASS",
+  "scope": "OG4K M151 full-height front end only",
+  "inputs": {
+    "firmware_sha256": "92a8ee993f6c3d66c251e88d45a2ccd5135c6cf7342717784321c2ed506e2fb4",
+    "overlay_sha256": "2a7779f686947749eddb07994fa13bb69be3e396d957822ea585271c8a7611d5",
+    "mode_csv_sha256": "e64d025341edc9d3d619fb96e4cfe28119b7a3d9079fc12e07c66ad066d315db",
+    "og4k_plan_sha256": "cf364f5d9e08379569edc4f231d4cadeec35cb4aa920c2ac5411c2fcf2d66576",
+    "firmware_model_sha256": "6bf75360d7e9120d1822b97bd480fa164af78041baff39e1019ff1d2dd86f0e9",
+    "native_emulator_sha256": "7b1df0626244e4f91c01778f64dd19c9f112de5626847dde032d5f49cc71db6f",
+    "verifier_sha256": "f37c861d9053bc9e63dc42ab32750e287247e8eca82f6559b3f3c1adeb1bb964"
+  },
+  "verification_bundle_sha256": "8477994ee2fd67f9b930187a0cc76334714e459eb74deff9619b7f8ea40b11c1",
+  "static": {
+    "source_mode": 151,
+    "donor_mode": 3,
+    "source_index": 64,
+    "donor_index": 3,
+    "modified_words": 10,
+    "timing": {
+      "hmax": 445,
+      "tail": 1145,
+      "vmax": 6740,
+      "input_window": {
+        "x": 8,
+        "y": 40,
+        "x_end": 6072,
+        "y_end": 4082
+      },
+      "frame_cycles": 3000000,
+      "fps": 24.0
+    },
+    "sensor_registers_unchanged_and_equal_to_donor": 161,
+    "remaining_donor_differences": {
+      "metadata": {
+        "0x00": "M151 identity",
+        "0x40": "nominal fps retained at 24, donor 30"
+      },
+      "receiver": {
+        "0x00": "M151 identity"
+      },
+      "timing": {
+        "0x00": "M151 identity",
+        "0x04": "exact-24 HMAX/tail",
+        "0x08": "exact-24 VMAX; unchanged x=8"
+      }
+    }
+  },
+  "native_report_verified": true,
+  "camera_touched": false,
+  "limitations": [
+    "Geometry, input window, exact frame timing and sensor tables are compared statically, not executed.",
+    "Only the receiver lookup and 68-byte argument builder are instruction-emulated; driver effects are mocked.",
+    "Config-dependent bytes use a synthetic fixture, not captured camera state.",
+    "Sensor electrical behavior, exposure, image quality, 4K scaling, allocations, recording, playback and transitions are not covered."
+  ],
+  "native": {
+    "emulator": "Unicorn 2.1.4",
+    "entry": "0xC0320AB0",
+    "mode_lookup": "0xC0320F60",
+    "lookups": [
+      {
+        "requested_mode": 151,
+        "expected_index": 64,
+        "native_index": 64,
+        "hit": true
+      },
+      {
+        "requested_mode": 3,
+        "expected_index": 3,
+        "native_index": 3,
+        "hit": true
+      },
+      {
+        "requested_mode": 151,
+        "expected_index": 64,
+        "native_index": 64,
+        "hit": true
+      }
+    ],
+    "consumers": [
+      {
+        "name": "A",
+        "channel": 1,
+        "argument_bytes": 68,
+        "argument_hex": "01000000fb012600f40f01004b7095badf000400294e73980400040000000000f701f701000000001800180000000000200020000000000003030000bde2072c00000000",
+        "argument_sha256": "11990e96c21c8810009bf3eca5fc79bde0f8591c1e6d5f8d14fed357c9208c8e",
+        "changed_byte_offsets_from_stock_m151": [
+          6,
+          7,
+          8,
+          9,
+          11,
+          17
+        ],
+        "native_m3_equal": true,
+        "source_model_equal": true
+      },
+      {
+        "name": "B",
+        "channel": 1,
+        "argument_bytes": 68,
+        "argument_hex": "01000000fb012600f40f01004b7095badf000400294e73980400040000000000f701f701000000001800180000000000200020000000000003030000bde2072c00000000",
+        "argument_sha256": "11990e96c21c8810009bf3eca5fc79bde0f8591c1e6d5f8d14fed357c9208c8e",
+        "changed_byte_offsets_from_stock_m151": [
+          6,
+          7,
+          8,
+          9,
+          11,
+          17
+        ],
+        "native_m3_equal": true,
+        "source_model_equal": true
+      }
+    ],
+    "config_fixture": "deterministic nonzero bytes; identical for all three cases",
+    "config_sha256": "e1cc6ba7bf322dcc40ab47273a6839e365e8a5efac089bff5c17b766dfff59c0"
+  }
+}

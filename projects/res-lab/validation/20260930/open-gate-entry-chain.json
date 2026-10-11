@@ -1,0 +1,419 @@
+{
+  "output": "/private/tmp/sensor-lab-entry-chain-20260930-r2",
+  "build_matrix": [
+    {
+      "directory": "/private/tmp/sensor-lab-entry-chain-20260930-r2/og3k-standalone-release",
+      "entries": [
+        "0xC0731600"
+      ],
+      "sections": 88,
+      "bin_sha256": "1d9aa26e0a1c45fe12d381848e565ff270f696c3aa10382efa65e158e87c7df8",
+      "autorun_sha256": "7906a8f4e1475e661196e7599b890f248ac4198b9247e940004c3e1236086d0d",
+      "name": "og3k-standalone-release",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/build_og3k_gyro.py",
+        "--out",
+        "/private/tmp/sensor-lab-entry-chain-20260930-r2/og3k-standalone-release",
+        "--no-gyro",
+        "--release"
+      ],
+      "target": "og3k",
+      "fmt_guard": true
+    },
+    {
+      "directory": "/private/tmp/sensor-lab-entry-chain-20260930-r2/og3k-standalone-debug",
+      "entries": [
+        "0x000006C0",
+        "0xC0731600"
+      ],
+      "sections": 98,
+      "bin_sha256": "bf38e448af00c3848c61dd229e3b645d60b722b0ad61705f217f302bf68da196",
+      "autorun_sha256": "ae4c70081a5cb08311a6e4482f85b871289f65f9fc4869239c76f7b3f8b47587",
+      "name": "og3k-standalone-debug",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/build_og3k_gyro.py",
+        "--out",
+        "/private/tmp/sensor-lab-entry-chain-20260930-r2/og3k-standalone-debug",
+        "--no-gyro"
+      ],
+      "target": "og3k",
+      "fmt_guard": true
+    },
+    {
+      "directory": "/private/tmp/sensor-lab-entry-chain-20260930-r2/og3k-combined-release",
+      "entries": [
+        "0x00003F80",
+        "0xC0731600"
+      ],
+      "sections": 96,
+      "bin_sha256": "3d20e3f009a11add983c048ecfcfd9950626cd0bc4522c0a5de74cac1cfdae7b",
+      "autorun_sha256": "922bfa39dce6615dd6fd7ea7754c9a9960f0749ad28a455712feaaa620e6ffaf",
+      "name": "og3k-combined-release",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/build_og3k_gyro.py",
+        "--out",
+        "/private/tmp/sensor-lab-entry-chain-20260930-r2/og3k-combined-release",
+        "--reference",
+        "--four-box-bar",
+        "--release"
+      ],
+      "target": "og3k",
+      "fmt_guard": true
+    },
+    {
+      "directory": "/private/tmp/sensor-lab-entry-chain-20260930-r2/og3k-guard-off-standalone",
+      "entries": [],
+      "sections": 84,
+      "bin_sha256": "ea3f6adf991cdd5801ff3a7e057bb2ad0e66c38a56f2a659fa1e861cd029c23b",
+      "autorun_sha256": "7906a8f4e1475e661196e7599b890f248ac4198b9247e940004c3e1236086d0d",
+      "name": "og3k-guard-off-standalone",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/build_og3k_gyro.py",
+        "--out",
+        "/private/tmp/sensor-lab-entry-chain-20260930-r2/og3k-guard-off-standalone",
+        "--no-gyro",
+        "--release"
+      ],
+      "target": "og3k",
+      "fmt_guard": false
+    },
+    {
+      "directory": "/private/tmp/sensor-lab-entry-chain-20260930-r2/og3k-combined-debug",
+      "entries": [
+        "0x00000810",
+        "0x000046C8",
+        "0xC0731600"
+      ],
+      "sections": 99,
+      "bin_sha256": "7c6e04d3d66fb23d2482d6138b5420ef76d8cba1c6fe963078bd9433eeea4976",
+      "autorun_sha256": "6135a5ae76943681cb2ba6e3db0c4669ffa7b8b999db2a4c57ceaf2e21415e17",
+      "name": "og3k-combined-debug",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/build_og3k_gyro.py",
+        "--out",
+        "/private/tmp/sensor-lab-entry-chain-20260930-r2/og3k-combined-debug",
+        "--reference",
+        "--four-box-bar"
+      ],
+      "target": "og3k",
+      "fmt_guard": true
+    },
+    {
+      "directory": "/private/tmp/sensor-lab-entry-chain-20260930-r2/og3k-combined-fast-debug",
+      "entries": [
+        "0x00000944",
+        "0x000047FC",
+        "0xC0731600"
+      ],
+      "sections": 100,
+      "bin_sha256": "af38edbf2495281769229306c569d9536d9721cd0ab4ec6f36e9f9fb08345077",
+      "autorun_sha256": "35a3141f4163c8c1790f38b7a5ba4ec92e99eb2396d2565712641f053bd4f775",
+      "name": "og3k-combined-fast-debug",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/build_og3k_gyro.py",
+        "--out",
+        "/private/tmp/sensor-lab-entry-chain-20260930-r2/og3k-combined-fast-debug",
+        "--dev-card",
+        "--four-box-bar",
+        "--fast"
+      ],
+      "target": "og3k",
+      "fmt_guard": true
+    },
+    {
+      "directory": "/private/tmp/sensor-lab-entry-chain-20260930-r2/og3k-guard-off-combined",
+      "entries": [
+        "0x000007F0",
+        "0x0000435C"
+      ],
+      "sections": 95,
+      "bin_sha256": "c34a09eb364f0c9bc1ec5ad8ee0fbcc466178558c0a33ce196db01c81dbdc469",
+      "autorun_sha256": "6135a5ae76943681cb2ba6e3db0c4669ffa7b8b999db2a4c57ceaf2e21415e17",
+      "name": "og3k-guard-off-combined",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/build_og3k_gyro.py",
+        "--out",
+        "/private/tmp/sensor-lab-entry-chain-20260930-r2/og3k-guard-off-combined",
+        "--reference",
+        "--four-box-bar"
+      ],
+      "target": "og3k",
+      "fmt_guard": false
+    },
+    {
+      "directory": "/private/tmp/sensor-lab-entry-chain-20260930-r2/og2k-standalone-release",
+      "entries": [
+        "0xC0731600"
+      ],
+      "sections": 88,
+      "bin_sha256": "9c4eb48b2131a130c5275b50b13196229662f3266c2c165316bf45aa7d9669a0",
+      "autorun_sha256": "27e864722cc7a3cb9eaa73b486eaf3eb38397c68aa9254347cb5572324cde82c",
+      "name": "og2k-standalone-release",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/build_og3k_gyro.py",
+        "--out",
+        "/private/tmp/sensor-lab-entry-chain-20260930-r2/og2k-standalone-release",
+        "--no-gyro",
+        "--release"
+      ],
+      "target": "og2k",
+      "fmt_guard": true
+    },
+    {
+      "directory": "/private/tmp/sensor-lab-entry-chain-20260930-r2/og2k-standalone-debug",
+      "entries": [
+        "0x000006C0",
+        "0xC0731600"
+      ],
+      "sections": 98,
+      "bin_sha256": "883111f928cc750dfb22be3ba46aff7a57533f54cb86c9f28f9f595faef40f25",
+      "autorun_sha256": "2a93d5dee4990bd09fc368cb59ff3a3db1e72613d6e0d95e75cc113906721281",
+      "name": "og2k-standalone-debug",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/build_og3k_gyro.py",
+        "--out",
+        "/private/tmp/sensor-lab-entry-chain-20260930-r2/og2k-standalone-debug",
+        "--no-gyro"
+      ],
+      "target": "og2k",
+      "fmt_guard": true
+    },
+    {
+      "directory": "/private/tmp/sensor-lab-entry-chain-20260930-r2/og2k-combined-release",
+      "entries": [
+        "0x000043D0",
+        "0xC0731600"
+      ],
+      "sections": 96,
+      "bin_sha256": "11ac055d82b03a7900b83867230717b634def4ec4ca0f39d539fdb4ea2896829",
+      "autorun_sha256": "922bfa39dce6615dd6fd7ea7754c9a9960f0749ad28a455712feaaa620e6ffaf",
+      "name": "og2k-combined-release",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/build_og3k_gyro.py",
+        "--out",
+        "/private/tmp/sensor-lab-entry-chain-20260930-r2/og2k-combined-release",
+        "--reference",
+        "--four-box-bar",
+        "--release"
+      ],
+      "target": "og2k",
+      "fmt_guard": true
+    },
+    {
+      "directory": "/private/tmp/sensor-lab-entry-chain-20260930-r2/og2k-combined-debug",
+      "entries": [
+        "0x00000810",
+        "0x00004B18",
+        "0xC0731600"
+      ],
+      "sections": 99,
+      "bin_sha256": "afcdd9e040469cb854d05930ac8aa59d84f38e1291df8a6de1f1e47beea1176c",
+      "autorun_sha256": "6135a5ae76943681cb2ba6e3db0c4669ffa7b8b999db2a4c57ceaf2e21415e17",
+      "name": "og2k-combined-debug",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/build_og3k_gyro.py",
+        "--out",
+        "/private/tmp/sensor-lab-entry-chain-20260930-r2/og2k-combined-debug",
+        "--reference",
+        "--four-box-bar"
+      ],
+      "target": "og2k",
+      "fmt_guard": true
+    },
+    {
+      "directory": "/private/tmp/sensor-lab-entry-chain-20260930-r2/og2k-combined-fast-debug",
+      "entries": [
+        "0x00000944",
+        "0x00004C4C",
+        "0xC0731600"
+      ],
+      "sections": 100,
+      "bin_sha256": "2fde065e766aa98362f493d171ee6570e197787f750e1936012d4921170c6ede",
+      "autorun_sha256": "35a3141f4163c8c1790f38b7a5ba4ec92e99eb2396d2565712641f053bd4f775",
+      "name": "og2k-combined-fast-debug",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/build_og3k_gyro.py",
+        "--out",
+        "/private/tmp/sensor-lab-entry-chain-20260930-r2/og2k-combined-fast-debug",
+        "--dev-card",
+        "--four-box-bar",
+        "--fast"
+      ],
+      "target": "og2k",
+      "fmt_guard": true
+    },
+    {
+      "directory": "/private/tmp/sensor-lab-entry-chain-20260930-r2/og2k-guard-off-standalone",
+      "entries": [],
+      "sections": 84,
+      "bin_sha256": "31cc376cccd1b7a00eac05ef6fdba9d3d07254b7f02fd88f2084e8f7ac7e2d82",
+      "autorun_sha256": "27e864722cc7a3cb9eaa73b486eaf3eb38397c68aa9254347cb5572324cde82c",
+      "name": "og2k-guard-off-standalone",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/build_og3k_gyro.py",
+        "--out",
+        "/private/tmp/sensor-lab-entry-chain-20260930-r2/og2k-guard-off-standalone",
+        "--no-gyro",
+        "--release"
+      ],
+      "target": "og2k",
+      "fmt_guard": false
+    },
+    {
+      "directory": "/private/tmp/sensor-lab-entry-chain-20260930-r2/og2k-guard-off-combined",
+      "entries": [
+        "0x000007F0",
+        "0x000047AC"
+      ],
+      "sections": 95,
+      "bin_sha256": "e521e4224e189b00033f046b0c2c7ca406554880ce8f1e457a61aa4bb2ae0f8a",
+      "autorun_sha256": "6135a5ae76943681cb2ba6e3db0c4669ffa7b8b999db2a4c57ceaf2e21415e17",
+      "name": "og2k-guard-off-combined",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/build_og3k_gyro.py",
+        "--out",
+        "/private/tmp/sensor-lab-entry-chain-20260930-r2/og2k-guard-off-combined",
+        "--reference",
+        "--four-box-bar"
+      ],
+      "target": "og2k",
+      "fmt_guard": false
+    }
+  ],
+  "failures": [],
+  "autorun_independence": [
+    {
+      "name": "plain",
+      "directories": [
+        "/private/tmp/sensor-lab-entry-chain-20260930-r2/autorun-plain-entry0",
+        "/private/tmp/sensor-lab-entry-chain-20260930-r2/autorun-plain-entry1"
+      ]
+    },
+    {
+      "name": "debug",
+      "directories": [
+        "/private/tmp/sensor-lab-entry-chain-20260930-r2/autorun-debug-entry0",
+        "/private/tmp/sensor-lab-entry-chain-20260930-r2/autorun-debug-entry1"
+      ]
+    },
+    {
+      "name": "fast-debug",
+      "directories": [
+        "/private/tmp/sensor-lab-entry-chain-20260930-r2/autorun-fast-debug-entry0",
+        "/private/tmp/sensor-lab-entry-chain-20260930-r2/autorun-fast-debug-entry1"
+      ]
+    }
+  ],
+  "catalogue_references": [
+    {
+      "directory": "/private/tmp/sensor-lab-entry-chain-20260930-r2/catalogue-og3k-frozen-plain",
+      "entries": [
+        "0x000039AC"
+      ],
+      "sections": 87,
+      "bin_sha256": "d2c929f8239f4c196d6c7491d1f1fa1da616a1b05a0c8ceb78218044378d8a39",
+      "autorun_sha256": "922bfa39dce6615dd6fd7ea7754c9a9960f0749ad28a455712feaaa620e6ffaf",
+      "name": "catalogue-og3k-frozen-plain",
+      "input": "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/fpsup-og3k-v0.2.4a"
+    },
+    {
+      "directory": "/private/tmp/sensor-lab-entry-chain-20260930-r2/catalogue-og3k-frozen-shell",
+      "entries": [
+        "0x000007D0",
+        "0x000040FC"
+      ],
+      "sections": 91,
+      "bin_sha256": "787a96f536625126afae1998db9ef682a96f345a1838a6f6621a45ac0cd79d29",
+      "autorun_sha256": "6135a5ae76943681cb2ba6e3db0c4669ffa7b8b999db2a4c57ceaf2e21415e17",
+      "name": "catalogue-og3k-frozen-shell",
+      "input": "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/fpsup-og3k-v0.2.4a"
+    },
+    {
+      "directory": "/private/tmp/sensor-lab-entry-chain-20260930-r2/catalogue-og3k-source-plain",
+      "entries": [
+        "0x00003F80",
+        "0xC0731600"
+      ],
+      "sections": 96,
+      "bin_sha256": "3d20e3f009a11add983c048ecfcfd9950626cd0bc4522c0a5de74cac1cfdae7b",
+      "autorun_sha256": "922bfa39dce6615dd6fd7ea7754c9a9960f0749ad28a455712feaaa620e6ffaf",
+      "name": "catalogue-og3k-source-plain",
+      "input": "/private/tmp/sensor-lab-entry-chain-20260930-r2/og3k-standalone-release"
+    },
+    {
+      "directory": "/private/tmp/sensor-lab-entry-chain-20260930-r2/catalogue-og3k-source-shell",
+      "entries": [
+        "0x00000810",
+        "0x000046C8",
+        "0xC0731600"
+      ],
+      "sections": 99,
+      "bin_sha256": "7c6e04d3d66fb23d2482d6138b5420ef76d8cba1c6fe963078bd9433eeea4976",
+      "autorun_sha256": "6135a5ae76943681cb2ba6e3db0c4669ffa7b8b999db2a4c57ceaf2e21415e17",
+      "name": "catalogue-og3k-source-shell",
+      "input": "/private/tmp/sensor-lab-entry-chain-20260930-r2/og3k-standalone-release"
+    },
+    {
+      "directory": "/private/tmp/sensor-lab-entry-chain-20260930-r2/catalogue-og2k-frozen-plain",
+      "entries": [
+        "0x00003DFC"
+      ],
+      "sections": 87,
+      "bin_sha256": "aef9569ce38ddd48756b72435c6a999afd33a00479c754c25e4ec659a7f0e074",
+      "autorun_sha256": "922bfa39dce6615dd6fd7ea7754c9a9960f0749ad28a455712feaaa620e6ffaf",
+      "name": "catalogue-og2k-frozen-plain",
+      "input": "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/fpsup-og2k-v0.1.1a"
+    },
+    {
+      "directory": "/private/tmp/sensor-lab-entry-chain-20260930-r2/catalogue-og2k-frozen-shell",
+      "entries": [
+        "0x000007D0",
+        "0x0000454C"
+      ],
+      "sections": 91,
+      "bin_sha256": "7761fca2d6972a1809d8b4de8dbcf821ac3dd2fffa3c83b96f990baed1bb5888",
+      "autorun_sha256": "6135a5ae76943681cb2ba6e3db0c4669ffa7b8b999db2a4c57ceaf2e21415e17",
+      "name": "catalogue-og2k-frozen-shell",
+      "input": "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/fpsup-og2k-v0.1.1a"
+    },
+    {
+      "directory": "/private/tmp/sensor-lab-entry-chain-20260930-r2/catalogue-og2k-source-plain",
+      "entries": [
+        "0x000043D0",
+        "0xC0731600"
+      ],
+      "sections": 96,
+      "bin_sha256": "11ac055d82b03a7900b83867230717b634def4ec4ca0f39d539fdb4ea2896829",
+      "autorun_sha256": "922bfa39dce6615dd6fd7ea7754c9a9960f0749ad28a455712feaaa620e6ffaf",
+      "name": "catalogue-og2k-source-plain",
+      "input": "/private/tmp/sensor-lab-entry-chain-20260930-r2/og2k-standalone-release"
+    },
+    {
+      "directory": "/private/tmp/sensor-lab-entry-chain-20260930-r2/catalogue-og2k-source-shell",
+      "entries": [
+        "0x00000810",
+        "0x00004B18",
+        "0xC0731600"
+      ],
+      "sections": 99,
+      "bin_sha256": "afcdd9e040469cb854d05930ac8aa59d84f38e1291df8a6de1f1e47beea1176c",
+      "autorun_sha256": "6135a5ae76943681cb2ba6e3db0c4669ffa7b8b999db2a4c57ceaf2e21415e17",
+      "name": "catalogue-og2k-source-shell",
+      "input": "/private/tmp/sensor-lab-entry-chain-20260930-r2/og2k-standalone-release"
+    }
+  ]
+}

@@ -1,0 +1,1557 @@
+{
+ "_source": "emulated: FUN_c05e6400 over out/seg0_c0000000.bin, tags 1 and 0x10001; see research/ui/tools/nbu_probe/",
+ "nbu_base": "0xC18C0460",
+ "pool": {
+  "size": 176152,
+  "base": "0xC18C0474"
+ },
+ "sets": [
+  {
+   "name": "MenuItem_SelectJump",
+   "hash": "0x01A8878A",
+   "address": "0xC21AE11C",
+   "offset": "0x8EDCBC",
+   "pool_offset": "0x1A8FC"
+  },
+  {
+   "name": "AudioGainAdjustButtonMenu",
+   "hash": "0x0214026A",
+   "address": "0xC18FB153",
+   "offset": "0x3ACF3",
+   "pool_offset": "0x95D8"
+  },
+  {
+   "name": "Y1_3C",
+   "hash": "0x02D3041E",
+   "address": "0xC27970B5",
+   "offset": "0xED6C55",
+   "pool_offset": "0x23FEC"
+  },
+  {
+   "name": "R2_2_8_1",
+   "hash": "0x04AAE7F7",
+   "address": "0xC26E0BCF",
+   "offset": "0xE2076F",
+   "pool_offset": "0x1F838"
+  },
+  {
+   "name": "B1_1",
+   "hash": "0x055CBE18",
+   "address": "0xC190F403",
+   "offset": "0x4EFA3",
+   "pool_offset": "0x97A4"
+  },
+  {
+   "name": "R2_1_10_5_1",
+   "hash": "0x05BA33E3",
+   "address": "0xC269B385",
+   "offset": "0xDDAF25",
+   "pool_offset": "0x1F7A0"
+  },
+  {
+   "name": "B4_1_2_3",
+   "hash": "0x0647B268",
+   "address": "0xC1B8E15F",
+   "offset": "0x2CDCFF",
+   "pool_offset": "0x9E70"
+  },
+  {
+   "name": "B6_1_2",
+   "hash": "0x07E13210",
+   "address": "0xC1D097AA",
+   "offset": "0x44934A",
+   "pool_offset": "0xA630"
+  },
+  {
+   "name": "B4_1_2_1",
+   "hash": "0x0847B58E",
+   "address": "0xC1B80E00",
+   "offset": "0x2C09A0",
+   "pool_offset": "0x9E64"
+  },
+  {
+   "name": "B1_2",
+   "hash": "0x085CC2D1",
+   "address": "0xC192C69E",
+   "offset": "0x6C23E",
+   "pool_offset": "0x9818"
+  },
+  {
+   "name": "QS_Common",
+   "hash": "0x08EC09B7",
+   "address": "0xC239C5FB",
+   "offset": "0xADC19B",
+   "pool_offset": "0x1ECDC"
+  },
+  {
+   "name": "B1_5",
+   "hash": "0x095CC464",
+   "address": "0xC1988B5E",
+   "offset": "0xC86FE",
+   "pool_offset": "0x9940"
+  },
+  {
+   "name": "B6_1_1",
+   "hash": "0x0AE136C9",
+   "address": "0xC1CEE759",
+   "offset": "0x42E2F9",
+   "pool_offset": "0xA5B8"
+  },
+  {
+   "name": "Y0",
+   "hash": "0x0B11162C",
+   "address": "0xC277F85D",
+   "offset": "0xEBF3FD",
+   "pool_offset": "0x23FD4"
+  },
+  {
+   "name": "R_FileSelect",
+   "hash": "0x0B82AA50",
+   "address": "0xC270A48A",
+   "offset": "0xE4A02A",
+   "pool_offset": "0x1F924"
+  },
+  {
+   "name": "B4_1_2_5",
+   "hash": "0x0C47BBDA",
+   "address": "0xC1BA0451",
+   "offset": "0x2DFFF1",
+   "pool_offset": "0x9EA0"
+  },
+  {
+   "name": "CommonKeyEvent",
+   "hash": "0x0CF9B641",
+   "address": "0xC1D86726",
+   "offset": "0x4C62C6",
+   "pool_offset": "0xEEA8"
+  },
+  {
+   "name": "MenuItem_Tab",
+   "hash": "0x10D08159",
+   "address": "0xC21E380E",
+   "offset": "0x9233AE",
+   "pool_offset": "0x1AB08"
+  },
+  {
+   "name": "Y1_3S",
+   "hash": "0x12D31D4E",
+   "address": "0xC27A934D",
+   "offset": "0xEE8EED",
+   "pool_offset": "0x2400C"
+  },
+  {
+   "name": "ShutterButtonMenu",
+   "hash": "0x14E01F75",
+   "address": "0xC2746781",
+   "offset": "0xE86321",
+   "pool_offset": "0x21CD4"
+  },
+  {
+   "name": "B3_5_5_6_Info",
+   "hash": "0x15F95920",
+   "address": "0xC1B33F6B",
+   "offset": "0x273B0B",
+   "pool_offset": "0x9D7C"
+  },
+  {
+   "name": "Y_USB",
+   "hash": "0x178BAE5D",
+   "address": "0xC2D30E74",
+   "offset": "0x1470A14",
+   "pool_offset": "0x24794"
+  },
+  {
+   "name": "Y5_CreateQR",
+   "hash": "0x18A74BF3",
+   "address": "0xC2CC2336",
+   "offset": "0x1401ED6",
+   "pool_offset": "0x246CC"
+  },
+  {
+   "name": "MenuItem_SelectJump_10_and_Over",
+   "hash": "0x1D09A123",
+   "address": "0xC21BAAD4",
+   "offset": "0x8FA674",
+   "pool_offset": "0x1A960"
+  },
+  {
+   "name": "Y4_1_3",
+   "hash": "0x1E0C8C06",
+   "address": "0xC2C1014C",
+   "offset": "0x134FCEC",
+   "pool_offset": "0x24518"
+  },
+  {
+   "name": "Y5_CreateQR_SaveSettingsSelect",
+   "hash": "0x1E9729B4",
+   "address": "0xC2CE2625",
+   "offset": "0x14221C5",
+   "pool_offset": "0x24704"
+  },
+  {
+   "name": "Y4_1_2",
+   "hash": "0x1F0C8D99",
+   "address": "0xC2C0450D",
+   "offset": "0x13440AD",
+   "pool_offset": "0x24510"
+  },
+  {
+   "name": "Y2_3C",
+   "hash": "0x20B6745D",
+   "address": "0xC27F9903",
+   "offset": "0xF394A3",
+   "pool_offset": "0x241C0"
+  },
+  {
+   "name": "MenuItem_Step",
+   "hash": "0x20FE7E68",
+   "address": "0xC21DF797",
+   "offset": "0x91F337",
+   "pool_offset": "0x1AAF8"
+  },
+  {
+   "name": "R2_2",
+   "hash": "0x2300F114",
+   "address": "0xC26A902F",
+   "offset": "0xDE8BCF",
+   "pool_offset": "0x1F7D0"
+  },
+  {
+   "name": "R2_1",
+   "hash": "0x2600F5CD",
+   "address": "0xC261EA26",
+   "offset": "0xD5E5C6",
+   "pool_offset": "0x1F620"
+  },
+  {
+   "name": "Footers",
+   "hash": "0x28666A73",
+   "address": "0xC1DEAEA4",
+   "offset": "0x52AA44",
+   "pool_offset": "0x12FE0"
+  },
+  {
+   "name": "Black",
+   "hash": "0x2B043744",
+   "address": "0xC1D5E8D2",
+   "offset": "0x49E472",
+   "pool_offset": "0xAA70"
+  },
+  {
+   "name": "LV_Magnify",
+   "hash": "0x2E05B5DB",
+   "address": "0xC1EAA1ED",
+   "offset": "0x5E9D8D",
+   "pool_offset": "0x16220"
+  },
+  {
+   "name": "PlaybackDelete",
+   "hash": "0x2F3D5D47",
+   "address": "0xC22594FC",
+   "offset": "0x99909C",
+   "pool_offset": "0x1DE5C"
+  },
+  {
+   "name": "Test",
+   "hash": "0x2FFCBE05",
+   "address": "0xC276E13D",
+   "offset": "0xEADCDD",
+   "pool_offset": "0x22E60"
+  },
+  {
+   "name": "Y2_3S",
+   "hash": "0x30B68D8D",
+   "address": "0xC2984B05",
+   "offset": "0x10C46A5",
+   "pool_offset": "0x241DC"
+  },
+  {
+   "name": "R2_1_10_1",
+   "hash": "0x313A5253",
+   "address": "0xC268E3EB",
+   "offset": "0xDCDF8B",
+   "pool_offset": "0x1F73C"
+  },
+  {
+   "name": "R2_1_10_2",
+   "hash": "0x323A53E6",
+   "address": "0xC2690BCB",
+   "offset": "0xDD076B",
+   "pool_offset": "0x1F75C"
+  },
+  {
+   "name": "MenuItem_Toggle",
+   "hash": "0x32F8EBE2",
+   "address": "0xC21E560B",
+   "offset": "0x9251AB",
+   "pool_offset": "0x1AB40"
+  },
+  {
+   "name": "R2_1_10_3",
+   "hash": "0x333A5579",
+   "address": "0xC26933AB",
+   "offset": "0xDD2F4B",
+   "pool_offset": "0x1F768"
+  },
+  {
+   "name": "Headers",
+   "hash": "0x334F5989",
+   "address": "0xC1DF4E6C",
+   "offset": "0x534A0C",
+   "pool_offset": "0x140D8"
+  },
+  {
+   "name": "R2_1_10_4",
+   "hash": "0x343A570C",
+   "address": "0xC2695B8B",
+   "offset": "0xDD572B",
+   "pool_offset": "0x1F788"
+  },
+  {
+   "name": "Processing",
+   "hash": "0x34C199E6",
+   "address": "0xC2278829",
+   "offset": "0x9B83C9",
+   "pool_offset": "0x1E194"
+  },
+  {
+   "name": "R2_1_10_5",
+   "hash": "0x353A589F",
+   "address": "0xC2698367",
+   "offset": "0xDD7F07",
+   "pool_offset": "0x1F794"
+  },
+  {
+   "name": "QS_CINE",
+   "hash": "0x356F6693",
+   "address": "0xC2278C02",
+   "offset": "0x9B87A2",
+   "pool_offset": "0x1EBF0"
+  },
+  {
+   "name": "FocusAreaButtonMenu_2_1",
+   "hash": "0x363E610C",
+   "address": "0xC1DBDA90",
+   "offset": "0x4FD630",
+   "pool_offset": "0x12634"
+  },
+  {
+   "name": "Y2_1_1",
+   "hash": "0x38F2D952",
+   "address": "0xC27E364C",
+   "offset": "0xF231EC",
+   "pool_offset": "0x24164"
+  },
+  {
+   "name": "FocusAreaButtonMenu_2_2",
+   "hash": "0x393E65C5",
+   "address": "0xC1DCB329",
+   "offset": "0x50AEC9",
+   "pool_offset": "0x1264C"
+  },
+  {
+   "name": "R2_1_02",
+   "hash": "0x3950C460",
+   "address": "0xC262C7EB",
+   "offset": "0xD6C38B",
+   "pool_offset": "0x1F630"
+  },
+  {
+   "name": "R2_1_03",
+   "hash": "0x3A50C5F3",
+   "address": "0xC26414F8",
+   "offset": "0xD81098",
+   "pool_offset": "0x1F6B0"
+  },
+  {
+   "name": "PlayBackIndex",
+   "hash": "0x3B32E2E8",
+   "address": "0xC2213E7D",
+   "offset": "0x953A1D",
+   "pool_offset": "0x1DDD0"
+  },
+  {
+   "name": "R2_1_01",
+   "hash": "0x3C50C919",
+   "address": "0xC2629BD2",
+   "offset": "0xD69772",
+   "pool_offset": "0x1F628"
+  },
+  {
+   "name": "R2_2_4_option",
+   "hash": "0x3D3CE7F9",
+   "address": "0xC26CB190",
+   "offset": "0xE0AD30",
+   "pool_offset": "0x1F7F8"
+  },
+  {
+   "name": "R2_1_06",
+   "hash": "0x3D50CAAC",
+   "address": "0xC26529A6",
+   "offset": "0xD92546",
+   "pool_offset": "0x1F6E8"
+  },
+  {
+   "name": "MenuItem_Select_10_and_Over",
+   "hash": "0x3DA9C1DB",
+   "address": "0xC21CD9BC",
+   "offset": "0x90D55C",
+   "pool_offset": "0x1AA5C"
+  },
+  {
+   "name": "MainR2",
+   "hash": "0x3DFA3F74",
+   "address": "0xC20E8B51",
+   "offset": "0x8286F1",
+   "pool_offset": "0x1A46C"
+  },
+  {
+   "name": "R2_1_07",
+   "hash": "0x3E50CC3F",
+   "address": "0xC2677473",
+   "offset": "0xDB7013",
+   "pool_offset": "0x1F70C"
+  },
+  {
+   "name": "R2_1_04",
+   "hash": "0x3F50CDD2",
+   "address": "0xC2644328",
+   "offset": "0xD83EC8",
+   "pool_offset": "0x1F6C8"
+  },
+  {
+   "name": "R2_1_05",
+   "hash": "0x4050CF65",
+   "address": "0xC264F921",
+   "offset": "0xD8F4C1",
+   "pool_offset": "0x1F6D0"
+  },
+  {
+   "name": "R2_1_11",
+   "hash": "0x40530DFC",
+   "address": "0xC26A489E",
+   "offset": "0xDE443E",
+   "pool_offset": "0x1F7C0"
+  },
+  {
+   "name": "MainR1",
+   "hash": "0x40FA442D",
+   "address": "0xC20A202D",
+   "offset": "0x7E1BCD",
+   "pool_offset": "0x1A464"
+  },
+  {
+   "name": "R2_1_10",
+   "hash": "0x41530F8F",
+   "address": "0xC26866EF",
+   "offset": "0xDC628F",
+   "pool_offset": "0x1F734"
+  },
+  {
+   "name": "ExposureCompensationButtonMenu",
+   "hash": "0x418D57D5",
+   "address": "0xC1DA1C64",
+   "offset": "0x4E1804",
+   "pool_offset": "0x1159C"
+  },
+  {
+   "name": "Blank",
+   "hash": "0x42E40961",
+   "address": "0xC1D5E9E6",
+   "offset": "0x49E586",
+   "pool_offset": "0xAA90"
+  },
+  {
+   "name": "R2_1_08",
+   "hash": "0x4350D41E",
+   "address": "0xC267A8A4",
+   "offset": "0xDBA444",
+   "pool_offset": "0x1F724"
+  },
+  {
+   "name": "R2_1_09",
+   "hash": "0x4450D5B1",
+   "address": "0xC2683BEF",
+   "offset": "0xDC378F",
+   "pool_offset": "0x1F72C"
+  },
+  {
+   "name": "B1_5_1",
+   "hash": "0x46067F70",
+   "address": "0xC19A637F",
+   "offset": "0xE5F1F",
+   "pool_offset": "0x9948"
+  },
+  {
+   "name": "B1_5_3",
+   "hash": "0x48068296",
+   "address": "0xC19CB22C",
+   "offset": "0x10ADCC",
+   "pool_offset": "0x99A0"
+  },
+  {
+   "name": "Y5_5",
+   "hash": "0x488749E3",
+   "address": "0xC2C961BE",
+   "offset": "0x13D5D5E",
+   "pool_offset": "0x24678"
+  },
+  {
+   "name": "B1_5_2",
+   "hash": "0x49068429",
+   "address": "0xC19B8BA3",
+   "offset": "0xF8743",
+   "pool_offset": "0x9974"
+  },
+  {
+   "name": "B1_5_5",
+   "hash": "0x4A0685BC",
+   "address": "0xC19FFDD5",
+   "offset": "0x13F975",
+   "pool_offset": "0x99CC"
+  },
+  {
+   "name": "MenuItem_Select_4_and_Under",
+   "hash": "0x4AA22382",
+   "address": "0xC21D5AA4",
+   "offset": "0x915644",
+   "pool_offset": "0x1AAB4"
+  },
+  {
+   "name": "B1_5_4",
+   "hash": "0x4B06874F",
+   "address": "0xC19E5326",
+   "offset": "0x124EC6",
+   "pool_offset": "0x99A8"
+  },
+  {
+   "name": "Y5_1",
+   "hash": "0x4C87502F",
+   "address": "0xC2C51342",
+   "offset": "0x1390EE2",
+   "pool_offset": "0x245F8"
+  },
+  {
+   "name": "Playback",
+   "hash": "0x4D72110C",
+   "address": "0xC2223129",
+   "offset": "0x962CC9",
+   "pool_offset": "0x1DE3C"
+  },
+  {
+   "name": "Y5_2",
+   "hash": "0x4D8751C2",
+   "address": "0xC2C6F422",
+   "offset": "0x13AEFC2",
+   "pool_offset": "0x24628"
+  },
+  {
+   "name": "Y5_CreateQR_IconSetting",
+   "hash": "0x4E580D8B",
+   "address": "0xC2CCFA67",
+   "offset": "0x140F607",
+   "pool_offset": "0x246D8"
+  },
+  {
+   "name": "Y5_3",
+   "hash": "0x4E875355",
+   "address": "0xC2C7F09E",
+   "offset": "0x13BEC3E",
+   "pool_offset": "0x24630"
+  },
+  {
+   "name": "B3_5",
+   "hash": "0x58E86296",
+   "address": "0xC1AEC6C1",
+   "offset": "0x22C261",
+   "pool_offset": "0x9CF8"
+  },
+  {
+   "name": "QS_STILLlike",
+   "hash": "0x59768713",
+   "address": "0xC24D1DC8",
+   "offset": "0xC11968",
+   "pool_offset": "0x1F298"
+  },
+  {
+   "name": "B3_4",
+   "hash": "0x59E86429",
+   "address": "0xC1AE5089",
+   "offset": "0x224C29",
+   "pool_offset": "0x9CF0"
+  },
+  {
+   "name": "B3_2",
+   "hash": "0x5BE8674F",
+   "address": "0xC1AD7D66",
+   "offset": "0x217906",
+   "pool_offset": "0x9CC8"
+  },
+  {
+   "name": "B3_1",
+   "hash": "0x5CE868E2",
+   "address": "0xC1AB6A1B",
+   "offset": "0x1F65BB",
+   "pool_offset": "0x9C9C"
+  },
+  {
+   "name": "PlaybackMovie",
+   "hash": "0x62C30A28",
+   "address": "0xC2260882",
+   "offset": "0x9A0422",
+   "pool_offset": "0x1DE6C"
+  },
+  {
+   "name": "B1_2_3",
+   "hash": "0x6ADFC23B",
+   "address": "0xC19432FF",
+   "offset": "0x82E9F",
+   "pool_offset": "0x9830"
+  },
+  {
+   "name": "Y2_7",
+   "hash": "0x6B0D21C0",
+   "address": "0xC2B7682D",
+   "offset": "0x12B63CD",
+   "pool_offset": "0x24308"
+  },
+  {
+   "name": "Y4_5",
+   "hash": "0x6BFE5A48",
+   "address": "0xC2C34966",
+   "offset": "0x1374506",
+   "pool_offset": "0x245C4"
+  },
+  {
+   "name": "lv_m",
+   "hash": "0x6C06363F",
+   "address": "0xC2D31941",
+   "offset": "0x14714E1",
+   "pool_offset": "0x27468"
+  },
+  {
+   "name": "Y2_5",
+   "hash": "0x6D0D24E6",
+   "address": "0xC2B2555D",
+   "offset": "0x12650FD",
+   "pool_offset": "0x242AC"
+  },
+  {
+   "name": "Y4_5_1",
+   "hash": "0x6F6F9C4C",
+   "address": "0xC2C46991",
+   "offset": "0x1386531",
+   "pool_offset": "0x245CC"
+  },
+  {
+   "name": "B1_2_4",
+   "hash": "0x6FDFCA1A",
+   "address": "0xC1950837",
+   "offset": "0x903D7",
+   "pool_offset": "0x986C"
+  },
+  {
+   "name": "Y2_2",
+   "hash": "0x700D299F",
+   "address": "0xC27EDA0A",
+   "offset": "0xF2D5AA",
+   "pool_offset": "0x2419C"
+  },
+  {
+   "name": "B1_2_5",
+   "hash": "0x70DFCBAD",
+   "address": "0xC196410F",
+   "offset": "0xA3CAF",
+   "pool_offset": "0x98B4"
+  },
+  {
+   "name": "Y4_3",
+   "hash": "0x71FE63BA",
+   "address": "0xC2C304D9",
+   "offset": "0x1370079",
+   "pool_offset": "0x245A4"
+  },
+  {
+   "name": "SetupHelpMenu",
+   "hash": "0x728ACE4E",
+   "address": "0xC27424E5",
+   "offset": "0xE82085",
+   "pool_offset": "0x21AD8"
+  },
+  {
+   "name": "Y2_9",
+   "hash": "0x790D37CA",
+   "address": "0xC2B98574",
+   "offset": "0x12D8114",
+   "pool_offset": "0x2434C"
+  },
+  {
+   "name": "Y1_1",
+   "hash": "0x79237343",
+   "address": "0xC278036C",
+   "offset": "0xEBFF0C",
+   "pool_offset": "0x23FDC"
+  },
+  {
+   "name": "Y2_8",
+   "hash": "0x7A0D395D",
+   "address": "0xC2B82ECF",
+   "offset": "0x12C2A6F",
+   "pool_offset": "0x24344"
+  },
+  {
+   "name": "Y1_2",
+   "hash": "0x7A2374D6",
+   "address": "0xC278932B",
+   "offset": "0xEC8ECB",
+   "pool_offset": "0x23FE4"
+  },
+  {
+   "name": "Y1_4",
+   "hash": "0x7C2377FC",
+   "address": "0xC27BD852",
+   "offset": "0xEFD3F2",
+   "pool_offset": "0x2403C"
+  },
+  {
+   "name": "MenuItem_SelectJump_4_and_Under",
+   "hash": "0x7D0BFE0A",
+   "address": "0xC21C3724",
+   "offset": "0x9032C4",
+   "pool_offset": "0x1A9C8"
+  },
+  {
+   "name": "Y1_5",
+   "hash": "0x7D23798F",
+   "address": "0xC27CB017",
+   "offset": "0xF0ABB7",
+   "pool_offset": "0x24044"
+  },
+  {
+   "name": "R2_1_06_1",
+   "hash": "0x7DC155A8",
+   "address": "0xC26583A1",
+   "offset": "0xD97F41",
+   "pool_offset": "0x1F6F0"
+  },
+  {
+   "name": "SoftKeyboard",
+   "hash": "0x7E3962E4",
+   "address": "0xC274F071",
+   "offset": "0xE8EC11",
+   "pool_offset": "0x21F20"
+  },
+  {
+   "name": "Y2_3C_ShutterAngle",
+   "hash": "0x7F35FE56",
+   "address": "0xC28BC223",
+   "offset": "0xFFBDC3",
+   "pool_offset": "0x241C8"
+  },
+  {
+   "name": "Y5_5_4",
+   "hash": "0x80188440",
+   "address": "0xC2CBA308",
+   "offset": "0x13F9EA8",
+   "pool_offset": "0x246BC"
+  },
+  {
+   "name": "B3_1_10_1",
+   "hash": "0x803F120E",
+   "address": "0xC1ACCA99",
+   "offset": "0x20C639",
+   "pool_offset": "0x9CAC"
+  },
+  {
+   "name": "MenuItem_Jump",
+   "hash": "0x83BE6062",
+   "address": "0xC219C1E5",
+   "offset": "0x8DBD85",
+   "pool_offset": "0x1A8A8"
+  },
+  {
+   "name": "ColorButtonMenu",
+   "hash": "0x84771543",
+   "address": "0xC1D5EAA6",
+   "offset": "0x49E646",
+   "pool_offset": "0xE984"
+  },
+  {
+   "name": "B5_7S",
+   "hash": "0x84E1DDF7",
+   "address": "0xC1CA0A31",
+   "offset": "0x3E05D1",
+   "pool_offset": "0xA4B8"
+  },
+  {
+   "name": "Y5_5_1",
+   "hash": "0x85188C1F",
+   "address": "0xC2CA1E13",
+   "offset": "0x13E19B3",
+   "pool_offset": "0x24680"
+  },
+  {
+   "name": "Y5_5_2",
+   "hash": "0x86188DB2",
+   "address": "0xC2CA9FBA",
+   "offset": "0x13E9B5A",
+   "pool_offset": "0x246A0"
+  },
+  {
+   "name": "Y5_5_3",
+   "hash": "0x87188F45",
+   "address": "0xC2CB2161",
+   "offset": "0x13F1D01",
+   "pool_offset": "0x246B4"
+  },
+  {
+   "name": "B6_2",
+   "hash": "0x89D46730",
+   "address": "0xC1D172A8",
+   "offset": "0x456E48",
+   "pool_offset": "0xA640"
+  },
+  {
+   "name": "B6_3",
+   "hash": "0x8AD468C3",
+   "address": "0xC1D41F20",
+   "offset": "0x481AC0",
+   "pool_offset": "0xA6B8"
+  },
+  {
+   "name": "Y2_5_1",
+   "hash": "0x8C55ECBE",
+   "address": "0xC2B3BAA9",
+   "offset": "0x127B649",
+   "pool_offset": "0x242B4"
+  },
+  {
+   "name": "B6_1",
+   "hash": "0x8CD46BE9",
+   "address": "0xC1CE1E28",
+   "offset": "0x4219C8",
+   "pool_offset": "0xA5B0"
+  },
+  {
+   "name": "HDRButtonMenu",
+   "hash": "0x8DBBFA8A",
+   "address": "0xC1DEE37C",
+   "offset": "0x52DF1C",
+   "pool_offset": "0x13DB4"
+  },
+  {
+   "name": "B5_7C",
+   "hash": "0x94E1F727",
+   "address": "0xC1C97CAB",
+   "offset": "0x3D784B",
+   "pool_offset": "0xA4B0"
+  },
+  {
+   "name": "B5_4_1",
+   "hash": "0x94E9DD37",
+   "address": "0xC1C44FF8",
+   "offset": "0x384B98",
+   "pool_offset": "0xA45C"
+  },
+  {
+   "name": "ModeButtonMenu",
+   "hash": "0x95171EBD",
+   "address": "0xC21ECA75",
+   "offset": "0x92C615",
+   "pool_offset": "0x1AF90"
+  },
+  {
+   "name": "FocusButtonMenu",
+   "hash": "0x9578DD4C",
+   "address": "0xC1DDCF13",
+   "offset": "0x51CAB3",
+   "pool_offset": "0x126A0"
+  },
+  {
+   "name": "B5_4_2",
+   "hash": "0x95E9DECA",
+   "address": "0xC1C57791",
+   "offset": "0x397331",
+   "pool_offset": "0xA47C"
+  },
+  {
+   "name": "CropZoomButtonMenu",
+   "hash": "0x9717B503",
+   "address": "0xC1D880E2",
+   "offset": "0x4C7C82",
+   "pool_offset": "0xF2FC"
+  },
+  {
+   "name": "ToneButtonMenu",
+   "hash": "0x9B098CAA",
+   "address": "0xC2774497",
+   "offset": "0xEB4037",
+   "pool_offset": "0x2343C"
+  },
+  {
+   "name": "ColorModeAdvancedSettings",
+   "hash": "0x9BB4B208",
+   "address": "0xC1D66D85",
+   "offset": "0x4A6925",
+   "pool_offset": "0xEAA0"
+  },
+  {
+   "name": "R1_6_4",
+   "hash": "0x9DCE4206",
+   "address": "0xC261066B",
+   "offset": "0xD5020B",
+   "pool_offset": "0x1F574"
+  },
+  {
+   "name": "MainY3",
+   "hash": "0xA6E38B70",
+   "address": "0xC213C805",
+   "offset": "0x87C3A5",
+   "pool_offset": "0x1A484"
+  },
+  {
+   "name": "MainY2",
+   "hash": "0xA7E38D03",
+   "address": "0xC2129779",
+   "offset": "0x869319",
+   "pool_offset": "0x1A47C"
+  },
+  {
+   "name": "Y5_4_1",
+   "hash": "0xA7F1CBC4",
+   "address": "0xC2C88216",
+   "offset": "0x13C7DB6",
+   "pool_offset": "0x24668"
+  },
+  {
+   "name": "MainY1",
+   "hash": "0xA8E38E96",
+   "address": "0xC210EFC6",
+   "offset": "0x84EB66",
+   "pool_offset": "0x1A474"
+  },
+  {
+   "name": "LV_STILLlike_LARGE",
+   "hash": "0xA95E870D",
+   "address": "0xC1F69EAE",
+   "offset": "0x6A9A4E",
+   "pool_offset": "0x16588"
+  },
+  {
+   "name": "AspectRatioButtonMenu",
+   "hash": "0xAA1F5843",
+   "address": "0xC18F41D6",
+   "offset": "0x33D76",
+   "pool_offset": "0x950C"
+  },
+  {
+   "name": "Y5_4_2",
+   "hash": "0xAAF1D07D",
+   "address": "0xC2C8EC22",
+   "offset": "0x13CE7C2",
+   "pool_offset": "0x24670"
+  },
+  {
+   "name": "Y5_ReadQR",
+   "hash": "0xAC02A5FB",
+   "address": "0xC2D19243",
+   "offset": "0x1458DE3",
+   "pool_offset": "0x24724"
+  },
+  {
+   "name": "B2_6_1",
+   "hash": "0xAC0848DC",
+   "address": "0xC1A88E92",
+   "offset": "0x1C8A32",
+   "pool_offset": "0x9BF0"
+  },
+  {
+   "name": "MainY5",
+   "hash": "0xACE394E2",
+   "address": "0xC217CDEE",
+   "offset": "0x8BC98E",
+   "pool_offset": "0x1A4B8"
+  },
+  {
+   "name": "CustomModeIconSetting",
+   "hash": "0xAD636D2C",
+   "address": "0xC1D98441",
+   "offset": "0x4D7FE1",
+   "pool_offset": "0xF65C"
+  },
+  {
+   "name": "MainY4",
+   "hash": "0xADE39675",
+   "address": "0xC214A0C0",
+   "offset": "0x889C60",
+   "pool_offset": "0x1A48C"
+  },
+  {
+   "name": "B2_6_2",
+   "hash": "0xAF084D95",
+   "address": "0xC1AA2C26",
+   "offset": "0x1E27C6",
+   "pool_offset": "0x9BF8"
+  },
+  {
+   "name": "B4_4",
+   "hash": "0xB361BC80",
+   "address": "0xC1BECC01",
+   "offset": "0x32C7A1",
+   "pool_offset": "0x9F98"
+  },
+  {
+   "name": "MenuItem_ChangeSelect",
+   "hash": "0xB4FA6C26",
+   "address": "0xC219913D",
+   "offset": "0x8D8CDD",
+   "pool_offset": "0x1A87C"
+  },
+  {
+   "name": "Y2_3SLike",
+   "hash": "0xB640F62E",
+   "address": "0xC2A4C402",
+   "offset": "0x118BFA2",
+   "pool_offset": "0x241E4"
+  },
+  {
+   "name": "B4_1",
+   "hash": "0xB861C45F",
+   "address": "0xC1B43BA8",
+   "offset": "0x283748",
+   "pool_offset": "0x9E5C"
+  },
+  {
+   "name": "B4_2",
+   "hash": "0xB961C5F2",
+   "address": "0xC1BCD19F",
+   "offset": "0x30CD3F",
+   "pool_offset": "0x9F30"
+  },
+  {
+   "name": "MainB6",
+   "hash": "0xB9D26038",
+   "address": "0xC2094712",
+   "offset": "0x7D42B2",
+   "pool_offset": "0x1A444"
+  },
+  {
+   "name": "B4_3",
+   "hash": "0xBA61C785",
+   "address": "0xC1BDC7FF",
+   "offset": "0x31C39F",
+   "pool_offset": "0x9F68"
+  },
+  {
+   "name": "MenuItem_ListStep",
+   "hash": "0xBAA88A14",
+   "address": "0xC219F977",
+   "offset": "0x8DF517",
+   "pool_offset": "0x1A8D8"
+  },
+  {
+   "name": "MainB4",
+   "hash": "0xBBD2635E",
+   "address": "0xC2066FCB",
+   "offset": "0x7A6B6B",
+   "pool_offset": "0x1A3F0"
+  },
+  {
+   "name": "MainB5",
+   "hash": "0xBCD264F1",
+   "address": "0xC2075687",
+   "offset": "0x7B5227",
+   "pool_offset": "0x1A3F8"
+  },
+  {
+   "name": "MainB2",
+   "hash": "0xBDD26684",
+   "address": "0xC2030364",
+   "offset": "0x76FF04",
+   "pool_offset": "0x1A3B8"
+  },
+  {
+   "name": "MENU_BG",
+   "hash": "0xBDD3E980",
+   "address": "0xC200D526",
+   "offset": "0x74D0C6",
+   "pool_offset": "0x180DC"
+  },
+  {
+   "name": "MainB3",
+   "hash": "0xBED26817",
+   "address": "0xC2055DB0",
+   "offset": "0x795950",
+   "pool_offset": "0x1A3C0"
+  },
+  {
+   "name": "MainB1",
+   "hash": "0xC0D26B3D",
+   "address": "0xC200DBF6",
+   "offset": "0x74D796",
+   "pool_offset": "0x1A3B0"
+  },
+  {
+   "name": "FocusAreaButtonMenu_3",
+   "hash": "0xC2DEE21B",
+   "address": "0xC1DD188D",
+   "offset": "0x51142D",
+   "pool_offset": "0x12664"
+  },
+  {
+   "name": "B3_1_10",
+   "hash": "0xC3959B36",
+   "address": "0xC1AC4152",
+   "offset": "0x203CF2",
+   "pool_offset": "0x9CA4"
+  },
+  {
+   "name": "FocusAreaButtonMenu_1",
+   "hash": "0xC4DEE541",
+   "address": "0xC1DAD765",
+   "offset": "0x4ED305",
+   "pool_offset": "0x12604"
+  },
+  {
+   "name": "B3_5_5",
+   "hash": "0xC4F639FA",
+   "address": "0xC1B05428",
+   "offset": "0x244FC8",
+   "pool_offset": "0x9D20"
+  },
+  {
+   "name": "Y5_CreateQR_Preview",
+   "hash": "0xC53A4080",
+   "address": "0xC2CD8BF4",
+   "offset": "0x1418794",
+   "pool_offset": "0x246F0"
+  },
+  {
+   "name": "B1_4_5",
+   "hash": "0xC68EDE37",
+   "address": "0xC197B1A8",
+   "offset": "0xBAD48",
+   "pool_offset": "0x9914"
+  },
+  {
+   "name": "FocusAreaButtonMenu_4",
+   "hash": "0xC7DEE9FA",
+   "address": "0xC1DD9C70",
+   "offset": "0x519810",
+   "pool_offset": "0x1267C"
+  },
+  {
+   "name": "still",
+   "hash": "0xC8028CD1",
+   "address": "0xC2D7E0C0",
+   "offset": "0x14BDC60",
+   "pool_offset": "0x29E8C"
+  },
+  {
+   "name": "B5_8_2",
+   "hash": "0xC9EC2396",
+   "address": "0xC1CB722A",
+   "offset": "0x3F6DCA",
+   "pool_offset": "0xA4E8"
+  },
+  {
+   "name": "B5_8_3",
+   "hash": "0xCAEC2529",
+   "address": "0xC1CC47A0",
+   "offset": "0x404340",
+   "pool_offset": "0xA4F0"
+  },
+  {
+   "name": "Y3_4_2",
+   "hash": "0xCCFBAF23",
+   "address": "0xC2BE4187",
+   "offset": "0x1323D27",
+   "pool_offset": "0x244C0"
+  },
+  {
+   "name": "Y3_4_1",
+   "hash": "0xCDFBB0B6",
+   "address": "0xC2BD9969",
+   "offset": "0x1319509",
+   "pool_offset": "0x244B8"
+  },
+  {
+   "name": "FocusPeakingButtonMenu",
+   "hash": "0xCEB9A46F",
+   "address": "0xC1DE33BB",
+   "offset": "0x522F5B",
+   "pool_offset": "0x12854"
+  },
+  {
+   "name": "R2_1_02_1",
+   "hash": "0xD1246914",
+   "address": "0xC2630765",
+   "offset": "0xD70305",
+   "pool_offset": "0x1F638"
+  },
+  {
+   "name": "B2_6",
+   "hash": "0xD270B658",
+   "address": "0xC1A792FB",
+   "offset": "0x1B8E9B",
+   "pool_offset": "0x9BE8"
+  },
+  {
+   "name": "LV_CINE_MEDIUM",
+   "hash": "0xD2874095",
+   "address": "0xC1E59DAA",
+   "offset": "0x59994A",
+   "pool_offset": "0x157A4"
+  },
+  {
+   "name": "B5_9",
+   "hash": "0xD33AF76C",
+   "address": "0xC1CD29E7",
+   "offset": "0x412587",
+   "pool_offset": "0xA4F8"
+  },
+  {
+   "name": "R2_1_02_2",
+   "hash": "0xD4246DCD",
+   "address": "0xC263D8AB",
+   "offset": "0xD7D44B",
+   "pool_offset": "0x1F644"
+  },
+  {
+   "name": "B5_8",
+   "hash": "0xD43AF8FF",
+   "address": "0xC1CA947B",
+   "offset": "0x3E901B",
+   "pool_offset": "0xA4D8"
+  },
+  {
+   "name": "R_FileConfirm",
+   "hash": "0xD48C4338",
+   "address": "0xC27026A0",
+   "offset": "0xE42240",
+   "pool_offset": "0x1F914"
+  },
+  {
+   "name": "B5_2C",
+   "hash": "0xD4EF27DA",
+   "address": "0xC1C02277",
+   "offset": "0x341E17",
+   "pool_offset": "0xA2F4"
+  },
+  {
+   "name": "B2_5",
+   "hash": "0xD570BB11",
+   "address": "0xC1A5C590",
+   "offset": "0x19C130",
+   "pool_offset": "0x9B60"
+  },
+  {
+   "name": "B2_2",
+   "hash": "0xD670BCA4",
+   "address": "0xC1A35FDD",
+   "offset": "0x175B7D",
+   "pool_offset": "0x9B3C"
+  },
+  {
+   "name": "B5_4",
+   "hash": "0xD83AFF4B",
+   "address": "0xC1C30CA3",
+   "offset": "0x370843",
+   "pool_offset": "0xA454"
+  },
+  {
+   "name": "B2_1",
+   "hash": "0xD970C15D",
+   "address": "0xC1A0F398",
+   "offset": "0x14EF38",
+   "pool_offset": "0x9AD8"
+  },
+  {
+   "name": "B3_5_5_7",
+   "hash": "0xDABFF018",
+   "address": "0xC1B3EF45",
+   "offset": "0x27EAE5",
+   "pool_offset": "0x9D8C"
+  },
+  {
+   "name": "B3_5_5_6",
+   "hash": "0xDBBFF1AB",
+   "address": "0xC1B2A224",
+   "offset": "0x269DC4",
+   "pool_offset": "0x9D58"
+  },
+  {
+   "name": "B6_2_2",
+   "hash": "0xDC470A1D",
+   "address": "0xC1D2BD73",
+   "offset": "0x46B913",
+   "pool_offset": "0xA650"
+  },
+  {
+   "name": "B3_5_5_5",
+   "hash": "0xDCBFF33E",
+   "address": "0xC1B25044",
+   "offset": "0x264BE4",
+   "pool_offset": "0x9D4C"
+  },
+  {
+   "name": "B5_3",
+   "hash": "0xDD3B072A",
+   "address": "0xC1C20461",
+   "offset": "0x360001",
+   "pool_offset": "0xA43C"
+  },
+  {
+   "name": "B3_5_5_4",
+   "hash": "0xDDBFF4D1",
+   "address": "0xC1B2143F",
+   "offset": "0x260FDF",
+   "pool_offset": "0x9D40"
+  },
+  {
+   "name": "QS_STILL",
+   "hash": "0xDDF73310",
+   "address": "0xC23E1F9C",
+   "offset": "0xB21B3C",
+   "pool_offset": "0x1F22C"
+  },
+  {
+   "name": "B3_5_5_3",
+   "hash": "0xDEBFF664",
+   "address": "0xC1B1C1AE",
+   "offset": "0x25BD4E",
+   "pool_offset": "0x9D34"
+  },
+  {
+   "name": "B3_5_5_2",
+   "hash": "0xDFBFF7F7",
+   "address": "0xC1B0AC80",
+   "offset": "0x24A820",
+   "pool_offset": "0x9D28"
+  },
+  {
+   "name": "ISOSensitivityButtonMenu",
+   "hash": "0xE0333EE6",
+   "address": "0xC1DFE728",
+   "offset": "0x53E2C8",
+   "pool_offset": "0x144F0"
+  },
+  {
+   "name": "R2_2_1",
+   "hash": "0xE1F6CD60",
+   "address": "0xC26B2A19",
+   "offset": "0xDF25B9",
+   "pool_offset": "0x1F7D8"
+  },
+  {
+   "name": "Y_UVC_er",
+   "hash": "0xE2820DAF",
+   "address": "0xC2D3139C",
+   "offset": "0x1470F3C",
+   "pool_offset": "0x2479C"
+  },
+  {
+   "name": "ModeButtonMenuSetC",
+   "hash": "0xE3E50C58",
+   "address": "0xC21F4818",
+   "offset": "0x9343B8",
+   "pool_offset": "0x1AFA0"
+  },
+  {
+   "name": "R2_2_3",
+   "hash": "0xE3F6D086",
+   "address": "0xC26BD485",
+   "offset": "0xDFD025",
+   "pool_offset": "0x1F7E8"
+  },
+  {
+   "name": "B4_1_3_1",
+   "hash": "0xE4314169",
+   "address": "0xC1BAFEDF",
+   "offset": "0x2EFA7F",
+   "pool_offset": "0x9ED0"
+  },
+  {
+   "name": "R2_2_2",
+   "hash": "0xE4F6D219",
+   "address": "0xC26B7F4D",
+   "offset": "0xDF7AED",
+   "pool_offset": "0x1F7E0"
+  },
+  {
+   "name": "HeadphoneVolumeButtonMenu",
+   "hash": "0xE5E6F154",
+   "address": "0xC1DF9703",
+   "offset": "0x5392A3",
+   "pool_offset": "0x14114"
+  },
+  {
+   "name": "R2_2_5",
+   "hash": "0xE5F6D3AC",
+   "address": "0xC26D221D",
+   "offset": "0xE11DBD",
+   "pool_offset": "0x1F808"
+  },
+  {
+   "name": "R2_2_4",
+   "hash": "0xE6F6D53F",
+   "address": "0xC26C3138",
+   "offset": "0xE02CD8",
+   "pool_offset": "0x1F7F0"
+  },
+  {
+   "name": "B4_1_3_4",
+   "hash": "0xE7314622",
+   "address": "0xC1BC2042",
+   "offset": "0x301BE2",
+   "pool_offset": "0x9F00"
+  },
+  {
+   "name": "R2_2_7",
+   "hash": "0xE7F6D6D2",
+   "address": "0xC26D84C2",
+   "offset": "0xE18062",
+   "pool_offset": "0x1F828"
+  },
+  {
+   "name": "R2_2_6",
+   "hash": "0xE8F6D865",
+   "address": "0xC26D577D",
+   "offset": "0xE1531D",
+   "pool_offset": "0x1F810"
+  },
+  {
+   "name": "Y2_6_3_3",
+   "hash": "0xE91E67D7",
+   "address": "0xC2B6B4B2",
+   "offset": "0x12AB052",
+   "pool_offset": "0x242F0"
+  },
+  {
+   "name": "Y3_4",
+   "hash": "0xE934DF8E",
+   "address": "0xC2BCFCE2",
+   "offset": "0x130F882",
+   "pool_offset": "0x244B0"
+  },
+  {
+   "name": "R2_2_9",
+   "hash": "0xE9F6D9F8",
+   "address": "0xC26FB8EC",
+   "offset": "0xE3B48C",
+   "pool_offset": "0x1F844"
+  },
+  {
+   "name": "Y3_5",
+   "hash": "0xEA34E121",
+   "address": "0xC2BF242E",
+   "offset": "0x1331FCE",
+   "pool_offset": "0x244C8"
+  },
+  {
+   "name": "LV_STILL_MEDIUM",
+   "hash": "0xEA8990E8",
+   "address": "0xC1F19BC8",
+   "offset": "0x659768",
+   "pool_offset": "0x16578"
+  },
+  {
+   "name": "R2_2_8",
+   "hash": "0xEAF6DB8B",
+   "address": "0xC26DB267",
+   "offset": "0xE1AE07",
+   "pool_offset": "0x1F830"
+  },
+  {
+   "name": "Y3_2",
+   "hash": "0xEB34E2B4",
+   "address": "0xC2BBDDFF",
+   "offset": "0x12FD99F",
+   "pool_offset": "0x244A0"
+  },
+  {
+   "name": "Y3_3",
+   "hash": "0xEC34E447",
+   "address": "0xC2BC7256",
+   "offset": "0x1306DF6",
+   "pool_offset": "0x244A8"
+  },
+  {
+   "name": "MenuItem_Select",
+   "hash": "0xECC14AB2",
+   "address": "0xC21A2310",
+   "offset": "0x8E1EB0",
+   "pool_offset": "0x1A8EC"
+  },
+  {
+   "name": "Y3_1",
+   "hash": "0xEE34E76D",
+   "address": "0xC2BA9B35",
+   "offset": "0x12E96D5",
+   "pool_offset": "0x24478"
+  },
+  {
+   "name": "Y5_ReadQR_SaveSettings",
+   "hash": "0xF095E134",
+   "address": "0xC2D1F67A",
+   "offset": "0x145F21A",
+   "pool_offset": "0x24730"
+  },
+  {
+   "name": "ApertureButtonMenu",
+   "hash": "0xF0E889F2",
+   "address": "0xC18ED044",
+   "offset": "0x2CBE4",
+   "pool_offset": "0x8FF4"
+  },
+  {
+   "name": "B3_1_9",
+   "hash": "0xF3B75E1A",
+   "address": "0xC1AD1A9D",
+   "offset": "0x21163D",
+   "pool_offset": "0x9CB8"
+  },
+  {
+   "name": "LV_CINE_LARGE",
+   "hash": "0xF612FB99",
+   "address": "0xC1E0A87E",
+   "offset": "0x54A41E",
+   "pool_offset": "0x15794"
+  },
+  {
+   "name": "LV_STILL_LARGE",
+   "hash": "0xF818DCA2",
+   "address": "0xC1ECA2EC",
+   "offset": "0x609E8C",
+   "pool_offset": "0x16568"
+  },
+  {
+   "name": "B5_4_2_1",
+   "hash": "0xFB29971A",
+   "address": "0xC1C76DAD",
+   "offset": "0x3B694D",
+   "pool_offset": "0xA484"
+  },
+  {
+   "name": "LV_STILLlike_MEDIUM",
+   "hash": "0xFC08F931",
+   "address": "0xC1FB9B35",
+   "offset": "0x6F96D5",
+   "pool_offset": "0x1659C"
+  },
+  {
+   "name": "Test_001",
+   "hash": "0xFC36579D",
+   "address": "0xC276E251",
+   "offset": "0xEADDF1",
+   "pool_offset": "0x22E68"
+  },
+  {
+   "name": "FocusAreaButtonMenu",
+   "hash": "0xFEF94E71",
+   "address": "0xC1DA6EDC",
+   "offset": "0x4E6A7C",
+   "pool_offset": "0x125F0"
+  }
+ ]
+}

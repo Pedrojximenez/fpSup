@@ -1,0 +1,6 @@
+screen: LV_CINE_MEDIUM
+screen: LV_CINE_MEDIUM
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-recording-formula/trial_recording.py", line 62, in <module>
+    now=L.listing();nums=sorted(now.keys()-screens.keys());assert len(nums)==r.get('capture_count',1),nums
+AssertionError: [1605]

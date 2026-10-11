@@ -1,0 +1,7 @@
+splash : FPSUPUI/  193536 bytes; hardware untested; keep beside AutoRun.txt and fpSup.BIN
+binary : fpSup.BIN  32768 bytes, 11 section(s), entry 0x00000574
+worker : 3912 bytes = 432 bootstrap (runs in the staging buffer) + 3480 copied to an allocation of its own
+start  : echo handler 0xC0BAC2F8 -> 0xC072DE64 (loader)
+patches: 7 firmware (iface+push), 0 screen
+wrote  : projects/res-lab/validation/20261010-saved-rows-v29/entry-chain/autorun-debug-entry0/AutoRun.txt  169 lines  sha256=5dc89b8506e8ce40
+clean  : 112 commands, no dumps and no diagnostics

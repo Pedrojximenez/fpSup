@@ -1,0 +1,69 @@
+# SIGMA fp Ver.5.02 - pre-StillCreateRaw raw-address probe
+# One normal single-frame still must be taken during the 30-second window.
+# Start cue: 1 color-bar pulse. Completion cue: 2 color-bar pulses.
+# RAM-only; cold boot restores all executable code.
+
+display monitor 0 1
+display colorbar 1 0
+ctrl sleep 700
+display colorbar 0 0
+ctrl sleep 400
+
+# Preserve authoritative words before patching.
+mem save \PREORIG.BIN 0xC0315DD0,,0x10
+mem save \DEFORIG.BIN 0xC03183E8,,0x60
+mem save \PDORIG.BIN 0xC030FB20,,0x10
+
+# Probe result area: raw_ptr, request_ptr, sensor_mode, bit_type, frame_count,
+# marker "PRB1". 0xDEADBEEF means no still frame reached the hook.
+mem set 0xC072E500 0xDEADBEEF
+mem set 0xC072E504 0xDEADBEEF
+mem set 0xC072E508 0xDEADBEEF
+mem set 0xC072E50C 0xDEADBEEF
+mem set 0xC072E510 0xDEADBEEF
+mem set 0xC072E514 0x31425250
+
+# Wrapper for AcqEndTrans: call the original first, then record the raw pointer
+# from request+0x30 (outer FrameExpos request+0x38). No bulk copy in this pass.
+mem set 0xC072DE64 0xE92D4010
+mem set 0xC072DE68 0xE1A04001
+mem set 0xC072DE6C 0xEBEFAAF1
+mem set 0xC072DE70 0xE5940030
+mem set 0xC072DE74 0xE30E1500
+mem set 0xC072DE78 0xE34C1072
+mem set 0xC072DE7C 0xE5810000
+mem set 0xC072DE80 0xE5814004
+mem set 0xC072DE84 0xE5940014
+mem set 0xC072DE88 0xE5810008
+mem set 0xC072DE8C 0xE5940018
+mem set 0xC072DE90 0xE581000C
+mem set 0xC072DE94 0xE5940024
+mem set 0xC072DE98 0xE5810010
+mem set 0xC072DE9C 0xE8BD8010
+
+# Disable the inline ISP WDD/BDD table enable argument in both normal branches.
+# Also disable the PDAF sensor-side setup call and bypass later CPU PdafCorrect.
+mem set 0xC03183F4 0xE3A02000
+mem set 0xC0318414 0xE3A02000
+mem set 0xC0318434 0xE3A02000
+mem set 0xC030FB20 0xE12FFF1E
+
+# Activate the standard single-frame post-DMA callsite last.
+mem set 0xC0315DD4 0xEB106022
+
+# Give the photographer time to take exactly one ordinary still.
+ctrl sleep 30000
+
+mem save \PREPROBE.BIN 0xC072E500,,0x20
+mem save \PRESITE.BIN 0xC0315DD0,,0x10
+mem save \PRECAVE.BIN 0xC072DE64,,0x40
+mem save \DEFPOST.BIN 0xC03183E8,,0x60
+mem save \PDPST.BIN 0xC030FB20,,0x10
+
+display colorbar 1 0
+ctrl sleep 700
+display colorbar 0 0
+ctrl sleep 400
+display colorbar 1 0
+ctrl sleep 700
+display colorbar 0 0

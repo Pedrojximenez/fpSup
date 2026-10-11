@@ -1,0 +1,49 @@
+{
+  "cards": [
+    {
+      "directory": "/Users/dido/Developer.localized/SIGMAfp_re/projects/sensor-lab/cards/20260930-review/plain",
+      "checks": [
+        "exact-bytes",
+        "entry-ABI",
+        "cache-order",
+        "journal-146-runtime-words",
+        "power-off-twice",
+        "warm-image",
+        "saved-selection",
+        "MOV-guard",
+        "missing-BIN",
+        "packaged-RAW14-picker",
+        "journal-coverage-mutation",
+        "entry-alignment-mutation"
+      ],
+      "artifacts": {
+        "AutoRun.txt": "57845e1b8d422289167d7a29cdd9cdd4b453e82fc9b2b8513e624171d533910f",
+        "fpSup.BIN": "9d155ef11dc8c20947163a0b944b437b7633ad8d088895713453ab82dcad5a4f"
+      }
+    },
+    {
+      "directory": "/Users/dido/Developer.localized/SIGMAfp_re/projects/sensor-lab/cards/20260930-review/debug",
+      "checks": [
+        "exact-bytes",
+        "entry-ABI",
+        "cache-order",
+        "journal-146-runtime-words",
+        "power-off-twice",
+        "warm-image",
+        "saved-selection",
+        "MOV-guard",
+        "missing-BIN",
+        "packaged-RAW14-picker",
+        "journal-coverage-mutation",
+        "entry-alignment-mutation"
+      ],
+      "artifacts": {
+        "AutoRun.txt": "5d5e31189e08e888d60df6ea85980d3b820d4536e33b3e82df359e641bec2b4d",
+        "fpSup.BIN": "6033a8cc1daf35efc1b8a5f099d2e432d6d5fde887db0b79e648e1babf848f2c"
+      }
+    }
+  ],
+  "autorun_independent": true,
+  "hardware_verified": false,
+  "stubs": "worker spawn, file/allocator/cache/OS services, native getters, original setter body, inactive LV"
+}

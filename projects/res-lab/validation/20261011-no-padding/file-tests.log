@@ -1,0 +1,58 @@
+.  checking card AutoRun.txt (4 B)...
+.  checking card AutoRun.txt (9 B)...
+  AutoRun.txt: script prefix matches; 4 B of comment-only tail verified
+  AutoRun check took 0.0s
+  checking FPSUPUI/0.BIN (8 B)...
+  FPSUPUI/0.BIN: matched in 0.0s
+  FPSUPUI: 1 candidate sidecars matched before transfer; none will be written
+  NOTE: the last deploy did not finish, or predates this check.
+        The camera may hold fpSup.BIN from one build and
+        AutoRun.txt from another, which boots without complaint.
+  writing fpSup.BIN (19 B sent, 19 B expected; attempt 1)...
+  fpSup.BIN: write took 0.0s; reading back 19 B...
+...  fpSup.BIN  19 B verified in 0.0s (attempt 1)
+  root pair verified; wrote fpSup.BIN only in 0.0s (no reboot performed)
+  writing fpSup.BIN (20 B sent, 20 B expected; attempt 1)...
+.  checking FPSUPUI/0.BIN (5 B)...
+  checking FPSUPUI/0.BIN (5 B)...
+  checking FPSUPUI/0.BIN (5 B)...
+.usage: getfile.py [-h] [--size SIZE] [--mode MODE] [--buf BUF] [--partial]
+                  remote [local]
+getfile.py: error: --buf requires --partial: an exact read needs extra buffer space to detect an old file tail
+...  NOTE: the last deploy did not finish, or predates this check.
+        The camera may hold fpSup.BIN from one build and
+        AutoRun.txt from another, which boots without complaint.
+  writing fpSup.BIN (20 B sent, 20 B expected; attempt 1)...
+  fpSup.BIN: write took 0.0s; reading back 20 B...
+...  checking card AutoRun.txt (5 B)...
+  AutoRun.txt: exact bytes verified
+  AutoRun check took 0.0s
+  NOTE: the last deploy did not finish, or predates this check.
+        The camera may hold fpSup.BIN from one build and
+        AutoRun.txt from another, which boots without complaint.
+  writing fpSup.BIN (19 B sent, 19 B expected; attempt 1)...
+  fpSup.BIN: write took 0.0s; reading back 19 B...
+...  fpSup.BIN  19 B verified in 0.0s (attempt 1)
+  root pair verified; wrote fpSup.BIN only in 0.0s (no reboot performed)
+  replacing 8 -> 4 B: delete \AutoRun.txt first
+  replacing 8 -> 4 B: delete \AutoRun.txt first
+..  replacing 21 -> 4 B: delete \AutoRun.txt first
+  replacing 21 -> 4 B: delete \fpSup\50RESLAB.BIN first
+...................  test 1024 bytes in 0.001s (2.0 MB/s)      
+.  test MEM1 refused (memw  : ERR mem refused at=0x50000000 done=0 cmd6 refused code=4); using the checked path
+.  test 1024 bytes in 0.001s (2.0 MB/s)      
+  test 1024 bytes in 0.00s (21.8 MB/s), MEM1, read back whole          
+..
+----------------------------------------------------------------------
+Ran 41 tests in 0.064s
+
+OK
+  local   /var/folders/20/mb8w7p_x7nlfpctnt7qd77b00000gn/T/tmp6o18sx5i/new.txt  4 bytes
+  remote  \AutoRun.txt  mode 0x7
+  buffer  0x45010000, file object 0x45010004
+  proof   region takes writes and still holds them a second later
+  restored echo -> 0xC03D99A0
+  reply   putfile: written
+  status  2 — written
+  open    1     write  1   (both are flags, not counts)
+  dir     4 B verified

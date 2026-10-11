@@ -1,0 +1,28 @@
+--- 
++++ 
+@@ -97,6 +97,7 @@
+     RATE_LV_RELOADS=0x6FC,
+     VR_LABEL=0x700,      # K string ids: the labels (uishare string layer, STRBASE)
+     FILE_UI=0x710,       # consumer-owned RCD selection page state
++    HDR_COPY_HITS=0x714, HDR_COPY_SRC=0x718, HDR_COPY_DST=0x71C, HDR_COPY_BYTES=0x720,
+     # (0x710..0x7CF: free -- the K-row EN arrays before every row was ours to grey)
+     VTV_CALLS=0x7D0,     # the shutter-range / angle sites asked
+     VTV_HITS=0x7D4,      # ... and got the virtual rate's answer
+@@ -217,7 +218,7 @@
+ 
+ # ---- C entry points (S.FN + 4*i) and hook slots (S.NEXT + 4*i) ----------------
+ FNS = ['PICK', 'SEL', 'FMT', 'CANVAS', 'NAME', 'OUT', 'VLOOK', 'V32', 'AC38', 'FPS', 'CMT', 'SAVE',
+-       'QSREC', 'QSLAY', 'QSLOAD', 'GATE', 'RCMT', 'VTV', 'VGUI', 'BINPATH', 'BINKERNEL', 'RECRATE']
++       'QSREC', 'QSLAY', 'QSLOAD', 'GATE', 'RCMT', 'VTV', 'VGUI', 'BINPATH', 'BINKERNEL', 'RECRATE', 'HDRCOPY']
+ HOOKS = [  # name, site, kind, replay ('' = BL site through its own target / none)
+     ('picker', 0xC043CCF8, 'b'), ('setter', 0xC005C020, 'b'), ('fmtset', 0xC005BE58, 'b'),
+     ('canvas', 0xC043A19C, 'bl'), ('vpro', 0xC043A18C, 'bl'), ('name', 0xC0437B48, 'b'),
+@@ -269,6 +270,8 @@
+     ('binkernel1', 0xC032DDF0, 'bl'), ('binkernel2', 0xC032DE70, 'bl'),
+     # CinemaDNG FrameRate rational; the native setting remains a supported carrier.
+     ('recrate', 0xC00C9BD0, 'b'),
++    # Native per-frame DNG header copy; its ARM BLX target gets a replay veneer.
++    ('hdrcopy', 0xC038C77C, 'bl'),
+ ]
+ RFLAG_CLAMP, RFLAG_MAG8, RFLAG_CROP = 1, 2, 4
+ # the virtual frame rates, core-defined (rcd entries only say which ones they time):

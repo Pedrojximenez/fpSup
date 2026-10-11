@@ -1,0 +1,36 @@
+{
+  "AutoRun.txt": {
+    "baseline_size": 3561,
+    "candidate_size": 3561,
+    "baseline_sha256": "889800fa363c75bfe0d9da43da82312276388a8929748ce05221ce0da931bb4c",
+    "candidate_sha256": "889800fa363c75bfe0d9da43da82312276388a8929748ce05221ce0da931bb4c",
+    "equal": true
+  },
+  "fpSup/LOADER.BIN": {
+    "baseline_size": 27664,
+    "candidate_size": 27664,
+    "baseline_sha256": "8bf7f13c72f62a7ca9ddefc92d02afdffb9054bed3d9c43656e94eea14869511",
+    "candidate_sha256": "8bf7f13c72f62a7ca9ddefc92d02afdffb9054bed3d9c43656e94eea14869511",
+    "equal": true
+  },
+  "fpSup/50RES-Lab v0.1.0test.BIN": {
+    "baseline_size": 609720,
+    "candidate_size": 609720,
+    "baseline_sha256": "dad8226db751fe10c2cac1f2f21269cc746957c7aacc5b19bec83dd027da155f",
+    "candidate_sha256": "dad8226db751fe10c2cac1f2f21269cc746957c7aacc5b19bec83dd027da155f",
+    "equal": true
+  },
+  "fpSup/32RESCUS.BIN": {
+    "baseline_size": 182720,
+    "candidate_size": 183104,
+    "baseline_sha256": "0751f2e6b6d30f84d38e6b0b7447bd7cfe3f766bb9fd8e97048017ca586031f3",
+    "candidate_sha256": "57d3587cb6df182a2a8de613ba5458e6e902182d5ca242a1ee63fd6e6c1428ca",
+    "equal": false
+  },
+  "rebuild_extra_inputs": {
+    "out/MAIN_c0000000.bin": "92a8ee993f6c3d66c251e88d45a2ccd5135c6cf7342717784321c2ed506e2fb4",
+    "out/seg0_c0000000.bin": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622",
+    "logo2.png": "5785bbf1d0e255ffbd893389d52e8e53932ae742e8f7f88e48d487767c79b8e1",
+    "research/ui/captures/og3k_86x49.xci": "bca87e51bf0ab02fd273b5ebc5dd3919a1a94e8fd08d0342e16d2e2aa14c937c"
+  }
+}

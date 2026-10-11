@@ -8,6 +8,13 @@ I'm making as much of my work public as possible, including unfinished experimen
 
 Some materials may be incomplete or outdated, but I hope they can help others continue exploring without having to start from scratch.
 
+### Workspace contents
+
+- [`research/`](research/) — SIGMA fp research, measurements, reverse-engineering notes, and evidence.
+- [`projects/`](projects/) — development source, experiments, test cards, validation records, and history.
+- [`INDEX.md`](INDEX.md) — the original workspace index.
+- [`UPLOAD.md`](UPLOAD.md) — snapshot coverage, compressed files, and omitted large captures.
+
 ### Links
 
 - [fpSup Website](https://ijigen.github.io/fpSup/)

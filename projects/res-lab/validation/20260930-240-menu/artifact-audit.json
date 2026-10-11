@@ -1,0 +1,38 @@
+{
+  "hardware_verified": false,
+  "source_and_artifact_hashes_verified": true,
+  "variants": [
+    {
+      "variant": "plain",
+      "bytes": 32768,
+      "checks": 16,
+      "BIN_sha256": "dc6df61013ab7ebc3da1c19f8fe59d8dc3df66deb6054bdf19fc931e9afef663",
+      "AutoRun_sha256": "57845e1b8d422289167d7a29cdd9cdd4b453e82fc9b2b8513e624171d533910f",
+      "preflight_AutoRun_identical": true,
+      "shared_sources_identical": true
+    },
+    {
+      "variant": "debug",
+      "bytes": 32768,
+      "checks": 16,
+      "BIN_sha256": "0ebda984eba90047e0622db9d6867a01482b839bec45f4e10baafb1c0326ec9b",
+      "AutoRun_sha256": "5d5e31189e08e888d60df6ea85980d3b820d4536e33b3e82df359e641bec2b4d",
+      "preflight_AutoRun_identical": true,
+      "shared_sources_identical": true
+    },
+    {
+      "variant": "fast-plain",
+      "bytes": 32768,
+      "checks": 16,
+      "BIN_sha256": "34406124507e794c3cf66664046d64e3c01f940b16ce5fc2978b48eb75e86e4d",
+      "AutoRun_sha256": "8383a3b22d08068add948ac27b4f4cf195cf6c17bd6f73f1125c9dfa42db187b"
+    },
+    {
+      "variant": "fast-debug",
+      "bytes": 32768,
+      "checks": 16,
+      "BIN_sha256": "b877d17413b4c1d4780e954283595f3c66e0a2adeaa0b631cd63e931a6b5821d",
+      "AutoRun_sha256": "35a3141f4163c8c1790f38b7a5ba4ec92e99eb2396d2565712641f053bd4f775"
+    }
+  ]
+}

@@ -1,0 +1,222 @@
+test_fast_miss_then_hit_copies_loader_and_closes_script (v3.test_boot_options.BootOptionsTests) ... test_four_options_load_real_v3_and_restore_products (v3.test_boot_options.BootOptionsTests) ... test_instant_missing_file_preserves_native_fallback_arguments (v3.test_boot_options.BootOptionsTests) ... ok
+test_instant_warm_restart_reloads_sup_and_skips_autorun (v3.test_boot_options.BootOptionsTests) ... FAIL
+test_manager_saves_complete_envelope_with_disabled_list (v3.test_boot_options.BootOptionsTests) ... test_wrong_loader_hook_word_never_arms_instant (v3.test_boot_options.BootOptionsTests) ... ok
+
+======================================================================
+FAIL: test_fast_miss_then_hit_copies_loader_and_closes_script (v3.test_boot_options.BootOptionsTests) (instant=False)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/v3/test_boot_options.py", line 158, in test_fast_miss_then_hit_copies_loader_and_closes_script
+    self.assertEqual(cam.misaligned, [])
+AssertionError: Lists differ: ['DCACHE', 'ICACHE', 'DCACHE', 'ICACHE', '[113 chars]ILE'] != []
+
+First list contains 16 additional elements.
+First extra element 0:
+'DCACHE'
+
++ []
+- ['DCACHE',
+-  'ICACHE',
+-  'DCACHE',
+-  'ICACHE',
+-  'D_FILE',
+-  'D_FILE',
+-  'D_FILE',
+-  'DCACHE',
+-  'ICACHE',
+-  'DCACHE',
+-  'ICACHE',
+-  'DCACHE',
+-  'ICACHE',
+-  'D_FILE',
+-  'D_FILE',
+-  'D_FILE']
+
+======================================================================
+FAIL: test_fast_miss_then_hit_copies_loader_and_closes_script (v3.test_boot_options.BootOptionsTests) (instant=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/v3/test_boot_options.py", line 158, in test_fast_miss_then_hit_copies_loader_and_closes_script
+    self.assertEqual(cam.misaligned, [])
+AssertionError: Lists differ: ['DCACHE', 'ICACHE', 'DCACHE', 'ICACHE', '[289 chars]CHE'] != []
+
+First list contains 32 additional elements.
+First extra element 0:
+'DCACHE'
+
++ []
+- ['DCACHE',
+-  'ICACHE',
+-  'DCACHE',
+-  'ICACHE',
+-  'D_FILE',
+-  'D_FILE',
+-  'D_FILE',
+-  'DCACHE',
+-  'ICACHE',
+-  'CYC_DRAW',
+-  'UI_CLEAR',
+-  'UI_CLEAR',
+-  'UI_FORCE',
+-  'DCACHE',
+-  'ICACHE',
+-  'DCACHE',
+-  'ICACHE',
+-  'DCACHE',
+-  'ICACHE',
+-  'DCACHE',
+-  'ICACHE',
+-  'D_FILE',
+-  'D_FILE',
+-  'D_FILE',
+-  'DCACHE',
+-  'ICACHE',
+-  'CYC_DRAW',
+-  'UI_CLEAR',
+-  'UI_CLEAR',
+-  'UI_FORCE',
+-  'DCACHE',
+-  'ICACHE']
+
+======================================================================
+FAIL: test_four_options_load_real_v3_and_restore_products (v3.test_boot_options.BootOptionsTests) (instant=False, fast=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/v3/test_boot_options.py", line 73, in test_four_options_load_real_v3_and_restore_products
+    self.assertEqual(cam.misaligned, [])
+AssertionError: Lists differ: ['DCACHE', 'ICACHE', 'DCACHE', 'ICACHE', 'D_FILE', 'D_FILE', 'D_FILE'] != []
+
+First list contains 7 additional elements.
+First extra element 0:
+'DCACHE'
+
+- ['DCACHE', 'ICACHE', 'DCACHE', 'ICACHE', 'D_FILE', 'D_FILE', 'D_FILE']
++ []
+
+======================================================================
+FAIL: test_four_options_load_real_v3_and_restore_products (v3.test_boot_options.BootOptionsTests) (instant=True, fast=False)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/v3/test_boot_options.py", line 73, in test_four_options_load_real_v3_and_restore_products
+    self.assertEqual(cam.misaligned, [])
+AssertionError: Lists differ: ['DCACHE', 'ICACHE', 'DCACHE', 'ICACHE', '[111 chars]CHE'] != []
+
+First list contains 15 additional elements.
+First extra element 0:
+'DCACHE'
+
++ []
+- ['DCACHE',
+-  'ICACHE',
+-  'DCACHE',
+-  'ICACHE',
+-  'D_FILE',
+-  'D_FILE',
+-  'D_FILE',
+-  'DCACHE',
+-  'ICACHE',
+-  'CYC_DRAW',
+-  'UI_CLEAR',
+-  'UI_CLEAR',
+-  'UI_FORCE',
+-  'DCACHE',
+-  'ICACHE']
+
+======================================================================
+FAIL: test_four_options_load_real_v3_and_restore_products (v3.test_boot_options.BootOptionsTests) (instant=True, fast=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/v3/test_boot_options.py", line 73, in test_four_options_load_real_v3_and_restore_products
+    self.assertEqual(cam.misaligned, [])
+AssertionError: Lists differ: ['DCACHE', 'ICACHE', 'DCACHE', 'ICACHE', '[111 chars]CHE'] != []
+
+First list contains 15 additional elements.
+First extra element 0:
+'DCACHE'
+
++ []
+- ['DCACHE',
+-  'ICACHE',
+-  'DCACHE',
+-  'ICACHE',
+-  'D_FILE',
+-  'D_FILE',
+-  'D_FILE',
+-  'DCACHE',
+-  'ICACHE',
+-  'CYC_DRAW',
+-  'UI_CLEAR',
+-  'UI_CLEAR',
+-  'UI_FORCE',
+-  'DCACHE',
+-  'ICACHE']
+
+======================================================================
+FAIL: test_instant_warm_restart_reloads_sup_and_skips_autorun (v3.test_boot_options.BootOptionsTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/v3/test_boot_options.py", line 107, in test_instant_warm_restart_reloads_sup_and_skips_autorun
+    self.assertEqual(cam.misaligned, [])
+AssertionError: Lists differ: ['DCACHE', 'ICACHE', 'DCACHE', 'ICACHE', '[111 chars]CHE'] != []
+
+First list contains 15 additional elements.
+First extra element 0:
+'DCACHE'
+
++ []
+- ['DCACHE',
+-  'ICACHE',
+-  'DCACHE',
+-  'ICACHE',
+-  'D_FILE',
+-  'D_FILE',
+-  'D_FILE',
+-  'DCACHE',
+-  'ICACHE',
+-  'CYC_DRAW',
+-  'UI_CLEAR',
+-  'UI_CLEAR',
+-  'UI_FORCE',
+-  'DCACHE',
+-  'ICACHE']
+
+======================================================================
+FAIL: test_manager_saves_complete_envelope_with_disabled_list (v3.test_boot_options.BootOptionsTests) (instant=True, fast=False)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/v3/test_boot_options.py", line 172, in test_manager_saves_complete_envelope_with_disabled_list
+    self.assertFalse(any(code == 'LOADED' and name == '10LOSS.BIN' for code, _a, _b, name in again.log()))
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/v3/test_v3.py", line 284, in log
+    st = self.state()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/v3/test_v3.py", line 271, in state
+    assert len(objs) == 1, self.registered
+AssertionError: [(1157693440, 0), (1157693440, 1), (1157720832, 0), (1157720832, 1)]
+
+======================================================================
+FAIL: test_manager_saves_complete_envelope_with_disabled_list (v3.test_boot_options.BootOptionsTests) (instant=False, fast=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/v3/test_boot_options.py", line 172, in test_manager_saves_complete_envelope_with_disabled_list
+    self.assertFalse(any(code == 'LOADED' and name == '10LOSS.BIN' for code, _a, _b, name in again.log()))
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/v3/test_v3.py", line 284, in log
+    st = self.state()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/v3/test_v3.py", line 271, in state
+    assert len(objs) == 1, self.registered
+AssertionError: [(1157693440, 0), (1157693440, 1), (1157720824, 0), (1157720824, 1)]
+
+======================================================================
+FAIL: test_manager_saves_complete_envelope_with_disabled_list (v3.test_boot_options.BootOptionsTests) (instant=True, fast=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/v3/test_boot_options.py", line 172, in test_manager_saves_complete_envelope_with_disabled_list
+    self.assertFalse(any(code == 'LOADED' and name == '10LOSS.BIN' for code, _a, _b, name in again.log()))
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/v3/test_v3.py", line 284, in log
+    st = self.state()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/v3/test_v3.py", line 271, in state
+    assert len(objs) == 1, self.registered
+AssertionError: [(1157693440, 0), (1157693440, 1), (1157720832, 0), (1157720832, 1)]
+
+----------------------------------------------------------------------
+Ran 6 tests in 40.295s
+
+FAILED (failures=9)

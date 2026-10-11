@@ -1,0 +1,27 @@
+SIGMA fp Ver.5.02 internal gyro test
+Card: fpGfTest
+Prepared: 2026-08-17 Asia/Taipei
+
+SAFETY
+- AutoRun.txt installs a temporary RAM hook. It does not write firmware or PROM.
+- If the camera freezes, remove the battery and this card before restarting.
+- Do not repeat a test while GYRO.BIN is still on the card.
+
+CAPTURE PROCEDURE
+1. Insert the card and start the camera.
+2. Record CinemaDNG for about 8 seconds.
+3. Keep still for 2 seconds.
+4. Yaw left/right only for 2 seconds.
+5. Pitch up/down only for 2 seconds.
+6. Roll clockwise/counter-clockwise only for 2 seconds.
+7. Stop recording and wait at least 10 seconds before powering off.
+8. Return the card to the computer without recording another clip.
+
+EXPECTED OUTPUTS
+- GYRO.BIN: continuous raw records, 8 bytes per sample (X,Y,0,Z).
+- HANDLE.BIN: USER-pool handle diagnostic.
+- CAVE3.BIN: installed hook verification dump.
+
+IMPORTANT
+- Record the exact video filename, frame rate, resolution, and measured clip duration.
+- The first valid run is the only run on this card until all output files are copied off.

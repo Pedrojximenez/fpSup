@@ -1,0 +1,46 @@
+{
+  "configuration": "four-box splash, ordinary loader, no product payload and no USB shell",
+  "build_command": [
+    "/Library/Developer/CommandLineTools/usr/bin/python3",
+    "-B",
+    "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/build_autorun.py",
+    "--loader",
+    "--no-shell",
+    "--four-box-bar",
+    "--out",
+    "/Users/dido/Developer.localized/SIGMAfp_re/codex/four-box-splash-20260924/build-20260924-122452/card/AutoRun.txt"
+  ],
+  "camera_tested": false,
+  "written_to_card": false,
+  "matches_reviewed_system_ui_plain": true,
+  "files": {
+    "AutoRun.txt": {
+      "bytes": 32768,
+      "sha256": "e60a7d2216b0b162cc4ff02e6f41cbd52c7404d5aad59d1c5c2d7c76a7a05d7b"
+    },
+    "fpSup.BIN": {
+      "bytes": 32768,
+      "sha256": "86ec4a8980faf202cfdeb9d672f4f8177e746f4f44d91445ae08dfa57728437e"
+    },
+    "FPSUPUI/0.BIN": {
+      "bytes": 73472,
+      "sha256": "bdd4dff67ebd7975ba1db361b7090860c8744a65197e03f57bf2922cce53be3c"
+    },
+    "FPSUPUI/1.BIN": {
+      "bytes": 73472,
+      "sha256": "71dc2c331a2c8ff82a382dc081ae1621fb009168b3516f00e436bee80c1413d1"
+    },
+    "FPSUPUI/2.BIN": {
+      "bytes": 73472,
+      "sha256": "cb9cf511171b0b49792eb72d11fd915ed9b7ac77f5706b921e517d95b87f78b5"
+    },
+    "FPSUPUI/3.BIN": {
+      "bytes": 73472,
+      "sha256": "4c382e48505e8ffb97feea5d931a923a7049a993f04cb317e356fafa21dfdd5f"
+    },
+    "FPSUPUI/4.BIN": {
+      "bytes": 73472,
+      "sha256": "f11dee2e9fb421df28e577ff17401500016ef60dbd66e27ea62bf2652bfd49f3"
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+ "schema_version": 1,
+ "kind": "offline_static_resolution_of_the_media_write_mode_gate",
+ "date": "2026-09-24",
+ "operator_scope": "offline only. No camera. Reading out/decomp/full and out/seg0_c0000000.bin.",
+ "answers": "the open question from ledger-live-mediawritemode-20260924.json: which item gates MenuItemMediaWriteMode::v3, and why setting the menu to 0 produced a flag of 1.",
+ "the_gate_is_the_item_itself": {
+  "level": "C",
+  "chain": [
+   "MenuItemMediaWriteMode::v3 obtains an item through (vtable +0x354) on the global _DAT_c31caa80.",
+   "_DAT_c31caa80 is the MenuItemFactory: its vtable at 0xC07397DC carries the typeinfo name MenuItemFactory_w71c1 at 0xC07397A4 (the base class MenuItemFactory is at 0xC0745CD0).",
+   "vtable +0x354 is MenuItemFactory_w71c1::v212 @ 0xC0085388, which returns factory + 0x1594.",
+   "In the factory constructor, FUN_c00ab898(param_1 + 0x565, ...) builds that item; param_1 is undefined4*, so 0x565 words = 0x1594 bytes. FUN_c00ab898 sets id 0xFE and vtable &DAT_c07430b0, which is MenuItemMediaWriteMode's own vtable (its ::v3 sits at +0x14 of it).",
+   "The neighbour at param_1 + 0x56c (0x15B0 bytes, accessor v213) is FUN_c00ab9a0, id 0xC2, vtable &DAT_c074311c = MenuItemFilePrefixRule. That is a different item."
+  ],
+  "conclusion": "there is no separate gating item. v3 consults the Media Write Mode item itself, through the factory."
+ },
+ "the_logic": {
+  "level": "C",
+  "index": "MenuItemMediaWriteMode::v5 (vtable +0x1C) returns 1, so FUN_c00913f8(item, 0xffff, 1, ...) returns 0. Both reads use index 0, i.e. the same value.",
+  "pseudocode": "v = value(this, 0); settings[0x9C] = (v == 0) ? 1 : (v == 1 ? 1 : 0)",
+  "table": {
+   "0": 1,
+   "1": 1,
+   "2 or more": 0
+  },
+  "consequence": "settings[0x9C] can only become 0, and SD aggregation can only be disabled, when Media Write Mode is 2 or higher."
+ },
+ "this_explains_the_failed_live_attempt": "On 2026-09-24 the camera read 1, was set to 0 with menu SetMediaWriteMode 0, and the settings slot was written to 0 by hand. After one recording the slot read 1 again. That is exactly what this table predicts: v3 re-ran at recording start and, seeing a value of 0, wrote 1. Setting the menu to 0 was the wrong direction - 0 and 1 give the same result.",
+ "prediction_to_test": {
+  "action": "menu SetMediaWriteMode 2",
+  "expected_if_accepted": "settings+0x9C becomes 0 at the next recording start, manager+0x0D becomes 0, and FUN_c03a5050 does not install the aggregation. The flush at 0xC03A5490 should then take far longer than 365 us for 3,244,544 bytes if the [I] in ledger-aggregation-off-path-20260924.json holds.",
+  "expected_if_rejected": "the item has only values 0 and 1, in which case settings[0x9C] is always 1 and SD aggregation cannot be disabled from this menu on this camera at all. That is an equally decisive answer and it retires the whole aggregation-off line."
+ },
+ "explicitly_not_established": [
+  "whether 2 is an accepted value. Three related resource names exist - CM_MediaWriteMode, CM_MediaWriteModeAj, CM_MediaWriteModeFix - which is consistent with three states but does not establish them.",
+  "which displayed label corresponds to which number",
+  "whether menu SetMediaWriteMode reads the same stored value that FUN_c006d530 reads at index 0. The live run is consistent with it but does not prove it."
+ ],
+ "camera_accessed": false,
+ "deployable": false
+}

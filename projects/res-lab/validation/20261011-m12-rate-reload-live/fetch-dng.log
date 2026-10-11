@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-m12-rate-reload-live/fetch_trial_frames.py", line 6, in <module>
+    from record_trial import overlay
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/record_trial.py", line 10, in <module>
+    expected_fps=Fraction(int(sys.argv[2]),1001) if len(sys.argv)>2 else None
+ValueError: invalid literal for int() with base 10: 'reload-240-a'

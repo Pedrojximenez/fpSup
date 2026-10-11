@@ -1,0 +1,93 @@
+{
+  "loaded_consumer_version": 9,
+  "loaded_producer_version": 17,
+  "restored_complete_BIN_matches_deployment": true,
+  "configured_consumer_sha256": "55a43ca02a34c842b71b6233f93fde86c20fc7f9af4899a5f0e819392cd9d1b6",
+  "enabled_labels": [
+    "VRC000"
+  ],
+  "active_rows_registry_unchanged": true,
+  "producer_recipe_not_applied": true,
+  "producer_UI_initialization": {
+    "before": 0,
+    "after": 1
+  },
+  "screenshot": "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261010-sidebar-v13/screenshots/1669-rescustom-count-v38-disabled-restart.jpg",
+  "ui_reads": [
+    {
+      "time": "2026-10-11T00:27:16.960512",
+      "command": "gui gets RC_Title",
+      "reply": "OK:RC_Title -> RES-CUSTOM (0/5)\n\n"
+    },
+    {
+      "time": "2026-10-11T00:27:50.003227",
+      "command": "gui gets RC_Title",
+      "reply": "OK:RC_Title -> RES-CUSTOM (1/5)\n\n"
+    },
+    {
+      "time": "2026-10-11T00:27:50.003767",
+      "command": "gui gets RC_Count",
+      "reply": "OK:RC_Count -> 1/5\n\n"
+    },
+    {
+      "time": "2026-10-11T00:27:50.004129",
+      "command": "gui gets RC_N1",
+      "reply": "OK:RC_N1 -> A9.RCD\n\n"
+    },
+    {
+      "time": "2026-10-11T00:27:50.004463",
+      "command": "gui gets RC_E1",
+      "reply": "OK:RC_E1 -> Enabled\n\n"
+    },
+    {
+      "time": "2026-10-11T00:27:50.004827",
+      "command": "gui gets RC_Status",
+      "reply": "OK:RC_Status -> Restart to apply\n\n"
+    },
+    {
+      "time": "2026-10-11T00:28:07.001264",
+      "command": "gui gets RC_Status",
+      "reply": "OK:RC_Status -> OK: confirm\n\n"
+    },
+    {
+      "time": "2026-10-11T00:28:44.790712",
+      "command": "gui gets RC_Title",
+      "reply": "OK:RC_Title -> RES-CUSTOM (0/5)\n\n"
+    },
+    {
+      "time": "2026-10-11T00:28:44.791346",
+      "command": "gui gets RC_G1",
+      "reply": "OK:RC_G1 -> A9.RCD\n\n"
+    },
+    {
+      "time": "2026-10-11T00:28:44.791758",
+      "command": "gui gets RC_R1",
+      "reply": "OK:RC_R1 -> Disabled\n\n"
+    },
+    {
+      "time": "2026-10-11T00:28:44.792117",
+      "command": "gui gets RC_Status",
+      "reply": "OK:RC_Status -> Restart to apply\n\n"
+    },
+    {
+      "time": "2026-10-11T00:28:44.792440",
+      "command": "gui gets RC_Count",
+      "reply": "OK:RC_Count -> 0/5\n\n"
+    },
+    {
+      "time": "2026-10-11T00:28:44.792826",
+      "command": "status get is_recording",
+      "reply": "is_recording -> 0\n\n"
+    },
+    {
+      "time": "2026-10-11T00:28:52.269727",
+      "command": "status get is_recording",
+      "reply": "is_recording -> 0\n\n"
+    },
+    {
+      "time": "2026-10-11T00:29:36.945424",
+      "command": "status get is_recording",
+      "reply": "is_recording -> 0\n\n"
+    }
+  ]
+}

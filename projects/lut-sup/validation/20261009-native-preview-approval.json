@@ -1,0 +1,17 @@
+{
+  "date_utc": "2026-10-09T05:45:15.488799+00:00",
+  "action": "read one diagnostic native preview ring and save in local project",
+  "bytes": 4177920,
+  "destination": "projects/lut-sup/validation/20261009-native-preview-bytes-01/native-ring.bin",
+  "automatic_approval_review": "rejected",
+  "reason": "Explicit authorization to transfer potentially sensitive current live-view image to local destination was not established by automatic review.",
+  "execution_occurred": true,
+  "user_approval": "granted",
+  "camera_image_data_read": true,
+  "safer_work_continued": "offline packing, residual fitting and guarded read-runner validation",
+  "user_reply": "可以啊",
+  "user_approval_scope": "one approximately 4 MB native live-view diagnostic saved in local SIGMAfp_re project",
+  "automatic_review_after_authorization": "approved",
+  "successful_report": "20261009-native-preview-bytes-01/report.json",
+  "resolved_at_utc": "2026-10-09T05:56:30.282231+00:00"
+}

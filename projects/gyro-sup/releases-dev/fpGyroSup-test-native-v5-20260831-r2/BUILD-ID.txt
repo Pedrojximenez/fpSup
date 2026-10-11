@@ -1,0 +1,24 @@
+fpGyroSup-test-native-v5-20260831-r2
+
+Purpose: isolate the r1 freeze at the 90% AutoRun boundary.
+Camera firmware: SIGMA fp Ver.5.02 only
+Lifecycle: native CDNG/MOV
+Boot recovery: disabled
+GYR format: v5
+Source commit: 8352786699ea2ee332eabc04ee1e224f4ce1dda2
+
+Changes from r1:
+- The unvalidated boot-time GYRO recovery scan is not compiled into PGEN.
+- The loader again calls the firmware media manager and selected-volume helper,
+  matching the final known bootable AutoRun path.
+- Both task-loader debug and no-shell release card sets are included for A/B.
+
+Verified layout:
+- logger: 3852 bytes at C072E064..C072EF70
+- park: 76 bytes at C072EFB4..C072F000
+- native/no-recovery PGEN: 6680 bytes; code 6664 bytes
+- PGEN entries: post +0x284, gcsv +0x137C
+- debug loader: 512 bytes, ending exactly at C072E064
+- release loader: 388 bytes, ending 124 bytes below C072E064
+- debug and release VSHL sections equal fresh source assembly
+- 21/21 host tests and git diff check passed

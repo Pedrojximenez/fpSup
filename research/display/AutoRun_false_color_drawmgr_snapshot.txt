@@ -1,0 +1,27 @@
+# SIGMA fp 5.02 draw-manager read-only snapshot
+# One color-bar pulse = started. Toggle stock False Color once and leave it there.
+# Two color-bar pulses = both snapshots saved; safe to power off and remove card.
+display monitor 0 1
+display colorbar 1 0
+ctrl sleep 700
+display colorbar 0 0
+ctrl sleep 400
+
+# Allow live-view/display initialization to settle, then save baseline state.
+ctrl sleep 5000
+mem save \DRWMGR0.BIN 0xc3783020,,0xa0
+mem save \CYCDRAW0.BIN 0xc3782fc8,,0x120
+
+# User interaction window: toggle the camera's stock False Color once.
+ctrl sleep 25000
+mem save \DRWMGR1.BIN 0xc3783020,,0xa0
+mem save \CYCDRAW1.BIN 0xc3782fc8,,0x120
+
+# Completion cue: two pulses.
+display colorbar 1 0
+ctrl sleep 500
+display colorbar 0 0
+ctrl sleep 300
+display colorbar 1 0
+ctrl sleep 500
+display colorbar 0 0

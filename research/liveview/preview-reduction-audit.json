@@ -1,0 +1,357 @@
+{
+  "scope": "Static ROM/table verification, not an active-state capture or pixel simulation of the ASIC.",
+  "sources": [
+    {
+      "path": "/Users/dido/Developer.localized/SIGMAfp_re/out/seg0_c0000000.bin",
+      "bytes": 49245696,
+      "sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622"
+    },
+    {
+      "path": "/Users/dido/Developer.localized/SIGMAfp_re/out/seg1_c2ef6e00.bin",
+      "bytes": 236032,
+      "sha256": "0dcaca8f5441fe4ddc6ed801cb888e325df4e76006e4f53a1c3219809b22ce7b"
+    },
+    {
+      "path": "/Users/dido/Developer.localized/SIGMAfp_re/research/other/external/FP3K-technical-handoff-2026-09-10/analysis/firmware/raw-profiles.json",
+      "bytes": 385414,
+      "sha256": "9139be317dc048081801093f40d337a20cbfc7756b317b296ccd6944707914d2"
+    }
+  ],
+  "profile_cells_verified": 19890,
+  "mapping_cells_verified": 500,
+  "profile_row_counts": {
+    "preview_1x1_record_1x1": 289,
+    "preview_3x3_record_1x1": 17
+  },
+  "preview_binned_profile_ids": [
+    131,
+    132,
+    139,
+    151,
+    152,
+    159,
+    171,
+    172,
+    179,
+    365,
+    366,
+    372,
+    374,
+    417,
+    423,
+    429,
+    443
+  ],
+  "selected_profile_templates": [
+    {
+      "row": 0,
+      "profile_ids": [
+        1
+      ],
+      "preview_hvbin": [
+        1,
+        1
+      ],
+      "record_hvbin": [
+        1,
+        1
+      ],
+      "preview_zoom_clamped": [
+        1024,
+        1024
+      ],
+      "record_zoom_clamped": [
+        1024,
+        1024
+      ],
+      "preview_base_dimensions": [
+        2016,
+        1344
+      ],
+      "record_base_dimensions": [
+        0,
+        0
+      ],
+      "format_words_at_80_84": [
+        10,
+        10
+      ]
+    },
+    {
+      "row": 2,
+      "profile_ids": [
+        5
+      ],
+      "preview_hvbin": [
+        1,
+        1
+      ],
+      "record_hvbin": [
+        1,
+        1
+      ],
+      "preview_zoom_clamped": [
+        1024,
+        1024
+      ],
+      "record_zoom_clamped": [
+        1024,
+        1024
+      ],
+      "preview_base_dimensions": [
+        2016,
+        1344
+      ],
+      "record_base_dimensions": [
+        0,
+        0
+      ],
+      "format_words_at_80_84": [
+        10,
+        10
+      ]
+    },
+    {
+      "row": 286,
+      "profile_ids": [
+        429
+      ],
+      "preview_hvbin": [
+        3,
+        3
+      ],
+      "record_hvbin": [
+        1,
+        1
+      ],
+      "preview_zoom_clamped": [
+        1024,
+        1024
+      ],
+      "record_zoom_clamped": [
+        1600,
+        1600
+      ],
+      "preview_base_dimensions": [
+        2016,
+        1135
+      ],
+      "record_base_dimensions": [
+        3856,
+        2170
+      ],
+      "format_words_at_80_84": [
+        7,
+        7
+      ]
+    },
+    {
+      "row": 288,
+      "profile_ids": [
+        431
+      ],
+      "preview_hvbin": [
+        1,
+        1
+      ],
+      "record_hvbin": [
+        1,
+        1
+      ],
+      "preview_zoom_clamped": [
+        1600,
+        1600
+      ],
+      "record_zoom_clamped": [
+        1600,
+        1600
+      ],
+      "preview_base_dimensions": [
+        1936,
+        1090
+      ],
+      "record_base_dimensions": [
+        1936,
+        1090
+      ],
+      "format_words_at_80_84": [
+        7,
+        7
+      ]
+    },
+    {
+      "row": 289,
+      "profile_ids": [
+        432
+      ],
+      "preview_hvbin": [
+        1,
+        1
+      ],
+      "record_hvbin": [
+        1,
+        1
+      ],
+      "preview_zoom_clamped": [
+        2048,
+        2048
+      ],
+      "record_zoom_clamped": [
+        1024,
+        1024
+      ],
+      "preview_base_dimensions": [
+        1936,
+        1087
+      ],
+      "record_base_dimensions": [
+        3856,
+        2170
+      ],
+      "format_words_at_80_84": [
+        7,
+        7
+      ]
+    }
+  ],
+  "reduction_records": [
+    {
+      "index": 0,
+      "address": "0xC0B5F770",
+      "hex": "000000000000030000040008000400040008000400040008000400011020101020101020101020100010201001018017ae0f100f7e080000",
+      "v_variant": 3,
+      "v_control": 0,
+      "h_variant": 1,
+      "vertical": [
+        1024,
+        2048,
+        1024,
+        1024,
+        2048,
+        1024,
+        1024,
+        2048,
+        1024
+      ],
+      "vertical_triplet_sums": [
+        4096,
+        4096,
+        4096
+      ],
+      "horizontal": [
+        16,
+        32,
+        16,
+        16,
+        32,
+        16,
+        16,
+        32,
+        16,
+        16,
+        32,
+        16
+      ],
+      "horizontal_triplet_sums": [
+        64,
+        64,
+        64,
+        64
+      ],
+      "horizontal2": [
+        16,
+        32,
+        16
+      ],
+      "horizontal2_sum": 64,
+      "main_v_control_if_vbin3": "0x00000001",
+      "sub_v_control_if_vbin3": "0x00000041"
+    },
+    {
+      "index": 1,
+      "address": "0xC0B5F7A8",
+      "hex": "00000000000002000001000e00010001000e00010001000e000100000438040438040438040438040004380401018017ae0f100f7e080000",
+      "v_variant": 2,
+      "v_control": 0,
+      "h_variant": 0,
+      "vertical": [
+        256,
+        3584,
+        256,
+        256,
+        3584,
+        256,
+        256,
+        3584,
+        256
+      ],
+      "vertical_triplet_sums": [
+        4096,
+        4096,
+        4096
+      ],
+      "horizontal": [
+        4,
+        56,
+        4,
+        4,
+        56,
+        4,
+        4,
+        56,
+        4,
+        4,
+        56,
+        4
+      ],
+      "horizontal_triplet_sums": [
+        64,
+        64,
+        64,
+        64
+      ],
+      "horizontal2": [
+        4,
+        56,
+        4
+      ],
+      "horizontal2_sum": 64,
+      "main_v_control_if_vbin3": "0x00010001",
+      "sub_v_control_if_vbin3": "0x00000041"
+    }
+  ],
+  "conditional_accumulator_requirements": [
+    {
+      "input_bits": 12,
+      "max_input": 4095,
+      "vertical_max_unsigned_weighted_sum": 16773120,
+      "vertical_min_unsigned_accumulator_bits": 24,
+      "horizontal_max_unsigned_weighted_sum": 262080,
+      "horizontal_min_unsigned_accumulator_bits": 18
+    },
+    {
+      "input_bits": 13,
+      "max_input": 8191,
+      "vertical_max_unsigned_weighted_sum": 33550336,
+      "vertical_min_unsigned_accumulator_bits": 25,
+      "horizontal_max_unsigned_weighted_sum": 524224,
+      "horizontal_min_unsigned_accumulator_bits": 19
+    },
+    {
+      "input_bits": 14,
+      "max_input": 16383,
+      "vertical_max_unsigned_weighted_sum": 67104768,
+      "vertical_min_unsigned_accumulator_bits": 26,
+      "horizontal_max_unsigned_weighted_sum": 1048512,
+      "horizontal_min_unsigned_accumulator_bits": 20
+    }
+  ],
+  "assumptions_and_limits": [
+    "Under the unsigned u16/u8 ROM interpretation, positive weights sum to 4096 vertically and 64 horizontally. ASIC coefficient signedness and division by these sums are not independently verified hardware specifications.",
+    "Under that coefficient interpretation, normalization and adequate intermediate precision, a weighted average lies between its input minimum and maximum.",
+    "Control fields are written exactly as modeled; their arithmetic semantics and actual ASIC accumulator width remain unknown.",
+    "Static profile templates can be selected/combined at runtime; profile IDs are not sensor-mode enum IDs.",
+    "A record DMA mux that does not select Vbin is not evidence that the preview pipeline bypasses Vbin.",
+    "Sensor saturation and gain/clamp stages before or after binning are not excluded by this audit."
+  ]
+}

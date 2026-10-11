@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "kind": "live_g4b_compressed_cinemadng_written",
+  "date": "2026-09-23",
+  "operator_scope": "live camera, DESTRUCTIVE: one frame of one clip was written as compressed CinemaDNG instead of stock RAW",
+  "camera": {
+    "model": "w71c1",
+    "firmware": "5.02.0.V91",
+    "git_hash": "13aa621060efff11aaba9b21ad925005302605cf",
+    "media": "SD"
+  },
+  "source": {
+    "commit": null,
+    "worktree_dirty": null,
+    "git_available": false,
+    "files": {
+      "fpSup/raw/lossless_codec/single_frame_encode_discard_probe.S": "c274512d0e0580f5ea21847787dcd0d4c6ce6fac99b16c85939e2408d1750066",
+      "fpSup/raw/lossless_codec/single_frame_codec_probe.py": "c91f3c9902bc2995be074851f0875b00e784aaa6319f18e4cb4ea7965872f7cd",
+      "projects/lossless-sup/tools/canonical_header.py": "f3aa6caf664b6f1d95e1680a9e2345926395d0a0ca82742e8559b8d30c873cec"
+    }
+  },
+  "profile": {
+    "phase": 5,
+    "geometry": "1936x1090",
+    "tile": "512x368",
+    "tiles": 12,
+    "predictor": 1,
+    "bit_depth": 12,
+    "header_bytes": 78848,
+    "payload_offset": "0x13800"
+  },
+  "integrity": {
+    "clip": "\\CINEMA\\A001_287",
+    "frame": "A001_287_20260923_000001.DNG",
+    "file_bytes": 1396736,
+    "stock_bytes": 3244544,
+    "ratio": 2.323,
+    "smaller_by_percent": 57.0,
+    "root_ifd_at": "0x13400",
+    "compression_tag": 7,
+    "tile_width": 512,
+    "tile_length": 368,
+    "tile_count": 12,
+    "strip_tags_present": [],
+    "soi_markers": 12,
+    "declared_offsets_match_actual_soi": true,
+    "tile_count_sum": 1316864,
+    "decoder": "LibRaw 0.22.1 via rawpy 0.27.0",
+    "decoded_shape": [
+      1090,
+      1936
+    ],
+    "decoded_samples": 2110240,
+    "decoded_mean": 540.61,
+    "decoded_std": 218.67,
+    "stock_neighbour_mean": 540.61,
+    "stock_neighbour_std": 218.67,
+    "max_difference_from_neighbour": 14
+  },
+  "notes": [
+    "The first attempt produced a structurally perfect but all-zero image. The cause was diagnosable from the artifact alone: ten SOI markers instead of twelve, the first at exactly the offset tile 2 would have had counting from the arena base. The codec had written at the base, and the header copy destroyed the first two tiles.",
+    "The reason was `#if OUT_OFF` against a `.equ`. A .equ is an assembler symbol and the preprocessor cannot see it, so the condition was always false. A test now asserts the built compressed image carries the offset as an immediate and the discard image does not.",
+    "finish_source compares seg[1] with the stock length, which marks every successful compressed write as ERR_SOURCE and then makes release refuse a healthy block. The check is now skipped for this phase; the header and pixel comparisons, which are what it is really for, still run."
+  ],
+  "explicitly_established": [
+    {
+      "level": "L",
+      "claim": "the camera writes a compressed CinemaDNG to the card: 1,396,736 bytes against 3,244,544 stock, 57% smaller, and LibRaw decodes it"
+    },
+    {
+      "level": "L",
+      "claim": "the writer accepts a node length different from the stock segment length; G4a had deliberately left it unchanged"
+    },
+    {
+      "level": "L",
+      "claim": "the owned 79,872-byte header built on the camera is structurally correct: root IFD at 0x13400, Compression 7, tile tags present, strip tags gone, and every declared tile offset matches an actual SOI"
+    },
+    {
+      "level": "L",
+      "claim": "the decoded frame matches its stock neighbour in mean and standard deviation to two decimals and differs by at most 14 LSB, which is sensor noise between consecutive frames"
+    }
+  ],
+  "explicitly_not_established": [
+    "losslessness OF THIS FRAME: the stock version of it no longer exists, having been replaced. The engine's bitstream was proven lossless separately, earlier the same day, on a frame whose stock copy survived",
+    "more than one frame: this is a single one-shot write, not a clip",
+    "in-camera playback, which remains impossible for tiled Compression=7",
+    "any other scene, geometry or bit depth",
+    "sustained writing, thermal behaviour, or the first-frame-derived buffer capacity across varying sizes",
+    "that the clip as a whole is well-formed: only frame 1 was replaced, and a mixed clip is not a supported thing"
+  ]
+}

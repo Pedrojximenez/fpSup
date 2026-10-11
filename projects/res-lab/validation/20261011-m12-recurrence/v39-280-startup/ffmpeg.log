@@ -1,0 +1,15 @@
+[in#0/avfoundation @ 0x7cd4c18000] Stream #0: not enough frames to estimate rate; consider increasing probesize
+Input #0, avfoundation, from 'AVerMedia ExtremeCap UVC:none':
+  Duration: N/A, start: 273176.954900, bitrate: N/A
+  Stream #0:0: Video: rawvideo (UYVY / 0x59565955), uyvy422, 1920x1080, 1000k tbr, 1000k tbn, start 273176.954900
+Stream mapping:
+  Stream #0:0 -> #0:0 (rawvideo (native) -> rawvideo (native))
+Press [q] to stop, [?] for help
+Output #0, rawvideo, to '/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-m12-recurrence/v39-280-startup/hdmi.rgb':
+  Metadata:
+    encoder         : Lavf63.1.101
+  Stream #0:0: Video: rawvideo (RGB[24] / 0x18424752), rgb24(pc, gbr/unknown/unknown, progressive), 1024x576, q=2-31, 14155776000 kb/s, 1000k fps, 1000k tbn
+    Metadata:
+      encoder         : Lavc63.1.101 rawvideo
+frame=   16 fps=0.0 q=-0.0 size=   25856KiB time=00:00:00.50 bitrate=423623.9kbits/s speed=0.98x elapsed=0:00:00.51    frame=   31 fps= 31 q=-0.0 size=   51712KiB time=00:00:01.00 bitrate=423624.3kbits/s speed=0.988x elapsed=0:00:01.01    frame=   46 fps= 30 q=-0.0 size=   77568KiB time=00:00:01.50 bitrate=423624.4kbits/s speed=0.987x elapsed=0:00:01.51    frame=   61 fps= 30 q=-0.0 size=  103680KiB time=00:00:02.00 bitrate=424673.1kbits/s speed=0.987x elapsed=0:00:02.02    frame=   77 fps= 30 q=-0.0 size=  131328KiB time=00:00:02.53 bitrate=424561.4kbits/s speed=   1x elapsed=0:00:02.53    frame=   92 fps= 30 q=-0.0 size=  157184KiB time=00:00:03.03 bitrate=424407.0kbits/s speed=   1x elapsed=0:00:03.03    frame=  106 fps= 30 q=-0.0 size=  181248KiB time=00:00:03.50 bitrate=424223.8kbits/s speed=0.988x elapsed=0:00:03.54    frame=  121 fps= 30 q=-0.0 size=  207360KiB time=00:00:04.03 bitrate=421093.9kbits/s speed=0.994x elapsed=0:00:04.06    frame=  136 fps= 30 q=-0.0 size=  233216KiB time=00:00:04.53 bitrate=421373.0kbits/s speed=0.991x elapsed=0:00:04.57    frame=  152 fps= 30 q=-0.0 size=  260864KiB time=00:00:05.06 bitrate=421750.8kbits/s speed=0.997x elapsed=0:00:05.08    frame=  167 fps= 30 q=-0.0 size=  286720KiB time=00:00:05.56 bitrate=421919.1kbits/s speed=0.995x elapsed=0:00:05.59    frame=  182 fps= 30 q=-0.0 size=  312576KiB time=00:00:06.09 bitrate=419776.4kbits/s speed=   1x elapsed=0:00:06.10    frame=  197 fps= 30 q=-0.0 size=  338688KiB time=00:00:06.59 bitrate=420385.7kbits/s speed=0.998x elapsed=0:00:06.61    frame=  211 fps= 30 q=-0.0 size=  362752KiB time=00:00:07.06 bitrate=420498.7kbits/s speed=0.991x elapsed=0:00:07.13    frame=  228 fps= 30 q=-0.0 size=  392192KiB time=00:00:07.63 bitrate=420858.8kbits/s speed=0.999x elapsed=0:00:07.64    [out#0/rawvideo @ 0x7cd50fd8c0] video:414720KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.000000%
+frame=  240 fps= 30 q=-0.0 Lsize=  414720KiB time=00:00:08.03 bitrate=422876.0kbits/s speed=   1x elapsed=0:00:08.02    

@@ -1,0 +1,16 @@
+C0376AF8 mov ip, r0
+C0376AFC ldr r1, [ip, #0x184]
+C0376B00 add r1, r1, #1
+C0376B04 str r1, [ip, #0x184]
+C0376B08 bx lr
+C0376B0C nop 
+C0376B10 mov ip, r0
+C0376B14 ldr r1, [ip, #0x184]
+C0376B18 mov r0, r1
+C0376B1C bx lr
+C0376B20 push {r4, r5, lr}
+C0376B24 mov r4, r0
+
+Frame initializer C037A12C calls C0376B10 and C037A138 stores the result to frame+1100.
+C0398928 calls C0376AF8 then C0398930 reads C0376B10 and C0398938 stores to frame+1100.
+This is a take generation, not a per-frame allocation sequence. The descriptor pointer is checked as well.

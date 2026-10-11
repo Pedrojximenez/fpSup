@@ -1,0 +1,156 @@
+{
+ "schema_version": 1,
+ "kind": "live_c2_single_frame_copyback",
+ "date": "2026-09-26",
+ "operator_scope": "live camera, DESTRUCTIVE: one frame of one clip was compressed INTO THE CAMERA'S OWN FRAME BUFFER and written as compressed CinemaDNG. seg[0] was never touched.",
+ "camera": {
+  "model": "w71c1",
+  "firmware": "5.02.0.V91",
+  "git_hash": "13aa621060efff11aaba9b21ad925005302605cf",
+  "media": "SD",
+  "mode": "CINE, FHD RAW12 24p",
+  "menu_SetMediaWriteMode": 0
+ },
+ "verdict": "PASS. The camera wrote a valid compressed CinemaDNG into its own frame buffer with only seg[1] changed.",
+ "profile": {
+  "phase": 7,
+  "geometry": "1936x1090",
+  "tile": "512x368",
+  "tiles": 12,
+  "predictor": 1,
+  "bit_depth": 12,
+  "header_bytes": 78848,
+  "payload_offset": "0x13800",
+  "retained_handle": "0x45578800"
+ },
+ "device_state": {
+  "count": 1,
+  "stage": 8,
+  "error": 0,
+  "encode_return": 1,
+  "size_return": 1,
+  "compressed_size_sum": 1396736,
+  "tile_count": 12,
+  "encode_entered": 1,
+  "block_adopted": 1,
+  "encode_us": 13753,
+  "first_pixel_before": "0x13725113",
+  "first_pixel_after": "0x00FE003B",
+  "last_pixel_before": "0x05811004",
+  "last_pixel_after": "0x05811004",
+  "result_words": {
+   "file_bytes": 1476608,
+   "copy_bytes": 1476608,
+   "fit": 1
+  }
+ },
+ "integrity": {
+  "clip": "\\CINEMA\\A001_090",
+  "frame": "A001_090_20260926_000001.DNG",
+  "file_bytes": 1476608,
+  "stock_bytes": 3244544,
+  "ratio": 2.197,
+  "smaller_by_percent": 54.5,
+  "sha256": "572de828ffe8089cf71f889e8c88b50bbaea4e28799d16e6f7b062f061766c65",
+  "verified_by": "tools/verify_compressed_dng.py --stock frame2 --control frame3 --decode",
+  "root_ifd_at": 78848,
+  "ifd_entries": 59,
+  "compression_tag": 7,
+  "strip_tags_present": [],
+  "payload_bytes": 1396736,
+  "file_bytes_equals_header_plus_payload": true,
+  "twelve_tiles_start_with_SOI_SOF3": true,
+  "declared_offsets_match_actual": true,
+  "padding_bytes": 457,
+  "decoder": "LibRaw via rawpy",
+  "decoded_shape": [
+   1090,
+   1936
+  ],
+  "decoded_samples": 2110240,
+  "decoded_mean": 535.16,
+  "decoded_std": 179.86,
+  "stock_neighbour_mean": 535.16,
+  "stock_neighbour_std": 179.86,
+  "max_difference_from_next_frame": 11,
+  "samples_differing_from_next_frame_percent": 74.2
+ },
+ "explicitly_established": [
+  {
+   "level": "L",
+   "claim": "THE ALIAS HOLDS. The copy went through frame_buffer + 0x40000000 and the card wrote what was copied. This was the one assumption emulation could not test - it maps both aliases onto one host buffer - and it is now measured."
+  },
+  {
+   "level": "L",
+   "claim": "seg[0] was never touched: the writer was left pointed at its own buffer and only seg[1] changed, from 3,244,544 to 1,476,608. Nothing of ours outlived the call, and no output slot array, release notification or extra memory was needed."
+  },
+  {
+   "level": "L",
+   "claim": "file_bytes = OUT_OFF + sum(tile byte counts) exactly: 79,872 + 1,396,736 = 1,476,608, and the file on the card is that length"
+  },
+  {
+   "level": "L",
+   "claim": "the frame is a valid compressed CinemaDNG: root pointer committed at 0x13400, Compression 7, no strip tags, 59 IFD entries, twelve tiles each starting SOI+SOF3 with declared offsets matching, and it decodes to 1090x1936 = 2,110,240 samples"
+  },
+  {
+   "level": "L",
+   "claim": "the original header survived. Against a stock neighbour the header differs at seven byte positions, and those are EXACTLY the seven positions two stock frames differ at - per-frame counters whose values step by one, with the copy-back frame (000001) one step before frame 000002. Every other byte from offset 8 to 78,848 is identical."
+  },
+  {
+   "level": "L",
+   "claim": "the content is this frame's own, not a neighbour's: mean and std match the neighbour to two decimals while 74.2% of samples differ by up to 11, which is frame-to-frame sensor noise at the scale already recorded"
+  },
+  {
+   "level": "L",
+   "claim": "2.197x smaller, 54.5% reduction, at an encode cost of 13,753 us - in line with the 13,640-13,657 us measured on 2026-09-23"
+  },
+  {
+   "level": "L",
+   "claim": "the ERR_SOURCE fix that emulation found is correct on the camera: first_pixel_after differs from before, as copy-back intends, and error is 0. last_pixel_after is unchanged because the copy is shorter than the buffer - both exactly as emulation predicted."
+  }
+ ],
+ "defects_found_and_fixed_during_this_session": [
+  {
+   "where": "the state block",
+   "defect": "S_FILE_BYTES/S_COPY_BYTES/S_FIT were put at 0xDC/0xE0/0xE4, which are the scratch phase's guard records that scratch_preflight_passed READS as a gate. The state block is full - 64 of 64 words - so there was no free word.",
+   "consequence_avoided": "every copy-back would have invalidated the gate admitting the next one",
+   "fix": "the three result words moved into the retained block at RESULT_OFF = 0x3F2800, costing no cave space and no state word"
+  },
+  {
+   "where": "the CLI",
+   "defect": "copy-back was not in the arming-action list, so it fell through to the restore branch and silently did nothing",
+   "fix": "the list is now ... + COMPRESSED_KINDS"
+  },
+  {
+   "where": "verify_compressed_dng",
+   "defect": "required each tile to END with EOI. Tile 11 carried 457 zero bytes past its EOI, so a correct frame was rejected.",
+   "fix": "a legal EOI with only zero padding after it, which is what the project's own rule always said and what verify_camera_payload already did"
+  },
+  {
+   "where": "verify_compressed_dng",
+   "defect": "required a byte-identical header, which is only valid against the frame's OWN original - gone after copy-back",
+   "fix": "an optional control: differing positions must be a subset of the positions two stock frames differ at, and every position is named. Not a tolerance."
+  },
+  {
+   "where": "RETAINING_PHASES",
+   "defect": "did not include 7, so release refused a block it was allowed to free and a power cycle was the only recovery",
+   "fix": "7 added; the block at 0x45578800 was then released with free_result 0"
+  }
+ ],
+ "explicitly_not_established": [
+  "THE COPY COST. S_T0/S_T1 bracket the ENCODE only, so the 13,753 us is the encode and the copy time was not measured at all. That was one of C2's two objectives and it was missed. The budget question - 24p, 29.97p, 60p - is therefore still open.",
+  "sustained behaviour. One frame, one clip. Whether eight consecutive copy-backs each carry their own content is C3 and is not implemented.",
+  "worst-case content. This frame compressed to 1.48 MB against a 3.24 MB buffer; the skip path was never exercised on the camera.",
+  "whether the 8,192 bytes before seg[0] inside the same allocation are read by anything",
+  "the aggregation state on this boot; the settings slot was not read"
+ ],
+ "camera_left_as_found": {
+  "hook_0xC0722AFC": "0xEBFDE061 original",
+  "hook_0xC03A5490": "0xEB0BD652 original",
+  "is_recording": 0,
+  "retained_block_0x45578800": "RELEASED, free_result 0",
+  "leaked": "a first 4 MiB block at 0x45178400 cannot be released: an earlier mis-armed attempt reseeded the state, so the handle is no longer recorded and release refuses. A power cycle clears it. Cause: I armed copy-back before adding it to the arming list, which ran the restore branch, and the state had already been reseeded.",
+  "clips_left_on_the_card": "A001_086 through A001_090; A001_090 frame 000001 is the compressed one"
+ },
+ "deployable": false
+}

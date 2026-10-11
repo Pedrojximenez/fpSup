@@ -1,0 +1,7 @@
+2026-09-24 — offline only
+python3 -B fp_usb_shell/test_boot_chain.py: 4 tests PASS
+python3 -B fp_usb_shell/test_splash.py: 8 tests PASS, no skips (Unicorn outside sandbox)
+Legacy plain/debug/Fast AutoRun and BIN byte identity: PASS
+Static redraw-word collision rejected before output: PASS
+Firmware 0xC0528700 original 0xE92D4BF0: PASS
+No hardware, card, network, daemon, publication, or commit operations.

@@ -1,0 +1,30 @@
+{
+  "suite": [
+    "test_reslab_header_copy",
+    "test_reslab_record_rate"
+  ],
+  "candidate": "plain-capture-header-v17",
+  "tests": 12,
+  "seconds": 372.387,
+  "result": "OK",
+  "unicorn_execution": true,
+  "frozen_v16_counterexample": {
+    "test": "CaptureCarrierHeaderTests.test_native30_capture240_exact_header_and_h2_canvas",
+    "expected_failure": true,
+    "actual": "Native DMA fallback return66 and original copy descriptor; no CPU header copy",
+    "seconds": 27.869
+  },
+  "initial_attempts": [
+    {
+      "kind": "sandbox JIT startup",
+      "exit": 132,
+      "verified": false
+    },
+    {
+      "kind": "trimmed live reference lacks LOADER.BIN",
+      "exit": 1,
+      "verified": false
+    }
+  ],
+  "hardware_verified": false
+}

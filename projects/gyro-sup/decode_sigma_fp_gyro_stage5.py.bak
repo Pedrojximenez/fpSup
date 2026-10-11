@@ -1,0 +1,149 @@
+#!/usr/bin/env python3
+"""Validate Stage-5 GYR and convert timestamped samples to Gyroflow GCSV."""
+
+from __future__ import annotations
+
+import argparse
+import csv
+import math
+import statistics
+import struct
+from dataclasses import dataclass
+from pathlib import Path
+
+FILE_HEADER = struct.Struct("<4s7I")
+BATCH_HEADER = struct.Struct("<4sIII")
+SAMPLE = struct.Struct("<hhhh")
+GYRO_SCALE_RAD_S = math.pi / (180.0 * 131.0)
+
+
+@dataclass
+class Batch:
+    timestamp_us: int
+    flags: int
+    samples: list[tuple[int, int, int]]
+
+
+@dataclass
+class Capture:
+    period_us: int
+    start_us: int
+    camera_id: int
+    reel_no: int
+    clip_no: int
+    initial_head: int
+    batches: list[Batch]
+
+    @property
+    def clip_name(self) -> str:
+        camera = chr(self.camera_id) if 0x20 <= self.camera_id < 0x7f else "?"
+        return f"{camera}{self.reel_no:03d}_{self.clip_no:03d}"
+
+    @property
+    def effective_period_us(self) -> int:
+        # Firmware descriptor value 2500 is the output data rate in Hz.
+        # Stage-5 initially stored it in the period field before this was
+        # confirmed by the monotonic TickTimer capture.
+        return round(1_000_000 / self.period_us) if self.period_us >= 1000 else self.period_us
+
+
+def delta32(value: int, origin: int) -> int:
+    return (value - origin) & 0xffffffff
+
+
+def read_capture(path: Path) -> Capture:
+    data = path.read_bytes()
+    if len(data) < FILE_HEADER.size:
+        raise ValueError("檔案短於 Stage-5 header")
+    magic, version, period, start, camera, reel, clip, head = FILE_HEADER.unpack_from(data)
+    if magic != b"GFS5" or version != 2 or not period:
+        raise ValueError(f"不支援的 header: {magic!r}, version={version}, period={period}")
+    batches, offset = [], FILE_HEADER.size
+    while offset < len(data):
+        if offset + BATCH_HEADER.size > len(data):
+            raise ValueError(f"batch header 截斷於 {offset:#x}")
+        magic, timestamp, count, flags = BATCH_HEADER.unpack_from(data, offset)
+        if magic != b"GFT1":
+            raise ValueError(f"batch magic 錯誤於 {offset:#x}: {magic!r}")
+        offset += BATCH_HEADER.size
+        end = offset + count * SAMPLE.size
+        if end > len(data):
+            raise ValueError(f"batch payload 截斷於 {offset:#x}")
+        samples = []
+        for x, y, pad, z in SAMPLE.iter_unpack(data[offset:end]):
+            if pad:
+                raise ValueError(f"非零 padding 於 {offset:#x}")
+            samples.append((x, y, z))
+        batches.append(Batch(timestamp, flags, samples))
+        offset = end
+    return Capture(period, start, camera, reel, clip, head, batches)
+
+
+def timestamped_samples(capture: Capture):
+    """Interpolate each sample backwards from its batch-drain timestamp."""
+    last = -1
+    for batch in capture.batches:
+        batch_end = delta32(batch.timestamp_us, capture.start_us)
+        first = batch_end - (len(batch.samples) - 1) * capture.effective_period_us
+        for index, sample in enumerate(batch.samples):
+            timestamp = max(first + index * capture.effective_period_us, last + 1)
+            last = timestamp
+            yield timestamp, sample
+
+
+def print_report(capture: Capture) -> None:
+    rows = list(timestamped_samples(capture))
+    counts = [len(batch.samples) for batch in capture.batches]
+    ticks = [delta32(batch.timestamp_us, capture.start_us) for batch in capture.batches]
+    print(f"clip: {capture.clip_name}")
+    print(f"descriptor_value: {capture.period_us}")
+    print(f"sample_period_us: {capture.effective_period_us}")
+    print(f"nominal_rate_hz: {1_000_000 / capture.effective_period_us:.6f}")
+    print(f"start_timestamp_us: {capture.start_us}")
+    print(f"batches: {len(capture.batches)}")
+    print(f"samples: {len(rows)}")
+    print(f"duration_s: {len(rows) * capture.effective_period_us / 1_000_000:.6f}")
+    print(f"wrap_batches: {sum(bool(batch.flags & 1) for batch in capture.batches)}")
+    if ticks:
+        print(f"timestamp_span_s: {(ticks[-1] - ticks[0]) / 1_000_000:.6f}")
+        print(f"timestamp_regressions: {sum(b < a for a, b in zip(ticks, ticks[1:]))}")
+        print(f"batch_samples: min={min(counts)} max={max(counts)} mean={statistics.fmean(counts):.3f}")
+
+
+def write_gcsv(
+    path: Path, capture: Capture, orientation: str, gscale: float,
+    time_shift_us: int,
+) -> None:
+    with path.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.writer(handle, lineterminator="\n")
+        writer.writerows([
+            ["GYROFLOW IMU LOG"], ["version", "1.3"],
+            ["id", "sigma_fp_v502_internal_icm20321"], ["orientation", orientation],
+            ["note", f"Stage-5 calibrated clip={capture.clip_name}; shift={time_shift_us}us"],
+            ["fwversion", "SIGMA fp 5.02"], ["videofilename", capture.clip_name],
+            ["tscale", "0.000001"], ["gscale", format(gscale, ".12g")],
+            ["t", "gx", "gy", "gz"],
+        ])
+        for timestamp, (x, y, z) in timestamped_samples(capture):
+            timestamp -= time_shift_us
+            if timestamp >= 0:
+                writer.writerow([timestamp, x, y, z])
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("input", type=Path)
+    parser.add_argument("--gcsv", type=Path)
+    parser.add_argument("--orientation", default="XYZ")
+    parser.add_argument("--gscale", type=float, default=GYRO_SCALE_RAD_S)
+    parser.add_argument("--time-shift-us", type=int, default=0)
+    args = parser.parse_args()
+    capture = read_capture(args.input)
+    print_report(capture)
+    if args.gcsv:
+        write_gcsv(args.gcsv, capture, args.orientation, args.gscale, args.time_shift_us)
+        print(f"wrote: {args.gcsv}")
+
+
+if __name__ == "__main__":
+    main()

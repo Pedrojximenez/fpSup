@@ -1,0 +1,47 @@
+fpGyroSup GCSV-only r17 + put_uint triplet experiment r20
+Build date: 2026-08-31
+Camera/firmware: SIGMA fp Ver.5.02
+Build type: release AutoRun, no USB shell
+Base: exact r17 buffered streaming binary path
+
+Measured reason for this build:
+- r17 retained 153,807 of an estimated 154,088 rows (99.817637%), with one
+  100.440 ms discontinuity in a 61.6-second GCSV.
+- r18/r19 pipeline changes regressed to 83.11% and 85.88%, so both were fully
+  removed.  Rebuilt r17 AutoRun/VSHL/PGEN matched the archived r17 binaries
+  byte for byte before this isolated formatter change began.
+- The remaining safe target is computation.  put_uint formats one timestamp on
+  every 2,500 Hz row and is called roughly 150,000 times per minute.
+
+Only r20 change:
+- Timestamp conversion groups three decimal digits per reciprocal division
+  instead of two.
+- Exact unsigned division is q=(n*0x10624DD3)>>38.  Since
+  1000*0x10624DD3-2^38=56 and 56*UINT_MAX<2^38, the positive reciprocal bias
+  cannot cross even the closest /1000 quotient boundary.
+- A common eight-digit timestamp uses two reciprocal multiplies instead of
+  three; a ten-digit one uses three instead of four.
+- Fixed-width 000..999 triplets live in a 4 KiB aligned packed-word table.
+  Timestamp +400 cycles through five low triplets, while the next triplet walks
+  a small cache-resident table.
+- put_i16, accelerometer caching and every GCSV byte outside timestamp decimal
+  formatting are unchanged.
+
+Unchanged r17 pipeline:
+- Two fixed 32 KiB raw A/B halves; memory use is independent of take length.
+- The existing writer formats and writes complete-line chunks at 64 KiB with
+  the proven 5 ms cooperative yield.
+- The 2,500 Hz callback only copies raw data.
+- Native lifecycle, transaction lock, JSON generation and task priority are
+  unchanged.  No GYR file is created by this experimental stream.
+
+Verification:
+- 50 unit, exact-format, reciprocal-proof, 100,000-random-u32, capacity, layout
+  and safety tests pass.
+- r20 output matches Python decimal and the archived r17 formatter for every
+  tested value, including UINT_MAX and one-hour timestamps.
+- AutoRun and VSHL are byte-identical to r17; all 5,152 profile-generator bytes
+  at the start of PGEN are also byte-identical.
+- Stream logger remains 3,620 bytes, ending at 0xC072EE88 below 0xC072EFB4.
+- PGEN pool code is 11,552 bytes; 11,568 bytes on card, far below 64 KiB.
+- This is an experimental hardware build, not fp-gyro-sup-v1.1.

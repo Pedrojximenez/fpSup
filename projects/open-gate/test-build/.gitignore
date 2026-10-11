@@ -1,0 +1,11 @@
+fp_usb_shell/fpshd
+fp_usb_shell/lsdesc
+gyro/autorun/
+gyro/.pgen.bin
+*.bak
+
+# August experiments stay untracked; the reviewed lossless-codec suite is kept.
+raw/*
+!raw/README.md
+!raw/lossless_codec/
+!raw/lossless_codec/**

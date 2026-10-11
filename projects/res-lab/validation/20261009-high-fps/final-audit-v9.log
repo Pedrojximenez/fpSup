@@ -1,0 +1,109 @@
+screen: LV_CINE_MEDIUM
+  code   412/412 B  7.0 KiB/s   verify 412/412 B  722 KiB/s   verify 412 bytes in 0.0s (357 KiB/s)      
+  code   412 bytes in 0.1s (3.3 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 32768 bytes in 0.003s (11.3 MB/s)      
+  remote  \AutoRun.txt  32768 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x53B00980 (36864 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 32768 of 32768
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/v9-final-readback/AutoRun.txt
+Verified \AutoRun.txt 32768
+  code   412/412 B  76.0 KiB/s   verify 412/412 B  601 KiB/s   verify 412 bytes in 0.0s (288 KiB/s)      
+  code   412 bytes in 0.0s (51.5 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 27668 bytes in 0.000s (83.1 MB/s)      
+  remote  \fpSup\LOADER.BIN  27668 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x53B00980 (31764 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 27668 of 27668
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/v9-final-readback/LOADER.BIN
+Verified \fpSup\LOADER.BIN 27668
+  code   412/412 B  103.6 KiB/s   verify 412/412 B  707 KiB/s   verify 412 bytes in 0.0s (354 KiB/s)      
+  code   412 bytes in 0.0s (65.5 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 76288 bytes in 0.001s (123.2 MB/s)      
+  remote  \fpSup\32RESCUS.BIN  76288 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x53B00980 (80384 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 76288 of 76288
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/v9-final-readback/32RESCUS.BIN
+Verified \fpSup\32RESCUS.BIN 76288
+  code   412/412 B  115.8 KiB/s   verify 412/412 B  440 KiB/s   verify 412 bytes in 0.0s (242 KiB/s)      
+  code   412 bytes in 0.0s (46.2 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 452448 bytes in 0.001s (337.9 MB/s)      
+  remote  \fpSup\50RESLAB.BIN  452448 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x53B00980 (456544 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 452448 of 452448
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/v9-final-readback/50RESLAB.BIN
+Verified \fpSup\50RESLAB.BIN 452448
+  code   412/412 B  56.3 KiB/s   verify 412/412 B  469 KiB/s   verify 412 bytes in 0.0s (221 KiB/s)      
+  code   412 bytes in 0.0s (37.6 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 7132 bytes in 0.000s (27.0 MB/s)      
+  remote  \fpSup\RESCUS\S16.RCD  7132 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x53B00980 (11228 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 7132 of 7132
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/v9-final-readback/S16.RCD
+Verified \fpSup\RESCUS\S16.RCD 7132
+  code   412/412 B  82.6 KiB/s   verify 412/412 B  749 KiB/s   verify 412 bytes in 0.0s (322 KiB/s)      
+  code   412 bytes in 0.0s (56.4 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 5216 bytes in 0.000s (21.3 MB/s)      
+  remote  \fpSup\RESCUS\OG2K.RCD  5216 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x53B00980 (9312 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 5216 of 5216
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/v9-final-readback/OG2K.RCD
+Verified \fpSup\RESCUS\OG2K.RCD 5216
+  code   412/412 B  117.1 KiB/s   verify 412/412 B  653 KiB/s   verify 412 bytes in 0.0s (316 KiB/s)      
+  code   412 bytes in 0.0s (68.6 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 4180 bytes in 0.000s (12.7 MB/s)      
+  remote  \fpSup\RESCUS\OG3K.RCD  4180 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x53B00980 (8276 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 4180 of 4180
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/v9-final-readback/OG3K.RCD
+Verified \fpSup\RESCUS\OG3K.RCD 4180
+  code   412/412 B  51.6 KiB/s   verify 412/412 B  510 KiB/s   verify 412 bytes in 0.0s (256 KiB/s)      
+  code   412 bytes in 0.0s (38.0 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 3900 bytes in 0.000s (16.8 MB/s)      
+  remote  \fpSup\RESCUS\OG4K.RCD  3900 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x53B00980 (7996 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 3900 of 3900
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/v9-final-readback/OG4K.RCD
+Verified \fpSup\RESCUS\OG4K.RCD 3900
+  code   412/412 B  88.5 KiB/s   verify 412/412 B  774 KiB/s   verify 412 bytes in 0.0s (358 KiB/s)      
+  code   412 bytes in 0.0s (60.0 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 7788 bytes in 0.000s (27.0 MB/s)      
+  remote  \fpSup\RESCUS\OG35K.RCD  7788 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x53B00980 (11884 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 7788 of 7788
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/v9-final-readback/OG35K.RCD
+Verified \fpSup\RESCUS\OG35K.RCD 7788

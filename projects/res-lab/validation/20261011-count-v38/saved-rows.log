@@ -1,0 +1,13 @@
+test_empty_selection_persists_and_rescustom_needs_no_producer (test_reslab_saved_rows.SavedRows) ... ok
+test_enable_assertion_detects_disconnected_consumer_callback (test_reslab_saved_rows.SavedRows) ... ok
+test_failed_persistence_and_recording_do_not_change_selection (test_reslab_saved_rows.SavedRows) ... ok
+test_full_list_save_then_rescustom_chooses_and_reboots_into_native_qs (test_reslab_saved_rows.SavedRows) ... ok
+test_paginated_choices_do_not_alias_hidden_files_or_more_settings (test_reslab_saved_rows.SavedRows) ... ok
+test_standalone_all_files_off_keeps_manager_and_stock_recording (test_reslab_saved_rows.SavedRows) ... /Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/res-custom/build_v3_rescustom.py:2: DeprecationWarning: invalid escape sequence \R
+  """res-custom: the multi-format OpenGate core and its format data files, for Loader v3.
+ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 302.618s
+
+OK

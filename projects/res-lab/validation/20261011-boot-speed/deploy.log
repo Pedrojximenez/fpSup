@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-boot-speed/deploy_no_hold.py", line 90, in <module>
+    main()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-boot-speed/deploy_no_hold.py", line 41, in main
+    assert 'D:0x00000000' in depth, 'AutoRun is still active; do not replace its loader'
+AssertionError: AutoRun is still active; do not replace its loader

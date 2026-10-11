@@ -1,0 +1,43 @@
+fpGyroSup GCSV-only hybrid streaming experiment r19
+Build date: 2026-08-31
+Camera/firmware: SIGMA fp Ver.5.02
+Build type: release AutoRun, no USB shell
+Base: r18 whole-block staging + raw-before-card-write ordering
+
+Measured reason for this build:
+- r18 A001_010 recorded 1,813 consecutive DNG frames and produced valid GCSV
+  and JSON, but retained only 128,198 of an estimated 154,252 IMU rows
+  (83.109457%).
+- After 12.155 seconds it lost samples at almost every roughly 3,800-row raw
+  block boundary: 25 gaps over 10 ms, with a 540.975 ms maximum.
+- r18 correctly removed every card call from the formatter, but also removed
+  the 5 ms cooperative sleep that r17 received after each 64 KiB text chunk.
+  The periodic block-aligned pattern points to uninterrupted formatting starving
+  the gyro producer, rather than a truncated file or isolated card stall.
+
+Hybrid transaction:
+1. Format one fixed 32 KiB raw block into the 216 KiB staging area.
+2. At 64 KiB, 128 KiB and 192 KiB staged boundaries, sleep for 5 ms so the gyro
+   producer can run.  These points perform no card or filesystem call.
+3. Publish the source raw half EMPTY after the whole block is formatted.
+4. Only then drain staged text in bounded 64 KiB card calls with 5 ms yields.
+
+Memory and duration bounds:
+- The stage still holds only one raw block's expanded GCSV, never the whole take.
+- O_TEXT..O_BUF_B remains 0x36000 bytes (216 KiB).
+- Maximum block output remains bounded to 203,564 bytes including header.
+- The two 32 KiB raw halves still provide about 3.069 seconds total capacity.
+- Recording duration does not increase RAM use.
+
+Unchanged safety boundaries:
+- The 2,500 Hz callback only copies raw gyro/accelerometer data.
+- No F_WRITE exists in the formatter or its CPU-yield path.
+- logger.S publishes raw EMPTY before stream command 5 reaches F_WRITE.
+- Native lifecycle, transaction lock, JSON generation and task priority are
+  unchanged.  No GYR file is opened, written, read back or recovered.
+
+Verification:
+- 49 unit, exact-format, capacity, ordering, pacing, layout and safety tests pass.
+- Stream logger: 3,676 bytes, ending at 0xC072EEC0 below 0xC072EFB4.
+- PGEN pool code: 7,592 bytes; 7,608 bytes on card.
+- This is an experimental hardware build, not fp-gyro-sup-v1.1.

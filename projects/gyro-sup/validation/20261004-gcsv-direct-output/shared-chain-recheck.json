@@ -1,0 +1,54 @@
+{
+  "started_at_utc": "2026-10-03T23:06:28.754633+00:00",
+  "finished_at_utc": "2026-10-03T23:06:37.806800+00:00",
+  "command": [
+    "/Library/Developer/CommandLineTools/usr/bin/python3",
+    "-B",
+    "-m",
+    "unittest",
+    "-v",
+    "test_boot_chain",
+    "test_loader_hook",
+    "test_splash"
+  ],
+  "cwd": "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell",
+  "mode": "escalated offline JIT execution",
+  "returncode": 0,
+  "status": "passed",
+  "source_sha256_start": {
+    "build_autorun.py": "8ff41f8a1060ce7e1eebec0dd0d1bfeb7dc45e8923aca7658cf1f373ae33440d",
+    "templates/loader.S": "14eb66a80d6222f2b4b7b497877e6e553a2f45dfee376da41d8193527cf41a17",
+    "templates/stage2.S": "0a1254422e733e98a18a9662a939d9783ace77e2ef9058e212bdab36e02511d1",
+    "templates/store_boot.S": "9f1cd7cc19b58bfb4ed1e71a3c8ad8d906516f3b0aceab613e4c566b9211bbae",
+    "templates/entries.S": "6046ce8a1a8a506784f61def3637c0fbfaaf31cb4c6c9a7f923d4497bf305c95",
+    "test_boot_chain.py": "df12706ae461198d427045b05f75b61ea7ba0266c24a0e4a46118b6690949419",
+    "test_loader_hook.py": "ab757c5aed546c11bafbab1b8c0760ce430326ac5f9b167dec1be58f267cd327",
+    "test_splash.py": "e207fc585182e778f462d1c567df5a439d0bdd3220a9df253c526f827faf4c0e"
+  },
+  "source_sha256_end": {
+    "build_autorun.py": "8ff41f8a1060ce7e1eebec0dd0d1bfeb7dc45e8923aca7658cf1f373ae33440d",
+    "templates/loader.S": "14eb66a80d6222f2b4b7b497877e6e553a2f45dfee376da41d8193527cf41a17",
+    "templates/stage2.S": "0a1254422e733e98a18a9662a939d9783ace77e2ef9058e212bdab36e02511d1",
+    "templates/store_boot.S": "9f1cd7cc19b58bfb4ed1e71a3c8ad8d906516f3b0aceab613e4c566b9211bbae",
+    "templates/entries.S": "6046ce8a1a8a506784f61def3637c0fbfaaf31cb4c6c9a7f923d4497bf305c95",
+    "test_boot_chain.py": "df12706ae461198d427045b05f75b61ea7ba0266c24a0e4a46118b6690949419",
+    "test_loader_hook.py": "ab757c5aed546c11bafbab1b8c0760ce430326ac5f9b167dec1be58f267cd327",
+    "test_splash.py": "e207fc585182e778f462d1c567df5a439d0bdd3220a9df253c526f827faf4c0e"
+  },
+  "sources_stable_during_run": true,
+  "summary": [
+    "test_pause_precedes_published_first_frame_and_tail_restores_without_bin (test_splash.SplashTests) ... ok",
+    "test_payload_only_updates_keep_autorun_and_art_identical (test_splash.SplashTests) ... ok",
+    "test_stage2_finishes_after_both_passes_and_returns_with_ui_restored (test_splash.SplashTests) ... ok",
+    "",
+    "----------------------------------------------------------------------",
+    "Ran 29 tests in 8.857s",
+    "",
+    "OK"
+  ],
+  "failure_entries": [],
+  "skip_lines": [],
+  "log": "/Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/validation/20261004-gcsv-direct-output/shared-chain-recheck.log",
+  "camera_access": false,
+  "reason_for_rerun": "Externally updated legacy test fixtures explicitly pass --no-four-box-bar. Reviewed exact diff: existing behavioral assertions unchanged. First-run logs retained."
+}

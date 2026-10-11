@@ -1,0 +1,17 @@
+E
+======================================================================
+ERROR: setUpClass (test_manage_page.ManagementPageTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/uishare/tab/test_manage_page.py", line 16, in setUpClass
+    'FT_LIST': M.build_manage(cls.img, cls.pool)}
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/uishare/tab/manage_page.py", line 593, in build_manage
+    manager_header(pg)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/uishare/tab/manage_page.py", line 525, in manager_header
+    x, y, w, h = struct.unpack_from('>4f', b, 32)
+struct.error: unpack_from requires a buffer of at least 48 bytes for unpacking 16 bytes at offset 32 (actual buffer size is 40)
+
+----------------------------------------------------------------------
+Ran 0 tests in 0.062s
+
+FAILED (errors=1)

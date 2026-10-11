@@ -1,0 +1,32 @@
+{
+  "phase": "verified",
+  "candidate": "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/cards/20261011-virtual-header-inner/debug-final/fpSup/32RESCUS.BIN",
+  "files": {
+    "AutoRun.txt": {
+      "bytes": 4666,
+      "before_sha256": "2e77dfe3529006d2cb95ac01e206048efe495493434c05f1ed8fad4ecd22bf96",
+      "unchanged": true
+    },
+    "LOADER.BIN": {
+      "bytes": 29276,
+      "before_sha256": "7b78041d80ddf9a74f751c4d38366a5ae8fa4184ff5d41494f2f345d7d25d95b",
+      "unchanged": true
+    },
+    "32RESCUS.BIN": {
+      "bytes": 183488,
+      "before_sha256": "aa84e297afb19038a7c22834093cc085cdeb8b4e6b3c7cc091158ccb6558e1a1"
+    },
+    "50RESLAB.BIN": {
+      "bytes": 609720,
+      "before_sha256": "dad8226db751fe10c2cac1f2f21269cc746957c7aacc5b19bec83dd027da155f",
+      "unchanged": true
+    }
+  },
+  "camera_rebooted": false,
+  "reason": "User authorizes on-camera testing of reviewed inner-header and local-bulk candidate",
+  "cfg_kind": "validated_saved_record",
+  "preserved_cfg_sha256": "32d9fbd890750ae0f038fed408eee2d62522cd2a65eefbd5c818138a59d2f89b",
+  "installed_sha256": "c8a7b776839e8382591855b93d96a603c7dd49bcaa2e054f5be92d37c768ddd5",
+  "card_updated": true,
+  "running_consumer_still_v12": true
+}

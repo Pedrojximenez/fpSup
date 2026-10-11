@@ -1,0 +1,25 @@
+{
+  "release": "R168",
+  "upstream_commit": "3d60d0f7d3ecbc09843d87a80e35e6adf735abe2",
+  "native_settings": 1552,
+  "rcd_formats": 984,
+  "verification": "offline only",
+  "on_camera": false,
+  "tests": [
+    {
+      "suite": "test_v3_rescustom",
+      "tests": 65,
+      "result": "OK"
+    },
+    {
+      "suite": "test_conversion",
+      "tests": 8,
+      "result": "OK"
+    }
+  ],
+  "core_sha256": "36053afed3c7d0752609a1b8db1b33d9b3c31b9273d1f2054cfcc9af78dce015",
+  "geometry_source": "upstream BIN planner; all output dimensions, nominal windows and RWZM matched modes_v45.json",
+  "timing": "res-custom solver; exact formal cycles, different vmax/tail allocation at 24 and 59.94",
+  "loader_changed": false,
+  "autorun_changed": false
+}

@@ -1,0 +1,29 @@
+test_00_exact_names (test_native_permissions.PermissionTests) ... ok
+test_01_partial_registration (test_native_permissions.PermissionTests) ... ok
+test_02_single_prepare (test_native_permissions.PermissionTests) ... ok
+test_03_partial_subscribe (test_native_permissions.PermissionTests) ... ok
+test_04_cursor_is_not_preference (test_native_permissions.PermissionTests) ... ok
+test_05_stale_confirm_rejected (test_native_permissions.PermissionTests) ... ok
+test_06_recording_locked (test_native_permissions.PermissionTests) ... ok
+test_07_still_hidden (test_native_permissions.PermissionTests) ... ok
+test_08_invalid_cursor (test_native_permissions.PermissionTests) ... ok
+test_09_close_before_publish (test_native_permissions.PermissionTests) ... ok
+test_10_echo_suppressed (test_native_permissions.PermissionTests) ... ok
+test_11_canonical_failure (test_native_permissions.PermissionTests) ... ok
+test_12_permission_failure (test_native_permissions.PermissionTests) ... ok
+test_13_fresh_context_failure (test_native_permissions.PermissionTests) ... ok
+test_14_foreign_cursor_event (test_native_permissions.PermissionTests) ... ok
+test_15_both_subscriptions_drain (test_native_permissions.PermissionTests) ... ok
+test_16_reentry (test_native_permissions.PermissionTests) ... ok
+test_17_permission_mapping (test_native_permissions.PermissionTests) ... ok
+test_18_begin_facts_failure (test_native_permissions.PermissionTests) ... ok
+test_19_close_busy_revokes (test_native_permissions.PermissionTests) ... ok
+test_20_stale_ticket (test_native_permissions.PermissionTests) ... ok
+test_21_provider_reentry (test_native_permissions.PermissionTests) ... ok
+test_22_cursor_changes_during_permission_publish (test_native_permissions.PermissionTests) ... ok
+test_mutations_detect_permission_and_identity_failures (test_native_permissions.PermissionTests) ... ok
+
+----------------------------------------------------------------------
+Ran 24 tests in 3.801s
+
+OK

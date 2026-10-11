@@ -1,0 +1,12 @@
+test_save_page_has_only_name_and_save_controls_mode_is_read_only (test_reslab_save_names.SaveNameTests) ... ok
+test_tool_settings_return_to_manager_with_native_state_machine (unittest.loader._FailedTest) ... ERROR
+
+======================================================================
+ERROR: test_tool_settings_return_to_manager_with_native_state_machine (unittest.loader._FailedTest)
+----------------------------------------------------------------------
+AttributeError: type object 'VirtualTests' has no attribute 'test_tool_settings_return_to_manager_with_native_state_machine'
+
+----------------------------------------------------------------------
+Ran 2 tests in 16.763s
+
+FAILED (errors=1)

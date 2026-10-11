@@ -1,0 +1,75 @@
+screen: LV_CINE_MEDIUM
+  tagged 16380/52744 B  1428 KiB/s   tagged 32760/52744 B  1914 KiB/s   tagged 49140/52744 B  1907 KiB/s   tagged 52744/52744 B  1895 KiB/s   tagged 52744 bytes in 0.0s (1840 KiB/s)      
+  tagged 116/116 B  203 KiB/s   tagged 116 bytes in 0.0s (97 KiB/s)      
+  tagged 116/116 B  139 KiB/s   tagged 116 bytes in 0.0s (66 KiB/s)      
+  tagged 80/80 B  117 KiB/s   tagged 80 bytes in 0.0s (53 KiB/s)      
+  tagged 104/104 B  133 KiB/s   tagged 104 bytes in 0.0s (73 KiB/s)      
+  tagged 60/60 B  99 KiB/s   tagged 60 bytes in 0.0s (51 KiB/s)      
+  tagged 16380/37160 B  2005 KiB/s   tagged 32760/37160 B  2512 KiB/s   tagged 37160/37160 B  2202 KiB/s   tagged 37160 bytes in 0.0s (2017 KiB/s)      
+screen: LV_CINE_MEDIUM
+  tagged 16380/52744 B  1984 KiB/s   tagged 32760/52744 B  2406 KiB/s   tagged 49140/52744 B  2180 KiB/s   tagged 52744/52744 B  2143 KiB/s   tagged 52744 bytes in 0.0s (2058 KiB/s)      
+  tagged 116/116 B  131 KiB/s   tagged 116 bytes in 0.0s (72 KiB/s)      
+  tagged 116/116 B  202 KiB/s   tagged 116 bytes in 0.0s (84 KiB/s)      
+  tagged 80/80 B  85 KiB/s   tagged 80 bytes in 0.0s (45 KiB/s)      
+  tagged 104/104 B  117 KiB/s   tagged 104 bytes in 0.0s (49 KiB/s)      
+  tagged 60/60 B  81 KiB/s   tagged 60 bytes in 0.0s (43 KiB/s)      
+{
+  "state": "0x452012c0",
+  "entry": "0x45201ee0",
+  "entry_words": [
+    5,
+    74,
+    230,
+    1159732980,
+    0,
+    844313160,
+    808661044,
+    0,
+    0,
+    21627210,
+    394126,
+    1106247680,
+    30,
+    0,
+    0,
+    0
+  ],
+  "vm": "0x45202600",
+  "vm_words": [
+    230,
+    12,
+    1,
+    0,
+    0,
+    21627210,
+    394126,
+    30,
+    1159734880,
+    1159734944,
+    1159735080,
+    1159735152,
+    1159735240,
+    1159735296,
+    0,
+    0
+  ],
+  "tim": "0x45202660",
+  "tim_words": [
+    230,
+    21627210,
+    394126,
+    526310,
+    680,
+    16383,
+    262143,
+    0
+  ],
+  "sensor_timing_fps": 239.76023976023976,
+  "native_engine_word": 1114636288,
+  "native_engine_fps": 60.0,
+  "consumer_canvas_fps": 30.0,
+  "global_bulk_bytes": 4194304,
+  "native_application_rate": "30000/1001",
+  "shutter_nominal": 30,
+  "sensor_cadence_measured": false
+}

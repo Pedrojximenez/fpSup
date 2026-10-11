@@ -1,0 +1,49 @@
+.syntax unified
+.arm
+.text
+/* ============================================================================
+ * og3kname — 取代解析度名發射器。裝法是改函式指標表 0xC0BE44DC 一個字,
+ * 不是掛程式碼 hook,所以原函式完好無損。
+ * ============================================================================
+ *   r0 = obj   r1 = key buffer   r2 = request
+ *
+ * 原函式是拿 request+8 / request+0xC 的寬高去比對一張配對表決定名字。
+ * 我們不重寫那套邏輯,只在 OG3K 生效時把請求的寬高暫時換成 3032×2012,
+ * 呼叫原函式(配對表的第三支已改成 {3032,2012} → "OG3K"),再還原。
+ *
+ * 旗標由 og3ksel 在解析度 setter 上維護。旗標是 0 就直接尾呼叫原函式。
+ * 這樣就完全不必動 MenuItemMovieRecSize,FHD 保持原廠。
+ * ========================================================================== */
+
+.equ FLAG, 0xC0731C08
+.equ ORIG, 0xC0437B48
+
+.macro LDA reg, value
+    movw    \reg, #:lower16:\value
+    movt    \reg, #:upper16:\value
+.endm
+
+.global entry
+entry:
+    LDA     ip, FLAG
+    ldr     ip, [ip]
+    cmp     ip, #0
+    beq     passthru
+
+    push    {r2, r3, r4, lr}
+    ldr     r3, [r2, #0x08]             @ 原本的寬
+    ldr     r4, [r2, #0x0C]             @ 原本的高
+    movw    ip, #3008
+    str     ip, [r2, #0x08]
+    movw    ip, #2000
+    str     ip, [r2, #0x0C]
+    LDA     ip, ORIG
+    blx     ip
+    pop     {r2, r3, r4, lr}
+    str     r3, [r2, #0x08]             @ 還原,不留副作用
+    str     r4, [r2, #0x0C]
+    bx      lr
+
+passthru:
+    LDA     ip, ORIG
+    bx      ip

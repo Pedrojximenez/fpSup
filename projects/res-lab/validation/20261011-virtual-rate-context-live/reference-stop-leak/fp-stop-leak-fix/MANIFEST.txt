@@ -1,0 +1,4 @@
+fpSup W2 stop-path fix (UNTESTED, not for cards until the user says so)
+05STOPFX.BIN  316 bytes  sha256 f9f26a092c5676ead5771ba8be4aac9c3734e9ed0cd144002a73b3f6b657c9d9
+patch: 0xC0377118 E92D4030 -> EA000160 (b 0xC03776A0 "raw del"), SL_EXCL; stock restored at power-off by the loader
+built from: repos/fpSup/fp_usb_shell/v3/patch_sup.S (unmodified), tools/build_w2.js, FW 5.02 image acead79a338de2d8d7485d036b0a020b8eebcbad29d05741540130c6acb75bfb

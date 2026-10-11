@@ -1,0 +1,227 @@
+{
+  "endpoint": "0xc072e290",
+  "consumer_base": "0x451d4780",
+  "consumer_state": "0x452012c0",
+  "registry": {
+    "magic": 826495574,
+    "abi": 2,
+    "lock": 0,
+    "provider": 1111575634,
+    "generation": 6,
+    "result": 0,
+    "detail": 0,
+    "count": 1,
+    "packs": 5,
+    "asset_used": 235540,
+    "row": 1
+  },
+  "consumer": {
+    "flag": 1,
+    "current": 1,
+    "res_value": 2,
+    "format_latch": 0,
+    "nrows": 2,
+    "nentries": 17,
+    "nmodes": 2
+  },
+  "selected": 1,
+  "rows": [
+    {
+      "index": 0,
+      "on": 1,
+      "width": 992,
+      "height": 662,
+      "stock": 2,
+      "menu_row": 2,
+      "pack": "0x452106c0",
+      "label": "H2S240",
+      "ui_result": 1
+    },
+    {
+      "index": 1,
+      "on": 1,
+      "width": 640,
+      "height": 426,
+      "stock": 2,
+      "menu_row": 3,
+      "pack": "0x45554dc0",
+      "label": "VRC000",
+      "ui_result": 1
+    }
+  ],
+  "producer_base": "0x45402dc0",
+  "producer_state": "0x45497b78",
+  "producer": {
+    "result": 1,
+    "app": 3331322648,
+    "reader": 3332398568,
+    "entry": 3332533760,
+    "page": 1161870700,
+    "nbr": 1161997056,
+    "nbr_len": 3000,
+    "core_base": 1161866112,
+    "pages_state": 1,
+    "out_w": 640,
+    "out_h": 426,
+    "ro_w": 2016,
+    "ro_h": 672,
+    "ro_sx": 3,
+    "ro_sy": 6,
+    "bin_h": 1,
+    "bin_v": 1,
+    "axis_armed": 1,
+    "modes_rows": 2,
+    "mode_sel": 1,
+    "canvas_valid": 1,
+    "crop_w": 0,
+    "crop_h": 0,
+    "ratio": 0,
+    "edit_field": 0,
+    "editing": 0,
+    "crop_lock": 0,
+    "lens_on": 0,
+    "lens_factor": 133,
+    "small_edit": 0,
+    "applied_geometry": 12,
+    "applied_valid": 1,
+    "bin_kh": 0,
+    "bin_kv": 0,
+    "bin_mode": 0,
+    "output_policy": 0,
+    "lock_num": 992,
+    "lock_den": 662,
+    "save_name": 0,
+    "name_text": 1701667150,
+    "name_field": 0,
+    "name_editing": 0
+  },
+  "mode_ids": [
+    9,
+    12
+  ],
+  "loaded_headers": {
+    "32RESCUS.BIN": {
+      "file_len": 185792,
+      "block_size": 996544,
+      "id": 1398096722,
+      "version": 17,
+      "min_services": 3
+    },
+    "50RESLAB.BIN": {
+      "file_len": 609720,
+      "block_size": 881024,
+      "id": 1111575634,
+      "version": 17,
+      "min_services": 3
+    }
+  },
+  "file_management": {
+    "available": [
+      "H2S240",
+      "HS",
+      "OG2K",
+      "OG35K",
+      "OG3K",
+      "OG4K",
+      "S16"
+    ],
+    "explicit_enable_count": 1,
+    "enabled_labels": [
+      "H2S240"
+    ],
+    "record_valid": true,
+    "ui_owner": "0x452a5840",
+    "ui_header": [
+      843465554,
+      1,
+      1159729856,
+      1159623256,
+      3331322648,
+      0,
+      0
+    ]
+  },
+  "fps_state": {
+    "VR_UI": 1,
+    "VR_WHY": 1,
+    "VRATE": 0,
+    "VR_COMMITS": 2,
+    "DIRTY": 1,
+    "PICKOK": 1,
+    "FPSLATCH": 1106247680,
+    "LAST_ENT": 3104,
+    "HITS": 121531
+  },
+  "engine_state_valid": true,
+  "engine_fps": 30.0,
+  "picked_entry": {
+    "FIVE": 5,
+    "PID": 74,
+    "MODE": 230,
+    "KEYPTR": 1159732980,
+    "ROW": 0,
+    "W0": 21627210,
+    "W1": 394126,
+    "ENGFPS": 1106247680,
+    "NOMINAL": 30,
+    "VM": 0,
+    "VAR": 0,
+    "VRATE": 0
+  },
+  "frame_cycles": 300300,
+  "sensor_timing_fps": 239.76023976023976,
+  "fps_gui": {
+    "MV_FrameRate": "OK:MV_FrameRate -> 3\n\n",
+    "EXCL_FrameRate": "OK:EXCL_FrameRate -> 1\n\n"
+  },
+  "fps_getter": "3\n\n",
+  "quality_getter": "0\n\n",
+  "screen": "LV_CINE_MEDIUM",
+  "rate_notification": {
+    "RATE_LVOWED": 0,
+    "RATE_LV_RELOADS": 0
+  },
+  "loaded_core_sha256": "09e657d5df0dbe9e1039eef822c4613c6c322d309a05cb5896e706e5fa819f57",
+  "rate_shims": [
+    {
+      "site": "0xc057a6f8",
+      "target": "0x45200d1c",
+      "sha256": "6756a56d998e445227924501d99f0b7c38fa3ddeb65bfb0eb256d2b9c40fe8b1"
+    },
+    {
+      "site": "0xc05821b8",
+      "target": "0x45200da0",
+      "sha256": "94051d1a1ea831822f52126565314902ea8b5549ff13af5f133ec8f0a824826b"
+    },
+    {
+      "site": "0xc00c9bd0",
+      "target": "0x45200064",
+      "sha256": "89dddd81bb36123b9af77383c28191f7fd2eb31783f59c479e5e0f473fc7608b"
+    },
+    {
+      "site": "0xc00fbb90",
+      "target": "0x451fffc0",
+      "sha256": "b0d42638f051f055aabc08df3fd3c38fca29cec169df14cd2fbdfc962cc731c4"
+    },
+    {
+      "site": "0xc03a5144",
+      "target": "0x45200028",
+      "sha256": "81ad82b5da26b46a98f472f45a028e64ecf05d8ead428d7dc81b0ef408e5132f"
+    }
+  ],
+  "header_copy": {
+    "HDR_COPY_CALLS": 470,
+    "HDR_COPY_HITS": 0,
+    "HDR_COPY_SRC": 0,
+    "HDR_COPY_DST": 0,
+    "HDR_COPY_BYTES": 0,
+    "HDR_COPY_WHY": 1,
+    "HDR_COPY_FRAME": 0,
+    "BULK_HITS": 0,
+    "BULK_LAST": 0
+  },
+  "sensorlab_profile": {
+    "M12_LEGACY_HITS": 0,
+    "M12_LEGACY_PID": 0
+  }
+}

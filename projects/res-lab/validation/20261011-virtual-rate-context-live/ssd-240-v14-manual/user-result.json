@@ -1,0 +1,21 @@
+{
+  "reported_utc": "2026-10-11T10:31:08.615797+00:00",
+  "user_result": "early spontaneous stop",
+  "user_confirmed_ssd": true,
+  "same_boot_v14": true,
+  "pre_swap_native_rate": 23976,
+  "limitation": "Several user takes occurred during continuous HDMI. The retained native log is SSD media; exact association to an individual HDMI clip is not established. No SSD filesystem files fetched after reconnect.",
+  "native_latest_retained_log": {
+    "requests": 128,
+    "finished": 128,
+    "reason": "vbuf/128/537215, raw1",
+    "media_signature": "slot5/exFAT/5000Mbps",
+    "time": "2026/10/11 18:35:33"
+  },
+  "standby_pool_free": [
+    96,
+    96,
+    96
+  ],
+  "stop_patch_currently_installed": false
+}

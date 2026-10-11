@@ -1,0 +1,373 @@
+--- before/projects/lossless-sup/notes/EARLY_STOP_94.md
++++ after/projects/lossless-sup/notes/EARLY_STOP_94.md
+@@ -1,6 +1,6 @@
+ # 開錄就停：94 幀問題與批次策略
+ 
+-## 2026-10-12 整合更新（離線候選版，尚未實機驗證）
++## 2026-10-12 幀數優化與獨立 stopfix（離線候選版，尚未實機驗證）
+ 
+ 以下新策略取代 10/06 的「3 × 原始幀大小」批次設定。後面的上機數字均屬於舊策略，不能當作新版已上機的證據。
+ 
+@@ -16,22 +16,25 @@
+   就先結算未滿 64 MiB 的批次。容量與幀數兩個條件，先到者生效。
+ - 解析度、壓縮率與未壓縮影格由實際檔案 byte 數反映。每 32 個檔案重新累積混合樣本，
+   顯示壓縮比例、平均大小、估計填滿 64 MiB 的幀數與資料率。估算只供觀察，
+-  不作為放寬幀数上限的依據；不能假設 lossless ON 就每幀都壓縮。
++  不作為放寬幀數上限的依據；不能假設 lossless ON 就每幀都壓縮。
+ - 新的檔案數 hook 僅對當次已接受的 lossless writer 影格與原廠 CinemaDNG callback 生效。
+   原廠 pending 計數尚未含正在送出的檔案，因此上限比較使用 `pending + 1`。
+ 
+-同時整合社群 stopfix：`C0377118: E92D4030 → EA000160`，轉到 `C03776A0`，
++依使用者決定，停錄釋放改由獨立 `05STOPFX.BIN` 負責，不再內嵌於 lossless。
++它將 `C0377118: E92D4030 → EA000160`，轉到 `C03776A0`，
+ 將原本只移出佇列的清理改走原廠引用計數釋放；仍有子物件時保留父物件，最後引用完成才回收。
+ 這是共用停錄路徑，lossless OFF 也會使用。它修正被丟棄影格的資源回收，不能補回未寫出的影格，
+ 也沒有解決壓縮引擎 stall。原廠 registry busy 分支依然直接返回，硬體併發行為須實機確認。
+ 
+ 釋放後緩衝地址會被重用，因此 flush 的壓縮紀錄除了 file buffer 地址，也核對 frame 指標及
+ 原廠 `frame+0x1100` generation；不符就清除舊紀錄，避免將舊壓縮表頭套到新的 RAW 影格。
+-兩個新修改點均有原廠位元檢查、v3 EXCL 宣告與關機還原。整合版不能再搭配獨立 `05STOPFX.BIN`；
+-重複宣告時 loader 會拒絕後載入的 lossless，避免重複修改。
++批次 hook 與 stopfix 各自由所屬模組檢查、宣告 EXCL 與交給 loader 關機還原。
++拆分版 `10LOSS.BIN` 可與 `05STOPFX.BIN` 並存，也能各自使用；只有載入獨立 STFX 才有停錄回收修正。
++先前 `20261012-bulk-stop-integration` 候選包仍是歷史整合版，不能與獨立 STFX 一起用。
++獨立 BIN 是 Loader v3 格式，不能直接加進舊的 v2 卡。
+ 
+ 完整來源差異、候選包、測試記錄與限制：
+-[`20261012-bulk-stop-integration`](../validation/20261012-bulk-stop-integration/)。
++[`20261012-separate-stopfix`](../validation/20261012-separate-stopfix/)。
+ 
+ ## 2026-10-06 舊策略與實機紀錄
+ 
+--- before/fpSup/lossless/README.md
++++ after/fpSup/lossless/README.md
+@@ -1,6 +1,6 @@
+ # fpLossless — standalone lossless RAW compression
+ 
+-## 2026-10-12: adaptive batch count and stop-release integration
++## 2026-10-12: adaptive batch count with optional standalone stopfix
+ 
+ The current builders produce an **offline development candidate**, including
+ the menu, native recording hooks and shared loader. The older status below is
+@@ -20,19 +20,25 @@
+   with the stock CinemaDNG callback. Low/unknown free descriptor counts force
+   an earlier native flush. OFF and unrelated filesystem calls retain their
+   original count decision.
+-- Integrate the community stop fix: `C0377118` branches to `C03776A0`, so discarded
+-  queue entries take the native reference-counted release path. This shared
+-  stop-path correction also applies with the menu OFF. It does not recover
+-  discarded images or cure encoder stalls. A busy registry still follows its
+-  native early return; concurrent hardware behavior remains unverified.
++- Stop-queue release belongs to the independent **`05STOPFX.BIN`** (Loader v3,
++  SIGMA fp Ver.5.02). LOSS neither claims nor changes `C0377118`. The standalone
++  patch redirects it to `C03776A0`, providing native reference-counted release
++  even without lossless. It does not recover discarded images or cure stalls;
++  the native busy-registry early return and hardware concurrency remain unverified.
+ - Flush metadata now checks the native frame pointer and generation as well
+   as the file buffer address; reused addresses retire mismatched metadata
+   without freeing live memory or applying a previous frame's compressed header.
+ 
+-Both added patch sites are guarded, journaled, exclusively claimed in v3 and
+-restored on shutdown. **Do not combine the integrated `10LOSS.BIN` with the
+-standalone `05STOPFX.BIN`**: their exclusive stop-site claims conflict, and the
+-loader refuses the later lossless module without arming it.
++The batch hook is guarded, journaled, exclusively claimed in v3 and restored on
++shutdown. This split `10LOSS.BIN` can coexist with the reviewed `05STOPFX.BIN` in
++the card's `/fpSup/` folder; either can load alone. LOSS's builders emit only
++LOSS and do not silently add stopfix. The older v2 card builder also omits the
++stop patch; a v3 standalone sup cannot simply be placed on a v2 card.
++
++The earlier candidate under `20261012-bulk-stop-integration` embedded stopfix
++and **must not** be combined with `05STOPFX.BIN`. Use the new split candidate
++below when combining the modules. The reviewed standalone file is 316 bytes,
++SHA-256 `f9f26a092c5676ead5771ba8be4aac9c3734e9ed0cd144002a73b3f6b657c9d9`.
+ 
+ Build from `fpSup/` into a new empty directory:
+ 
+@@ -53,7 +59,7 @@
+ `card_status.py` reads the matching build's `layout.json` and reports batch cap,
+ FPS reserve, pool pressure, mixed file statistics and retired stale metadata.
+ Source changes, exact candidate bytes, validation logs and hardware limitations:
+-[`20261012-bulk-stop-integration`](../../projects/lossless-sup/validation/20261012-bulk-stop-integration/).
++[`20261012-separate-stopfix`](../../projects/lossless-sup/validation/20261012-separate-stopfix/).
+ The updated mechanism is also recorded in
+ [`EARLY_STOP_94.md`](../../projects/lossless-sup/notes/EARLY_STOP_94.md).
+ 
+--- before/fpSup/lossless/build_card.py
++++ after/fpSup/lossless/build_card.py
+@@ -85,7 +85,6 @@
+     0xC038BD08: (0xE594300C, 'CinemaDNG event observation: ldr r3, [r4, #0xc]'),
+     0xC037DEF8: (0xEB000042, 'native FIFO discard observation: bl C037E008'),
+     0xC063F828: (0x9805D102, 'Thumb aggregation count gate: bne C063F830; ldr r0,[sp,#20]'),
+-    0xC0377118: (0xE92D4030, 'stop queue release: redirect pop/drop to native raw del'),
+     # the row's private strings hang on these (uishare/NESTED_HOOKS.md);
+     # other sups declare the same stock words, and identical sections fold
+     0xC05E5B58: (0x3FFFF1B1, 'string resolve (nested string layers)'),
+--- before/fpSup/lossless/build_v3_lossless.py
++++ after/fpSup/lossless/build_v3_lossless.py
+@@ -10,7 +10,7 @@
+   - the file IS the block: [FSB1 header][card.S][compiled C][FPUI], the state
+     after it in the zeroed tail. No allocation, no copy, no second read of a
+     file: the row's FPUI block rides in the sup (card.c FPL_MENU_OFF).
+-  - entry(block, svc) claims all sixteen sites and the engine first, checks
++  - entry(block, svc) claims all fifteen sites and the engine first, checks
+     the layers below, takes its cave block from svc->cave_alloc, and only then
+     starts the codec task and installs the row, then arms. A refusal anywhere
+     before that returns SL_RELEASE with nothing written.
+@@ -42,11 +42,11 @@
+ SUP_ID = 'LOSS'
+ VERSION = 1
+ SETTINGS_OFF = 0
+-SITE_COUNT = 16                    # card.S `claims`; the same sites as build_card.SITES
++SITE_COUNT = 15                    # card.S `claims`; the same sites as build_card.SITES
+ KINDS = {1: 'CHAIN', 2: 'EXCL', 3: 'SHARED_UI'}
+ WANT_KIND = {0xC038BFF0: 2, 0xC05BDDAC: 2,                     # arrive, clip size
+              0xC05E5B58: 3, 0xC05E61C8: 3, 0xC05E61E0: 3,     # uishare string layers
+-             0xC0B9E5D8: 2, 0xC063F828: 2, 0xC0377118: 2}     # bulk data/gate, stop release
++             0xC0B9E5D8: 2, 0xC063F828: 2}                   # bulk data / count gate
+ 
+ 
+ def menu_block():
+--- before/fpSup/lossless/native/card.S
++++ after/fpSup/lossless/native/card.S
+@@ -60,9 +60,6 @@
+ .equ REAL_DISCARD, 0xC037E008
+ .equ SITE_BULK,    0xC063F828    /* Thumb: bne C063F830; ldr r0,[sp,#20] */
+ .equ STOCK_BULK,   0x9805D102
+-.equ SITE_RELEASE, 0xC0377118    /* raw/yuv/jpg/writer pending queue flush */
+-.equ STOCK_RELEASE,0xE92D4030
+-.equ PATCH_RELEASE,0xEA000160    /* b C03776A0: pop + native refcounted release */
+ .equ CAVE_BYTES,   104
+ 
+ /* Passed in by the builder: BLOB_LEN, BLOCK_BYTES, STATE_OFF and the C
+@@ -374,11 +371,6 @@
+     bne     out
+     LDA     r0, SITE_BULK
+     LDA     r1, STOCK_BULK
+-    ldr     r2, [r0]
+-    cmp     r2, r1
+-    bne     out
+-    LDA     r0, SITE_RELEASE
+-    LDA     r1, STOCK_RELEASE
+     ldr     r2, [r0]
+     cmp     r2, r1
+     bne     out
+@@ -491,9 +483,6 @@
+     LDA     r0, SITE_BULK
+     add     r1, r8, #96
+     bl      encode_thumb
+-    LDA     r0, SITE_RELEASE
+-    LDA     r1, PATCH_RELEASE
+-    str     r1, [r0]
+ 
+     LDA     ip, F_DCACHE
+     blx     ip
+@@ -790,7 +779,7 @@
+ /* What this sup changes: { address, stock word, kind }. The stock words are
+  * checked against the reference image by build_v3_lossless.py. */
+ claims:
+-    .word 16
++    .word 15
+     .word SITE_REC,     STOCK_REC,     SL_CHAIN
+     .word SITE_ARRIVE,  STOCK_ARRIVE,  SL_EXCL     @ replaces blx r3: not a branch
+     .word SITE_STOP,    STOCK_STOP,    SL_CHAIN
+@@ -802,7 +791,6 @@
+     .word SITE_EVENT,   STOCK_EVENT,   SL_CHAIN
+     .word SITE_DISCARD, STOCK_DISCARD, SL_CHAIN
+     .word SITE_BULK,    STOCK_BULK,    SL_EXCL
+-    .word SITE_RELEASE, STOCK_RELEASE, SL_EXCL
+     .word 0xC05E5B58,   0x3FFFF1B1,    SL_SHARED_UI   @ uishare string layers
+     .word 0xC05E61C8,   0x428A6942,    SL_SHARED_UI
+     .word 0xC05E61E0,   0x69406902,    SL_SHARED_UI
+--- before/fpSup/lossless/test_card_emulation.py
++++ after/fpSup/lossless/test_card_emulation.py
+@@ -207,7 +207,7 @@
+         cam = self.boot()
+         for name, (site, stock) in SITES.items():
+             self.assertEqual(cam.word(site), stock, name)
+-        for site in (0xC063F828, 0xC0377118):
++        for site in (0xC063F828,):
+             self.assertEqual(cam.word(site), build_card_module.SITES[site][0])
+ 
+     def test_it_allocates_its_own_user_block_copies_publishes_then_arms(self):
+@@ -282,8 +282,8 @@
+         for name, (site, stock) in SITES.items():
+             self.assertEqual(cam.word(site), stock, name)
+ 
+-    def test_new_bulk_and_release_sites_are_guarded_and_installed(self):
+-        for site in (0xC063F828, 0xC0377118):
++    def test_new_bulk_site_is_guarded_and_installed(self):
++        for site in (0xC063F828,):
+             with self.subTest(site=hex(site)):
+                 cam = self.boot()
+                 cam.mu.mem_write(site, struct.pack('<I', 0xE1A00000))
+@@ -293,13 +293,13 @@
+                     self.assertEqual(cam.word(old_site), stock)
+         cam = self.boot()
+         self.launch(cam)
+-        self.assertEqual(cam.word(0xC0377118), 0xEA000160)
++        self.assertEqual(cam.word(0xC0377118), 0xE92D4030)
+         from capstone import Cs, CS_ARCH_ARM, CS_MODE_THUMB
+         inst = list(Cs(CS_ARCH_ARM, CS_MODE_THUMB).disasm(
+             bytes(cam.mu.mem_read(0xC063F828, 4)), 0xC063F828))[0]
+         self.assertEqual((inst.mnemonic, int(inst.op_str[1:], 16)), ('b.w', CAVE_ARENA + 96))
+ 
+-    def test_power_off_restores_the_new_sites_twice(self):
++    def test_power_off_restores_the_bulk_site_twice(self):
+         cam = self.boot()
+         self.launch(cam)
+         # Product builds omit the optional LH_MARK debug pointer. Use the
+@@ -308,8 +308,19 @@
+         journal = cam.registered[0][0]
+         for _ in range(2):
+             cam.call(cam.word(journal + 4), r0=journal, r1=4)
+-            for site in (0xC063F828, 0xC0377118):
++            for site in (0xC063F828,):
+                 self.assertEqual(cam.word(site), build_card_module.SITES[site][0])
++
++    def test_unrelated_stopfix_word_is_not_guarded_written_or_journaled(self):
++        cam = self.boot()
++        cam.mu.mem_write(0xC0377118, struct.pack('<I', 0xEA000160))
++        self.assertEqual(self.launch(cam), 0)
++        self.assertEqual(cam.word(0xC0377118), 0xEA000160)
++        self.assertEqual(cam.word(BLOCK + card_symbols()['g_card']),
++                         BLOCK + len(self.blob) + (-len(self.blob) % 64))
++        journal = cam.registered[0][0]
++        cam.call(cam.word(journal + 4), r0=journal, r1=4)
++        self.assertEqual(cam.word(0xC0377118), 0xEA000160)
+ 
+     # ---- through the veneers ------------------------------------------
+     def enter(self, cam, name, regs, lr=T.DONE, r4=0x44444444, stack_delta=0):
+--- before/fpSup/lossless/test_stop_release.py
++++ after/fpSup/lossless/test_stop_release.py
+@@ -1,7 +1,7 @@
+-"""Stock stop-queue release instructions used by the integrated lossless patch.
+-
+-Promoted from the 2026-10-11 community review. The built LOSS install/restore
+-and exclusive claim are covered by test_v3_lossless/test_card_emulation.
++"""Stock stop-queue release instructions used by the standalone STFX companion.
++
++Promoted from the 2026-10-11 community review. Standalone STFX loading alongside
++LOSS and restoration are covered by test_v3_lossless; LOSS does not own this patch.
+ Actual queue, parent/child reference and RAW cleanup instructions execute;
+ locks and allocator/pool-return boundaries are explicit substitutes. No real
+ DMA, scheduling, concurrent descriptor reuse or camera I/O is tested.
+--- before/fpSup/lossless/test_v3_lossless.py
++++ after/fpSup/lossless/test_v3_lossless.py
+@@ -13,6 +13,7 @@
+ Emulated, not on the camera. The row is not installed here (no GUI object in
+ the image's RAM), so the menu path stops at its first check.
+ """
++import hashlib
+ import pathlib
+ import struct
+ import sys
+@@ -46,6 +47,14 @@
+ REPLAY = {STOP: 'stop_replay', END: 'end_replay', POOL: 'pool_replay',
+           EVENT: 'event_replay', PLAY: 'play_replay'}
+ LOWER = 0xC0100000                 # a layer below's target: inside branch reach
++
++
++def stopfix_sup():
++    """Unmodified standalone patch_sup, byte-identical to the reviewed file."""
++    data = B.patch_sup('STFX', [(STOP_RELEASE, struct.pack('<I', 0xEA000160), 2)])
++    assert hashlib.sha256(data).hexdigest() == \
++        'f9f26a092c5676ead5771ba8be4aac9c3734e9ed0cd144002a73b3f6b657c9d9'
++    return data
+ 
+ 
+ def branch(site, target, op):
+@@ -135,7 +144,8 @@
+         # the call sites call what was below them: the firmware
+         self.assertEqual(cam.w(blob + self.sym['flush_real']), 0xC069ADE0)
+         self.assertEqual(cam.w(blob + self.sym['discard_real']), 0xC037E008)
+-        self.assertEqual(cam.w(STOP_RELEASE), 0xEA000160)
++        self.assertEqual(cam.w(STOP_RELEASE), self.stock(STOP_RELEASE))
++        self.assertNotIn(STOP_RELEASE, SITES)
+         from capstone import Cs, CS_ARCH_ARM, CS_MODE_THUMB
+         ins = list(Cs(CS_ARCH_ARM, CS_MODE_THUMB).disasm(
+             bytes(cam.mu.mem_read(BULK_GATE, 4)), BULK_GATE))[0]
+@@ -151,7 +161,7 @@
+ 
+     def test_a_patch_left_by_last_boot_is_repaired_then_armed(self):
+         stale = {REC: 0xEB0DEAD0, STOP: 0xEA0DEAD0, CLIP: 0xE1A00000,
+-                 STOP_RELEASE: 0xEA000160, BULK_GATE: 0xB800F000}
++                 BULK_GATE: 0xB800F000}
+         cam = self.boot(stale=stale)
+         self.assertEqual(self.outcome(cam), 'LOADED')
+         repaired = {a for c, a, _, t in cam.log() if c == 'REPAIRED'}
+@@ -183,18 +193,57 @@
+         cam = self.boot(('05OTHER.BIN', o))
+         self.assert_released_clean(cam, held=(ARRIVE,))
+ 
+-    def test_bulk_gate_and_stop_release_are_exclusive(self):
+-        for site in (BULK_GATE, STOP_RELEASE):
++    def test_bulk_gate_is_exclusive(self):
++        for site in (BULK_GATE,):
+             with self.subTest(site=hex(site)):
+                 o = self.other('OTHR', (site, 1, 0))
+                 cam = self.boot(('05OTHER.BIN', o))
+                 self.assert_released_clean(cam, held=(site,))
+ 
+-    def test_standalone_stopfix_conflict_refuses_lossless(self):
+-        other = B.patch_sup('STFX', [(STOP_RELEASE, struct.pack('<I', 0xEA000160), 2)])
+-        cam = self.boot(('05STOPFX.BIN', other))
+-        self.assert_released_clean(cam, held=(STOP_RELEASE,))
++    def assert_stopfix_coexists(self, cam, name):
++        self.assertEqual(self.outcome(cam, name), 'LOADED')
++        self.assertEqual(self.outcome(cam), 'LOADED')
+         self.assertEqual(cam.w(STOP_RELEASE), 0xEA000160)
++        self.assertEqual(sorted(a for a, _, _ in cam.journal()), sorted([*SITES, STOP_RELEASE]))
++
++    def test_standalone_stopfix_coexists_in_both_load_orders_and_restores(self):
++        for name in ('05STOPFX.BIN', '15STOPFX.BIN'):
++            with self.subTest(name=name):
++                cam = self.boot((name, stopfix_sup()))
++                self.assert_stopfix_coexists(cam, name)
++                cam.power_off()
++                for a in (*SITES, STOP_RELEASE):
++                    self.assertEqual(cam.w(a), self.stock(a), hex(a))
++
++    def test_standalone_stopfix_repairs_its_own_stale_word(self):
++        cam = self.boot(('05STOPFX.BIN', stopfix_sup()), stale={STOP_RELEASE: 0xEA000160})
++        self.assert_stopfix_coexists(cam, '05STOPFX.BIN')
++        self.assertIn(STOP_RELEASE, {a for c, a, _, _ in cam.log() if c == 'REPAIRED'})
++
++    def test_stopfix_can_load_without_lossless(self):
++        cam = LosslessCamera(*T.card(('05STOPFX.BIN', stopfix_sup())))
++        cam.boot()
++        self.assertEqual(self.outcome(cam, '05STOPFX.BIN'), 'LOADED')
++        self.assertEqual(cam.w(STOP_RELEASE), 0xEA000160)
++        self.assertEqual([a for a, _, _ in cam.journal()], [STOP_RELEASE])
++        cam.power_off()
++        self.assertEqual(cam.w(STOP_RELEASE), self.stock(STOP_RELEASE))
++
++    def test_mutation_reintroducing_stop_claim_is_detected(self):
++        sup = bytearray(self.sup)
++        # Inject the removed claim in place of the independent bulk gate.
++        at = B.SL_HEADER_LEN + self.sym['claims'] + 4
++        for i in range(L.SITE_COUNT):
++            if struct.unpack_from('<I', sup, at + 12 * i)[0] == BULK_GATE:
++                struct.pack_into('<3I', sup, at + 12 * i,
++                                 STOP_RELEASE, self.stock(STOP_RELEASE), 2)
++                break
++        else:
++            self.fail('bulk gate claim missing')
++        cam = self.boot(('05STOPFX.BIN', stopfix_sup()), sup=bytes(sup))
++        with self.assertRaises(AssertionError):
++            self.assert_stopfix_coexists(cam, '05STOPFX.BIN')
++        self.assertEqual(self.outcome(cam), 'RELEASED')
+ 
+     def test_an_exclusive_hold_on_a_chain_site_releases(self):
+         o = self.other('OTHR', (FLUSH, 2, 0))
+@@ -372,8 +421,8 @@
+         cam = self.boot(('05OTHER.BIN', o), sup=self.mutate_kind(CLIP, 1))
+         self.assertEqual(self.outcome(cam), 'LOADED')              # the guard is the kind
+ 
+-    def test_mutation_new_sites_as_chain_is_caught(self):
+-        for site in (BULK_GATE, STOP_RELEASE):
++    def test_mutation_bulk_site_as_chain_is_caught(self):
++        for site in (BULK_GATE,):
+             other = self.other('OTHR', (site, 1, 0))
+             cam = self.boot(('05OTHER.BIN', other), sup=self.mutate_kind(site, 1))
+             with self.assertRaises(AssertionError):

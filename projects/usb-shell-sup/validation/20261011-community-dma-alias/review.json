@@ -1,0 +1,65 @@
+{
+  "date": "2026-10-11",
+  "source": "Locally extracted /Users/dido/Downloads/fp-handover-20261011; the zip itself is absent.",
+  "sources": {
+    "/Users/dido/Downloads/fp-handover-20261011/05STOPFX.BIN": {
+      "bytes": 316,
+      "sha256": "f9f26a092c5676ead5771ba8be4aac9c3734e9ed0cd144002a73b3f6b657c9d9"
+    },
+    "/Users/dido/Downloads/fp-handover-20261011/HANDOVER.md": {
+      "bytes": 3485,
+      "sha256": "9656979fdd41e0ffe76e0581f673b75ac8188437c917979e6558631ce8d36824"
+    },
+    "/Users/dido/Downloads/fp-handover-20261011/dma-alias-resolved.md": {
+      "bytes": 3295,
+      "sha256": "de175ddee2d773d473655bb9a7b7ceb013f555decbb4444d03e461769d51185f"
+    }
+  },
+  "stop_fix": {
+    "unchanged_from_previous_review": true,
+    "decision": "Experimental candidate; no new camera evidence."
+  },
+  "dma_claim": {
+    "decision": "Reject the interpretation of the +0x40000000 result as the controller DMA address.",
+    "init_fields": {
+      "context_base": "0xC31E3200",
+      "physical_TRB_table": "+0x38 / 0xC31E3238",
+      "CPU_uncached_TRB_table": "+0x64 / 0xC31E3264"
+    },
+    "init_example_ctx2": {
+      "cached_original": "0xC31E32E0",
+      "physical_DMA": "0x031E32E0",
+      "CPU_uncached": "0x431E32E0"
+    },
+    "actual_command": "C01E6B80 loads context+0x38 and passes it to C01E6A48; C01E6AAA writes it directly to DEPCMDPAR1 at 0x2100C804 + physical_endpoint*0x10.",
+    "actual_bulk_payload": "C01E5880 keeps 0x50000000 as the CPU uncached pointer, then C01E591E subtracts 0x40000000 and C01E5922 writes 0x10000000 to TRB bufptr.",
+    "cached_bulk_payload": "For CPU pointers >=0xC0000000, the native path performs cache maintenance and conversion to the uncached CPU alias, then subtracts 0x40000000; C31E32C0 becomes 031E32C0 in bufptr.",
+    "scope": "Software values in the native USB path are proved; whether an additional alternative DMA address is hardware-accessible is not tested. The submission does not establish identity-mapped RAW DMA.",
+    "worker_impact": "Do not replace the current worker TO_BUS subtraction with identity from this handover."
+  },
+  "tests": {
+    "firmware_sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622",
+    "tests_run": 6,
+    "passed": true,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "hardware_io_performed": false,
+    "cpu_trb_address": "0x431E32E0",
+    "controller_trb_address": "0x031E32E0",
+    "raw_source_cpu_address": "0x50000000",
+    "native_payload_trb_bufptr": "0x10000000",
+    "limits": [
+      "emulated MMIO only",
+      "substituted endpoint selection, locks, caches and command acceptance",
+      "no DMA reachability, frame ownership, USB completion or image alignment proof"
+    ]
+  },
+  "proposed_probe_corrections": [
+    "Writing a shared TRB and starting a transfer changes endpoint state; it is not a read-only or no-risk observation.",
+    "The referenced RAW_PUSH note uses historical EP84/ctx4/physical9; current endpoints and ownership must be checked from maintained source.",
+    "Comparing a fixed 4 KiB RAW slice with CinemaDNG requires matching frame, packing, OB/stride and layout; mismatch is not proof of a different alias."
+  ],
+  "hardware_io_performed": false,
+  "production_code_modified": false
+}

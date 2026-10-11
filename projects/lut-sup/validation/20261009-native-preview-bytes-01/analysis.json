@@ -1,0 +1,166 @@
+{
+  "width": 1620,
+  "height": 911,
+  "packing": "linear Y0 Cb Y1 Cr, 8-bit 4:2:2",
+  "active_bytes": 2951640,
+  "chroma_reconstruction": "replicate one Cb/Cr pair to two pixels",
+  "chroma_siting_verified": false,
+  "rgb_encoding_verified": false,
+  "camera_write_path_verified": false,
+  "raw_ring_sha256": "14c72f31e92ff99e055c2cb2eaf1284e594cb52e386b8c8fbb2b6c75fb9a5c86",
+  "row_stride_bytes": 3240,
+  "ring_bytes": 4177920,
+  "excluded_tail_bytes": 1226280,
+  "packing_evidence": "complete recognizable scene at descriptor geometry, Y-first chroma-neutral byte lanes, and row-stride comparison",
+  "packing_confirmed_for_this_capture": true,
+  "applies_to_all_camera_modes": false,
+  "linear_stride_candidates": [
+    {
+      "stride_pixels": 16,
+      "mean_absolute_y_step": 7.627793370578274
+    },
+    {
+      "stride_pixels": 32,
+      "mean_absolute_y_step": 11.084561421637911
+    },
+    {
+      "stride_pixels": 64,
+      "mean_absolute_y_step": 15.665328817536935
+    },
+    {
+      "stride_pixels": 128,
+      "mean_absolute_y_step": 20.325276362812033
+    },
+    {
+      "stride_pixels": 256,
+      "mean_absolute_y_step": 24.81233413128134
+    },
+    {
+      "stride_pixels": 512,
+      "mean_absolute_y_step": 32.51802185599189
+    },
+    {
+      "stride_pixels": 960,
+      "mean_absolute_y_step": 33.94045402989058
+    },
+    {
+      "stride_pixels": 1024,
+      "mean_absolute_y_step": 32.877854102167184
+    },
+    {
+      "stride_pixels": 1620,
+      "mean_absolute_y_step": 1.5348820908226106
+    },
+    {
+      "stride_pixels": 1632,
+      "mean_absolute_y_step": 6.573882146385751
+    },
+    {
+      "stride_pixels": 1648,
+      "mean_absolute_y_step": 10.338953829926432
+    },
+    {
+      "stride_pixels": 1664,
+      "mean_absolute_y_step": 13.133759646710105
+    },
+    {
+      "stride_pixels": 1920,
+      "mean_absolute_y_step": 26.141739282852566
+    },
+    {
+      "stride_pixels": 2048,
+      "mean_absolute_y_step": 30.542308873811304
+    }
+  ],
+  "rgb_decode_hypotheses": [
+    {
+      "matrix": "601",
+      "range": "full",
+      "rgb_min": -0.005498039215686275,
+      "rgb_max": 0.8227137254901961,
+      "fraction_pixels_outside_0_1": 1.761732460598176e-05,
+      "rgb_encoding_verified": false,
+      "gamma_conversion": false
+    },
+    {
+      "matrix": "709",
+      "range": "full",
+      "rgb_min": -0.0061756862745098035,
+      "rgb_max": 0.8345160784313725,
+      "fraction_pixels_outside_0_1": 1.9650092829748886e-05,
+      "rgb_encoding_verified": false,
+      "gamma_conversion": false
+    },
+    {
+      "matrix": "601",
+      "range": "limited",
+      "rgb_min": -0.07931828930202217,
+      "rgb_max": 0.8783930202217873,
+      "fraction_pixels_outside_0_1": 0.0013158786301852529,
+      "rgb_encoding_verified": false,
+      "gamma_conversion": false
+    },
+    {
+      "matrix": "709",
+      "range": "limited",
+      "rgb_min": -0.08008971787345075,
+      "rgb_max": 0.8918287345075016,
+      "fraction_pixels_outside_0_1": 0.0014669810681519427,
+      "rgb_encoding_verified": false,
+      "gamma_conversion": false
+    }
+  ],
+  "planes": {
+    "y": {
+      "min": 0,
+      "max": 199,
+      "p05_p50_p95": [
+        66.0,
+        112.0,
+        155.0
+      ]
+    },
+    "cb": {
+      "min": 121,
+      "max": 171,
+      "p05_p50_p95": [
+        128.0,
+        132.0,
+        167.0
+      ]
+    },
+    "cr": {
+      "min": 107,
+      "max": 132,
+      "p05_p50_p95": [
+        121.0,
+        125.0,
+        129.0
+      ]
+    }
+  },
+  "atomic_frame": false,
+  "frame_lease_owned": false,
+  "cube_deployed": false,
+  "cube_pixel_fidelity_measured": false,
+  "camera_cpu_runtime_verified": false,
+  "sample_has_native_hardware_input_output_pairs": false,
+  "conclusions": [
+    "This CINE MONIT1 sample is linear YUYV8 at 1620x911; old blanket tiled-ring interpretation is disproved for this mode.",
+    "Do not read the unused ring capacity as image pixels or count its 255 tail as highlight clipping.",
+    "A readable output is available, but RGB matrix/range, transfer function and primaries remain uncalibrated.",
+    "Eight-bit quantization and shared 4:2:2 chroma limit output-only recovery; seek pre-quantization/chroma-reduction correction placement.",
+    "A running producer was not leased or frozen; diagnostic bytes are not a coherent calibration frame.",
+    "Native setters/CPU kernel, frame ownership and full-cube error comparison remain required before live LUT fidelity claims."
+  ],
+  "references": [
+    "https://www.itu.int/rec/R-REC-BT.601-7-201103-I/en",
+    "https://www.itu.int/rec/R-REC-BT.709-6-201506-I/en",
+    "https://raw.githubusercontent.com/FFmpeg/FFmpeg/master/libavutil/csp.c"
+  ],
+  "sha256": {
+    "projects/lut-sup/probes/analyse_native_preview.py": "e8018c342bd58c4848e057d686ef1a1c43f7baa6583888387b281e416719a9e6",
+    "fpSup/lut/preview.py": "a48205c4eeb8f526e8a3f680b469719f6bd9b716ce378e73c3f08620942c7514",
+    "projects/lut-sup/validation/20261009-native-preview-bytes-01/report.json": "45eda4dc555b0a1849d8393901739c11ced0ea1fe06804100e3458279bb296c7"
+  }
+}

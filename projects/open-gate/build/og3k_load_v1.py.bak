@@ -1,0 +1,249 @@
+#!/usr/bin/env python3
+"""OG3K — 一鍵把整套裝回執行中的相機(USB shell)。冪等,可重複執行。
+
+前提:卡上是 og3k_autorun 或任何有 C043A19C 幾何 hook 的 build。
+本腳本負責其餘全部:發射器、選單、格式表、picker hook。
+
+    ./og3k_load.py            套用
+    ./og3k_load.py --check    只檢查不寫
+"""
+import struct, sys, pathlib
+HERE = pathlib.Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE.parent.parent / "fpSup-v1" / "fp_usb_shell"))
+from armasm import assemble
+from putfile import mem_get, mem_set
+
+IMG = (HERE.parent.parent / "out" / "MAIN_c0000000.bin").read_bytes()
+B = 0xC0000000
+CHECK = "--check" in sys.argv
+
+CODE, TABLE, NAME, HITS = 0xC0730800, 0xC0731000, 0xC0730C00, 0xC0730700
+HOOK, HOOK_STOCK = 0xC043CCF8, 0xE92D4CF0
+TT, T3, CSV = 0xC0B59500, 0xC0BE5B50, 0xC0F8E7EC
+order = [struct.unpack_from('<I', IMG, TT - B + i * 0x20)[0] for i in range(70)]
+idx = {m: i for i, m in enumerate(order)}
+
+#  key          donor  時序抄自  picker 表3 slot
+FMT = [("OG3K23_98",  98, 109, 10), ("OG3K24",   98, 218,  9),
+       ("OG3K25",     98, 125,  8), ("OG3K30",   98, 106,  7),
+       ("OG3K48",     98, 220,  6), ("OG3K50",   98, 115,  5),
+       ("OG3K60",     98,  27,  4), ("OG3K100", 117,  89, 12)]
+
+NEW_CSV = (b'\xef\xbb\xbfNO,TEXT,IMAGE,Enabled,Enabled2\n'
+           b'1,0313,blank,1,2\n'
+           b'2,0314,blank,1,2\n'
+           b'3,OG3K 3008x2000,,1,2')
+# 剛好 89 bytes。標頭與資料列都用裸 \n、最後一列不收尾換行,才塞得下完整標籤。
+# 第三列的 IMAGE 欄留空 —— 那是把外層摘要從「圖片資源」切成「文字」的開關。
+
+SEL_CODE, SEL_HOOK, SEL_STOCK = 0xC0731800, 0xC005C020, 0xE92D4070
+ROW_CODE, ROW_HOOK, ROW_STOCK = 0xC072F800, 0xC043A19C, 0xE1A00004
+FLAG = 0xC0731C08
+NAME_CODE = 0xC0731A00
+ASP_CODE, ASP_HOOK, ASP_STOCK = 0xC0731B00, 0xC0306EA0, 0xE3A00003
+AS2_CODE, AS2_HOOK, AS2_STOCK = 0xC0731B40, 0xC0306EEC, 0xE3A00003
+OUT_CODE, OUT_HOOK, OUT_STOCK = 0xC0731D00, 0xC0437E98, 0xE92D4030
+TPL0, TPL2 = 0xC0732000, 0xC0732030   # og3kout 的兩份私有模板(idx0 / idx2)
+OHITS, OREJ = 0xC0732060, 0xC0732070  # 命中數 / 未處理描述子的拒絕環
+# 預覽可見高:同一組「+1C = 1」的兄弟 profile 的 PARAM+0x28。
+# 待機用 5,半按與錄影會切到其他幾個,全部都要跟著旗標切換。
+P5TAB = 0xC0732100
+PREV = [0xC0BDB9CC,   # profile 5
+        0xC0BDBC28,   # profile 210
+        0xC0BDBC60,   # profile 227
+        0xC0BDBC8C,   # profile 257
+        0xC0BDBC90,   # profile 258
+        0xC0BDBC94]   # profile 259
+DIS_CODE, DIS_HOOK, DIS_STOCK = 0xC0732200, 0xC0437ECC, 0xE1A00002
+WITH_DISPFIT = "--dispfit" in sys.argv      # 預設不裝,疑似造成畫面略微拉高
+
+
+def rd(a, t=8):
+    for _ in range(t):
+        w = mem_get(a)
+        if w and w[0] is not None:
+            return w[0]
+    raise SystemExit(f"read failed 0x{a:08X}")
+
+
+def wr(a, v, t=12):
+    if rd(a) == v:
+        return True, False
+    if CHECK:
+        return False, True
+    for _ in range(t):
+        mem_set(a, v)
+        if rd(a) == v:
+            return True, True
+    return False, True
+
+
+def words(name, items):
+    bad = changed = 0
+    for a, v in items:
+        ok, ch = wr(a, v)
+        bad += not ok
+        changed += ch
+    tag = "✗ %d 個失敗" % bad if bad else ("改了 %d 字" % changed if changed else "已就緒")
+    print(f"  {name:<26} {tag}")
+    return bad
+
+
+def timing(m):
+    o = TT - B + idx[m] * 0x20
+    return struct.unpack_from('<HHHH', IMG, o + 4)
+
+
+def main():
+    print("OG3K " + ("檢查" if CHECK else "套用") + "\n")
+    bad = 0
+
+    bad += words("發射器配對 {3032,2012}", [(0xC0BCFE80, 3032), (0xC0BCFE84, 2012)])
+
+    kb = b'OG3K\x00\x00\x00\x00'
+    bad += words("cave 的 \"OG3K\" 字串",
+                 [(NAME + i * 4, struct.unpack_from('<I', kb, i * 4)[0]) for i in range(2)])
+    lo, hi = NAME & 0xFFFF, NAME >> 16
+    bad += words("原函式的字串指標 → OG3K",
+                 [(0xC0437C34, 0xE3000000 | ((lo >> 12) << 16) | (4 << 12) | (lo & 0xFFF)),
+                  (0xC0437C38, 0xE3400000 | ((hi >> 12) << 16) | (4 << 12) | (hi & 0xFFF))])
+
+    nb = assemble(HERE / "og3kname.S")
+    bad += words(f"og3kname payload {len(nb)}B",
+                 [(NAME_CODE + i * 4, v)
+                  for i, v in enumerate(struct.unpack(f"<{len(nb)//4}I", nb))])
+    bad += words("發射器函式指標 0xC0BE44DC", [(0xC0BE44DC, NAME_CODE)])
+
+    # 完全不碰 MenuItemMovieRecSize —— 解析度名由 og3kname 依旗標決定
+    bad += words("MenuItemMovieRecSize 保持原廠", [(0xC074222C, 1920), (0xC0742230, 1080)])
+    bad += words("控制器上限 BE float 2.0", [(0xC1A709BC, 0x00000040)])
+
+    span = (89 + 3) // 4 * 4
+    cur = b''.join(struct.pack('<I', rd(CSV + k * 4)) for k in range(span // 4))
+    buf = bytearray(cur)
+    buf[:89] = NEW_CSV + b'\x00' * (89 - len(NEW_CSV))
+    bad += words("選單 CSV",
+                 [(CSV + k * 4, struct.unpack_from('<I', bytes(buf), k * 4)[0])
+                  for k in range(span // 4)])
+
+    items = []
+    for n, (key, donor, src, slot) in enumerate(FMT):
+        hm, tl, vm, x = timing(src)
+        if key == "OG3K100":
+            hm, tl, vm = 330, 270, 2182
+        assert hm * 2012 < hm * (vm - 1) + tl, key
+        base = TABLE + n * 48
+        kbytes = key.encode() + b'\x00' * (16 - len(key))
+        rec = ([5, struct.unpack_from('<I', IMG, T3 - B + slot * 0x10 + 4)[0], donor,
+                base + 0x14, TT + idx[donor] * 0x20]
+               + list(struct.unpack('<4I', kbytes))
+               + [hm | (tl << 16), vm | (x << 16), 0])
+        items += [(base + i * 4, v) for i, v in enumerate(rec)]
+    items += [(TABLE + len(FMT) * 48 + i * 4, 0) for i in range(12)]
+    bad += words(f"格式表 {len(FMT)} 筆", items)
+
+    blob = assemble(HERE / "fmttable.S")
+    bad += words(f"fmttable payload {len(blob)}B",
+                 [(CODE + i * 4, v)
+                  for i, v in enumerate(struct.unpack(f"<{len(blob)//4}I", blob))])
+
+    rb = assemble(HERE / "rowpatch_og3k.S")
+    rbr = 0xEB000000 | (((ROW_CODE - ROW_HOOK - 8) >> 2) & 0xFFFFFF)
+    rw = [(ROW_CODE + i * 4, v)
+          for i, v in enumerate(struct.unpack(f"<{len(rb)//4}I", rb))]
+    if any(rd(a) != v for a, v in rw):
+        # payload 要換。它是活的程式碼,hook 正指著它,
+        # 邊執行邊逐字覆寫會執行到半新半舊的混合 —— 先解除再換。
+        if rd(ROW_HOOK) == rbr:
+            print("  畫布 hook 先解除(payload 要換,不能邊跑邊改)")
+            if not wr(ROW_HOOK, ROW_STOCK)[0]:
+                raise SystemExit("無法解除畫布 hook")
+        bad += words(f"畫布 payload {len(rb)}B (帶旗標守衛)", rw)
+    else:
+        print(f"  {'畫布 payload ' + str(len(rb)) + 'B':<26} 已就緒")
+    if rd(ROW_HOOK) not in (ROW_STOCK, rbr):
+        raise SystemExit(f"畫布 hook 點是 0x{rd(ROW_HOOK):08X},停手")
+    bad += words("畫布 hook", [(ROW_HOOK, rbr)])
+
+    sb = assemble(HERE / "og3ksel.S")
+    bad += words(f"og3ksel payload {len(sb)}B",
+                 [(SEL_CODE + i * 4, v)
+                  for i, v in enumerate(struct.unpack(f"<{len(sb)//4}I", sb))])
+    sbr = 0xEA000000 | (((SEL_CODE - SEL_HOOK - 8) >> 2) & 0xFFFFFF)
+    if rd(SEL_HOOK) not in (SEL_STOCK, sbr):
+        raise SystemExit(f"setter hook 點是 0x{rd(SEL_HOOK):08X},停手")
+    bad += words("解析度 setter hook", [(SEL_HOOK, sbr)])
+
+    ab = assemble(HERE / "og3kaspect.S")
+    bad += words(f"長寬比 payload {len(ab)}B",
+                 [(ASP_CODE + i * 4, v)
+                  for i, v in enumerate(struct.unpack(f"<{len(ab)//4}I", ab))])
+    abr = 0xEA000000 | (((ASP_CODE - ASP_HOOK - 8) >> 2) & 0xFFFFFF)
+    if rd(ASP_HOOK) not in (ASP_STOCK, abr):
+        raise SystemExit(f"長寬比 hook 點是 0x{rd(ASP_HOOK):08X},停手")
+    bad += words("長寬比 hook C0306EA0", [(ASP_HOOK, abr)])
+
+    a2 = assemble(HERE / "og3kaspect2.S")
+    bad += words(f"長寬比2 payload {len(a2)}B",
+                 [(AS2_CODE + i * 4, v)
+                  for i, v in enumerate(struct.unpack(f"<{len(a2)//4}I", a2))])
+    a2r = 0xEA000000 | (((AS2_CODE - AS2_HOOK - 8) >> 2) & 0xFFFFFF)
+    if rd(AS2_HOOK) not in (AS2_STOCK, a2r):
+        raise SystemExit(f"長寬比2 hook 點是 0x{rd(AS2_HOOK):08X},停手")
+    bad += words("長寬比2 hook C0306EEC", [(AS2_HOOK, a2r)])
+
+    ob = assemble(HERE / "og3kout.S")
+    obr = 0xEA000000 | (((OUT_CODE - OUT_HOOK - 8) >> 2) & 0xFFFFFF)
+    ow = [(OUT_CODE + i * 4, v)
+          for i, v in enumerate(struct.unpack(f"<{len(ob)//4}I", ob))]
+    if any(rd(a) != v for a, v in ow):
+        if rd(OUT_HOOK) == obr:
+            print("  主輸出 hook 先解除(payload 要換,不能邊跑邊改)")
+            if not wr(OUT_HOOK, OUT_STOCK)[0]:
+                raise SystemExit("無法解除主輸出 hook")
+        bad += words("主輸出模板重建",
+                     [(TPL0, 0), (TPL2, 0), (OHITS, 0)]
+                     + [(OREJ + i * 4, 0) for i in range(19)])
+        bad += words(f"og3kout payload {len(ob)}B", ow)
+    else:
+        print(f"  {'og3kout payload ' + str(len(ob)) + 'B':<26} 已就緒")
+    if rd(OUT_HOOK) not in (OUT_STOCK, obr):
+        raise SystemExit(f"主輸出 hook 點是 0x{rd(OUT_HOOK):08X},停手")
+    bad += words("主輸出 hook C0437E98", [(OUT_HOOK, obr)])
+
+    # profile 5 的預覽可見高平時由 og3ksel 跟著旗標切換;這裡只是讓
+    # 重新載入後的靜態表與當下旗標一致,不然要等下一次切換解析度才會對上。
+    bad += words("預覽位址表",
+                 [(P5TAB, len(PREV))]
+                 + [(P5TAB + 4 + i * 4, a) for i, a in enumerate(PREV)])
+    h = 1334 if rd(FLAG) else 1125
+    bad += words(f"預覽可見高對齊旗標 ({h})", [(a, h) for a in PREV])
+
+    if WITH_DISPFIT:
+        db = assemble(HERE / "dispfit_v3.S")
+        dbr = 0xEA000000 | (((DIS_CODE - DIS_HOOK - 8) >> 2) & 0xFFFFFF)
+        dw = [(DIS_CODE + i * 4, v)
+              for i, v in enumerate(struct.unpack(f"<{len(db)//4}I", db))]
+        if any(rd(a) != v for a, v in dw) and rd(DIS_HOOK) == dbr:
+            wr(DIS_HOOK, DIS_STOCK)
+        bad += words(f"dispfit_v3 {len(db)}B", dw)
+        bad += words("dispfit hook C0437ECC", [(DIS_HOOK, dbr)])
+    elif rd(DIS_HOOK) != DIS_STOCK:
+        bad += words("dispfit hook 解除", [(DIS_HOOK, DIS_STOCK)])
+
+    br = 0xEA000000 | (((CODE - HOOK - 8) >> 2) & 0xFFFFFF)
+    if rd(HOOK) not in (HOOK_STOCK, br):
+        raise SystemExit(f"hook 點是 0x{rd(HOOK):08X},既非原廠也非我們的,停手")
+    bad += words("picker hook (最後 arm)", [(HOOK, br)])
+
+    print()
+    if bad:
+        print(f"★ {bad} 項失敗")
+        return 1
+    print("★ 全部就緒" if not CHECK else "★ 檢查完成")
+    print(f"  格式表命中 {rd(HITS)} 次")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

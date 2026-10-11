@@ -1,0 +1,35 @@
+Hi bei — here's the full write-up on the record-buffer stop leak and the one-word fix, with everything needed to verify it from scratch. All from read-only RE of the 5.02 image (image_C0000000.bin, base 0xC0000000), cross-checked by hand and in Ghidra. This is the same leak you documented in HSW_DEVELOPMENT_STATUS.md §7.3 / §8.3 — I traced it independently and it reduces to a single instruction.
+
+THE BUG
+On an overflow / vbuf stop, each sub-pipeline calls FUN_c0377118(obj), a pop-and-DROP:
+    do { n = FUN_c0381008(obj+0x10); } while (n); return 1;
+It empties the pending-request queue at obj+0x10 and throws every node away without releasing it.
+Request nodes live in MPoolFixed<4380,96> @ 0xC2F1F3D8 (stride 0x1128, free-count at +0x112C). Node layout: +0x10FC id, +0x110C queue link, +0x1110 refcount, +0x1118 parent id (-1 = top-level). A child node's completion is what decrements its parent's refcount (+0x1110); when a child is dropped instead of released, the parent's refcount never hits 0, so the parent's descriptor AND its RAW strip (1,441,792 B each) are stranded until a battery pull. That's your 44 x 1,441,792 ~= 63.4 MB / free-count 96->52 measurement.
+
+THE FIX — ONE WORD
+The firmware already contains the correct releasing flush next door: FUN_c03776A0 ("raw del"):
+    mgr = FUN_c0374220(); while (n = FUN_c0381008(obj+0x10)) FUN_c0375030(mgr, n->id);
+— ref-counted release per node. FUN_c0375030(mgr,id) looks the node up (FUN_c03753C0: id<96 ? mgr->slot[id] : 0), and if it's a child (+0x1118 != -1) frees it and decrements the parent, freeing the parent at refcount 0; top-level frees only at refcount 0.
+So point the leaky flush at the good one by overwriting its prologue with a tail-branch:
+
+    0xC0377118:  E92D4030  (push {r4,r5,lr})   ->   EA000160  (b 0xC03776A0)
+
+(file offset 0x377118). Verified against the image: stock word at 0xC0377118 = E92D4030; 0xC03776A0 prologue = E92D4170; and EA000160 from 0xC0377118 resolves to exactly 0xC03776A0 (addr+8 + (sign-extend(0x000160)<<2)). Same argument (obj in r0), and the branch is before anything touches the stack, so there's no prologue/epilogue mismatch.
+
+WHY IT'S SAFE (each checked in the disasm)
+1. The queue at obj+0x10 holds PENDING only. Submit (0xC03774F0..0xC0377580) pushes a node there only when the stage couldn't start it (0xC037A990 returned 0), and pops it before starting. So nothing flushed is under DMA.
+2. Return value unused. FUN_c0377118 returns 1, FUN_c03776A0 returns 0, but all 12 call sites (0xC0377688, 0xC03840C0/D8, 0xC03841BC, 0xC03842E8/0300, 0xC038F3F8/410/51C/524, 0xC0398D34/3C) ignore it — each is followed by an arg-free singleton getter that reloads r0, or by "mov r1,#1; mov r0,r1".
+3. Double-release is a no-op. The stop sites already release the current request after the flush; FUN_c03768D8 (free) early-returns when slot[id]==0 and ends by setting slot[id]=0 (0xC0376AEC), so neither a re-freed node nor a twice-decremented parent is possible.
+4. Defer path not taken for the record manager. FUN_c0375030 defers when mgr+0x190 is set; the only store to +0x190 for this manager is its constructor writing 0 (0xC037420C). The other +0x190 stores (0xC00A507C, 0xC031A0E4, setter 0xC031ABB0) belong to a different class.
+5. No deadlock at the stop site. FUN_c0377620 ("raw stop") drops its own lock (+0x84) before calling the flush, so the release's manager-lock acquisition can't self-deadlock there.
+Corroborating: there's already a stage-4-specific releasing flush FUN_c037dee0 called at 0xC0398D44 right after a leaky FUN_c0377118 — more evidence that pop-and-release is the intended semantics and the drop is the bug.
+
+THE 4 CREATE-PIPELINE STAGES (for context): cre_raw FUN_c0377390, cre_yuv FUN_c037af20, cre_jpg FUN_c037d5c8, writer FUN_c037dd50. In each, a node is pushed to obj+0x10 only when the stage can't start it, and the node that does start is popped first — so no queued node has been started in any stage.
+
+PACKAGING (your loader, your call): a Loader v3 patch sup that claim()s [0xC0377118, 4) SL_EXCL with stock E92D4030, writes EA000160, publish()es, returns SL_KEEP; power-off write-back restores stock. I built one offline (05STOPFX.BIN, 316 B, id STFX, sha256 f9f26a092c5676ead5771ba8be4aac9c3734e9ed0cd144002a73b3f6b657c9d9) straight from your unmodified fp_usb_shell/v3/patch_sup.S so the row layout matches build_v3.patch_sup() exactly — but it is COMPLETELY UNTESTED; I have not put it on a card. Built against FW 5.02 image sha256 acead79a338de2d8d7485d036b0a020b8eebcbad29d05741540130c6acb75bfb.
+
+TO VERIFY FROM SCRATCH: disassemble FUN_c0377118, FUN_c03776A0, FUN_c0375030, FUN_c03768D8, FUN_c03753C0 and confirm the drop-vs-release split; confirm the 12 call sites discard the return; confirm the +0x190 defer store is only the constructor's 0.
+
+TEST PLAN (SD first, no SSD): via the USB shell read the pool free-count (0xC2F1F3D8 + 0x112C) and RAW-used before/after. Stock: provoke an overflow stop -> expect 96->~52 (reproduces your number). Patched: same -> expect back to 96 with RAW-used unchanged; then start/stop ~10x looking for drift. Only after that, SSD with a forced stall to see whether MscHost/USB survives the clean release.
+
+Happy to send 05STOPFX.BIN + the full trace notes. If anything above doesn't match your model of the recMgr pipeline, I'd really like to know. Cheers!

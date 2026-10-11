@@ -1,0 +1,108 @@
+{
+  "recorded_at_utc": "2026-10-01T15:59:14Z",
+  "status": "passed",
+  "scope": "Actual offline ARM execution of JSON numeric helpers in saved baseline and current assembled Base, GCSV and GCSV-yield blobs. No camera access, deployment or source mutation.",
+  "execution": {
+    "python": "/usr/bin/python3",
+    "mode": "Explicitly escalated offline command because sandboxed Unicorn probe could not execute JIT code",
+    "original_form": "Inline python3 -B script; its helper checks are preserved in check_json_helpers.py",
+    "original_exit_code": 0,
+    "original_stdout": [
+      "base baseline/current helpers identical and expected; ABI/odd guards pass 426",
+      "gcsv baseline/current helpers identical and expected; ABI/odd guards pass 426",
+      "gcsv-yield baseline/current helpers identical and expected; ABI/odd guards pass 426"
+    ],
+    "replay_command_from_workspace_root": "python3 -B projects/gyro-sup/validation/20261001-gcsv-direct-output/check_json_helpers.py",
+    "replay_script_sha256": "245c53dfd68ab6a57d99ea562899e523db4b4c794bbca6ceda8a2c4d0379a09d",
+    "replay_script_validation": "AST syntax check passed; the completed ARM batch was not repeated after persisting the replay script"
+  },
+  "inputs": {
+    "source": "fpSup/gyro/gcsv_rows.S",
+    "source_sha256_recorded_after_run": "b74c6d0b284349fd8edffda0250e75e26df950b1b75de49a1930a44522f4273c",
+    "helpers": ["ji", "jm", "jhalf"],
+    "random_seed": 813,
+    "random_uint32_values": 128,
+    "explicit_values": [0, 1, 9, 10, 99, 100, 999, 1000, 32767, 32768, 65535, 100000, 1000000000, 4294967295],
+    "unique_values_per_helper": 142,
+    "destination_address": "0x47000003",
+    "instruction_limit_per_invocation": 3000
+  },
+  "assertions": [
+    "Baseline and candidate output bytes equal an independent Python decimal oracle",
+    "ji prints the full unsigned value",
+    "jm prints unsigned thousandths with exactly three fractional digits",
+    "jhalf prints floor(value/2) followed by .0 or .5",
+    "All calls return within the instruction limit",
+    "Output cursor r9 remains within the declared output region",
+    "Three leading sentinel bytes and every byte after the returned cursor remain unchanged",
+    "r4-r11 are preserved except r9, which is the documented JSON output cursor",
+    "SP is restored; strict harness also checks 8-byte stack alignment at ARM calls",
+    "ji preserves its caller's r1 value 0xDEADBEEF",
+    "Execution outside the assembled blob or declared strict native stubs fails"
+  ],
+  "editions": [
+    {
+      "edition": "base",
+      "defines": ["FPGYRO_EDITION_BASE=1"],
+      "status": "passed",
+      "cases": 426,
+      "arm_invocations": 852,
+      "baseline_bytes": 13760,
+      "baseline_sha256": "ba10d690153513a1ce65394b81b795cd8f706a31946a6a9eacc2cb8f50dc6278",
+      "candidate_bytes": 13896,
+      "candidate_sha256": "5c0bae4b3bd3abb17e23c446bcd6a92f899dfd9b1be9f071c325328b5f7a7a38"
+    },
+    {
+      "edition": "gcsv",
+      "defines": [],
+      "status": "passed",
+      "cases": 426,
+      "arm_invocations": 852,
+      "baseline_bytes": 14328,
+      "baseline_sha256": "91dca49db60ebfc629a7912a6ddad0a215e0067d7610f958a43387fa7b054259",
+      "candidate_bytes": 14472,
+      "candidate_sha256": "c6e9f98bffaf057768bd099c587d903f031f378bc656692fdc17fb0bb07472bb"
+    },
+    {
+      "edition": "gcsv-yield",
+      "defines": ["FPGYRO_FORMAT_YIELD_RECORDS=128"],
+      "status": "passed",
+      "cases": 426,
+      "arm_invocations": 852,
+      "baseline_bytes": 14368,
+      "baseline_sha256": "09230ece35a54c5433e5685458b5680d5c2f87ebf75c3be1f563e2795f7be9d0",
+      "candidate_bytes": 14504,
+      "candidate_sha256": "7095c9d01cb6c172cb7cb4d9fc77ab5a681b624b730201eb3da53f4b9a5e036a"
+    }
+  ],
+  "total_cases": 1278,
+  "total_arm_invocations": 2556,
+  "failures": [],
+  "skips_in_completed_run": [],
+  "prior_unavailable_attempts": [
+    {
+      "scope": "Sandboxed one-instruction Unicorn capability probe only",
+      "return_code": -4,
+      "result": "Unavailable in the sandbox; not counted as a passing ARM test",
+      "resolution": "The explicitly escalated offline command subsequently executed every reported helper case"
+    }
+  ],
+  "not_covered": [
+    "Full gcsv_json_write firmware interactions and complete lens profile generation",
+    "VFP jd helper execution; its integer helper call sites were reviewed statically",
+    "Physical scheduling, storage latency, or audio/video synchronization"
+  ],
+  "independent_assembly_checks": {
+    "status": "passed",
+    "cases_per_edition": 100091,
+    "random_seed": 731,
+    "coverage": "Length table extracted from actual assembled bytes: all binary interval endpoints, powers-of-ten boundaries, 100000 random uint32 values",
+    "resolved_ADR_offsets_from_PC": {
+      "fastpath_dec_pairs": -316,
+      "u32_digits_by_bit": -152,
+      "u32_powers_of_ten": -128,
+      "general_dec_pairs": -392
+    },
+    "notes": "All four decoded ADR instructions target their exact assembled symbols in each edition. These arithmetic/ADR checks were separate from the 1278 ARM helper cases."
+  }
+}

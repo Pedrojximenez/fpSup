@@ -1,0 +1,14 @@
+test_no_recording_core_and_restoration (__main__.Check) ... FAIL
+
+======================================================================
+FAIL: test_no_recording_core_and_restoration (__main__.Check)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_v3_reslab.py", line 113, in test_no_recording_core_and_restoration
+    self.assertEqual(bytes(cam.mu.mem_read(0xC0B00000,0x200000)),cam.sensitive)
+AssertionError: b'`\x[3193543 chars]0\x00YYXX\x01\x00\x00\x00\x01\x00\x00\x00\x01\[3965619 chars]\x00' != b'`\x[3193543 chars]0\x00\x01\x00\x00\x00\x01\x00\x00\x00\x01\x00\[3965631 chars]\x00'
+
+----------------------------------------------------------------------
+Ran 1 test in 39.832s
+
+FAILED (failures=1)

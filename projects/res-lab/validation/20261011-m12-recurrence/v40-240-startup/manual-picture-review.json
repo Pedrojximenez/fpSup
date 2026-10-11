@@ -1,0 +1,36 @@
+{
+  "diagnostic_only": true,
+  "visible_fault": true,
+  "observation": "A displaced/rescaled rectangular preview patch at upper left during the start/stop transition. No full-height central split, but picture integrity fails.",
+  "visually_inspected_frames": [
+    20,
+    40,
+    48,
+    52,
+    56,
+    58,
+    60,
+    62,
+    64,
+    66,
+    68,
+    70,
+    74,
+    80,
+    140,
+    239
+  ],
+  "fault_samples": [
+    58,
+    60,
+    62,
+    64,
+    66
+  ],
+  "native_carrier": 3,
+  "virtual_rank": 23976,
+  "original_geometry_r78_unchanged": true,
+  "standby_after": true,
+  "raw_frames_finished": 1,
+  "limits": "Short startup/stop window, not continuous recording. Blur limits fine detail but rectangular geometry displacement is visible."
+}

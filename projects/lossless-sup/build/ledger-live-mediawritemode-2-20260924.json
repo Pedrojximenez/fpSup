@@ -1,0 +1,58 @@
+{
+ "schema_version": 1,
+ "kind": "live_test_of_media_write_mode_value_2",
+ "date": "2026-09-24",
+ "operator_scope": "live camera. Read-only flush probe armed four times, self-restored each time. One menu setting changed and restored. No clip content written, no codec run, no file deleted, nothing saved to FlashValue.",
+ "camera": {
+  "model": "w71c1",
+  "firmware": "5.02.0.V91",
+  "media": "SD",
+  "app_current": 2,
+  "mode": "CINE, FHD RAW12 24p"
+ },
+ "tests": "the prediction in ledger-mediawritemode-gate-20260924.json: if Media Write Mode accepts a value of 2, settings[0x9C] should become 0 and SD aggregation should not be installed.",
+ "verdict": "2 IS ACCEPTED BUT HAS NO EFFECT. The shell cannot change the value that MenuItemMediaWriteMode::v3 reads.",
+ "measured": [
+  {
+   "level": "L",
+   "claim": "menu SetMediaWriteMode 2 returns OK and reads back 2. The value is not rejected, so the item is not limited to 0 and 1."
+  },
+  {
+   "level": "L",
+   "claim": "settings+0x9C stayed 1 throughout: before the recording, during it, and after. manager+0x0D stayed 1."
+  },
+  {
+   "level": "L",
+   "claim": "manager+0x0C read 1 during the recording and 0 after, so FUN_c03a5050 DID run at recording start and FUN_c03a5190 tore it down at stop. The init read 1 from the slot, not 0."
+  },
+  {
+   "level": "L",
+   "claim": "the flush at 0xC03A5490 was 368 us for 3,244,544 bytes, unchanged from 372, 365 and 356 us measured before. The write path did not change."
+  },
+  {
+   "level": "I",
+   "claim": "therefore menu SetMediaWriteMode writes a value that FUN_c006d530 does not read. The committed value the item reports to v3 appears to be unchanged at 1, which is also why the hand-written settings[0x9C] = 0 was overwritten back to 1 at the next recording. Changing this setting for real seems to require the camera's own menu UI."
+  }
+ ],
+ "a_false_positive_that_was_caught": {
+  "level": "L",
+  "what_happened": "The first run after setting 2 reported flush_elapsed_us = 57,994. For 3,244,544 bytes that is 55.9 MB/s, a realistic card speed, and it looked like the write had become synchronous - exactly the predicted result.",
+  "why_it_was_wrong": "n = 1. Two repeat runs returned a stale 57,994 because the arm had silently failed on an occupied cave, which the tail of the output hid. After clearing the cave and verifying the probe read 'not entered, flush_elapsed_us 0' before recording, a clean run gave 368 us.",
+  "probable_cause_of_the_outlier": "that run was the only one where mem_get was issued DURING the recording, twice. The shell's USB worker contending with card I/O is a documented hazard on this camera. Not proven, but it is the one thing that run did differently.",
+  "lesson": "arm state must be verified as fresh before each run, and no USB traffic during the recording being measured."
+ },
+ "explicitly_not_established": [
+  "what menu SetMediaWriteMode actually writes, and where the value v3 reads is stored",
+  "whether changing the setting through the camera's own menu UI would change settings[0x9C]. That is the obvious next test and it needs a hand on the camera or menu navigation.",
+  "whether SD aggregation can be disabled at all on this camera",
+  "everything in ledger-aggregation-off-path-20260924.json remains untested: the write path was never reached in the non-aggregating state"
+ ],
+ "camera_left_as_found": {
+  "menu_SetMediaWriteMode": 1,
+  "settings_0x9C": 1,
+  "hook_0xC03A5490": "0xEB0BD652 original",
+  "is_recording": 0,
+  "note": "the cave holds the flush probe's code from the last arm; inert, hook restored, cleared by a power cycle"
+ },
+ "deployable": false
+}

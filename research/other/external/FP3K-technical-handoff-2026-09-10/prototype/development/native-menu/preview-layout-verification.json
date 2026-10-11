@@ -1,0 +1,230 @@
+{
+  "payload_sha256": "8cf489ef8ad5e4c8723adac4dd421f6943a5d4f6338c030f70148764901b243e",
+  "cases": [
+    {
+      "case": "trampoline-active0-device1-flags13",
+      "passed": true
+    },
+    {
+      "case": "trampoline-active0-device1-flagsf80000d3",
+      "passed": true
+    },
+    {
+      "case": "trampoline-active0-device4-flags13",
+      "passed": true
+    },
+    {
+      "case": "trampoline-active0-device4-flagsf80000d3",
+      "passed": true
+    },
+    {
+      "case": "trampoline-active0-device5-flags13",
+      "passed": true
+    },
+    {
+      "case": "trampoline-active0-device5-flagsf80000d3",
+      "passed": true
+    },
+    {
+      "case": "trampoline-active0-device29-flags13",
+      "passed": true
+    },
+    {
+      "case": "trampoline-active0-device29-flagsf80000d3",
+      "passed": true
+    },
+    {
+      "case": "trampoline-active1-device1-flags13",
+      "passed": true
+    },
+    {
+      "case": "trampoline-active1-device1-flagsf80000d3",
+      "passed": true
+    },
+    {
+      "case": "trampoline-active1-device4-flags13",
+      "passed": true
+    },
+    {
+      "case": "trampoline-active1-device4-flagsf80000d3",
+      "passed": true
+    },
+    {
+      "case": "trampoline-active1-device5-flags13",
+      "passed": true
+    },
+    {
+      "case": "trampoline-active1-device5-flagsf80000d3",
+      "passed": true
+    },
+    {
+      "case": "trampoline-active1-device29-flags13",
+      "passed": true
+    },
+    {
+      "case": "trampoline-active1-device29-flagsf80000d3",
+      "passed": true
+    },
+    {
+      "case": "trampoline-active2-device1-flags13",
+      "passed": true
+    },
+    {
+      "case": "trampoline-active2-device1-flagsf80000d3",
+      "passed": true
+    },
+    {
+      "case": "trampoline-active2-device4-flags13",
+      "passed": true
+    },
+    {
+      "case": "trampoline-active2-device4-flagsf80000d3",
+      "passed": true
+    },
+    {
+      "case": "trampoline-active2-device5-flags13",
+      "passed": true
+    },
+    {
+      "case": "trampoline-active2-device5-flagsf80000d3",
+      "passed": true
+    },
+    {
+      "case": "trampoline-active2-device29-flags13",
+      "passed": true
+    },
+    {
+      "case": "trampoline-active2-device29-flagsf80000d3",
+      "passed": true
+    },
+    {
+      "case": "native-fit-active0-device1-branchTrue",
+      "rectangle": [
+        1620,
+        911,
+        0,
+        84
+      ],
+      "writes": [
+        [
+          124,
+          2
+        ],
+        [
+          126,
+          2
+        ],
+        [
+          128,
+          2
+        ],
+        [
+          130,
+          2
+        ],
+        [
+          152,
+          4
+        ]
+      ],
+      "passed": true
+    },
+    {
+      "case": "native-fit-active1-device1-branchTrue",
+      "rectangle": [
+        1620,
+        1080,
+        0,
+        0
+      ],
+      "writes": [
+        [
+          124,
+          2
+        ],
+        [
+          126,
+          2
+        ],
+        [
+          128,
+          2
+        ],
+        [
+          130,
+          2
+        ],
+        [
+          152,
+          4
+        ]
+      ],
+      "passed": true
+    },
+    {
+      "case": "native-fit-active1-device5-branchTrue",
+      "rectangle": [
+        1620,
+        911,
+        0,
+        84
+      ],
+      "writes": [
+        [
+          124,
+          2
+        ],
+        [
+          126,
+          2
+        ],
+        [
+          128,
+          2
+        ],
+        [
+          130,
+          2
+        ],
+        [
+          152,
+          4
+        ]
+      ],
+      "passed": true
+    },
+    {
+      "case": "native-fit-active1-device1-branchFalse",
+      "rectangle": [
+        1620,
+        1080,
+        0,
+        0
+      ],
+      "writes": [
+        [
+          124,
+          2
+        ],
+        [
+          126,
+          2
+        ],
+        [
+          128,
+          2
+        ],
+        [
+          130,
+          2
+        ],
+        [
+          152,
+          4
+        ]
+      ],
+      "passed": true
+    }
+  ],
+  "limitations": "Selector fixtures are not camera observations. Executes native display-fit math and bounded descriptor writes, not LCD rendering, refresh, overlay composition, or sensor coverage."
+}

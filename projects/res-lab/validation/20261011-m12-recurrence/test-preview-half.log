@@ -1,0 +1,15 @@
+test_scoped_preview_formula_and_native_route (__main__.PreviewHalf) ... M12 23976 isotropic half preview; native route {'enabled': [0, 1, 0], 'mux': [4, 4], 'main_zoom': [2048, 1024], 'secondary_zoom': [2048, 2048], 'record': 0}
+FAIL
+
+======================================================================
+FAIL: test_scoped_preview_formula_and_native_route (__main__.PreviewHalf)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-m12-recurrence/test_preview_half.py", line 81, in test_scoped_preview_formula_and_native_route
+    self.assertNotEqual(route['enabled'], [0, 1, 0], 'must not recreate unequal-axis matching C')
+AssertionError: [0, 1, 0] == [0, 1, 0] : must not recreate unequal-axis matching C
+
+----------------------------------------------------------------------
+Ran 1 test in 31.686s
+
+FAILED (failures=1)

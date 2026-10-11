@@ -1,0 +1,15 @@
+{
+  "composition": "Loader v3 with independent LOSS and STFX modules",
+  "lossless_source": "candidate-card",
+  "stopfix_source": "inputs/05STOPFX.BIN",
+  "stopfix_bytes": 316,
+  "sha256": {
+    "fpSup/05STOPFX.BIN": "f9f26a092c5676ead5771ba8be4aac9c3734e9ed0cd144002a73b3f6b657c9d9",
+    "fpSup/10LOSS.BIN": "a24e1dde7e973c423f32c3b1c30a42acd039fa2fddebc83c27674e911de3ba9f",
+    "fpSup/LOADER.BIN": "0f63b167bc8c6dd259a5ec7c465ac00aff7d5e9f25594b36c8eba6684cea4af1",
+    "AutoRun.txt": "889800fa363c75bfe0d9da43da82312276388a8929748ce05221ce0da931bb4c"
+  },
+  "embedded_stopfix_in_lossless": false,
+  "camera_tested": false,
+  "written_to_card": false
+}

@@ -1,0 +1,90 @@
+{
+  "clip": "A001_026",
+  "frames_requested": 88,
+  "frames_finished": 88,
+  "passed_continuous": true,
+  "manual_stop": true,
+  "idle_after": true,
+  "nominal_fps": 29.97,
+  "sensor_timing_fps": 29.97002997002997,
+  "output": [
+    992,
+    662
+  ],
+  "image_quality_verified": false,
+  "image_quality_reason": "Preview is black; decoded RAW samples are near black level. No visible scene detail to inspect the first-second seam.",
+  "samples": [
+    {
+      "frame": 1,
+      "tiff_header": true,
+      "tags": {
+        "ImageWidth": 1008,
+        "ImageLength": 672,
+        "BitsPerSample": 12,
+        "DefaultCropOrigin": [
+          8,
+          5
+        ],
+        "DefaultCropSize": [
+          992,
+          662
+        ],
+        "FrameRate": "30000/1001",
+        "BlackLevel": [
+          "262136/1024",
+          "262136/1024",
+          "262136/1024",
+          "262136/1024"
+        ]
+      }
+    },
+    {
+      "frame": 44,
+      "tiff_header": true,
+      "tags": {
+        "ImageWidth": 1008,
+        "ImageLength": 672,
+        "BitsPerSample": 12,
+        "DefaultCropOrigin": [
+          8,
+          5
+        ],
+        "DefaultCropSize": [
+          992,
+          662
+        ],
+        "FrameRate": "30000/1001",
+        "BlackLevel": [
+          "262178/1024",
+          "262178/1024",
+          "262178/1024",
+          "262178/1024"
+        ]
+      }
+    },
+    {
+      "frame": 88,
+      "tiff_header": true,
+      "tags": {
+        "ImageWidth": 1008,
+        "ImageLength": 672,
+        "BitsPerSample": 12,
+        "DefaultCropOrigin": [
+          8,
+          5
+        ],
+        "DefaultCropSize": [
+          992,
+          662
+        ],
+        "FrameRate": "30000/1001",
+        "BlackLevel": [
+          "262127/1024",
+          "262127/1024",
+          "262127/1024",
+          "262127/1024"
+        ]
+      }
+    }
+  ]
+}

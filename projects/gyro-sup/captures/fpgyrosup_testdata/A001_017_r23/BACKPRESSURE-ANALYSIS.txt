@@ -1,0 +1,94 @@
+fpGyroSup r23 A001_017: double-buffer / writer back-pressure analysis
+Date: 2026-08-31
+
+Finding
+The large gaps are caused by ownership back-pressure while a raw half remains
+WRITING across a third synchronous 64 KiB GCSV media write. They are not buffer
+overwrite, malformed text, signed decimal fallback, or a random timestamp bug.
+
+Current state machine
+- Each 32 KiB half holds at most 3,836 gyro rows (1.5344 s at 2,500 Hz); actual
+  blocks in A001_017 hold about 3,790--3,828 rows because a whole ring batch must
+  fit.
+- Producer states are EMPTY -> FILLING -> READY.
+- Writer changes READY -> WRITING, formats the entire block and performs every
+  required F_WRITE before finally publishing EMPTY.
+- While one half is WRITING, only the other half can absorb new samples. Thus
+  effective jitter tolerance is about 1.52 s, not the sum of both halves.
+- If the filling half becomes READY before the writer releases the other one,
+  the callback advances the hardware-ring head and drops the whole current
+  batch. It repeats this on each callback until an EMPTY half appears.
+
+Exact A001_017 correlation
+The timestamp discontinuities identify 40 sealed raw blocks. Simulating the
+real complete-line 64 KiB threshold from the exact GCSV byte lengths produces
+five three-write blocks. Every one, and only these five, is followed one block
+later by a large drop interval:
+
+  writer block   text bytes   flushes   gap after other half fills
+       22          144,943       3             380.942 ms
+       27          159,557       3              41.746 ms
+       29          159,610       3             284.950 ms
+       31          157,871       3             280.961 ms
+       35          146,349       3             122.815 ms
+
+The one-block offset is expected: while the writer owns block N, the callback
+fills block N+1. The visible gap begins only when N+1 is full and N is still not
+EMPTY.
+
+There are strong controls in the same recording. Blocks 25 and 26 contain
+150,088 and 152,065 text bytes but need only two writes because of their initial
+text-buffer phase; neither causes a large gap. Therefore text size alone is not
+enough. Crossing into a third synchronous media call is the decisive event.
+
+Interpretation
+- r23 decimal lookup improved the CPU side, which is why completeness improved
+  despite stronger motion. Formatting still determines how quickly the next
+  64 KiB boundary is crossed, but arithmetic is now secondary.
+- The fixed 5 ms sleep adds only 5 ms per call. It cannot by itself explain
+  41--381 ms of overrun. The variable F_WRITE wait / card arbitration with the
+  CinemaDNG writer dominates the service-time tail.
+- This is primarily a transient latency problem, not proven permanent average
+  throughput below 2,500 Hz: two-write blocks at comparable byte counts catch
+  up, and loss occurs in bounded bursts at the three-write cases.
+
+Recommended structural order
+1. Three 32 KiB raw slots, retaining 64 KiB writes and the 5 ms yield.
+   One WRITING slot would leave two slots (about 3.04 s) of capture headroom.
+   The observed worst overrun is only 0.381 s. A free 0x38000..0x40000 pool
+   window is available for the third slot; memory remains fixed with duration.
+   This changes queue depth without changing the card behaviour already proven
+   not to terminate CinemaDNG.
+
+2. Four 16 KiB slots, if preserving the existing 64 KiB raw allocation is more
+   important than implementation simplicity. This is the earlier suggested
+   "mark 16 KiB READY, continue in the next slot" design. One WRITING slot then
+   leaves three slots, about 2.30 s of queued capture, and an observed slot
+   expands to roughly 65--81 KiB instead of 125--160 KiB. It is a sound design,
+   but needs four metadata records, ordered sequence selection and four accel
+   zones. Merely shrinking A/B to two 16 KiB slots would be worse: it leaves
+   only about 0.76 s of headroom.
+
+3. An 80 KiB text threshold is a smaller experiment and would keep every
+   observed r23 block to at most two calls, but each card mutex hold becomes 25%
+   larger. Because this camera terminates recording when media latency is too
+   high, changing the proven 64 KiB call size is less conservative than adding
+   queue depth.
+
+Not recommended as the next move
+- Larger A/B halves: block expansion and service time grow with the deadline,
+  while there is still only one spare slot.
+- Removing the 5 ms yield or raising writer priority: r18/r19 already showed
+  that uninterrupted formatter work can starve the producer and reduce
+  completeness to 83--86%.
+- Reusing r18 whole-block text staging unchanged: it releases raw before media
+  I/O but holds raw throughout a long uninterrupted formatting phase; the prior
+  hardware result is a regression, not a theoretical concern.
+
+Useful r24 diagnostics
+- Writer phase: FORMAT, F_WRITE, POST_WRITE_SLEEP.
+- Per-block sequence, service time and flush count.
+- Drop counters split by writer phase, plus maximum service time for two-write
+  and three-write blocks.
+- Persist the fixed-size counters only after recording stops. These probes can
+  verify the ownership diagnosis without adding any recording-time media call.

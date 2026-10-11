@@ -1,0 +1,89 @@
+# SIGMA fp Ver.5.02 - full pre-StillCreateRaw capture
+# Take ONE normal single-frame still immediately after the first color bar.
+# The hook copies 0x03000000 bytes before returning to StillCreateRaw.
+# Start cue: 1 color-bar pulse. File-complete cue: 2 color-bar pulses.
+# RAM-only; cold boot restores executable RAM.
+
+display monitor 0 1
+display colorbar 1 0
+ctrl sleep 700
+display colorbar 0 0
+ctrl sleep 400
+
+# Reserve a 48 MiB USER-pool destination. The hook validates pointer and size.
+memmgr bufmem get 0 0x03000000
+mem save \PREHANDLE.BIN 0xC3757A7C,,0xC
+
+# Initialize result: raw source, copy destination, copied bytes, mode, bit, count.
+mem set 0xC072E500 0xDEADBEEF
+mem set 0xC072E504 0xDEADBEEF
+mem set 0xC072E508 0x00000000
+mem set 0xC072E50C 0xDEADBEEF
+mem set 0xC072E510 0xDEADBEEF
+mem set 0xC072E514 0xDEADBEEF
+
+# AcqEndTrans wrapper. It calls the original, validates the USER allocation,
+# memcpy()s the DMA raw buffer immediately, records metadata, then returns.
+mem set 0xC072DE64 0xE92D40F0
+mem set 0xC072DE68 0xE1A04001
+mem set 0xC072DE6C 0xE308CA38
+mem set 0xC072DE70 0xE34CC031
+mem set 0xC072DE74 0xE12FFF3C
+mem set 0xC072DE78 0xE5945030
+mem set 0xC072DE7C 0xE3076A7C
+mem set 0xC072DE80 0xE34C6375
+mem set 0xC072DE84 0xE5967000
+mem set 0xC072DE88 0xE5963004
+mem set 0xC072DE8C 0xE3002000
+mem set 0xC072DE90 0xE3402300
+mem set 0xC072DE94 0xE3570000
+mem set 0xC072DE98 0x0A000008
+mem set 0xC072DE9C 0xE1530002
+mem set 0xC072DEA0 0x3A000006
+mem set 0xC072DEA4 0xE1A00007
+mem set 0xC072DEA8 0xE1A01005
+mem set 0xC072DEAC 0xE305C10C
+mem set 0xC072DEB0 0xE34CC001
+mem set 0xC072DEB4 0xE12FFF3C
+mem set 0xC072DEB8 0xE5963004
+mem set 0xC072DEBC 0xEA000000
+mem set 0xC072DEC0 0xE3A03000
+mem set 0xC072DEC4 0xE30E1500
+mem set 0xC072DEC8 0xE34C1072
+mem set 0xC072DECC 0xE5815000
+mem set 0xC072DED0 0xE5817004
+mem set 0xC072DED4 0xE5813008
+mem set 0xC072DED8 0xE5940014
+mem set 0xC072DEDC 0xE581000C
+mem set 0xC072DEE0 0xE5940018
+mem set 0xC072DEE4 0xE5810010
+mem set 0xC072DEE8 0xE5940024
+mem set 0xC072DEEC 0xE5810014
+mem set 0xC072DEF0 0xE8BD80F0
+
+# Clear/disable inline ISP WDD+BDD and PDAF setup before exposure.
+mem set 0xC03183F4 0xE3A02000
+mem set 0xC0318414 0xE3A02000
+mem set 0xC0318434 0xE3A02000
+# Bypass later CPU PdafCorrect as an independent guard.
+mem set 0xC030FB20 0xE12FFF1E
+
+# Activate the normal single-frame post-DMA callsite last.
+mem set 0xC0315DD4 0xEB106022
+
+# Shoot immediately. The raw copy occurs inside the hook; this wait only delays
+# card serialization until the ordinary DNG capture has finished.
+ctrl sleep 45000
+
+mem save \PREMETA.BIN 0xC072E500,,0x20
+mem save \PREHOOK.BIN 0xC072DE64,,0x90
+mem save \PREDEF.BIN 0xC03183E8,,0x60
+mem save \PRERAW.BIN 0x44F6ADC0,,0x03000000
+
+display colorbar 1 0
+ctrl sleep 700
+display colorbar 0 0
+ctrl sleep 400
+display colorbar 1 0
+ctrl sleep 700
+display colorbar 0 0

@@ -1,0 +1,48 @@
+fpGyroSup GCSV-only r17 + aligned accel-text source read experiment r22
+Build date: 2026-08-31
+Camera/firmware: SIGMA fp Ver.5.02
+Build type: release AutoRun, no USB shell
+Base: exact archived r17 buffered streaming binary path
+
+Reason for this build:
+- r21 A001_014 proved that motion is a material load variable.  The first
+  stationary 30 seconds retained 99.968--99.984% in every five-second bin.
+  Once motion made at least one gyro axis exceed +/-99 on 95--100% of rows,
+  five major gaps appeared and total completeness fell to 98.053563%.
+- r21's bounded put_i16 multiply was correct but saved too little.  It was
+  fully removed first; the rebuilt PGEN then matched archived r17 byte for byte.
+- The cached accel ASCII fragment is copied on every 2,500 Hz row.  Its old
+  byte loop spends four instructions per byte even though the source is stable
+  and aligned.  A typical 13--14-byte fragment costs 52--56 loop instructions.
+
+Only r22 change:
+- When at least four cached accel bytes remain, one aligned 32-bit source load
+  replaces four source byte loads.  The word is unpacked and written through
+  four STRB instructions.
+- The GCSV destination remains bytewise because its address is not guaranteed
+  to be aligned.  There is no unaligned STR/STRH.
+- A four-byte group is entered only when all four bytes belong to the fragment.
+  The exact final 0--3 bytes use the original byte loop.
+- Typical 13--14-byte fragments now take about 41--45 loop instructions,
+  saving about 11 instructions per row, roughly 27,500 instructions per second.
+
+Unchanged r17 pipeline:
+- r17 put_uint and put_i16 are restored exactly.  r20's /1000 table and r21's
+  0x147B reciprocal are absent.
+- Two fixed 32 KiB raw A/B halves; memory use is independent of take length.
+- The writer formats and writes complete-line chunks at 64 KiB with a 5 ms
+  cooperative yield.
+- The 2,500 Hz callback only copies raw data.
+- Native lifecycle, transaction lock, JSON generation and task priority are
+  unchanged.  No GYR file is created by this stream.
+
+Verification:
+- All 48 unit, exact-format, layout and safety tests pass.
+- The copy model covers every possible cached-fragment length 0..19 and emits
+  exactly the original bytes without over-read or over-write.
+- O_STREAM_STATE + ST_ACC_TEXT is proven 4-byte aligned; the only word access
+  is an aligned source LDR.
+- AutoRun and VSHL are byte-identical to archived r17.
+- PGEN pool code is 7,548 bytes; 7,564 bytes on card, only 60 bytes larger than
+  r17 and far below the 64 KiB limit.
+- This is an experimental hardware build, not fp-gyro-sup-v1.1.

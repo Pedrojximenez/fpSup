@@ -1,0 +1,45 @@
+# SIGMA fp Ver.5.02 - map six retained 8 MiB USER-pool allocations
+# Start cue: 1 color-bar pulse. Mapping complete: 2 color-bar pulses.
+# Do not take a picture in this pass.
+
+display monitor 0 1
+display colorbar 1 0
+ctrl sleep 700
+display colorbar 0 0
+ctrl sleep 400
+
+# Redirect the bufmem shell handler's 12-byte handle destination for each get.
+# Handle records are retained at C072E600..C072E65F.
+mem set 0xC03FA3F8 0xE30E5600
+mem set 0xC03FA400 0xE34C5072
+memmgr bufmem get 0 0x00800000
+
+mem set 0xC03FA3F8 0xE30E5610
+memmgr bufmem get 0 0x00800000
+
+mem set 0xC03FA3F8 0xE30E5620
+memmgr bufmem get 0 0x00800000
+
+mem set 0xC03FA3F8 0xE30E5630
+memmgr bufmem get 0 0x00800000
+
+mem set 0xC03FA3F8 0xE30E5640
+memmgr bufmem get 0 0x00800000
+
+mem set 0xC03FA3F8 0xE30E5650
+memmgr bufmem get 0 0x00800000
+
+mem save \POOL6.BIN 0xC072E600,,0x60
+mem save \POOLCODE.BIN 0xC03FA3F8,,0xC
+
+# Restore the shell handler's authoritative handle destination.
+mem set 0xC03FA3F8 0xE3075A7C
+mem set 0xC03FA400 0xE34C5375
+
+display colorbar 1 0
+ctrl sleep 700
+display colorbar 0 0
+ctrl sleep 400
+display colorbar 1 0
+ctrl sleep 700
+display colorbar 0 0

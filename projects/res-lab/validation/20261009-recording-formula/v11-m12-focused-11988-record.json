@@ -1,0 +1,576 @@
+{
+  "label": "v11-m12-focused-11988",
+  "expected_rank": 0,
+  "observations": [
+    {
+      "seconds": 0.609,
+      "recording": 1
+    },
+    {
+      "seconds": 1.115,
+      "recording": 1
+    },
+    {
+      "seconds": 1.622,
+      "recording": 1
+    },
+    {
+      "seconds": 2.131,
+      "recording": 1
+    },
+    {
+      "seconds": 2.637,
+      "recording": 1
+    },
+    {
+      "seconds": 3.145,
+      "recording": 1
+    },
+    {
+      "seconds": 3.784,
+      "recording": 1
+    },
+    {
+      "seconds": 4.292,
+      "recording": 1
+    },
+    {
+      "seconds": 4.801,
+      "recording": 1
+    },
+    {
+      "seconds": 5.336,
+      "recording": 1
+    },
+    {
+      "seconds": 5.84,
+      "recording": 1
+    },
+    {
+      "seconds": 6.343,
+      "recording": 1
+    }
+  ],
+  "manual_stop": true,
+  "before": {
+    "endpoint": "0xc072e260",
+    "consumer_base": "0x451188c0",
+    "consumer_state": "0x4512a840",
+    "registry": {
+      "magic": 826495574,
+      "abi": 2,
+      "lock": 0,
+      "provider": 1111575634,
+      "generation": 1,
+      "result": 0,
+      "detail": 0,
+      "count": 1,
+      "packs": 1,
+      "asset_used": 47104,
+      "row": 5
+    },
+    "consumer": {
+      "flag": 1,
+      "current": 6,
+      "res_value": 2,
+      "format_latch": 0,
+      "nrows": 6,
+      "nentries": 59,
+      "nmodes": 7
+    },
+    "selected": 6,
+    "rows": [
+      {
+        "index": 0,
+        "on": 1,
+        "width": 2000,
+        "height": 1334,
+        "stock": 2,
+        "menu_row": 2,
+        "pack": "0x45139bc0",
+        "label": "OG2K",
+        "ui_result": 1
+      },
+      {
+        "index": 1,
+        "on": 1,
+        "width": 3456,
+        "height": 2304,
+        "stock": 3,
+        "menu_row": 3,
+        "pack": "0x4513b180",
+        "label": "OG35K",
+        "ui_result": 1
+      },
+      {
+        "index": 2,
+        "on": 1,
+        "width": 3008,
+        "height": 2000,
+        "stock": 2,
+        "menu_row": 4,
+        "pack": "0x4513ce80",
+        "label": "OG3K",
+        "ui_result": 1
+      },
+      {
+        "index": 3,
+        "on": 1,
+        "width": 3840,
+        "height": 2560,
+        "stock": 3,
+        "menu_row": 5,
+        "pack": "0x4513e100",
+        "label": "OG4K",
+        "ui_result": 1
+      },
+      {
+        "index": 4,
+        "on": 1,
+        "width": 2096,
+        "height": 1238,
+        "stock": 2,
+        "menu_row": 6,
+        "pack": "0x4513f140",
+        "label": "S16",
+        "ui_result": 1
+      },
+      {
+        "index": 5,
+        "on": 1,
+        "width": 992,
+        "height": 662,
+        "stock": 2,
+        "menu_row": 7,
+        "pack": "0x44f6adc0",
+        "label": "VRC000",
+        "ui_result": 1
+      }
+    ],
+    "producer_base": "0x452b9980",
+    "producer_state": "0x45328220",
+    "producer": {
+      "result": 1,
+      "app": 3331322648,
+      "reader": 3332398568,
+      "entry": 3332533760,
+      "page": 1160515116,
+      "nbr": 1160635920,
+      "nbr_len": 2708,
+      "core_base": 1160510528,
+      "pages_state": 1,
+      "out_w": 992,
+      "out_h": 662,
+      "ro_w": 2016,
+      "ro_h": 672,
+      "ro_sx": 3,
+      "ro_sy": 6,
+      "bin_h": 1,
+      "bin_v": 1,
+      "axis_armed": 1,
+      "modes_rows": 2,
+      "mode_sel": 1,
+      "canvas_valid": 1,
+      "crop_w": 0,
+      "crop_h": 0,
+      "ratio": 0,
+      "edit_field": 0,
+      "editing": 0
+    },
+    "mode_ids": [
+      9,
+      12
+    ],
+    "loaded_headers": {
+      "32RESCUS.BIN": {
+        "file_len": 76288,
+        "block_size": 746688,
+        "id": 1398096722,
+        "version": 4,
+        "min_services": 3
+      },
+      "50RESLAB.BIN": {
+        "file_len": 452768,
+        "block_size": 720896,
+        "id": 1111575634,
+        "version": 8,
+        "min_services": 3
+      }
+    },
+    "fps_state": {
+      "VR_UI": 1,
+      "VR_WHY": 1,
+      "VRATE": 0,
+      "VR_COMMITS": 0,
+      "DIRTY": 1,
+      "PICKOK": 1,
+      "FPSLATCH": 1114636288,
+      "LAST_ENT": 6880,
+      "HITS": 63342
+    },
+    "engine_state_valid": true,
+    "engine_fps": 60.0,
+    "picked_entry": {
+      "FIVE": 5,
+      "PID": 55,
+      "MODE": 236,
+      "KEYPTR": 1158857524,
+      "ROW": 5,
+      "W0": 21627210,
+      "W1": 395036,
+      "ENGFPS": 1114636288,
+      "NOMINAL": 120,
+      "VM": 6,
+      "VAR": 12,
+      "VRATE": 0
+    },
+    "frame_cycles": 600600,
+    "sensor_timing_fps": 119.88011988011988,
+    "fps_gui": {
+      "MV_FrameRate": "OK:MV_FrameRate -> 8\n\n",
+      "EXCL_FrameRate": "OK:EXCL_FrameRate -> 0\n\n"
+    },
+    "fps_getter": "7\n\n",
+    "quality_getter": "0\n\n",
+    "screen": "LV_CINE_MEDIUM"
+  },
+  "clips_before": {
+    "A001_001": "20261008",
+    "A001_002": "20261008",
+    "A001_003": "20261009",
+    "A001_004": "20261009",
+    "A001_005": "20261009",
+    "A001_006": "20261009",
+    "A001_007": "20261009",
+    "A001_008": "20261009",
+    "A001_009": "20261009",
+    "A001_010": "20261009",
+    "A001_011": "20261009",
+    "A001_012": "20261009",
+    "A001_013": "20261009",
+    "A001_014": "20261009",
+    "A001_015": "20261009",
+    "A001_016": "20261009",
+    "A001_017": "20261009",
+    "A001_018": "20261009",
+    "A001_019": "20261009",
+    "A001_020": "20261009"
+  },
+  "capture_sent": true,
+  "capture_count": 1,
+  "idle_after": true,
+  "native_log": "slot=1, cnt=12/600\nsize=131072*978816(119GB), free=93%, exFAT, UHS-II\ntime       : 2026/10/09 23:51:39 \nrec factor : Nothing \nui factor  : Button \nbattery    : OK \ntemp(BAT)  : OK \ntemp(BODY) : OK \ntemp(LCD)  : OK \ntemp(CMOS) : OK \nfile-size=1095168, bulk-size=67108864(61.3)\nreq_cnt=668, fin_cnt=668, key\nrequest  ,finish   ,diff,gap ,reqcnt,fincnt,diff,sdb,MB/s\n     1115,     1370, 255,1115,    57,     1,  56,  6, 244\n     1582,     1840, 258, 212,   114,    57,  57,  5, 246\n     2051,     2305, 254, 211,   171,   114,  57,  5, 250\n     2516,     2773, 257, 211,   228,   171,  57,  5, 247\n     2985,     3242, 257, 212,   285,   228,  57,  5, 247\n     3454,     3710, 256, 212,   342,   285,  57,  5, 248\n     3922,     4177, 255, 212,   399,   342,  57,  5, 249\n     4389,     4644, 255, 212,   456,   399,  57,  5, 249\n     4848,     5108, 260, 204,   512,   456,  56,  6, 240\n     5317,     5571, 254, 209,   569,   513,  56,  6, 245\n     5813,     6068, 255, 242,   626,   569,  57,  2, 249\n     6125,     6338, 213,  57,   668,   626,  42, 52, 221\n",
+  "clips_after": {
+    "A001_001": "20261008",
+    "A001_002": "20261008",
+    "A001_003": "20261009",
+    "A001_004": "20261009",
+    "A001_005": "20261009",
+    "A001_006": "20261009",
+    "A001_007": "20261009",
+    "A001_008": "20261009",
+    "A001_009": "20261009",
+    "A001_010": "20261009",
+    "A001_011": "20261009",
+    "A001_012": "20261009",
+    "A001_013": "20261009",
+    "A001_014": "20261009",
+    "A001_015": "20261009",
+    "A001_016": "20261009",
+    "A001_017": "20261009",
+    "A001_018": "20261009",
+    "A001_019": "20261009",
+    "A001_020": "20261009",
+    "A001_021": "20261009"
+  },
+  "new_clips": [
+    "A001_021"
+  ],
+  "capture_requested": 1,
+  "capture_delivered": 1,
+  "previews": [
+    "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-recording-formula/v11-m12-focused-11988-rec-preview.jpg"
+  ],
+  "clip": "A001_021",
+  "frames_requested": 668,
+  "frames_finished": 668,
+  "file_size": 1095168,
+  "samples": [
+    {
+      "frame": 1,
+      "file": "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-recording-formula/v11-m12-focused-11988-frame000001.dng",
+      "tiff_header": true,
+      "tags": {
+        "NewSubfileType": 0,
+        "ImageWidth": 1008,
+        "ImageLength": 672,
+        "BitsPerSample": 12,
+        "Compression": 1,
+        "StripOffsets": 78848,
+        "StripByteCounts": 1016064,
+        "BlackLevel": [
+          "262111/1024",
+          "262111/1024",
+          "262111/1024",
+          "262111/1024"
+        ],
+        "WhiteLevel": 4095,
+        "DefaultCropOrigin": [
+          8,
+          5
+        ],
+        "DefaultCropSize": [
+          992,
+          662
+        ],
+        "BaselineExposure": "3072/1024",
+        "FrameRate": "120000/1001"
+      }
+    },
+    {
+      "frame": 334,
+      "file": "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-recording-formula/v11-m12-focused-11988-frame000334.dng",
+      "tiff_header": true,
+      "tags": {
+        "NewSubfileType": 0,
+        "ImageWidth": 1008,
+        "ImageLength": 672,
+        "BitsPerSample": 12,
+        "Compression": 1,
+        "StripOffsets": 78848,
+        "StripByteCounts": 1016064,
+        "BlackLevel": [
+          "262159/1024",
+          "262159/1024",
+          "262159/1024",
+          "262159/1024"
+        ],
+        "WhiteLevel": 4095,
+        "DefaultCropOrigin": [
+          8,
+          5
+        ],
+        "DefaultCropSize": [
+          992,
+          662
+        ],
+        "BaselineExposure": "3072/1024",
+        "FrameRate": "120000/1001"
+      }
+    },
+    {
+      "frame": 668,
+      "file": "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-recording-formula/v11-m12-focused-11988-frame000668.dng",
+      "tiff_header": true,
+      "tags": {
+        "NewSubfileType": 0,
+        "ImageWidth": 1008,
+        "ImageLength": 672,
+        "BitsPerSample": 12,
+        "Compression": 1,
+        "StripOffsets": 78848,
+        "StripByteCounts": 1016064,
+        "BlackLevel": [
+          "262134/1024",
+          "262134/1024",
+          "262134/1024",
+          "262134/1024"
+        ],
+        "WhiteLevel": 4095,
+        "DefaultCropOrigin": [
+          8,
+          5
+        ],
+        "DefaultCropSize": [
+          992,
+          662
+        ],
+        "BaselineExposure": "3072/1024",
+        "FrameRate": "120000/1001"
+      }
+    }
+  ],
+  "after": {
+    "endpoint": "0xc072e260",
+    "consumer_base": "0x451188c0",
+    "consumer_state": "0x4512a840",
+    "registry": {
+      "magic": 826495574,
+      "abi": 2,
+      "lock": 0,
+      "provider": 1111575634,
+      "generation": 1,
+      "result": 0,
+      "detail": 0,
+      "count": 1,
+      "packs": 1,
+      "asset_used": 47104,
+      "row": 5
+    },
+    "consumer": {
+      "flag": 1,
+      "current": 6,
+      "res_value": 2,
+      "format_latch": 0,
+      "nrows": 6,
+      "nentries": 59,
+      "nmodes": 7
+    },
+    "selected": 6,
+    "rows": [
+      {
+        "index": 0,
+        "on": 1,
+        "width": 2000,
+        "height": 1334,
+        "stock": 2,
+        "menu_row": 2,
+        "pack": "0x45139bc0",
+        "label": "OG2K",
+        "ui_result": 1
+      },
+      {
+        "index": 1,
+        "on": 1,
+        "width": 3456,
+        "height": 2304,
+        "stock": 3,
+        "menu_row": 3,
+        "pack": "0x4513b180",
+        "label": "OG35K",
+        "ui_result": 1
+      },
+      {
+        "index": 2,
+        "on": 1,
+        "width": 3008,
+        "height": 2000,
+        "stock": 2,
+        "menu_row": 4,
+        "pack": "0x4513ce80",
+        "label": "OG3K",
+        "ui_result": 1
+      },
+      {
+        "index": 3,
+        "on": 1,
+        "width": 3840,
+        "height": 2560,
+        "stock": 3,
+        "menu_row": 5,
+        "pack": "0x4513e100",
+        "label": "OG4K",
+        "ui_result": 1
+      },
+      {
+        "index": 4,
+        "on": 1,
+        "width": 2096,
+        "height": 1238,
+        "stock": 2,
+        "menu_row": 6,
+        "pack": "0x4513f140",
+        "label": "S16",
+        "ui_result": 1
+      },
+      {
+        "index": 5,
+        "on": 1,
+        "width": 992,
+        "height": 662,
+        "stock": 2,
+        "menu_row": 7,
+        "pack": "0x44f6adc0",
+        "label": "VRC000",
+        "ui_result": 1
+      }
+    ],
+    "producer_base": "0x452b9980",
+    "producer_state": "0x45328220",
+    "producer": {
+      "result": 1,
+      "app": 3331322648,
+      "reader": 3332398568,
+      "entry": 3332533760,
+      "page": 1160515116,
+      "nbr": 1160635920,
+      "nbr_len": 2708,
+      "core_base": 1160510528,
+      "pages_state": 1,
+      "out_w": 992,
+      "out_h": 662,
+      "ro_w": 2016,
+      "ro_h": 672,
+      "ro_sx": 3,
+      "ro_sy": 6,
+      "bin_h": 1,
+      "bin_v": 1,
+      "axis_armed": 1,
+      "modes_rows": 2,
+      "mode_sel": 1,
+      "canvas_valid": 1,
+      "crop_w": 0,
+      "crop_h": 0,
+      "ratio": 0,
+      "edit_field": 0,
+      "editing": 0
+    },
+    "mode_ids": [
+      9,
+      12
+    ],
+    "loaded_headers": {
+      "32RESCUS.BIN": {
+        "file_len": 76288,
+        "block_size": 746688,
+        "id": 1398096722,
+        "version": 4,
+        "min_services": 3
+      },
+      "50RESLAB.BIN": {
+        "file_len": 452768,
+        "block_size": 720896,
+        "id": 1111575634,
+        "version": 8,
+        "min_services": 3
+      }
+    },
+    "fps_state": {
+      "VR_UI": 1,
+      "VR_WHY": 1,
+      "VRATE": 0,
+      "VR_COMMITS": 0,
+      "DIRTY": 1,
+      "PICKOK": 1,
+      "FPSLATCH": 1114636288,
+      "LAST_ENT": 6880,
+      "HITS": 66893
+    },
+    "engine_state_valid": true,
+    "engine_fps": 60.0,
+    "picked_entry": {
+      "FIVE": 5,
+      "PID": 55,
+      "MODE": 236,
+      "KEYPTR": 1158857524,
+      "ROW": 5,
+      "W0": 21627210,
+      "W1": 395036,
+      "ENGFPS": 1114636288,
+      "NOMINAL": 120,
+      "VM": 6,
+      "VAR": 12,
+      "VRATE": 0
+    },
+    "frame_cycles": 600600,
+    "sensor_timing_fps": 119.88011988011988,
+    "fps_gui": {
+      "MV_FrameRate": "OK:MV_FrameRate -> 8\n\n",
+      "EXCL_FrameRate": "OK:EXCL_FrameRate -> 0\n\n"
+    },
+    "fps_getter": "7\n\n",
+    "quality_getter": "0\n\n",
+    "screen": "LV_CINE_MEDIUM"
+  },
+  "passed_continuous": true
+}

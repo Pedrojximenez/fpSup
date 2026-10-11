@@ -1,0 +1,130 @@
+{
+  "firmware_sha256": "92a8ee993f6c3d66c251e88d45a2ccd5135c6cf7342717784321c2ed506e2fb4",
+  "hook_site": "0xc032d870",
+  "source_sha256": "c28d0688c6c400aeb3816da1f5673196c29958a60aa9b8f7b0e1ab85d081d0ca",
+  "test_sha256": "ac35e86168cf76a65a633bdd362a80d2397436010eedf7bcfa9e31b72f53e07e",
+  "code_sha256": "92d457e8ffc77ea2179ef5361fe1807d9af594200dcd2dfaabfe7ba152f43a0e",
+  "code_bytes": 244,
+  "cases": [
+    {
+      "mode": 0,
+      "stock": [
+        0,
+        0
+      ],
+      "candidate": [
+        192,
+        8
+      ],
+      "changed_offsets": [
+        11,
+        17
+      ]
+    },
+    {
+      "mode": 129,
+      "stock": [
+        0,
+        0
+      ],
+      "candidate": [
+        192,
+        8
+      ],
+      "changed_offsets": [
+        11,
+        17
+      ]
+    },
+    {
+      "mode": 141,
+      "stock": [
+        0,
+        0
+      ],
+      "candidate": [
+        192,
+        8
+      ],
+      "changed_offsets": [
+        11,
+        17
+      ]
+    },
+    {
+      "mode": 144,
+      "stock": [
+        0,
+        0
+      ],
+      "candidate": [
+        192,
+        8
+      ],
+      "changed_offsets": [
+        11,
+        17
+      ]
+    },
+    {
+      "mode": 6,
+      "stock": [
+        192,
+        8
+      ],
+      "candidate": [
+        192,
+        8
+      ],
+      "changed_offsets": []
+    },
+    {
+      "mode": 95,
+      "stock": [
+        192,
+        8
+      ],
+      "candidate": [
+        192,
+        8
+      ],
+      "changed_offsets": []
+    },
+    {
+      "mode": 100,
+      "stock": [
+        192,
+        8
+      ],
+      "candidate": [
+        192,
+        8
+      ],
+      "changed_offsets": []
+    },
+    {
+      "mode": 122,
+      "stock": [
+        192,
+        8
+      ],
+      "candidate": [
+        192,
+        8
+      ],
+      "changed_offsets": []
+    }
+  ],
+  "pass_through_controls": 7,
+  "two_stock_channel_calls_per_case": true,
+  "limits": [
+    "C032D5E0 is native; memset, manager lookup, settings getters and receiver hardware calls are strict stubs",
+    "the two real channel call sites execute, but no MMIO/DMA/pixel data or camera is exercised"
+  ],
+  "mutations_detected": [
+    "MUTATE_ALL_MODES",
+    "MUTATE_SKIP_NATIVE",
+    "MUTATE_SKIP_C0",
+    "MUTATE_WRONG_OFFSET"
+  ]
+}

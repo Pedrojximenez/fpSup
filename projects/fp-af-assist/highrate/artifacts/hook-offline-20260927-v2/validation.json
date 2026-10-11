@@ -1,0 +1,50 @@
+{
+  "schema": "fp.af-first-hook-offline-validation/v1",
+  "at": "2026-09-27T21:00:54.136257+08:00",
+  "hardware_hook_installed": false,
+  "camera_capture_received": false,
+  "live_ready": false,
+  "tests": [
+    {
+      "suite": "highrate.test_highrate",
+      "passed": 19,
+      "scope": "actual assembled recorder, narrow ARM model and capture decoder"
+    },
+    {
+      "suite": "highrate.test_af_probe_helper",
+      "passed": 18,
+      "scope": "actual helper bytes under Unicorn; native services mocked"
+    },
+    {
+      "suite": "highrate.test_af_hook_trial",
+      "passed": 20,
+      "scope": "installer model and default production zero-I/O shutdown gate"
+    },
+    {
+      "suite": "fp_usb_shell/host/tests/test_ep83_host.py",
+      "passed": 11,
+      "scope": "actual fpshd C with fake libusb"
+    }
+  ],
+  "total_passed": 68,
+  "host_candidate": {
+    "file": "fpshd-ep83-candidate",
+    "sha256": "d49af74430becc84ad77292af6a4f91ceff014b29b4d72a01e37d4bf29dd029f",
+    "installed": false,
+    "compiler_argv": [
+      "cc",
+      "-std=c11",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/host/fpshd.c",
+      "-I/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/diagnostics/include",
+      "-L/Users/dido/Developer.localized/SIGMAfp_re/projects/usb-shell-sup/lib",
+      "-lusb-1.0",
+      "-Wl,-rpath,/Users/dido/Developer.localized/SIGMAfp_re/projects/usb-shell-sup/lib",
+      "-o",
+      "NEW_OUTPUT_PATH"
+    ]
+  }
+}

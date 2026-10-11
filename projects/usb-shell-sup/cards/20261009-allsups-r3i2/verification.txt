@@ -1,0 +1,13 @@
+2026-10-09: r3i2 final hardware-tested management candidate.
+Management C: python3 -B -m unittest v3.test_allsups v3.test_manage_mutations — 18 tests OK (17 behavioral tests plus one test of five isolated faulty variants); all five variants detected.
+Native UI: python3 -B -m unittest test_manage_page — six tests OK on final r3i2 UI, including the popup List's FT_Default binding.
+The r3i2 UI-only repair leaves loader code bytes identical to r3i; C tests were not unnecessarily repeated after that repair.
+git diff --check: passed.
+Default non-management loader: 7,260 bytes, SHA-256 41f3218ac1405962eee7182528e969531de4e11adf0c7a0b4868dda79f8cf67c, unchanged.
+Hardware: three shell reboots; title Left/Right paging and boundaries, native footer glyph, two-choice popup, More options visibility, current-state initialization, MENU cancellation, and callback eligibility passed.
+Final r3i2 provider counter: 0 before, 1 after Enable Right, still 1 after Disable Right; no preference change from either Right action.
+All camera LOADER.BIN, ALLSUPS.BIN and AutoRun.txt bytes exactly match this directory. FSDS count=0 and remaining 30 slots zero.
+Temporary 60BTN.BIN removed; original six product Sups retained. Final screen FT_Y6, is_recording=0.
+Prior r3h evidence: 66 baseline loader/boot/restore tests, product disable/enable across restart, and native screen-vector growth. No new baseline run claimed for this revision.
+Not exercised: physical power-switch cycles, actual product Sup settings pages, recording, AF/lens operation, network/QR update, SD formatting/restore.
+Evidence: ../20261009-allsups-r3i-live1/RESULTS.md, final-readback.json, transcript.txt and counter-proof-boot2.txt.

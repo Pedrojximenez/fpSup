@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "kind": "live_g5_sustained_compressed_write_FAILS_on_one_buffer",
+  "date": "2026-09-23",
+  "operator_scope": "live camera, DESTRUCTIVE: eight consecutive frames written compressed from a single buffer",
+  "camera": {
+    "model": "w71c1",
+    "firmware": "5.02.0.V91",
+    "media": "SD"
+  },
+  "source": {
+    "commit": null,
+    "worktree_dirty": null,
+    "git_available": false,
+    "files": {
+      "fpSup/raw/lossless_codec/single_frame_encode_discard_probe.S": "827960c09b7f22116851ba713c2fc648fca077b460942eea0657eb80fe18b049",
+      "fpSup/raw/lossless_codec/single_frame_codec_probe.py": "8117187715eae089c5dafc0395da57cdd81ff126a8af05ffe4c479d017f4f2a0"
+    }
+  },
+  "profile": {
+    "phase": 6,
+    "frames_requested": 8,
+    "buffers": 1,
+    "geometry": "1936x1090",
+    "tile": "512x368"
+  },
+  "frames": {
+    "entered": 8,
+    "finished": 8,
+    "frames_done": 8
+  },
+  "timing": {
+    "per_frame_us": [
+      13652,
+      13652,
+      13641,
+      13656,
+      13645,
+      13657,
+      13640,
+      13644
+    ],
+    "worst_us": 13657,
+    "budget_24p_us": 41708,
+    "worst_fraction_of_budget": 0.33,
+    "frames_over_budget": 0
+  },
+  "per_frame": {
+    "compressed_bytes": [
+      1222656,
+      1222656,
+      1222656,
+      1221632,
+      1222656,
+      1222656,
+      1222656,
+      1222656
+    ],
+    "source_buffers_distinct": 8
+  },
+  "integrity": {
+    "clip": "\\CINEMA\\A001_290",
+    "file_bytes_each": 1302528,
+    "frames_checked": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "all_decode": true,
+    "soi_per_frame": 12,
+    "declared_offsets_match_actual_soi": true,
+    "sha256_of_checked_frames_identical": true,
+    "stock_frames_9_and_10_differ_by": 16
+  },
+  "notes": [
+    "The timing half of the run is a clean pass: eight consecutive compressed encodes at a third of the frame budget, spread 17 us. The buffer lifetime is what fails.",
+    "This is why the mirror phase mattered. G4a proved a redirected buffer reaches the card; without it, identical frames here could have been read as the redirect not working at all."
+  ],
+  "explicitly_established": [
+    {
+      "level": "L",
+      "claim": "ONE buffer is not enough: all eight frames were written from distinct sources with distinct compressed sizes, yet the frames on the card are byte-identical. The buffer was reused before the card consumed it."
+    },
+    {
+      "level": "L",
+      "claim": "the failure is silent, not torn: every frame decodes, carries twelve tiles and has offsets matching its SOI markers. Checking only that a frame decodes would have called this a success."
+    },
+    {
+      "level": "L",
+      "claim": "the scene was not static: consecutive stock frames from the same clip differ by up to 16 LSB, so identical compressed frames cannot be explained by the subject"
+    },
+    {
+      "level": "L",
+      "claim": "the per-frame length IS taken from each frame's own registration; only the content is shared"
+    },
+    {
+      "level": "L",
+      "claim": "eight consecutive compressed encodes cost 13,640-13,657 us each, 33% of the 23.976 budget, with zero frames over budget"
+    }
+  ],
+  "explicitly_not_established": [
+    "WHEN the card actually reads the buffer: the content being uniformly the last frame's is consistent with a late per-frame DMA and with a batched write at clip close, and this run cannot tell them apart",
+    "how many buffers would be enough; the firmware's own eight-deep source ring is a hint, not a measurement",
+    "whether a larger allocation can be obtained from the writer task at all",
+    "anything about thermal behaviour: eight frames is a third of a second",
+    "the first-frame-derived capacity question, which this run does not touch"
+  ],
+  "corrections": [
+    {
+      "date": "2026-09-23",
+      "field": "integrity.sha256_of_checked_frames_identical",
+      "verdict": "MEASURED WRONG, CONCLUSION UNCHANGED",
+      "what_happened": "All four frames were fetched with a forced --size of 1,302,528. Frame 4 is really 1,301,504 bytes, so that read ran 1,024 bytes past its end and its hash was not a hash of the file.",
+      "remeasured": {
+        "frame_1_bytes": 1302528,
+        "frame_2_bytes": 1302528,
+        "frame_4_bytes": 1301504,
+        "frame_8_bytes": 1302528,
+        "frames_1_2_8_sha_identical": true,
+        "frame_1_prefix_equals_frame_4": true
+      },
+      "conclusion": "Both original claims stand and are now separable: the node length IS per-frame, taken from each frame's own registration, and frame 4 is a 1,024-byte-shorter prefix of the same shared payload. Only the buffer contents are shared; the writer's descriptor handling is per-frame and correct.",
+      "note": "BUFFER_DESIGN.md cites this as 'the fourth encode's length does not match the file read back' and lists the payload-to-descriptor relation as unknown. That particular discrepancy was my measurement, not the camera's behaviour."
+    }
+  ]
+}

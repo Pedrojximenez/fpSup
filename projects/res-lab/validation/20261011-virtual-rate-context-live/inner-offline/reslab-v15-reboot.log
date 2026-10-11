@@ -1,0 +1,14 @@
+Uncertain outcome; command will not be replayed: reboot: ERR shl frame0 rc=-1(LIBUSB_ERROR_IO) moved=0/64
+
+Replacement daemon: 79046
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/camera.py", line 174, in <module>
+    main()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/camera.py", line 168, in main
+    print('Postboot recording:',recording(),flush=True)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/camera.py", line 33, in recording
+    reply = live.checked_sh('status get is_recording')
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/live_camera.py", line 36, in checked_sh
+    raise RuntimeError(f'Uncertain outcome; command will not be replayed: {line}: {reply}')
+RuntimeError: Uncertain outcome; command will not be replayed: status get is_recording: ERR shl claim iface 0 rc=-3(LIBUSB_ERROR_ACCESS)
+

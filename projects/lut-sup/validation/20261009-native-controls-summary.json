@@ -1,0 +1,2593 @@
+{
+  "trial": "projects/lut-sup/validation/20261009-native-controls-trial-01/report.json",
+  "trial_sha256": "8a34940320ae94b70f63276f417f2d9dc422a31f3d031b1c115841080660eb1d",
+  "source_rom_sha256": "92a8ee993f6c3d66c251e88d45a2ccd5135c6cf7342717784321c2ed506e2fb4",
+  "analysis_sha256": "5e114de1b8c01664f24751023dbf19e8033ca4a259b7c915590aa9c4d5bdb7f6",
+  "ceq_decoder_sha256": "dc7ad8485be9ea3796cea0ab72d432fb5828732c92123199ab5403d3d63ae927",
+  "evidence_kind": "native_configuration_measurement",
+  "pixel_effect_verified": false,
+  "cube_deployed": false,
+  "atomic_frame_snapshot": false,
+  "restored": true,
+  "final_state": {
+    "color_mode": 12,
+    "app_current": 2,
+    "is_recording": 0,
+    "stored_record_mode": 1,
+    "applied_record_mode": 1,
+    "relative_gain": 1170,
+    "boot_id": 4040737
+  },
+  "final_controls": {
+    "SetColorModeEffect": 0,
+    "SetColorModeContrast": 0,
+    "SetColorModeSaturation": 0,
+    "SetToneControlMode": 0,
+    "SetToneManualHighlight": 0,
+    "SetToneManualShadow": 0
+  },
+  "conditions": [
+    {
+      "mode": 0,
+      "mode_name": "Standard",
+      "condition": "contrast_low",
+      "requested": {
+        "SetColorModeContrast": -5
+      },
+      "stable_changed_regions": {},
+      "tone_context0_pointer": "0xc0976f34",
+      "ceq_samples": [
+        {
+          "sample": 0,
+          "context": 0,
+          "sha256": "6c9d397f238457a487d263b4b7e7fd2c4a08f590889477f6d37b9955ad85878e"
+        },
+        {
+          "sample": 0,
+          "context": 1,
+          "sha256": "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9"
+        },
+        {
+          "sample": 1,
+          "context": 0,
+          "sha256": "6c9d397f238457a487d263b4b7e7fd2c4a08f590889477f6d37b9955ad85878e"
+        },
+        {
+          "sample": 1,
+          "context": 1,
+          "sha256": "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9"
+        },
+        {
+          "sample": 2,
+          "context": 0,
+          "sha256": "6c9d397f238457a487d263b4b7e7fd2c4a08f590889477f6d37b9955ad85878e"
+        },
+        {
+          "sample": 2,
+          "context": 1,
+          "sha256": "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9"
+        }
+      ]
+    },
+    {
+      "mode": 0,
+      "mode_name": "Standard",
+      "condition": "contrast_high",
+      "requested": {
+        "SetColorModeContrast": 5
+      },
+      "stable_changed_regions": {},
+      "tone_context0_pointer": "0xc0976f34",
+      "ceq_samples": [
+        {
+          "sample": 0,
+          "context": 0,
+          "sha256": "6c9d397f238457a487d263b4b7e7fd2c4a08f590889477f6d37b9955ad85878e"
+        },
+        {
+          "sample": 0,
+          "context": 1,
+          "sha256": "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9"
+        },
+        {
+          "sample": 1,
+          "context": 0,
+          "sha256": "6c9d397f238457a487d263b4b7e7fd2c4a08f590889477f6d37b9955ad85878e"
+        },
+        {
+          "sample": 1,
+          "context": 1,
+          "sha256": "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9"
+        },
+        {
+          "sample": 2,
+          "context": 0,
+          "sha256": "6c9d397f238457a487d263b4b7e7fd2c4a08f590889477f6d37b9955ad85878e"
+        },
+        {
+          "sample": 2,
+          "context": 1,
+          "sha256": "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9"
+        }
+      ]
+    },
+    {
+      "mode": 0,
+      "mode_name": "Standard",
+      "condition": "saturation_low",
+      "requested": {
+        "SetColorModeSaturation": -5
+      },
+      "stable_changed_regions": {},
+      "tone_context0_pointer": "0xc0976f34",
+      "ceq_samples": [
+        {
+          "sample": 0,
+          "context": 0,
+          "sha256": "6c9d397f238457a487d263b4b7e7fd2c4a08f590889477f6d37b9955ad85878e"
+        },
+        {
+          "sample": 0,
+          "context": 1,
+          "sha256": "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9"
+        },
+        {
+          "sample": 1,
+          "context": 0,
+          "sha256": "6c9d397f238457a487d263b4b7e7fd2c4a08f590889477f6d37b9955ad85878e"
+        },
+        {
+          "sample": 1,
+          "context": 1,
+          "sha256": "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9"
+        },
+        {
+          "sample": 2,
+          "context": 0,
+          "sha256": "6c9d397f238457a487d263b4b7e7fd2c4a08f590889477f6d37b9955ad85878e"
+        },
+        {
+          "sample": 2,
+          "context": 1,
+          "sha256": "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9"
+        }
+      ]
+    },
+    {
+      "mode": 0,
+      "mode_name": "Standard",
+      "condition": "saturation_high",
+      "requested": {
+        "SetColorModeSaturation": 5
+      },
+      "stable_changed_regions": {},
+      "tone_context0_pointer": "0xc0976f34",
+      "ceq_samples": [
+        {
+          "sample": 0,
+          "context": 1,
+          "sha256": "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9"
+        },
+        {
+          "sample": 1,
+          "context": 0,
+          "sha256": "6c9d397f238457a487d263b4b7e7fd2c4a08f590889477f6d37b9955ad85878e"
+        },
+        {
+          "sample": 1,
+          "context": 1,
+          "sha256": "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9"
+        },
+        {
+          "sample": 2,
+          "context": 0,
+          "sha256": "6c9d397f238457a487d263b4b7e7fd2c4a08f590889477f6d37b9955ad85878e"
+        },
+        {
+          "sample": 2,
+          "context": 1,
+          "sha256": "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9"
+        }
+      ]
+    },
+    {
+      "mode": 0,
+      "mode_name": "Standard",
+      "condition": "tone_auto_mild",
+      "requested": {
+        "SetToneControlMode": 1
+      },
+      "stable_changed_regions": {},
+      "tone_context0_pointer": "0xc0976f34",
+      "ceq_samples": [
+        {
+          "sample": 0,
+          "context": 0,
+          "sha256": "6c9d397f238457a487d263b4b7e7fd2c4a08f590889477f6d37b9955ad85878e"
+        },
+        {
+          "sample": 0,
+          "context": 1,
+          "sha256": "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9"
+        },
+        {
+          "sample": 1,
+          "context": 0,
+          "sha256": "0b302d617752ce23d00d2afcf88a1f807d2915cab9fadb9b60682f55f52c1431"
+        },
+        {
+          "sample": 1,
+          "context": 1,
+          "sha256": "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9"
+        },
+        {
+          "sample": 2,
+          "context": 0,
+          "sha256": "6c9d397f238457a487d263b4b7e7fd2c4a08f590889477f6d37b9955ad85878e"
+        },
+        {
+          "sample": 2,
+          "context": 1,
+          "sha256": "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9"
+        }
+      ]
+    },
+    {
+      "mode": 0,
+      "mode_name": "Standard",
+      "condition": "tone_auto_strong",
+      "requested": {
+        "SetToneControlMode": 2
+      },
+      "stable_changed_regions": {},
+      "tone_context0_pointer": "0xc0976f34",
+      "ceq_samples": [
+        {
+          "sample": 0,
+          "context": 0,
+          "sha256": "6c9d397f238457a487d263b4b7e7fd2c4a08f590889477f6d37b9955ad85878e"
+        },
+        {
+          "sample": 0,
+          "context": 1,
+          "sha256": "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9"
+        },
+        {
+          "sample": 1,
+          "context": 0,
+          "sha256": "6c9d397f238457a487d263b4b7e7fd2c4a08f590889477f6d37b9955ad85878e"
+        },
+        {
+          "sample": 1,
+          "context": 1,
+          "sha256": "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9"
+        },
+        {
+          "sample": 2,
+          "context": 0,
+          "sha256": "6c9d397f238457a487d263b4b7e7fd2c4a08f590889477f6d37b9955ad85878e"
+        },
+        {
+          "sample": 2,
+          "context": 1,
+          "sha256": "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9"
+        }
+      ]
+    },
+    {
+      "mode": 0,
+      "mode_name": "Standard",
+      "condition": "highlight_low",
+      "requested": {
+        "SetToneControlMode": 3,
+        "SetToneManualHighlight": -5
+      },
+      "stable_changed_regions": {
+        "bank0_CEQ_YGAM_30212140": 10
+      },
+      "tone_context0_pointer": "0xc0976f34",
+      "ceq_samples": [
+        {
+          "sample": 0,
+          "context": 0,
+          "sha256": "6c9d397f238457a487d263b4b7e7fd2c4a08f590889477f6d37b9955ad85878e"
+        },
+        {
+          "sample": 0,
+          "context": 1,
+          "sha256": "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9"
+        },
+        {
+          "sample": 1,
+          "context": 0,
+          "sha256": "6c9d397f238457a487d263b4b7e7fd2c4a08f590889477f6d37b9955ad85878e"
+        },
+        {
+          "sample": 1,
+          "context": 1,
+          "sha256": "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9"
+        },
+        {
+          "sample": 2,
+          "context": 0,
+          "sha256": "6c9d397f238457a487d263b4b7e7fd2c4a08f590889477f6d37b9955ad85878e"
+        },
+        {
+          "sample": 2,
+          "context": 1,
+          "sha256": "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9"
+        }
+      ]
+    },
+    {
+      "mode": 0,
+      "mode_name": "Standard",
+      "condition": "highlight_high",
+      "requested": {
+        "SetToneControlMode": 3,
+        "SetToneManualHighlight": 5
+      },
+      "stable_changed_regions": {
+        "bank0_CEQ_YGAM_30212140": 10
+      },
+      "tone_context0_pointer": "0xc0976f34",
+      "ceq_samples": [
+        {
+          "sample": 0,
+          "context": 0,
+          "sha256": "6c9d397f238457a487d263b4b7e7fd2c4a08f590889477f6d37b9955ad85878e"
+        },
+        {
+          "sample": 0,
+          "context": 1,
+          "sha256": "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9"
+        },
+        {
+          "sample": 1,
+          "context": 0,
+          "sha256": "6c9d397f238457a487d263b4b7e7fd2c4a08f590889477f6d37b9955ad85878e"
+        },
+        {
+          "sample": 1,
+          "context": 1,
+          "sha256": "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9"
+        },
+        {
+          "sample": 2,
+          "context": 0,
+          "sha256": "6c9d397f238457a487d263b4b7e7fd2c4a08f590889477f6d37b9955ad85878e"
+        },
+        {
+          "sample": 2,
+          "context": 1,
+          "sha256": "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9"
+        }
+      ]
+    },
+    {
+      "mode": 0,
+      "mode_name": "Standard",
+      "condition": "shadow_low",
+      "requested": {
+        "SetToneControlMode": 3,
+        "SetToneManualShadow": -5
+      },
+      "stable_changed_regions": {
+        "bank0_CEQ_YGAM_30212140": 10
+      },
+      "tone_context0_pointer": "0xc0976f34",
+      "ceq_samples": [
+        {
+          "sample": 0,
+          "context": 0,
+          "sha256": "6c9d397f238457a487d263b4b7e7fd2c4a08f590889477f6d37b9955ad85878e"
+        },
+        {
+          "sample": 0,
+          "context": 1,
+          "sha256": "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9"
+        },
+        {
+          "sample": 1,
+          "context": 0,
+          "sha256": "6c9d397f238457a487d263b4b7e7fd2c4a08f590889477f6d37b9955ad85878e"
+        },
+        {
+          "sample": 1,
+          "context": 1,
+          "sha256": "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9"
+        },
+        {
+          "sample": 2,
+          "context": 0,
+          "sha256": "6c9d397f238457a487d263b4b7e7fd2c4a08f590889477f6d37b9955ad85878e"
+        },
+        {
+          "sample": 2,
+          "context": 1,
+          "sha256": "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9"
+        }
+      ]
+    },
+    {
+      "mode": 0,
+      "mode_name": "Standard",
+      "condition": "shadow_high",
+      "requested": {
+        "SetToneControlMode": 3,
+        "SetToneManualShadow": 5
+      },
+      "stable_changed_regions": {
+        "bank0_CEQ_YGAM_30212140": 10
+      },
+      "tone_context0_pointer": "0xc0976f34",
+      "ceq_samples": [
+        {
+          "sample": 0,
+          "context": 0,
+          "sha256": "6c9d397f238457a487d263b4b7e7fd2c4a08f590889477f6d37b9955ad85878e"
+        },
+        {
+          "sample": 0,
+          "context": 1,
+          "sha256": "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9"
+        },
+        {
+          "sample": 1,
+          "context": 0,
+          "sha256": "6c9d397f238457a487d263b4b7e7fd2c4a08f590889477f6d37b9955ad85878e"
+        },
+        {
+          "sample": 1,
+          "context": 1,
+          "sha256": "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9"
+        },
+        {
+          "sample": 2,
+          "context": 0,
+          "sha256": "6c9d397f238457a487d263b4b7e7fd2c4a08f590889477f6d37b9955ad85878e"
+        },
+        {
+          "sample": 2,
+          "context": 1,
+          "sha256": "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9"
+        }
+      ]
+    },
+    {
+      "mode": 6,
+      "mode_name": "TealOrange",
+      "condition": "effect_low",
+      "requested": {
+        "SetColorModeEffect": -5
+      },
+      "stable_changed_regions": {
+        "bank0_MAT_TOP RGBLMAT_30210CB0": 6,
+        "bank0_GAM_TOP YCMAT_30210E64": 2,
+        "bank0_CEQ_ORG_30211EE0": 16,
+        "bank0_CEQ_TGT_30211FA0": 34,
+        "bank0_CEQ24_ORG_30212080": 8,
+        "bank0_CEQ24_TGT_302120E0": 15,
+        "TONE_CONTEXT0_POINTER": 1,
+        "TONE_CACHED_DESCRIPTOR": 1
+      },
+      "tone_context0_pointer": "0xc3419da8",
+      "ceq_samples": [
+        {
+          "sample": 0,
+          "context": 0,
+          "sha256": "a4e9f1b5d6767ad4bb66f7613d0eaaa4e0b8fd3f8f58a300ade8ffe9c9bd9f1a"
+        },
+        {
+          "sample": 0,
+          "context": 1,
+          "sha256": "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9"
+        },
+        {
+          "sample": 1,
+          "context": 0,
+          "sha256": "a4e9f1b5d6767ad4bb66f7613d0eaaa4e0b8fd3f8f58a300ade8ffe9c9bd9f1a"
+        },
+        {
+          "sample": 1,
+          "context": 1,
+          "sha256": "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9"
+        },
+        {
+          "sample": 2,
+          "context": 0,
+          "sha256": "a4e9f1b5d6767ad4bb66f7613d0eaaa4e0b8fd3f8f58a300ade8ffe9c9bd9f1a"
+        },
+        {
+          "sample": 2,
+          "context": 1,
+          "sha256": "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9"
+        }
+      ]
+    },
+    {
+      "mode": 6,
+      "mode_name": "TealOrange",
+      "condition": "effect_high",
+      "requested": {
+        "SetColorModeEffect": 5
+      },
+      "stable_changed_regions": {
+        "bank0_MAT_TOP RGBLMAT_30210CB0": 6,
+        "bank0_GAM_TOP YCMAT_30210E64": 2,
+        "bank0_CEQ_ORG_30211EE0": 16,
+        "bank0_CEQ_TGT_30211FA0": 18,
+        "bank0_CEQ24_ORG_30212080": 8,
+        "bank0_CEQ24_TGT_302120E0": 7,
+        "TONE_CONTEXT0_POINTER": 1,
+        "TONE_CACHED_DESCRIPTOR": 1
+      },
+      "tone_context0_pointer": "0xc341ada8",
+      "ceq_samples": [
+        {
+          "sample": 0,
+          "context": 0,
+          "sha256": "08ab9be1a7e689f49017f99b994ab93d0349412bc8a4b6d07b97346cce37fff0"
+        },
+        {
+          "sample": 0,
+          "context": 1,
+          "sha256": "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9"
+        },
+        {
+          "sample": 1,
+          "context": 0,
+          "sha256": "08ab9be1a7e689f49017f99b994ab93d0349412bc8a4b6d07b97346cce37fff0"
+        },
+        {
+          "sample": 1,
+          "context": 1,
+          "sha256": "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9"
+        },
+        {
+          "sample": 2,
+          "context": 0,
+          "sha256": "08ab9be1a7e689f49017f99b994ab93d0349412bc8a4b6d07b97346cce37fff0"
+        },
+        {
+          "sample": 2,
+          "context": 1,
+          "sha256": "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9"
+        }
+      ]
+    },
+    {
+      "mode": 13,
+      "mode_name": "PowderBlue",
+      "condition": "effect_low",
+      "requested": {
+        "SetColorModeEffect": -5
+      },
+      "stable_changed_regions": {
+        "bank0_MAT_TOP RGBLMAT_30210CB0": 6,
+        "bank0_GAM_TOP YCMAT_30210E64": 2,
+        "bank0_CEQ_TGT_30211FA0": 29,
+        "bank0_CEQ24_TGT_302120E0": 16,
+        "TONE_CONTEXT0_POINTER": 1,
+        "TONE_CACHED_DESCRIPTOR": 1
+      },
+      "tone_context0_pointer": "0xc3419da8",
+      "ceq_samples": [
+        {
+          "sample": 0,
+          "context": 0,
+          "sha256": "a4e9f1b5d6767ad4bb66f7613d0eaaa4e0b8fd3f8f58a300ade8ffe9c9bd9f1a"
+        },
+        {
+          "sample": 0,
+          "context": 1,
+          "sha256": "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9"
+        },
+        {
+          "sample": 1,
+          "context": 0,
+          "sha256": "449dffdac305b37ceae3d364b1d58cd29636b8c8151969ddef2b771fad33b635"
+        },
+        {
+          "sample": 1,
+          "context": 1,
+          "sha256": "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9"
+        },
+        {
+          "sample": 2,
+          "context": 0,
+          "sha256": "85a3af196bd4aa46c2d179c0999e09e68b812c2c7495d301231161cc7a4061f5"
+        },
+        {
+          "sample": 2,
+          "context": 1,
+          "sha256": "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9"
+        }
+      ]
+    },
+    {
+      "mode": 13,
+      "mode_name": "PowderBlue",
+      "condition": "effect_high",
+      "requested": {
+        "SetColorModeEffect": 5
+      },
+      "stable_changed_regions": {
+        "bank0_MAT_TOP RGBLMAT_30210CB0": 6,
+        "bank0_GAM_TOP YCMAT_30210E64": 2,
+        "bank0_CEQ_TGT_30211FA0": 15,
+        "bank0_CEQ24_TGT_302120E0": 9,
+        "TONE_CONTEXT0_POINTER": 1,
+        "TONE_CACHED_DESCRIPTOR": 1
+      },
+      "tone_context0_pointer": "0xc341ada8",
+      "ceq_samples": [
+        {
+          "sample": 0,
+          "context": 0,
+          "sha256": "661bc1cf16d0cc5717b030202e53185a7b2e0f78543c727b7ed8a69dcb39ffe4"
+        },
+        {
+          "sample": 0,
+          "context": 1,
+          "sha256": "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9"
+        },
+        {
+          "sample": 1,
+          "context": 0,
+          "sha256": "9ade6910f8a5d31daad90cb5e87380170c4efc24b5e8eb4797d3ecc3a7fddc86"
+        },
+        {
+          "sample": 1,
+          "context": 1,
+          "sha256": "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9"
+        },
+        {
+          "sample": 2,
+          "context": 0,
+          "sha256": "9ade6910f8a5d31daad90cb5e87380170c4efc24b5e8eb4797d3ecc3a7fddc86"
+        },
+        {
+          "sample": 2,
+          "context": 1,
+          "sha256": "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9"
+        }
+      ]
+    }
+  ],
+  "valid_ceq_sample_contexts": 83,
+  "refused_ceq_samples": [
+    {
+      "mode": 0,
+      "condition": "saturation_high",
+      "sample": 0,
+      "context": 0,
+      "reason": "CEQ source values must be exact u16 integers"
+    }
+  ],
+  "unique_ceq_resources": {
+    "6c9d397f238457a487d263b4b7e7fd2c4a08f590889477f6d37b9955ad85878e": {
+      "source_bytes": 288,
+      "planes": [
+        [
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512
+        ],
+        [
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683
+        ],
+        [
+          0,
+          2731,
+          5461,
+          8192,
+          10923,
+          13653,
+          16384,
+          19115,
+          21845,
+          24576,
+          27307,
+          30037,
+          32768,
+          35499,
+          38229,
+          40960,
+          43691,
+          46421,
+          49152,
+          51883,
+          54613,
+          57344,
+          60075,
+          62805
+        ],
+        [
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          576,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          384,
+          512
+        ],
+        [
+          992,
+          1024,
+          1024,
+          992,
+          992,
+          944,
+          928,
+          832,
+          992,
+          880,
+          1120,
+          1376,
+          1120,
+          912,
+          1040,
+          992,
+          1024,
+          1072,
+          1120,
+          1120,
+          976,
+          1120,
+          960,
+          960
+        ],
+        [
+          0,
+          2219,
+          4949,
+          8192,
+          10667,
+          13653,
+          16896,
+          19115,
+          21845,
+          24832,
+          27563,
+          30037,
+          31488,
+          34475,
+          37717,
+          40448,
+          43691,
+          46421,
+          50176,
+          52907,
+          56661,
+          57344,
+          62123,
+          63573
+        ]
+      ],
+      "layout_verified": true,
+      "pixel_formula_verified": false,
+      "complete_isp_job": false,
+      "control_fields_included": false,
+      "plane_names": [
+        "ORG_A",
+        "ORG_B",
+        "ORG_C",
+        "TGT_A",
+        "TGT_B",
+        "TGT_C"
+      ],
+      "shadow_plane_b_shift": 2,
+      "source_hex": "000200020002000200020002000200020002000200020002000200020002000200020002000200020002000200020002ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab020000ab0a55150020ab2a55350040ab4a55550060ab6a55750080ab8a559500a0abaa55b500c0abca55d500e0abea55f5000200020002000200020002000200020002000240020002000200020002000200020002000200020002000280010002e00300040004e003e003b003a0034003e003700360046005600490031004e0030004300460046004d0036004c003c0030000ab0855130020ab2955350042ab4a55550061ab6b5575007bab865593009eabaa55b500c4abce55dd00e0abf255f8"
+    },
+    "16e384ea5c03324bd44df73c7445eb465a5079a028619be452b6a56f0603efd9": {
+      "source_bytes": 288,
+      "planes": [
+        [
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1700,
+          1700,
+          1700,
+          1700,
+          1700,
+          1700,
+          1700,
+          1700,
+          1700,
+          1700,
+          1700,
+          1700,
+          1700,
+          1700,
+          1700,
+          1700,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          4096,
+          8192,
+          12288,
+          16384,
+          19712,
+          24064,
+          28672,
+          32768,
+          36864,
+          40960,
+          45056,
+          49152,
+          53248,
+          57344,
+          61440,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          2176,
+          2176,
+          2176,
+          2112,
+          1792,
+          1844,
+          2240,
+          2240,
+          2368,
+          2432,
+          2432,
+          2304,
+          2304,
+          2432,
+          2464,
+          1892,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          4096,
+          8192,
+          12032,
+          16384,
+          19712,
+          23808,
+          28672,
+          32768,
+          36864,
+          40960,
+          45056,
+          49152,
+          53248,
+          57216,
+          62208,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "layout_verified": true,
+      "pixel_formula_verified": false,
+      "complete_isp_job": false,
+      "control_fields_included": false,
+      "plane_names": [
+        "ORG_A",
+        "ORG_B",
+        "ORG_C",
+        "TGT_A",
+        "TGT_B",
+        "TGT_C"
+      ],
+      "shadow_plane_b_shift": 2,
+      "source_hex": "000200020002000200020002000200020002000200020002000200020002000200000000000000000000000000000000a406a406a406a406a406a406a406a406a406a406a406a406a406a406a406a4060000000000000000000000000000000000000010002000300040004d005e00700080009000a000b000c000d000e000f000000000000000000000000000000000000200020002000200020002000200020002000200020002000200020002000200000000000000000000000000000000800880088008400800073407c008c008400980098009000900098009a009640700000000000000000000000000000000000000100020002f0040004d005d00700080009000a000b000c000d080df00f300000000000000000000000000000000"
+    },
+    "0b302d617752ce23d00d2afcf88a1f807d2915cab9fadb9b60682f55f52c1431": {
+      "source_bytes": 288,
+      "planes": [
+        [
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512
+        ],
+        [
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683
+        ],
+        [
+          0,
+          2731,
+          5461,
+          8192,
+          10923,
+          13653,
+          16384,
+          19115,
+          21845,
+          24576,
+          27307,
+          30037,
+          32768,
+          35499,
+          38229,
+          40960,
+          43691,
+          46421,
+          49152,
+          51883,
+          54613,
+          57344,
+          60075,
+          62805
+        ],
+        [
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          576,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          384,
+          512
+        ],
+        [
+          992,
+          1024,
+          1024,
+          992,
+          992,
+          944,
+          928,
+          832,
+          992,
+          880,
+          1120,
+          1376,
+          1120,
+          912,
+          1040,
+          992,
+          0,
+          1072,
+          1120,
+          1120,
+          976,
+          1120,
+          960,
+          960
+        ],
+        [
+          0,
+          2219,
+          4949,
+          8192,
+          10667,
+          13653,
+          16896,
+          19115,
+          21845,
+          24832,
+          27563,
+          30037,
+          31488,
+          34475,
+          37717,
+          40448,
+          43691,
+          46421,
+          50176,
+          52907,
+          56661,
+          57344,
+          62123,
+          63573
+        ]
+      ],
+      "layout_verified": true,
+      "pixel_formula_verified": false,
+      "complete_isp_job": false,
+      "control_fields_included": false,
+      "plane_names": [
+        "ORG_A",
+        "ORG_B",
+        "ORG_C",
+        "TGT_A",
+        "TGT_B",
+        "TGT_C"
+      ],
+      "shadow_plane_b_shift": 2,
+      "source_hex": "000200020002000200020002000200020002000200020002000200020002000200020002000200020002000200020002ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab020000ab0a55150020ab2a55350040ab4a55550060ab6a55750080ab8a559500a0abaa55b500c0abca55d500e0abea55f5000200020002000200020002000200020002000240020002000200020002000200020002000200020002000280010002e00300040004e003e003b003a0034003e003700360046005600490031004e0030000300460046004d0036004c003c0030000ab0855130020ab2955350042ab4a55550061ab6b5575007bab865593009eabaa55b500c4abce55dd00e0abf255f8"
+    },
+    "a4e9f1b5d6767ad4bb66f7613d0eaaa4e0b8fd3f8f58a300ade8ffe9c9bd9f1a": {
+      "source_bytes": 288,
+      "planes": [
+        [
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512
+        ],
+        [
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683
+        ],
+        [
+          0,
+          2731,
+          5461,
+          8192,
+          10923,
+          13653,
+          16384,
+          19115,
+          21845,
+          24576,
+          27307,
+          30037,
+          32768,
+          35499,
+          38229,
+          40960,
+          43691,
+          46421,
+          49152,
+          51883,
+          54613,
+          57344,
+          60075,
+          62805
+        ],
+        [
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          544,
+          576,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512
+        ],
+        [
+          832,
+          832,
+          832,
+          832,
+          832,
+          832,
+          832,
+          832,
+          992,
+          896,
+          1072,
+          1280,
+          1088,
+          960,
+          928,
+          896,
+          960,
+          1024,
+          1056,
+          1056,
+          1056,
+          928,
+          800,
+          800
+        ],
+        [
+          512,
+          3499,
+          6229,
+          8960,
+          11691,
+          13653,
+          17408,
+          19883,
+          23125,
+          24832,
+          27819,
+          30549,
+          31744,
+          34475,
+          38229,
+          41472,
+          43691,
+          46421,
+          49664,
+          53419,
+          55125,
+          56832,
+          62123,
+          64597
+        ]
+      ],
+      "layout_verified": true,
+      "pixel_formula_verified": false,
+      "complete_isp_job": false,
+      "control_fields_included": false,
+      "plane_names": [
+        "ORG_A",
+        "ORG_B",
+        "ORG_C",
+        "TGT_A",
+        "TGT_B",
+        "TGT_C"
+      ],
+      "shadow_plane_b_shift": 2,
+      "source_hex": "000200020002000200020002000200020002000200020002000200020002000200020002000200020002000200020002ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab020000ab0a55150020ab2a55350040ab4a55550060ab6a55750080ab8a559500a0abaa55b500c0abca55d500e0abea55f500020002000200020002000200020002000220024002000200020002000200020002000200020002000200020002000240034003400340034003400340034003e0038003300400054004c003a0038003c0030004200420042004a003200320030002ab0d55180023ab2d55350044ab4d555a0061ab6c5577007cab86559500a2abaa55b500c2abd055d700deabf255fc"
+    },
+    "08ab9be1a7e689f49017f99b994ab93d0349412bc8a4b6d07b97346cce37fff0": {
+      "source_bytes": 288,
+      "planes": [
+        [
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512
+        ],
+        [
+          1262,
+          1262,
+          1262,
+          1262,
+          1262,
+          1262,
+          1262,
+          1262,
+          1262,
+          1262,
+          1262,
+          1262,
+          1262,
+          1262,
+          1262,
+          1262,
+          1262,
+          1262,
+          1262,
+          1262,
+          1262,
+          1262,
+          1262,
+          1262
+        ],
+        [
+          0,
+          2731,
+          5461,
+          8192,
+          10923,
+          13653,
+          16384,
+          19115,
+          21845,
+          24576,
+          27307,
+          30037,
+          32768,
+          35499,
+          38229,
+          40960,
+          43691,
+          46421,
+          49152,
+          51883,
+          54613,
+          57344,
+          60075,
+          62805
+        ],
+        [
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          490,
+          468,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512
+        ],
+        [
+          1158,
+          1158,
+          1158,
+          1158,
+          1158,
+          1158,
+          886,
+          1212,
+          1100,
+          1113,
+          1099,
+          900,
+          980,
+          1068,
+          1091,
+          1113,
+          1068,
+          1024,
+          1110,
+          1110,
+          785,
+          1199,
+          1180,
+          1180
+        ],
+        [
+          2048,
+          4779,
+          7509,
+          10240,
+          12971,
+          14677,
+          16896,
+          19371,
+          22101,
+          24064,
+          25771,
+          28501,
+          30720,
+          33451,
+          36181,
+          38912,
+          41643,
+          44373,
+          48128,
+          51371,
+          54613,
+          57856,
+          60075,
+          63829
+        ]
+      ],
+      "layout_verified": true,
+      "pixel_formula_verified": false,
+      "complete_isp_job": false,
+      "control_fields_included": false,
+      "plane_names": [
+        "ORG_A",
+        "ORG_B",
+        "ORG_C",
+        "TGT_A",
+        "TGT_B",
+        "TGT_C"
+      ],
+      "shadow_plane_b_shift": 2,
+      "source_hex": "000200020002000200020002000200020002000200020002000200020002000200020002000200020002000200020002ee04ee04ee04ee04ee04ee04ee04ee04ee04ee04ee04ee04ee04ee04ee04ee04ee04ee04ee04ee04ee04ee04ee04ee040000ab0a55150020ab2a55350040ab4a55550060ab6a55750080ab8a559500a0abaa55b500c0abca55d500e0abea55f5000200020002000200020002000200020002ea01d40100020002000200020002000200020002000200020002000200028604860486048604860486047603bc044c0459044b048403d4032c04430459042c040004560456041103af049c049c040008ab12551d0028ab3255390042ab4b5556005eab64556f0078ab82558d0098aba255ad00bcabc855d500e2abea55f9"
+    },
+    "449dffdac305b37ceae3d364b1d58cd29636b8c8151969ddef2b771fad33b635": {
+      "source_bytes": 288,
+      "planes": [
+        [
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512
+        ],
+        [
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683
+        ],
+        [
+          0,
+          2731,
+          5461,
+          8192,
+          10923,
+          13653,
+          16384,
+          19115,
+          21845,
+          24576,
+          27307,
+          30037,
+          32768,
+          35499,
+          38229,
+          40960,
+          43691,
+          46421,
+          49152,
+          51883,
+          54613,
+          57344,
+          60075,
+          62805
+        ],
+        [
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          544,
+          576,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512
+        ],
+        [
+          0,
+          832,
+          832,
+          832,
+          832,
+          832,
+          832,
+          832,
+          992,
+          896,
+          1072,
+          1280,
+          1088,
+          960,
+          928,
+          896,
+          960,
+          1024,
+          1056,
+          1056,
+          1056,
+          928,
+          800,
+          800
+        ],
+        [
+          512,
+          3499,
+          6229,
+          8960,
+          11691,
+          13653,
+          17408,
+          19883,
+          23125,
+          24832,
+          27819,
+          30549,
+          31744,
+          34475,
+          38229,
+          41472,
+          43691,
+          46421,
+          49664,
+          53419,
+          55125,
+          56832,
+          62123,
+          64597
+        ]
+      ],
+      "layout_verified": true,
+      "pixel_formula_verified": false,
+      "complete_isp_job": false,
+      "control_fields_included": false,
+      "plane_names": [
+        "ORG_A",
+        "ORG_B",
+        "ORG_C",
+        "TGT_A",
+        "TGT_B",
+        "TGT_C"
+      ],
+      "shadow_plane_b_shift": 2,
+      "source_hex": "000200020002000200020002000200020002000200020002000200020002000200020002000200020002000200020002ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab020000ab0a55150020ab2a55350040ab4a55550060ab6a55750080ab8a559500a0abaa55b500c0abca55d500e0abea55f500020002000200020002000200020002000220024002000200020002000200020002000200020002000200020002000200004003400340034003400340034003e0038003300400054004c003a0038003c0030004200420042004a003200320030002ab0d55180023ab2d55350044ab4d555a0061ab6c5577007cab86559500a2abaa55b500c2abd055d700deabf255fc"
+    },
+    "85a3af196bd4aa46c2d179c0999e09e68b812c2c7495d301231161cc7a4061f5": {
+      "source_bytes": 288,
+      "planes": [
+        [
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512
+        ],
+        [
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683
+        ],
+        [
+          0,
+          2731,
+          5461,
+          8192,
+          10923,
+          13653,
+          16384,
+          19115,
+          21845,
+          24576,
+          27307,
+          30037,
+          32768,
+          35499,
+          38229,
+          40960,
+          0,
+          46421,
+          49152,
+          51883,
+          54613,
+          57344,
+          60075,
+          62805
+        ],
+        [
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          544,
+          576,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512
+        ],
+        [
+          832,
+          832,
+          832,
+          832,
+          832,
+          832,
+          832,
+          832,
+          992,
+          896,
+          1072,
+          1280,
+          1088,
+          960,
+          928,
+          896,
+          960,
+          1024,
+          1056,
+          1056,
+          1056,
+          928,
+          800,
+          800
+        ],
+        [
+          512,
+          3499,
+          6229,
+          8960,
+          11691,
+          13653,
+          17408,
+          19883,
+          23125,
+          24832,
+          27819,
+          30549,
+          31744,
+          34475,
+          38229,
+          41472,
+          43691,
+          46421,
+          49664,
+          53419,
+          55125,
+          56832,
+          62123,
+          64597
+        ]
+      ],
+      "layout_verified": true,
+      "pixel_formula_verified": false,
+      "complete_isp_job": false,
+      "control_fields_included": false,
+      "plane_names": [
+        "ORG_A",
+        "ORG_B",
+        "ORG_C",
+        "TGT_A",
+        "TGT_B",
+        "TGT_C"
+      ],
+      "shadow_plane_b_shift": 2,
+      "source_hex": "000200020002000200020002000200020002000200020002000200020002000200020002000200020002000200020002ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab020000ab0a55150020ab2a55350040ab4a55550060ab6a55750080ab8a559500a0000055b500c0abca55d500e0abea55f500020002000200020002000200020002000220024002000200020002000200020002000200020002000200020002000240034003400340034003400340034003e0038003300400054004c003a0038003c0030004200420042004a003200320030002ab0d55180023ab2d55350044ab4d555a0061ab6c5577007cab86559500a2abaa55b500c2abd055d700deabf255fc"
+    },
+    "661bc1cf16d0cc5717b030202e53185a7b2e0f78543c727b7ed8a69dcb39ffe4": {
+      "source_bytes": 288,
+      "planes": [
+        [
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512
+        ],
+        [
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683
+        ],
+        [
+          0,
+          2731,
+          5461,
+          8192,
+          10923,
+          13653,
+          16384,
+          19115,
+          21845,
+          24576,
+          27307,
+          30037,
+          32768,
+          35499,
+          38229,
+          40960,
+          43691,
+          46421,
+          49152,
+          51883,
+          54613,
+          57344,
+          60075,
+          62805
+        ],
+        [
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          0,
+          697,
+          678,
+          512,
+          512,
+          512,
+          512,
+          308,
+          512,
+          512,
+          512,
+          512,
+          512,
+          716,
+          512,
+          512
+        ],
+        [
+          1958,
+          1958,
+          1548,
+          1548,
+          1548,
+          1548,
+          1343,
+          934,
+          1094,
+          1100,
+          996,
+          871,
+          986,
+          1062,
+          1491,
+          1919,
+          1881,
+          1638,
+          1516,
+          1107,
+          801,
+          877,
+          1772,
+          1977
+        ],
+        [
+          1024,
+          5035,
+          6485,
+          8192,
+          10923,
+          13653,
+          15872,
+          20651,
+          21845,
+          27392,
+          29867,
+          31061,
+          32768,
+          37035,
+          42069,
+          46592,
+          47275,
+          47957,
+          53504,
+          54443,
+          55125,
+          55808,
+          59051,
+          62805
+        ]
+      ],
+      "layout_verified": true,
+      "pixel_formula_verified": false,
+      "complete_isp_job": false,
+      "control_fields_included": false,
+      "plane_names": [
+        "ORG_A",
+        "ORG_B",
+        "ORG_C",
+        "TGT_A",
+        "TGT_B",
+        "TGT_C"
+      ],
+      "shadow_plane_b_shift": 2,
+      "source_hex": "000200020002000200020002000200020002000200020002000200020002000200020002000200020002000200020002ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab020000ab0a55150020ab2a55350040ab4a55550060ab6a55750080ab8a559500a0abaa55b500c0abca55d500e0abea55f5000200020002000200020002000200020000b902a6020002000200020002340100020002000200020002cc0200020002a607a6070c060c060c060c063f05a60346044c04e4036703da032604d3057f0759076606ec05530421036d03ec06b9070004ab1355190020ab2a5535003eab505555006bab7455790080ab9055a400b6abb855bb00d1abd455d700daabe655f5"
+    },
+    "9ade6910f8a5d31daad90cb5e87380170c4efc24b5e8eb4797d3ecc3a7fddc86": {
+      "source_bytes": 288,
+      "planes": [
+        [
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512
+        ],
+        [
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683,
+          683
+        ],
+        [
+          0,
+          2731,
+          5461,
+          8192,
+          10923,
+          13653,
+          16384,
+          19115,
+          21845,
+          24576,
+          27307,
+          30037,
+          32768,
+          35499,
+          38229,
+          40960,
+          43691,
+          46421,
+          49152,
+          51883,
+          54613,
+          57344,
+          60075,
+          62805
+        ],
+        [
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          697,
+          678,
+          512,
+          512,
+          512,
+          512,
+          308,
+          512,
+          512,
+          512,
+          512,
+          512,
+          716,
+          512,
+          512
+        ],
+        [
+          1958,
+          1958,
+          1548,
+          1548,
+          1548,
+          1548,
+          1343,
+          934,
+          1094,
+          1100,
+          996,
+          871,
+          986,
+          1062,
+          1491,
+          1919,
+          1881,
+          1638,
+          1516,
+          1107,
+          801,
+          877,
+          1772,
+          1977
+        ],
+        [
+          1024,
+          5035,
+          6485,
+          8192,
+          10923,
+          13653,
+          15872,
+          20651,
+          21845,
+          27392,
+          29867,
+          31061,
+          32768,
+          37035,
+          42069,
+          46592,
+          47275,
+          47957,
+          53504,
+          54443,
+          55125,
+          55808,
+          59051,
+          62805
+        ]
+      ],
+      "layout_verified": true,
+      "pixel_formula_verified": false,
+      "complete_isp_job": false,
+      "control_fields_included": false,
+      "plane_names": [
+        "ORG_A",
+        "ORG_B",
+        "ORG_C",
+        "TGT_A",
+        "TGT_B",
+        "TGT_C"
+      ],
+      "shadow_plane_b_shift": 2,
+      "source_hex": "000200020002000200020002000200020002000200020002000200020002000200020002000200020002000200020002ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab02ab020000ab0a55150020ab2a55350040ab4a55550060ab6a55750080ab8a559500a0abaa55b500c0abca55d500e0abea55f5000200020002000200020002000200020002b902a6020002000200020002340100020002000200020002cc0200020002a607a6070c060c060c060c063f05a60346044c04e4036703da032604d3057f0759076606ec05530421036d03ec06b9070004ab1355190020ab2a5535003eab505555006bab7455790080ab9055a400b6abb855bb00d1abd455d700daabe655f5"
+    }
+  },
+  "linear_descriptor_samples": [
+    {
+      "mode": 0,
+      "condition": "contrast_low",
+      "sample": 0,
+      "width": 0,
+      "height": 0,
+      "base": "0x0"
+    },
+    {
+      "mode": 0,
+      "condition": "contrast_low",
+      "sample": 1,
+      "width": 0,
+      "height": 0,
+      "base": "0x0"
+    },
+    {
+      "mode": 0,
+      "condition": "contrast_low",
+      "sample": 2,
+      "width": 0,
+      "height": 0,
+      "base": "0x0"
+    },
+    {
+      "mode": 0,
+      "condition": "contrast_high",
+      "sample": 0,
+      "width": 0,
+      "height": 0,
+      "base": "0x0"
+    },
+    {
+      "mode": 0,
+      "condition": "contrast_high",
+      "sample": 1,
+      "width": 0,
+      "height": 0,
+      "base": "0x0"
+    },
+    {
+      "mode": 0,
+      "condition": "contrast_high",
+      "sample": 2,
+      "width": 0,
+      "height": 0,
+      "base": "0x0"
+    },
+    {
+      "mode": 0,
+      "condition": "saturation_low",
+      "sample": 0,
+      "width": 0,
+      "height": 0,
+      "base": "0x0"
+    },
+    {
+      "mode": 0,
+      "condition": "saturation_low",
+      "sample": 1,
+      "width": 0,
+      "height": 0,
+      "base": "0x0"
+    },
+    {
+      "mode": 0,
+      "condition": "saturation_low",
+      "sample": 2,
+      "width": 0,
+      "height": 0,
+      "base": "0x0"
+    },
+    {
+      "mode": 0,
+      "condition": "saturation_high",
+      "sample": 0,
+      "width": 0,
+      "height": 0,
+      "base": "0x0"
+    },
+    {
+      "mode": 0,
+      "condition": "saturation_high",
+      "sample": 1,
+      "width": 0,
+      "height": 0,
+      "base": "0x0"
+    },
+    {
+      "mode": 0,
+      "condition": "saturation_high",
+      "sample": 2,
+      "width": 0,
+      "height": 0,
+      "base": "0x0"
+    },
+    {
+      "mode": 0,
+      "condition": "tone_auto_mild",
+      "sample": 0,
+      "width": 0,
+      "height": 0,
+      "base": "0x0"
+    },
+    {
+      "mode": 0,
+      "condition": "tone_auto_mild",
+      "sample": 1,
+      "width": 0,
+      "height": 0,
+      "base": "0x0"
+    },
+    {
+      "mode": 0,
+      "condition": "tone_auto_mild",
+      "sample": 2,
+      "width": 0,
+      "height": 0,
+      "base": "0x0"
+    },
+    {
+      "mode": 0,
+      "condition": "tone_auto_strong",
+      "sample": 0,
+      "width": 0,
+      "height": 0,
+      "base": "0x0"
+    },
+    {
+      "mode": 0,
+      "condition": "tone_auto_strong",
+      "sample": 1,
+      "width": 0,
+      "height": 0,
+      "base": "0x0"
+    },
+    {
+      "mode": 0,
+      "condition": "tone_auto_strong",
+      "sample": 2,
+      "width": 0,
+      "height": 0,
+      "base": "0x0"
+    },
+    {
+      "mode": 0,
+      "condition": "highlight_low",
+      "sample": 0,
+      "width": 0,
+      "height": 0,
+      "base": "0x0"
+    },
+    {
+      "mode": 0,
+      "condition": "highlight_low",
+      "sample": 1,
+      "width": 0,
+      "height": 0,
+      "base": "0x0"
+    },
+    {
+      "mode": 0,
+      "condition": "highlight_low",
+      "sample": 2,
+      "width": 0,
+      "height": 0,
+      "base": "0x0"
+    },
+    {
+      "mode": 0,
+      "condition": "highlight_high",
+      "sample": 0,
+      "width": 0,
+      "height": 0,
+      "base": "0x0"
+    },
+    {
+      "mode": 0,
+      "condition": "highlight_high",
+      "sample": 1,
+      "width": 0,
+      "height": 0,
+      "base": "0x0"
+    },
+    {
+      "mode": 0,
+      "condition": "highlight_high",
+      "sample": 2,
+      "width": 0,
+      "height": 0,
+      "base": "0x0"
+    },
+    {
+      "mode": 0,
+      "condition": "shadow_low",
+      "sample": 0,
+      "width": 0,
+      "height": 0,
+      "base": "0x0"
+    },
+    {
+      "mode": 0,
+      "condition": "shadow_low",
+      "sample": 1,
+      "width": 0,
+      "height": 0,
+      "base": "0x0"
+    },
+    {
+      "mode": 0,
+      "condition": "shadow_low",
+      "sample": 2,
+      "width": 0,
+      "height": 0,
+      "base": "0x0"
+    },
+    {
+      "mode": 0,
+      "condition": "shadow_high",
+      "sample": 0,
+      "width": 0,
+      "height": 0,
+      "base": "0x0"
+    },
+    {
+      "mode": 0,
+      "condition": "shadow_high",
+      "sample": 1,
+      "width": 0,
+      "height": 0,
+      "base": "0x0"
+    },
+    {
+      "mode": 0,
+      "condition": "shadow_high",
+      "sample": 2,
+      "width": 0,
+      "height": 0,
+      "base": "0x0"
+    },
+    {
+      "mode": 6,
+      "condition": "effect_low",
+      "sample": 0,
+      "width": 0,
+      "height": 0,
+      "base": "0x0"
+    },
+    {
+      "mode": 6,
+      "condition": "effect_low",
+      "sample": 1,
+      "width": 0,
+      "height": 0,
+      "base": "0x0"
+    },
+    {
+      "mode": 6,
+      "condition": "effect_low",
+      "sample": 2,
+      "width": 0,
+      "height": 0,
+      "base": "0x0"
+    },
+    {
+      "mode": 6,
+      "condition": "effect_high",
+      "sample": 0,
+      "width": 0,
+      "height": 0,
+      "base": "0x0"
+    },
+    {
+      "mode": 6,
+      "condition": "effect_high",
+      "sample": 1,
+      "width": 0,
+      "height": 0,
+      "base": "0x0"
+    },
+    {
+      "mode": 6,
+      "condition": "effect_high",
+      "sample": 2,
+      "width": 0,
+      "height": 0,
+      "base": "0x0"
+    },
+    {
+      "mode": 13,
+      "condition": "effect_low",
+      "sample": 0,
+      "width": 0,
+      "height": 0,
+      "base": "0x0"
+    },
+    {
+      "mode": 13,
+      "condition": "effect_low",
+      "sample": 1,
+      "width": 0,
+      "height": 0,
+      "base": "0x0"
+    },
+    {
+      "mode": 13,
+      "condition": "effect_low",
+      "sample": 2,
+      "width": 0,
+      "height": 0,
+      "base": "0x0"
+    },
+    {
+      "mode": 13,
+      "condition": "effect_high",
+      "sample": 0,
+      "width": 0,
+      "height": 0,
+      "base": "0x0"
+    },
+    {
+      "mode": 13,
+      "condition": "effect_high",
+      "sample": 1,
+      "width": 0,
+      "height": 0,
+      "base": "0x0"
+    },
+    {
+      "mode": 13,
+      "condition": "effect_high",
+      "sample": 2,
+      "width": 0,
+      "height": 0,
+      "base": "0x0"
+    }
+  ],
+  "linear_full_colour_source_available": false,
+  "conclusions": [
+    "TealOrange/PowderBlue effect couples matrices, CEQ anchors and native tone pointers.",
+    "Manual highlight/shadow produces stable CEQ YGAM configuration differences.",
+    "Contrast/saturation/auto tone produced no stable differences in sampled regions; capability is unresolved.",
+    "CEQ source layout is six planes of 24 u16 entries, split 16+8; plane B scales by four.",
+    "One unrepresentable transient CEQ word is refused; it is not converted to deployable bytes.",
+    "CEQ channel semantics, interpolation, pipeline ordering, clamp and pixel fidelity remain unmeasured.",
+    "Native tone RAM is owned by firmware; it is not a free LUT staging buffer."
+  ]
+}

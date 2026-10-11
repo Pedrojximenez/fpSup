@@ -1,0 +1,236 @@
+{
+  "passed": true,
+  "tests_run": 18,
+  "tests_skipped": 0,
+  "probe_files_sha256": {
+    "test_binding_probe.py": "e6dbc1ba4f53bb48b90c0b2bddf43bbbcaf057749f12dca159b22d11964b9b09",
+    "binding_probe.py": "f81d514da9301ecb04e5f61755251639727dcbed2009b21b05b381a87c51eef8",
+    "registry_probe.py": "10e85a61bca9a6074ecad4b115154ba0de45c294f5aad18564603b3cdf09f764"
+  },
+  "unicorn_version": "2.1.4",
+  "seg0_sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622",
+  "firmware_rx": true,
+  "only_synthetic_ram_writable": true,
+  "instruction_limit": 20000,
+  "timeout_us": 250000,
+  "executed_native_functions": {
+    "app_lookup": [
+      "0xC05DCA88",
+      "0xC05DCAB6"
+    ],
+    "dispatch_bound_components": [
+      "0xC05DC0D0",
+      "0xC05DC174"
+    ],
+    "get_registry": [
+      "0xC05D9EB0",
+      "0xC05D9EB8"
+    ],
+    "map_append": [
+      "0xC05ED248",
+      "0xC05ED294"
+    ],
+    "map_lookup": [
+      "0xC05ED3B8",
+      "0xC05ED45A"
+    ],
+    "map_reserve": [
+      "0xC05ED1F0",
+      "0xC05ED246"
+    ],
+    "map_sort": [
+      "0xC05ED2B0",
+      "0xC05ED3B8"
+    ],
+    "name_hash_fnv1a": [
+      "0xC05E9DE8",
+      "0xC05E9E0A"
+    ],
+    "notify_private_then_global": [
+      "0xC05D9F90",
+      "0xC05D9FC8"
+    ],
+    "register": [
+      "0xC05DB308",
+      "0xC05DB412"
+    ],
+    "registry_lookup": [
+      "0xC05DB418",
+      "0xC05DB42E"
+    ],
+    "set_batch_core": [
+      "0xC05DC178",
+      "0xC05DC468"
+    ],
+    "set_index_or_name_wrapper": [
+      "0xC05DC818",
+      "0xC05DC83C"
+    ],
+    "set_named_no_callback_wrapper": [
+      "0xC05DC778",
+      "0xC05DC7C6"
+    ],
+    "set_named_notify_wrapper": [
+      "0xC05DC7C8",
+      "0xC05DC818"
+    ],
+    "subscribe_wrapper": [
+      "0xC05DCB18",
+      "0xC05DCB2C"
+    ],
+    "subscription_mutation": [
+      "0xC05D9EB8",
+      "0xC05D9F8A"
+    ],
+    "temporary_vector_destroy": [
+      "0xC05D7470",
+      "0xC05D7496"
+    ],
+    "temporary_vector_init": [
+      "0xC05D7430",
+      "0xC05D745C"
+    ],
+    "unsubscribe_wrapper": [
+      "0xC05DCB30",
+      "0xC05DCB40"
+    ],
+    "vector_append": [
+      "0xC05D74A8",
+      "0xC05D74D2"
+    ],
+    "vector_get": [
+      "0xC05D7528",
+      "0xC05D7530"
+    ]
+  },
+  "stubbed_services": [
+    "Lua wrapper C05DB868",
+    "strcmp C0013E2C",
+    "synthetic alloc/free/realloc",
+    "synthetic lock/unlock (no OS synchronization)",
+    "private/global callbacks (capture; optional once-only tail-delegation to native unsubscribe/silent setter)"
+  ],
+  "original_lua_executed": false,
+  "original_allocator_executed": false,
+  "original_ui_component_callbacks_executed": false,
+  "interleavings": "Deterministic pause/cancel/resume, not measured camera threading",
+  "runtime_ready": false,
+  "camera_accessed": false,
+  "hook_installed": false,
+  "observations": {
+    "set_event_order": [
+      {
+        "kind": "private",
+        "descriptor": 268451920,
+        "context": 268449792,
+        "value": 1,
+        "lock_depth": 0
+      },
+      {
+        "kind": "lock",
+        "args": [
+          268443904,
+          2702232190
+        ]
+      },
+      {
+        "kind": "unlock",
+        "args": [
+          268443904,
+          2702232190
+        ]
+      }
+    ],
+    "post_unsubscribe_inflight_callback": [
+      {
+        "kind": "private",
+        "descriptor": 268451920,
+        "context": 268449792,
+        "value": 0,
+        "lock_depth": 0
+      }
+    ],
+    "forced_interleaving_freed_read": true,
+    "self_unsubscribe_during_callback": [
+      {
+        "kind": "private",
+        "descriptor": 268451920,
+        "context": 268449792,
+        "value": 1,
+        "lock_depth": 0
+      },
+      {
+        "kind": "lock",
+        "args": [
+          268443904,
+          2702232190
+        ]
+      },
+      {
+        "kind": "unlock",
+        "args": [
+          268443904,
+          2702232190
+        ]
+      },
+      {
+        "kind": "global",
+        "descriptor": 268451920,
+        "context": 268449808,
+        "value": 1,
+        "lock_depth": 0
+      },
+      {
+        "kind": "lock",
+        "args": [
+          268443904,
+          2702232190
+        ]
+      },
+      {
+        "kind": "unlock",
+        "args": [
+          268443904,
+          2702232190
+        ]
+      }
+    ],
+    "synchronous_reentrant_revert": [
+      {
+        "kind": "private",
+        "descriptor": 268451920,
+        "context": 268449792,
+        "value": 1,
+        "lock_depth": 0
+      },
+      {
+        "kind": "lock",
+        "args": [
+          268443904,
+          2702232190
+        ]
+      },
+      {
+        "kind": "unlock",
+        "args": [
+          268443904,
+          2702232190
+        ]
+      },
+      {
+        "kind": "lock",
+        "args": [
+          268443904,
+          2702232190
+        ]
+      },
+      {
+        "kind": "unlock",
+        "args": [
+          268443904,
+          2702232190
+        ]
+      }
+    ]
+  }
+}

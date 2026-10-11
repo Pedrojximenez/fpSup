@@ -1,0 +1,9 @@
+{
+  "transport": "getfile + address-tagged read_bulk planned",
+  "return_code": 1,
+  "file_open_return": 0,
+  "actual_read": 0,
+  "read_bulk_executed": false,
+  "no_retry": true,
+  "note": "Both known first and index92 paths unavailable after restart; not enough to infer only last-frame loss."
+}

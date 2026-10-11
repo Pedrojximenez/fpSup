@@ -1,0 +1,127 @@
+{
+ "schema_version": 1,
+ "kind": "live_phase9_geometry_was_the_refusal",
+ "date": "2026-09-27",
+ "operator_scope": "live camera, NON-DESTRUCTIVE: the camera's frame was read as the codec's source and never written; the destination and its guards were in our own retained block; seg was never touched and the frame reached the card as it would have. One recording. Hook self-restored, block released with free_result 0.",
+ "camera": {
+  "model": "w71c1",
+  "firmware": "5.02.0.V91",
+  "media": "SD",
+  "mode": "CINE, FHD RAW12 24p",
+  "boot": "fresh, cave empty",
+  "retained_handle": "0x45177000"
+ },
+ "question": "was the reduced geometry why the engine refused on 2026-09-26?",
+ "verdict": "YES. At 1936x1090 the encode succeeds; at 1536x736 it returned 0.",
+ "measured": {
+  "phase": 9,
+  "variant": "PROBE_FRAME (product geometry, frame as source)",
+  "count": 1,
+  "stage": 8,
+  "error": 0,
+  "init_return": 1,
+  "encode_return": 1,
+  "size_return": 1,
+  "tile_sizes": [
+   54351,
+   66868,
+   75012,
+   62862,
+   54896,
+   69218,
+   86137,
+   67959,
+   60834,
+   72793,
+   65578,
+   54148
+  ],
+  "compressed_size_sum": 790528,
+  "sum_checks_out": "the twelve sizes add to 790,528 = 0xC1000, which is what the probe reported",
+  "declared_length_readback": "0x305000 = 3,166,208",
+  "guards": {
+   "all_five_intact": true
+  },
+  "payload_vs_declared": "790,528 is 25.0% of 3,166,208",
+  "ratio_vs_stock": "3,244,544 -> 870,400 with a header, 3.73x. A darker, flatter scene than the 2.197x of C2."
+ },
+ "what_this_settles": {
+  "level": "L",
+  "claim": "the engine refuses a geometry it was not configured for. 1536x736 with six 512x368 tiles was chosen only so a generated source and a destination would both fit in one 4 MiB block; F_INIT accepted it and F_ENC returned 0. The same probe at 1936x1090 with twelve tiles returns 1.",
+  "corroborates": "the engine is a single global configured for the current mode. Every successful encode in this project has used the sensor geometry."
+ },
+ "what_this_does_NOT_settle": {
+  "claim": "the bound is still untested, exactly as predicted before the run",
+  "why": "a real frame compresses. This one used 25.0% of the declared length, so five intact guards say only that nothing wrote 3.17 MB when it had 790 KB to write. The declared length readback of 0x305000 is confirmed for a third time, but confirming the NUMBER is not confirming that the engine STOPS there."
+ },
+ "a_corroboration_found_offline_the_same_day": {
+  "level": "C",
+  "claim": "0x305000 was this project's ORIGINAL WORK_CAP. 3,166,208 - 3,165,360 = 848, which matches the note's 'the old 0x305000 sat 848 B above the packed raster' exactly. Whoever chose it was setting the arena to the engine's own declared output length.",
+  "and_a_misreading_corrected": "the same note says a noisy frame 'overran the guard and destroyed the size table'. That sentence is in output-bound-20260923.json, which records camera_accessed: false - it is hazard analysis, not an observation. NO overrun at 0x305000 has ever been measured, so it is not evidence against the bound."
+ },
+ "what_testing_the_bound_now_requires": [
+  "the product geometry, since the engine refuses anything else",
+  "incompressible content AT that geometry, which cannot be the camera's frame - so a source we generate, 3,165,696 bytes",
+  "a destination of 3,166,208 plus guards, also ours",
+  "6.33 MB together, so TWO 4 MiB blocks. A second allocation succeeded on 2026-09-26 at 0x45578800, so the allocator will give one; the scratch preflight would need to retain two, or the probe would have to allocate the second itself."
+ ],
+ "explicitly_not_established": [
+  "whether the engine respects its declared output length. Three runs have now confirmed what the length IS and none has tested whether it is enforced.",
+  "what exactly refuses a non-sensor geometry, and whether any geometry other than the configured one is accepted",
+  "the read-versus-write pointer race, still untested",
+  "that the LCG source is incompressible to this codec; it has never reached the encoder"
+ ],
+ "camera_left_as_found": {
+  "hook_0xC0722AFC": "0xEBFDE061 original",
+  "is_recording": 0,
+  "retained_block": "RELEASED, free_result 0"
+ },
+ "deployable": false,
+ "corrections": [
+  {
+   "date": "2026-09-27",
+   "found_by": "notes/CURRENT_DEVELOPMENT.md section 2, which spotted that the twelve tile sizes recorded here do not add up to the total recorded here",
+   "original_fields_unchanged": true,
+   "field": "measured.tile_sizes[2]",
+   "verdict": "A TRANSCRIPTION ERROR IN THIS LEDGER, NOT A DEVICE DISAGREEMENT",
+   "what_was_wrong": "tile 2 is recorded as 75,012. The probe read back 0x00012484, which is 74,884. I converted it wrongly when writing this entry, and 75,012 - 74,884 = 128, which is exactly the discrepancy the note found.",
+   "the_readback_resolves_it": {
+    "hex_as_the_probe_reported_them": [
+     "0xD44F",
+     "0x10534",
+     "0x12484",
+     "0xF58E",
+     "0xD670",
+     "0x10E62",
+     "0x15079",
+     "0x10977",
+     "0xEDA2",
+     "0x11C59",
+     "0x1002A",
+     "0xD384"
+    ],
+    "their_sum": "790,528 = 0xC1000",
+    "what_the_probe_reported_as_the_sum": "790,528 = 0xC1000",
+    "they_agree": true,
+    "note_said": "'no original dump or log was found in the project that resolves the contradiction' - the hex readback IS that record, and it does resolve it"
+   },
+   "corrected_tile_sizes": [
+    54351,
+    66868,
+    74884,
+    62862,
+    54896,
+    69218,
+    86137,
+    67959,
+    60834,
+    72793,
+    65578,
+    54148
+   ],
+   "what_this_means_for_the_derived_numbers": "the sum was never wrong, so payload 790,528 and 25.0% of the declared 3,166,208 stand. The '3.73x smaller' figure used 790,528 + 79,872 = 870,400 and also stands arithmetically - but the note is right to set it aside for a different reason: this variant never built a file, so a compression ratio for it is a calculation, not a measurement.",
+   "lesson": "hex is what the device reports; a decimal column written beside it by hand is a second source that can be wrong on its own.",
+   "evidence_level": "L"
+  }
+ ]
+}

@@ -1,0 +1,90 @@
+[
+  {
+    "source": "/Users/dido/.claude/projects/-Users-dido-Developer-localized-SIGMAfp-re-projects-open-gate/5acbf12f-3568-4c49-9959-d190b5001045.jsonl",
+    "line": 2721,
+    "source_line_sha256": "3a92ab90db4c4295ea30a46da739d39853b37ccf45c9a9901eec1c9a02a298f1",
+    "timestamp_utc": "2026-09-29T00:47:00.630Z",
+    "purpose": "H2 predecessor donor selection: p13 and fill",
+    "text": "ok\n=== H  240 fps:2016x672 mode 12\n  ⚠ 240 從沒上機過;七欄 hirate 漏一欄就是凍結\n  AXIS   [12, 9, 2016, 672, 65537, 1024, 1024, 43386832, 0]\n  求解器 bin ÷1/÷1  RWZM 1024/1024  裁切 2000x662  它會挑的 mode 12(AXIS 裡留 0 讓相機自己挑)\n  主機模型 rec 2016x672  act 2000x662  valid 1\n  會寫 0xc0732490..0xc07324b4(9 字),然後 menu SetMovRecSize 3 -> 4\n安裝時 fill = True  donor 由 pick_profile 決定\ndonor: (13, True, 2356, (0, 0))"
+  },
+  {
+    "source": "/Users/dido/.claude/projects/-Users-dido-Developer-localized-SIGMAfp-re-projects-open-gate/5acbf12f-3568-4c49-9959-d190b5001045.jsonl",
+    "line": 2739,
+    "source_line_sha256": "edfda86281d753f1c4802dec6ef9c1d61d31bf9ed2af129ba859751714fec14f",
+    "timestamp_utc": "2026-09-29T00:47:53.569Z",
+    "purpose": "H2 verified live install before the aspect correction",
+    "text": "  預檢 1460 個位址全部可讀\n  狀態:foreign    非原廠的原廠資料:0 個位址\n  已解除:13 個 hook 回原廠,還原 0 個原廠字\n  計畫 1423 筆;改了 102 字;payload 與 hook 都讀回過\n★ 就緒(只限本次 session;換版本前拔電池)\nfmt/size: 0 / 4\nShell cwd was reset to /Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate"
+  },
+  {
+    "source": "/Users/dido/.claude/projects/-Users-dido-Developer-localized-SIGMAfp-re-projects-open-gate/5acbf12f-3568-4c49-9959-d190b5001045.jsonl",
+    "line": 2744,
+    "source_line_sha256": "9cd71798ebdc6723b83b3003fbeb19fc170474e39e31207b1c64ee384480cc48",
+    "timestamp_utc": "2026-09-29T00:48:05.470Z",
+    "purpose": "Actual H2 live recipe, 25 canvas pairs, firmware model",
+    "text": "=== H2  240 fps + RWZM 2048/1024 -> 1008x672 方形像素 3:2\n  ⚠ 非等向 RWZM 零先例 + 2048 錄影路徑沒用過 + 240 沒上機過\n  AXIS   [12, 9, 2016, 672, 65537, 2048, 1024, 43385824, 0]\n  求解器 bin ÷1/÷1  RWZM 2048/1024  裁切 992x662  它會挑的 mode 12(AXIS 裡留 0 讓相機自己挑)\n  主機模型 rec 1008x672  act 992x662  valid 1\n  相機   rec 1008x672  act 992x662  valid 1  mode 12  bin_e 0/0  rwzm 2048/1024\n  畫布命中 601 -> 675\n  ★ RECIPE 27 字逐字比對:相同 ✓\n\n畫布 25 對\n   +0x000 = 1008\n   +0x004 = 672\n   +0x00C = 1008\n   +0x010 = 672\n   +0x020 = 992\n   +0x024 = 992\n   +0x028 = 662\n   +0x02C = 662\n   +0x060 = 2048  <-- RWZM H\n   +0x064 = 2048  <-- RWZM H\n   +0x080 = 7\n   +0x084 = 7\n   +0x090 = 1  <-- >60fps 七欄\n   +0x0B0 = 1  <-- >60fps 七欄\n   +0x0C0 = 0  <-- >60fps 七欄\n   +0x0D0 = 1024  <-- RWZM V\n   +0x0D4 = 1024  <-- RWZM V\n   +0x0D8 = 1008\n   +0x0DC = 1008  <-- >60fps 七欄\n   +0x0E0 = 672\n   +0x0E4 = 672  <-- >60fps 七欄\n   +0x0F4 = 1008  <-- 感測器視窗\n   +0x0F8 = 672  <-- 感測器視窗\n   +0x0FC = 1073741824  <-- >60fps 七欄\n   +0x100 = 1073741824  <-- >60fps 七欄\n七欄齊全: True\nversion: model       = w71c1"
+  },
+  {
+    "source": "/Users/dido/.claude/projects/-Users-dido-Developer-localized-SIGMAfp-re-projects-open-gate/5acbf12f-3568-4c49-9959-d190b5001045.jsonl",
+    "line": 2834,
+    "source_line_sha256": "eafc36fa56f5f6bba60a586298ca95a430463fe4d13b60500235b2b0efe565f8",
+    "timestamp_utc": "2026-09-29T00:55:10.107Z",
+    "purpose": "First screenshot capture bounded by historical host tool call",
+    "text": "Historical tool input (not executed): {\"name\": \"Bash\", \"input\": {\"command\": \"python3 imx410_load.py --disarm --axis-preset H2 2>&1 | tail -3 && cd /Users/dido/Developer.localized/SIGMAfp_re && python3 -c \\\"\\nimport sys, time; sys.path.insert(0,'fpSup/fp_usb_shell')\\nsys.path.insert(0,'projects/open-gate/build')\\nfrom putfile import sh, mem_get\\nfrom imx410_axis import push\\nfrom imx410_full import Registry\\nimport imx410_plan as PL\\nfrom imx410_block import R_ASPECT, ASPECT_TABLE\\nsh('menu SetMovRecFormat 0'); time.sleep(0.8)\\nsh('menu SetMovRecSize 4'); time.sleep(1.5)\\npush(Registry(), 'H2'); time.sleep(1.5)\\nasp=mem_get(PL.RECIPE + R_ASPECT*4, 1)[0]\\nprint('相機算的 aspect enum =', asp, '=', ASPECT_TABLE.get(asp))\\nsh('key CAPTUREON'); time.sleep(0.15); sh('key CAPTUREOFF'); time.sleep(3.0)\\nl=sh(r'dir \\\\DCIM\\\\100SIGMA').strip().splitlines()[-1].split(); print(l[-1], l[-2])\\n\\\" 2>&1 | tail -6\", \"description\": \"Reinstall with the aspect fix and screenshot\", \"timeout\": 600000}}"
+  },
+  {
+    "source": "/Users/dido/.claude/projects/-Users-dido-Developer-localized-SIGMAfp-re-projects-open-gate/5acbf12f-3568-4c49-9959-d190b5001045.jsonl",
+    "line": 2840,
+    "source_line_sha256": "1f194abfadbe7fc8a8885d8f63ca216fed518dcb7a031328ffca2e509cfad213",
+    "timestamp_utc": "2026-09-29T00:55:42.199Z",
+    "purpose": "H2 verified live install with corrected aspect, 08:55 local",
+    "text": "  已解除:13 個 hook 回原廠,還原 0 個原廠字\n  計畫 1434 筆;改了 268 字;payload 與 hook 都讀回過\n★ 就緒(只限本次 session;換版本前拔電池)\n  主機模型 rec 1008x672  act 992x662  valid 1\n  相機   rec 1008x672  act 992x662  valid 1  mode 12  bin_e 0/0  rwzm 2048/1024\n  畫布命中 91 -> 165\n  ★ RECIPE 27 字逐字比對:相同 ✓\n相機算的 aspect enum = 2 = (3, 2)\nSS__1048.JPG 195444\nShell cwd was reset to /Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate"
+  },
+  {
+    "source": "/Users/dido/.claude/projects/-Users-dido-Developer-localized-SIGMAfp-re-projects-open-gate/5acbf12f-3568-4c49-9959-d190b5001045.jsonl",
+    "line": 2915,
+    "source_line_sha256": "2e97a9913989f0a4c3373cc4fc1ae60cdd35b0bf8898f76d7f07393f60be711e",
+    "timestamp_utc": "2026-09-29T01:01:46.004Z",
+    "purpose": "Contemporaneous summary: sensor 240, native application 30",
+    "text": "240 成了,而且你要的 3:2 壓縮也成了 —— 但過程中抓到一個公式漏洞。\n\n## 240 fps\n\n```\n光柵 2016x672(唯一)  mode 12  hmax 330 tail 330 vmax 910 → 239.76024 fps(0 ppm)\nA001_170   94 格  乾淨停\n```\n\n**94 格 = `POOL_INFLIGHT`**,正是 §10 預測的下界 —— 那個模型在這裡準了(它高估的是大格子)。七欄 hirate 由執行期閘門正確寫入。\n\n## RWZM 修正非對稱 —— 非等向的正當用途\n\n光柵 2016x672 的 scale 是 **3×6**,每個像素是 3 寬 × 6 高(1:2)。水平壓 2× 之後變 6×6:\n\n```\nRWZM 2048/1024 → 1008x672   像素變方形,輸出正好 3:2\n資料率 476 → 236 MB/s\nDNG: 1008x672,StripByteCounts 1,016,064 精確,DefaultCropSize [992,662] = 1.4985\n```\n\n這是 `RWZM_ANISOTROPIC_PROVEN = False` 那條路**第一次有正當理由**:不是刻意擠畫面,是修正感測器自己的非對稱。\n\n## 你要的公式 —— 長寬比漏了 RWZM\n\nidle 畫面被塞進窄高框,原因是 `aspect_enum` 只吃 mode 的 scale:\n\n```\n算的    992x3 : 662x6 = 0.749   ← 直式,所以畫窄框\n該算的  992x(3x2) : 662x(6x1) = 1.4985 = 3:2\n```\n\n**一個輸出像素涵蓋的感測器區域是 `scale × zoom/1024`。** 修正(分兩步是為了相機端 32 位元不溢位):\n\n```\nt = act_w * 1024 * sx / (act_h * sy)    →  767\nr = t * zh / zv                         →  1534 = 1.498 ✓\n```\n\n主機與 `og3krecipe.S` 各自實作、逐字比對。**已驗證的組態一個都沒變**(unity 時抵銷)。上機確認 enum = 2 (3:2),畫面填滿整框、黑邊消失。\n\n## 我這輪的主要失誤\n\n**連錯三次把沒更新的 LCD 當量具。** idle 畫布要半按 REC 才重置,我改完配方就直接截圖,還據此得出「相關 0.991 完全貼合」這種有數字的假結論。已存成記憶,之後任何 LCD 對照都會先送 S1。\n\n## 一個半成品\n\n```\nDNG FrameRate  30000/1001 = 29.97    ← 應該 239.76\n```\n\n感測器跑 240 了,但 **app 層的 movie framerate 還是 30**。當慢動作素材用剛好(8× 慢速),但標籤是錯的。要補的三樣 §5 早列過(有理數、CSV 第十列、控制器上限,HSW 做過)—— 已列為 §15 第 13 條。\n\n筆記 §12.33,測試 127 全過。"
+  },
+  {
+    "source": "/Users/dido/.claude/projects/-Users-dido-Developer-localized-SIGMAfp-re-projects-open-gate/5acbf12f-3568-4c49-9959-d190b5001045.jsonl",
+    "line": 3050,
+    "source_line_sha256": "371ff2cc1ec0a1c17115017ff1a8b56373eaf00ac7f66723320e084a38dc7cda",
+    "timestamp_utc": "2026-09-29T01:16:19.004Z",
+    "purpose": "First new rate-hook installation attempt after the clip time",
+    "text": "Historical tool input (not executed): {\"name\": \"Bash\", \"input\": {\"command\": \"python3 imx410_load.py --disarm --axis-preset H2 2>&1 | tail -3 && cd /Users/dido/Developer.localized/SIGMAfp_re && python3 -c \\\"\\nimport sys, time; sys.path.insert(0,'fpSup/fp_usb_shell'); sys.path.insert(0,'projects/open-gate/build')\\nfrom putfile import sh\\nfrom imx410_axis import push\\nfrom imx410_full import Registry\\nsh('menu SetMovRecFormat 0'); time.sleep(0.8)\\nsh('menu SetMovRecSize 4'); time.sleep(1.5)\\npush(Registry(), 'H2'); time.sleep(1.5)\\ntry: sh('key MOVON', retries=0)\\nexcept Exception: pass\\ntime.sleep(0.12)\\ntry: sh('key MOVOFF', retries=0)\\nexcept Exception: pass\\ntime.sleep(4.0)\\nprint('rec:', sh('status get is_recording').strip())\\nc=sh(r'dir \\\\CINEMA').strip().splitlines()[-1].split()[-1]; print('片段:', c)\\nr=sh(rf'dir \\\\CINEMA\\\\{c}')\\ndn=[l.split() for l in r.strip().splitlines() if '.DNG' in l]\\nprint('格數', len(dn), dn[0][-1], dn[0][-2])\\n\\\" 2>&1 | tail -6\", \"description\": \"Install with the rate hook and record a 240 clip\", \"timeout\": 600000}}"
+  },
+  {
+    "source": "/Users/dido/.claude/projects/-Users-dido-Developer-localized-SIGMAfp-re-projects-open-gate/5acbf12f-3568-4c49-9959-d190b5001045.jsonl",
+    "line": 3051,
+    "source_line_sha256": "1d69db66279ec40c975bf1f556a6a7bf43d11a2f33d310bf606ac6ff0644bb31",
+    "timestamp_utc": "2026-09-29T01:16:28.895Z",
+    "purpose": "Installation preflight failed, zero writes",
+    "text": "IMX410 全功能版 安裝\n\n★ 預檢讀取失敗;零寫入:0xC005BE58: 沒有回應\n\n=== H2  240 fps + RWZM 2048/1024 -> 1008x672 方形像素 3:2\n  ⚠ 非等向 RWZM 零先例 + 2048 錄影路徑沒用過 + 240 沒上機過\n  AXIS   [12, 9, 2016, 672, 65537, 2048, 1024, 43385824, 0]\n  求解器 bin ÷1/÷1  RWZM 2048/1024  裁切 992x662  它會挑的 mode 12(AXIS 裡留 0 讓相機自己挑)\n  主機模型 rec 1008x672  act 992x662  valid 1\nShell cwd was reset to /Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate"
+  },
+  {
+    "source": "/Users/dido/.claude/projects/-Users-dido-Developer-localized-SIGMAfp-re-projects-open-gate/5acbf12f-3568-4c49-9959-d190b5001045.jsonl",
+    "line": 3065,
+    "source_line_sha256": "fbf615fc57e2fd7e2384db4de684e9dc59c2d23ec980147e3aabffae1c4b8c46",
+    "timestamp_utc": "2026-09-29T01:17:02.820Z",
+    "purpose": "Contemporaneous report that the previous H2 install remained",
+    "text": "**相機從 USB 上消失了** —— 不是 wedge,是裝置不見了。`ioreg` 完全找不到 SIGMA fp,所以 shell 開不了。\n\n主機這側沒問題(`fpshd` 單一實例、ptpguard 正常)。這要你動手:**USB 重插**(或相機關機再開)。\n\n## 目前狀態\n\n- 安裝**在預檢就失敗、零寫入**,所以相機上是**上一版**的 H2(沒有 rate hook)。剛才那段就算錄了也不算數,我不會拿它下結論。\n- 拔電池的話一切回原廠,不需要解安裝。\n\n## 這一輪做完的(全部離線驗過)\n\n新 payload **`imx410_rate.S`**(128 B),hook 在 `FUN_c00c9bd0` —— CinemaDNG `FrameRate` 標籤的唯一來源。命中時直接吐我們的有理數,不命中就補回被覆寫的 `push {r4-r8,lr}` 跳回原函式。\n\n```\n新表 RATNUM(88 B):原廠九個逐筆吻合,240 → 240000/1001、400 → 400000/1000\n計畫 1415 → 1481 筆\n```\n\n這比 HSW 當年那四件事省很多(有理數表、CSV 第十列、控制器上限、新 enum)—— 標籤的來源就這一個函式,換掉它就換掉標籤。\n\n## 兩個守衛擋住我,而且它們是對的\n\n`test_armed_hooks_are_a_subset_of_og3k` 明寫「**要多加一顆就要有明確的旗標和單獨的驗證,不能順手打開**」。我照辦了:\n\n- 加 `WITH_RATE` 旗標,理由與單獨驗證寫在註解裡\n- 例外在測試裡**逐顆列名**(`allowed = {PL.RAT_HOOK}`),不是把測試放寬\n\n測試 127 全過。\n\n⚠ 還有一個**已知沒查**的:這顆只管 DNG 標籤。**時間碼與音訊同步**仍走原廠 enum(§5.3 列的未列舉消費端)。240 的時間碼大概還是會照 30 走 —— 那要另外查。\n\nUSB 重插之後跟我說,我再重裝並錄一段驗 `FrameRate` 是不是 240000/1001。"
+  },
+  {
+    "source": "/Users/dido/.claude/projects/-Users-dido-Developer-localized-SIGMAfp-re-projects-open-gate/5acbf12f-3568-4c49-9959-d190b5001045.jsonl",
+    "line": 3160,
+    "source_line_sha256": "b4018f38e74986af345d07d36461c176b9474fded94a63952d035a5689c4bd1c",
+    "timestamp_utc": "2026-09-29T01:33:10.115Z",
+    "purpose": "Second screenshot capture bounded by historical host tool call",
+    "text": "Historical tool input (not executed): {\"name\": \"Bash\", \"input\": {\"command\": \"cd /Users/dido/Developer.localized/SIGMAfp_re && python3 -c \\\"\\nimport sys, time; sys.path.insert(0,'fpSup/fp_usb_shell')\\nfrom putfile import sh\\nsh('key CAPTUREON'); time.sleep(0.15); sh('key CAPTUREOFF'); time.sleep(3.0)\\nl=sh(r'dir \\\\DCIM\\\\100SIGMA').strip().splitlines()[-1].split(); print(l[-1], l[-2])\\n\\\" 2>&1 | tail -2\", \"description\": \"Screenshot to see the current screen state\", \"timeout\": 300000}}"
+  },
+  {
+    "source": "/Users/dido/.claude/projects/-Users-dido-Developer-localized-SIGMAfp-re-projects-open-gate/5acbf12f-3568-4c49-9959-d190b5001045.jsonl",
+    "line": 3161,
+    "source_line_sha256": "f1065d6bc378016cc7f6b871c95358f258e251c22c1dbfc18673b460e03accf3",
+    "timestamp_utc": "2026-09-29T01:33:13.453Z",
+    "purpose": "Second screenshot capture completion",
+    "text": "SS__1050.JPG 313647\nShell cwd was reset to /Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate"
+  }
+]

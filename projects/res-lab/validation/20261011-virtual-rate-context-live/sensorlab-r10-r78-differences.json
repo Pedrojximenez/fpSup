@@ -1,0 +1,225 @@
+{
+  "sensorlab_source_sha256": "918c9b515ea45c0403e1b22e19497cdcfb948ecf72e019f56c5f11089af57f34",
+  "r78_geometry_reference": "4c39061502bfe82f3e43347488464fb942b588aeb366925399b519b97e239543",
+  "engine_matched_for_comparison": 239.76023864746094,
+  "current_geometry": {
+    "0x0": 1008,
+    "0x4": 672,
+    "0x8": 0,
+    "0xc": 2000,
+    "0x10": 672,
+    "0x14": 0,
+    "0x18": 0,
+    "0x1c": 1,
+    "0x20": 1984,
+    "0x24": 992,
+    "0x28": 662,
+    "0x2c": 662,
+    "0x30": 1131397791,
+    "0x34": 0,
+    "0x38": 1,
+    "0x3c": 0,
+    "0x40": 0,
+    "0x44": 0,
+    "0x48": 0,
+    "0x4c": 0,
+    "0x50": 0,
+    "0x54": 0,
+    "0x58": 0,
+    "0x5c": 0,
+    "0x60": 1023,
+    "0x64": 2048,
+    "0x68": 0,
+    "0x6c": 0,
+    "0x70": 0,
+    "0x74": 0,
+    "0x78": 0,
+    "0x7c": 0,
+    "0x80": 7,
+    "0x84": 7,
+    "0x88": 0,
+    "0x8c": 0,
+    "0x90": 1,
+    "0x94": 0,
+    "0x98": 0,
+    "0x9c": 0,
+    "0xa0": 0,
+    "0xa4": 0,
+    "0xa8": 0,
+    "0xac": 0,
+    "0xb0": 0,
+    "0xb4": 1,
+    "0xb8": 0,
+    "0xbc": 0,
+    "0xc0": 0,
+    "0xc4": 0,
+    "0xc8": 0,
+    "0xcc": 0,
+    "0xd0": 1023,
+    "0xd4": 1024,
+    "0xd8": 2000,
+    "0xdc": 1008,
+    "0xe0": 672,
+    "0xe4": 672,
+    "0xe8": 0,
+    "0xec": 0,
+    "0xf0": 2,
+    "0xf4": 2016,
+    "0xf8": 672,
+    "0xfc": 1077936128,
+    "0x100": 1086324736
+  },
+  "all_old_current_differences": [
+    {
+      "offset": "0xc",
+      "r10": 1008,
+      "current_r78_geometry": 2000
+    },
+    {
+      "offset": "0x1c",
+      "r10": 2,
+      "current_r78_geometry": 1
+    },
+    {
+      "offset": "0x20",
+      "r10": 992,
+      "current_r78_geometry": 1984
+    },
+    {
+      "offset": "0x60",
+      "r10": 2048,
+      "current_r78_geometry": 1023
+    },
+    {
+      "offset": "0x88",
+      "r10": 4,
+      "current_r78_geometry": 0
+    },
+    {
+      "offset": "0xb0",
+      "r10": 1,
+      "current_r78_geometry": 0
+    },
+    {
+      "offset": "0xd0",
+      "r10": 1024,
+      "current_r78_geometry": 1023
+    },
+    {
+      "offset": "0xd8",
+      "r10": 1008,
+      "current_r78_geometry": 2000
+    },
+    {
+      "offset": "0xf4",
+      "r10": 1008,
+      "current_r78_geometry": 2016
+    },
+    {
+      "offset": "0xfc",
+      "r10": 1073741824,
+      "current_r78_geometry": 1077936128
+    },
+    {
+      "offset": "0x100",
+      "r10": 1073741824,
+      "current_r78_geometry": 1086324736
+    }
+  ],
+  "remaining_after_withdrawn_4word_matching_trial": [
+    {
+      "offset": "0x1c",
+      "r10": 2,
+      "matching_trial_geometry": 1
+    },
+    {
+      "offset": "0x88",
+      "r10": 4,
+      "matching_trial_geometry": 0
+    },
+    {
+      "offset": "0xb0",
+      "r10": 1,
+      "matching_trial_geometry": 0
+    },
+    {
+      "offset": "0xd0",
+      "r10": 1024,
+      "matching_trial_geometry": 1023
+    },
+    {
+      "offset": "0xf4",
+      "r10": 1008,
+      "matching_trial_geometry": 2016
+    },
+    {
+      "offset": "0xfc",
+      "r10": 1073741824,
+      "matching_trial_geometry": 1077936128
+    },
+    {
+      "offset": "0x100",
+      "r10": 1073741824,
+      "matching_trial_geometry": 1086324736
+    }
+  ],
+  "limitation": "Initial r78 comparison is a low-rate frozen geometry reference with matched engine. Actual frozen v14 high-rate comparison now independently executed and recorded below. Software fixture does not prove DMA/media behavior. Historical matching trial also had engine30/carrier30 and is not an old-r10 replay.",
+  "actual_v14_high_rate_differences": [
+    {
+      "offset": "0xc",
+      "r10": 1008,
+      "v14": 2000
+    },
+    {
+      "offset": "0x1c",
+      "r10": 2,
+      "v14": 1
+    },
+    {
+      "offset": "0x20",
+      "r10": 992,
+      "v14": 1984
+    },
+    {
+      "offset": "0x60",
+      "r10": 2048,
+      "v14": 1023
+    },
+    {
+      "offset": "0x88",
+      "r10": 4,
+      "v14": 0
+    },
+    {
+      "offset": "0xd0",
+      "r10": 1024,
+      "v14": 1023
+    },
+    {
+      "offset": "0xd4",
+      "r10": 1024,
+      "v14": 1023
+    },
+    {
+      "offset": "0xd8",
+      "r10": 1008,
+      "v14": 2000
+    },
+    {
+      "offset": "0xf4",
+      "r10": 1008,
+      "v14": 2016
+    },
+    {
+      "offset": "0xfc",
+      "r10": 1073741824,
+      "v14": 1077936128
+    },
+    {
+      "offset": "0x100",
+      "r10": 1073741824,
+      "v14": 1086324736
+    }
+  ],
+  "actual_v14_test": "Frozen v14 executed via same ARM fixture; full old240 profile comparison fails on11words as expected. B0 already1 at high rate; D4 is1023."
+}

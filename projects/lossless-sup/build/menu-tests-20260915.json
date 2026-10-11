@@ -1,0 +1,34 @@
+{
+  "scope": "offline native-row resource candidate, not runtime UI",
+  "test_suite": "fpSup/lossless/menu/test_menu_candidate.py",
+  "tests_run": 26,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "passed": true,
+  "artifact_hashes_verified": true,
+  "deterministic_rebuild_verified": true,
+  "camera_accessed": false,
+  "deployable": false,
+  "builder_sha256": "ce6f217d207b3dce887be4819cb98efee180461ca0fb253a5f5033a8c16b970d",
+  "test_source_sha256": "23c90edcdc3db933bd9d19577153e07ab2aa3d395af3df4b8bab62af7fc4e07b",
+  "source_sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622",
+  "outputs": {
+    "MainB2.fpLossless.gated.page": {
+      "length": 179826,
+      "sha256": "ce1bd3b2f4b7a15cd7adc22d08db2ed292ae10686b3ef0fcf86b6f82760ebcdd"
+    },
+    "MainB2.fpLossless.strings": {
+      "length": 176248,
+      "sha256": "cd277bb8273595e5de6aec2fd276f5f73ba828131cd3cbef4233c71584389faf"
+    }
+  },
+  "unresolved": [
+    "PRIVATE_ROW_STATE_UNRESOLVED",
+    "PRIVATE_VARIABLE_UNREGISTERED",
+    "NAVIGATION_NOT_PROVEN",
+    "PRIVATE_LABEL_RENDERING_NOT_PROVEN",
+    "NO_RUNTIME_RESOURCE_ADAPTER",
+    "NATIVE_ALLOCATION_NOT_EXECUTED"
+  ]
+}

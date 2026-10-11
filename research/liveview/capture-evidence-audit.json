@@ -1,0 +1,176 @@
+{
+  "scope": [
+    "/Users/dido/Developer.localized/SIGMAfp_re",
+    "/Users/dido/Documents/Codex/2026-08-16/4"
+  ],
+  "pq": {
+    "OFF": {
+      "files": [
+        {
+          "path": "/Users/dido/Documents/Codex/2026-08-16/4/outputs/OFF/PQP844.bin",
+          "bytes": 2116,
+          "sha256": "6bd7d08b94f7a44043d5c40f3d21c52ed198f6220d0121dd3da1967917cdfd86"
+        },
+        {
+          "path": "/Users/dido/Documents/Codex/2026-08-16/4/outputs/OFF/TONE_CH0.bin",
+          "bytes": 20,
+          "sha256": "de47c9b27eb8d300dbb5f2c353e632c393262cf06340c4fa7f1b40c4cbd36f90"
+        },
+        {
+          "path": "/Users/dido/Documents/Codex/2026-08-16/4/outputs/OFF/TONE_CH1.bin",
+          "bytes": 20,
+          "sha256": "de47c9b27eb8d300dbb5f2c353e632c393262cf06340c4fa7f1b40c4cbd36f90"
+        }
+      ],
+      "nonzero_bytes": 335,
+      "tone0_hex": "0000000000000000000000000000000000000000",
+      "tone1_hex": "0000000000000000000000000000000000000000",
+      "tone0_slice_matches": true,
+      "tone1_slice_matches": true
+    },
+    "T&O": {
+      "files": [
+        {
+          "path": "/Users/dido/Documents/Codex/2026-08-16/4/outputs/T&O/PQP844.bin",
+          "bytes": 2116,
+          "sha256": "6bd7d08b94f7a44043d5c40f3d21c52ed198f6220d0121dd3da1967917cdfd86"
+        },
+        {
+          "path": "/Users/dido/Documents/Codex/2026-08-16/4/outputs/T&O/TONE_CH0.bin",
+          "bytes": 20,
+          "sha256": "de47c9b27eb8d300dbb5f2c353e632c393262cf06340c4fa7f1b40c4cbd36f90"
+        },
+        {
+          "path": "/Users/dido/Documents/Codex/2026-08-16/4/outputs/T&O/TONE_CH1.bin",
+          "bytes": 20,
+          "sha256": "de47c9b27eb8d300dbb5f2c353e632c393262cf06340c4fa7f1b40c4cbd36f90"
+        }
+      ],
+      "nonzero_bytes": 335,
+      "tone0_hex": "0000000000000000000000000000000000000000",
+      "tone1_hex": "0000000000000000000000000000000000000000",
+      "tone0_slice_matches": true,
+      "tone1_slice_matches": true
+    },
+    "different_byte_count": 0
+  },
+  "gamma_dump_payload_search": {
+    "/Users/dido/Developer.localized/SIGMAfp_re": {
+      "GAM158": [],
+      "PST15E": [],
+      "CEQ1D0": [],
+      "YUV1E0": []
+    },
+    "/Users/dido/Documents/Codex/2026-08-16/4": {
+      "GAM158": [],
+      "PST15E": [],
+      "CEQ1D0": [],
+      "YUV1E0": []
+    }
+  },
+  "iso_sessions": {
+    "2026-09-16-iso100-v5": {
+      "source": {
+        "path": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/captures/af-fusion/2026-09-16-iso100-v5/samples.jsonl",
+        "bytes": 99291,
+        "sha256": "a0da73560897b14a23c2d5fc4870841b520bc0d461fc3ac7d6bdbef639b935f1"
+      },
+      "binary_source": {
+        "path": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/captures/af-fusion/2026-09-16-iso100-v5/samples.bin",
+        "bytes": 12480,
+        "sha256": "14f62fd73c85540a1a030510f87154c1f9cb89db59b4ee2b70691847cc5bbbde"
+      },
+      "records": 60,
+      "coherent_records": 60,
+      "sequence_min": 0,
+      "sequence_max": 59,
+      "unique_imx410_gains": [
+        {
+          "analog_code": 985,
+          "analog_ratio_x100": 131,
+          "hcg": false,
+          "hcg_raw": 0,
+          "relative_gain": 117
+        }
+      ],
+      "movie_recording_values": [
+        false
+      ]
+    },
+    "2026-09-16-iso12800-c": {
+      "source": {
+        "path": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/captures/af-fusion/2026-09-16-iso12800-c/samples.jsonl",
+        "bytes": 99499,
+        "sha256": "cdb8b92bb7dcdf3dcc94d74f9d865bbe9ead9f702cfd1bf685b4894c1887d378"
+      },
+      "binary_source": {
+        "path": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/captures/af-fusion/2026-09-16-iso12800-c/samples.bin",
+        "bytes": 12480,
+        "sha256": "3144d8c2a1f22bb076bad9bf67d12699cb9454b711a59f0967587eff93040df1"
+      },
+      "records": 60,
+      "coherent_records": 60,
+      "sequence_min": 0,
+      "sequence_max": 59,
+      "unique_imx410_gains": [
+        {
+          "analog_code": 3840,
+          "analog_ratio_x100": 1606,
+          "hcg": true,
+          "hcg_raw": 1,
+          "relative_gain": 14976
+        }
+      ],
+      "movie_recording_values": [
+        false
+      ]
+    }
+  },
+  "supporting_sources": [
+    {
+      "path": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/captures/af-fusion/2026-09-16-iso100-v5/README.md",
+      "bytes": 2806,
+      "sha256": "62c265ed111ab0c8a3abc1bf34bf1a5ff4483b4f10b8b0bb7ed7505101ca9f45"
+    },
+    {
+      "path": "/Users/dido/Developer.localized/SIGMAfp_re/research/other/notes/CAMERA_STATE_SOURCES.md",
+      "bytes": 25321,
+      "sha256": "950f31120c924548ca634bac4a7ffe8237daef670825763055200db5287ccd22"
+    },
+    {
+      "path": "/Users/dido/Developer.localized/SIGMAfp_re/research/other/external/FP3K-technical-handoff-2026-09-10/analysis/reduction-method/native-trace.json",
+      "bytes": 18044,
+      "sha256": "8c9e4a7e67e6862caada50e786989a0e000f74b0e529b3eaf663a91b7d541273"
+    },
+    {
+      "path": "/Users/dido/Developer.localized/SIGMAfp_re/research/other/external/FP3K-technical-handoff-2026-09-10/analysis/reduction-method/FINDINGS.md",
+      "bytes": 6117,
+      "sha256": "d06b6c14cbec2a73a80000dcb5ef82b8f3ef6a8eae621847ace266adf4ecbbae"
+    },
+    {
+      "path": "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/notes/REDUCTION_KERNEL_MEASURED.md",
+      "bytes": 223718,
+      "sha256": "82f0adaae701b90790e2e7ae173274199234da9dcc325968482d5a95e7633b2c"
+    },
+    {
+      "path": "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/notes/reduction-kernel/README.md",
+      "bytes": 2755,
+      "sha256": "9caab231c74298ee31c01cc1bcb8e851d589e9f3a5b4f05160f70f97aede69fb"
+    },
+    {
+      "path": "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/notes/LIVE_VIEW_DISPLAY_CHAIN.md",
+      "bytes": 11189,
+      "sha256": "e4532e727a67e691cec34b4d565b4c9d2584a4859dc5650c2d22e0a35997f943"
+    },
+    {
+      "path": "/Users/dido/Developer.localized/SIGMAfp_re/research/imaging-hw/notes/CRCT_PATH_SELECTOR_SOLVED.md",
+      "bytes": 15821,
+      "sha256": "39c949f7d7cfda50373eb34829c1e62e2d13107d65e791b6948e5d1f49827a96"
+    },
+    {
+      "path": "/Users/dido/Developer.localized/SIGMAfp_re/codex/evidence/opengate_ev_bug_20260914/compare_083_084/result.json",
+      "bytes": 1133,
+      "sha256": "6db3e40b978d6c291556a8ea57b6c0eb6ea6a0924faff8f2a0d1c7c31980cca3"
+    }
+  ]
+}

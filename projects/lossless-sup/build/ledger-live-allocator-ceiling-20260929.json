@@ -1,0 +1,56 @@
+{
+ "schema_version": 1,
+ "kind": "live_the_allocator_gives_16_MiB_in_total_however_it_is_carved",
+ "date": "2026-09-29",
+ "scope": "LIVE on the camera, firmware 5.02.0.V91, model w71c1. callfn only: no clip, no hook, no frame touched. Every block was freed inside the same call, and every run reported free_return 0.",
+
+ "the_question": "ledger-live-aggregation-batch-measured-20260929.json puts the asynchronous design's pool at 64 MiB, because a slot must survive until the 64 MiB aggregation batch holding it is flushed. Two 4 MiB blocks were the most ever obtained. Is more available?",
+
+ "the_answer": {
+  "single_block_ceiling": "16 MiB. 4, 8 and 16 were granted; 20, 24, 28, 30, 31, 32 and 64 were all refused.",
+  "total_ceiling": "16 MiB as well, however it is carved up",
+  "measurements": [
+   {"request": "4 MiB x 8", "granted": "4 blocks", "total_MiB": 16},
+   {"request": "4 MiB x 4", "granted": "4 blocks", "total_MiB": 16},
+   {"request": "4 MiB x 2", "granted": "2 blocks", "total_MiB": 8},
+   {"request": "8 MiB x 4", "granted": "2 blocks", "total_MiB": 16},
+   {"request": "16 MiB x 8", "granted": "1 block", "total_MiB": 16},
+   {"request": "20..64 MiB x 1", "granted": "none", "total_MiB": 0}
+  ],
+  "allocator": "F_ALLOC 0xC001CF78 then F_GET 0xC001D038, the same pair every probe in this project uses, with F_FREE 0xC001D2B8",
+  "level": "L"
+ },
+
+ "what_it_rules_out": "the pool route as designed. 64 MiB of our own buffers is four times what this allocator will give, and the shortfall is not a fragmentation accident: the total is the same 16 MiB whether asked for as one block, two, four or eight.",
+
+ "what_is_left": [
+  {
+   "route": "put the compressed frame back in the camera's own buffer",
+   "memory": "one scratch block, and the camera's own buffer already survives to the batch flush because the write path owns it",
+   "cost": "the node holding the length is the caller's stack object, so the length must be set during that frame's own flush call, so the compressed size must be known then, so the encode is SYNCHRONOUS. G5 measured 13.65 ms per FHD frame: 33 percent of a 24p period, 41 percent at 30p, 82 percent at 59.94p.",
+   "the_open_risk": "copy-back froze the camera at the CinemaDNG writer site 0xC0722AFC, and copy-back-length-only froze too, isolating the seg[1] write as the cause. It has NEVER been tried at the flush site 0xC03A5490, where 40 node-pointer writes ran clean on 2026-09-29 and where the structure is the writer's own node, not the camera's seg. G4b already showed a node length different from the stock segment length is accepted."
+  },
+  {
+   "route": "lower the aggregation threshold",
+   "idea": "the batch flushes when vol[0x4828] <= vol[0x4a58]. vol[0x4828] is a variable holding 0x04000000. A smaller value means smaller batches, and a batch of 8 compressed frames is about 11 MB -- inside the 16 MiB we have. The pool route would then work and the encode could stay asynchronous.",
+   "status": "not attempted. The volume object's address is not yet established, and changing a live firmware variable that governs card writes is a bigger step than anything done so far."
+  },
+  {
+   "route": "another memory source",
+   "note": "the notes name a legacy 1 MiB pool descriptor at C3757A7C that is explicitly NOT ours, and af_probe_helper.S takes a 64 KiB USER allocation by a different path. Whether any other allocator has more than 16 MiB to give is unknown."
+  }
+ ],
+
+ "corrections": [
+  {
+   "what_was_wrong": "the first reading of '16 MiB x 8 -> 1 granted' printed NOTHING GRANTED AT ALL.",
+   "why": "the verdict tested a `granted` field meaning 'the whole request was met'. One block of eight is still 16 MiB obtained. Fixed to judge on the total actually held, with a test."
+  }
+ ],
+
+ "tooling_added": {
+  "alloc_capacity_probe.S": "284 bytes, callfn-invoked. Takes a size, an alignment and a count; holds that many blocks AT ONCE, records every handle, then frees them all newest first and returns how many it got. The first refusal stops the asking, so the free runs on exactly what was granted. The count is bounded by the handle table, not by the caller.",
+  "alloc_capacity_driver.py": "borrows lossless.codec.code and lossless.codec.state at the codec chain's OWN fixed sizes -- idempotent, no arena cost -- and refuses to install unless both hook sites read their stock word.",
+  "test_alloc_capacity.py": "23 tests, nine mutations all caught, including 'never frees', 'frees past what was granted', 'trusts the caller for the count' and 'moves H_TABLE without telling the driver'."
+ }
+}

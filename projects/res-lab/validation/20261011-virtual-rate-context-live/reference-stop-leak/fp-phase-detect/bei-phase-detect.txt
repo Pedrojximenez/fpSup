@@ -1,0 +1,34 @@
+Hi bei — a question about the fp's phase-detect, since you know the AF side far better than me. All read-only RE of the 5.02 image (image_C0000000.bin, base 0xC0000000); strings below are grep-verified, addresses are from my Ghidra project.
+
+WHAT'S IN THE FIRMWARE
+The image clearly carries a full PDAF + hybrid AF stack, not just contrast AF:
+- Per-sensor-mode PD line-readout config: "PDAF size=%u, %u, line=(%u,%u),(%u,%u), interval=%u, sensor=%" (~0xC0283830 / 0xC0283B20).
+- Phase -> signed defocus: AfMgrMeasurePdafDefocus (0xC091AF54), "DiffPh %5d Reliability %5d g_af_h_data %5d".
+- Per-area phase telemetry: "pd_area=%u, rel=%d, diff_ph=%d, err=%u" and "...thr=%d , diff_Ph=%d".
+- PD defect / marginal correction: "PDAF Marginal Correction Coefficient" (0xC0BB88CC), "PDAF Cor: %d", "pd_cor %6.5f pd_cor_total %6.5f max_dp %d".
+- Direction + speed from phase: pd_dir_route, pd_change_speed_route.
+- Hybrid (phase+contrast): AfMgrProcessHybrid (0xC091EE70), AfMgrPhaseDetection.
+- Raw PD logger: "pd_%04d%02d%02d_%02d%02d%02d.csv".
+Sensor is the Sony IMX410 — the same part Sony runs on-sensor hybrid PDAF on in the A7 III — so the hardware lineage has PD pixels.
+
+WHY IT PULSES (not in dispute)
+Live CAF is pure contrast: the metric (peakNow 0xC32915C4 / peakMax 0xC32915C8, target g_afpos 0xC32914E0, "AF:%d peak=%d g_afpos=%d" 0xC091A130) is a sign-less sharpness scalar — it says how sharp, never which way. To get direction the firmware dithers the lens and watches the metric; that probing IS the wobble (AfMgrProcessRocking 0xC091F7F8, shell "caf drive wobbling"). Phase detect, if live, gives signed defocus in one shot (direction + distance) — no dither, no pulse.
+
+THE OPEN QUESTION I CAN'T SETTLE FROM THE BINARY
+Whether valid phase is actually read out in the UHD-24p CDNG VIDEO mode, or only in stills / LV-AF. The code and the PD-line config are right there, but community field tests suggested no usable phase signal in video, and one reading is that this is dormant shared-platform (fp L / stills) code with nothing feeding it in video. I'm not going to overclaim either way — this is the gate.
+
+WE CAN LIKELY OBSERVE THE ANSWER, NOT GUESS (no patch)
+There's a pdaf debug-command group in the image (help lines, verbatim):
+    pdaf caf      : "pdaf caf debug output."
+    pdaf image    : "pdaf subject determination debug output."
+    pdaf sequence : "pdaf sequence debug output."
+    pdaf invalid  : "disable phase detection."
+plus the pd_YYYYMMDD_HHMMSS.csv logger and the DiffPh/Reliability/pd_area/rel/diff_ph readouts above. So the decisive test looks like an OBSERVATION: run pdaf caf / pdaf sequence (or capture the CSV) while recording UHD 24p CDNG and read whether DiffPh / Reliability / rel / diff_ph come back valid and non-zero.
+Questions for you: (a) are those pdaf commands reachable from the current shell? (b) do you know whether PD-line readout is programmed in the video ImagerModes, or only stills/LV-AF?
+
+WHAT ENABLING IT WOULD LOOK LIKE
+- If phase is live in video -> feed the signed defocus (AfMgrMeasurePdafDefocus -> DiffPh) straight to ExecAbsoluteFocusDriving (GIMBAL 0x9413, handler 0xC04EF298, works during rec) = a true phase-servo, no dither.
+- If PD lines are only in a stills/LV mode -> it may be a mode-config gate (PD readout simply not programmed into the video ImagerModes); enabling there is possible in principle but speculative and needs your sensor-mode knowledge.
+- If phase is genuinely dead in video -> fall back to subject-lock hold-and-correct on 0x9413 (eye/face/subject tracking is fully decoded: DetectionMgr emits per-detection {label,x,y,w,h,score}, eye separate from face, colour/subject model 0xC37CDFA8 + motion prediction). Drive to subject, then HOLD and only re-drive past a hysteresis threshold. Kills the pulsing regardless of phase.
+
+Keen to hear if you've already probed any of this — especially whether pdaf caf/sequence produce anything while rolling video. Cheers!

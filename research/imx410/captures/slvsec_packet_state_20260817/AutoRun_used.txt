@@ -1,0 +1,74 @@
+# SIGMA fp Ver.5.02 - read-only SLVS-EC packet/assembler state comparison
+# Start cue: one color-bar pulse. Take ONE photo 5-15 seconds later.
+# Completion cue: two pulses. Normal [40,4082] source window is untouched.
+
+display monitor 0 1
+display colorbar 1 0
+ctrl sleep 700
+display colorbar 0 0
+ctrl sleep 400
+
+# Let live view settle, then save the idle baseline.
+ctrl sleep 5000
+mem save \PKPHYB.BIN 0x300E1000,,0x00001000
+mem save \PKASMB.BIN 0x30100000,,0x00001000
+
+# Result area: raw_ptr, hold_entered, release, mode, bit_type, frame_count.
+mem set 0xC072E500 0xDEADBEEF
+mem set 0xC072E504 0x00000000
+mem set 0xC072E508 0x00000000
+mem set 0xC072E50C 0xDEADBEEF
+mem set 0xC072E510 0xDEADBEEF
+mem set 0xC072E514 0xDEADBEEF
+
+# Proven AcqEndTrans wrapper: observe a completed DMA frame and hold before
+# StillCreateRaw. This does not modify receiver or sensor configuration.
+mem set 0xC072DE64 0xE92D4070
+mem set 0xC072DE68 0xE1A04001
+mem set 0xC072DE6C 0xE308CA38
+mem set 0xC072DE70 0xE34CC031
+mem set 0xC072DE74 0xE12FFF3C
+mem set 0xC072DE78 0xE5945030
+mem set 0xC072DE7C 0xE30E6500
+mem set 0xC072DE80 0xE34C6072
+mem set 0xC072DE84 0xE5865000
+mem set 0xC072DE88 0xE3A00001
+mem set 0xC072DE8C 0xE5860004
+mem set 0xC072DE90 0xE5940014
+mem set 0xC072DE94 0xE586000C
+mem set 0xC072DE98 0xE5940018
+mem set 0xC072DE9C 0xE5860010
+mem set 0xC072DEA0 0xE5940024
+mem set 0xC072DEA4 0xE5860014
+mem set 0xC072DEA8 0xE5960008
+mem set 0xC072DEAC 0xE3500000
+mem set 0xC072DEB0 0x1A000004
+mem set 0xC072DEB4 0xE3A00064
+mem set 0xC072DEB8 0xE300C5D8
+mem set 0xC072DEBC 0xE34CC037
+mem set 0xC072DEC0 0xE12FFF3C
+mem set 0xC072DEC4 0xEAFFFFF7
+mem set 0xC072DEC8 0xE8BD8070
+
+# Activate known single-frame post-DMA callsite last.
+mem set 0xC0315DD4 0xEB106022
+
+# Take one still during this window.
+ctrl sleep 20000
+
+# Snapshot while StillCreateRaw is held.
+mem save \PKPHYA.BIN 0x300E1000,,0x00001000
+mem save \PKASMA.BIN 0x30100000,,0x00001000
+mem save \PKMETA.BIN 0xC072E500,,0x00000020
+
+# Release normal DNG processing.
+mem set 0xC072E508 0x00000001
+ctrl sleep 7000
+
+display colorbar 1 0
+ctrl sleep 700
+display colorbar 0 0
+ctrl sleep 400
+display colorbar 1 0
+ctrl sleep 700
+display colorbar 0 0

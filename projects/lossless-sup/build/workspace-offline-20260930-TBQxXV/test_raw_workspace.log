@@ -1,0 +1,8 @@
+{"camera_accessed": false, "camera_capacity_proved": false, "deployable": false, "dma_drain_proved": false, "firmware_sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622", "kind": "compiled_raw_workspace_host_and_original_arm_descriptor_wrappers", "legacy_C001CFD8_nested_SP_mod8": 4, "native_instructions_executed": ["C001CFD8", "C001D3D0"], "new_wrapper_stack_alignment": 8, "passed": true, "producer_exclusion_proved": false, "skipped": 0, "source_hashes": {"raw_workspace.c": "efc71e9199ed4922df63fbebd0370758b04f1304e30596565ac158a2fc0031ec", "raw_workspace.h": "ffc9a9a9d03536a18fce4912c1643e82ba55ca4f273fb4cfc0a5f46595e1a4a3", "test_raw_workspace.py": "64ccb0467f9cc7be45609ed9e87853f1558c4554561359a039d3365303c6b637"}, "substitutes": ["memory mode", "pool selection", "physical allocation/free"], "tests_run": 40, "text_bytes": 804, "text_sha256": "b0a7e8c342a0d0a83afffc45173d786611361dab164df454e8c3f001c93ee436"}
+RAW WORKSPACE VERIFIED: 40 tests, 0 skipped
+test_host_and_actual_arm_in_child (__main__.RawWorkspaceTests) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 1.339s
+
+OK

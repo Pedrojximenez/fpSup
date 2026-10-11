@@ -1,0 +1,69 @@
+{
+  "after-domain-fix": {
+    "passed": true,
+    "cases": 142800
+  },
+  "all-rates": {
+    "passed": true,
+    "cases": 8400
+  },
+  "arm-all-modes": {
+    "passed": true,
+    "cases": 1750
+  },
+  "arm-all-apply": {
+    "passed": true,
+    "cases": 62
+  },
+  "arm-guards": {
+    "passed": true,
+    "cases": 20
+  },
+  "arm-guard-mutation": {
+    "passed": true,
+    "cases": null
+  },
+  "artifact-proof": {
+    "passed": true,
+    "cases": null
+  },
+  "audit-settings-tests": {
+    "passed": true,
+    "cases": null
+  },
+  "v6-m98-bin3-ratio276": {
+    "passed": true,
+    "clip": "A001_006",
+    "output": [
+      992,
+      360
+    ],
+    "record_raster": [
+      1008,
+      370
+    ],
+    "bits": 12,
+    "fps": 50
+  },
+  "v6-m98-free-half": {
+    "passed": true,
+    "clip": "A001_007",
+    "output": [
+      1504,
+      1006
+    ],
+    "record_raster": [
+      1520,
+      1016
+    ],
+    "bits": 12,
+    "fps": 50
+  },
+  "final_camera_audit": {
+    "passed": true,
+    "files": 9,
+    "screen": "LV_CINE_MEDIUM",
+    "generation": 2
+  },
+  "passed": true
+}

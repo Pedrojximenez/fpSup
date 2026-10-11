@@ -1,0 +1,29 @@
+test_a_full_cave_releases_with_nothing_written (test_v3_reslab.ResLabV3Tests) ... ok
+test_a_late_hook_site_held_by_another_releases (test_v3_reslab.ResLabV3Tests) ... ok
+test_a_payload_runs_through_its_hook (test_v3_reslab.ResLabV3Tests) ... ok
+test_a_stale_hook_is_repaired_then_armed (test_v3_reslab.ResLabV3Tests) ... ok
+test_a_static_word_held_by_another_releases (test_v3_reslab.ResLabV3Tests) ... ok
+test_debug_shell_and_reslab_load_together (test_v3_reslab.ResLabV3Tests) ... ok
+test_every_word_the_core_changes_later_is_journalled (test_v3_reslab.ResLabV3Tests)
+Independent of the builder's list: the 70 sensor-mode timing records ... ok
+test_loads_claims_relocates_and_arms_the_core (test_v3_reslab.ResLabV3Tests) ... ok
+test_menu_callbacks_run_on_an_aligned_stack (test_v3_reslab.ResLabV3Tests)
+MARK+0x50/+0x54 are entered from hook payloads with the firmware's ... ok
+test_menu_installed_arms_the_late_hooks_and_exposes_the_page (test_v3_reslab.ResLabV3Tests) ... ok
+test_nbr_refused_puts_the_stock_page_back (test_v3_reslab.ResLabV3Tests) ... ok
+test_page_id_site_is_shared_and_alone_it_passes_to_the_firmware (test_v3_reslab.ResLabV3Tests) ... ok
+test_page_id_site_stacks_on_a_layer_below (test_v3_reslab.ResLabV3Tests) ... ok
+test_pointer_pairs_name_the_tables_where_they_landed (test_v3_reslab.ResLabV3Tests) ... ok
+test_power_off_puts_every_claimed_word_back (test_v3_reslab.ResLabV3Tests) ... ok
+test_real_installer_accepts_exact_fit_without_reopening_the_file (test_v3_reslab.ResLabV3Tests) ... ok
+test_real_installer_bounds_declared_slmp_length_before_parsing (test_v3_reslab.ResLabV3Tests) ... ok
+test_real_installer_preserves_firmware_layout_and_power_off_restores_claims (test_v3_reslab.ResLabV3Tests) ... ok
+test_recording_picker_runs_from_the_block_and_publishes_profile_87 (test_v3_reslab.ResLabV3Tests) ... ok
+test_static_words_are_written (test_v3_reslab.ResLabV3Tests) ... ok
+test_the_menu_finds_the_core_through_the_picker (test_v3_reslab.ResLabV3Tests)
+sl_modes.c sl_core_base, in Python. ... ok
+
+----------------------------------------------------------------------
+Ran 21 tests in 47.948s
+
+OK

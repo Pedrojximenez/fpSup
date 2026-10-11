@@ -1,0 +1,152 @@
+{
+  "date": "2026-10-09",
+  "camera_operations": false,
+  "on_camera_ready": false,
+  "cube": {
+    "path": "/Users/dido/Developer.localized/SIGMAfp_re/bmcc6k/analysis-20260924/bmcc6k-decompile-20260924/payload_audit/extracted/payload/restore/user/luts/Blackmagic Gen 5 Film to Video.cube",
+    "title": "",
+    "source_sha256": "120647691ed3e5996e0c545d521fe2c052dd57b466429cd2be36ddf7c71250c6",
+    "size1d": 0,
+    "size3d": 33,
+    "range1d": [
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        1.0,
+        1.0,
+        1.0
+      ]
+    ],
+    "range3d": [
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        1.0,
+        1.0,
+        1.0
+      ]
+    ]
+  },
+  "files": [
+    {
+      "source": "/Users/dido/Movies/fpSup/color area/A001_297/A001_297_20260924_000001.DNG",
+      "source_sha256": "99adbcb147bd1bb78185dcfd032e89f3743394615ad6899534e2f3803835ddd1",
+      "output": "/tmp/fpsup-lut-validation-20261009/A001_297_20260924_000001-source-look.dng",
+      "output_sha256": "f73c91dd98bd9303a4dbe02c48d1ad0ff74b2377131c8ee44c3e50221ae22c37",
+      "added_bytes": 182406,
+      "image_payload_ranges": 1,
+      "image_payload_sha256": "35ee593686519de80c24e997023f775f3e50759ae39a97c9fc6e0ba63efc773a",
+      "bayer_shape": [
+        1090,
+        1936
+      ],
+      "bayer_dtype": "uint16",
+      "bayer_sha256": "054583e437a3eaac2795c18f31c0bbeedd1999d36327ab0f9941941e75818e4e",
+      "bayer_equal": true,
+      "cube_restored_exactly": true,
+      "original_bytes_except_root_ifd_pointer_unchanged": true
+    },
+    {
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/research/imaging-hw/color-characterisation/captures/_SDI0010.DNG",
+      "source_sha256": "1bd172b324db659366d052d1664cf9a875e0426580589732603776ea3b69f64c",
+      "output": "/tmp/fpsup-lut-validation-20261009/_SDI0010-source-look.dng",
+      "output_sha256": "431a5a8c1f3f414b57480a154bbcfbca92db6d4454eddc9730b05fb2b4edd5a7",
+      "added_bytes": 182262,
+      "image_payload_ranges": 387,
+      "image_payload_sha256": "0176af454cf547d991a7c9e69b243f24d3e6e8acf697912ed15666fe799e856f",
+      "bayer_shape": [
+        4042,
+        6064
+      ],
+      "bayer_dtype": "uint16",
+      "bayer_sha256": "a5d833cda3f206f8d606cec24755d9e8d88f95c0658b1e482bc0f26792acaaaa",
+      "bayer_equal": true,
+      "cube_restored_exactly": true,
+      "original_bytes_except_root_ifd_pointer_unchanged": true
+    }
+  ],
+  "preview": {
+    "input": "/tmp/fpsup-lut-validation-20261009/chart.png",
+    "output": "/tmp/fpsup-lut-validation-20261009/chart-look.png",
+    "channel_mapping_exact": true
+  },
+  "rgbtables": {
+    "output": "/tmp/fpsup-lut-validation-20261009/A001_297-rgbtables.dng",
+    "bayer_equal": true,
+    "reader_render_effect_verified": false,
+    "settings": {
+      "schema": "fpSup-LUT-settings-1",
+      "name": "channel-order",
+      "input_space": "srgb",
+      "output_space": "srgb",
+      "strength": 1.0,
+      "interpolation": "tetrahedral",
+      "source_sha256": "a91a70ec8db8fcef64bc248e97d849334379fd1dbe785e7f172ef223210fc7b7",
+      "source_bytes": 96,
+      "cube": {
+        "title": "fpSup channel-order check",
+        "source_sha256": "a91a70ec8db8fcef64bc248e97d849334379fd1dbe785e7f172ef223210fc7b7",
+        "size1d": 0,
+        "size3d": 2,
+        "range1d": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            1.0,
+            1.0,
+            1.0
+          ]
+        ],
+        "range3d": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            1.0,
+            1.0,
+            1.0
+          ]
+        ]
+      },
+      "rendering": "dng-rgbtables-reader-dependent",
+      "rgbtables_divisions": 2,
+      "rgbtables_resampling_error": {
+        "reference": "tetrahedral, normalized input cube, RGB absolute error",
+        "samples": 14913,
+        "mean": 0.0,
+        "p95": 0.0,
+        "max": 0.0
+      }
+    }
+  },
+  "offline_tests": {
+    "lut": {
+      "count": 17,
+      "passed": true,
+      "command": "python3 -B -m unittest discover -s fpSup/lut -p 'test_*.py'"
+    },
+    "isp_map": {
+      "count": 3,
+      "passed": true,
+      "command": "python3 -B -m unittest discover -s research/imaging-hw/isp-colour-blocks-20260927 -p 'test_*.py'",
+      "diagnostic_routes": 120
+    }
+  },
+  "tool_sources_sha256": {
+    "fpSup/lut/cube.py": "d80aa6d51b38d495c05d87abea719665780ce80df808ed3f936ac9523d6d67a1",
+    "fpSup/lut/dng.py": "fbd52f93747bf6b9dbe16fb262f460e834f556c940355d54a196f5feade12465",
+    "fpSup/lut/fplut.py": "b9363a044b090efa0eafd674695dbaca620cd508bef1ed13a7500acfc0b5f6ba",
+    "research/imaging-hw/isp-colour-blocks-20260927/extract_isp_map.py": "340141a6b318414122e0e359bde820b91fd127738dceb39e68d0cbd56de2093f"
+  }
+}

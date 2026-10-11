@@ -1,0 +1,1259 @@
+{
+  "mode_count": 70,
+  "cases": 142800,
+  "issues": {
+    "preview_raster_exceeds_source": 258
+  },
+  "examples": [
+    {
+      "mode": 98,
+      "raw": [
+        3032,
+        2012
+      ],
+      "scale": [
+        2,
+        2
+      ],
+      "bin": [
+        1,
+        1
+      ],
+      "ratio": 16,
+      "crop_requested": [
+        0,
+        0
+      ],
+      "output_requested": [
+        1504,
+        1006
+      ],
+      "lead": 0,
+      "result": [
+        1504,
+        1006,
+        1,
+        1,
+        0,
+        0,
+        16,
+        2000,
+        1327,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        1520,
+        1016,
+        1536,
+        1016,
+        1,
+        1520,
+        1504,
+        1006,
+        1006,
+        1,
+        0,
+        0,
+        2027,
+        2042,
+        0,
+        1,
+        0,
+        0,
+        0,
+        2027,
+        2027,
+        1536,
+        1520,
+        1016,
+        1016,
+        3032,
+        2012,
+        1073741824,
+        1073741824
+      ],
+      "errors": [
+        "preview_raster_exceeds_source"
+      ]
+    },
+    {
+      "mode": 98,
+      "raw": [
+        3032,
+        2012
+      ],
+      "scale": [
+        2,
+        2
+      ],
+      "bin": [
+        1,
+        1
+      ],
+      "ratio": 16,
+      "crop_requested": [
+        0,
+        0
+      ],
+      "output_requested": [
+        1504,
+        1006
+      ],
+      "lead": 1,
+      "result": [
+        1504,
+        1006,
+        1,
+        1,
+        0,
+        0,
+        16,
+        2000,
+        1327,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        1520,
+        1016,
+        1536,
+        1016,
+        1,
+        1520,
+        1504,
+        1006,
+        1006,
+        1,
+        0,
+        0,
+        2027,
+        2042,
+        0,
+        1,
+        0,
+        0,
+        0,
+        2027,
+        2027,
+        1536,
+        1520,
+        1016,
+        1016,
+        3032,
+        2012,
+        1073741824,
+        1073741824
+      ],
+      "errors": [
+        "preview_raster_exceeds_source"
+      ]
+    },
+    {
+      "mode": 6,
+      "raw": [
+        4176,
+        2174
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "bin": [
+        1,
+        1
+      ],
+      "ratio": 2,
+      "crop_requested": [
+        0,
+        0
+      ],
+      "output_requested": [
+        16,
+        2
+      ],
+      "lead": 0,
+      "result": [
+        592,
+        320,
+        1,
+        1,
+        0,
+        0,
+        2,
+        1370,
+        702,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        608,
+        330,
+        640,
+        330,
+        1,
+        624,
+        592,
+        320,
+        320,
+        16,
+        1,
+        0,
+        2248,
+        7033,
+        0,
+        1,
+        0,
+        1,
+        0,
+        2248,
+        6745,
+        640,
+        608,
+        330,
+        330,
+        4176,
+        2174,
+        1065353216,
+        1065353216
+      ],
+      "errors": [
+        "preview_raster_exceeds_source"
+      ]
+    },
+    {
+      "mode": 6,
+      "raw": [
+        4176,
+        2174
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "bin": [
+        1,
+        1
+      ],
+      "ratio": 2,
+      "crop_requested": [
+        0,
+        0
+      ],
+      "output_requested": [
+        16,
+        2
+      ],
+      "lead": 1,
+      "result": [
+        592,
+        320,
+        1,
+        1,
+        0,
+        0,
+        2,
+        1370,
+        702,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        608,
+        330,
+        640,
+        330,
+        1,
+        624,
+        592,
+        320,
+        320,
+        16,
+        1,
+        0,
+        2248,
+        7033,
+        0,
+        1,
+        0,
+        1,
+        0,
+        2248,
+        6745,
+        640,
+        608,
+        330,
+        330,
+        4176,
+        2174,
+        1065353216,
+        1065353216
+      ],
+      "errors": [
+        "preview_raster_exceeds_source"
+      ]
+    },
+    {
+      "mode": 6,
+      "raw": [
+        4176,
+        2174
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "bin": [
+        1,
+        1
+      ],
+      "ratio": 2,
+      "crop_requested": [
+        0,
+        0
+      ],
+      "output_requested": [
+        2080,
+        1086
+      ],
+      "lead": 0,
+      "result": [
+        1776,
+        960,
+        1,
+        1,
+        0,
+        0,
+        2,
+        1386,
+        717,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        1792,
+        970,
+        1872,
+        970,
+        1,
+        1856,
+        1776,
+        960,
+        960,
+        1,
+        0,
+        0,
+        2295,
+        2386,
+        0,
+        1,
+        0,
+        0,
+        0,
+        2295,
+        2295,
+        1872,
+        1792,
+        970,
+        970,
+        4176,
+        2174,
+        1065353216,
+        1065353216
+      ],
+      "errors": [
+        "preview_raster_exceeds_source"
+      ]
+    },
+    {
+      "mode": 122,
+      "raw": [
+        4176,
+        2174
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "bin": [
+        1,
+        1
+      ],
+      "ratio": 2,
+      "crop_requested": [
+        0,
+        0
+      ],
+      "output_requested": [
+        16,
+        2
+      ],
+      "lead": 0,
+      "result": [
+        592,
+        320,
+        1,
+        1,
+        0,
+        0,
+        2,
+        1370,
+        702,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        608,
+        330,
+        640,
+        330,
+        1,
+        624,
+        592,
+        320,
+        320,
+        16,
+        1,
+        0,
+        2248,
+        7033,
+        0,
+        1,
+        0,
+        1,
+        0,
+        2248,
+        6745,
+        640,
+        608,
+        330,
+        330,
+        4176,
+        2174,
+        1065353216,
+        1065353216
+      ],
+      "errors": [
+        "preview_raster_exceeds_source"
+      ]
+    },
+    {
+      "mode": 122,
+      "raw": [
+        4176,
+        2174
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "bin": [
+        1,
+        1
+      ],
+      "ratio": 2,
+      "crop_requested": [
+        0,
+        0
+      ],
+      "output_requested": [
+        16,
+        2
+      ],
+      "lead": 1,
+      "result": [
+        592,
+        320,
+        1,
+        1,
+        0,
+        0,
+        2,
+        1370,
+        702,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        608,
+        330,
+        640,
+        330,
+        1,
+        624,
+        592,
+        320,
+        320,
+        16,
+        1,
+        0,
+        2248,
+        7033,
+        0,
+        1,
+        0,
+        1,
+        0,
+        2248,
+        6745,
+        640,
+        608,
+        330,
+        330,
+        4176,
+        2174,
+        1065353216,
+        1065353216
+      ],
+      "errors": [
+        "preview_raster_exceeds_source"
+      ]
+    },
+    {
+      "mode": 122,
+      "raw": [
+        4176,
+        2174
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "bin": [
+        1,
+        1
+      ],
+      "ratio": 2,
+      "crop_requested": [
+        0,
+        0
+      ],
+      "output_requested": [
+        2080,
+        1086
+      ],
+      "lead": 0,
+      "result": [
+        1776,
+        960,
+        1,
+        1,
+        0,
+        0,
+        2,
+        1386,
+        717,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        1792,
+        970,
+        1872,
+        970,
+        1,
+        1856,
+        1776,
+        960,
+        960,
+        1,
+        0,
+        0,
+        2295,
+        2386,
+        0,
+        1,
+        0,
+        0,
+        0,
+        2295,
+        2295,
+        1872,
+        1792,
+        970,
+        970,
+        4176,
+        2174,
+        1065353216,
+        1065353216
+      ],
+      "errors": [
+        "preview_raster_exceeds_source"
+      ]
+    },
+    {
+      "mode": 100,
+      "raw": [
+        4176,
+        2174
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "bin": [
+        1,
+        1
+      ],
+      "ratio": 2,
+      "crop_requested": [
+        0,
+        0
+      ],
+      "output_requested": [
+        16,
+        2
+      ],
+      "lead": 0,
+      "result": [
+        592,
+        320,
+        1,
+        1,
+        0,
+        0,
+        2,
+        1370,
+        702,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        608,
+        330,
+        640,
+        330,
+        1,
+        624,
+        592,
+        320,
+        320,
+        16,
+        1,
+        0,
+        2248,
+        7033,
+        0,
+        1,
+        0,
+        1,
+        0,
+        2248,
+        6745,
+        640,
+        608,
+        330,
+        330,
+        4176,
+        2174,
+        1065353216,
+        1065353216
+      ],
+      "errors": [
+        "preview_raster_exceeds_source"
+      ]
+    },
+    {
+      "mode": 100,
+      "raw": [
+        4176,
+        2174
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "bin": [
+        1,
+        1
+      ],
+      "ratio": 2,
+      "crop_requested": [
+        0,
+        0
+      ],
+      "output_requested": [
+        16,
+        2
+      ],
+      "lead": 1,
+      "result": [
+        592,
+        320,
+        1,
+        1,
+        0,
+        0,
+        2,
+        1370,
+        702,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        608,
+        330,
+        640,
+        330,
+        1,
+        624,
+        592,
+        320,
+        320,
+        16,
+        1,
+        0,
+        2248,
+        7033,
+        0,
+        1,
+        0,
+        1,
+        0,
+        2248,
+        6745,
+        640,
+        608,
+        330,
+        330,
+        4176,
+        2174,
+        1065353216,
+        1065353216
+      ],
+      "errors": [
+        "preview_raster_exceeds_source"
+      ]
+    },
+    {
+      "mode": 100,
+      "raw": [
+        4176,
+        2174
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "bin": [
+        1,
+        1
+      ],
+      "ratio": 2,
+      "crop_requested": [
+        0,
+        0
+      ],
+      "output_requested": [
+        2080,
+        1086
+      ],
+      "lead": 0,
+      "result": [
+        1776,
+        960,
+        1,
+        1,
+        0,
+        0,
+        2,
+        1386,
+        717,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        1792,
+        970,
+        1872,
+        970,
+        1,
+        1856,
+        1776,
+        960,
+        960,
+        1,
+        0,
+        0,
+        2295,
+        2386,
+        0,
+        1,
+        0,
+        0,
+        0,
+        2295,
+        2295,
+        1872,
+        1792,
+        970,
+        970,
+        4176,
+        2174,
+        1065353216,
+        1065353216
+      ],
+      "errors": [
+        "preview_raster_exceeds_source"
+      ]
+    },
+    {
+      "mode": 102,
+      "raw": [
+        4176,
+        2174
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "bin": [
+        1,
+        1
+      ],
+      "ratio": 2,
+      "crop_requested": [
+        0,
+        0
+      ],
+      "output_requested": [
+        16,
+        2
+      ],
+      "lead": 0,
+      "result": [
+        592,
+        320,
+        1,
+        1,
+        0,
+        0,
+        2,
+        1370,
+        702,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        608,
+        330,
+        640,
+        330,
+        1,
+        624,
+        592,
+        320,
+        320,
+        16,
+        1,
+        0,
+        2248,
+        7033,
+        0,
+        1,
+        0,
+        1,
+        0,
+        2248,
+        6745,
+        640,
+        608,
+        330,
+        330,
+        4176,
+        2174,
+        1065353216,
+        1065353216
+      ],
+      "errors": [
+        "preview_raster_exceeds_source"
+      ]
+    }
+  ],
+  "modes": {
+    "0": {
+      "cases": 2040,
+      "issues": {}
+    },
+    "97": {
+      "cases": 2040,
+      "issues": {}
+    },
+    "98": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 2
+      }
+    },
+    "3": {
+      "cases": 2040,
+      "issues": {}
+    },
+    "121": {
+      "cases": 2040,
+      "issues": {}
+    },
+    "6": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 3
+      }
+    },
+    "122": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 3
+      }
+    },
+    "95": {
+      "cases": 2040,
+      "issues": {}
+    },
+    "100": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 3
+      }
+    },
+    "7": {
+      "cases": 2040,
+      "issues": {}
+    },
+    "123": {
+      "cases": 2040,
+      "issues": {}
+    },
+    "102": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 3
+      }
+    },
+    "124": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 3
+      }
+    },
+    "101": {
+      "cases": 2040,
+      "issues": {}
+    },
+    "108": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 3
+      }
+    },
+    "27": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 3
+      }
+    },
+    "115": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 3
+      }
+    },
+    "88": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 3
+      }
+    },
+    "116": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 3
+      }
+    },
+    "106": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 3
+      }
+    },
+    "125": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 3
+      }
+    },
+    "107": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 3
+      }
+    },
+    "126": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 3
+      }
+    },
+    "109": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 3
+      }
+    },
+    "110": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 3
+      }
+    },
+    "58": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 3
+      }
+    },
+    "89": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 3
+      }
+    },
+    "103": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 3
+      }
+    },
+    "118": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 3
+      }
+    },
+    "104": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 3
+      }
+    },
+    "105": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 3
+      }
+    },
+    "111": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 3
+      }
+    },
+    "127": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 3
+      }
+    },
+    "112": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 3
+      }
+    },
+    "128": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 3
+      }
+    },
+    "113": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 3
+      }
+    },
+    "114": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 3
+      }
+    },
+    "139": {
+      "cases": 2040,
+      "issues": {}
+    },
+    "56": {
+      "cases": 2040,
+      "issues": {}
+    },
+    "140": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 45
+      }
+    },
+    "11": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 2
+      }
+    },
+    "117": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 2
+      }
+    },
+    "12": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 45
+      }
+    },
+    "129": {
+      "cases": 2040,
+      "issues": {}
+    },
+    "130": {
+      "cases": 2040,
+      "issues": {}
+    },
+    "131": {
+      "cases": 2040,
+      "issues": {}
+    },
+    "132": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 3
+      }
+    },
+    "133": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 3
+      }
+    },
+    "134": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 4
+      }
+    },
+    "10": {
+      "cases": 2040,
+      "issues": {}
+    },
+    "135": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 3
+      }
+    },
+    "136": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 3
+      }
+    },
+    "8": {
+      "cases": 2040,
+      "issues": {}
+    },
+    "9": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 45
+      }
+    },
+    "141": {
+      "cases": 2040,
+      "issues": {}
+    },
+    "142": {
+      "cases": 2040,
+      "issues": {}
+    },
+    "143": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 2
+      }
+    },
+    "144": {
+      "cases": 2040,
+      "issues": {}
+    },
+    "145": {
+      "cases": 2040,
+      "issues": {}
+    },
+    "146": {
+      "cases": 2040,
+      "issues": {}
+    },
+    "147": {
+      "cases": 2040,
+      "issues": {}
+    },
+    "148": {
+      "cases": 2040,
+      "issues": {}
+    },
+    "149": {
+      "cases": 2040,
+      "issues": {}
+    },
+    "150": {
+      "cases": 2040,
+      "issues": {}
+    },
+    "151": {
+      "cases": 2040,
+      "issues": {}
+    },
+    "152": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 3
+      }
+    },
+    "218": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 3
+      }
+    },
+    "219": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 3
+      }
+    },
+    "220": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 3
+      }
+    },
+    "221": {
+      "cases": 2040,
+      "issues": {
+        "preview_raster_exceeds_source": 3
+      }
+    }
+  },
+  "seconds": 6.499,
+  "passed": false
+}

@@ -1,0 +1,107 @@
+{
+  "status": "Offline-tested preview geometry experiment; not installed",
+  "firmware": "Sigma fp 5.02",
+  "baseline_resident_sha256": "8cf489ef8ad5e4c8723adac4dd421f6943a5d4f6338c030f70148764901b243e",
+  "probe_base": "0xc0731b70",
+  "probe_bytes": 1100,
+  "probe_sha256": "59a48cdbb9f0f1b620e0cd4250270c49752ef0fba1da8bd67fe4166fec90310d",
+  "autorun_bytes": 14208,
+  "autorun_sha256": "0bda00b04fa09ff34c16c43f587626291aec2610db1354696cc66edc3aaadfca",
+  "sample_count": 56,
+  "sample_stride": 2304,
+  "interval_ms": 750,
+  "capture_bytes": 129088,
+  "explicit_startup_sleep_ms": 0,
+  "sampling_seconds": 42.0,
+  "ranges": {
+    "0x340": "C375D840 +0x100 manager",
+    "0x440": "C31DF564 +0x360 native processing config",
+    "0x7a0": "C0732000 +64 private state, including QS and display-fit diagnostics",
+    "0x800": "C31D2800 +0x100 display state"
+  },
+  "limitations": [
+    "Trace copies are sequential; frame/config changes can race reads.",
+    "Snapshot reads RAM only. It does not program preview geometry.",
+    "128KiB diagnostic allocation retained until restart.",
+    "Camera scheduling and file writes require hardware validation.",
+    "No new take after sampling window; one delayed save after native idle checks."
+  ],
+  "preview_experiment": {
+    "table_changes": [
+      {
+        "address": 3233659340,
+        "expected": 1125,
+        "replacement": 1334,
+        "profile": 5,
+        "parameter_offset": 40,
+        "category": "preview"
+      },
+      {
+        "address": 3233664148,
+        "expected": 1135,
+        "replacement": 1344,
+        "profile": 429,
+        "parameter_offset": 16,
+        "category": "preview"
+      },
+      {
+        "address": 3233660476,
+        "expected": 1125,
+        "replacement": 1334,
+        "profile": 429,
+        "parameter_offset": 40,
+        "category": "preview"
+      },
+      {
+        "address": 3233655580,
+        "expected": 1135,
+        "replacement": 1344,
+        "profile": 429,
+        "parameter_offset": 224,
+        "category": "preview"
+      }
+    ],
+    "state_bytes": 64,
+    "layout_hook": {
+      "address": "0xc0306ea0",
+      "scope": "Private 3K and native display device kind 1",
+      "aspect": [
+        3,
+        2
+      ],
+      "diagnostic_offsets": [
+        56,
+        60
+      ],
+      "limitations": "Native movie display-fit branch; hardware execution and visible framing not established."
+    },
+    "output_hook": {
+      "address": "0xc0437e98",
+      "primary_channel": 0,
+      "dimensions": [
+        1620,
+        1080
+      ],
+      "policy_objects": [
+        "0xc375eb68",
+        "0xc375ed3c"
+      ],
+      "guards": "Private 3K active, exact owner and template pointers, FNV of all 44 stock template bytes. Otherwise stock accessor.",
+      "behavior": "Returns an immutable private output template; only width/height and matching visible dimensions change. Format, allocation limit and video flags preserved."
+    },
+    "qs_diagnostic_bits": {
+      "0": "first QS limit",
+      "1": "second QS limit",
+      "2": "first QS footer",
+      "3": "second QS footer"
+    },
+    "qs_seen_offset": 48,
+    "qs_extended_offset": 52,
+    "limitations": [
+      "Only fresh source construction sees table changes; the current standby source can remain cached until a native transition.",
+      "Buffer-size calculations verified against observed source objects; actual allocations and display framing require camera testing.",
+      "QS regression is being diagnosed, not claimed fixed."
+    ]
+  },
+  "baseline_version": "0.3.5-preview3"
+}

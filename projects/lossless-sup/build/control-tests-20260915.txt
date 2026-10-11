@@ -1,0 +1,36 @@
+test_all_128_readiness_combinations (test_control.ControlTests) ... ok
+test_boot_clears_stale_state_to_off (test_control.ControlTests) ... ok
+test_camera_arm_cross_compiles (test_control.ControlTests) ... ok
+test_changes_locked_for_raw_and_lossless_takes (test_control.ControlTests) ... ok
+test_counter_overflow_stops (test_control.ControlTests) ... ok
+test_every_target_predicate_is_required (test_control.ControlTests) ... ok
+test_fault_sticky_but_off_can_restore_stock_recording (test_control.ControlTests) ... ok
+test_fault_stops_without_mixing_raw_and_lossless (test_control.ControlTests) ... ok
+test_invalid_state_is_never_written (test_control.ControlTests) ... ok
+test_invalid_values_are_not_boolean_coerced (test_control.ControlTests) ... ok
+test_menu_changes_only_private_requested_word (test_control.ControlTests) ... ok
+test_no_next_take_before_cleanup (test_control.ControlTests) ... ok
+test_nulls_and_out_of_take_calls (test_control.ControlTests) ... ok
+test_off_requires_no_codec_or_target (test_control.ControlTests) ... ok
+test_product_is_standalone_and_not_shippable (test_control.ControlTests) ... ok
+test_recheck_at_rec_after_switching_to_og (test_control.ControlTests) ... ok
+test_recheck_lost_readiness_at_rec (test_control.ControlTests) ... ok
+test_struct_abi (test_control.ControlTests) ... ok
+test_two_takes_retain_selection_not_frame_state (test_control.ControlTests) ... ok
+test_unready_on_is_rejected_without_mutation (test_control.ControlTests) ... ok
+test_attach_once_and_no_owner_replacement (test_ui_control.UITests) ... ok
+test_cine_mainb2_and_actual_private_widget_are_required (test_ui_control.UITests) ... ok
+test_detach_and_recreated_owner_invalidates_old_callback (test_ui_control.UITests) ... ok
+test_off_on_changes_only_product_preference (test_ui_control.UITests) ... ok
+test_recording_locks_both_values (test_ui_control.UITests) ... ok
+test_still_transition_hides_row (test_ui_control.UITests) ... ok
+test_unready_backend_cannot_appear_usable (test_ui_control.UITests) ... ok
+test_unsupported_geometry_disables_on_but_allows_off (test_ui_control.UITests) ... ok
+test_warm_boot_invalidates_old_callback (test_ui_control.UITests) ... ok
+test_wrong_owner_and_stale_generation_are_ignored (test_ui_control.UITests) ... ok
+test_zero_session_is_invalid (test_ui_control.UITests) ... ok
+
+----------------------------------------------------------------------
+Ran 31 tests in 0.950s
+
+OK

@@ -1,0 +1,10 @@
+Sigma fp three-row CINE list + read-only geometry probe
+
+AutoRun.txt bytes=32768 sha256=efc594e5c4f6fe7ed967b89038366ca98218a56d33bf61cc0a40a3aa48fd4dd7
+rowprobe bytes=108 sha256=b3af15faaba53b5465bea584bb4a7294cd2d99a5fd2d8ddf9fcef3877e922beb
+dispfit  bytes=184 sha256=89b0662197f82da1882e3134c0f02a5b79121c665e97d8d16970ddf363a44859
+reference_firmware sha256=92a8ee993f6c3d66c251e88d45a2ccd5135c6cf7342717784321c2ed506e2fb4
+menu_csv_words=20 at 0xC0F8E7EC len=89 rows=3 label='OG 3032x2012'
+probe_log=0xC072FA60..0xC072FAA4
+sensor/picker/RWZM/canvas=stock; this build records nothing new
+restore=remove or rename AutoRun.txt, then fully power-cycle

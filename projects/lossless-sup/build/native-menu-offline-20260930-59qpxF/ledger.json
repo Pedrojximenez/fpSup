@@ -1,0 +1,52 @@
+{
+  "kind": "offline_native_menu_increment",
+  "date": "2026-09-30",
+  "status": "offline_verified_not_deployable",
+  "camera_accessed": false,
+  "card_written": false,
+  "native_binding_installed": false,
+  "full_page_construction_verified": false,
+  "rendering_verified": false,
+  "camera_ready": false,
+  "on_ready": false,
+  "autorun_changed": false,
+  "bin_produced": false,
+  "root": "/Users/dido/Developer.localized/SIGMAfp_re",
+  "commands": "BUILD_NOTES.md",
+  "source_and_artifact_hashes": "SHA256SUMS",
+  "firmware_sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622",
+  "tools": {"python": "3.9.6", "clang": "Apple clang 21.0.0", "unicorn": "2.1.4"},
+  "candidate": {
+    "profile": "native-permission-gated",
+    "page_bytes": 179907,
+    "pool_bytes": 176300,
+    "records": 1541,
+    "objects": 214,
+    "page_sha256": "e602a154162790287fed8a182e07fda0af5d02509b59300a25725fe923c71dea",
+    "pool_sha256": "3ff3ea5264f8a16aec7fac30160cc8065dfe1d2b896fb7b40c3212de5cf7d3ba",
+    "default_profile_unchanged": true
+  },
+  "tests": [
+    {"log": "permissions.log", "tests": 24, "skipped": 0, "passed": true, "detail": "23 compiled C scenarios at O2 and ASan/UBSan; one mutation test covers four faults; mocked registry/exclusion"},
+    {"log": "native-port.log", "tests": 23, "skipped": 0, "passed": true},
+    {"log": "binding.log", "tests": 30, "skipped": 0, "passed": true},
+    {"log": "core.log", "tests": 64, "skipped": 0, "passed": true, "detail": "includes one wrapper with 8 ARM child cases, not counted twice"},
+    {"log": "menu-permission.log", "tests": 17, "skipped": 0, "passed": true, "detail": "includes eight binary mutations"},
+    {"log": "menu-fixed.log", "tests": 35, "skipped": 0, "passed": true},
+    {"log": "menu-recipe.log", "tests": 8, "skipped": 0, "passed": true},
+    {"log": "native-variable.log", "tests": 25, "skipped": 0, "passed": true, "detail": "compiled ARM32 C to original variable calls; bounded framework stubs"},
+    {"log": "native-permission-arm.log", "tests": 6, "skipped": 0, "passed": true, "detail": "original ARM A2P/property/dispatch/P2A; framework boundaries substituted; no complete page"},
+    {"log": "reader-permission.log", "tests": 16, "skipped": 0, "passed": true, "detail": "compiled ARM bridge and original header/terminal/selector; middle records substituted"},
+    {"log": "reader-fixed.log", "tests": 16, "skipped": 0, "passed": true, "detail": "same bridge with unchanged fixed profile"}
+  ],
+  "remaining": [
+    "outer native reader initialization/cleanup/retry protection",
+    "complete private-page native component construction and GUI lifetime",
+    "actual notification exclusion and queued source/callback drain",
+    "font, layout, navigation, grey state and reasons",
+    "relocation/resident allocation/original trampoline/shared hook composition",
+    "shared loader entry, cache publication and hook journal validation",
+    "separate same-frame codec hold/defer/handoff and all-format validation",
+    "authorized bounded camera trial after notifying the user"
+  ]
+}

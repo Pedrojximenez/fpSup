@@ -1,0 +1,246 @@
+# --- OG3K: 3032x2012 open gate, every CinemaDNG rate up to 59.94 -----
+# Sigma fp firmware Ver.5.02 ONLY; no runtime version guard.
+# Cold-boot RAM patches only.  Remove AutoRun.txt and power-cycle to undo.
+#
+# The seven modes the FHD rates already use are turned into 2012-row
+# modes.  Their sensor register records differ from mode 98 in only the
+# mode id and the minimum-blanking field, so they are already the same
+# 2x reduction and the same quiet analog profile; only the row window
+# and the geometry height said 1708.  Timing is untouched, so every
+# rate stays exactly what SIGMA ships.
+#
+#   23.976 -> mode 109      48 -> mode 220      59.94 -> mode 27
+#   24     -> mode 218      50 -> mode 115
+#   25     -> mode 125   29.97 -> mode 106
+#
+# 100 fps and 119.88 are NOT patched: 2012 rows at hmax 445 need
+# 12.44 ms and the fastest 3032x2012 readout is 9.22 ms, so 119.88
+# (8.34 ms a frame) is impossible and 100 needs mode 117 instead.
+
+# mode27 (59.94) timing +0x0C input window; stock 0x00AC0BDC
+mem set 0xC0B596EC 0x00140BDC
+# mode27 (59.94) timing +0x10 input window; stock 0x00000758
+mem set 0xC0B596F0 0x000007F0
+# mode27 (59.94) geometry +0x08; stock 0x000006AC
+mem set 0xC0B5A3A4 0x000007DC
+# mode27 (59.94) geometry +0x18; stock 0x000006AC
+mem set 0xC0B5A3B4 0x000007DC
+# mode27 (59.94) geometry +0x28; stock 0x000006AC
+mem set 0xC0B5A3C4 0x000007DC
+# mode27 (59.94) geometry +0x54; stock 0x00000001
+mem set 0xC0B5A3F0 0x00000002
+# mode27 (59.94) geometry +0x60; stock 0x00000012
+mem set 0xC0B5A3FC 0x00000013
+# mode27 (59.94) receiver +0x04; stock 0x00000008
+mem set 0xC0B5C984 0x00000000
+# mode27 (59.94) receiver +0x08; stock 0x00AC00FE
+mem set 0xC0B5C988 0x001200FE
+# mode27 (59.94) receiver +0x0C; stock 0x0000075C
+mem set 0xC0B5C98C 0x000007F2
+# mode27 (59.94) receiver +0x18; stock 0x0004C003
+mem set 0xC0B5C998 0x00040003
+# mode115 (50) timing +0x0C input window; stock 0x00AC0BDC
+mem set 0xC0B5970C 0x00140BDC
+# mode115 (50) timing +0x10 input window; stock 0x00000758
+mem set 0xC0B59710 0x000007F0
+# mode115 (50) geometry +0x08; stock 0x000006AC
+mem set 0xC0B5A408 0x000007DC
+# mode115 (50) geometry +0x18; stock 0x000006AC
+mem set 0xC0B5A418 0x000007DC
+# mode115 (50) geometry +0x28; stock 0x000006AC
+mem set 0xC0B5A428 0x000007DC
+# mode115 (50) geometry +0x54; stock 0x00000001
+mem set 0xC0B5A454 0x00000002
+# mode115 (50) geometry +0x60; stock 0x00000012
+mem set 0xC0B5A460 0x00000013
+# mode115 (50) receiver +0x04; stock 0x00000008
+mem set 0xC0B5C9BC 0x00000000
+# mode115 (50) receiver +0x08; stock 0x00AC00FE
+mem set 0xC0B5C9C0 0x001200FE
+# mode115 (50) receiver +0x0C; stock 0x0000075C
+mem set 0xC0B5C9C4 0x000007F2
+# mode115 (50) receiver +0x18; stock 0x0004C003
+mem set 0xC0B5C9D0 0x00040003
+# mode220 (48) timing +0x0C input window; stock 0x00AC0BDC
+mem set 0xC0B59D8C 0x00140BDC
+# mode220 (48) timing +0x10 input window; stock 0x00000758
+mem set 0xC0B59D90 0x000007F0
+# mode220 (48) geometry +0x08; stock 0x000006AC
+mem set 0xC0B5B858 0x000007DC
+# mode220 (48) geometry +0x18; stock 0x000006AC
+mem set 0xC0B5B868 0x000007DC
+# mode220 (48) geometry +0x28; stock 0x000006AC
+mem set 0xC0B5B878 0x000007DC
+# mode220 (48) geometry +0x54; stock 0x00000001
+mem set 0xC0B5B8A4 0x00000002
+# mode220 (48) geometry +0x60; stock 0x00000012
+mem set 0xC0B5B8B0 0x00000013
+# mode220 (48) receiver +0x04; stock 0x00000008
+mem set 0xC0B5D51C 0x00000000
+# mode220 (48) receiver +0x08; stock 0x00AC00FF
+mem set 0xC0B5D520 0x001200FE
+# mode220 (48) receiver +0x0C; stock 0x0000075C
+mem set 0xC0B5D524 0x000007F2
+# mode220 (48) receiver +0x18; stock 0x0004C003
+mem set 0xC0B5D530 0x00040003
+# mode106 (29.97) timing +0x0C input window; stock 0x00AC0BDC
+mem set 0xC0B5976C 0x00140BDC
+# mode106 (29.97) timing +0x10 input window; stock 0x00000758
+mem set 0xC0B59770 0x000007F0
+# mode106 (29.97) geometry +0x08; stock 0x000006AC
+mem set 0xC0B5A534 0x000007DC
+# mode106 (29.97) geometry +0x18; stock 0x000006AC
+mem set 0xC0B5A544 0x000007DC
+# mode106 (29.97) geometry +0x28; stock 0x000006AC
+mem set 0xC0B5A554 0x000007DC
+# mode106 (29.97) geometry +0x54; stock 0x00000001
+mem set 0xC0B5A580 0x00000002
+# mode106 (29.97) geometry +0x60; stock 0x00000012
+mem set 0xC0B5A58C 0x00000013
+# mode106 (29.97) receiver +0x04; stock 0x00000008
+mem set 0xC0B5CA64 0x00000000
+# mode106 (29.97) receiver +0x08; stock 0x00AC00FE
+mem set 0xC0B5CA68 0x001200FE
+# mode106 (29.97) receiver +0x0C; stock 0x0000075C
+mem set 0xC0B5CA6C 0x000007F2
+# mode106 (29.97) receiver +0x18; stock 0x0004C003
+mem set 0xC0B5CA78 0x00040003
+# mode125 (25) timing +0x0C input window; stock 0x00AC0BDC
+mem set 0xC0B5978C 0x00140BDC
+# mode125 (25) timing +0x10 input window; stock 0x00000758
+mem set 0xC0B59790 0x000007F0
+# mode125 (25) geometry +0x08; stock 0x000006AC
+mem set 0xC0B5A598 0x000007DC
+# mode125 (25) geometry +0x18; stock 0x000006AC
+mem set 0xC0B5A5A8 0x000007DC
+# mode125 (25) geometry +0x28; stock 0x000006AC
+mem set 0xC0B5A5B8 0x000007DC
+# mode125 (25) geometry +0x54; stock 0x00000001
+mem set 0xC0B5A5E4 0x00000002
+# mode125 (25) geometry +0x60; stock 0x00000012
+mem set 0xC0B5A5F0 0x00000013
+# mode125 (25) receiver +0x04; stock 0x00000008
+mem set 0xC0B5CA9C 0x00000000
+# mode125 (25) receiver +0x08; stock 0x00AC00FE
+mem set 0xC0B5CAA0 0x001200FE
+# mode125 (25) receiver +0x0C; stock 0x0000075C
+mem set 0xC0B5CAA4 0x000007F2
+# mode125 (25) receiver +0x18; stock 0x0004C003
+mem set 0xC0B5CAB0 0x00040003
+# mode218 (24) timing +0x0C input window; stock 0x00AC0BDC
+mem set 0xC0B59D4C 0x00140BDC
+# mode218 (24) timing +0x10 input window; stock 0x00000758
+mem set 0xC0B59D50 0x000007F0
+# mode218 (24) geometry +0x08; stock 0x000006AC
+mem set 0xC0B5B790 0x000007DC
+# mode218 (24) geometry +0x18; stock 0x000006AC
+mem set 0xC0B5B7A0 0x000007DC
+# mode218 (24) geometry +0x28; stock 0x000006AC
+mem set 0xC0B5B7B0 0x000007DC
+# mode218 (24) geometry +0x54; stock 0x00000001
+mem set 0xC0B5B7DC 0x00000002
+# mode218 (24) geometry +0x60; stock 0x00000012
+mem set 0xC0B5B7E8 0x00000013
+# mode218 (24) receiver +0x04; stock 0x00000008
+mem set 0xC0B5D4AC 0x00000000
+# mode218 (24) receiver +0x08; stock 0x00AC00FF
+mem set 0xC0B5D4B0 0x001200FE
+# mode218 (24) receiver +0x0C; stock 0x0000075C
+mem set 0xC0B5D4B4 0x000007F2
+# mode218 (24) receiver +0x18; stock 0x0004C003
+mem set 0xC0B5D4C0 0x00040003
+# mode109 (23.976) timing +0x0C input window; stock 0x00AC0BDC
+mem set 0xC0B597EC 0x00140BDC
+# mode109 (23.976) timing +0x10 input window; stock 0x00000758
+mem set 0xC0B597F0 0x000007F0
+# mode109 (23.976) geometry +0x08; stock 0x000006AC
+mem set 0xC0B5A6C4 0x000007DC
+# mode109 (23.976) geometry +0x18; stock 0x000006AC
+mem set 0xC0B5A6D4 0x000007DC
+# mode109 (23.976) geometry +0x28; stock 0x000006AC
+mem set 0xC0B5A6E4 0x000007DC
+# mode109 (23.976) geometry +0x54; stock 0x00000001
+mem set 0xC0B5A710 0x00000002
+# mode109 (23.976) geometry +0x60; stock 0x00000012
+mem set 0xC0B5A71C 0x00000013
+# mode109 (23.976) receiver +0x04; stock 0x00000008
+mem set 0xC0B5CB44 0x00000000
+# mode109 (23.976) receiver +0x08; stock 0x00AC00FE
+mem set 0xC0B5CB48 0x001200FE
+# mode109 (23.976) receiver +0x0C; stock 0x0000075C
+mem set 0xC0B5CB4C 0x000007F2
+# mode109 (23.976) receiver +0x18; stock 0x0004C003
+mem set 0xC0B5CB58 0x00040003
+# profile122 live RWZM H -> unity; stock 0x00000640
+mem set 0xC0BD9A34 0x00000400
+# profile122 record RWZM H -> unity; stock 0x00000640
+mem set 0xC0BE1684 0x00000400
+# profile122 live RWZM V -> unity; stock 0x00000640
+mem set 0xC0BD9EFC 0x00000400
+# profile122 record RWZM V -> unity; stock 0x00000640
+mem set 0xC0BE1B4C 0x00000400
+
+# geometry payload, 232 bytes
+mem set 0xC072F800 0xE92D500F
+mem set 0xC072F804 0xE284105C
+mem set 0xC072F808 0xE30FCA00
+mem set 0xC072F80C 0xE34CC072
+mem set 0xC072F810 0xE5913000
+mem set 0xC072F814 0xE3000790
+mem set 0xC072F818 0xE1530000
+mem set 0xC072F81C 0x1A00002E
+mem set 0xC072F820 0xE5913004
+mem set 0xC072F824 0xE3000442
+mem set 0xC072F828 0xE1530000
+mem set 0xC072F82C 0x1A00002A
+mem set 0xC072F830 0xE59C0000
+mem set 0xC072F834 0xE3500000
+mem set 0xC072F838 0x1A000006
+mem set 0xC072F83C 0xE58C5004
+mem set 0xC072F840 0xE30000D8
+mem set 0xC072F844 0xE7913000
+mem set 0xC072F848 0xE58C3008
+mem set 0xC072F84C 0xE30000E0
+mem set 0xC072F850 0xE7913000
+mem set 0xC072F854 0xE58C300C
+mem set 0xC072F858 0xE3003BD8
+mem set 0xC072F85C 0xE3000000
+mem set 0xC072F860 0xE7813000
+mem set 0xC072F864 0xE30037DC
+mem set 0xC072F868 0xE3000004
+mem set 0xC072F86C 0xE7813000
+mem set 0xC072F870 0xE3003BC0
+mem set 0xC072F874 0xE3000024
+mem set 0xC072F878 0xE7813000
+mem set 0xC072F87C 0xE30037D0
+mem set 0xC072F880 0xE300002C
+mem set 0xC072F884 0xE7813000
+mem set 0xC072F888 0xE3003BD8
+mem set 0xC072F88C 0xE30000D8
+mem set 0xC072F890 0xE7813000
+mem set 0xC072F894 0xE30037DC
+mem set 0xC072F898 0xE30000E0
+mem set 0xC072F89C 0xE7813000
+mem set 0xC072F8A0 0xE3003BD8
+mem set 0xC072F8A4 0xE30000DC
+mem set 0xC072F8A8 0xE7813000
+mem set 0xC072F8AC 0xE30037DC
+mem set 0xC072F8B0 0xE30000E4
+mem set 0xC072F8B4 0xE7813000
+mem set 0xC072F8B8 0xE3003BD8
+mem set 0xC072F8BC 0xE30000F4
+mem set 0xC072F8C0 0xE7813000
+mem set 0xC072F8C4 0xE30037DC
+mem set 0xC072F8C8 0xE30000F8
+mem set 0xC072F8CC 0xE7813000
+mem set 0xC072F8D0 0xE59C3000
+mem set 0xC072F8D4 0xE2833001
+mem set 0xC072F8D8 0xE58C3000
+mem set 0xC072F8DC 0xE8BD500F
+mem set 0xC072F8E0 0xE1A00004
+mem set 0xC072F8E4 0xE12FFF1E
+
+# Arm last, geometry before display.
+# 0xC043A19C stock 0xE1A00004 (mov r0,r4).
+mem set 0xC043A19C 0xEB0BD597
+# --- END OG3K --------------------------------------------------------

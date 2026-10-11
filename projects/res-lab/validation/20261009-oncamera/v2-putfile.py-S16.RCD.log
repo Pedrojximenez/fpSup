@@ -1,0 +1,21 @@
+  local   projects/res-lab/validation/20261009-oncamera/rcd-v3/S16.RCD  7132 bytes
+  remote  \fpSup\RESCUS\S16.RCD  mode 0x7
+  buffer  0x450629C0, file object 0x4506459C
+  proof   region takes writes and still holds them a second later
+  restored echo -> 0xC03D99A0
+  reply   putfile: written
+  status  2 — written
+  open    1     write  1   (both are flags, not counts)
+  WARNING S16.RCD did not appear in dir
+
+  stage  7132 bytes in 0.001s (12.3 MB/s)      
+
+  verify 7132 bytes in 0.000s (20.7 MB/s)      
+
+  stage  7132 bytes in 0.01s (0.5 MB/s), MEM1, read back whole          
+
+  code   304/304 B  4.9 KiB/s 
+  verify 304/304 B  533 KiB/s 
+  verify 304 bytes in 0.0s (253 KiB/s)      
+
+  code   304 bytes in 0.1s (2.5 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          

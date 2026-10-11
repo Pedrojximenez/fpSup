@@ -1,0 +1,18 @@
+test_apply_without_file_and_live_canvas (test_virtual_rcd.VirtualTests) ... FAIL
+test_settings_alias_and_recording_page_preservation (test_virtual_rcd.VirtualTests) ... ok
+test_shutdown_restores_claimed_words (test_virtual_rcd.VirtualTests) ... ok
+
+======================================================================
+FAIL: test_apply_without_file_and_live_canvas (test_virtual_rcd.VirtualTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_virtual_rcd.py", line 131, in test_apply_without_file_and_live_canvas
+    self.assertEqual(cam.written,cam.written_baseline);cam.assert_tables(self);self.assertEqual(cam.misaligned,[])
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_virtual_rcd.py", line 100, in assert_tables
+    def assert_tables(self,test):test.assertEqual(bytes(self.mu.mem_read(0xC0B00000,0x200000)),self.tables)
+AssertionError: b'`\x[7051600 chars]x03\xff\xff\xff\x00\x00\x00\x00\x060\x03\x00\x[107574 chars]\x00' != b'`\x[7051600 chars]x03\x06\x01\x01\x00\x00\x00\x00\x060\x03\x00\x[107574 chars]\x00'
+
+----------------------------------------------------------------------
+Ran 3 tests in 42.673s
+
+FAILED (failures=1)

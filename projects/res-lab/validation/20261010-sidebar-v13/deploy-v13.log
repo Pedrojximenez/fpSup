@@ -1,0 +1,28 @@
+  code   412/412 B  8.2 KiB/s   verify 412/412 B  786 KiB/s   verify 412 bytes in 0.0s (381 KiB/s)      
+  code   412 bytes in 0.1s (4.2 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 32768 bytes in 0.000s (76.6 MB/s)      
+  code   412/412 B  135.8 KiB/s   verify 412/412 B  725 KiB/s   verify 412 bytes in 0.0s (342 KiB/s)      
+  code   412 bytes in 0.0s (81.0 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 76288 bytes in 0.000s (169.5 MB/s)      
+  remote  \AutoRun.txt  32768 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x53B00980 (36864 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 32768 of 32768
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261010-sidebar-v13/deployment-v13/before-AutoRun.txt
+  remote  \fpSup\32RESCUS.BIN  76288 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x53B00980 (80384 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 76288 of 76288
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261010-sidebar-v13/deployment-v13/before-32RESCUS.BIN
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261010-sidebar-v13/deploy_camera.py", line 61, in <module>
+    main()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261010-sidebar-v13/deploy_camera.py", line 35, in main
+    assert backup.read_bytes() == expected, f'Unknown existing {relative}'
+AssertionError: Unknown existing fpSup/32RESCUS.BIN

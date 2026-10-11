@@ -1,0 +1,16 @@
+fpGyroSup stream baseline r36 (rebuilt from source 2026-09-03)
+Camera/firmware: SIGMA fp Ver.5.02. Release AutoRun, no USB shell. GCSV-only stream (no GYR).
+Source: fpSup/gyro (logger.S two-slot 32K/64K, gcsvgen.S 1250 Hz two-tap + sparse accel, profilegen.S).
+PGEN 9fe5ce1c6b31 is byte-identical to the r36 PGEN measured live on 2026-09-02.
+
+Why this is the baseline (controlled A/B, same camera, same heavy shake, hot-reloaded PGEN only):
+  A001_001  r23 (2500 Hz, 7-col every row)   S_DROPPED=3402  completeness 97.757%  5 gaps 180-342 ms
+  A001_003  r36 (1250 Hz + sparse accel)     S_DROPPED=0     completeness 99.994%  0 gaps
+Mechanism (proven via S_DROPPED matching GCSV gaps 3402 vs 3405): a 32 KiB raw slot fills in 1.6 s;
+heavy motion made r23's text ~148 KB/slot = three 64 KiB F_WRITEs, each waiting ~0.5 s for the card
+lock behind video (our writer is priority 28, video/audio are 6) -> ~1.9 s service > 1.6 s -> overflow.
+r36 keeps a slot's text under 64 KiB -> one write -> no overflow. Byte bandwidth was never the limit.
+
+Known open issue (independent of drops): JSON lens profile may be missing. S_GEOM_W/H read 0x0 across
+whole takes (seen on take 3, not only the first after cold boot): the geometry global 0xC37CE210 does
+not populate in stream mode. GCSV is unaffected. See notes/STREAM_DROP_INVESTIGATION.md.

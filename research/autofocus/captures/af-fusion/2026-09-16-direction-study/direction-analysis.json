@@ -1,0 +1,990 @@
+{
+  "schema": "sigma-fp-direction-diagnostic/v1",
+  "mode": "offline-exploratory",
+  "camera_touched": false,
+  "optical_direction_validated": false,
+  "usable_for_dfd": null,
+  "limitations": [
+    "All labels use native H-derived peaks, not independent optical truth.",
+    "Pair agreement is in-sample internal consistency, not held-out prediction accuracy.",
+    "Lower/higher position is not independently calibrated near/far distance.",
+    "A range overlap is not an observed equal-value pair; crossings are explicitly interpolated.",
+    "No per-history-sample gain/filter normalization is justified by this dataset.",
+    "The displayed ratio level is illustrative, not a learned controller threshold."
+  ],
+  "trials": [
+    {
+      "native_H_reference_peak": 10013,
+      "samples": [
+        {
+          "k": 0,
+          "position": 10409,
+          "h": 3130,
+          "l": 34983,
+          "aggregate": 3130,
+          "position_minus_native_peak": 396,
+          "h_over_l": 0.08947202927136037
+        },
+        {
+          "k": 1,
+          "position": 10340,
+          "h": 4071,
+          "l": 36619,
+          "aggregate": 4071,
+          "position_minus_native_peak": 327,
+          "h_over_l": 0.11117179606215352
+        },
+        {
+          "k": 2,
+          "position": 10207,
+          "h": 6404,
+          "l": 39593,
+          "aggregate": 6404,
+          "position_minus_native_peak": 194,
+          "h_over_l": 0.16174576313994898
+        },
+        {
+          "k": 3,
+          "position": 10076,
+          "h": 8577,
+          "l": 41945,
+          "aggregate": 8577,
+          "position_minus_native_peak": 63,
+          "h_over_l": 0.20448205984026702
+        },
+        {
+          "k": 4,
+          "position": 9943,
+          "h": 8525,
+          "l": 42946,
+          "aggregate": 8525,
+          "position_minus_native_peak": -70,
+          "h_over_l": 0.19850509942718764
+        },
+        {
+          "k": 5,
+          "position": 9809,
+          "h": 7497,
+          "l": 43042,
+          "aggregate": 7497,
+          "position_minus_native_peak": -204,
+          "h_over_l": 0.1741787091677896
+        }
+      ],
+      "metrics": {
+        "h": {
+          "sample_argmax_indices": [
+            3
+          ],
+          "sample_argmax_positions": [
+            10076
+          ],
+          "argmax_has_endpoint": false,
+          "opposite_side_sample_range_overlap": [
+            7497,
+            8525
+          ],
+          "same_side_pair_count": 4,
+          "same_side_agree_with_native_H_reference": 4,
+          "same_side_abstain_count": 0,
+          "same_side_disagree_count": 0
+        },
+        "l": {
+          "sample_argmax_indices": [
+            5
+          ],
+          "sample_argmax_positions": [
+            9809
+          ],
+          "argmax_has_endpoint": true,
+          "opposite_side_sample_range_overlap": null,
+          "same_side_pair_count": 4,
+          "same_side_agree_with_native_H_reference": 3,
+          "same_side_abstain_count": 0,
+          "same_side_disagree_count": 1
+        },
+        "h_over_l": {
+          "sample_argmax_indices": [
+            3
+          ],
+          "sample_argmax_positions": [
+            10076
+          ],
+          "argmax_has_endpoint": false,
+          "opposite_side_sample_range_overlap": [
+            0.1741787091677896,
+            0.19850509942718764
+          ],
+          "same_side_pair_count": 4,
+          "same_side_agree_with_native_H_reference": 4,
+          "same_side_abstain_count": 0,
+          "same_side_disagree_count": 0
+        }
+      },
+      "pairs": [
+        {
+          "from_k": 0,
+          "to_k": 1,
+          "delta_position": -69,
+          "crosses_or_touches_native_peak": false,
+          "target_direction_from_second_point": -1,
+          "metrics": {
+            "h": {
+              "delta": 941,
+              "gradient_direction": -1
+            },
+            "l": {
+              "delta": 1636,
+              "gradient_direction": -1
+            },
+            "h_over_l": {
+              "delta": 0.02169976679079315,
+              "gradient_direction": -1
+            }
+          }
+        },
+        {
+          "from_k": 1,
+          "to_k": 2,
+          "delta_position": -133,
+          "crosses_or_touches_native_peak": false,
+          "target_direction_from_second_point": -1,
+          "metrics": {
+            "h": {
+              "delta": 2333,
+              "gradient_direction": -1
+            },
+            "l": {
+              "delta": 2974,
+              "gradient_direction": -1
+            },
+            "h_over_l": {
+              "delta": 0.05057396707779546,
+              "gradient_direction": -1
+            }
+          }
+        },
+        {
+          "from_k": 2,
+          "to_k": 3,
+          "delta_position": -131,
+          "crosses_or_touches_native_peak": false,
+          "target_direction_from_second_point": -1,
+          "metrics": {
+            "h": {
+              "delta": 2173,
+              "gradient_direction": -1
+            },
+            "l": {
+              "delta": 2352,
+              "gradient_direction": -1
+            },
+            "h_over_l": {
+              "delta": 0.04273629670031803,
+              "gradient_direction": -1
+            }
+          }
+        },
+        {
+          "from_k": 3,
+          "to_k": 4,
+          "delta_position": -133,
+          "crosses_or_touches_native_peak": true,
+          "target_direction_from_second_point": null,
+          "metrics": {
+            "h": {
+              "delta": -52,
+              "gradient_direction": 1
+            },
+            "l": {
+              "delta": 1001,
+              "gradient_direction": -1
+            },
+            "h_over_l": {
+              "delta": -0.00597696041307938,
+              "gradient_direction": 1
+            }
+          }
+        },
+        {
+          "from_k": 4,
+          "to_k": 5,
+          "delta_position": -134,
+          "crosses_or_touches_native_peak": false,
+          "target_direction_from_second_point": 1,
+          "metrics": {
+            "h": {
+              "delta": -1028,
+              "gradient_direction": 1
+            },
+            "l": {
+              "delta": 96,
+              "gradient_direction": -1
+            },
+            "h_over_l": {
+              "delta": -0.024326390259398034,
+              "gradient_direction": 1
+            }
+          }
+        }
+      ],
+      "crossing_pairs_excluded_from_agreement": 1,
+      "illustrative_ratio_level": 0.19,
+      "ratio_level_piecewise_linear_crossings": {
+        "positions": [
+          10120.392003649227,
+          9896.150331344255
+        ],
+        "flat_intervals": []
+      },
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/captures/af-fusion/2026-09-16-s1-right-b/native-history.json",
+      "source_sha256": "8276221aa2b0bc928a313e7e87e497f1304b8ef4bab966734ac7a0a7e0103819",
+      "manifest_sha256": "69b254cfa8dbf86c506f67046cea0ecb4f4305de3ecf11f5aaf6af271703bb10",
+      "name": "2026-09-16-s1-right-b",
+      "source_full_dump_stable": true,
+      "transport_counters": {
+        "records_written": 592,
+        "invalid_replies": 1,
+        "duplicate_records": 0,
+        "stale_session_replies": 0,
+        "out_of_order_records": 0,
+        "camera_sequence_gaps": 0
+      }
+    },
+    {
+      "native_H_reference_peak": 9996,
+      "samples": [
+        {
+          "k": 0,
+          "position": 10422,
+          "h": 2993,
+          "l": 34756,
+          "aggregate": 2993,
+          "position_minus_native_peak": 426,
+          "h_over_l": 0.086114627690183
+        },
+        {
+          "k": 1,
+          "position": 10340,
+          "h": 4004,
+          "l": 36544,
+          "aggregate": 4004,
+          "position_minus_native_peak": 344,
+          "h_over_l": 0.10956654991243432
+        },
+        {
+          "k": 2,
+          "position": 10205,
+          "h": 6260,
+          "l": 39465,
+          "aggregate": 6260,
+          "position_minus_native_peak": 209,
+          "h_over_l": 0.158621563410617
+        },
+        {
+          "k": 3,
+          "position": 10074,
+          "h": 8440,
+          "l": 41909,
+          "aggregate": 8440,
+          "position_minus_native_peak": 78,
+          "h_over_l": 0.20138872318595052
+        },
+        {
+          "k": 4,
+          "position": 9940,
+          "h": 8532,
+          "l": 42855,
+          "aggregate": 8532,
+          "position_minus_native_peak": -56,
+          "h_over_l": 0.19908995449772487
+        },
+        {
+          "k": 5,
+          "position": 9807,
+          "h": 7508,
+          "l": 43038,
+          "aggregate": 7508,
+          "position_minus_native_peak": -189,
+          "h_over_l": 0.1744504856173614
+        }
+      ],
+      "metrics": {
+        "h": {
+          "sample_argmax_indices": [
+            4
+          ],
+          "sample_argmax_positions": [
+            9940
+          ],
+          "argmax_has_endpoint": false,
+          "opposite_side_sample_range_overlap": [
+            7508,
+            8440
+          ],
+          "same_side_pair_count": 4,
+          "same_side_agree_with_native_H_reference": 4,
+          "same_side_abstain_count": 0,
+          "same_side_disagree_count": 0
+        },
+        "l": {
+          "sample_argmax_indices": [
+            5
+          ],
+          "sample_argmax_positions": [
+            9807
+          ],
+          "argmax_has_endpoint": true,
+          "opposite_side_sample_range_overlap": null,
+          "same_side_pair_count": 4,
+          "same_side_agree_with_native_H_reference": 3,
+          "same_side_abstain_count": 0,
+          "same_side_disagree_count": 1
+        },
+        "h_over_l": {
+          "sample_argmax_indices": [
+            3
+          ],
+          "sample_argmax_positions": [
+            10074
+          ],
+          "argmax_has_endpoint": false,
+          "opposite_side_sample_range_overlap": [
+            0.1744504856173614,
+            0.19908995449772487
+          ],
+          "same_side_pair_count": 4,
+          "same_side_agree_with_native_H_reference": 4,
+          "same_side_abstain_count": 0,
+          "same_side_disagree_count": 0
+        }
+      },
+      "pairs": [
+        {
+          "from_k": 0,
+          "to_k": 1,
+          "delta_position": -82,
+          "crosses_or_touches_native_peak": false,
+          "target_direction_from_second_point": -1,
+          "metrics": {
+            "h": {
+              "delta": 1011,
+              "gradient_direction": -1
+            },
+            "l": {
+              "delta": 1788,
+              "gradient_direction": -1
+            },
+            "h_over_l": {
+              "delta": 0.02345192222225133,
+              "gradient_direction": -1
+            }
+          }
+        },
+        {
+          "from_k": 1,
+          "to_k": 2,
+          "delta_position": -135,
+          "crosses_or_touches_native_peak": false,
+          "target_direction_from_second_point": -1,
+          "metrics": {
+            "h": {
+              "delta": 2256,
+              "gradient_direction": -1
+            },
+            "l": {
+              "delta": 2921,
+              "gradient_direction": -1
+            },
+            "h_over_l": {
+              "delta": 0.049055013498182684,
+              "gradient_direction": -1
+            }
+          }
+        },
+        {
+          "from_k": 2,
+          "to_k": 3,
+          "delta_position": -131,
+          "crosses_or_touches_native_peak": false,
+          "target_direction_from_second_point": -1,
+          "metrics": {
+            "h": {
+              "delta": 2180,
+              "gradient_direction": -1
+            },
+            "l": {
+              "delta": 2444,
+              "gradient_direction": -1
+            },
+            "h_over_l": {
+              "delta": 0.04276715977533352,
+              "gradient_direction": -1
+            }
+          }
+        },
+        {
+          "from_k": 3,
+          "to_k": 4,
+          "delta_position": -134,
+          "crosses_or_touches_native_peak": true,
+          "target_direction_from_second_point": null,
+          "metrics": {
+            "h": {
+              "delta": 92,
+              "gradient_direction": -1
+            },
+            "l": {
+              "delta": 946,
+              "gradient_direction": -1
+            },
+            "h_over_l": {
+              "delta": -0.0022987686882256497,
+              "gradient_direction": 1
+            }
+          }
+        },
+        {
+          "from_k": 4,
+          "to_k": 5,
+          "delta_position": -133,
+          "crosses_or_touches_native_peak": false,
+          "target_direction_from_second_point": 1,
+          "metrics": {
+            "h": {
+              "delta": -1024,
+              "gradient_direction": 1
+            },
+            "l": {
+              "delta": 183,
+              "gradient_direction": -1
+            },
+            "h_over_l": {
+              "delta": -0.024639468880363474,
+              "gradient_direction": 1
+            }
+          }
+        }
+      ],
+      "crossing_pairs_excluded_from_agreement": 1,
+      "illustrative_ratio_level": 0.19,
+      "ratio_level_piecewise_linear_crossings": {
+        "positions": [
+          10108.88477479442,
+          9890.93384707002
+        ],
+        "flat_intervals": []
+      },
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/captures/af-fusion/2026-09-16-repeat-a/native-history-recheck.json",
+      "source_sha256": "ff5134dc65ade3de0595819c676e28b8abb35a9f58083aad81bc352b471d207a",
+      "manifest_sha256": "ec6907f3dfa9b97bbcf5a9044f429ed6a845fa5c3ff5d2b565385dc375467311",
+      "name": "2026-09-16-repeat-a",
+      "source_full_dump_stable": false,
+      "transport_counters": {
+        "records_written": 597,
+        "invalid_replies": 0,
+        "duplicate_records": 0,
+        "stale_session_replies": 0,
+        "out_of_order_records": 0,
+        "camera_sequence_gaps": 0
+      }
+    },
+    {
+      "native_H_reference_peak": 10011,
+      "samples": [
+        {
+          "k": 0,
+          "position": 10405,
+          "h": 3138,
+          "l": 35060,
+          "aggregate": 3138,
+          "position_minus_native_peak": 394,
+          "h_over_l": 0.08950370792926411
+        },
+        {
+          "k": 1,
+          "position": 10340,
+          "h": 3984,
+          "l": 36574,
+          "aggregate": 3984,
+          "position_minus_native_peak": 329,
+          "h_over_l": 0.10892984087056379
+        },
+        {
+          "k": 2,
+          "position": 10207,
+          "h": 6307,
+          "l": 39560,
+          "aggregate": 6307,
+          "position_minus_native_peak": 196,
+          "h_over_l": 0.15942871587462082
+        },
+        {
+          "k": 3,
+          "position": 10074,
+          "h": 8472,
+          "l": 41898,
+          "aggregate": 8472,
+          "position_minus_native_peak": 63,
+          "h_over_l": 0.20220535586424174
+        },
+        {
+          "k": 4,
+          "position": 9943,
+          "h": 8434,
+          "l": 42740,
+          "aggregate": 8434,
+          "position_minus_native_peak": -68,
+          "h_over_l": 0.19733270940570893
+        },
+        {
+          "k": 5,
+          "position": 9809,
+          "h": 7445,
+          "l": 43039,
+          "aggregate": 7445,
+          "position_minus_native_peak": -202,
+          "h_over_l": 0.17298264364878366
+        }
+      ],
+      "metrics": {
+        "h": {
+          "sample_argmax_indices": [
+            3
+          ],
+          "sample_argmax_positions": [
+            10074
+          ],
+          "argmax_has_endpoint": false,
+          "opposite_side_sample_range_overlap": [
+            7445,
+            8434
+          ],
+          "same_side_pair_count": 4,
+          "same_side_agree_with_native_H_reference": 4,
+          "same_side_abstain_count": 0,
+          "same_side_disagree_count": 0
+        },
+        "l": {
+          "sample_argmax_indices": [
+            5
+          ],
+          "sample_argmax_positions": [
+            9809
+          ],
+          "argmax_has_endpoint": true,
+          "opposite_side_sample_range_overlap": null,
+          "same_side_pair_count": 4,
+          "same_side_agree_with_native_H_reference": 3,
+          "same_side_abstain_count": 0,
+          "same_side_disagree_count": 1
+        },
+        "h_over_l": {
+          "sample_argmax_indices": [
+            3
+          ],
+          "sample_argmax_positions": [
+            10074
+          ],
+          "argmax_has_endpoint": false,
+          "opposite_side_sample_range_overlap": [
+            0.17298264364878366,
+            0.19733270940570893
+          ],
+          "same_side_pair_count": 4,
+          "same_side_agree_with_native_H_reference": 4,
+          "same_side_abstain_count": 0,
+          "same_side_disagree_count": 0
+        }
+      },
+      "pairs": [
+        {
+          "from_k": 0,
+          "to_k": 1,
+          "delta_position": -65,
+          "crosses_or_touches_native_peak": false,
+          "target_direction_from_second_point": -1,
+          "metrics": {
+            "h": {
+              "delta": 846,
+              "gradient_direction": -1
+            },
+            "l": {
+              "delta": 1514,
+              "gradient_direction": -1
+            },
+            "h_over_l": {
+              "delta": 0.019426132941299676,
+              "gradient_direction": -1
+            }
+          }
+        },
+        {
+          "from_k": 1,
+          "to_k": 2,
+          "delta_position": -133,
+          "crosses_or_touches_native_peak": false,
+          "target_direction_from_second_point": -1,
+          "metrics": {
+            "h": {
+              "delta": 2323,
+              "gradient_direction": -1
+            },
+            "l": {
+              "delta": 2986,
+              "gradient_direction": -1
+            },
+            "h_over_l": {
+              "delta": 0.05049887500405703,
+              "gradient_direction": -1
+            }
+          }
+        },
+        {
+          "from_k": 2,
+          "to_k": 3,
+          "delta_position": -133,
+          "crosses_or_touches_native_peak": false,
+          "target_direction_from_second_point": -1,
+          "metrics": {
+            "h": {
+              "delta": 2165,
+              "gradient_direction": -1
+            },
+            "l": {
+              "delta": 2338,
+              "gradient_direction": -1
+            },
+            "h_over_l": {
+              "delta": 0.04277663998962092,
+              "gradient_direction": -1
+            }
+          }
+        },
+        {
+          "from_k": 3,
+          "to_k": 4,
+          "delta_position": -131,
+          "crosses_or_touches_native_peak": true,
+          "target_direction_from_second_point": null,
+          "metrics": {
+            "h": {
+              "delta": -38,
+              "gradient_direction": 1
+            },
+            "l": {
+              "delta": 842,
+              "gradient_direction": -1
+            },
+            "h_over_l": {
+              "delta": -0.004872646458532803,
+              "gradient_direction": 1
+            }
+          }
+        },
+        {
+          "from_k": 4,
+          "to_k": 5,
+          "delta_position": -134,
+          "crosses_or_touches_native_peak": false,
+          "target_direction_from_second_point": 1,
+          "metrics": {
+            "h": {
+              "delta": -989,
+              "gradient_direction": 1
+            },
+            "l": {
+              "delta": 299,
+              "gradient_direction": -1
+            },
+            "h_over_l": {
+              "delta": -0.024350065756925277,
+              "gradient_direction": 1
+            }
+          }
+        }
+      ],
+      "crossing_pairs_excluded_from_agreement": 1,
+      "illustrative_ratio_level": 0.19,
+      "ratio_level_piecewise_linear_crossings": {
+        "positions": [
+          10111.948570302344,
+          9902.647621892538
+        ],
+        "flat_intervals": []
+      },
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/captures/af-fusion/2026-09-16-repeat-b/native-history.json",
+      "source_sha256": "ddf257f3f6d41de99ac063f903f748586263e64507a89c1f5aa46e44f3e24350",
+      "manifest_sha256": "ec23f5a9f8ba99f05a64b979a73940ddf93a06d3abff6e8b6e2eb0f463fc4e7c",
+      "name": "2026-09-16-repeat-b",
+      "source_full_dump_stable": false,
+      "transport_counters": {
+        "records_written": 599,
+        "invalid_replies": 0,
+        "duplicate_records": 0,
+        "stale_session_replies": 0,
+        "out_of_order_records": 0,
+        "camera_sequence_gaps": 0
+      }
+    },
+    {
+      "native_H_reference_peak": 10013,
+      "samples": [
+        {
+          "k": 0,
+          "position": 10420,
+          "h": 2983,
+          "l": 34841,
+          "aggregate": 2983,
+          "position_minus_native_peak": 407,
+          "h_over_l": 0.08561751958898998
+        },
+        {
+          "k": 1,
+          "position": 10338,
+          "h": 4084,
+          "l": 36740,
+          "aggregate": 4084,
+          "position_minus_native_peak": 325,
+          "h_over_l": 0.11115949918345128
+        },
+        {
+          "k": 2,
+          "position": 10205,
+          "h": 6359,
+          "l": 39492,
+          "aggregate": 6359,
+          "position_minus_native_peak": 192,
+          "h_over_l": 0.16101995340828523
+        },
+        {
+          "k": 3,
+          "position": 10074,
+          "h": 8531,
+          "l": 41971,
+          "aggregate": 8531,
+          "position_minus_native_peak": 61,
+          "h_over_l": 0.2032593933906745
+        },
+        {
+          "k": 4,
+          "position": 9940,
+          "h": 8432,
+          "l": 42922,
+          "aggregate": 8432,
+          "position_minus_native_peak": -73,
+          "h_over_l": 0.19644937328176693
+        },
+        {
+          "k": 5,
+          "position": 9807,
+          "h": 7512,
+          "l": 43161,
+          "aggregate": 7512,
+          "position_minus_native_peak": -206,
+          "h_over_l": 0.1740460137624244
+        }
+      ],
+      "metrics": {
+        "h": {
+          "sample_argmax_indices": [
+            3
+          ],
+          "sample_argmax_positions": [
+            10074
+          ],
+          "argmax_has_endpoint": false,
+          "opposite_side_sample_range_overlap": [
+            7512,
+            8432
+          ],
+          "same_side_pair_count": 4,
+          "same_side_agree_with_native_H_reference": 4,
+          "same_side_abstain_count": 0,
+          "same_side_disagree_count": 0
+        },
+        "l": {
+          "sample_argmax_indices": [
+            5
+          ],
+          "sample_argmax_positions": [
+            9807
+          ],
+          "argmax_has_endpoint": true,
+          "opposite_side_sample_range_overlap": null,
+          "same_side_pair_count": 4,
+          "same_side_agree_with_native_H_reference": 3,
+          "same_side_abstain_count": 0,
+          "same_side_disagree_count": 1
+        },
+        "h_over_l": {
+          "sample_argmax_indices": [
+            3
+          ],
+          "sample_argmax_positions": [
+            10074
+          ],
+          "argmax_has_endpoint": false,
+          "opposite_side_sample_range_overlap": [
+            0.1740460137624244,
+            0.19644937328176693
+          ],
+          "same_side_pair_count": 4,
+          "same_side_agree_with_native_H_reference": 4,
+          "same_side_abstain_count": 0,
+          "same_side_disagree_count": 0
+        }
+      },
+      "pairs": [
+        {
+          "from_k": 0,
+          "to_k": 1,
+          "delta_position": -82,
+          "crosses_or_touches_native_peak": false,
+          "target_direction_from_second_point": -1,
+          "metrics": {
+            "h": {
+              "delta": 1101,
+              "gradient_direction": -1
+            },
+            "l": {
+              "delta": 1899,
+              "gradient_direction": -1
+            },
+            "h_over_l": {
+              "delta": 0.025541979594461292,
+              "gradient_direction": -1
+            }
+          }
+        },
+        {
+          "from_k": 1,
+          "to_k": 2,
+          "delta_position": -133,
+          "crosses_or_touches_native_peak": false,
+          "target_direction_from_second_point": -1,
+          "metrics": {
+            "h": {
+              "delta": 2275,
+              "gradient_direction": -1
+            },
+            "l": {
+              "delta": 2752,
+              "gradient_direction": -1
+            },
+            "h_over_l": {
+              "delta": 0.049860454224833956,
+              "gradient_direction": -1
+            }
+          }
+        },
+        {
+          "from_k": 2,
+          "to_k": 3,
+          "delta_position": -131,
+          "crosses_or_touches_native_peak": false,
+          "target_direction_from_second_point": -1,
+          "metrics": {
+            "h": {
+              "delta": 2172,
+              "gradient_direction": -1
+            },
+            "l": {
+              "delta": 2479,
+              "gradient_direction": -1
+            },
+            "h_over_l": {
+              "delta": 0.04223943998238927,
+              "gradient_direction": -1
+            }
+          }
+        },
+        {
+          "from_k": 3,
+          "to_k": 4,
+          "delta_position": -134,
+          "crosses_or_touches_native_peak": true,
+          "target_direction_from_second_point": null,
+          "metrics": {
+            "h": {
+              "delta": -99,
+              "gradient_direction": 1
+            },
+            "l": {
+              "delta": 951,
+              "gradient_direction": -1
+            },
+            "h_over_l": {
+              "delta": -0.006810020108907577,
+              "gradient_direction": 1
+            }
+          }
+        },
+        {
+          "from_k": 4,
+          "to_k": 5,
+          "delta_position": -133,
+          "crosses_or_touches_native_peak": false,
+          "target_direction_from_second_point": 1,
+          "metrics": {
+            "h": {
+              "delta": -920,
+              "gradient_direction": 1
+            },
+            "l": {
+              "delta": 239,
+              "gradient_direction": -1
+            },
+            "h_over_l": {
+              "delta": -0.022403359519342525,
+              "gradient_direction": 1
+            }
+          }
+        }
+      ],
+      "crossing_pairs_excluded_from_agreement": 1,
+      "illustrative_ratio_level": 0.19,
+      "ratio_level_piecewise_linear_crossings": {
+        "positions": [
+          10115.12224345073,
+          9901.712588429677
+        ],
+        "flat_intervals": []
+      },
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/captures/af-fusion/2026-09-16-repeat-c/native-history.json",
+      "source_sha256": "189d947abe1b9c7ded5accedd5d461baa24ce99f1d0c8297f22a58e8b305e8c4",
+      "manifest_sha256": "b4f2d2c5f1c4d0aa7f0eb47e9f2045a2a85834a317c72bc80a305f69222ac682",
+      "name": "2026-09-16-repeat-c",
+      "source_full_dump_stable": false,
+      "transport_counters": {
+        "records_written": 599,
+        "invalid_replies": 0,
+        "duplicate_records": 0,
+        "stale_session_replies": 0,
+        "out_of_order_records": 0,
+        "camera_sequence_gaps": 0
+      }
+    }
+  ],
+  "totals": {
+    "h": {
+      "same_side_pair_count": 16,
+      "same_side_agree_with_native_H_reference": 16,
+      "same_side_abstain_count": 0,
+      "same_side_disagree_count": 0
+    },
+    "l": {
+      "same_side_pair_count": 16,
+      "same_side_agree_with_native_H_reference": 12,
+      "same_side_abstain_count": 0,
+      "same_side_disagree_count": 4
+    },
+    "h_over_l": {
+      "same_side_pair_count": 16,
+      "same_side_agree_with_native_H_reference": 16,
+      "same_side_abstain_count": 0,
+      "same_side_disagree_count": 0
+    }
+  },
+  "crossing_pairs_excluded_from_agreement": 4
+}

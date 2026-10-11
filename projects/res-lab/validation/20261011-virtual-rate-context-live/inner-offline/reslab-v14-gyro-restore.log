@@ -1,0 +1,43 @@
+  code   412/412 B  2.5 KiB/s   verify 412/412 B  744 KiB/s   verify 412 bytes in 0.0s (357 KiB/s)      
+  code   412 bytes in 0.2s (1.8 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  tagged 16380/29276 B  1813 KiB/s   tagged 29276/29276 B  2287 KiB/s   tagged 29276 bytes in 0.0s (1771 KiB/s)      
+  stage  29276 bytes in 0.001s (22.4 MB/s)      
+  verify 29276 bytes in 0.000s (78.7 MB/s)      
+  stage  29276 bytes in 0.02s (1.7 MB/s), MEM1, read back whole          
+  code   304/304 B  80.1 KiB/s   verify 304/304 B  579 KiB/s   verify 304 bytes in 0.0s (286 KiB/s)      
+  code   304 bytes in 0.0s (52.5 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  code   412/412 B  112.3 KiB/s   verify 412/412 B  756 KiB/s   verify 412 bytes in 0.0s (221 KiB/s)      
+  code   412 bytes in 0.0s (43.1 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  tagged 16380/29276 B  3236 KiB/s   tagged 29276/29276 B  229 KiB/s   tagged 29276 bytes in 0.1s (226 KiB/s)      
+  remote  \fpSup\LOADER.BIN  29276 bytes, mode 0x1
+  buffer  from the firmware, file object 0x45063380
+  reply   getfile: read
+  buffer  0x53B00980 (33372 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 29276 of 29276
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/gyro2-config-restore-v14-header-contrast/before-LOADER.BIN
+  local   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/gyro2-config-restore-v14-header-contrast/prepared-LOADER.BIN  29276 bytes
+  remote  \fpSup\LOADER.BIN  mode 0x7
+  buffer  0x45063380, file object 0x4506A5DC
+  proof   region takes writes and still holds them a second later
+  restored echo -> 0xC03D99A0
+  reply   putfile: written
+  status  2 — written
+  open    1     write  1   (both are flags, not counts)
+  dir     29276 B verified
+  remote  \fpSup\LOADER.BIN  29276 bytes, mode 0x1
+  buffer  from the firmware, file object 0x45063380
+  reply   getfile: read
+  buffer  0x53B00980 (33372 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 29276 of 29276
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/gyro2-config-restore-v14-header-contrast/after-LOADER.BIN
+{
+  "action": "restore",
+  "phase": "verified",
+  "program_bytes_changed": false,
+  "original_sha256": "7b78041d80ddf9a74f751c4d38366a5ae8fa4184ff5d41494f2f345d7d25d95b",
+  "target_sha256": "7b78041d80ddf9a74f751c4d38366a5ae8fa4184ff5d41494f2f345d7d25d95b"
+}

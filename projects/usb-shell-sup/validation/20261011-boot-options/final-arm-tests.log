@@ -1,0 +1,70 @@
+test_loader_publishes_before_stage2_normal_and_profile (test_boot_chain.BootChainTests) ... ok
+test_payload_update_does_not_change_autorun (test_boot_chain.BootChainTests) ... ok
+test_store_hit_and_miss_preserve_stack_and_return (test_boot_chain.BootChainTests) ... ok
+test_unpadded_files_use_loader_capacity_without_changing_autorun (test_boot_chain.BootChainTests) ... ok
+test_autorun_path_is_unchanged (test_loader_hook.FourBoxOnTheHookTests) ... ok
+test_warm_path_pauses_paints_frame0_then_finishes_and_restores (test_loader_hook.FourBoxOnTheHookTests) ... ok
+test_banner_does_not_wait_when_late_already (test_loader_hook.LoaderHookTests) ... ok
+test_banner_is_drawn_after_the_load (test_loader_hook.LoaderHookTests) ... ok
+test_echo_entry_arms_the_hook (test_loader_hook.LoaderHookTests) ... ok
+test_foreign_loader_is_not_armed (test_loader_hook.LoaderHookTests) ... ok
+test_hook_loads_and_skips_the_autorun (test_loader_hook.LoaderHookTests) ... ok
+test_journal_holds_stock_words_and_only_outside_the_cave (test_loader_hook.LoaderHookTests) ... ok
+test_no_file_starts_the_autorun_as_the_firmware_would (test_loader_hook.LoaderHookTests) ... ok
+test_power_off_puts_every_word_back_but_the_hook (test_loader_hook.LoaderHookTests) ... ok
+test_entry_receives_aligned_stack_and_own_address (test_loader_hook.PlainCardRestoreTests) ... ok
+test_restores_at_power_off_but_does_not_arm (test_loader_hook.PlainCardRestoreTests) ... ok
+test_another_script_is_not_mistaken_for_the_autorun (test_loader_hook.ThreeWayBootTests) ... ok
+test_autorun_path_arms_the_abort (test_loader_hook.ThreeWayBootTests) ... ok
+test_garbage_depth_is_not_walked (test_loader_hook.ThreeWayBootTests) ... ok
+test_hook_path_leaves_echo_alone_and_seeds_the_store (test_loader_hook.ThreeWayBootTests) ... ok
+test_asset_four_independent_fills_and_brand_colors (test_splash.SplashTests) ... ok
+test_first_frame_replaces_full_top_row_and_keeps_progress_files_small (test_splash.SplashTests) ... ok
+test_four_states_each_seed_all_three_buffers (test_splash.SplashTests) ... ok
+test_loader_failures_return_to_unconditional_ui_restoration (test_splash.SplashTests) ... ok
+test_native_finish_does_not_overwrite_a_foreign_draw_hook (test_splash.SplashTests) ... ok
+test_opt_in_loader_fits_fast_store_and_legacy_mode_stays_available (test_splash.SplashTests) ... ok
+test_pause_precedes_published_first_frame_and_tail_restores_without_bin (test_splash.SplashTests) ... ok
+test_payload_only_updates_keep_autorun_and_art_identical (test_splash.SplashTests) ... ok
+test_stage2_finishes_after_both_passes_and_returns_with_ui_restored (test_splash.SplashTests) ... ok
+test_disabling_instant_removes_previous_warm_hook_but_keeps_foreign_site (v3.test_boot_options.BootOptionsTests) ... ok
+test_fast_miss_then_hit_copies_loader_and_closes_script (v3.test_boot_options.BootOptionsTests) ... ok
+test_four_options_load_real_v3_and_restore_products (v3.test_boot_options.BootOptionsTests) ... ok
+test_instant_missing_file_preserves_native_fallback_arguments (v3.test_boot_options.BootOptionsTests) ... ok
+test_instant_warm_restart_reloads_sup_and_skips_autorun (v3.test_boot_options.BootOptionsTests) ... ok
+test_manager_saves_complete_envelope_with_disabled_list (v3.test_boot_options.BootOptionsTests) ... ok
+test_merge_embeds_the_exact_current_builder_pairs (v3.test_boot_options.BootOptionsTests) ... ok
+test_wrong_loader_hook_word_never_arms_instant (v3.test_boot_options.BootOptionsTests) ... ok
+test_a_patch_left_by_a_missed_power_off_is_repaired_not_journaled (v3.test_v3.LoaderV3Tests) ... ok
+test_autorun_draws_frames_from_fpSup_UI (v3.test_v3.LoaderV3Tests) ... ok
+test_bad_headers_are_skipped (v3.test_v3.LoaderV3Tests) ... ok
+test_block_size_tail_is_zeroed (v3.test_v3.LoaderV3Tests) ... ok
+test_chain_claims_stack_and_exclusive_does_not (v3.test_v3.LoaderV3Tests) ... ok
+test_chain_next_decodes_branches (v3.test_v3.LoaderV3Tests) ... ok
+test_conflicting_sup_is_released_and_leaves_nothing (v3.test_v3.LoaderV3Tests) ... ok
+test_each_sup_is_told_its_own_path (v3.test_v3.LoaderV3Tests)
+Service version 2: r2 = the file it was loaded from, resident (it ... ok
+test_journal_holds_the_declared_stock_and_power_off_restores_it (v3.test_v3.LoaderV3Tests) ... ok
+test_last_frame_after_the_load_then_redraw_restored (v3.test_v3.LoaderV3Tests) ... ok
+test_load_log_is_written_whole (v3.test_v3.LoaderV3Tests) ... ok
+test_loads_in_name_order_skipping_what_is_not_a_sup (v3.test_v3.LoaderV3Tests) ... ok
+test_no_directory_loads_nothing_and_does_not_start_the_autorun (v3.test_v3.LoaderV3Tests) ... ok
+test_padded_shell_sup_still_loads (v3.test_v3.LoaderV3Tests)
+Historical padded sups remain readable; new builders emit real size. ... ok
+test_same_id_loads_once (v3.test_v3.LoaderV3Tests) ... ok
+test_shell_sup_backs_off_when_the_interface_word_is_taken (v3.test_v3.LoaderV3Tests) ... ok
+test_shell_sup_can_leave_ptp_alone (v3.test_v3.LoaderV3Tests) ... ok
+test_shell_sup_zeroes_a_stale_claim_patches_the_interface_and_spawns (v3.test_v3.LoaderV3Tests) ... ok
+test_stale_site_is_stock_before_anyone_writes_it (v3.test_v3.LoaderV3Tests)
+A CHAIN layer reads the site to find the layer below; a stale bl ... ok
+test_state_layout (v3.test_v3.LoaderV3Tests) ... ok
+test_survives_the_staging_buffer_being_freed (v3.test_v3.LoaderV3Tests)
+Everything that runs after the load -- power-off, services -- is in ... ok
+test_version_3_services (v3.test_v3.LoaderV3Tests)
+holder(): who is in the books for a site, in load order, the running ... ok
+test_power_off_puts_every_site_back (v3.test_allsups.AllSupsTests) ... ok
+
+----------------------------------------------------------------------
+Ran 60 tests in 102.044s
+
+OK

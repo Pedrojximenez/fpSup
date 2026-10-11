@@ -1,0 +1,91 @@
+  code   412/412 B  6.9 KiB/s   verify 412/412 B  337 KiB/s   verify 412 bytes in 0.0s (189 KiB/s)      
+  code   412 bytes in 0.1s (3.4 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 32768 bytes in 0.001s (51.4 MB/s)      
+  code   412/412 B  88.5 KiB/s   verify 412/412 B  536 KiB/s   verify 412 bytes in 0.0s (292 KiB/s)      
+  code   412 bytes in 0.0s (58.5 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 77120 bytes in 0.001s (130.3 MB/s)      
+  code   412/412 B  86.6 KiB/s   verify 412/412 B  764 KiB/s   verify 412 bytes in 0.0s (309 KiB/s)      
+  code   412 bytes in 0.0s (58.0 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 27668 bytes in 0.000s (99.5 MB/s)      
+  code   412/412 B  85.5 KiB/s   verify 412/412 B  611 KiB/s   verify 412 bytes in 0.0s (267 KiB/s)      
+  code   412 bytes in 0.0s (54.2 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 625696 bytes in 0.002s (337.5 MB/s)      
+  stage  607608 bytes in 0.002s (299.3 MB/s)      
+  verify 607608 bytes in 0.002s (352.9 MB/s)      
+  stage  607608 bytes in 0.00s (139.4 MB/s), MEM1, read back whole          
+  code   304/304 B  65.5 KiB/s   verify 304/304 B  433 KiB/s   verify 304 bytes in 0.0s (228 KiB/s)      
+  code   304 bytes in 0.0s (42.2 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  code   412/412 B  83.9 KiB/s   verify 412/412 B  589 KiB/s   verify 412 bytes in 0.0s (309 KiB/s)      
+  code   412 bytes in 0.0s (55.8 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 607608 bytes in 0.002s (327.0 MB/s)      
+  remote  \AutoRun.txt  32768 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x5F900980 (36864 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 32768 of 32768
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261010-save-v24/deployment-v25/before-AutoRun.txt
+  remote  \fpSup\32RESCUS.BIN  77120 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x5F900980 (81216 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 77120 of 77120
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261010-save-v24/deployment-v25/before-32RESCUS.BIN
+  remote  \fpSup\LOADER.BIN  27668 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x5F900980 (31764 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 27668 of 27668
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261010-save-v24/deployment-v25/before-LOADER.BIN
+  remote  \fpSup\50RESLAB.BIN  625696 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x5F900980 (629792 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 625696 of 625696
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261010-save-v24/deployment-v25/before-50RESLAB.BIN
+  local   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/cards/20261010-save-v25/debug/fpSup/50RESLAB.BIN  607608 bytes
+  remote  \fpSup\50RESLAB.BIN  mode 0x7
+  buffer  0x450629C0, file object 0x450F6F38
+  proof   region takes writes and still holds them a second later
+  restored echo -> 0xC03D99A0
+  reply   putfile: written
+  status  2 — written
+  open    1     write  1   (both are flags, not counts)
+  WARNING 50RESLAB.BIN did not appear in dir
+  remote  \fpSup\50RESLAB.BIN  607608 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x5F900980 (611704 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 607608 of 607608
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261010-save-v24/deployment-v25/installed-50RESLAB.BIN
+{
+  "old_card": "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/cards/20261010-controls-v23/debug",
+  "new_card": "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/cards/20261010-save-v25/debug",
+  "phase": "verified",
+  "consumer_settings_preserved": {
+    "sha256": "f0245e95122ffc54815906c87cff9fbccf0fcbda1d5c3fa4948622a45eb69701",
+    "label": "VRC000",
+    "stock": 2,
+    "flags": 0,
+    "checksum_valid": true
+  },
+  "files": [
+    {
+      "name": "50RESLAB.BIN",
+      "bytes": 607608,
+      "sha256": "3c216d4b36d74393c7ea8f7ea81ac54e54faa204d2c98d8ca452b68d4aebd060",
+      "candidate_sha256": "3c216d4b36d74393c7ea8f7ea81ac54e54faa204d2c98d8ca452b68d4aebd060",
+      "backup_sha256": "6970ceb926724ce1a83ee87c7e8f61f16248eeb0010eb154b26638526592f945"
+    }
+  ],
+  "passed": true
+}

@@ -1,0 +1,1344 @@
+{
+  "date": "2026-10-09",
+  "firmware": "SIGMA fp Ver.5.02",
+  "scope": "離線盤點；本次沒有相機操作、寫卡或部署。native_mode_measured 引用稍早已完成的試驗。",
+  "physical_chip_conclusion": "確認 XZ01 平台與多個內部色彩處理介面；尚未確認另一顆獨立可供 sup 使用的色彩晶片，也未確認公開 Milbeaut SKU。",
+  "fidelity_conclusion": "尚未套入任意 cube 並做機內 pixel A/B，不能提供還原百分比。",
+  "resources": [
+    {
+      "id": "rgblmat",
+      "label": "RGBLMAT：兩組矩陣",
+      "evidence_level": "native_mode_measured",
+      "candidate_use": "色域／通道混合，原生 LUT 近似",
+      "limits": "第二組配置逐係數吻合 ROM；自訂係數、像素符號／clamp 與 LUT 誤差待測。",
+      "isp_routes": [
+        {
+          "name": "MAT_TOP RGBLMAT",
+          "name_addr": "0xc07d3b9c",
+          "diagnostic_function": "FUN_c01597b8",
+          "diagnostic_address": "0xc01597b8",
+          "diagnostic_mmio": [
+            "0x30115100",
+            "0x3011513c"
+          ],
+          "mappings": [
+            {
+              "diagnostic_mmio": "0x30115100",
+              "mmio_start": "0x30115100",
+              "shadow_start": "0x30210cb0",
+              "words": 26,
+              "descriptor_function": "FUN_c019c810"
+            },
+            {
+              "diagnostic_mmio": "0x3011513c",
+              "mmio_start": "0x30115100",
+              "shadow_start": "0x30210cb0",
+              "words": 26,
+              "descriptor_function": "FUN_c019c810"
+            }
+          ]
+        }
+      ],
+      "functions": [
+        {
+          "path": "out/decomp/full/blk_c01.c",
+          "line": 3567,
+          "address": "0xC01073A0"
+        },
+        {
+          "path": "out/decomp/full/blk_c01.c",
+          "line": 3635,
+          "address": "0xC0107548"
+        },
+        {
+          "path": "out/decomp/full/blk_c02.c",
+          "line": 131323,
+          "address": "0xC02CFCF0"
+        }
+      ]
+    },
+    {
+      "id": "tone_tables",
+      "label": "SIGSEQ 一／三通道 tone 表",
+      "evidence_level": "static_dispatch_confirmed",
+      "candidate_use": "一條或三條 2048×u16 曲線，shaper 候選",
+      "limits": "三通道 1D 不等於 3D；索引、精度、影像路由待測。原生 scratch／cache 有 owner。",
+      "isp_routes": [
+        {
+          "name": "GAM_TOP GAMMA TABLE",
+          "name_addr": "0xc07d3c00",
+          "diagnostic_function": "FUN_c01597b8",
+          "diagnostic_address": "0xc01597b8",
+          "diagnostic_mmio": [
+            "0x30115b00"
+          ],
+          "mappings": [
+            {
+              "diagnostic_mmio": "0x30115b00",
+              "mmio_start": "0x30115b00",
+              "shadow_start": "0x30210eb4",
+              "words": 4,
+              "descriptor_function": "FUN_c019c810"
+            }
+          ]
+        },
+        {
+          "name": "GAM_TOP SBUS GAMMA",
+          "name_addr": "0xc07d3820",
+          "diagnostic_function": "FUN_c01597b8",
+          "diagnostic_address": "0xc01597b8",
+          "diagnostic_mmio": [
+            "0x30115b14",
+            "0x30115b2c"
+          ],
+          "mappings": [
+            {
+              "diagnostic_mmio": "0x30115b14",
+              "mmio_start": "0x30115b14",
+              "shadow_start": "0x30210ec4",
+              "words": 4,
+              "descriptor_function": "FUN_c019c810"
+            },
+            {
+              "diagnostic_mmio": "0x30115b2c",
+              "mmio_start": "0x30115b2c",
+              "shadow_start": "0x30210edc",
+              "words": 1,
+              "descriptor_function": "FUN_c019c810"
+            }
+          ]
+        }
+      ],
+      "functions": [
+        {
+          "path": "out/decomp/full/blk_c02.c",
+          "line": 133347,
+          "address": "0xC02D29E0"
+        },
+        {
+          "path": "out/decomp/full/blk_c02.c",
+          "line": 133594,
+          "address": "0xC02D2FD0"
+        },
+        {
+          "path": "out/decomp/full/blk_c01.c",
+          "line": 13868,
+          "address": "0xC011B4C8"
+        },
+        {
+          "path": "out/decomp/full/blk_c01.c",
+          "line": 84186,
+          "address": "0xC019C190"
+        }
+      ]
+    },
+    {
+      "id": "gamma_stages",
+      "label": "IGAMMA／PSTIGAM／GAMDEC／GAM_BAS",
+      "evidence_level": "static_parameters_confirmed",
+      "candidate_use": "曲線及數值尺度候選",
+      "limits": "27 段參數與 packed 控制已辨識，硬體座標與像素公式待測。",
+      "isp_routes": [
+        {
+          "name": "MAT_TOP IGAMMA",
+          "name_addr": "0xc07d376c",
+          "diagnostic_function": "FUN_c01597b8",
+          "diagnostic_address": "0xc01597b8",
+          "diagnostic_mmio": [
+            "0x30115000"
+          ],
+          "mappings": [
+            {
+              "diagnostic_mmio": "0x30115000",
+              "mmio_start": "0x30115000",
+              "shadow_start": "0x30210c70",
+              "words": 16,
+              "descriptor_function": "FUN_c019c810"
+            }
+          ]
+        },
+        {
+          "name": "MAT_TOP PSTIGAM",
+          "name_addr": "0xc07d3bb0",
+          "diagnostic_function": "FUN_c01597b8",
+          "diagnostic_address": "0xc01597b8",
+          "diagnostic_mmio": [
+            "0x30115200"
+          ],
+          "mappings": [
+            {
+              "diagnostic_mmio": "0x30115200",
+              "mmio_start": "0x30115200",
+              "shadow_start": "0x30210d18",
+              "words": 14,
+              "descriptor_function": "FUN_c019c810"
+            }
+          ]
+        },
+        {
+          "name": "GAM_TOP GAM_GS GAMDEC",
+          "name_addr": "0xc07d3bc4",
+          "diagnostic_function": "FUN_c01597b8",
+          "diagnostic_address": "0xc01597b8",
+          "diagnostic_mmio": [
+            "0x30115804",
+            "0x30115820",
+            "0x3011583c",
+            "0x30115864"
+          ],
+          "mappings": [
+            {
+              "diagnostic_mmio": "0x30115804",
+              "mmio_start": "0x30115804",
+              "shadow_start": "0x30210d50",
+              "words": 2,
+              "descriptor_function": "FUN_c019c810"
+            },
+            {
+              "diagnostic_mmio": "0x30115820",
+              "mmio_start": "0x30115820",
+              "shadow_start": "0x30210d58",
+              "words": 33,
+              "descriptor_function": "FUN_c019c810"
+            },
+            {
+              "diagnostic_mmio": "0x3011583c",
+              "mmio_start": "0x30115820",
+              "shadow_start": "0x30210d58",
+              "words": 33,
+              "descriptor_function": "FUN_c019c810"
+            },
+            {
+              "diagnostic_mmio": "0x30115864",
+              "mmio_start": "0x30115820",
+              "shadow_start": "0x30210d58",
+              "words": 33,
+              "descriptor_function": "FUN_c019c810"
+            }
+          ]
+        },
+        {
+          "name": "GAM_TOP GAM_BAS",
+          "name_addr": "0xc07d3bdc",
+          "diagnostic_function": "FUN_c01597b8",
+          "diagnostic_address": "0xc01597b8",
+          "diagnostic_mmio": [
+            "0x30115900"
+          ],
+          "mappings": [
+            {
+              "diagnostic_mmio": "0x30115900",
+              "mmio_start": "0x30115900",
+              "shadow_start": "0x30210ddc",
+              "words": 34,
+              "descriptor_function": "FUN_c019c810"
+            }
+          ]
+        }
+      ],
+      "functions": []
+    },
+    {
+      "id": "conversion",
+      "label": "YCMAT／RGBMAT_PL",
+      "evidence_level": "mixed_measured_and_static",
+      "candidate_use": "亮度／色度與輸出轉換",
+      "limits": "YCMAT 有 native 模式穩定變化；RGBMAT_PL 似 601 類 YUV→RGB 是數值推論。",
+      "isp_routes": [
+        {
+          "name": "GAM_TOP YCMAT",
+          "name_addr": "0xc07d3bf0",
+          "diagnostic_function": "FUN_c01597b8",
+          "diagnostic_address": "0xc01597b8",
+          "diagnostic_mmio": [
+            "0x30115a00",
+            "0x30115a2c"
+          ],
+          "mappings": [
+            {
+              "diagnostic_mmio": "0x30115a00",
+              "mmio_start": "0x30115a00",
+              "shadow_start": "0x30210e64",
+              "words": 20,
+              "descriptor_function": "FUN_c019c810"
+            },
+            {
+              "diagnostic_mmio": "0x30115a2c",
+              "mmio_start": "0x30115a00",
+              "shadow_start": "0x30210e64",
+              "words": 20,
+              "descriptor_function": "FUN_c019c810"
+            }
+          ]
+        },
+        {
+          "name": "GAM_TOP RGBMAT_PL",
+          "name_addr": "0xc07d3c18",
+          "diagnostic_function": "FUN_c01597b8",
+          "diagnostic_address": "0xc01597b8",
+          "diagnostic_mmio": [
+            "0x30115b80"
+          ],
+          "mappings": [
+            {
+              "diagnostic_mmio": "0x30115b80",
+              "mmio_start": "0x30115b80",
+              "shadow_start": "0x30210ee0",
+              "words": 9,
+              "descriptor_function": "FUN_c019c810"
+            }
+          ]
+        }
+      ],
+      "functions": [
+        {
+          "path": "out/decomp/full/blk_c01.c",
+          "line": 4061,
+          "address": "0xC01083D8"
+        },
+        {
+          "path": "out/decomp/full/blk_c01.c",
+          "line": 13175,
+          "address": "0xC011A8B0"
+        },
+        {
+          "path": "out/decomp/full/blk_c06.c",
+          "line": 120606,
+          "address": "0xC0691AD8"
+        }
+      ]
+    },
+    {
+      "id": "chroma_regions",
+      "label": "CUVAREA／CUVCONT",
+      "evidence_level": "static_native_setters_confirmed",
+      "candidate_use": "色度區域選擇與控制候選",
+      "limits": "resource 0x17/0x18 與 setter 確認；任意 hue remap 與 mode 耦合未證，setter 同時涉及 APSUP。",
+      "isp_routes": [
+        {
+          "name": "PST_TOP CUVAREA CARE_SEL",
+          "name_addr": "0xc07d38fc",
+          "diagnostic_function": "FUN_c01597b8",
+          "diagnostic_address": "0xc01597b8",
+          "diagnostic_mmio": [
+            "0x30116600"
+          ],
+          "mappings": [
+            {
+              "diagnostic_mmio": "0x30116600",
+              "mmio_start": "0x30116600",
+              "shadow_start": "0x30211024",
+              "words": 17,
+              "descriptor_function": "FUN_c019c810"
+            }
+          ]
+        },
+        {
+          "name": "PST_TOP CUVCONT",
+          "name_addr": "0xc07d3c64",
+          "diagnostic_function": "FUN_c01597b8",
+          "diagnostic_address": "0xc01597b8",
+          "diagnostic_mmio": [
+            "0x30116700",
+            "0x3011671c"
+          ],
+          "mappings": [
+            {
+              "diagnostic_mmio": "0x30116700",
+              "mmio_start": "0x30116700",
+              "shadow_start": "0x30211068",
+              "words": 8,
+              "descriptor_function": "FUN_c019c810"
+            },
+            {
+              "diagnostic_mmio": "0x3011671c",
+              "mmio_start": "0x30116700",
+              "shadow_start": "0x30211068",
+              "words": 8,
+              "descriptor_function": "FUN_c019c810"
+            }
+          ]
+        }
+      ],
+      "functions": [
+        {
+          "path": "out/decomp/full/blk_c01.c",
+          "line": 5545,
+          "address": "0xC010B7E0"
+        },
+        {
+          "path": "out/decomp/full/blk_c01.c",
+          "line": 5661,
+          "address": "0xC010BAF0"
+        },
+        {
+          "path": "out/decomp/full/blk_c06.c",
+          "line": 119503,
+          "address": "0xC068FF90"
+        },
+        {
+          "path": "out/decomp/full/blk_c06.c",
+          "line": 119550,
+          "address": "0xC0690098"
+        }
+      ]
+    },
+    {
+      "id": "chroma_controls",
+      "label": "CSUP／C_SAT_C／APSUP；ECSUP",
+      "evidence_level": "mixed_measured_and_static",
+      "candidate_use": "色度／飽和與外觀控制候選",
+      "limits": "前三區在 enum 11/14 有穩定 native 變化；ECSUP 僅靜態證據。完整硬體公式未驗。",
+      "isp_routes": [
+        {
+          "name": "PST_TOP CSUP",
+          "name_addr": "0xc07d3918",
+          "diagnostic_function": "FUN_c01597b8",
+          "diagnostic_address": "0xc01597b8",
+          "diagnostic_mmio": [
+            "0x30116800",
+            "0x3011682c"
+          ],
+          "mappings": [
+            {
+              "diagnostic_mmio": "0x30116800",
+              "mmio_start": "0x30116800",
+              "shadow_start": "0x30211088",
+              "words": 12,
+              "descriptor_function": "FUN_c019c810"
+            },
+            {
+              "diagnostic_mmio": "0x3011682c",
+              "mmio_start": "0x30116800",
+              "shadow_start": "0x30211088",
+              "words": 12,
+              "descriptor_function": "FUN_c019c810"
+            }
+          ]
+        },
+        {
+          "name": "YMED_TOP C_SAT_C",
+          "name_addr": "0xc07d3928",
+          "diagnostic_function": "FUN_c01597b8",
+          "diagnostic_address": "0xc01597b8",
+          "diagnostic_mmio": [
+            "0x30117b00",
+            "0x30117b50",
+            "0x30117b5c"
+          ],
+          "mappings": [
+            {
+              "diagnostic_mmio": "0x30117b00",
+              "mmio_start": "0x30117b00",
+              "shadow_start": "0x3021127c",
+              "words": 24,
+              "descriptor_function": "FUN_c019c810"
+            },
+            {
+              "diagnostic_mmio": "0x30117b50",
+              "mmio_start": "0x30117b00",
+              "shadow_start": "0x3021127c",
+              "words": 24,
+              "descriptor_function": "FUN_c019c810"
+            },
+            {
+              "diagnostic_mmio": "0x30117b5c",
+              "mmio_start": "0x30117b00",
+              "shadow_start": "0x3021127c",
+              "words": 24,
+              "descriptor_function": "FUN_c019c810"
+            }
+          ]
+        },
+        {
+          "name": "PST_TOP APSUP",
+          "name_addr": "0xc07d3c40",
+          "diagnostic_function": "FUN_c01597b8",
+          "diagnostic_address": "0xc01597b8",
+          "diagnostic_mmio": [
+            "0x30116500"
+          ],
+          "mappings": [
+            {
+              "diagnostic_mmio": "0x30116500",
+              "mmio_start": "0x30116500",
+              "shadow_start": "0x30210fbc",
+              "words": 20,
+              "descriptor_function": "FUN_c019c810"
+            }
+          ]
+        },
+        {
+          "name": "PST_TOP ECSUP",
+          "name_addr": "0xc07d3c78",
+          "diagnostic_function": "FUN_c01597b8",
+          "diagnostic_address": "0xc01597b8",
+          "diagnostic_mmio": [
+            "0x30116900"
+          ],
+          "mappings": [
+            {
+              "diagnostic_mmio": "0x30116900",
+              "mmio_start": "0x30116900",
+              "shadow_start": "0x302110b8",
+              "words": 2,
+              "descriptor_function": "FUN_c019c810"
+            }
+          ]
+        }
+      ],
+      "functions": []
+    },
+    {
+      "id": "ceq",
+      "label": "CEQ／CEQ24／YGAM／KNEE／OFFSET／CLIP",
+      "evidence_level": "static_descriptors_and_setters_confirmed",
+      "candidate_use": "額外曲線、原始／目標資料與 knee/clip 控制候選",
+      "limits": "4096 項 CPU 曲線展開證明建表，不證明任意 3D LUT 硬體或 hue 等化公式。",
+      "isp_routes": [
+        {
+          "name": "CEQ_ORG",
+          "name_addr": "0xc07d3d78",
+          "diagnostic_function": "FUN_c01597b8",
+          "diagnostic_address": "0xc01597b8",
+          "diagnostic_mmio": [
+            "0x3011d020"
+          ],
+          "mappings": [
+            {
+              "diagnostic_mmio": "0x3011d020",
+              "mmio_start": "0x3011d020",
+              "shadow_start": "0x30211ee0",
+              "words": 48,
+              "descriptor_function": "FUN_c019c810"
+            }
+          ]
+        },
+        {
+          "name": "CEQ_TGT",
+          "name_addr": "0xc07d3d84",
+          "diagnostic_function": "FUN_c01597b8",
+          "diagnostic_address": "0xc01597b8",
+          "diagnostic_mmio": [
+            "0x3011d0e0",
+            "0x3011d1b4"
+          ],
+          "mappings": [
+            {
+              "diagnostic_mmio": "0x3011d0e0",
+              "mmio_start": "0x3011d0e0",
+              "shadow_start": "0x30211fa0",
+              "words": 56,
+              "descriptor_function": "FUN_c019c810"
+            },
+            {
+              "diagnostic_mmio": "0x3011d1b4",
+              "mmio_start": "0x3011d0e0",
+              "shadow_start": "0x30211fa0",
+              "words": 56,
+              "descriptor_function": "FUN_c019c810"
+            }
+          ]
+        },
+        {
+          "name": "CEQ24_ORG",
+          "name_addr": "0xc07d3d90",
+          "diagnostic_function": "FUN_c01597b8",
+          "diagnostic_address": "0xc01597b8",
+          "diagnostic_mmio": [
+            "0x3011d500"
+          ],
+          "mappings": [
+            {
+              "diagnostic_mmio": "0x3011d500",
+              "mmio_start": "0x3011d500",
+              "shadow_start": "0x30212080",
+              "words": 24,
+              "descriptor_function": "FUN_c019c810"
+            }
+          ]
+        },
+        {
+          "name": "CEQ24_TGT",
+          "name_addr": "0xc07d3d9c",
+          "diagnostic_function": "FUN_c01597b8",
+          "diagnostic_address": "0xc01597b8",
+          "diagnostic_mmio": [
+            "0x3011d560"
+          ],
+          "mappings": [
+            {
+              "diagnostic_mmio": "0x3011d560",
+              "mmio_start": "0x3011d560",
+              "shadow_start": "0x302120e0",
+              "words": 24,
+              "descriptor_function": "FUN_c019c810"
+            }
+          ]
+        },
+        {
+          "name": "CEQ_YGAM",
+          "name_addr": "0xc07d3990",
+          "diagnostic_function": "FUN_c01597b8",
+          "diagnostic_address": "0xc01597b8",
+          "diagnostic_mmio": [
+            "0x3011d600"
+          ],
+          "mappings": [
+            {
+              "diagnostic_mmio": "0x3011d600",
+              "mmio_start": "0x3011d600",
+              "shadow_start": "0x30212140",
+              "words": 18,
+              "descriptor_function": "FUN_c019c810"
+            }
+          ]
+        },
+        {
+          "name": "CEQ_KNEE",
+          "name_addr": "0xc07d399c",
+          "diagnostic_function": "FUN_c01597b8",
+          "diagnostic_address": "0xc01597b8",
+          "diagnostic_mmio": [
+            "0x3011d64c",
+            "0x3011d660"
+          ],
+          "mappings": [
+            {
+              "diagnostic_mmio": "0x3011d64c",
+              "mmio_start": "0x3011d64c",
+              "shadow_start": "0x30212188",
+              "words": 8,
+              "descriptor_function": "FUN_c019c810"
+            },
+            {
+              "diagnostic_mmio": "0x3011d660",
+              "mmio_start": "0x3011d64c",
+              "shadow_start": "0x30212188",
+              "words": 8,
+              "descriptor_function": "FUN_c019c810"
+            }
+          ]
+        },
+        {
+          "name": "CEQ_CORING",
+          "name_addr": "0xc07d3840",
+          "diagnostic_function": "FUN_c01597b8",
+          "diagnostic_address": "0xc01597b8",
+          "diagnostic_mmio": [
+            "0x3011d670"
+          ],
+          "mappings": [
+            {
+              "diagnostic_mmio": "0x3011d670",
+              "mmio_start": "0x3011d670",
+              "shadow_start": "0x302121a8",
+              "words": 3,
+              "descriptor_function": "FUN_c019c810"
+            }
+          ]
+        },
+        {
+          "name": "CEQ_OFFSET",
+          "name_addr": "0xc07d384c",
+          "diagnostic_function": "FUN_c01597b8",
+          "diagnostic_address": "0xc01597b8",
+          "diagnostic_mmio": [
+            "0x3011d680",
+            "0x3011d690",
+            "0x3011d6a0"
+          ],
+          "mappings": [
+            {
+              "diagnostic_mmio": "0x3011d680",
+              "mmio_start": "0x3011d680",
+              "shadow_start": "0x302121b4",
+              "words": 10,
+              "descriptor_function": "FUN_c019c810"
+            },
+            {
+              "diagnostic_mmio": "0x3011d690",
+              "mmio_start": "0x3011d680",
+              "shadow_start": "0x302121b4",
+              "words": 10,
+              "descriptor_function": "FUN_c019c810"
+            },
+            {
+              "diagnostic_mmio": "0x3011d6a0",
+              "mmio_start": "0x3011d680",
+              "shadow_start": "0x302121b4",
+              "words": 10,
+              "descriptor_function": "FUN_c019c810"
+            }
+          ]
+        },
+        {
+          "name": "CEQ_COMPATI",
+          "name_addr": "0xc07d3da8",
+          "diagnostic_function": "FUN_c01597b8",
+          "diagnostic_address": "0xc01597b8",
+          "diagnostic_mmio": [
+            "0x3011d6b0"
+          ],
+          "mappings": [
+            {
+              "diagnostic_mmio": "0x3011d6b0",
+              "mmio_start": "0x3011d6b0",
+              "shadow_start": "0x302121dc",
+              "words": 1,
+              "descriptor_function": "FUN_c019c810"
+            }
+          ]
+        },
+        {
+          "name": "CEQ_CORING2",
+          "name_addr": "0xc07d3db8",
+          "diagnostic_function": "FUN_c01597b8",
+          "diagnostic_address": "0xc01597b8",
+          "diagnostic_mmio": [
+            "0x3011d6b8"
+          ],
+          "mappings": [
+            {
+              "diagnostic_mmio": "0x3011d6b8",
+              "mmio_start": "0x3011d6b8",
+              "shadow_start": "0x302121e0",
+              "words": 18,
+              "descriptor_function": "FUN_c019c810"
+            }
+          ]
+        },
+        {
+          "name": "CEQ_CLIP",
+          "name_addr": "0xc07d39a8",
+          "diagnostic_function": "FUN_c01597b8",
+          "diagnostic_address": "0xc01597b8",
+          "diagnostic_mmio": [
+            "0x3011d700",
+            "0x3011d7e0",
+            "0x3011d7f4"
+          ],
+          "mappings": [
+            {
+              "diagnostic_mmio": "0x3011d700",
+              "mmio_start": "0x3011d700",
+              "shadow_start": "0x30212228",
+              "words": 63,
+              "descriptor_function": "FUN_c019c810"
+            },
+            {
+              "diagnostic_mmio": "0x3011d7e0",
+              "mmio_start": "0x3011d700",
+              "shadow_start": "0x30212228",
+              "words": 63,
+              "descriptor_function": "FUN_c019c810"
+            },
+            {
+              "diagnostic_mmio": "0x3011d7f4",
+              "mmio_start": "0x3011d700",
+              "shadow_start": "0x30212228",
+              "words": 63,
+              "descriptor_function": "FUN_c019c810"
+            }
+          ]
+        },
+        {
+          "name": "CEQ_Y_GAMMA",
+          "name_addr": "0xc07d3dc8",
+          "diagnostic_function": "FUN_c01597b8",
+          "diagnostic_address": "0xc01597b8",
+          "diagnostic_mmio": [
+            "0x3011d800"
+          ],
+          "mappings": [
+            {
+              "diagnostic_mmio": "0x3011d800",
+              "mmio_start": "0x3011d800",
+              "shadow_start": "0x30212324",
+              "words": 18,
+              "descriptor_function": "FUN_c019c810"
+            }
+          ]
+        }
+      ],
+      "functions": [
+        {
+          "path": "out/decomp/full/blk_c02.c",
+          "line": 133677,
+          "address": "0xC02D3190"
+        },
+        {
+          "path": "out/decomp/full/blk_c01.c",
+          "line": 8861,
+          "address": "0xC0112B00"
+        },
+        {
+          "path": "out/decomp/full/blk_c01.c",
+          "line": 8319,
+          "address": "0xC0110800"
+        }
+      ]
+    },
+    {
+      "id": "post_curves",
+      "label": "PST_TOP Y_GAMMA／CKNEE",
+      "evidence_level": "static_parameters_confirmed",
+      "candidate_use": "亮度曲線與 knee 候選",
+      "limits": "成對參數可設定；輸入域、硬體插值與裁切公式未量測。",
+      "isp_routes": [
+        {
+          "name": "PST_TOP Y_GAMMA",
+          "name_addr": "0xc07d3c2c",
+          "diagnostic_function": "FUN_c01597b8",
+          "diagnostic_address": "0xc01597b8",
+          "diagnostic_mmio": [
+            "0x30115e00",
+            "0x30115e4c"
+          ],
+          "mappings": [
+            {
+              "diagnostic_mmio": "0x30115e00",
+              "mmio_start": "0x30115e00",
+              "shadow_start": "0x30210f08",
+              "words": 20,
+              "descriptor_function": "FUN_c019c810"
+            },
+            {
+              "diagnostic_mmio": "0x30115e4c",
+              "mmio_start": "0x30115e00",
+              "shadow_start": "0x30210f08",
+              "words": 20,
+              "descriptor_function": "FUN_c019c810"
+            }
+          ]
+        },
+        {
+          "name": "PST_TOP CKNEE",
+          "name_addr": "0xc07d3c88",
+          "diagnostic_function": "FUN_c01597b8",
+          "diagnostic_address": "0xc01597b8",
+          "diagnostic_mmio": [
+            "0x30116a00"
+          ],
+          "mappings": [
+            {
+              "diagnostic_mmio": "0x30116a00",
+              "mmio_start": "0x30116a00",
+              "shadow_start": "0x302110c0",
+              "words": 8,
+              "descriptor_function": "FUN_c019c810"
+            }
+          ]
+        }
+      ],
+      "functions": [
+        {
+          "path": "out/decomp/full/blk_c01.c",
+          "line": 6220,
+          "address": "0xC010C7C8"
+        }
+      ]
+    },
+    {
+      "id": "display",
+      "label": "顯示端 CSC＋RGB gamma",
+      "evidence_level": "static_native_driver_confirmed",
+      "candidate_use": "LCD／輸出監看轉換候選",
+      "limits": "三矩陣 bank、兩 gamma bank，3×16 bytes 資料；動態路由未驗，不固定命名 LCD/HDMI/EVF bank。設定會在顯示重啟重送。",
+      "isp_routes": [],
+      "functions": [
+        {
+          "path": "out/decomp/full/blk_c00.c",
+          "line": 174264,
+          "address": "0xC00E3948"
+        },
+        {
+          "path": "out/decomp/full/blk_c00.c",
+          "line": 174371,
+          "address": "0xC00E3AF0"
+        },
+        {
+          "path": "out/decomp/full/blk_c06.c",
+          "line": 35355,
+          "address": "0xC0625F68"
+        }
+      ]
+    },
+    {
+      "id": "sigpro",
+      "label": "SIGPRO RawMakePreview／FillLight／RawMix／MBlender",
+      "evidence_level": "static_native_jobs_confirmed",
+      "candidate_use": "RAW 預覽、顯影與合成工作介面；STILL/JPG 介入候選",
+      "limits": "原生 jobs 與 buffer 描述子存在，不證明獨立可編程 DSP、自訂 kernel 或持續 Live View 路由。",
+      "isp_routes": [],
+      "functions": [
+        {
+          "path": "out/decomp/full/blk_c04.c",
+          "line": 33584,
+          "address": "0xC04321A0"
+        },
+        {
+          "path": "out/decomp/full/blk_c04.c",
+          "line": 33157,
+          "address": "0xC04317C8"
+        },
+        {
+          "path": "out/decomp/full/blk_c04.c",
+          "line": 31189,
+          "address": "0xC042F008"
+        }
+      ]
+    },
+    {
+      "id": "cpu",
+      "label": "主 ARM CPU",
+      "evidence_level": "software_candidate_offline_reference_ready",
+      "candidate_use": "完整 .cube 四面體內插；先評估低解析度 LV、單張顯影",
+      "limits": "桌面 full reference 已有，機內像素 input/output ownership、吞吐未測；NEON、時脈、核心數不可從公開 Milbeaut SKU 代入。",
+      "isp_routes": [],
+      "functions": []
+    },
+    {
+      "id": "calibration",
+      "label": "CRCT／RAW_CORR／WHITE BALANCE／前段增益",
+      "evidence_level": "static_calibration_paths_confirmed",
+      "candidate_use": "LUT 輸入校準與 headroom 研究",
+      "limits": "前段校準不等於 look；與 RAW sink 共享程度待驗，不能當成不改 RAW 的效果 backend。",
+      "isp_routes": [
+        {
+          "name": "CRCT_TOP",
+          "name_addr": "0xc07d3858",
+          "diagnostic_function": "FUN_c01597b8",
+          "diagnostic_address": "0xc01597b8",
+          "diagnostic_mmio": [
+            "0x300f0000",
+            "0x300f0100",
+            "0x300f0180",
+            "0x300f01c0",
+            "0x300f0200",
+            "0x300f0300",
+            "0x300f0380",
+            "0x300f05c0",
+            "0x300f0600",
+            "0x300f0680",
+            "0x300f06a0",
+            "0x300f06b0",
+            "0x300f06c0",
+            "0x300f0700",
+            "0x300f0710",
+            "0x300f0720",
+            "0x300f0748",
+            "0x300f0750",
+            "0x300f0760",
+            "0x300f0770",
+            "0x300f07f0",
+            "0x300f0810",
+            "0x300f082c",
+            "0x300f0840",
+            "0x300f0850",
+            "0x300f0870",
+            "0x300f0880",
+            "0x300f0890",
+            "0x300f08c0",
+            "0x300f0900",
+            "0x300f0940",
+            "0x300f0980"
+          ],
+          "mappings": []
+        },
+        {
+          "name": "CRCT_TOP",
+          "name_addr": "0xc07d3858",
+          "diagnostic_function": "FUN_c01597b8",
+          "diagnostic_address": "0xc01597b8",
+          "diagnostic_mmio": [
+            "0x300f2000",
+            "0x300f2100",
+            "0x300f2180",
+            "0x300f21c0",
+            "0x300f2200",
+            "0x300f2300",
+            "0x300f2380",
+            "0x300f25c0",
+            "0x300f2600",
+            "0x300f2680",
+            "0x300f26a0",
+            "0x300f26b0",
+            "0x300f26c0",
+            "0x300f2700",
+            "0x300f2710",
+            "0x300f2720",
+            "0x300f2748",
+            "0x300f2750",
+            "0x300f2760",
+            "0x300f2770",
+            "0x300f27f0",
+            "0x300f2810",
+            "0x300f282c",
+            "0x300f2840",
+            "0x300f2850",
+            "0x300f2870",
+            "0x300f2880",
+            "0x300f2890",
+            "0x300f28c0",
+            "0x300f2900",
+            "0x300f2940",
+            "0x300f2980"
+          ],
+          "mappings": []
+        },
+        {
+          "name": "CRCT_3A",
+          "name_addr": "0xc07d39e4",
+          "diagnostic_function": "FUN_c01597b8",
+          "diagnostic_address": "0xc01597b8",
+          "diagnostic_mmio": [
+            "0x300f0b00",
+            "0x300f0b30",
+            "0x300f0be0",
+            "0x300f0c30"
+          ],
+          "mappings": []
+        },
+        {
+          "name": "SIG0 RAW_CORR",
+          "name_addr": "0xc07d3aa0",
+          "diagnostic_function": "FUN_c01597b8",
+          "diagnostic_address": "0xc01597b8",
+          "diagnostic_mmio": [
+            "0x301128d0"
+          ],
+          "mappings": [
+            {
+              "diagnostic_mmio": "0x301128d0",
+              "mmio_start": "0x301128d0",
+              "shadow_start": "0x302104e4",
+              "words": 16,
+              "descriptor_function": "FUN_c019c810"
+            }
+          ]
+        },
+        {
+          "name": "SIG1 WHITE BALANCE",
+          "name_addr": "0xc07d37f4",
+          "diagnostic_function": "FUN_c01597b8",
+          "diagnostic_address": "0xc01597b8",
+          "diagnostic_mmio": [
+            "0x30113480",
+            "0x30113494",
+            "0x301134c0",
+            "0x301134d8"
+          ],
+          "mappings": [
+            {
+              "diagnostic_mmio": "0x30113480",
+              "mmio_start": "0x30113480",
+              "shadow_start": "0x30210764",
+              "words": 1,
+              "descriptor_function": "FUN_c019c810"
+            },
+            {
+              "diagnostic_mmio": "0x30113494",
+              "mmio_start": "0x30113494",
+              "shadow_start": "0x30210768",
+              "words": 6,
+              "descriptor_function": "FUN_c019c810"
+            },
+            {
+              "diagnostic_mmio": "0x301134c0",
+              "mmio_start": "0x301134c0",
+              "shadow_start": "0x30210780",
+              "words": 14,
+              "descriptor_function": "FUN_c019c810"
+            },
+            {
+              "diagnostic_mmio": "0x301134d8",
+              "mmio_start": "0x301134c0",
+              "shadow_start": "0x30210780",
+              "words": 14,
+              "descriptor_function": "FUN_c019c810"
+            }
+          ]
+        }
+      ],
+      "functions": []
+    },
+    {
+      "id": "unclear",
+      "label": "DHAZ／TNCR／TMAP",
+      "evidence_level": "named_registers_confirmed_semantics_unknown",
+      "candidate_use": "待研究，不列作已可用 LUT backend",
+      "limits": "DHAZ/TNCR 有 packed setter，像素公式未證；TMAP 有尺寸／格點／座標運算，名稱不能證明 tone mapping。",
+      "isp_routes": [
+        {
+          "name": "DHAZ",
+          "name_addr": "0xc07d36d4",
+          "diagnostic_function": "FUN_c01597b8",
+          "diagnostic_address": "0xc01597b8",
+          "diagnostic_mmio": [
+            "0x30117c00"
+          ],
+          "mappings": [
+            {
+              "diagnostic_mmio": "0x30117c00",
+              "mmio_start": "0x30117c00",
+              "shadow_start": "0x302112e4",
+              "words": 21,
+              "descriptor_function": "FUN_c019c810"
+            }
+          ]
+        },
+        {
+          "name": "TNCR",
+          "name_addr": "0xc07d36dc",
+          "diagnostic_function": "FUN_c01597b8",
+          "diagnostic_address": "0xc01597b8",
+          "diagnostic_mmio": [
+            "0x30117d00"
+          ],
+          "mappings": [
+            {
+              "diagnostic_mmio": "0x30117d00",
+              "mmio_start": "0x30117d00",
+              "shadow_start": "0x30211338",
+              "words": 21,
+              "descriptor_function": "FUN_c019c810"
+            }
+          ]
+        },
+        {
+          "name": "TMAP",
+          "name_addr": "0xc07d36f4",
+          "diagnostic_function": "FUN_c01597b8",
+          "diagnostic_address": "0xc01597b8",
+          "diagnostic_mmio": [
+            "0x30130600"
+          ],
+          "mappings": [
+            {
+              "diagnostic_mmio": "0x30130600",
+              "mmio_start": "0x30130600",
+              "shadow_start": "0x30212828",
+              "words": 17,
+              "descriptor_function": "FUN_c019c810"
+            }
+          ]
+        }
+      ],
+      "functions": [
+        {
+          "path": "out/decomp/full/blk_c01.c",
+          "line": 48642,
+          "address": "0xC0157228"
+        },
+        {
+          "path": "out/decomp/full/blk_c01.c",
+          "line": 49415,
+          "address": "0xC0158558"
+        },
+        {
+          "path": "out/decomp/full/blk_c01.c",
+          "line": 39652,
+          "address": "0xC013FEE0"
+        }
+      ]
+    },
+    {
+      "id": "coprocessor_unknown",
+      "label": "ARM926_1／ARM926_2／ARM9",
+      "evidence_level": "partition_names_only",
+      "candidate_use": "待確認角色與介面",
+      "limits": "分割區名稱不足以證明有兩個可自由使用的色彩核心；未找到可用自訂 LUT 工作介面。",
+      "isp_routes": [],
+      "functions": []
+    },
+    {
+      "id": "gpu_unknown",
+      "label": "GPU／任意硬體 3D LUT／可編程影像 DSP",
+      "evidence_level": "no_callable_path_confirmed",
+      "candidate_use": "保留研究可能",
+      "limits": "未找到可供目前 sup 呼叫的程式／資料介面；名稱未出現不能證明硬體不存在。",
+      "isp_routes": [],
+      "functions": []
+    },
+    {
+      "id": "not_general_lut",
+      "label": "OSD palette／面板校色／JPEG 與 MOV 編碼器",
+      "evidence_level": "not_established_as_general_colour_backend",
+      "candidate_use": "OSD、影像呈現與壓縮",
+      "limits": "256 色 palette 不等於完整 RGB LUT；JPEG/LJPEG/H.264 壓縮能力不等於可做自訂色彩轉換。",
+      "isp_routes": [],
+      "functions": []
+    }
+  ],
+  "methods": [
+    {
+      "id": "native_combo",
+      "name": "原生 ISP 多區塊組合",
+      "target": "LV；MOV/JPG 待路由驗證",
+      "status": "native 配置已有上機基準，自訂 cube 近似尚未實作",
+      "fidelity": "依 LUT 擬合能力與實測誤差，不保證任意 3D LUT 等價"
+    },
+    {
+      "id": "display_only",
+      "name": "顯示端矩陣＋gamma",
+      "target": "LCD；HDMI/EVF 各別驗證",
+      "status": "靜態 setter 確認，尚未注入自訂 look",
+      "fidelity": "適合矩陣／曲線類 look，跨通道非線性 3D 只能近似"
+    },
+    {
+      "id": "cpu_full",
+      "name": "主 CPU 完整 3D LUT",
+      "target": "先評估低解析度 LV；單張 JPG 次之；MOV 吞吐待測",
+      "status": "桌面完整 reference 已完成，機內 runtime 未實作",
+      "fidelity": "保留全部 RGB 節點；精度仍依輸入轉換、內插、量化與顯示路由"
+    },
+    {
+      "id": "hybrid",
+      "name": "原生處理＋軟體殘差",
+      "target": "監看優先",
+      "status": "設計候選，尚無原型或效能證據",
+      "fidelity": "需解決輸入輸出、可逆性與裁切後才可驗是否改善近似，不保證省算力"
+    },
+    {
+      "id": "still_develop",
+      "name": "接入 RAW 顯影，在 JPEG 編碼前處理",
+      "target": "STILL JPG／DNG 回放顯影",
+      "status": "原生 jobs 已辨識，尚未接入",
+      "fidelity": "單張可放寬延遲，但仍須驗 demosaic、色域／gamma、buffer 與 writer ownership"
+    },
+    {
+      "id": "cube_archive",
+      "name": "CDNG／STILL DNG 保存完整 cube＋設定",
+      "target": "RAW 後製",
+      "status": "離線實檔逐 byte 回存、RAW 不變已驗；機內 writer 未接入",
+      "fidelity": "來源可逐 byte 取回；自訂 XMP 保存不等於 reader 自動套用"
+    },
+    {
+      "id": "dng_standard",
+      "name": "DNG RGBTables／ProfileLookTable／HueSatMap＋ToneCurve",
+      "target": "支援的後製 reader",
+      "status": "RGBTables 離線 writer 已有；LookTable 轉換未實作；原生 HSM/TC 曾做 Resolve A/B",
+      "fidelity": "規格不保證 reader 支援；現有 RGBTables 最多 32³ 且有限制；HSV look table 不能直接複製 RGB cube"
+    },
+    {
+      "id": "postprocess",
+      "name": "後製軟體直接載入原始 cube",
+      "target": "CDNG 解碼後／MOV／JPG",
+      "status": "與機內功能分開的完整 LUT 工作流",
+      "fidelity": "須對應 LUT 輸入色域、gamma、曝光與插值；不提供機內 Live View"
+    }
+  ],
+  "public_primary_sources": [
+    {
+      "url": "https://www.sigma-global.com/en/cameras/fp/",
+      "use": "原生相機功能，不是處理器 SKU 證據"
+    },
+    {
+      "url": "https://www.eu.socionext.com/solutions/visual-solutions/",
+      "use": "Milbeaut 家族一般資訊，未將 fp XZ01 對應到 SC2000/SC2002/MB86S27"
+    },
+    {
+      "url": "https://helpx.adobe.com/content/dam/help/en/camera-raw/digital-negative/jcr_content/root/content/flex/items/position/position-par/download_section_733958301/download-1/DNG_Spec_1_7_1_0.pdf",
+      "use": "RGBTables pp75–81；ProfileLookTable pp56–57；HSM/TC pp49–51"
+    }
+  ],
+  "sources": [
+    {
+      "path": "out/MAIN_c0000000.bin",
+      "sha256": "92a8ee993f6c3d66c251e88d45a2ccd5135c6cf7342717784321c2ed506e2fb4"
+    },
+    {
+      "path": "research/imaging-hw/isp-colour-blocks-20260927/isp-map.json",
+      "sha256": "0f267833a888058bcb6acce36797b3a724d470be86f6e964b7931536851d0db9"
+    },
+    {
+      "path": "out/decomp/full/blk_c00.c",
+      "sha256": "9bb8b762d86f951617792b912d1bd2f2d2581f587e159c54e68d974bdd015180"
+    },
+    {
+      "path": "out/decomp/full/blk_c01.c",
+      "sha256": "4b8d1d419598eb6e67b9cda963de99e724091959213b863bca787d99a529c2b9"
+    },
+    {
+      "path": "out/decomp/full/blk_c02.c",
+      "sha256": "c2c5b6aabb2fbd01497d0b9acda511ab51a60d651724a363197c8d8bad51d491"
+    },
+    {
+      "path": "out/decomp/full/blk_c04.c",
+      "sha256": "f68b2ac76f71eea5250adf61ab996cbee63b392629d3bfe98dd59e543f795756"
+    },
+    {
+      "path": "out/decomp/full/blk_c06.c",
+      "sha256": "3f53ce84fafdbafc28b5097c339fe820af4c312c3b13c761277d02f3c19b4c9b"
+    },
+    {
+      "path": "out/rtti_classes.txt",
+      "sha256": "848569f92fe6714bb42b2c0922899001983e6b9a755474d90f2c74d26739fa5b"
+    },
+    {
+      "path": "out/MAIN.strings.txt",
+      "sha256": "ddb16a08b48075f8c5b28a40839a08b4625cb9de01647092abe1ea190470cf7d"
+    },
+    {
+      "path": "projects/lut-sup/validation/20261009-native-colour-summary.json",
+      "sha256": "39a21029437fbabc70147ba943f18c36958e75525f954dbe059197623fa9f021"
+    },
+    {
+      "path": "projects/lut-sup/validation/20261009-native-mode-trial-05/report.json",
+      "sha256": "b3322e62c3e5c15e1c277e2c1d0aadb21f4292b449b6d4d22272978d52f5d816"
+    },
+    {
+      "path": "projects/lut-sup/validation/20261009-offline.json",
+      "sha256": "957cb55a0a3dec48732c35e1bff95b2d98f35e5cce3007448fdf8c8032da7dd7"
+    },
+    {
+      "path": "research/liveview/isp-path-audit.md",
+      "sha256": "4ba445053338ab47519fd3dbe9a0c9b21a24d22a268958dd345d48cb740403bb"
+    },
+    {
+      "path": "research/liveview/matrix-gamma-audit.md",
+      "sha256": "bc4ae6450f95a2f62bffa3e12805ee6b41bdcdbb5181073c7c67e2b9c1912b2d"
+    },
+    {
+      "path": "research/liveview/display-route-audit.md",
+      "sha256": "70f42246f15b8c8ab16334996ee9458f16e5df909cd09b37451724ec0fdeacfb"
+    },
+    {
+      "path": "research/display/RAW_FALSE_COLOR_IMPLEMENTATION.md",
+      "sha256": "8c904f3e507fd3251e82f86c58aa647551946b40bde3cb2f3ebc123bf4093e55"
+    },
+    {
+      "path": "research/imaging-hw/isp-colour-blocks-20260927/LUT_BLOCKS_2026-10-09.md",
+      "sha256": "9b70d1acc748c6eb43975dae0ed7ffa1882f3b0cfda1ce34e37fd34e22f754e9"
+    },
+    {
+      "path": "research/firmware/notes/FORMAT.md",
+      "sha256": "d5c7ecbf0ad8c5800bc20f9255cfa57f6b5e8beec8d749d61ff6cef1c87743dd"
+    },
+    {
+      "path": "research/firmware/notes/FIRMWARE_INVENTORY.md",
+      "sha256": "df34feb25b1e35db146d18ddead6db053af06be31dd417f17bdeb564458ba14c"
+    },
+    {
+      "path": "research/rtos/notes/SUBSYSTEMS.md",
+      "sha256": "af902300417dbc9b589fc1bbbb7d5f69fa9940d92fbd5e7d8a9b63c16a0ff43d"
+    },
+    {
+      "path": "research/imaging-hw/notes/HW_LOSSLESS_JPEG_CODEC.md",
+      "sha256": "6852ead74b2f3f011f34663539fb4a63bbdb3fb788b9fad6087c36d657cbef38"
+    },
+    {
+      "path": "fpSup/lut/cube.py",
+      "sha256": "d80aa6d51b38d495c05d87abea719665780ce80df808ed3f936ac9523d6d67a1"
+    },
+    {
+      "path": "fpSup/lut/dng.py",
+      "sha256": "fbd52f93747bf6b9dbe16fb262f460e834f556c940355d54a196f5feade12465"
+    },
+    {
+      "path": "fpSup/lut/README.md",
+      "sha256": "c72d195d917e36057cf78db15b82fb4dbfcfd5ad8d14132716102d5a4eec4c59"
+    }
+  ]
+}

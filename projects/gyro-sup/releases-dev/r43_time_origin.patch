@@ -1,0 +1,60 @@
+diff --git a/gyro/gcsvgen.S b/gyro/gcsvgen.S
+index 6f7d2e4..7696ec8 100644
+--- a/gyro/gcsvgen.S
++++ b/gyro/gcsvgen.S
+@@ -45,6 +45,9 @@
+                                      the stream is continuous; 0 = first block.  Lives
+                                      in the dormant third slot record's unused +4 word
+                                      (0x1DC): two-slot only, never S_C_STATE at 0x1D8. */
++.equ ST_ORIGIN,       0x58        /* r43: the take's t=0 in TickTimer us (0x1F8)        */
++.equ ST_ROW_START,    0x5C        /* r43: text pointer at the start of the current row (0x1FC),
++                                   * so a row that predates the origin can be unwritten */
+ .equ ST_PREV_DROPPED, 0x40        /* S_DROPPED as of the previous block (0x1E0, dormant
+                                      S_C_FIRST in two-slot).  Unchanged = the grid is
+                                      continuous, whatever the anchor's latency.         */
+@@ -691,6 +694,16 @@ gcsv_stream_header_tail:
+     str     r0, [r7, #ST_NEXT_EXPECT]
+     str     r0, [r7, #ST_PREV_DROPPED]
+     bl      gcsv_stream_acc_refresh
++    /* r43: the timeline's origin is now, not the callback's attach.  The writer
++     * opens the gcsv only once O_LC_STATE is 4 (first DNG confirmed), so this
++     * is within ~15 ms of the first frame existing on the card.  (The
++     * MovieRecording flag's rise was tried as an anchor and is not one: on a
++     * cold-boot take it led the first frame by 3.8 s.)  Rows recorded before
++     * the origin are formatted and then unwritten. */
++    movw    ip, #0xB6E0
++    movt    ip, #0xC002
++    blx     ip                           @ TickTimer now: first DNG confirmed
++    str     r0, [r7, #ST_ORIGIN]
+     mov     r0, #1
+     dmb     ish
+     str     r0, [r7, #ST_OPEN]
+@@ -726,8 +739,9 @@ gcsv_stream_block:
+     cmp     r8, r0
+     bhi     gcsv_stream_fail
+     ldr     r9, [r4, #8]
+-    ldr     r11, [r10, #S_START_US]
+-    sub     r9, r9, r11                  @ unsigned time since record start
++    add     r11, r10, #O_STREAM_STATE
++    ldr     r11, [r11, #ST_ORIGIN]       @ r43: time since the first DNG's start edge
++    sub     r9, r9, r11                  @ (negative, as signed, for pre-origin rows)
+ 
+     /* Seam continuity.  Each block's anchor comes from the callback's TickTimer
+      * read, which trails the last sample by its own latency (0..1 ms), so block
+@@ -823,6 +837,7 @@ gcsv_stream_seeded:
+ gcsv_stream_sample:
+     cmp     r8, #0
+     beq     gcsv_stream_acc_tail
++    str     r5, [r11, #ST_ROW_START]     @ r43: remember where this row's text starts
+ 
+     /* 1250 Hz output: average two adjacent 2500 Hz samples per row.  This is a
+      * two-tap anti-alias box filter, not decimation-by-drop: (s0+s1)>>1 halts
+@@ -949,6 +964,8 @@ gcsv_stream_acc_fourcol:
+ gcsv_stream_acc_newline:
+     mov     r0, #10
+     strb    r0, [r5], #1
++    cmp     r9, #0                       @ r43: a row from before the origin is
++    ldrlt   r5, [r11, #ST_ROW_START]     @ unwritten -- state advanced, text discarded
+ 
+     cmp     r8, #2                       @ same test the head used: pair vs lone tail
+     blo     gcsv_stream_step_one

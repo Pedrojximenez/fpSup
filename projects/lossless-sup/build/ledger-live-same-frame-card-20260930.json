@@ -1,0 +1,56 @@
+{
+ "schema_version": 1,
+ "kind": "live_same_frame_compression_from_a_card",
+ "date": "2026-09-30",
+ "scope": "LIVE on the camera, firmware 5.02.0.V91, model w71c1. fpLossless TEST card (testcard-20260930-g, fpSup.BIN padded to 61,440 B, sha256 cf9f9f78...; AutoRun.txt unchanged 35a3141f...), USB shell + Fast Start 2. FHD 12-bit 29.97 CinemaDNG, SD, static scene, remote MOVON/MOVOFF. Operator authorised the session and the listed memory reads.",
+
+ "headline": "a card-installed, non-blocking, same-frame pipeline compressed frames of a live take with the camera's own lossless-JPEG hardware and the camera wrote them as decodable DNGs; the take has no dropped frames. Frame 1 of \\CINEMA\\A001_250 is 900,096 B against 3,244,544 B stock and decodes with LibRaw.",
+
+ "runs_that_led_here": [
+  {"card": "c", "found": "all four hooks armed on the camera; 10 power cycles clean; C03A33C8 called 29 times, never with event 3 -- no take became lossless; the flush hook ran 133 times, all untouched"},
+  {"card": "d", "found": "request log: 0x2D, 0x23, 0x24, 0x2D around one take -- the movie button sends 0x23 (start) and 0x24 (stop), not 3"},
+  {"card": "e", "found": "0x23 admitted: producer facts read on the camera were exact (1936x1090, 12-bit, raster 3,165,372, 30000/1001); RAW workspace reserved and released; but all 133 frames refused"},
+  {"card": "f", "found": "every refusal was the descriptor check: word 15 of each frame's copy is that frame's own buffer address (0x54136800), 0 in the LiveViewState object -- only width, height and format are compared now"},
+  {"card": "g", "found": "this ledger"}
+ ],
+
+ "question_1_answered": {
+  "what": "does a frame's own allocation cover the 1 KiB-rounded length the engine is told?",
+  "answer": "no, by exactly 512 B at FHD 12-bit. frame+0x6C reads 0x31A200 = 3,252,736 B, which is exactly the native request 0x15400 + align512(3,165,372); the allocator grants no slack. The engine is told 3,166,208 B from +0x15400. Every compressed frame here went through the copy fallback.",
+  "level": "L"
+ },
+
+ "the_take": {
+  "clip": "\\CINEMA\\A001_250",
+  "files": 94,
+  "timecodes": "frame 1 08:32:18:16, frame 94 08:32:21:19: 93 steps for 93 files -- none dropped. The take is shorter than the 5 s between pulses because the start took effect late; the USB shell timed out at +1.5 s.",
+  "card_state": {
+   "arrivals": 94, "held": 16, "copied": 16, "direct": 0, "compressed": 16,
+   "engine_refused": 0, "no_benefit": 0, "faults": 0,
+   "refused_no_promise_slot": 13, "passed_busy": 65,
+   "flush_calls": 94, "trailers_applied": 16, "trailer_refused": 0,
+   "last_job": {"pattern": 1, "total": 817769, "padded": 818176, "end_position": 817776},
+   "last_node_length": 898048
+  },
+  "frame_1": {
+   "bytes": 900096, "root_ifd": 899072, "payload_head": "ffd8ffc3",
+   "entries": 59, "Compression": 7, "tiles": "12 of 512x368, every offset an SOI",
+   "tile_bytes": [56560, 67718, 80156, 65018, 67463, 77397, 77646, 58803, 72980, 72503, 69394, 54586],
+   "decoded": "LibRaw 1090x1936: min 262 max 685 mean 395.01",
+   "against_frame_2_stock": "min 262 max 684 mean 395.01; |diff| mean 0.97, max 8, 99.9th pct 5: sensor noise between two frames of a static scene; the last three rows agree",
+   "level": "L"
+  }
+ },
+
+ "what_this_is_not": [
+  "bit-exact proof: frame 1's own original was overwritten by design. The engine's bitstream was proven lossless against a surviving copy on 2026-09-23; here only decodability and noise-level agreement with the neighbour are shown.",
+  "fast: one frame in about six was compressed. The copy fallback moves 3 MB word by word through the uncached alias, and the copy-back 0.8 MB the same way, both on the movie task; the shell timed out and the stop took about 10 s.",
+  "complete: 13 frames were turned away because all 16 promise slots were waiting for their flush, which the SD aggregation batches."
+ ],
+
+ "next": [
+  "bulk copies instead of volatile word loops (or read in place: the 512 B lies up to the next 1 KiB boundary, and the allocator places these blocks 1 KiB aligned -- an operator decision)",
+  "more promise slots than a 64 MiB aggregation batch holds compressed frames",
+  "a take with a known original kept alongside, for a bit-exact check"
+ ]
+}
