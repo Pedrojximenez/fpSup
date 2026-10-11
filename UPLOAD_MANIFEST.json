@@ -5,10 +5,10 @@
     "projects"
   ],
   "summary": {
-    "files": 18765,
-    "bytes": 15141892680,
-    "stored_bytes": 14838779351,
-    "compressed": 10,
+    "files": 18769,
+    "bytes": 16279239708,
+    "stored_bytes": 15243035311,
+    "compressed": 14,
     "dereferenced": 10
   },
   "files": [
@@ -150151,6 +150151,42 @@
       "sha256": "604b3e207ad56de9b4d118056ab0730d05edaeb0f8877d746d6e3c7aa80f16d1",
       "stored_bytes": 103502805,
       "stored_sha256": "604b3e207ad56de9b4d118056ab0730d05edaeb0f8877d746d6e3c7aa80f16d1"
+    },
+    {
+      "path": "projects/res-lab/validation/20261011-m12-recurrence/user-rollback-v38-120-check/hdmi.rgb",
+      "bytes": 424673280,
+      "sha256": "724209b674769906d253797f72eb4247862695aff73534255576b0db276e1cfc",
+      "stored_bytes": 101982016,
+      "stored_sha256": "e6e878d4a0874fb2a56ef2707489ae21fd84da7f6cb5db40959540b650cd725d",
+      "storage": "xz",
+      "stored_path": "projects/res-lab/validation/20261011-m12-recurrence/user-rollback-v38-120-check/hdmi.rgb.xz"
+    },
+    {
+      "path": "projects/res-lab/validation/20261011-m12-recurrence/v39-120-chronology/hdmi.rgb",
+      "bytes": 424673280,
+      "sha256": "f6e07aea48e79db1cec2cc08dccf1fc38c5aa755a9c54431d830c63d86763008",
+      "stored_bytes": 98366568,
+      "stored_sha256": "8aed1473cb67ac637553a4a33c353e3fd394a2437698bb679e08795a88ec99d5",
+      "storage": "xz",
+      "stored_path": "projects/res-lab/validation/20261011-m12-recurrence/v39-120-chronology/hdmi.rgb.xz"
+    },
+    {
+      "path": "research/imaging-hw/color-characterisation/exports/13a_2d - 00000002.tif",
+      "bytes": 144000234,
+      "sha256": "b4ac85328895fb10609865513e24ea294c3d37648cc1164e6b1eb8a04ede0db8",
+      "stored_bytes": 101953688,
+      "stored_sha256": "5ddf131ffff14209ef25fe9779820855a05396eccc5c18506905b3d8482e13b2",
+      "storage": "xz",
+      "stored_path": "research/imaging-hw/color-characterisation/exports/13a_2d - 00000002.tif.xz"
+    },
+    {
+      "path": "research/imaging-hw/color-characterisation/exports/13p3d60_2d - 00000002.tif",
+      "bytes": 144000234,
+      "sha256": "b4ac85328895fb10609865513e24ea294c3d37648cc1164e6b1eb8a04ede0db8",
+      "stored_bytes": 101953688,
+      "stored_sha256": "5ddf131ffff14209ef25fe9779820855a05396eccc5c18506905b3d8482e13b2",
+      "storage": "xz",
+      "stored_path": "research/imaging-hw/color-characterisation/exports/13p3d60_2d - 00000002.tif.xz"
     }
   ],
   "excluded": [
@@ -150193,16 +150229,6 @@
     {
       "path": "research/imaging-hw/.DS_Store",
       "reason": "local metadata or generated cache"
-    },
-    {
-      "path": "research/imaging-hw/color-characterisation/exports/13a_2d - 00000002.tif",
-      "bytes": 144000234,
-      "reason": "lossless compressed file exceeds 95 MiB upload cap"
-    },
-    {
-      "path": "research/imaging-hw/color-characterisation/exports/13p3d60_2d - 00000002.tif",
-      "bytes": 144000234,
-      "reason": "lossless compressed file exceeds 95 MiB upload cap"
     },
     {
       "path": "research/imaging-hw/color-characterisation/exports/output - 00000002.tif",
@@ -150372,16 +150398,6 @@
     {
       "path": "projects/res-lab/validation/20261011-m12-rate-reload-live/reload-280-eightbit-observe/hdmi.mkv",
       "bytes": 144168456,
-      "reason": "lossless compressed file exceeds 95 MiB upload cap"
-    },
-    {
-      "path": "projects/res-lab/validation/20261011-m12-recurrence/user-rollback-v38-120-check/hdmi.rgb",
-      "bytes": 424673280,
-      "reason": "lossless compressed file exceeds 95 MiB upload cap"
-    },
-    {
-      "path": "projects/res-lab/validation/20261011-m12-recurrence/v39-120-chronology/hdmi.rgb",
-      "bytes": 424673280,
       "reason": "lossless compressed file exceeds 95 MiB upload cap"
     },
     {

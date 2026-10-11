@@ -2,12 +2,12 @@
 
 This upload preserves `research/` and `projects/` from the local SIGMA fp development workspace.
 
-- Files included: **18,765**.
-- Original included content: **14.10 GiB**.
-- Stored content: **13.82 GiB** before Git compression.
-- Large files preserved with lossless gzip compression: **10**.
+- Files included: **18,769**.
+- Original included content: **15.16 GiB**.
+- Stored content: **14.20 GiB** before Git compression.
+- Large files preserved with lossless gzip/XZ compression: **14**.
 - Symbolic links copied as their target bytes for portability: **10**.
-- Oversized files omitted after compression: **54**, totaling **17.68 GiB**.
+- Oversized files omitted after compression: **50**, totaling **16.62 GiB**.
 
 ## Finding material
 
@@ -17,23 +17,22 @@ The index and source code retain references to the larger local workspace. Paths
 
 ## Compressed files
 
-Files larger than 50 MiB were losslessly compressed when the result fits below 95 MiB. Their original directory and filename are preserved with an additional `.gz` suffix. Files that already fit GitHub's 100 MiB limit may instead remain in their original format.
-For example, `commands.jsonl.gz` restores to `commands.jsonl` using a gzip-compatible archive utility, or:
+Large files use lossless gzip or XZ archives where they fit [GitHub's 100 MiB file limit](https://docs.github.com/en/repositories/working-with-files/managing-files/adding-a-file-to-a-repository). Their original directory and filename are preserved with an additional `.gz` or `.xz` suffix. Other files remain in their original format.
+A gzip- or XZ-compatible archive utility restores each file to its original name. For example:
 
 ```sh
 gzip -dk path/to/commands.jsonl.gz
+xz -dk path/to/hdmi.rgb.xz
 ```
 
 [`UPLOAD_MANIFEST.json`](UPLOAD_MANIFEST.json) lists every included original path, original size, SHA-256, stored size, and stored SHA-256. It also records original symbolic-link targets and every omission.
 
 ## Omitted oversized captures
 
-These files remain in the original local workspace. They exceeded the per-file upload cap even after lossless compression.
+These files remain in the original local workspace. Lossless archive attempts did not fit the upload cap; larger HDMI videos are also retained locally.
 
 | Original path | Size (GiB) |
 | --- | ---: |
-| `research/imaging-hw/color-characterisation/exports/13a_2d - 00000002.tif` | 0.134 |
-| `research/imaging-hw/color-characterisation/exports/13p3d60_2d - 00000002.tif` | 0.134 |
 | `research/imaging-hw/color-characterisation/exports/output - 00000002.tif` | 0.134 |
 | `projects/res-lab/validation/20261011-m12-rate-reload-live/reload-120-control/hdmi.mkv` | 0.143 |
 | `projects/res-lab/validation/20261011-m12-rate-reload-live/reload-120-observe/hdmi.mkv` | 0.136 |
@@ -44,8 +43,6 @@ These files remain in the original local workspace. They exceeded the per-file u
 | `projects/res-lab/validation/20261011-m12-rate-reload-live/reload-280-a/hdmi.mkv` | 0.143 |
 | `projects/res-lab/validation/20261011-m12-rate-reload-live/reload-280-eightbit-a/hdmi.mkv` | 0.134 |
 | `projects/res-lab/validation/20261011-m12-rate-reload-live/reload-280-eightbit-observe/hdmi.mkv` | 0.134 |
-| `projects/res-lab/validation/20261011-m12-recurrence/user-rollback-v38-120-check/hdmi.rgb` | 0.396 |
-| `projects/res-lab/validation/20261011-m12-recurrence/v39-120-chronology/hdmi.rgb` | 0.396 |
 | `projects/res-lab/validation/20261011-m12-recurrence/v39-280-chronology/hdmi.rgb` | 0.396 |
 | `projects/res-lab/validation/20261011-m12-recurrence/v39-engine30-240-chronology/hdmi.rgb` | 0.396 |
 | `projects/res-lab/validation/20261011-m12-recurrence/v39-engine30-280-firstbatch/hdmi.rgb` | 0.396 |
