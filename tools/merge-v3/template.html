@@ -70,6 +70,7 @@ details.dev[open]>summary::before{content:"▾ "}
   padding:1px 8px 1px 5px;display:inline-flex;gap:5px;align-items:center;cursor:pointer}
 .tile .data label.on{border-color:var(--sig);color:var(--ink)}
 .tile .data input{width:13px;height:13px;margin:0}
+.tile .data small{font-size:.68rem;color:var(--dim);margin-left:.35em}
 .tile .guide{grid-column:2;font-family:var(--mono);font-size:.78rem;color:var(--sig);text-decoration:none;
   justify-self:start}
 .tile .guide:hover{text-decoration:underline}
@@ -393,7 +394,7 @@ function readme(picked){
   for (const p of CAT.products.filter(p => on.includes(p.id))){
     L.push(`  ${p.file.padEnd(12)} ${p.release}${who(p)}`);
     const ds = dataChosen(p, picked);
-    if (ds.length) L.push(`  ${''.padEnd(12)} data: ${ds.map(d => d.label).join(', ')}`);
+    if (ds.length) L.push(`  ${''.padEnd(12)} data: ${ds.map(d => d.label + (d.author ? ' (by ' + d.author + ')' : '')).join(', ')}`);
   }
   if (off.length){
     L.push('', 'ON THE CARD BUT OFF (fpSup\\*.OFF) -- they clash with a sup that runs:');
@@ -521,7 +522,7 @@ function dataChips(p, t){
   const offs = dataExcluded(p, picked);
   return `<div class="data" role="group" aria-label="${esc(t.formats)}">${p.data_files.map(d => {
     const on = !offs.includes(d.path);
-    return `<label class="${on ? 'on' : ''}"><input type="checkbox" data-file="${esc(d.path)}" data-of="${p.id}" ${on ? 'checked' : ''}>${esc(d.label)}</label>`;
+    return `<label class="${on ? 'on' : ''}"><input type="checkbox" data-file="${esc(d.path)}" data-of="${p.id}" ${on ? 'checked' : ''}>${esc(d.label)}${d.author ? `<small>${esc(t.by)} ${esc(d.author)}</small>` : ''}</label>`;
   }).join('')}</div>`;
 }
 

@@ -35,7 +35,7 @@ TEMPLATE = HERE / 'template.html'
 GUIDE = FPSUP / 'guide'
 OUT = HERE / 'index.html'
 SITE_COPY = HERE.parent / 'card-composer' / 'index.html'
-INPUTS = HERE / 'inputs' / 'res-custom-20261011'
+INPUTS = HERE / 'inputs' / 'res-custom-20261013'
 sys.path.insert(0, str(FPSUP / 'fp_usb_shell'))
 from autorun_text import without_legacy_padding
 from v3 import build_v3 as V3
@@ -75,7 +75,11 @@ PRODUCTS = {
                                     zh='多種自訂錄影解析度合一:Open Gate OG2K、OG3K、OG3.5K、OG4K 與 S16。'), category='format', file='32RESCUS.BIN',
                        excl=['og3k', 'og2k', 'formats'],
                        data=dict(dir='RESCUS', ext='.RCD',
-                                 names={'OG35K': 'OG3.5K'}),
+                                 names={'OG35K': 'OG3.5K'},
+                                 # per-format author shown on its chip (user 2026-10-13)
+                                 authors={k: 'Jose Hurtado' for k in ('OG35K', 'OG4K', 'S16')},
+                                 # chip order on the page (user 2026-10-13); others after, by name
+                                 order=['OG2K', 'OG3K', 'OG35K', 'OG4K', 'S16']),
                        author=AUTHOR, credits=['Jose Hurtado (the S16, OG3.5K and OG4K formats, used with his permission; the one-core, row-per-format design, the greyed-out options and the video clamp)'],
                        pending=True),
     'res-lab': dict(name='RES-Lab', category='format', file='50RES-Lab v0.1.0test.BIN',
@@ -208,10 +212,11 @@ def input_products(directory):
         for rel in entry.get('data_files', []):
             b = verified[rel]
             target = 'fpSup/RESCUS/' + pathlib.PurePosixPath(rel).name
-            p['data_files'].append(dict(label=label(spec, target), **embedded({target:b})[0]))
+            p['data_files'].append(dict(label=label(spec, target), author=data_author(spec, target), **embedded({target:b})[0]))
         for rel in entry.get('support_files', []):
             target = 'fpSup/RESCUS/' + pathlib.PurePosixPath(rel).name
             p['support_files'] += embedded({target:verified[rel]})
+        p['data_files'].sort(key=lambda d: data_rank(spec, d['path']))
         if entry.get('virtual'):
             p['virtual'], _ = sup_file(entry['virtual'], 'RCUS')
         out.append(p)
@@ -265,6 +270,15 @@ def updated(d, sup):
 def label(spec, rel):
     stem = pathlib.PurePosixPath(rel).stem
     return spec['data'].get('names', {}).get(stem, stem)
+
+
+def data_rank(spec, rel):
+    order, stem = spec['data'].get('order', []), pathlib.PurePosixPath(rel).stem
+    return (order.index(stem) if stem in order else len(order), rel)
+
+
+def data_author(spec, rel):
+    return spec['data'].get('authors', {}).get(pathlib.PurePosixPath(rel).stem, '')
 
 
 def guide(key):
@@ -360,10 +374,10 @@ def main():
                              file=sup, size=len(b), sha256=sha(b),
                              about=spec['summary'], data=base64.b64encode(b).decode(),
                              guide=guide(key),
-                             data_files=[dict(path=rel, label=label(spec, rel), size=len(files[rel]),
+                             data_files=[dict(path=rel, label=label(spec, rel), author=data_author(spec, rel), size=len(files[rel]),
                                               sha256=sha(files[rel]),
                                               data=base64.b64encode(files[rel]).decode())
-                                         for rel in data]))
+                                         for rel in sorted(data, key=lambda r: data_rank(spec, r))]))
     if not products:
         raise SystemExit('no v3 release found')
     for p in input_products(inputs):
