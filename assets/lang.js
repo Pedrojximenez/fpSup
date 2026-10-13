@@ -150,6 +150,7 @@
   })();
 
   function apply(lang, remember) {
+    if (lang !== 'en' && lang !== 'cn' && lang !== 'zh') return;
     root.setAttribute('data-lang', lang);
     root.setAttribute('lang', lang === 'cn' ? 'zh-Hans' : lang === 'zh' ? 'zh-Hant' : 'en');
     btns.forEach(function (b) {
@@ -159,7 +160,16 @@
       pair[0].nodeValue = (lang === 'cn') ? toSimplified(pair[1]) : pair[1];
     });
     if (remember) { try { localStorage.setItem(KEY, lang); } catch (e) {} }
+    window.dispatchEvent(new CustomEvent('fpsup-languagechange', { detail: { lang: lang } }));
   }
+
+  // Interactive research pages translate newly drawn text with the same
+  // setting and character map as the static pages.
+  window.FPSupLanguage = {
+    get: function () { return root.getAttribute('data-lang') || 'en'; },
+    set: function (lang) { apply(lang, true); },
+    toSimplified: toSimplified
+  };
 
   var saved = null;
   try { saved = localStorage.getItem(KEY); } catch (e) {}
