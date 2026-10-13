@@ -1,0 +1,241 @@
+{
+  "off": {
+    "label": "lag-protected-off-take",
+    "clip": "A001_158",
+    "window": {
+      "lo_us": 1100000,
+      "hi_us": 2100000,
+      "cpu_percent": 83.1752,
+      "task_percent": {
+        "123": 0.0,
+        "inittsk": 16.8248,
+        "29": 3.3794,
+        "_VSHL": 0.1538,
+        "8": 0.0,
+        "42": 0.0095,
+        "15": 0.0448,
+        "68": 0.8981,
+        "69": 0.5061,
+        "71": 1.3928,
+        "FPLCODE": 0.8006,
+        "73": 0.0472,
+        "72": 0.6739,
+        "98": 0.4147,
+        "92": 1.5443,
+        "14": 0.4285,
+        "CamSch": 47.6044,
+        "MRecMgr": 13.374,
+        "95": 1.2719,
+        "43": 0.0,
+        "101": 0.0,
+        "113": 0.0,
+        "12": 0.0,
+        "63": 1.4626,
+        "97": 0.1479,
+        "DrawMgr": 2.6444,
+        "62": 0.0447,
+        "126": 0.1672,
+        "100": 0.1784,
+        "24": 0.0148,
+        "105": 0.0386,
+        "145": 0.5741,
+        "13": 0.0,
+        "31": 0.0282,
+        "88": 0.4356,
+        "96": 0.0035,
+        "118": 0.061,
+        "94": 1.348,
+        "90": 0.0943,
+        "74": 0.0,
+        "75": 0.0,
+        "SRecRaw": 0.0,
+        "110": 0.0407,
+        "4": 0.0,
+        "67": 0.0035,
+        "106": 0.0039,
+        "146": 0.0,
+        "18": 0.0577,
+        "SRecFile": 3.2821
+      },
+      "draw_dispatch_max_gap_us": 56919
+    }
+  },
+  "on": {
+    "label": "baseline-60p-take",
+    "clip": [
+      "A001_160"
+    ],
+    "boot": 11784880,
+    "window": {
+      "cpu_percent": 96.8914,
+      "task_percent": {
+        "MRecMgr": 28.1784,
+        "ImgCtrl": 0.5869,
+        "LensCycl": 3.5273,
+        "MANAGER": 0.8191,
+        "S2R": 0.5216,
+        "R2YHDIS": 1.5224,
+        "AeDev": 1.4325,
+        "SRecFile": 4.502,
+        "VDD": 0.0553,
+        "Y2YVDIS": 0.7548,
+        "PicCorr": 0.1063,
+        "CamSch": 40.9912,
+        "FPLCODE": 6.2965,
+        "AtomosFr": 0.7712,
+        "TempChk": 0.004,
+        "GyroData": 0.0936,
+        "inittsk": 3.1086,
+        "_VSHL": 0.187,
+        "AUD_INT": 0.2582,
+        "Level": 1.02,
+        "FdTsk": 1.0617,
+        "EyeDtctn": 0.0329,
+        "LcdTh": 0.018,
+        "StOsdObs": 0.5145,
+        "DrawMgr": 1.797,
+        "LcdBrTh": 0.0894,
+        "RemoCon": 0.0323,
+        "EventMgr": 0.0325,
+        "FPFLIP": 0.1069,
+        "BtrMgr": 0.0524,
+        "LensUbat": 0.0125,
+        "ESCycl": 0.0452,
+        "ExtStrb": 0.9023,
+        "ExtEvfCh": 0.006,
+        "SDePower": 0.0237
+      }
+    },
+    "windowUs": [
+      1100000,
+      2100000
+    ]
+  },
+  "fixed": {
+    "label": "stream-repeat-60p",
+    "clip": [
+      "A001_164"
+    ],
+    "boot": 12057892,
+    "window": {
+      "cpu_percent": 90.86229999999999,
+      "task_percent": {
+        "CamSch": 47.8828,
+        "FPLCODE": 3.9262,
+        "LensCycl": 3.3389,
+        "AeDev": 1.5214,
+        "LcdTh": 0.0148,
+        "MRecMgr": 18.6374,
+        "SRecFile": 2.63,
+        "Level": 1.1005,
+        "LensUbat": 0.018,
+        "SDePower": 0.0206,
+        "inittsk": 9.1377,
+        "ImgCtrl": 0.3975,
+        "AtomosFr": 2.1411,
+        "MANAGER": 0.7046,
+        "S2R": 0.5249,
+        "R2YHDIS": 1.3968,
+        "VDD": 0.0438,
+        "Y2YVDIS": 0.6556,
+        "PicCorr": 0.1023,
+        "AUD_INT": 0.2881,
+        "_VSHL": 0.1471,
+        "DrawMgr": 1.5577,
+        "RemoCon": 0.0396,
+        "GyroData": 0.1459,
+        "FdTsk": 1.4217,
+        "EyeDtctn": 0.0369,
+        "StOsdObs": 0.5676,
+        "LcdBrTh": 0.1637,
+        "ESCycl": 0.0558,
+        "ExtStrb": 1.0349,
+        "EventMgr": 0.0198,
+        "FPFLIP": 0.1066,
+        "shell": 0.0025,
+        "ExtEvfCh": 0.0052,
+        "BtrMgr": 0.0231,
+        "TempChk": 0.004
+      }
+    },
+    "windowUs": [
+      1100000,
+      2100000
+    ]
+  },
+  "phasesBefore": {
+    "3": {
+      "count": 55,
+      "meanUs": 808.7272727272727,
+      "cpuMeanUs": 21.8,
+      "cpuSumUs": 1199,
+      "maxUs": 3389
+    },
+    "5": {
+      "count": 55,
+      "meanUs": 279.94545454545454,
+      "cpuMeanUs": 267.3272727272727,
+      "cpuSumUs": 14703,
+      "maxUs": 1353
+    },
+    "4": {
+      "count": 106,
+      "meanUs": 7252.61320754717,
+      "cpuMeanUs": 351.5660377358491,
+      "cpuSumUs": 37266,
+      "maxUs": 13954
+    },
+    "1": {
+      "count": 54,
+      "meanUs": 1318.2037037037037,
+      "cpuMeanUs": 22.666666666666668,
+      "cpuSumUs": 1224,
+      "maxUs": 9575
+    },
+    "2": {
+      "count": 54,
+      "meanUs": 2095.3518518518517,
+      "cpuMeanUs": 1417.0,
+      "cpuSumUs": 76518,
+      "maxUs": 14004
+    }
+  },
+  "phasesAfter": {
+    "5": {
+      "count": 59,
+      "meanUs": 315.3220338983051,
+      "cpuMeanUs": 304.06779661016947,
+      "cpuSumUs": 17940,
+      "maxUs": 1350
+    },
+    "4": {
+      "count": 113,
+      "meanUs": 6991.95575221239,
+      "cpuMeanUs": 105.26548672566372,
+      "cpuSumUs": 11895,
+      "maxUs": 13994
+    },
+    "1": {
+      "count": 58,
+      "meanUs": 1383.1379310344828,
+      "cpuMeanUs": 22.0,
+      "cpuSumUs": 1276,
+      "maxUs": 9601
+    },
+    "2": {
+      "count": 59,
+      "meanUs": 488.3050847457627,
+      "cpuMeanUs": 426.93220338983053,
+      "cpuSumUs": 25189,
+      "maxUs": 1185
+    },
+    "3": {
+      "count": 59,
+      "meanUs": 632.1016949152543,
+      "cpuMeanUs": 20.89830508474576,
+      "cpuSumUs": 1233,
+      "maxUs": 1922
+    }
+  },
+  "source": "20261012-pipeline-cost; same-take native task monitor joined to phase intervals"
+}

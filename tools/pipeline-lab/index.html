@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SIGMA fp pipeline analysis — fpSup</title>
+<meta name="description" data-i18n-content="description" content="Interactive per-frame SIGMA fp recording model: 96 buffer slots, the 64 MiB write gate, lossless compression, media speed and measured CPU costs.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ijigen.github.io/fpSup/tools/pipeline-lab/">
+<meta property="og:title" data-i18n-content="title" content="SIGMA fp pipeline analysis">
+<meta property="og:description" data-i18n-content="description" content="Follow each frame through the recording pipeline, buffer slots and the 64 MiB write gate.">
+<link rel="icon" href="../../assets/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<style>
+:root{color-scheme:light dark;--paper:light-dark(#f2f1ed,#0f1317);--panel:light-dark(#fbfaf8,#171c21);--ink:light-dark(#171b1f,#e4e6e4);--dim:light-dark(#5d6570,#9ba5af);--line:light-dark(#d6d4cd,#36424d);--raw:light-dark(#516777,#8fadb8);--loss:light-dark(#9e5614,#eead61);--sd:light-dark(#28725f,#7cceba);--bad:light-dark(#a42c3c,#fb8195)}
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{margin:0 auto;max-width:1080px;padding:28px 20px 56px;background:var(--paper);color:var(--ink);font:15px/1.6 system-ui,-apple-system,sans-serif}
+header{border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:22px}h1{font-size:1.6rem;margin:0;font-weight:600}h2{font-size:1rem;margin:30px 0 10px}p{margin:7px 0}.muted{color:var(--dim)}
+.controls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}label{display:block;min-width:0}label span{display:block;color:var(--dim);margin-bottom:5px;font-size:.85rem}
+select,input,button{font:inherit;max-width:100%}select,input[type=number]{width:100%;padding:8px;border:1px solid var(--line);border-radius:4px;color:var(--ink);background:var(--panel)}button{color:var(--ink);background:var(--panel);border:1px solid var(--line);padding:9px 13px;border-radius:4px;cursor:pointer}button[aria-pressed=true]{border-color:var(--loss);color:var(--loss)}button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--loss);outline-offset:3px}
+.checks{display:flex;align-items:center;gap:9px;height:42px}.checks input{width:19px;height:19px;accent-color:var(--loss)}details{margin-top:16px}summary{cursor:pointer;color:var(--dim)}.advanced{margin-top:12px}.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin:22px 0}.metric{border-top:1px solid var(--line);padding-top:10px}.metric strong{font-size:1.5rem;font-weight:500;font-variant-numeric:tabular-nums}.metric small{display:block;color:var(--dim)}
+.flow{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;margin:16px 0}.node{position:relative;text-align:left;min-height:102px;overflow-wrap:anywhere}.node:not(:last-child)::after{content:'→';position:absolute;right:-12px;top:8px;color:var(--dim)}.node small{display:block;color:var(--dim);margin-top:6px}.node.selected{border-color:var(--loss)}.node.inactive{opacity:.5}.node b{font-weight:500}.node .resource{font-size:.75rem;color:var(--loss);display:block}.detail{border-left:3px solid var(--loss);padding:3px 13px;min-height:72px}
+.fig{width:100%;display:block}.fig text{fill:var(--ink);font:12px system-ui,sans-serif}.fig .grid{stroke:var(--line);stroke-width:1}.fig .raw{stroke:var(--raw);fill:none;stroke-width:2}.fig .loss{fill:var(--loss)}.fig .sd{fill:var(--sd)}.fig .ram-fill{fill:var(--raw);opacity:.1}.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:.85rem;color:var(--dim)}.key::before{content:'';display:inline-block;width:14px;height:8px;margin-right:6px;background:var(--raw)}.key.loss::before{background:var(--loss)}.key.sd::before{background:var(--sd)}
+.range{width:100%;accent-color:var(--loss)}.state{font-variant-numeric:tabular-nums}table{width:100%;border-collapse:collapse;margin-top:12px;font-variant-numeric:tabular-nums}th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line)}th{font-weight:500;color:var(--dim)}.scroll{overflow:auto}.bad{color:var(--bad)}.cpu-row{display:grid;grid-template-columns:90px 1fr 70px;align-items:center;gap:10px;margin:9px 0}.bar{display:flex;height:21px;background:var(--line)}.bar span{display:block}.bar .native{background:var(--raw)}.bar .codec{background:var(--loss)}.bar .other{background:var(--sd)}.bar .idle{background:transparent}.note{font-size:.88rem;color:var(--dim)}footer{margin-top:28px;border-top:1px solid var(--line);padding-top:16px;font-size:.85rem;color:var(--dim)}a{color:var(--loss)}
+.flow-controls{display:flex;flex-wrap:wrap;align-items:end;gap:9px}.flow-controls label{max-width:210px}.flow-controls label span{margin-bottom:3px}.frame-mark{cursor:pointer}.frame-picker{max-width:420px;margin-top:13px}#frame-flow{margin-top:12px}#frame-trace{overflow-wrap:anywhere}
+@media(max-width:780px){.controls{grid-template-columns:repeat(2,minmax(0,1fr))}.flow{grid-template-columns:repeat(3,minmax(0,1fr))}.node:nth-child(3)::after{content:''}}
+@media(max-width:480px){body{padding:18px 12px}.metrics{grid-template-columns:1fr;gap:12px}.flow{grid-template-columns:repeat(2,minmax(0,1fr))}.node:nth-child(2n)::after{content:''}.node:nth-child(3)::after{content:'→'}.controls{gap:10px}.cpu-row{grid-template-columns:68px 1fr 56px}th,td{padding:7px 5px}.node{min-height:100px}}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:22px;flex-wrap:wrap}.topbar nav{display:flex;gap:15px;flex-wrap:wrap}.topbar a{text-decoration:none}.lang{display:flex;border:1px solid var(--line);border-radius:4px;overflow:hidden}.lang button{border:0;border-radius:0;padding:5px 11px;font-size:.8rem}.lang button+button{border-left:1px solid var(--line)}.lang button[aria-pressed=true]{background:var(--panel);box-shadow:inset 0 -2px var(--loss)}.control-label{display:block;color:var(--dim);margin-bottom:5px;font-size:.85rem}
+</style>
+</head>
+<body>
+<div class="topbar">
+<nav><a href="../../research.html">← <span data-i18n="research">Firmware research</span></a><a href="../../">fpSup</a></nav>
+<div class="lang" role="group" aria-label="Language / 语言 / 語言"><button type="button" data-set="en" aria-pressed="true">EN</button><button type="button" data-set="cn" aria-pressed="false">中</button><button type="button" data-set="zh" aria-pressed="false">繁</button></div>
+</div>
+<header><h1 data-i18n="title">SIGMA fp pipeline analysis</h1><p class="muted" data-i18n="subtitle">Follow the work, frame releases and waits as codec and media speeds change.</p></header>
+<main>
+<div class="controls">
+<label><span data-i18n="resolution">Frame dimensions · RAW</span><select id="resolution"><option value="1936,1090">FHD · 1936 × 1090</option><option value="3008,2000">3K · 3008 × 2000</option><option value="3840,2160">UHD · 3840 × 2160</option><option value="6000,4000">6K · 6000 × 4000</option></select></label>
+<label><span data-i18n="fps">Frame rate</span><select id="fps"><option value="23.976">23.976 fps</option><option value="29.97">29.97 fps</option><option value="59.94" selected>59.94 fps</option><option value="100">100 fps</option><option value="119.88">119.88 fps</option></select></label>
+<label><span data-i18n="speed">Sustained media write speed · MB/s</span><input id="speed" type="number" min="1" max="3000" step="1" value="270"></label>
+<div><span class="control-label">LOSS</span><div class="checks"><input id="loss" type="checkbox" checked><label for="loss" data-i18n="lossOn">Enable hardware compression</label></div></div>
+</div>
+<details><summary data-i18n="assumptions">File size, slots and timing assumptions</summary><div class="controls advanced">
+<label><span data-i18n="ratio">Compressed pixels / RAW pixels · %</span><input id="ratio" type="number" min="5" max="100" value="25"></label>
+<label><span data-i18n="codecTime">FHD encode completion · ms (with scheduling)</span><input id="codec" type="number" min="1" max="500" step=".1" value="14.4"></label>
+<label><span data-i18n="latency">Observed completion latency · ms</span><input id="latency" type="number" min="100" max="1000" value="250"></label>
+<label><span data-i18n="slotPolicy">Buffer slot policy</span><select id="slots"><option value="stock" selected data-i18n="stockSlots">Stock · 96 slots</option><option value="expanded" data-i18n="expandedSlots">Expand for two batches</option></select></label>
+<label><span data-i18n="rawMemory">Available RAW allocation pool · MiB</span><input id="rawmem" type="number" min="32" max="2048" value="708"></label>
+<label><span data-i18n="handoffTime">Compressed frame handoff · ms</span><input id="handoff" type="number" min="0" max="100" step=".1" value="2.5"></label>
+</div></details>
+<p class="note" data-i18n="assumptionsNote">Dimensions and speeds are model inputs; the camera does not support every combination. Batches stay at 64 MiB. Initial encode/handoff timings refer to the corrected FHD short test; other sizes scale with pixel count. CPU figures are measured only.</p>
+<div id="error" role="alert" class="bad" hidden></div>
+<h2 id="flow-heading" data-i18n="flowHeading">Frame flow · 96 slots and the 64 MiB gate</h2>
+<div class="flow-controls">
+<button id="play" type="button">Play</button><button id="step" type="button" data-i18n="step">Next frame</button><button id="event-step" type="button" data-i18n="eventStep">Next event</button><button id="restart" type="button" data-i18n="restart">Restart</button>
+<label><span data-i18n="playbackSpeed">Playback speed</span><select id="play-speed"><option value=".05" data-i18n="fineSpeed">0.05× · inspect the flow</option><option value=".25" selected data-i18n="slowSpeed">0.25× · slow motion</option><option value="1">1×</option></select></label>
+<label id="slot-page-label" hidden><span data-i18n="slotPage">Buffer slot page</span><select id="slot-page"></select></label>
+</div>
+<svg id="frame-flow" class="fig" role="img" data-i18n-aria-label="flowAria" aria-label="Each frame’s buffer slot, compression or RAW route, and the 64 MiB media gate"></svg>
+<label style="margin-top:12px"><span><span data-i18n="viewTime">View time</span> · <output id="time-label">0.00 s</output></span><input id="time" class="range" type="range" min="0" max="10" step="any" value="0"></label>
+<div class="legend"><span class="key" data-i18n="rawFrame">RAW frame</span><span class="key loss" data-i18n="compressedFrame">Compressed frame</span><span class="key sd" data-i18n="sentFrame">Data sent; awaiting batch callback</span><span data-i18n="ringLegend">Bright ring: passing the gate · grey cell: free slot</span></div>
+<p class="note" data-i18n="flowNote">A slot and its moving markers refer to the same frame. Encoding and media completion are different events: passage through the gate does not release a slot until the batch callback.</p>
+<label class="frame-picker"><span data-i18n="framePicker">Click a slot or marker, or select a frame to inspect its route</span><select id="frame-picker"><option value="" data-i18n="noFrames">No frames yet</option></select></label>
+<p id="frame-trace" class="state" aria-live="polite"></p>
+<details><summary data-i18n="ratesHeading">Data rates and pipeline stages</summary>
+<div class="metrics" aria-live="polite"><div class="metric"><small data-i18n="dataRate">File data rate over the 10 s model</small><strong id="rate"></strong><small id="rate-note"></small></div><div class="metric"><small data-i18n="peakMemory">Peak allocations: pending frames + two spares</small><strong id="ram"></strong><small id="ram-note"></small></div><div class="metric"><small data-i18n="batchCapacity">64 MiB batch / available slots</small><strong id="capacity"></strong><small id="capacity-note"></small></div></div>
+<h2 data-i18n="pathHeading">The route a frame takes</h2>
+<div class="flow" id="flow"><button class="node" data-stage="capture"><span class="resource" data-i18n="captureResource">Stock · capture</span><b data-i18n="captureNode">RAW allocation</b><small id="capture-value"></small></button><button class="node" data-stage="codec"><span class="resource" data-i18n="codecResource">LOSS · hardware</span><b data-i18n="codecNode">Two lanes / one engine</b><small id="codec-value"></small></button><button class="node" data-stage="handoff"><span class="resource" data-i18n="handoffResource">LOSS · CPU + DMA</span><b data-i18n="handoffNode">Complete DNG / swap</b><small data-i18n="handoffNote">Keep native frame identity</small></button><button class="node" data-stage="writer"><span class="resource" data-i18n="writerResource">Stock · files</span><b data-i18n="writerNode">Create / submit file</b><small data-i18n="writerNote">LOSS changes final length</small></button><button class="node" data-stage="batch"><span class="resource" data-i18n="batchResource">Stock · media</span><b data-i18n="batchNode">Accumulate 64 MiB</b><small id="batch-value"></small></button><button class="node" data-stage="free"><span class="resource" data-i18n="freeResource">Stock · callback</span><b data-i18n="freeNode">Release RAW allocation</b><small data-i18n="freeNote">STOPFX completes cleanup on abnormal stop</small></button></div>
+<div class="detail" id="stage-detail" aria-live="polite"></div>
+<p class="note" data-i18n="allocationNote">Uncompressed frames and those bypassed due to busy lanes or memory protection use the native file route. Compressed frames retain a RAW-sized allocation until their batch completes.</p>
+</details>
+<details><summary data-i18n="queueHeading">Queue history and camera measurements</summary>
+<h2><span data-i18n="timelineHeading">10 s queue simulation</span> <span class="muted">· <span data-i18n="timelineQualifier">Model · no camera recording</span></span></h2>
+<svg id="timeline" class="fig" role="img" data-i18n-aria-label="timelineAria" aria-label="Hardware codec, media batch timeline and allocations held by pending frames"></svg>
+<div class="legend"><span class="key loss" data-i18n="encodeJobs">Encode jobs</span><span class="key sd" data-i18n="mediaWrites">Media writes</span><span class="key" data-i18n="frameAllocations">Frame allocations</span></div>
+<p id="state" class="state" aria-live="polite"></p><p id="outcome" class="note"></p>
+<h2 data-i18n="measuredHeading">Camera measurements · FHD 12-bit / 59.94p</h2>
+<div id="measurement"></div>
+<p class="note" data-i18n="measuredNote">Short tests at FHD / 59.94p, observed 1.1–2.1 s after the task monitor started, with the same diagnostic communication priority. OFF is an earlier reference; ON before and after were measured following separate reboots. Other camera work affects total load. Phase CPU timings locate added work more precisely; task time can include interrupts and memory waits.</p>
+<details open><summary data-i18n="phaseHeading">Added work: phase timings</summary><div class="scroll"><table><thead><tr><th data-i18n="work">Work</th><th data-i18n="before">Before</th><th data-i18n="after">After</th><th data-i18n="evidence">Evidence</th></tr></thead><tbody id="phase-table"></tbody></table></div></details>
+</details>
+<footer><p data-i18n="footer">Interactive research model · speeds in MB/s, memory in MiB. Unmeasured results are left blank.</p><p><a href="measurements.json" download data-i18n="evidenceLink">Download measured data</a> · <a href="model.js" data-i18n="modelLink">Model calculations</a></p></footer>
+</main>
+<script src="../../assets/lang.js"></script><script src="i18n.js"></script><script src="model.js"></script><script src="evidence.js"></script><script src="flow.js"></script><script src="ui.js"></script>
+</body>
+</html>
