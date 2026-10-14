@@ -78,3 +78,8 @@ python3 -B -m unittest discover -s tools/merge-v3 -p test_version_history.py
 STOPFX 恢復為獨立選項，作者 Ruari。`inputs/stopfx-20261012/manifest.json` 核對原始
 316-byte `05STOPFX.BIN`，SHA-256 `f9f26a092c5676ead5771ba8be4aac9c3734e9ed0cd144002a73b3f6b657c9d9`。
 只加入 STOPFX 快照；Lossless 維持 `fpsup-lossless-v0.2.0test`，不帶本機較新的開發 BIN。
+
+2026-10-15:Lossless 換成 `fpsup-lossless-v0.3.0test`(快取別名、tag 檔頭、拿掉 64 MiB 調整、引擎每段只開一次;上機紀錄
+`projects/lossless-sup/validation/20261015-clear/README.md`)。新增 FCAP 快照 `inputs/fcap-20261015/`(`30FCAP.BIN` 316 B,
+`d2b22eda…`,`projects/rec-core/fcap`)。新的 `links` 欄位：勾 Lossless 一併勾上 FCAP,但 FCAP 可自行取消(使用者：不必必選，
+只需聯動);與 `requires`(RES-Lab → Res-Custom,不可取消)不同。`INPUTS` 改為清單，`--inputs` 可重複。

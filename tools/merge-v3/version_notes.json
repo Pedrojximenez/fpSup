@@ -1,4 +1,16 @@
 {
+  "fpsup-lossless-v0.3.0test": {
+    "en": [
+      "Uses much less of the camera’s processor while compressing.",
+      "Compressed frames keep their table in the DNG header; the header is 1 KB longer.",
+      "Long compressed takes rely on FCAP (ticked together on this page) instead of a batch-size change."
+    ],
+    "zh": [
+      "壓縮時佔用的相機處理器大幅減少。",
+      "壓縮畫格的表格改放在 DNG 檔頭內，檔頭多 1 KB。",
+      "長時間壓縮錄影改由 FCAP 處理(本頁勾選 Lossless 會一併勾上),不再調整批次大小。"
+    ]
+  },
   "fpsup-res-custom-v0.1.2test": {
     "en": [
       "First release: OG2K, OG3K, OG3.5K, OG4K and S16 are available together in one Sup.",

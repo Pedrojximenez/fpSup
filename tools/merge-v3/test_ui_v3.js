@@ -117,14 +117,24 @@ const stopfx = api.CAT.products.find(p => p.id === 'stopfx');
 assert(stopfx && stopfx.author === 'Ruari');
 assert.strictEqual(stopfx.sha256, 'f9f26a092c5676ead5771ba8be4aac9c3734e9ed0cd144002a73b3f6b657c9d9');
 assert(el('tiles').innerHTML.includes('作者 <b>Ruari</b>'));
-for (const id of ['stopfx', 'lossless']){
+for (const id of ['stopfx', 'fcap']){
   change({id}, true);
   assert.deepStrictEqual(api.compose(api.picked()).on, [id]);
   assert(api.checks(api.picked()).every(r => r.ok));
   change({id}, false);
 }
-change({id:'stopfx'}, true);
+// Ticking Lossless ticks FCAP too (user 2026-10-15), but FCAP stays optional
 change({id:'lossless'}, true);
+assert.deepStrictEqual(api.picked(), ['lossless', 'fcap']);
+change({id:'fcap'}, false);
+assert.deepStrictEqual(api.compose(api.picked()).on, ['lossless']);
+assert(api.checks(api.picked()).every(r => r.ok));
+change({id:'lossless'}, false);
+change({id:'fcap'}, true);                         // FCAP first: nothing ticked twice
+change({id:'lossless'}, true);
+assert.deepStrictEqual(api.picked(), ['fcap', 'lossless']);
+change({id:'fcap'}, false);
+change({id:'stopfx'}, true);
 assert.deepStrictEqual(api.compose(api.picked()).files.filter(f => f.p).map(f => f.name),
   ['fpSup/05STOPFX.BIN', 'fpSup/10LOSS.BIN']);
 assert(api.readme(api.picked()).includes('by Ruari'));

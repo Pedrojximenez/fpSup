@@ -24,7 +24,8 @@ class VersionHistoryTests(unittest.TestCase):
                     self.assertTrue(h['changes']['zh'])
                 self.assertTrue((HERE / h['source']).is_file(), h['source'])
         lossless = next(p for p in cat['products'] if p['id'] == 'lossless')
-        self.assertEqual(lossless['history'][0]['release'], 'fpsup-lossless-v0.2.0test')
+        self.assertEqual(lossless['release'], 'fpsup-lossless-v0.3.0test')
+        self.assertIn('fpsup-lossless-v0.2.0test', [h['release'] for h in lossless['history']])
         self.assertFalse(any('20261012' in h['release'] for h in lossless['history']))
         self.assertTrue(all(not p['history'] for p in cat['pending']))
 

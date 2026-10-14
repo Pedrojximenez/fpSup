@@ -691,7 +691,9 @@ document.addEventListener('change', e => {
   const id = e.target.dataset && e.target.dataset.id;
   if (!id) return;
   if (!e.target.checked && selected(picked).some(q => (byId(q).requires || []).includes(id))) return render();
-  picked = e.target.checked ? [...picked, id] : picked.filter(x => x !== id);
+  /* links: ticking a tile ticks those too; each stays free to untick */
+  const linked = e.target.checked ? (byId(id).links || []).filter(x => byId(x) && !picked.includes(x)) : [];
+  picked = e.target.checked ? [...picked, id, ...linked] : picked.filter(x => x !== id);
   render();
 });
 render();

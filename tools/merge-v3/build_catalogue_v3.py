@@ -36,7 +36,7 @@ GUIDE = FPSUP / 'guide'
 OUT = HERE / 'index.html'
 SITE_COPY = HERE.parent / 'card-composer' / 'index.html'
 # Res-Custom is a versioned release; do not override it with a development snapshot.
-INPUTS = HERE / 'inputs' / 'stopfx-20261012'
+INPUTS = [HERE / 'inputs' / name for name in ('stopfx-20261012', 'fcap-20261015')]
 sys.path.insert(0, str(FPSUP / 'fp_usb_shell'))
 from autorun_text import without_legacy_padding
 from v3 import build_v3 as V3
@@ -63,7 +63,7 @@ SUP_RE = re.compile(r'^[0-9]{2}.+\.BIN$')
 CATEGORIES = ['format', 'focus', 'motion', 'monitor', 'development']
 # the page shows sups in this order (user 2026-10-07); the card's load order is
 # still the file names'
-ORDER = ['res-custom', 'res-lab', 'lossless', 'stopfx', 'split-record', 'hdrx', 'af', 'gyro2', 'raw-view', 'screenflip', 'desqueeze', 'tap-to-zoom', 'lut', 'usbshell']
+ORDER = ['res-custom', 'res-lab', 'lossless', 'fcap', 'stopfx', 'split-record', 'hdrx', 'af', 'gyro2', 'raw-view', 'screenflip', 'desqueeze', 'tap-to-zoom', 'lut', 'usbshell']
 AUTHOR = ''
 PRODUCTS = {
     # og3k / og2k: not this round (user 2026-10-07) -- the OG line ships as
@@ -89,9 +89,22 @@ PRODUCTS = {
                     summary=dict(en='Adjust the sensor readout, crop and recording size with a live diagram, and save custom formats.',
                                  zh='搭配示意圖調整感光元件讀取方式、裁切與錄影尺寸，並可保存自訂格式。'),
                     author=AUTHOR, credits=[]),
+    # links: ticking this tile also ticks those (user 2026-10-15: Lossless
+    # ticks FCAP -- without it a compressed take stops at ~94 frames, the
+    # stock batch waiting for 128 files -- but FCAP can still be unticked;
+    # unlike requires, which RES-Lab uses for Res-Custom and which holds).
     'lossless':   dict(name='Lossless',
                        summary=dict(en='Record smaller CinemaDNG files with lossless compression, preserving image quality.',
-                                    zh='錄製容量更小、畫質不變的無損壓縮 CinemaDNG。'), category='format', excl=[], author=AUTHOR, credits=['CorNy']),
+                                    zh='錄製容量更小、畫質不變的無損壓縮 CinemaDNG。'), category='format', excl=[],
+                       links=['fcap'], author=AUTHOR, credits=['CorNy']),
+    # projects/rec-core/fcap: the stock writer sends a batch of files at 64 MiB
+    # or 128 files; FCAP makes it 40 files, so small (compressed) frames never
+    # fill the 96-slot descriptor pool. Full-size RAW batches still close at
+    # 64 MiB first and are unchanged.
+    'fcap':       dict(name='FCAP', sup_id='FCAP', file='30FCAP.BIN',
+                       summary=dict(en='Writes small frames to the card sooner, so long compressed or small-format takes do not stop early. Needed by Lossless.',
+                                    zh='讓小幀更早寫入記憶卡，壓縮或小尺寸格式的長錄影不會提早停止。Lossless 需要它。'),
+                       category='format', excl=[], author=AUTHOR, credits=[]),
     'stopfx':     dict(name='STOPFX', sup_id='STFX', file='05STOPFX.BIN',
                        summary=dict(en='Helps the camera clear pending frames after an abnormal recording stop. Use alone or with Lossless.',
                                     zh='幫助相機在異常停錄後清理暫存影格，可單獨或搭配 Lossless 使用。'),
@@ -208,7 +221,7 @@ def input_products(directory):
         payload, version = sup_file(entry['file'], spec.get('sup_id', 'RLAB' if key == 'res-lab' else 'RCUS'))
         filename = pathlib.PurePosixPath(entry['file'])
         p = dict(id=key, name=filename.stem.lstrip('0123456789') if key == 'res-lab' else spec['name'], category=spec['category'], file=filename.name,
-                 excl=list(spec['excl']), requires=spec.get('requires', []), needs_manager=spec.get('needs_manager', False),
+                 excl=list(spec['excl']), requires=spec.get('requires', []), links=spec.get('links', []), needs_manager=spec.get('needs_manager', False),
                  author=spec['author'], credits=spec['credits'], release=entry.get('release', f'fpsup-{key}-dev-r{version}'),
                  version=str(version),
                  build_label=entry.get('build_label', dict(en='Development build', zh='開發版')), date=meta['date'], about=spec['summary'], guide=guide(key),
@@ -332,11 +345,11 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--releases', type=pathlib.Path, help='read releases from here (tests)')
     ap.add_argument('--out', type=pathlib.Path)
-    ap.add_argument('--inputs', type=pathlib.Path, help='manifest-checked development Res tools')
+    ap.add_argument('--inputs', type=pathlib.Path, action='append', help='manifest-checked snapshot (repeat for separate products)')
     a = ap.parse_args()
     RELEASES = a.releases or RELEASES
     OUT = a.out or OUT
-    inputs = a.inputs or (INPUTS if not a.releases else None)
+    inputs = a.inputs if a.inputs is not None else (INPUTS if not a.releases else [])
     for k, spec in PRODUCTS.items():
         if k not in ORDER:
             raise SystemExit(f'{k}: not in ORDER')
@@ -373,7 +386,7 @@ def main():
         if spec['category'] not in CATEGORIES:
             raise SystemExit(f'{key}: category {spec["category"]!r} not in CATEGORIES')
         products.append(dict(id=key, name=spec['name'], category=spec['category'],
-                             excl=list(spec['excl']), author=spec['author'],
+                             excl=list(spec['excl']), links=spec.get('links', []), author=spec['author'],
                              credits=list(spec['credits']), release=d.name,
                              version=version_of(d), date=updated(d, sup),
                              file=sup, size=len(b), sha256=sha(b),
@@ -385,7 +398,7 @@ def main():
                                          for rel in sorted(data, key=lambda r: data_rank(spec, r))]))
     if not products:
         raise SystemExit('no v3 release found')
-    for p in input_products(inputs):
+    for p in [p for directory in inputs for p in input_products(directory)]:
         products = [q for q in products if q['id'] != p['id']] + [p]
         pending = [q for q in pending if q['id'] != p['id']]
         skipped = [q for q in skipped if q != p['id']]
