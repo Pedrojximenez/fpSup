@@ -231,6 +231,28 @@ entry:
     blo     2b
 #endif
 
+#if V3
+    /* Run from the CACHED alias. The loader's USER block is NonCacheBuffer:
+     * VA 0x4xxxxxxx is normal NON-cacheable (MMU 0x45044C02), so every
+     * instruction of this code and every access to its state went to DRAM
+     * (2026-10-13: the trailer's ~9.5k instructions took 1.18 ms per frame).
+     * The same physical memory is mapped cacheable, executable, at VA +
+     * 0x80000000 (0xC0..0xFF -> PA 0x40..0x7F, 0x4xx45C06), the window the
+     * firmware's own code and heap live in. Nothing in this block is handed
+     * to a DMA master. From here on every resident address is the cached one:
+     * the state, the C entries, the shims the veneers name, the host record.
+     * Clean+invalidate first, so the cached alias holds no stale line. */
+    LDA     ip, F_DCACHE
+    blx     ip
+    cmp     r5, #0x40000000
+    blo     1f
+    cmp     r5, #0x80000000
+    bhs     1f
+    add     r5, r5, #0x80000000
+    mov     r11, #0x80000000            @ RESIDENT: the cached alias of here
+1:
+#endif
+
     /* the resident words the shims read: the state, and each C entry */
     LDA     r6, STATE_OFF
     add     r6, r5, r6                  @ r6 = the card state
@@ -283,6 +305,10 @@ entry:
     str     ip, [r0]
     RESIDENT r0, w_discard
     LDA     ip, OFF_DISCARD
+    add     ip, r4, ip
+    str     ip, [r0]
+    RESIDENT r0, w_observe
+    LDA     ip, OFF_OBSERVE
     add     ip, r4, ip
     str     ip, [r0]
 
@@ -466,6 +492,17 @@ entry:
     mov     r2, #0xEB000000             @ bl: continue into the real cleanup
     bl      encode
 
+    /* Last of all, the header template's observer (card.c fpl_card_observer):
+     * a list entry, not a site -- it only does anything for a take the hooks
+     * above admitted. */
+    RESIDENT r0, g_card
+    ldr     r0, [r0]
+    RESIDENT r1, obs_shim
+    RESIDENT r2, c_base
+    LDA     ip, OFF_OBSERVER
+    add     ip, r2, ip
+    blx     ip
+
     LDA     ip, F_DCACHE
     blx     ip
     LDA     ip, F_ICACHE
@@ -475,6 +512,8 @@ entry:
     mov     r0, #0                      @ SL_KEEP
     pop     {r3, r4, r5, r6, r7, r8, r9, r10, r11, pc}
 out:                                    @ nothing written: SL_RELEASE
+    LDA     ip, F_DCACHE                @ no dirty line of the cached alias
+    blx     ip                          @ may outlive the freed block
     mov     r0, #1
     pop     {r3, r4, r5, r6, r7, r8, r9, r10, r11, pc}
 
@@ -662,6 +701,21 @@ pool_replay:
     push    {r4, r5, r6, r7, sl, lr}    @ STOCK_POOL, executed here
     ldr     pc, pool_resume
 
+/* The CinemaDNG tag Subject's observer, vtable +0xC: r0 = the observer,
+ * r1 = the DataPool. Called by FUN_c0055fe0 in the notifying task with no
+ * known stack alignment. Returns 1 always: 0 would take it off the list. */
+obs_shim:
+    push    {r4, lr}
+    mov     r4, sp
+    bic     sp, sp, #7
+    mov     r0, r1
+    ldr     r1, g_card
+    ldr     ip, w_observe
+    blx     ip
+    mov     sp, r4
+    mov     r0, #1
+    pop     {r4, pc}
+
 /* The codec task's entry (tk_sta_tsk). The body takes the state and never
  * returns: a task cannot be ended in this firmware. */
 task_shim:
@@ -683,6 +737,7 @@ w_pool:      .word 0
 w_written:   .word 0
 w_event:     .word 0
 w_discard:   .word 0
+w_observe:   .word 0
 stop_resume: .word STOP_RESUME
 flush_real:  .word REAL_FLUSH
 end_resume:  .word END_RESUME
@@ -706,7 +761,7 @@ settings:
 /* What this sup changes: { address, stock word, kind }. The stock words are
  * checked against the reference image by build_v3_lossless.py. */
 claims:
-    .word 14
+    .word 13
     .word SITE_REC,     STOCK_REC,     SL_CHAIN
     .word SITE_ARRIVE,  STOCK_ARRIVE,  SL_EXCL     @ replaces blx r3: not a branch
     .word SITE_STOP,    STOCK_STOP,    SL_CHAIN
@@ -720,7 +775,6 @@ claims:
     .word 0xC05E5B58,   0x3FFFF1B1,    SL_SHARED_UI   @ uishare string layers
     .word 0xC05E61C8,   0x428A6942,    SL_SHARED_UI
     .word 0xC05E61E0,   0x69406902,    SL_SHARED_UI
-    .word 0xC0B9E5D8,   0x04000000,    SL_EXCL        @ file-layer bulk size (card.c)
 #endif
     .align  3
 c_base:

@@ -42,11 +42,10 @@ NAME = '10LOSS.BIN'
 SUP_ID = 'LOSS'
 VERSION = 1
 SETTINGS_OFF = 0
-SITE_COUNT = 14                    # card.S `claims`; the same sites as build_card.SITES
+SITE_COUNT = 13                    # card.S `claims`; the same sites as build_card.SITES
 KINDS = {1: 'CHAIN', 2: 'EXCL', 3: 'SHARED_UI'}
 WANT_KIND = {0xC038BFF0: 2, 0xC05BDDAC: 2,                     # arrive, clip size
-             0xC05E5B58: 3, 0xC05E61C8: 3, 0xC05E61E0: 3,     # uishare string layers
-             0xC0B9E5D8: 2}                                   # bulk size (data)
+             0xC05E5B58: 3, 0xC05E61C8: 3, 0xC05E61E0: 3}     # uishare string layers
 
 
 def menu_block():
@@ -157,19 +156,23 @@ def check_claims(launcher, at):
     return rows
 
 
-def sup_file(tmp, pad_to=0):
+def sup_file(tmp):
     menu = menu_block()
     blob, facts = build_blob(tmp, menu)
     # min_svc 2: entry needs its own path in r2 to save the ON/OFF state
     data = B.make_sup(blob, B.SL_HEADER_LEN, SUP_ID, VERSION,
-                      block_size=B.SL_HEADER_LEN + facts['block_bytes'], min_svc=2,
-                      pad_to=pad_to)
+                      block_size=B.SL_HEADER_LEN + facts['block_bytes'], min_svc=2)
     return data, facts
 
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     ap.add_argument('--out', type=pathlib.Path, required=True)
+    ap.add_argument('--time-flush', action='store_true',
+                    help='diagnostic only: time the writer hook (card.c FPL_DIAG_FLUSH_TIME)')
+    ap.add_argument('--time-hooks', action='store_true',
+                    help='diagnostic only: time every hook and the stock enqueue, keep the '
+                         'stack pointer each ran on (card.c FPL_DIAG_HOOK_TIME)')
     ap.add_argument('--trace', action='store_true',
                     help='debug: also record the per-arrival trace and the native event log '
                          '(card.c FPL_DIAG_TRACE; card_status.py --trace/--elog reads them)')
@@ -178,6 +181,15 @@ def main():
     a = ap.parse_args()
     if a.trace:
         C.CFLAGS.append('-DFPL_DIAG_TRACE')
+    if a.time_hooks:
+        C.CFLAGS.append('-DFPL_DIAG_HOOK_TIME')
+        C.FIELDS.extend(['hook_time', 'enq_n', 'enq_us', 'hold.diag_enq_n', 'hold.diag_enq_us',
+                         'hold.diag_enq_max_us', 'hold_b.diag_enq_n', 'hold_b.diag_enq_us',
+                         'hold.job.diag_submit_us', 'hold.job.diag_finish_us', 'hold.job.diag_n',
+                         'hold.diag_collect_us', 'hold.diag_collect_n', 'hold.diag_take_us', 'hold.diag_take_n', 'hold.diag_dma_us', 'hold.diag_dma_n', 'hold.diag_copy_us', 'hold.diag_copy_n', 'hold_b.diag_collect_us', 'hold_b.diag_collect_n', 'hold_b.diag_take_us', 'hold_b.diag_take_n', 'hold_b.diag_dma_us', 'hold_b.diag_dma_n', 'hold_b.diag_copy_us', 'hold_b.diag_copy_n'])
+    if a.time_flush:
+        C.CFLAGS.append('-DFPL_DIAG_FLUSH_TIME')
+        C.FIELDS.extend(['flush_n', 'flush_us', 'flush_max_us', 'flush_applied_us'])
     out = a.out.resolve()
     if out.exists() and any(out.iterdir()):
         raise SystemExit(f'{out} is not empty: this never overwrites a build or a card')

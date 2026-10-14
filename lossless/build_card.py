@@ -89,9 +89,6 @@ SITES = {                           # site: (stock word, what it is)
     0xC05E5B58: (0x3FFFF1B1, 'string resolve (nested string layers)'),
     0xC05E61C8: (0x428A6942, 'string owns (nested string layers)'),
     0xC05E61E0: (0x69406902, 'string remain (nested string layers)'),
-    # data, not a hook: the CinemaDNG file layer's bulk size, set per take by
-    # card.c (EARLY_STOP_94.md); journaled so a power-off puts 64 MB back
-    0xC0B9E5D8: (0x04000000, 'bulk size: {64 MB, 0, 256 KiB, C03A55D0} +0'),
 }
 SHARED_SITES = {0xC05E5B58, 0xC05E61C8, 0xC05E61E0}   # declared by others too
 # The fields a host reads after a test take, by their path in struct fpl_card.
@@ -112,7 +109,7 @@ FIELDS = ['magic', 'hold_live', 'rec_events', 'rec_admitted', 'rec_raw',
           'hold_b.magic', 'hold_b.lane', 'hold_b.held', 'hold_b.compressed',
           'hold_b.refused', 'hold_b.no_benefit', 'hold_b.faults', 'hold_b.swapped',
           'hold_b.dma_failed',
-          'flush.applied', 'flush.trailer_failed', 'flush.length_mismatch',
+          'flush.applied', 'flush.tag_failed', 'flush.length_mismatch',
           'hold.stalls', 'hold_b.stalls', 'hold.job_last_us', 'hold.job_max_us',
           'hold.stall_limit_us', 'hold_b.job_last_us', 'hold_b.job_max_us', 'hold.job_sum_us', 'hold.job_count', 'hold_b.job_sum_us', 'hold_b.job_count', 'hold.submit_sum_us', 'hold.finish_sum_us', 'hold.poll_sum', 'hold.gap_sum_us', 'hold.cycle_sum_us', 'hold.cycle_count', 'hold_b.submit_sum_us', 'hold_b.finish_sum_us', 'hold_b.poll_sum', 'hold_b.gap_sum_us', 'hold_b.cycle_sum_us', 'hold_b.cycle_count', 'tile_force', 'hold.job.tile_width', 'hold.job.tile_height', 'hold.job.tiles', 'hold.job.stall_regs', 'hold_b.job.stall_regs',
           'play.seen', 'play.stock', 'play.decoded', 'play.refused_by', 'play.last_us',
@@ -120,7 +117,11 @@ FIELDS = ['magic', 'hold_live', 'rec_events', 'rec_admitted', 'rec_raw',
           'play.clips', 'play.clips_ours', 'play.clip_size_was', 'play.clip_size_set',
           'play.clip_failed', 'play.scratch_bytes', 'play.scratch_failed',
           'play.scratch_freed', 'play.scratch_want', 'play.clips_first_stock', 'take_frames']
-FIELDS += ['settings_on', 'settings_ok', 'saves', 'save_failed', 'save_last', 'bulk', 'bulk_writer_open', 'trace_n', 'trace', 'elog_n', 'elog']          # card.c FPL_TRACE: per-arrival records
+FIELDS += ['settings_on', 'settings_ok', 'saves', 'save_failed', 'save_last', 'trace_n', 'trace', 'elog_n', 'elog']          # card.c FPL_TRACE: per-arrival records
+FIELDS += ['engine_release', 'hold.job.reused', 'hold_b.job.reused', 'tag_tiles', 'tag_bytes', 'hold.require_head', 'observer_slot', 'observer_full', 'observer_calls', 'tag_mode0',
+           'tag_added', 'tag_add_result', 'tag_add_failed', 'tag_prepared', 'tag_prepare_failed',
+           'tag_prepare_result', 'tag_head',
+           'tag_want', 'tag_pending', 'tag_live', 'tag_index']   # header_tag.h
 FIELDS += ['record_diag.' + name for name in (
     'event_calls', 'raw_errors', 'capture_limits', 'completion_errors', 'lookup_missing',
     'last_event', 'last_result', 'last_slot', 'last_generation', 'last_state',
@@ -132,7 +133,7 @@ UNITS = ['control.c', 'frame_pipeline.c', 'native/workspace_layout.c', 'uishare/
          'uishare/ui_apply.c',
          'native/menu_page.c',
          'native/raw_workspace.c', 'native/rec_workspace.c', 'native/producer_facts.c',
-         'native/rec_hook.c', 'native/codec_job.c', 'native/trailer.c',
+         'native/rec_hook.c', 'native/codec_job.c', 'native/header_tag.c',
          'native/frame_hold.c', 'native/flush_site.c', 'native/play_decode.c',
          'native/record_diag.c',
          'native/card.c']
@@ -142,7 +143,8 @@ ENTRIES = {'OFF_INIT': 'fpl_card_init', 'OFF_REC': 'fpl_card_rec',
            'OFF_PLAY': 'fpl_card_play', 'OFF_CLIP': 'fpl_card_clip',
            'OFF_END': 'fpl_card_play_end', 'OFF_POOL': 'fpl_card_play_pool',
            'OFF_WRITTEN': 'fpl_card_written', 'OFF_EVENT': 'fpl_card_event',
-           'OFF_DISCARD': 'fpl_card_discard'}
+           'OFF_DISCARD': 'fpl_card_discard',
+           'OFF_OBSERVE': 'fpl_card_observe', 'OFF_OBSERVER': 'fpl_card_observer'}
 CFLAGS = ['--target=armv7a-none-eabi', '-mcpu=cortex-a9', '-mthumb', '-mfloat-abi=soft',
           '-mfpu=none', '-mstackrealign', '-ffreestanding', '-fno-builtin', '-nostdlib', '-fno-jump-tables',
           '-fropi', '-fno-addrsig', '-O2', '-std=c11', '-Wall', '-Wextra', '-Werror',

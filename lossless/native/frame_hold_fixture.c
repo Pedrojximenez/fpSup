@@ -60,6 +60,11 @@ static void wr_quiet(uintptr_t a, uint32_t v) { uint32_t *s = slot(a, 0); if (s)
  * allocation holds (1 KiB rounding against 512 B rounding). */
 static uint32_t width = 520, height = 368, format = 0;
 static uint32_t told(void) { return fpl_codec_source_bytes(width, height, format); }
+/* the take's header bytes (frame+0x14C): 0x13400 stock, longer with the
+ * card's tag (header_tag.h); the file starts that far before the raster */
+static uint32_t fixture_head = 0x13400u;
+#define FILE_AT (0x15400u - fixture_head)
+void fpl_fixture_head(uint32_t head) { fixture_head = head; }
 static uintptr_t frame_at(uint32_t id) { return FRAMES + id * 0x2000u; }
 /* C0135D40 for 12-bit */
 static uint32_t raster_bytes(void) {
@@ -228,6 +233,11 @@ void fpl_fixture_reenter(uint32_t v) { reenter = v; }
 /* 0: the codec task does not run while stop sleeps (starved) */
 void fpl_fixture_task_in_sleep(uint32_t v) { task_in_sleep = v; }
 static struct fpl_flush_stats flush_stats;
+/* The take's prepared IFD (header_tag.h): every frame's header is the same
+ * template, so preparing it in each frame's header gives the same record. */
+static struct fpl_header_tag fixture_tag;
+static uint32_t fixture_tag_ready;
+#define FIXTURE_TAG_AT 0x400u
 static uint32_t writer_count;
 static uint32_t published(void) {
     uint32_t n = 0;
@@ -268,6 +278,7 @@ uint32_t fpl_fixture_reset(uint32_t latency_polls, uint32_t payload, uint32_t lo
     struct fpl_hold_workspace w;
     memset(mem, 0, sizeof mem);
     memset(engine, 0, sizeof engine);
+    fixture_head = 0x13400u;
     memset(&pipeline, 0, sizeof pipeline); memset(&control, 0, sizeof control);
     memset(&facts, 0, sizeof facts); memset(&hold, 0, sizeof hold);
     memset(&pipeline_b, 0, sizeof pipeline_b); memset(&hold_b, 0, sizeof hold_b);
@@ -278,6 +289,7 @@ uint32_t fpl_fixture_reset(uint32_t latency_polls, uint32_t payload, uint32_t lo
     enq_n = uncached_hits = barriers = oob = tilecount = endpos = barrier_n = 0;
     enq_result = 1; enq_calls = 0;
     memset(&flush_stats, 0, sizeof flush_stats);
+    fixture_tag_ready = 0;
     writer_count = 1;
     mode = MODE_OK; latency = latency_polls; left = running = stuck = 0;
     payload_bytes = payload; open_ret = close_ret = 0; starts = closes = 0;
@@ -324,11 +336,11 @@ void fpl_fixture_frame(uint32_t id, uint32_t spare_capacity) {
     wr_quiet(f + 0x70, 10);
     wr_quiet(f + 0x128, 0x15400u);
     wr_quiet(f + 0x4c, (uint32_t)handle + 0x15400u);    /* descriptor word 15 */
-    wr_quiet(f + 0x14c, 0x13400u);                     /* set before the enqueue */
+    wr_quiet(f + 0x14c, fixture_head);                 /* set before the enqueue */
     wr_quiet(f + 0x1104, 8);
     wr_quiet(f + 0x1114, 0);                           /* no clones */
     wr_quiet(f + 0x1118, 0xffffffffu);                 /* owns its allocation */
-    wr_quiet(handle + 0x2000u, 0x48000000u | id);      /* its header, DMA'd in */
+    wr_quiet(handle + FILE_AT, 0x48000000u | id);      /* its header, DMA'd in */
     wr_quiet(raster_of(id), 0xF0000000u | id);          /* this frame's picture */
     wr_quiet(raster_of(id) + 4, 0xFEEDFACEu);
 }
@@ -402,20 +414,21 @@ void fpl_fixture_pipeline_phase(uint32_t v) { pipeline.phase = v; }
  * 0xFFFFFFFF for none, and consumes the promise when `consume`. */
 uint32_t fpl_fixture_flush(uint32_t id, uint32_t consume) {
     struct fpl_frame_hold *h = &hold;
-    const struct fpl_hold_commit *c = fpl_hold_peek(h, current_handle(id) + 0x2000u);
-    if (!c) c = fpl_hold_peek(h = &hold_b, current_handle(id) + 0x2000u);
+    const struct fpl_hold_commit *c = fpl_hold_peek(h, current_handle(id) + FILE_AT);
+    if (!c) c = fpl_hold_peek(h = &hold_b, current_handle(id) + FILE_AT);
     if (!c) return 0xFFFFFFFFu;
     uint32_t payload = c->payload;
     if (consume) fpl_hold_consumed(h, c);
     return payload;
 }
 uint32_t fpl_fixture_commit_tiles(uint32_t id, uint32_t index) {
-    const struct fpl_hold_commit *c = fpl_hold_peek(&hold, current_handle(id) + 0x2000u);
+    const struct fpl_hold_commit *c = fpl_hold_peek(&hold, current_handle(id) + FILE_AT);
     if (!c) return 0xFFFFFFFFu;
     if (index == 0xFFFEu) return c->tile_width << 16 | c->tile_height;
     return index == 0xFFFFu ? c->tiles : c->tile_bytes[index];
 }
 void fpl_fixture_tile_force(uint32_t force) { hold.tile_force = hold_b.tile_force = force; }
+void fpl_fixture_require_head(uint32_t v) { hold.require_head = hold_b.require_head = v; }
 uint32_t fpl_fixture_get(uint32_t field) {
     if (field >= 1000 && field < 1256) return enq_ids[field - 1000];
     if (field >= 2000 && field < 2256) return enq_payload[field - 2000];
@@ -424,7 +437,7 @@ uint32_t fpl_fixture_get(uint32_t field) {
     if (field >= 5000 && field < 5000 + MAX_ID) return rd_quiet(raster_of(field - 5000));
     if (field >= 6000 && field < 7024) return barrier_log[field - 6000];
     if (field >= 8000 && field < 8000 + MAX_ID) return (uint32_t)(current_handle(field - 8000) - MEM);
-    if (field >= 9000 && field < 9000 + MAX_ID) return rd_quiet(current_handle(field - 9000) + 0x2000u);
+    if (field >= 9000 && field < 9000 + MAX_ID) return rd_quiet(current_handle(field - 9000) + FILE_AT);
     if (field >= 10000 && field < 10000 + MAX_ID) return rd_quiet(frame_at(field - 10000) + 0x6c);
     if (field >= 11000 && field < 11000 + MAX_ID) return rd_quiet(frame_at(field - 11000) + 0x70);
     if (field >= 12000 && field < 12000 + MAX_ID) return rd_quiet(frame_at(field - 12000) + 0x4c) - MEM;
@@ -481,10 +494,14 @@ uint32_t fpl_fixture_get(uint32_t field) {
 const struct fpl_flush_natives fpl_flush_test_natives = { rd, wr, n_uncached, n_barrier };
 #define WRITER (MEM + 0x0F0000u)
 
-/* A minimal stock CinemaDNG root IFD, sorted, at the file's offset 8. */
+
+/* A minimal CinemaDNG root IFD, sorted, at the file's offset 8, with the
+ * card's tag (header_tag.h) -- as the template of an admitted take is -- and
+ * that take's IFD prepared in it. */
 void fpl_fixture_header(uint32_t id) {
-    static const uint16_t tags[] = {256, 257, 258, 259, 262, 273, 277, 278, 279, 284};
-    uintptr_t file = current_handle(id) + 0x2000u;
+    static const uint16_t tags[] = {256, 257, 258, 259, 262, 273, 277, 278, 279, 284,
+                                    FPL_HEADER_TAG};
+    uintptr_t file = current_handle(id) + FILE_AT;
     uint32_t n = sizeof tags / sizeof tags[0];
     wr_quiet(file, 0x002a4949u);                         /* II*\0 */
     wr_quiet(file + 4, 8);
@@ -494,27 +511,33 @@ void fpl_fixture_header(uint32_t id) {
         uint8_t *e = p + 2 + 12 * i;
         uint32_t value = tags[i] == 256 ? width : tags[i] == 257 ? height :
                          tags[i] == 258 ? 12 : tags[i] == 259 ? 1 :
-                         tags[i] == 273 ? 0x13400u : tags[i] == 279 ? raster_bytes() : 1;
-        uint16_t type = (tags[i] == 256 || tags[i] == 257 || tags[i] == 273 ||
+                         tags[i] == 273 ? fixture_head : tags[i] == 279 ? raster_bytes() :
+                         tags[i] == FPL_HEADER_TAG ? FIXTURE_TAG_AT : 1;
+        uint32_t count = tags[i] == FPL_HEADER_TAG ? FPL_HEADER_TAG_MAX : 1;
+        uint16_t type = tags[i] == FPL_HEADER_TAG ? 7 :
+                        (tags[i] == 256 || tags[i] == 257 || tags[i] == 273 ||
                          tags[i] == 278 || tags[i] == 279) ? 4 : 3;
         e[0] = (uint8_t)tags[i]; e[1] = (uint8_t)(tags[i] >> 8);
         e[2] = (uint8_t)type; e[3] = 0;
-        e[4] = 1; e[5] = e[6] = e[7] = 0;
+        memcpy(e + 4, &count, 4);
         memcpy(e + 8, &value, 4);
     }
     memset(p + 2 + 12 * n, 0, 4);
+    fixture_tag_ready = fpl_header_tag_prepare(&fixture_tag, file, fixture_head,
+                                               rd_quiet, wr_quiet) == FPL_OK;
 }
 /* The writer's final flush for frame `id`, with its node as the stock file. */
 uint32_t fpl_fixture_writer_flush(uint32_t id, uint32_t length) {
     wr_quiet(WRITER + 0x90, writer_count);
     wr_quiet(WRITER + 0x8C, WRITER + 0x0C);
-    wr_quiet(WRITER + 0x0C + 4, (uint32_t)(current_handle(id) + 0x2000u));
-    wr_quiet(WRITER + 0x0C + 8, length ? length : 0x13400u + ((raster_bytes() + 0x1ffu) & ~0x1ffu));
-    return fpl_flush_before(WRITER, &hold, &hold_b, &flush_stats);
+    wr_quiet(WRITER + 0x0C + 4, (uint32_t)(current_handle(id) + FILE_AT));
+    wr_quiet(WRITER + 0x0C + 8, length ? length : fixture_head + ((raster_bytes() + 0x1ffu) & ~0x1ffu));
+    return fpl_flush_before(WRITER, &hold, &hold_b, fixture_tag_ready ? &fixture_tag : NULL,
+                            &flush_stats);
 }
 void fpl_fixture_writer_shape(uint32_t count) { writer_count = count; }
 void fpl_fixture_file_poke(uint32_t id, uint32_t offset, uint32_t value) {
-    wr_quiet(current_handle(id) + 0x2000u + offset, value);
+    wr_quiet(current_handle(id) + FILE_AT + offset, value);
 }
 uint32_t fpl_fixture_flush_get(uint32_t field) {
     switch (field) {
@@ -522,12 +545,12 @@ uint32_t fpl_fixture_flush_get(uint32_t field) {
     case 1: return flush_stats.applied;
     case 2: return flush_stats.no_promise;
     case 3: return flush_stats.length_mismatch;
-    case 4: return flush_stats.trailer_failed;
+    case 4: return flush_stats.tag_failed;
     case 5: return flush_stats.shape;
-    case 6: return rd_quiet(handle_of(0) + 0x2000u + 4);    /* unused */
+    case 6: return rd_quiet(handle_of(0) + FILE_AT + 4);    /* unused */
     default: return 0xFFFFFFFFu;
     }
 }
 uint32_t fpl_fixture_file_word(uint32_t id, uint32_t offset) {
-    return rd_quiet(current_handle(id) + 0x2000u + offset);
+    return rd_quiet(current_handle(id) + FILE_AT + offset);
 }

@@ -5,8 +5,8 @@
 #include "producer_facts.h"
 
 #define FPL_HOLD_MAGIC 0x444c4f48u
-/* A compressed frame's file MUST get its trailer and length at the flush, or
- * it is written as garbage. A frame is therefore only ever held when a slot
+/* A compressed frame's file MUST get its IFD completed and its length at the
+ * flush, or it is written as garbage. A frame is therefore only ever held when a slot
  * is free to carry that promise. The flush comes when the SD aggregation
  * batch (64 MiB) is written, so the slots must outnumber the compressed frames
  * one batch can hold: on the camera 16 filled before the first flush and 13
@@ -52,6 +52,8 @@ struct fpl_hold_commit {
     uint32_t payload, tiles;            /* padded payload bytes after 0x13400 */
     uint32_t tile_width, tile_height;   /* the grid it was compressed with */
     uint32_t capacity, stock_bytes;     /* the file buffer's; the stock length */
+    uint32_t head;                      /* the frame's header bytes (+0x14C):
+                                           where the payload starts */
     uint32_t tile_bytes[FPL_CODEC_TILE_MAX];   /* host order */
 };
 
@@ -90,6 +92,7 @@ struct fpl_frame_hold {
     /* the held frame's native identity */
     uintptr_t creator, frame;
     uint32_t native_id;
+    uint32_t head;                      /* its header bytes (frame+0x14C) */
     struct fpl_frame_token token;
     /* flush-site slots: published here, consumed on the writer's task */
     struct fpl_hold_commit ring[FPL_HOLD_COMMITS];
@@ -128,11 +131,23 @@ struct fpl_frame_hold {
                                            every lane was busy */
     struct fpl_codec_input lane_in;
     uint32_t tile_force;                /* tile_grid.h; set before the take */
+    /* Hold only frames whose header (frame+0x14C) is this many bytes: the
+     * template that carries the take's prepared IFD (header_tag.h). The card
+     * sets 0xFFFFFFFF at REC -- nothing held -- until the IFD is prepared.
+     * 0: no requirement (host tests of this module alone). */
+    uint32_t require_head;
+#ifdef FPL_DIAG_HOOK_TIME
+    uint32_t diag_enq_n, diag_enq_us, diag_enq_max_us;  /* C037DD50 calls */
+    /* lanes arrive split (us sums, calls): collect the finished frame (its
+     * handoff: header DMA, payload copy, enqueue), take the new one */
+    uint32_t diag_collect_us, diag_collect_n, diag_take_us, diag_take_n;
+    uint32_t diag_dma_us, diag_dma_n, diag_copy_us, diag_copy_n, diag_handoff_us;
+#endif
 };
 enum fpl_hold_refusal {
     FPL_HOLD_R_DESCRIPTOR = 0, FPL_HOLD_R_RESERVE = 1, FPL_HOLD_R_HANDLE = 2,
     FPL_HOLD_R_RASTER = 3, FPL_HOLD_R_SHORT = 4, FPL_HOLD_R_OUTPUT = 5,
-    FPL_HOLD_R_SLOT = 6
+    FPL_HOLD_R_SLOT = 6, FPL_HOLD_R_HEADER = 7
 };
 
 /* Fresh storage; pipeline/facts must outlive it; workspace is the output and

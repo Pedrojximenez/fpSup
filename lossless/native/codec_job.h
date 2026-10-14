@@ -41,6 +41,25 @@ struct fpl_codec_job {
     /* the engine's registers when a job was given up on (fpl_codec_job_abort):
      * 300D0000, 04, 08, 0C, 64, 74, F8 (end position), 3FC */
     uint32_t stall_regs[8];
+    /* 1: keep the engine open for the take (2026-10-15). C062FEE8's open is
+     * 170 us of power/clock/resource requests a frame; what its close+open
+     * really gives the next job is set-up registers at zero: C062FFF8 ORs
+     * every one of them (300D0040..300D0084) into what is there. So after
+     * the first job's real open, each later job clears them instead
+     * (fpl_codec_job_submit) and no finished job is closed. A refusal or any
+     * failure still closes; the caller closes at the end of the take
+     * (fpl_codec_job_release). 0: open and close every job, as the encoder
+     * does. validation/20261015-snapshot: the registers after a real open
+     * are 0 but for 300D0074 = 1 and 300D008C/90 = 0x3FFFFF, every take and
+     * boot; reusing the engine without the clear is refused every other
+     * frame (20261015-engine). */
+    uint32_t keep_open;
+    uint32_t reused;                    /* jobs started on a kept-open engine */
+#ifdef FPL_DIAG_HOOK_TIME
+    /* diagnostic only, sums in us: submit {F_INIT, open, band zero, submit,
+     * reset+start}; finish {eoi+tiles, total, pad, table, close} */
+    uint32_t diag_submit_us[5], diag_finish_us[5], diag_n;
+#endif
 };
 
 /* Everything the caller vouches for. `source_capacity` is how many bytes are
@@ -98,4 +117,7 @@ uint32_t fpl_codec_job_wait(struct fpl_codec_job *, uint32_t ticks);
  * the interrupt off -- stops it, and the job is IDLE again: its source was only
  * read, its output is not used. FPL_FAULT if CLOSE failed (state unknown). */
 uint32_t fpl_codec_job_abort(struct fpl_codec_job *);
+/* Close the engine a keep_open take left open. Never while a job runs:
+ * FPL_BUSY. FPL_OK when it is closed (or was). */
+uint32_t fpl_codec_job_release(struct fpl_codec_job *);
 #endif

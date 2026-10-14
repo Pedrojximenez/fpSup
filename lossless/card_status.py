@@ -32,10 +32,28 @@ def find_record(mem_get):
         if words[i + 8] == MAGIC:
             block = ARENA + 4 * i
             state, base = words[i + 9], words[i + 10]
-            if 0x40000000 <= base < 0xC0000000 and base < state and not base & 7:
+            # 0x4xxxxxxx: the loader's NonCacheBuffer block; 0xCxxxxxxx: the
+            # same memory's cached alias, where the card runs since 2026-10-13
+            cached = 0xC4000000 <= base < 0x100000000
+            if (0x40000000 <= base < 0x80000000 or cached) and base < state and not base & 7:
                 return block, state, base
     return None
 
+
+
+def read_words(at, nbytes):
+    """read_direct's DMA reaches only CPU-0x40000000 addresses. A cached-alias
+    state (0xC4.. and up) is read word by word through the shell's CPU reads:
+    slower, but coherent with the cache, and nothing outside its reach."""
+    import struct
+    if at < 0x80000000:
+        from putfile import read_direct
+        return read_direct(at, nbytes)
+    from putfile import mem_get
+    words = []
+    for off in range(0, nbytes, 1024):
+        words += mem_get(at + off, min(256, (nbytes - off + 3) // 4))
+    return struct.pack(f'<{len(words)}I', *words)
 
 
 LANE = {0: 'idle', 1: 'held', 2: 'running', 3: 'finished', 4: 'collecting', 5: 'fault'}
@@ -47,8 +65,7 @@ def print_trace(at, n, out):
     frame's state / live children / duplicates / parent. arrivals - flushed =
     frames the writer has not written yet; REC stops at descriptors free <= 1."""
     import struct
-    from putfile import read_direct
-    raw = read_direct(at, 32 * n)
+    raw = read_words(at, 32 * n)
     rows = [struct.unpack_from('<8I', raw, 32 * i) for i in range(n)]
     t0 = rows[0][0]
     lines = ['ms,arrivals,flushed,unwritten,desc_free,lane_a,lane_b,reg_lock,occupied,'
@@ -114,9 +131,8 @@ def main():
         print_trace(state + fields['trace'], min(v['trace_n'], 512), a.trace)
     if 'elog' in fields and v.get('elog_n') and a.elog:
         import struct
-        from putfile import read_direct
         n = min(v['elog_n'], 2048)
-        raw = read_direct(state + fields['elog'], 8 * n)
+        raw = read_words(state + fields['elog'], 8 * n)
         rows = [struct.unpack_from('<2I', raw, 8 * i) for i in range(n)]
         t0 = rows[0][0]
         a.elog.write_text('ms,kind,slot,result,state\n' + ''.join(
@@ -191,8 +207,8 @@ def main():
           f'{v["play.max_us"] / 1000:.1f} ms)' + (f', left alone {prefused}' if prefused else '')
           + f'; last slot buffer 0x{v["play.last_buf"]:08X} capacity {v["play.last_cap"]:,} '
           f'read {v["play.last_got"]:,}')
-    print(f'  before file write (not a write-success count): trailers applied {v["flush.applied"]}, trailer refused '
-          f'{v["flush.trailer_failed"]}, other length {v["flush.length_mismatch"]}; '
+    print(f'  before file write (not a write-success count): IFDs completed {v["flush.applied"]}, header not the take\'s '
+          f'{v["flush.tag_failed"]}, other length {v["flush.length_mismatch"]}; '
           f'promises a previous take left {v["stale_promises"]}')
     if 'record_diag.writer_calls' in v:
         d = {k.removeprefix('record_diag.'): val for k, val in v.items()

@@ -6,6 +6,8 @@
                                         dst len, table, table len */
 #define TILE_COUNT_VAR 0xc302cdecu   /* F_SIZE's loop bound */
 #define DEV_ENDPOS     0x300d00f8u   /* where the engine says the stream ended */
+#define DEV_ENABLE     0x300d0074u   /* bit 0: set by open (C0630480(1)), cleared by close */
+#define DEV_SETUP      0x300d0040u   /* C062FFF8 ORs its set-up into 300D0040..0084 */
 #define STOCK_CALLBACK 0xc062fcb1u   /* the driver's own completion callback */
 #define WAIT_PATTERN   5u            /* bit 0 done, bit 2 error */
 #define WAIT_OR        1u
@@ -110,6 +112,15 @@ static uint32_t refuse(struct fpl_codec_job *j, uint32_t result) {
     return result;
 }
 
+#if defined(FPL_DIAG_HOOK_TIME) && !defined(FPL_CODEC_JOB_HOST_TEST)
+static uint32_t diag_tick(void) { return ((uint32_t (*)(void))0xc002b6e0u)(); }
+#define DIAG_T0 uint32_t diag_t = diag_tick(), diag_u
+#define DIAG_STEP(arr, i) (diag_u = diag_tick(), (arr)[i] += diag_u - diag_t, diag_t = diag_u)
+#else
+#define DIAG_T0 (void)0
+#define DIAG_STEP(arr, i) ((void)0)
+#endif
+
 uint32_t fpl_codec_job_submit(struct fpl_codec_job *j, const struct fpl_codec_input *in) {
     uint32_t init[9], tiles_x, tiles_y, tiles, source_bytes, native, tw, th;
     uint32_t engine[6];
@@ -143,6 +154,7 @@ uint32_t fpl_codec_job_submit(struct fpl_codec_job *j, const struct fpl_codec_in
     if (source_bytes > in->source_capacity) return refuse(j, FPL_NOT_READY);
 
     /* ---- F_INIT, exactly as a caller of F_ENC would -------------------- */
+    DIAG_T0;
     init[0] = in->width;
     init[1] = in->height;
     init[2] = in->format;
@@ -153,6 +165,7 @@ uint32_t fpl_codec_job_submit(struct fpl_codec_job *j, const struct fpl_codec_in
     init[7] = (uint32_t)in->table;
     init[8] = 0;                         /* flag byte 0: the stock path */
     native = native_init(init);
+    DIAG_STEP(j->diag_submit_us, 0);
     if (native != 1) return refuse(j, FPL_NOT_READY);  /* nothing started */
     for (uint32_t n = 0; n < 6; ++n) engine[n] = peek(ENGINE_BLOCK + 4u * n);
 
@@ -190,12 +203,25 @@ uint32_t fpl_codec_job_submit(struct fpl_codec_job *j, const struct fpl_codec_in
     j->request[11] = STOCK_CALLBACK;
 
     native_clr_flg(j->flag, 0);
-    if ((native = native_open()) != 0) return refuse(j, FPL_NOT_READY);
+    DIAG_STEP(j->diag_submit_us, 0);
+    if (j->keep_open && (peek(DEV_ENABLE) & 1u)) {
+        /* Still open from this take's last job: what close+open would give
+         * is the set-up registers at zero. 300D0040..0070 and 0078..0088;
+         * 0074 is the enable itself. */
+        for (uint32_t n = 0; n < 13u; ++n) poke(DEV_SETUP + 4u * n, 0);
+        for (uint32_t n = 14u; n < 19u; ++n) poke(DEV_SETUP + 4u * n, 0);
+        j->reused++;
+    } else if ((native = native_open()) != 0) {
+        return refuse(j, FPL_NOT_READY);
+    }
+    DIAG_STEP(j->diag_submit_us, 1);
     for (uint32_t n = 0; n < engine[5]; n += 4) poke(band_table + n, 0);
+    DIAG_STEP(j->diag_submit_us, 2);
     if ((native = native_submit(j->request)) != 0) {
         native_close();
         return refuse(j, FPL_NOT_READY);
     }
+    DIAG_STEP(j->diag_submit_us, 3);
     native_reset();                      /* C062FE90: the firmware pulses the
                                             soft reset before EVERY start */
     if ((native = native_start()) != 0) {
@@ -221,6 +247,10 @@ uint32_t fpl_codec_job_submit(struct fpl_codec_job *j, const struct fpl_codec_in
     j->table_bytes = engine[5];
     j->polls = j->pattern = j->end_position = j->total = j->padded = 0;
     j->last_native = 0;
+    DIAG_STEP(j->diag_submit_us, 4);
+#ifdef FPL_DIAG_HOOK_TIME
+    j->diag_n++;
+#endif
     j->phase = FPL_CODEC_RUNNING;
     return FPL_OK;
 }
@@ -238,6 +268,15 @@ uint32_t fpl_codec_job_abort(struct fpl_codec_job *j) {
     native_clr_flg(j->flag, 0);
     if ((native = native_close()) != 0) return fail(j, native);
     j->phase = FPL_CODEC_IDLE;
+    return FPL_OK;
+}
+
+uint32_t fpl_codec_job_release(struct fpl_codec_job *j) {
+    uint32_t native;
+    if (!j || j->magic != FPL_CODEC_JOB_MAGIC) return FPL_INVALID;
+    if (j->phase == FPL_CODEC_RUNNING) return FPL_BUSY;
+    if (!(peek(DEV_ENABLE) & 1u)) return FPL_OK;
+    if ((native = native_close()) != 0) return fail(j, native);
     return FPL_OK;
 }
 
@@ -277,10 +316,13 @@ uint32_t fpl_codec_job_wait(struct fpl_codec_job *j, uint32_t ticks) {
     }
 
     /* ---- C062F912 .. C062FA1A, in order ------------------------------- */
+    DIAG_T0;
     j->end_position = peek(DEV_ENDPOS);
     native_eoi(j->destination, j->end_position);
     native_tiles(j->destination, j->band_table, j->tiles);
+    DIAG_STEP(j->diag_finish_us, 0);
     total = native_total(j->band_table, j->tiles);
+    DIAG_STEP(j->diag_finish_us, 1);
     aligned = align_kib(total);
     if (!total || aligned > j->destination_bytes) {  /* cannot be; never trust */
         native_close();
@@ -293,11 +335,14 @@ uint32_t fpl_codec_job_wait(struct fpl_codec_job *j, uint32_t ticks) {
         uint32_t shift = (uint32_t)(at & 3u) * 8u;
         poke(at & ~3u, word & ~(0xffu << shift));
     }
+    DIAG_STEP(j->diag_finish_us, 2);
     last = j->band_table + (j->tiles - 1u) * 4u;
     poke(last, bswap(bswap(peek(last)) + pad));
     for (uint32_t n = 0; n < j->tiles * 4u; n += 4)  /* into the engine's table */
         poke(j->table + n, peek(j->band_table + n));
-    if ((native = native_close()) != 0) return fail(j, native);
+    DIAG_STEP(j->diag_finish_us, 3);
+    if (!j->keep_open && (native = native_close()) != 0) return fail(j, native);
+    DIAG_STEP(j->diag_finish_us, 4);
 
     j->total = total;
     j->padded = aligned;

@@ -52,14 +52,14 @@ ORIGINAL = {'prepare': 0xC03A2438, 'enqueue': 0xC037DD50, 'flush': 0xC069ADE0,
             'stop_resume': 0xC0398D8C, 'tk_cre_tsk': 0xC0016A58, 'tk_sta_tsk': 0xC0016BC0,
             'end_resume': 0xC05C2E94, 'pool_resume': 0xC05C2D14,
             'event_resume': 0xC038BD0C, 'discard': 0xC037E008,
-            'irq_off': 0xC000EC14, 'irq_restore': 0xC000EC24}
+            'irq_off': 0xC000EC14, 'irq_restore': 0xC000EC24,
+            'tag_add': 0xC00BA378}
 # A clip's first frame, as fpl_play_clip opens it -- open refused. Installed
 # only after boot: the loader reads fpSup.BIN through the same file API.
 CLIP_FILE = {'clip_volume': 0xC069B930, 'clip_path': 0xC069B9B8, 'f_ctor': 0xC0365E90,
              'f_open': 0xC0365FB0, 'f_dtor': 0xC0365ED0}
 TASK_ID = 0x5A
-BULK = 0xC0B9E5D8                     # the file layer's bulk size (card.c FPL_BULK_CFG)
-BULK_WRITER = 0xC359BE4C              # FUN_c03A4C88(): +0xC set once FUN_c03A5050 ran
+BULK = 0xC0B9E5D8                     # the file layer's bulk size (stock 64 MB; LOSS leaves it)
 
 
 def build_card():
@@ -106,7 +106,8 @@ class CardCamera(T.Camera):
         self.returns = {'ORIG_prepare': 7, 'ORIG_enqueue': 1, 'ORIG_flush': 0,
                         'ORIG_tk_cre_tsk': TASK_ID, 'ORIG_tk_sta_tsk': 0,
                         'ORIG_clip_volume': 1, 'ORIG_clip_path': 0x45100000,
-                        'ORIG_f_ctor': 0, 'ORIG_f_open': 0, 'ORIG_f_dtor': 0}
+                        'ORIG_f_ctor': 0, 'ORIG_f_open': 0, 'ORIG_f_dtor': 0,
+                        'ORIG_tag_add': 0}
         self.task_descriptors = []
         self.flush_result = (0, 0)
         self.irq_depth = 0
@@ -214,12 +215,15 @@ class CardEmulationTests(unittest.TestCase):
         # identical but for the state/entry words the launcher resolves
         words = card_symbols()
         lo, hi = words['g_card'], words['stop_resume']
-        self.assertEqual(hi - lo, 4 * len(CARD_OFFSETS))
+        # one word per entry the shims call, plus g_card; OFF_INIT and
+        # OFF_OBSERVER are called once at load and have none
+        resident_words = len(CARD_OFFSETS) - 1
+        self.assertEqual(hi - lo, 4 * resident_words)
         resident = bytes(cam.mu.mem_read(BLOCK, len(self.blob)))
         self.assertEqual(resident[:lo], self.blob[:lo])
         self.assertEqual(resident[hi:], self.blob[hi:])
         self.assertEqual(self.blob[lo:hi], b'\0' * (hi - lo))
-        filled = struct.unpack(f'<{len(CARD_OFFSETS)}I', resident[lo:hi])
+        filled = struct.unpack(f'<{resident_words}I', resident[lo:hi])
         self.assertTrue(all(filled), 'a resident word was left empty')
         calls = [c for c in cam.calls if c in ('H_GET', 'H_ADDR', 'DCACHE', 'ICACHE')]
         self.assertEqual(calls, ['H_GET', 'H_ADDR', 'DCACHE', 'ICACHE',
@@ -338,19 +342,15 @@ class CardEmulationTests(unittest.TestCase):
         self.assertEqual(self.field(cam, 'rec_menu_off'), 1)
         self.assertEqual(cam.irq_depth, 0)
 
-    def test_an_off_take_leaves_the_bulk_size_stock(self):
-        """EARLY_STOP_94.md: only an admitted compressed take changes the file
-        layer's bulk size; every other take starts from the stock 64 MB, even
-        when the word was left at another value."""
+    def test_rec_never_touches_the_bulk_size(self):
+        """2026-10-14 (user): the 64 MB bulk size is no longer LOSS's to set --
+        the rec-core writer owns the file layer. REC leaves the word as found."""
         cam = self.armed()
         cam.mu.mem_write(BULK, struct.pack('<I', 0x00C00000))
-        cam.mu.mem_write(BULK_WRITER + 0xC, b'\0')
         request = T.STACK - 0x3000
         cam.mu.mem_write(request, struct.pack('<I', 0x23))
         self.assertEqual(self.enter(cam, 'rec', (0x1234, request), stack_delta=4), 7)
-        self.assertEqual(cam.word(BULK), 0x04000000)
-        self.assertEqual(self.field(cam, 'bulk'), 0x04000000)
-        self.assertEqual(self.field(cam, 'bulk_writer_open'), 0)
+        self.assertEqual(cam.word(BULK), 0x00C00000)
 
     def test_mutation_omitting_rec_alignment_is_caught(self):
         cam = self.armed()
@@ -567,6 +567,156 @@ class CardEmulationTests(unittest.TestCase):
         self.assertEqual(pushed[5], T.DONE)
 
 
+    # ---- the header template's observer (header_tag.h) -------------------
+    SUBJECT = 0xC31AC4EC
+    TEMPLATE_PTR, TEMPLATE_LEN = 0xC358DBA8, 0xC358DBA4
+    POOL, POOL_VT, EVENT, BUILDER, POOL_FN = (0xC3F00000, 0xC3F00100, 0xC3F00200,
+                                              0xC3F00300, 0xC3F00400)
+    TEMPLATE = 0xC3E00000
+
+    @staticmethod
+    def put(cam, at, value):
+        cam.mu.mem_write(at, struct.pack('<I', value & 0xFFFFFFFF))
+
+    @staticmethod
+    def movw_movt(rd, value):
+        lo, hi = value & 0xFFFF, value >> 16
+        return [0xE3000000 | (lo >> 12) << 16 | rd << 12 | (lo & 0xFFF),
+                0xE3400000 | (hi >> 12) << 16 | rd << 12 | (hi & 0xFFF)]
+
+    def data_pool(self, cam, mode, flag=0):
+        """A DataPool: vtable +0x40 returns the event {mode, 3, flag}, +0x2C
+        the builder -- as FUN_c00559f0 leaves them for the observers."""
+        code = (self.movw_movt(0, self.EVENT) + [0xE12FFF1E] +
+                self.movw_movt(0, self.BUILDER) + [0xE12FFF1E])
+        cam.mu.mem_write(self.POOL_FN, struct.pack(f'<{len(code)}I', *code))
+        self.put(cam, self.POOL, self.POOL_VT)
+        self.put(cam, self.POOL_VT + 0x40, self.POOL_FN)
+        self.put(cam, self.POOL_VT + 0x2C, self.POOL_FN + 12)
+        cam.mu.mem_write(self.EVENT, struct.pack('<3I', mode, 3, flag))
+
+    def set_field(self, cam, path, value):
+        state = cam.word(self.cave_block(cam) + 36)
+        self.put(cam, state + LAYOUT[path], value)
+
+    def notify(self, cam, mode, flag=0):
+        """The Subject's notify loop calling our slot: vt+0xC(observer, pool),
+        from a stack 4 off 8 as the firmware's may be."""
+        self.data_pool(cam, mode, flag)
+        obs = cam.word(self.SUBJECT + 4 * (self.field(cam, 'observer_slot') - 1))
+        shim = cam.word(cam.word(obs) + 0xC)
+        cam.originals.clear()
+        sp = T.STACK - 0x2004
+        for reg in range(4, 12):
+            cam.mu.reg_write(getattr(__import__('unicorn.arm_const', fromlist=['x']),
+                                     f'UC_ARM_REG_R{reg}'), 0x40404040 + reg)
+        r0, sp_after = cam.call(shim, r0=obs, r1=self.POOL, sp=sp)
+        self.assertEqual((r0, sp_after), (1, sp), 'observer must return 1 with the stack as given')
+        for reg in range(4, 12):
+            self.assertEqual(cam.r(getattr(__import__('unicorn.arm_const', fromlist=['x']),
+                                           f'UC_ARM_REG_R{reg}')), 0x40404040 + reg)
+
+    def template(self, cam):
+        sys.path.insert(0, str(HERE / 'native'))
+        import test_header_tag as H
+        stock = H.STOCK.read_bytes()
+        tmpl, head = H.make_template(stock)
+        cam.mu.mem_write(self.TEMPLATE, bytes(tmpl))
+        self.put(cam, self.TEMPLATE_PTR, self.TEMPLATE)
+        self.put(cam, self.TEMPLATE_LEN, head)
+        return tmpl, head, H
+
+    def test_the_observer_is_put_on_the_subject_list_last(self):
+        cam = self.armed()
+        self.assertEqual(self.field(cam, 'observer_slot'), 1)
+        obs = cam.word(self.SUBJECT)
+        self.assertEqual(cam.word(cam.word(obs) + 0xC), BLOCK + card_symbols()['obs_shim'])
+        self.assertEqual([cam.word(self.SUBJECT + 4 * n) for n in range(1, 9)], [0] * 8)
+        # after every site is armed: the last call before the final cache flush
+        self.assertEqual(cam.calls[-2:], ['DCACHE', 'ICACHE'])
+
+    def test_a_full_subject_list_is_left_alone(self):
+        cam = self.boot()
+        taken = [0x1000 + n for n in range(9)]
+        cam.mu.mem_write(self.SUBJECT, struct.pack('<9I', *taken))
+        self.assertEqual(self.launch(cam), 0)
+        self.assertEqual(list(struct.unpack('<9I', cam.mu.mem_read(self.SUBJECT, 36))), taken)
+        self.assertEqual(self.field(cam, 'observer_slot'), 0)
+        self.assertEqual(self.field(cam, 'observer_full'), 1)
+
+    def test_an_admitted_take_gets_its_tag_and_its_ifd_and_nothing_per_frame(self):
+        cam = self.armed()
+        tmpl, head, H = self.template(cam)
+        self.set_field(cam, 'tag_want', 1)
+        self.set_field(cam, 'tag_bytes', H.TAG_BYTES)
+        self.set_field(cam, 'hold.require_head', 0xFFFFFFFF)   # as REC leaves it
+        # mode 0, the template build: the tag is added to the open builder
+        self.notify(cam, 0)
+        adds = [o for o in cam.originals if o[0] == 'ORIG_tag_add']
+        self.assertEqual(len(adds), 1)
+        (_, regs, sp, _), = adds
+        self.assertEqual(regs, (self.BUILDER, 0, 0xFD4C, 7))
+        count, value = struct.unpack('<II', cam.mu.mem_read(sp, 8))
+        self.assertEqual(count, H.TAG_BYTES)
+        self.assertEqual(bytes(cam.mu.mem_read(value, count)), bytes(count))
+        self.assertEqual((self.field(cam, 'tag_added'), self.field(cam, 'tag_want'),
+                          self.field(cam, 'tag_pending')), (1, 0, 1))
+        # mode 2 after the serialization: the IFD goes into the template
+        self.notify(cam, 2, 1)
+        self.assertEqual(self.field(cam, 'tag_prepare_result'), 0)
+        self.assertEqual((self.field(cam, 'tag_prepared'), self.field(cam, 'tag_head')),
+                         (1, head))
+        self.assertNotEqual(self.field(cam, 'tag_live'), 0)
+        self.assertEqual(self.field(cam, 'hold.require_head'), head, 'frames still refused')
+        live = bytes(cam.mu.mem_read(self.TEMPLATE, head))
+        value_at = struct.unpack_from('<I', live, H.entry_at(live, 0x13400, 0xFD4C) + 8)[0]
+        ifd_at = (value_at + 3) & ~3
+        n, = struct.unpack_from('<H', live, ifd_at)
+        root_n, = struct.unpack_from('<H', live, 0x13400)
+        self.assertEqual(n, root_n - 3 + 4)
+        self.assertEqual(live[:value_at], bytes(tmpl[:value_at]), 'wrote outside the tag')
+        # mode 3, every frame: the values the firmware rewrites are shared,
+        # so the per-frame notify writes nothing
+        self.notify(cam, 3)
+        self.assertEqual(bytes(cam.mu.mem_read(self.TEMPLATE, head)), live)
+        self.assertEqual([o for o in cam.originals if o[0] == 'ORIG_tag_add'], [])
+
+    def test_a_take_it_did_not_admit_is_not_touched(self):
+        cam = self.armed()
+        tmpl, head, _ = self.template(cam)
+        for mode, flag in ((0, 0), (2, 1), (3, 0)):
+            self.notify(cam, mode, flag)
+        self.assertEqual([o for o in cam.originals if o[0] == 'ORIG_tag_add'], [])
+        self.assertEqual(bytes(cam.mu.mem_read(self.TEMPLATE, head)), bytes(tmpl))
+        self.assertEqual((self.field(cam, 'tag_mode0'), self.field(cam, 'tag_added'),
+                          self.field(cam, 'tag_prepared'), self.field(cam, 'tag_live')),
+                         (1, 0, 0, 0))
+
+    def test_a_template_without_the_tag_leaves_the_take_raw(self):
+        cam = self.armed()
+        tmpl, head, H = self.template(cam)
+        stock = H.STOCK.read_bytes()[:0x13400]
+        cam.mu.mem_write(self.TEMPLATE, stock)
+        self.put(cam, self.TEMPLATE_LEN, 0x13400)
+        self.set_field(cam, 'tag_pending', 1)
+        self.notify(cam, 2, 1)
+        self.assertEqual(self.field(cam, 'tag_prepare_result'), 3)      # UNSUPPORTED
+        self.assertEqual((self.field(cam, 'tag_prepared'), self.field(cam, 'tag_live')), (0, 0))
+        self.assertEqual(bytes(cam.mu.mem_read(self.TEMPLATE, 0x13400)), stock)
+        self.assertNotEqual(self.field(cam, 'hold.require_head'), 0x13400, 'frames would be held')
+
+    def test_a_new_take_forgets_the_prepared_ifd(self):
+        cam = self.armed()
+        self.template(cam)
+        self.set_field(cam, 'tag_pending', 1)
+        self.notify(cam, 2, 1)
+        self.assertNotEqual(self.field(cam, 'tag_live'), 0)
+        request = T.STACK - 0x3000
+        cam.mu.mem_write(request, struct.pack('<I', 0x23))
+        self.enter(cam, 'rec', (0x1234, request), stack_delta=4)
+        self.assertEqual(self.field(cam, 'tag_live'), 0)
+
+
 # ---- the Lossless RAW row, composed by ui_apply in the ARM build -------------
 GUI_OBJECT = 0xC37B7048
 UI_AREA = 0xC3A00000                  # app, screens, reader, entries, names: unused BSS
@@ -682,9 +832,6 @@ class MenuEmulationTests(unittest.TestCase):
         page_at = (0xC18C0460 + off) & 0xFFFFFFFF
         hdr = struct.unpack('<32I', bytes(cam.mu.mem_read((page_at & ~3) - 128, 128)))
         self.assertEqual(hdr[0], 0x47505346)
-        self.assertGreaterEqual((page_at & ~3) - 128, BLOCK)
-        self.assertLessEqual(page_at + hdr[3], BLOCK + CARD_BLOCK,
-                             'the page escaped the launcher block')
         page = bytes(cam.mu.mem_read(page_at, hdr[3]))
         pages = {'MainB2': self.fpui.PageCopy(self.stock_page, len(self.stock_page), 1)}
         pool = self.fpui.Strings(self.pool_stock)

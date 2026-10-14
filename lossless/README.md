@@ -1,5 +1,59 @@
 # fpLossless — standalone lossless RAW compression
 
+## 2026-10-12: independent lossless module with adaptive batch count
+
+The current builders produce an **offline development candidate**, including
+the menu, native recording hooks and shared loader. The older status below is
+retained as history. This increment has not been tested on a camera.
+
+- Keep the stock **64 MiB** byte target. A second native flush trigger limits
+  frames in a batch to half the available descriptor budget, after reserving
+  two stop slots, four pipeline slots, and arrivals during a writer return.
+  FPS is rounded upward; the initial return allowance is **100 ms**, then only
+  increases to the longest observed return in that take. These reserves are
+  policy assumptions pending hardware measurement, not a no-stall guarantee.
+- Actual mixed RAW/compressed bytes drive the existing byte trigger. A rolling
+  32-file sample reports compression fraction, mean file size and the estimated
+  frames needed for 64 MiB. The estimate never relaxes the count/free-slot
+  guards. Resolution and RAW fallbacks are thus reflected in actual file sizes.
+- The count hook applies only to the current admitted lossless writer frame
+  with the stock CinemaDNG callback. Low/unknown free descriptor counts force
+  an earlier native flush. OFF and unrelated filesystem calls retain their
+  original count decision.
+- Flush metadata now checks the native frame pointer and generation as well
+  as the file buffer address; reused addresses retire mismatched metadata
+  without freeing live memory or applying a previous frame's compressed header.
+
+The batch hook is guarded, journaled, exclusively claimed in v3 and restored on
+shutdown. LOSS builds, loads and runs its tests independently of other optional
+sup modules. The module package contains `10LOSS.BIN` and its build/layout
+metadata. Cross-module checks are maintained separately in `integration_tests/`.
+
+Build from `fpSup/` into a new empty directory:
+
+```sh
+python3 -B lossless/build_v3_lossless.py --out /absolute/new/directory
+# Add --trace for diagnostics, or --card for a complete shared-loader card.
+```
+
+Focused offline tests:
+
+```sh
+cd lossless/native
+python3 -B -m unittest test_bulk_policy test_frame_hold test_record_diag
+cd ..
+python3 -B -X faulthandler -m unittest test_bulk_native test_v3_lossless test_card_emulation
+```
+
+`card_status.py` reads the matching build's `layout.json` and reports batch cap,
+FPS reserve, pool pressure, mixed file statistics and retired stale metadata.
+Source changes, exact candidate bytes, validation logs and hardware limitations:
+[`20261012-lossless-independent`](../../projects/lossless-sup/validation/20261012-lossless-independent/).
+The updated mechanism is also recorded in
+[`EARLY_STOP_94.md`](../../projects/lossless-sup/notes/EARLY_STOP_94.md).
+
+## Historical status — 2026-09-30
+
 Development source, **not an installable recording product**. No AutoRun,
 VSHL, firmware patch or camera deployment is emitted by this directory yet.
 The current development entry (2026-09-30, §14), evidence limits and next gates are in

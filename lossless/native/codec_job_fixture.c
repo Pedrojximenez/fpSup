@@ -50,15 +50,18 @@ static uint32_t f_twai(uint32_t f, uint32_t w, uint32_t m, uint32_t *p, uint32_t
     *p = twai_pattern;
     return twai_ret;
 }
-static uint32_t f_open(void) { rec(C_OPEN); return open_ret; }
+/* the engine's enable, 300D0074 bit 0, as C0630480 sets and clears it */
+static uint32_t f_open(void) { rec(C_OPEN); if (!open_ret) devregs[0x74 / 4] |= 1u; return open_ret; }
+static uint32_t submit_regs[19];        /* 300D0040..0088 as the submit found them */
 static uint32_t f_submit(const uint32_t *r) {
     rec(C_SUBMIT);
+    memcpy(submit_regs, &devregs[0x40 / 4], sizeof submit_regs);
     memcpy(request_seen, r, sizeof request_seen);
     return submit_ret;
 }
 static void f_reset(void) { rec(C_RESET); }
 static uint32_t f_start(void) { rec(C_START); return start_ret; }
-static uint32_t f_close(void) { rec(C_CLOSE); return close_ret; }
+static uint32_t f_close(void) { rec(C_CLOSE); if (!close_ret) devregs[0x74 / 4] &= ~1u; return close_ret; }
 static void f_eoi(uintptr_t d, uint32_t e) {
     rec(C_EOI); eoi_args[0] = (uint32_t)d; eoi_args[1] = e;
 }
@@ -138,6 +141,10 @@ void fpl_fixture_set(uint32_t knob, uint32_t value) {
     case 15: input.source = value; break;
     case 16: devregs[2] = value; break;          /* 300D0008 */
     case 17: input.tile_force = value; break;
+    case 18: job.keep_open = value; break;
+    case 19:                                        /* a finished job's set-up */
+        for (uint32_t n = 0; n < 19; ++n) devregs[0x40 / 4 + n] |= value;
+        break;
     }
 }
 uint32_t fpl_fixture_submit(void) { return fpl_codec_job_submit(&job, &input); }
@@ -147,6 +154,10 @@ uint32_t fpl_fixture_wait(uint32_t ticks) {
     return fpl_codec_job_wait(&job, ticks);
 }
 uint32_t fpl_fixture_abort(void) { return fpl_codec_job_abort(&job); }
+uint32_t fpl_fixture_release(void) { return fpl_codec_job_release(&job); }
+uint32_t fpl_fixture_reused(void) { return job.reused; }
+uint32_t fpl_fixture_submit_reg(uint32_t n) { return submit_regs[n]; }
+uint32_t fpl_fixture_engine_open(void) { return devregs[0x74 / 4] & 1u; }
 uint32_t fpl_fixture_source_bytes(uint32_t w, uint32_t h, uint32_t f) {
     return fpl_codec_source_bytes(w, h, f);
 }

@@ -17,8 +17,11 @@
  *   frame+0x1114 how many clones share this allocation (Dup2 path)
  *   frame+0x1118 -1 = owns its allocation; else the id of the frame that
  *                does (C03777B8 frees the owner's records on the last clone)
- *   file buffer  = handle + 0x2000 (seg[0], measured live 2026-09-26)
- *   raster       = handle + header reserve = file + 0x13400
+ *   file buffer  = raster - frame[0x14C]: handle + 0x2000 with the stock
+ *                0x13400 header (seg[0], measured live 2026-09-26); a take
+ *                whose template carries the card's tag (header_tag.h) has a
+ *                longer header and its file starts earlier
+ *   raster       = handle + header reserve = file + frame[0x14C]
  */
 #define FRAME_KIND        0x04u
 #define FRAME_DESCRIPTOR  0x10u
@@ -36,9 +39,7 @@
 #define KIND_CINEMADNG    1u
 #define STATE_PENDING     0xbu
 #define HEADER_RESERVE    0x15400u
-#define FILE_OFFSET       0x2000u
-#define PIXELS_IN_FILE    (HEADER_RESERVE - FILE_OFFSET)     /* 0x13400 */
-#define TRAILER_BOUND     4096u      /* root IFD copy, bounded; tables extra */
+#define HEAD_MIN          0x400u     /* a header this short is not a DNG's */
 /* A job not done after STALL_TIMES its expected time is given up on (the
  * engine, ~170 Mpix/s measured: STALL_PIX_PER_US), but never before
  * STALL_MIN_US. 2026-10-06: a stuck job was waited on for 250 checks
@@ -70,7 +71,7 @@ static uintptr_t native_frame(uint32_t id) {
     typedef uintptr_t (*lookup)(uintptr_t, uint32_t);
     return ((lookup)0xc03753c0u)(((registry)0xc0374220u)(), id);      /* ARM */
 }
-static uint32_t native_enqueue(uintptr_t creator, uint32_t id, uint32_t argument) {
+static uint32_t native_enqueue_raw(uintptr_t creator, uint32_t id, uint32_t argument) {
     typedef uint32_t (*fn)(uintptr_t, uint32_t, uint32_t);
     return ((fn)0xc037dd50u)(creator, id, argument) & 0xffu;          /* uxtb */
 }
@@ -107,6 +108,22 @@ static uint32_t tick_us(void) {                   /* C002B6E0: the 1 MHz counter
     typedef uint32_t (*fn)(void);
     return ((fn)0xc002b6e0u)();
 }
+#ifdef FPL_DIAG_HOOK_TIME
+/* diagnostic only: the stock enqueue's own time, to take out of the hooks' */
+static uint32_t diag_enqueue(struct fpl_frame_hold *h, uintptr_t creator, uint32_t id,
+                             uint32_t argument) {
+    uint32_t began = tick_us(), r = native_enqueue_raw(creator, id, argument);
+    uint32_t took = tick_us() - began;
+    if (!h) return r;
+    ++h->diag_enq_n;
+    h->diag_enq_us += took;
+    if (took > h->diag_enq_max_us) h->diag_enq_max_us = took;
+    return r;
+}
+#define native_enqueue(c, i, a) diag_enqueue(h, c, i, a)
+#else
+#define native_enqueue native_enqueue_raw
+#endif
 #else
 #error "ARM32 native frame ABI required; host tests must explicitly substitute it"
 #endif
@@ -174,6 +191,13 @@ static void bulk_copy(uintptr_t to, uintptr_t from, uint32_t bytes) {
 }
 #endif
 
+/* The frame's header length (frame+0x14C), or 0 when it cannot be the
+ * file's: the file is the `head` bytes before the raster, inside the reserve. */
+static uint32_t frame_head(uintptr_t frame) {
+    uint32_t head = peek(frame + FRAME_HEADER);
+    return head >= HEAD_MIN && head <= HEADER_RESERVE && !(head & 3u) ? head : 0;
+}
+
 /* May this frame's allocation be exchanged for the spare? Only a frame that
  * owns its allocation outright, with no clone reading it, whose record is the
  * allocator's own class-10 kind, whose raster pointer is still the one derived
@@ -190,7 +214,8 @@ static uint32_t swap_allowed(const struct fpl_frame_hold *h, uintptr_t frame) {
            peek(frame + FRAME_OWNER) == OWNS_ALLOCATION &&
            peek(frame + FRAME_CLONES) == 0 &&
            peek(frame + FRAME_RESERVE) == HEADER_RESERVE &&
-           peek(frame + FRAME_HEADER) == PIXELS_IN_FILE &&
+           frame_head(frame) &&
+           (frame != h->frame || frame_head(frame) == h->head) &&
            peek(frame + FRAME_RASTER) == handle + HEADER_RESERVE &&
            h->workspace.spare.capacity >= peek(frame + FRAME_CAPACITY);
 }
@@ -219,7 +244,15 @@ static uint32_t handoff(void *context, const struct fpl_frame_lease *lease,
             uint32_t a_class = peek(frame + FRAME_CLASS);
             uintptr_t a = peek(frame + FRAME_HANDLE);
             /* the firmware's own header DMA; the CPU copy only if it fails */
-            if (header_dma(spare, a, HEADER_RESERVE) != 0) {
+#if defined(FPL_DIAG_HOOK_TIME) && !defined(FPL_FRAME_HOLD_HOST_TEST)
+            uint32_t dma_t = tick_us();
+#endif
+            uint32_t dma_r = header_dma(spare, a, HEADER_RESERVE);
+#if defined(FPL_DIAG_HOOK_TIME) && !defined(FPL_FRAME_HOLD_HOST_TEST)
+            h->diag_dma_us += tick_us() - dma_t;
+            h->diag_dma_n++;
+#endif
+            if (dma_r != 0) {
                 bulk_copy(uncached(spare), uncached(a), HEADER_RESERVE);
                 saturate(&h->dma_failed);
             }
@@ -228,8 +261,8 @@ static uint32_t handoff(void *context, const struct fpl_frame_lease *lease,
             poke(frame + FRAME_CAPACITY, h->workspace.spare.capacity);
             poke(frame + FRAME_CLASS, h->workspace.spare.allocator_class);
             poke(frame + FRAME_RASTER, spare + HEADER_RESERVE);
-            file = spare + FILE_OFFSET;
-            capacity = h->workspace.spare.capacity - FILE_OFFSET;
+            file = spare + HEADER_RESERVE - h->head;
+            capacity = h->workspace.spare.capacity - (HEADER_RESERVE - h->head);
             h->workspace.spare.handle = a;
             h->workspace.spare.capacity = a_capacity;
             h->workspace.spare.allocator_class = a_class;
@@ -239,8 +272,15 @@ static uint32_t handoff(void *context, const struct fpl_frame_lease *lease,
              * alias on both sides: the engine wrote the output by DMA and
              * the SD engine will read the frame by DMA. */
             if (h->swapping) saturate(&h->swap_undone);
-            bulk_copy(uncached(lease->buffer + PIXELS_IN_FILE), uncached(output->bytes),
+#if defined(FPL_DIAG_HOOK_TIME) && !defined(FPL_FRAME_HOLD_HOST_TEST)
+            uint32_t copy_t = tick_us();
+#endif
+            bulk_copy(uncached(lease->buffer + h->head), uncached(output->bytes),
                       output->length);
+#if defined(FPL_DIAG_HOOK_TIME) && !defined(FPL_FRAME_HOLD_HOST_TEST)
+            h->diag_copy_us += tick_us() - copy_t;
+            h->diag_copy_n++;
+#endif
         }
         for (uint32_t n = 0; n < tiles; ++n)
             c->tile_bytes[n] = bswap(peek(uncached(h->job.table + 4u * n)));
@@ -250,6 +290,7 @@ static uint32_t handoff(void *context, const struct fpl_frame_lease *lease,
         c->tile_height = h->job.tile_height;
         c->capacity = capacity;
         c->stock_bytes = lease->stock_file_bytes;
+        c->head = h->head;
         barrier();
         c->file = file;                      /* published */
         barrier();
@@ -287,8 +328,8 @@ static uint32_t service_done(struct fpl_frame_hold *h, struct fpl_pipeline *p,
         out.bytes = h->swapping ? h->workspace.spare.handle + HEADER_RESERVE
                                 : h->workspace.output;
         out.length = h->job.padded;
-        out.file_bytes = PIXELS_IN_FILE + h->job.padded + TRAILER_BOUND +
-                         8u * h->job.tiles;
+        out.file_bytes = h->head + h->job.padded;   /* the IFD and its tables
+                                                       are in the header */
         out.validated = 1;       /* codec success, every tile, source length
                                     covered by the frame's own allocation,
                                     output bounded by F_INIT's checked length,
@@ -354,7 +395,7 @@ static uint32_t readable(uint32_t capacity) {
 /* Build the lease and decide whether this frame can be held at all. */
 static uint32_t eligible(struct fpl_frame_hold *h, uintptr_t frame,
                          struct fpl_frame_lease *lease) {
-    uint32_t descriptor[FPL_FACTS_DESCRIPTOR_WORDS], handle, capacity, told;
+    uint32_t descriptor[FPL_FACTS_DESCRIPTOR_WORDS], handle, capacity, told, head;
     for (uint32_t n = 0; n < FPL_FACTS_DESCRIPTOR_WORDS; ++n)
         descriptor[n] = peek(frame + FRAME_DESCRIPTOR + 4u * n);
     handle = peek(frame + FRAME_HANDLE);
@@ -365,8 +406,14 @@ static uint32_t eligible(struct fpl_frame_hold *h, uintptr_t frame,
         saturate(&h->refused_by[FPL_HOLD_R_DESCRIPTOR]);
         return 0;
     }
-    if (peek(frame + FRAME_RESERVE) != HEADER_RESERVE) {
+    head = frame_head(frame);
+    if (peek(frame + FRAME_RESERVE) != HEADER_RESERVE || !head) {
         saturate(&h->refused_by[FPL_HOLD_R_RESERVE]);
+        return 0;
+    }
+    if (h->require_head && head != h->require_head) {
+        /* not the template that holds this take's IFD: it stays RAW */
+        saturate(&h->refused_by[FPL_HOLD_R_HEADER]);
         return 0;
     }
     if (!handle || (handle & 0x3ffu) || !told) {
@@ -391,12 +438,12 @@ static uint32_t eligible(struct fpl_frame_hold *h, uintptr_t frame,
         saturate(&h->refused_by[FPL_HOLD_R_SLOT]);
         return 0;
     }
-    lease->buffer = handle + FILE_OFFSET;
+    lease->buffer = handle + HEADER_RESERVE - head;
     lease->metadata = frame;
     lease->writer = frame;                  /* the file is made from the frame
                                                at dispatch, after release */
-    lease->capacity = capacity - FILE_OFFSET;
-    lease->stock_file_bytes = PIXELS_IN_FILE + align512(h->facts->seen.raster);
+    lease->capacity = capacity - (HEADER_RESERVE - head);
+    lease->stock_file_bytes = head + align512(h->facts->seen.raster);
     return 1;
 }
 
@@ -429,6 +476,7 @@ static uint32_t admit(struct fpl_frame_hold *h, uintptr_t creator, uint32_t nati
 
     /* ---- held: exactly C037DD50's prefix, then the engine ---------------- */
     poke(frame + FRAME_STATE, STATE_PENDING);
+    h->head = frame_head(frame);         /* eligible() proved it non-zero */
     h->creator = creator;
     h->frame = frame;
     h->native_id = native_id;
@@ -436,7 +484,7 @@ static uint32_t admit(struct fpl_frame_hold *h, uintptr_t creator, uint32_t nati
     in->width = h->facts->seen.width;
     in->height = h->facts->seen.height;
     in->format = h->facts->seen.format;
-    in->source = lease.buffer - FILE_OFFSET + HEADER_RESERVE;
+    in->source = lease.buffer + h->head;
     in->source_capacity = readable(peek(frame + FRAME_CAPACITY));
     h->swapping = swap_allowed(h, frame);
     if (!h->swapping && h->workspace.spare.handle) saturate(&h->swap_declined);
@@ -698,11 +746,22 @@ uint32_t fpl_lanes_arrive(struct fpl_frame_hold *const lane[2], uintptr_t creato
                           uint32_t native_id, uint32_t argument) {
     struct fpl_frame_hold *first, *second;
     uint32_t order;
+#ifdef FPL_DIAG_HOOK_TIME
+    struct fpl_frame_hold *h = lane ? lane[0] : 0;       /* diag_enqueue's account */
+#endif
     if (!lane || !hold_valid(lane[0])) return native_enqueue(creator, native_id, argument);
     by_age(lane, &first, &second);
     /* finished frames go back first, oldest first */
+#if defined(FPL_DIAG_HOOK_TIME) && !defined(FPL_FRAME_HOLD_HOST_TEST)
+    uint32_t diag_t = tick_us(), diag_c = (first->lane == FPL_LANE_FINISHED) +
+                      (second && second->lane == FPL_LANE_FINISHED);
+#endif
     fpl_hold_collect(first);
     if (second) fpl_hold_collect(second);
+#if defined(FPL_DIAG_HOOK_TIME) && !defined(FPL_FRAME_HOLD_HOST_TEST)
+    lane[0]->diag_collect_us += tick_us() - diag_t;
+    lane[0]->diag_collect_n += diag_c;
+#endif
     if (engine_failed(lane)) {
         /* Native transfers stay on the arrival/stop side, not the worker.
          * Waiting frames have not touched the failed engine and go RAW. */
@@ -712,10 +771,17 @@ uint32_t fpl_lanes_arrive(struct fpl_frame_hold *const lane[2], uintptr_t creato
     }
     order = (second && second->order > first->order ? second->order : first->order) + 1u;
     for (uint32_t n = 0; n < 2; ++n) {
-        struct fpl_frame_hold *h = lane[n];
-        if (!hold_valid(h) || h->lane != FPL_LANE_IDLE) continue;
-        h->order = order;
-        if (fpl_hold_take(h, creator, native_id, argument)) return 1;
+        struct fpl_frame_hold *l = lane[n];
+        if (!hold_valid(l) || l->lane != FPL_LANE_IDLE) continue;
+        l->order = order;
+#if defined(FPL_DIAG_HOOK_TIME) && !defined(FPL_FRAME_HOLD_HOST_TEST)
+        uint32_t take_t = tick_us(), took_it = fpl_hold_take(l, creator, native_id, argument);
+        lane[0]->diag_take_us += tick_us() - take_t;
+        lane[0]->diag_take_n++;
+        if (took_it) return 1;
+#else
+        if (fpl_hold_take(l, creator, native_id, argument)) return 1;
+#endif
         break;                       /* not a frame to hold: the other lane
                                         would say the same */
     }

@@ -45,6 +45,7 @@ RESUME = {STOP: 'stop_resume', END: 'end_resume', POOL: 'pool_resume',
 REPLAY = {STOP: 'stop_replay', END: 'end_replay', POOL: 'pool_replay',
           EVENT: 'event_replay', PLAY: 'play_replay'}
 LOWER = 0xC0100000                 # a layer below's target: inside branch reach
+CACHED = 0x80000000                # the block's cached alias: VA + this
 
 
 def branch(site, target, op):
@@ -64,6 +65,16 @@ class LosslessCamera(T.Camera):
         for at, name in ((0xC000EC14, 'IRQ_OFF'), (0xC000EC24, 'IRQ_ON')):
             self.mu.mem_write(at, struct.pack('<I', 0xE12FFF1E))
             self.by_addr[at] = name
+        # The camera maps the loader's NonCacheBuffer heap twice: VA 0x4.......
+        # uncached and VA +0x80000000 cached, one physical memory (MMU rows
+        # 0x45044C02 / 0x45045C06, read live 2026-10-13). The card switches to
+        # the cached alias, so the model maps both onto one buffer.
+        import ctypes
+        heap = self.mu.mem_read(T.HEAP, T.HEAP_SIZE)
+        self.mu.mem_unmap(T.HEAP, T.HEAP_SIZE)
+        self._heap_buf = ctypes.create_string_buffer(bytes(heap), T.HEAP_SIZE)
+        for at in (T.HEAP, T.HEAP + CACHED):
+            self.mu.mem_map_ptr(at, T.HEAP_SIZE, 7, self._heap_buf)
 
 
 @unittest.skipIf(T.Uc is None or not T.IMAGE.exists(), 'needs unicorn and the image')
@@ -101,6 +112,26 @@ class LosslessV3Tests(unittest.TestCase):
         return T.test_sup(sid, [(a, self.stock(a), k, new) for a, k, new in rows])
 
     # ---- loaded ---------------------------------------------------------
+    def test_the_cached_alias_is_cleaned_before_its_first_use(self):
+        """The heap's cached alias may hold stale lines from before the load:
+        a clean+invalidate must come before the first access through it, and
+        another before entry returns, so what was written there is in memory."""
+        files, dirs = T.card(('10LOSS.BIN', self.sup))
+        cam = LosslessCamera(files, dirs)
+        from unicorn import UC_HOOK_MEM_READ, UC_HOOK_MEM_WRITE
+        first = []
+        def touched(mu, access, addr, size, value, _):
+            if not first:
+                first.append(len(cam.calls))
+        cam.mu.hook_add(UC_HOOK_MEM_READ | UC_HOOK_MEM_WRITE, touched,
+                        begin=T.HEAP + CACHED, end=T.HEAP + CACHED + T.HEAP_SIZE - 1)
+        cam.boot()
+        self.assertEqual(self.outcome(cam), 'LOADED')
+        self.assertTrue(first, 'the cached alias was never used')
+        self.assertIn('DCACHE', cam.calls[:first[0]])
+        before_return = cam.calls[:cam.calls.index('ICACHE', first[0])]
+        self.assertEqual(before_return[-1], 'DCACHE')
+
     def test_loads_claims_every_site_and_the_engine_then_arms(self):
         cam = self.boot()
         self.assertEqual(self.outcome(cam), 'LOADED')
@@ -116,6 +147,9 @@ class LosslessV3Tests(unittest.TestCase):
         cave = cam.w(T.cave.CAVE_BUMP) - 96                      # card.S CAVE_BYTES
         self.assertEqual(cave, (T.cave.CAVE_ARENA + 7) & ~7)     # cave_alloc: 8-aligned
         base, blob = self.block(cam), self.blob(cam)
+        # everything the firmware is given names the block's CACHED alias
+        cached = blob + CACHED
+        self.assertTrue(0xC4000000 <= cached, hex(cached))
         for site, off in VENEER_AT.items():
             word = cam.w(site)
             op = 0xEA000000 if site in B_FORM else 0xEB000000
@@ -123,14 +157,14 @@ class LosslessV3Tests(unittest.TestCase):
             self.assertEqual(target_of(site, word), cave + off, hex(site))
             self.assertEqual(cam.w(cave + off), 0xE51FF004)
             shim = cam.w(cave + off + 4)
-            self.assertTrue(blob <= shim < base + B.SL_HEADER_LEN + self.facts['c_base'],
+            self.assertTrue(cached <= shim < cached + self.facts['c_base'],
                             f'{site:#x} shim {shim:#x}')
         self.assertEqual(cam.w(cave + 32), 0x43504C46)          # "FLPC"
-        self.assertEqual(cam.w(cave + 40), blob)
+        self.assertEqual(cam.w(cave + 40), cached)
         state = cam.w(cave + 36)
-        self.assertEqual(state, blob + self.facts['state_off'])
+        self.assertEqual(state, cached + self.facts['state_off'])
         self.assertEqual(cam.w(state), 0x44524143)              # "CARD": init ran
-        self.assertEqual(cam.tasks, [blob + self.sym['task_shim']])
+        self.assertEqual(cam.tasks, [cached + self.sym['task_shim']])
         # the call sites call what was below them: the firmware
         self.assertEqual(cam.w(blob + self.sym['flush_real']), 0xC069ADE0)
         self.assertEqual(cam.w(blob + self.sym['discard_real']), 0xC037E008)

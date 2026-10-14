@@ -28,11 +28,11 @@ static void wr(uintptr_t a, uint32_t v) { *(volatile uint32_t *)a = v; }
 static void saturate(uint32_t *v) { if (*v != UINT32_MAX) ++*v; }
 
 uint32_t fpl_flush_before(uintptr_t writer, struct fpl_frame_hold *h,
-                          struct fpl_frame_hold *h2, struct fpl_flush_stats *s) {
+                          struct fpl_frame_hold *h2, const struct fpl_header_tag *tag,
+                          struct fpl_flush_stats *s) {
     const struct fpl_hold_commit *c;
-    struct fpl_trailer t;
     uintptr_t node, buffer;
-    uint32_t length, rounded;
+    uint32_t length, rounded, file_bytes = 0;
 
     if (!s) return FPL_INVALID;
     saturate(&s->calls);
@@ -57,20 +57,22 @@ uint32_t fpl_flush_before(uintptr_t writer, struct fpl_frame_hold *h,
         saturate(&s->length_mismatch);
         return FPL_OK;
     }
-    if (fpl_trailer_write_all(uncached(buffer), c->payload, c->tile_bytes, c->tiles,
-                              c->tile_width, c->tile_height, c->capacity,
-                              rd, wr, &t) != FPL_OK) {
-        /* The payload is already in the raster and the header was refused:
-         * this frame is lost either way. Recorded, consumed, not retried. */
-        saturate(&s->trailer_failed);
+    if (!tag || c->head != tag->head ||
+        fpl_header_tag_complete(tag, uncached(buffer), c->payload, c->tile_bytes, c->tiles,
+                                c->tile_width, c->tile_height, c->capacity,
+                                rd, wr, &file_bytes) != FPL_OK) {
+        /* The payload is already in the raster and the header does not hold
+         * the take's IFD: this frame is lost either way. Recorded, consumed,
+         * not retried. */
+        saturate(&s->tag_failed);
         fpl_hold_consumed(h, c);
         return FPL_FAULT;
     }
     barrier();
     /* Rounded up to 1 KiB, as every length given to this writer has been:
-     * the extra bytes are the old raster's, after the file's last table. */
-    rounded = (t.file_bytes + 0x3ffu) & ~0x3ffu;
-    if (rounded > c->capacity || rounded >= c->stock_bytes) rounded = t.file_bytes;
+     * the extra bytes are the old raster's, after the last tile. */
+    rounded = (file_bytes + 0x3ffu) & ~0x3ffu;
+    if (rounded > c->capacity || rounded >= c->stock_bytes) rounded = file_bytes;
     poke(node + NODE_LENGTH, rounded);
     barrier();
     s->last_length = peek(node + NODE_LENGTH);

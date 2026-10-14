@@ -54,7 +54,8 @@ def build(directory, source=None, name='codec.dylib'):
     lib = ct.CDLL(str(out))
     for fn, count, ret in (('reset', 3, True), ('set', 2, False), ('submit', 0, True),
                            ('poll', 0, True), ('wait', 1, True), ('get', 1, True), ('source_bytes', 3, True),
-                           ('abort', 0, True)):
+                           ('abort', 0, True), ('engine_open', 0, True),
+                           ('release', 0, True), ('reused', 0, True), ('submit_reg', 1, True)):
         f = getattr(lib, 'fpl_fixture_' + fn)
         f.argtypes = [ct.c_uint32] * count
         f.restype = ct.c_uint32 if ret else None
@@ -85,6 +86,55 @@ class CodecJobTests(unittest.TestCase):
 
     def request(self):
         return [self.get(200 + i) for i in range(12)]
+
+    # ---- keep_open: one open a take, the set-up registers cleared (2026-10-15)
+    K_KEEP, K_DIRTY = 18, 19
+
+    def finish_one(self):
+        self.assertEqual(self.lib.fpl_fixture_submit(), OK)
+        self.assertEqual(self.lib.fpl_fixture_poll(), OK)
+
+    def test_kept_open_later_jobs_clear_the_set_up_instead_of_reopening(self):
+        self.set(self.K_KEEP, 1)
+        self.finish_one()
+        self.assertNotIn(C_CLOSE, self.calls(), 'a finished job closed a kept-open engine')
+        for _ in range(2):
+            self.set(self.K_DIRTY, 0x5A5A5A50)       # what C062FFF8 ORed in last time
+            self.finish_one()
+            regs = [self.lib.fpl_fixture_submit_reg(n) for n in range(19)]
+            self.assertEqual(regs[:13] + regs[14:], [0] * 18, 'set-up not cleared before submit')
+            self.assertEqual(regs[13] & 1, 1, '300D0074, the enable, was touched')
+        self.assertEqual(self.calls().count(C_OPEN), 1)
+        self.assertEqual(self.lib.fpl_fixture_reused(), 2)
+        self.assertEqual(self.calls().count(C_RESET), 3, 'the soft reset before every start')
+        self.assertEqual(self.lib.fpl_fixture_release(), OK)
+        self.assertEqual(self.calls()[-1], C_CLOSE)
+        self.assertEqual(self.lib.fpl_fixture_engine_open(), 0)
+        self.assertEqual(self.lib.fpl_fixture_release(), OK)
+        self.assertEqual(self.calls().count(C_CLOSE), 1)
+
+    def test_release_never_closes_a_running_job(self):
+        self.set(self.K_KEEP, 1)
+        self.assertEqual(self.lib.fpl_fixture_submit(), OK)
+        self.assertEqual(self.lib.fpl_fixture_release(), BUSY)
+        self.assertNotIn(C_CLOSE, self.calls())
+
+    def test_a_refusal_still_closes_and_the_next_job_reopens(self):
+        self.set(self.K_KEEP, 1)
+        self.set(K_PATTERN, 4)
+        self.assertEqual(self.lib.fpl_fixture_submit(), OK)
+        self.assertEqual(self.lib.fpl_fixture_poll(), UNSUPPORTED)
+        self.assertEqual(self.lib.fpl_fixture_engine_open(), 0)
+        self.set(K_PATTERN, 1)
+        self.finish_one()
+        self.assertEqual(self.calls().count(C_OPEN), 2)
+        self.assertEqual(self.lib.fpl_fixture_reused(), 0)
+
+    def test_without_keep_open_every_job_opens_and_closes_as_the_encoder(self):
+        self.finish_one()
+        self.finish_one()
+        self.assertEqual((self.calls().count(C_OPEN), self.calls().count(C_CLOSE)), (2, 2))
+        self.assertEqual(self.lib.fpl_fixture_engine_open(), 0)
 
     # ---- submit -------------------------------------------------------
     def test_submit_calls_the_firmware_steps_in_order_and_does_not_wait(self):

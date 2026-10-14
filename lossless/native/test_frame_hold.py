@@ -32,11 +32,11 @@ COMMITS = 16                     # FPL_HOLD_COMMITS
 GRANTED_EXTRA = 1024             # the allocator granting a little more than asked
 NONE = 0xFFFFFFFF
 SOURCES = ['frame_hold.c', 'codec_job.c', 'producer_facts.c', 'frame_hold_fixture.c',
-           'flush_site.c', 'trailer.c']
+           'flush_site.c', 'header_tag.c']
 CORE = ['frame_pipeline.c', 'control.c']
 SMALL_PAYLOAD = 40 * 1024        # compresses well: the file gets shorter
-HUGE_PAYLOAD = 0x45C00           # fits the engine's room, but no file saving:
-                                 # plus the trailer bound it passes the stock file
+HUGE_PAYLOAD = 0x46400           # fits the engine's room (align_kib of the raster)
+                                 # but not under the stock file: no saving
 
 
 def raw(i): return 0xF0000000 | i
@@ -79,7 +79,8 @@ def build(directory, replace=None, name='hold.dylib'):
                            ('lane_finish', 1, True), ('lane_get', 2, True),
                            ('kick', 1, True), ('reenter', 1, False),
                            ('dma_fails', 1, False), ('pipeline_phase', 1, False),
-                           ('task_in_sleep', 1, False)):
+                           ('task_in_sleep', 1, False), ('head', 1, False),
+                           ('require_head', 1, False)):
         f = getattr(lib, 'fpl_fixture_' + fn)
         f.argtypes = [ct.c_uint32] * count
         f.restype = ct.c_uint32 if ret else None
@@ -299,6 +300,35 @@ class HoldTests(unittest.TestCase):
         self.assertEqual(self.queued(), [(1, raw(1), 8)])
         self.assertEqual(self.get(STARTS), 0)
 
+    def test_a_frame_of_another_template_than_the_takes_ifd_is_not_held(self):
+        """require_head: only frames whose header is the template the take's
+        IFD was prepared in; 0xFFFFFFFF (the card at REC) holds nothing."""
+        for require in (0x13800, 0xFFFFFFFF):
+            with self.subTest(require=hex(require)):
+                self.reset()
+                self.lib.fpl_fixture_require_head(require)
+                self.frames(1, spare=0)
+                self.lib.fpl_fixture_arrive(1)
+                self.assertEqual(self.queued(), [(1, raw(1), 8)])
+                self.assertEqual(self.get(STARTS), 0)
+        self.reset()
+        self.lib.fpl_fixture_require_head(0x13400)
+        self.frames(1, spare=0)
+        self.lib.fpl_fixture_arrive(1)
+        self.assertEqual(self.get(STARTS), 1)
+
+    def test_a_frame_whose_header_cannot_be_its_file_is_not_held(self):
+        """frame+0x14C past the reserve, unaligned or too short: the file would
+        not start inside the allocation (2026-10-14, header_tag.h)."""
+        for value in (0x15800, 0x13402, 0x200):
+            with self.subTest(head=hex(value)):
+                self.reset()
+                self.frames(1, spare=0)
+                self.lib.fpl_fixture_frame_field(1, 0x14C, value)
+                self.lib.fpl_fixture_arrive(1)
+                self.assertEqual(self.queued(), [(1, raw(1), 8)])
+                self.assertEqual(self.get(STARTS), 0)
+
     def test_a_frame_with_its_own_buffer_pointer_in_the_descriptor_is_still_held(self):
         """Measured on the camera: descriptor word 15 is per frame."""
         self.frames(1)
@@ -461,7 +491,7 @@ class SwapHoldTests(HoldTests):
         self.assertEqual(self.get(DMA_FAILED), 1)
 
     def test_a_frame_that_shares_its_allocation_is_copied_back_not_swapped(self):
-        for field, value in ((0x1114, 1), (0x1118, 5), (0x70, 9), (0x14C, 0x13200)):
+        for field, value in ((0x1114, 1), (0x1118, 5), (0x70, 9)):
             with self.subTest(field=hex(field)):
                 self.reset()
                 self.frames(1, 2)
@@ -591,10 +621,13 @@ class NoOutputTests(unittest.TestCase):
         self.assertEqual(self.get(SWAP_UNDONE), 1)
 
 
+TAG_IFD_AT = 0x400                 # frame_hold_fixture.c FIXTURE_TAG_AT
+
+
 class FlushSiteTests(HoldTests):
     """The whole chain: hold, encode, give back, then the writer's flush
-    writes the trailer and shortens the node -- only for the frame that was
-    promised, only at its stock length."""
+    completes the IFD the header already holds and shortens the node -- only
+    for the frame that was promised, only at its stock length."""
 
     def frames(self, *ids, spare=GRANTED_EXTRA):
         super().frames(*ids, spare=spare)
@@ -603,7 +636,7 @@ class FlushSiteTests(HoldTests):
 
     def fget(self, f): return self.lib.fpl_fixture_flush_get(f)
 
-    def test_a_compressed_frame_gets_its_trailer_and_a_shorter_length(self):
+    def test_a_compressed_frame_gets_its_ifd_and_a_shorter_length(self):
         self.frames(1, 2)
         self.lib.fpl_fixture_arrive(1)
         self.lib.fpl_fixture_arrive(2)
@@ -613,9 +646,26 @@ class FlushSiteTests(HoldTests):
         length = self.fget(0)
         self.assertLess(length, stock)
         self.assertEqual(length % 1024, 0)
-        self.assertEqual(self.lib.fpl_fixture_file_word(1, 4), 0x13400 + SMALL_PAYLOAD,
-                         'root pointer not moved to the trailing IFD')
+        self.assertEqual(self.lib.fpl_fixture_file_word(1, 4), TAG_IFD_AT,
+                         'root pointer not moved to the prepared IFD')
         self.assertEqual(self.lib.fpl_fixture_flush(1, 0), NONE, 'promise not consumed')
+        self.assertEqual(self.get(OOB), 0)
+
+    def test_a_longer_header_moves_the_file_and_the_payload_with_it(self):
+        """A take whose template carries the card's tag (header_tag.h): the
+        file starts 0x15400 - head before the raster, the payload at `head`."""
+        head = 0x14000
+        self.lib.fpl_fixture_head(head)
+        self.frames(1, 2)
+        self.lib.fpl_fixture_arrive(1)
+        self.lib.fpl_fixture_arrive(2)
+        self.assertEqual(self.lib.fpl_fixture_writer_flush(1, 0), OK)
+        self.assertEqual(self.fget(1), 1)
+        stock = head + ((self.get(RASTER) + 0x1FF) & ~0x1FF)
+        self.assertLess(self.fget(0), stock)
+        self.assertEqual(self.lib.fpl_fixture_file_word(1, 4), TAG_IFD_AT)
+        # the node is the longer header plus the payload, 1 KiB rounded
+        self.assertEqual(self.fget(0), (head + SMALL_PAYLOAD + 0x3FF) & ~0x3FF)
         self.assertEqual(self.get(OOB), 0)
 
     def test_a_raw_frame_is_left_exactly_as_it_was(self):
@@ -658,7 +708,7 @@ class FlushSiteTests(HoldTests):
         self.assertEqual(self.lib.fpl_fixture_writer_flush(1, 0), OK)
         self.assertEqual(self.fget(1), 1)
 
-    def test_a_header_the_trailer_refuses_is_recorded_and_not_retried(self):
+    def test_a_header_that_is_not_the_takes_template_is_recorded_and_not_retried(self):
         """The payload is already in the raster: that frame is lost either
         way. It must be counted, its promise consumed, and nothing written."""
         self.frames(1, 2)
@@ -692,8 +742,8 @@ class HoldMutationTests(unittest.TestCase):
         'does not mark the frame pending': (
             '    poke(frame + FRAME_STATE, STATE_PENDING);', ''),
         'copies into the NEXT frame': (
-            '        bulk_copy(uncached(lease->buffer + PIXELS_IN_FILE), uncached(output->bytes),',
-            '        bulk_copy(uncached(lease->buffer + 0x60000u + PIXELS_IN_FILE), uncached(output->bytes),'),
+            '        bulk_copy(uncached(lease->buffer + h->head), uncached(output->bytes),',
+            '        bulk_copy(uncached(lease->buffer + 0x60000u + h->head), uncached(output->bytes),'),
         'skips the format check': (
             '    if (!fpl_producer_facts_match(h->facts, descriptor)) {',
             '    if (0 && !fpl_producer_facts_match(h->facts, descriptor)) {'),
@@ -720,13 +770,13 @@ class HoldMutationTests(unittest.TestCase):
 
     SWAP_MUTATIONS = {
         'swaps without the header': (
-            '            if (header_dma(spare, a, HEADER_RESERVE) != 0) {',
-            '            if (0) {'),
+            '            uint32_t dma_r = header_dma(spare, a, HEADER_RESERVE);',
+            '            uint32_t dma_r = 0;'),
         'no CPU copy when the DMA refuses': (
             '                bulk_copy(uncached(spare), uncached(a), HEADER_RESERVE);\n', ''),
         'DMA through the uncached alias': (
-            '            if (header_dma(spare, a, HEADER_RESERVE) != 0) {',
-            '            if (header_dma(uncached(spare), uncached(a), HEADER_RESERVE) != 0) {'),
+            '            uint32_t dma_r = header_dma(spare, a, HEADER_RESERVE);',
+            '            uint32_t dma_r = header_dma(uncached(spare), uncached(a), HEADER_RESERVE);'),
         'leaves the raster pointer on A': (
             '            poke(frame + FRAME_RASTER, spare + HEADER_RESERVE);\n', ''),
         'keeps the old record': ('            poke(frame + FRAME_HANDLE, spare);\n', ''),
@@ -738,7 +788,7 @@ class HoldMutationTests(unittest.TestCase):
         'does not look again at the release': (
             '        if (h->swapping && swap_allowed(h, h->frame)) {', '        if (h->swapping) {'),
         'never takes A as the next spare': ('            h->workspace.spare.handle = a;\n', ''),
-        'publishes the old file buffer': ('            file = spare + FILE_OFFSET;\n', ''),
+        'publishes the old file buffer': ('            file = spare + HEADER_RESERVE - h->head;\n', ''),
         'accepts a smaller spare': (
             '           h->workspace.spare.capacity >= peek(frame + FRAME_CAPACITY);',
             '           1;'),
@@ -788,11 +838,10 @@ class FlushMutationTests(unittest.TestCase):
         'ignores the stock length': (
             'flush_site.c', '    if (length != c->stock_bytes) {',
             '    if (length != c->stock_bytes && 0) {'),
-        'shortens before the trailer': (
+        'shortens before the IFD is complete': (
             'flush_site.c',
-            '    if (fpl_trailer_write_all(uncached(buffer), c->payload, c->tile_bytes, c->tiles,',
-            '    poke(node + NODE_LENGTH, 1024);\n'
-            '    if (fpl_trailer_write_all(uncached(buffer), c->payload, c->tile_bytes, c->tiles,'),
+            '    if (!tag || c->head != tag->head ||',
+            '    poke(node + NODE_LENGTH, 1024);\n    if (!tag || c->head != tag->head ||'),
         'never consumes the promise': (
             'flush_site.c', '    fpl_hold_consumed(h, c);\n    saturate(&s->applied);',
             '    saturate(&s->applied);'),

@@ -8,7 +8,7 @@
  *   arrive C038BFF0  every CinemaDNG frame reaching the creator.
  *   stop   C0398D88  (entry) every native stop check: finish the held frame,
  *                    then end the take and give the workspace back.
- *   flush  C03A5490  the writer's final flush: trailer and length.
+ *   flush  C03A5490  the writer's final flush: the prepared IFD and length.
  *
  * TEST-CARD POLICY, deliberately different from the product contract:
  *
@@ -36,26 +36,11 @@
 #include "menu_page.h"
 #include "play_decode.h"
 #include "record_diag.h"
+#include "header_tag.h"
 
 #define FPL_CARD_MAGIC 0x44524143u               /* "CARD" */
 #define FPL_TRACE      512u
 #define FPL_ELOG       2048u
-/* The CinemaDNG file layer's bulk mode (FUN_c03A5050 at a take's first file:
- * FUN_c0366790 -> XC_MediaFileSdCard v17 -> FUN_c063F220) commits written files
- * once BULK bytes have been written, or 128 files are queued; only then does each
- * file's completion (FUN_c03A55D0 -> event 9) let its frame go. A frame keeps its
- * descriptor (MPoolFixed<4380,96>: REC stops at 94 in flight) until then. Stock
- * BULK is 64 MB, ~20 stock FHD files; compressed FHD files are ~0.8 MB, so a
- * commit needed ~80 of them and REC stopped at frame 94 (projects/lossless-sup/
- * notes/EARLY_STOP_94.md). For a compressed take BULK is FPL_BULK_FILES stock
- * frames' worth -- a commit within a few files whatever the resolution or the
- * compression -- and stock for every other take. FUN_c03A5050 reads the word at
- * the first file, after REC preparation. */
-#define FPL_BULK_CFG   0xc0b9e5d8u        /* {bulk bytes, 0, 256 KiB, FUN_c03A55D0} */
-#define FPL_BULK_STOCK 0x04000000u
-#define FPL_BULK_FILES 3u
-#define FPL_BULK_MIN   0x00400000u
-#define FPL_FILE_HEAD  0x13400u           /* the DNG header before the raster */
 /* Lossless RAW ON/OFF, kept in this sup's own file (Loader v3 passes its path):
  * card.S `settings`, 16 bytes {"FLST", version 1, 0/1, check}. Read from the
  * block at boot; rewritten in place (open 7, seek, write, read back) by the codec
@@ -70,6 +55,16 @@
 #define FPL_QUIET_US       3000000u       /* no REC and no frame for this long */
 #define FPL_HEADER_LEN     32u            /* the FSB1 header before the blob */
 #define USED __attribute__((used))
+/* diagnostic only (FPL_DIAG_HOOK_TIME): every hook's C entry is wrapped to
+ * count its calls and time, and to keep the stack pointer it ran on -- the
+ * task, from the firmware's TCB stack ranges (C301EACC, 0x34 a task). */
+#ifdef FPL_DIAG_HOOK_TIME
+#define HOOK_DEF static
+#define HOOK(n) n##_body
+#else
+#define HOOK_DEF USED
+#define HOOK(n) n
+#endif
 
 #if defined(__arm__) && UINTPTR_MAX == UINT32_MAX
 static uint32_t card_original_prepare(uintptr_t camera, const uint32_t *request) {
@@ -80,6 +75,11 @@ static uint32_t card_original_enqueue(uintptr_t creator, uint32_t id, uint32_t a
     typedef uint32_t (*fn)(uintptr_t, uint32_t, uint32_t);
     return ((fn)0xc037dd50u)(creator, id, argument);
 }
+#ifdef FPL_DIAG_HOOK_TIME
+#define CARD_ENQ(c, cr, i, a) card_timed_enqueue(c, cr, i, a)
+#else
+#define CARD_ENQ(c, cr, i, a) card_original_enqueue(cr, i, a)
+#endif
 /* The frames' own allocator: C037A990 gets every kind-1 frame buffer with
  * C001CFD8(C001CF78(10), &frame[0x68], bytes, 0x400, 0) and C0374180 frees
  * it with C001D3D0. The spare comes from the same place, or the firmware
@@ -183,6 +183,36 @@ static void card_registry(uint32_t out[4]) {
              *(volatile const uint32_t *)(oldest + 0x1114u) << 16;
     out[3] = *(volatile const uint32_t *)(oldest + 0x1118u);
 }
+/* The CinemaDNG tag Subject and the take's header template (research/
+ * firmware/notes/cinemadng-header/HDR_CDNG.md §0.1, §0.6, §1): nine observer
+ * slots, each called vt+0xC(observer, DataPool) at every notify; the
+ * template's address and length in the MovRec singleton C358DB98. */
+#define CARD_SUBJECT       0xc31ac4ecu
+#define CARD_TEMPLATE      0xc358dba8u     /* singleton +0x10 */
+#define CARD_TEMPLATE_LEN  0xc358dba4u     /* singleton +0xC = req+0x14C */
+/* the builder's tag add, as the lens observer calls it (FUN_c0364810) */
+static uint32_t card_tag_add(uintptr_t builder, uint32_t ifd, uint32_t tag, uint32_t type,
+                             uint32_t count, const void *value) {
+    typedef uint32_t (*fn)(uintptr_t, uint32_t, uint32_t, uint32_t, uint32_t, const void *);
+    return ((fn)0xc00ba378u)(builder, ifd, tag, type, count, value);
+}
+/* DataPool->vtable[slot](DataPool): +0x40 the event {mode, type, flag},
+ * +0x2C the tag builder (0 once serialized) */
+static uintptr_t card_pool_call(uintptr_t pool, uint32_t slot) {
+    typedef uintptr_t (*fn)(uintptr_t);
+    uintptr_t vt = *(volatile const uint32_t *)pool;
+    return ((fn)*(volatile const uint32_t *)(vt + slot))(pool);
+}
+/* The template is cached heap and the firmware's DMA reads it: clean what we
+ * wrote to memory (DCCMVAC per 32-byte line). */
+static void card_clean_lines(uintptr_t at, uint32_t bytes) {
+    for (uintptr_t p = at & ~(uintptr_t)31; p < at + bytes; p += 32)
+        __asm__ volatile("mcr p15, 0, %0, c7, c10, 1" :: "r"(p) : "memory");
+    __asm__ volatile("dsb sy" ::: "memory");
+}
+static uint32_t card_tag_read(uintptr_t a) { return *(volatile const uint32_t *)a; }
+static void card_tag_write(uintptr_t a, uint32_t v) { *(volatile uint32_t *)a = v; }
+static void card_publish_barrier(void) { __asm__ volatile("dmb sy" ::: "memory"); }
 #elif defined(FPL_CARD_HOST_TEST)
 extern uint32_t fpl_test_card_prepare(uintptr_t, const uint32_t *);
 extern uint32_t fpl_test_card_enqueue(uintptr_t, uint32_t, uint32_t);
@@ -196,6 +226,7 @@ extern void fpl_test_card_irq_restore(uint32_t);
 #define card_sleep_ms fpl_test_card_sleep
 #define card_original_prepare fpl_test_card_prepare
 #define card_original_enqueue fpl_test_card_enqueue
+#define CARD_ENQ(c, cr, i, a) card_original_enqueue(cr, i, a)
 #define card_get_spare fpl_test_card_get_spare
 #define card_free_spare fpl_test_card_free_spare
 #define card_irq_off fpl_test_card_irq_off
@@ -211,6 +242,17 @@ static void card_f_close(void *o) { (void)o; }
 static void card_f_dtor(void *o) { (void)o; }
 #define card_pool_left() 0u
 static void card_registry(uint32_t out[4]) { out[0] = out[1] = out[2] = out[3] = 0; }
+extern uintptr_t fpl_test_card_subject;
+#define CARD_SUBJECT fpl_test_card_subject
+#define CARD_TEMPLATE 0u
+#define CARD_TEMPLATE_LEN 0u
+static uint32_t card_tag_add(uintptr_t b, uint32_t i, uint32_t t, uint32_t y, uint32_t n,
+                             const void *v) { (void)b; (void)i; (void)t; (void)y; (void)n; (void)v; return 0; }
+static uintptr_t card_pool_call(uintptr_t p, uint32_t s) { (void)p; (void)s; return 0; }
+static void card_clean_lines(uintptr_t a, uint32_t n) { (void)a; (void)n; }
+static uint32_t card_tag_read(uintptr_t a) { return *(volatile const uint32_t *)a; }
+static void card_tag_write(uintptr_t a, uint32_t v) { *(volatile uint32_t *)a = v; }
+static void card_publish_barrier(void) { __asm__ volatile("" ::: "memory"); }
 #else
 #error "ARM32 native card ABI required; host tests must explicitly substitute it"
 #endif
@@ -228,6 +270,11 @@ struct fpl_card {
     struct { uintptr_t handle; uint32_t capacity, allocator_class; } table_b;
     struct fpl_frame_hold *lane[2];
     struct fpl_flush_stats flush;
+#ifdef FPL_DIAG_FLUSH_TIME
+    /* diagnostic only: the writer hook's own time, all calls and the ones
+     * that wrote a trailer */
+    uint32_t flush_n, flush_us, flush_max_us, flush_applied_us;
+#endif
     uint32_t hold_live;
     /* read over USB after a test take; all saturating */
     uint32_t rec_events, rec_admitted, rec_raw, rec_firmware_refused;
@@ -256,9 +303,28 @@ struct fpl_card {
     uint32_t save_pending, saves, save_failed, save_last;
     uint32_t rec_tick, arrive_tick;     /* microseconds of the last REC / arrival */
     uint32_t fobj[1024];                /* a file object: loader.S gives it 4 KiB */
-    uint32_t bulk;                      /* the bulk size this take's first file read */
-    uint32_t bulk_writer_open;          /* FUN_c03A5050 already ran at REC? (must be 0) */
     uint32_t tile_force;                /* tile_grid.h, for measuring: w << 16 | h, 0 = default */
+    /* The take's compressed IFD inside the header template (header_tag.h):
+     * the observer adds the tag at the template build and prepares the IFD
+     * after the serialization; nothing per frame. Two copies:
+     * a flush still finishing the previous take keeps the one it read. */
+    struct fpl_header_tag tags[2];
+    const struct fpl_header_tag *volatile tag_live;   /* 0: this take is RAW */
+    uint32_t tag_index, tag_want, tag_pending;
+    uint32_t tag_mode0, tag_added, tag_add_result, tag_add_failed;
+    uint32_t tag_prepared, tag_prepare_failed, tag_prepare_result, tag_head;
+    uint32_t observer[1], observer_vtable[4];   /* {vtable}; +0xC = card.S obs_shim */
+    uint32_t observer_slot;             /* 1 + the Subject slot; 0 = not registered */
+    uint32_t observer_full, observer_calls;
+    uint32_t tag_tiles, tag_bytes;      /* this take's grid; its tag's size */
+    uint32_t engine_release;            /* the last fpl_codec_job_release result */
+#ifdef FPL_DIAG_HOOK_TIME
+    /* rec, arrive, stop, flush, observe, written, event, discard:
+     * {calls, microseconds, longest, last stack pointer} */
+    uint32_t hook_time[8][4];
+    uint32_t enq_n, enq_us;             /* stock C037DD50 from the arrive hook */
+#endif
+    uint32_t tag_zero[FPL_HEADER_TAG_MAX / 4];     /* the tag's value as added */
     /* One record per CinemaDNG arrival this take (the first FPL_TRACE ones):
      * where the frames are. {microseconds, arrivals so far, writer flushes
      * so far (record_diag.writer_calls), descriptor pool free | lane A state
@@ -286,6 +352,15 @@ static uint32_t test_readiness(void *c, uint32_t reserved) {
 static uint32_t card_valid(const struct fpl_card *c) {
     return c && c->magic == FPL_CARD_MAGIC;
 }
+#ifdef FPL_DIAG_HOOK_TIME
+static uint32_t card_timed_enqueue(struct fpl_card *c, uintptr_t creator, uint32_t id,
+                                   uint32_t argument) {
+    uint32_t began = card_tick_us(), r = card_original_enqueue(creator, id, argument);
+    c->enq_n++;
+    c->enq_us += card_tick_us() - began;
+    return r;
+}
+#endif
 static uint32_t ring_empty(const struct fpl_card *c) {
     for (uint32_t n = 0; n < FPL_HOLD_COMMITS; ++n)
         if (c->hold.ring[n].file || c->hold_b.ring[n].file) return 0;
@@ -450,6 +525,8 @@ static uint32_t start_hold(struct fpl_card *c) {
         return 0;
     }
     c->hold.tile_force = c->hold_b.tile_force = c->tile_force;
+    /* one open a take: codec_job.h keep_open */
+    c->hold.job.keep_open = c->hold_b.job.keep_open = 1;
     c->take_frames = 0;
     c->hold_live = 1;
     return 1;
@@ -473,34 +550,22 @@ static void release_spare(struct fpl_card *c) {
     }
 }
 
-static void card_bulk(struct fpl_card *c, uint32_t bytes) {
-    *(volatile uint32_t *)FPL_BULK_CFG = bytes;
-    c->bulk = bytes;
-}
-/* FPL_BULK_FILES stock files of this take's geometry, within [MIN, STOCK]. */
-static uint32_t card_bulk_for(uint32_t raster) {
-    uint32_t file = (raster + FPL_FILE_HEAD + 0x1ffu) & ~0x1ffu;
-    if (!raster || file > FPL_BULK_STOCK / FPL_BULK_FILES) return FPL_BULK_STOCK;
-    file *= FPL_BULK_FILES;
-    return file < FPL_BULK_MIN ? FPL_BULK_MIN : file;
-}
-
-USED uint32_t fpl_card_rec(uintptr_t camera, const uint32_t *request, struct fpl_card *c) {
+HOOK_DEF uint32_t HOOK(fpl_card_rec)(uintptr_t camera, const uint32_t *request, struct fpl_card *c) {
     uint32_t dispatch;
     if (!card_valid(c) || !request || !FPL_REC_IS_START(request[0]))
         return card_valid(c) ? fpl_rec_hook_call(camera, request, &c->rec)
                              : card_original_prepare(camera, request);
     card_saturate(&c->rec_events);
     c->rec_tick = card_tick_us() | 1u;
+    /* a new take: no prepared IFD until its own template has one */
+    c->tag_live = 0;
+    c->tag_want = c->tag_pending = 0;
     c->take_frames = 0;
     uint32_t mask = card_irq_off();
     fpl_record_diag_reset(&c->record_diag);
     c->trace_n = 0;
     c->elog_n = 0;
     card_irq_restore(mask);
-    /* every take starts stock; only an admitted compressed take changes it */
-    c->bulk_writer_open = *(volatile const uint8_t *)(0xc359be4cu + 0xcu);
-    card_bulk(c, FPL_BULK_STOCK);
     fpl_play_end(&c->play);             /* a scratch playback left: back to the pool */
     if (!fpl_menu_on(&c->menu)) {
         /* Lossless RAW is OFF (the default): the take is exactly stock */
@@ -516,7 +581,19 @@ USED uint32_t fpl_card_rec(uintptr_t camera, const uint32_t *request, struct fpl
     if (dispatch) {
         if (start_hold(c)) {
             card_saturate(&c->rec_admitted);
-            card_bulk(c, card_bulk_for(c->rec.facts.seen.raster));
+            /* Nothing is held until the take's IFD is in its template: the
+             * template is built after this (FUN_c0378a50), and the tag is
+             * asked for here, sized for this take's tiles. No observer, no
+             * tag: the whole take is RAW. */
+            c->hold.require_head = c->hold_b.require_head = 0xffffffffu;
+            {
+                uint32_t tw, th, w = c->rec.facts.seen.width, ht = c->rec.facts.seen.height;
+                fpl_tile_grid(w, ht, c->tile_force, &tw, &th);
+                c->tag_tiles = fpl_tile_steps(w, tw) * fpl_tile_steps(ht, th);
+            }
+            c->tag_bytes = FPL_HEADER_TAG_BYTES(c->tag_tiles);
+            c->tag_want = c->observer_slot != 0 && c->tag_tiles &&
+                          c->tag_tiles <= FPL_TILE_MAX;
         } else {
             card_saturate(&c->rec_raw);
         }
@@ -531,7 +608,7 @@ USED uint32_t fpl_card_rec(uintptr_t camera, const uint32_t *request, struct fpl
     return 0;
 }
 
-USED uint32_t fpl_card_arrive(uintptr_t creator, uint32_t id, uint32_t argument,
+HOOK_DEF uint32_t HOOK(fpl_card_arrive)(uintptr_t creator, uint32_t id, uint32_t argument,
                               struct fpl_card *c) {
     if (!card_valid(c))
         return card_original_enqueue(creator, id, argument);
@@ -549,18 +626,18 @@ USED uint32_t fpl_card_arrive(uintptr_t creator, uint32_t id, uint32_t argument,
         card_registry(t + 4);
     }
 #endif
-    if (!c->hold_live) return card_original_enqueue(creator, id, argument);
+    if (!c->hold_live) return CARD_ENQ(c, creator, id, argument);
     /* The take's first frame always goes out uncompressed: DaVinci Resolve
      * decides a clip's decoding from its first frame and plays a clip that
      * mixes compressed and uncompressed frames only when that one is
      * uncompressed (reported by users, 2026-10-02). It is queued at once, so
      * it is the clip's first file. */
     if (first)
-        return card_original_enqueue(creator, id, argument);
+        return CARD_ENQ(c, creator, id, argument);
     return fpl_lanes_arrive(c->lane, creator, id, argument);
 }
 
-USED void fpl_card_stop(struct fpl_card *c, uint32_t kind) {
+HOOK_DEF void HOOK(fpl_card_stop)(struct fpl_card *c, uint32_t kind) {
     struct fpl_rec_workspace *w;
     if (!card_valid(c) || !c->hold_live || (kind != 1 && kind != 9)) return;
     card_saturate(&c->stops);
@@ -580,6 +657,7 @@ USED void fpl_card_stop(struct fpl_card *c, uint32_t kind) {
     }
     c->last_finish = fpl_rec_workspace_finish(w, w->pipeline.take, 1);
     if (c->last_finish == FPL_OK) {
+        c->engine_release = fpl_codec_job_release(&c->hold.job);
         release_spare(c);
         c->hold_live = 0;                        /* the adapter stays valid
                                                     until its promises flush */
@@ -589,9 +667,102 @@ USED void fpl_card_stop(struct fpl_card *c, uint32_t kind) {
     }
 }
 
-USED void fpl_card_flush(uintptr_t writer, struct fpl_card *c) {
+HOOK_DEF void HOOK(fpl_card_flush)(uintptr_t writer, struct fpl_card *c) {
     if (!card_valid(c)) return;
-    fpl_flush_before(writer, &c->hold, &c->hold_b, &c->flush);
+#ifdef FPL_DIAG_FLUSH_TIME
+    uint32_t applied = c->flush.applied, began = card_tick_us(), took;
+#endif
+    fpl_flush_before(writer, &c->hold, &c->hold_b, c->tag_live, &c->flush);
+#ifdef FPL_DIAG_FLUSH_TIME
+    took = card_tick_us() - began;
+    ++c->flush_n;
+    c->flush_us += took;
+    if (took > c->flush_max_us) c->flush_max_us = took;
+    if (c->flush.applied != applied) c->flush_applied_us += took;
+#endif
+}
+
+/* ---- the header template's observer (header_tag.h) --------------------
+ *
+ * card.S obs_shim, from the Subject's notify (FUN_c00559f0 -> FUN_c0055fe0),
+ * in whatever task notifies -- for the movie, MovRec. Always returns 1: an
+ * observer that returns 0 is taken off the list. Only a take this card
+ * admitted is touched, in order: the mode-0 notify of its template build
+ * (the builder still open) adds the tag; the mode-2 notify after its
+ * serialization (C0378F70) prepares the IFD. Nothing per frame: the
+ * values the firmware rewrites each frame are out of line and shared
+ * (header_tag.h). Anything else -- stills, other DataPools, the per-frame
+ * mode-3 notifies, a take we did not admit -- returns at once. */
+HOOK_DEF uint32_t HOOK(fpl_card_observe)(uintptr_t pool, struct fpl_card *c) {
+    const volatile uint32_t *event;
+    uint32_t mode;
+    if (!card_valid(c) || !pool) return 1;
+    card_saturate(&c->observer_calls);
+    event = (const volatile uint32_t *)card_pool_call(pool, 0x40u);
+    if (!event) return 1;
+    mode = event[0];
+    if (mode == 0u) {
+        uintptr_t builder;
+        /* every template build is counted: one after an admitted REC with no
+         * tag added says the REC hook came too late for it */
+        card_saturate(&c->tag_mode0);
+        if (!c->tag_want) return 1;
+        c->tag_want = 0;
+        builder = card_pool_call(pool, 0x2cu);
+        if (!builder) {
+            card_saturate(&c->tag_add_failed);
+            return 1;
+        }
+        c->tag_add_result = card_tag_add(builder, 0u, FPL_HEADER_TAG, 7u,
+                                         c->tag_bytes, c->tag_zero);
+        c->tag_pending = 1;
+        card_saturate(&c->tag_added);
+    } else if (mode == 2u) {
+        struct fpl_header_tag *next;
+        uintptr_t base;
+        if (!c->tag_pending) return 1;
+        c->tag_pending = 0;
+        base = *(volatile const uint32_t *)CARD_TEMPLATE;
+        c->tag_head = *(volatile const uint32_t *)CARD_TEMPLATE_LEN;
+        next = &c->tags[c->tag_index ^ 1u];
+        c->tag_prepare_result = base ? fpl_header_tag_prepare(next, base, c->tag_head,
+                                                              card_tag_read, card_tag_write)
+                                     : FPL_INVALID;
+        if (c->tag_prepare_result != FPL_OK) {
+            card_saturate(&c->tag_prepare_failed);
+            return 1;
+        }
+        card_clean_lines(base + next->ifd_at, next->counts_at + 4u * next->max_tiles - next->ifd_at);
+        c->tag_index ^= 1u;
+        card_publish_barrier();          /* the IFD's record before its pointer:
+                                            the writer's task reads it */
+        c->tag_live = next;
+        /* from now on, frames of this template may be held */
+        c->hold.require_head = c->hold_b.require_head = next->head;
+        card_saturate(&c->tag_prepared);
+    }
+    return 1;
+}
+
+/* After every hook is armed (card.S): put the observer on the Subject's list
+ * as FUN_c00d2958 would -- the first empty slot, interrupts off -- but never
+ * through it: with no slot left it asserts and the camera stops. No slot, no
+ * observer, and every compressed frame keeps its trailing IFD. */
+USED void fpl_card_observer(struct fpl_card *c, uintptr_t shim) {
+    volatile uint32_t *slot = (volatile uint32_t *)CARD_SUBJECT;
+    uint32_t mask, free_at = 0;
+    if (!card_valid(c) || !shim || c->observer_slot) return;
+    c->observer_vtable[3] = (uint32_t)shim;
+    c->observer[0] = (uint32_t)(uintptr_t)c->observer_vtable;
+    mask = card_irq_off();
+    for (uint32_t n = 0; n < 9u; ++n) {
+        if (slot[n] == (uint32_t)(uintptr_t)c->observer) { free_at = n + 1u; break; }
+        if (!slot[n] && !free_at) free_at = n + 1u;
+    }
+    if (free_at) slot[free_at - 1u] = (uint32_t)(uintptr_t)c->observer;
+    card_irq_restore(mask);
+    if (free_at) c->observer_slot = free_at;
+    else card_saturate(&c->observer_full);
 }
 
 /* The writer's full r0:r1 result, observed after the native call. A nonzero
@@ -603,7 +774,7 @@ static void card_elog(struct fpl_card *c, uint32_t what) {
     e[1] = what;
 }
 
-USED void fpl_card_written(struct fpl_card *c, uint32_t low, uint32_t high) {
+HOOK_DEF void HOOK(fpl_card_written)(struct fpl_card *c, uint32_t low, uint32_t high) {
     if (!card_valid(c)) return;
     uint32_t mask = card_irq_off();
 #ifdef FPL_DIAG_TRACE
@@ -614,7 +785,7 @@ USED void fpl_card_written(struct fpl_card *c, uint32_t low, uint32_t high) {
 }
 
 /* C038BD08: the CinemaDNG dispatcher already looked this frame up. */
-USED void fpl_card_event(uintptr_t message, uintptr_t frame, struct fpl_card *c) {
+HOOK_DEF void HOOK(fpl_card_event)(uintptr_t message, uintptr_t frame, struct fpl_card *c) {
     if (!card_valid(c)) return;
     uint32_t mask = card_irq_off();
 #ifdef FPL_DIAG_TRACE
@@ -631,7 +802,7 @@ USED void fpl_card_event(uintptr_t message, uintptr_t frame, struct fpl_card *c)
 
 /* C037DEF8: one frame has actually been popped by the native FIFO discard.
  * The shim immediately continues into the original cleanup exactly once. */
-USED void fpl_card_discard(uintptr_t creator, uintptr_t frame, uint32_t caller,
+HOOK_DEF void HOOK(fpl_card_discard)(uintptr_t creator, uintptr_t frame, uint32_t caller,
                            struct fpl_card *c) {
     (void)creator;
     if (!card_valid(c)) return;
@@ -731,7 +902,10 @@ USED uint32_t fpl_card_clip(struct fpl_card *c, uintptr_t player, uintptr_t desc
 
 /* C05C2D10: the player makes its buffer pool. */
 USED void fpl_card_play_pool(struct fpl_card *c) {
-    if (card_valid(c) && !c->hold_live) fpl_play_pool(&c->play);
+    if (!card_valid(c) || c->hold_live) return;
+    /* a take that never finished may have left the engine open */
+    if (c->hold.magic) c->engine_release = fpl_codec_job_release(&c->hold.job);
+    fpl_play_pool(&c->play);
 }
 
 /* C05C2E90: the player frees its buffers. */
@@ -739,4 +913,45 @@ USED void fpl_card_play_end(struct fpl_card *c) {
     if (card_valid(c)) fpl_play_end(&c->play);
 }
 
+#ifdef FPL_DIAG_HOOK_TIME
+static void hook_done(struct fpl_card *c, uint32_t which, uint32_t began) {
+    uint32_t took, sp;
+    if (!card_valid(c)) return;
+    took = card_tick_us() - began;
+    __asm__ volatile("mov %0, sp" : "=r"(sp));
+    c->hook_time[which][0]++;
+    c->hook_time[which][1] += took;
+    if (took > c->hook_time[which][2]) c->hook_time[which][2] = took;
+    c->hook_time[which][3] = sp;
+}
+USED uint32_t fpl_card_rec(uintptr_t camera, const uint32_t *request, struct fpl_card *c) {
+    uint32_t t = card_tick_us(), r = fpl_card_rec_body(camera, request, c);
+    hook_done(c, 0, t); return r;
+}
+USED uint32_t fpl_card_arrive(uintptr_t creator, uint32_t id, uint32_t argument,
+                              struct fpl_card *c) {
+    uint32_t t = card_tick_us(), r = fpl_card_arrive_body(creator, id, argument, c);
+    hook_done(c, 1, t); return r;
+}
+USED void fpl_card_stop(struct fpl_card *c, uint32_t kind) {
+    uint32_t t = card_tick_us(); fpl_card_stop_body(c, kind); hook_done(c, 2, t);
+}
+USED void fpl_card_flush(uintptr_t writer, struct fpl_card *c) {
+    uint32_t t = card_tick_us(); fpl_card_flush_body(writer, c); hook_done(c, 3, t);
+}
+USED uint32_t fpl_card_observe(uintptr_t pool, struct fpl_card *c) {
+    uint32_t t = card_tick_us(), r = fpl_card_observe_body(pool, c);
+    hook_done(c, 4, t); return r;
+}
+USED void fpl_card_written(struct fpl_card *c, uint32_t low, uint32_t high) {
+    uint32_t t = card_tick_us(); fpl_card_written_body(c, low, high); hook_done(c, 5, t);
+}
+USED void fpl_card_event(uintptr_t message, uintptr_t frame, struct fpl_card *c) {
+    uint32_t t = card_tick_us(); fpl_card_event_body(message, frame, c); hook_done(c, 6, t);
+}
+USED void fpl_card_discard(uintptr_t creator, uintptr_t frame, uint32_t caller,
+                           struct fpl_card *c) {
+    uint32_t t = card_tick_us(); fpl_card_discard_body(creator, frame, caller, c); hook_done(c, 7, t);
+}
+#endif
 USED uint32_t fpl_card_state_bytes(void) { return sizeof(struct fpl_card); }
