@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>fpSup-Merge v3</title>
+<title>fpSup-Merge</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <style>
 :root{
@@ -37,7 +37,7 @@ button{font:inherit;cursor:pointer}
 .lang button,.cats button{font-family:var(--mono);font-size:.78rem;background:transparent;color:var(--dim);
   border:1px solid var(--line);border-radius:4px;padding:3px 9px}
 .lang button[aria-pressed="true"],.cats button[aria-pressed="true"]{color:var(--ink);border-color:var(--ink)}
-button:focus-visible,input:focus-visible{outline:2px solid var(--sig);outline-offset:2px}
+button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible,.history-list:focus-visible{outline:2px solid var(--sig);outline-offset:2px}
 .cols{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:26px;align-items:start}
 @media(max-width:760px){.cols{grid-template-columns:1fr}}
 section{margin-bottom:22px}
@@ -74,6 +74,21 @@ details.dev[open]>summary::before{content:"▾ "}
 .tile .guide{grid-column:2;font-family:var(--mono);font-size:.78rem;color:var(--sig);text-decoration:none;
   justify-self:start}
 .tile .guide:hover{text-decoration:underline}
+.tile .history{grid-column:2;min-width:0;margin:2px 0 0}
+.history>summary{color:var(--sig);font-size:.78rem}
+.history>summary .count{color:var(--dim)}
+.history-list{max-height:360px;overflow-y:auto;margin-top:8px;padding:0 8px 0 12px;border-left:2px solid var(--line);overscroll-behavior:contain}
+.history article{padding:10px 0;border-top:1px solid var(--line)}
+.history article:first-child{border-top:0;padding-top:0}
+.history h3{display:flex;align-items:center;flex-wrap:wrap;gap:5px 8px;font-size:.79rem;margin:0 0 5px;font-weight:500}
+.history h3 .badge{font-size:.68rem;padding:0 5px;border:1px solid var(--line);border-radius:3px;color:var(--dim)}
+.history h3 .current{color:var(--sig);border-color:var(--sig)}
+.history time{font-size:.72rem;color:var(--dim)}
+.history ul{padding-left:1.15em;margin:0 0 6px;color:var(--dim);font-size:.82rem}
+.history li{margin-bottom:4px;overflow-wrap:anywhere}
+.history p{color:var(--dim);font-size:.82rem;margin:7px 0}
+.history .source{font-size:.75rem;color:var(--sig);text-decoration:none}
+.history .source:hover{text-decoration:underline}
 .tile.pending{opacity:.6;border-style:dashed}
 .tile.pending .soon{font-family:var(--mono);font-size:.72rem;border:1px solid var(--dim);color:var(--dim);
   border-radius:3px;padding:0 6px;margin-left:.5em;font-weight:400}
@@ -81,7 +96,7 @@ details.dev[open]>summary::before{content:"▾ "}
 aside{position:sticky;top:16px;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:16px}
 @media(max-width:760px){aside{position:static}}
 .tree{font-family:var(--mono);font-size:.8rem;margin:0 0 12px;padding:10px;background:var(--paper);
-  border-radius:4px;overflow-x:auto;white-space:pre;line-height:1.5}
+  border-radius:4px;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.5}
 .tree .new{color:var(--sig)} .tree .off{color:var(--dim)}
 .dl{width:100%;background:var(--sig);color:#fff;border:0;border-radius:5px;padding:10px;font-weight:600}
 .dl:disabled{background:var(--line);color:var(--dim);cursor:not-allowed}
@@ -147,7 +162,7 @@ header .lang{position:absolute;top:0;right:0}
       <img class="mark" src="../../assets/fpsup-logo.png" width="463" height="500" alt="fpSup">
     </picture>
     <div>
-      <h1>fpSup-Merge <small>Loader v3</small></h1>
+      <h1>fpSup-Merge</h1>
       <p data-t="intro"></p>
       <div class="support">
 
@@ -178,10 +193,6 @@ header .lang{position:absolute;top:0;right:0}
       <ol id="steps"></ol>
       <p class="thanks" id="thanks"></p>
     </section>
-    <details>
-      <summary data-t="hashes"></summary>
-      <table id="hashtbl"></table>
-    </details>
   </aside>
 </div>
 
@@ -421,8 +432,8 @@ function zipFor(picked){
 <script id="ui">
 const T = {
   zh: {
-    intro: '勾選要放進同一張卡的 sup,下載 zip,把裡面資料夾的內容全部複製到 SD 卡根目錄。Loader v3 卡是一個資料夾：每個 sup 一個檔案，合併就是放在一起。只支援 Ver.5.02。',
-    card: '卡片內容', hashes: '檔案雜湊',
+    intro: '勾選想使用的功能，下載並解壓縮，再照下方安裝說明放入 SD 卡。只支援 SIGMA fp Ver.5.02。',
+    card: '已選功能',
     startup: '啟動', instant: '瞬間啟動', instantHint: '預設開啟，電源開關重啟時直接載入。',
     fast: '快速啟動', fastHint: '勾選以加速冷開機；首次使用會把啟動程式存入相機設定區。',
     manager: 'fpSup 管理頁', managerHint: '在相機選單開啟 Sup 設定、啟用或停用；啟用清單於重開機後生效。',
@@ -437,9 +448,9 @@ const T = {
     flash: '⚡ 感謝我們的閃電俠 <b>Andy_hal9000</b>:他的建議讓開機從 11.5 秒縮短到 3 秒，每張卡都用上了。',
     steps: [
       '相機必須是 SIGMA fp(不是 fp L),韌體剛好 <b>Ver.5.02</b>。',
-      '勾選要的 sup,下載 zip 並解壓縮。',
+      '勾選要的功能，下載 zip 並解壓縮。',
       '把解出來的資料夾<b>裡面的東西</b>(<code>AutoRun.txt</code>、<code>fpSup</code> 資料夾、<code>README.txt</code>)複製到 SD 卡<b>最上層</b>。<b>更新卡時先刪掉卡上整個舊的 <code>fpSup</code> 資料夾</b>(以及舊格式的 <code>fpSup.BIN</code>、<code>FPSUPUI</code>):只覆蓋的話，這次沒勾的 sup 或格式資料檔還留在卡上，仍會被載入。',
-      '開機。左上角四格全白就是載入完成;每個 sup 有沒有載入記在 <code>fpSup\\LOAD.LOG</code>。',
+      '開機。左上角四格全白表示載入完成。',
     ],
     format: ['錄影格式', '解析度、開放式取景、無損壓縮'],
     monitor: ['監看與螢幕', '拍攝時螢幕上看到什麼'],
@@ -447,17 +458,19 @@ const T = {
     upcoming: ['開發中', '還不能選，先讓你知道接下來有什麼'],
     motion: ['陀螺儀與後製', '錄影時記下的資料，給後製用'],
     development: ['開發用', '一般拍攝不需要'],
-    dl: '下載 zip', pick: '先勾選一個 sup 或 fpSup 管理頁',
+    dl: '下載 zip', pick: '先勾選想使用的功能',
     by: '作者', thanks: '致謝', soon: '尚未發行', dev: '開發中', long: '長期開發', updated: '更新', formats: '要放進卡的格式', guide: '更多說明',
+    history: '版本改動', currentVersion: '目前提供', releaseNotes: '完整版本說明',
+    noHistory: '尚無版本改動紀錄。', noChanges: '此版本未另外記錄改動摘要。', originalNotes: '以下為原始英文改動紀錄。',
     clash: n => `與 ${n} 衝突：放在卡上但不啟用(.OFF)`,
     clashOn: n => `與 ${n} 衝突：此項啟用,${n} 存成 .OFF`,
     swap: '改成啟用這個',
-    ok: n => `${n} 項檢查全部通過`, fail: w => `檢查失敗:${w}`,
+    ok: n => '已準備好，可以下載。', fail: w => `檢查失敗:${w}`, inactive: '未啟用',
     nOff: n => `${n} 個 sup 存成 .OFF 不啟用。之後要換：衝突的那個改名成 .OFF,想用的改回 .BIN,重開機。`,
   },
   en: {
-    intro: 'Tick the sups for one card, download the zip, and copy what is inside its folder to the SD card root. A Loader v3 card is a folder: one file per sup, so merging is putting them together. Ver.5.02 only.',
-    card: 'Card contents', hashes: 'File hashes',
+    intro: 'Choose the tools you want, download and unzip them, then follow the installation steps below. SIGMA fp Ver.5.02 only.',
+    card: 'Selected tools',
     startup: 'Start-up', instant: 'Instant Start', instantHint: 'On by default. Loads directly after a power-switch restart.',
     fast: 'Fast Start', fastHint: 'Tick to speed up cold starts. The first boot stores the loader in camera settings.',
     manager: 'fpSup menu page', managerHint: 'Open Sup settings and enable or disable Sups in the camera menu. Restart to apply the enable list.',
@@ -469,9 +482,9 @@ const T = {
     flash: '⚡ Thanks to our Flash, <b>Andy_hal9000</b>, whose tip cut start-up from 11.5 s to 3 s, on every card.',
     steps: [
       'The camera must be a SIGMA fp (not fp L) on firmware <b>Ver.5.02</b> exactly.',
-      'Tick the sups you want, download the zip and unzip it.',
+      'Choose the tools you want, download the zip and unzip it.',
       'Copy <b>what is inside</b> the unzipped folder (<code>AutoRun.txt</code>, the <code>fpSup</code> folder, <code>README.txt</code>) to the <b>top level</b> of the SD card. <b>When updating a card, first delete the whole old <code>fpSup</code> folder</b> (and an old-format <code>fpSup.BIN</code> or <code>FPSUPUI</code>): copying over it leaves sups and format data files you did not tick this time on the card, and they still load.',
-      'Start the camera. Four white boxes top left mean it loaded; <code>fpSup\\LOAD.LOG</code> records whether each sup loaded.',
+      'Start the camera. Four white boxes at the top left mean loading is complete.',
     ],
     format: ['Recording formats', 'Resolution, open gate, lossless compression'],
     monitor: ['Monitoring & screen', 'What you see on the screen while shooting'],
@@ -479,12 +492,14 @@ const T = {
     upcoming: ['In development', 'Not selectable yet: what is coming next'],
     motion: ['Gyro & post', 'Data recorded with the clip, for post'],
     development: ['Development', 'Not needed for shooting'],
-    dl: 'Download zip', pick: 'Tick a sup or the fpSup menu page',
+    dl: 'Download zip', pick: 'Choose the tools you want',
     by: 'By', thanks: 'Thanks to', soon: 'Not released yet', dev: 'In development', long: 'Long-term development', updated: 'updated', formats: 'Formats to put on the card', guide: 'More',
+    history: 'Version changes', currentVersion: 'Currently offered', releaseNotes: 'Full release notes',
+    noHistory: 'No version changes recorded yet.', noChanges: 'No separate change summary was recorded for this version.', originalNotes: 'Original change notes in English:',
     clash: n => `Clashes with ${n}: on the card but off (.OFF)`,
     clashOn: n => `Clashes with ${n}: this one runs, ${n} is saved as .OFF`,
     swap: 'Run this one instead',
-    ok: n => `All ${n} checks pass`, fail: w => `Check failed: ${w}`,
+    ok: n => 'Ready to download.', fail: w => `Check failed: ${w}`, inactive: 'not enabled',
     nOff: n => `${n} sup(s) are saved as .OFF and do not run. To switch later, rename the clashing one to .OFF and the one you want back to .BIN, and restart.`,
   },
 };
@@ -503,6 +518,25 @@ const about = p => lang === 'en' ? p.about.en : lang === 'cn' ? toCn(p.about.zh)
 let picked = [];                     // priority order: earlier wins a clash
 const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const OPEN_HISTORY = new Set();
+
+function versionHistory(p, t){
+  const history = p.history || [];
+  const entries = history.map(h => {
+    const localized = h.changes[lang === 'en' ? 'en' : 'zh'];
+    const changes = localized || h.changes.en || [];
+    return `<article>
+      <h3>${h.label ? `<span class="m">${esc(h.label)}</span>` : ''}${h.date ? `<time datetime="${esc(h.date)}">${esc(h.date)}</time>` : ''}${h.build_label ? `<span class="badge">${esc(about({about:h.build_label}))}</span>` : ''}${h.current ? `<span class="badge current">${esc(t.currentVersion)}</span>` : ''}</h3>
+      ${!localized && changes.length && lang !== 'en' ? `<p>${esc(t.originalNotes)}</p>` : ''}
+      ${changes.length ? `<ul>${changes.map(s => `<li>${esc(lang === 'cn' ? toCn(s) : s)}</li>`).join('')}</ul>` : `<p>${esc(t.noChanges)}</p>`}
+      ${h.source && h.source_kind !== 'manifest' ? `<a class="source" href="${esc(h.source)}" target="_blank" rel="noopener">${esc(t.releaseNotes)} ↗</a>` : ''}
+    </article>`;
+  }).join('');
+  return `<details class="history" data-history="${p.id}"${OPEN_HISTORY.has(p.id) ? ' open' : ''}>
+    <summary>${esc(t.history)}${history.length ? ` <span class="count">· ${history.length}</span>` : ''}</summary>
+    ${history.length ? `<div class="history-list" tabindex="0" role="region" aria-label="${esc(p.name + ' · ' + t.history)}">${entries}</div>` : `<p>${esc(t.noHistory)}</p>`}
+  </details>`;
+}
 
 const more = (p, t) => p.guide
   ? `<a class="guide" href="${esc(p.guide)}" target="_blank" rel="noopener">${esc(t.guide)} ↗</a>` : '';
@@ -547,6 +581,7 @@ function tile(p, t, pl){
     ${dataChips(p, t)}
     ${warn}
     ${more(p, t)}
+    ${versionHistory(p, t)}
     ${byline(p, t)}
   </div>`;
 }
@@ -557,6 +592,7 @@ function pendingTile(p, t){
     <span class="name">${esc(p.name)}<span class="soon">${esc(p.stage === 'dev' ? t.dev : p.stage === 'long' ? t.long : t.soon)}</span></span>
     <span class="desc">${esc(about(p) || p.about.en || '')}</span>
     ${more(p, t)}
+    ${versionHistory(p, t)}
     ${byline(p, t)}
   </div>`;
 }
@@ -602,18 +638,15 @@ function render(){
   const run = files.filter(f => f.p && !f.off);
   const off = files.filter(f => f.off);
   const ready = selected(picked).length || managerEnabled(picked);
+  const chosenTool = p => {
+    const formats = dataChosen(p, picked).map(d => d.label);
+    return esc(p.name) + (formats.length ? '\n  ' + formats.map(esc).join(' · ') : '');
+  };
   $('#tree').innerHTML = ready
-    ? ['AutoRun.txt', 'README.txt', 'fpSup/', '  LOADER.BIN', '  UI/0..4.BIN',
-       ...(managerEnabled(picked) ? ['  UI/ALLSUPS.BIN'] : []),
-       ...run.map(f => `<span class="new">  ${esc(f.p.file)}</span>`),
-       ...[...new Set(files.filter(f => f.dataOf).map(f => f.name.split('/')[1]))].flatMap(dir =>
-         [`<span class="new">  ${esc(dir)}/</span>`,
-          ...files.filter(f => f.dataOf && f.name.split('/')[1] === dir)
-                  .map(f => `<span class="new">    ${esc(f.name.split('/').pop())}</span>`)]),
-       ...off.map(f => `<span class="off">  ${esc(offName(f.p.file))}</span>`)].join('\n')
+    ? [...run.map(f => `<span class="new">${chosenTool(f.p)}</span>`),
+       ...(managerEnabled(picked) ? [esc(t.manager)] : []),
+       ...off.map(f => `<span class="off">${chosenTool(f.p)} (${esc(t.inactive)})</span>`)].join('\n')
     : esc(t.pick);
-  $('#hashtbl').innerHTML = files.map(f =>
-    `<tr><td>${esc(f.name)}</td><td>${f.data.length}</td><td>${f.sha256}</td></tr>`).join('');
 
   const st = $('#status'), dl = $('#dl');
   dl.textContent = t.dl;
@@ -625,6 +658,10 @@ function render(){
   st.style.whiteSpace = 'pre-line';
 }
 
+document.addEventListener('toggle', e => {
+  const id = e.target.dataset && e.target.dataset.history;
+  if (id) e.target.open ? OPEN_HISTORY.add(id) : OPEN_HISTORY.delete(id);
+}, true);
 document.addEventListener('click', e => {
   const b = e.target.closest('button');
   if (!b) return;

@@ -35,10 +35,12 @@ TEMPLATE = HERE / 'template.html'
 GUIDE = FPSUP / 'guide'
 OUT = HERE / 'index.html'
 SITE_COPY = HERE.parent / 'card-composer' / 'index.html'
-INPUTS = HERE / 'inputs' / 'res-custom-20261013'
+# Res-Custom is a versioned release; do not override it with a development snapshot.
+INPUTS = HERE / 'inputs' / 'stopfx-20261012'
 sys.path.insert(0, str(FPSUP / 'fp_usb_shell'))
 from autorun_text import without_legacy_padding
 from v3 import build_v3 as V3
+from release_history import attach_history
 
 SHARED = ['AutoRun.txt', 'fpSup/LOADER.BIN'] + [f'fpSup/UI/{i}.BIN' for i in range(5)]
 SUP_RE = re.compile(r'^[0-9]{2}.+\.BIN$')
@@ -61,7 +63,7 @@ SUP_RE = re.compile(r'^[0-9]{2}.+\.BIN$')
 CATEGORIES = ['format', 'focus', 'motion', 'monitor', 'development']
 # the page shows sups in this order (user 2026-10-07); the card's load order is
 # still the file names'
-ORDER = ['res-custom', 'res-lab', 'lossless', 'split-record', 'hdrx', 'af', 'gyro2', 'raw-view', 'screenflip', 'desqueeze', 'tap-to-zoom', 'lut', 'usbshell']
+ORDER = ['res-custom', 'res-lab', 'lossless', 'stopfx', 'split-record', 'hdrx', 'af', 'gyro2', 'raw-view', 'screenflip', 'desqueeze', 'tap-to-zoom', 'lut', 'usbshell']
 AUTHOR = ''
 PRODUCTS = {
     # og3k / og2k: not this round (user 2026-10-07) -- the OG line ships as
@@ -80,20 +82,23 @@ PRODUCTS = {
                                  authors={k: 'Jose Hurtado' for k in ('OG35K', 'OG4K', 'S16')},
                                  # chip order on the page (user 2026-10-13); others after, by name
                                  order=['OG2K', 'OG3K', 'OG35K', 'OG4K', 'S16']),
-                       author=AUTHOR, credits=['Jose Hurtado (the S16, OG3.5K and OG4K formats, used with his permission; the one-core, row-per-format design, the greyed-out options and the video clamp)'],
+                       author=AUTHOR, credits=['Jose Hurtado'],
                        pending=True),
     'res-lab': dict(name='RES-Lab', category='format', file='50RES-Lab v0.1.0test.BIN',
                     excl=[], requires=['res-custom'], needs_manager=True, stage='dev', pending=True,
-                    summary=dict(en='Choose a sensor mode, crop and output size with a live diagram. Applies immediately; SAVE creates named RCD files.',
-                                 zh='搭配示意圖選擇感光元件模式、裁切與輸出尺寸，即時套用；SAVE 可另存具名 RCD。'),
+                    summary=dict(en='Adjust the sensor readout, crop and recording size with a live diagram, and save custom formats.',
+                                 zh='搭配示意圖調整感光元件讀取方式、裁切與錄影尺寸，並可保存自訂格式。'),
                     author=AUTHOR, credits=[]),
     'lossless':   dict(name='Lossless',
-                       summary=dict(en="Lossless-compressed CinemaDNG, by the camera's own hardware codec.",
-                                    zh='用相機內建的硬體編碼器錄無損壓縮 CinemaDNG。'), category='format', excl=[], author=AUTHOR, credits=['CorNy (found that a mixed clip needs its first frame uncompressed)']),
+                       summary=dict(en='Record smaller CinemaDNG files with lossless compression, preserving image quality.',
+                                    zh='錄製容量更小、畫質不變的無損壓縮 CinemaDNG。'), category='format', excl=[], author=AUTHOR, credits=['CorNy']),
+    'stopfx':     dict(name='STOPFX', sup_id='STFX', file='05STOPFX.BIN',
+                       summary=dict(en='Helps the camera clear pending frames after an abnormal recording stop. Use alone or with Lossless.',
+                                    zh='幫助相機在異常停錄後清理暫存影格，可單獨或搭配 Lossless 使用。'),
+                       category='format', excl=[], author='Ruari', credits=[]),
     'raw-view':   dict(name='RAW-View',
                        summary=dict(en='The screen shows the RAW about to be recorded: what clips on screen clips in the DNG.',
-                                    zh='螢幕顯示即將錄下的 RAW:畫面上過曝的地方，錄下來就是過曝。'), category='monitor', excl=[], author=AUTHOR, credits=['Ole Berek (display curves from his SIGMA fp Rec709 LUT & Operations Guide)',
-                                'Luka (found and derived the CinemaDNG colour-tag fix at Saturation +0.2)']),
+                                    zh='螢幕顯示即將錄下的 RAW:畫面上過曝的地方，錄下來就是過曝。'), category='monitor', excl=[], author=AUTHOR, credits=['Ole Berek', 'Luka']),
     'screenflip': dict(name='ScreenFlip',
                        summary=dict(en='Flip the rear screen 180°, mirror it, or both.',
                                     zh='背螢幕翻轉 180°、左右鏡像，或兩者。'), category='monitor', excl=[], author=AUTHOR, credits=[]),
@@ -200,13 +205,13 @@ def input_products(directory):
         spec = PRODUCTS[key]
         if spec.get('stage') in ('dev', 'long'):
             continue
-        payload, version = sup_file(entry['file'], 'RLAB' if key == 'res-lab' else 'RCUS')
+        payload, version = sup_file(entry['file'], spec.get('sup_id', 'RLAB' if key == 'res-lab' else 'RCUS'))
         filename = pathlib.PurePosixPath(entry['file'])
         p = dict(id=key, name=filename.stem.lstrip('0123456789') if key == 'res-lab' else spec['name'], category=spec['category'], file=filename.name,
                  excl=list(spec['excl']), requires=spec.get('requires', []), needs_manager=spec.get('needs_manager', False),
-                 author=spec['author'], credits=spec['credits'], release=f'fpsup-{key}-dev-r{version}',
+                 author=spec['author'], credits=spec['credits'], release=entry.get('release', f'fpsup-{key}-dev-r{version}'),
                  version=str(version),
-                 build_label=dict(en='Development build', zh='開發版'), date=meta['date'], about=spec['summary'], guide=guide(key),
+                 build_label=entry.get('build_label', dict(en='Development build', zh='開發版')), date=meta['date'], about=spec['summary'], guide=guide(key),
                  provenance=dict(manifest=str(directory.relative_to(HERE) / 'manifest.json') if directory.is_relative_to(HERE) else str(directory / 'manifest.json'),
                                  source_sha256=meta['source_sha256']), data_files=[], support_files=[], **payload)
         for rel in entry.get('data_files', []):
@@ -397,6 +402,7 @@ def main():
                products=sorted(products, key=lambda p: p['file']),
                pending=sorted(pending, key=lambda p: p['file']),
                order=ORDER)
+    attach_history(cat, RELEASES)
     page = TEMPLATE.read_text(encoding='utf-8')
     if page.count('@@CATALOGUE@@') != 1:
         raise SystemExit('template.html must hold @@CATALOGUE@@ exactly once')

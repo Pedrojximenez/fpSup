@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>STOPFX — abnormal recording stop fix | fpSup</title>
+<meta name="description" content="Ruari's independent recording resource-release fix for SIGMA fp Ver.5.02.">
+<link rel="icon" href="../assets/favicon.ico" sizes="any">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<div class="langbar"><div class="lang" role="group" aria-label="Language / 語言 / 语言">
+<button type="button" data-set="en" aria-pressed="true">EN</button>
+<button type="button" data-set="cn" aria-pressed="false">中</button>
+<button type="button" data-set="zh" aria-pressed="false">繁</button>
+</div></div>
+<a class="back" href="../tools/merge-v3/">&larr; fpSup-Merge</a>
+<header class="hero"><h1>STOPFX</h1>
+<p class="lede en">Helps the camera clear pending frames after an abnormal recording stop.</p>
+<p class="lede zh">幫助相機在異常停錄後清理暫存影格。</p>
+<p><span class="en">By </span><span class="zh">作者：</span><b>Ruari</b> · <span class="en">Test build</span><span class="zh">測試版</span> · 2026-10-12</p></header>
+<h2><span class="en">Install</span><span class="zh">安裝</span></h2>
+<p class="en">Select <b>STOPFX</b> in <a href="../tools/merge-v3/#install">fpSup-Merge</a> and follow its installation steps. SIGMA fp firmware Ver.5.02 only.</p>
+<p class="zh">在 <a href="../tools/merge-v3/#install">fpSup-Merge</a> 勾選 <b>STOPFX</b>，依頁面說明安裝。只支援 SIGMA fp 韌體 Ver.5.02。</p>
+<h2><span class="en">Independent of Lossless</span><span class="zh">可獨立使用</span></h2>
+<p class="en">STOPFX works as soon as the camera starts; no extra setting is needed. It can run alone or alongside <a href="lossless.html">Lossless</a>. Select each tool separately in Merge.</p>
+<p class="zh">勾選後，開機即生效，不用另外設定。可單獨使用，也能與 <a href="lossless.html">Lossless</a> 同卡；在 Merge 分別勾選即可。</p>
+<h2><span class="en">What it changes</span><span class="zh">修正效果</span></h2>
+<p class="en">If recording stops unexpectedly, STOPFX helps clear frames still waiting to be saved. It does not recover lost frames or make storage faster.</p>
+<p class="zh">錄影意外停止時，幫助相機清理仍在等待保存的影格。它不會補回丟失影格，也不會提高卡片速度。</p>
+<h2><span class="en">Camera checks</span><span class="zh">上機紀錄</span></h2>
+<p class="en">On 2026-10-12, STOPFX and Lossless were used together through ten consecutive overload stops at 3K, 12-bit, 100 fps without restarting the camera. A subsequent FHD 59.94 fps recording completed.</p>
+<p class="zh">2026-10-12 與 Lossless 同卡，在 3K、12-bit、100 fps 連續觸發 10 次過載停錄，中間沒有重開機，之後仍完成 FHD 59.94 fps 錄影。</p>
+<p class="en">Overload can still lose frames, and STOPFX does not fix separate Lossless recording stalls. SSD recording and repeated restarts have not been checked in these trials.</p>
+<p class="zh">過載仍可能丟格，STOPFX 也不能修正 Lossless 本身的錄影卡住問題。這次尚未檢查 SSD 錄影及反覆重開機。</p>
+<footer><p><a href="../">fpSup</a> · <a href="../tools/merge-v3/">fpSup-Merge</a> · STOPFX by Ruari</p></footer>
+<script src="../assets/lang.js?v=7c49866d" defer></script>
+</body></html>

@@ -18,7 +18,7 @@ global.document = {
   addEventListener: (name, fn) => handlers.set(name, fn),
 };
 const api = new Function(grab('compose') + grab('ui') +
-  '\nreturn {BOOT, CAT, DATA_OFF, compose, checks, readme, picked:()=>picked};')();
+  '\nreturn {BOOT, CAT, DATA_OFF, compose, checks, readme, zipFor, picked:()=>picked, history:p=>versionHistory(p,T[lang])};')();
 const change = (dataset, checked) => handlers.get('change')({target:{dataset, checked}});
 const startup = () => el('startup').innerHTML;
 const checked = key => new RegExp(`data-boot="${key}" checked`).test(startup());
@@ -79,3 +79,64 @@ assert(api.readme(api.picked()).includes('by Jose Hurtado'));
 for (const id of ['desqueeze', 'tap-to-zoom']) change({id}, false);
 assert(el('dl').disabled);
 console.log('passed: defaults, checkbox controls, all four boot choices, unchanged sup selections, download checks and pending RES-Lab in three languages, and Jose monitor selection/attribution');
+
+// History is available on every tile, including Sups without a release.
+for (const p of api.CAT.products.concat(api.CAT.pending || [])){
+  assert(el('tiles').innerHTML.includes(`data-history="${p.id}"`));
+  const html = api.history(p);
+  assert(html.includes('版本改動'));
+  if (p.history.length){
+    for (const h of p.history){
+      assert(html.includes(h.label));
+      if (h.source && h.source_kind !== 'manifest') assert(html.includes(`href="${h.source}"`));
+    }
+    assert.strictEqual(p.history.filter(h => h.current).length, p.release ? 1 : 0);
+  } else assert(html.includes('尚無版本改動紀錄'));
+}
+const raw = api.CAT.products.find(p => p.id === 'raw-view');
+const rawLegacy = ['0.3.0test','0.2.3test','0.2.2test','0.2.1test','0.2.0test','0.1.0test'];
+assert.deepStrictEqual(raw.history.filter(h => rawLegacy.includes(h.version)).map(h => h.version), rawLegacy);
+const beforeHistory = Buffer.from(api.zipFor(['raw-view']));
+const toggle = open => handlers.get('toggle')({target:{dataset:{history:'raw-view'},open}});
+const language = lang => handlers.get('click')({target:{closest:()=>({dataset:{lang}})}});
+toggle(true);
+change({id:'raw-view'}, true);
+assert(el('tiles').innerHTML.includes('data-history="raw-view" open'));
+language('en');
+assert(api.history(raw).includes('Version changes') && api.history(raw).includes('Currently offered'));
+assert(api.history(raw).includes('data-history="raw-view" open'));
+language('cn');
+assert(api.history(raw).includes('版本改动') && api.history(raw).includes('完整版本说明'));
+language('zh');
+toggle(false);
+change({id:'raw-view'}, false);
+assert(!api.history(raw).includes('data-history="raw-view" open'));
+assert.deepStrictEqual(api.picked(), []);
+assert(Buffer.from(api.zipFor(['raw-view'])).equals(beforeHistory));
+const stopfx = api.CAT.products.find(p => p.id === 'stopfx');
+assert(stopfx && stopfx.author === 'Ruari');
+assert.strictEqual(stopfx.sha256, 'f9f26a092c5676ead5771ba8be4aac9c3734e9ed0cd144002a73b3f6b657c9d9');
+assert(el('tiles').innerHTML.includes('作者 <b>Ruari</b>'));
+for (const id of ['stopfx', 'lossless']){
+  change({id}, true);
+  assert.deepStrictEqual(api.compose(api.picked()).on, [id]);
+  assert(api.checks(api.picked()).every(r => r.ok));
+  change({id}, false);
+}
+change({id:'stopfx'}, true);
+change({id:'lossless'}, true);
+assert.deepStrictEqual(api.compose(api.picked()).files.filter(f => f.p).map(f => f.name),
+  ['fpSup/05STOPFX.BIN', 'fpSup/10LOSS.BIN']);
+assert(api.readme(api.picked()).includes('by Ruari'));
+assert(el('tree').innerHTML.includes('STOPFX') && !el('tree').innerHTML.includes('.BIN'));
+assert.strictEqual(el('status').textContent, '已準備好，可以下載。');
+for (const id of ['stopfx', 'lossless']) change({id}, false);
+const res = api.CAT.products.find(p => p.id === 'res-custom');
+assert(!/consumer|dev-r19|RCD|宣告/.test(api.history(res)));
+assert(!api.history(stopfx).includes('manifest.json'));
+assert(!page.includes('<small>Loader v3</small>') && !page.includes('id="hashtbl"'));
+assert.strictEqual(api.CAT.products.find(p => p.id === 'gyro2').credits.length, 0);
+const unsafe = api.history({id:'example',name:'<example>',history:[{label:'v1',
+  changes:{en:['<script>unsafe</script>'],zh:['<script>unsafe</script>']}}]});
+assert(!unsafe.includes('<script>') && unsafe.includes('&lt;script&gt;'));
+console.log('passed: boot choices, selections, download checks, version history, languages and retained disclosure state');

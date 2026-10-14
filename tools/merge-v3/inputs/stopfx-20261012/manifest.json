@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-12",
+  "source_sha256": {},
+  "files": {
+    "05STOPFX.BIN": {
+      "size": 316,
+      "sha256": "f9f26a092c5676ead5771ba8be4aac9c3734e9ed0cd144002a73b3f6b657c9d9"
+    }
+  },
+  "products": {
+    "stopfx": {
+      "file": "05STOPFX.BIN",
+      "release": "fpsup-stopfx-test-20261012",
+      "build_label": {
+        "en": "Test build",
+        "zh": "測試版"
+      }
+    }
+  },
+  "origin": "Downloads/fp-stop-leak-fix/05STOPFX.BIN",
+  "validation": "projects/lossless-sup/validation/20261012-camera-lossless-stopfx/RESULTS.md",
+  "author": "Ruari"
+}
