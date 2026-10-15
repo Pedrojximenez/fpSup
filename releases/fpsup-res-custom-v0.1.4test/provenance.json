@@ -1,0 +1,34 @@
+{
+  "release": "fpsup-res-custom-v0.1.4test",
+  "scope": "Local Merge test version; not published",
+  "accepted_artifact": "projects/res-lab/validation/20261015-qs-first-open/on-camera/combined-fix12",
+  "artifact_build_json_sha256": "4260d776bce66613323215c6b08ce9831b6991b6e54ade025a040ae9d1659a23",
+  "product_bytes_rebuilt": false,
+  "product_sha256": "d9a8e10050184424886afaca263279967ab2cc2c89314c44038fe4402a676355",
+  "product_bytes": 313216,
+  "settings": "Builder defaults; camera-personalized CFG not included",
+  "source_sha256": {
+    "projects/open-gate/build/res-custom/vr_ui.py": "0a8597ffe37a0f6f059b319b14fe7a81da0e4b1bf7e19dc356fd5558e14267f8",
+    "projects/open-gate/build/res-custom/ogc.c": "9915cbae02ff0091f1ee28ecca5a73fe2af2bfb3f7e242ad1b09967679954d78",
+    "projects/open-gate/build/res-custom/test_lv_text_style.py": "610cb75dbd3885a3de24ec2f6c21e2c594516642668469d4d39ed0f4eca8320e",
+    "projects/open-gate/build/res-custom/test_v3_rescustom.py": "a47c59b074449a487f7ff64814a18b0b55b0716a10ce490d1819d80d96f1b9ef",
+    "fpSup/uishare/ui_apply.c": "ea6347b0ef8c07ccc4a3fe26d1ca56940599268ef348f58e564c0062617f9cf9",
+    "fpSup/uishare/test_ui_apply.py": "2e6b3d75a7a60d624e00528d6f5f57e5b64c83c36b7423f8fad168b67590016b",
+    "projects/open-gate/build/res-custom/build_v3_rescustom.py": "2e6a50291c73535edae1ee065d35cdd93dd6c347d8e2f8a56e3cafa3ddfd541c",
+    "projects/open-gate/build/res-custom/ogc_layout.py": "b933f8bdb9de2290ae1abbc7df7929eb20e9301ce889d1b437cda69bd292dc23"
+  },
+  "shared_files_from": "fpsup-res-custom-v0.1.3test",
+  "rcd_bytes_unchanged_from": "fpsup-res-custom-v0.1.3test",
+  "visual_acceptance": {
+    "date": "2026-10-15",
+    "statement": "還不錯就這樣",
+    "scope": "Current outward three-pixel black edge and existing text spacing; retain this style. This is not an assertion of exact stock-font equality or performance parity."
+  },
+  "evidence": {
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/run7/provenance.json": "7089ce8dd2cbb8b668d36875c0f34b0ff13352e9282aa41f497ab1c9d866fcdf",
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/combined-fix12-verification.json": "0655c81275d23638851bd45f218146e945398a83f10faca50ac950d23ed23b1f",
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/run7/white-geometry-preserved.json": "bb8558619157bdbf6a8ad6d6c825867685d991603fc72c00ec124f135ac487b7",
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/run7/outward-edge-measurement.json": "a005e7a44b08c431c64b44799e67616cbab50e1b9fd6ab44551c66fd7160b785",
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/run7/edge-colour-restored-black.json": "a9de49b5b1b72e45875680a3961ca3c6b88bd2874472818dec008786aa9e5e53"
+  }
+}

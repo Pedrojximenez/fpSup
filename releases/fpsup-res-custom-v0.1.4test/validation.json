@@ -1,0 +1,188 @@
+{
+  "release": "fpsup-res-custom-v0.1.4test",
+  "product_sha256": "d9a8e10050184424886afaca263279967ab2cc2c89314c44038fe4402a676355",
+  "product_bytes": 313216,
+  "product_bytes_rebuilt": false,
+  "rcd_files_unchanged": true,
+  "prior_offline_actual_bin": {
+    "sha256": "d9a8e10050184424886afaca263279967ab2cc2c89314c44038fe4402a676355",
+    "bytes": 313216,
+    "actual_card_loader": "2535b983a03f12b54ca107bb9d59591506b928c60ee07835676020f261e311b3",
+    "custom_qs_rows": 5,
+    "qs_reference_records_equal": 371,
+    "lv_reference_records_equal": 16,
+    "LV_reader_resource_registration_flag": 1,
+    "journal_restored": true,
+    "written_to_card": false,
+    "GUI_rendered": false
+  },
+  "prior_focused_tests": "6 passed in 85.263s including four native layout parser paths and two core regressions",
+  "camera_visual_scope": "Medium CINE LV, 29.97 only; other layouts/rates not individually tested on camera.",
+  "camera_personalized_cfg_included": false,
+  "QS_delay_resolved": false,
+  "performance_remeasured": false,
+  "recording_performed": false,
+  "local_packaging_checks": {
+    "passed": true,
+    "tests": {
+      "test-version-history.log": {
+        "tests": 4,
+        "seconds": 0.038,
+        "passed": true,
+        "sha256": "f956005d0fffd32ac4a36ab5c68098cf29abcd859b0dd83722c4ea73d78658fd"
+      },
+      "test-ui-apply.log": {
+        "tests": 31,
+        "seconds": 13.681,
+        "passed": true,
+        "sha256": "eaa6cf76782a07b16474fb65f2dfcbd88b838f770f3ae917243108e328f953fe"
+      },
+      "test-shared-boot-unrestricted.log": {
+        "tests": 48,
+        "seconds": 95.447,
+        "passed": true,
+        "sha256": "97d65e99f44ce6285d810f53b5659aa7b84cda94e20df7d492161b3ca89fe721"
+      },
+      "test-merge-v3.log": {
+        "passed": true,
+        "sha256": "d22f339f1af81c1fc9f7622893e054c98314272cefea288e154c753dec187f57"
+      },
+      "test-ui-v3.log": {
+        "passed": true,
+        "sha256": "52557360e9d58893d4b03ea32a315ce42a67b838bdceb1f88ce6372ab86fa04b"
+      }
+    },
+    "boot_entry_chain": {
+      "build_cases": 14,
+      "autorun_comparisons": 3,
+      "catalogue_references": 8,
+      "report_sha256": "78bbce028a9e80a951c6743079fe3b8ccfb005aa552f938dc3a46068bffb3ea5"
+    },
+    "catalogue_diff": {
+      "product_changes": [
+        "res-custom"
+      ],
+      "previous_release_unchanged": true,
+      "all_autoruns_unchanged": true,
+      "default_boot_pair_unchanged": true,
+      "other_products_unchanged": true,
+      "pending_unchanged": true,
+      "embedded_product_sha256": "d9a8e10050184424886afaca263279967ab2cc2c89314c44038fe4402a676355",
+      "embedded_product_bytes": 313216,
+      "version": "0.1.4test",
+      "index_sha256": "bc985fea5c66b80fdabe596e5e92d0fd2d08b70d4a9b83d9c1f1d636d853e70c",
+      "boot_pairs": {
+        "i0f0": {
+          "AutoRun.txt": {
+            "size": 3561,
+            "sha256": "889800fa363c75bfe0d9da43da82312276388a8929748ce05221ce0da931bb4c"
+          },
+          "fpSup/LOADER.BIN": {
+            "size": 8248,
+            "sha256": "3c9a6b36687dfc21d4764d61ff190b1222efd9a84f5aa4277fb52527eb751534"
+          }
+        },
+        "i0f1": {
+          "AutoRun.txt": {
+            "size": 4666,
+            "sha256": "2e77dfe3529006d2cb95ac01e206048efe495493434c05f1ed8fad4ecd22bf96"
+          },
+          "fpSup/LOADER.BIN": {
+            "size": 8568,
+            "sha256": "33ab64ba9e45ff75c6b1ab3eaf6df7839db4a86998857327eca667c2b6df5030"
+          }
+        },
+        "i1f0": {
+          "AutoRun.txt": {
+            "size": 3561,
+            "sha256": "889800fa363c75bfe0d9da43da82312276388a8929748ce05221ce0da931bb4c"
+          },
+          "fpSup/LOADER.BIN": {
+            "size": 8528,
+            "sha256": "ab34813df3c9a662d54085cddc8373adb584ee8664ff60d0c4371456eaa55cd1"
+          }
+        },
+        "i1f1": {
+          "AutoRun.txt": {
+            "size": 4666,
+            "sha256": "2e77dfe3529006d2cb95ac01e206048efe495493434c05f1ed8fad4ecd22bf96"
+          },
+          "fpSup/LOADER.BIN": {
+            "size": 8848,
+            "sha256": "f9f041babf0613f05265f9fda283caf3855f075c8b65c45c690a37d2f8dfbb32"
+          }
+        },
+        "m1i0f0": {
+          "AutoRun.txt": {
+            "size": 3561,
+            "sha256": "889800fa363c75bfe0d9da43da82312276388a8929748ce05221ce0da931bb4c"
+          },
+          "fpSup/LOADER.BIN": {
+            "size": 28676,
+            "sha256": "f1c92fa02d1cd0297bc7920b5cdf3ba574419a81be97d64b17a1dc7b7c3919a6"
+          }
+        },
+        "m1i0f1": {
+          "AutoRun.txt": {
+            "size": 4666,
+            "sha256": "2e77dfe3529006d2cb95ac01e206048efe495493434c05f1ed8fad4ecd22bf96"
+          },
+          "fpSup/LOADER.BIN": {
+            "size": 28996,
+            "sha256": "2501dc5def3994aab8cb426891eb2e3e6d6d4deb5df2a8a6fda319e4444124e8"
+          }
+        },
+        "m1i1f0": {
+          "AutoRun.txt": {
+            "size": 3561,
+            "sha256": "889800fa363c75bfe0d9da43da82312276388a8929748ce05221ce0da931bb4c"
+          },
+          "fpSup/LOADER.BIN": {
+            "size": 28956,
+            "sha256": "8284f7a6c8fabf24127554b9510fe67e50035de5a5ae4603226ba841a81d0119"
+          }
+        },
+        "m1i1f1": {
+          "AutoRun.txt": {
+            "size": 4666,
+            "sha256": "2e77dfe3529006d2cb95ac01e206048efe495493434c05f1ed8fad4ecd22bf96"
+          },
+          "fpSup/LOADER.BIN": {
+            "size": 29276,
+            "sha256": "8c407fc89a5f3f05493297bb0ee49458e6f05d9f6d0a557fcaea7dbe44549302"
+          }
+        }
+      },
+      "rebuilt_manager_variants": [
+        "m1i0f0",
+        "m1i0f1",
+        "m1i1f0",
+        "m1i1f1"
+      ],
+      "manager_reason": "Maintained builder picks up the already-required ui_apply.c string base limit 64 (previously 8), also used by accepted FPS BIN; management UI rebuilt from that same source.",
+      "boot_source_changes": {
+        "uishare/ui_apply.c": {
+          "before": "4b6bad26312cfe102477f159cab5e7e34198176c1a9bcacf300b19d7c6fe432d",
+          "after": "ea6347b0ef8c07ccc4a3fe26d1ca56940599268ef348f58e564c0062617f9cf9"
+        }
+      }
+    },
+    "export": {
+      "scope": "ZIP generated by the actual local page compose script; no browser-download completion claimed",
+      "path": "fpsup-res-custom-v0.1.4test-IS.zip",
+      "sha256": "e7ac6618142826a43614f3d251abf74b04a83a23225b3427d62d1fe768027280",
+      "product_sha256": "d9a8e10050184424886afaca263279967ab2cc2c89314c44038fe4402a676355",
+      "product_bytes": 313216,
+      "all_five_rcds_equal": true
+    },
+    "browser": {
+      "url": "http://127.0.0.1:8731/tools/merge-v3/",
+      "visible_version": "v0.1.4test",
+      "current_history_verified": true,
+      "download_ready": true,
+      "download_event": "Automation wait timed out; actual page compose ZIP validated offline",
+      "screenshot_sha256": "9b499d5bf5c4adf024149f63a961a94feade5c2a8985445c0fbbaf37b9cf28df"
+    },
+    "initial_sandbox_JIT_run": "exit 132; rerun outside sandbox completed with no skipped tests"
+  }
+}
