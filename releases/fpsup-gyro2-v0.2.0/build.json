@@ -1,0 +1,16 @@
+{
+ "product": "fpSup-Gyro2, Loader v3 sup",
+ "file": "40GYR2.BIN",
+ "sup_id": "GYR2",
+ "version": 6,
+ "sha256": "2cbfe477bf8b11cc0e4fed37df177f6f5d561bf31243e2b00687eed15aa9a7d3",
+ "facts": {
+  "code": 4008,
+  "file": 4040,
+  "block": 60880
+ },
+ "sources": {
+  "projects/gyro2-sup/build.py": "31a35afab06317d75b11e4e5e7eda1e3fedc38e5ac3e89ddbcfbe297c8233a70",
+  "projects/gyro2-sup/src/gyr2.S": "1d7a35dd79edbb6824c510303ea8ea032b29d46a942ad771cafddb864953feb5"
+ }
+}

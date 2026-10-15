@@ -41,7 +41,7 @@ list the versions below.
 | [`fpsup-desqueeze`](releases/fpsup-desqueeze-v0.1.4test/) | v0.1.4test | Anamorphic preview: the screen shows the picture desqueezed (1.33x, 1.6x or 2.0x) with the Frame Guide scaled and an amber indicator; the recorded CinemaDNG is unchanged. Test build. |
 | [`fpsup-gyro`](releases/fpsup-gyro-v1.14.1test/) | v1.14.1test | Writes Gyroflow .gcsv motion and .json lens files while recording CinemaDNG. This test build needs on-camera audio sync validation. |
 | [`fpsup-gyro-base`](releases/fpsup-gyro-base-v1.14.0/) | v1.14.0 | Writes the gyro and accelerometer as a raw .GYR in the root of the disk the take went to — every sample, nothing on the camera but the stream — converted afterwards in a browser. Same code as fpGyroSup v1.14.0. |
-| [`fpsup-gyro2`](releases/fpsup-gyro2-v0.1.0/) | v0.1.0 | Writes the fp's gyro and level data into every CinemaDNG frame; the Gyroflow (fpSup) plugin for DaVinci Resolve reads it from the frames and stabilises the clip, with no sync step. Works with Lossless. |
+| [`fpsup-gyro2`](releases/fpsup-gyro2-v0.2.0/) | v0.2.0 | Writes the fp's gyro and level data into every CinemaDNG frame; the Gyroflow (fpSup) plugin for DaVinci Resolve reads it from the frames and stabilises the clip, with no sync step. Works with Lossless. |
 | [`fpsup-lossless`](releases/fpsup-lossless-v0.3.0test/) | v0.3.0test | Lossless-compressed CinemaDNG, by the camera's own hardware codec: a Lossless RAW row (SHOOT page 2, CINE) turns it on; frames the codec cannot finish in time are written uncompressed, and compressed clips play back in the camera. Test build. |
 | [`fpsup-og2k`](releases/fpsup-og2k-v0.1.5a/) | v0.1.5a | The same open gate at 2016×1344, on the sensor's quiet readout at every frame rate. 98 MB/s at 24p 12-bit, 8.3 ms rolling shutter. Test build. |
 | [`fpsup-og3k`](releases/fpsup-og3k-v0.2.8a/) | v0.2.8a | The sensor's whole 3:2 area at 3024×2010, eight frame rates from 23.976 to 100, native UI in Settings and Quick Set. 221 MB/s at 24p 12-bit — this needs an external SSD, not an SD card. Alpha. |
@@ -159,7 +159,7 @@ Each page says what has been proven, what is being worked on, and what is open.
 | [`fpsup-desqueeze`](releases/fpsup-desqueeze-v0.1.4test/) | v0.1.4test | 變形鏡頭預覽：螢幕以 1.33x、1.6x 或 2.0x 還原畫面比例，構圖線跟著縮放並顯示琥珀色標記；錄下的 CinemaDNG 不變。測試版。 |
 | [`fpsup-gyro`](releases/fpsup-gyro-v1.14.1test/) | v1.14.1test | 錄製 CinemaDNG 時寫出 Gyroflow 的 .gcsv 運動紀錄與 .json 鏡頭檔。此測試版的聲畫同步仍待實機驗證。 |
 | [`fpsup-gyro-base`](releases/fpsup-gyro-base-v1.14.0/) | v1.14.0 | 在錄影那顆磁碟的根目錄寫一個原始 .GYR(陀螺儀與加速度計每個樣本都在),機上只做串流,事後在瀏覽器轉換。與 fpGyroSup v1.14.0 同一份程式。 |
-| [`fpsup-gyro2`](releases/fpsup-gyro2-v0.1.0/) | v0.1.0 | 把 fp 的陀螺儀與水平儀資料寫進每一格 CinemaDNG;DaVinci Resolve 的 Gyroflow (fpSup) 外掛直接從畫面檔讀取並防震，不用手動同步。可與 Lossless 同卡。 |
+| [`fpsup-gyro2`](releases/fpsup-gyro2-v0.2.0/) | v0.2.0 | 把 fp 的陀螺儀與水平儀資料寫進每一格 CinemaDNG;DaVinci Resolve 的 Gyroflow (fpSup) 外掛直接從畫面檔讀取並防震，不用手動同步。可與 Lossless 同卡。 |
 | [`fpsup-lossless`](releases/fpsup-lossless-v0.3.0test/) | v0.3.0test | 用相機自己的硬體編碼器錄無損壓縮 CinemaDNG:SHOOT 第 2 頁(CINE)多一列 Lossless RAW 開關;來不及壓的畫格照原樣寫入未壓縮,壓縮過的片段可在機內回放。測試版。 |
 | [`fpsup-og2k`](releases/fpsup-og2k-v0.1.5a/) | v0.1.5a | 同樣的 open gate,2016×1344,每個幀率都走感光元件的安靜讀出。24p 12-bit 為 98 MB/s,捲簾 8.3 ms。測試版。 |
 | [`fpsup-og3k`](releases/fpsup-og3k-v0.2.8a/) | v0.2.8a | 感光元件完整的 3:2 面積,3024×2010,八個幀率從 23.976 到 100,Settings 與 QS 有原生 UI。24p 12-bit 為 221 MB/s ——這個碼率要外接 SSD,SD 卡不夠。Alpha。 |

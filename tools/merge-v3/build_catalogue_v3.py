@@ -126,7 +126,7 @@ PRODUCTS = {
                         author='Jose Hurtado', credits=[]),
     'gyro2':      dict(name='Gyro2',
                        summary=dict(en='Gyro data inside every CinemaDNG frame; stabilise in DaVinci Resolve with the Gyroflow plugin (fpSup build).',
-                                    zh='把陀螺儀資料寫進每一格 CinemaDNG,用 Gyroflow 的 DaVinci Resolve 插件(fpSup 版)防震。'), category='motion', excl=[], file='20GYR2.BIN',
+                                    zh='把陀螺儀資料寫進每一格 CinemaDNG,用 Gyroflow 的 DaVinci Resolve 插件(fpSup 版)防震。'), category='motion', excl=[], file='40GYR2.BIN',
                        author=AUTHOR, credits=[],
                        pending=True),
     # In development (user 2026-10-07: show what is coming).  stage='dev' tiles

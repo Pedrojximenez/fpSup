@@ -1,4 +1,16 @@
 {
+  "fpsup-gyro2-v0.2.0": {
+    "en": [
+      "New data format: needs the Gyroflow (fpSup) plugin v0.1.10 or later. Clips from v0.1.0 still open.",
+      "Much lighter on the camera while recording; the readout time is worked out for every recording format.",
+      "The file is now 40GYR2.BIN; when upgrading by hand, delete the old 20GYR2.BIN."
+    ],
+    "zh": [
+      "資料格式更新：需要 Gyroflow（fpSup）外掛 v0.1.10 以上。v0.1.0 錄的片段照樣能讀。",
+      "錄影時對相機的負擔大幅降低；讀出時間依各種錄影格式計算。",
+      "檔名改為 40GYR2.BIN；手動升級時請刪掉舊的 20GYR2.BIN。"
+    ]
+  },
   "fpsup-lossless-v0.3.0test": {
     "en": [
       "Uses much less of the camera’s processor while compressing.",

@@ -260,10 +260,10 @@ afterwards; the <b>Update status</b> line then shows the result.</p>
 
 <!-- 7. REMOVE -->
 <h2 id="remove"><span class="en">Remove</span><span class="zh">移除</span></h2>
-<p class="en">Camera: delete <code>fpSup/20GYR2.BIN</code> from the card (or the whole fpSup card),
+<p class="en">Camera: delete <code>fpSup/40GYR2.BIN</code> from the card (or the whole fpSup card),
 then switch the camera off. There is no menu setting to set back. Plugin: delete
 <code>fpSupGyroflow.ofx.bundle</code> from the plugin folder and restart Resolve.</p>
-<p class="zh">相機:刪除卡上的 <code>fpSup/20GYR2.BIN</code>(或整張 fpSup 卡的內容),再關機。
+<p class="zh">相機:刪除卡上的 <code>fpSup/40GYR2.BIN</code>(或整張 fpSup 卡的內容),再關機。
 <strong>沒有選單設定要改回。</strong>外掛:從外掛資料夾刪掉 <code>fpSupGyroflow.ofx.bundle</code>,重開 Resolve。</p>
 
 <!-- 8. TROUBLE -->
@@ -278,8 +278,12 @@ then switch the camera off. There is no menu setting to set back. Plugin: delete
         Mac 可以改用上面的<b>終端機安裝</b>重裝一次。</span></td></tr>
     <tr><td><span class="en">Status says the take has no Vd frame sync</span><span class="zh">Status 說這段沒有 Vd 幀同步</span></td>
         <td><span class="en">The clip was not recorded with Gyro2 loaded (or with an early test build). Check the
-        card has <code>fpSup/20GYR2.BIN</code> and record again.</span><span class="zh">這段錄的時候沒有載入 Gyro2(或是早期測試版錄的)。
-        確認卡上有 <code>fpSup/20GYR2.BIN</code>,重錄。</span></td></tr>
+        card has <code>fpSup/40GYR2.BIN</code> and record again.</span><span class="zh">這段錄的時候沒有載入 Gyro2(或是早期測試版錄的)。
+        確認卡上有 <code>fpSup/40GYR2.BIN</code>,重錄。</span></td></tr>
+    <tr><td><span class="en">Status says <i>unsupported block version 2</i></span><span class="zh">Status 說 <i>unsupported block version 2</i></span></td>
+        <td><span class="en">The clip was recorded with Gyro2 v0.2.0 or later, which needs plugin v0.1.10 or later.
+        <a href="#update">Update the plugin</a>, then quit and reopen Resolve.</span><span class="zh">這段是用 Gyro2 v0.2.0 以後的版本錄的，需要 v0.1.10 以上的外掛。
+        <a href="#update">更新外掛</a>,然後把 Resolve 整個關掉再打開。</span></td></tr>
     <tr><td><span class="en">The picture bends near the edges with a manual lens</span><span class="zh">手動鏡頭時畫面邊緣彎曲</span></td>
         <td><span class="en">Set Manual lens focal correctly, then adjust Corner distortion &mdash;
         <a href="#use">Use</a>.</span><span class="zh">把 Manual lens focal 填對,再調 Corner distortion ——

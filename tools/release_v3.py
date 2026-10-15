@@ -44,7 +44,7 @@ PRODUCTS = {
                    '30OG3K.BIN', 'OG3K', 'Open Gate 3K'),
     'og2k':       ([ROOT / 'projects' / 'open-gate' / 'build' / 'build_v3_og.py', '--target', 'og2k'],
                    '30OG2K.BIN', 'OG2K', 'Open Gate 2K'),
-    'gyro2':      ([ROOT / 'projects' / 'gyro2-sup' / 'build.py'], '20GYR2.BIN', 'GYR2', 'Gyro2'),
+    'gyro2':      ([ROOT / 'projects' / 'gyro2-sup' / 'build.py'], '40GYR2.BIN', 'GYR2', 'Gyro2'),
     'screenflip': ([FPSUP / 'screenflip' / 'build_v3_flip.py'], '40FLIP.BIN', 'FLIP', 'Screen flip'),
     'raw-view':   ([ROOT / 'projects' / 'rawview' / 'build' / 'build_v3_rawview.py'], '45RAWV.BIN',
                    'RAWV', 'RAW view'),
