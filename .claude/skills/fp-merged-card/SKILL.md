@@ -14,7 +14,8 @@ description: Building a SIGMA fp card to test with — one product or several (o
 # A card to test with
 
 Build any combination here, Fast Start 3 included. The cards people download
-come from `fpSup/tools/card-composer/index.html`; that is about distribution and
+come from fpSup-Merge, `fpSup/tools/merge-v3/index.html` (built by
+`build_catalogue_v3.py`; `tools/card-composer/` is the previous composer); that is about distribution and
 the checks the page runs, not about what a script is allowed to make (2026-09-20,
 the user's call).
 
@@ -228,7 +229,7 @@ bytes from `releases/fpsup-<product>-v<version>/`; do not rebuild and assume.
   is cold.
 - For anything that arms hooks: boot, do **not** record, power off, start again —
   about ten times — plus once right after a take.
-- After any change to a card, run `tools/card-composer/build_catalogue.py`.
+- After any change to a card, run `tools/merge-v3/build_catalogue_v3.py`.
 - A script-built card does not go into `releases/`. Releases are cut by
   `gyro/release_card.py`, the open-gate builder's `--release`, or
   `repack_release.py` for a payload that did not change.

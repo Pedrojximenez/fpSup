@@ -203,7 +203,7 @@ open gate 的 builder 在完整研究專案裡(`projects/open-gate/build/build_o
 ## 7. 合併多個 sup,以及 Fast Start 3
 
 **fpSup-Merge** 在瀏覽器裡把已發布的 sup 合併成一張卡:
-<https://ijigen.github.io/fpSup/tools/card-composer/>。勾選要的卡,就能下載
+<https://ijigen.github.io/fpSup/tools/merge-v3/>。勾選要的卡,就能下載
 `AutoRun.txt` 和 `fpSup.BIN`。也可以把你自己的 `fpSup.BIN` 拖進去一起合併。
 
 合併時它會做這些事:
@@ -266,7 +266,7 @@ releases/fpsup-<產品>-v<版本>/
 2. 放進 `releases/fpsup-<產品>-v<版本>/`,附上 `ABOUT.txt`。
 3. `python3 tools/build_releases.py` —— 重新產生網站和 `README.md` 裡的表格。
    表格過期的話,GitHub Pages 的部署會失敗。
-4. `python3 tools/card-composer/build_catalogue.py` —— 重新產生 fpSup-Merge。
+4. `python3 -B tools/merge-v3/build_catalogue_v3.py` —— 重新產生 fpSup-Merge。
    任何組合重現不出來,它就拒絕寫出頁面。
 5. 用資料夾名稱打 tag:`git tag -a fpsup-<產品>-v<版本>`。
 6. 推送 `main` 和 tag,GitHub Pages 會部署網站和合併頁。

@@ -48,6 +48,9 @@ PRODUCTS = {
     'screenflip': ([FPSUP / 'screenflip' / 'build_v3_flip.py'], '40FLIP.BIN', 'FLIP', 'Screen flip'),
     'raw-view':   ([ROOT / 'projects' / 'rawview' / 'build' / 'build_v3_rawview.py'], '45RAWV.BIN',
                    'RAWV', 'RAW view'),
+    # projects/rec-core/writer: the card write without the FS lock, SD and SSD (2026-10-15)
+    'unlocked-writer': ([ROOT / 'projects' / 'rec-core' / 'writer' / 'build.py'], '20ULWR.BIN', 'ULWR',
+                        'Unlocked Writer'),
     # the OpenGate formats (2026-10-07): one core + one data file per format in \fpSup\RESCUS\
     'res-custom': ([ROOT / 'projects' / 'open-gate' / 'build' / 'res-custom' / 'build_v3_rescustom.py'],
                    '32RESCUS.BIN', 'RCUS', 'Open Gate formats (res-custom)'),

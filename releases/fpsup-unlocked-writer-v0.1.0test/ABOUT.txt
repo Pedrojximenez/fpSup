@@ -1,0 +1,2 @@
+en: Writes recording data to the SD card or SSD without holding the file-system lock, so file-system work and the card write run at the same time. SD card: on by itself (Video Speed Class and CMD20 are detected). SSD: works only with Write Mode turned on. Test build.
+zh: 寫卡時不握檔案系統鎖，檔案系統工作和寫卡同時進行。SD 卡自動生效(自動辨識 Video Speed Class 與 CMD20);SSD 要開啟 Write Mode 才會生效。測試版。

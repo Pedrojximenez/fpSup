@@ -241,7 +241,7 @@ working. If one fails, fix the cause; do not remove the check.
 ## 7. Combining sups, and Fast Start 3
 
 **fpSup-Merge** combines released sups into one card in the browser:
-<https://ijigen.github.io/fpSup/tools/card-composer/>. Tick the cards, get
+<https://ijigen.github.io/fpSup/tools/merge-v3/>. Tick the cards, get
 `AutoRun.txt` and `fpSup.BIN`. You can also drop in your own `fpSup.BIN`.
 
 What it does when it combines:
@@ -321,7 +321,7 @@ Its bytes are frozen: a release is never rebuilt or edited in place. The steps:
 2. Put it in `releases/fpsup-<product>-v<version>/` with an `ABOUT.txt`.
 3. `python3 tools/build_releases.py` — regenerates the tables on the website
    and in `README.md`. The GitHub Pages workflow fails if they are stale.
-4. `python3 tools/card-composer/build_catalogue.py` — regenerates fpSup-Merge.
+4. `python3 -B tools/merge-v3/build_catalogue_v3.py` — regenerates fpSup-Merge.
    It refuses to write the page if a combination does not reproduce.
 5. Tag it with the folder's name: `git tag -a fpsup-<product>-v<version>`.
 6. Push `main` and the tag. GitHub Pages deploys the site and the page.

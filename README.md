@@ -49,6 +49,7 @@ list the versions below.
 | [`fpsup-res-custom`](releases/fpsup-res-custom-v0.1.3test/) | v0.1.3test | Open Gate formats in one: OG2K, OG3K, OG3.5K, OG4K and S16 as extra movie resolutions in Settings and Quick Set, each a small data file in fpSup\RESCUS; the camera's own tables are not changed. Test. |
 | [`fpsup-screenflip`](releases/fpsup-screenflip-v0.1.0test/) | v0.1.0test | Flip the rear screen 180°, mirror it, or both — set separately for each custom display mode, applied when you switch into that mode. Test build. |
 | [`fpsup-tap-to-zoom`](releases/fpsup-tap-to-zoom-v0.1.0test/) | v0.1.0test | Tap to Zoom: tap the screen to zoom the live picture 2x around that point; the next tap returns to the full frame. While zoomed, the command dials pick 2x, 4x or 8x and never touch exposure. Works while recording; the file is unchanged. Stacks on Desqueeze. Test. |
+| [`fpsup-unlocked-writer`](releases/fpsup-unlocked-writer-v0.1.0test/) | v0.1.0test | Writes recording data to the SD card or SSD without holding the file-system lock, so file-system work and the card write run at the same time. SD card: on by itself (Video Speed Class and CMD20 are detected). SSD: works only with Write Mode turned on. Test build. |
 | [`fpsup-usbshell`](releases/fpsup-usbshell-v3.4.0test/) | v3.4.0test | The shell that answers `shl` over USB, parasitic on the camera's own PTP gadget so the firmware keeps owning the endpoints. |
 <!-- releases:end:en -->
 
@@ -167,6 +168,7 @@ Each page says what has been proven, what is being worked on, and what is open.
 | [`fpsup-res-custom`](releases/fpsup-res-custom-v0.1.3test/) | v0.1.3test | Open Gate 各格式合一:OG2K、OG3K、OG3.5K、OG4K、S16 成為 Settings 與 QS 的錄影解析度新選項,每個格式是 fpSup\RESCUS 裡的一個小資料檔;不改相機原廠的任何表。測試版。 |
 | [`fpsup-screenflip`](releases/fpsup-screenflip-v0.1.0test/) | v0.1.0test | 背螢幕翻轉 180°、鏡像或兩者 —— 每個自訂顯示模式各自設定,切換進那個模式時才套用。測試版。 |
 | [`fpsup-tap-to-zoom`](releases/fpsup-tap-to-zoom-v0.1.0test/) | v0.1.0test | Tap to Zoom：輕觸螢幕即以該點為中心把即時畫面放大 2x，再點一次還原全畫面。放大時，指令轉盤可選 2x、4x 或 8x，不影響曝光。錄影中也可用，檔案不變。可與 Desqueeze 同卡。測試版。 |
+| [`fpsup-unlocked-writer`](releases/fpsup-unlocked-writer-v0.1.0test/) | v0.1.0test | 寫卡時不握檔案系統鎖，檔案系統工作和寫卡同時進行。SD 卡自動生效(自動辨識 Video Speed Class 與 CMD20);SSD 要開啟 Write Mode 才會生效。測試版。 |
 | [`fpsup-usbshell`](releases/fpsup-usbshell-v3.4.0test/) | v3.4.0test | 透過 USB 回應 `shl` 的 shell。寄生在相機自己的 PTP gadget 上,端點仍由韌體管。 |
 <!-- releases:end:zh -->
 

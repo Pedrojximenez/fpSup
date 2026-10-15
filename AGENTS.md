@@ -13,3 +13,22 @@ keeps no copy of it; a task that does not touch the load chain should not grow
 into a load-chain refactor. An offline build is not permission to operate the
 camera, write a card, commit, push or publish. The walkthrough for people is
 [BUILDING.md](BUILDING.md).
+
+## fpSup-Merge 頁 / the Merge page
+
+「上到 merge 頁」就是改這個工作目錄裡的 `tools/merge-v3/`：來源是
+`build_catalogue_v3.py` 與 `version_notes.json`，新發行版放 `releases/`，然後跑
+`python3 -B tools/merge-v3/build_catalogue_v3.py` 重建 `tools/merge-v3/index.html`，
+再跑 [tools/merge-v3/README.md](tools/merge-v3/README.md) 列的測試。不要在
+scratchpad、`/tmp` 或另開的 worktree 裡做完就回報；`tools/card-composer/` 是舊版
+合併器，不是 merge 頁。回報時給這個 repo 裡的路徑；commit、push 仍要使用者同意。
+
+"Put it on the Merge page" means changing `tools/merge-v3/` in this working
+directory: the sources are `build_catalogue_v3.py` and `version_notes.json`, a
+new release goes in `releases/`; then run
+`python3 -B tools/merge-v3/build_catalogue_v3.py` to rebuild
+`tools/merge-v3/index.html`, and the tests listed in
+[tools/merge-v3/README.md](tools/merge-v3/README.md). Do not finish the work in
+a scratchpad, `/tmp` or a separate worktree and report that; `tools/card-composer/`
+is the previous composer, not the Merge page. Report paths inside this repo;
+commit and push still need the user's say-so.

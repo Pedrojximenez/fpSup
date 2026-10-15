@@ -63,7 +63,7 @@ SUP_RE = re.compile(r'^[0-9]{2}.+\.BIN$')
 CATEGORIES = ['format', 'focus', 'motion', 'monitor', 'development']
 # the page shows sups in this order (user 2026-10-07); the card's load order is
 # still the file names'
-ORDER = ['res-custom', 'res-lab', 'lossless', 'fcap', 'stopfx', 'split-record', 'hdrx', 'af', 'gyro2', 'raw-view', 'screenflip', 'desqueeze', 'tap-to-zoom', 'lut', 'usbshell']
+ORDER = ['res-custom', 'res-lab', 'lossless', 'fcap', 'unlocked-writer', 'stopfx', 'split-record', 'hdrx', 'af', 'gyro2', 'raw-view', 'screenflip', 'desqueeze', 'tap-to-zoom', 'lut', 'usbshell']
 AUTHOR = ''
 PRODUCTS = {
     # og3k / og2k: not this round (user 2026-10-07) -- the OG line ships as
@@ -104,6 +104,13 @@ PRODUCTS = {
     'fcap':       dict(name='FCAP', sup_id='FCAP', file='30FCAP.BIN',
                        summary=dict(en='Writes small frames to the card sooner, so long compressed or small-format takes do not stop early. Needed by Lossless.',
                                     zh='讓小幀更早寫入記憶卡，壓縮或小尺寸格式的長錄影不會提早停止。Lossless 需要它。'),
+                       category='format', excl=[], author=AUTHOR, credits=[]),
+    # projects/rec-core/writer: the stock batch write, sent by our own task
+    # without the FS lock (SD and SSD alike).  No links: whether Lossless
+    # should tick it is the user's call (lossless-sup, 2026-10-15).
+    'unlocked-writer': dict(name='Unlocked Writer', sup_id='ULWR', file='20ULWR.BIN',
+                       summary=dict(en='Writes recordings to the SD card or SSD without holding the file-system lock, so the camera keeps working while the card is written. SD card: on by itself (Video Speed Class and CMD20 are detected). SSD: works only with Write Mode turned on.',
+                                    zh='寫卡時不握檔案系統鎖，寫入 SD 卡或 SSD 的同時，相機照常處理後續畫格。SD 卡自動生效(自動辨識 Video Speed Class 與 CMD20);SSD 要開啟 Write Mode 才會生效。'),
                        category='format', excl=[], author=AUTHOR, credits=[]),
     'stopfx':     dict(name='STOPFX', sup_id='STFX', file='05STOPFX.BIN',
                        summary=dict(en='Helps the camera clear pending frames after an abnormal recording stop. Use alone or with Lossless.',
