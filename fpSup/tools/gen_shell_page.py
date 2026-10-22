@@ -239,7 +239,7 @@ details.cmd .skip b{color:var(--ink)}
         <td><code>_AutoRun.txt</code> on the SD card, one command per line</td>
         <td>at boot, before most of the camera is up</td></tr>
     <tr><td>USB shell</td>
-        <td><a href="https://github.com/ijigen/fpSup/tree/main/fp_usb_shell">fp USB Shell</a>
+        <td><a href="https://github.com/ijigen/fpSup/tree/main/fpSup/fp_usb_shell">fp USB Shell</a>
         forwards a line with <code>shl &lt;cmd&gt;</code></td>
         <td>any time the camera is on</td></tr>
     <tr><td>UART</td>
@@ -393,16 +393,16 @@ Ver.5.02 image. The usage text was asked from a camera over the USB shell, with 
 capture sink pushed onto the shell's own output stack so the firmware's
 <code>printf</code> came back over USB instead of going to the UART pads. The
 working documents are
-<a href="https://github.com/ijigen/fpSup/blob/main/docs/SHELL_COMMANDS.md">SHELL_COMMANDS</a>
+<a href="https://github.com/ijigen/fpSup/blob/main/fpSup/docs/SHELL_COMMANDS.md">SHELL_COMMANDS</a>
 and
-<a href="https://github.com/ijigen/fpSup/blob/main/docs/SHELL_CAPABILITIES.md">SHELL_CAPABILITIES</a>,
+<a href="https://github.com/ijigen/fpSup/blob/main/fpSup/docs/SHELL_CAPABILITIES.md">SHELL_CAPABILITIES</a>,
 and this page is generated from the first of them by
-<a href="https://github.com/ijigen/fpSup/blob/main/tools/gen_shell_page.py">tools/gen_shell_page.py</a>.</p>
+<a href="https://github.com/ijigen/fpSup/blob/main/fpSup/tools/gen_shell_page.py">tools/gen_shell_page.py</a>.</p>
 
 <footer>
   <p><a href="../research.html">Firmware research</a> &middot;
   <a href="../">fpSup</a> &middot;
-  <a href="https://discord.gg/WVTCcpGUYC">Discord</a> &middot;
+  <a href="https://discord.gg/XeFK5zNZpT">Discord</a> &middot;
   <a href="https://github.com/ijigen/fpSup">Repository</a></p>
 </footer>
 

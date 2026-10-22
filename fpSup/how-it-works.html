@@ -55,11 +55,11 @@ and the dispatcher tokenises a line, compares the name, and calls the handler.</
 是 77 筆 <code>{ char name[0x14]; void *handler; }</code>;
 分派器把一行文字切成 token、比對名字、然後呼叫對應的 handler。</p>
 <p class="en">Those commands read and write memory, poke hardware registers, drive the sensor's
-readout modes, and set menu values. <a href="https://github.com/ijigen/fpSup/blob/main/docs/SHELL_COMMANDS.md">The full list is
+readout modes, and set menu values. <a href="https://github.com/ijigen/fpSup/blob/main/fpSup/docs/SHELL_COMMANDS.md">The full list is
 written down</a>, with the usage text asked from a live camera rather than
 reconstructed &mdash; that is the firmware's own help, printing itself.</p>
 <p class="zh">這些指令能讀寫記憶體、戳硬體暫存器、驅動感光元件的讀出模式、設定選單數值。
-<a href="https://github.com/ijigen/fpSup/blob/main/docs/SHELL_COMMANDS.md">完整清單記在這裡</a>,
+<a href="https://github.com/ijigen/fpSup/blob/main/fpSup/docs/SHELL_COMMANDS.md">完整清單記在這裡</a>,
 其中的用法說明是<strong>跟實機要出來的</strong>,不是重建的 ——
 那是韌體自己的說明,自己印出來的。</p>
 
@@ -175,13 +175,13 @@ firmware had just disabled underneath it. The command register never cleared, a
 camera's own PTP gadget</b>: the firmware keeps the endpoints, creates and re-creates
 them across a recording reconfiguration, and the shell simply rides along. Recording
 survives it, and so does unplugging the cable.
-<a href="https://github.com/ijigen/fpSup/blob/main/docs/FREEZE_ROOTCAUSE.md">The full analysis is here</a>, six symptoms to one
+<a href="https://github.com/ijigen/fpSup/blob/main/fpSup/docs/FREEZE_ROOTCAUSE.md">The full analysis is here</a>, six symptoms to one
 mechanism, every step confirmed in the disassembly.</p>
 <p class="zh">修法是<strong>什麼都不要擁有</strong>。現在發行的 shell 是
 <b>寄生在相機自己的 PTP gadget 上</b>:端點由韌體持有,
 錄影重新組態時由韌體去建立與重建,shell 只是搭順風車。<br>
 這樣錄影撐得過去,拔線也撐得過去。
-<a href="https://github.com/ijigen/fpSup/blob/main/docs/FREEZE_ROOTCAUSE.md">完整分析在這裡</a> ——
+<a href="https://github.com/ijigen/fpSup/blob/main/fpSup/docs/FREEZE_ROOTCAUSE.md">完整分析在這裡</a> ——
 六個症狀收斂到一個機制,每一步都在反組譯裡確認過。</p>
 
 <h2 id="merge"><span class="en">What went wrong: the card that was quietly wrong</span><span class="zh">出過的錯:一張悄悄是錯的卡</span></h2>
@@ -213,12 +213,12 @@ build scripts can still create a card; what they no longer do is combine two.</p
 <p class="en">The new resolution is not an overlay drawn on top of the interface. Every menu item
 in the fp carries its own metadata in ROM, immediately after its name string &mdash;
 which means a mode can be given a real entry that behaves like the others, in Settings
-and in Quick Set. <a href="https://github.com/ijigen/fpSup/blob/main/docs/MENU_MODIFICATION.md">How that was worked out</a>.</p>
+and in Quick Set. <a href="https://github.com/ijigen/fpSup/blob/main/fpSup/docs/MENU_MODIFICATION.md">How that was worked out</a>.</p>
 <p class="zh">那個新解析度<strong>不是</strong>畫在介面上面的疊圖。<br>
 fp 裡每一個選單項目都在 ROM 裡帶著自己的 metadata,就緊接在它的名稱字串後面 ——
 這表示一個模式可以擁有一個<strong>真正的選單項目</strong>,
 行為跟其他項目一樣,在 Settings 和 Quick Set 裡都是。
-<a href="https://github.com/ijigen/fpSup/blob/main/docs/MENU_MODIFICATION.md">這是怎麼弄清楚的</a>。</p>
+<a href="https://github.com/ijigen/fpSup/blob/main/fpSup/docs/MENU_MODIFICATION.md">這是怎麼弄清楚的</a>。</p>
 
 <h2><span class="en">Credit</span><span class="zh">致謝</span></h2>
 <p class="en">Open gate on an fp was first done by
@@ -236,7 +236,7 @@ possible.</p>
   <p class="zh">想再往下讀的話,<a href="research.html">研究頁面</a>是一個子系統一個子系統寫的,
   而且每一份都把<strong>已經證實的</strong>和<strong>還沒解的</strong>分開。</p>
   <p><a href="./">fpSup</a> &middot; <a href="guide.html"><span class="en">How to use it</span><span class="zh">怎麼用</span></a> &middot;
-  <a href="https://discord.gg/WVTCcpGUYC">Discord</a> &middot;
+  <a href="https://discord.gg/XeFK5zNZpT">Discord</a> &middot;
   <a href="https://www.youtube.com/@fp-sup">YouTube</a></p>
 </footer>
 

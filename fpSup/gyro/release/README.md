@@ -14,7 +14,7 @@ and the complete `FPSUPUI` folder from this ZIP to the boot SD card root.
 ## Historical v1.11b notes / 舊版 v1.11b 說明
 
 [![supMe on Ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/fpsup)
-[![Join the fpSup Discord](https://img.shields.io/badge/Discord-Join-5865F2?logo=discord&logoColor=white)](https://discord.gg/WVTCcpGUYC)
+[![Join the fpSup Discord](https://img.shields.io/badge/Discord-Join-5865F2?logo=discord&logoColor=white)](https://discord.gg/XeFK5zNZpT)
 
 [English](#english) | [繁體中文](#繁體中文)
 
