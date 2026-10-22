@@ -201,7 +201,7 @@
 - [ ] Panasonic／Leica 只在取得可讀核心或可驗證演算法證據時深化；加密 payload、符號或 API 名稱不等於已取得 DFD 實作。
 - [ ] Z CAM 僅針對統計對齊、反轉後樣本丟棄、重搜／失敗／ROI 耦合等具體問題做程式對照；**不作連續 AF 性能標竿，不列照搬控制器目標**。
 
-**停止規則：**每次外部研究先指定一個問題、最小新證據與輸出；若只能重述同 sensor／符號／通用 API，記錄未知並停止該輪，將重心放回 fp 的可量測主線。[非 PDAF 參考分類](notes/research/NON_PDAF_CAMERA_REFERENCE_2026-09-27.md)、[Z CAM 程式參考](notes/research/ZCAM_AF_REFERENCE_2026-09-27.md)
+**停止規則：**每次外部研究先指定一個問題、最小新證據與輸出；若只能重述同 sensor／符號／通用 API，記錄未知並停止該輪，將重心放回 fp 的可量測主線。[非 PDAF 參考分類](notes/research/NON_PDAF_CAMERA_REFERENCE_2026-09-27.md)、[Z CAM 程式參考](../../zcam_e2f6/notes/ZCAM_AF_REFERENCE_2026-09-27.fp-af-assist.md)
 
 ## 目前會阻擋哪一步
 

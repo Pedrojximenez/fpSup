@@ -13,3 +13,17 @@
 *.pyo
 *.tsbuildinfo
 .env*
+
+# 實拍原始資料(HDMI 錄影、暗場、RAW 序列…)動輒數十 GB,留在本機。
+# 已經收進 repo 的舊 captures 不受影響;新的不再自動加入。
+projects/*/captures/
+research/**/captures/
+*.mkv
+*.rgb
+
+# 不公開的東西放在專案底下的 private/(韌體 dump、私人內容、未授權的資料)
+# 規則見 INDEX.md 開頭;commit 前另有 .githooks/ 的檢查
+**/private/
+
+# LiDAR 不是 fp,另外處理
+projects/fp-lidar-direct/

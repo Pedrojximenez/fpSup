@@ -2,6 +2,13 @@
 
 > **給之後的 session:先讀這份。**
 
+> **不公開的東西放哪裡**(2026-10-23 定;`research/`、`projects/`、`fpSup/` 都會上 GitHub)
+> - fp 韌體映像、反編譯、Ghidra → 根目錄 `out/`、`firmware/`、`ghidra_proj/`
+> - 其他廠牌的資料,**包括拿 fp 跟它對照的筆記** → 根目錄該廠牌的資料夾(`zcam_e2f6/`、`bmcc6k/`…)
+> - 夾帶韌體的 dump、私人內容、別人沒說可公開的資料 → **該專案底下的 `private/`**(任何深度都不會被 commit)
+> - 筆記引用 `private/` 的檔案時寫明「不公開、怎麼自己取得」
+> - commit 前有自動檢查,夾帶韌體程式碼或反編譯輸出會被擋下
+
 > **參考:設定區的風險**(原「第一守則」,2026-10-01 訂、2026-10-22 起只當參考)
 > 相機設定區會跨關機保存,寫入原廠不支援的值前請先調查清楚。
 > 過去的分析見 [research/SETTINGS_AREA_FIRST_RULE.md](research/SETTINGS_AREA_FIRST_RULE.md)。
@@ -61,7 +68,7 @@ captures/    素材 —— 支持那些結論的證據
 此目錄保留量測／重播工具與原始證據；AF 筆記正文已集中至 `projects/fp-af-assist/notes/`。`fp-af-explainer/` 為歷史說明工具。
 
 - [`CROSSCAM_PDAF_FEASIBILITY_2026-09-27.md`](projects/fp-af-assist/notes/research/CROSSCAM_PDAF_FEASIBILITY_2026-09-27.md) — ★ PDAF 原始資料重審：fp dispatch／RAW、Sony A7III／A7C、Nikon；四個門檻及停止規則
-- [`ZCAM_AF_REFERENCE_2026-09-27.md`](projects/fp-af-assist/notes/research/ZCAM_AF_REFERENCE_2026-09-27.md) — Z CAM 可讀 CAF／SAF、ISP→FV、重搜與 ROI：失敗機制參考，不作性能標竿
+- [`ZCAM_AF_REFERENCE_2026-09-27.md`](zcam_e2f6/notes/ZCAM_AF_REFERENCE_2026-09-27.fp-af-assist.md) — Z CAM 可讀 CAF／SAF、ISP→FV、重搜與 ROI：失敗機制參考，不作性能標竿
 - [`NON_PDAF_CAMERA_REFERENCE_2026-09-27.md`](projects/fp-af-assist/notes/research/NON_PDAF_CAMERA_REFERENCE_2026-09-27.md) — Panasonic／Leica 方法與加密限制；BMCC 6K 新版 PDAF 分類及可讀控制契約
 - [`FP_AF_FIRMWARE_INTERVENTION_MAP_2026-09-27.md`](projects/fp-af-assist/notes/research/FP_AF_FIRMWARE_INTERVENTION_MAP_2026-09-27.md) — fp 可達 CDAF／AAT 接點、觀測欄位、時間語意與首版決策介面
 - [`FP_GEOMETRY_DFD_FUSION_2026-09-27.md`](projects/fp-af-assist/notes/research/FP_GEOMETRY_DFD_FUSION_2026-09-27.md) — ★ 最新分工：首次合焦建立錨點，face／AAT 幾何判接近／遠離，DFD 若成立估離焦量，CDAF 確認
@@ -193,8 +200,8 @@ captures/    素材 —— 支持那些結論的證據
 - [`prior-evidence.md`](research/liveview/prior-evidence.md) — 2026-08-16 原始 tone 實驗回查與證據限制
 - [`isp-path-audit.md`](research/liveview/isp-path-audit.md) — ISP 區塊訂正、tone 排程、matrix／gain 與待驗證 clipping
 - [`display-route-audit.md`](research/liveview/display-route-audit.md) — LCD 末端 CSC、RGB gamma、輸出路由與面板量測界線
-- [`bmcc6k-reference.md`](research/liveview/bmcc6k-reference.md) — BMCC 6K 的 Rec.709／Gen 5／跨通道 LUT 對照；接入 rawview 時的輸入與校準邊界。
-- [`zcam-e2f6-reference.md`](research/liveview/zcam-e2f6-reference.md) — 對照組:Z CAM E2-F6(IMX410)的 LCD shader 全鏈;+3.65 檔硬切、單一矩陣、每台機器的面板校正
+- [`bmcc6k-reference.md`](bmcc6k/notes/FP_LIVEVIEW_COMPARISON.md) — BMCC 6K 的 Rec.709／Gen 5／跨通道 LUT 對照；接入 rawview 時的輸入與校準邊界。
+- [`zcam-e2f6-reference.md`](zcam_e2f6/notes/FP_LIVEVIEW_COMPARISON.md) — 對照組:Z CAM E2-F6(IMX410)的 LCD shader 全鏈;+3.65 檔硬切、單一矩陣、每台機器的面板校正
 - [`audit_tone_curves.py`](research/liveview/audit_tone_curves.py) — 純離線 88 條 ROM 曲線與歷史 2048 點表稽核；JSON／CSV 證據同目錄
 
 ### `research/other/` — 其他 —— 不屬於上面任何一類;長大就代表分類該調整
@@ -242,7 +249,7 @@ captures/    素材 —— 支持那些結論的證據
 
 ## 他牌相機 —— 最外層
 
-反編譯、韌體、Ghidra 專案都跟著相機放在根目錄;fp 端的對照筆記仍在 `research/`(例如 `research/liveview/bmcc6k-reference.md`)。
+反編譯、韌體、Ghidra 專案都跟著相機放在根目錄;**拿 fp 跟它們對照的筆記也一樣放在各廠牌的資料夾**(例如 `bmcc6k/notes/FP_LIVEVIEW_COMPARISON.md`),不放 `research/`,因為 `research/` 會公開。
 
 ### `bmcc6k/` — BMCC 6K：外層、色彩資料已解；核心程式仍受保護
 

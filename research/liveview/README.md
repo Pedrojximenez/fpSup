@@ -14,13 +14,13 @@
 
 ## 對照組：BMCC 6K／Rec.709（2026-09-24）
 
-新整合 [BMCC 6K 對照研究](bmcc6k-reference.md)：已解開外層韌體與 colour-science datapack，恢復相機專屬 Rec.709 設定、91 條 ISO 曲線、校準矩陣和 33³ 監看 LUT。mode 2 的 Film 曲線與官方 Gen 5 公式高度吻合，但核心程式未解開，執行順序仍未知。
+新整合 [BMCC 6K 對照研究](../../bmcc6k/notes/FP_LIVEVIEW_COMPARISON.md)：已解開外層韌體與 colour-science datapack，恢復相機專屬 Rec.709 設定、91 條 ISO 曲線、校準矩陣和 33³ 監看 LUT。mode 2 的 Film 曲線與官方 Gen 5 公式高度吻合，但核心程式未解開，執行順序仍未知。
 
 這組資料補上可重現的高光肩部與跨通道轉換對照。**BMCC 校準、ISO 表及 Film LUT 不能直接套在 fp 的 Bayer／線性 RGB／已處理預覽上**；來源、色域、編碼與範圍須先確認。完整資料與重現工具已歸入 [bmcc6k](../../bmcc6k/README.md)，BRAW／CDNG 結果也一併收錄。
 
 ## 對照組：Z CAM E2-F6（2026-09-24）
 
-同樣用 IMX410 的 Z CAM，監看轉換是明文 GLSL：ZLog2 解碼 → ×12.8 → 單一 3×3 → 1024 點顯示表（每台機器有面板校正檔），**+3.65 檔硬切、沒有色域壓縮**。詳見 [zcam-e2f6-reference.md](zcam-e2f6-reference.md)。
+同樣用 IMX410 的 Z CAM，監看轉換是明文 GLSL：ZLog2 解碼 → ×12.8 → 單一 3×3 → 1024 點顯示表（每台機器有面板校正檔），**+3.65 檔硬切、沒有色域壓縮**。詳見 [zcam-e2f6-reference.md](../../zcam_e2f6/notes/FP_LIVEVIEW_COMPARISON.md)。
 
 ## 結論
 

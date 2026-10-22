@@ -161,6 +161,7 @@ AI 一直觉得它没什么,只是个简单的脚本语言。
 > [!WARNING]
 > 这个 repo 包含实验性的固件研究和非官方修改。
 > 有些代码可能不完整、未经测试,甚至有潜在危险。使用它可能导致录像失败、数据丢失、设置出问题,甚至让相机无法使用。
+> 本项目与 SIGMA 公司无关,也未经其认可。
 > **使用风险自负。**
 
 ### 💡 怎么开始一个新功能
@@ -177,6 +178,7 @@ AI 一直觉得它没什么,只是个简单的脚本语言。
 - 🔌 一条 USB-C 线、一张 SD 卡
 - 💻 Mac(USB Shell 的主机工具目前在 macOS 上开发)
 - 🤖 一个能读文件、跑命令的 AI 编程助手(Codex、Claude Code)
+- 🔍 **固件不在这里**:这个 repo 不包含 SIGMA 的固件或反编译结果。要不要自己分析固件,以及其中的法律风险(各地法规和 SIGMA 的使用条款都不同),请自行判断、自行承担。
 
 ### 🚀 三步上手
 
@@ -215,6 +217,12 @@ fpSup/          ← 网站、正式发布卡(releases/)、各 sup 的发布版�
 ```sh
 git clone --filter=blob:none --sparse https://github.com/ijigen/fpSup.git
 cd fpSup && git sparse-checkout set fpSup .claude
+```
+
+要 commit 的话,先启用 commit 前的检查(防止固件或反编译输出被误传):
+
+```sh
+git config core.hooksPath .githooks
 ```
 
 </details>

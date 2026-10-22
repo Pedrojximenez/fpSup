@@ -2,7 +2,7 @@
 
 目標：LCD 上看到的畫面，**RAW 還有差異的高光與飽和色不要提前剪成一片**；正常範圍依可驗證的顯示轉換呈現。
 這是 [`projects/rawlive`](../rawlive/README.md) 規劃的相機端實作；研究依據在 [`research/liveview`](../../research/liveview/README.md)，
-對照組包括 [Z CAM E2-F6 的監看 shader](../../research/liveview/zcam-e2f6-reference.md) 與 [BMCC 6K 的 Rec.709／Gen 5／LUT 資料](../../research/liveview/bmcc6k-reference.md)。
+對照組包括 [Z CAM E2-F6 的監看 shader](../../zcam_e2f6/notes/FP_LIVEVIEW_COMPARISON.md) 與 [BMCC 6K 的 Rec.709／Gen 5／LUT 資料](../../bmcc6k/notes/FP_LIVEVIEW_COMPARISON.md)。
 
 ## 最高原則（使用者，2026-09-24）
 
@@ -446,7 +446,7 @@ EL Zone 色階本身是以 18% 灰為 0、−6…+6 檔上色。**fp 的 EL Zone
 
 ## BMCC 6K 研究的接入方式
 
-完整對照見 [BMCC 6K Live View／Rec.709](../../research/liveview/bmcc6k-reference.md)，原始研究、資料與工具集中於 [BMCC 歸檔](../../bmcc6k/README.md)。
+完整對照見 [BMCC 6K Live View／Rec.709](../../bmcc6k/notes/FP_LIVEVIEW_COMPARISON.md)，原始研究、資料與工具集中於 [BMCC 歸檔](../../bmcc6k/README.md)。
 
 - **可重算的顯示參考**：Film→Video／Extended Video LUT 明訂 Gen 5 Film／Blackmagic Wide Gamut 輸入及 Rec709／BT1886 輸出；33³ LUT 含跨通道處理與不同高光肩部，可補充原本的 Z CAM 對照。
 - **先建立正確輸入**：未來若做 fp 的離線 LUT 比較，先用 fp 自身校準把已確認來源轉入正確工作色域與 Film 編碼。Blackmagic 的感測器校準、ISO 選表和硬體曲線封裝不是 fp 參數。

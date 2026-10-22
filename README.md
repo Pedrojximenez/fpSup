@@ -162,6 +162,7 @@ It may help you, especially if you want to start from scratch on another camera.
 > [!WARNING]
 > This repo contains experimental firmware research and unofficial modifications.
 > Some code may be incomplete, untested or even dangerous. Using it may cause failed recordings, data loss, broken settings, or even an unusable camera.
+> This project is not affiliated with or endorsed by SIGMA Corporation.
 > **Use at your own risk.**
 
 ### 💡 How to start a new feature
@@ -178,6 +179,7 @@ It may help you, especially if you want to start from scratch on another camera.
 - 🔌 A USB-C cable and an SD card
 - 💻 A Mac (the USB Shell host tools are currently developed on macOS)
 - 🤖 An AI coding assistant that can read files and run commands (Codex, Claude Code)
+- 🔍 **The firmware is not here**: this repo does not include SIGMA's firmware or any decompiled output. Whether to analyse the firmware yourself, and the legal risks that come with it (laws and SIGMA's terms of use vary by place), is your own decision and responsibility.
 
 ### 🚀 Three steps to get going
 
@@ -216,6 +218,12 @@ For just the source:
 ```sh
 git clone --filter=blob:none --sparse https://github.com/ijigen/fpSup.git
 cd fpSup && git sparse-checkout set fpSup .claude
+```
+
+Before committing, turn on the pre-commit check (it stops firmware or decompiler output from slipping in):
+
+```sh
+git config core.hooksPath .githooks
 ```
 
 </details>

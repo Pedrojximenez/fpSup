@@ -86,7 +86,7 @@
 - [PTP_FOCUS.md](research/PTP_FOCUS.md) — SIGMA fp — PTP 對焦控制在錄影時失效：原因與可能解法
 - [PTP_FOCUS_RECORDING.md](research/PTP_FOCUS_RECORDING.md) — PTP/GIMBAL 錄影中控焦 — session 閘研究 (待續)
 - [SIGMA_FP_PDAF_INVESTIGATION_REPORT_2026-08-18.md](research/SIGMA_FP_PDAF_INVESTIGATION_REPORT_2026-08-18.md) — SIGMA fp 相位像素／PDAF 原始資料調查報告
-- [ZCAM_AF_REFERENCE_2026-09-27.md](research/ZCAM_AF_REFERENCE_2026-09-27.md) — Z CAM E2-F6 AF：可讀實作與失敗機制參考（2026-09-27）
+- [ZCAM_AF_REFERENCE_2026-09-27.md](../../../zcam_e2f6/notes/ZCAM_AF_REFERENCE_2026-09-27.fp-af-assist.md) — Z CAM E2-F6 AF：可讀實作與失敗機制參考（2026-09-27）
 
 ## 幾何核心、輸入與合焦配對（6 份）
 
@@ -118,7 +118,7 @@
 ## 既有實測與分析說明（5 份）
 
 - [analysis-native_subject_20260927.md](evidence/analysis-native_subject_20260927.md) — Native subject 輸入契約：第二個離線增量
-- [analysis-zcam_af_20260927.md](evidence/analysis-zcam_af_20260927.md) — Z CAM AF 離線反編譯存檔（2026-09-27）
+- [analysis-zcam_af_20260927.md](../../../zcam_e2f6/notes/analysis-zcam_af_20260927.md) — Z CAM AF 離線反編譯存檔（2026-09-27）
 - [capture-af-fusion-2026-09-16-iso100-v5.md](evidence/capture-af-fusion-2026-09-16-iso100-v5.md) — ISO 100 return baseline — 2026-09-16
 - [capture-native-preflight-20260927-121028.md](evidence/capture-native-preflight-20260927-121028.md) — fp 5.02：首次原生唯讀環境核對
 - [capture-native-preflight-20260927-124113.md](evidence/capture-native-preflight-20260927-124113.md) — fp 5.02：辨識來源與顯示路徑診斷

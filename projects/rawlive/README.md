@@ -49,7 +49,7 @@
 - 固定光源、曝光、ISO 與手動白平衡，包含灰階、高光漸層、色卡及高飽和紅／藍／洋紅。
 - 量化平台區段、色相變化與中性灰偏移；先定義可接受誤差，保留各處理階段的數值以便定位差異。
 
-BMCC 6K 已補入 [Gen 5／Rec.709／33³ LUT 離線對照](../../research/liveview/bmcc6k-reference.md)。它可提供高光與跨通道映射的可重算參考；使用前須先以 fp 自身校準建立正確工作色域和 Film 輸入，不直接移植 Blackmagic 校準矩陣、ISO 曲線或硬體封裝。
+BMCC 6K 已補入 [Gen 5／Rec.709／33³ LUT 離線對照](../../bmcc6k/notes/FP_LIVEVIEW_COMPARISON.md)。它可提供高光與跨通道映射的可重算參考；使用前須先以 fp 自身校準建立正確工作色域和 Film 輸入，不直接移植 Blackmagic 校準矩陣、ISO 曲線或硬體封裝。
 
 ### 3. 監看隔離與實機 prototype
 
@@ -69,7 +69,7 @@ BMCC 6K 已補入 [Gen 5／Rec.709／33³ LUT 離線對照](../../research/livev
 ## 研究依據
 
 - [rawview 相機端實作與 SIGMA fp 快照](../rawview/README.md)
-- [BMCC 6K Live View／Rec.709 對照與完整資料入口](../../research/liveview/bmcc6k-reference.md)
+- [BMCC 6K Live View／Rec.709 對照與完整資料入口](../../bmcc6k/notes/FP_LIVEVIEW_COMPARISON.md)
 
 - [Live View 研究總報告與 A/B 驗證設計](../../research/liveview/README.md)
 - [bin／vbin、RAW 前端與上游截斷追查](../../research/liveview/upstream-clip-audit.md)

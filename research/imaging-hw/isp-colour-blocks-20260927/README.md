@@ -257,4 +257,4 @@ CUVAREA 位址已定位；是否能搭配其他區塊改善這類 look，仍需�
 
 - [`notes/COLOR_SCIENCE.md`](../notes/COLOR_SCIENCE.md) —— 色彩管線順序、88 條 tone 曲線、CCM
 - [`../liveview/upstream-clip-audit.md`](../../liveview/upstream-clip-audit.md) —— tone 之前的截斷追查(未結案)
-- [`../liveview/zcam-e2f6-reference.md`](../../liveview/zcam-e2f6-reference.md) —— 對照:Z CAM 有使用者 3D LUT 模式
+- [`../liveview/zcam-e2f6-reference.md`](../../../zcam_e2f6/notes/FP_LIVEVIEW_COMPARISON.md) —— 對照:Z CAM 有使用者 3D LUT 模式

@@ -55,7 +55,7 @@ MAIN:
 - POWOR_ON_RESET/FwRecovery/recoverySequence 都是 L 卡口鏡頭通訊,與機身救援無關。
 
 ## 7. BOOT 分割區實際內容(2026-10-01 上機唯讀傾印)
-- `prom readfile 2 5242880 \BOOT_P2.BIN` → `research/firmware/captures/BOOT_P2_5MB.bin`(卡上那份仍在)。
+- `prom readfile 2 5242880 \BOOT_P2.BIN` → `research/firmware/private/BOOT_P2_5MB.bin`(卡上那份仍在)。
 - `@DFI` 容器、載入位址 0xC0000000、有效資料到 0x40E5FF(約 4 MB)、**未壓縮**(MAIN 的 LZSS 解不開,直接看得到字串)。
 - 版本字串 `v50_BOOT`,git hash 0bdcc8cb…(與 MAIN 13aa6210… 不同)。
 - **有**:SD 卡驅動(exFAT)、USB(PTP、MSC、Type-C)、NAND PromDriver、Xacti 廠商指令全套
