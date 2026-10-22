@@ -107,10 +107,8 @@ GYRO 發布之後,我開始做 Open Gate,讓 fp 錄下感光元件完整的 3:2 
 fp 拍靜態照片時有一個硬體無損壓縮引擎,錄影卻從來沒用它,所以 CinemaDNG 一直是未壓縮的,寫卡速度永遠是瓶頸。
 
 8 月 30 日,我量到這個引擎每秒能處理 1.7 億像素,FHD 壓縮錄影是可行的。
-9 月起,我把研究和開發方向都公開了:引擎怎麼呼叫、預算怎麼算,還做了解說頁和預算模擬器。
+9 月 21 日,我把研究和開發方向都公開了:引擎的成本模型、它在流程裡的位置,還做了解說頁和預算模擬器。
 10 月 3 日,第一個 Lossless 發布。
-
-<!-- 待確認:日期與描述 -->
 
 ## 九、撤回
 
@@ -246,7 +244,7 @@ fpSup 只是這台相機的一部分。下面這些我碰過,但沒走完。如�
 | 熱靴 | 是雙向的 SPI 通道;只有靜態分析,沒上過機 | `research/interfaces/notes/HOT_SHOE.md` |
 | 工廠測試點 / UART | 要拆機接線,腳位未確認 | `research/firmware/notes/HIDDEN_FEATURES.md` |
 | HDMI RAW 錄影機 | HDMI 訊號裡就是 12-bit Bayer;規格寫好了,還沒人做 | `projects/hdmi-recorder/` |
-| 同一顆 IMX410 的其他相機 | Z CAM E2-F6 全解開;Sony A7 III 反編譯了;Nikon 看過;Panasonic 加密 | <!-- 待確認:這些目錄目前不在 research/ 或 projects/ 底下 --> |
+| 同一顆 IMX410 的其他相機 | Z CAM E2-F6 全解開;Sony A7 III 反編譯了;Nikon 看過;Panasonic 加密 | 還在我的電腦裡,尚未放進 repo |
 
 最早讓我開始這一切的對焦,到現在還沒解。
 
