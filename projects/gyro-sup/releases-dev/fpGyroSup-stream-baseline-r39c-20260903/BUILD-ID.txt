@@ -1,0 +1,11 @@
+fpGyroSup stream baseline r39c (2026-09-03) — SIGMA fp Ver.5.02, release AutoRun (no shell), GCSV-only stream.
+= r38e logger (AutoRun.txt / VSHL.BIN byte-identical to r38e) + PGEN r39c:
+  dims    : pg_setting_dims reads cam_movie_imagesize.h/.v (0xC3758B98/9C) + CinemaDNG border 16/10.  No DNG read.
+            Regenerated A001_008.json byte-identical to the DNG-derived one.
+  lens    : idle-time cache of the two lens-bus blocks (focal, name) keyed by a 68-byte LENS_REGION fingerprint;
+            the bus is never touched while a take runs.  Cache fills within 1 s of idle.
+  json    : written during the take once the clip is established and the mode sampled (block 1-2, ~2-3 s in).
+            A001_010: early write ok at block 2, stop-time job skipped, JSON identical to the stop-time build.
+            Stop-time path retained as fallback.
+  attach  : r38e firmware-mirrored MovieRecording read; 0x21 path still not exercised live (008/009/010 on 0x11).
+Card layout: AutoRun.txt, VSHL.BIN, PGEN.BIN at root.  Do not mix versions.

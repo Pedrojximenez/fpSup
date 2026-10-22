@@ -1,0 +1,1097 @@
+test_01_exact_private_name_and_fresh_state (__main__.NativePortTests) ... ok
+test_02_absent_lookup_is_not_a_descriptor (__main__.NativePortTests) ... ok
+test_03_register_defaults_off_and_borrows_stable_name (__main__.NativePortTests) ... ok
+test_04_no_duplicate_registration (__main__.NativePortTests) ... ok
+test_05_collision_is_never_adopted (__main__.NativePortTests) ... ok
+test_06_registration_error_is_sticky (__main__.NativePortTests) ... ok
+test_07_lua_failure_is_not_rolled_back_or_retried (__main__.NativePortTests) ... ok
+test_08_nonboolean_value_rejected_before_native_assignment (__main__.NativePortTests) ... ok
+test_09_canonical_set_executes_original_silent_array_setter (__main__.NativePortTests) ... ok
+test_10_subscription_copies_pair_and_original_user_write_notifies (__main__.NativePortTests) ... ok
+test_11_subscription_cannot_replace_foreign_owner (__main__.NativePortTests) ... ok
+test_12_duplicate_subscribe_does_not_mutate (__main__.NativePortTests) ... ok
+test_13_unsubscribe_checks_pair_pointer_and_context (__main__.NativePortTests) ... ok
+test_14_serial_unsubscribe_does_not_free_descriptor_name_or_context (__main__.NativePortTests) ... ok
+test_15_failed_subscribe_retains_context_until_explicit_cleanup (__main__.NativePortTests) ... ok
+test_16_native_set_failure_sticky_but_serial_cancel_still_possible (__main__.NativePortTests) ... ok
+test_17_read_checks_type_before_acceptance (__main__.NativePortTests) ... ok
+test_18_descriptor_identity_and_borrowed_name_checked (__main__.NativePortTests) ... ok
+test_19_inactive_registry_status_is_not_success (__main__.NativePortTests) ... ok
+test_20_null_outputs_no_native_call (__main__.NativePortTests) ... ok
+test_21_changed_subscriber_rejected_before_write (__main__.NativePortTests) ... ok
+test_22_removed_subscription_rejected_on_read (__main__.NativePortTests) ... ok
+test_23_unowned_subscription_rejected_before_write (__main__.NativePortTests) ... ok
+test_24_only_exact_cursor_and_confirm_private_names_are_admitted (__main__.NativePortTests) ... ok
+test_25_private_prefix_or_stock_names_do_not_expand_the_allowlist (__main__.NativePortTests) ... ok
+
+----------------------------------------------------------------------
+Ran 25 tests in 0.979s
+
+OK
+{
+  "kind": "compiled_arm_c_to_original_native_variable_calls",
+  "passed": true,
+  "tests_run": 25,
+  "skipped": 0,
+  "camera_accessed": false,
+  "deployable": false,
+  "native_port_complete": false,
+  "seg0_sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622",
+  "text_bytes": 3268,
+  "text_sha256": "7bf9a88e4581cd521cc217874e089e5c3ba0ddb642838227bafaccfa05d0a06a",
+  "function_offsets": {
+    "fp_nv_init": 1,
+    "fp_nv_inspect": 351,
+    "fp_nv_register_off": 761,
+    "fp_nv_read": 1241,
+    "fp_nv_subscribe": 1707,
+    "fp_nv_set_canonical": 2207,
+    "fp_nv_unsubscribe_locked": 2791
+  },
+  "covered_native_intervals": [
+    "app_lookup",
+    "dispatch_bound_components",
+    "get_registry",
+    "map_append",
+    "map_lookup",
+    "map_reserve",
+    "map_sort",
+    "map_sort_key",
+    "name_hash_fnv1a",
+    "notify_private_then_global",
+    "register",
+    "registry_lookup",
+    "set_batch_core",
+    "set_named_no_callback_wrapper",
+    "set_named_notify_wrapper",
+    "subscribe_wrapper",
+    "subscription_mutation",
+    "temporary_vector_destroy",
+    "temporary_vector_init",
+    "unsubscribe_wrapper",
+    "vector_append",
+    "vector_get"
+  ],
+  "native_entry_calls": [
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697564,
+        308720
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697564,
+        308720
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        308720
+      ]
+    },
+    {
+      "entry": "0xc05db308",
+      "args": [
+        268435456,
+        1,
+        268697544,
+        3227366153
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        268451936
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697564,
+        308720
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697564,
+        308720
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        308720
+      ]
+    },
+    {
+      "entry": "0xc05db308",
+      "args": [
+        268435456,
+        1,
+        268697544,
+        3227366153
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        268451936
+      ]
+    },
+    {
+      "entry": "0xc05db308",
+      "args": [
+        268435456,
+        1,
+        268447744,
+        0
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268449280,
+        268448768,
+        0
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        308720
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        308720
+      ]
+    },
+    {
+      "entry": "0xc05db308",
+      "args": [
+        268435456,
+        1,
+        268697544,
+        3227366153
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        308720
+      ]
+    },
+    {
+      "entry": "0xc05db308",
+      "args": [
+        268435456,
+        1,
+        268697544,
+        3227366153
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        308720
+      ]
+    },
+    {
+      "entry": "0xc05db308",
+      "args": [
+        268435456,
+        1,
+        268697544,
+        3227366153
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        268451936
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        256
+      ]
+    },
+    {
+      "entry": "0xc05dcb18",
+      "args": [
+        268435456,
+        268448000,
+        268697548,
+        3227372313
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        308720
+      ]
+    },
+    {
+      "entry": "0xc05dc778",
+      "args": [
+        268435456,
+        0,
+        1,
+        268697544
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        0
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        308720
+      ]
+    },
+    {
+      "entry": "0xc05dc778",
+      "args": [
+        268435456,
+        0,
+        1,
+        268697544
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        0
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        308720
+      ]
+    },
+    {
+      "entry": "0xc05db308",
+      "args": [
+        268435456,
+        1,
+        268697544,
+        3227366153
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        268451936
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        256
+      ]
+    },
+    {
+      "entry": "0xc05dcb18",
+      "args": [
+        268435456,
+        268448000,
+        268697548,
+        3227372313
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        308720
+      ]
+    },
+    {
+      "entry": "0xc05db308",
+      "args": [
+        268435456,
+        1,
+        268697544,
+        3227366153
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        268451936
+      ]
+    },
+    {
+      "entry": "0xc05dcb18",
+      "args": [
+        268435456,
+        268448000,
+        268449536,
+        0
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        256
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        308720
+      ]
+    },
+    {
+      "entry": "0xc05db308",
+      "args": [
+        268435456,
+        1,
+        268697544,
+        3227366153
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        268451936
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        256
+      ]
+    },
+    {
+      "entry": "0xc05dcb18",
+      "args": [
+        268435456,
+        268448000,
+        268697548,
+        3227372313
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        308720
+      ]
+    },
+    {
+      "entry": "0xc05db308",
+      "args": [
+        268435456,
+        1,
+        268697544,
+        3227366153
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        268451936
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        256
+      ]
+    },
+    {
+      "entry": "0xc05dcb18",
+      "args": [
+        268435456,
+        268448000,
+        268697548,
+        3227372313
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697564,
+        308720
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        308720
+      ]
+    },
+    {
+      "entry": "0xc05db308",
+      "args": [
+        268435456,
+        1,
+        268697544,
+        3227366153
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        268451936
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        256
+      ]
+    },
+    {
+      "entry": "0xc05dcb18",
+      "args": [
+        268435456,
+        268448000,
+        268697548,
+        3227372313
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697564,
+        308720
+      ]
+    },
+    {
+      "entry": "0xc05dcb30",
+      "args": [
+        268435456,
+        268448000,
+        3227372337,
+        536871169
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        308720
+      ]
+    },
+    {
+      "entry": "0xc05db308",
+      "args": [
+        268435456,
+        1,
+        268697544,
+        3227366153
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        268451936
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        256
+      ]
+    },
+    {
+      "entry": "0xc05dcb18",
+      "args": [
+        268435456,
+        268448000,
+        268697548,
+        3227372313
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697564,
+        308720
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        308720
+      ]
+    },
+    {
+      "entry": "0xc05db308",
+      "args": [
+        268435456,
+        1,
+        268697544,
+        3227366153
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        268451936
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        256
+      ]
+    },
+    {
+      "entry": "0xc05dcb18",
+      "args": [
+        268435456,
+        268448000,
+        268697548,
+        3227372313
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        308720
+      ]
+    },
+    {
+      "entry": "0xc05dc778",
+      "args": [
+        268435456,
+        0,
+        1,
+        268697544
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697564,
+        308720
+      ]
+    },
+    {
+      "entry": "0xc05dcb30",
+      "args": [
+        268435456,
+        268448000,
+        3227372337,
+        536871169
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        308720
+      ]
+    },
+    {
+      "entry": "0xc05db308",
+      "args": [
+        268435456,
+        1,
+        268697544,
+        3227366153
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        268451936
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697564,
+        308720
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        308720
+      ]
+    },
+    {
+      "entry": "0xc05db308",
+      "args": [
+        268435456,
+        1,
+        268697544,
+        3227366153
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        268451936
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        308720
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697564,
+        308720
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        308720
+      ]
+    },
+    {
+      "entry": "0xc05db308",
+      "args": [
+        268435456,
+        1,
+        268697544,
+        3227366153
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        268451936
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        256
+      ]
+    },
+    {
+      "entry": "0xc05dcb18",
+      "args": [
+        268435456,
+        268448000,
+        268697548,
+        3227372313
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        308720
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        308720
+      ]
+    },
+    {
+      "entry": "0xc05db308",
+      "args": [
+        268435456,
+        1,
+        268697544,
+        3227366153
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        268451936
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        256
+      ]
+    },
+    {
+      "entry": "0xc05dcb18",
+      "args": [
+        268435456,
+        268448000,
+        268697548,
+        3227372313
+      ]
+    },
+    {
+      "entry": "0xc05dcb30",
+      "args": [
+        268435456,
+        268448000,
+        0,
+        0
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697564,
+        308720
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        308720
+      ]
+    },
+    {
+      "entry": "0xc05db308",
+      "args": [
+        268435456,
+        1,
+        268697544,
+        3227366153
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        268451936
+      ]
+    },
+    {
+      "entry": "0xc05dcb18",
+      "args": [
+        268435456,
+        268448000,
+        268449536,
+        0
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448000,
+        268697556,
+        308720
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448256,
+        268697556,
+        308720
+      ]
+    },
+    {
+      "entry": "0xc05db308",
+      "args": [
+        268435456,
+        1,
+        268697544,
+        3227366153
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448256,
+        268697556,
+        268451936
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448256,
+        268697556,
+        308720
+      ]
+    },
+    {
+      "entry": "0xc05dc778",
+      "args": [
+        268435456,
+        0,
+        1,
+        268697544
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448256,
+        268697556,
+        0
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448320,
+        268697556,
+        308720
+      ]
+    },
+    {
+      "entry": "0xc05db308",
+      "args": [
+        268435456,
+        1,
+        268697544,
+        3227366153
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448320,
+        268697556,
+        268451984
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448320,
+        268697556,
+        308720
+      ]
+    },
+    {
+      "entry": "0xc05dc778",
+      "args": [
+        268435456,
+        0,
+        1,
+        268697544
+      ]
+    },
+    {
+      "entry": "0xc05dca88",
+      "args": [
+        268435456,
+        268448320,
+        268697556,
+        0
+      ]
+    }
+  ],
+  "source_hashes": {
+    "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/native_variable.c": "72b755442722d584d8018ee0c7c1bfffd4b5874a542fcd3c7cf3d964fe8f6c10",
+    "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/native_variable.h": "fdb37c8f04c841aa45f509b1d255430a3500d6184c1ae004330cb18a3fe31e3f",
+    "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py": "8fadf574b1670dc20c167efda22659d3c482c9867221d81bdbcb2416a2f975ca",
+    "/Users/dido/Developer.localized/SIGMAfp_re/research/ui/tools/arm_text/elf_text.py": "e31174f7f044740371bb4a30cf11d12e81512ee01d0c5a35e10cf0c5237c8015",
+    "/Users/dido/Developer.localized/SIGMAfp_re/research/ui/tools/native_variable_probe/binding_probe.py": "f81d514da9301ecb04e5f61755251639727dcbed2009b21b05b381a87c51eef8",
+    "/Users/dido/Developer.localized/SIGMAfp_re/research/ui/tools/native_variable_probe/registry_probe.py": "10e85a61bca9a6074ecad4b115154ba0de45c294f5aad18564603b3cdf09f764"
+  },
+  "bounds": {
+    "instructions_per_call": 20000,
+    "timeout_us": 250000,
+    "callee_saved_r4_r11_checked": true,
+    "sp_restoration_checked": true
+  },
+  "substitutes": [
+    "Lua registration",
+    "heap",
+    "ASCII strcmp",
+    "lock/unlock",
+    "private/global callback services",
+    "empty component vectors"
+  ],
+  "exclusion": "Only serial emulator tests; caller must implement actual notification exclusion",
+  "remaining": [
+    "native page installation",
+    "actual callback to policy glue",
+    "rendering",
+    "owner executor and quiescence",
+    "recorder/backend integration"
+  ]
+}

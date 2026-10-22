@@ -1,0 +1,18 @@
+{
+  "camera_autorun_sha256": "2e77dfe3529006d2cb95ac01e206048efe495493434c05f1ed8fad4ecd22bf96",
+  "camera_loader_sha256": "ecae97aff1c484d878f1ae5c277bc1b9607860f49601c4832c08da97ff0b801a",
+  "loader_header": [
+    1313423958,
+    0,
+    0,
+    27508
+  ],
+  "instant_callsite": "0xEB0000CC (stock; no Instant hook)",
+  "store_magic": "0x5C502AA9",
+  "fast_expected_magic": "0x93528A87",
+  "done_us": 13095816,
+  "start_us_from_last_loader_log": 8192911,
+  "last_loader_elapsed_us": 4902905,
+  "finding": "Fast AutoRun installed with old plain manager core; its expected store magic 0x93528A87 does not match actual 0x5C502AA9, so Fast misses and falls back. Old core has no provision/abort/Instant stage2 envelope; Instant callsite is stock. No deployment performed in this inspection.",
+  "fast_store_matches": false
+}

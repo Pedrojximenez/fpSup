@@ -1,0 +1,47 @@
+fpLossless 專案完全獨立整理
+2026-10-12｜離線開發候選，尚未實機驗證或寫卡
+
+完成範圍
+
+上一輪已分離執行碼，本輪移除專案層級的剩餘關聯：
+- lossless/ 的來源、建置、單元測試與 README 均無 STOPFX 的引用或建置要求。
+- 停錄回收補丁的原廠指令測試移到 fpSup/stopfix/，可自行執行，不匯入 lossless builder/tests。
+- 兩個模組的相容性、載入順序與互不修改對方位址等案例移到 fpSup/integration_tests/。
+  這些案例只在明確執行跨模組驗證時才跑，不屬於 lossless 自身的測試套件。
+- 交付改為純 lossless 模組包，只帶 fpSup/10LOSS.BIN、build.json、layout.json、README 與清單。
+  不再把 05STOPFX.BIN 放進 lossless 的交付包。
+
+lossless 仍保留原本負責的壓縮工作收尾、RAW 回退、64 MiB／動態幀數控制及舊壓縮描述身分檢查。
+上述功能不需要安裝、啟用或讀取獨立停錄補丁。
+
+二進位與來源
+
+本輪沒有修改產品執行碼或共用 loader；重新獨立建置的 10LOSS.BIN 與上一輪已驗證的拆分版
+逐位元組相同。SHA-256：a24e1dde7e973c423f32c3b1c30a42acd039fa2fddebc83c27674e911de3ba9f
+原始來源 hash 仍符合 build.json；source.diff、sources.sha256.json 及 before/ 記錄本輪整理。
+純模組建置命令（從 fpSup）：
+python3 -B lossless/build_v3_lossless.py --out ../projects/lossless-sup/validation/20261012-lossless-independent/module
+
+驗證
+
+本次共 74 項通過、0 失敗、0 錯誤、0 略過：lossless 自身 60、獨立補丁 9、另行跨模組 5。
+
+run_tests.py 分成 lossless、stopfix、integration 三個獨立程序。
+lossless 模式禁止建立 STFX，並確認結束時沒有匯入 stopfix 相關模組；只使用保存的 LOSS bytes。
+stopfix 模式確認不匯入 lossless 的 builder 或 Loader v3 測試。
+integration 模式才匯入兩個模組，保留雙方共存／單獨載入與隔離的覆蓋，以及重新加回 claim 的反例。
+各套件結果在 *-tests.json／*-tests.log，最終彙整在 validation.json。
+產品 bytes 未改動，前輪一般／診斷／Fast 的結果仍可按相同 hash 對照；本輪未擴大重跑純 C 模組。
+
+交付
+
+lossless-module-only-20261012.zip 是單獨模組更新，適用 SIGMA fp Ver.5.02 與既有相容 Loader v3。
+zip 不包含 AutoRun 或共用 loader，也不包含其他功能模組。
+module/10LOSS.BIN 是 builder 原始輸出；package/fpSup/10LOSS.BIN 是同一份檔案，未經修改。
+前輪成對交付的歷史 zip 保留作追溯，並非本輪交付。
+
+限制
+
+離線模擬的媒體、allocator、鎖及任務邊界仍有明確替代，不能證明實際 DMA／排程與最壞延遲。
+幀數控制的 100 ms 初值及管線保留量仍需實機量測。
+本次未操作相機、寫卡、commit、push 或發布。

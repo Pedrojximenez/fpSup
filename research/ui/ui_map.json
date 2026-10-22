@@ -1,0 +1,838 @@
+{
+  "_about": "SIGMA fp Ver.5.02 native-UI navigation map. Curated facts only; every entry carries its source. Addresses are ARM virtual (image base 0xC0000000). Generated data (string pool, page table, icon manifest) is NOT stored here -- uinav.py reads it from the firmware image.",
+  "firmware": {
+    "image": "out/seg0_c0000000.bin",
+    "size": 49245696,
+    "sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622",
+    "base": 3221225472,
+    "note": "The same image the MainB2 / fixed-popup / og3k-UI work pins. Do not substitute out/MAIN_c0000000.bin."
+  },
+  "regions": [
+    {
+      "name": "NBU base",
+      "start": "0xC18C0460",
+      "end": "0xC18C0474",
+      "what": "serialised-UI container header (screen declarations live inside tag 10001)",
+      "read_when": "startup resource pass",
+      "patch": "structure only, guarded",
+      "source": "research/ui/MAINB2_ROW_EXTENSION.md; FP3K HANDOFF.md §7"
+    },
+    {
+      "name": "string pool",
+      "start": "0xC18C0474",
+      "end": "0xC1900000",
+      "what": "sorted NUL-separated string pool; records reference strings by BIG-ENDIAN pool offset (offset = addr - 0xC18C0474)",
+      "read_when": "on demand, via FUN_c05e5b58",
+      "patch": "resolver hook serves synthetic offsets",
+      "source": "research/ui/README.md §1 (verified against three names); base re-derived 2026-09-29 by EXECUTING the interpreter (research/ui/tools/nbu_probe)"
+    },
+    {
+      "name": "UI records",
+      "start": "0xC1900000",
+      "end": "0xC2D80000",
+      "what": "serialised UI records (NBU), 20 MB, interpreted by FUN_c05e6400. NOT one linear container: the top-level container is only the pool plus a 221-entry index of separate resource sets (research/ui/nbu_sets.json)",
+      "read_when": "once per resource-set interpretation",
+      "patch": "delta copy in a bounded temp buffer, original-byte fingerprint guarded",
+      "source": "research/ui/README.md §1/§6"
+    },
+    {
+      "name": "embedded Lua",
+      "start": "0xC2D80000",
+      "end": "0xC2E00000",
+      "what": "Lua chunks for GUI binding / expressions (gui gc prints LUA_GC*)",
+      "read_when": "GUI binding",
+      "patch": "not attempted",
+      "source": "research/ui/README.md §1"
+    },
+    {
+      "name": "XCI icon blobs",
+      "start": "0xC1240014",
+      "end": "0xC151C348",
+      "what": "2005 LZ4/L8A8 icon blobs in the static image, therefore writable DRAM at run time",
+      "read_when": "image open path, cached by name",
+      "patch": "serve synthetic names instead of editing in place",
+      "source": "research/ui/README.md §2; tools/xci.py round-trip is pixel exact"
+    },
+    {
+      "name": "XCI build manifest",
+      "start": "0xC0D24968",
+      "end": "0xC0D445F0",
+      "what": "2006 NUL-separated ../ResXCI/... paths, in blob order with one gap",
+      "read_when": "build artefact, not read at run time",
+      "patch": "n/a",
+      "source": "research/ui/README.md §2; count verified 2026-09-29"
+    },
+    {
+      "name": "GUI page table",
+      "start": "0xC0D0DB68",
+      "end": "0xC0D0E1B0",
+      "what": "196 x {name_ptr, page_id}: every native GUI page (MainB1..MainY5, B2_5_4, Y4_4_STILL, ...)",
+      "read_when": "GUI factory FUN_c054a510 dispatch",
+      "patch": "read-only navigation aid",
+      "source": "verified by extraction 2026-09-29; MainB2 = id 10 matches MAINB2_ROW_EXTENSION.md"
+    },
+    {
+      "name": "NBR directory",
+      "start": "0xC0D4D9BC",
+      "end": "0xC0D566EC",
+      "what": "2259 x 16-byte BIG-ENDIAN entries {fnv1a(path), path offset in the name pool, data offset FROM 0xC0D22400, data size}, sorted by key. SOLVED 2026-09-29: repointing one entry (8 bytes at entry+0x08) replaces any resource -- icon, font, or menu-list CSV -- with no hook at all",
+      "read_when": "resource lookup by name",
+      "patch": "8 bytes per resource; the new bytes can live anywhere at or after the container base and can be LONGER than the stock resource",
+      "source": "research/ui/RESOURCE_REPLACEMENT.md; tools/nbr_stock.py (2259/2259 keys, 2005/2005 xci blobs, and it reproduces fpSup-Formats' own patch byte for byte)"
+    },
+    {
+      "name": "free scratch",
+      "start": "0xC0793060",
+      "end": "0xC0795000",
+      "what": "zero-filled firmware space used to host a private UI pack (6,956 B in Formats v0.3.0a; also referenced by og3k_ui.S)",
+      "read_when": "n/a",
+      "patch": "journalled and written back at power-off",
+      "source": "fpsup-formats-v0.3.0a MANIFEST.txt; projects/open-gate/build/og3k_ui.S:36"
+    },
+    {
+      "name": "enum->state pairs",
+      "start": "0xC2E4020C",
+      "end": "0xC2E40224",
+      "what": "{3,0} UHD, {2,1} FHD, {4,2} -- stock firmware already declares a third display state",
+      "read_when": "EVERY evaluation, by FUN_c06ccd10",
+      "patch": "works immediately, next screen draw",
+      "source": "research/ui/README.md §4 (the one live patch that measurably worked)"
+    },
+    {
+      "name": "Settings ctrl max",
+      "start": "0xC1A709BC",
+      "end": "0xC1A709C0",
+      "what": "float maximum of the resolution controller; a CSV row alone is visible but unselectable until this grows",
+      "read_when": "resource pass",
+      "patch": "float 2.0 for three rows (FP3K), 5.0 for six rows (Formats)",
+      "source": "FP3K HANDOFF.md §7; fpsup-formats-v0.3.0a MANIFEST.txt"
+    },
+    {
+      "name": "menu CSV text",
+      "start": "0xC0F8E7EC",
+      "end": "0xC0F8E848",
+      "what": "short menu CSV row text",
+      "read_when": "resource pass",
+      "patch": "journalled row text",
+      "source": "fpsup-formats-v0.3.0a MANIFEST.txt"
+    },
+    {
+      "name": "long menu CSV",
+      "start": "0xC12C7CF8",
+      "end": "0xC12C7D94",
+      "what": "long menu CSV row text",
+      "read_when": "resource pass",
+      "patch": "journalled row text",
+      "source": "fpsup-formats-v0.3.0a MANIFEST.txt"
+    },
+    {
+      "name": "MainB2 page",
+      "start": "0xC2030364",
+      "end": "0xC2055DB0",
+      "what": "SHOOT page 2, 1392 length-delimited records, root object id 116 at 0xC2037C1B; audio-row donor 0xC204DACA..0xC205460A",
+      "read_when": "resource pass",
+      "patch": "reparent a donor wrapper (offline recipe, not camera-verified)",
+      "source": "research/ui/MAINB2_ROW_EXTENSION.md"
+    },
+    {
+      "name": "MainY4 page",
+      "start": "0xC214A0C0",
+      "end": "0xC217CDEE",
+      "what": "holds the Y4_4_STILL two-option donor 0xC216C8B8..0xC2172BC6 (21 objects, MenuItem_Select 19459, List 19463)",
+      "read_when": "resource pass",
+      "patch": "the fpLossless private-row donor",
+      "source": "projects/lossless-sup/notes/NATIVE_ROW_DONOR.md"
+    },
+    {
+      "name": "Quick Set resource sets",
+      "start": "0xC2278C02",
+      "end": "0xC24D1DC8",
+      "what": "QS_CINE 0xC2278C02 (14,285 records), QS_Common 0xC239C5FB, QS_STILL 0xC23E1F9C, QS_STILLlike 0xC24D1DC8. CORRECTION: FP3K's 'QS footer records' at these addresses are the SET bases, not single records. A third resolution state touches 218 records in 8 sets, 152 of them here",
+      "read_when": "resource pass",
+      "patch": "NBU record edits; no CSV exists for QS",
+      "source": "research/ui/QUICK_SET.md"
+    },
+    {
+      "name": "settings summary",
+      "start": "0xC1A7246B",
+      "end": "0xC1A7246C",
+      "what": "the collapsed Settings summary record under page B2_5_4 (0xC1A6E777 was the wrong one)",
+      "read_when": "resource pass",
+      "patch": "delta copy",
+      "source": "FP3K HANDOFF.md §7"
+    },
+    {
+      "name": "event table (seg1)",
+      "start": "0xC2F23848",
+      "end": "0xC2F23A80",
+      "what": "70 active 8-byte {event_id, callback} records + zero sentinel; the on-disk callback words are zero and are written by the MOVW/MOVT/STR initializer 0xC05123D8..0xC0512738. Event 0x44 entry 0xC2F23A70",
+      "read_when": "startup initializer, then dispatch",
+      "patch": "n/a -- the zeros were not a missing consumer",
+      "source": "projects/lossless-sup/notes/FIXED_POPUP.md"
+    },
+    {
+      "name": "resource-set index",
+      "start": "0xC18C0460",
+      "end": "0xC18C0474",
+      "what": "the NBU container header: magic 'NBU\\0' and version 0x01090000 (1.9). Its two records are the string pool and the 221-entry resource-set table; every screen is a separate set at 0xC18C0460 + offset",
+      "read_when": "startup resource pass",
+      "patch": "not patched by anything here",
+      "source": "emulated 2026-09-29: research/ui/tools/nbu_probe"
+    },
+    {
+      "name": "NBR container",
+      "start": "0xC0D22400",
+      "end": "0xC18A6C34",
+      "what": "the whole resource container: 'NBR\\0' 1.5, then length-delimited records -- tag 1 the 177,572-byte name pool (2,260 build paths), tag 2 the 11,817,672-byte directory plus data, tag 0x20001 (81,844 B, undecoded), terminator. Same record shape as the NBU container",
+      "read_when": "startup and on demand",
+      "patch": "see the NBR directory",
+      "source": "research/ui/RESOURCE_REPLACEMENT.md"
+    },
+    {
+      "name": "Resolution row list",
+      "start": "0xC0F8E7EC",
+      "end": "0xC0F8E845",
+      "what": "../MenuB12/data/ListB12/B2_5_4.cvm -- an 89-byte UTF-8 CSV with a BOM: header plus '1,0313,...' and '2,0314,...'. THIS is why the Resolution menu has two rows. Its directory entry is #68 at 0xC0D4DDFC, repointed at 0xC0D4DE04",
+      "read_when": "menu build",
+      "patch": "put a longer CSV elsewhere and repoint entry 68",
+      "source": "research/ui/RESOURCE_REPLACEMENT.md"
+    },
+    {
+      "name": "menu string tables",
+      "start": "0xC0D56CFC",
+      "end": "0xC0F44C2C",
+      "what": "17 .nloc files, one per language: 'NDB\\0', count, then 8-byte entries {u32 LE fnv1a(ascii id), u8 0, u24 LE record offset}; a record is {u32 id offset, u32 text offset} then both NUL-terminated. 46,376 of 46,376 keys check. The ids are the TEXT column of the menu CSVs: 0313 = 'UHD 3840x2160'",
+      "read_when": "menu draw",
+      "patch": "not needed for a new row -- a CSV's TEXT cell may be a literal string instead of an id",
+      "source": "research/ui/RESOURCE_REPLACEMENT.md; tools/nbr_stock.py parse_nloc"
+    }
+  ],
+  "funcs": [
+    {
+      "addr": "0xC054A510",
+      "isa": "arm",
+      "name": "GuiFactory",
+      "what": "constructs pages; case 10 builds UicGuiMenuB2",
+      "source": "research/ui/MAINB2_ROW_EXTENSION.md"
+    },
+    {
+      "addr": "0xC0583430",
+      "isa": "arm",
+      "name": "UicGuiMenuB2::ctor",
+      "what": "sets vtable 0xC0D1DF1C, owner global 0xC37B75D8; dtor 0xC0583470; binding context this+0x1C",
+      "source": "research/ui/MAINB2_ROW_EXTENSION.md"
+    },
+    {
+      "addr": "0xC05834D8",
+      "isa": "arm",
+      "name": "MainB2::attach",
+      "what": "subscribes CM_DCCrop, ST_AspectRatio, MV_AudioRecord; detach 0xC0583538",
+      "source": "research/ui/MAINB2_ROW_EXTENSION.md"
+    },
+    {
+      "addr": "0xC0583598",
+      "isa": "arm",
+      "name": "MainB2 stock callbacks",
+      "what": "also 0xC05835F0 / 0xC0583648; convert UI values and call factory-settings setters. A private feature must NOT reuse them",
+      "source": "research/ui/MAINB2_ROW_EXTENSION.md"
+    },
+    {
+      "addr": "0xC05DB308",
+      "isa": "thumb",
+      "name": "var registry register",
+      "what": "app, count, 12-byte {type, borrowed_name_ptr, initial_value}; type 0 = integer; descriptor 32 B",
+      "source": "research/ui/MAINB2_ROW_EXTENSION.md; executed offline by tools/native_variable_probe"
+    },
+    {
+      "addr": "0xC05DB418",
+      "isa": "thumb",
+      "name": "var registry lookup",
+      "what": "returns success with a NULL output when absent -- a zero return is not proof of existence",
+      "source": "research/ui/MAINB2_ROW_EXTENSION.md"
+    },
+    {
+      "addr": "0xC05DCB18",
+      "isa": "arm",
+      "name": "lookup named var + attach callback",
+      "what": "uses 0xC05DB418; missing variables return an error",
+      "source": "research/ui/MAINB2_ROW_EXTENSION.md"
+    },
+    {
+      "addr": "0xC05ED248",
+      "isa": "thumb",
+      "name": "var map insert",
+      "what": "map, name, descriptor",
+      "source": "research/ui/MAINB2_ROW_EXTENSION.md"
+    },
+    {
+      "addr": "0xC0593F30",
+      "isa": "arm",
+      "name": "queue GUI variable update",
+      "what": "does NOT create a private variable",
+      "source": "research/ui/MAINB2_ROW_EXTENSION.md"
+    },
+    {
+      "addr": "0xC06BDA30",
+      "isa": "arm",
+      "name": "MenuValueConverterBase__v21",
+      "what": "returns &0xC2E4020C and a hard-coded count of 3; Formats patches the converter's code words 0xC06BDA3C/40/48",
+      "source": "research/ui/README.md §4; fpsup-formats-v0.3.0a MANIFEST.txt"
+    },
+    {
+      "addr": "0xC06CCD10",
+      "isa": "arm",
+      "name": "pair-table evaluator",
+      "what": "reads the enum->state pair table on every evaluation",
+      "source": "research/ui/README.md §4"
+    },
+    {
+      "addr": "0xC05E6400",
+      "isa": "thumb",
+      "name": "NBU record interpreter",
+      "what": "bytecode interpreter; tokens via param_1[0xe]; case 10 builds an image array; THE durable intervention point",
+      "source": "research/ui/README.md §5/§5c"
+    },
+    {
+      "addr": "0xC05E84D8",
+      "isa": "thumb",
+      "name": "NBR memory loader",
+      "what": "where a private NBR pack is registered once",
+      "source": "research/ui/README.md §6; FP3K HANDOFF.md §7"
+    },
+    {
+      "addr": "0xC05E5B58",
+      "isa": "thumb",
+      "name": "pool offset -> string",
+      "what": "hook only for the stock NBU pool so synthetic offsets resolve into the private NBR",
+      "source": "research/ui/README.md §6"
+    },
+    {
+      "addr": "0xC05D90F0",
+      "isa": "thumb",
+      "name": "layout loader",
+      "what": "og3k hooks it last, to release a Quick Set layout built before the other hooks so the next load re-parses it",
+      "source": "projects/open-gate/build/build_og3k_ui_candidate.py THUMB_HOOKS"
+    },
+    {
+      "addr": "0xC05EDC40",
+      "isa": "thumb",
+      "name": "element ctor",
+      "what": "allocates 0x34 bytes; one Quick Set draw constructs 314 elements, ALL from the single call site 0xC05E7300 with the same allocator -- a hook here cannot tell widgets apart",
+      "source": "research/ui/README.md §5/§5b"
+    },
+    {
+      "addr": "0xC05EDB68",
+      "isa": "thumb",
+      "name": "element set name",
+      "what": "writes the resource name to elem+0x18",
+      "source": "research/ui/README.md §5c"
+    },
+    {
+      "addr": "0xC05E2CA8",
+      "isa": "thumb",
+      "name": "container append",
+      "what": "the natural intervention point: the element is fully populated, elem+0x18 identifies the widget, the container is in hand",
+      "source": "research/ui/README.md §5c"
+    },
+    {
+      "addr": "0xC05EDD40",
+      "isa": "thumb",
+      "name": "element clone",
+      "what": "takes its allocator from the source element's +0x10, so a third entry needs no interpreter allocator",
+      "source": "research/ui/README.md §5c"
+    },
+    {
+      "addr": "0xC05E2988",
+      "isa": "thumb",
+      "name": "image container ctor",
+      "what": "called by case 10 with (alloc, name, count)",
+      "source": "research/ui/README.md §5c"
+    },
+    {
+      "addr": "0xC05E2280",
+      "isa": "thumb",
+      "name": "animation key bracket",
+      "what": "compares the curve against eval+0x1C float time; returns bracketing keys (r2 lower, r3 upper); never indexes past the array",
+      "source": "research/ui/README.md §3"
+    },
+    {
+      "addr": "0xC05E2970",
+      "isa": "thumb",
+      "name": "selected key value",
+      "what": "returns the lower key's value at key+0x18; the post-parse tile fallback hooks it after the stock result",
+      "source": "research/ui/README.md §3/§6"
+    },
+    {
+      "addr": "0xC05E37F8",
+      "isa": "thumb",
+      "name": "group endpoint observer",
+      "what": "watch it to verify that the live 20_MV_Resolution / 21_MV_Resolution container really received time 66 after its stock endpoint 33",
+      "source": "research/ui/README.md §6"
+    },
+    {
+      "addr": "0xC0602098",
+      "isa": "thumb",
+      "name": "aligned image open",
+      "what": "where synthetic XCI names are served with bounded descriptors; a unique name is REQUIRED or the cached backend never reloads",
+      "source": "research/ui/README.md §6"
+    },
+    {
+      "addr": "0xC055FDF4",
+      "isa": "arm",
+      "name": "gui image log (name)",
+      "what": "with 0xC055FE14 (dimensions): what `gui image log 1` prints. The GUI channel is flooded by ERR from 0xC055FA14/0xC055FA30 -- filter them",
+      "source": "research/ui/README.md §8"
+    },
+    {
+      "addr": "0xC05824D0",
+      "isa": "arm",
+      "name": "QS selection",
+      "what": "FP3K's Quick Set selection hook",
+      "source": "FP3K HANDOFF.md §7"
+    },
+    {
+      "addr": "0xC059C640",
+      "isa": "arm",
+      "name": "HUD publisher",
+      "what": "with 0xC059C9F0; FP3K hooks both",
+      "source": "FP3K HANDOFF.md §7"
+    },
+    {
+      "addr": "0xC057A6A0",
+      "isa": "arm",
+      "name": "selection core",
+      "what": "FP3K core hook 1 of 8",
+      "source": "FP3K HANDOFF.md §7"
+    },
+    {
+      "addr": "0xC05931D0",
+      "isa": "arm",
+      "name": "resolution readback",
+      "what": "FP3K core hook",
+      "source": "FP3K HANDOFF.md §7"
+    },
+    {
+      "addr": "0xC005C020",
+      "isa": "arm",
+      "name": "resolution setter",
+      "what": "the shared resolution write path; hooked by FP3K and by every fpSup format card",
+      "source": "FP3K HANDOFF.md §7; fpsup-formats-v0.3.0a MANIFEST.txt"
+    },
+    {
+      "addr": "0xC048BE80",
+      "isa": "arm",
+      "name": "popup width listener",
+      "what": "updates width via 0xC04B63F8 -> 0xC04B6238 -> 0xC04B6308, then queues event 0x44 through 0xC0515560 -> 0xC05170F8",
+      "source": "projects/lossless-sup/notes/FIXED_POPUP.md"
+    },
+    {
+      "addr": "0xC02E8A08",
+      "isa": "arm",
+      "name": "display submit",
+      "what": "third-party overlay provider installs a checked cave veneer here (lachgil module_ui)",
+      "source": "lachgil/module-platform.md"
+    },
+    {
+      "addr": "0xC03722E8",
+      "isa": "arm",
+      "name": "FalseColor custom-button press",
+      "what": "observed and forwarded unchanged by the lachgil overlay provider; release is not hooked",
+      "source": "lachgil/module-platform.md"
+    }
+  ],
+  "hook_sites": [
+    {
+      "addr": "0xC05E5B58",
+      "owners": [
+        "fpsup-og3k",
+        "fpsup-og2k",
+        "fpsup-formats",
+        "fp3k"
+      ],
+      "role": "NBU string resolver (private-NBR names)"
+    },
+    {
+      "addr": "0xC05E84D8",
+      "owners": [
+        "fpsup-og3k",
+        "fpsup-og2k",
+        "fpsup-formats",
+        "fp3k"
+      ],
+      "role": "NBR memory loader (register the private pack once)"
+    },
+    {
+      "addr": "0xC05E6400",
+      "owners": [
+        "fpsup-og3k",
+        "fpsup-og2k",
+        "fpsup-formats",
+        "fp3k"
+      ],
+      "role": "NBU record interpreter (fingerprint-guarded delta copies)"
+    },
+    {
+      "addr": "0xC05D90F0",
+      "owners": [
+        "fpsup-og3k",
+        "fpsup-og2k"
+      ],
+      "role": "layout loader -- release a stale Quick Set layout"
+    },
+    {
+      "addr": "0xC005C020",
+      "owners": [
+        "fpsup-og3k",
+        "fpsup-formats",
+        "fp3k"
+      ],
+      "role": "resolution setter"
+    },
+    {
+      "addr": "0xC005C054",
+      "owners": [
+        "fpsup-formats"
+      ],
+      "role": "regseltail: after a resolution change, apply + change events; toggles crop once when the standby look changes so Quick Set rebuilds live view"
+    },
+    {
+      "addr": "0xC043CCF8",
+      "owners": [
+        "fpsup-og3k",
+        "fpsup-formats"
+      ],
+      "role": "format picker (sensor timing for the current frame rate)"
+    },
+    {
+      "addr": "0xC0437B48",
+      "owners": [
+        "fpsup-og3k",
+        "fpsup-formats"
+      ],
+      "role": "name emitter (the row's displayed name)"
+    },
+    {
+      "addr": "0xC043A19C",
+      "owners": [
+        "fpsup-og3k",
+        "fpsup-og2k",
+        "fpsup-formats"
+      ],
+      "role": "canvas builder (raster, DNG crop, pixel format, standby crop)"
+    },
+    {
+      "addr": "0xC0437E98",
+      "owners": [
+        "fpsup-og3k",
+        "fpsup-formats",
+        "fp3k"
+      ],
+      "role": "output descriptor / primary output template"
+    },
+    {
+      "addr": "0xC0306EA0",
+      "owners": [
+        "fpsup-og3k",
+        "fpsup-formats"
+      ],
+      "role": "aspect (with 0xC0306EEC)"
+    },
+    {
+      "addr": "0xC03A6DD8",
+      "owners": [
+        "fpsup-og3k",
+        "fpsup-formats"
+      ],
+      "role": "gain-state dispatch (dual-native ISO threshold)"
+    },
+    {
+      "addr": "0xC04A121C",
+      "owners": [
+        "fpsup-formats"
+      ],
+      "role": "regfrclass: frame-rate list state from the row's max rate (greying)"
+    },
+    {
+      "addr": "0xC00A87E4",
+      "owners": [
+        "fpsup-formats"
+      ],
+      "role": "regfrmax: frame-rate normaliser cap"
+    },
+    {
+      "addr": "0xC04A1788",
+      "owners": [
+        "fpsup-formats"
+      ],
+      "role": "regcropstate: Crop Mode greyed"
+    },
+    {
+      "addr": "0xC00A93BC",
+      "owners": [
+        "fpsup-formats"
+      ],
+      "role": "regcropeff: Crop Mode effectively off"
+    },
+    {
+      "addr": "0xC02E8A08",
+      "owners": [
+        "lachgil-modules"
+      ],
+      "role": "display submit -- overlay present/hide"
+    },
+    {
+      "addr": "0xC03722E8",
+      "owners": [
+        "lachgil-modules",
+        "sigma-fp-lab-fcscale"
+      ],
+      "role": "FalseColor custom-function press"
+    }
+  ],
+  "owners": [
+    {
+      "id": "fpsup-og3k",
+      "who": "this project (ijigen)",
+      "kind": "shipped card",
+      "ui": "3rd Resolution row with native Settings + Quick Set UI: 2538 UI words, 360 selected NBU records, 4 Thumb hooks, private NBR pack",
+      "status": "camera-verified (menu summary, three-option list, QS large/small value, UHD/FHD/OG3K footer strip + cursor)",
+      "where": "fpSup/releases/fpsup-og3k-v0.2.7a, projects/open-gate/build/build_og3k_ui_candidate.py"
+    },
+    {
+      "id": "fpsup-og2k",
+      "who": "this project (ijigen)",
+      "kind": "shipped card",
+      "ui": "same UI machinery as og3k, OG2K row",
+      "status": "camera-verified",
+      "where": "fpSup/releases/fpsup-og2k-v0.1.4a"
+    },
+    {
+      "id": "fpsup-formats",
+      "who": "contributor build handed over as fpsup-formats-v0.3.0a.tar",
+      "kind": "incoming alpha card",
+      "ui": "SIX Resolution rows (UHD FHD S16 OG2K OG3K OG3.5K) with native list, closed row, QS tile, six-label footer + cursor, per-row frame-rate greying, Crop Mode greying; UI pack at 0xC0793060, NBR DIRECTORY ENTRY rewrite at 0xC0D4DE04, controller max 5.0",
+      "status": "rc10 camera-verified; this exact file only 'parece que funciona'",
+      "where": "research/other/external/fpsup-formats-v0.3.0a/ (imported 2026-09-29)"
+    },
+    {
+      "id": "fplossless",
+      "who": "this project (ijigen)",
+      "kind": "offline design + probes",
+      "ui": "a PRIVATE two-option row on SHOOT page 2 (MainB2) from the Y4_4_STILL donor, fixed-width popup, private app variable",
+      "status": "offline only -- no camera-verified row",
+      "where": "fpSup/lossless/, projects/lossless-sup/notes/{NATIVE_ROW_DONOR,FIXED_POPUP}.md, research/ui/MAINB2_ROW_EXTENSION.md"
+    },
+    {
+      "id": "fp3k",
+      "who": "Vitaly Li",
+      "kind": "archived handoff",
+      "ui": "third resolution UI index with a private NBR pack (FP3K_L/M/QS/SET/FONT), 47 resolution groups, 380 resource changes, 2 QS limits, 6 UI hooks of 16 total",
+      "status": "camera-validated on Ver.5.02 -- the precedent the fpSup route was built on",
+      "where": "research/other/external/FP3K-technical-handoff-2026-09-10/HANDOFF.md §7"
+    },
+    {
+      "id": "lachgil-modules",
+      "who": "lachgil",
+      "kind": "third-party platform",
+      "ui": "NOT native UI: a 96x32 overlay canvas at LCD (464,560) drawn by module provider 0x100 over the display submit hook, plus a button observer",
+      "status": "camera-confirmed tile on fp 5.02; experimental",
+      "where": "lachgil/module-platform.md"
+    },
+    {
+      "id": "sigma-fp-lab-fcscale",
+      "who": "sigma-fp-lab",
+      "kind": "third-party AutoRun card",
+      "ui": "False Color / EL Zone scale drawn over the live view, FalseColor button repurposed",
+      "status": "works; repackaged as a mergeable VBIN payload here",
+      "where": "projects/fc-scale/notes/FC_SCALE_CARD_AS_VBIN.md"
+    },
+    {
+      "id": "wjhrdy-indoor",
+      "who": "wjhrdy",
+      "kind": "pull request (closed)",
+      "ui": "no UI drawing: it READS the selected custom-preset name (Indoor / IN) out of the settings banks and changes the P-mode shutter family",
+      "status": "offline tests only",
+      "where": "https://github.com/wjhrdy/fpSup/pull/2"
+    },
+    {
+      "id": "display-osd",
+      "who": "this project (ijigen)",
+      "kind": "shell primitive",
+      "ui": "`display text` + `display osd 1 <ARGB>`, `display faceframe` hardware rectangles, `display osdfile` bitmaps, boot banner",
+      "status": "camera-verified",
+      "where": "research/display/notes/{DISPLAY_OSD_MAP,OSD_PERSISTENT_MARKER}.md, research/display/notes/SPLASH_BAND.md"
+    }
+  ],
+  "routes": [
+    {
+      "id": "R0-author",
+      "name": "edit the resource data itself",
+      "how": "research/ui/tools/nbu_probe/nbu_format.py: split a resource set into its length-delimited records, change them, join() back. The allocation header (0x10002) and the image arrays (0x1000B) are the two records a new row has to touch, plus the controller max at 0xC1A709BC",
+      "cost": "no hooks at all for the edit itself -- but the edited set still needs a load path, and the per-field grammar of a record body is only partly decoded",
+      "gets": "real authoring: 221 sets, 303,597 records, all of them addressable, editable and re-emittable byte-exactly",
+      "does_not": "get the edited set into the camera by itself: that is R3 (the resource-directory redirect), whose record fields are still untraced",
+      "verified": "offline: 220 of 220 adjacent sets tile exactly; MainB2's 1392 boundaries match the firmware's own parse and re-emit byte for byte"
+    },
+    {
+      "id": "R1-pairtable",
+      "name": "enum->state pair table",
+      "how": "write 0xC2E4020C; read on every evaluation by 0xC06CCD10",
+      "cost": "one word",
+      "gets": "a display state switch, immediately, next draw",
+      "does_not": "create artwork or a menu row",
+      "verified": "camera (research/ui/README.md §4)"
+    },
+    {
+      "id": "R2-privatenbr",
+      "name": "private NBR + guarded record copies",
+      "how": "3 Thumb hooks (0xC05E84D8 load, 0xC05E6400 parse, 0xC05E5B58 strings); register a private pack once, then for each target record: match address + FNV-1a of the original bytes, copy into a bounded 512-byte buffer, append the new state and ALL companion properties, let the stock interpreter parse the copy",
+      "cost": "~2.5k words + a pack; every companion property must be cloned (visibility, rectangle, position, collapse, cursor, timeline) or the tile draws corrupted",
+      "gets": "real native rows, Quick Set tiles, footer strips, collapsed summaries",
+      "does_not": "replay a record that was already consumed -- a zero target-hit bitmap is a TIMING miss, not a drawing failure",
+      "verified": "camera (FP3K v0.3.2, fpsup-og3k v0.2.x, fpsup-formats v0.3.0a)"
+    },
+    {
+      "id": "R3-directory",
+      "name": "repoint a resource in the NBR directory",
+      "how": "write 8 bytes at a directory entry +0x08 (data offset from 0xC0D22400, and size) so the stock loader picks up your bytes instead; tools/nbr_stock.py prints the exact write",
+      "cost": "8 bytes per resource plus the new bytes, both journalled and restored at power-off",
+      "gets": "any icon, font or MENU LIST CSV replaced, including with something LONGER. The whole menu is 195 .cvm files whose columns are named by their own header line; Enabled/Enabled2 = 1,2 selectable and 0,0 greyed, and the _excl variants are pre-baked grey-out versions. A TEXT cell may be a literal string, so a new row needs no change to the 17 .nloc tables",
+      "does_not": "make a new row selectable on its own (the Settings controller max at 0xC1A709BC has to grow) or draw a new tile (that needs the NBU side: image array 0x1000B plus every companion property plus the allocation header)",
+      "verified": "offline, and it reproduces fpSup-Formats' camera-verified 8-byte patch byte for byte"
+    },
+    {
+      "id": "R4-postparse",
+      "name": "post-parse tile fallback",
+      "how": "three layers: observe 0xC05E37F8 for a real time-66 endpoint, then hook 0xC05E2970 to swap in UNIQUE synthetic image names for the exact groups, then serve those names at 0xC0602098",
+      "cost": "three hooks, only covers the active 20/21 tiles",
+      "gets": "a tile on a screen that was already parsed",
+      "does_not": "cover the footer slot, cursor range or the collapsed summary",
+      "verified": "traced, never installed"
+    },
+    {
+      "id": "R5-donorrow",
+      "name": "donor-row reparenting",
+      "how": "take a stock two-option wrapper (Y4_4_STILL 0xC216C8B8), reparent it to the MainB2 root 116, remap ids, rewrite position/visibility/text/List bounds, bind a PRIVATE registered variable (0xC05DB308)",
+      "cost": "large offline recipe, every field individually pinned",
+      "gets": "a genuinely new setting, not a new value of an existing one",
+      "does_not": "exist on a camera yet; focus behaviour, allocator capacity, timing and failure cleanup unverified",
+      "verified": "offline only"
+    },
+    {
+      "id": "R6-overlay",
+      "name": "draw over the UI instead of in it",
+      "how": "`display text` / `display osd` / `display faceframe` / `display osdfile`, or a cave veneer on the display submit 0xC02E8A08",
+      "cost": "small",
+      "gets": "text, rectangles, bitmaps, a false-colour scale, a boot banner",
+      "does_not": "look native, survive arbitrary redraws without an observer, or appear in menus",
+      "verified": "camera (both this project and two third parties)"
+    }
+  ],
+  "emulated": [
+    {
+      "probe": "research/ui/tools/nbu_probe",
+      "entries": [
+        "0xC05E6400",
+        "0xC05E5FE0",
+        "0xC05E5F20",
+        "0xC05E63E8",
+        "0xC05E5D78",
+        "0xC05E5DB8",
+        "0xC05E5E38",
+        "0xC05E5EA8",
+        "0xC05E5E20",
+        "0xC05E5B58"
+      ],
+      "what": "the record interpreter itself, over the real container. Established: tokens are BIG-ENDIAN u32; EVERY record is {u32 tag, u32 size, body} with size counting the header, so a set can be split, edited and re-emitted with no per-tag grammar; the top level holds only the string pool (tag 1, pool base 0xC18C0474) and a 221-entry resource-set index (tag 0x10001); tag 0x10002 is the allocation header (MainB2: 3028 bytes, 23 classes, 193 objectBase); tag 0x1000B is the image array (the 'case 10' of README 5c -- the only tag that calls FUN_c05e2988). Pure-Python codec in nbu_format.py splits all 221 sets and 303,597 records in 0.4 s, and all 220 adjacent sets tile exactly; MainB2 round-trips byte for byte and its 1392 boundaries equal the firmware's",
+      "tests": 32
+    },
+    {
+      "probe": "research/ui/tools/native_variable_probe",
+      "entries": [
+        "0xC05DB309",
+        "0xC05DB419",
+        "0xC05DCA89",
+        "0xC05ED249"
+      ],
+      "what": "private-variable registration, lookup, vector/map growth, hashing, sorting -- pinned original Thumb under unicorn with synthetic app/registry and substituted allocator, Lua wrapper and strcmp",
+      "tests": 15
+    },
+    {
+      "probe": "research/ui/tools/native_variable_probe (binding)",
+      "entries": [],
+      "what": "why callback errors cannot veto native assignment, and why unsubscribe alone cannot retire callback storage",
+      "tests": 18
+    },
+    {
+      "probe": "research/ui/tools/native_page_probe",
+      "entries": [],
+      "what": "lazy page loading",
+      "tests": 16
+    },
+    {
+      "probe": "research/ui/tools/native_control_probe",
+      "entries": [],
+      "what": "choice-control permissions (the greying question)",
+      "tests": 14
+    },
+    {
+      "probe": "research/ui/tools/native_component_schema.py",
+      "entries": [],
+      "what": "typed component schemas -> component-schemas-v502.json",
+      "tests": null
+    },
+    {
+      "probe": "fpSup/fp_usb_shell/test_loader_hook.py",
+      "entries": [],
+      "what": "the loader/stage2/payload harness: real firmware image, Python-substituted firmware routines. Skill: fp-unicorn-emulation",
+      "tests": null
+    }
+  ],
+  "traps": [
+    {
+      "trap": "one-frame log lag",
+      "what": "`gui image log` spans more than one frame and the first draw after a state change still carries the PREVIOUS state's icons. Close -> change -> wait 3 s -> open (discard) -> close -> clear log -> open (measure). Cross-check by probing the other state first",
+      "source": "research/ui/README.md §8"
+    },
+    {
+      "trap": "heap addresses do not persist",
+      "what": "eight parsed element copies were patched and read back correct, then a 144 MB sweep found none of them: the screen object that owned them had been freed. They were NOT rebuilt per draw",
+      "source": "research/ui/README.md §4/§5c"
+    },
+    {
+      "trap": "the resolution array is built once",
+      "what": "with the append hook armed, every screen-level transition (QS draw, gui scr set 1_03_CINE, resolution away and back, MENU open/close, SetRecMode, STILL/CINESW) produced ZERO matching appends",
+      "source": "research/ui/README.md §5c"
+    },
+    {
+      "trap": "image property alone is not a state",
+      "what": "raising only the image property's key count cannot create a UI state: the controller maximum, the group endpoint and every companion property need matching time-66 keys too",
+      "source": "research/ui/README.md §3/§6"
+    },
+    {
+      "trap": "a CSV row is visible but dead",
+      "what": "adding a CSV row made the option appear and refuse selection until the Settings controller max at 0xC1A709BC grew",
+      "source": "FP3K HANDOFF.md §7"
+    },
+    {
+      "trap": "cached image backend",
+      "what": "reusing a stock `_2` name leaves the cached backend with no reason to decode again -- synthetic names must be UNIQUE",
+      "source": "research/ui/README.md §6"
+    },
+    {
+      "trap": "GUI code is Thumb-2",
+      "what": "enter with B.W (T4), never BL, so lr still holds the original caller's return address; avoid bl between local labels (R_ARM_THM_CALL is not implemented); return with bx to a Thumb address",
+      "source": "research/ui/README.md §5b"
+    },
+    {
+      "trap": "capture without dismissing",
+      "what": "`key CAPTUREON` can dismiss the Quick Set overlay; use `display capture <path> 3 2` with retries=0 and confirm the file with `dir`. The main layer is ARGB4444, NOT L8A8",
+      "source": "research/ui/README.md §8; research/display/notes/SPLASH_BAND.md"
+    },
+    {
+      "trap": "one call site, 314 elements",
+      "what": "every element of a Quick Set draw comes from 0xC05E7300 with the same allocator, so a hook on the constructor cannot discriminate widgets; discriminate at the append (0xC05E2CA8) by elem+0x18",
+      "source": "research/ui/README.md §5b/§5c"
+    }
+  ]
+}

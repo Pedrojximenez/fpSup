@@ -1,0 +1,4 @@
+interface:
+  display_name: "SIGMA fp 測試卡建置"
+  short_description: "SIGMA fp merged development cards and exact-byte checks"
+  default_prompt: "Use $fp-merged-card to build and verify a SIGMA fp development card using the maintained shared loader."

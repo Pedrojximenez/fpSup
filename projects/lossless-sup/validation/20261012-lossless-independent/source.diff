@@ -1,0 +1,877 @@
+--- before/fpSup/lossless/README.md
++++ after/fpSup/lossless/README.md
+@@ -1,6 +1,6 @@
+ # fpLossless — standalone lossless RAW compression
+ 
+-## 2026-10-12: adaptive batch count with optional standalone stopfix
++## 2026-10-12: independent lossless module with adaptive batch count
+ 
+ The current builders produce an **offline development candidate**, including
+ the menu, native recording hooks and shared loader. The older status below is
+@@ -20,31 +20,20 @@
+   with the stock CinemaDNG callback. Low/unknown free descriptor counts force
+   an earlier native flush. OFF and unrelated filesystem calls retain their
+   original count decision.
+-- Stop-queue release belongs to the independent **`05STOPFX.BIN`** (Loader v3,
+-  SIGMA fp Ver.5.02). LOSS neither claims nor changes `C0377118`. The standalone
+-  patch redirects it to `C03776A0`, providing native reference-counted release
+-  even without lossless. It does not recover discarded images or cure stalls;
+-  the native busy-registry early return and hardware concurrency remain unverified.
+ - Flush metadata now checks the native frame pointer and generation as well
+   as the file buffer address; reused addresses retire mismatched metadata
+   without freeing live memory or applying a previous frame's compressed header.
+ 
+ The batch hook is guarded, journaled, exclusively claimed in v3 and restored on
+-shutdown. This split `10LOSS.BIN` can coexist with the reviewed `05STOPFX.BIN` in
+-the card's `/fpSup/` folder; either can load alone. LOSS's builders emit only
+-LOSS and do not silently add stopfix. The older v2 card builder also omits the
+-stop patch; a v3 standalone sup cannot simply be placed on a v2 card.
+-
+-The earlier candidate under `20261012-bulk-stop-integration` embedded stopfix
+-and **must not** be combined with `05STOPFX.BIN`. Use the new split candidate
+-below when combining the modules. The reviewed standalone file is 316 bytes,
+-SHA-256 `f9f26a092c5676ead5771ba8be4aac9c3734e9ed0cd144002a73b3f6b657c9d9`.
++shutdown. LOSS builds, loads and runs its tests independently of other optional
++sup modules. The module package contains `10LOSS.BIN` and its build/layout
++metadata. Cross-module checks are maintained separately in `integration_tests/`.
+ 
+ Build from `fpSup/` into a new empty directory:
+ 
+ ```sh
+-python3 -B lossless/build_v3_lossless.py --out /absolute/new/directory --card
+-# Add --trace for the diagnostic variant.
++python3 -B lossless/build_v3_lossless.py --out /absolute/new/directory
++# Add --trace for diagnostics, or --card for a complete shared-loader card.
+ ```
+ 
+ Focused offline tests:
+@@ -53,13 +42,13 @@
+ cd lossless/native
+ python3 -B -m unittest test_bulk_policy test_frame_hold test_record_diag
+ cd ..
+-python3 -B -X faulthandler -m unittest test_bulk_native test_stop_release test_v3_lossless test_card_emulation
++python3 -B -X faulthandler -m unittest test_bulk_native test_v3_lossless test_card_emulation
+ ```
+ 
+ `card_status.py` reads the matching build's `layout.json` and reports batch cap,
+ FPS reserve, pool pressure, mixed file statistics and retired stale metadata.
+ Source changes, exact candidate bytes, validation logs and hardware limitations:
+-[`20261012-separate-stopfix`](../../projects/lossless-sup/validation/20261012-separate-stopfix/).
++[`20261012-lossless-independent`](../../projects/lossless-sup/validation/20261012-lossless-independent/).
+ The updated mechanism is also recorded in
+ [`EARLY_STOP_94.md`](../../projects/lossless-sup/notes/EARLY_STOP_94.md).
+ 
+--- before/fpSup/lossless/test_v3_lossless.py
++++ after/fpSup/lossless/test_v3_lossless.py
+@@ -13,7 +13,6 @@
+ Emulated, not on the camera. The row is not installed here (no GUI object in
+ the image's RAM), so the menu path stops at its first check.
+ """
+-import hashlib
+ import pathlib
+ import struct
+ import sys
+@@ -37,7 +36,7 @@
+ REC, ARRIVE, STOP, FLUSH = 0xC03A33C8, 0xC038BFF0, 0xC0398D88, 0xC03A5490
+ PLAY, CLIP, END, POOL = 0xC05C0EA4, 0xC05BDDAC, 0xC05C2E90, 0xC05C2D10
+ EVENT, DISCARD = 0xC038BD08, 0xC037DEF8
+-BULK_GATE, STOP_RELEASE = 0xC063F828, 0xC0377118
++BULK_GATE = 0xC063F828
+ ENGINE = 0x300D0000
+ VENEER_AT = {REC: 0, ARRIVE: 8, STOP: 16, FLUSH: 24, PLAY: 48, CLIP: 56,
+              END: 64, POOL: 72, EVENT: 80, DISCARD: 88}
+@@ -47,14 +46,6 @@
+ REPLAY = {STOP: 'stop_replay', END: 'end_replay', POOL: 'pool_replay',
+           EVENT: 'event_replay', PLAY: 'play_replay'}
+ LOWER = 0xC0100000                 # a layer below's target: inside branch reach
+-
+-
+-def stopfix_sup():
+-    """Unmodified standalone patch_sup, byte-identical to the reviewed file."""
+-    data = B.patch_sup('STFX', [(STOP_RELEASE, struct.pack('<I', 0xEA000160), 2)])
+-    assert hashlib.sha256(data).hexdigest() == \
+-        'f9f26a092c5676ead5771ba8be4aac9c3734e9ed0cd144002a73b3f6b657c9d9'
+-    return data
+ 
+ 
+ def branch(site, target, op):
+@@ -144,8 +135,6 @@
+         # the call sites call what was below them: the firmware
+         self.assertEqual(cam.w(blob + self.sym['flush_real']), 0xC069ADE0)
+         self.assertEqual(cam.w(blob + self.sym['discard_real']), 0xC037E008)
+-        self.assertEqual(cam.w(STOP_RELEASE), self.stock(STOP_RELEASE))
+-        self.assertNotIn(STOP_RELEASE, SITES)
+         from capstone import Cs, CS_ARCH_ARM, CS_MODE_THUMB
+         ins = list(Cs(CS_ARCH_ARM, CS_MODE_THUMB).disasm(
+             bytes(cam.mu.mem_read(BULK_GATE, 4)), BULK_GATE))[0]
+@@ -199,51 +188,6 @@
+                 o = self.other('OTHR', (site, 1, 0))
+                 cam = self.boot(('05OTHER.BIN', o))
+                 self.assert_released_clean(cam, held=(site,))
+-
+-    def assert_stopfix_coexists(self, cam, name):
+-        self.assertEqual(self.outcome(cam, name), 'LOADED')
+-        self.assertEqual(self.outcome(cam), 'LOADED')
+-        self.assertEqual(cam.w(STOP_RELEASE), 0xEA000160)
+-        self.assertEqual(sorted(a for a, _, _ in cam.journal()), sorted([*SITES, STOP_RELEASE]))
+-
+-    def test_standalone_stopfix_coexists_in_both_load_orders_and_restores(self):
+-        for name in ('05STOPFX.BIN', '15STOPFX.BIN'):
+-            with self.subTest(name=name):
+-                cam = self.boot((name, stopfix_sup()))
+-                self.assert_stopfix_coexists(cam, name)
+-                cam.power_off()
+-                for a in (*SITES, STOP_RELEASE):
+-                    self.assertEqual(cam.w(a), self.stock(a), hex(a))
+-
+-    def test_standalone_stopfix_repairs_its_own_stale_word(self):
+-        cam = self.boot(('05STOPFX.BIN', stopfix_sup()), stale={STOP_RELEASE: 0xEA000160})
+-        self.assert_stopfix_coexists(cam, '05STOPFX.BIN')
+-        self.assertIn(STOP_RELEASE, {a for c, a, _, _ in cam.log() if c == 'REPAIRED'})
+-
+-    def test_stopfix_can_load_without_lossless(self):
+-        cam = LosslessCamera(*T.card(('05STOPFX.BIN', stopfix_sup())))
+-        cam.boot()
+-        self.assertEqual(self.outcome(cam, '05STOPFX.BIN'), 'LOADED')
+-        self.assertEqual(cam.w(STOP_RELEASE), 0xEA000160)
+-        self.assertEqual([a for a, _, _ in cam.journal()], [STOP_RELEASE])
+-        cam.power_off()
+-        self.assertEqual(cam.w(STOP_RELEASE), self.stock(STOP_RELEASE))
+-
+-    def test_mutation_reintroducing_stop_claim_is_detected(self):
+-        sup = bytearray(self.sup)
+-        # Inject the removed claim in place of the independent bulk gate.
+-        at = B.SL_HEADER_LEN + self.sym['claims'] + 4
+-        for i in range(L.SITE_COUNT):
+-            if struct.unpack_from('<I', sup, at + 12 * i)[0] == BULK_GATE:
+-                struct.pack_into('<3I', sup, at + 12 * i,
+-                                 STOP_RELEASE, self.stock(STOP_RELEASE), 2)
+-                break
+-        else:
+-            self.fail('bulk gate claim missing')
+-        cam = self.boot(('05STOPFX.BIN', stopfix_sup()), sup=bytes(sup))
+-        with self.assertRaises(AssertionError):
+-            self.assert_stopfix_coexists(cam, '05STOPFX.BIN')
+-        self.assertEqual(self.outcome(cam), 'RELEASED')
+ 
+     def test_an_exclusive_hold_on_a_chain_site_releases(self):
+         o = self.other('OTHR', (FLUSH, 2, 0))
+--- before/fpSup/lossless/test_card_emulation.py
++++ after/fpSup/lossless/test_card_emulation.py
+@@ -293,7 +293,6 @@
+                     self.assertEqual(cam.word(old_site), stock)
+         cam = self.boot()
+         self.launch(cam)
+-        self.assertEqual(cam.word(0xC0377118), 0xE92D4030)
+         from capstone import Cs, CS_ARCH_ARM, CS_MODE_THUMB
+         inst = list(Cs(CS_ARCH_ARM, CS_MODE_THUMB).disasm(
+             bytes(cam.mu.mem_read(0xC063F828, 4)), 0xC063F828))[0]
+@@ -310,17 +309,6 @@
+             cam.call(cam.word(journal + 4), r0=journal, r1=4)
+             for site in (0xC063F828,):
+                 self.assertEqual(cam.word(site), build_card_module.SITES[site][0])
+-
+-    def test_unrelated_stopfix_word_is_not_guarded_written_or_journaled(self):
+-        cam = self.boot()
+-        cam.mu.mem_write(0xC0377118, struct.pack('<I', 0xEA000160))
+-        self.assertEqual(self.launch(cam), 0)
+-        self.assertEqual(cam.word(0xC0377118), 0xEA000160)
+-        self.assertEqual(cam.word(BLOCK + card_symbols()['g_card']),
+-                         BLOCK + len(self.blob) + (-len(self.blob) % 64))
+-        journal = cam.registered[0][0]
+-        cam.call(cam.word(journal + 4), r0=journal, r1=4)
+-        self.assertEqual(cam.word(0xC0377118), 0xEA000160)
+ 
+     # ---- through the veneers ------------------------------------------
+     def enter(self, cam, name, regs, lr=T.DONE, r4=0x44444444, stack_delta=0):
+--- before/fpSup/lossless/test_stop_release.py
++++ /dev/null
+@@ -1,255 +0,0 @@
+-"""Stock stop-queue release instructions used by the standalone STFX companion.
+-
+-Promoted from the 2026-10-11 community review. Standalone STFX loading alongside
+-LOSS and restoration are covered by test_v3_lossless; LOSS does not own this patch.
+-Actual queue, parent/child reference and RAW cleanup instructions execute;
+-locks and allocator/pool-return boundaries are explicit substitutes. No real
+-DMA, scheduling, concurrent descriptor reuse or camera I/O is tested.
+-"""
+-import hashlib
+-import pathlib
+-import struct
+-import sys
+-import unittest
+-
+-HERE = pathlib.Path(__file__).resolve().parent
+-ROOT = HERE.parents[1]
+-sys.path.insert(0, str(ROOT / 'fpSup/raw/lossless_codec'))
+-sys.path.insert(0, str(ROOT / 'fpSup/fp_usb_shell/v3'))
+-from test_native_writer_contract import StockWriter, STOP, STACK
+-
+-IMAGE = ROOT / 'out/seg0_c0000000.bin'
+-IMAGE_SHA = 'aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622'
+-SITE, STOCK, PATCH = 0xC0377118, 0xE92D4030, 0xEA000160
+-MGR, OBJ, NODE, RAW = 0x45002000, 0x45002400, 0x48000000, 0x49000000
+-RANGES = [(SITE, 0xC0377150), (0xC03776A0, 0xC0377730),
+-          (0xC0375030, 0xC0375178), (0xC03753C0, 0xC0375400),
+-          (0xC03768D8, 0xC0376AF8), (0xC0381008, 0xC0381090),
+-          (0xC0374180, 0xC03741D0), (0xC03777B8, 0xC03779D8),
+-          (0xC037B1F0, 0xC037B248), (0xC037D880, 0xC037D898),
+-          (0xC037E008, 0xC037E060)]
+-CALLS = [0xC0377688, 0xC03840C0, 0xC03840D8, 0xC03841BC,
+-         0xC03842E8, 0xC0384300, 0xC038F3F8, 0xC038F410,
+-         0xC038F51C, 0xC038F524, 0xC0398D34, 0xC0398D3C]
+-
+-
+-def pinned(path, expected):
+-    data = path.read_bytes()
+-    if hashlib.sha256(data).hexdigest() != expected:
+-        raise AssertionError('input hash mismatch: ' + str(path))
+-    return data
+-
+-
+-class Flush(StockWriter):
+-    def __init__(self, patched=True):
+-        super().__init__(pinned(IMAGE, IMAGE_SHA))
+-        self.mu.mem_map(NODE, 0x100000)
+-        self.returned, self.buffers, self.locks = [], [], {}
+-        self.raw_bytes = {}
+-        if patched:
+-            self.put(SITE, PATCH)
+-        self.substitutes = {
+-            0xC0019DC0: lambda: self.ret(0x1234),
+-            0xC001A048: self.ret, 0xC001A288: self.ret,
+-            0xC0374220: lambda: self.ret(MGR),
+-            0xC0377348: lambda: self.ret(OBJ),
+-            0xC037AED8: lambda: self.ret(OBJ + 0x100),
+-            0xC037D580: lambda: self.ret(OBJ + 0x200),
+-            0xC037DD08: lambda: self.ret(OBJ + 0x300),
+-            0xC0010298: self.queue_lock,
+-            0xC00102D0: self.queue_unlock,
+-            0xC036DCC8: lambda: self.ret(0),
+-            0xC00101C0: self.manager_lock,
+-            0xC0010210: self.manager_unlock,
+-            0xC001D3D0: self.buffer_free,
+-            0xC0380580: self.pool_return,
+-        }
+-        # Match the maintained v3 harness: also place bx lr at every substituted
+-        # boundary because a PC write from a Unicorn hook can be ignored.
+-        for address in self.substitutes:
+-            self.put(address, 0xE12FFF1E)
+-
+-    def queue_lock(self):
+-        token, owner = self.r('r0'), self.r('r1')
+-        if owner in self.locks:
+-            raise AssertionError('recursive queue acquisition')
+-        self.locks[owner] = token
+-        self.put(token, owner)
+-        self.ret(token)
+-
+-    def queue_unlock(self):
+-        owner = self.get(self.r('r0'))
+-        if self.locks.pop(owner, None) is None:
+-            raise AssertionError('unowned queue unlock')
+-        self.ret()
+-
+-    def manager_lock(self):
+-        if self.r('r0') != MGR or MGR in self.locks:
+-            raise AssertionError('unexpected manager acquisition')
+-        self.locks[MGR] = 0xCAFE
+-        self.ret(0xCAFE)
+-
+-    def manager_unlock(self):
+-        if (self.r('r0'), self.r('r1')) != (MGR, 0xCAFE):
+-            raise AssertionError('unexpected manager unlock')
+-        if self.locks.pop(MGR, None) != 0xCAFE:
+-            raise AssertionError('unowned manager unlock')
+-        self.ret()
+-
+-    def buffer_free(self):
+-        handle = self.get(self.r('r0'))
+-        if handle not in self.raw_bytes or handle in self.buffers:
+-            raise AssertionError('unknown or duplicate RAW buffer release')
+-        self.buffers.append(handle)
+-        self.ret()
+-
+-    def pool_return(self):
+-        frame = self.r('r0')
+-        if self.r('r1') != 3 or frame in self.returned:
+-            raise AssertionError('unknown or duplicate node return')
+-        if not NODE <= frame < NODE + 96 * 0x2000:
+-            raise AssertionError('out-of-pool node')
+-        self.returned.append(frame)
+-        self.ret()
+-
+-    def node(self, slot, parent=0xFFFFFFFF, refs=0, raw_refs=0, raw_slot=None):
+-        frame = NODE + slot * 0x2000
+-        self.put(MGR + 4 + slot * 4, frame)
+-        self.put(MGR + 0x18C, self.get(MGR + 0x18C) + 1)
+-        for off, value in [(4, 1), (0x10FC, slot), (0x1118, parent),
+-                           (0x1110, refs), (0x1114, raw_refs)]:
+-            self.put(frame + off, value)
+-        if raw_slot is None:
+-            raw_slot = slot
+-        handle = RAW + raw_slot * 0x2000
+-        self.raw_bytes[handle] = 1441792
+-        self.put(frame + 0x68, handle)
+-        self.put(frame + 0x6C, 1441792)
+-        self.put(frame + 0x70, 10)
+-        # All other native buffer wrappers are absent (allocator type 15).
+-        for off in list(range(0x74, 0x128, 12)) + [0x12C, 0x18C, 0xFD0, 0xFDC, 0xFE8]:
+-            self.put(frame + off + 8, 15)
+-        return frame
+-
+-    def queue(self, frames):
+-        self.put(OBJ + 0x14, frames[0] if frames else 0)
+-        self.put(OBJ + 0x18, frames[-1] if frames else 0)
+-        for i, frame in enumerate(frames):
+-            self.put(frame + 0x110C, frames[i + 1] if i + 1 < len(frames) else 0)
+-
+-    def invoke(self, addr=SITE, **registers):
+-        self.allowed, self.stops, self.stubs = RANGES, {STOP}, self.substitutes
+-        self.reached = None
+-        self.setr('sp', STACK - 0x100)
+-        self.setr('lr', STOP)
+-        for name, value in registers.items():
+-            self.setr(name, value)
+-        self.mu.emu_start(addr, 0, count=200000)
+-        if self.reached != STOP:
+-            raise AssertionError('did not return within instruction budget')
+-        if self.r('sp') != STACK - 0x100 or self.locks:
+-            raise AssertionError('stack or lock not restored')
+-
+-
+-class StopReleaseTests(unittest.TestCase):
+-    def test_branch_and_all_twelve_direct_call_sites(self):
+-        from capstone import Cs, CS_ARCH_ARM, CS_MODE_ARM
+-        image = pinned(IMAGE, IMAGE_SHA)
+-        md = Cs(CS_ARCH_ARM, CS_MODE_ARM)
+-        ins = list(md.disasm(struct.pack('<I', PATCH), SITE))[0]
+-        self.assertEqual((ins.mnemonic, ins.op_str), ('b', '#0xc03776a0'))
+-        actual = []
+-        for off in range(0, len(image) - 4, 4):
+-            w = struct.unpack_from('<I', image, off)[0]
+-            if w >> 24 != 0xEB:
+-                continue
+-            imm = w & 0xFFFFFF
+-            if imm & 0x800000:
+-                imm -= 0x1000000
+-            if 0xC0000000 + off + 8 + imm * 4 == SITE:
+-                actual.append(0xC0000000 + off)
+-        self.assertEqual(actual, CALLS)
+-        getters = {0xC037AED8, 0xC037D580, 0xC037DD08, 0xC0374220}
+-        for a in actual:
+-            following = list(md.disasm(image[a + 4 - 0xC0000000:a + 12 - 0xC0000000], a + 4))
+-            first = following[0]
+-            if first.mnemonic == 'bl':
+-                self.assertIn(int(first.op_str[1:], 16), getters)
+-            else:
+-                self.assertEqual([(i.mnemonic, i.op_str) for i in following],
+-                                 [('mov', 'r1, #1'), ('mov', 'r0, r1')])
+-
+-    def test_stock_drops_44_but_patch_releases_44(self):
+-        for patched in (False, True):
+-            r = Flush(patched)
+-            frames = [r.node(i) for i in range(44)]
+-            r.queue(frames)
+-            r.invoke(r0=OBJ)
+-            self.assertEqual((r.get(OBJ + 0x14), r.get(OBJ + 0x18)), (0, 0))
+-            self.assertEqual(len(r.returned), 44 if patched else 0)
+-            self.assertEqual(len(r.buffers), 44 if patched else 0)
+-            self.assertEqual(r.get(MGR + 0x18C), 0 if patched else 44)
+-            for i in range(44):
+-                self.assertEqual(r.get(MGR + 4 + i * 4), 0 if patched else frames[i])
+-
+-    def test_parent_survives_until_active_child_completes(self):
+-        r = Flush()
+-        parent = r.node(0, refs=2, raw_refs=2)
+-        queued = r.node(1, parent=0, raw_slot=0)
+-        active = r.node(2, parent=0, raw_slot=0)
+-        r.queue([queued])
+-        r.invoke(r0=OBJ)
+-        self.assertEqual(r.returned, [queued])
+-        self.assertEqual(r.buffers, [])
+-        self.assertEqual((r.get(parent + 0x1110), r.get(parent + 0x1114)), (1, 1))
+-        self.assertEqual(r.get(MGR + 4), parent)
+-        r.invoke(0xC0375030, r0=MGR, r1=2)
+-        self.assertEqual(r.returned, [queued, active, parent])
+-        self.assertEqual(len(r.buffers), 1)
+-        self.assertEqual(r.get(MGR + 0x18C), 0)
+-
+-    def test_sequential_duplicate_release_is_noop(self):
+-        r = Flush()
+-        parent = r.node(0, refs=1, raw_refs=1)
+-        child = r.node(1, parent=0, raw_slot=0)
+-        r.queue([child])
+-        r.invoke(r0=OBJ)
+-        r.invoke(0xC0375030, r0=MGR, r1=1)
+-        r.invoke(0xC0375030, r0=MGR, r1=0)
+-        self.assertEqual(r.returned, [child, parent])
+-        self.assertEqual(len(r.buffers), 1)
+-        self.assertEqual(r.get(parent + 0x1110), 0)
+-
+-    def test_empty_queue_preserves_callee_registers(self):
+-        r = Flush()
+-        regs = {f'r{i}': 0x11220000 + i for i in range(4, 12)}
+-        r.queue([])
+-        r.invoke(r0=OBJ, **regs)
+-        self.assertEqual({n: r.r(n) for n in regs}, regs)
+-        self.assertEqual(r.returned, [])
+-
+-    def test_busy_manager_does_not_release(self):
+-        r = Flush()
+-        frame = r.node(0)
+-        r.mu.mem_write(MGR + 0x190, b'\x01')
+-        r.queue([frame])
+-        r.invoke(r0=OBJ)
+-        self.assertEqual(r.returned, [])
+-        self.assertEqual(r.get(MGR + 4), frame)
+-        # A busy manager still loses the popped queue; patch is not a busy-flag fix.
+-        self.assertEqual(r.get(OBJ + 0x14), 0)
+-
+-    def test_parent_decrement_mutation_is_detected(self):
+-        r = Flush()
+-        parent = r.node(0, refs=1, raw_refs=1)
+-        child = r.node(1, parent=0, raw_slot=0)
+-        r.put(0xC0375100, 0xE1A02002)  # private mov r2,r2 instead of sub r2,r2,#1
+-        r.queue([child])
+-        r.invoke(r0=OBJ)
+-        with self.assertRaises(AssertionError):
+-            self.assertEqual(r.get(MGR + 4), 0)
+-        self.assertEqual(r.get(MGR + 4), parent)
+-
+-
+-if __name__ == '__main__':
+-    unittest.main()
+--- /dev/null
++++ after/fpSup/stopfix/README.md
+@@ -0,0 +1,28 @@
++# Standalone stop-queue release patch
++
++`05STOPFX.BIN` is an independent Loader v3 module for SIGMA fp Ver.5.02. It
++redirects `C0377118` to native reference-counted release at `C03776A0`. It does
++not require the lossless module and does not implement frame-count optimization.
++
++The reviewed file is 316 bytes, SHA-256
++`f9f26a092c5676ead5771ba8be4aac9c3734e9ed0cd144002a73b3f6b657c9d9`.
++`stopfix_fixture.py` reproduces those exact bytes with the shared patch builder.
++
++Run this module's offline tests from this directory:
++
++```sh
++python3 -B -X faulthandler -m unittest test_stop_release
++```
++
++Cross-module compatibility tests live separately in `../integration_tests/`.
++LOSS builds and tests do not import or build this module.
++
++Offline verification has not established hardware timing or all concurrent
++release cases; the stock registry-busy early return remains a limitation.
++The patch cannot recover discarded images or allocations already lost before
++installation. See the original review in
++`../../projects/lossless-sup/validation/20261011-community-stopfix/`.
++
++The historical `20261012-bulk-stop-integration` candidate embedded this patch
++in LOSS and conflicts with the standalone BIN. Later independent LOSS builds
++do not own the stop-release site.
+--- /dev/null
++++ after/fpSup/stopfix/test_stop_release.py
+@@ -0,0 +1,278 @@
++"""Stock stop-queue release instructions used by the standalone STFX module.
++
++Promoted from the 2026-10-11 community review. This suite has no dependency on
++the lossless module, its builder, or its tests.
++Actual queue, parent/child reference and RAW cleanup instructions execute;
++locks and allocator/pool-return boundaries are explicit substitutes. No real
++DMA, scheduling, concurrent descriptor reuse or camera I/O is tested.
++"""
++import hashlib
++import pathlib
++import struct
++import sys
++import unittest
++
++HERE = pathlib.Path(__file__).resolve().parent
++ROOT = HERE.parents[1]
++sys.path.insert(0, str(ROOT / 'fpSup/raw/lossless_codec'))
++sys.path.insert(0, str(ROOT / 'fpSup/fp_usb_shell/v3'))
++from test_native_writer_contract import StockWriter, STOP, STACK
++from stopfix_fixture import SITE, STOCK, PATCH, stopfix_sup
++import test_v3 as V3
++
++IMAGE = ROOT / 'out/seg0_c0000000.bin'
++IMAGE_SHA = 'aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622'
++MGR, OBJ, NODE, RAW = 0x45002000, 0x45002400, 0x48000000, 0x49000000
++RANGES = [(SITE, 0xC0377150), (0xC03776A0, 0xC0377730),
++          (0xC0375030, 0xC0375178), (0xC03753C0, 0xC0375400),
++          (0xC03768D8, 0xC0376AF8), (0xC0381008, 0xC0381090),
++          (0xC0374180, 0xC03741D0), (0xC03777B8, 0xC03779D8),
++          (0xC037B1F0, 0xC037B248), (0xC037D880, 0xC037D898),
++          (0xC037E008, 0xC037E060)]
++CALLS = [0xC0377688, 0xC03840C0, 0xC03840D8, 0xC03841BC,
++         0xC03842E8, 0xC0384300, 0xC038F3F8, 0xC038F410,
++         0xC038F51C, 0xC038F524, 0xC0398D34, 0xC0398D3C]
++
++
++def pinned(path, expected):
++    data = path.read_bytes()
++    if hashlib.sha256(data).hexdigest() != expected:
++        raise AssertionError('input hash mismatch: ' + str(path))
++    return data
++
++
++class Flush(StockWriter):
++    def __init__(self, patched=True):
++        super().__init__(pinned(IMAGE, IMAGE_SHA))
++        self.mu.mem_map(NODE, 0x100000)
++        self.returned, self.buffers, self.locks = [], [], {}
++        self.raw_bytes = {}
++        if patched:
++            self.put(SITE, PATCH)
++        self.substitutes = {
++            0xC0019DC0: lambda: self.ret(0x1234),
++            0xC001A048: self.ret, 0xC001A288: self.ret,
++            0xC0374220: lambda: self.ret(MGR),
++            0xC0377348: lambda: self.ret(OBJ),
++            0xC037AED8: lambda: self.ret(OBJ + 0x100),
++            0xC037D580: lambda: self.ret(OBJ + 0x200),
++            0xC037DD08: lambda: self.ret(OBJ + 0x300),
++            0xC0010298: self.queue_lock,
++            0xC00102D0: self.queue_unlock,
++            0xC036DCC8: lambda: self.ret(0),
++            0xC00101C0: self.manager_lock,
++            0xC0010210: self.manager_unlock,
++            0xC001D3D0: self.buffer_free,
++            0xC0380580: self.pool_return,
++        }
++        # Match the maintained v3 harness: also place bx lr at every substituted
++        # boundary because a PC write from a Unicorn hook can be ignored.
++        for address in self.substitutes:
++            self.put(address, 0xE12FFF1E)
++
++    def queue_lock(self):
++        token, owner = self.r('r0'), self.r('r1')
++        if owner in self.locks:
++            raise AssertionError('recursive queue acquisition')
++        self.locks[owner] = token
++        self.put(token, owner)
++        self.ret(token)
++
++    def queue_unlock(self):
++        owner = self.get(self.r('r0'))
++        if self.locks.pop(owner, None) is None:
++            raise AssertionError('unowned queue unlock')
++        self.ret()
++
++    def manager_lock(self):
++        if self.r('r0') != MGR or MGR in self.locks:
++            raise AssertionError('unexpected manager acquisition')
++        self.locks[MGR] = 0xCAFE
++        self.ret(0xCAFE)
++
++    def manager_unlock(self):
++        if (self.r('r0'), self.r('r1')) != (MGR, 0xCAFE):
++            raise AssertionError('unexpected manager unlock')
++        if self.locks.pop(MGR, None) != 0xCAFE:
++            raise AssertionError('unowned manager unlock')
++        self.ret()
++
++    def buffer_free(self):
++        handle = self.get(self.r('r0'))
++        if handle not in self.raw_bytes or handle in self.buffers:
++            raise AssertionError('unknown or duplicate RAW buffer release')
++        self.buffers.append(handle)
++        self.ret()
++
++    def pool_return(self):
++        frame = self.r('r0')
++        if self.r('r1') != 3 or frame in self.returned:
++            raise AssertionError('unknown or duplicate node return')
++        if not NODE <= frame < NODE + 96 * 0x2000:
++            raise AssertionError('out-of-pool node')
++        self.returned.append(frame)
++        self.ret()
++
++    def node(self, slot, parent=0xFFFFFFFF, refs=0, raw_refs=0, raw_slot=None):
++        frame = NODE + slot * 0x2000
++        self.put(MGR + 4 + slot * 4, frame)
++        self.put(MGR + 0x18C, self.get(MGR + 0x18C) + 1)
++        for off, value in [(4, 1), (0x10FC, slot), (0x1118, parent),
++                           (0x1110, refs), (0x1114, raw_refs)]:
++            self.put(frame + off, value)
++        if raw_slot is None:
++            raw_slot = slot
++        handle = RAW + raw_slot * 0x2000
++        self.raw_bytes[handle] = 1441792
++        self.put(frame + 0x68, handle)
++        self.put(frame + 0x6C, 1441792)
++        self.put(frame + 0x70, 10)
++        # All other native buffer wrappers are absent (allocator type 15).
++        for off in list(range(0x74, 0x128, 12)) + [0x12C, 0x18C, 0xFD0, 0xFDC, 0xFE8]:
++            self.put(frame + off + 8, 15)
++        return frame
++
++    def queue(self, frames):
++        self.put(OBJ + 0x14, frames[0] if frames else 0)
++        self.put(OBJ + 0x18, frames[-1] if frames else 0)
++        for i, frame in enumerate(frames):
++            self.put(frame + 0x110C, frames[i + 1] if i + 1 < len(frames) else 0)
++
++    def invoke(self, addr=SITE, **registers):
++        self.allowed, self.stops, self.stubs = RANGES, {STOP}, self.substitutes
++        self.reached = None
++        self.setr('sp', STACK - 0x100)
++        self.setr('lr', STOP)
++        for name, value in registers.items():
++            self.setr(name, value)
++        self.mu.emu_start(addr, 0, count=200000)
++        if self.reached != STOP:
++            raise AssertionError('did not return within instruction budget')
++        if self.r('sp') != STACK - 0x100 or self.locks:
++            raise AssertionError('stack or lock not restored')
++
++
++class StopReleaseTests(unittest.TestCase):
++    def test_standalone_loader_stale_repair_and_power_off(self):
++        for stale in (None, {SITE: PATCH}):
++            with self.subTest(stale=stale):
++                cam = V3.Camera(*V3.card(('05STOPFX.BIN', stopfix_sup())), stale=stale)
++                cam.boot()
++                self.assertEqual(cam.w(SITE), PATCH)
++                self.assertEqual(cam.journal(), [(SITE, 4, struct.pack('<I', STOCK))])
++                self.assertEqual(cam.tasks, [])
++                self.assertEqual(cam.misaligned, [])
++                cam.power_off()
++                self.assertEqual(cam.w(SITE), STOCK)
++
++    def test_standalone_exclusive_conflict_keeps_prior_owner(self):
++        import build_v3 as B
++        owner = B.patch_sup('OWNR', [(SITE, struct.pack('<I', 0xE1A00000), 2)])
++        cam = V3.Camera(*V3.card(('00OWNER.BIN', owner), ('05STOPFX.BIN', stopfix_sup())))
++        cam.boot()
++        self.assertEqual(cam.w(SITE), 0xE1A00000)
++        self.assertIn('05STOPFX.BIN', [name for kind, _, _, name in cam.log() if kind == 'RELEASED'])
++        cam.power_off()
++        self.assertEqual(cam.w(SITE), STOCK)
++
++    def test_branch_and_all_twelve_direct_call_sites(self):
++        from capstone import Cs, CS_ARCH_ARM, CS_MODE_ARM
++        image = pinned(IMAGE, IMAGE_SHA)
++        md = Cs(CS_ARCH_ARM, CS_MODE_ARM)
++        ins = list(md.disasm(struct.pack('<I', PATCH), SITE))[0]
++        self.assertEqual((ins.mnemonic, ins.op_str), ('b', '#0xc03776a0'))
++        actual = []
++        for off in range(0, len(image) - 4, 4):
++            w = struct.unpack_from('<I', image, off)[0]
++            if w >> 24 != 0xEB:
++                continue
++            imm = w & 0xFFFFFF
++            if imm & 0x800000:
++                imm -= 0x1000000
++            if 0xC0000000 + off + 8 + imm * 4 == SITE:
++                actual.append(0xC0000000 + off)
++        self.assertEqual(actual, CALLS)
++        getters = {0xC037AED8, 0xC037D580, 0xC037DD08, 0xC0374220}
++        for a in actual:
++            following = list(md.disasm(image[a + 4 - 0xC0000000:a + 12 - 0xC0000000], a + 4))
++            first = following[0]
++            if first.mnemonic == 'bl':
++                self.assertIn(int(first.op_str[1:], 16), getters)
++            else:
++                self.assertEqual([(i.mnemonic, i.op_str) for i in following],
++                                 [('mov', 'r1, #1'), ('mov', 'r0, r1')])
++
++    def test_stock_drops_44_but_patch_releases_44(self):
++        for patched in (False, True):
++            r = Flush(patched)
++            frames = [r.node(i) for i in range(44)]
++            r.queue(frames)
++            r.invoke(r0=OBJ)
++            self.assertEqual((r.get(OBJ + 0x14), r.get(OBJ + 0x18)), (0, 0))
++            self.assertEqual(len(r.returned), 44 if patched else 0)
++            self.assertEqual(len(r.buffers), 44 if patched else 0)
++            self.assertEqual(r.get(MGR + 0x18C), 0 if patched else 44)
++            for i in range(44):
++                self.assertEqual(r.get(MGR + 4 + i * 4), 0 if patched else frames[i])
++
++    def test_parent_survives_until_active_child_completes(self):
++        r = Flush()
++        parent = r.node(0, refs=2, raw_refs=2)
++        queued = r.node(1, parent=0, raw_slot=0)
++        active = r.node(2, parent=0, raw_slot=0)
++        r.queue([queued])
++        r.invoke(r0=OBJ)
++        self.assertEqual(r.returned, [queued])
++        self.assertEqual(r.buffers, [])
++        self.assertEqual((r.get(parent + 0x1110), r.get(parent + 0x1114)), (1, 1))
++        self.assertEqual(r.get(MGR + 4), parent)
++        r.invoke(0xC0375030, r0=MGR, r1=2)
++        self.assertEqual(r.returned, [queued, active, parent])
++        self.assertEqual(len(r.buffers), 1)
++        self.assertEqual(r.get(MGR + 0x18C), 0)
++
++    def test_sequential_duplicate_release_is_noop(self):
++        r = Flush()
++        parent = r.node(0, refs=1, raw_refs=1)
++        child = r.node(1, parent=0, raw_slot=0)
++        r.queue([child])
++        r.invoke(r0=OBJ)
++        r.invoke(0xC0375030, r0=MGR, r1=1)
++        r.invoke(0xC0375030, r0=MGR, r1=0)
++        self.assertEqual(r.returned, [child, parent])
++        self.assertEqual(len(r.buffers), 1)
++        self.assertEqual(r.get(parent + 0x1110), 0)
++
++    def test_empty_queue_preserves_callee_registers(self):
++        r = Flush()
++        regs = {f'r{i}': 0x11220000 + i for i in range(4, 12)}
++        r.queue([])
++        r.invoke(r0=OBJ, **regs)
++        self.assertEqual({n: r.r(n) for n in regs}, regs)
++        self.assertEqual(r.returned, [])
++
++    def test_busy_manager_does_not_release(self):
++        r = Flush()
++        frame = r.node(0)
++        r.mu.mem_write(MGR + 0x190, b'\x01')
++        r.queue([frame])
++        r.invoke(r0=OBJ)
++        self.assertEqual(r.returned, [])
++        self.assertEqual(r.get(MGR + 4), frame)
++        # A busy manager still loses the popped queue; patch is not a busy-flag fix.
++        self.assertEqual(r.get(OBJ + 0x14), 0)
++
++    def test_parent_decrement_mutation_is_detected(self):
++        r = Flush()
++        parent = r.node(0, refs=1, raw_refs=1)
++        child = r.node(1, parent=0, raw_slot=0)
++        r.put(0xC0375100, 0xE1A02002)  # private mov r2,r2 instead of sub r2,r2,#1
++        r.queue([child])
++        r.invoke(r0=OBJ)
++        with self.assertRaises(AssertionError):
++            self.assertEqual(r.get(MGR + 4), 0)
++        self.assertEqual(r.get(MGR + 4), parent)
++
++
++if __name__ == '__main__':
++    unittest.main()
+--- /dev/null
++++ after/fpSup/stopfix/stopfix_fixture.py
+@@ -0,0 +1,18 @@
++"""Independent offline fixture for the reviewed Loader v3 stop-queue patch."""
++import hashlib
++from pathlib import Path
++import struct
++import sys
++
++sys.path.insert(0, str(Path(__file__).resolve().parent.parent / 'fp_usb_shell/v3'))
++import build_v3 as B
++
++SITE, STOCK, PATCH = 0xC0377118, 0xE92D4030, 0xEA000160
++SHA256 = 'f9f26a092c5676ead5771ba8be4aac9c3734e9ed0cd144002a73b3f6b657c9d9'
++
++
++def stopfix_sup():
++    """Shared patch builder only; assert identity with the original 316-byte BIN."""
++    data = B.patch_sup('STFX', [(SITE, struct.pack('<I', PATCH), 2)])
++    assert len(data) == 316 and hashlib.sha256(data).hexdigest() == SHA256
++    return data
+--- /dev/null
++++ after/fpSup/integration_tests/test_lossless_stopfix.py
+@@ -0,0 +1,86 @@
++"""Optional cross-module checks, outside either module's own test suite.
++
++Run explicitly from fpSup: python3 -B -m unittest discover -s integration_tests
++Native tasks, allocators and media use the maintained offline harness stubs.
++"""
++from pathlib import Path
++import struct
++import sys
++import unittest
++
++FPSUP = Path(__file__).resolve().parent.parent
++sys.path.insert(0, str(FPSUP / 'lossless'))
++sys.path.insert(0, str(FPSUP / 'stopfix'))
++import test_v3_lossless as V
++import test_card_emulation as C
++from stopfix_fixture import SITE, STOCK, PATCH, stopfix_sup
++
++
++class ModuleCompatibilityTests(unittest.TestCase):
++    @classmethod
++    def setUpClass(cls):
++        # Reuse setup/helpers, without inheriting/re-running all LOSS tests.
++        V.LosslessV3Tests.setUpClass.__func__(cls)
++
++    boot = V.LosslessV3Tests.boot
++    outcome = V.LosslessV3Tests.outcome
++    stock = V.LosslessV3Tests.stock
++
++    def assert_coexists(self, cam, name):
++        self.assertEqual(self.outcome(cam, name), 'LOADED')
++        self.assertEqual(self.outcome(cam), 'LOADED')
++        self.assertEqual(cam.w(SITE), PATCH)
++        self.assertEqual(sorted(a for a, _, _ in cam.journal()), sorted([*V.SITES, SITE]))
++
++    def test_lossless_alone_does_not_claim_or_modify_the_stop_site(self):
++        cam = self.boot()
++        self.assertEqual(self.outcome(cam), 'LOADED')
++        self.assertNotIn(SITE, V.SITES)
++        self.assertNotIn(SITE, [a for a, _, _ in cam.journal()])
++        self.assertEqual(cam.w(SITE), STOCK)
++
++    def test_both_load_orders_and_power_off(self):
++        for name in ('05STOPFX.BIN', '15STOPFX.BIN'):
++            with self.subTest(name=name):
++                cam = self.boot((name, stopfix_sup()))
++                self.assert_coexists(cam, name)
++                cam.power_off()
++                for site in (*V.SITES, SITE):
++                    self.assertEqual(cam.w(site), self.stock(site), hex(site))
++
++    def test_stopfix_repairs_its_own_stale_word(self):
++        cam = self.boot(('05STOPFX.BIN', stopfix_sup()), stale={SITE: PATCH})
++        self.assert_coexists(cam, '05STOPFX.BIN')
++        self.assertIn(SITE, {a for kind, a, _, _ in cam.log() if kind == 'REPAIRED'})
++
++    def test_mutation_reintroducing_stop_claim_is_detected(self):
++        sup = bytearray(self.sup)
++        at = V.B.SL_HEADER_LEN + self.sym['claims'] + 4
++        for i in range(V.L.SITE_COUNT):
++            if struct.unpack_from('<I', sup, at + 12 * i)[0] == V.BULK_GATE:
++                struct.pack_into('<3I', sup, at + 12 * i, SITE, STOCK, 2)
++                break
++        else:
++            self.fail('bulk gate claim missing')
++        cam = self.boot(('05STOPFX.BIN', stopfix_sup()), sup=bytes(sup))
++        with self.assertRaises(AssertionError):
++            self.assert_coexists(cam, '05STOPFX.BIN')
++        self.assertEqual(self.outcome(cam), 'RELEASED')
++
++
++class V2IsolationTests(unittest.TestCase):
++    @classmethod
++    def setUpClass(cls):
++        C.CardEmulationTests.setUpClass()
++
++    def test_unrelated_word_is_not_guarded_written_or_journaled(self):
++        case = C.CardEmulationTests()
++        cam = case.boot()
++        cam.mu.mem_write(SITE, struct.pack('<I', PATCH))
++        self.assertEqual(case.launch(cam), 0)
++        self.assertEqual(cam.word(SITE), PATCH)
++        self.assertEqual(cam.word(C.BLOCK + C.card_symbols()['g_card']),
++                         C.BLOCK + len(case.blob) + (-len(case.blob) % 64))
++        journal = cam.registered[0][0]
++        cam.call(cam.word(journal + 4), r0=journal, r1=4)
++        self.assertEqual(cam.word(SITE), PATCH)
+--- before/projects/lossless-sup/notes/EARLY_STOP_94.md
++++ after/projects/lossless-sup/notes/EARLY_STOP_94.md
+@@ -1,4 +1,8 @@
+ # 開錄就停：94 幀問題與批次策略
++
++目前 lossless 的建置、自身測試與交付包均獨立；只交付 `10LOSS.BIN` 與其建置資料。
++停錄補丁專屬測試位於 `fpSup/stopfix/`，選用的跨模組驗證位於 `fpSup/integration_tests/`。
++最新獨立包與驗證見 [`20261012-lossless-independent`](../validation/20261012-lossless-independent/)。
+ 
+ ## 2026-10-12 幀數優化與獨立 stopfix（離線候選版，尚未實機驗證）
+ 

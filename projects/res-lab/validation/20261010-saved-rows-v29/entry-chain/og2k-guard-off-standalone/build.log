@@ -1,0 +1,28 @@
+splash : FPSUPUI/  193536 bytes; hardware untested; keep beside AutoRun.txt and fpSup.BIN
+binary : fpSup.BIN  32768 bytes, 84 section(s), entry 0x00000000
+worker : none -- no task either, the loader runs in the callback
+start  : echo handler 0xC0BAC2F8 -> 0xC072DE64 (loader)
+patches: 0 firmware (-), 0 screen
+wrote  : /var/folders/20/mb8w7p_x7nlfpctnt7qd77b00000gn/T/og3k-sw7jxo7x/og3k_ui_source/AutoRun.txt  168 lines  sha256=5dc89b8506e8ce40
+clean  : 112 commands, no dumps and no diagnostics
+{
+  "status": "OG2K release test candidate; no camera result is recorded in this manifest for OG2K",
+  "ui_records": 360,
+  "ui_code_bytes": 6344,
+  "ui_pack_bytes": 4704,
+  "vshl_used_bytes": 16420,
+  "output": "/var/folders/20/mb8w7p_x7nlfpctnt7qd77b00000gn/T/og3k-sw7jxo7x/og3k_ui_source"
+}
+splash : FPSUPUI/  193536 bytes; hardware untested; keep beside AutoRun.txt and fpSup.BIN
+binary : fpSup.BIN  32768 bytes, 84 section(s), entry 0x00000000
+worker : none -- no task either, the loader runs in the callback
+start  : echo handler 0xC0BAC2F8 -> 0xC072DE64 (loader)
+patches: 0 firmware (-), 0 screen
+wrote  : projects/res-lab/validation/20261010-saved-rows-v29/entry-chain/og2k-guard-off-standalone/AutoRun.txt  168 lines  sha256=5dc89b8506e8ce40
+clean  : 112 commands, no dumps and no diagnostics
+  OG3K 3623 筆 → 83 個區段   (release,無 shell)
+  AutoRun 116 條指令   fpSup.BIN 32,768B   84 個區段
+  計畫回讀:✓ 全部重現
+  MANIFEST.txt / README.md NOT written: they are OG3K's text.
+  Carry OG2K's forward from the previous release and edit them.
+  → projects/res-lab/validation/20261010-saved-rows-v29/entry-chain/og2k-guard-off-standalone

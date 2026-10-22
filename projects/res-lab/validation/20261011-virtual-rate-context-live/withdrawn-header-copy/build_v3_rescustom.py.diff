@@ -1,0 +1,11 @@
+--- 
++++ 
+@@ -51,7 +51,7 @@
+ PAIR_SITES = ((0xC06BDA3C, 8), (0xC06BDA48, 4),   # the resolution converter's movw/movt, mov #n
+               (0xC06BDB0C, 8), (0xC06BDB18, 4),   # the frame-rate converter (row <-> internal)
+               (0xC06CB6DC, 8), (0xC06CB6E8, 4))   # the frame-rate summary (export -> state)
+-CORE_NAME, CORE_ID, VERSION = '32RESCUS.BIN', 'RCUS', 12
++CORE_NAME, CORE_ID, VERSION = '32RESCUS.BIN', 'RCUS', 13
+ RCD_DIR = 'RESCUS'
+ SHIFT = 0x10000000
+ SPAN = 0x8000                       # the layout must fit og_pic's window

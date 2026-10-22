@@ -1,0 +1,26 @@
+splash : FPSUPUI/  193536 bytes; hardware untested; keep beside AutoRun.txt and fpSup.BIN
+binary : fpSup.BIN  32768 bytes, 88 section(s), entry 0xC0731600
+worker : none -- no task either, the loader runs in the callback
+start  : echo handler 0xC0BAC2F8 -> 0xC072DE64 (loader)
+patches: 0 firmware (-), 0 screen
+wrote  : /var/folders/20/mb8w7p_x7nlfpctnt7qd77b00000gn/T/og3k-buhqcj1b/og3k_ui_source/AutoRun.txt  168 lines  sha256=5dc89b8506e8ce40
+clean  : 112 commands, no dumps and no diagnostics
+{
+  "status": "release test candidate; camera-tested CINE UI payload; the previous single-callsite shutter-angle fix failed a confirmed FHD/OG3K camera comparison; after the four-callsite and I-cache fixes, a battery-out 29.97/180-degree FHD/OG3K live-view comparison received a provisional visual pass; exact readback and the other frame rates remain pending; no USB shell",
+  "ui_records": 360,
+  "ui_code_bytes": 6344,
+  "ui_pack_bytes": 3732,
+  "vshl_used_bytes": 16192,
+  "output": "/var/folders/20/mb8w7p_x7nlfpctnt7qd77b00000gn/T/og3k-buhqcj1b/og3k_ui_source"
+}
+splash : FPSUPUI/  193536 bytes; hardware untested; keep beside AutoRun.txt and fpSup.BIN
+binary : fpSup.BIN  32768 bytes, 98 section(s), entry 0x00004F54
+worker : 3912 bytes = 432 bootstrap (runs in the staging buffer) + 3480 copied to an allocation of its own
+start  : echo handler 0xC0BAC2F8 -> 0xC072DE64 (loader)
+patches: 7 firmware (iface+push), 0 screen
+wrote  : projects/res-lab/validation/20261010-saved-rows-v29/entry-chain/og3k-standalone-debug/AutoRun.txt  169 lines  sha256=5dc89b8506e8ce40
+clean  : 112 commands, no dumps and no diagnostics
+  OG3K 3558 筆 → 87 個區段   + USB shell
+  AutoRun 116 條指令   fpSup.BIN 32,768B   98 個區段
+  計畫回讀:✓ 全部重現
+  → projects/res-lab/validation/20261010-saved-rows-v29/entry-chain/og3k-standalone-debug

@@ -1,0 +1,51 @@
+  code   412/412 B  6.0 KiB/s   verify 412/412 B  604 KiB/s   verify 412 bytes in 0.0s (276 KiB/s)      
+  code   412 bytes in 0.1s (3.0 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 27668 bytes in 0.000s (56.5 MB/s)      
+  stage  27652 bytes in 0.001s (36.7 MB/s)      
+  verify 27652 bytes in 0.001s (41.4 MB/s)      
+  stage  27652 bytes in 0.00s (16.1 MB/s), MEM1, read back whole          
+  code   304/304 B  47.6 KiB/s   verify 304/304 B  80 KiB/s   verify 304 bytes in 0.0s (59 KiB/s)      
+  code   304 bytes in 0.0s (23.8 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  code   412/412 B  87.0 KiB/s   verify 412/412 B  400 KiB/s   verify 412 bytes in 0.0s (194 KiB/s)      
+  code   412 bytes in 0.0s (49.4 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 27652 bytes in 0.000s (68.1 MB/s)      
+  remote  \fpSup\LOADER.BIN  27668 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x53B00980 (31764 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 27668 of 27668
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-boot-speed/before-deployment-LOADER.BIN
+  local   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-boot-speed/prepared-LOADER.BIN  27652 bytes
+  remote  \fpSup\LOADER.BIN  mode 0x7
+  buffer  0x450629C0, file object 0x450695C4
+  proof   region takes writes and still holds them a second later
+  restored echo -> 0xC03D99A0
+  reply   putfile: written
+  status  2 — written
+  open    1     write  1   (both are flags, not counts)
+  WARNING LOADER.BIN did not appear in dir
+  remote  \fpSup\LOADER.BIN  27652 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x53B00980 (31748 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 27652 of 27652
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-boot-speed/installed-LOADER.BIN
+{
+  "phase": "verified",
+  "remote": "\\fpSup\\LOADER.BIN",
+  "card": "/Users/dido/Developer.localized/SIGMAfp_re/projects/usb-shell-sup/cards/20261011-no-hold-v3",
+  "registration_callbacks": [
+    "0xc03da158"
+  ],
+  "old_bytes": 27668,
+  "new_bytes": 27652,
+  "old_sha256": "07907bb42890968fa813431adb56bf5819b705186e2b0924744761e26876d07f",
+  "new_sha256": "ecae97aff1c484d878f1ae5c277bc1b9607860f49601c4832c08da97ff0b801a",
+  "disabled_ids": [],
+  "autorun_changed": false,
+  "passed": true
+}

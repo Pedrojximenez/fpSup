@@ -1,0 +1,64 @@
+{
+  "card": "projects/res-lab/cards/20261009-virtual-rcd-v6/debug",
+  "module_sha256": "bf3719a9e86dbbd08c77925ac60123e8112ebf6cc3285479771eeee84c213fe5",
+  "modes": {
+    "0": [
+      {
+        "bin": [
+          1,
+          1
+        ],
+        "ratio": 0,
+        "crop": [
+          0,
+          0
+        ],
+        "output": [
+          6048,
+          4032
+        ],
+        "lead": 1,
+        "rate": "23.98p 1029 MB/s"
+      },
+      {
+        "bin": [
+          1,
+          1
+        ],
+        "ratio": 1,
+        "crop": [
+          0,
+          0
+        ],
+        "output": [
+          6048,
+          4032
+        ],
+        "lead": 1,
+        "rate": "23.98p 1029 MB/s"
+      },
+      {
+        "bin": [
+          1,
+          1
+        ],
+        "ratio": 7,
+        "crop": [
+          0,
+          0
+        ],
+        "output": [
+          5520,
+          2000
+        ],
+        "lead": 1,
+        "rate": "23.98p 467 MB/s"
+      }
+    ]
+  },
+  "cases": 3,
+  "encoded": 0,
+  "raw14_rejected": 1,
+  "passed": true,
+  "seconds": 13.361
+}

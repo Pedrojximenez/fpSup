@@ -1,0 +1,12 @@
+{
+  "native_rec": 0,
+  "pool_ptr": "0xc3520cd0",
+  "header": [
+    "0xc0b99474",
+    "0xc353fe60",
+    "0xc353dc10"
+  ],
+  "free_count": 93,
+  "reason_bytes_hex": "2c20766275662f39342f39313332382c2072617731000000000000000000000000000000000000000000000467683b01",
+  "note": "Fixed firmware pool pointer and verified vtable; read-only, no allocator call. REC=0 does not imply stop completion."
+}

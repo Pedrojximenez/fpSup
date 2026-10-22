@@ -1,0 +1,26 @@
+PASS og3k-standalone-release: 0xC0731600
+PASS og3k-standalone-debug: 0x0000082C -> 0xC0731600
+PASS og3k-combined-release: 0x00003FE0 -> 0xC0731600
+PASS og3k-guard-off-standalone: entry 0
+PASS og3k-combined-debug: 0x00000834 -> 0x00004F40 -> 0xC0731600
+PASS og3k-combined-fast-debug: 0x00000968 -> 0x00005074 -> 0xC0731600
+PASS og3k-guard-off-combined: 0x00000814 -> 0x00004BD4
+PASS og2k-standalone-release: 0xC0731600
+PASS og2k-standalone-debug: 0x0000082C -> 0xC0731600
+PASS og2k-combined-release: 0x00004430 -> 0xC0731600
+PASS og2k-combined-debug: 0x00000834 -> 0x00005390 -> 0xC0731600
+PASS og2k-combined-fast-debug: 0x00000968 -> 0x000054C4 -> 0xC0731600
+PASS og2k-guard-off-standalone: entry 0
+PASS og2k-guard-off-combined: 0x00000814 -> 0x00005024
+PASS same AutoRun, different BIN entry: plain
+PASS same AutoRun, different BIN entry: debug
+PASS same AutoRun, different BIN entry: fast-debug
+PASS catalogue-og3k-frozen-plain
+PASS catalogue-og3k-frozen-shell
+PASS catalogue-og3k-source-plain
+PASS catalogue-og3k-source-shell
+PASS catalogue-og2k-frozen-plain
+PASS catalogue-og2k-frozen-shell
+PASS catalogue-og2k-source-plain
+PASS catalogue-og2k-source-shell
+PASS 14 build cases, 3 AutoRun comparisons, 8 catalogue references: projects/res-lab/validation/20261010-saved-rows-v29/entry-chain

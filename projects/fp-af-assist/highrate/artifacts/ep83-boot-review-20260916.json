@@ -1,0 +1,85 @@
+{
+  "adapter_complete": false,
+  "artifact_kind": "review_only_patch_plan",
+  "autorun_generated": false,
+  "card_write_performed": false,
+  "deployment_ready": false,
+  "firmware_adapter_complete": false,
+  "lifecycle_verified": false,
+  "offline_only": true,
+  "order_rule": "install native sender suppression before changing the ctx3 default mode",
+  "ownership_verified": false,
+  "patch_order": [
+    {
+      "address": 3223214208,
+      "address_hex": "0xC01E5880",
+      "candidate_after": 1198530560,
+      "candidate_after_hex": "0x47702000",
+      "expected_before": 1307633965,
+      "expected_before_hex": "0x4DF0E92D",
+      "meaning": "Thumb `movs r0,#0; bx lr`; suppress native mode-2 IN before changing ctx3",
+      "name": "native_mode2_in_success_noop",
+      "sequence": 1
+    },
+    {
+      "address": 3229493248,
+      "address_hex": "0xC07E2800",
+      "candidate_after": 1,
+      "candidate_after_hex": "0x00000001",
+      "expected_before": 2,
+      "expected_before_hex": "0x00000002",
+      "meaning": "change the ctx3 default copied by C01E67F8 from mode 2 to mode 1",
+      "name": "ctx3_default_mode_bulk",
+      "sequence": 2
+    }
+  ],
+  "plan_only": true,
+  "preflight_may_succeed": false,
+  "requires": {
+    "cold_boot": true,
+    "dma_alignment_bytes": 64,
+    "existing_ep83_descriptor_bulk_patches": true,
+    "explicit_dma_buffer_lease": true,
+    "new_explicit_authorization": true,
+    "one_serial_worker_task_owns_all_ep83_start_wait_trb_access": true,
+    "post_attach_ctx3_tuple": [
+      1,
+      1,
+      3,
+      0
+    ],
+    "rollback_requires_reboot_without_candidate_patches": true,
+    "usb_cable_unplugged_until_boot_patches_and_worker_are_ready": true
+  },
+  "rollback": {
+    "live_restore_claimed": false,
+    "method": "cold reboot using a build without these candidate RAM-image edits"
+  },
+  "rom_bytes": 49245696,
+  "rom_sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622",
+  "schema": "fp-af-ep83-boot-plan-v1",
+  "source_evidence": [
+    "C01E5880 has source xrefs from C01E8158 and C01E91D0",
+    "C07E2800 stores the ROM default ctx3 tuple {2,1,3,0}",
+    "C01E67F8 copies the default tuple into the runtime endpoint context",
+    "live read on 2026-09-16 confirmed ctx3 {2,1,3,0}; it did not authorize writes"
+  ],
+  "unresolved_blockers": [
+    {
+      "detail": "mode-1 WaitIn completion can select the bulk OUT context with C01E60E0, rewrite its TRB, and Start OUT when C31E3974!=1 and C31E3A08==0; the EP01 worker-routing collision is not resolved",
+      "id": "mode1_wait_completion_rearms_bulk_out",
+      "source": "blk_c01.c:138238-138258 (C01E7780)"
+    },
+    {
+      "detail": "the existing worker/native routing lifecycle is still shared; the two candidate words do not themselves establish a single owner",
+      "id": "shared_worker_ptp_routing_not_closed",
+      "source": "fp_usb_shell/camera/worker.S and native PTP shared endpoint path"
+    },
+    {
+      "detail": "no fixed-address preflight/start/wait/completion binding is emitted, and this plan must not be treated as permission to make one live",
+      "id": "firmware_adapter_not_implemented",
+      "source": "highrate/af_sender.c callbacks"
+    }
+  ],
+  "usb_access_performed": false
+}

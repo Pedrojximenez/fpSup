@@ -1,0 +1,34 @@
+{
+  "fpSup/UI/ALLSUPS.BIN": {
+    "bytes": 347378,
+    "sha256": "acd15bdad956f36bb44818b089bd6aa3745ecbe08f93dc4f1cd8430a8db57204",
+    "matches_candidate": true
+  },
+  "fpSup/LOADER.BIN": {
+    "bytes": 27668,
+    "sha256": "07907bb42890968fa813431adb56bf5819b705186e2b0924744761e26876d07f",
+    "matches_candidate": true
+  },
+  "AutoRun.txt": {
+    "bytes": 32768,
+    "sha256": "0c5107fff1262ad8ca3bb675329b71c80926c8b35cdd40931b387639b45edbf0",
+    "matches_candidate": true
+  },
+  "FSDS": "all 128 bytes unchanged; empty disabled list",
+  "directories": {
+    "\\fpSup": "                                          .\n2025/12/31  08:00:00                47680 32RESCUS.BIN\n2026/10/07  20:26:02                 4096 ._32RESCUS.BIN\n2026/10/07  20:25:26 <DIR>                UI\n2026/10/07  20:26:02                 4096 ._UI\n2026/10/09  10:13:24                27668 LOADER.BIN\n2026/10/07  20:26:02                 4096 ._LOADER.BIN\n2025/12/31  08:00:00                 4208 20GYR2.BIN\n2026/10/07  20:26:02                 4096 ._20GYR2.BIN\n2026/10/08  13:28:36                38644 45RAWV.BIN\n2026/10/07  20:26:02                 4096 ._45RAWV.BIN\n2026/10/08  13:24:08                25936 40FLIP.BIN\n2026/10/07  20:26:02                 4096 ._40FLIP.BIN\n2026/10/08  12:28:26                70944 10LOSS.BIN\n2026/10/07  20:26:02                 4096 ._10LOSS.BIN\n2025/12/31  08:00:00                 4552 00SHELL.BIN\n2026/10/07  20:26:02                 4096 ._00SHELL.BIN\n2026/10/07  20:25:26 <DIR>                RESCUS\n2026/10/07  20:26:02                 4096 ._RESCUS\n2026/10/09  12:06:26                 4096 LOAD.LOG\n",
+    "\\fpSup\\UI": "                                          .\n2025/12/31  08:00:00                19712 4.BIN\n2026/10/07  20:26:02                 4096 ._4.BIN\n2025/12/31  08:00:00                19712 3.BIN\n2026/10/07  20:26:02                 4096 ._3.BIN\n2025/12/31  08:00:00                19712 2.BIN\n2026/10/07  20:26:02                 4096 ._2.BIN\n2025/12/31  08:00:00               114688 0.BIN\n2026/10/07  20:26:02                 4096 ._0.BIN\n2025/12/31  08:00:00                19712 1.BIN\n2026/10/07  20:26:02                 4096 ._1.BIN\n2026/10/09  12:05:50               347378 ALLSUPS.BIN\n"
+  },
+  "products": [
+    "32RESCUS.BIN",
+    "20GYR2.BIN",
+    "45RAWV.BIN",
+    "40FLIP.BIN",
+    "10LOSS.BIN",
+    "00SHELL.BIN"
+  ],
+  "screen": "FT_Y6",
+  "home_focus_reply": "OK:FT_HomeFocus -> 3451\n\n",
+  "language_reply": "OK:CM_Language -> 0\n\n",
+  "recording_reply": "is_recording -> 0\n\n"
+}

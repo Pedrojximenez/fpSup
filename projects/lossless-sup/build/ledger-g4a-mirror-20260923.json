@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "kind": "live_g4a_mirror_redirect",
+  "date": "2026-09-23",
+  "operator_scope": "live camera, FIRST DESTRUCTIVE step: the writer's node was redirected at a copy for one frame. No codec ran and no format changed.",
+  "camera": {
+    "model": "w71c1",
+    "firmware": "5.02.0.V91",
+    "git_hash": "13aa621060efff11aaba9b21ad925005302605cf",
+    "media": "SD"
+  },
+  "source": {
+    "commit": null,
+    "worktree_dirty": null,
+    "git_available": false,
+    "files": {
+      "fpSup/raw/lossless_codec/single_frame_encode_discard_probe.S": "e18f22288c4249f1ed9bbd1e48bcdaaa410e89279eb7695631e5fef70bc8dbd9",
+      "fpSup/raw/lossless_codec/single_frame_codec_probe.py": "de3e420860971f7fe972aac23d6c7df38986c04d435a990e6215e77c0af2933b"
+    }
+  },
+  "hook": {
+    "site": "0xC0722AFC",
+    "original": "0xEBFDE061",
+    "restored": "0xEBFDE061"
+  },
+  "lease": {
+    "kind": "cave claim",
+    "arena_handle": "0x45699000",
+    "retained_through_flush": true,
+    "released_after": true
+  },
+  "profile": {
+    "phase": 4,
+    "codec_called": false,
+    "node_length_changed": false
+  },
+  "timing": {
+    "copy_us": 44896,
+    "budget_24p_us": 41708,
+    "copy_bytes": 3244544,
+    "copy_rate_MBps": 72.3,
+    "note": "the copy exceeds one frame budget; recording continued and both frames are intact, but this is not a rate a per-frame path can keep"
+  },
+  "integrity": {
+    "clip": "\\CINEMA\\A001_281",
+    "watermark_offset": "0x3181F0",
+    "watermark_value": "0x5252494D",
+    "frame1_carries_watermark": true,
+    "frame2_carries_watermark": false,
+    "frame1_decodes": true,
+    "frame1_shape": [
+      1090,
+      1936
+    ],
+    "frame1_mean": 538.8,
+    "frame2_mean": 538.8,
+    "max_abs_difference_between_consecutive_frames": 16,
+    "probe_error": 0
+  },
+  "notes": [
+    "The first live run raised a false ERR_SOURCE: the copy used r5/r6/r7, which finish_source needs as the segment, DNG and pixel pointers. The redirect itself had already happened. Fixed by saving them around the copy.",
+    "A byte-identical mirror cannot prove itself, because a redirect that never took would put the same bytes on the card. The watermark is what makes the result decisive, and it sits in padding no decoder reads.",
+    "The copy runs at 72 MB/s, which is what an uncached write path looks like. A real writer would not copy the raster at all: it would place only the 79,872-byte header and let the codec write the payload where it already writes it."
+  ],
+  "explicitly_established": [
+    {
+      "level": "L",
+      "claim": "the writer's node can be redirected at our own buffer: frame 1 on the card carries the watermark and frame 2 does not, so the card read our copy and not the original"
+    },
+    {
+      "level": "L",
+      "claim": "CPU writes through the 0x8 uncached view are visible to the SD DMA with a dsb alone: no cache maintenance was called and the frame arrived intact"
+    },
+    {
+      "level": "L",
+      "claim": "the redirected frame is a valid DNG: it decodes at 1090x1936 with the same mean as its neighbour and differs only by sensor noise"
+    },
+    {
+      "level": "L",
+      "claim": "a watermark in the trailing padding after the raster does not disturb the image"
+    }
+  ],
+  "explicitly_not_established": [
+    "that a DIFFERENT length is accepted; seg[1] was deliberately left unchanged",
+    "anything about compressed data: no codec ran in this phase",
+    "that 44.9 ms of copying is sustainable; it is over one frame budget and only one frame was redirected",
+    "whether the uncached view would still suffice if the writer's own buffer were cached differently",
+    "more than one frame, one clip, one scene"
+  ]
+}

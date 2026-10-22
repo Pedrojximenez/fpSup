@@ -1,0 +1,21 @@
+  local   projects/res-lab/validation/20261009-oncamera/rcd-v3/OG3K.RCD  4180 bytes
+  remote  \fpSup\RESCUS\OG3K.RCD  mode 0x7
+  buffer  0x450629C0, file object 0x45063A14
+  proof   region takes writes and still holds them a second later
+  restored echo -> 0xC03D99A0
+  reply   putfile: written
+  status  2 — written
+  open    1     write  1   (both are flags, not counts)
+  WARNING OG3K.RCD did not appear in dir
+
+  stage  4180 bytes in 0.001s (2.8 MB/s)      
+
+  verify 4180 bytes in 0.000s (18.4 MB/s)      
+
+  stage  4180 bytes in 0.01s (0.3 MB/s), MEM1, read back whole          
+
+  code   304/304 B  1.8 KiB/s 
+  verify 304/304 B  491 KiB/s 
+  verify 304 bytes in 0.0s (233 KiB/s)      
+
+  code   304 bytes in 0.2s (1.3 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          

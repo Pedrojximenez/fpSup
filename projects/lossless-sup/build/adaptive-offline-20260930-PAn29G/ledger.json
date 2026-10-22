@@ -1,0 +1,81 @@
+{
+  "date": "2026-09-30",
+  "kind": "offline-implementation-and-verification",
+  "camera_ready": false,
+  "camera_operations": false,
+  "card_writes": false,
+  "installable_bin_created": false,
+  "autorun_changed": false,
+  "committed_or_published": false,
+  "build_rules": "fpSup/SUP_BUILD_RULES.md",
+  "build_notes": "BUILD_NOTES.md",
+  "tools": {
+    "clang": "Apple clang 21.0.0 (clang-2100.3.27.1)",
+    "python": "3.9.6",
+    "unicorn": "2.1.4",
+    "target": "armv7-none-eabi cortex-a9 ARM soft-float freestanding"
+  },
+  "tests": {
+    "lossless_core_top_level": {"passed": 64, "skipped": 0},
+    "nested_actual_arm_pipeline": {"passed": 8, "skipped": 0, "included_in_core_count": true},
+    "binding": {"passed": 30, "skipped": 0},
+    "native_port": {"passed": 23, "skipped": 0},
+    "focused_codec_driver_stock_writer": {"passed": 129, "skipped": 0},
+    "top_level_total": 246,
+    "pipeline_host_mutants_detected": 8,
+    "format_gate_mutants_detected": 3,
+    "arm_output_proof_mutant_detected": true,
+    "native_zero_and_nonzero_branch_mutation_detected": true,
+    "initial_sandbox_arm": "SIGILL, not passed",
+    "final_reviewed_host_arm": "passed with zero skips",
+    "permission_review_timeout": "one timeout, retry succeeded"
+  },
+  "artifacts_sha256": {
+    "control.o": "ac939ec5911023a5285e7bea2b59c218957c48dc5f8928c335096ca64df33f9c",
+    "ui_control.o": "752e6b437d333ffaea3601847ccff76da3d6587317571b497747844b3d264275",
+    "frame_pipeline.o": "3279ee7f3b1e9d596f70e00aa86d27b9b5e148ba245a87e69935eed7c9c6bebd"
+  },
+  "executed_pipeline_text": {
+    "bytes": 2680,
+    "sha256": "727f0d49e18d22f34e03478163e596284a61a1992e6a2e72ac52356ca40c9f81",
+    "extractor": "research/ui/tools/arm_text/elf_text.py",
+    "handoff": "synthetic, not native adapter"
+  },
+  "sources_sha256": {
+    "fpSup/lossless/control.c": "02ef0d67638451dbaf1cb4200b5b44ab377f83b186f05f5d2829a74b4cc458f2",
+    "fpSup/lossless/control.h": "09c1f2a4478ee73df771a2bd9fc6470fe401c35ee9d65058175602c2214f518d",
+    "fpSup/lossless/ui_control.c": "88f0431e15c753aa5bfa3c70ea946fc1300ff745b8d92d2549fa40eb41e3deef",
+    "fpSup/lossless/ui_control.h": "0af299ffd4a9085edc81f1ed742b72baed7694178d95364f6846e59afd1666f3",
+    "fpSup/lossless/frame_pipeline.c": "6be864c8cef31fcc4b9979c2e1eebb16aad38fc6b78d989691c71cfcc6f1a8f1",
+    "fpSup/lossless/frame_pipeline.h": "818e18053bb7d3fb49b089d7c00e095af4b43819b3ce0ce479dbbff9eff40782",
+    "fpSup/lossless/tests/test_control.py": "1a36f43d8b110219b5d344749684f2f002ea610c2851ffbe9e20967ce631a453",
+    "fpSup/lossless/tests/test_ui_control.py": "b9dd73a31128931b9da02b0fffe8f29f5a1f6e4143825a1c4fd374c131dc3718",
+    "fpSup/lossless/tests/test_frame_pipeline.py": "0eff470c3ed47a8b57dd01a5ca4d81b2e9578cde17b1f035f867d23488e7bc58",
+    "fpSup/lossless/tests/test_frame_pipeline_arm.py": "c9cb8f7bdda7bc7f92784551a7cf6343e36df12ed89451050c9290fcbb27ae72",
+    "fpSup/raw/lossless_codec/inline_compress_driver.py": "f9099de4f255d8eee54f5fb6fa6785652fa2728ed8eae2e360e7b16982580d5c",
+    "fpSup/raw/lossless_codec/test_inline_compress.py": "0f696e4c96a9f2b9d778ce3d6295629e5c049998b17a27d5c39231d2de25ae58",
+    "fpSup/raw/lossless_codec/test_inline_deployment_gate.py": "3c3790a3cedcc0c4c4a5816d65f7e5923277733a2137dcffb7cf13d14fbb8579",
+    "fpSup/raw/lossless_codec/test_native_writer_contract.py": "0392d3bca335361c1394d276813b483e0eca56f3075ec61f9c60876006c9d8c4"
+  },
+  "firmware_sha256": {
+    "out/seg0_c0000000.bin": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622"
+  },
+  "historical_ledger_correction": {
+    "path": "projects/lossless-sup/build/ledger-static-late-submit-20260929.json",
+    "original_preserved": true,
+    "corrections": [
+      "C069ADE0 zero r0/r1 is a failure path, not successful deferred submission",
+      "CinemaDNG observers are registered and notified",
+      "frame+0x1030 is a pathname; flush writer is caller-stack storage",
+      "frame+0x10fc is a reusable registry index, not a permanent sequence"
+    ]
+  },
+  "unverified": [
+    "native whole-frame hold and legal deferred same-frame writer handoff",
+    "creator FIFO progress while selected frame is held; exactly-once completion",
+    "real DMA output bounds, source-tail coverage, stop and cross-batch behavior",
+    "native menu installation/rendering/event quiescence",
+    "all requested 10/12-bit formats and 6K capacity",
+    "new product entry/install/shared-loader packaging and camera validation"
+  ]
+}

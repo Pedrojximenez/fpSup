@@ -1,0 +1,14 @@
+test_data_only_high_entries_and_native_switch (__main__.Engine30) ... FAIL
+
+======================================================================
+FAIL: test_data_only_high_entries_and_native_switch (__main__.Engine30)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-m12-recurrence/test_engine30.py", line 84, in test_data_only_high_entries_and_native_switch
+    self.assertEqual(data[0x30//4], V.L._f32(engine))
+AssertionError: 1114636288 != 1106247680
+
+----------------------------------------------------------------------
+Ran 1 test in 32.851s
+
+FAILED (failures=1)

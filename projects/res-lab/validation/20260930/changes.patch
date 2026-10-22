@@ -1,0 +1,2002 @@
+--- a/INDEX.md
++++ b/INDEX.md
+@@ -6,17 +6,19 @@
+ 先讀 [完整開發清單](projects/fp-af-assist/PLAN.md) 與 [全部筆記索引](projects/fp-af-assist/notes/README.md)。
+ 此項優先於下方研究／專案的通用分類；AF 程式與原始證據仍留原位，舊筆記路徑只作轉向入口。
+ 
+-## ⚠ 待確認(2026-09-29,沒有動,請頁面負責人自行核對)
+-
+-`fpSup/` 是公開站,以下兩頁的內容與樹裡的研究結論對不上:
++## ⚠ 公開頁面核對(2026-09-30 更新)
++
++`fpSup/` 是公開站；本機文件修正不等於已發布。
+ 
+ - **`fpSup/projects/ui-sup.md`** —— 「未解」仍寫著文字顏色編碼不明、只確定兩個值。
+   樹裡已解:顏色是 **256 筆 AYUV 調色盤的索引**(表 `0xC0B520BC`、索引在 `0xC0BB1208`
+   低位元組),逐索引拍照驗過 245/256 在 4 階以內。見
+   [`research/display/notes/CENTER_LINE.md`](research/display/notes/CENTER_LINE.md) §9。
+-- **`fpSup/projects/sensor-lab-sup.md`** —— 仍把 `0xC37CE210` 當錄影幾何。
+-  該位址已被推翻(UHD 讀 0),真正來源是 CameraMgrSetting `+0x40` 再 `+16`/`+10`。見
+-  [`projects/open-gate/notes/RECORDING_GEOMETRY_AND_LENS_PROGRAM.md`](projects/open-gate/notes/RECORDING_GEOMETRY_AND_LENS_PROGRAM.md)。
++- **Sensor Lab 本機文件已修正，未發布。** 原頁的「研究完成」已改成原型，
++  `0xC37CE210` 改列下游快取；反證見
++  [CANVAS_IS_NOT_THE_SETTINGS_BLOCK §13](projects/open-gate/notes/CANVAS_IS_NOT_THE_SETTINGS_BLOCK.md)。
++  最新 Custom Sensor 狀態、精確測試卡與上機前交接集中於
++  **[projects/sensor-lab](projects/sensor-lab/README.md)**；程式仍沿用 `projects/open-gate/build/imx410_*`。
+ 
+ ## 這棵樹怎麼分
+ 
+--- a/SIGMA_FP_PRODUCT_ROADMAP.md
++++ b/SIGMA_FP_PRODUCT_ROADMAP.md
+@@ -26,7 +26,7 @@
+ | **fpFocus** | 首次合焦後，機內 face／AAT 幾何判方向，DFD 若成立估位移，CDAF 確認 | S1 研究／量測已有 S2 PoC | 依里程碑驗收 | 原廠 AF 逆向、H/L 歷史量測與 native 控制已有成果；機內輔助器及錄影閉環尚未驗收 |
+ | **fpRAW** | Bayer 擷取、RAW 串流、壓縮、封裝與低頻寬錄影 | S2 PoC | 42% | RAW 位址與格式路徑已定位；可靠串流與可播放封裝仍在研究 |
+ | **fpScope** | 機內 False Color、LUT、Gamma、Peaking 等監看工具 | S2 PoC | 55% | False Color 核心與 hook 設計已完成，仍需完整 live overlay 驗收 |
+-| **fpSensor Lab** | IMX410 模式、ISO、gain、bit depth 與 sensor 實驗平台 | S2 PoC | 68% | 靜態研究相當完整，控制核心已有測試；相機端安全控制介面未完成 |
++| **fpSensor Lab** | IMX410 模式、ISO、gain、bit depth 與 Custom Sensor 七軸平台 | S2 PoC／部分實錄 | 依里程碑驗收 | 2026-09-30 普通／debug 測試卡完成離線驗證；完整機上選單、回放及本次卡片的實機驗收未完成 |
+ | **fpMedia** | USB SSD、SD RAW、單檔 RAW、PTP 與錄影共存 | S1 研究 | 22% | 有資料率與路徑假設，尚缺完整 storage routing PoC |
+ | **fpPower** | 開機／PTP 模式 USB-C 供電與更好的耗電策略 | S0 構想 | 10% | 尚未形成可驗證的 PMIC／USB power-state 控制鏈 |
+ | **fpRemote** | Wi-Fi Live View、差分串流與無線控制 | S0 構想 | 8% | 相機本體沒有可用內建無線通訊證據，需依賴外部硬體 |
+@@ -188,6 +188,14 @@
+ 
+ ## fpSensor Lab — IMX410 Control and Characterization
+ 
++**2026-09-30：現行工作已延伸為 Custom Sensor 七軸引擎。** 最新入口為
++[Sensor Lab](projects/sensor-lab/README.md)，實作沿用 `projects/open-gate/build/imx410_*`。
++本輪完成原生位深／格率同步、未知連拍容量處理，以及符合共用 Build 規範的普通／debug
++測試卡；本次產物尚未上機。下一里程碑為不錄影開關機、選單連動與基準錄影驗收，
++完整機上 mode 選單／反灰、每段幾何回放、RAW14 與 CRCT 仍在待辦。
++下表的 gain／characterization 是較早的研究支線，不代表 Custom Sensor 已完成；
++RAW14 分析也不能代替這一版 movie RAW14 的 packing／曝光驗收。
++
+ 面向研究者的 sensor 模式、gain 與 RAW 行為分析工具，而非預設提供破壞性超頻選項。
+ 
+ | 子功能 | 階段 | 進度 | 現有成果 | 下一里程碑 |
+--- a/fpSup/README.md
++++ b/fpSup/README.md
+@@ -70,7 +70,7 @@
+ | # | Project | What it is | Status |
+ |---|---|---|---|
+ | 1 | [**usb shell sup**](projects/usb-shell-sup.md) | USB firmware research and data transport | **released** — v3.2.0. The channel is built on the camera's own PTP gadget, so recording survives it |
+-| 2 | [**sensor lab sup**](projects/sensor-lab-sup.md) | IMX410 modes, ISO, gain, sensor control | **research complete** — [explainer](https://ijigen.github.io/fpSup/explainers/imx410-iso-gain.html), and the mode-table ambiguity closed |
++| 2 | [**sensor lab sup**](projects/sensor-lab-sup.md) | IMX410 modes, ISO, gain, sensor control | **prototype** — Custom Sensor offline test cards prepared; hardware acceptance pending. [ISO/gain explainer](https://ijigen.github.io/fpSup/explainers/imx410-iso-gain.html) |
+ | 3 | [**gyro sup**](projects/gyro-sup.md) | Gyro, six-axis logging, Gyroflow workflow | **released** — two editions; Base writes a raw `.GYR` instead, converted [in a browser](gyro/convert/) |
+ | 4 | [**open gate**](projects/open-gate.md) | Recording the sensor's full 3:2 area | **OG3K v0.2.5a alpha · OG2K v0.1.2a test** — 3024×2010 or 2016×1344, same field of view; Super35/crop must remain off |
+ | 5 | [**6k to ssd**](projects/6k-to-ssd.md) | Getting the best 6K the link can carry | designed; 8-bit lands within 94–100% of native 6K across every remaining unknown |
+@@ -172,7 +172,7 @@
+ | # | 項目 | 是什麼 | 狀態 |
+ |---|---|---|---|
+ | 1 | [**usb shell sup**](projects/usb-shell-sup.md) | USB 韌體研究與資料傳輸 | **已釋出** —— v3.2.0。通道建在相機自己的 PTP gadget 上,所以錄影撐得過去 |
+-| 2 | [**sensor lab sup**](projects/sensor-lab-sup.md) | IMX410 模式、ISO、增益、感光元件控制 | **研究完成** —— [互動說明](https://ijigen.github.io/fpSup/explainers/imx410-iso-gain.html),模式表的歧義也收掉了 |
++| 2 | [**sensor lab sup**](projects/sensor-lab-sup.md) | IMX410 模式、ISO、增益、感光元件控制 | **原型** —— Custom Sensor 離線測試卡已備妥，尚待實機驗收；[ISO／增益說明](https://ijigen.github.io/fpSup/explainers/imx410-iso-gain.html) |
+ | 3 | [**gyro sup**](projects/gyro-sup.md) | 陀螺儀、六軸記錄、Gyroflow 流程 | **已釋出** —— 兩個版本;Base 版寫原始 `.GYR`,[在瀏覽器裡](gyro/convert/)轉換 |
+ | 4 | [**open gate**](projects/open-gate.md) | 錄下感光元件完整的 3:2 面積 | **OG3K v0.2.5a alpha · OG2K v0.1.2a test** —— 3024×2010 或 2016×1344,視角相同;Super35/crop 必須關閉 |
+ | 5 | [**6k to ssd**](projects/6k-to-ssd.md) | 把鏈路載得動的最好 6K 拿出來 | 設計完成;8bit 在所有剩餘未知數下都落在原生 6K 的 94–100% |
+--- a/fpSup/fp_usb_shell/templates/stage2.S
++++ b/fpSup/fp_usb_shell/templates/stage2.S
+@@ -127,8 +127,15 @@
+     movt    r3, #0x4000                 @ 0x40000000
+     cmp     r0, r3
+     addlo   r0, r0, r6
++    /* The native caller can arrive four bytes off. Keep the public entry ABI
++     * (r0 = resolved entry), but provide an AAPCS-aligned call frame. r4 is
++     * saved above and must survive the entry; restore the exact incoming SP
++     * before pass 2. This also aligns every entry in entries.S. */
++    mov     r4, sp
++    bic     sp, sp, #7
+     mov     ip, r0
+     blx     ip
++    mov     sp, r4
+ 1:  mov     r8, #0                      @ pass 2: offsets into the entry's pool
+     bl      s2_pass
+     bl      s2_publish                  @ the pool code just landed; publish it too
+--- a/fpSup/fp_usb_shell/test_loader_hook.py
++++ b/fpSup/fp_usb_shell/test_loader_hook.py
+@@ -411,6 +411,21 @@
+             self.assertEqual(bytes(cam.mu.mem_read(d, n)),
+                              cam.stock[d - 0xC0000000:d - 0xC0000000 + n], hex(d))
+ 
++    def test_entry_receives_aligned_stack_and_own_address(self):
++        class EntryABI(Camera):
++            seen = False
++            def _hook(self, mu, addr, size, data):
++                if self.entry is not None and addr == self.entry:
++                    assert self.r(UC_ARM_REG_SP) % 8 == 0
++                    assert self.r(UC_ARM_REG_R0) == addr
++                    self.seen = True
++                super()._hook(mu, addr, size, data)
++        for incoming in (STACK - 0x1000, STACK - 0x1004):
++            cam = EntryABI(self.loader, self.bin)
++            _, returned = cam.call(CAVE_LOW, sp=incoming)
++            self.assertTrue(cam.seen)
++            self.assertEqual(returned, incoming)
++
+ 
+ if __name__ == '__main__':
+     unittest.main()
+--- a/fpSup/projects/sensor-lab-sup.md
++++ b/fpSup/projects/sensor-lab-sup.md
+@@ -2,71 +2,80 @@
+ 
+ [English](#english) | [繁體中文](#繁體中文)
+ 
+-IMX410 modes, ISO, gain and sensor control.
+-**Status: research complete — ISO and gain fully solved, and the mode-table
+-ambiguity closed on 2026-09-10**
++IMX410 modes, ISO, gain and Custom Sensor control.
++**Status (2026-09-30): prototype — offline test cards prepared; hardware acceptance pending.**
+ 
+-IMX410 模式、ISO、gain 與 sensor 控制。**狀態:研究完成 —— ISO/gain 已完整解出,模式表的歧義 2026-09-10 已解**
++IMX410 模式、ISO、增益與 Custom Sensor 控制。
++**狀態(2026-09-30)：原型；離線測試卡已備妥，尚待實機驗收。**
+ 
+ ---
+ 
+ ## English
+ 
+-### Goal
++### Established research
+ 
+-Work out what the IMX410 actually does in the fp: how ISO maps onto conversion
+-gain and analog gain, what each sensor mode's parameters are, and which numbers
+-the firmware confirms versus which are OTP values that still need measuring.
++The ISO/gain chain has been decompiled, including conversion gain, analog gain,
++readout and the ADC stage. The [interactive explainer](https://ijigen.github.io/fpSup/explainers/imx410-iso-gain.html)
++distinguishes firmware-confirmed behavior from OTP values that need measurement.
+ 
+-### Proven
++The three picker tables (`0xC0BE5810`, `0xC0BE59B0`, `0xC0BE5B50`) select sensor
++modes by geometry and frame rate. The stock FHD 29.97 slot selects mode 106;
++a recorded take confirmed 106 at `0xC343B590`. The corresponding FHD 29.97
++CinemaDNG rolling-shutter result is 10.556 ms. These are specific mode results,
++not a claim that all sensor behavior is solved.
+ 
+-- **The ISO and gain chain is fully decompiled** — conversion gain, analog gain,
+-  analog readout and the ADC stage
+-- The result is an [interactive explainer](https://ijigen.github.io/fpSup/) in
+-  English and Traditional Chinese that **separates firmware-confirmed behaviour
+-  from OTP values that still require measurement**
+-- Recording geometry at `0xC37CE210` = {1936, 1090, 3244544 bytes per frame}
++**Correction:** `0xC37CE210` is a downstream geometry cache, not an authoritative
++source. The earlier `{1936, 1090, 3244544}` observation does not establish causality;
++a later take produced valid 1936×1090 DNGs while that cache was all zero.
++The geometry intervention was demonstrated in the FieldAngle record assembled
++by `FUN_c043a158`, before its derived values are calculated.
+ 
+-### Open
++### Current implementation and remaining work
+ 
+-> ✅ **Resolved 2026-09-10 — and the mode-index field was never needed.**
+-> The mode is chosen by a table, so read the table. The picker's three arrays
+-> (`0xC0BE5810` / `0xC0BE59B0` / `0xC0BE5B50`, 26 entries of 16 bytes, `+0x08`
+-> the sensor mode) are laid out as *(readout geometry × frame rate)*, and the
+-> FHD 29.97 slot holds **106**. **Mode 111 does not appear in any of the three.**
+-> A real take reads 106 back from `0xC343B590`.
+->
+-> **FHD 29.97 CinemaDNG rolling shutter is 10.556 ms.** That is the number gyro
+-> sup's lens profile was missing. See `../research/imx410/notes/FRAME_RATE_IS_VMAX.md`.
++Custom Sensor has a seven-axis recipe engine and limited prior recording evidence.
++The latest offline changes synchronize native bit-depth/frame-rate selections,
++correct RAW14 latching, make unknown burst capacity explicit, and package ordinary
++and debug cards through the shared builder with shutdown restoration. This build
++has not been tested on the camera or released; Fast/merged packaging is unsupported.
++
++The on-camera mode selector and conditional disabling, per-clip playback geometry,
++RAW14 gain/packing, CRCT validation and repeated power cycles remain open.
++Solvable RAW14 donors and offline tests do not establish recording readiness.
+ 
+ ---
+ 
+ ## 繁體中文
+ 
+-### 目標
++### 已有研究證據
+ 
+-搞清楚 IMX410 在 fp 上的實際行為:ISO 怎麼對應到轉換增益與類比增益、
+-各感光模式的參數,以及哪些是韌體確認的、哪些只是 OTP 值。
++ISO／增益鏈已反編譯，涵蓋轉換增益、類比增益、讀出與 ADC 階段。
++[互動說明](https://ijigen.github.io/fpSup/explainers/imx410-iso-gain.html)明確區分
++韌體確認的行為與仍需量測的 OTP 值。
+ 
+-### 已確認
++三張 picker 表(`0xC0BE5810`、`0xC0BE59B0`、`0xC0BE5B50`)依幾何與格率選擇
++sensor mode。原廠 FHD 29.97 那格是 mode 106，實錄後 `0xC343B590` 也讀回 106；
++對應 FHD 29.97 CinemaDNG 的捲簾為 10.556 ms。這是特定模式的結論，不代表所有
++感測器行為都已解完。
+ 
+-- **ISO / 增益鏈完整反編譯** —— 轉換增益、類比增益、類比讀出、ADC 階段都對出來了
+-- 成果做成了[互動說明頁](https://ijigen.github.io/fpSup/),英文／繁體中文雙語,
+-  而且**明確區分「韌體已確認」與「仍需實機量測的 OTP 值」**
+-- 錄影幾何 `0xC37CE210` = {1936, 1090, 每影格 3244544 bytes}
++**更正：**`0xC37CE210` 是下游幾何快取，不能當權威來源。
++早期 `{1936, 1090, 3244544}` 的觀測不能證明因果；後來該快取全為 0 時仍錄出
++正確的 1936×1090 DNG。畫布的因果驗證是在 `FUN_c043a158` 組好 FieldAngle record、
++尚未推導下游值之前介入。
+ 
+-### 未解
++### 現行實作與缺口
+ 
+-> ✅ **2026-09-10 已解 —— 而且根本不需要那個「模式索引欄位」。**
+-> 模式是由一張表選的,所以去讀那張表。picker 的三個陣列
+-> (`0xC0BE5810` / `0xC0BE59B0` / `0xC0BE5B50`,26 筆 ×16 bytes,`+0x08` 是感光元件模式)
+-> 排列成 *(讀出幾何 × 幀率)*,而 **FHD 29.97 那一格填的是 106**;
+-> **模式 111 在三張表裡都不存在**。實錄後 `0xC343B590` 也讀回 106。
+->
+-> **FHD 29.97 CinemaDNG 的捲簾是 10.556 ms。** 這正是 gyro sup 鏡頭 profile 缺的數字。
+-> 見 `../research/imx410/notes/FRAME_RATE_IS_VMAX.md`。
++Custom Sensor 已有七軸配方引擎及有限實錄證據。本次離線修補接上原生位深／格率、
++修正 RAW14 鎖存、明示連拍容量未知，並經共用 builder 封裝普通／debug 卡與關機還原。
++**本次卡片尚未上機、未發布；尚不支援 Fast／合併封裝。**
++
++機上 mode 選單與條件反灰、每段素材各自幾何的回放、RAW14 增益／封裝、CRCT
++對照與反覆開關機仍待完成。RAW14 donor 求得出來、離線測試通過，都不等於可出貨。
+ 
+ ---
+ 
+-**Notes / 相關筆記:** `ISO_FIRMWARE_COMPLETE`, `ISO_HANDLING`, `ISO_DR_UNDERSTANDING`,
+-`COLOR_SCIENCE`
++Full research tree / 完整研究樹中的現況入口：`projects/sensor-lab/README.md`。
++Design and evidence / 設計與證據：`projects/open-gate/notes/IMX410_FULL_DESIGN.md`、
++`CANVAS_IS_NOT_THE_SETTINGS_BLOCK.md` §13、`CANVAS_MOVED_AT_C043A19C.md`、
++`research/imx410/notes/FRAME_RATE_IS_VMAX.md`。
++Those files belong to the full research workspace and may be absent from this public checkout.
++這些證據檔屬於完整研究工作區，不保證存在於公開 checkout。
+--- a/fpSup/research.html
++++ b/fpSup/research.html
+@@ -165,7 +165,7 @@
+         <td><span class="en">released — v3.2.0, built on the camera's own PTP gadget so recording survives it</span><span class="zh">已釋出 —— v3.2.0,建在相機自己的 PTP gadget 上,所以錄影不會被它打斷</span></td></tr>
+     <tr><td><a href="https://github.com/ijigen/fpSup/blob/main/projects/sensor-lab-sup.md">sensor lab sup</a></td>
+         <td><span class="en">IMX410 modes, ISO, gain, sensor control</span><span class="zh">IMX410 的模式、ISO、增益、感光元件控制</span></td>
+-        <td><span class="en">research complete — the mode-table ambiguity is closed</span><span class="zh">研究完成 —— 模式表的歧義已經解掉</span></td></tr>
++        <td><span class="en">prototype — offline test cards prepared; hardware acceptance pending</span><span class="zh">原型 —— 離線測試卡已備妥，尚待實機驗收</span></td></tr>
+     <tr><td><a href="https://github.com/ijigen/fpSup/blob/main/projects/gyro-sup.md">gyro sup</a></td>
+         <td><span class="en">Gyro, six-axis logging, Gyroflow workflow</span><span class="zh">陀螺儀、六軸記錄、Gyroflow 流程</span></td>
+         <td><span class="en">released — two editions</span><span class="zh">已釋出 —— 兩個版本</span></td></tr>
+--- a/projects/open-gate/build/imx410_fmt.S
++++ b/projects/open-gate/build/imx410_fmt.S
+@@ -12,10 +12,8 @@
+  *
+  * fmttable.S 原封不動留著 —— 它是 OG3K/OG2K/OG6K/HSW 四個出貨目標的承重牆。
+  *
+- * 鍵的比對只看**前四個位元組**(= 我們的標籤 "CUST")。格率後綴不看,因為
+- * 格率是七個軸之一,住在 AXIS 裡。這也是為什麼換掉格率發射器之後
+- * (0xC0BE44D0 +0x10,見 IMX410_FULL_DESIGN §5.3)不需要新的 enum:
+- * 後綴是什麼都無所謂。
++ * 前四個位元組識別 "CUST";格率尾碼與原廠呼叫端的 eRawBitType 同步到
++ * AXIS 後才重算。14-bit 與 12-bit 共用 TAB3,不能只看表指標反推位深。
+  *
+  * 查不到 mode 時**不放行給原廠**。原廠查不到會退回 TAB3[0] = UHD30,而
+  * 2026-09-27 實測那會造成「畫面拉長、檔案是 UHD」。改成回傳同一張表的
+@@ -126,6 +124,45 @@
+     ldr     r3, [r6]
+     cmp     r3, ip
+     bne     pass
++
++#ifdef WITH_BIT_FROM_MENU
++    /* 只在 FUN_c043b828 的三個已核對呼叫點讀原廠 config。
++     * 原廠 r6 是 config;entry 保存的 r6 在 sp+12,現在 r6 已是 key。
++     * 直接呼叫 picker 的其他使用者不保證 r6 的語意,絕不能解參考它。
++     * 不新增 hook、不做跨次讀取;同一次呼叫的 enum 與表必須相符。 */
++    LDA     ip, 0xC043B8D8             @ TAB1: BL C043CCF8 的返回點
++    cmp     lr, ip
++    beq     bs_read
++    add     ip, ip, #0x30              @ TAB2: C043B908
++    cmp     lr, ip
++    beq     bs_read
++    add     ip, ip, #0x24              @ TAB3: C043B92C (12 或 14)
++    cmp     lr, ip
++    bne     bs_done
++bs_read:
++    ldr     r3, [sp, #12]
++    ldr     r3, [r3, #0x20]            @ eRawBitType,本次原廠 config
++    cmp     r3, #1                     @ 14-bit 的表仍是 TAB3
++    cmpeq   r5, #BD12
++    beq     bs_fourteen
++    cmp     r3, r5                     @ 其餘必須與 table 一致
++    bne     bs_done
++    mov     r0, #12
++    cmp     r3, #BD8
++    moveq   r0, #8
++    cmp     r3, #BD10
++    moveq   r0, #10
++    b       bs_store
++bs_fourteen:
++    mov     r0, #14
++bs_store:
++    mov     r5, r3                     @ BITLATCH 保留真正 enum (14 = 1)
++    LDA     ip, AXIS
++    ldr     r1, [ip]
++    cmp     r1, r0
++    strne   r0, [ip]                   @ A_BIT = 0;重算前同步
++bs_done:
++#endif
+ 
+ #ifdef WITH_RATE_FROM_MENU
+     /* ---- 鍵的尾碼 -> AXIS 的格率索引 ------------------------------------
+--- a/projects/open-gate/build/imx410_full.py
++++ b/projects/open-gate/build/imx410_full.py
+@@ -414,30 +414,35 @@
+     return crop[0] * crop[1] * depth // 8
+ 
+ 
+-def burst(crop, depth, fps, media_mbps, inflight=POOL_INFLIGHT):
+-    """寫入跟不上時錄得到幾格 —— **這不是警告,是預期行為**。
+-
+-    描述子在每一格寫完之後歸還,所以:
+-      · 寫得完(write_fps >= fps)-> 池子永遠不見底,錄到卡滿或使用者停手。
+-      · 寫不完 -> 在途數以 (fps - write_fps) 成長,抽乾就 `vbuf` 乾淨停。
+-
+-    回傳的 `frames_min` 是 **`inflight`**,那是實測對得上的下界:240 fps + SD
+-    正是 94/94。上界 `inflight * fps / (fps - write_fps)` 假設描述子即時歸還,
+-    真實的寫入延遲會讓它靠近下界。兩個都給,不要只給一個數字假裝很準。
++def burst(crop, depth, fps, media_mbps, inflight=POOL_INFLIGHT, *, buffer_bytes=None):
++    """以記錄矩陣估吞吐;有實測可用緩衝容量時才給容量模型的格數。
++
++    94 是描述子上限,不是錄影格數的實測下界(A001_150 只有 37 格)。
++    buffer_bytes 必須由呼叫端提供;448 MiB 仍是推論,不能暗中當預設。
++    frames/seconds 是理想化容量模型範圍,不是保證;未提供容量則為 None。
++    RAW14 先按已知的 16 bpp 緩衝估算,CDNG 實際封裝仍待量測。
+     """
+-    per = frame_bytes(crop, depth)
++    if (min(crop) <= 0 or depth not in (8, 10, 12, 14, 16) or fps <= 0
++            or media_mbps < 0 or inflight <= 0 or
++            (buffer_bytes is not None and buffer_bytes < 0)):
++        raise ValueError("invalid geometry, rate or buffer capacity")
++    per = frame_bytes(crop, 16 if depth == 14 else depth)
+     need = per * fps / 1e6                       # MB/s
+     write_fps = media_mbps * 1e6 / per
+     if write_fps >= fps:
+         return dict(need_mbps=need, write_fps=write_fps, sustained=True,
+                     frames=None, seconds=None,
+-                    why="寫得完 —— 描述子每格歸還,池子不見底")
+-    hi = inflight * fps / (fps - write_fps)
++                    why="平均媒體速率足夠;未涵蓋實際寫入延遲與其他管線限制")
++    capacity = None if buffer_bytes is None else min(inflight, buffer_bytes // per)
++    hi = None if capacity is None else capacity * fps / (fps - write_fps)
+     return dict(need_mbps=need, write_fps=write_fps, sustained=False,
+-                frames=(inflight, int(hi)),
+-                seconds=(inflight / fps, hi / fps),
++                frames=None if capacity is None else (capacity, int(hi)),
++                seconds=None if capacity is None else (capacity / fps, hi / fps),
++                buffer_bytes=buffer_bytes, frame_bytes=per,
+                 why=f"寫入約 {write_fps:.1f} fps 跟不上 {fps:.2f} fps → "
+-                    f"描述子池抽乾 → `vbuf` 乾淨停止(不是凍結)")
++                    "緩衝用完時應乾淨停止(不是凍結);" +
++                    ("可用 RAW 緩衝容量未知,不提供格數保證" if capacity is None
++                     else "格數是輸入容量的模型估計,不是實測保證"))
+ 
+ 
+ def canvas_required(donor: Mode, rec_raster, fps):
+@@ -508,9 +513,8 @@
+         r.errors.append(f"位元深度 {bit} 不在 8/10/12/14")
+     elif bit == 14:
+         r.notes.append(
+-            "14-bit:picker 只有三張表(8/10/12),CDNG 品質字串也只有三個;"
+-            "回放把 BitsPerSample 14 映成 RAW8、增益分派也落進 movie_raw_8bit。"
+-            "要真的錄 14-bit 必須新建第四張表 + profile + 增益政策。")
++            "14-bit 共用 TAB3,RAW14 donor 與原廠 16 bpp 平面碼已接上;"
++            "增益政策、CDNG 是否 packed 14-bit 與回放仍待實機驗證。")
+ 
+     # --- 格率 -----------------------------------------------------------
+     if rate not in RATES:
+@@ -519,9 +523,11 @@
+         fps = None
+     else:
+         fps = RATES[rate]
+-        if rate in RATES_EXTRA:
+-            r.notes.append(f"{rate}:enum 存在但選單沒有那一列 —— 需要補有理數"
+-                           f"(FUN_c00c9bd0)、CSV 第十列與控制器上限,HSW 做過。")
++        if rate == "240":
++            r.notes.append("240:第十列、配對表與容器有理數已接上;選單格率優先於"
++                           "主機 AXIS 初值,時間碼與音訊仍待驗證。")
++        elif rate == "400":
++            r.notes.append("400:有鍵字但尚無選單列;仍須通過模式的消隱預算。")
+ 
+     # --- CRCT ------------------------------------------------------------
+     if hbin not in HBIN_TAPS:
+@@ -717,11 +723,15 @@
+                        f"+0x0F4/+0x0F8 必寫(不補的話請求不會完成)")
+ 
+     # 資料率:不是門檻,是「會錄到多久」。
+-    r.burst = burst(r.crop, bit, fps, media_mbps)
++    r.burst = burst(rec, bit, fps, media_mbps)
+     b = r.burst
+     if b["sustained"]:
+         r.notes.append(f"吞吐:需要 {b['need_mbps']:.0f} MB/s,媒體 "
+-                       f"{media_mbps:.0f} MB/s → 錄得完,錄到卡滿為止")
++                       f"{media_mbps:.0f} MB/s → 平均速率足夠,持續錄影仍待實測")
++    elif b["frames"] is None:
++        r.notes.append(f"吞吐:需要 {b['need_mbps']:.0f} MB/s,媒體 "
++                       f"{media_mbps:.0f} MB/s;可用 RAW 緩衝容量未量測,"
++                       "不能把 94 個描述子當作至少可錄 94 格。")
+     else:
+         lo, hi = b["frames"]
+         slo, shi = b["seconds"]
+--- a/projects/open-gate/build/imx410_load.py
++++ b/projects/open-gate/build/imx410_load.py
+@@ -100,6 +100,9 @@
+             got = list(self._get(addr, count))
+         except Exception:                            # noqa: BLE001
+             got = [None] * count
++        if len(got) > count:
++            raise ReadFailed(f"0x{addr:08X}: 回覆 {len(got)} 字超過要求 {count}")
++        got += [None] * (count - len(got))
+         for i, v in enumerate(got):
+             if v is None:
+                 got[i] = self.read(addr + i * 4)     # 逐字補,它自己會重試
+@@ -128,7 +131,7 @@
+                 if self.read(addr) == value:
+                     return True
+                 raise WriteFailed(f"0x{addr:08X} 讀回不符")
+-            except ReadFailed as e:
++            except (ReadFailed, WriteFailed) as e:
+                 last = e
+         raise WriteFailed(f"0x{addr:08X} 重試 {tries} 次仍無法確認:{last}")
+ 
+@@ -241,11 +244,8 @@
+     """stage=None 全裝;stage=N 只武裝前 N 個階段(body 一律全寫)。
+ 
+     ★ `axis`:用哪一組七軸當**安裝時**的初始軸。這不只是「開機停在哪一組」——
+-      畫布模板的閘門(`CG_ZOOM` / `CG_BIN` / `CG_FILL` / `CG_WINDOW`)是在
+-      `canvas_template()` 裡、也就是**安裝時**解掉的。用 RWZM unity 的軸安裝,
+-      那四欄 RWZM 就**不在模板裡**,之後在執行期怎麼改 AXIS 都不會被寫 ——
+-      RECIPE 會完全正確地跟著變,但硬體從來沒被程式化。
+-      2026-09-28 上機就是這樣拿到一個假通過(§12.29)。
++      `CG_BIN` / `CG_FILL` / `CG_WINDOW` 仍由安裝時決定。
++      `CG_ZOOM` / `CG_OVER60` 已在 payload 內依每次配方判斷(§12.31)。
+     """
+     img = image if image is not None else PL.FIRMWARE.read_bytes()
+     io = io or CameraIO()
+@@ -344,10 +344,11 @@
+     changed = 0
+     try:
+         for a, v, _ in body:
++            # 寫入可能成功後才在讀回時拋錯;先記錄嘗試過的位址,不可漏還原。
++            if not (PRIVATE_LO <= a < PRIVATE_HI):
++                touched_external.append(a)
+             if io.write(a, v):
+                 changed += 1
+-                if not (PRIVATE_LO <= a < PRIVATE_HI):
+-                    touched_external.append(a)
+         io.sync()
+     except Exception as e:                            # noqa: BLE001
+         _rollback(io, touched_external, stock)
+@@ -420,9 +421,8 @@
+                     help="只武裝前 N 個階段(0 = 只寫 body)。"
+                          "階段順序:canvas, display, fps, menu, picker")
+     ap.add_argument("--axis-preset", metavar="X",
+-                    help="用 imx410_axis 的某一組預設當**安裝時**的初始軸。"
+-                         "RWZM/bin 的畫布欄位是安裝時決定的,要測那兩個軸"
+-                         "就得用對應的軸安裝(見 apply 的說明)")
++                    help="選 imx410_axis 的安裝初值;bin 模板仍由此決定。"
++                         "位深與格率在原廠選單路徑以選單為準;RWZM 可執行期改。")
+     a = ap.parse_args(argv)
+     axis = None
+     if a.axis_preset:
+--- a/projects/open-gate/build/imx410_menu.py
++++ b/projects/open-gate/build/imx410_menu.py
+@@ -13,9 +13,8 @@
+     · `rwzm_auto()`   —— 沒有算「精確除數」的函式;`solve_geometry` 只在
+       原廠用過的三個值裡找,那是**逆向求解器**要的,不是第 ⑥ 步要的
+ 
+-⚠ **第 ⑤⑥ 步現在不是執行期的軸。** 畫布閘門在 `canvas_template()`、也就是
+-  安裝時解掉的(§12.29),所以選單改了 hbin/vbin/RWZM,RECIPE 會完全正確地
+-  跟著變而硬體不會被程式化。這一層算得出來,不代表相機做得到 —— 見 §15 第 3 條。
++⚠ CG_BIN/FILL/WINDOW 仍是安裝時閘門；RWZM 已由相機端執行期判斷。
++主機選單可求解不表示機上選單／條件反灰已完成；最新缺口見設計 §15。
+ """
+ from __future__ import annotations
+ 
+@@ -27,9 +26,9 @@
+ 
+ from imx410_block import HBIN_SET, RWZM_SET, VBIN_SET
+ from imx410_full import (ALIGN, ALIGN_H, ALIGN_SAFE, CLOCK, FULL_H, FULL_W,
+-                         RATES, RATES_STOCK, RWZM_UNITY, Registry)
+-
+-# 選單不是執行期的軸 —— 這個常數讓呼叫端可以把警語印出來,而不是各自寫死。
++                         RATES, RWZM_UNITY, Registry)
++
++# 尚有安裝時閘門(CG_BIN/FILL/WINDOW)；不表示 RWZM 仍被固定。
+ GATES_ARE_INSTALL_TIME = True
+ 
+ 
+@@ -77,8 +76,8 @@
+ #   不灰 = 只是**風險高**(資料率、卡速)
+ #
+ # ⚠ 代價要講清楚:拿掉硬閘門之後,`burst()`「錄得到多久」從參考值變成
+-#   使用者**唯一**的事前資訊,而它對大格子是高估的(§15 第 7 條)。
+-#   那條本來不擋路,現在擋路了。
++#   使用者事前資訊。2026-09-30 已移除 94 格保證；容量未量時不報秒數，
++#   相機 WITH_FRCLASS 仍關閉，原廠媒體限制尚未移除。
+ MEDIA_GATING = False
+ 
+ # 選單實際列出來的格率(第十列 240 已加,400 沒有列)。
+@@ -125,27 +124,25 @@
+ 
+ # ---- ① 位元深度 ------------------------------------------------------------
+ def bit_options(reg: Registry):
+-    """8 / 10 / 12 / 14。14 沒有 mode,會走進死路 —— 標出來而不是默默列著。"""
++    """可求解的位深;usable 表示模式表可解,不表示已完成實機驗收。"""
+     out = []
+     for depth in (8, 10, 12, 14):
+-        # picker 只有三張表;14 在 metadata 裡有模式,但 §4 的整條鏈不支援。
+         has_mode = any(m.depth == (14 if depth == 14 else 12) for m in reg.modes)
+-        dead = depth == 14
+-        out.append(dict(bit=depth, usable=has_mode and not dead,
+-                        note="沒有 mode,④ 會是空的,實際會退回 FHD(§4)"
+-                             if dead else ""))
++        out.append(dict(bit=depth, usable=has_mode,
++                        note="RAW14 donor 可解;增益政策與 CDNG 封裝仍待實機驗證(§4)"
++                             if depth == 14 else ""))
+     return out
+ 
+ 
+ # ---- ② 格率 ----------------------------------------------------------------
+ def fps_options(reg: Registry, bit: int):
+-    """選單上有列的九個,加上「至少有一個模式跑得到」這個條件。"""
++    """十個選單格率,包含 240;至少有一個 mode 留有正的消隱預算。"""
+     depth = 14 if bit == 14 else 12
+     out = []
+-    for key in RATES_STOCK:
++    for key in MENU_RATES:
+         fps = RATES[key]
+         n = sum(1 for m in reg.modes
+-                if m.depth == depth and m.fps_ceiling >= fps)
++                if m.depth == depth and m.hmax * m.raw[1] < CLOCK / fps)
+         out.append(dict(rate=key, fps=fps, modes=n, usable=n > 0))
+     return out
+ 
+@@ -192,7 +189,7 @@
+     fps = RATES[rate]
+     fam = {}
+     for m in reg.modes:
+-        if m.depth != depth or m.fps_ceiling < fps:
++        if m.depth != depth or m.hmax * m.raw[1] >= CLOCK / fps:
+             continue
+         if want and (m.raw[0] < want[0] or m.raw[1] < want[1]):
+             continue                      # 放大做不到
+@@ -359,8 +356,8 @@
+     if not z["stock_precedent"]:
+         print(f"   ⚠ 這組值原廠錄影路徑沒用過(只用過 {RWZM_SET})")
+     if GATES_ARE_INSTALL_TIME:
+-        print("\n⚠ ⑤⑥ 現在不是執行期的軸 —— 畫布閘門是安裝時解掉的(§12.29)。"
+-              "\n  這裡算得出來不代表相機做得到;見 §15 第 3 條。")
++        print("\n⚠ bin 模板仍由安裝時決定;RWZM 已可在執行期改變(§12.31)。"
++              "\n  CRCT 錄影側串接仍待 I0/I 實機驗證(§6.2)。")
+     return r
+ 
+ 
+--- a/projects/open-gate/build/imx410_plan.py
++++ b/projects/open-gate/build/imx410_plan.py
+@@ -5,15 +5,10 @@
+ 而且有 EXPECTED_PLAN_WORDS 那條刻意的絆線。全功能版的形狀不一樣(沒有靜態
+ 格式表、多三個資料表、少一顆畫布 payload),所以另立一份。
+ 
+-這一份負責的是:
+-    四個資料表   AXIS / RATETAB / TMGTAB / CTMPL
+-    三顆 payload og3krecipe / imx410_fmt / imx410_canvas
+-    兩個 hook    0xC043CCF8(picker)、0xC043A19C(畫布)
+-
+-**還不是完整產品。** og3ksel(選單 enum → FLAG)、og3kname(解析度名)、
+-og3kaspect/aspect2、og3kout、og3kgs、og3kfmt/og3krestore 仍由 og3k_plan 那側
+-提供,而且 aspect 那兩顆現在寫死 3:2 —— 全功能版的長寬比是算出來的,那兩顆
+-要跟著改。見 §MISSING。
++負責資料、動態配方、畫布、選單連動、顯示與入口的單一寫入計畫。
++長寬比已由 imx410_aspect 依配方計算;格率與位深跟隨原廠選單。
++**目前仍是測試產品。** 本機卡片由 build_sensor_lab_card.py 呼叫共用
++build_autorun.py 封裝,未完成項目見 MISSING。
+ 
+     ./imx410_plan.py            印出配置與計畫摘要
+     ./imx410_plan.py --map      只印位址配置
+@@ -94,7 +89,7 @@
+ RESTORE_CODE = 0xC0731600    # og3krestore
+ OUT_CODE    = 0xC0731D00     # og3kout
+ GTAB        = 0xC0732100     # 分組表(1 組:六個預覽 profile 的可見高)
+-FMT_CODE    = 0xC0730800     # imx410_fmt,396 B
++FMT_CODE    = 0xC0730740     # imx410_fmt;aspect2 尾端之後,到 FPS_CODE 前
+ # og3krecipe 的上限是 og3kfmt 的槽 0xC0731400,所以這裡只有 2016 B。
+ # 目前 1552 B,餘 464 B。超過的話 layout_errors() 會擋(2026-09-28 加長寬比
+ # 之後就撞過一次)。
+@@ -158,19 +153,13 @@
+ #   單獨的驗證:錄一段 240,DNG 的 FrameRate 必須是 240000/1001。
+ #   關掉它(False)就回到「感測器 240、標籤 30」的狀態,其餘功能不受影響。
+ WITH_RATE = True
+-
+-# ★ 選單第十列 239.76 fps。og3k_plan 的 HSW 版做過但**沒上機驗過**,而且它的
+-#   第 ④ 件(enum<->列 配對表 0xC2E44EE4 九筆無預留)至今未解。這裡先做
+-#   ①②③,把 ④ 的症狀單獨隔離出來 —— 即使 ④ 沒解,也能看到
+-#   「第十列出現、反灰狀態正確、游標移不移得下去」。
+-#
+-#   ① 六個 B2_5_5 變體各改寫成十列。原廠 257 bytes 是 BOM 3 + 標頭 38 +
+-#      九列 x 24,**一個位元組都不剩**。把 IMAGE 欄留空(九列的值全是 blank,
+-#      而且 og3k 的解析度列 `3,OG3K 3008x2000,,1,2` 早就用空 IMAGE 出貨)
+-#      每列省 5 B,十列共 235 B,餘 22。
+-#   ② 第十列**繼承第九列的 Enabled** —— 只有全開變體給 1,2,其餘五個 0,0。
+-#      240 是 476 MB/s(壓成 3:2 後 236),只有 SSD 撐得住,反灰是誠實的。
+-#   ③ 清單控制器上限 8.0 -> 9.0,否則第十列「看得見但游標移不下去」。
++WITH_BIT_FROM_MENU = True  # 原廠同次 picker 呼叫的 config +0x20,含 RAW14
++
++# ★ 選單第十列 239.76 fps，2026-09-30 現況：
++#   CSV 整欄移除 IMAGE 並保留結尾 CRLF；控制器上限 8.0 -> 9.0。
++#   enum/列配對表已搬到 cave 並加入 (5, 9)，實機能識別第十列為 240。
++#   六個 CSV 變體的第十列繼承第九列 Enabled；WITH_FRCLASS 關閉時
++#   原廠媒體 gate 仍有效。新增列的收合摘要與最新配方連動另待驗收。
+ WITH_RATE_ROW = True
+ 
+ # (資源位址, 描述子位址, 原廠長度)。描述子是 BE {key, 檔名位移, 資源位移, 長度},
+@@ -192,7 +181,7 @@
+ 
+ 
+ def rate_row_csv(img, res):
+-    """九列 -> 十列。IMAGE 欄留空騰空間,第十列繼承第九列的 Enabled。"""
++    """九列 -> 十列。移除整個 IMAGE 欄,第十列繼承第九列的 Enabled。"""
+     raw = img[res - B: res - B + RATE_ROW_LEN]
+     bom, body = raw[:3], raw[3:]
+     lines = [l for l in body.split(b"\r\n") if l]
+@@ -544,8 +533,9 @@
+                        f"ASPTAB={ASPTAB:#x}"],
+         "imx410_fmt": [f"RECIPE={RECIPE:#x}", f"RECIPE_CODE={RECIPE_CODE:#x}",
+                        f"ENTRY={ENTRY_ADDR:#x}", f"HITS={HITS:#x}",
+-                       f"PROFILE={PROFILE}"]
+-                      + ([f"AXIS={AXIS:#x}", f"RATESTR={RATESTR:#x}",
++                       f"PROFILE={PROFILE}", f"AXIS={AXIS:#x}"]
++                      + (["WITH_BIT_FROM_MENU=1"] if WITH_BIT_FROM_MENU else [])
++                      + ([f"RATESTR={RATESTR:#x}",
+                           "WITH_RATE_FROM_MENU=1"]
+                          if WITH_RATE_FROM_MENU else []),
+         "imx410_canvas": [f"CANVAS={CANVAS:#x}", f"PROFILE={PROFILE}"],
+@@ -799,6 +789,7 @@
+     for addr, val, note in (
+             (0xC0731C00, 0, "og3ksel 計次"), (0xC0731C04, 0, "最後 enum"),
+             (0xC0731C08, 0, "FLAG = 0"),
++            (0xC0731C0C, 0, "PBFLAG = 0"),
+             (0xC0731C14, 0, "位元深度鎖存 = 12-bit"),
+             (0xC0731C20, 0xFFFFFFFF, "錄影格式鎖存 = UNKNOWN"),
+             (FPSLATCH, 0, "引擎格率鎖存"), (PICKOK, 1, "picker 同意 = 1"),
+@@ -846,7 +837,7 @@
+     列出**,不能用「反正 cave 裡的都不算」帶過。
+     """
+     out = set()
+-    for lo, n in ((RECIPE, RECIPE_WORDS), (ENTRY_ADDR, 12),
++    for lo, n in ((AXIS, AXIS_WORDS), (RECIPE, RECIPE_WORDS), (ENTRY_ADDR, 12),
+                   (CANVAS, 1 + CANVAS_MAX_PAIRS * 2), (HITS, 1),
+                   (0xC0731C00, 2),          # og3ksel 計次 / 最後 enum
+                   (0xC0731C08, 1),          # FLAG
+@@ -924,97 +915,21 @@
+ 
+ 
+ # ---- MISSING ---------------------------------------------------------------
+-# 這一份**還不是完整產品**。要在相機上真的錄出東西,還缺:
++# Current open items only. Historical experiments remain in IMX410_FULL_DESIGN.
+ MISSING = (
+-    "輸出尺寸的上下界。高度那條已追完(韌體主動遮成偶數,12 處 & 0xfffe;寬度的 "
+-    "16 則是沒人遮的正確性要求,違反會默默弄壞 stride —— §3.1b)。剩下的是界線:"
+-    "最小尺寸沒有下界的證據,最大尺寸除了「<= 窗口的縮減結果」之外(畫布/緩衝那"
+-    "側的上限)也沒查。",
+-    "burst() 對大格子高估:A001_150 只錄到 37 格,而 §10 的模型下界是 "
+-    "POOL_INFLIGHT = 94。每格 12.75 MB 遠大於模型假設的每格約 1.02 MB 在途成本,"
+-    "卡住的大概是 RAW 區容量而不是描述子數量 —— 模型少一條「總位元組」的界線。"
+-    "★ 2026-09-29 這一條從「不擋路」變成**擋路**:使用者決定媒體不反灰(§8.6),"
+-    "burst() 的估計從參考值變成使用者唯一的事前資訊,高估就等於騙人。"
+-    "拿掉硬閘門和修這個模型是同一件事的兩半,要一起做。見 §12.29 / §8.6。",
+-    "★ 回放整條。og3kpbsel / og3kpb / og3kcanvas 的 case B 都還沒接,og3kname 的 "
+-    "TARGET_AW/AH 仍是編譯期值。**RWZM 變成執行期軸之後更急**:以前一張卡上的"
+-    "片子幾何固定,現在同一張卡上每一段可以不一樣,回放要嘛從片子自己的標籤取"
+-    "幾何要嘛認不得。見 §15 第 5 條。",
+-    "★ 怎麼把 hbin/vbin 接進 CDNG 管線。2026-09-29 上機證明 CRCT 對 CDNG 只是一個"
+-    "會改幾何宣告的欄位、不做像素處理(相關 0.987 對上純裁切),所以 CDNG 的縮減"
+-    "手段只有感測器模式與 RWZM 兩個。入口是 CRCT 的啟用位元在哪,以及預覽那 17 列"
+-    "是怎麼讓它生效的。使用者決定之後再研究。見 §2 / §6.1。",
+-    "(已解決)改軸本來就會生效 —— 只改 AXIS,RECIPE 與畫布都跟著變,這條鏈是"
+-    "反應式的。要記的是**生效條件**:LV 在跑且 picker 已把我們的表項選上"
+-    "(畫布 hook 只在 profile id == 13 時做事)。診斷先看畫布命中有沒有在跳。"
+-    "見 §12.36。",
+-    "240 的容器格率**已補上**(imx410_rate.S 換掉 FUN_c00c9bd0,A001_171 是 "
+-    "240000/1001),但**只管標籤** —— 時間碼與音訊同步仍走原廠 enum,沒查。"
+-    "見 §12.35。",
+-    "非等向 RWZM(長寬縮放不同)**零原廠先例** —— 原廠 306 列沒有一列 H != V。"
+-    "欄位與正向計算都支援,但沒上機看過;要非等向的比例,hbin/vbin 才是有"
+-    "先例的那條路。RWZM_ANISOTROPIC_PROVEN = False。見 §12.25。",
+-    "回放 —— imx410_canvas 只做錄影。og3kpbsel / og3kpb / og3kcanvas 的 case B "
+-    "都還沒接;它們的位址已在 _reused_regions() 留著,不會被佔走。",
+-    "og3kname 的 TARGET_AW/AH 是**編譯期**值(取初始配方)。它的回放辨識路徑"
+-    "拿那對尺寸比對,配方換了就對不上 —— 回放接上時一起改成讀 RECIPE。",
+-    "分組表的可見高只有兩個值是驗證過的:3:2 -> 1334(og3k 上機驗過)、"
+-    "16:9 -> 1125(原廠)。其餘比例是 2000/顯示比 算出來的,**沒上機看過**"
+-    " —— 比 3:2 更方的會夾在上限 1334,預期左右留黑而不是拉長。",
+-    "CSV 用 Enabled=0,0 關掉 UHD/FHD,不是刪列(刪列會讓 enum 重編號)。"
+-    "**游標會不會卡在被關掉的第一列,還沒上機驗過。**",
+-    "MainB2 四列 —— 選單還沒有地方寫 AXIS,所以七個軸目前只能從主機改。"
+-    "那條路的三個未解問題見 §14/§MAINB2。",
+-    "★ mode 主軸 + 反灰的相機端還沒做(§8.6)。主機側完整:mode_legal() / "
+-    "menu_enabled() / csv_set_enabled(),九個測試。相機端缺三塊:(1) 還沒有 mode "
+-    "這個選單列(要借 B2_5_4 或新開,兩者都要 §8.3 搬表);(2) 改 mode 時在 RAM "
+-    "改寫 Enabled 兩欄(長度不變,所以不用動描述子/槽);(3) 壓住 FUN_c04a1120 "
+-    "的類別函式(hook 返回匯合點 0xC04A121C,固定回類別 0)—— 那會**接管原廠的 "
+-    "SSD/SD 反灰**,接管後 100/119.88 在 SD 上要不要灰變成我們的責任。",
+-    "既有碰撞:AXIS 的 A_MODE == 0 當「不指定」,但 mid 0 = ACQ 也是實體模式,"
+-    "所以 ACQ 指定不了。今天不痛(ACQ 上限 19.55p < 選單最低 23.98),補了更低的"
+-    "格率列舉之後會咬人。要修得動 AXIS 語意與 payload。見 §8.6。",
+-    "★ 選單的格率已接回 AXIS(§8.10,零新增 hook):picker 的鍵尾碼就是選單選的"
+-    "格率,imx410_fmt 比對它並寫進 AXIS[A_RATE]。⚠ **行為改變:選單說了算** —— "
+-    "先前 --axis-preset 設 240 而選單停在 119.88 會錄出 240,現在會錄 119.88,"
+-    "上機測 240 必須把選單也切到第十列。還沒接的:位元深度(14 會被讀成 12,"
+-    "要偷 0xC043B8B8)與解析度(名字發射器無條件發 CUST,看不出選了哪一列)。",
+-    "★★ 訂正(§8.9):加列**純資料就做得到,不用 hook**。先前「選得到看不見」"
+-    "不是 NBU,是 CSV 的形式錯了兩處:結尾 CRLF 被拿掉、IMAGE 欄留空而不是整欄"
+-    "拿掉。改對之後位元深度四列、格率十列都畫得出來也選得到。"
+-    "剩下的界線是**選中之後那個值的呈現**(收合摘要 / Quick Set 圖磚 / 底列)"
+-    "—— 選了第四列收合摘要會空白,那一半才要 R2。",
+-    "執行期只有「原地改」有效:NBR 目錄項 repoint 與 NBU 集合索引改指向**都**在"
+-    "開機時固化,實機各驗過一次(§8.8 / §8.9)。塞不下要騰欄位,不是搬家。"
+-    "⚠ 這不否定開機時 repoint —— fpSup-Formats 就是那樣出貨的。",
+-    "★★ 上機 ⑥(§8.7):配對表搬家**成功**(選第 10 列會跳出「SD 卡不能用這個"
+-    "幀率」= 韌體正確認出 240 並套用媒體閘門)、控制器上限生效、CSV 列數生效 —— "
+-    "但**新的列完全沒有被畫出來**。「選得到」與「看得到」是兩件事:資料那一層"
+-    "(CSV + 配對表 + controller max)只給前者,畫出來要 NBU 那一層"
+-    "(影像陣列 0x1000B + 伴隨屬性 + 配置標頭,開機後每組資源集只解析一次)。"
+-    "那就是 routes 的 R2,我們自己的 fpSup-OG3K 做過:2538 words + 360 筆記錄 + "
+-    "私有 pack + 3~4 個 Thumb hook。**下一步要做的是這個。**",
+-    "選 14 bit 會卡住選單(REC 鍵可強制退出,再進正常,不是硬凍結)。推測是選到"
+-    "一個沒有美術、而且 picker 只有三張表的狀態,但**沒有證據**,別當結論。見 §8.7。",
+-    "★ 位元深度第四列 14 bit 已實作(§8.4),上機結果見 §8.7。原廠備齊了配對表"
+-    "第四筆 (1,3)、字串 0308 = '14 bit'、Qual:14bit、BitsPerSample —— 只缺 CSV "
+-    "一列與清單上限 2.0->3.0,兩者都做了。上機要看:第四列出現、excl 變體正確"
+-    "反灰、游標移得下去。選到之後能不能真的錄 14-bit 是 §4.5 的三件事,分開判。",
+-    "★ 14-bit:2026-09-29 追完,三個路障拆掉兩個半(§4)。enum 1 = 14-bit,"
+-    "BitsPerSample 原廠就對,選單配對表 0xC2E401CC 原廠就有四筆,第四張 picker "
+-    "表不需要(enum 1 走 else -> TAB3,我們的 hook 比對 key)。平面碼沒有 14 bpp,"
+-    "但原廠 14-bit 照片 profile(p41/p44/p81/p84)的 RAW 平面是碼 8 = 16 bpp 容器"
+-    "—— CANVAS_PLANE[14] 與 og3krecipe.S 的 plane_tab 都已改成 (7, 8),有測試釘住。"
+-    "**還沒上機。** 剩:增益政策(舊說法的位址可能記錯,重查前別引用)、"
+-    "CDNG 到底 packed 還是原樣倒出(上機量每格位元組數即可)、"
+-    "選單 eRawBitType 與 AXIS 位深一致性(BITLATCH 在 14-bit 時寫的是錯值,"
+-    "這個 build 沒人讀)。全開閘 14-bit 要不到:全高上限 19.55p 而格率池最低 23.98。",
+-    "★ 第十列格率(240 fps)還選不到:CSV 第 10 列、描述子長度、控制器上限都"
+-    "已上機寫入並讀回確認,但 enum<->列 配對表 0xC2E44EE4 只有九筆,游標從 "
+-    "119.88 往下會繞回 23.98。作法 2026-09-29 已解(§8.3):表位址與筆數是 "
+-    "0xC06CB6DC/E0/E8 三條指令的立即值,改三個字就能指到 cave 的 80 B 新表、"
+-    "筆數 9->10,第十筆填 (5, 9) —— enum 5 在配對表與有理數 switch 裡都是洞。"
+-    "**還沒實作、沒上機。** enum 5 對時間碼/音訊那些消費端的影響也沒查。",
++    "機上 mode 選單與依 mode 更新反灰尚未完成;目前可在機上控制格率與位深,其餘軸仍由主機設定。",
++    "選單新增列的收合摘要/圖示仍需實機驗收;CUSTOM 游標、位深/格率連動及 Invalid MovSize 驗證器訊息待確認。",
++    "14-bit 的增益政策、CDNG packed 14 vs 16 bpp 容器、回放仍待驗證;TAB3 共用與 RAW14 donor 可求解不代表可出貨。",
++    "回放須依每段素材自己的幾何重建;目前回放 hooks 尚未接,og3kname 仍使用初始尺寸。",
++    "CRCT 錄影側須非 unity RWZM 才可能選到 Hbin2;I0/I 成對驗證未做。x5 沒有係數證據。",
++    "CG_BIN/CG_FILL/CG_WINDOW 仍由安裝時決定;RWZM 與 >60 fps 閘門已是執行期。",
++    "RAW 可用緩衝容量未量測;burst 不再把 94 個描述子冒充最低格數,448 MiB 僅是假說。",
++    "不依媒體反灰是目標政策;WITH_FRCLASS 仍關閉,相機原廠 SD/SSD 媒體限制尚在。",
++    "輸出尺寸上下界、≥100 fps SSD 路徑及非等向 RWZM 的更多組合仍待實機驗證。",
++    "240 容器 FrameRate 已有 A001_171 證據;時間碼與音訊同步尚未確認。",
++    "mode 0 與自動選擇哨兵共用值;全高 RAW14 低於選單最低格率,暫不可強制選 ACQ。",
++    "無解仍退回固定 FHD30;不跟選單格率,也不表示 RAW14 無解時能產生正確 14-bit 素材。",
++    "測試卡須上機驗證開機/不錄影/關機/再開約十輪及跨卡暖啟動;Fast 與多產品合併未開放。",
+ )
+ 
+ 
+--- a/projects/open-gate/build/test_boot_entry_chain.py
++++ b/projects/open-gate/build/test_boot_entry_chain.py
+@@ -99,6 +99,10 @@
+     directory = output / f"{target}-{name}"
+     command = [sys.executable, str(HERE / "build_og3k_gyro.py"), "--out", str(directory)]
+     command += ["--dev-card"] if fast else (["--reference"] if combined else ["--no-gyro"])
++    if combined:
++        # refs() uses the current four-box packaging. Comparing its BIN with
++        # the legacy text-splash configuration changes stage2 and offsets.
++        command.append("--four-box-bar")
+     if not debug:
+         command.append("--release")
+     if fast:
+--- a/projects/open-gate/build/test_imx410_fmt.py
++++ b/projects/open-gate/build/test_imx410_fmt.py
+@@ -15,9 +15,9 @@
+ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+ from unicorn import UC_ARCH_ARM, UC_HOOK_CODE, UC_MODE_ARM, Uc
+ from unicorn.arm_const import UC_ARM_REG_LR, UC_ARM_REG_R0, UC_ARM_REG_R1, \
+-    UC_ARM_REG_R2, UC_ARM_REG_SP
+-
+-from armasm import assemble
++    UC_ARM_REG_R2, UC_ARM_REG_R6, UC_ARM_REG_SP
++
++from armasm import assemble, symbols
+ from imx410_block import (A_RATE, RATE_KEYS, RECIPE_WORDS, R_MODE, R_IDX,
+                           R_TW0, R_TW1, aspect_q_table, axis_words,
+                           canvas_template, expected_recipe, rate_table,
+@@ -29,7 +29,7 @@
+ RECIPE_CODE = 0x40002000
+ AXIS = 0x40010000
+ RECIPE = 0x40010040
+-ENTRY = 0x40010080
++ENTRY = 0x400100B0            # RECIPE 現為 27 字;舊 +0x80 會覆蓋後 11 字
+ RATETAB = 0x40010100
+ TMGTAB = 0x40010200
+ CTMPL = 0x40010400
+@@ -41,8 +41,11 @@
+ IMAGER = 0xC343B588
+ DESC = 0xC2F1E654
+ 
+-TAB = {12: 0xC0BE5B50, 10: 0xC0BE59B0, 8: 0xC0BE5810}
++TAB = {14: 0xC0BE5B50, 12: 0xC0BE5B50, 10: 0xC0BE59B0, 8: 0xC0BE5810}
+ BD = {12: 0, 10: 3, 8: 4}
++MENU_BD = {**BD, 14: 1}
++MENU_RETURN = {8: 0xC043B8D8, 10: 0xC043B908,
++               12: 0xC043B92C, 14: 0xC043B92C}
+ BITLATCH, PICKOK, FPSLATCH, HITS = 0xC0731C14, 0xC0731C44, 0xC0731C40, 0xC0730700
+ PROFILE = 13
+ 
+@@ -56,10 +59,10 @@
+ FMT_DEFS = [f"RECIPE={RECIPE:#x}", f"RECIPE_CODE={RECIPE_CODE:#x}",
+             f"ENTRY={ENTRY:#x}", f"PROFILE={PROFILE}",
+             f"AXIS={AXIS:#x}", f"RATESTR={RATESTR:#x}",
+-            "WITH_RATE_FROM_MENU=1"]
+-
+-
+-def run(axis, key: bytes, depth=12):
++            "WITH_RATE_FROM_MENU=1", "WITH_BIT_FROM_MENU=1"]
++
++
++def run(axis, key: bytes, depth=12, menu_depth=None, fmt_blob=None):
+     """模擬 picker 呼叫 hook 一次。回傳 (r0, 觀測到的各個鎖存)。"""
+     mu = Uc(UC_ARCH_ARM, UC_MODE_ARM)
+     mu.mem_map(0x40000000, 0x00040000)
+@@ -72,7 +75,8 @@
+     mu.mem_write(0xC0B00000, IMG[0xC0B00000 - B: 0xC0D00000 - B])
+     mu.mem_write(DESC, struct.pack("<4I", 0xC0B59500, 70, 0xC0B59DC0, 70))
+     mu.mem_write(IMAGER, struct.pack("<I", DESC))
+-    mu.mem_write(FMT_CODE, assemble("imx410_fmt.S", defines=FMT_DEFS))
++    mu.mem_write(FMT_CODE, fmt_blob if fmt_blob is not None else
++                 assemble("imx410_fmt.S", defines=FMT_DEFS))
+     mu.mem_write(RECIPE_CODE, assemble("og3krecipe.S", defines=DEFS))
+     mu.mem_write(RATETAB, rate_table())
+     mu.mem_write(TMGTAB, timing_table())
+@@ -93,9 +97,16 @@
+     mu.reg_write(UC_ARM_REG_R0, 0xAAAA0000)
+     mu.reg_write(UC_ARM_REG_R1, TAB[depth])
+     mu.reg_write(UC_ARM_REG_R2, keybuf)
++    # 非原廠呼叫者的 r6 刻意不可讀,證明不會亂走 config pointer。
++    config = 0x40011200 if menu_depth is not None else 0xDEAD0000
++    mu.reg_write(UC_ARM_REG_R6, config)
++    end = DONE
++    if menu_depth is not None:
++        mu.mem_write(config + 0x20, struct.pack("<I", MENU_BD[menu_depth]))
++        end = MENU_RETURN[menu_depth]
+     mu.reg_write(UC_ARM_REG_SP, STACK)
+-    mu.reg_write(UC_ARM_REG_LR, DONE)
+-    mu.emu_start(FMT_CODE, DONE, count=2_000_000)
++    mu.reg_write(UC_ARM_REG_LR, end)
++    mu.emu_start(FMT_CODE, end, count=2_000_000)
+ 
+     w = lambda a: struct.unpack("<I", mu.mem_read(a, 4))[0]
+     return dict(r0=mu.reg_read(UC_ARM_REG_R0),
+@@ -108,7 +119,47 @@
+                 bitlatch=w(BITLATCH), pickok=w(PICKOK),
+                 fpslatch=w(FPSLATCH), hits=w(HITS),
+                 timing=lambda a: struct.unpack("<3I", mu.mem_read(a, 12)),
+-                mu=mu)
++                sp=mu.reg_read(UC_ARM_REG_SP),
++                r6=mu.reg_read(UC_ARM_REG_R6), mu=mu)
++
++
++def test_native_menu_depth_overrides_stale_axis_before_recipe():
++    for bit in (8, 10, 12, 14):
++        raster = (5712, 3216) if bit == 14 else (3032, 2012)
++        ax = axis_words(bit=12 if bit != 12 else 8, rate="30", raster=raster)
++        got = run(ax, b"CUST24", depth=bit, menu_depth=bit)
++        want = axis_words(bit=bit, rate="24", raster=raster)
++        assert got["axis"] == list(want), (bit, got["axis"])
++        assert got["recipe"] == expected_recipe(REG, want), bit
++        assert got["bitlatch"] == MENU_BD[bit], bit
++        assert got["pickok"] == 1, bit
++        assert got["sp"] == STACK and got["r6"] == 0x40011200
++
++
++def test_menu_depth_bridge_is_scoped_to_custom_key():
++    got = run(OG3K, b"FHD24", depth=14, menu_depth=14)
++    assert got["passed"] and got["axis"] == list(OG3K)
++
++
++def test_native_callsite_contract_matches_firmware():
++    # 同一 config 的 +0x20 由 r6 讀;三條 BL 返回點各自必須指向 picker。
++    assert struct.unpack_from("<I", IMG, 0xC043B8B8 - B)[0] == 0xE5962020
++    for end in set(MENU_RETURN.values()):
++        insn = struct.unpack_from("<I", IMG, end - 4 - B)[0]
++        disp = insn & 0xFFFFFF
++        if disp & 0x800000:
++            disp -= 0x1000000
++        assert insn >> 24 == 0xEB and end + 4 + disp * 4 == 0xC043CCF8
++
++
++def test_bit_bridge_mutation_is_detected():
++    blob = bytearray(assemble("imx410_fmt.S", defines=FMT_DEFS))
++    offset = symbols("imx410_fmt.S", defines=FMT_DEFS)["bs_store"] + 20
++    assert struct.unpack_from("<I", blob, offset)[0] & 0xFFF00000 == 0x15800000
++    blob[offset:offset + 4] = bytes.fromhex("0000a0e1")
++    got = run(axis_words(bit=12, rate="24", raster=(5712, 3216)),
++              b"CUST24", depth=14, menu_depth=14, fmt_blob=bytes(blob))
++    assert got["axis"][0] != 14, "突變未改變結果:位深同步測試無效"
+ 
+ 
+ OG3K = axis_words(bit=12, rate="30", raster=(3032, 2012))
+--- a/projects/open-gate/build/test_imx410_full.py
++++ b/projects/open-gate/build/test_imx410_full.py
+@@ -291,13 +291,25 @@
+     assert POOL_INFLIGHT == POOL_TOTAL - 2
+ 
+ 
+-def test_burst_lower_bound_matches_a001_020():
+-    """240 fps + SD 的實測是 94/94 `vbuf` 乾淨停 —— 下界要對上。"""
++def test_descriptor_count_is_not_a_general_burst_lower_bound():
++    """A001_020 的 94 格不能推廣為 A001_150 等大格子的下界。"""
+     b = burst((2016, 672), 12, RATES["240"], MEDIA_SD)
+     assert not b["sustained"]
+-    assert b["frames"][0] == POOL_INFLIGHT
+-    assert 0.35 < b["seconds"][0] < 0.45          # 約 0.39 秒
++    assert b["frames"] is None and b["seconds"] is None
+     assert "乾淨停止" in b["why"] and "凍結" in b["why"]
++
++
++def test_burst_capacity_is_explicit_and_bytes_can_limit_before_descriptors():
++    geometry = (6016, 1416)
++    per = geometry[0] * geometry[1] * 12 // 8
++    b = burst(geometry, 12, 30, 0, buffer_bytes=per * 37)
++    assert b["frames"] == (37, 37) and b["frame_bytes"] == per
++    assert burst(geometry, 12, 30, 0)["frames"] is None
++
++
++def test_burst_uses_recording_matrix_not_visible_crop():
++    r = resolve(REG, bit=12, rate="30", raster=(3032, 2012))
++    assert r.burst["need_mbps"] == 3024 * 2012 * 1.5 * RATES["30"] / 1e6
+ 
+ 
+ def test_burst_sustained_when_writer_keeps_up():
+--- a/projects/open-gate/build/test_imx410_load.py
++++ b/projects/open-gate/build/test_imx410_load.py
+@@ -329,6 +329,7 @@
+     vol = P.volatile_addresses()
+     assert 0xC0732A08 in vol, "畫布的『最後 profile』槽沒列進去"
+     assert P.RECIPE in vol and P.CANVAS in vol and P.HITS in vol
++    assert all(P.AXIS + i * 4 in vol for i in range(9)), "選單改 AXIS 不應判為外來版本"
+     # hook 本身**不可以**是 volatile —— 那是分類唯一的依據
+     hooks = {a for a, _, n in P.plan() if "hook" in n}
+     assert not (hooks & vol), [hex(a) for a in hooks & vol]
+@@ -339,6 +340,38 @@
+         ov[a] = 0xA5A50000 + i
+     rc, io = run(overrides=ov, check=True)
+     assert rc == 0, "執行期槽偏離就認不出自己了"
++
++
++def test_short_batch_reply_recovers_every_missing_word():
++    def get(addr, count=1):
++        return [123] if count > 1 else [addr]
++    io = LD.CameraIO(mem_get=get, mem_set=lambda a, v: None)
++    assert io.read_many(0x1000, 3) == [123, 0x1004, 0x1008]
++
++
++def test_write_readback_mismatch_retries_boundedly():
++    memory, writes = {}, []
++    def put(addr, value):
++        writes.append((addr, value))
++        if len(writes) == 2:
++            memory[addr] = value
++    io = LD.CameraIO(mem_get=lambda a: [memory.get(a, 0)], mem_set=put)
++    assert io.write(0x1000, 7) and writes == [(0x1000, 7)] * 2
++
++
++def test_post_write_failure_rolls_back_the_uncertain_word():
++    class PostWriteFailure(LD.FakeIO):
++        tripped = False
++        def write(self, addr, value):
++            changed = super().write(addr, value)
++            if addr == PL.CTRL_CAP and not self.tripped:
++                self.tripped = True
++                raise LD.WriteFailed("寫入完成但讀回失敗")
++            return changed
++    io = PostWriteFailure(IMG)
++    assert LD.apply(io, image=IMG) == 1
++    assert io.tripped and io.read(PL.CTRL_CAP) == stock(PL.CTRL_CAP)
++    assert all(io.read(a) == stock(a) for a in HOOKS)
+ 
+ 
+ def test_read_retries_like_the_write_path_does():
+--- a/projects/open-gate/build/test_imx410_menu.py
++++ b/projects/open-gate/build/test_imx410_menu.py
+@@ -20,6 +20,17 @@
+ 
+ REG = Registry()
+ IMG = PL.FIRMWARE.read_bytes()
++
++
++def test_solver_menu_includes_raw14_and_tenth_rate():
++    options = M.bit_options(REG)
++    assert [o["bit"] for o in options if o["usable"]] == [8, 10, 12, 14]
++    rows = M.fps_options(REG, 12)
++    assert tuple(row["rate"] for row in rows) == M.MENU_RATES
++    assert rows[-1]["rate"] == "240" and rows[-1]["usable"]
++    raw14 = M.fps_options(REG, 14)
++    assert next(row for row in raw14 if row["rate"] == "24")["usable"]
++    assert not next(row for row in raw14 if row["rate"] == "240")["usable"]
+ 
+ 
+ def test_mode_axis_zero_means_auto_so_acq_cannot_be_forced():
+--- a/projects/open-gate/notes/IMX410_FULL_DESIGN.md
++++ b/projects/open-gate/notes/IMX410_FULL_DESIGN.md
+@@ -12,82 +12,40 @@
+ 
+ ---
+ 
+-## 0. 現在的狀態(2026-09-28)
+-
+-**能跑,而且錄出過正確的檔案。** 一次安裝加兩個選單指令就到位:
+-
+-```
+-./imx410_load.py                    1406 筆寫入、十顆 payload、十四個 hook
+-menu SetMovRecFormat 0              讓 FMTLATCH 鎖存 CinemaDNG(不能省)
+-menu SetMovRecSize 4                選 CUSTOM
+-```
+-
+-上機驗證過的(A001_125,2026-09-28):
+-
+-```
+-DNG   3024x2012 / 12-bit / StripByteCounts 9,126,432 = 3024x2012x1.5 精確
+-      DefaultCropSize [3008, 2002]   DefaultCropOrigin [8, 5]
+-      ExposureTime 1/60 = 29.97 的 180°
+-rec   req_cnt = fin_cnt = 51,零掉格,按鈕停
+-畫布  命中 184 次,相機全程活著
+-```
+-
+-### 七個軸的狀態
+-
+-| 軸 | 狀態 |
++## 0. 現在的狀態(2026-09-30)
++
++**七軸引擎已有實錄證據；本輪完成離線修補與測試卡，尚未上機驗收。**
++最新入口、精確產物、Build 規範對照與驗收順序在
++[Sensor Lab 專案頁](../../sensor-lab/README.md)。使用者要求上機前先說明。
++
++- 2026-09-28 的 A001_125：3024×2012 / 12-bit，StripByteCounts 9,126,432，
++  req_cnt = fin_cnt = 51，按鈕停止；這是舊配方的實機證據，不代表本次卡片已驗。
++- 2026-09-29 的 B/C 成對測試與 A001_171：donor 切換、240 與 2048/1024
++  非等向 RWZM 已有有限實機先例，詳見 §12.29、§12.33、§12.35。
++- 原生格率尾碼與位深 enum 現在同步到 AXIS 再重算。14-bit 共用 TAB3、
++  BITLATCH = 1，RAW14 donor 可解；增益、CDNG packing 與回放仍待驗。
++- RWZM 已是執行期軸；CG_BIN／FILL／WINDOW 仍由安裝時組態決定。
++  CRCT 需對照非 unity RWZM 的分支，不能沿用「對 CDNG 永遠無效」的結論(§6.2)。
++- `burst()` 改用記錄矩陣；實測可用緩衝容量未知時不報格數／秒數，
++  不再把 94 描述子當最低格數，也不把 448 MiB 假說當實測。
++- 普通與 debug 測試卡沿用共用 builder／stage2。執行期會改動的 146 個韌體字
++  已納入關機 journal；stage2 入口 SP 對齊缺口已補。沒有新 loader，也沒改兩個 pass。
++
++177 項 Sensor Lab 測試、2,280 組主機選單掃描，以及共用與精確成品的離線驗證
++詳見專案頁。尚缺機上 mode 選單／條件反灰、收合摘要驗收、每段幾何回放與實機廣度，
++不能標成「研究／產品完成」。最新清單在 §15，歷史過程保留在下文。
++
++### 檔案
++
++| 檔案 | 用途 |
+ |---|---|
+-| 原始解析度 | 16 個光柵族齊全,含「怎麼柴切全尺寸」(§2.1) |
+-| mode | 引擎算得出來,含消隱餘裕與 quiet/fast 指紋排序(§5.1、§5.2) |
+-| bit | 8/10/12 可用;14 列得出但無 mode,走 FHD fallback(§4) |
+-| 格率 | 到 240;480/960 擱置,缺的是 mode 不是韌體結構(§5) |
+-| 最終裁切 | ★ 已經是**輸入**:`resolve(want=…)` 逆向解出 bin/RWZM(§12.27) |
+-| hbin/vbin | H 1/3/5、V 1/3(§6) |
+-| RWZM | ★ 四個定點逐格、134 列零違反(§12.25);1600 已實機寫入且不凍(§12.29) |
+-
+-### 三個最重要的結論
+-
+-1. **畫布就是一整列 PARAM profile**(65 個字,位移連續)。寫它 = 就地宣告一個
+-   profile,不必新增列。§13
+-2. **donor profile 必須依配方的幾何挑。** 四次錄影凍結的共同根因是寫死 p13 ——
+-   它的 rec/act 是 0x0(空殼)。§12.20
+-3. **預設配方要逐欄等於已驗證的組態**,只在某個軸真的要求時才偏離。§12.21
+-4. **PARAM profile 是按「軸」分區塊、區塊內再分路徑的** —— H 區塊
+-   `+0x58/+0x5C/+0x60/+0x64`、V 區塊 `+0xC4/+0xC8/+0xD0/+0xD4`。把它讀成
+-   「預覽一組、錄影一組」就會差一個槽,UHD 因此整整一天解不開。§12.25
+-
+-### 還沒解的(依重要性;完整清單見 §15)
+-
+-```
+-非等向 RWZM              ZH!=ZV 零先例,§12.25 的槽位修正仍無實機仲裁
+-burst 模型對大格子高估    預測下界 94 格,實際 37 格,§12.29
+-MainB2 四列              七個軸目前只能從主機改,§8
+-回放整條                 og3kpbsel / og3kpb / canvas case B,位址已保留
+-og3kname 的 AW/AH        仍是編譯期值
+-```
+-
+-~~UHD 的水平縮減走哪條路~~ —— **2026-09-28 解開**。不是第二條路徑,
+-是 RWZM 四欄的配對讀錯一個槽;`+0xFC` 是衍生值不是分界。§12.25
+-~~幾何鏈的方向~~ —— **同日接上**。`resolve(want=…)` 走逆向,求解器留在主機,
+-相機一個位元都不用改。§12.27
+-**2026-09-29 上機驗過了**:B/C 成對 —— 同一個 3840x2160、兩組不同的旋鈕,
+-相機自己挑出 mode 102 與 mode 7(= 原廠 UHD30CROP / UHD30)。§12.29
+-
+-### 檔案
+-
+-```
+-build/imx410_full.py     七軸引擎(唯讀韌體,不碰相機)
+-build/imx410_block.py    AXIS/RECIPE/模板的佈局 + 主機端參考模型 + 逆向求解器
+-build/imx410_plan.py     寫入計畫與位址配置
+-build/imx410_load.py     載入器(--check / --disarm / --stage)
+-build/imx410_axis.py     推一組七軸上機、讀回 RECIPE 逐字比(--check 乾跑)
+-                         ⚠ 還沒跑過,連乾跑都沒有 —— 見 §12.28
+-build/og3krecipe.S       相機上的配方計算      build/imx410_fmt.S     picker hook
+-build/imx410_canvas.S    畫布                  build/imx410_aspect.S  長寬比(組兩次)
+-build/imx410_fps.S       快門角度
+-測試 125 項:test_imx410_{full,recipe,fmt,canvas,plan,load}.py
+-```
+-
+-**og3k_plan.py 一個字都沒改**,四個出貨目標仍是 1005 / 1038 / 938 / 1083。
++| `build/imx410_full.py` / `imx410_block.py` | 主機引擎、AXIS/RECIPE 模型、逆向幾何求解 |
++| `build/imx410_plan.py` / `imx410_menu.py` | 位址／寫入計畫、主機選單與反灰模型 |
++| `build/imx410_fmt.S` / `og3krecipe.S` | 原生選單同步、picker 與機上配方 |
++| `build/imx410_canvas.S` / `imx410_aspect.S` / `imx410_fps.S` | 畫布、比例、快門 |
++| `build/imx410_load.py` / `imx410_axis.py` | 有授權時的 USB 安裝、AXIS 更新；`load --check` 也會讀相機 |
++| `build/build_sensor_lab_card.py` | 離線普通／debug 測試卡，必須使用全新輸出目錄 |
++| `build/test_sensor_lab_card.py` | 真正執行精確 BIN，附 journal 與 ABI 突變檢查 |
+ 
+ ---
+ 
+@@ -3403,136 +3361,21 @@
+ 3. §13.5 的同一個問題:有沒有消費端直接照 profile id 讀 ROM 欄表。
+ 4. 55 KB 的 RAM 要從哪裡來(開發 cave 只有 3,920 bytes 可配)。
+ 
+-## 15. 還沒做的
+-
+-`imx410_plan.MISSING` 是這份的機器可讀版;兩邊要一起改。
+-`python3 imx410_plan.py` 會把它印出來。
+-
+-**擋住「公式完善」的:**
+-
+-1. ~~UHD 的水平縮減走哪條路。~~ **2026-09-28 解開,見 §12.25。** 沒有第二條
+-   路徑:`out = (in/bin)*1024/rwzm` 全部 134 列都成立,先前對不上是 RWZM
+-   四欄的配對讀錯一個槽。`+0xFC` 是感測器模式 scale 的衍生值,不是分界。
+-2. ~~幾何鏈的方向要反過來。~~ **2026-09-28 接上,見 §12.27。**
+-   `resolve(want=(w,h))` 走逆向,重現原廠 UHD30 / UHD30CROP 兩組解與已出貨的
+-   OG3K。求解器留在主機,相機一個位元都不用改(AXIS 本來就帶七個軸)。
+-
+-**擋住「能給人用」的:**
+-
+-3. ~~畫布閘門要搬進 payload。~~ **2026-09-29 做完,見 §12.31。**
+-   `canvas_emit` 改成位元圖分派,`CG_ZOOM` 由相機端每次重算配方時自己判斷 ——
+-   RWZM 是真的執行期軸了。`CG_BIN` 沒搬(CRCT 對 CDNG 只是宣告,§6.1),
+-   `CG_FILL`/`CG_WINDOW` 沒搬(跟著 donor 走,donor id 編進 picker 表項)。
+-4. **MainB2 四列。** 選單還沒有地方寫 AXIS,所以七個軸目前**只能從主機改**。
+-   三個未解問題見 §8.1。**整組 `B2_5_*` 的地圖(資源 / 描述子 / 槽 / 配對表 /
+-   上限)在 §8.4**,要沿用原廠列就查那張表。
+-
+-   ★ **選單模型 2026-09-29 改了**:不是精靈式四步,而是「mode 是主軸,
+-   其他軸靠反灰跟著它」(§8.6)。主機側完整(`mode_legal` / `menu_enabled` /
+-   `csv_set_enabled`,九個測試);**相機端三塊都沒做** —— 還沒有 mode 選單列、
+-   改 mode 時的 RAM 改寫、壓住 `FUN_c04a1120` 的類別函式。
+-   **QS 那一層不用另外做**(§8.5)。
+-
+-   ✅ **位元深度第四列「14 bit」已實作**(§8.4):配對表 `0xC2E401CC` 原廠就有
+-   第四筆 `(1,3)`、字串 `0308` 原廠就有,只缺 CSV 一列與上限 2.0→3.0。
+-   兩個障礙都解掉了(差 1 B 靠去掉結尾 CRLF —— 原廠三個 `.cvm` 的先例;
+-   上限不對齊靠 `put_bytes()` 讀改寫)。五個測試守著。**還沒上機。**
+-
+-   ⚠ **第十列格率(240 fps)的最後一哩已經解了,但還沒做。** CSV 第 10 列、
+-   描述子長度、控制器上限都已上機寫入並讀回確認;游標從 119.88 往下會繞回
+-   23.98,因為 enum↔列 配對表 `0xC2E44EE4` 只有九筆。**§8.3 給出了完整作法**:
+-   改 `0xC06CB6DC/E0/E8` 三個立即值,指到 cave 的 80 B 新表、筆數 9→10,
+-   第十筆填 `(5, 9)`(enum 5 是韌體自己留的空號)。**還沒實作、沒上機。**
+-5. ★ **回放整條** —— `og3kpbsel` / `og3kpb` / `og3kcanvas` 的 case B 都還沒接。
+-   位址已在 `_reused_regions()` 留著。連帶:`og3kname` 的 `TARGET_AW/AH` 仍是
+-   **編譯期**值,回放的辨識路徑拿那對尺寸比對,配方一換就對不上 —— 接回放時
+-   一起改成讀 RECIPE。
+-
+-   ⚠ **RWZM 變成執行期軸之後這條更急了**(使用者 2026-09-29 指出,決定之後
+-   再想):以前一張卡上的片子幾何是固定的,現在**同一張卡上每一段可以不一樣**。
+-   回放要嘛從片子自己的標籤取幾何,要嘛就認不得。這不只是「還沒接」,
+-   是設計上多了一個維度。
+-
+-**上機還沒看過的:**
+-
+-6. **輸出尺寸的上下界。** 高度那條 2026-09-29 追完了(韌體主動遮成偶數,
+-   12 處 `& 0xfffe`;寬度的 16 則是**沒人遮**的正確性要求 —— §3.1b)。
+-   剩下的是界線:**最小尺寸**沒有下界的證據(原廠最小的影像輸出是
+-   1920x1080,縮圖路徑的 240x160 是另一條路),**最大尺寸**除了
+-   「<= 窗口的縮減結果」之外,畫布/緩衝那側的上限沒查。
+-7. **`burst()` 對大格子高估。** A001_150 只錄到 **37 格**,而 §10 的模型下界是
+-   `POOL_INFLIGHT = 94`。每格 12.75 MB 遠大於模型假設的每格約 1.02 MB 在途
+-   成本,所以卡住的大概是 RAW 區容量而不是描述子數量 —— 模型少了一條
+-   「總位元組」的界線。
+-
+-   ★ **2026-09-29:這一條從「不擋路」變成擋路了。** 使用者決定媒體不反灰
+-   (§8.6),所以 `burst()` 的估計從參考值變成使用者**唯一**的事前資訊 ——
+-   高估就等於騙人。拿掉硬閘門和修這個模型是**同一件事的兩半**,要一起做。
+-
+-   (原本的說法:不擋路,行為仍是乾淨停止,但 UI 要顯示「錄得到多久」
+-   之前得先修。§12.29)
+-8. ~~CRCT 在錄影路徑完全沒有先例。~~ **2026-09-29 上機回答了,答案是否定的:
+-   CRCT 對 CDNG 只是一個會改幾何宣告的欄位,不做像素處理**(相關 0.987 對上
+-   純裁切)。連帶推翻了「7/16 光柵值得做 CRCT」那整套論證 —— 前提就是錯的。
+-   **CDNG 的縮減手段只有兩個:感測器模式與 RWZM。** §2、§6.1
+-   剩下的是一條新題目(使用者 2026-09-29 決定**之後再研究**):
+-   **要怎麼把 hbin/vbin 接進 CDNG 管線**。入口是 CRCT 的啟用位元在哪,
+-   以及預覽那 17 列是怎麼讓它生效的。
+-9. **非等向 RWZM:原廠零先例,但我們自己驗過了。** 原廠 306 列沒有一列 H ≠ V,
+-   所以 `RWZM_ANISOTROPIC_PROVEN` 仍是 False(那個旗標講的是**原廠**先例)。
+-   但 2026-09-29 我們自己在相機上跑成功:240 fps 配 RWZM 2048/1024,用來修正
+-   光柵 2016x672 的 3x6 非對稱(3x2 = 6 對 6x1 = 6,像素變方形、輸出正好 3:2),
+-   錄出 A001_171,幾何與長寬比都正確。**所以它可用,只是原廠沒這樣用過。**
+-   剩下的是廣度:只驗過這一組,其他比例沒掃過。§12.33
+-10. **CSV 游標。** 用 `Enabled=0,0` 關掉 UHD/FHD 而不是刪列(刪列會讓 enum 重
+-   編號)。游標會不會卡在被關掉的第一列,沒驗過。
+-11. **分組表的其餘比例。** 可見高只有 3:2 -> 1334(og3k 驗過)與 16:9 -> 1125
+-   (原廠)是已知good的,其餘是算出來的。§12.18
+-12. **≥100 fps 的 SSD 凍結**(§11 未解)。要 SSD 才選得到、要 shell 才量得到;
+-   破解方法是 `rec log-on` 把 log 寫到媒體上事後讀。
+-
+-**小的:**
+-
+-13. **韌體一直在噴 `Invalid MovSize`。** `MENU` 記錄頻道持續出現
+-   `0xC00A82C0 Invalid MovSize` —— 某個驗證器認為我們的 CUSTOM 解析度 enum
+-   不合法。功能上看起來沒事(錄得出來、幾何正確、DNG 標籤對),但這是
+-   **沒人注意過的抱怨**,值得追它是誰、會不會在別的路徑上擋事。§8.1
+-
+-14. ~~240 的容器格率沒跟上。~~ **2026-09-29 補上了,見 §12.35。**
+-   `imx410_rate.S`(128 B)換掉 `FUN_c00c9bd0` —— DNG `FrameRate` 標籤的唯一
+-   來源,所以不必做 §5 列的那四件事。A001_171 是 240000/1001。
+-   ⚠ 只管標籤:**時間碼與音訊同步仍走原廠 enum**,沒查。
+-15. ~~設定變更要自己重新觸發 picker。~~ **同日推翻,見 §12.36。**
+-   實測只改 AXIS(完全不碰選單)RECIPE 與畫布就跟著變了 —— 這條鏈本來就是
+-   反應式的。真正要記的是它的**生效條件**:LV 在跑、而且 picker 已經把我們的
+-   表項選上(畫布 hook 只在 profile id == 13 時做事)。
+-   診斷先看**畫布命中有沒有在跳**,那是最直接的指標。
+-X. ★ **舊的 240 容器格率項(已解決,保留編號用)** 感測器時序設得到 240(走 AXIS,§12.33 上機
+-   94 格乾淨停),但 DNG 的 `FrameRate` 仍是 30000/1001 —— app 層的 movie
+-   framerate 沒被改。要補的三樣 §5 早就列過:有理數(`FUN_c00c9bd0`)、
+-   CSV 第十列、控制器上限,**HSW 做過**。現況當慢動作素材用剛好(8x 慢速),
+-   但標籤是錯的。
+-
+-16. **14-bit** —— **2026-09-29 大幅推進,見重寫過的 §4。** 原本以為要做四件事
+-    (第四張 picker 表 / 一組 profile / 增益政策 / 回放修補),追下去發現:
+-    **第一件不存在**(enum 1 落進 else → TAB3,而我們的 hook 比對 key 不比對表),
+-    **第二件原廠給了值**(p41/p44/p81/p84 的 RAW 平面碼 8 = 16 bpp 容器 ——
+-    已經改進 `CANVAS_PLANE[14]` 與 `og3krecipe.S` 的 `plane_tab`,兩側有測試釘住),
+-    選單那側的配對表 `0xC2E401CC` **原廠就有四筆**,`BitsPerSample` 也原廠就對。
+-    主機側五組 14-bit 組態已經解得出來並借到真的 RAW14 donor。**還沒上機。**
+-
+-    剩下的:
+-    - **增益政策**沒解 —— §4 舊版指的 `FUN_c039dde8` 反組譯後看不到那個分派,
+-      位址可能記錯。**重查之前不要引用舊說法。**影響曝光,不影響能不能錄。
+-    - **容器 vs 標籤**:RAW 緩衝 16 bpp、`BitsPerSample` 寫 14,CDNG 到底
+-      packed 還是原樣倒出,**上機量每格位元組數就知道**(`w*h*2` vs `w*h*14/8`)。
+-    - **不變量**:選單的 eRawBitType 與 AXIS 的位深必須一致,兩邊分開來源。
+-      `imx410_fmt.S` 寫進 BITLATCH 的值在 14-bit 時是錯的(反推自 TAB3),
+-      目前這個 build 沒人讀它 —— 是明天的陷阱,不是今天的 bug。
+-    - **全開閘 14-bit 要不到**:RAW14 全高 4042 行的上限是 19.55p(hmax 911 的
+-      行時間,物理),而格率列舉池最低只到 23.98 —— 兩頭都差一點,碰不到。
+-      真正拿得到的是 **5712x3216 @ 24p**、3968x2640 @ 25p、4176x2174 @ 30p。
+-17. **`imx410_fmt` 的 fallback 固定 FHD30**,不跟選單格率走。原廠的退回同樣不跟
+-    (而且是 UHD),所以現況已經是嚴格的改善;要跟格率得在表裡找 `FHD<suffix>`。
+-18. **UI 顯示 `burst()`** 的「預計錄得到 N 格 / N 秒」。那是資訊不是警告 ——
+-    使用者要的就是「可以錄一下下」。§10.1
++## 15. 還沒做的(2026-09-30)
++
++`imx410_plan.MISSING` 是同一份機器可讀清單，兩邊必須一起改。
++已解決的舊項目及實驗過程保留在 §1–14；本節只列目前缺口。
++
++1. 機上 mode 選單與依 mode 更新反灰尚未完成;目前可在機上控制格率與位深,其餘軸仍由主機設定。
++2. 選單新增列的收合摘要/圖示仍需實機驗收;CUSTOM 游標、位深/格率連動及 Invalid MovSize 驗證器訊息待確認。
++3. 14-bit 的增益政策、CDNG packed 14 vs 16 bpp 容器、回放仍待驗證;TAB3 共用與 RAW14 donor 可求解不代表可出貨。
++4. 回放須依每段素材自己的幾何重建;目前回放 hooks 尚未接,og3kname 仍使用初始尺寸。
++5. CRCT 錄影側須非 unity RWZM 才可能選到 Hbin2;I0/I 成對驗證未做。x5 沒有係數證據。
++6. CG_BIN/CG_FILL/CG_WINDOW 仍由安裝時決定;RWZM 與 >60 fps 閘門已是執行期。
++7. RAW 可用緩衝容量未量測;burst 不再把 94 個描述子冒充最低格數,448 MiB 僅是假說。
++8. 不依媒體反灰是目標政策;WITH_FRCLASS 仍關閉,相機原廠 SD/SSD 媒體限制尚在。
++9. 輸出尺寸上下界、≥100 fps SSD 路徑及非等向 RWZM 的更多組合仍待實機驗證。
++10. 240 容器 FrameRate 已有 A001_171 證據;時間碼與音訊同步尚未確認。
++11. mode 0 與自動選擇哨兵共用值;全高 RAW14 低於選單最低格率,暫不可強制選 ACQ。
++12. 無解仍退回固定 FHD30;不跟選單格率,也不表示 RAW14 無解時能產生正確 14-bit 素材。
++13. 測試卡須上機驗證開機/不錄影/關機/再開約十輪及跨卡暖啟動;Fast 與多產品合併未開放。
+--- a/projects/open-gate/notes/RECORDING_GEOMETRY_AND_LENS_PROGRAM.md
++++ b/projects/open-gate/notes/RECORDING_GEOMETRY_AND_LENS_PROGRAM.md
+@@ -1,4 +1,9 @@
+ # 錄影幾何位址 + 機內鏡頭程式 (2026-08-25, USB shell 實機驗證)
++
++> **2026-09-30 更正入口：** 下方 §1 是早期觀測，不再作錄影幾何來源的結論。
++> `0xC37CE210` 曾在有效 DNG 錄影時全為 0，只是下游快取；見
++> [CANVAS_IS_NOT_THE_SETTINGS_BLOCK §13](CANVAS_IS_NOT_THE_SETTINGS_BLOCK.md#13-重開機之後位址穩定性以及-0xc37ce210-也出局)。
++> 畫布因果驗證見 [CANVAS_MOVED_AT_C043A19C](CANVAS_MOVED_AT_C043A19C.md)。
+ 
+ 全部在 USB shell 上驗過才會進 AutoRun —— 換卡開機錄影的迴圈太慢,而且失敗
+ 只看得到「沒有檔案」或凍結。
+--- a/projects/open-gate/notes/STATUS_2026-09-30.md
++++ b/projects/open-gate/notes/STATUS_2026-09-30.md
+@@ -1,7 +1,11 @@
+ # 現況報告 —— 2026-09-29 / 30
+ 
+ Custom Sensor(IMX410 全功能版)。這兩天的主軸是**選單**,順帶把 CRCT 那條
+-擱置很久的路重新打開。167 個測試全過,相機目前是乾淨原廠、有一次安裝待做。
++擱置很久的路重新打開。下方 §1–4、§6 保留這兩天的實機與研究紀錄。
++
++**2026-09-30 離線收尾更新：177 項 Sensor Lab 測試通過，普通／debug 測試卡已完成
++Build 規範的離線驗證。本輪沒有讀寫相機，不能由舊紀錄推定現在仍是乾淨原廠。**
++最新產物與上機前交接見 [Sensor Lab 專案頁](../../sensor-lab/README.md)。
+ 
+ ---
+ 
+@@ -122,42 +126,18 @@
+ 
+ ---
+ 
+-## 5. 待做
++## 5. 本輪收尾與下一步(2026-09-30)
+ 
+-### 馬上
++已完成：原生位深／AXIS 連動、14-bit BITLATCH、RAW14/240 主機選單、連拍模型
++容量未知處理、USB 不確定寫入還原、146 字 runtime journal，以及普通／debug
++精確測試卡。共用 stage2 補入口 SP 對齊，兩個 pass 與入口 ABI 保持不變。
+ 
+-**一次安裝 + 五步驗證**(已備妥,等使用者點頭):
++取代舊的「安裝 2011 項」預估：本次卡片計畫是 2042 個產品字加 146 個 journal
++宣告，合計 2188 字；普通 148 區段、debug 158 區段。來源與成品雜湊以 manifest 為準。
+ 
+-```
+-1  裝 2011 項,讀回確認
+-2  解析度應出現第三列 CUSTOM(前兩列反灰)   ← 驗修好的 CSV
+-3  選 CUSTOM -> FLAG 應變 1、HITS 開始跳
+-4  切格率 23.98 -> AXIS[1] 應為 0            ← §8.10 兩點差分
+-5  切格率 59.94 -> AXIS[1] 應為 6
+-```
+-
+-### 接著
+-
+-```
+-建卡          繞開 USB shell,而且**可以測開機時的 repoint**(執行期已否定)
+-              2011 個位址剛好是 64 個連續區段,對應卡片的 section 模型
+-CRCT 階段②   預設 I0 / I 已備妥(2016x1344,bin x1 vs x3,同為 rwzm 1600)
+-              ⚠ CG_BIN 是安裝時閘門,兩組各要重裝一次
+-反灰的相機端  壓住 FUN_c04a1120 固定回全開;媒體不反灰(使用者決定)
+-burst() 模型  拿掉硬閘門之後它變成使用者唯一的事前資訊,而它對大格子高估
+-              假說:瓶頸是總位元組(約 448 MiB)不是描述子數,兩個資料點都對得上
+-```
+-
+-### 14-bit 剩下的
+-
+-```
+-增益政策      沒有 movie raw 14bit 的 gain state(<flag> 只列 4/5/6/7)
+-容器 vs 標籤  RAW 緩衝 16 bpp 而 BitsPerSample 寫 14,packed 還是原樣倒出未知
+-              **上機量每格位元組數就知道**(w*h*2 vs w*h*14/8)
+-不變量        選單的 eRawBitType 與 AXIS 的位深要一致,目前兩個來源
+-可達的組合    5712x3216 @ 24p 最好;全開閘 14-bit 要不到(上限 19.55p,
+-              而格率列舉池最低 23.98,兩頭差一點)
+-```
++接下來先做不錄影開關機、CUSTOM 選單及位深／格率連動，**上機前先跟使用者說明**。
++本輪沒有相機連線、實體寫卡或發布，完整待辦見設計 §15。
++14-bit 增益／packing、CRCT I0/I、每段素材的回放與完整機上 mode 選單仍未完成。
+ 
+ ---
+ 
+--- a/projects/usb-shell-sup/notes/CARD_BUILD_PIPELINE.md
++++ b/projects/usb-shell-sup/notes/CARD_BUILD_PIPELINE.md
+@@ -1,4 +1,23 @@
+ # 出貨卡的建置流程 —— 現況盤點
++
++## 2026-09-30：Sensor Lab 離線驗收補 entry SP 對齊
++
++Sensor Lab 精確普通 BIN 在 Unicorn 執行時，原廠 caller 的 SP 偏移 4 bytes
++傳到產品 restore entry，違反既有 AAPCS 要求。共用 `stage2.S` 現在以 callee-saved
++r4 保存 SP、呼叫 entry 前向下對齊 8 bytes、返回後恢復原 SP。
++保留 r0 = 已解析自身入口、兩個 pass、既有入口順序和關機 journal，未改 loader bytes。
++同配置 AutoRun 前後逐 byte 相同；此修補只在 BIN。不是新的載入契約或產品專用 loader。
++
++`test_boot_chain test_loader_hook test_splash` 共 29 項通過；新增 aligned／4-byte-off
++入口測試。Sensor Lab 普通／debug 精確卡各 12 項通過，含刪掉對齊指令的反證。
++OG 整合回歸 14 種建置、3 組 AutoRun 比較、8 組 catalogue refs 通過；測試中的
++combined 配置補 `--four-box-bar`，對齊 catalogue 現行封裝，未改發布品或相等檢查。
++
++Sensor Lab 另將 picker／recipe 執行期會改的 146 個原廠字宣告為原字區段，
++由既有 journal 還原；沒有自己的 power-off callback。只做普通與 debug 獨立測試卡。
++本次均為離線結果，未連相機、未寫實體卡、未發布；不表示實機開關機已通過。
++產物、雜湊、stub 界線及中途失敗記錄見
++[Sensor Lab 收尾驗證](../../sensor-lab/validation/20260930/RESULTS.md)。
+ 
+ > **2026-09-25 更新(LOADER_V2):** 每張 `--loader` 卡的 stage2 現在都會先註冊關機回呼、記下被覆寫的韌體字,關機時寫回;`--loader-hook` 讓暖開機由 `0xC03DA420` 直接叫 loader、不跑 AutoRun;合併頁面的選項改為 Fast Start 2(`--store-boot --loader-hook --four-box-bar`)。本筆記以下內容是之前的狀態,新的設計、上機結果與未解問題見 `LOADER_V2.md`。
+ 
+--- /dev/null
++++ b/projects/open-gate/build/build_sensor_lab_card.py
+@@ -0,0 +1,175 @@
++#!/usr/bin/env python3
++"""Offline Sensor Lab test card, using the maintained shared loader.
++
++No camera transport, card deployment, Fast Start or merge support is implied.
++Run with --out NEW_DIRECTORY [--debug] [--axis-preset A].
++"""
++from __future__ import annotations
++
++import argparse
++from contextlib import contextmanager
++import hashlib
++import json
++import os
++from pathlib import Path
++import struct
++import subprocess
++import sys
++import tempfile
++
++HERE = Path(__file__).resolve().parent
++ROOT = HERE.parents[2]
++SHELL = ROOT / "fpSup/fp_usb_shell"
++sys.path.insert(0, str(HERE))
++import imx410_plan as PL
++from imx410_full import TIMING
++
++
++@contextmanager
++def source_directory():
++    before = Path.cwd()
++    os.chdir(HERE)
++    try:
++        yield
++    finally:
++        os.chdir(before)
++
++
++def runtime_restore_words(image):
++    """Register all native words that the resident hooks may change later.
++
++    The picker/recipe restores the previous donor on a mode change, but the
++    last donor and preview heights still need the shared power-off journal.
++    Mode-table relocation by another product is outside this standalone card.
++    """
++    addresses = set(PL.PREV_PROFILES)
++    for index in range(70):
++        addresses.update((TIMING + index * 0x20 + 4, TIMING + index * 0x20 + 8))
++    return [(a, struct.unpack_from("<I", image, a - PL.B)[0], "runtime restore")
++            for a in sorted(addresses)]
++
++
++def card_items(axis=None):
++    with source_directory():
++        items = PL.plan(recipe_axis=axis)
++        bad = PL.layout_errors() + PL.hook_errors() + PL.order_errors(items)
++    if bad:
++        raise ValueError("; ".join(bad))
++    image = PL.FIRMWARE.read_bytes()
++    restore = runtime_restore_words(image)
++    if len({a for a, _, _ in items + restore}) != len(items) + len(restore):
++        raise ValueError("duplicate destination in plan or runtime journal declarations")
++    # Code/state first, original-value journal declarations next, data next,
++    # hooks last in the plan's dependency order. Never sort hooks by address.
++    hooks = [x for x in items if "hook" in x[2]]
++    body = [x for x in items if "hook" not in x[2]]
++    private = [x for x in body if PL.CAVE_LO <= x[0] < PL.CAVE_HI]
++    external = [x for x in body if not PL.CAVE_LO <= x[0] < PL.CAVE_HI]
++    return private + restore + external + hooks
++
++
++def sections(items):
++    """Coalesce adjacent words without changing publication order."""
++    result = []
++    for address, value, _ in items:
++        if result and address == result[-1][0] + len(result[-1][1]):
++            result[-1][1].extend(struct.pack("<I", value))
++        else:
++            result.append((address, bytearray(struct.pack("<I", value))))
++    return [(a, bytes(b)) for a, b in result]
++
++
++def decode(blob):
++    magic, count, entry, length = struct.unpack_from("<4sIII", blob)
++    if magic != b"VBIN" or count > (len(blob) - 16) // 8:
++        raise ValueError("invalid VBIN header")
++    cursor = 16 + count * 8
++    end = cursor + length
++    if end > len(blob):
++        raise ValueError("truncated VBIN body")
++    records = []
++    for i in range(count):
++        address, size = struct.unpack_from("<II", blob, 16 + i * 8)
++        if size % 4 or cursor + size > end:
++            raise ValueError("invalid section length")
++        records.append((address, cursor, blob[cursor:cursor + size]))
++        cursor += size
++    if cursor != end or any(blob[end:]):
++        raise ValueError("body length or padding mismatch")
++    occupied = sorted((a, a + len(b)) for a, _, b in records if a)
++    if any(hi > next_lo for (_, hi), (next_lo, _) in zip(occupied, occupied[1:])):
++        raise ValueError("overlapping sections")
++    return entry, records
++
++
++def sha(path):
++    return hashlib.sha256(path.read_bytes()).hexdigest()
++
++
++def build(output, debug=False, axis=None):
++    output = Path(output).resolve()
++    if output.exists():
++        raise ValueError(f"output must be new: {output}")
++    items = card_items(axis)
++    output.mkdir(parents=True)
++    sources = {Path(__file__), PL.FIRMWARE, HERE / "imx410_plan.py",
++               HERE / "imx410_block.py", HERE / "imx410_full.py",
++               SHELL / "build_autorun.py", SHELL / "armasm.py",
++               SHELL / "patches.py", SHELL / "boot_splash.py"}
++    sources.update(HERE / source for _, source, _ in PL.payloads())
++    sources.update((SHELL / "templates").glob("*.S"))
++    sources.update((SHELL / "camera").glob("*.S"))
++    source_hashes = {str(p.relative_to(ROOT)): sha(p) for p in sorted(sources)}
++    with tempfile.TemporaryDirectory(prefix="sensor-lab-sections-") as tmp:
++        command = [sys.executable, "-B", str(SHELL / "build_autorun.py"),
++                   "--loader", "--banner", "Sensor Lab test", "--out",
++                   str(output / "AutoRun.txt"), "--vshl-entry", hex(PL.RESTORE_CODE)]
++        if not debug:
++            command.append("--no-shell")
++        for i, (address, data) in enumerate(sections(items)):
++            path = Path(tmp) / f"{i:03d}-{address:08x}.bin"
++            path.write_bytes(data)
++            command += ["--also-bin", f"{address:#x}:{path}"]
++        result = subprocess.run(command, capture_output=True, text=True)
++        (output / "build.log").write_text(result.stdout + result.stderr)
++        if result.returncode:
++            raise RuntimeError(f"shared builder failed; see {output / 'build.log'}")
++    entry, records = decode((output / "fpSup.BIN").read_bytes())
++    words = {a + i: struct.unpack_from("<I", data, i)[0]
++             for a, _, data in records if a >= 0x40000000
++             for i in range(0, len(data), 4)}
++    if any(words.get(a) != v for a, v, _ in items):
++        raise ValueError("packaged bytes differ from the Sensor Lab plan")
++    # Reuse the existing entry contract validator; no common entry implementation changes.
++    from test_boot_entry_chain import EntryCheck
++    check = EntryCheck().check(output, debug=debug, combined=False, restore=True)
++    if source_hashes != {str(p.relative_to(ROOT)): sha(p) for p in sorted(sources)}:
++        raise RuntimeError("source changed during build")
++    manifest = dict(product="Sensor Lab", kind="offline-test-card", debug=debug,
++                    hardware_verified=False, fast=False, merge_supported=False,
++                    axis=list(axis or PL.INITIAL_AXIS), entry=entry,
++                    entry_check=check, plan_words=len(items), sections=len(records),
++                    runtime_restore_addresses=[hex(a) for a, _, _ in runtime_restore_words(PL.FIRMWARE.read_bytes())],
++                    source_sha256=source_hashes,
++                    artifacts={n: sha(output / n) for n in ("AutoRun.txt", "fpSup.BIN")},
++                    limitations=list(PL.MISSING))
++    (output / "MANIFEST.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n")
++    return manifest
++
++
++def main():
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("--out", type=Path, required=True)
++    parser.add_argument("--debug", action="store_true")
++    parser.add_argument("--axis-preset")
++    args = parser.parse_args()
++    axis = None
++    if args.axis_preset:
++        from imx410_axis import preset_axis
++        axis, _ = preset_axis(PL.Registry(), args.axis_preset)
++    manifest = build(args.out, debug=args.debug, axis=axis)
++    print(json.dumps({k: manifest[k] for k in ("kind", "debug", "sections", "plan_words", "artifacts")}, indent=2))
++
++
++if __name__ == "__main__":
++    main()
+--- /dev/null
++++ b/projects/open-gate/build/test_sensor_lab_card.py
+@@ -0,0 +1,226 @@
++#!/usr/bin/env python3
++"""Execute the exact Sensor Lab card through the shared loader, offline only.
++
++The worker spawn and named firmware services are stubs. The real loader,
++stage2, entries trampoline, Sensor Lab restore entry, selector and picker run.
++"""
++import argparse
++import json
++from pathlib import Path
++import re
++import struct
++import sys
++import tempfile
++
++HERE = Path(__file__).resolve().parent
++sys.path[:0] = [str(HERE), str(HERE.parents[2] / "fpSup/fp_usb_shell")]
++import build_sensor_lab_card as B
++import imx410_plan as PL
++import test_loader_hook as T
++from armasm import symbols
++from unicorn.arm_const import (UC_ARM_REG_R0, UC_ARM_REG_R1, UC_ARM_REG_R2,
++                               UC_ARM_REG_R4, UC_ARM_REG_R5, UC_ARM_REG_R6,
++                               UC_ARM_REG_LR, UC_ARM_REG_PC, UC_ARM_REG_SP)
++
++
++class SensorCamera(T.Camera):
++    def __init__(self, directory, have_file=True, preference=0, movie_format=0, blob=None):
++        self.blob = blob if blob is not None else (directory / "fpSup.BIN").read_bytes()
++        entry, records = B.decode(self.blob)
++        self.worker_pc = None
++        self.worker_offset = None
++        if entry < 0x40000000 and entry:
++            table = symbols(B.SHELL / "templates/entries.S")["table"]
++            self.worker_offset = struct.unpack_from("<I", self.blob, entry + table + 4)[0]
++        text = (directory / "AutoRun.txt").read_text()
++        loader = {int(a, 16): int(v, 16) for a, v in
++                  re.findall(r"^mem set (0x[0-9A-Fa-f]+) (0x[0-9A-Fa-f]+)", text, re.M)
++                  if T.CAVE_LOW <= int(a, 16) < T.CAVE_LOW + 0x200}
++        assert loader
++        self.movie_format = movie_format
++        self.sensor_entries = 0
++        self.stop_at = set()
++        self.native_calls = []
++        super().__init__(loader, self.blob, have_file=have_file)
++        self.mu.mem_write(0xC30754CC, struct.pack("<I", preference))
++
++    def _hook(self, mu, address, size, data):
++        if address in self.stop_at:
++            mu.emu_stop()
++            return
++        if address == self.worker_pc:
++            assert self.r(UC_ARM_REG_R0) == address and self.r(UC_ARM_REG_SP) % 8 == 0, (hex(address), hex(self.r(UC_ARM_REG_R0)), hex(self.r(UC_ARM_REG_SP)))
++            self.calls.append("WORKER_STUB")
++            return self._ret(0)
++        if address == PL.RESTORE_CODE:
++            assert self.r(UC_ARM_REG_R0) == address and self.r(UC_ARM_REG_SP) % 8 == 0, (hex(address), hex(self.r(UC_ARM_REG_R0)), hex(self.r(UC_ARM_REG_SP)))
++            self.sensor_entries += 1
++            self.calls.append("SENSOR_ENTRY")
++        native = {0xC0057AE8: 0xC3000300, 0xC005BE90: self.movie_format,
++                  0xC0423C48: 0xC3000400}  # getter, format, inactive LV holder
++        if address in native:
++            assert self.r(UC_ARM_REG_SP) % 8 == 0
++            self.native_calls.append(address)
++            return self._ret(native[address])
++        if address == PL.SEL_HOOK + 4:
++            # Original setter body is a declared stub. Its displaced push has
++            # executed; perform the matching pop and return, preserving ABI.
++            sp = self.r(UC_ARM_REG_SP)
++            words = struct.unpack("<4I", mu.mem_read(sp, 16))
++            for reg, value in zip((UC_ARM_REG_R4, UC_ARM_REG_R5, UC_ARM_REG_R6, UC_ARM_REG_PC), words):
++                mu.reg_write(reg, value)
++            mu.reg_write(UC_ARM_REG_SP, sp + 16)
++            return
++        if address == T.F["F_READ"]:
++            if self.worker_offset is not None:
++                self.worker_pc = self.r(UC_ARM_REG_R1) + self.worker_offset
++            super()._hook(mu, address, size, data)
++            self.entry = None  # execute our entry/trampoline instead of T's entry stub
++            return
++        # Reject unexpected firmware execution instead of accepting ROM noise.
++        if 0xC0000000 <= address < 0xC3000000:
++            allowed = (address in self.by_addr or
++                       T.CAVE_LOW <= address < T.CAVE_LOW + 0x200 or
++                       PL.CAVE_LO <= address < PL.CAVE_HI or
++                       address in (PL.SEL_HOOK, PL.PIK_HOOK))
++            if not allowed:
++                raise AssertionError(f"unstubbed firmware execution at {address:#x}")
++        return super()._hook(mu, address, size, data)
++
++    def boot(self):
++        result = self.call(T.CAVE_LOW)
++        assert result[1] == T.STACK - 0x1004
++        if self.have_file:
++            assert self.sensor_entries == 1
++            assert [flag for _, flag in self.registered] == [0, 1]
++            assert self.word(0xC0731C20) == self.movie_format
++            assert "DCACHE" in self.calls and "ICACHE" in self.calls
++            assert self.calls.index("DCACHE") < self.calls.index("ICACHE") < self.calls.index("SENSOR_ENTRY")
++        return result
++
++
++def verify(directory):
++    manifest = json.loads((directory / "MANIFEST.json").read_text())
++    for name, digest in manifest["artifacts"].items():
++        assert B.sha(directory / name) == digest, name
++    cam = SensorCamera(directory)
++    cam.boot()
++    assert cam.word(0xC0731C08) == 0
++    if manifest["debug"]:
++        assert cam.calls.index("WORKER_STUB") < cam.calls.index("SENSOR_ENTRY")
++    else:
++        assert "WORKER_STUB" not in cam.calls
++    _, records = B.decode(cam.blob)
++    firmware = [(a, data) for a, _, data in records
++                if a >= 0x40000000 and not T.CAVE_LO <= a < T.CAVE_HI]
++    obj = cam.registered[0][0]
++    journal, saved = cam.word(obj + 8), {}
++    while cam.word(journal):
++        a, size = cam.word(journal), cam.word(journal + 4)
++        for i in range(0, size, 4):
++            saved[a + i] = cam.word(journal + 8 + i)
++        journal += 8 + size
++    runtime = [int(a, 16) for a in manifest["runtime_restore_addresses"]]
++    assert len(runtime) == 146 and all(a in saved for a in runtime)
++    for a in runtime:
++        cam.mu.mem_write(a, struct.pack("<I", saved[a] ^ 0x00123456))
++    for _ in range(2):
++        cam.call(cam.word(obj + 4), r0=obj, r1=4)
++    for address, data in firmware:
++        assert bytes(cam.mu.mem_read(address, len(data))) == cam.stock[address - PL.B:address - PL.B + len(data)]
++    # Warm image: firmware restored, cave retained, BSS/heap recreated as at boot.
++    warm = SensorCamera(directory)
++    warm.mu.mem_write(T.CAVE_LO, bytes(cam.mu.mem_read(T.CAVE_LO, T.CAVE_HI - T.CAVE_LO)))
++    warm.boot()
++    assert warm.word(0xC0731C08) == 0 and warm.word(PL.RECIPE + 9 * 4) == 0
++
++    for preference, fmt, expected in ((1, 0, 1), (1, 1, 0)):
++        selected = SensorCamera(directory, preference=preference, movie_format=fmt)
++        selected.boot()
++        assert selected.word(0xC0731C08) == expected
++    missing = SensorCamera(directory, have_file=False)
++    missing.boot()
++    assert missing.sensor_entries == 0 and missing.registered == []
++    assert missing.word(PL.PIK_HOOK) == PL.PIK_STOCK
++
++    # Exact delivered picker bytes: a 14-bit menu request must replace stale 12.
++    actual = SensorCamera(directory)
++    actual.boot()
++    from imx410_block import axis_words, expected_recipe, RECIPE_WORDS
++    axis = axis_words(bit=12, rate="30", raster=(5712, 3216))
++    mu = actual.mu
++    mu.mem_write(PL.AXIS, struct.pack("<9I", *axis))
++    mu.mem_write(0xC2F1E654, struct.pack("<4I", 0xC0B59500, 70, 0xC0B59DC0, 70))
++    mu.mem_write(0xC343B588, struct.pack("<I", 0xC2F1E654))
++    mu.mem_write(0xC3000600, b"CUST24\x00" + bytes(25))
++    mu.mem_write(0xC3000720, struct.pack("<I", 1))
++    for reg, value in ((UC_ARM_REG_R0, 0xC3000300), (UC_ARM_REG_R1, 0xC0BE5B50),
++                       (UC_ARM_REG_R2, 0xC3000600), (UC_ARM_REG_R6, 0xC3000700),
++                       (UC_ARM_REG_LR, 0xC043B92C), (UC_ARM_REG_SP, T.STACK - 0x1000)):
++        mu.reg_write(reg, value)
++    actual.stop_at.add(0xC043B92C)
++    mu.emu_start(PL.PIK_HOOK, 0xC043B92C, count=2_000_000)
++    want = expected_recipe(PL.Registry(), axis_words(bit=14, rate="24", raster=(5712, 3216)))
++    got = list(struct.unpack(f"<{RECIPE_WORDS}I", mu.mem_read(PL.RECIPE, RECIPE_WORDS * 4)))
++    assert got == want and actual.word(PL.BITLATCH) == 1
++
++    # Mutate the delivered BIN, not shared source: move one runtime declaration
++    # into unused private cave so stage2 no longer journals that native word.
++    mutant = bytearray(cam.blob)
++    index = next(i for i, (a, _, _) in enumerate(records) if a == runtime[0])
++    struct.pack_into("<I", mutant, 16 + index * 8, 0xC0730300)
++    broken = SensorCamera(directory, blob=bytes(mutant))
++    broken.boot()
++    j = broken.word(broken.registered[0][0] + 8)
++    covered = set()
++    while broken.word(j):
++        a, size = broken.word(j), broken.word(j + 4)
++        covered.update(range(a, a + size, 4))
++        j += 8 + size
++    assert runtime[0] not in covered, "journal mutation was not exercised"
++    missing_runtime = set(runtime) - covered
++    assert missing_runtime, "coverage check failed to detect removed runtime declaration"
++    # Removing the stage2 alignment from the exact card must fail at entry.
++    marker = bytes.fromhex("0d40a0e107d0cde300c0a0e13cff2fe104d0a0e1")
++    assert cam.blob.count(marker) == 1
++    mutant = bytearray(cam.blob)
++    offset = mutant.index(marker) + 4
++    mutant[offset:offset + 4] = bytes.fromhex("0000a0e1")
++    try:
++        SensorCamera(directory, blob=bytes(mutant)).boot()
++    except AssertionError as error:
++        assert error.args and isinstance(error.args[0], tuple), error
++    else:
++        raise AssertionError("unaligned entry mutation escaped detection")
++    return dict(directory=str(directory), checks=["exact-bytes", "entry-ABI", "cache-order",
++                "journal-146-runtime-words", "power-off-twice", "warm-image",
++                "saved-selection", "MOV-guard", "missing-BIN", "packaged-RAW14-picker",
++                "journal-coverage-mutation", "entry-alignment-mutation"], artifacts=manifest["artifacts"])
++
++
++def main():
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("--out", type=Path)
++    args = parser.parse_args()
++    output = args.out or Path(tempfile.mkdtemp(prefix="sensor-lab-card-test-"))
++    output.mkdir(parents=True, exist_ok=True)
++    results = []
++    for debug in (False, True):
++        name = "debug" if debug else "plain"
++        directory = output / name
++        B.build(directory, debug=debug)
++        results.append(verify(directory))
++        print(f"PASS {name}: {len(results[-1]['checks'])} checks", flush=True)
++        variant = output / f"{name}-alternate-axis"
++        axis = list(PL.INITIAL_AXIS)
++        axis[5] = 1600
++        B.build(variant, debug=debug, axis=axis)
++        assert (variant / "AutoRun.txt").read_bytes() == (directory / "AutoRun.txt").read_bytes()
++        assert (variant / "fpSup.BIN").read_bytes() != (directory / "fpSup.BIN").read_bytes()
++    (output / "verification.json").write_text(json.dumps(dict(cards=results, autorun_independent=True,
++                   hardware_verified=False, stubs="worker spawn, file/allocator/cache/OS services, native getters, original setter body, inactive LV"), indent=2) + "\n")
++    print(f"PASS payload-only changes preserve AutoRun; report: {output / 'verification.json'}")
++
++
++if __name__ == "__main__":
++    main()
+--- /dev/null
++++ b/projects/sensor-lab/README.md
+@@ -0,0 +1,79 @@
++# Sensor Lab — 上機前收尾
++
++更新：2026-09-30。**目前是可供下一輪驗收的測試產品，尚未完成產品驗收。**
++這一輪只修改本機來源、建置與模擬；沒有連相機、寫實體卡片或發布。
++使用者要求上機前先說明。本次上機範圍尚未確認。
++
++Sensor Lab 的現行實作是 Custom Sensor 七軸引擎，沿用
++[`../open-gate/build/imx410_plan.py`](../open-gate/build/imx410_plan.py)；
++不搬動原本的程式，也不另複製載入器。
++完整機制與實機歷史見 [IMX410_FULL_DESIGN](../open-gate/notes/IMX410_FULL_DESIGN.md)。
++
++## 本輪完成
++
++- 原生位深選單同步到 AXIS 後才重算配方；12/14-bit 共用 TAB3 時，14-bit 的鎖存值改為正確的 enum 1。只讀三個已核對原廠呼叫點的設定，其他呼叫不解參考未知 r6。
++- 主機選單納入可求解的 RAW14 與第十列 240，統一正消隱預算。可求解不等於已上機。
++- 連拍估計使用完整記錄矩陣；未量到可用 RAW 緩衝容量時，格數／秒數顯示未知。94 個描述子不再被當成保證下界；448 MiB 不作預設值。
++- USB 安裝器補上短批次讀取的逐字回讀、寫後讀回失敗的有限重試，以及最後一次寫入結果不明時的還原。AXIS 九個執行期狀態字不再誤判成外來程式。
++- 加入普通與 debug 測試卡 builder。70 個 donor 的兩個時序字與六個預覽高度，共 146 個執行期會改動的韌體字，先交給共用 journal 保存；PBFLAG 明確初始化。
++- 實際卡片模擬抓到 stage2 入口的堆疊對齊缺口：現在呼叫 entry 前對齊 8 bytes，返回後恢復原 SP。兩個 pass、r0 自身位址與入口順序保留；loader bytes 與同配置的 AutoRun 不變。
++
++## Build 規範與產物
++
++遵循 [`fpSup/SUP_BUILD_RULES.md`](../../fpSup/SUP_BUILD_RULES.md)。
++[`build_sensor_lab_card.py`](../open-gate/build/build_sensor_lab_card.py) 只把產品內容交給
++共用 `build_autorun.py --loader`，以 `--vshl-entry 0xC0731600` 指定會返回的初始化入口。
++普通版用 `--no-shell`；debug 由共用 `entries.S` 依序呼叫 worker → restore。
++**目前只支援獨立普通卡與 debug 卡；Fast、合併卡及其他產品已搬移 mode table 的情況不在支援範圍。**
++
++本機產物：[20260930-preflight](cards/20260930-preflight/)。
++`plain/` 是普通測試卡；`debug/` 帶 USB shell，供下一輪觀測。
++兩個 `*-alternate-axis/` 目錄僅作「換配方不改 AutoRun」的比較，不是建議上機版本。
++每張卡的 `MANIFEST.json` 記錄來源與產物 SHA-256、entry、區段、journal 位址和限制；
++[`verification.json`](cards/20260930-preflight/verification.json) 記錄精確成品的模擬結果。
++沒有覆蓋 frozen release。
++
++從專案根目錄建到**全新目錄**：
++
++```sh
++python3 -B projects/open-gate/build/build_sensor_lab_card.py --out /tmp/sensor-lab-plain-new
++python3 -B projects/open-gate/build/build_sensor_lab_card.py --debug --out /tmp/sensor-lab-debug-new
++python3 -B projects/open-gate/build/test_sensor_lab_card.py --out /tmp/sensor-lab-verification-new
++```
++
++相容的配方／payload／entry 更新不要求換 AutoRun，已比較實際檔案。
++這不表示可把普通版與 debug 版混搭；第一次部署仍須選用同一目錄的完整產物。
++SHA-256 僅用於本機追溯，未加入 runtime 配對或版本檢查。
++
++## 離線驗證
++
++| 範圍 | 結果 | 證據 |
++|---|---|---|
++| 七組 Sensor Lab 測試 | 177/177：full 58、recipe 14、fmt 16、canvas 10、plan 39、load 27、menu 13 | [測試日誌](validation/20260930/) |
++| 主機選單掃描 | 2,280 組、0 broken，包含 RAW14 與 240 | [掃描日誌](validation/20260930/menu-sweep.log) |
++| 共用 boot/loader/splash | 29 項通過 | [共用測試](validation/20260930/shared-loader.log) |
++| OG 入口與 catalogue | 14 種建置、3 組 AutoRun 比較、8 組 catalogue references 通過 | [報告](validation/20260930/open-gate-entry-chain.json) |
++| Sensor Lab 精確 BIN | 普通／debug 各 12 項檢查，加上兩組 payload-only 比較 | [報告](cards/20260930-preflight/verification.json) |
++
++精確 BIN 檢查涵蓋：入口 ABI、D/I cache 次序、146 字 journal、兩次關機還原、
++保留 cave 的暖映像、保存的 CUSTOM 選擇、MOV guard、缺 BIN、原生 RAW14 picker。
++故意刪掉 journal 宣告及 stage2 的對齊指令，檢查都能識別錯誤。
++較早的失敗及修正原因記於 [收尾驗證紀錄](validation/20260930/RESULTS.md)。
++
++模擬真正執行 loader、stage2、入口 trampoline、restore、selector 和 picker；
++worker 建立、檔案／配置／快取／OS 服務、原廠 getter／setter body 與未啟動的 LV 使用 stub。
++**這些測試不能證明實際快取、排程、USB、感測器、錄影或暖開機穩定。**
++
++## 上機前交接
++
++建議首輪使用 `debug/` 的精確產物，先驗證載入與選單連動：
++
++1. 確認相機與卡片現況、保存原始檔案，讀回部署後的 SHA-256。
++2. 開機後驗 entry 狀態、CUSTOM 游標、選單摘要，以及切換 8/10/12-bit 與基準格率時的 AXIS／RECIPE；14-bit 留給有合法 RAW14 配方的專項。
++3. 先做不錄影的開機→關機→再開約十輪，並另做上一張卡切到這張卡的暖開機驗證。
++4. 前述穩定後，再分開安排基準 12-bit 短片、RAW14 封裝／曝光、CRCT I0/I 與高格率測試。
++
++這是一份待確認的上機順序，尚未執行。RAW14、CRCT、≥100 fps SSD、
++音訊／時間碼與每段不同幾何的回放都不能因為這次離線通過而標成完成。
++機上 mode 選單、依 mode 反灰和完整回放仍有實作工作；最新缺口以
++[`imx410_plan.MISSING`](../open-gate/build/imx410_plan.py) 與設計 §15 為準。
+--- /dev/null
++++ b/projects/sensor-lab/validation/20260930/RESULTS.md
+@@ -0,0 +1,112 @@
++# Sensor Lab：2026-09-30 離線驗證紀錄
++
++本輪依使用者要求收尾，遵循 [`SUP_BUILD_RULES.md`](../../../../fpSup/SUP_BUILD_RULES.md)。
++**沒有相機連線、實體寫卡、commit、push 或發布。** 上機前須先交接範圍。
++目前完成的是離線修補與驗收準備；完整機上 mode 選單、條件反灰、逐段回放等仍未完成。
++
++## 修改與問題定位
++
++1. 原生 picker 的同次 config `+0x20` 是位深 enum。只接受已核對的三個返回點
++   `C043B8D8/B908/B92C`，先同步 AXIS 再算配方，14-bit 的 BITLATCH = 1。
++   payload 移至 `C0730740`，不與 aspect2／fps 重疊，沒有新增 hook。
++2. 原 fmt 測試把 ENTRY 放在 RECIPE 的尾端，配方擴至 27 字後重疊。
++   測試配置已修正並比對完整配方；交付產品原有獨立配置不受此測試缺陷影響。
++3. 安裝器處理短批次讀取，寫後讀回不符會有限重試，最後一次寫入結果不明也回復。
++   九個 AXIS 字加入可變狀態集合；同一版不因正常選單操作被誤判外來。
++4. RAW14／240 納入主機選單；連拍資料率使用完整記錄矩陣。
++   容量未知時不報格數／秒數；14-bit 暫依已知 16 bpp RAW 緩衝估算，CDNG packing 未驗。
++5. 新 builder 封裝 2042 個產品字，加上 146 個執行期修改位址的原字宣告。
++   stage2 在 entry 前將它們納入 journal；普通 148 區段、debug 158 區段。
++6. 真正執行精確 BIN 時，發現 stage2 在呼叫端 SP 偏移 4 bytes 時違反入口對齊要求。
++   共用 `stage2.S` 只增加保存 SP、對齊 SP、恢復 SP 三條指令，保留兩個 pass、
++   `r0 = entry 自身位址` 和原入口順序。未改 loader、entries ABI 或 shutdown 架構。
++
++## 通過項目
++
++| 測試 | 結果 |
++|---|---|
++| `test_imx410_full.py` | 58/58 |
++| `test_imx410_recipe.py` | 14/14 |
++| `test_imx410_fmt.py` | 16/16 |
++| `test_imx410_canvas.py` | 10/10 |
++| `test_imx410_plan.py` | 39/39 |
++| `test_imx410_load.py` | 27/27 |
++| `test_imx410_menu.py` | 13/13 |
++| `imx410_menu.py --sweep` | 2280 組，0 broken |
++| 共用 `test_boot_chain test_loader_hook test_splash` | 29 項，0 skipped |
++| `test_boot_entry_chain.py` | 14 建置、3 AutoRun 比較、8 catalogue references |
++| `test_sensor_lab_card.py` | 普通／debug 各 12 項，另 2 組 payload-only 比較 |
++
++七組 Sensor Lab 合計 177 項；各組 stdout/stderr 在同目錄 `.log`。
++共用 suite 完整結果在 [`shared-loader.log`](shared-loader.log)。
++OG 建置報告在 [`open-gate-entry-chain.json`](open-gate-entry-chain.json)，原始產物留於
++`/private/tmp/sensor-lab-entry-chain-20260930-r2`；只呼叫 catalogue 的 `refs()`，未執行發布 main。
++精確 Sensor Lab 產物與 manifest 在 [`../../cards/20260930-preflight`](../../cards/20260930-preflight/)。
++
++精確卡片測試的 12 項：雜湊、入口 ABI、快取呼叫次序、146 字 runtime journal、
++兩次關機回復、保留 cave 的暖映像、保存 CUSTOM 選擇、MOV guard、缺 BIN、
++真實 RAW14 picker、journal 宣告突變、entry 對齊突變。
++兩組突變直接修改測試中的 BIN 副本，不改交付 BIN 或共用來源。
++
++執行環境：macOS 的 Python 3.9／Unicorn 2.1.4。Unicorn 在受限執行環境中
++`emu_start` 曾以 SIGILL 結束，經核准改於非沙箱執行純離線模擬後成功；
++未將崩潰當成測試通過。沒有以模擬結果宣稱已驗證硬體快取或實際開关機。
++
++## 中途失敗與修正
++
++- Sensor Lab plain 最初在實際 entry 因 SP 未對齊失敗，據此修共用 stage2；
++  新增對齊／未對齊兩種呼叫端測試，並用刪掉 `bic sp,sp,#7` 的突變確認能抓到。
++- debug 測試起初把 worker offset 加到固定 heap 起點，忽略 loader 真正的 read buffer。
++  harness 改從 `F_READ` 的 r1 取得 staging base；worker stub 也核對 r0/SP。
++- 整合測試最初在 catalogue source 比較失敗。差異是測試用舊文字橫幅配置對比
++  catalogue 的四格配置（stage2 大小不同），非產品 payload 差異。
++  只修 `test_boot_entry_chain.py`，讓 combined 比較加 `--four-box-bar`；
++  沒有修改網站目錄、降低逐 byte 相等要求或覆寫 frozen release。全矩陣重跑通過。
++
++## 重跑方式
++
++```sh
++# 在 projects/open-gate/build；每支含自己的 runner，不需 pytest
++python3 -B test_imx410_full.py
++python3 -B test_imx410_recipe.py
++python3 -B test_imx410_fmt.py
++python3 -B test_imx410_canvas.py
++python3 -B test_imx410_plan.py
++python3 -B test_imx410_load.py
++python3 -B test_imx410_menu.py
++python3 -B imx410_menu.py --sweep
++
++# 在 fpSup/fp_usb_shell
++python3 -B -m unittest test_boot_chain test_loader_hook test_splash
++
++# 在專案根目錄；指定的目錄必須是新的
++python3 -B projects/open-gate/build/test_boot_entry_chain.py --out /tmp/og-entry-new
++python3 -B projects/open-gate/build/test_sensor_lab_card.py --out /tmp/sensor-card-new
++```
++
++`imx410_load.py --check` 會讀相機，**不是離線檢查**，本輪未執行。
++
++## 精確檔案與相容性
++
++| 成品 | SHA-256 |
++|---|---|
++| plain AutoRun.txt | `57845e1b8d422289167d7a29cdd9cdd4b453e82fc9b2b8513e624171d533910f` |
++| plain fpSup.BIN | `9d155ef11dc8c20947163a0b944b437b7633ad8d088895713453ab82dcad5a4f` |
++| debug AutoRun.txt | `5d5e31189e08e888d60df6ea85980d3b820d4536e33b3e82df359e641bec2b4d` |
++| debug fpSup.BIN | `6033a8cc1daf35efc1b8a5f099d2e432d6d5fde887db0b79e648e1babf848f2c` |
++
++每張卡的完整來源指紋與限制見各自 `MANIFEST.json`。修改 stage2 前後的 plain
++AutoRun 已逐 byte 比較相同；換 AXIS 的 plain/debug 比較也相同，BIN 有變。
++因此相容的 payload 更新只換 BIN，不加 runtime 雜湊或綁版要求。
++首次安裝或切換普通/debug 仍使用該配置完整一組檔案。
++
++## 限制與待驗收
++
++模擬執行真實 loader/stage2/entries/restore/selector/picker；worker spawn、檔案、
++配置、OS、快取服務、原廠 getter/setter body 及 inactive LV 為 stub。
++相機上的模式選單／條件反灰與每段幾何回放仍未完成；RAW14、CRCT I0/I、
++≥100 fps SSD、240 音訊／時間碼、未知容量、十輪不錄影開關機與跨卡暖啟動仍待驗。
++本次不支援 Fast／多產品合併，也不保證可疊在搬移 sensor mode table 的產品之上。
++
++原始修改前副本保留於
++`archive/codex-worklog/sensor-lab-closeout-20260930/before/`，避免混同使用者原有變更。

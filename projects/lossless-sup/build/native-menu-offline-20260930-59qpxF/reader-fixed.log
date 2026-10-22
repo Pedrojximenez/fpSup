@@ -1,0 +1,75 @@
+test_context_change_poison (__main__.ReaderTests) ... ok
+test_cursor_mismatch_poison (__main__.ReaderTests) ... ok
+test_early_stop_poison (__main__.ReaderTests) ... ok
+test_first_boundary_rejections_do_not_touch_reader (__main__.ReaderTests) ... ok
+test_fresh_init_and_parser_pointer_contract (__main__.ReaderTests) ... ok
+test_mutation_omitting_quarantine_exposes_native_partial_publication (__main__.ReaderTests) ... ok
+test_native_selector_cannot_publish_failed_partial_root (__main__.ReaderTests) ... ok
+test_page_fingerprint_and_record_count_are_pinned (__main__.ReaderTests) ... ok
+test_partial_root_is_quarantined_and_cannot_be_retried (__main__.ReaderTests) ... ok
+test_post_restore_string_scope (__main__.ReaderTests) ... ok
+test_prevalidation_rejects_malformed_record_even_if_hash_is_updated (__main__.ReaderTests) ... ok
+test_reentry_executes_guard_and_preserves_first_partial_diagnostics (__main__.ReaderTests) ... ok
+test_root_and_full_object_count_required (__main__.ReaderTests) ... ok
+test_stock_pool_prefix_required_even_with_matching_new_hash (__main__.ReaderTests) ... ok
+test_terminal_must_return_one (__main__.ReaderTests) ... ok
+test_whole_candidate_original_header_terminal_and_restore (__main__.ReaderTests) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 38.321s
+
+OK
+{
+  "kind": "compiled_arm_native_reader_bridge",
+  "passed": true,
+  "tests": 16,
+  "skipped": 0,
+  "profile": "pure-fixed-gated",
+  "camera_accessed": false,
+  "installer_ready": false,
+  "deployed": false,
+  "seg0_sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622",
+  "candidate_page_sha256": "33946d01b1fd9bca7cba72ef55ef53e16a0469a00e5a29f35896a46e43023633",
+  "candidate_pool_sha256": "ea773283be884f8c40ca1f08d759d94157d3d58200398a92805ef3f8cd09ad96",
+  "text_sha256": "fe0ab3994455362ad4e950d70e8ea8479525152ec0e13629d6c68350fbe7c76e",
+  "text_bytes": 1956,
+  "function_offsets": {
+    "fp_nr_init": 1,
+    "fp_nr_parse": 345,
+    "fp_nr_string": 1765
+  },
+  "covered_native_intervals": [
+    "lazy_page_selector",
+    "parser_scratch_cleanup",
+    "reader_be32",
+    "record_parser",
+    "string_pool_resolve"
+  ],
+  "source_hashes": {
+    "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/loader/native_reader.c": "93f0d68fd96e1fea909e3067cb5b5b356ec359f64dbad08492b9c077a31b396e",
+    "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/loader/native_reader.h": "7bdc177b8d739da6801deaa0fcc40fd7530634ffe5db649e62bb220b2e66c170",
+    "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/loader/test_native_reader.py": "307d36014bd31443530fc7a31a8528e31e0a08b0c3bf4c332b4d8e98b1e76fc1",
+    "/Users/dido/Developer.localized/SIGMAfp_re/research/ui/tools/arm_text/elf_text.py": "e31174f7f044740371bb4a30cf11d12e81512ee01d0c5a35e10cf0c5237c8015",
+    "/Users/dido/Developer.localized/SIGMAfp_re/research/ui/tools/native_page_probe/page_probe.py": "f0dbe0740139969b37f9265ba2ff1b489d49ddd119face8a37f326101c872568",
+    "/Users/dido/Developer.localized/SIGMAfp_re/research/ui/tools/native_variable_probe/registry_probe.py": "10e85a61bca9a6074ecad4b115154ba0de45c294f5aad18564603b3cdf09f764"
+  },
+  "bounds": {
+    "instructions_per_call": 12000000,
+    "timeout_us": 15000000,
+    "callee_saved_r4_r11_checked": true,
+    "sp_restoration_checked": true,
+    "native_parser_call_sp8_checked": true
+  },
+  "substitutes": [
+    "intermediate component records",
+    "heap/arena/component sizes",
+    "opaque app preflight",
+    "root release/owner services"
+  ],
+  "remaining": [
+    "native outer-entry initialization/retry/drain gate",
+    "actual component construction and native GUI lifetime",
+    "hook coexistence/installation/publication/journal",
+    "rendering"
+  ]
+}

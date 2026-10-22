@@ -1,0 +1,472 @@
+{
+  "version": "0.1",
+  "method": "bounded_settled_H_contrast",
+  "status": "fault",
+  "reason": "cancelled after native stop/completion",
+  "confirmed": false,
+  "optical_focus_verified": false,
+  "initial_position": 10707,
+  "selected_position": 10757,
+  "final_position": null,
+  "last_verified_position": 10757,
+  "observations": [
+    {
+      "position": 10707,
+      "h": 7952.0,
+      "l": 31454,
+      "gain": [
+        117,
+        985,
+        131,
+        0
+      ],
+      "context": [
+        "fp-5.02/background-processing-mode-0/area-0",
+        1,
+        4294967295,
+        0,
+        0,
+        0,
+        0,
+        1,
+        2,
+        0,
+        1,
+        [
+          117,
+          225,
+          8333,
+          2164
+        ],
+        [
+          10,
+          4
+        ],
+        [
+          "448 277 128 128",
+          "0",
+          "0",
+          "3"
+        ],
+        "capture_idle",
+        "not_optically_validated"
+      ],
+      "valid": true,
+      "purpose": "initial"
+    },
+    {
+      "position": 10757,
+      "h": 9975.0,
+      "l": 32873,
+      "gain": [
+        117,
+        985,
+        131,
+        0
+      ],
+      "context": [
+        "fp-5.02/background-processing-mode-0/area-0",
+        1,
+        4294967295,
+        0,
+        0,
+        0,
+        0,
+        1,
+        2,
+        0,
+        1,
+        [
+          117,
+          225,
+          8333,
+          2164
+        ],
+        [
+          10,
+          4
+        ],
+        [
+          "448 277 128 128",
+          "0",
+          "0",
+          "3"
+        ],
+        "capture_idle",
+        "not_optically_validated"
+      ],
+      "valid": true,
+      "purpose": "probe"
+    },
+    {
+      "position": 10657,
+      "h": 6126.0,
+      "l": 29849,
+      "gain": [
+        117,
+        985,
+        131,
+        0
+      ],
+      "context": [
+        "fp-5.02/background-processing-mode-0/area-0",
+        1,
+        4294967295,
+        0,
+        0,
+        0,
+        0,
+        1,
+        2,
+        0,
+        1,
+        [
+          117,
+          225,
+          8333,
+          2164
+        ],
+        [
+          10,
+          4
+        ],
+        [
+          "448 277 128 128",
+          "0",
+          "0",
+          "3"
+        ],
+        "capture_idle",
+        "not_optically_validated"
+      ],
+      "valid": true,
+      "purpose": "probe"
+    },
+    {
+      "position": 10757,
+      "h": 9895.0,
+      "l": 32839,
+      "gain": [
+        117,
+        985,
+        131,
+        0
+      ],
+      "context": [
+        "fp-5.02/background-processing-mode-0/area-0",
+        1,
+        4294967295,
+        0,
+        0,
+        0,
+        0,
+        1,
+        2,
+        0,
+        1,
+        [
+          117,
+          225,
+          8333,
+          2164
+        ],
+        [
+          10,
+          4
+        ],
+        [
+          "448 277 128 128",
+          "0",
+          "0",
+          "3"
+        ],
+        "capture_idle",
+        "not_optically_validated"
+      ],
+      "valid": true,
+      "purpose": "extend"
+    }
+  ],
+  "moves": [
+    {
+      "from": 10707,
+      "target": 10757,
+      "purpose": "probe",
+      "issued": true,
+      "completed": true
+    },
+    {
+      "from": 10757,
+      "target": 10657,
+      "purpose": "probe",
+      "issued": true,
+      "completed": true
+    },
+    {
+      "from": 10657,
+      "target": 10757,
+      "purpose": "extend",
+      "issued": true,
+      "completed": true
+    },
+    {
+      "from": 10757,
+      "target": 10807,
+      "purpose": "extend",
+      "issued": true,
+      "completed": false
+    }
+  ],
+  "events": [
+    {
+      "kind": "observation",
+      "sample": {
+        "position": 10707,
+        "h": 7952.0,
+        "l": 31454,
+        "gain": [
+          117,
+          985,
+          131,
+          0
+        ],
+        "context": [
+          "fp-5.02/background-processing-mode-0/area-0",
+          1,
+          4294967295,
+          0,
+          0,
+          0,
+          0,
+          1,
+          2,
+          0,
+          1,
+          [
+            117,
+            225,
+            8333,
+            2164
+          ],
+          [
+            10,
+            4
+          ],
+          [
+            "448 277 128 128",
+            "0",
+            "0",
+            "3"
+          ],
+          "capture_idle",
+          "not_optically_validated"
+        ],
+        "valid": true,
+        "purpose": "initial"
+      }
+    },
+    {
+      "kind": "move_requested",
+      "from": 10707,
+      "target": 10757,
+      "purpose": "probe",
+      "issued": false,
+      "completed": false
+    },
+    {
+      "kind": "observation",
+      "sample": {
+        "position": 10757,
+        "h": 9975.0,
+        "l": 32873,
+        "gain": [
+          117,
+          985,
+          131,
+          0
+        ],
+        "context": [
+          "fp-5.02/background-processing-mode-0/area-0",
+          1,
+          4294967295,
+          0,
+          0,
+          0,
+          0,
+          1,
+          2,
+          0,
+          1,
+          [
+            117,
+            225,
+            8333,
+            2164
+          ],
+          [
+            10,
+            4
+          ],
+          [
+            "448 277 128 128",
+            "0",
+            "0",
+            "3"
+          ],
+          "capture_idle",
+          "not_optically_validated"
+        ],
+        "valid": true,
+        "purpose": "probe"
+      }
+    },
+    {
+      "kind": "move_requested",
+      "from": 10757,
+      "target": 10657,
+      "purpose": "probe",
+      "issued": false,
+      "completed": false
+    },
+    {
+      "kind": "observation",
+      "sample": {
+        "position": 10657,
+        "h": 6126.0,
+        "l": 29849,
+        "gain": [
+          117,
+          985,
+          131,
+          0
+        ],
+        "context": [
+          "fp-5.02/background-processing-mode-0/area-0",
+          1,
+          4294967295,
+          0,
+          0,
+          0,
+          0,
+          1,
+          2,
+          0,
+          1,
+          [
+            117,
+            225,
+            8333,
+            2164
+          ],
+          [
+            10,
+            4
+          ],
+          [
+            "448 277 128 128",
+            "0",
+            "0",
+            "3"
+          ],
+          "capture_idle",
+          "not_optically_validated"
+        ],
+        "valid": true,
+        "purpose": "probe"
+      }
+    },
+    {
+      "kind": "move_requested",
+      "from": 10657,
+      "target": 10757,
+      "purpose": "extend",
+      "issued": false,
+      "completed": false
+    },
+    {
+      "kind": "observation",
+      "sample": {
+        "position": 10757,
+        "h": 9895.0,
+        "l": 32839,
+        "gain": [
+          117,
+          985,
+          131,
+          0
+        ],
+        "context": [
+          "fp-5.02/background-processing-mode-0/area-0",
+          1,
+          4294967295,
+          0,
+          0,
+          0,
+          0,
+          1,
+          2,
+          0,
+          1,
+          [
+            117,
+            225,
+            8333,
+            2164
+          ],
+          [
+            10,
+            4
+          ],
+          [
+            "448 277 128 128",
+            "0",
+            "0",
+            "3"
+          ],
+          "capture_idle",
+          "not_optically_validated"
+        ],
+        "valid": true,
+        "purpose": "extend"
+      }
+    },
+    {
+      "kind": "move_requested",
+      "from": 10757,
+      "target": 10807,
+      "purpose": "extend",
+      "issued": false,
+      "completed": false
+    },
+    {
+      "kind": "finished",
+      "status": "fault",
+      "reason": "cancelled after native stop/completion"
+    }
+  ],
+  "quadratic_target": null,
+  "stop": {
+    "verified": true,
+    "request": {
+      "requested": false,
+      "reason": "no owned pending movement"
+    },
+    "completion": {
+      "native_done": true,
+      "position": 10807
+    },
+    "optical_stop_verified": false
+  },
+  "limits": {
+    "radius": 100,
+    "max_step": 100,
+    "max_moves": 12,
+    "improvement": 0.03,
+    "allowed_positions": [
+      10607,
+      10807
+    ]
+  },
+  "error_type": "BridgeError",
+  "cleanup_complete": true
+}

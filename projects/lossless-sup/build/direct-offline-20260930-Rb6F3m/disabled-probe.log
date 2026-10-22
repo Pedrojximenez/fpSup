@@ -1,0 +1,21 @@
+test_build_still_uses_offline_assembler_without_camera (__main__.ArmGateTests) ... ok
+test_cli_arm_without_reference_still_reports_safety_gate (__main__.ArmGateTests) ... ok
+test_cli_refuses_before_constructing_shell_or_calling_arm (__main__.ArmGateTests) ... ok
+test_direct_arm_has_no_frame_bound_escape (__main__.ArmGateTests) ... ok
+test_direct_arm_refuses_before_any_camera_or_import_effect (__main__.ArmGateTests) ... ok
+test_gate_explains_all_three_unresolved_requirements (__main__.ArmGateTests) ... ok
+test_no_force_or_unsafe_command_line_bypass (__main__.ArmGateTests) ... ok
+test_failure_end_positions_do_not_infer_production_or_capacity (__main__.CapturedStateTests) ... ok
+test_missing_callback_is_absent_evidence_not_absent_completion (__main__.CapturedStateTests) ... ok
+test_no_seed_does_not_claim_every_frame_was_refused (__main__.CapturedStateTests) ... ok
+test_processed_steps_are_not_reported_as_compressed_frames (__main__.CapturedStateTests) ... ok
+test_ratio_uses_captured_geometry_not_fixed_fhd_raster (__main__.CapturedStateTests) ... ok
+test_soi_is_neither_decode_success_nor_decode_failure (__main__.CapturedStateTests) ... ok
+test_submissions_alone_are_not_successful_compression (__main__.CapturedStateTests) ... ok
+test_unmapped_status_bits_are_not_assigned_a_cause (__main__.CapturedStateTests) ... ok
+test_writeback_verdict_keeps_frame_identity_warning (__main__.CapturedStateTests) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.007s
+
+OK

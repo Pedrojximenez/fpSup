@@ -1,0 +1,34 @@
+fpGyroSup GCSV-only streaming experiment r15
+Build date: 2026-08-31
+Camera/firmware: SIGMA fp Ver.5.02
+Build type: release AutoRun, no USB shell
+Base: r14 decimal fast path and 32 KiB media pacing
+
+Recording path:
+- The 2500 Hz callback still only copies raw samples into the proven two 16 KiB
+  RAM halves. It performs no formatting and no media calls.
+- The existing writer task formats each sealed half directly into GCSV.
+- Complete GCSV lines accumulate in a bounded 32 KiB text buffer.
+- Each GCSV write retains the five millisecond cooperative yield.
+- No GYR file is opened, written, read back or recovered in this build.
+
+Stop path:
+- The final raw half is formatted, the GCSV tail is flushed, and GCSV is closed.
+- The queue records GCSV as already complete and runs only the existing JSON
+  generator under the native MovieSaving transaction.
+- JSON lens reads are intentionally unchanged for this first A/B test.
+
+Memory and duration:
+- RAM use is fixed and does not grow with recording duration.
+- The previous one-minute take showed the formatter running about ten times
+  faster than real time; this build tests card scheduling under recording.
+
+Safety boundaries:
+- Native lifecycle enabled; boot recovery disabled because no GYR exists.
+- r14 remains the rollback/reference image and is not written concurrently.
+- This is an experimental hardware build, not fp-gyro-sup-v1.1.
+
+Verification:
+- 43 unit, layout and safety tests pass.
+- Stream logger: 3,672 bytes, ending at 0xC072EEBC below 0xC072EFB4.
+- PGEN pool code: 7,372 bytes; 7,388 bytes on card.

@@ -1,0 +1,32 @@
+// SIGMA fp Standard - FITTED look, IN-PIPELINE v2 (output-calibrated)
+// DWG/DI -> DWG/DI. Keep your photo Output = sRGB. Tone re-derived to absorb
+// your actual sRGB output transform (measured from output.tif vs JPG).
+__CONSTANT__ float MAT[9] = { 4.618160f,-2.089912f,-0.107353f,-0.611751f,3.788154f,-0.842551f,0.139723f,-2.173887f,4.374515f };
+__CONSTANT__ float R2D[9] = { 0.562767f,0.323517f,0.113716f,0.077755f,0.749577f,0.172668f,0.064669f,0.191999f,0.743332f };
+__CONSTANT__ float TR[65] = { 0.000000f,0.041166f,0.066890f,0.073016f,0.100205f,0.119704f,0.141276f,0.166817f,0.194555f,0.224071f,0.260227f,0.296801f,0.334469f,0.375255f,0.405616f,0.433362f,0.473474f,0.504878f,0.537904f,0.576755f,0.607082f,0.639077f,0.662522f,0.695817f,0.722962f,0.738777f,0.763647f,0.793534f,0.814229f,0.828441f,0.841581f,0.841581f,0.841581f,0.841581f,0.841581f,0.841581f,0.841581f,0.841581f,0.841581f,0.841581f,0.841581f,0.841581f,0.847396f,0.854333f,0.861269f,0.868206f,0.875142f,0.882079f,0.889015f,0.895952f,0.902888f,0.909825f,0.916762f,0.923698f,0.930635f,0.937571f,0.944508f,0.951444f,0.958381f,0.965317f,0.972254f,0.979190f,0.986127f,0.993063f,1.000000f };
+__CONSTANT__ float TG[65] = { 0.000000f,0.029875f,0.059131f,0.086170f,0.111115f,0.137567f,0.155859f,0.179887f,0.203314f,0.225623f,0.252410f,0.283069f,0.318857f,0.380576f,0.420366f,0.452639f,0.487266f,0.521589f,0.560933f,0.601756f,0.636319f,0.682679f,0.710693f,0.741991f,0.774440f,0.806459f,0.831892f,0.848558f,0.876382f,0.916267f,0.933484f,0.950701f,0.954506f,0.957681f,0.960855f,0.964029f,0.967203f,0.970377f,0.973551f,0.976725f,0.979899f,0.983073f,0.986247f,0.989421f,0.992595f,0.995770f,0.997376f,0.997522f,0.997668f,0.997814f,0.997959f,0.998105f,0.998251f,0.998397f,0.998542f,0.998688f,0.998834f,0.998980f,0.999125f,0.999271f,0.999417f,0.999563f,0.999708f,0.999854f,1.000000f };
+__CONSTANT__ float TB[65] = { 0.000000f,0.048901f,0.062758f,0.075357f,0.091628f,0.111667f,0.145364f,0.175326f,0.201459f,0.227259f,0.259901f,0.310959f,0.362017f,0.401285f,0.439334f,0.468381f,0.497564f,0.533637f,0.574901f,0.612382f,0.657454f,0.698172f,0.734603f,0.766616f,0.801597f,0.822493f,0.855273f,0.888607f,0.906096f,0.934568f,0.971059f,0.997681f,0.997681f,0.997681f,0.997681f,0.997681f,0.997681f,0.997681f,0.997681f,0.997681f,0.997681f,0.997681f,0.997681f,0.997681f,0.997681f,0.997681f,0.997681f,0.997681f,0.997681f,0.997681f,0.997801f,0.997958f,0.998115f,0.998272f,0.998429f,0.998586f,0.998743f,0.998900f,0.999058f,0.999215f,0.999372f,0.999529f,0.999686f,0.999843f,1.000000f };
+__DEVICE__ float di2lin(float v) {
+    if (v <= 0.02740668f) return v / 10.44426855f;
+    return _exp2f(v / 0.07329248f - 7.0f) - 0.0075f;
+}
+__DEVICE__ float lin2di(float v) {
+    if (v <= 0.00262409f) return v * 10.44426855f;
+    return (_log2f(v + 0.0075f) + 7.0f) * 0.07329248f;
+}
+__DEVICE__ float toneR(float x) { x=_fmaxf(0.0f,_fminf(1.0f,x)); float fi=x*64.0f; int i=(int)fi; float t=fi-(float)i; if(i>=64) return TR[64]; return TR[i]*(1.0f-t)+TR[i+1]*t; }
+__DEVICE__ float toneG(float x) { x=_fmaxf(0.0f,_fminf(1.0f,x)); float fi=x*64.0f; int i=(int)fi; float t=fi-(float)i; if(i>=64) return TG[64]; return TG[i]*(1.0f-t)+TG[i+1]*t; }
+__DEVICE__ float toneB(float x) { x=_fmaxf(0.0f,_fminf(1.0f,x)); float fi=x*64.0f; int i=(int)fi; float t=fi-(float)i; if(i>=64) return TB[64]; return TB[i]*(1.0f-t)+TB[i+1]*t; }
+__DEVICE__ float3 transform(int p_Width, int p_Height, int p_X, int p_Y, float p_R, float p_G, float p_B) {
+    float r = di2lin(p_R) / 2.124f;
+    float g = di2lin(p_G) / 2.124f;
+    float b = di2lin(p_B) / 2.124f;
+    float zr = MAT[0]*r + MAT[1]*g + MAT[2]*b;
+    float zg = MAT[3]*r + MAT[4]*g + MAT[5]*b;
+    float zb = MAT[6]*r + MAT[7]*g + MAT[8]*b;
+    float lr = toneR(zr); float lg = toneG(zg); float lb = toneB(zb);
+    float dr = R2D[0]*lr + R2D[1]*lg + R2D[2]*lb;
+    float dg = R2D[3]*lr + R2D[4]*lg + R2D[5]*lb;
+    float db = R2D[6]*lr + R2D[7]*lg + R2D[8]*lb;
+    return make_float3(lin2di(_fmaxf(0.0f,dr)), lin2di(_fmaxf(0.0f,dg)), lin2di(_fmaxf(0.0f,db)));
+}

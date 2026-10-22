@@ -1,0 +1,76 @@
+screen: LV_CINE_MEDIUM
+  tagged 16380/50658 B  1490 KiB/s   tagged 32760/50658 B  1852 KiB/s   tagged 49140/50658 B  1981 KiB/s   tagged 50658/50658 B  1974 KiB/s   tagged 50658 bytes in 0.0s (1862 KiB/s)      
+  tagged 116/116 B  176 KiB/s   tagged 116 bytes in 0.0s (77 KiB/s)      
+  tagged 116/116 B  189 KiB/s   tagged 116 bytes in 0.0s (80 KiB/s)      
+  tagged 84/84 B  165 KiB/s   tagged 84 bytes in 0.0s (66 KiB/s)      
+{
+  "screen": "LV_CINE_MEDIUM",
+  "consumer": {
+    "flag": 0,
+    "current": 0,
+    "res_value": 2,
+    "format_latch": 0,
+    "nrows": 6,
+    "nentries": 59,
+    "nmodes": 8
+  },
+  "producer": {
+    "result": 1,
+    "app": 3331322648,
+    "reader": 3332398568,
+    "entry": 3332533760,
+    "page": 1161110124,
+    "nbr": 1161236480,
+    "nbr_len": 3000,
+    "core_base": 1161105536,
+    "pages_state": 0,
+    "out_w": 0,
+    "out_h": 0,
+    "ro_w": 0,
+    "ro_h": 0,
+    "ro_sx": 0,
+    "ro_sy": 0,
+    "bin_h": 0,
+    "bin_v": 0,
+    "axis_armed": 0,
+    "modes_rows": 0,
+    "mode_sel": 0,
+    "canvas_valid": 0,
+    "crop_w": 0,
+    "crop_h": 0,
+    "ratio": 0,
+    "edit_field": 0,
+    "editing": 0,
+    "crop_lock": 0,
+    "lens_on": 0,
+    "lens_factor": 0,
+    "small_edit": 0,
+    "applied_geometry": 0,
+    "applied_valid": 0,
+    "bin_kh": 0,
+    "bin_kv": 0,
+    "bin_mode": 0,
+    "output_policy": 0,
+    "lock_num": 0,
+    "lock_den": 0,
+    "save_name": 0,
+    "name_text": 0,
+    "name_field": 0,
+    "name_editing": 0
+  },
+  "fps_state": {
+    "VR_UI": 1,
+    "VR_WHY": 1,
+    "VRATE": 0,
+    "VR_COMMITS": 0,
+    "DIRTY": 0,
+    "PICKOK": 1,
+    "FPSLATCH": 0,
+    "LAST_ENT": 0,
+    "HITS": 0
+  },
+  "rate_notification": {
+    "RATE_LVOWED": 0,
+    "RATE_LV_RELOADS": 0
+  }
+}

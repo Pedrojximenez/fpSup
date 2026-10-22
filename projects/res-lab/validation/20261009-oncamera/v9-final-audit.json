@@ -1,0 +1,235 @@
+{
+  "verified": [
+    {
+      "remote": "\\AutoRun.txt",
+      "bytes": 32768,
+      "sha256": "0c5107fff1262ad8ca3bb675329b71c80926c8b35cdd40931b387639b45edbf0",
+      "readback": "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/v9-final-readback/AutoRun.txt",
+      "comparison": "exact"
+    },
+    {
+      "remote": "\\fpSup\\LOADER.BIN",
+      "bytes": 27668,
+      "sha256": "e4c69bda754dde21050d70a6fc672958aea8e2d46caf1b578ba1800422e0ffe1",
+      "readback": "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/v9-final-readback/LOADER.BIN",
+      "comparison": "exact"
+    },
+    {
+      "remote": "\\fpSup\\32RESCUS.BIN",
+      "bytes": 76288,
+      "sha256": "27eb17f7a8d2165d78b0aad6046981c911a38a3d25706d778ff9633af0ef56b7",
+      "readback": "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/v9-final-readback/32RESCUS.BIN",
+      "comparison": "program exact; owned settings validated",
+      "source_sha256": "5d0699f05aac9679765b953cc79a2e2b0ebfcf48f22dfa020df27b0466d5547a",
+      "settings": {
+        "label": "VRC000",
+        "stock": 2,
+        "flags": 0,
+        "enabled_count": 0,
+        "checksum_valid": true
+      }
+    },
+    {
+      "remote": "\\fpSup\\50RESLAB.BIN",
+      "bytes": 452448,
+      "sha256": "c910f4334cd930f130454da58083079fa89aac5c23bc0d6c5a0d11c079f19687",
+      "readback": "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/v9-final-readback/50RESLAB.BIN",
+      "comparison": "exact"
+    },
+    {
+      "remote": "\\fpSup\\RESCUS\\S16.RCD",
+      "bytes": 7132,
+      "sha256": "48740fbbd3dbcb3bf823d1ecdc8a9104e476efd61642142a3a4b221f598f5b15",
+      "readback": "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/v9-final-readback/S16.RCD",
+      "comparison": "exact"
+    },
+    {
+      "remote": "\\fpSup\\RESCUS\\OG2K.RCD",
+      "bytes": 5216,
+      "sha256": "7beef10339d41f8cd39ecc9014cb32fd39b994457e61622b9638e33452dd218a",
+      "readback": "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/v9-final-readback/OG2K.RCD",
+      "comparison": "exact"
+    },
+    {
+      "remote": "\\fpSup\\RESCUS\\OG3K.RCD",
+      "bytes": 4180,
+      "sha256": "5b3c7d266e68a89460bfeba96ee67a1e18a29e4ba14fbd7a4bdad127dce2f2ae",
+      "readback": "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/v9-final-readback/OG3K.RCD",
+      "comparison": "exact"
+    },
+    {
+      "remote": "\\fpSup\\RESCUS\\OG4K.RCD",
+      "bytes": 3900,
+      "sha256": "d3711c12c5b03234927f951c27826d9a095c4ed99d941cc54dcd3c88226689db",
+      "readback": "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/v9-final-readback/OG4K.RCD",
+      "comparison": "exact"
+    },
+    {
+      "remote": "\\fpSup\\RESCUS\\OG35K.RCD",
+      "bytes": 7788,
+      "sha256": "0d81f785bce9665937433bbdd06314c06523092876323dc0ce56bdab215e1cc7",
+      "readback": "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/v9-final-readback/OG35K.RCD",
+      "comparison": "exact"
+    }
+  ],
+  "screen": "LV_CINE_MEDIUM",
+  "settings": {
+    "MovRecSize": "2\n\n",
+    "MovFramerate": "3\n\n",
+    "MovCinemaDNGQuality": "0\n\n",
+    "MovRecFormat": "0\n\n",
+    "MovBiningSupport": "0\n\n",
+    "CropMode": "0\n\n"
+  },
+  "runtime": {
+    "endpoint": "0xc072e260",
+    "consumer_base": "0x451d4180",
+    "consumer_state": "0x451e6100",
+    "registry": {
+      "magic": 826495574,
+      "abi": 2,
+      "lock": 0,
+      "provider": 1111575634,
+      "generation": 1,
+      "result": 0,
+      "detail": 0,
+      "count": 1,
+      "packs": 1,
+      "asset_used": 47104,
+      "row": 5
+    },
+    "consumer": {
+      "flag": 1,
+      "current": 6,
+      "res_value": 2,
+      "format_latch": 0,
+      "nrows": 6,
+      "nentries": 59,
+      "nmodes": 7
+    },
+    "selected": 6,
+    "rows": [
+      {
+        "index": 0,
+        "on": 1,
+        "width": 2000,
+        "height": 1334,
+        "stock": 2,
+        "menu_row": 2,
+        "pack": "0x451f5480",
+        "label": "OG2K",
+        "ui_result": 1
+      },
+      {
+        "index": 1,
+        "on": 1,
+        "width": 3456,
+        "height": 2304,
+        "stock": 3,
+        "menu_row": 3,
+        "pack": "0x451f6a40",
+        "label": "OG35K",
+        "ui_result": 1
+      },
+      {
+        "index": 2,
+        "on": 1,
+        "width": 3008,
+        "height": 2000,
+        "stock": 2,
+        "menu_row": 4,
+        "pack": "0x451f8740",
+        "label": "OG3K",
+        "ui_result": 1
+      },
+      {
+        "index": 3,
+        "on": 1,
+        "width": 3840,
+        "height": 2560,
+        "stock": 3,
+        "menu_row": 5,
+        "pack": "0x451f99c0",
+        "label": "OG4K",
+        "ui_result": 1
+      },
+      {
+        "index": 4,
+        "on": 1,
+        "width": 2096,
+        "height": 1238,
+        "stock": 2,
+        "menu_row": 6,
+        "pack": "0x451faa00",
+        "label": "S16",
+        "ui_result": 1
+      },
+      {
+        "index": 5,
+        "on": 1,
+        "width": 992,
+        "height": 662,
+        "stock": 2,
+        "menu_row": 7,
+        "pack": "0x45026680",
+        "label": "VRC000",
+        "ui_result": 1
+      }
+    ],
+    "producer_base": "0x45375240",
+    "producer_state": "0x453e39a0",
+    "producer": {
+      "result": 1,
+      "app": 3331322648,
+      "reader": 3332398568,
+      "entry": 3332533760,
+      "page": 1161282988,
+      "nbr": 1161403792,
+      "nbr_len": 2708,
+      "core_base": 1161278400,
+      "pages_state": 1,
+      "out_w": 992,
+      "out_h": 662,
+      "ro_w": 2016,
+      "ro_h": 672,
+      "ro_sx": 3,
+      "ro_sy": 6,
+      "bin_h": 1,
+      "bin_v": 1,
+      "axis_armed": 1,
+      "modes_rows": 2,
+      "mode_sel": 1,
+      "canvas_valid": 1,
+      "crop_w": 0,
+      "crop_h": 0,
+      "ratio": 0,
+      "edit_field": 0,
+      "editing": 0
+    },
+    "mode_ids": [
+      9,
+      12
+    ],
+    "loaded_headers": {
+      "32RESCUS.BIN": {
+        "file_len": 76288,
+        "block_size": 746688,
+        "id": 1398096722,
+        "version": 4,
+        "min_services": 3
+      },
+      "50RESLAB.BIN": {
+        "file_len": 452448,
+        "block_size": 720576,
+        "id": 1111575634,
+        "version": 6,
+        "min_services": 3
+      }
+    }
+  },
+  "root_listing": "                                          .\n2026/10/07  10:20:36 <DIR>                .Spotlight-V100\n2026/10/08  23:42:08 <DIR>                DCIM\n2026/10/07  20:25:26 <DIR>                fpSup\n2026/10/07  20:26:02                 4096 ._fpSup\n2025/12/31  08:00:00                32768 AutoRun.txt\n2026/10/07  20:26:02                 4096 ._AutoRun.txt\n2026/10/07  15:00:02 <DIR>                .Trashes\n2026/10/08  12:29:26 <DIR>                CINEMA\n2026/10/08  19:14:12 <DIR>                .fseventsd\n",
+  "sup_listing": "                                          .\n2026/10/09  20:43:10                76288 32RESCUS.BIN\n2026/10/07  20:26:02                 4096 ._32RESCUS.BIN\n2026/10/07  20:25:26 <DIR>                UI\n2026/10/07  20:26:02                 4096 ._UI\n2026/10/09  12:52:34                27668 LOADER.BIN\n2026/10/07  20:26:02                 4096 ._LOADER.BIN\n2025/12/31  08:00:00                 4208 20GYR2.BIN\n2026/10/07  20:26:02                 4096 ._20GYR2.BIN\n2026/10/08  13:28:36                38644 45RAWV.BIN\n2026/10/07  20:26:02                 4096 ._45RAWV.BIN\n2026/10/08  13:24:08                25936 40FLIP.BIN\n2026/10/07  20:26:02                 4096 ._40FLIP.BIN\n2026/10/09  21:04:12                70944 10LOSS.BIN\n2026/10/07  20:26:02                 4096 ._10LOSS.BIN\n2025/12/31  08:00:00                 4552 00SHELL.BIN\n2026/10/07  20:26:02                 4096 ._00SHELL.BIN\n2026/10/07  20:25:26 <DIR>                RESCUS\n2026/10/07  20:26:02                 4096 ._RESCUS\n2026/10/09  20:43:38                 4096 LOAD.LOG\n2026/10/09  20:20:08               452448 50RESLAB.BIN\n",
+  "rcd_listing": "                                          .\n2026/10/09  14:55:42                 7132 S16.RCD\n2026/10/07  20:26:02                 4096 ._S16.RCD\n2026/10/09  14:55:40                 3900 OG4K.RCD\n2026/10/07  20:26:02                 4096 ._OG4K.RCD\n2026/10/09  14:55:38                 4180 OG3K.RCD\n2026/10/07  20:26:02                 4096 ._OG3K.RCD\n2026/10/09  14:55:34                 5216 OG2K.RCD\n2026/10/07  20:26:02                 4096 ._OG2K.RCD\n2026/10/09  14:55:36                 7788 OG35K.RCD\n2026/10/07  20:26:02                 4096 ._OG35K.RCD\n",
+  "idle": true,
+  "passed": true
+}

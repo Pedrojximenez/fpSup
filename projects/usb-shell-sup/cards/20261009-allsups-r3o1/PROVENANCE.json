@@ -1,0 +1,91 @@
+{
+  "candidate": "r3o1",
+  "files": {
+    "AutoRun.txt": {
+      "bytes": 32768,
+      "sha256": "0c5107fff1262ad8ca3bb675329b71c80926c8b35cdd40931b387639b45edbf0"
+    },
+    "fpSup/LOADER.BIN": {
+      "bytes": 27668,
+      "sha256": "07907bb42890968fa813431adb56bf5819b705186e2b0924744761e26876d07f"
+    },
+    "fpSup/UI/ALLSUPS.BIN": {
+      "bytes": 347504,
+      "sha256": "92e9b9b8220fed7878fae23bc5fb8ca416704636241244f6b847cac89eef894e"
+    }
+  },
+  "source": {
+    "fpSup/uishare/tab/manage_page.py": {
+      "bytes": 33552,
+      "sha256": "f9ffeca0ad18fe3db75c5b71885f7370bc62cfa5d3a3194fd841aa3857384e5f"
+    },
+    "fpSup/uishare/tab/manager_logo.py": {
+      "bytes": 3620,
+      "sha256": "9404dc83f5020ed97ec4ec293aba87dfdfa9b1142e1d3fc0484c0568a2ce767c"
+    },
+    "fpSup/uishare/tab/build_ft6.py": {
+      "bytes": 12914,
+      "sha256": "75f3b0168b46d443635d532ed6641d392f5eb863c807c8f88f12977eaf220f4b"
+    },
+    "fpSup/uishare/tab/test_manage_page.py": {
+      "bytes": 7503,
+      "sha256": "56aa92edeed284d1c1ddd2136320f7dcfaf52a99b9bc0d53bfd556d4e7e0c44f"
+    },
+    "fpSup/uishare/tab/test_ft6.py": {
+      "bytes": 14232,
+      "sha256": "1cdedb4897b799357b13ee111ead075e9e26e2a1cf3feacf9bb6eb1008197879"
+    },
+    "fpSup/fp_usb_shell/v3/allsups.c": {
+      "bytes": 31704,
+      "sha256": "fbe4dbe763ddf7ce1a763886ac648d211068d4ded8ad5188a1e0b845815858fb"
+    },
+    "fpSup/fp_usb_shell/v3/sloader.c": {
+      "bytes": 29551,
+      "sha256": "07cf9c9ec13ce5ba78498a3c80e95b395baf1e8c376668f749174566a6ca4f7b"
+    },
+    "fpSup/fp_usb_shell/v3/test_allsups.py": {
+      "bytes": 18596,
+      "sha256": "0de5b72679fc5b542052fc64cb5642f5a3b15f1bf175dc968aa59af043221e17"
+    },
+    "fpSup/fp_usb_shell/v3/build_v3.py": {
+      "bytes": 13355,
+      "sha256": "99cf0cf37e267df5e7ff78971ae91de488c3218954c0c321bb427c9db963325a"
+    },
+    "logo2.png": {
+      "bytes": 1853539,
+      "sha256": "5785bbf1d0e255ffbd893389d52e8e53932ae742e8f7f88e48d487767c79b8e1"
+    }
+  },
+  "deployment": "UI only; management Loader and AutoRun exactly match r3n14",
+  "native_reference": [
+    "1520",
+    "1521",
+    "1522"
+  ],
+  "tests": {
+    "native": {
+      "count": 12,
+      "seconds": 19.033,
+      "result": "passed"
+    },
+    "management_baseline": {
+      "candidate": "r3n19",
+      "count": 18,
+      "code": "unchanged"
+    },
+    "mutation": "Expected home lock/action fault rejected"
+  },
+  "camera": {
+    "result": "passed",
+    "readback": "../20261009-allsups-r3n-live1/final-readback-r3o1.json",
+    "evidence": [
+      "1548 home all rows",
+      "1553 format focused and locked",
+      "1555 QR focused and locked"
+    ],
+    "language": 0,
+    "recording": 0,
+    "source_rebuild": "exact byte match"
+  },
+  "change": "Disable unfinished home Update/SD format and information QR/update items, using native SelectLock and no Right/OK action. SD Card Format (Keep fpSup) direct home label."
+}

@@ -1,0 +1,25 @@
+................................................................................................<unknown>:2: DeprecationWarning: invalid escape sequence \L
+F.<unknown>:2: DeprecationWarning: invalid escape sequence \L
+.<unknown>:2: DeprecationWarning: invalid escape sequence \L
+..................
+======================================================================
+FAIL: test_nothing_claims_an_address_in_the_arena (test_safety.ArenaTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/gyro/test_safety.py", line 591, in test_nothing_claims_an_address_in_the_arena
+    self.assertEqual(
+AssertionError: Lists differ: ['card_status.py:22: 0xC072E064', 'test_card_emulation.py:41: 0xC072E064'] != []
+
+First list contains 2 additional elements.
+First extra element 0:
+'card_status.py:22: 0xC072E064'
+
+- ['card_status.py:22: 0xC072E064', 'test_card_emulation.py:41: 0xC072E064']
++ [] : these name an address the allocator hands out:
+  card_status.py:22: 0xC072E064
+  test_card_emulation.py:41: 0xC072E064
+
+----------------------------------------------------------------------
+Ran 117 tests in 4.875s
+
+FAILED (failures=1)

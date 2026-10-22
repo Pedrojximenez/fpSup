@@ -1,0 +1,58 @@
+{
+  "code_bytes": 376,
+  "record_bytes": 832,
+  "cases": [
+    {
+      "case": "valid",
+      "flags": 1,
+      "passed": true
+    },
+    {
+      "case": "null",
+      "flags": 0,
+      "passed": true
+    },
+    {
+      "case": "unaligned",
+      "flags": 0,
+      "passed": true
+    },
+    {
+      "case": "mmio",
+      "flags": 0,
+      "passed": true
+    },
+    {
+      "case": "outside_windows",
+      "flags": 0,
+      "passed": true
+    },
+    {
+      "case": "end_overflow",
+      "flags": 0,
+      "passed": true
+    },
+    {
+      "case": "wrong_parameter_pointer",
+      "flags": 0,
+      "passed": true
+    },
+    {
+      "case": "source_changes",
+      "flags": 3,
+      "passed": true
+    },
+    {
+      "case": "mode_changes",
+      "flags": 5,
+      "passed": true
+    },
+    {
+      "case": "parameter_changes",
+      "flags": 3,
+      "passed": true
+    }
+  ],
+  "status": "Offline component only. No scheduler, allocation wrapper, loader, file writer or deployable AutoRun.",
+  "limitations": "Concurrent mutation detection is best effort; parameter fields can change without pointer changes. No atomic snapshot claim."
+}

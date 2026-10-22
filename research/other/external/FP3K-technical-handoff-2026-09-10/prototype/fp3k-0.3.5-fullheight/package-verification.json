@@ -1,0 +1,84 @@
+{
+  "cases": [
+    {
+      "case": "cold",
+      "status": 16,
+      "passed": true
+    },
+    {
+      "case": "busy-boot",
+      "status": 16,
+      "passed": true
+    },
+    {
+      "case": "missing",
+      "status": 33,
+      "passed": true
+    },
+    {
+      "case": "short",
+      "status": 34,
+      "passed": true
+    },
+    {
+      "case": "empty",
+      "status": 34,
+      "passed": true
+    },
+    {
+      "case": "corrupt",
+      "status": 35,
+      "passed": true
+    },
+    {
+      "case": "stock-table-mismatch",
+      "status": 49,
+      "passed": true
+    },
+    {
+      "case": "warm-idle",
+      "status": 17,
+      "passed": true
+    },
+    {
+      "case": "warm-active",
+      "status": 17,
+      "passed": true
+    },
+    {
+      "case": "warm-corrupt",
+      "status": 36,
+      "passed": true
+    },
+    {
+      "case": "mixed-hooks",
+      "status": 36,
+      "passed": true
+    },
+    {
+      "case": "foreign-hook",
+      "status": 36,
+      "passed": true
+    },
+    {
+      "case": "warm-bad-state",
+      "status": 36,
+      "passed": true
+    }
+  ],
+  "files": {
+    "AutoRun.txt": {
+      "bytes": 5401,
+      "sha256": "c63eae39730677b1582bd1ca5a7093ddff684f2d58237e0b93b43e9b6be34760"
+    },
+    "FP3KMENU.BIN": {
+      "bytes": 15620,
+      "sha256": "8cf489ef8ad5e4c8723adac4dd421f6943a5d4f6338c030f70148764901b243e"
+    },
+    "loader.bin": {
+      "bytes": 652,
+      "sha256": "cd62c3f482db7a56d53190a0a92f89686ee3f7b50a745f2e86cecc3c8c81c219"
+    }
+  },
+  "limitations": "Actual assembled bootstrap, resident installer and installed menu hooks executed. Filesystem, hardware cache synchronization, settings backing service, volume routing and UI queue mocked. Camera timing, rendering and physical media behavior require hardware validation."
+}

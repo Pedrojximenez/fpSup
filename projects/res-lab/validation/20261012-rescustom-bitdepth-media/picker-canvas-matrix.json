@@ -1,0 +1,572 @@
+{
+  "scope": "Offline execution of current RES-Custom native-rate picker and canvas for OG3.5K and OG4K, normal/crop keys, 8/10/12-bit. Virtual-rate duplicate plain-key observations are deduplicated. Firmware medium/bit-depth exclusion is not emulated in this matrix; settings getter/setter bodies are stubbed. No camera access.",
+  "core_sha256": "5d4ff35675ef6e3e2c470fefe2780bbecbf3ef19dbc4de2028d03bb8f3c2224b",
+  "sources_sha256": {
+    "ogc.c": "240f0c0c8b38c3c3b984fa57ad8f4ed16d3755f93487e772a15d088e2a07089b",
+    "jose_formats.py": "96472d15a305641532249530e7cb8ede83c16f6b6233a9b55a8ce8ed24350547",
+    "build_v3_rescustom.py": "2bdc173b89092412045294bcdc4099ae4ffbab44ddb79a389e8170f6b11d992c",
+    "test_v3_rescustom.py": "301aa564dcc25b7972fc6822a779037cd6a3c0f0531138833a1e2edb76889f9a"
+  },
+  "regression_tests_passed_this_invocation": [],
+  "passed": 48,
+  "results": [
+    {
+      "format": "OG35K",
+      "key": "OG35K23_98",
+      "bits": 8,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        10,
+        10
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG35K",
+      "key": "OG35K23_98",
+      "bits": 10,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        10,
+        9
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG35K",
+      "key": "OG35K23_98",
+      "bits": 12,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        7,
+        7
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG35K",
+      "key": "OG35K23_98CROP",
+      "bits": 8,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        10,
+        10
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG35K",
+      "key": "OG35K23_98CROP",
+      "bits": 10,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        10,
+        9
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG35K",
+      "key": "OG35K23_98CROP",
+      "bits": 12,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        7,
+        7
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG35K",
+      "key": "OG35K24",
+      "bits": 8,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        10,
+        10
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG35K",
+      "key": "OG35K24",
+      "bits": 10,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        10,
+        9
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG35K",
+      "key": "OG35K24",
+      "bits": 12,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        7,
+        7
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG35K",
+      "key": "OG35K24CROP",
+      "bits": 8,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        10,
+        10
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG35K",
+      "key": "OG35K24CROP",
+      "bits": 10,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        10,
+        9
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG35K",
+      "key": "OG35K24CROP",
+      "bits": 12,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        7,
+        7
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG35K",
+      "key": "OG35K25",
+      "bits": 8,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        10,
+        10
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG35K",
+      "key": "OG35K25",
+      "bits": 10,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        10,
+        9
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG35K",
+      "key": "OG35K25",
+      "bits": 12,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        7,
+        7
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG35K",
+      "key": "OG35K25CROP",
+      "bits": 8,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        10,
+        10
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG35K",
+      "key": "OG35K25CROP",
+      "bits": 10,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        10,
+        9
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG35K",
+      "key": "OG35K25CROP",
+      "bits": 12,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        7,
+        7
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG35K",
+      "key": "OG35K30",
+      "bits": 8,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        10,
+        10
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG35K",
+      "key": "OG35K30",
+      "bits": 10,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        10,
+        9
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG35K",
+      "key": "OG35K30",
+      "bits": 12,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        7,
+        7
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG35K",
+      "key": "OG35K30CROP",
+      "bits": 8,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        10,
+        10
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG35K",
+      "key": "OG35K30CROP",
+      "bits": 10,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        10,
+        9
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG35K",
+      "key": "OG35K30CROP",
+      "bits": 12,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        7,
+        7
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG4K",
+      "key": "OG4K23_98",
+      "bits": 8,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        10,
+        10
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG4K",
+      "key": "OG4K23_98",
+      "bits": 10,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        10,
+        9
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG4K",
+      "key": "OG4K23_98",
+      "bits": 12,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        7,
+        7
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG4K",
+      "key": "OG4K23_98CROP",
+      "bits": 8,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        10,
+        10
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG4K",
+      "key": "OG4K23_98CROP",
+      "bits": 10,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        10,
+        9
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG4K",
+      "key": "OG4K23_98CROP",
+      "bits": 12,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        7,
+        7
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG4K",
+      "key": "OG4K24",
+      "bits": 8,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        10,
+        10
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG4K",
+      "key": "OG4K24",
+      "bits": 10,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        10,
+        9
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG4K",
+      "key": "OG4K24",
+      "bits": 12,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        7,
+        7
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG4K",
+      "key": "OG4K24CROP",
+      "bits": 8,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        10,
+        10
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG4K",
+      "key": "OG4K24CROP",
+      "bits": 10,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        10,
+        9
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG4K",
+      "key": "OG4K24CROP",
+      "bits": 12,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        7,
+        7
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG4K",
+      "key": "OG4K25",
+      "bits": 8,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        10,
+        10
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG4K",
+      "key": "OG4K25",
+      "bits": 10,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        10,
+        9
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG4K",
+      "key": "OG4K25",
+      "bits": 12,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        7,
+        7
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG4K",
+      "key": "OG4K25CROP",
+      "bits": 8,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        10,
+        10
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG4K",
+      "key": "OG4K25CROP",
+      "bits": 10,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        10,
+        9
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG4K",
+      "key": "OG4K25CROP",
+      "bits": 12,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        7,
+        7
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG4K",
+      "key": "OG4K30",
+      "bits": 8,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        10,
+        10
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG4K",
+      "key": "OG4K30",
+      "bits": 10,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        10,
+        9
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG4K",
+      "key": "OG4K30",
+      "bits": 12,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        7,
+        7
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG4K",
+      "key": "OG4K30CROP",
+      "bits": 8,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        10,
+        10
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG4K",
+      "key": "OG4K30CROP",
+      "bits": 10,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        10,
+        9
+      ],
+      "pass": true
+    },
+    {
+      "format": "OG4K",
+      "key": "OG4K30CROP",
+      "bits": 12,
+      "setting_resolution": 3,
+      "canvas_formats": [
+        7,
+        7
+      ],
+      "pass": true
+    }
+  ],
+  "raw_observations": 60,
+  "regression_tests_passed_separate_invocation": [
+    "test_uhd_formats_choose_and_go_live_on_the_uhd_value",
+    "test_the_picker_answers_our_keys_with_virtual_ids",
+    "test_the_canvas_declares_our_profile",
+    "test_no_firmware_table_changes"
+  ],
+  "regression_result": "4 tests passed in 23.052 seconds; no skips.",
+  "release_source_review": {
+    "version": "v0.1.2test",
+    "core_sha256": "87bd6a9436f48b880d9766b1860597fc570e0d3d7b9669599b8a1f80e229acf9",
+    "rows": [
+      {
+        "label": "OG35K",
+        "stock_value": 3
+      },
+      {
+        "label": "OG4K",
+        "stock_value": 3
+      }
+    ],
+    "bitdepth_exclusion_notifier_hook_present": false,
+    "release_binary_emulated": false
+  },
+  "conclusion": "OG3.5K and OG4K use stock UHD resolution value 3, and retain the stock bit-depth/media exclusion. Their current picker/canvas supports 8/10/12-bit. The user-reported SD-only 8-bit versus SSD 12-bit availability agrees with this source behavior and Sigma fp manual media limits.",
+  "official_manual": "https://www.sigma-global.com/en/support/download/fp_Manual_FW_Ver.5.0_CT_2.pdf",
+  "initial_validation_limits": [
+    "Sandboxed Unicorn execution stopped with SIGILL/exit 132; offline execution outside the sandbox completed.",
+    "Initial additional matrix checked Cam.res, whose setter body is stubbed; it was corrected to assert the core RESVAL latch. Production sources were not changed."
+  ]
+}

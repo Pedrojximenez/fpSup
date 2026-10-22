@@ -1,0 +1,65 @@
+ok   ui script parses
+ok   sha256hex matches node
+ok   Instant on by default; Fast opt-in
+ok   usbshell: released product bytes, current boot pair
+ok   usbshell: real AutoRun EOF and hash
+ok   lossless: released product bytes, current boot pair
+ok   lossless: real AutoRun EOF and hash
+ok   gyro2: released product bytes, current boot pair
+ok   gyro2: real AutoRun EOF and hash
+ok   res-custom: released product bytes, current boot pair
+ok   res-custom: real AutoRun EOF and hash
+ok   screenflip: released product bytes, current boot pair
+ok   screenflip: real AutoRun EOF and hash
+ok   raw-view: released product bytes, current boot pair
+ok   raw-view: real AutoRun EOF and hash
+ok   Instant false, Fast false: exact boot pair in zip
+ok   Instant false, Fast false: selections retained
+ok   README records boot choices
+ok   loader ends at actual VBIN length
+ok   flipped boot byte blocks download
+ok   Instant false, Fast true: exact boot pair in zip
+ok   Instant false, Fast true: selections retained
+ok   README records boot choices
+ok   loader ends at actual VBIN length
+ok   flipped boot byte blocks download
+ok   Instant true, Fast false: exact boot pair in zip
+ok   Instant true, Fast false: selections retained
+ok   README records boot choices
+ok   loader ends at actual VBIN length
+ok   flipped boot byte blocks download
+ok   Instant true, Fast true: exact boot pair in zip
+ok   Instant true, Fast true: selections retained
+ok   README records boot choices
+ok   loader ends at actual VBIN length
+ok   flipped boot byte blocks download
+ok   no two running sups clash
+ok   parked sups are fpSup/NAME.OFF
+ok   all 6 ticked: checks pass (off: -)
+ok   first ticked of a clashing pair runs
+ok   zip: 00SHELL.BIN runs, 10LOSS.BIN is fpSup/10LOSS.OFF
+ok   no OFF folder
+ok   README says how to switch
+ok   a clash is not a failed check
+ok   flipped bit in a sup fails the self-check
+ok   zip is reproducible
+ok   res-custom: all 3 data files by default
+ok   res-custom: unticked OG3.5K is left out
+ok   res-custom: no data file ticked is refused
+todo usbshell: no guide page yet
+ok   lossless guide ../../guide/lossless.html exists
+ok   gyro2 guide ../../guide/gyro2.html exists
+ok   res-custom guide ../../guide/res-custom.html exists
+ok   screenflip guide ../../guide/screenflip.html exists
+ok   raw-view guide ../../guide/raw-view.html exists
+todo split-record: no guide page yet
+todo hdrx: no guide page yet
+todo af: no guide page yet
+todo lut: no guide page yet
+ok   lossless: tile thanks CorNy
+ok   res-custom: tile thanks Jose Hurtado
+ok   raw-view: tile thanks Ole Berek
+ok   AutoRun has the no-delay patch, page thanks Andy_hal9000
+ok   sups in the zip are in file-name order
+ok   author/credits fields present
+all passed

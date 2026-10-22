@@ -1,0 +1,125 @@
+{
+  "name": "28mm F1.4 DG HSM | Art 019",
+  "n_focal": 1,
+  "focal_axis_0p1mm": [
+    280
+  ],
+  "n_step": 22,
+  "scale": "defocus_per_pulse_um = defocus_raw / 65536.0 (16.16 fixed)",
+  "cell": "{ step_pos, defocus_raw, dpp_um }; step_pos=對焦步位, dpp=每脈衝離焦量(µm)",
+  "table": [
+    [
+      {
+        "step_pos": 0,
+        "defocus_raw": 0,
+        "dpp_um": 0.0
+      },
+      {
+        "step_pos": 927,
+        "defocus_raw": 34645,
+        "dpp_um": 0.52864
+      },
+      {
+        "step_pos": 1390,
+        "defocus_raw": 52009,
+        "dpp_um": 0.79359
+      },
+      {
+        "step_pos": 1738,
+        "defocus_raw": 65051,
+        "dpp_um": 0.9926
+      },
+      {
+        "step_pos": 2028,
+        "defocus_raw": 75929,
+        "dpp_um": 1.15858
+      },
+      {
+        "step_pos": 2376,
+        "defocus_raw": 88997,
+        "dpp_um": 1.35799
+      },
+      {
+        "step_pos": 2666,
+        "defocus_raw": 99898,
+        "dpp_um": 1.52432
+      },
+      {
+        "step_pos": 3013,
+        "defocus_raw": 112991,
+        "dpp_um": 1.72411
+      },
+      {
+        "step_pos": 3361,
+        "defocus_raw": 126097,
+        "dpp_um": 1.92409
+      },
+      {
+        "step_pos": 3941,
+        "defocus_raw": 147970,
+        "dpp_um": 2.25784
+      },
+      {
+        "step_pos": 4288,
+        "defocus_raw": 161110,
+        "dpp_um": 2.45834
+      },
+      {
+        "step_pos": 4578,
+        "defocus_raw": 172069,
+        "dpp_um": 2.62556
+      },
+      {
+        "step_pos": 5274,
+        "defocus_raw": 198403,
+        "dpp_um": 3.02739
+      },
+      {
+        "step_pos": 5853,
+        "defocus_raw": 220381,
+        "dpp_um": 3.36275
+      },
+      {
+        "step_pos": 6549,
+        "defocus_raw": 246792,
+        "dpp_um": 3.76575
+      },
+      {
+        "step_pos": 7186,
+        "defocus_raw": 271036,
+        "dpp_um": 4.13568
+      },
+      {
+        "step_pos": 7766,
+        "defocus_raw": 293100,
+        "dpp_um": 4.47235
+      },
+      {
+        "step_pos": 8461,
+        "defocus_raw": 319608,
+        "dpp_um": 4.87683
+      },
+      {
+        "step_pos": 9388,
+        "defocus_raw": 354995,
+        "dpp_um": 5.41679
+      },
+      {
+        "step_pos": 10200,
+        "defocus_raw": 385996,
+        "dpp_um": 5.88983
+      },
+      {
+        "step_pos": 11127,
+        "defocus_raw": 421462,
+        "dpp_um": 6.431
+      },
+      {
+        "step_pos": 11127,
+        "defocus_raw": 421462,
+        "dpp_um": 6.431
+      }
+    ]
+  ],
+  "source": "lens_data+0x10c58 (parser FUN_c0338510); wire 來源=鏡頭內部 ROM 0x356BB via L-mount CmdRead"
+}

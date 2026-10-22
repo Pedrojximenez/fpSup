@@ -1,0 +1,238 @@
+{
+  "endpoint": "0xc072e200",
+  "consumer_base": "0x4504c680",
+  "consumer_state": "0x45078740",
+  "registry": {
+    "magic": 826495574,
+    "abi": 2,
+    "lock": 0,
+    "provider": 1111575634,
+    "generation": 3,
+    "result": 0,
+    "detail": 0,
+    "count": 1,
+    "packs": 2,
+    "asset_used": 94216,
+    "row": 5
+  },
+  "consumer": {
+    "flag": 1,
+    "current": 6,
+    "res_value": 2,
+    "format_latch": 0,
+    "nrows": 6,
+    "nentries": 62,
+    "nmodes": 7
+  },
+  "selected": 6,
+  "rows": [
+    {
+      "index": 0,
+      "on": 1,
+      "width": 992,
+      "height": 662,
+      "stock": 2,
+      "menu_row": 2,
+      "pack": "0x45087cc0",
+      "label": "HS",
+      "ui_result": 1
+    },
+    {
+      "index": 1,
+      "on": 1,
+      "width": 2000,
+      "height": 1334,
+      "stock": 2,
+      "menu_row": 3,
+      "pack": "0x45093700",
+      "label": "OG2K",
+      "ui_result": 1
+    },
+    {
+      "index": 2,
+      "on": 1,
+      "width": 3456,
+      "height": 2304,
+      "stock": 3,
+      "menu_row": 4,
+      "pack": "0x45094cc0",
+      "label": "OG35K",
+      "ui_result": 1
+    },
+    {
+      "index": 3,
+      "on": 1,
+      "width": 3008,
+      "height": 2000,
+      "stock": 2,
+      "menu_row": 5,
+      "pack": "0x450969c0",
+      "label": "OG3K",
+      "ui_result": 1
+    },
+    {
+      "index": 4,
+      "on": 1,
+      "width": 3840,
+      "height": 2560,
+      "stock": 3,
+      "menu_row": 6,
+      "pack": "0x45097c40",
+      "label": "OG4K",
+      "ui_result": 1
+    },
+    {
+      "index": 5,
+      "on": 1,
+      "width": 992,
+      "height": 662,
+      "stock": 2,
+      "menu_row": 7,
+      "pack": "0x45478a40",
+      "label": "VRC000",
+      "ui_result": 1
+    }
+  ],
+  "producer_base": "0x452ef500",
+  "producer_state": "0x453842b8",
+  "producer": {
+    "result": 1,
+    "app": 3331322648,
+    "reader": 3332398568,
+    "entry": 3332533760,
+    "page": 1160742060,
+    "nbr": 1160868416,
+    "nbr_len": 3000,
+    "core_base": 1160737472,
+    "pages_state": 1,
+    "out_w": 992,
+    "out_h": 662,
+    "ro_w": 2016,
+    "ro_h": 672,
+    "ro_sx": 3,
+    "ro_sy": 6,
+    "bin_h": 1,
+    "bin_v": 1,
+    "axis_armed": 1,
+    "modes_rows": 2,
+    "mode_sel": 1,
+    "canvas_valid": 1,
+    "crop_w": 0,
+    "crop_h": 0,
+    "ratio": 0,
+    "edit_field": 0,
+    "editing": 0,
+    "crop_lock": 0,
+    "lens_on": 0,
+    "lens_factor": 133,
+    "small_edit": 0,
+    "applied_geometry": 12,
+    "applied_valid": 1,
+    "bin_kh": 0,
+    "bin_kv": 0,
+    "bin_mode": 0,
+    "output_policy": 0,
+    "lock_num": 992,
+    "lock_den": 662,
+    "save_name": 0,
+    "name_text": 1701667150,
+    "name_field": 0,
+    "name_editing": 0
+  },
+  "mode_ids": [
+    9,
+    12
+  ],
+  "loaded_headers": {
+    "32RESCUS.BIN": {
+      "file_len": 183104,
+      "block_size": 993856,
+      "id": 1398096722,
+      "version": 10,
+      "min_services": 3
+    },
+    "50RESLAB.BIN": {
+      "file_len": 609720,
+      "block_size": 881024,
+      "id": 1111575634,
+      "version": 17,
+      "min_services": 3
+    }
+  },
+  "file_management": {
+    "available": [
+      "HS",
+      "OG2K",
+      "OG35K",
+      "OG3K",
+      "OG4K",
+      "S16"
+    ],
+    "explicit_enable_count": 0,
+    "enabled_labels": [],
+    "record_valid": true,
+    "ui_owner": "0x4511ccc0",
+    "ui_header": [
+      843465554,
+      0,
+      1158121280,
+      1158014936,
+      3331322648,
+      0,
+      0
+    ]
+  },
+  "fps_state": {
+    "VR_UI": 1,
+    "VR_WHY": 1,
+    "VRATE": 27972,
+    "VR_COMMITS": 6,
+    "DIRTY": 1,
+    "PICKOK": 1,
+    "FPSLATCH": 1133239346,
+    "LAST_ENT": 7200,
+    "HITS": 123897
+  },
+  "engine_state_valid": true,
+  "engine_fps": 279.72027587890625,
+  "picked_entry": {
+    "FIVE": 5,
+    "PID": 62,
+    "MODE": 236,
+    "KEYPTR": 1158128500,
+    "ROW": 5,
+    "W0": 21627210,
+    "W1": 393996,
+    "ENGFPS": 1133239346,
+    "NOMINAL": 280,
+    "VM": 6,
+    "VAR": 18,
+    "VRATE": 27972
+  },
+  "frame_cycles": 257400,
+  "sensor_timing_fps": 279.72027972027973,
+  "fps_gui": {
+    "MV_FrameRate": "OK:MV_FrameRate -> 10\n\n",
+    "EXCL_FrameRate": "OK:EXCL_FrameRate -> 0\n\n"
+  },
+  "fps_getter": "7\n\n",
+  "quality_getter": "4\n\n",
+  "screen": "LV_CINE_MEDIUM",
+  "rate_notification": {
+    "RATE_LVOWED": 0,
+    "RATE_LV_RELOADS": 6
+  },
+  "loaded_core_sha256": "aab156d8c28f97099df33f15133e6b0e092e02b520acc3de013d01f62e7dbbb7",
+  "rate_shims": [
+    {
+      "site": "0xc057a6f8",
+      "target": "0x450781a8",
+      "sha256": "e91d4ef6cbf39ff2c10801107c5b6370da5848469b11873b35a82d413850a123"
+    },
+    {
+      "site": "0xc05821b8",
+      "target": "0x4507822c",
+      "sha256": "a051ecbf009f4e61255e0f8c426734fb37279a3b4325b333869b17cc72f40f09"
+    }
+  ]
+}

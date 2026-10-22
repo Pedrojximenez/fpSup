@@ -1,0 +1,26 @@
+screen: LV_CINE_MEDIUM
+  tagged 16380/52744 B  2193 KiB/s   tagged 32760/52744 B  2696 KiB/s   tagged 49140/52744 B  2175 KiB/s   tagged 52744/52744 B  2172 KiB/s   tagged 52744 bytes in 0.0s (2111 KiB/s)      
+  tagged 116/116 B  163 KiB/s   tagged 116 bytes in 0.0s (89 KiB/s)      
+  tagged 116/116 B  200 KiB/s   tagged 116 bytes in 0.0s (33 KiB/s)      
+  tagged 80/80 B  73 KiB/s   tagged 80 bytes in 0.0s (41 KiB/s)      
+  tagged 104/104 B  169 KiB/s   tagged 104 bytes in 0.0s (83 KiB/s)      
+  tagged 60/60 B  99 KiB/s   tagged 60 bytes in 0.0s (33 KiB/s)      
+screen: LV_CINE_MEDIUM
+  tagged 16380/52744 B  2789 KiB/s   tagged 32760/52744 B  2107 KiB/s   tagged 49140/52744 B  2273 KiB/s   tagged 52744/52744 B  2303 KiB/s   tagged 52744 bytes in 0.0s (2236 KiB/s)      
+  tagged 116/116 B  53 KiB/s   tagged 116 bytes in 0.0s (41 KiB/s)      
+  tagged 116/116 B  221 KiB/s   tagged 116 bytes in 0.0s (105 KiB/s)      
+  tagged 80/80 B  129 KiB/s   tagged 80 bytes in 0.0s (21 KiB/s)      
+  tagged 104/104 B  93 KiB/s   tagged 104 bytes in 0.0s (55 KiB/s)      
+  tagged 60/60 B  91 KiB/s   tagged 60 bytes in 0.0s (39 KiB/s)      
+{
+  "label": "sensor-only-native30-quiet20",
+  "new_clips": [
+    "A001_089"
+  ],
+  "stop_sent": false,
+  "spontaneous_stop": true,
+  "standby_after": true,
+  "phase": "captured",
+  "record_log": "slot=1, cnt=3/600\nsize=131072*978816(119GB), free=75%, exFAT, UHS-II\ntime       : 2026/10/12 00:05:45 \nrec factor : Nothing \nui factor  : Nothing \nbattery    : OK \ntemp(BAT)  : OK \ntemp(BODY) : OK \ntemp(LCD)  : OK \ntemp(CMOS) : OK \nfile-size=1095168, bulk-size=67108864(61.3)\nreq_cnt=94, fin_cnt=94, vbuf/94/81226, raw1\nrequest  ,finish   ,diff,gap ,reqcnt,fincnt,diff,sdb,MB/s\n     1185,     1388, 203,1185,     5,     1,   4,  1,  26\n     1645,     2109, 464, 257,    62,     6,  56,  7, 134\n     2128,     2283, 155,  19,    94,    62,  32, 63, 233\n"
+}
+Verified processing FPS latch30.0, sensor timing239.76, no CPU-header or reduced-bulk hits.

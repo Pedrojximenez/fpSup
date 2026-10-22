@@ -1,0 +1,42 @@
+fpGyroSup r30 writer-private raw snapshot back-pressure test
+Build date: 2026-08-31
+Camera/firmware: SIGMA fp Ver.5.02
+Build type: release AutoRun, no USB shell
+Base: exact r29 sparse native-rate accelerometer GCSV
+
+Observed reason for this build:
+- r29 A001_008 recorded 18,958 continuous DNG frames over 632.566 seconds and
+  wrote complete 35.97 MB GCSV plus JSON.
+- It retained 1,584,098 gyro rows and 31,669 native-rate accel rows, but one
+  real 40.545 ms gyro gap occurred at 329.936 seconds.
+- The gap was the 217th of 416 raw-block boundaries and is the only interval
+  over 1.08 ms.  It matches the r17 producer's drop_batch path when one raw
+  half is READY and the writer still owns the other half across card latency.
+
+Only pipeline change from r29:
+- The producer remains the exact r17/r29 two-slot A/B logger.
+- When the writer claims READY, it builds the existing header and copies the
+  complete fixed 32 KiB raw slot to a writer-private snapshot at state+0x38000.
+- It then clears and publishes the source slot EMPTY before calling the exact
+  r29 formatter/media path on the private snapshot.
+- The RAM copy is eight words per iteration, 1,024 bounded iterations once per
+  roughly 1.52-second raw block.  It performs no formatting or media call.
+- While the writer is blocked in F_WRITE, both producer slots can now absorb
+  about 3.0 seconds of gyro instead of only one slot's roughly 1.5 seconds.
+
+Explicitly unchanged:
+- 2,500 Hz gyro callback, ring draining, A/B ownership and sequence ordering.
+- Sparse approximately 50 Hz accelerometer rows and all r29 GCSV bytes.
+- 64 KiB complete-line F_WRITE calls and the 5 ms cooperative yield.
+- Native lifecycle, recording/power locks, JSON generation and task priority.
+- No GYR file, third producer slot, formatter staging or sensor decimation.
+
+Safety and layout verification:
+- AutoRun.txt and PGEN.BIN are byte-for-byte identical to r29.
+- The original writer call is redirected to an appended 80-byte helper; the
+  old post-format slot clear is bypassed so it cannot corrupt a reused slot.
+- The private snapshot occupies the previously verified free
+  state+0x38000..+0x40000 window and does not overlap A, B, text or read areas.
+- Resident logger grows from 3,620 to 3,700 bytes and ends at 0xC072EED8,
+  40 bytes below the conservative 0xC072EF00 boundary.
+- Experimental hardware build; not fp-gyro-sup-v1.1.

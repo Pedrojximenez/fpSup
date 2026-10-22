@@ -1,0 +1,47 @@
+{
+  "date_utc": "2026-10-09T05:45:21.253873+00:00",
+  "status": "passed",
+  "tests_run": 51,
+  "skipped": [],
+  "failures": [],
+  "errors": [],
+  "camera_operations": false,
+  "isp_pixel_emulation": false,
+  "ceq_real_firmware_emulation": {
+    "contexts": [
+      0,
+      1
+    ],
+    "expand_thumb_entry": "0xC01084D9",
+    "route_thumb_entry": "0xC0108C99",
+    "valid_camera_sample_contexts": 83,
+    "refused_transient_sample_contexts": 1,
+    "code_execution_allowlist": true,
+    "rom_and_source_read_only": true,
+    "callee_saved_registers_and_stack_checked": true,
+    "instruction_bound_per_call": 10000,
+    "scaling_mutation_detected": true
+  },
+  "residual_pair_provenance": "synthetic test fixtures; no measured camera RGB pairs",
+  "sha256": {
+    "fpSup/lut/cube.py": "d80aa6d51b38d495c05d87abea719665780ce80df808ed3f936ac9523d6d67a1",
+    "fpSup/lut/dng.py": "fbd52f93747bf6b9dbe16fb262f460e834f556c940355d54a196f5feade12465",
+    "fpSup/lut/fplut.py": "b9363a044b090efa0eafd674695dbaca620cd508bef1ed13a7500acfc0b5f6ba",
+    "fpSup/lut/native_ceq.py": "dc7ad8485be9ea3796cea0ab72d432fb5828732c92123199ab5403d3d63ae927",
+    "fpSup/lut/residual.py": "605861d92faff72fe41b9a3de1c9447b3b0398d776baf45dd9775bcaecb953e9",
+    "fpSup/lut/test_lut.py": "4aabedeec57c4326e6bf2a20a1681729544d0fba19f48e08acf78e045e51ab9e",
+    "fpSup/lut/test_native_ceq.py": "78ccf770e69d33df4a599f7761e6746c86ab1ad93ef7b218c8bcb41d22a13310",
+    "fpSup/lut/test_residual.py": "c7ca174eacc7efd940b5e8cbcd829948843f6e8686d6599b4965d42b777c6f82",
+    "projects/lut-sup/probes/native_mode_trial.py": "dbda7e0bc36b65f39bd7218956ded6495472a8da9b5009d0017d3000c8ddde01",
+    "projects/lut-sup/probes/native_controls_trial.py": "2d6e366d06c7d6499b05c2f454a60f1e9383ef54d1daafd7f9a95b261465abe1",
+    "projects/lut-sup/probes/native_output_descriptors.py": "3ced6437e831c877a2faa9637a1a1481cdf3078c4abb036139fd85ac506a5f3a",
+    "projects/lut-sup/probes/native_preview_bytes.py": "2752025650abd28437d67e4320fc368e96d793785f9fd5ff7ce32ae895608afd",
+    "projects/lut-sup/probes/analyse_native_controls.py": "5e114de1b8c01664f24751023dbf19e8033ca4a259b7c915590aa9c4d5bdb7f6",
+    "projects/lut-sup/probes/test_native_mode_trial.py": "fe2dbf5c30a259a69ad3873f5d45d3273b47124184e2e007d2c3784c7ed85db4",
+    "projects/lut-sup/probes/test_native_controls_trial.py": "b1e37cb4bdbaa55de8ba40fed8ea1f9abc58b5f075f52fc8b98d34e323c93099",
+    "projects/lut-sup/probes/test_native_preview_bytes.py": "0779e07559fab60da92c7eb528e751c54e7d690a08c25de092fbaec4f067297f",
+    "projects/lut-sup/probes/validate_hybrid.py": "64b52d5b760792d8de0e5ab2282e992b42a360ddb3263ed9ab765c7ff839db67",
+    "out/MAIN_c0000000.bin": "92a8ee993f6c3d66c251e88d45a2ccd5135c6cf7342717784321c2ed506e2fb4",
+    "projects/lut-sup/validation/20261009-native-controls-trial-01/report.json": "8a34940320ae94b70f63276f417f2d9dc422a31f3d031b1c115841080660eb1d"
+  }
+}

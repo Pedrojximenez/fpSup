@@ -1,0 +1,91 @@
+{
+  "schema": "sigma-fp-near-history-analysis/v1",
+  "status": "completed-near-area0-structural-candidate",
+  "full_dump_stable": false,
+  "history_stable": true,
+  "permitted_live_differences": [
+    {
+      "address": "0xC32914FC",
+      "before": 47216,
+      "after": 47249,
+      "reason": "live L reference, not a stored history element"
+    }
+  ],
+  "freshness_confirmed": null,
+  "usable_for_dfd": null,
+  "limitations": [
+    "May be stale: verify a new sweep in trial telemetry separately.",
+    "No independent optical/motor timing ground truth.",
+    "H/L are CDAF frequency bands, not phase-detection halves.",
+    "Exposure/gain is not attached per native history sample."
+  ],
+  "metadata": {
+    "state": 4,
+    "raw_n": 6,
+    "delay_d": 1,
+    "valid_count": 6,
+    "captured_prefix_count": 32,
+    "excluded_tail_count": 26,
+    "descriptor_direction_raw": 1,
+    "global_command_position": 10021
+  },
+  "samples": [
+    {
+      "k": 0,
+      "position": 10405,
+      "h": 3138,
+      "l": 35060,
+      "aggregate": 3138
+    },
+    {
+      "k": 1,
+      "position": 10340,
+      "h": 3984,
+      "l": 36574,
+      "aggregate": 3984
+    },
+    {
+      "k": 2,
+      "position": 10207,
+      "h": 6307,
+      "l": 39560,
+      "aggregate": 6307
+    },
+    {
+      "k": 3,
+      "position": 10074,
+      "h": 8472,
+      "l": 41898,
+      "aggregate": 8472
+    },
+    {
+      "k": 4,
+      "position": 9943,
+      "h": 8434,
+      "l": 42740,
+      "aggregate": 8434
+    },
+    {
+      "k": 5,
+      "position": 9809,
+      "h": 7445,
+      "l": 43039,
+      "aggregate": 7445
+    }
+  ],
+  "peak": {
+    "native_formula_candidate_position": 10011,
+    "near_peak_position": 10011,
+    "near_selected_position": 10011,
+    "matches_near_peak": true,
+    "matches_near_selected": true,
+    "scope": "interior H-maximum branch candidate; not full firmware replay",
+    "h_argmax": 3,
+    "native_formula_float_offset": 63.17206601365997,
+    "native_formula_rounded_offset": 63,
+    "ordinary_quadratic_vertex": 10010.811048294066,
+    "reason": "interior candidate calculated"
+  },
+  "source": "/Users/dido/Developer.localized/SIGMAfp_re/research/autofocus/captures/af-fusion/2026-09-16-repeat-b/native-history.json",
+  "source_sha256": "ddf257f3f6d41de99ac063f903f748586263e64507a89c1f5aa46e44f3e24350"
+}

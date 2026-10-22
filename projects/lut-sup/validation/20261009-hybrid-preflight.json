@@ -1,0 +1,138 @@
+{
+  "time_utc": "2026-10-09T05:13:12.475858+00:00",
+  "mutations": false,
+  "daemon": "OK name=fpshd version=3.2.0 protocol=1 frame=64 payload=44 transport=EP01-EP82 iface=0 camera=open seq=13160 ep83=host_candidate upload=UP01-probed mem=MEM1-probed quarantine=0 fault=none",
+  "state": {
+    "color_mode": 12,
+    "app_current": 2,
+    "is_recording": 0,
+    "stored_record_mode": 1,
+    "applied_record_mode": 1,
+    "relative_gain": 1170,
+    "boot_id": 4040737
+  },
+  "hooks": {
+    "0xc0075cf4": [
+      3780771846
+    ],
+    "0xc0313244": [
+      3851755532
+    ],
+    "0xc0bac2f8": [
+      3225262496
+    ]
+  },
+  "controls": {
+    "SetColorModeEffect": "0",
+    "SetColorModeContrast": "0",
+    "SetColorModeSaturation": "0",
+    "SetColorModeToning": "0",
+    "SetToneControlMode": "0",
+    "SetToneManualHighlight": "0",
+    "SetToneManualShadow": "0",
+    "SetFillLightEffect": "0"
+  },
+  "status": "read-complete",
+  "transcript": [
+    {
+      "time_utc": "2026-10-09T05:13:12.476363+00:00",
+      "command": "STATUS",
+      "reply": "OK name=fpshd version=3.2.0 protocol=1 frame=64 payload=44 transport=EP01-EP82 iface=0 camera=open seq=13160 ep83=host_candidate upload=UP01-probed mem=MEM1-probed quarantine=0 fault=none"
+    },
+    {
+      "time_utc": "2026-10-09T05:13:12.476725+00:00",
+      "command": "TMO 1500 SHL status get is_recording",
+      "reply": "OK is_recording -> 0\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:13:12.477259+00:00",
+      "command": "TMO 1500 SHL menu SetColorMode",
+      "reply": "OK 12\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:13:12.477504+00:00",
+      "command": "TMO 1500 SHL status get app_current",
+      "reply": "OK app_current -> 2\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:13:12.477771+00:00",
+      "command": "TMO 1500 SHL status get is_recording",
+      "reply": "OK is_recording -> 0\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:13:12.478060+00:00",
+      "command": "TMO 1500 SHL mem get 0xC31C01B0,,0x4",
+      "reply": "OK get : A:0xc31c01b0, D:0x00000001\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:13:12.480693+00:00",
+      "command": "TMO 1500 SHL mem get 0xC31F86E0,,0x4",
+      "reply": "OK get : A:0xc31f86e0, D:0x00000001\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:13:12.481005+00:00",
+      "command": "TMO 1500 SHL mem get 0xC343B5A0,,0x4",
+      "reply": "OK get : A:0xc343b5a0, D:0x00000492\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:13:12.481301+00:00",
+      "command": "TMO 1500 SHL mem get 0xC072F6F8,,0x4",
+      "reply": "OK get : A:0xc072f6f8, D:0x003DA821\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:13:12.481548+00:00",
+      "command": "TMO 1500 SHL mem get 0xC0075CF4,,0x4",
+      "reply": "OK get : A:0xc0075cf4, D:0xE15A0006\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:13:12.481880+00:00",
+      "command": "TMO 1500 SHL mem get 0xC0313244,,0x4",
+      "reply": "OK get : A:0xc0313244, D:0xE595200C\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:13:12.482543+00:00",
+      "command": "TMO 1500 SHL mem get 0xC0BAC2F8,,0x4",
+      "reply": "OK get : A:0xc0bac2f8, D:0xC03D99A0\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:13:12.483105+00:00",
+      "command": "TMO 1500 SHL menu SetColorModeEffect",
+      "reply": "OK 0\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:13:12.483601+00:00",
+      "command": "TMO 1500 SHL menu SetColorModeContrast",
+      "reply": "OK 0\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:13:12.484087+00:00",
+      "command": "TMO 1500 SHL menu SetColorModeSaturation",
+      "reply": "OK 0\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:13:12.484608+00:00",
+      "command": "TMO 1500 SHL menu SetColorModeToning",
+      "reply": "OK 0\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:13:12.485047+00:00",
+      "command": "TMO 1500 SHL menu SetToneControlMode",
+      "reply": "OK 0\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:13:12.485446+00:00",
+      "command": "TMO 1500 SHL menu SetToneManualHighlight",
+      "reply": "OK 0\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:13:12.485865+00:00",
+      "command": "TMO 1500 SHL menu SetToneManualShadow",
+      "reply": "OK 0\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:13:12.486299+00:00",
+      "command": "TMO 1500 SHL menu SetFillLightEffect",
+      "reply": "OK 0\\n"
+    }
+  ]
+}

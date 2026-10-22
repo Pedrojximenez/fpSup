@@ -1,0 +1,50 @@
+{
+  "kind": "offline_direct_control_native_contracts",
+  "date": "2026-09-30",
+  "status": "offline_verified_not_deployable",
+  "requested_card": {
+    "activation": "direct without menu",
+    "usb_shell": "current fp_usb_shell",
+    "fast_start": 2,
+    "menu": false,
+    "opengate": false,
+    "gyro": false
+  },
+  "camera_accessed": false,
+  "card_written": false,
+  "camera_ready": false,
+  "runtime_adapter_installed": false,
+  "bin_produced": false,
+  "autorun_changed": false,
+  "root": "/Users/dido/Developer.localized/SIGMAfp_re",
+  "commands": "BUILD_NOTES.md",
+  "source_and_artifact_hashes": "SHA256SUMS",
+  "firmware": {
+    "seg0_sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622",
+    "seg1_sha256": "0dcaca8f5441fe4ddc6ed801cb888e325df4e76006e4f53a1c3219809b22ce7b"
+  },
+  "tools": {"python": "3.9.6", "clang": "Apple clang 21.0.0", "unicorn": "2.1.4"},
+  "tests": [
+    {"log": "core-final.log", "tests": 73, "skipped": 0, "passed": true, "detail": "includes two isolated wrappers with 11 direct-control and 8 pipeline ARM cases; synthetic facts/handoff, not native ownership"},
+    {"log": "native-port.log", "tests": 23, "skipped": 0, "passed": true, "detail": "22 host O2 and ASan/UBSan scenarios plus ARM compilation"},
+    {"log": "binding.log", "tests": 30, "skipped": 0, "passed": true},
+    {"log": "native-codec.log", "tests": 16, "skipped": 0, "passed": true, "detail": "original init/encode/size/postprocess/close; OS/DMA/power boundaries substituted; 4 mutations"},
+    {"log": "native-defer.log", "tests": 22, "skipped": 0, "passed": true, "detail": "original creator/registry/FIFO/stop/THR exit/IRQ, explicit kernel/resource stubs; 3 mutations"},
+    {"log": "disabled-probe.log", "tests": 16, "skipped": 0, "passed": true, "detail": "old wrong-frame arm stays disabled before any camera side effect"}
+  ],
+  "total_top_level_tests": 180,
+  "objects": [
+    {"path": "control.o", "optimization": "O3", "bytes": 3160, "strict_text_bytes": 2076, "text_sha256": "47a308e615f52ede4349388c367cf41bab37c48c2cb82240982d73e66a332313"},
+    {"path": "frame_pipeline.o", "optimization": "O2", "bytes": 3844, "strict_text_bytes": 2680, "text_sha256": "727f0d49e18d22f34e03478163e596284a61a1992e6a2e72ac52356ca40c9f81"}
+  ],
+  "remaining": [
+    "native same-frame ownership across all stop and teardown routes",
+    "real worker scheduling, DMA quiescence and bounded failure drain",
+    "complete padded source and safe output capacity",
+    "same-source writer handoff and per-frame DNG metadata",
+    "per-geometry 10/12-bit encode and large-format capacity validation",
+    "resident launcher and journaled hooks using shared loader",
+    "actual Lossless plus USB shell Fast Start 2 artifact and exact-byte validation",
+    "notify user before bounded hardware trial"
+  ]
+}

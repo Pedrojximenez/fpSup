@@ -1,0 +1,61 @@
+--- fpshd.upstream.c	2026-09-16 07:28:30
++++ fpshd-diagnostic.c	2026-09-16 07:28:30
+@@ -24,6 +24,9 @@
+ #include <sys/socket.h>
+ #include <sys/un.h>
+ #include <unistd.h>
++#ifdef FPSH_DIAGNOSTIC_FRAME_LOG
++#include <time.h>
++#endif
+ 
+ #define FRAME_SIZE   64
+ #define PAYLOAD_SIZE 44
+@@ -82,6 +85,37 @@
+ static libusb_device_handle*g_cam;
+ static uint32_t             g_seq;
+ static volatile sig_atomic_t g_stop;
++
++#ifdef FPSH_DIAGNOSTIC_FRAME_LOG
++/* Diagnostic-only observation of bytes already returned by libusb.  No reads,
++ * retries, drains, packet acceptance, or camera state are changed here.
++ * Only [0, moved) is inspected; the uninitialized remainder of rx is not read.
++ * stderr logging can perturb timing and is not itself a transport repair.
++ */
++static void diagnostic_frame_log(uint32_t sequence, int frame, int rc,
++                                 int moved, const unsigned char *bytes)
++{
++    static unsigned long long count;
++    static const char digits[] = "0123456789abcdef";
++    int saved_errno = errno;
++    struct timespec ts = { -1, -1 };
++    char hex[FRAME_SIZE * 2 + 1];
++    size_t captured = moved > 0 ? (size_t)moved : 0;
++    if (captured > FRAME_SIZE) captured = FRAME_SIZE;
++    int clock_rc = clock_gettime(CLOCK_MONOTONIC_RAW, &ts);
++    for (size_t i = 0; i < captured; i++) {
++        hex[i * 2] = digits[bytes[i] >> 4];
++        hex[i * 2 + 1] = digits[bytes[i] & 15];
++    }
++    hex[captured * 2] = 0;
++    fprintf(stderr, "FPSH_DIAG_FRAME count=%llu seq=%u frame=%d rc=%d "
++            "moved=%d expected=%d captured=%zu clock=MONOTONIC_RAW "
++            "clock_rc=%d raw_sec=%lld raw_nsec=%ld hex=%s\n",
++            ++count, sequence, frame, rc, moved, FRAME_SIZE, captured,
++            clock_rc, (long long)ts.tv_sec, ts.tv_nsec, hex);
++    errno = saved_errno;
++}
++#endif
+ 
+ static uint32_t crc32(const uint8_t *p, size_t n)
+ {
+@@ -234,6 +268,10 @@
+         rc = libusb_bulk_transfer(g_cam, EP_IN, (unsigned char *)&rx, FRAME_SIZE,
+                                   &moved, TMO);
+         if (rc != 0 || moved != FRAME_SIZE) {
++#ifdef FPSH_DIAGNOSTIC_FRAME_LOG
++            diagnostic_frame_log(tx.sequence, frame, rc, moved,
++                                 (const unsigned char *)&rx);
++#endif
+             snprintf(g_why, sizeof g_why, "frame%d rc=%d(%s) moved=%d/%d",
+                      frame, rc, libusb_error_name(rc), moved, FRAME_SIZE);
+             if (rc == LIBUSB_ERROR_NO_DEVICE) { cam_close(); return -1; }

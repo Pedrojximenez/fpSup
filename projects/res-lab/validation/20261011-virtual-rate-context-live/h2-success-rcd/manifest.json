@@ -1,0 +1,314 @@
+{
+  "file": "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/h2-success-rcd/H2S240.RCD",
+  "bytes": 7060,
+  "sha256": "835d214cf4c0b17d26f075e6ce3f749fe346ac88fb7c9ab4b9fe3642f15cbc99",
+  "fnv1a": "0x18e5dd90",
+  "required_consumer_product_version": 16,
+  "rcd_wire_version": 3,
+  "parameters": {
+    "label": "H2S240",
+    "profile": 13,
+    "enum": 7,
+    "stock_value": 2,
+    "aspect": 2,
+    "flags": 0,
+    "prev_h": 1334,
+    "act": [
+      992,
+      662
+    ],
+    "modes": [
+      [
+        12,
+        2997,
+        330,
+        0,
+        6
+      ]
+    ],
+    "canvas_rec": [
+      [
+        0,
+        1008
+      ],
+      [
+        4,
+        672
+      ],
+      [
+        12,
+        1008
+      ],
+      [
+        16,
+        672
+      ],
+      [
+        32,
+        992
+      ],
+      [
+        36,
+        992
+      ],
+      [
+        40,
+        662
+      ],
+      [
+        44,
+        662
+      ],
+      [
+        96,
+        2048
+      ],
+      [
+        100,
+        2048
+      ],
+      [
+        128,
+        7
+      ],
+      [
+        132,
+        7
+      ],
+      [
+        144,
+        1
+      ],
+      [
+        176,
+        1
+      ],
+      [
+        192,
+        0
+      ],
+      [
+        208,
+        1024
+      ],
+      [
+        212,
+        1024
+      ],
+      [
+        216,
+        1008
+      ],
+      [
+        220,
+        1008
+      ],
+      [
+        224,
+        672
+      ],
+      [
+        228,
+        672
+      ],
+      [
+        244,
+        1008
+      ],
+      [
+        248,
+        672
+      ],
+      [
+        252,
+        1073741824
+      ],
+      [
+        256,
+        1073741824
+      ]
+    ],
+    "canvas_pb": [
+      [
+        0,
+        1008
+      ],
+      [
+        4,
+        672
+      ],
+      [
+        12,
+        1008
+      ],
+      [
+        16,
+        672
+      ],
+      [
+        36,
+        992
+      ],
+      [
+        44,
+        662
+      ],
+      [
+        220,
+        1008
+      ],
+      [
+        228,
+        672
+      ]
+    ],
+    "row_text": "H2S240 992x662",
+    "summary": "H2S240",
+    "capture_timing": [
+      [
+        2997,
+        0,
+        21627210,
+        394126,
+        1131397791,
+        240
+      ]
+    ]
+  },
+  "expected_canvas": [
+    1008,
+    672,
+    0,
+    1008,
+    672,
+    0,
+    0,
+    2,
+    992,
+    992,
+    662,
+    662,
+    1131397791,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    2048,
+    2048,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    7,
+    7,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1024,
+    1024,
+    1008,
+    1008,
+    672,
+    672,
+    0,
+    0,
+    2,
+    1008,
+    672,
+    1073741824,
+    1073741824
+  ],
+  "assets": [
+    {
+      "name": "H2S240_QS",
+      "width": 86,
+      "height": 49,
+      "bytes": 839,
+      "sha256": "3265b49034e266f49f343f94fd9f35884d83cd80b440cbf556e61631b44d078e"
+    },
+    {
+      "name": "H2S240_SET",
+      "width": 86,
+      "height": 74,
+      "bytes": 877,
+      "sha256": "f38906b548c1ff702f382316566d257ac86c94711cbf9869d22ac09dd7479447"
+    },
+    {
+      "name": "H2S240_FONT",
+      "width": 150,
+      "height": 38,
+      "bytes": 1076,
+      "sha256": "b3e2fc27ff8bbc3fb988f68a39908a030f95c76ce0333f589ab64ba6065bd1c1"
+    },
+    {
+      "name": "font_S_imageSize_992",
+      "width": 88,
+      "height": 38,
+      "bytes": 1464,
+      "sha256": "18e3d1c39dfdc2dd1d0d38cabc1a1390c5081538ebc2bb0652e5335ee0b885cf"
+    },
+    {
+      "name": "font_S_imageSize_662",
+      "width": 88,
+      "height": 38,
+      "bytes": 1457,
+      "sha256": "d2c85ebd69cbd0ccf3f731fed78798808567f5e380641fac1faae23ecfffe6eb"
+    }
+  ],
+  "source": "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/success-version-audit/historical-h2-profile-difference.json",
+  "source_sha256": "f7f6b7f9d339b8e537122d58e3c2d1212d5a3ee25c526fe1667d3c2f824e804a",
+  "tested_entry": {
+    "key": "H2S24030",
+    "donor": 12,
+    "w0": 21627210,
+    "w1": 394126,
+    "engfps": 1131397791,
+    "nominal": 240,
+    "vrate": 0,
+    "rank": 2997,
+    "crop": 0
+  },
+  "sensor_fps": 239.76023976023976,
+  "native_menu_fps": "30000/1001",
+  "raw": [
+    1008,
+    672
+  ],
+  "crop": [
+    992,
+    662
+  ],
+  "inference": "Engine FPS derives from the preserved predecessor recipe-to-FPSLATCH path. The exact live FPSLATCH at A001_193 start was not saved.",
+  "limitations": [
+    "Reconstructed parameter family, not the exact old installed binary.",
+    "Only the native30 entry selects the historical240 capture timing.",
+    "Other generated carrier entries retain their ordinary timing.",
+    "Playback UI/assets and the maintained loader are current integrations.",
+    "No hardware recording test has passed for this reconstructed RCD."
+  ],
+  "camera_changed": false
+}

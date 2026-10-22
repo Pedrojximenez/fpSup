@@ -1,0 +1,57 @@
+fpGyroSup r33 r32-base drop/anchor ground-truth probe
+Build date: 2026-09-01
+Camera/firmware: SIGMA fp Ver.5.02
+Build type: release AutoRun, no USB shell
+Base: exact r32 honest cross-block timestamp continuity
+
+Reason for this build:
+- r32 A001_006 retained 1,355,667 gyro rows and 16,219 continuous DNG frames.
+- All but two GCSV intervals were exactly 400 us.  The two block-start
+  intervals were 4,093 us and 83,435 us.
+- Those intervals can mean real producer drop_batch loss, but the existing
+  logger snapshots the hardware ring head before it reads TickTimer.  A task
+  preemption in that narrow window creates the same forward raw-anchor jump
+  without losing samples.
+- r32's 1,000-us policy cannot distinguish these causes, and the existing
+  S_DROPPED counter was never persisted.
+
+Only diagnostic changes from r32:
+- At every non-empty gyro hook, one extra TickTimer read occurs immediately
+  before the original ring-head load.  The original post-head TickTimer result
+  remains the unmodified batch-end timestamp.
+- Only callbacks that start a new raw block contribute to
+  max_block_head_tick_us, because only those callbacks supply GCSV anchors.
+- The original S_DROPPED sample counter remains unchanged.
+- Take start clears the new last/max words at state+0x1E4/+0x1E8 together with
+  S_DROPPED.
+- Before command 3 performs its already-existing final GCSV flush, it appends:
+    #FPD1;drop_samples=N;max_block_head_tick_us=N
+  The trailer contains no comma and is therefore one flexible-CSV field.
+
+Explicitly unchanged:
+- r32 two-slot writer ownership, 32 KiB raw slots, 64 KiB complete-line writes,
+  5 ms yield, sparse native-rate accel, timestamp policy and 2,500 Hz sensor.
+- No additional file, F_OPEN, F_WRITE, flush, close or recording-time media call.
+  The trailer rides in the existing final GCSV flush.
+- Native lifecycle, JSON builder/queue, recording and shutdown locks.
+- All old PGEN JSON bytes and all old VSHL writer/media instructions.
+
+Interpretation:
+- drop_samples > 0 proves the producer executed drop_batch; the number is the
+  exact raw gyro sample count advanced without copying.
+- drop_samples=0 excludes this producer drop_batch path, but not an upstream
+  sensor pause or hardware-ring overwrite.
+- An unusually large max_block_head_tick_us near a displayed GCSV local gap
+  strongly supports head-to-TickTimer scheduling delay.  It is a take-wide
+  maximum, so it does not by itself pair the measurement to a specific seam.
+- Both nonzero means the take may contain both mechanisms; compare the exact
+  GCSV seams with the two counters before changing buffering.
+
+Safety and binary verification:
+- AutoRun.txt is byte-for-byte identical to r32.
+- Four checked VSHL instructions become bounded helper calls.  The 96-byte tail
+  ends at 0xC072EEE8, 24 bytes below the conservative 0xC072EF00 boundary and
+  204 bytes below the resident parking stub.
+- One checked PGEN final-flush call is redirected through a 132-byte append
+  helper which calls that same flush exactly once.  JSON code is unchanged.
+- Experimental hardware diagnostic build; not fp-gyro-sup-v1.1.

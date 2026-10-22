@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SIGMA fp · AF 輔助</title>
+  <style nonce="__CSP_NONCE__">
+    :root{color-scheme:dark;font-family:ui-sans-serif,system-ui,-apple-system,"Noto Sans TC",sans-serif;background:#101317;color:#e7ecf2;line-height:1.55}
+    *{box-sizing:border-box}body{margin:0}main{width:min(960px,100%);margin:auto;padding:40px 24px 64px}
+    .eyebrow{font-size:12px;letter-spacing:.13em;color:#97a7bb;text-transform:uppercase}h1{font-size:clamp(26px,4vw,38px);font-weight:620;letter-spacing:-.035em;margin:5px 0 7px}h2{font-size:16px;margin:0 0 15px;font-weight:600}p{margin:8px 0}.intro{color:#a9b6c7;max-width:710px}
+    .topline{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}.badge{border:1px solid #394658;border-radius:99px;padding:5px 12px;font-size:13px;white-space:nowrap}.badge.ready{color:#8ee0bb;border-color:#336d57}.badge.busy{color:#f5cc88;border-color:#806438}.badge.error{color:#ffacac;border-color:#a24e52}
+    .demo{background:#342b17;border:1px solid #725c2b;border-radius:12px;padding:13px 17px;margin-top:22px;color:#efd398}.demo[hidden]{display:none}.warning{border-left:3px solid #7a6949;padding:2px 15px;margin:24px 0;color:#c4c3bd;font-size:14px}
+    .grid{display:grid;grid-template-columns:1.08fr 1fr;gap:18px;margin-top:24px}.card{background:#181d24;border:1px solid #2b3542;border-radius:16px;padding:23px}.full{margin-top:18px}.status-message{min-height:52px;color:#c3cedb;font-size:15px;overflow-wrap:anywhere}
+    dl{display:grid;grid-template-columns:100px minmax(0,1fr);gap:10px 15px;font-size:14px;margin:24px 0 0}dt{color:#8fa0b4}dd{margin:0;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}.muted{color:#94a3b6;font-size:13px}.actions{display:grid;gap:12px}button{font:inherit;font-weight:570;border:1px solid #415169;background:#252f3d;color:#e6edf6;padding:12px 15px;border-radius:9px;cursor:pointer;transition:background .15s}button:hover:enabled{background:#334358}button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #a0c6ff;outline-offset:3px}button:disabled{opacity:.38;cursor:not-allowed}.primary{background:#a7c8ef;color:#132239;border-color:#a7c8ef}.primary:hover:enabled{background:#c3dcfa}.stop{border-color:#8a5559;color:#ffb9bb;background:#302126}.stop:hover:enabled{background:#4a2b31}.small{font-size:13px;padding:8px 13px}
+    .arm{display:flex;align-items:flex-start;gap:10px;background:#10151b;border:1px solid #2b3542;border-radius:10px;padding:13px 14px;margin-bottom:16px;font-size:14px}.arm input{width:18px;height:18px;margin:3px 0 0;flex:none;accent-color:#a7c8ef}.subnote{margin-top:13px;font-size:12px;color:#9cabbc}.outcome{white-space:pre-wrap;overflow-wrap:anywhere;color:#c5d1df;margin:0;font:inherit;font-size:14px;max-height:260px;overflow:auto}.request-message{min-height:23px;color:#b9cce4;font-size:14px;margin-top:15px}.request-message.error{color:#ffafae}progress{width:100%;height:7px;display:block;margin-top:18px;accent-color:#a7c8ef}footer{margin-top:22px;color:#8192a7;font-size:12px}#updated{font-variant-numeric:tabular-nums}
+    progress[hidden]{display:none}@media(max-width:700px){main{padding:26px 16px 40px}.grid{grid-template-columns:1fr}.card{padding:20px}.warning{font-size:13px}dl{grid-template-columns:90px 1fr}}
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="topline"><div class="eyebrow">SIGMA fp / AF assist · experimental v0.1</div><span id="badge" class="badge">尚未讀取</span></div>
+    <h1>小範圍，確認焦點。</h1>
+    <p class="intro">非錄影 Live View 的單一對焦框實驗。有限步距輔助與原廠對焦分開操作；不會自動切換到原廠 AF。</p>
+  </header>
+  <div id="demo" class="demo" hidden><strong>離線展示</strong> — 所有位置、訊號與結果都是模擬。沒有連接或操作相機。</div>
+  <aside class="warning">只限非錄影狀態。請固定相機與主體，保留鏡頭活動空間。輔助動作限制為起始位置附近 ±100 pulses，屬實驗性對比對焦，不是已校準的 DFD；不代表距離或角度。</aside>
+  <div class="grid">
+    <section class="card" aria-labelledby="status-title">
+      <div class="topline"><h2 id="status-title">目前狀態</h2><button id="refresh" class="small" type="button">連接／更新狀態</button></div>
+      <p id="status-message" class="status-message" aria-live="polite">讀取狀態不會啟動對焦。</p>
+      <progress id="progress" max="1" value="0" aria-label="工作進度" hidden></progress>
+      <dl>
+        <dt>對焦框</dt><dd id="roi">尚無資料</dd>
+        <dt>鏡頭位置</dt><dd id="position">尚無資料</dd>
+        <dt>H 對比訊號</dt><dd id="h">尚無資料</dd>
+        <dt>最近更新</dt><dd id="updated">尚未讀取</dd>
+      </dl>
+      <p class="subnote">沒有即時畫面預覽。位置與 H 值僅供診斷；數值本身不保證合焦。</p>
+    </section>
+    <section class="card" aria-labelledby="actions-title">
+      <h2 id="actions-title">一次操作</h2>
+      <label class="arm"><input id="armed" type="checkbox" disabled><span>我確認現在未錄影，場景固定，並允許這次鏡頭動作。</span></label>
+      <div class="actions">
+        <button id="assist" class="primary" type="button" disabled>開始受限 AF 輔助</button>
+        <button id="native" type="button" disabled>單獨執行原廠 AF</button>
+        <button id="stop" class="stop" type="button" disabled>要求停止／解除動作確認</button>
+      </div>
+      <p class="subnote">原廠 AF 可能進行較大範圍的鏡頭掃描，不受輔助的 ±100 pulses 範圍限制。每次開始前都需重新勾選確認。</p>
+      <p class="subnote">停止按鈕送出的是停止請求，不是即時硬體急停。關閉頁面不會停止鏡頭，請等待程式回報停止與清理完成。</p>
+      <p id="request-message" class="request-message" role="status" aria-live="polite"></p>
+    </section>
+  </div>
+  <section class="card full" aria-labelledby="outcome-title"><h2 id="outcome-title">最近結果</h2><p id="outcome-summary">尚無結果。</p><details><summary>查看研究紀錄</summary><pre id="outcome" class="outcome">尚無結果。</pre></details></section>
+  <footer>僅在這台電腦提供介面。請勿分享含授權碼的網址。狀態每 2 秒更新；連線中斷時不會自動重試鏡頭動作。</footer>
+</main>
+<script nonce="__CSP_NONCE__">
+"use strict";
+const el = id => document.getElementById(id);
+const token = new URLSearchParams(location.hash.slice(1)).get("token") || "";
+// Keep the session secret out of copied addresses and browser history.
+if (token) history.replaceState(null, "", location.pathname);
+let status = null, startPending = false, stopPending = false, refreshing = false;
+const display = value => value === undefined || value === null ? "尚無資料" : typeof value === "object" ? JSON.stringify(value, null, 2) : String(value);
+function resultSummary(value) {
+  if (value == null) return "尚無結果。";
+  if (typeof value !== "object") return String(value);
+  const labels = {completed:"本輪完成", unconfirmed:"沒有確認改善", cancelled:"已取消", fault:"已停止並鎖定", not_run:"未執行"};
+  let text = (value.synthetic ? "離線模擬：" : "") + (labels[value.status] || "本輪結束") + "。";
+  if (value.initial_position != null && value.final_position != null) text += "位置 " + value.initial_position + " → " + value.final_position + "。";
+  if (value.confirmed === true) text += "已重新量測確認對比改善；不等於已獨立驗證光學合焦。";
+  if (value.cleanup_complete === true) text += "暫借的工具空間已核對還原。";
+  if (value.cleanup_complete === false) text += "工具還原尚未確認，請先查看紀錄，勿重試。";
+  return text;
+}
+function note(message, error = false) {
+  el("request-message").textContent = message;
+  el("request-message").classList.toggle("error", error);
+}
+function controls() {
+  const ready = Boolean(token && status && status.available === true && status.busy !== true && !startPending && !stopPending);
+  el("armed").disabled = !ready;
+  if (!ready) el("armed").checked = false;
+  el("assist").disabled = !ready || !el("armed").checked;
+  el("native").disabled = !ready || !el("armed").checked;
+  // Stop remains available during a start request or a stale/offline status.
+  el("stop").disabled = !token || stopPending;
+}
+function render(next) {
+  status = next;
+  el("demo").hidden = next.demo !== true;
+  const busy = next.busy === true, ready = next.available === true;
+  el("badge").textContent = next.demo ? "離線模擬" : busy ? "執行中" : ready ? "已就緒" : "暫不可操作";
+  el("badge").className = "badge " + (busy ? "busy" : ready ? "ready" : "error");
+  el("status-message").textContent = next.message || display(next.state);
+  el("roi").textContent = display(next.roi);
+  el("position").textContent = display(next.position);
+  el("h").textContent = display(next.h);
+  el("updated").textContent = new Date().toLocaleTimeString("zh-TW", {hour12: false});
+  el("progress").hidden = !busy;
+  if (Number.isFinite(next.progress)) el("progress").value = Math.max(0, Math.min(1, next.progress));
+  else el("progress").removeAttribute("value");
+  el("outcome").textContent = next.outcome == null ? "尚無結果。" : display(next.outcome);
+  el("outcome-summary").textContent = resultSummary(next.outcome);
+  controls();
+}
+async function request(path, payload) {
+  const abort = new AbortController();
+  const timer = setTimeout(() => abort.abort(), 5000);
+  try {
+    const options = {cache: "no-store", credentials: "omit", signal: abort.signal};
+    if (payload !== undefined) Object.assign(options, {method: "POST", headers: {"Content-Type": "application/json", "X-AF-Token": token}, body: JSON.stringify(payload)});
+    const response = await fetch(path, options);
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || "請求失敗（" + response.status + "）");
+    return data;
+  } finally { clearTimeout(timer); }
+}
+async function refresh() {
+  if (refreshing) return;
+  refreshing = true;
+  el("refresh").disabled = true;
+  try { render(await request("/api/status")); }
+  catch (error) {
+    status = null;
+    el("badge").textContent = "連線中斷";
+    el("badge").className = "badge error";
+    el("status-message").textContent = "無法確認目前狀態。請查看本機程式；這不代表鏡頭已停止。";
+    el("progress").hidden = true;
+    controls();
+  } finally { refreshing = false; el("refresh").disabled = false; }
+}
+async function start(kind) {
+  if (!el("armed").checked || startPending || stopPending || !status || status.available !== true || status.busy === true) return;
+  startPending = true;
+  el("armed").checked = false;
+  controls();
+  note("正在送出一次性動作請求…");
+  try {
+    const result = await request("/api/start", {kind, armed: true});
+    note(result.message || (result.ok === false ? "未開始操作。" : "請求已送出，請等待狀態回報。"), result.ok === false);
+  } catch (error) { note(error.message + " 動作狀態未確認；不會自動重試。", true); }
+  finally { startPending = false; controls(); await refresh(); }
+}
+async function stop() {
+  el("armed").checked = false;
+  if (stopPending) return;
+  stopPending = true;
+  controls();
+  note("正在要求停止；請等待停止與清理結果…");
+  try {
+    const result = await request("/api/stop", {});
+    note(result.message || "已送出停止請求；仍需等待狀態確認。", result.ok === false);
+  } catch (error) { note(error.message + " 無法確認停止；請查看本機程式。", true); }
+  finally { stopPending = false; controls(); await refresh(); }
+}
+el("armed").addEventListener("change", controls);
+el("refresh").addEventListener("click", refresh);
+el("assist").addEventListener("click", () => start("assist"));
+el("native").addEventListener("click", () => start("native"));
+el("stop").addEventListener("click", stop);
+if (!token) note("缺少動作授權碼。請使用本機程式顯示的完整網址開啟；目前只能查看狀態。", true);
+controls();
+refresh();
+setInterval(refresh, 2000);
+</script>
+</body>
+</html>

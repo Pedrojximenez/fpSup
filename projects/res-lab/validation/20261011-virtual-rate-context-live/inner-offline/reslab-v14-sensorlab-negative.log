@@ -1,0 +1,31 @@
+test_full_old_240_profile_and_280_geometry (__main__.SensorLabCanvas) ... FAIL
+
+======================================================================
+FAIL: test_full_old_240_profile_and_280_geometry (__main__.SensorLabCanvas)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/test_sensorlab_canvas.py", line 64, in test_full_old_240_profile_and_280_geometry
+    self.assertEqual(differences,[],'candidate differs from actual archived r10 canvas')
+AssertionError: Lists differ: [('0xc', 1008, 2000), ('0x1c', 2, 1), ('0x[206 chars]736)] != []
+
+First list contains 11 additional elements.
+First extra element 0:
+('0xc', 1008, 2000)
+
++ []
+- [('0xc', 1008, 2000),
+-  ('0x1c', 2, 1),
+-  ('0x20', 992, 1984),
+-  ('0x60', 2048, 1023),
+-  ('0x88', 4, 0),
+-  ('0xd0', 1024, 1023),
+-  ('0xd4', 1024, 1023),
+-  ('0xd8', 1008, 2000),
+-  ('0xf4', 1008, 2016),
+-  ('0xfc', 1073741824, 1077936128),
+-  ('0x100', 1073741824, 1086324736)] : candidate differs from actual archived r10 canvas
+
+----------------------------------------------------------------------
+Ran 1 test in 31.769s
+
+FAILED (failures=1)

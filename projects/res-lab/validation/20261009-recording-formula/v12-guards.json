@@ -1,0 +1,31 @@
+{
+  "card": "projects/res-lab/cards/20261010-virtual-rcd-v12/debug",
+  "module_sha256": "992712475e517c6d170475c8829ca1c176937b28aa10c838ca3d4235646c812c",
+  "rejections": [
+    "record width",
+    "record height",
+    "preview width past source",
+    "preview height past source",
+    "empty preview",
+    "record crop mismatch",
+    "preview bin",
+    "record bin mismatch",
+    "preview zoom too large",
+    "record zoom too large",
+    "movie class",
+    "producer preview mismatch",
+    "producer record mismatch",
+    "raw width mismatch",
+    "zero standby width",
+    "standby height past maximum",
+    "crop removes whole window",
+    "unsupported bin",
+    "forged mode raster",
+    "forged mode scale"
+  ],
+  "cases": 20,
+  "active_recipe_preserved": true,
+  "valid_after_poisoning": true,
+  "passed": true,
+  "seconds": 20.697
+}

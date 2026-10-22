@@ -1,0 +1,15 @@
+test_apply_without_file_and_live_canvas (test_virtual_rcd.VirtualTests) ... ok
+test_static_format_remains_available_after_dynamic_rebuild (test_virtual_rcd.VirtualTests) ... ok
+test_settings_open_uses_both_native_requests_and_preserves_recording (test_virtual_rcd.VirtualTests) ... ok
+test_tool_settings_return_to_manager_with_native_state_machine (unittest.loader._FailedTest) ... ERROR
+test_shutdown_restores_claimed_words (test_virtual_rcd.VirtualTests) ... ok
+
+======================================================================
+ERROR: test_tool_settings_return_to_manager_with_native_state_machine (unittest.loader._FailedTest)
+----------------------------------------------------------------------
+AttributeError: type object 'VirtualTests' has no attribute 'test_tool_settings_return_to_manager_with_native_state_machine'
+
+----------------------------------------------------------------------
+Ran 5 tests in 139.481s
+
+FAILED (errors=1)

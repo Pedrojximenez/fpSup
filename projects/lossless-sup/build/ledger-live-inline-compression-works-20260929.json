@@ -1,0 +1,76 @@
+{
+ "schema_version": 1,
+ "kind": "live_in_camera_lossless_compression_written_to_the_card_during_recording",
+ "date": "2026-09-29",
+ "scope": "LIVE on the camera, firmware 5.02.0.V91, model w71c1. Hook at 0xC03A5490, the final flush. FHD 12-bit 59.94p CinemaDNG, clip \\CINEMA\\A001_211. Two camera-allocated 4 MiB blocks. Host-pulsed MOVON/MOVOFF.",
+
+ "headline": "eight consecutive frames of a live recording were compressed by the camera's own lossless-JPEG hardware and written to the card at 1,422,336 bytes instead of 3,244,544 -- 43.8 percent of the stock file, on real footage. This is fpLossless working, end to end, for the first time.",
+
+ "the_chain_that_ran": [
+  "check the writer's shape; only the exact 3,244,544-byte node is accepted",
+  "once per run: ENG_OPEN 0xC062FEE9 -- power, clock, install and ENABLE IRQ 0x29 -- then FLAG_CREATE",
+  "copy the raster out of the camera's own buffer into block A, 0x304CB0 bytes",
+  "F_INIT with source = block A, destination = block B, size table = A+0x3F1000",
+  "publish the tile count to 0xC302CDEC, which is F_SIZE's loop bound",
+  "build the 0x30-byte request from the engine block, clr_flg, ENG_SUBMIT, ENG_START",
+  "twai_flg and wait; check the return AND the engine's error bit",
+  "F_SIZE for the twelve tile sizes, and sum them",
+  "write the compressed tiles back into the camera's own buffer, after the frame's own header",
+  "shorten the writer's node to round_up(0x13400 + sum, 1 KiB)"
+ ],
+
+ "the_state_block": {
+  "entries": 8, "frames_compressed": 8, "frames_skipped": 0,
+  "shape_refused": 0, "error": null, "stage": 7,
+  "open_return": 0, "flag_id": 150, "init_return": 1,
+  "submit_return": 0, "start_return": 0, "wait_return": 0,
+  "pattern": 1, "size_return": 1,
+  "block_a": "0x45177000", "block_b": "0x45577400",
+  "camera_buffer": "0x550BA800",
+  "compressed_bytes": 1343099,
+  "new_node_length": 1422336,
+  "node_length_readback": 1422336,
+  "tile_sizes": [82980, 134407, 128467, 90707, 104950, 149893,
+                 137529, 84223, 92360, 125826, 115430, 96327],
+  "reading": "every return in the chain is its success value. pattern 1 is bit 0 = done with bit 2 = error clear. The twelve tile sizes vary from 82,980 to 149,893, which is what real footage looks like; the synthetic source used earlier gave twelve nearly identical values."
+ },
+
+ "the_card": {
+  "clip": "\\CINEMA\\A001_211",
+  "files 1 to 8": "1,422,336 bytes each, payload at 0x13400 begins ff d8 ff c3 (SOI then SOF3, lossless JPEG), eight DISTINCT sha256",
+  "files 9 and 10": "3,244,544 bytes, stock, payload unchanged -- exactly the probe's bound of 8",
+  "ratio": "1,343,099 of 3,165,360 raster bytes = 42.4 percent; 1,422,336 of 3,244,544 file bytes = 43.8 percent, a 2.28x reduction",
+  "level": "L"
+ },
+
+ "what_this_is_and_is_not": {
+  "is": "the camera compressing its own live footage with its own hardware codec and writing the result to the card, with every frame of the clip accounted for and nothing else disturbed.",
+  "is_not_yet": [
+   "a file that decodes. The frame's own header is kept and still describes an uncompressed frame, so a reader sees the wrong Compression, TileOffsets and TileByteCounts. Fixing that is the trailing IFD, which is a written tool and a separate run -- deliberately not folded in, so this run had one thing to prove.",
+   "asynchronous. This build waits for the encode inside the flush call. 13.65 ms against a 16.7 ms period at 59.94p is 82 percent, so a stutter is expected here and is not a fault of the design. The asynchronous encode was proven separately the same day; making the switch moves the encode to frame N and writes its result at frame N+1, and touches none of the joins this run tested.",
+   "a whole clip. The bound is eight frames and two ceilings enforce it."
+  ]
+ },
+
+ "why_it_needs_no_buffer_pool": "the compressed frame goes back into the camera's OWN buffer, which the write path already owns and which already survives to the aggregation flush. Measured the same day: the allocator gives 16 MiB in total and one aggregation batch is 64 MiB, so a pool of our own buffers could never have been one batch deep. The operator proposed the write-back; it is what makes the memory arithmetic work.",
+
+ "known_gap_found_by_this_run": {
+  "what": "`release` refuses after this probe has run: it takes its evidence from the codec chain's state block, and this probe borrows that claim and writes its own layout over it, so the scratch magic and the retaining phase are gone.",
+  "consequence": "the two 4 MiB blocks stayed allocated. Their lifecycle records inside the blocks are intact and still name the allocator 0xC3073A5C, both role and mark correct, both 'held'. A power cycle frees them.",
+  "the_fix_is_a_design_one": "release should take its evidence from the blocks' OWN records, which the camera wrote and which no probe's state layout can erase, rather than from a state block any probe may borrow. The records already carry everything it needs: handle, allocator, size, end, role and the self-naming mark.",
+  "what_was_NOT_done": "the state was not re-seeded to make release proceed. Fabricating the scratch magic and the phase is exactly what those guards exist to prevent, and a release that ran on invented evidence would be worse than a leaked block."
+ },
+
+ "cleanup": {
+  "codec": "closed with C062FF69; the owner word 0xC37CF87C reads 0 again",
+  "hook": "0xC03A5490 restored to 0xEB0BD652, verified",
+  "blocks": "still allocated; see the gap above",
+  "shell": "alive"
+ },
+
+ "tooling_added": {
+  "inline_compress_probe.S": "1,284 bytes of a 1,792-byte claim. Nine failure paths, every one leaving the frame completely stock, and a test that no failure path can be reached after the write-back has started. Bounded at 8 compressed frames and 24 hook entries.",
+  "inline_compress_driver.py": "borrows the codec chain's claims at its own fixed sizes, recovers both block bases from the camera's lifecycle records rather than from arguments, and reports a verdict from the state and a second from the card.",
+  "test_inline_compress.py": "44 tests, 22 mutations all caught -- among them 'copies past the camera buffer', 'declared length runs into the size table', 'a zero sum becomes a copy length', 'starts before submitting', 'ignores the engine error bit' and 'opens on every frame'."
+ }
+}

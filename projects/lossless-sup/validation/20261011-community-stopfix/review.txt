@@ -1,0 +1,46 @@
+網友 stop leak 與 phase detect 資料採用審查
+2026-10-11
+
+結論
+fp-stop-leak-fix：建議採用修法為實驗候選，尚不直接併入正式版。
+fp-phase-detect：不採用目前提議的 PDAF 觀測指令與 phase servo。
+本次完成離線審查；未修改產品程式、未操作相機、未寫卡、未發布。
+
+Stop leak
+原廠 C0377118 清空佇列時只摘鏈，C03776A0 則逐節點呼叫 C0375030。
+網友的一字跳轉與 12 個直接呼叫點均吻合；所有直接呼叫點都忽略回傳值。
+316-byte 的 05STOPFX.BIN 已用目前 patch_sup.S 與 build_v3.patch_sup 重建，逐位元組相同。
+SHA-256：f9f26a092c5676ead5771ba8be4aac9c3734e9ed0cd144002a73b3f6b657c9d9
+
+10 項離線測試通過、0 跳過：包含原廠摘鏈與修補後回收、父子引用計數、
+保留尚有 active child 的父節點、順序重複釋放、空佇列、busy flag、
+引用計數反例、精確 BIN 載入、SL_EXCL 衝突拒絕、stale 狀態及關機還原。
+模擬執行實際原廠指令；鎖、RAW allocator 和 descriptor pool-return 邊界有明確替代。
+44 節點回收與 RAW byte totals 屬合成情境，不能當作新的相機量測。
+
+這是原生 recMgr 的異常停止回收問題，lossless 和 HSW 都可能碰到。
+它不修初次塞滿池的根因、壓縮引擎 stall、已丟掉的幀，或修補前已摘鏈的洩漏。
+網友的測試位址有一處更正：C2F1F3D8 存 pool 指標，free count 應先取該指標，
+再讀 pool+112C；不是直接讀 C2F1F3D8+112C。
+manager+190 非零時釋放直接返回，並非延期排入另一個佇列；建構子將其設為零。
+網友整份韌體 hash 與本機不同，但已比對的關鍵指令範圍一致，且補丁能精確重建。
+
+正式納入前的驗收
+先用 SD 比較原廠與 STFX、lossless OFF/ON、正常停止與異常停止。
+清理完成後確認 pool/RAW 回到本段基準，至少連續十段沒有累積，下一段能正常開始。
+共享函式也影響靜態拍攝錯誤/取消路徑，需納入回歸；另驗不錄影的關機還原及暖開機。
+離線模擬尚未驗證兩個 codec lane、writer promise、真實 DMA/排程及 SSD/USB 生命週期。
+SD 通過後再評估 SSD，通過實機驗收才納入維護中的正式建置線。
+
+Phase detect
+pdaf caf/sequence/image/invalid 是 af dbg 的除錯位元標籤，不是獨立 shell 指令。
+已核對 C092BA54 指向 C029BA08，量測可用性函式固定回 0；
+感光元件 PDAF 旗標的 ROM 初值 C0B5F89C=0，IMX410 的幾何 getter C0322330 不寫輸出。
+因此韌體內有 PDAF 字串、類別與共用碼，不能推出 fp 的錄影模式有可用 phase 資料。
+這也不能證明晶圓物理上沒有 phase pixels；本次結論只針對原廠 fp 可達資料路徑。
+0x9413 錄影中可用仍是程式閘的推論，沒有因這份外部文件新增實機證據。
+主體鎖定與保持再修正可留作 CDAF/DFD 研究方向，尚不能承諾消除所有抽動。
+
+完整來源、hash 與模擬限制：review.json、test-results.json。
+PDAF 既有詳細分析：projects/fp-af-assist/notes/research/PDAF_SHELL_AND_PDLINE_GATES_2026-10-11.md
+官方 fp 規格（AF System列為 Contrast detection system）：https://www.sigma-global.com/en/cameras/fp/

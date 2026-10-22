@@ -1,0 +1,21 @@
+{
+  "checks": {
+    "AutoRun.txt": {
+      "unchanged_vs_v10": true,
+      "debug_plain_equal": true
+    },
+    "fpSup/LOADER.BIN": {
+      "unchanged_vs_v10": true,
+      "debug_plain_equal": true
+    },
+    "fpSup/32RESCUS.BIN": {
+      "unchanged_vs_v10": true,
+      "debug_plain_equal": true
+    }
+  },
+  "producer": {
+    "bytes": 452768,
+    "sha256": "579c224cdca865e03630998bf0ec097d1cbd4bd4b5af5857fd28d67d4bf12e5e"
+  },
+  "passed": true
+}

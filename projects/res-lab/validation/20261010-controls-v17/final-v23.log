@@ -1,0 +1,24 @@
+gui gets SL_M_Text
+OK:SL_M_Text -> M116 2088x1174
+
+
+gui gets SL_E_Text
+OK:SL_E_Text -> Applied
+
+
+gui geti SL_F_Fps
+OK:SL_F_Fps -> 0
+
+
+gui geti SL_LabTab
+OK:SL_LabTab -> 1
+
+
+gui gets SL_O_Rate
+OK:SL_O_Rate -> 29.97p 109 MB/s
+
+
+status get is_recording
+is_recording -> 0
+
+

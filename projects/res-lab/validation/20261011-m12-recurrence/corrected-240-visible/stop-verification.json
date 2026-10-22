@@ -1,0 +1,24 @@
+{
+  "overlay_samples": {
+    "20": {
+      "rec_pixels": 0,
+      "standby_pixels": 202,
+      "standby_visible": true
+    },
+    "42": {
+      "rec_pixels": 231,
+      "standby_pixels": 0,
+      "standby_visible": false
+    },
+    "239": {
+      "rec_pixels": 231,
+      "standby_pixels": 0,
+      "standby_visible": false
+    }
+  },
+  "native_rec_zero_after": true,
+  "standby_after": false,
+  "reason": "REC overlay persisted and normal MENU did not change screen",
+  "original_runner_standby_after_only_meant_native_flag": true,
+  "no_additional_recording_started": true
+}

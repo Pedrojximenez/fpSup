@@ -1,0 +1,18 @@
+test_standalone_all_files_off_keeps_manager_and_stock_recording (test_reslab_saved_rows.SavedRows) ... /Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/res-custom/build_v3_rescustom.py:2: DeprecationWarning: invalid escape sequence \R
+  """res-custom: the multi-format OpenGate core and its format data files, for Loader v3.
+FAIL
+test_enable_assertion_detects_disconnected_consumer_callback (test_reslab_saved_rows.SavedRows) ... ok
+test_full_list_save_then_rescustom_chooses_and_reboots_into_native_qs (test_reslab_saved_rows.SavedRows) ... ok
+
+======================================================================
+FAIL: test_standalone_all_files_off_keeps_manager_and_stock_recording (test_reslab_saved_rows.SavedRows)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_reslab_saved_rows.py", line 123, in test_standalone_all_files_off_keeps_manager_and_stock_recording
+    if address!=0xC056461c:self.assertEqual(c.w(address),B.word(address))
+AssertionError: 2961590128 != 2961618176
+
+----------------------------------------------------------------------
+Ran 3 tests in 112.482s
+
+FAILED (failures=1)

@@ -1,0 +1,19 @@
+fpGyroSup stream baseline r38e (2026-09-03) — SIGMA fp Ver.5.02, release AutoRun (no shell), GCSV-only stream.
+= r37 + exact seal-time drop snapshot + firmware-mirrored MovieRecording read + lifecycle observer (diagnostic).
+AutoRun.txt byte-identical to r37; VSHL.BIN rebuilt (build_card.py --no-shell --gcsv-stream) so its logger section is r38e.
+via load.py in the shell workflow; the release AutoRun carries it the same way as r37) are the builds verified live.
+
+Verified live (USB-shell hot-reload + cold-boot inject, same camera):
+  seams   : the callback now stores S_DROPPED into the slot record (+4) at both seal sites; the writer copies it
+            into the block header word; gcsvgen compares this block's seal count with the previous block's and
+            continues the 2500 Hz grid when equal (no more latency tolerance; 65 ms sanity bound only).
+            A001_003 (29 s), A001_004 (15 s), A001_008 (12 s): S_DROPPED 0, intervals only 800/600 us, residual 0.
+  attach  : the firmware publishes MovieRecording to 0xC347DF38+0x157 OR, when the movie-engine selector
+            0xC347D1C0+0x14 (synced from the "LDAFR" serial status packet) reads 0x21, to 0xC34765CC+0x3D
+            (publisher FUN_c0332480, test FUN_c0352e18).  The old code read only +0x157 and missed A001_005..007
+            entirely (observer: 219/219 polls flag=0).  The callback now mirrors the publisher's selection.
+            NOT yet exercised on the 0x21 path (A001_008 attached on the 0x11 path, as before).
+  observer: PGEN samples flagA/flagB/selector/S_FILE/ACTIVE while a take is published but unattached
+            (state words 0x1E4..0x1F4 of the pool state block).  Pure counts, no behaviour change.
+  json    : unchanged from r37 (dimensions from the take's DNG); every take with a gcsv had a json, Q_DROPPED 0.
+Card layout: AutoRun.txt, VSHL.BIN, PGEN.BIN at root.  Do not mix versions.

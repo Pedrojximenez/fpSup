@@ -1,0 +1,386 @@
+.syntax unified
+.arm
+.text
+.global stage5_hook
+
+/*
+ * SIGMA fp Ver.5.02 Stage-5 gyro logger.
+ * Load address: 0xC072DE64. Hook site: 0xC00D0794.
+ *
+ * File header (48 bytes):
+ *   u32 magic = 'GFS5'; u32 version = 4; u32 sample_period_us = 2500;
+ *   u32 start_us; u32 camera_id; u32 reel_no; u32 clip_no; u32 initial_head;
+ *   u32 frame_readout_us; u32 reserved[3].
+ *
+ * v4 records the rolling-shutter readout time so each clip describes its own, rather
+ * than the value being measured by hand and pasted into a lens profile. It is not a
+ * per-camera constant: it follows the readout mode, so 4K, FHD and the crop modes each
+ * have their own. FUN_c030c7f0 is the firmware's own accessor (sensor-timing vtable
+ * +0x3C) and is the same field AF's delay compensation uses as readout/2. Reading it
+ * costs a vtable fetch, so it is safe on this thread -- unlike lens identity, which
+ * would need an L-mount bus transaction (~376 ms measured) and would overrun the
+ * 600-sample gyro ring (240 ms) if done here.
+ * Batch header (24 bytes), followed by sample_count raw 8-byte samples:
+ *   u32 magic = 'GFT2'; u32 timestamp_us; u32 sample_count; u32 flags (bit0=wrap);
+ *   i16 accel_x, accel_y, accel_z, pad.
+ *
+ * v3 adds the accelerometer (MMA8452Q, 1024 LSB/g) so Gyroflow horizon lock works.
+ * One accel triple per batch, carrying the batch's own TickTimer stamp -- that puts
+ * both sensors in a single clock domain, which the archive lists as the precondition
+ * for emitting accel at all. The cache only refreshes at ~47 Hz (firmware polls it;
+ * raising the sensor ODR past 100 Hz changes nothing -- measured 45.7/46.4/46.7/46.7 Hz
+ * at ODR 100/200/400/800), and that is ample for a gravity vector.
+ *
+ * The sensor boots in a 6.25 Hz auto-sleep mode, which is useless for horizon lock,
+ * so a one-shot init raises it. It writes CTRL_REG1/2 directly rather than calling
+ * IMUDevInterface_MMA8452Q__v3: that helper does a software reset plus ~26 ms of
+ * delays, and this hook runs on the 2500 Hz gyro thread where that would drop samples.
+ */
+
+.equ STATE_ACTIVE,  0xC072E4C4
+.equ STATE_COUNT,   0xC072E4C8
+.equ STATE_HEAD,    0xC072E4CC
+.equ STATE_STARTVD, 0xC072E4D0
+.equ STATE_ACCELINIT, 0xC072E4D4
+.equ ACCEL_IFACE,   0xC3777914      /* IMUDevInterface_MMA8452Q singleton */
+.equ ACCEL_CACHE,   0xC377790C      /* i16 X, Y, Z (axis-remapped by firmware) */
+.equ FN_LOCK,       0xC0010298      /* scoped-lock enter, as used by ..._v3 */
+.equ FN_UNLOCK,     0xC00102D0      /* scoped-lock leave */
+.equ FILE_OBJECT,   0xC072E464
+.equ FILE_PATH,     0xC072E500
+.equ USER_BASE,     0x44F6ADC0
+.equ USER_END,      0x456EADC0
+.equ PATH_MGR_SD,   0xC3438400
+.equ GYRO_DESC_PTR, 0xC31E3FCC
+
+.macro ldr_addr reg, value
+    movw    \reg, #:lower16:\value
+    movt    \reg, #:upper16:\value
+.endm
+
+stage5_hook:
+    /* Ten registers keeps the public-call stack 8-byte aligned. */
+    push    {r3-r11, lr}
+
+    /* Original instruction replaced at 0xC00D0794. */
+    movw    ip, #0xC6F9
+    movt    ip, #0xC01E
+    blx     ip
+    mov     r11, r0
+
+    /* One-shot: lift the accelerometer out of its 6.25 Hz auto-sleep mode. */
+    ldr_addr r0, STATE_ACCELINIT
+    ldr     r1, [r0]
+    cmp     r1, #0
+    bne     accel_ready
+    mov     r1, #1
+    str     r1, [r0]
+    bl      accel_init
+accel_ready:
+
+    /* Camera's real MovieRecording state: LensIsTr singleton + 0x157. */
+    movw    ip, #0xB2D0
+    movt    ip, #0xC035
+    blx     ip
+    ldrb    r5, [r0, #0x157]
+
+    ldr_addr r6, STATE_ACTIVE
+    ldr     r7, [r6]
+    cmp     r5, #0
+    beq     recording_stopped
+    cmp     r7, #0
+    bne     drain_ring
+
+recording_started:
+    mov     r0, #1
+    str     r0, [r6]
+
+    /* Monotonic TickTimer timestamp in microseconds. */
+    movw    ip, #0xB6E0
+    movt    ip, #0xC002
+    blx     ip
+    ldr_addr r1, STATE_STARTVD
+    str     r0, [r1]
+
+    /* Build root sidecar name. Manager holds the previous clip, so add one. */
+    ldr_addr r8, PATH_MGR_SD
+    ldr_addr r9, FILE_PATH
+    ldrb    r0, [r8, #8]
+    strb    r0, [r9, #1]
+    add     r0, r9, #2
+    ldr     r1, [r8, #0x0c]
+    bl      put_decimal_3
+    add     r0, r9, #6
+    ldr     r1, [r8, #0x10]
+    add     r1, r1, #1
+    bl      put_decimal_3
+
+    /* Initialize the 32-byte file header. */
+    ldr_addr r10, USER_BASE
+    movw    r0, #0x4647
+    movt    r0, #0x3553              /* little-endian 'GFS5' */
+    str     r0, [r10, #0]
+    mov     r0, #4
+    str     r0, [r10, #4]
+    movw    r0, #2500
+    str     r0, [r10, #8]
+    ldr_addr r0, STATE_STARTVD
+    ldr     r0, [r0]
+    str     r0, [r10, #12]
+    ldrb    r0, [r8, #8]
+    str     r0, [r10, #16]
+    ldr     r0, [r8, #0x0c]
+    str     r0, [r10, #20]
+    ldr     r0, [r8, #0x10]
+    add     r0, r0, #1
+    str     r0, [r10, #24]
+
+    /* Snapshot the current gyro head; do not copy pre-record history. */
+    ldr_addr r0, GYRO_DESC_PTR
+    ldr     r0, [r0]
+    ldr     r0, [r0, #0x60]
+    ldr     r1, [r0]
+    str     r1, [r10, #28]
+    ldr_addr r0, STATE_HEAD
+    str     r1, [r0]
+    /* Rolling-shutter readout, straight from the firmware. */
+    movw    ip, #0xC7F0
+    movt    ip, #0xC030              /* FUN_c030c7f0 */
+    blx     ip
+    str     r0, [r10, #0x20]
+    mov     r0, #0
+    str     r0, [r10, #0x24]
+    str     r0, [r10, #0x28]
+    str     r0, [r10, #0x2c]
+    ldr_addr r0, STATE_COUNT
+    mov     r1, #48
+    str     r1, [r0]
+    b       return_original
+
+drain_ring:
+    /* r8=ring base, r5=new head, r6=old head. */
+    ldr_addr r0, GYRO_DESC_PTR
+    ldr     r0, [r0]
+    ldr     r8, [r0, #0x60]
+    ldr     r5, [r8]
+    ldr_addr r0, STATE_HEAD
+    ldr     r6, [r0]
+    cmp     r5, r6
+    beq     return_original
+
+    /* Read monotonic microsecond timestamp before copying. */
+    movw    ip, #0xB6E0
+    movt    ip, #0xC002
+    blx     ip
+    mov     r9, r0
+    mov     r10, #0                  /* flags */
+    cmp     r5, r6
+    subhi   r4, r5, r6
+    bhi     have_byte_count
+    movw    r4, #0x12C4
+    add     r4, r4, r5
+    sub     r4, r4, r6
+    mov     r10, #1                 /* ring wrapped */
+have_byte_count:
+    mov     r3, r4, lsr #3          /* sample_count */
+
+    /* Reserve/write the batch header, failing closed if the 8 MiB buffer is full. */
+    ldr_addr r7, STATE_COUNT
+    ldr     r2, [r7]
+    ldr_addr r1, USER_BASE
+    add     r0, r1, r2
+    add     ip, r0, #24
+    add     ip, ip, r4
+    ldr_addr r1, USER_END
+    cmp     ip, r1
+    bhi     return_original
+    movw    r1, #0x4647
+    movt    r1, #0x3254              /* little-endian 'GFT2' */
+    str     r1, [r0, #0]
+    str     r9, [r0, #4]
+    str     r3, [r0, #8]
+    str     r10, [r0, #12]
+    /* Accel triple, stamped by the same TickTimer read as this batch. */
+    ldr_addr r1, ACCEL_CACHE
+    ldrsh   ip, [r1]
+    strh    ip, [r0, #16]
+    ldrsh   ip, [r1, #2]
+    strh    ip, [r0, #18]
+    ldrsh   ip, [r1, #4]
+    strh    ip, [r0, #20]
+    mov     ip, #0
+    strh    ip, [r0, #22]
+    add     r2, r2, #24
+    str     r2, [r7]
+
+    /* Copy one or two ring spans. copy_span takes [r0,r1). */
+    add     r0, r6, #4
+    cmp     r5, r6
+    bhi     no_wrap_copy
+    movw    r2, #0x12C4
+    add     r1, r8, r2
+    bl      copy_span
+    add     r0, r8, #4
+    add     r1, r5, #4
+    bl      copy_span
+    b       update_head
+no_wrap_copy:
+    add     r1, r5, #4
+    bl      copy_span
+update_head:
+    ldr_addr r0, STATE_HEAD
+    str     r5, [r0]
+    b       return_original
+
+recording_stopped:
+    cmp     r7, #0
+    beq     return_original
+    mov     r0, #0
+    str     r0, [r6]
+    ldr_addr r0, STATE_COUNT
+    ldr     r0, [r0]
+    cmp     r0, #32
+    bls     return_original
+
+    /* Validated Stage-3 file API sequence. */
+    movw    ip, #0x4658
+    movt    ip, #0xC044
+    blx     ip
+    mov     r1, #0
+    movw    ip, #0x4698
+    movt    ip, #0xC044
+    blx     ip
+    mov     r1, r0
+    ldr_addr r0, FILE_OBJECT
+    movw    ip, #0x5E90
+    movt    ip, #0xC036
+    blx     ip
+    ldr_addr r0, FILE_OBJECT
+    ldr_addr r1, FILE_PATH
+    movw    r2, #0x0402
+    movw    ip, #0x5FB0
+    movt    ip, #0xC036
+    blx     ip
+    ldr_addr r0, FILE_OBJECT
+    ldr_addr r1, USER_BASE
+    ldr_addr r2, STATE_COUNT
+    ldr     r2, [r2]
+    movw    ip, #0x60E8
+    movt    ip, #0xC036
+    blx     ip
+    ldr_addr r0, FILE_OBJECT
+    movw    ip, #0x6020
+    movt    ip, #0xC036
+    blx     ip
+    ldr_addr r0, FILE_OBJECT
+    mov     r1, #2
+    movw    ip, #0x5ED0
+    movt    ip, #0xC036
+    blx     ip
+
+return_original:
+    mov     r0, r11
+    pop     {r3-r11, pc}
+
+/* Copy bytes [r0,r1) into USER_BASE + *STATE_COUNT. r7 must point to STATE_COUNT. */
+copy_span:
+    ldr     r2, [r7]
+    ldr_addr r3, USER_BASE
+    add     r3, r3, r2
+    ldr_addr ip, USER_END
+1:
+    cmp     r0, r1
+    beq     2f
+    cmp     r3, ip
+    bhs     2f
+    ldrb    r2, [r0], #1
+    strb    r2, [r3], #1
+    b       1b
+2:
+    ldr_addr r2, USER_BASE
+    sub     r3, r3, r2
+    str     r3, [r7]
+    bx      lr
+
+/* Store value 0..999 as exactly three ASCII digits. r0=dst, r1=value. */
+put_decimal_3:
+    mov     r2, #'0'
+3:
+    cmp     r1, #100
+    blo     4f
+    sub     r1, r1, #100
+    add     r2, r2, #1
+    b       3b
+4:
+    strb    r2, [r0], #1
+    mov     r2, #'0'
+5:
+    cmp     r1, #10
+    blo     6f
+    sub     r1, r1, #10
+    add     r2, r2, #1
+    b       5b
+6:
+    strb    r2, [r0], #1
+    add     r1, r1, #'0'
+    strb    r1, [r0]
+    bx      lr
+
+
+/*
+ * accel_init -- one-shot MMA8452Q rate change, mirroring the lock discipline in
+ * IMUDevInterface_MMA8452Q__v3 so it cannot collide with the firmware's own reads.
+ *   CTRL_REG2 = 0x02  clear SLPE (no auto-sleep), MODS = high resolution
+ *   CTRL_REG1 = 0x1C  standby first -- DR bits are not writable while active
+ *   CTRL_REG1 = 0x1D  same, ACTIVE -- DR = 100 Hz, LNOISE on
+ * Frame: sp+0/4 = stack args 5 and 6, sp+16 = lock guard, sp+24 = value byte.
+ */
+accel_init:
+    push    {r4-r7, lr}
+    sub     sp, sp, #32
+    ldr_addr r5, ACCEL_IFACE
+    add     r0, sp, #16
+    ldr     r1, [r5]
+    ldr_addr ip, FN_LOCK
+    blx     ip
+    ldr     r6, [r5, #8]             /* I2C bus object */
+    ldr     r0, [r6, #0x18]
+    ldr     r7, [r0, #0x0c]          /* bus write entry */
+    mov     r4, #0x02
+    mov     r5, #0x2B
+    bl      accel_write
+    mov     r4, #0x1C
+    mov     r5, #0x2A
+    bl      accel_write
+    mov     r4, #0x1D
+    mov     r5, #0x2A
+    bl      accel_write
+    add     r0, sp, #16
+    mov     r1, #2
+    ldr_addr ip, FN_UNLOCK
+    blx     ip
+    add     sp, sp, #32
+    pop     {r4-r7, pc}
+
+/*
+ * accel_write -- r5 = register, r4 = value, r6 = bus, r7 = entry.
+ * The bus entry takes six arguments, so five and six arrive on the stack at the
+ * sp in effect at the call. This frame therefore has to be owned here rather than
+ * borrowed from the caller: writing them into the caller's frame would land on our
+ * own saved lr and return into nowhere.
+ */
+accel_write:
+    push    {r4, lr}
+    sub     sp, sp, #16              /* sp+0/4 = args five and six, sp+8 = value */
+    strb    r4, [sp, #8]
+    mov     r0, #1
+    str     r0, [sp, #0]
+    mov     r0, #0
+    str     r0, [sp, #4]
+    mov     r0, r6
+    mov     r1, r5
+    mov     r2, #1
+    add     r3, sp, #8
+    blx     r7
+    add     sp, sp, #16
+    pop     {r4, pc}

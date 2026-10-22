@@ -1,0 +1,52 @@
+{
+  "schema": "fpSup-LUT-settings-1",
+  "name": "ARRI LogC3 Rec709 v1",
+  "input_space": "ARRI Wide Gamut 3 / LogC3 / Full Range",
+  "output_space": "Rec.709 D65 / Gamma 2.4 / Full Range",
+  "strength": 1.0,
+  "interpolation": "tetrahedral",
+  "source_sha256": "241aff344709aa90b468f8658144888db38f29f9aa1b3c0d917cf327ca3b354e",
+  "source_bytes": 970314,
+  "cube": {
+    "title": "",
+    "source_sha256": "241aff344709aa90b468f8658144888db38f29f9aa1b3c0d917cf327ca3b354e",
+    "size1d": 0,
+    "size3d": 33,
+    "range1d": [
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        1.0,
+        1.0,
+        1.0
+      ]
+    ],
+    "range3d": [
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        1.0,
+        1.0,
+        1.0
+      ]
+    ]
+  },
+  "on_camera_ready": false,
+  "table_order": "blue outer, green middle, red inner, RGB channel",
+  "assets": {
+    "source.cube": {
+      "bytes": 970314,
+      "sha256": "241aff344709aa90b468f8658144888db38f29f9aa1b3c0d917cf327ca3b354e"
+    },
+    "cube3d.f32le": {
+      "bytes": 431244,
+      "sha256": "45b2fd7e8b8b4de2371c5f3efba6e362408108ceefad8df5cf18282c4d921885"
+    }
+  }
+}

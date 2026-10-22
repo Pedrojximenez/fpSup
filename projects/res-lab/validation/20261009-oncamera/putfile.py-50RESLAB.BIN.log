@@ -1,0 +1,19 @@
+  local   projects/res-lab/cards/20261009-virtual-rcd-v1/debug/fpSup/50RESLAB.BIN  450976 bytes
+  remote  \fpSup\50RESLAB.BIN  mode 0x7
+  buffer  0x450629C0, file object 0x450D0B60
+  proof   region takes writes and still holds them a second later
+  restored echo -> 0xC03D99A0
+  reply   ERR shl cmd rc=-7(LIBUSB_ERROR_TIMEOUT) moved=0/64
+
+  stage  450976 bytes in 0.002s (193.0 MB/s)      
+
+  verify 450976 bytes in 0.002s (278.2 MB/s)      
+
+  stage  450976 bytes in 0.02s (25.7 MB/s), MEM1, read back whole          
+
+  code   304/304 B  5.6 KiB/s 
+  verify 304/304 B  281 KiB/s 
+  verify 304 bytes in 0.0s (169 KiB/s)      
+
+  code   304 bytes in 0.1s (2.7 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+putfile echo reply failed; write outcome is unknown

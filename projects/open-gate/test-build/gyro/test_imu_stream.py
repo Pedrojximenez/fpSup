@@ -1,0 +1,1169 @@
+#!/usr/bin/env python3
+"""The format is only worth what both producers agree on.
+
+Half of these read the assembly rather than run it.  The bugs this file exists
+to catch -- a record shape that drifts between the two hooks, a producer that
+keeps its own copy of the index, an odd push -- are all things that assemble
+cleanly and are found on the camera or not at all.
+"""
+import pathlib
+import re
+import struct
+import tempfile
+import sys
+import unittest
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE.parent / 'fp_usb_shell'))
+
+import imu_stream as S                                         # noqa: E402
+from armasm import assemble                                    # noqa: E402
+
+ACCEL = (HERE / 'accel_hook.S').read_text()
+DRAIN = (HERE / 'gyro_drain.S').read_text()
+TRIG = (HERE / 'rec_trigger.S').read_text()
+INC = (HERE / 'imu_stream.inc.S').read_text()
+SPACE = (HERE / 'stream_space.S').read_text()
+
+# Who may append to the stream, and who may not.  Only a hook that lays
+# samples down in the order the coprocessor made them can claim a position;
+# everything else measures into state words.
+# Only the accelerometer hook appends now: it drains the coprocessor's ring
+# and then puts its own record behind what it just moved, which is the only
+# way that record's position can be its time.
+WRITERS = (('accel', ACCEL),)
+MARKERS = (('trigger', TRIG),)
+
+
+def equ(name, src=INC):
+    m = re.search(rf'^\.equ\s+{name},\s*([^\s/@]+)', src, re.M)
+    if not m:
+        raise AssertionError(f'no .equ {name}')
+    return m.group(1).rstrip(',')
+
+
+class Header(unittest.TestCase):
+    def test_tags_are_what_the_reader_expects(self):
+        self.assertEqual(int(equ('TAG_GYRO'), 0), S.TAG_GYRO)
+        self.assertEqual(int(equ('TAG_ACCEL'), 0), S.TAG_ACCEL)
+        # TAG_START, TAG_STOP and TAG_VD are gone from the assembly: nothing
+        # appends them any more.  The decoder still knows them, for files
+        # written before the markers came out.
+
+    def test_both_producers_take_the_header_rather_than_a_copy(self):
+        for name, src in (('accel_hook.S', ACCEL), ('gyro_drain.S', DRAIN),
+                          ('stream_space.S', SPACE),
+                          ('rec_trigger.S', TRIG),):
+            self.assertIn('#include "imu_stream.inc.S"', src, name)
+            # A literal stream address in a producer is a second source of truth.
+            for bad in ('0xC072E1F8', '0xC072E200'):
+                self.assertNotIn(bad, src.split('*/')[-1], f'{name} hardcodes {bad}')
+
+
+class RecordShape(unittest.TestCase):
+    """x at 0, y at 2, tag at 4, z at 6 -- in both producers, or neither works."""
+
+    def offsets(self, src):
+        body = src[src.index('push'):]
+        got = {}
+        for m in re.finditer(r'strh\s+r\d+,\s*\[r\d+(?:,\s*#(\d+))?\]', body):
+            got.setdefault(int(m.group(1) or 0), 0)
+            got[int(m.group(1) or 0)] += 1
+        return got
+
+    def test_four_halfwords_each(self):
+        for name, src in WRITERS:
+            self.assertEqual(sorted(self.offsets(src)), [0, 2, 4, 6], name)
+
+    def test_tag_is_written_last(self):
+        """A reader that catches a half-written record sees the old tag, not a
+        new payload under an old one."""
+        for name, src in WRITERS:
+            body = src[src.index('push'):]
+            stores = [int(m.group(1) or 0) for m in
+                      re.finditer(r'strh\s+r\d+,\s*\[r\d+(?:,\s*#(\d+))?\]', body)]
+            self.assertEqual(stores[-1], 4, f'{name} does not publish with the tag')
+
+    def test_the_producers_make_no_judgement(self):
+        """Audio's producer is a DMA engine: it is pointed at a buffer, it
+        writes, and the hardware raises the completion.  It tests nothing.
+
+        Ours ask for room, write what they are given, and say how much.  Every
+        judgement -- where the ring is, how it is divided, whether a buffer
+        filled, whether anything should be posted -- belongs to the space
+        provider, and a producer that grows one back fails here."""
+        for name, src in WRITERS:
+            body = src[src.index('push'):]
+            for forbidden in ('ring_slot', 'RING_MASK', 'BUF_', 'ldrex',
+                              'STREAM_POSTED', 'T_FOPEN', 'T_STOPSENT',
+                              'STREAM_SIGFN'):
+                self.assertNotIn(forbidden, body,
+                                 f'{name} is deciding something: {forbidden}')
+            self.assertIn('STREAM_CLAIMFN', body)
+            self.assertIn('STREAM_COMMITFN', body)
+
+    def test_the_block_state_is_locked(self):
+        """B_CUR, B_FILL and B_DONE are read and written together, and two
+        different tasks reach them: the accelerometer driver, and the recorder
+        when it commits a stop and the tail of the take has to come out before
+        the file closes.  A task switch in between hands the same space out
+        twice.
+
+        Audio needs none of this -- its producer is one DSP callback.  The old
+        design got away with none of it because it claimed a single monotonic
+        word with LDREX; three words need a lock, and masking is what
+        MPoolFixed::v1 uses on its own free list."""
+        for name in ('stream_claim', 'stream_commit'):
+            body = SPACE[SPACE.index(f'{name}:'):]
+            body = body[:body.index('\n    bx      lr')]
+            self.assertIn('st_lock', body, f'{name} touches the state unlocked')
+            self.assertIn('st_unlock', body, f'{name} never lets interrupts back')
+
+    def test_the_post_happens_outside_the_lock(self):
+        """Taking a descriptor and sending a message do not belong in a critical
+        section -- and by then the block is marked busy and B_CUR is cleared, so
+        the state is already consistent."""
+        commit = SPACE[SPACE.index('stream_commit:'):]
+        post = commit.index('STREAM_SIGFN')
+        # the release that precedes the call, not the one on the early exit
+        self.assertLess(commit.index('B_BUSY'), commit.rindex('st_unlock', 0, post))
+        self.assertLess(commit.rindex('st_unlock', 0, post), post)
+
+    def test_full_is_the_block_running_out(self):
+        """Audio's blocks are separate allocations and "full" is not a number
+        anyone computes -- it is that block being used up.  Ours are separate
+        allocations too now, so the same subtraction that decides how much of
+        the current one to hand out is what discovers there is none left.  No
+        mask, no modulo, no index into a tiled ring."""
+        body = SPACE[SPACE.index('stream_claim:'):]
+        for gone in ('BUF_MASK', 'RING_MASK', 'ring_slot', 'STREAM_INDEX'):
+            self.assertNotIn(gone, body, f'{gone} is arithmetic on a tiled ring')
+        self.assertIn('B_PTR', body)
+        self.assertIn('BUF_RECORDS', body)
+
+    def test_a_block_is_handed_over_when_it_is_used_up(self):
+        commit = SPACE[SPACE.index('stream_commit:'):]
+        self.assertIn('BUF_RECORDS', commit)
+        self.assertIn('blo     9f', commit, 'the test is not against capacity')
+        self.assertIn('B_BUSY', commit, 'the block is not marked as gone')
+        self.assertIn('STREAM_SIGFN', commit)
+
+    def test_the_markers_append_nothing_to_the_stream(self):
+        """A marker appended from outside the gyro producer lands where the last
+        drain left the index, 0-20 ms before it belongs -- most of a frame, on a
+        thing whose whole job is to say which frame.  Both marker hooks measure
+        with the coprocessor's head instead, into state words, and claim no
+        position.  They may append again when the drain moves into the producers
+        and the position becomes true by construction, not before."""
+        for name, src in MARKERS:
+            body = src[src.index('rec_trigger:'):]
+            self.assertNotIn('ring_slot', body, name)
+            self.assertNotIn('ldrex', body, f'{name} still claims a stream slot')
+            # \b, because strhi and strlo are conditional word stores and the
+            # Vd hook is full of them.
+            self.assertIsNone(re.search(r'strh\s+r\d+,\s*\[', body),
+                              f'{name} still writes a record')
+        self.assertIn('gyro_head', TRIG, 'the record trigger stopped measuring')
+
+    def test_records_are_eight_bytes_apart(self):
+        """The stride lives in the space provider now, and only there: it is the
+        only thing that turns a record count into an address."""
+        body = SPACE[SPACE.index('stream_claim:'):]
+        self.assertRegex(body, r'lsl #3')
+        for name, src in WRITERS:
+            self.assertNotRegex(src[src.index('push'):], r'lsl\s+#3',
+                                f'{name} is doing address arithmetic')
+class Header(unittest.TestCase):
+    """The .GYR v7 header.  The camera writes it; gyr7.py reads it; the two
+    have to agree field for field, and nothing else checks that."""
+
+    def setUp(self):
+        self.inc = (HERE / 'ring_task.inc.S').read_text()
+        # The writer is an edition file plus the core both editions share, so
+        # a test that reads only one of them is reading half a writer.
+        self.task = ((HERE / 'ring_task.S').read_text() + '\n'
+                     + (HERE / 'writer_core.inc.S').read_text())
+
+    @staticmethod
+    def code(text):
+        """Comments mention the very names these tests assert on -- a check
+        that reads them passes on a file whose code says something else."""
+        text = re.sub(r'/\*.*?\*/', '', text, flags=re.S)
+        return re.sub(r'@.*', '', text)
+
+    def equ(self, name):
+        m = re.search(rf'^\.equ {name},\s*(\S+?)\s*(?:/\*|$)',
+                      self.inc, re.M)
+        self.assertIsNotNone(m, f'{name} is not defined')
+        return int(m.group(1), 0)
+
+    def test_the_two_sides_lay_the_header_out_the_same(self):
+        import gyr7
+        self.assertEqual(self.equ('HDR_BYTES'), gyr7.HDR_BYTES)
+        self.assertEqual(gyr7.HEADER.size, gyr7.HDR_BYTES)
+        # Field by field, camera offset against host offset.
+        for name, want in (('H_MAGIC', 0), ('H_VERSION', 4), ('H_PERIOD_PS', 8),
+                           ('H_GSCALE', 0x0C), ('H_ORIENT', 0x10),
+                           ('H_CLIP', 0x14), ('H_VOLUME', 0x1C),
+                           ('H_PAYLOAD', 0x20), ('H_DROPPED', 0x24),
+                           ('H_MODE', 0x28), ('H_EXPOSURE', 0x2C),
+                           ('H_WIDTH', 0x30), ('H_HEIGHT', 0x34)):
+            self.assertEqual(self.equ(name), want, name)
+
+    def test_the_period_is_the_measured_one(self):
+        """400 us flat is 0.085 us fast on every sample.  The figure two
+        independent rulers agreed on is 400.0854 us."""
+        self.assertEqual(self.equ('GYR_PERIOD_PS'), 400085400)
+
+    def test_whoever_opens_the_file_owns_where_it_is(self):
+        """B_OFF must be set by take_header, not by take_open.  --dropfile
+        after a freeze opens nothing and closes what is already there; with the
+        record hook owning B_OFF that path stamped the PREVIOUS take's payload
+        length into the new header, which is exactly the case the tool exists
+        for."""
+        header = self.code(self.task[self.task.index('\ntake_header:'):
+                                     self.task.index('\nput_header:')])
+        self.assertIn('B_OFF', header)
+        self.assertIn('HDR_BYTES', header)
+        take_open = self.code(self.task[self.task.index('\ntake_open:'):
+                                        self.task.index('\ntake_close:')])
+        self.assertNotIn('B_OFF', take_open, 'one owner, and it is the open')
+
+    def test_the_geometry_comes_from_the_settings(self):
+        """0xC37CE210 looks like the source and is a trap: {1936,1090,...} at
+        1080p, zero at UHD, and zero right through a 35 s take here.
+        CameraMgrSetting has it while the camera is idle, so there is nothing
+        to race -- and profilegen.S has been reading it that way all along."""
+        header = self.code(self.task[self.task.index('\ntake_header:'):
+                                     self.task.index('\nput_header:')])
+        self.assertIn('F_CAMSETTING', header)
+        self.assertIn('SETTING_DIMS', header)
+        self.assertIn('DNG_PAD_W', header)
+        self.assertIn('DNG_PAD_H', header)
+        self.assertNotIn('0xC37CE210', self.code(self.task))
+        self.assertNotIn('0xC37CE210', self.code(self.inc))
+        self.assertEqual(self.equ('F_CAMSETTING'), 0xC0206E98)
+        self.assertEqual(self.equ('SETTING_DIMS'), 0x40)
+        # A CinemaDNG frame is sixteen wider and ten taller than the menu says.
+        self.assertEqual(self.equ('DNG_PAD_W'), 16)
+        self.assertEqual(self.equ('DNG_PAD_H'), 10)
+
+    def test_the_named_code_addresses_really_name_that_code(self):
+        """ACCEL_AT/START_AT/STOP_AT are exempted from the words-on-code check
+        because they ARE the code's addresses -- gsup_boot builds the three
+        branch encodings from them.  An exemption that stops being true is a
+        branch into the middle of a hook, so check it."""
+        import imu_stream_deploy as D
+        inc = (HERE / 'ring_task.inc.S').read_text()
+        for equ, producer in (('ACCEL_AT', 'accel'), ('START_AT', 'start'),
+                              ('STOP_AT', 'stop')):
+            m = re.search(rf'^\.equ {equ},\s*(0x[0-9A-Fa-f]+)', inc, re.M)
+            self.assertIsNotNone(m, equ)
+            self.assertEqual(int(m.group(1), 0), D.PRODUCERS[producer][0],
+                             f'{equ} is not where {producer} is placed')
+
+    def test_the_arm_words_match_the_deployer(self):
+        """The card arms the hooks from constants; the USB deploy computes them.
+        If they ever disagree, one of the two branches into nothing."""
+        import imu_stream_deploy as D
+        inc = (HERE / 'ring_task.inc.S').read_text()
+        for equ, producer in (('ARM_ACCEL', 'accel'), ('ARM_START', 'start'),
+                              ('ARM_STOP', 'stop')):
+            at, _src, _d, site, _orig, thumb = D.PRODUCERS[producer]
+            want = D.branch_word(site, at, thumb)
+            m = re.search(rf'^\.equ {equ},\s*(.+?)\s*$', inc, re.M)
+            self.assertIsNotNone(m, equ)
+            got = eval(m.group(1), {}, {n: int(re.search(
+                rf'^\.equ {n},\s*(0x[0-9A-Fa-f]+)', inc, re.M).group(1), 0)
+                for n in ('ACCEL_SITE', 'ACCEL_AT', 'START_SITE', 'START_AT',
+                          'STOP_SITE', 'STOP_AT')})
+            self.assertEqual(got, want, f'{equ} disagrees with the deployer')
+
+    def test_the_camera_never_makes_the_log_directory(self):
+        """\\GYRO has to already exist on whatever volume is recorded to, and
+        putting it there is the user's business.
+
+        We tried it twice.  On the record-start path the mkdir wrote FAT
+        metadata in SRecFile's thread and froze the camera on every take to the
+        USB SSD, while the SD card -- which already had the folder, so the
+        mkdir was skipped -- ran a whole session clean.  Moved to boot it
+        stopped freezing and started guessing: F_VOL returns the volume the
+        camera is routed to at that instant, not the one the take will use.
+        """
+        code = self.code(self.task)
+        for call in ('F_DIR_CTOR', 'F_DIR_MKDIR', 'F_DIR_DTOR', 'make_gyro_dir'):
+            self.assertNotIn(call, code, 'the camera does not create folders')
+        openfile = self.code(self.task[self.task.index('\nwriter_openfile:'):
+                                       self.task.index('\nwriter_closefile:')])
+        self.assertEqual(openfile.count('F_OPEN'), 2, 'one open, no retry')
+
+    def test_the_text_buffer_is_asked_for_on_the_path_that_runs(self):
+        """I put the extra allocation after blocks_open's `b 3f`, which is the
+        branch the successful path takes.  It assembled, it deployed, and it
+        was unreachable: G_TEXT stayed zero and nothing said anything.  It has
+        to come before that branch, and it has to be given back in free_blocks
+        or a free-and-take cycle leaks one block every time round."""
+        core = (HERE / 'writer_core.inc.S').read_text()
+        body = core[core.index('\nblocks_open:'):core.index('\nblocks_close:')]
+        self.assertIn('G_TEXT', body)
+        self.assertLess(body.index('G_TEXT'), body.index('b       3f'),
+                        'the allocation is on the far side of the branch')
+        free = core[core.index('\nfree_blocks:'):core.index('\nblocks_open:')]
+        self.assertIn('G_TEXT', free, 'the text block leaks on every cycle')
+
+    def test_the_blob_is_fingerprinted_not_sampled(self):
+        """The old guard read four words from two functions and said "the
+        camera has this blob".  Both were near the top; a change in the middle
+        left them identical, every routine after it moved, and echo_into
+        branched into another function's middle -- the shell died with the
+        handler still redirected.
+
+        A word that changes when any byte does cannot miss that.  The samples
+        stay, because the word is firmware RAM and outlives the pool it
+        describes: they say the code is there, it says the code is this."""
+        import ring_task_deploy as R
+        src = (HERE / 'ring_task_deploy.py').read_text()
+        self.assertIn('def fingerprint(code)', src)
+        self.assertNotEqual(R.fingerprint(b'a' * 64), R.fingerprint(b'a' * 63 + b'b'))
+        verify = src[src.index('def _verify_placed'):]
+        self.assertIn('fingerprint(code)', verify, 'the guard must check it')
+        place = src[src.index('def place_code'):src.index('def _require_room')]
+        self.assertIn('T_FINGER', place, 'placing must write it')
+
+    def test_an_argument_is_saved_before_the_first_call(self):
+        """blob_at returns in r0, so it destroys whatever r0 held.  take_header
+        takes the volume in r0 and used to stash it on the line after the one
+        that became `bl blob_at`: the header then carried a pool address where
+        the disk number goes, and the file still opened and still parsed."""
+        body = self.task[self.task.index('\ntake_header:'):]
+        body = body[:body.index('bl      blob_at')]
+        self.assertIn('mov     r5, r0', body,
+                      'the volume must be saved before anything returns in r0')
+
+    def test_nothing_reaches_a_buffer_with_adr(self):
+        """`adr` reaches only as far as an eight-bit rotated immediate allows,
+        so how far apart two things landed decided whether the file assembled.
+        It broke three times in one day -- inserting blocks_open, inserting
+        make_gyro_dir, and splitting the writer -- and each time the fix was to
+        shuffle the file, which is not a fix.  The offsets are in the table the
+        builder patches, and blob_at turns one into an address."""
+        for name in ('writer_path', 'writer_header'):
+            self.assertNotIn(f'adr     r0, {name}', self.task)
+            self.assertNotIn(f'adr     r4, {name}', self.task)
+            self.assertNotIn(f'adr     r6, {name}', self.task)
+        import ring_task_deploy as R
+        for name in ('writer_path', 'writer_header'):
+            self.assertIn(name, R.GSUP_ROUTINES,
+                          f'{name} is reached through the table, so it must be in it')
+
+    def test_the_header_is_written_twice(self):
+        """Once at open so the file always has a magic, once at close for the
+        counts that only exist then."""
+        self.assertIn('bl      take_header', self.task)
+        self.assertEqual(self.task.count('bl      put_header'), 2)
+
+    def test_the_reader_rejects_the_old_container(self):
+        import gyr7
+        bad = pathlib.Path(tempfile.mkdtemp()) / 'x.GYR'
+        bad.write_bytes(b'GFS6' + b'\0' * 60)
+        with self.assertRaises(ValueError):
+            gyr7.read_capture(bad)
+
+
+class Editions(unittest.TestCase):
+    """Two editions of one writer.  They share a core and differ in the three
+    functions the core calls without looking inside; anything else that differs
+    is a fork, and a fork drifts."""
+
+    def setUp(self):
+        import ring_task_deploy as R
+        self.R = R
+        self.base = R.symbols(HERE / 'ring_task.S', ())
+        self.gcsv = R.symbols(HERE / 'gcsv_task.S', ())
+
+    def test_both_define_the_three(self):
+        for name in ('writer_openfile', 'writer_put', 'writer_closefile'):
+            self.assertIn(name, self.base, f'Base has no {name}')
+            self.assertIn(name, self.gcsv, f'the gcsv edition has no {name}')
+
+    def test_the_shared_core_lands_at_the_same_offsets(self):
+        """Both include it first, so every shared routine is at the same place
+        in both blobs.  If that stops being true, one of them has grown
+        something ahead of the core and the two are no longer the same code."""
+        for name in ('writer_body', 'writer_post', 'take_open', 'take_close',
+                     'blocks_open', 'gsup_boot', 'make_writer', 'take_path'):
+            self.assertEqual(self.base[name], self.gcsv[name], name)
+
+    def test_the_table_tolerates_what_an_edition_does_not_have(self):
+        """gsup_offsets carries entries for both editions' buffers.  Base has no
+        gcsv header and the gcsv edition has no binary one; the missing entry
+        must be zero, which blob_at reads as "not here", not a KeyError at
+        build time or a wild pointer at run time."""
+        for src, absent in (('ring_task.S', 'gcsv_head1'),
+                            ('gcsv_task.S', 'writer_header')):
+            syms = self.R.symbols(HERE / src, ())
+            self.assertNotIn(absent, syms)
+            code = self.R.patch_offsets(assemble(HERE / src, ()), syms)
+            i = self.R.GSUP_ROUTINES.index(absent)
+            self.assertEqual(struct.unpack_from('<I', code, i * 4)[0], 0)
+
+    def test_the_sidecars_go_where_the_take_does(self):
+        """A CinemaDNG take is a folder of frames and the sidecars belong in it;
+        a MOV take is one file and they belong beside it.  Which is happening
+        sits twelve bytes past the frame size in the settings block the
+        dimensions already come from -- measured by switching the camera over
+        and diffing, then confirmed against the live block rather than the
+        shell's mirror of it."""
+        inc = (HERE / 'ring_task.inc.S').read_text()
+        self.assertIn('.equ SETTING_FORMAT, SETTING_DIMS + 0x0C', inc)
+        self.assertIn('.equ FORMAT_CDNG,    0', inc)
+        task = (HERE / 'gcsv_task.S').read_text()
+        path = task[task.index('\nclip_path:'):task.index('\ncopy_clip:')]
+        self.assertIn('SETTING_FORMAT', path)
+        self.assertIn('FORMAT_CDNG', path)
+        # the clip name twice for CinemaDNG, once for MOV
+        self.assertEqual(path.count('bl      copy_clip'), 2)
+        # and nothing here creates a directory: they are the camera's own
+        for call in ('F_DIR_MKDIR', 'make_gyro_dir'):
+            self.assertNotIn(call, task)
+
+    def test_the_take_is_recorded_landscape_upright(self):
+        """FUN_c00c9b48 works out a DNG's EXIF Orientation from the Level
+        object, and its first line is `if (gate == 0) return 1`.  So clearing
+        that byte makes every frame landscape upright, which is what lets
+        Gyroflow agree with itself about a portrait take -- it takes the size
+        from the frames and then rotates by the tag, so with the tag in, the
+        preview is portrait and the maths is landscape.
+
+        WHERE it is cleared is the whole question, and the take is the wrong
+        place: a portrait take's first frame still read Orientation 8 with the
+        record hook demonstrably run.  It happens at the STILL/CINE switch now
+        -- see ModeHook -- so what this asserts is that the record path has
+        been left out of it."""
+        inc = (HERE / 'ring_task.inc.S').read_text()
+        self.assertIn('.equ LEVEL_OBJ,      0xC3498DFC', inc)
+        self.assertIn('.equ LEVEL_GATE,     LEVEL_OBJ + 0x30', inc)
+        self.assertIn('LEVEL_GATE', (HERE / 'mode_hook.S').read_text())
+        # and nothing patches the recording path to do it
+        self.assertNotIn('orient_stub', (HERE / 'build_base_card.py').read_text())
+
+    def test_boot_forgets_the_last_power_ons_blocks(self):
+        """blocks_open returns early when B_PTR already holds something, which
+        is right within a boot and wrong across one: the power switch does not
+        clear RAM, so the cave still names the last session's buffers while the
+        allocator has been reinitialised and considers them free.  gsup_boot
+        has to clear them BEFORE it calls blocks_open, or the stream is written
+        into memory the recorder is about to be handed.
+
+        The first take after a warm restart still worked and the second stopped
+        by itself; only a cold boot fixed it.  Nothing about that is visible in
+        a build, so it is checked here."""
+        core = (HERE / 'writer_core.inc.S').read_text()
+        boot = core[core.index('\ngsup_boot:'):]
+        boot = boot[:boot.index('\n9:')]
+        code = re.sub(r'/\*.*?\*/', '', boot, flags=re.S)
+        code = re.sub(r'@.*', '', code)
+        # gsup_boot reaches blocks_open through the routine table, not by name,
+        # so the anchor is the slot: G_OFF_BLOCKS is 0x14.
+        call = code.index('[r5, #20]')
+        for word in ('B_PTR', 'B_BUSY', 'G_TEXT'):
+            self.assertIn(word, code, f'gsup_boot never clears {word}')
+            self.assertLess(code.index(word), call,
+                            f'{word} is cleared after blocks_open, not before')
+        # ...and cleared, not merely mentioned: r0 is the zero the whole block
+        # stores, so the loop has to store r0.
+        i = code.index('B_PTR')
+        self.assertRegex(code[i:i + 200], r'str\s+r0, \[r1\], #4')
+
+    def test_the_sidecars_have_somewhere_to_go(self):
+        """v1.11a wrote nothing at all when the take went to an external SSD:
+        the path is \\CINEMA\\<clip>\\<clip>.gcsv, which needs the clip's own
+        folder to exist, and if it does not the open just fails.  Base never
+        showed this because \\GYRO\\<clip>.GYR is created whatever the name.
+
+        Three rungs now, and the one that matters for an SSD take is the
+        middle one -- its log belongs on the SSD, not on whichever card is in
+        the slot.  Each rung records what it got, because a camera with an SSD
+        in its only USB socket cannot be watched while it records."""
+        task = (HERE / 'gcsv_task.S').read_text()
+        code = re.sub(r'/\*.*?\*/', '', task, flags=re.S)
+        code = re.sub(r'@.*', '', code)
+        openf = code[code.index('\nwriter_openfile:'):code.index('\nclip_path:')]
+        for w in ('D_OPEN1', 'D_OPEN2', 'D_OPEN3', 'D_VOL', 'G_FALLBACK'):
+            self.assertIn(w, openf, f'the open never records {w}')
+        self.assertEqual(openf.count('bl      try_open'), 3, 'not three rungs')
+        # the middle rung keeps the recording volume; only the last drops to SD
+        self.assertEqual(openf.count('VOL_SD'), 1,
+                         'more than one rung goes to the SD card')
+        # a failed open must leave nothing built, or every later open fails too
+        tri = code[code.index('\ntry_open:'):code.index('\ndbg_path:')]
+        self.assertIn('F_DTOR', tri, 'try_open leaves the object built on failure')
+        # and nothing makes a directory: doing that at record start froze the
+        # camera on every SSD take, which is why the fallback is a root.
+        for f in ('gcsv_task.S', 'ring_task.S', 'writer_core.inc.S'):
+            src = re.sub(r'/\*.*?\*/', '', (HERE / f).read_text(), flags=re.S)
+            src = re.sub(r'@.*', '', src)
+            self.assertNotIn('MKDIR', src, f'{f} makes a directory')
+        # and the json has to land where the gcsv did
+        js = re.sub(r'/\*.*?\*/', '', (HERE / 'gcsv_json.S').read_text(), flags=re.S)
+        self.assertIn('G_FALLBACK', js, 'the json does not follow the gcsv')
+        self.assertIn('VOL_SD', js)
+
+    def test_the_profile_asks_whether_the_readout_is_being_scaled(self):
+        """The recorded frame is the menu setting plus the CinemaDNG border only
+        while the readout is scaled down to it.  The open-gate build sets
+        profile 122's record scaler to unity and the frame becomes the readout
+        itself -- 3032x2012 -- while the setting still says FHD, which is how
+        eight takes got a profile calling them 1936x1090.  Both halves are
+        checked, so a UHD take through another profile is left alone, and the
+        constant is the same word the open-gate AutoRun writes."""
+        js = re.sub(r'/\*.*?\*/', '', (HERE / 'gcsv_json.S').read_text(), flags=re.S)
+        dims = js[js.index('\nj_dims:'):js.index('\ngcsv_json_write:')]
+        dims = re.sub(r'@.*', '', dims)
+        self.assertIn('F_CAMSETTING', dims, 'the fallback is still the setting')
+        self.assertIn('DNG_PAD_W', dims)
+        self.assertIn('RWZM_RECORD_H', dims, 'the scaler is not consulted')
+        self.assertIn('SCALED_W', dims, 'the override is not tied to one canvas')
+        self.assertIn('bl      j_geom', dims, 'the readout row is not read')
+        equ = lambda n: int(re.search(rf'^\.equ {n},\s*(0x[0-9A-Fa-f]+|\d+)',
+                                      js, re.M).group(1), 0)
+        self.assertEqual(equ('RWZM_UNITY'), 0x400)
+        self.assertEqual((equ('SCALED_W'), equ('SCALED_H')), (1936, 1090))
+
+        # The open-gate builder owns that address; a copy that drifts is a
+        # profile that quietly goes back to lying about the frame.
+        builder = HERE.parent / 'opengate' / 'build_test_autorun.py'
+        if not builder.exists():
+            self.skipTest('no open-gate build in this tree')
+        patches = re.findall(r'\(0x([0-9A-Fa-f]{8}), 0x([0-9A-Fa-f]{8}), '
+                             r'0x([0-9A-Fa-f]{8}), "([^"]*)"\)',
+                             builder.read_text())
+        rec_h = [p for p in patches if 'record RWZM H' in p[3]]
+        self.assertEqual(len(rec_h), 1, 'the open-gate builder changed shape')
+        self.assertEqual(int(rec_h[0][0], 16), equ('RWZM_RECORD_H'))
+        self.assertEqual(int(rec_h[0][2], 16), equ('RWZM_UNITY'))
+
+    def test_the_header_names_the_clip(self):
+        """Gyroflow matches a log to a clip by videofilename.  The name came out
+        of the path with a fixed skip of six -- the length of Base's "\\GYRO\\" --
+        and this edition's path starts "\\CINEMA\\", so every take wrote
+        "A\\A001_0".  It comes from the clip buffer now, which is the same
+        eight bytes in both editions."""
+        task = (HERE / 'gcsv_task.S').read_text()
+        head = task[task.index('\ngcsv_header:'):task.index('\nput_str:')]
+        code = re.sub(r'/\*.*?\*/', '', head, flags=re.S)
+        code = re.sub(r'@.*', '', code)
+        self.assertIn('G_OFF_CLIP', code)
+        self.assertNotIn('G_OFF_PATH', code, 'the name still comes from the path')
+
+    def test_a_block_becomes_one_write(self):
+        """16 KiB is the trigger unit -- where "the buffer is full" happens --
+        not a write size.  Writing a block's rows in three 16 KiB pieces took
+        the card lock three times as often as Base does, and a take stopped by
+        itself at 2:18 on a camera that has recorded on that card for years.
+        The text buffer holds a whole block's worth so the loop runs once."""
+        inc = (HERE / 'ring_task.inc.S').read_text()
+        text = int(re.search(r'^\.equ TEXT_BYTES,\s*(0x[0-9A-Fa-f]+)',
+                             inc, re.M).group(1), 0)
+        stream = (HERE / 'imu_stream.inc.S').read_text()
+        block = int(re.search(r'^\.equ BUF_BYTES,\s*(0x[0-9A-Fa-f]+)',
+                              stream, re.M).group(1), 0)
+        rows = block // 8                       # at most one row a record
+        rowmax = int(re.search(r'^\.equ ROW_MAX,\s*(\d+)',
+                               (HERE / 'gcsv_rows.S').read_text(), re.M).group(1))
+        self.assertGreaterEqual(text, rows * rowmax + rowmax,
+                                'a block of rows must fit, or it is two writes')
+        put = (HERE / 'gcsv_task.S').read_text()
+        put = put[put.index('\nwriter_put:'):]
+        self.assertIn('TEXT_BYTES', put, 'the budget must be the whole buffer')
+        self.assertNotIn('BUF_BYTES', put[:put.index('9:')],
+                         'the budget is not the block size')
+
+    def test_the_gcsv_header_is_the_one_the_camera_wrote(self):
+        """Checked against the camera: 249 bytes, and the drop count's six
+        digits at NOTE_DROPS_AT so the close can rewrite them without moving a
+        byte after them."""
+        src = (HERE / 'gcsv_task.S').read_text()
+        h1 = src[src.index('gcsv_head1:'):].split('"')[1]
+        h2 = src[src.index('gcsv_head2:'):].split('"')[1]
+        h1 = h1.encode().decode('unicode_escape')
+        h2 = h2.encode().decode('unicode_escape')
+        whole = h1 + 'A001_002' + h2
+        self.assertEqual(len(whole), 249)
+        inc = (HERE / 'ring_task.inc.S').read_text()
+        at = int(re.search(r'^\.equ NOTE_DROPS_AT,\s*(\d+)', inc, re.M).group(1))
+        self.assertEqual(whole[at:at + 6], '000000')
+        self.assertEqual(whole[at - 15:at], 'dropped_blocks=')
+
+
+class BlockComments(unittest.TestCase):
+    """A block comment that is never closed swallows the code after it, and the
+    assembler says nothing.  One of these ate take_close's own `9:` return
+    label: every teardown short of the last branched to the NEXT function's
+    `9:` -- whose pop happened to match, so they looked like passes -- and the
+    full teardown fell straight through into writer_openfile, re-opening the
+    file at record stop.  Three camera freezes and a battery each.
+
+    The house style is that every continuation line of a block comment starts
+    with `*`, so a comment that has swallowed code is one whose interior lines
+    do not.  That is checkable, and eyes are not.
+    """
+
+    CODE = re.compile(
+        r'^[A-Za-z_0-9]+:|'
+        r'^\s+(?:mov[wt]?|ldr|str|add|sub|rsb|cmp|cmn|tst|teq|and|orr|eor|bic'
+        r'|lsl|lsr|asr|mul|mla|adr|nop|push|pop|b|bl|blx|bx|msr|mrs|ldm|stm)'
+        r'(?:eq|ne|cs|cc|hs|lo|mi|pl|vs|vc|hi|ls|ge|lt|gt|le|al)?s?\s+'
+        r'(?:r\d|ip\b|sp\b|lr\b|pc\b|#|\{|\d+[fb]\b'
+        r"|[A-Za-z_]\w*\s*(?:@.*)?$)")
+
+    def test_no_block_comment_swallows_code(self):
+        for f in sorted(HERE.parent.rglob('*.S')):
+            inside = False
+            for n, line in enumerate(f.read_text().splitlines(), 1):
+                body = line
+                if inside:
+                    self.assertFalse(
+                        self.CODE.match(line),
+                        f'{f.name}:{n} is inside a block comment but is code '
+                        f'-- an unterminated /* above it is eating this '
+                        f'line: {line!r}')
+                    if '*/' not in line:
+                        continue
+                    body = line.split('*/', 1)[1]
+                    inside = False
+                while True:
+                    o = body.find('/*')
+                    if o < 0:
+                        break
+                    c = body.find('*/', o + 2)
+                    if c < 0:
+                        inside = True
+                        break
+                    body = body[c + 2:]
+
+
+class AudioShape(unittest.TestCase):
+    """The writer must have the shape AudF_W has, not the shape it grew.
+
+    Each of these is a line from the audio source, not a preference:
+    AudioFileWriter::v1 @0xC01FBD40 for the body, AudF_W @0xC01FD380 for the
+    build order, AudioFileRecordingObserver::v0 @0xC01FBB18 for the teardown.
+    """
+
+    def setUp(self):
+        # The writer is an edition file plus the core both editions share, so
+        # a test that reads only one of them is reading half a writer.
+        self.task = ((HERE / 'ring_task.S').read_text() + '\n'
+                     + (HERE / 'writer_core.inc.S').read_text())
+        self.inc = (HERE / 'ring_task.inc.S').read_text()
+
+    def body(self, name):
+        i = self.task.index(f'\n{name}:')
+        j = self.task.index('\n    bx      lr', i)
+        return self.task[i:j]
+
+    CALL = re.compile(r'^\s*(?:blx?)\s+(?:ip|r\d+|(\w+))\s*$|'
+                      r'^\s*mov[wt]\s+ip,\s*#:(?:lower|upper)16:(\w+)\s*$', re.M)
+
+    def calls(self, text):
+        """The names a routine actually calls, with comments -- which may
+        mention the very name we are asserting is gone -- stripped out."""
+        code = re.sub(r'/\*.*?\*/', '', text, flags=re.S)
+        code = re.sub(r'@.*', '', code)
+        return {a or b for a, b in self.CALL.findall(code)}
+
+    def whole(self, name):
+        """The whole routine, not just up to the first return: a function with
+        an early exit (DRY_RUN) has more than one bx lr."""
+        i = self.task.index(f'\n{name}:')
+        m = re.compile(r'^[A-Za-z_][A-Za-z0-9_]*:', re.M).search(self.task, i + 2 + len(name))
+        return self.task[i:m.start() if m else len(self.task)]
+
+    def test_the_writer_body_returns(self):
+        """AudioFileWriter::v1 breaks out of its loop on the stop message and
+        returns; FUN_c036efe8 catches that and sets the completion flag.  A body
+        that can never return has no one to wait for it."""
+        b = self.body('writer_body')
+        self.assertIn('bl      writer_release', b)
+        self.assertIn('pop     {r4, lr}', b)
+
+    def test_every_job_says_where_it_belongs(self):
+        """A job that never gets a descriptor used to vanish, and every record
+        after it moved earlier in the file by the length of the hole -- which in
+        a format whose claim is that position IS time silently rewrites the
+        timeline.  Audio's writer compares the job's offset against its own file
+        position and seeks when they disagree."""
+        self.assertEqual(int(equ('J_OFF'), 0), 4)
+        put = self.body('writer_put')
+        self.assertIn('J_OFF', put)
+        self.assertIn('F_SEEK', put)
+        self.assertIn('T_POS', put)
+        commit = SPACE[SPACE.index('stream_commit:'):]
+        self.assertIn('B_OFF', commit, 'the offset is not carried at all')
+
+    def test_attach_passes_the_body_objects_address(self):
+        """FUN_c036efe8 calls (**(code **)(**(int **)(holder + 8) + 0xc))(): B is
+        the stored pointer, *B the body's vtable, vtable+0xC the function.
+        W_BODYOBJ is the body -- one word holding &W_VT -- so attach must pass
+        &W_BODYOBJ.  Passing its VALUE (&W_VT) hands the worker W_VT[0] as a
+        vtable, which nothing writes, and it died the instant it was woken."""
+        t = self.body('take_open')
+        att = t.index('XT_ATTACH')
+        window = t[att - 400:att]
+        self.assertIn('W_BODYOBJ', window)
+        self.assertNotRegex(window, r'W_BODYOBJ\n\s+ldr\s+r1, \[r1\]',
+                            'attach dereferences the body object')
+        self.assertNotIn('ldr     r1, [r1]', window[window.rindex('W_BODYOBJ'):])
+
+    def test_every_take_names_its_own_file(self):
+        """A fixed name layers every take's writes into one file.  The camera
+        names clips from RecordFilePathMgrCinema and so must we, or the log
+        cannot be matched to the clip it belongs to."""
+        c = self.whole('take_path')
+        for field in ('#0x10', '#0x2C', '#8', '#0x0C'):
+            self.assertIn(field, c, f'take_path must read the manager\'s {field}')
+        self.assertIn('O_AUTORSTFLG', c,
+                      'the saved maximum only counts when AutoRstFlg is clear')
+        # take_path works out the NAME; where the file goes is the edition's.
+        self.assertIn('G_OFF_CLIP', c)
+        self.assertNotIn("mov     r0, #'G'", c, 'the name is not a path')
+        openfile = self.whole('writer_openfile')
+        self.assertIn('bl      take_path', openfile)
+        self.assertIn('bl      base_path', openfile)
+        base = self.whole('base_path')
+        for ch in ("'G'", "'Y'", "'R'"):
+            self.assertIn(f'mov     r0, #{ch}', base)
+
+    def test_no_fixed_path_is_left_in_the_blob(self):
+        """The deployer used to patch a name into the blob.  If a literal comes
+        back, two takes share a file again and the second overwrites the first
+        from byte zero."""
+        literals = [l for l in self.task.splitlines() if '.asciz' in l]
+        self.assertFalse([l for l in literals if '.GYR' in l],
+                         f'no file path belongs in the blob: {literals}')
+        self.assertNotIn('RINGTEST',
+                         (HERE / 'ring_task_deploy.py').read_text())
+
+    def test_the_tail_goes_before_the_marker(self):
+        """FUN_c01fbc80 copies four words into the stop message and audio's are
+        DAT_c07e3dc8 = four zeros, so AudioFileWriter::v1 breaks on J_STOP
+        without writing anything.  The last part-filled block therefore has to
+        be posted as an ordinary job BEFORE the marker, or the tail of every
+        take is lost."""
+        c = self.whole('take_close')
+        flush = c.index('STREAM_FLUSHFN')
+        stop = c.index('bl      writer_make_job')
+        self.assertLess(flush, stop,
+                        'the tail must be posted before the stop marker')
+
+    def test_the_stop_message_carries_no_data(self):
+        """Audio's marker is four zero words and a flag.  Ours must be too:
+        a stop job with a length would be written by a body that never looks
+        at it."""
+        c = self.whole('take_close')
+        stop = c.index('mov     r0, #1                      @ J_STOP')
+        args = c[stop:c.index('bl      writer_make_job', stop)]
+        for r in ('r1', 'r2', 'r3'):
+            self.assertIn(f'mov     {r}, #0', args)
+
+    def test_the_flush_writes_only_what_was_committed(self):
+        """B_FILL counts records handed out; B_DONE counts records written.
+        A claim that has not committed is a producer mid-write, so flushing
+        B_FILL would write records that do not exist yet."""
+        f = (HERE / 'stream_space.S').read_text()
+        body = f[f.index('\nstream_flush:'):]
+        self.assertIn('B_DONE', body)
+        self.assertNotIn('B_FILL', body,
+                         'the flush must not trust the claim count')
+
+    def test_the_file_is_closed_by_its_destructor_alone(self):
+        """AudioFileWriter::v0 calls XC_MediaFile::v0 and never F_CLOSE: the
+        destructor's first act is FUN_c0366020, which is F_CLOSE.  Calling it
+        ourselves first sent us through that path twice."""
+        called = self.calls(self.whole('writer_closefile'))
+        self.assertIn('F_DTOR', called)
+        self.assertNotIn('F_CLOSE', called,
+                         'closing twice is not what audio does')
+
+    def test_the_thread_is_the_firmwares_own(self):
+        """XC_Thread.cpp's pool, used rather than reimplemented: the flag, the
+        task, the parking and the wup/ter/del all live inside these four calls,
+        and the only interface the worker has is slot +0xC of the object it is
+        handed."""
+        for call in ('XT_CREATE', 'XT_ATTACH', 'XT_JOIN', 'XT_DESTROY'):
+            self.assertIn(call, self.task, f'{call} is not used')
+        self.assertNotIn('TK_CRE_TSK', self.task, 'still making its own task')
+        self.assertNotIn('FLG_CREATE', self.task, 'still making its own flag')
+        self.assertIn('W_VT', self.task)
+
+    def test_the_writer_never_touches_the_file_lifecycle(self):
+        """The file is open before this task exists and closed after it has
+        finished.  Opening it from inside the loop, at priority 6, is what this
+        rewrite removes."""
+        b = self.body('writer_body')
+        for bad in ('writer_openfile', 'writer_closefile', 'writer_reconcile'):
+            self.assertNotIn(bad, b, f'writer_body still calls {bad}')
+        self.assertNotIn('writer_reconcile', self.task, 'reconcile is still here')
+
+    def test_the_buffers_come_from_the_allocator(self):
+        """DspAudioDevice::v5 asks the class 6 heap for its two blocks at
+        capture start and gives them back at stop.  Ours does the same, from
+        class 0 -- not 6, which is audio's own, and not 10, which is RAW and is
+        what movRec could not allocate the day this project froze the camera."""
+        b = self.body('blocks_open')
+        self.assertIn('MEM_HEAP', b)
+        self.assertIn('MEM_GET', b)
+        self.assertIn('MEM_FREE', self.task)
+        self.assertEqual(int(equ('MEM_CLASS', self.inc), 0), 0)
+        # and NOT in the record hook's path: the movie takes its memory at
+        # record start, so ours has to be older than that
+        t = self.body('take_open')
+        self.assertNotIn('MEM_GET', t, 'take_open still asks the allocator')
+        c = self.body('take_close')
+        self.assertNotIn('free_blocks', c, 'take_close still gives them back')
+
+    def test_take_open_opens_before_it_starts_anything(self):
+        """AudF_W's constructor opens the file, then attaches the body and wakes
+        it.  Reversed, the writer can be posted to before there is a file --
+        which is what the knock job existed to paper over."""
+        t = self.body('take_open')
+        self.assertLess(t.index('bl      writer_openfile'),
+                        t.index('bl      make_writer'))
+        # the knock job is gone from the code; the comment saying why is not
+        self.assertNotIn('bl      writer_make_job             @ an empty job',
+                         self.task)
+
+    def test_take_close_joins_before_it_closes(self):
+        """The observer's destructor posts the stop, waits on the thread's
+        completion flag, and only then runs the file's destructor.  Closing
+        first would close a file the writer is still writing to."""
+        t = self.body('take_close')
+        self.assertLess(t.index('writer_make_job'), t.index('XT_JOIN'))
+        # AudioFileWriter::v0's order: mailbox, thread, and the file LAST
+        self.assertLess(t.index('XT_JOIN'), t.index('MBX_DELETE'))
+        self.assertLess(t.index('MBX_DELETE'), t.index('XT_DESTROY'))
+        self.assertLess(t.index('XT_DESTROY'), t.index('bl      writer_closefile'))
+
+    def test_the_record_hooks_are_what_build_and_tear_down(self):
+        """XC_AudioRecorder::Start and ::Stop do this, in the recorder's own
+        task.  Both hooks run in that task; that is why the calls live there."""
+        tail = TRIG[TRIG.index('T_CLOSEFN'):]
+        # one #ifdef, two arms: stop takes T_CLOSEFN, start takes T_OPENFN
+        self.assertIn('#ifdef REC_STOP', TRIG[:TRIG.index('T_CLOSEFN')][-200:])
+        self.assertIn('T_OPENFN', tail[:tail.index('#endif')])
+        self.assertIn('blxne   ip', tail)
+
+    def test_the_stop_still_travels_as_a_job(self):
+        """Ordering by construction: the stop comes out of the queue behind
+        every write of the take, because it went in behind them."""
+        t = self.body('take_close')
+        self.assertIn('mov     r0, #1', t.split('writer_make_job')[0][-200:])
+
+
+class Assembly(unittest.TestCase):
+    def words(self, path):
+        code = assemble(HERE / path)
+        return struct.unpack(f'<{len(code)//4}I', code)
+
+    def test_no_frame_leaves_the_stack_misaligned(self):
+        """The stack must stay eight-byte aligned, full stop.
+
+        This was weakened once to "misaligned AND calls something", on the
+        reasoning that a leaf function cannot reach a firmware LDRD.  The
+        camera disagreed: mpool_free was a leaf, pushed five registers, and
+        wedged it; pushing four fixed it and the same probe then ran clean
+        through every stage.  The window is the interrupt taken before the
+        function masks them -- the context save lands on the interrupted
+        task's own stack.  The mutation test had already shown the weakened
+        guard could not catch it, and that should have been the end of the
+        argument.
+
+        A push may still be odd if a `sub sp` in the same prologue makes the
+        total a multiple of eight -- gcsvgen's put_uint_many pushes five and
+        subtracts twelve.  And a frame that reproduces a hooked function's own
+        prologue is the firmware's alignment, not ours; it says so on the line.
+        """
+        for path in sorted(HERE.glob('*.S')):
+            lines = path.read_text().splitlines()
+            for n, line in enumerate(lines):
+                m = re.match(r'\s*push\s*\{([^}]*)\}', line)
+                if not m or 'displaced' in line:
+                    continue
+                regs = 0
+                for part in m.group(1).split(','):
+                    part = part.strip()
+                    rng = re.match(r'r(\d+)\s*-\s*r(\d+)$', part)
+                    regs += int(rng.group(2)) - int(rng.group(1)) + 1 if rng else 1
+                total = regs * 4
+                for follow in lines[n + 1:n + 4]:
+                    sub = re.match(r'\s*sub\s+sp,\s*sp,\s*#(\d+)', follow)
+                    if sub:
+                        total += int(sub.group(1))
+                        break
+                    if follow.strip().startswith(('push', 'pop', 'bl', 'bx', 'b ')):
+                        break
+                self.assertEqual(total % 8, 0,
+                                 f'{path.name}:{n + 1} pushes {regs} registers, '
+                                 f'leaving the stack at {total}: {line.strip()}')
+
+    def test_pushes_are_even(self):
+        """An odd push misaligns the stack and the firmware's LDRD takes a data
+        abort -- which freezes the camera, not the hook."""
+        for path in ('accel_hook.S', 'gyro_drain.S', 'stream_space.S',
+                     'rec_trigger.S'):
+            for w in self.words(path):
+                if (w & 0x0FFF0000) == 0x092D0000:              # push {reglist}
+                    self.assertEqual(bin(w & 0xFFFF).count('1') % 2, 0,
+                                     f'{path} pushes an odd number')
+
+    def test_accel_ends_with_the_displaced_instruction(self):
+        w = self.words('accel_hook.S')
+        self.assertEqual(w[-2], 0xE3A02000, 'mov r2, #0 is not there')
+        self.assertEqual(w[-1], 0xE12FFF1E, 'bx lr is not there')
+
+    def test_the_accel_hook_runs_outside_the_drivers_lock(self):
+        """IMUDev_ACCEL_MMA8452Q::v7 takes a lock on the way in (FUN_c0010298)
+        and releases it at 0xC050D4C4.  Everything this hook does -- a drain, a
+        mailbox send, a priority 6 preemption that may write to the card -- used
+        to happen with that lock held, and whatever else waits on it waited for
+        all of it.  Audio's producer is a DSP completion callback and holds
+        nothing."""
+        self.assertIn('0xC050D4C8', ACCEL)
+        self.assertNotIn('.equ ACCEL_SITE,      0xC050D498', ACCEL)
+
+    def test_the_accel_measurement_is_off_by_default(self):
+        """A bisect with two variables in it is not a bisect.  Without the flag
+        the hook must be the same bytes it was before the counters existed:
+        the flag inserts a block after the push and changes nothing else."""
+        self.assertIn('#ifdef ACC_MEASURE', ACCEL)
+        plain = assemble(HERE / 'accel_hook.S', ())
+        measured = assemble(HERE / 'accel_hook.S', ('ACC_MEASURE',))
+        self.assertGreater(len(measured), len(plain))
+        self.assertEqual(measured[:4], plain[:4], 'the push moved')
+        self.assertEqual(measured[-(len(plain) - 4):], plain[4:],
+                         'the flag changed the work, not just added to it')
+
+    def test_the_gap_measurement_cannot_report_a_negative(self):
+        """The head is a byte offset that wraps at GYRO_RING_SPAN, so a visit
+        that straddles a wrap must add the span back, not produce a huge
+        unsigned number."""
+        self.assertIn('movwlo', ACCEL)
+        self.assertIn('GYRO_RING_SPAN', ACCEL)
+
+    def test_all_of_them_fit_where_they_are_put(self):
+        import imu_stream_deploy as D
+        D._check_header()
+        D._place()                      # raises on overlap or on leaving the cave
+
+
+class Reader(unittest.TestCase):
+    def blob(self, *recs):
+        return b''.join(struct.pack('<hhhh', *r) for r in recs)
+
+    def test_position_is_time(self):
+        b = self.blob((1, 2, 0, 3), (4, 5, 0, 6), (7, 8, 0, 9))
+        r = S.rows(S.records(b))
+        self.assertEqual([t for t, _, _, _ in r], [0.0, 400.0, 800.0])
+
+    def test_accel_does_not_advance_time(self):
+        b = self.blob((1, 1, 0, 1), (9, 9, 1, 9), (2, 2, 0, 2))
+        r = S.rows(S.records(b))
+        self.assertEqual([t for t, _, _, _ in r], [0.0, 400.0])
+        self.assertIsNone(r[0][2])
+        self.assertEqual(r[1][2], (9, 9, 9))
+
+    def test_a_frame_marker_does_not_advance_time_either(self):
+        b = self.blob((1, 1, 0, 1), (7, 0, 2, 0), (2, 2, 0, 2), (3, 3, 0, 3))
+        r = S.rows(S.records(b))
+        self.assertEqual([t for t, _, _, _ in r], [0.0, 400.0, 800.0])
+        self.assertIsNone(r[0][3])
+        self.assertEqual(r[1][3], ('frame', 7), 'the frame lands on the row after it')
+        self.assertIsNone(r[2][3])
+
+    def test_frame_spacing_counts_gyro_between_markers(self):
+        recs = S.records(self.blob(
+            (0, 0, 2, 0), *([(0, 0, 0, 0)] * 83), (1, 0, 2, 0),
+            *([(0, 0, 0, 0)] * 84), (2, 0, 2, 0)))
+        gaps, mean = S.frame_spacing(recs)
+        self.assertEqual(gaps, [83, 84], 'each gap must be visible, not averaged away')
+        self.assertAlmostEqual(mean, 83.5)
+
+    def test_frame_spacing_ignores_accel_records(self):
+        recs = S.records(self.blob(
+            (0, 0, 2, 0), (0, 0, 0, 0), (9, 9, 1, 9), (0, 0, 0, 0), (1, 0, 2, 0)))
+        gaps, _ = S.frame_spacing(recs)
+        self.assertEqual(gaps, [2])
+
+    def test_a_leading_accel_lands_on_the_first_row(self):
+        b = self.blob((9, 9, 1, 9), (1, 1, 0, 1))
+        r = S.rows(S.records(b))
+        self.assertEqual(len(r), 1)
+        self.assertEqual(r[0][2], (9, 9, 9))
+
+    def test_a_gyro_sample_and_an_accel_sample_are_the_same_size(self):
+        self.assertEqual(len(self.blob((0, 0, 0, 0))),
+                         len(self.blob((0, 0, 1, 0))))
+        self.assertEqual(S.RECORD, 8)
+
+    def test_an_unknown_tag_is_refused_rather_than_guessed(self):
+        with self.assertRaises(ValueError):
+            S.rows(S.records(self.blob((0, 0, 7, 0))))
+
+    def test_no_hook_sits_on_a_function_entry(self):
+        """Every one of these functions saves lr in its first instruction, so a
+        bl there would put our return address in the function's own frame.  Each
+        site must be past the push -- and past the early returns, or a take that
+        bails out would look like a take that started."""
+        import imu_stream_deploy as D
+        entries = {0xC0315C10, 0xC01FB640, 0xC01FB918, 0xC050D250, 0xC01FD380,
+                   0xC0125478}
+        for name, (_at, _src, _d, site, _orig, _t) in D.PRODUCERS.items():
+            self.assertNotIn(site, entries, f'{name} is on a function entry')
+
+    def test_every_hook_declares_the_site_it_is_deployed_to(self):
+        import imu_stream_deploy as D
+        D._check_header()                # raises if a source and the table drift
+
+    def test_the_two_triggers_share_one_source(self):
+        """Start and stop differ by four lines; two files would drift."""
+        import imu_stream_deploy as D
+        self.assertEqual(D.PRODUCERS['start'][1], D.PRODUCERS['stop'][1])
+        self.assertEqual(D.PRODUCERS['stop'][2], ('REC_STOP',))
+
+    def test_a_short_buffer_is_refused(self):
+        with self.assertRaises(ValueError):
+            S.records(b'\0' * 12)
+
+    def test_summary_counts_the_interleave(self):
+        recs = S.records(self.blob(*([(0, 0, 0, 0)] * 53 + [(0, 0, 1, 0)])))
+        s = S.summary(recs)
+        self.assertEqual((s['gyro'], s['accel'], s['frame']), (53, 1, 0))
+        self.assertEqual((s['start'], s['stop']), (0, 0))
+        self.assertAlmostEqual(s['duration_us'], 53 * 400)
+
+
+class ModeHook(unittest.TestCase):
+    """The STILL/CINE hook, which is what decides a take's orientation.
+
+    Everything here is a thing that assembles cleanly and is wrong on the
+    camera: a site that no longer holds the instruction the stub re-executes,
+    a Base card that arms a hook it did not place, and a build that still
+    thinks it is only watching when we believe it is armed."""
+
+    FW = HERE.parent.parent / 'out' / 'MAIN_c0000000.bin'
+    SRC = (HERE / 'mode_hook.S').read_text()
+
+    def setUp(self):
+        import imu_stream_deploy as D
+        self.at, self.src, self.defines, self.site, self.orig, _ = D.PRODUCERS['mode']
+
+    def test_the_site_still_holds_the_instruction_we_displace(self):
+        """The stub ends by running `mov r4, r0` itself.  If the firmware word
+        there is anything else, arming replaces an instruction we do not put
+        back -- silently, and inside a function that is running."""
+        if not self.FW.exists():
+            self.skipTest(f'no firmware image at {self.FW}')
+        d = self.FW.read_bytes()
+        got = struct.unpack_from('<I', d, self.site - 0xC0000000)[0]
+        self.assertEqual(got, self.orig,
+                         f'0x{self.site:08X} is 0x{got:08X}, not '
+                         f'0x{self.orig:08X}')
+
+    def test_the_stub_puts_the_displaced_instruction_back(self):
+        """Assembled, not read: the last two instructions must be `mov r4, r0`
+        then `bx lr`.  A comment saying so is not the same thing."""
+        blob = assemble(HERE / 'mode_hook.S', self.defines)
+        tail = struct.unpack_from('<II', blob, len(blob) - 8)
+        self.assertEqual(tail, (self.orig, 0xE12FFF1E),
+                         'the stub does not end with the displaced '
+                         'instruction and bx lr')
+
+    def test_the_push_is_even(self):
+        """Eight-byte alignment, which an interrupt's STRD needs even in a leaf.
+        Six registers, in one push."""
+        pushes = re.findall(r'^\s*push\s+\{([^}]*)\}', self.SRC, re.M)
+        self.assertEqual(len(pushes), 1)
+        self.assertEqual(len(pushes[0].split(',')) % 2, 0, pushes[0])
+
+    def test_base_neither_places_it_nor_arms_it(self):
+        """Base is the stream and nothing else.  Placing without arming would
+        be dead cave; arming without placing would branch into whatever is
+        there -- which is how the orientation stub once froze a take."""
+        import build_base_card as B
+        for edition, want in (('base', False), ('gcsv', True)):
+            names = [w for _a, _b, w in B.sections(edition)]
+            self.assertEqual('mode' in names, want, edition)
+        core = (HERE / 'writer_core.inc.S').read_text()
+        self.assertIn('#ifdef WANT_MODE_HOOK', core)
+        self.assertIn('ARM_MODE', core)
+        self.assertNotIn('WANT_MODE_HOOK', (HERE / 'ring_task.S').read_text())
+        self.assertIn('#define WANT_MODE_HOOK', (HERE / 'gcsv_task.S').read_text())
+
+    def test_the_take_does_not_touch_the_attitude_gate(self):
+        """It was tried there and the first frame of a portrait take still read
+        Orientation 8.  Leaving the record path able to write that byte is what
+        made a take stop by itself at twenty seconds."""
+        for f in ('gcsv_task.S', 'ring_task.S'):
+            code = re.sub(r'/\*.*?\*/', '', (HERE / f).read_text(), flags=re.S)
+            code = re.sub(r'@.*', '', code)
+            self.assertNotIn('LEVEL_GATE', code, f)
+        # The core touches it in exactly one place: gsup_boot, which asks once
+        # what mode the card was loaded into, because the hook has nothing to
+        # fire on for a camera that booted straight into cine.
+        core = re.sub(r'/\*.*?\*/', '', (HERE / 'writer_core.inc.S').read_text(),
+                      flags=re.S)
+        core = re.sub(r'@.*', '', core)
+        self.assertEqual(core.count('LEVEL_GATE'), 2, 'lower16 and upper16, once')
+        boot = core[core.index('\ngsup_boot:'):]
+        self.assertIn('LEVEL_GATE', boot, 'not in gsup_boot')
+        # and it may only ever clear it -- FUN_c0365328 starts the level gauge
+        # only while the byte is zero, so writing a one here would turn the
+        # gauge off for the life of the boot.
+        i = boot.index('LEVEL_GATE')
+        lines = [l.strip() for l in boot[:i].splitlines() if l.strip()]
+        self.assertEqual(lines[-2:], ['mov     r0, #0', 'movw    r1, #:lower16:'],
+                         'the boot check does not load a zero to store')
+        self.assertRegex(boot[i:i + 200], r'strb\s+r0, \[r1\]')
+
+    def test_armed_means_it_writes_the_gate(self):
+        """MODE_CINE is filled in from what the hook recorded on the camera.
+        Once it is not negative the build must actually store the byte -- a
+        build that still only watches, believed armed, is a take spent."""
+        cine = int(equ('MODE_CINE', (HERE / 'ring_task.inc.S').read_text()), 0)
+        blob = assemble(HERE / 'mode_hook.S', self.defines)
+        words = struct.unpack(f'<{len(blob) // 4}I', blob)
+        armed = 0xE5C23000 in words             # strb r3, [r2]
+        self.assertEqual(armed, cine >= 0,
+                         f'MODE_CINE = {cine} but the stub '
+                         f'{"stores" if armed else "does not store"} the gate')
+
+    def test_it_records_what_it_saw_and_how_often(self):
+        """Which of 0 and 1 is CINE is not in the decompilation.  The count is
+        the only thing that separates "encoded the other way round" from "never
+        fired", and that distinction cost two takes at the record hook."""
+        self.assertIn('G_MODE', self.SRC)
+        # The count is reached as [r2, #4], so the two equates have to be
+        # adjacent -- moving one without the other would have the hook
+        # counting into whatever came next.
+        inc = (HERE / 'ring_task.inc.S').read_text()
+        self.assertEqual(int(equ('G_MODE_N', inc), 0),
+                         int(equ('G_MODE', inc), 0) + 4)
+        self.assertRegex(self.SRC, r'str\s+r3, \[r2, #4\]')
+        self.assertIn('G_MODE_N', (HERE / 'writer_core.inc.S').read_text())
+
+    def test_the_branch_reaches_the_stub(self):
+        """ARM_MODE and MODE_AT come from the same two constants, so they
+        cannot disagree -- but the displacement still has to fit."""
+        inc = (HERE / 'ring_task.inc.S').read_text()
+        site = int(equ('MODE_SITE', inc), 0)
+        at = int(equ('MODE_AT', inc), 0)
+        self.assertEqual(site, self.site)
+        self.assertEqual(at, self.at)
+        disp = (at - site - 8) >> 2
+        self.assertEqual(disp, ((disp << 8) >> 8), 'the bl does not reach')
+
+
+if __name__ == '__main__':
+    unittest.main(verbosity=2)

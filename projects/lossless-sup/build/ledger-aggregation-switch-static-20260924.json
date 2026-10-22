@@ -1,0 +1,46 @@
+{
+ "schema_version": 1,
+ "kind": "offline_static_provenance_of_the_sd_aggregation_switch",
+ "date": "2026-09-24",
+ "operator_scope": "offline only. No camera, no card, no hook armed. Reading out/decomp/full and out/seg0_c0000000.bin.",
+ "answers": "the open question left by ledger-sd-aggregation-static-20260924.json: what sets manager+0xD, the byte that decides whether C03A55D0 is a release fence or fires at submit.",
+ "chain": {
+  "level": "C",
+  "steps": [
+   "MenuItemMediaWriteMode::v3 @ 0xC00AB8E8 writes one byte: *(param_2 + 0x9C) = 0 or 1.",
+   "param_2 is a shared settings block, not this item's own state: 160 MenuItem*::v3 functions in blk_c00.c each store into param_2 at a distinct offset (MenuItemCinemaMode +0x44, MenuItemDriveMode +0x48, MenuItemAudioRecSupport +0xE0, ...). MediaWriteMode owns +0x9C.",
+   "FUN_c03a5050, the CinemaDNG init, reads that same slot: manager[0xD] = *(byte*)(FUN_c0021c40() + 0x9C), where FUN_c0021c00() returns the singleton 0xC30751D4 and FUN_c0021c40(obj) returns *(obj + 0x5C).",
+   "when manager[0xD] is non-zero, FUN_c03a5050 installs the aggregation via FUN_c0366790 with the table at 0xC0B9E5D8 = {0x04000000, helper_pointer, 0x00040000, 0xC03A55D0}.",
+   "FUN_c03a5348 then branches on the same byte: set -> mark frame[0x1104] = 0xC and let C03A55D0 arrive later from FUN_c063f140; clear -> call C03A55D0(frame, total == 0 ? -1 : 0) immediately after the submit returns."
+  ]
+ },
+ "it_is_a_user_setting": {
+  "level": "C",
+  "claim": "the switch is the Media Write Mode menu item, not an internal capability probe",
+  "shell_command": "menu SetMediaWriteMode",
+  "evidence": "the string SetMediaWriteMode at 0xC0BBE2E0 sits in the menu command table between SetMediaSelect (0xC0BBE2BC) and SetFilePrefixRule (0xC0BBE318), all of which are menu Set* shell commands",
+  "option_resource_names": {
+   "0xC18CDA80": "CM_MediaWriteModeAj",
+   "0xC18CDA94": "CM_MediaWriteModeFix"
+  },
+  "consequence": "the value can be read with one shell command taking no argument. No memory read, no hook, no arming, nothing written."
+ },
+ "why_this_matters": [
+  "Everything in ledger-sd-aggregation-static-20260924.json branches on this byte. Set, C03A55D0 is a real release fence delivered after a transfer; clear, it fires at submit, which G3 measured at 372 us for 3.2 MB and which BUFFER_DESIGN section 5 already refuses to treat as a reuse notification.",
+  "It is a USER setting, so it is not a fixed property of the firmware: whatever we build has to work, or refuse clearly, under both values. A design that only works in one position of a menu the user can move is not a design.",
+  "G3 and G5 did not record it, so neither run can be reinterpreted with confidence."
+ ],
+ "explicitly_not_established": [
+  "what the two option values mean. Aj and Fix are resource-name suffixes in a table of condition names; the obvious readings (adjust / fixed-size allocation) are NOT established here and were not traced.",
+  "which value maps to 1 and which to 0. MenuItemMediaWriteMode::v3 derives the byte through FUN_c006d530 and FUN_c006d630 on two different objects, and that logic was not followed.",
+  "the value in effect during the G3 and G5 runs",
+  "whether a fixed-size allocation mode, if that is what one option is, would interact with variable-length compressed files. That is a plausible concern and nothing here supports or refutes it."
+ ],
+ "next_step_if_a_camera_session_is_authorised": {
+  "action": "menu SetMediaWriteMode with no argument",
+  "risk": "read-only. It prints the current value and changes nothing. No clip folder is listed, no file deleted, no memory read, no probe armed, no setting saved.",
+  "note": "the user's standing instruction is that camera testing comes last and that a reminder is given before any camera session. This is offered as the cheapest possible camera fact, not scheduled."
+ },
+ "camera_accessed": false,
+ "deployable": false
+}

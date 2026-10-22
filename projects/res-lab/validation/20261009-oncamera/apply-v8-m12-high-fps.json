@@ -1,0 +1,295 @@
+{
+  "before": {
+    "endpoint": "0xc072e260",
+    "consumer_base": "0x451d41c0",
+    "consumer_state": "0x451e5d40",
+    "registry": {
+      "magic": 826495574,
+      "abi": 2,
+      "lock": 0,
+      "provider": 0,
+      "generation": 0,
+      "result": 0,
+      "detail": 0,
+      "count": 1,
+      "packs": 0,
+      "asset_used": 0,
+      "row": 5
+    },
+    "consumer": {
+      "flag": 0,
+      "current": 0,
+      "res_value": 2,
+      "format_latch": 0,
+      "nrows": 6,
+      "nentries": 56,
+      "nmodes": 8
+    },
+    "selected": 0,
+    "rows": [
+      {
+        "index": 0,
+        "on": 1,
+        "width": 2000,
+        "height": 1334,
+        "stock": 2,
+        "menu_row": 2,
+        "pack": "0x451f50c0",
+        "label": "OG2K",
+        "ui_result": 1
+      },
+      {
+        "index": 1,
+        "on": 1,
+        "width": 3456,
+        "height": 2304,
+        "stock": 3,
+        "menu_row": 3,
+        "pack": "0x451f6680",
+        "label": "OG35K",
+        "ui_result": 1
+      },
+      {
+        "index": 2,
+        "on": 1,
+        "width": 3008,
+        "height": 2000,
+        "stock": 2,
+        "menu_row": 4,
+        "pack": "0x451f8380",
+        "label": "OG3K",
+        "ui_result": 1
+      },
+      {
+        "index": 3,
+        "on": 1,
+        "width": 3840,
+        "height": 2560,
+        "stock": 3,
+        "menu_row": 5,
+        "pack": "0x451f9600",
+        "label": "OG4K",
+        "ui_result": 1
+      },
+      {
+        "index": 4,
+        "on": 1,
+        "width": 2096,
+        "height": 1238,
+        "stock": 2,
+        "menu_row": 6,
+        "pack": "0x451fa640",
+        "label": "S16",
+        "ui_result": 1
+      },
+      {
+        "index": 5,
+        "on": 1,
+        "width": 3008,
+        "height": 2000,
+        "stock": 2,
+        "menu_row": 7,
+        "pack": "0x451e3e08",
+        "label": "VRC000",
+        "ui_result": 1
+      }
+    ],
+    "producer_base": "0x45374e80",
+    "producer_state": "0x453e35e0",
+    "producer": {
+      "result": 1,
+      "app": 3331322648,
+      "reader": 3332398568,
+      "entry": 3332533760,
+      "page": 1161282028,
+      "nbr": 1161402832,
+      "nbr_len": 2708,
+      "core_base": 1161277440,
+      "pages_state": 1,
+      "out_w": 992,
+      "out_h": 662,
+      "ro_w": 2016,
+      "ro_h": 672,
+      "ro_sx": 3,
+      "ro_sy": 6,
+      "bin_h": 1,
+      "bin_v": 1,
+      "axis_armed": 1,
+      "modes_rows": 2,
+      "mode_sel": 1,
+      "canvas_valid": 1,
+      "crop_w": 0,
+      "crop_h": 0,
+      "ratio": 0,
+      "edit_field": 0,
+      "editing": 0
+    },
+    "mode_ids": [
+      9,
+      12
+    ],
+    "loaded_headers": {
+      "32RESCUS.BIN": {
+        "file_len": 75264,
+        "block_size": 745664,
+        "id": 1398096722,
+        "version": 3,
+        "min_services": 3
+      },
+      "50RESLAB.BIN": {
+        "file_len": 452448,
+        "block_size": 720576,
+        "id": 1111575634,
+        "version": 6,
+        "min_services": 3
+      }
+    }
+  },
+  "after": {
+    "endpoint": "0xc072e260",
+    "consumer_base": "0x451d41c0",
+    "consumer_state": "0x451e5d40",
+    "registry": {
+      "magic": 826495574,
+      "abi": 2,
+      "lock": 0,
+      "provider": 1111575634,
+      "generation": 1,
+      "result": 0,
+      "detail": 0,
+      "count": 1,
+      "packs": 1,
+      "asset_used": 47104,
+      "row": 5
+    },
+    "consumer": {
+      "flag": 1,
+      "current": 6,
+      "res_value": 2,
+      "format_latch": 0,
+      "nrows": 6,
+      "nentries": 59,
+      "nmodes": 7
+    },
+    "selected": 6,
+    "rows": [
+      {
+        "index": 0,
+        "on": 1,
+        "width": 2000,
+        "height": 1334,
+        "stock": 2,
+        "menu_row": 2,
+        "pack": "0x451f50c0",
+        "label": "OG2K",
+        "ui_result": 1
+      },
+      {
+        "index": 1,
+        "on": 1,
+        "width": 3456,
+        "height": 2304,
+        "stock": 3,
+        "menu_row": 3,
+        "pack": "0x451f6680",
+        "label": "OG35K",
+        "ui_result": 1
+      },
+      {
+        "index": 2,
+        "on": 1,
+        "width": 3008,
+        "height": 2000,
+        "stock": 2,
+        "menu_row": 4,
+        "pack": "0x451f8380",
+        "label": "OG3K",
+        "ui_result": 1
+      },
+      {
+        "index": 3,
+        "on": 1,
+        "width": 3840,
+        "height": 2560,
+        "stock": 3,
+        "menu_row": 5,
+        "pack": "0x451f9600",
+        "label": "OG4K",
+        "ui_result": 1
+      },
+      {
+        "index": 4,
+        "on": 1,
+        "width": 2096,
+        "height": 1238,
+        "stock": 2,
+        "menu_row": 6,
+        "pack": "0x451fa640",
+        "label": "S16",
+        "ui_result": 1
+      },
+      {
+        "index": 5,
+        "on": 1,
+        "width": 992,
+        "height": 662,
+        "stock": 2,
+        "menu_row": 7,
+        "pack": "0x44f6adc0",
+        "label": "VRC000",
+        "ui_result": 1
+      }
+    ],
+    "producer_base": "0x45374e80",
+    "producer_state": "0x453e35e0",
+    "producer": {
+      "result": 1,
+      "app": 3331322648,
+      "reader": 3332398568,
+      "entry": 3332533760,
+      "page": 1161282028,
+      "nbr": 1161402832,
+      "nbr_len": 2708,
+      "core_base": 1161277440,
+      "pages_state": 1,
+      "out_w": 992,
+      "out_h": 662,
+      "ro_w": 2016,
+      "ro_h": 672,
+      "ro_sx": 3,
+      "ro_sy": 6,
+      "bin_h": 1,
+      "bin_v": 1,
+      "axis_armed": 1,
+      "modes_rows": 2,
+      "mode_sel": 1,
+      "canvas_valid": 1,
+      "crop_w": 0,
+      "crop_h": 0,
+      "ratio": 0,
+      "edit_field": 0,
+      "editing": 0
+    },
+    "mode_ids": [
+      9,
+      12
+    ],
+    "loaded_headers": {
+      "32RESCUS.BIN": {
+        "file_len": 75264,
+        "block_size": 745664,
+        "id": 1398096722,
+        "version": 3,
+        "min_services": 3
+      },
+      "50RESLAB.BIN": {
+        "file_len": 452448,
+        "block_size": 720576,
+        "id": 1111575634,
+        "version": 6,
+        "min_services": 3
+      }
+    }
+  },
+  "passed": true
+}

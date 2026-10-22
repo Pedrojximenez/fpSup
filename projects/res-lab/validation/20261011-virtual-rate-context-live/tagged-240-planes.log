@@ -1,0 +1,13 @@
+screen: LV_CINE_MEDIUM
+screen: LV_CINE_MEDIUM
+{
+  "label": "tagged-240-planes",
+  "new_clips": [
+    "A001_062"
+  ],
+  "stop_sent": false,
+  "spontaneous_stop": true,
+  "standby_after": true,
+  "phase": "captured",
+  "record_log": "slot=1, cnt=3/600\nsize=131072*978816(119GB), free=78%, exFAT, UHS-II\ntime       : 2026/10/11 16:36:29 \nrec factor : Nothing \nui factor  : Nothing \nbattery    : OK \ntemp(BAT)  : OK \ntemp(BODY) : OK \ntemp(LCD)  : OK \ntemp(CMOS) : OK \nfile-size=1095168, bulk-size=67108864(61.3)\nreq_cnt=94, fin_cnt=94, vbuf/94/85601, raw1\nrequest  ,finish   ,diff,gap ,reqcnt,fincnt,diff,sdb,MB/s\n     1029,     1394, 365,1029,     5,     1,   4,  1,  15\n     1638,     2119, 481, 244,    62,     6,  56,  7, 129\n     2130,     2279, 149,  11,    94,    62,  32, 63, 242\n"
+}

@@ -1,0 +1,95 @@
+{
+  "date": "2026-10-11",
+  "scope": "Offline adoption review only. No production changes, camera operations, card writes or publication.",
+  "decision": {
+    "stop_leak_fix": "Recommended as an experimental candidate; not approved for a production release until hardware acceptance.",
+    "phase_detect": "Do not adopt the proposed direct PDAF observer/servo; the fp-specific availability and geometry gates do not supply usable phase data."
+  },
+  "source_files": {
+    "/Users/dido/Downloads/fp-stop-leak-fix/05STOPFX.BIN": {
+      "bytes": 316,
+      "sha256": "f9f26a092c5676ead5771ba8be4aac9c3734e9ed0cd144002a73b3f6b657c9d9"
+    },
+    "/Users/dido/Downloads/fp-stop-leak-fix/MANIFEST.txt": {
+      "bytes": 449,
+      "sha256": "47af70fcfff166335f00b1d7f93996a0d43c21f237b4dbebcba7ee766eb8f143"
+    },
+    "/Users/dido/Downloads/fp-stop-leak-fix/bei-stop-leak-fix.txt": {
+      "bytes": 5368,
+      "sha256": "6b456703b10d2680d720418600196e6d8813d00d7be97f15248bcfb319228271"
+    },
+    "/Users/dido/Downloads/fp-stop-leak-fix/w2-stop-path-notes.md": {
+      "bytes": 6689,
+      "sha256": "38bf697fef7f44acbaa193d721fd620147a949c89d06a8044908e9a9c10ca64f"
+    },
+    "/Users/dido/Downloads/fp-phase-detect/af-deepdive-notes.md": {
+      "bytes": 7831,
+      "sha256": "8c32242a4265ae8d04c7b216991cfcefa4f06f42aa9f00a078e68acf5ae48b44"
+    },
+    "/Users/dido/Downloads/fp-phase-detect/bei-phase-detect.txt": {
+      "bytes": 3966,
+      "sha256": "03ea2d167f6daf5fefc62ddfc13393e292b0bb2acd40ecfa25a828c4b94aaae9"
+    }
+  },
+  "stop_fix": {
+    "sup_bytes": 316,
+    "sup_sha256": "f9f26a092c5676ead5771ba8be4aac9c3734e9ed0cd144002a73b3f6b657c9d9",
+    "exact_rebuild_matches": true,
+    "site": "0xC0377118",
+    "stock": "0xE92D4030",
+    "patch": "0xEA000160",
+    "target": "0xC03776A0",
+    "direct_call_sites": 12,
+    "direct_call_returns_discarded": true,
+    "firmware_seg0_sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622",
+    "firmware_main_sha256": "92a8ee993f6c3d66c251e88d45a2ccd5135c6cf7342717784321c2ed506e2fb4",
+    "external_whole_image_sha256": "acead79a338de2d8d7485d036b0a020b8eebcbad29d05741540130c6acb75bfb",
+    "firmware_identity_note": "Whole-image hashes differ; critical native instruction ranges agree between the local images, and the submitted sup matches an exact rebuild from current local sources.",
+    "relationship_to_lossless": "Shared native recMgr abnormal-stop cleanup, not a defect unique to the lossless codec. Relevant to residue after overflow/vbuf/mem stops. Does not fix initial throughput/codec stalls, restore dropped frames or recover descriptors dropped before patch installation.",
+    "free_count_read": "pool = *(uint32_t *)0xC2F1F3D8; free_count = *(uint32_t *)(pool + 0x112C). The fixed word stores a pointer, not the pool itself.",
+    "busy_flag_note": "Release returns immediately when manager+0x190 != 0; it does not defer/requeue. The constructor initializes this byte to 0. Offline checks do not prove concurrent lifetime safety.",
+    "simulation": {
+      "firmware_sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622",
+      "sup_sha256": "f9f26a092c5676ead5771ba8be4aac9c3734e9ed0cd144002a73b3f6b657c9d9",
+      "tests_run": 10,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "passed": true,
+      "hardware_io_performed": false,
+      "limits": [
+        "single-threaded mutex substitutes",
+        "synthetic pool-return and RAW allocator accounting",
+        "no DMA, codec, scheduling, storage or concurrent descriptor-reuse validation"
+      ]
+    }
+  },
+  "phase_detect": {
+    "help_strings": "pdaf caf/sequence/image/invalid are af dbg bit labels, not standalone shell commands.",
+    "pddef_gate": {
+      "vtable_slot": "0xC092BA54",
+      "function": "0xC029BA08",
+      "returns": 0
+    },
+    "sensor_pdaf_flag": {
+      "ROM_source": "0xC0B5F89C",
+      "value": 0
+    },
+    "geometry_slot": {
+      "address": "0xC0B5FD7C",
+      "function": "0xC0322330",
+      "writes_output": false
+    },
+    "limits": "This establishes the stock fp path is unavailable; it does not establish the physical absence of phase pixels in the sensor die. Nonzero debug values alone would not establish freshness, validity or a calibrated signed optical cue.",
+    "focus_9413": "Recording-time use is a static-code inference, not a new on-camera verification.",
+    "existing_analysis": "/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/research/PDAF_SHELL_AND_PDLINE_GATES_2026-10-11.md",
+    "official_product_specification": "https://www.sigma-global.com/en/cameras/fp/"
+  },
+  "hardware_acceptance_remaining": [
+    "Fresh baseline with the existing pool and RAW diagnostics; SD stock vs STFX, lossless OFF and ON, normal stop and abnormal overflow stop.",
+    "Confirm pool/RAW return to per-session baseline after cleanup; repeat at least ten takes without drift, and verify the next take can start.",
+    "Cover native stills cancellation/error paths because the patch changes a shared routine, and test idle boot/power-off restoration and warm boot over a previous card.",
+    "Validate two codec lanes, writer promises, actual DMA completion and media/USB behavior on SD before SSD.",
+    "Only after bounded hardware acceptance should the change be included in a maintained release builder."
+  ]
+}

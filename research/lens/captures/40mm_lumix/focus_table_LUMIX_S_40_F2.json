@@ -1,0 +1,32 @@
+{
+  "name": "LUMIX S 40/F2",
+  "mode": "prime",
+  "focal_points": 1,
+  "n": 10,
+  "distances_mm": [
+    1000000,
+    2700,
+    1350,
+    900,
+    675,
+    540,
+    450,
+    386,
+    338,
+    300
+  ],
+  "positions": [
+    6276,
+    6707,
+    7151,
+    7607,
+    8078,
+    8564,
+    9068,
+    9588,
+    10130,
+    10706
+  ],
+  "algorithm": "reciprocal-space piecewise-linear; see FOCUS_DISTANCE_PRINCIPLE.md",
+  "note_position_domain": "P[] 是鏡頭內部位置域, 非 PTP focus_pos; 需 1~2 點線性校準"
+}

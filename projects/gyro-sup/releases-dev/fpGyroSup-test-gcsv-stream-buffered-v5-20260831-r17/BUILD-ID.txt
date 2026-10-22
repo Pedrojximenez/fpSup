@@ -1,0 +1,41 @@
+fpGyroSup GCSV-only buffered streaming experiment r17
+Build date: 2026-08-31
+Camera/firmware: SIGMA fp Ver.5.02
+Build type: release AutoRun, no USB shell
+Base: r16 GCSV-only 64 KiB text stream
+
+Measured reason for this build:
+- r16 sustained the full 2500 Hz rate for almost the entire 61.47-second take.
+- It retained 152,448 samples (99.20%) but had two isolated 200.898 ms and
+  282.196 ms gaps, totalling about 0.482 seconds.
+- That changes the problem from sustained throughput to bounded media latency.
+
+Fixed buffering:
+- GCSV-only raw A/B halves are 32 KiB each instead of 16 KiB each.
+- Their usable gyro span is about 1.534 seconds per half, 3.069 seconds total.
+- Each half reserves 2 KiB for accelerometer records instead of 1 KiB.
+- Buffer A ends exactly at the profile table; buffer B occupies the verified free
+  pool window after the live 64 KiB text chunk and before O_READ.
+- Memory remains fixed and independent of recording duration.
+
+Computation changes:
+- Each accelerometer timestamp is converted to take-relative time once per raw
+  block instead of again while approximately 53 gyro rows inspect it.
+- The accel cursor and stream-state address stay in callee-saved registers across
+  the 2500 Hz loop.
+- Timestamp +400 and the 64 KiB threshold use immediate instructions directly.
+- r16's cached accelerometer ASCII, skipped CRC and in-place accel zone remain.
+
+Unchanged safety boundaries:
+- The callback still only copies raw samples; it formats nothing and calls no
+  media API.
+- The existing writer task remains the only GCSV formatter/media caller.
+- 64 KiB complete-line writes retain the five millisecond cooperative yield.
+- Native lifecycle, task priority and JSON generation are unchanged.
+- No GYR file is opened, written, read back or recovered.
+
+Verification:
+- 47 unit, exact-format, capacity, layout and safety tests pass.
+- Stream logger: 3,620 bytes, ending at 0xC072EE88 below 0xC072EFB4.
+- PGEN pool code: 7,488 bytes; 7,504 bytes on card.
+- This is an experimental hardware build, not fp-gyro-sup-v1.1.

@@ -1,0 +1,413 @@
+{
+  "status": "incomplete",
+  "lens_motion_requested": false,
+  "error": "SamplingTimeout('settled observation deadline expired')",
+  "evidence": {
+    "method": "scheduler_progress_checked",
+    "started_at": 2.905841958,
+    "timeout_s": 8.0,
+    "minimum_settle_s": 0.15,
+    "observed_transitions": [
+      {
+        "from": 2,
+        "to": 0,
+        "time": 5.308289541
+      },
+      {
+        "from": 0,
+        "to": 2,
+        "time": 5.481295625
+      },
+      {
+        "from": 2,
+        "to": 1,
+        "time": 5.717740041
+      },
+      {
+        "from": 1,
+        "to": 2,
+        "time": 5.735959541
+      },
+      {
+        "from": 2,
+        "to": 0,
+        "time": 5.907393291
+      },
+      {
+        "from": 0,
+        "to": 1,
+        "time": 6.07614975
+      },
+      {
+        "from": 1,
+        "to": 0,
+        "time": 6.341377666
+      },
+      {
+        "from": 0,
+        "to": 1,
+        "time": 6.672071
+      },
+      {
+        "from": 1,
+        "to": 2,
+        "time": 6.929243875
+      },
+      {
+        "from": 2,
+        "to": 0,
+        "time": 7.265891916
+      },
+      {
+        "from": 0,
+        "to": 1,
+        "time": 7.508866875
+      },
+      {
+        "from": 1,
+        "to": 2,
+        "time": 7.528518208
+      },
+      {
+        "from": 2,
+        "to": 1,
+        "time": 7.866869208
+      },
+      {
+        "from": 1,
+        "to": 0,
+        "time": 8.105290375
+      },
+      {
+        "from": 0,
+        "to": 2,
+        "time": 8.127032416
+      },
+      {
+        "from": 2,
+        "to": 0,
+        "time": 8.460262
+      },
+      {
+        "from": 0,
+        "to": 2,
+        "time": 8.784137833
+      },
+      {
+        "from": 2,
+        "to": 0,
+        "time": 8.803688541
+      },
+      {
+        "from": 0,
+        "to": 1,
+        "time": 8.97013675
+      },
+      {
+        "from": 1,
+        "to": 2,
+        "time": 9.135636125
+      },
+      {
+        "from": 2,
+        "to": 1,
+        "time": 9.374773791
+      },
+      {
+        "from": 1,
+        "to": 0,
+        "time": 9.395241333
+      },
+      {
+        "from": 0,
+        "to": 1,
+        "time": 9.732997416
+      },
+      {
+        "from": 1,
+        "to": 2,
+        "time": 9.991211875
+      },
+      {
+        "from": 2,
+        "to": 0,
+        "time": 10.156256208
+      },
+      {
+        "from": 0,
+        "to": 1,
+        "time": 10.318047916
+      },
+      {
+        "from": 1,
+        "to": 0,
+        "time": 10.559038958
+      },
+      {
+        "from": 0,
+        "to": 2,
+        "time": 10.580971125
+      }
+    ],
+    "samples": [],
+    "discarded_samples": [
+      {
+        "h": 20536,
+        "l": 48774,
+        "position": 10707,
+        "phase_before": 1,
+        "phase_after": 2,
+        "bracket_started_at": 5.717740041,
+        "bracket_finished_at": 5.735959541,
+        "started_at": 5.717742041,
+        "finished_at": 5.729973,
+        "observed_transition_count": 3,
+        "context_guard_before": [
+          5.314586625,
+          5.481295625
+        ],
+        "context_guard_after": [
+          5.735962083,
+          5.907393291
+        ],
+        "reason": "visible_phase_boundary"
+      },
+      {
+        "h": 20571,
+        "l": 48737,
+        "position": 10707,
+        "phase_before": 1,
+        "phase_after": 0,
+        "bracket_started_at": 6.320572458,
+        "bracket_finished_at": 6.341377666,
+        "started_at": 6.320573333,
+        "finished_at": 6.334223,
+        "observed_transition_count": 6,
+        "context_guard_before": [
+          5.912715166,
+          6.07614975
+        ],
+        "context_guard_after": [
+          6.341380958,
+          6.507966833
+        ],
+        "reason": "visible_phase_boundary"
+      },
+      {
+        "h": 20589,
+        "l": 48750,
+        "position": 10707,
+        "phase_before": 1,
+        "phase_after": 2,
+        "bracket_started_at": 6.90867675,
+        "bracket_finished_at": 6.929243875,
+        "started_at": 6.908677458,
+        "finished_at": 6.922278666,
+        "observed_transition_count": 8,
+        "context_guard_before": [
+          6.51427375,
+          6.672071
+        ],
+        "context_guard_after": [
+          6.92924675,
+          7.09708975
+        ],
+        "reason": "visible_phase_boundary"
+      },
+      {
+        "h": 20596,
+        "l": 48808,
+        "position": 10707,
+        "phase_before": 1,
+        "phase_after": 2,
+        "bracket_started_at": 7.508866875,
+        "bracket_finished_at": 7.528518208,
+        "started_at": 7.508869041,
+        "finished_at": 7.521565666,
+        "observed_transition_count": 11,
+        "context_guard_before": [
+          7.103372583,
+          7.265891916
+        ],
+        "context_guard_after": [
+          7.528520791,
+          7.696590041
+        ],
+        "reason": "visible_phase_boundary"
+      },
+      {
+        "h": 20599,
+        "l": 48785,
+        "position": 10707,
+        "phase_before": 0,
+        "phase_after": 2,
+        "bracket_started_at": 8.105290375,
+        "bracket_finished_at": 8.127032416,
+        "started_at": 8.105292541,
+        "finished_at": 8.118591541,
+        "observed_transition_count": 14,
+        "context_guard_before": [
+          7.702684708,
+          7.866869208
+        ],
+        "context_guard_after": [
+          8.12703475,
+          8.290610833
+        ],
+        "reason": "visible_phase_boundary"
+      },
+      {
+        "h": 20570,
+        "l": 48870,
+        "position": 10707,
+        "phase_before": 2,
+        "phase_after": 0,
+        "bracket_started_at": 8.784137833,
+        "bracket_finished_at": 8.803688541,
+        "started_at": 8.784139958,
+        "finished_at": 8.796957083,
+        "observed_transition_count": 17,
+        "context_guard_before": [
+          8.296915083,
+          8.460262
+        ],
+        "context_guard_after": [
+          8.803690875,
+          8.97013675
+        ],
+        "reason": "visible_phase_boundary"
+      },
+      {
+        "h": 20604,
+        "l": 48729,
+        "position": 10707,
+        "phase_before": 1,
+        "phase_after": 0,
+        "bracket_started_at": 9.374773791,
+        "bracket_finished_at": 9.395241333,
+        "started_at": 9.374776208,
+        "finished_at": 9.388460791,
+        "observed_transition_count": 21,
+        "context_guard_before": [
+          8.976419375,
+          9.135636125
+        ],
+        "context_guard_after": [
+          9.395243958,
+          9.564306375
+        ],
+        "reason": "visible_phase_boundary"
+      },
+      {
+        "h": 20590,
+        "l": 48771,
+        "position": 10707,
+        "phase_before": 1,
+        "phase_after": 2,
+        "bracket_started_at": 9.969508291,
+        "bracket_finished_at": 9.991211875,
+        "started_at": 9.969509375,
+        "finished_at": 9.985085916,
+        "observed_transition_count": 23,
+        "context_guard_before": [
+          9.569818333,
+          9.732997416
+        ],
+        "context_guard_after": [
+          9.991215041,
+          10.156256208
+        ],
+        "reason": "visible_phase_boundary"
+      },
+      {
+        "h": 20588,
+        "l": 48888,
+        "position": 10707,
+        "phase_before": 0,
+        "phase_after": 2,
+        "bracket_started_at": 10.559038958,
+        "bracket_finished_at": 10.580971125,
+        "started_at": 10.559041083,
+        "finished_at": 10.574291458,
+        "observed_transition_count": 27,
+        "context_guard_before": [
+          10.1625615,
+          10.318047916
+        ],
+        "context_guard_after": [
+          10.580974125,
+          10.745753541
+        ],
+        "reason": "visible_phase_boundary"
+      }
+    ],
+    "optical_focus_verified": false,
+    "exposure_alignment_verified": false,
+    "usable_for_dfd": false,
+    "initial_state": {
+      "position": 10707,
+      "min_position": 5974,
+      "max_position": 11116,
+      "lens_ready": 1,
+      "property_predicate": 0,
+      "focus_flags": 3,
+      "lens_sync_flags": 1,
+      "native_done": true,
+      "still_exposing": false,
+      "still_saving": false,
+      "movie_saving": false,
+      "still_processing": false,
+      "movie_recording": false,
+      "shutter_sequence": 0,
+      "capture_idle": true,
+      "af_route": 14
+    },
+    "settings": {
+      "menu SetFocusPosition": "448 277 128 128",
+      "menu SetFocusMode": "0",
+      "menu SetFocusArea": "0",
+      "menu SetFocusAreaSize": "3"
+    },
+    "gain": [
+      117,
+      985,
+      131,
+      0
+    ],
+    "context": [
+      "fp-5.02/background-processing-mode-0/area-0",
+      1,
+      4294967295,
+      0,
+      0,
+      0,
+      0,
+      1,
+      2,
+      0,
+      1,
+      [
+        117,
+        225,
+        8333,
+        2164
+      ],
+      [
+        10,
+        4
+      ],
+      [
+        "448 277 128 128",
+        "0",
+        "0",
+        "3"
+      ],
+      "capture_idle",
+      "not_optically_validated"
+    ],
+    "finished_at": 10.912399625,
+    "elapsed_s": 8.006557667000001
+  },
+  "cleanup_complete": true,
+  "quarantined": false
+}

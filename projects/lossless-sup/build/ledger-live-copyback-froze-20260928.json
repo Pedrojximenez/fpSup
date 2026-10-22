@@ -1,0 +1,38 @@
+{
+ "schema_version": 1,
+ "kind": "live_copyback_froze_the_camera_cleanly",
+ "date": "2026-09-28",
+ "operator_scope": "ON THE CAMERA, authorised. The operator pressed the record key; the host sent ZERO USB traffic between arming and the freeze.",
+ "outcome": "THE CAMERA FROZE. No measurement was obtained. The shell stopped answering, so the state block could not be read; the camera stayed enumerated (ioreg id unchanged), so it had not rebooted. Recovery is a power cycle, which loses the state block.",
+ "why_this_instance_matters": {
+  "no_confounds": "the two earlier copy-back failures each had one. On 2026-09-26 the C2 re-run froze with the cause not established. Earlier today the shell wedged during a copy-back clip, but the operator was using the camera for other work at the same time - and I wrongly blamed copy-back for twelve clip folders that were theirs, which is withdrawn.",
+  "this_run": "exclusive access, settings verified FHD RAW12 0x318200, power preflight and scratch preflight both PASS in the same boot minutes earlier, and NO host USB traffic at all during the clip - the operator pressed the key precisely so that polling could be ruled out.",
+  "score": "copy-back is now one success in four live attempts (C2 on 9/26 succeeded; its re-run froze; two attempts today failed)."
+ },
+ "what_the_history_makes_of_it": {
+  "two_proven_single_frame_routes": {
+   "compress (PHASE 5), G4b on 2026-09-23": "PASS. The camera wrote a compressed CinemaDNG from OUR OWN arena: 1,396,736 B payload against 3,244,544 stock, LibRaw decoded it. The writer's node was redirected at our buffer.",
+   "copy-back (PHASE 7), C2 on 2026-09-26": "PASS once. Compressed INTO THE CAMERA'S OWN frame buffer, only seg[1] changed."
+  },
+  "the_difference_that_is_left": "mirror and compress both point the writer at OUR buffer and both worked. copy-back leaves the writer pointed at the CAMERA'S buffer and copies about 1.5 MB into it from inside the hook. Changing the length is NOT the suspect on its own, because compress had to shorten seg[1] too and worked.",
+  "the_suspect": "the 1.5 MB copy into the camera's own frame buffer, performed inside the writer's call. That buffer belongs to the imaging pipeline. C1 found clone counters 0 and owner 0xFFFFFFFF at one moment, which is not the same as nobody touching it while we copy.",
+  "NOT_established": "no mechanism. The shell dies before the state block can be read, so it is not even known whether the freeze happens inside the hook or after we return."
+ },
+ "the_strategic_consequence": {
+  "what_rests_on_C2": "CURRENT_DEVELOPMENT §1 dropped 'build our own output pool plus a release callback' as a shared prerequisite BECAUSE C2 succeeded. That decision rests on a result that has not reproduced in three subsequent attempts.",
+  "the_alternative_is_the_better_understood_one": "compress + an own output pool has a live single-frame success (G4b) and a known, bounded blocker: G5 showed one buffer is not enough because the aggregation batch still holds it. That is an engineering problem with a shape. An unexplained freeze is not.",
+  "recommendation": "treat the freeze as the project's blocking question, ahead of cost measurement and ahead of sustained frames. Measuring the cost of a path that fails three times in four is measuring nothing."
+ },
+ "the_cheapest_decisive_next_test": {
+  "pair": [
+   "change seg[1] to a shorter length and copy NOTHING. The card then writes a truncated stock RAW - a short file, harmless to the camera. Freezes => the length change is the cause and copy-back is finished as an approach.",
+   "copy into the frame buffer but leave seg[1] alone. The card writes a full-length file whose tail is leftover RAW - junk on the card, harmless. Freezes => the copy is the cause."
+  ],
+  "cost_per_attempt": "a freeze, a power cycle, the movie settings re-applied, and two setup clips.",
+  "note": "each attempt is expensive because a freeze costs the state block. Anything that could record progress where it survives a power cycle would be worth more than another attempt."
+ },
+ "an_operational_cost_worth_recording": "every power cycle reverts the movie settings, because the project forbids `menu save`. Today they came back as UHD once and OG3K once, and the first preflight after each caught it by refusing a frame whose length was not 0x318200.",
+ "camera_accessed": true,
+ "camera_left_in": "FROZEN, enumerated, shell not answering. A power cycle is required and will lose the state block.",
+ "deployable": false
+}

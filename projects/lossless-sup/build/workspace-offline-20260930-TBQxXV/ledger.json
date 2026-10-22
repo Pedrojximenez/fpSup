@@ -1,0 +1,275 @@
+{
+  "camera_ready": false,
+  "artifact_type": "unlinked ARM objects and offline tests",
+  "runtime_hooks_installed": false,
+  "bin_or_autorun_produced": false,
+  "rec_arm_execution_verified": false,
+  "commands": [
+    {
+      "label": "compiler-version",
+      "argv": [
+        "/usr/bin/clang",
+        "--version"
+      ],
+      "returncode": 0,
+      "log": "compiler-version.log"
+    },
+    {
+      "label": "compile-control",
+      "argv": [
+        "/usr/bin/clang",
+        "--target=armv7-none-eabi",
+        "-mcpu=cortex-a9",
+        "-marm",
+        "-mfloat-abi=soft",
+        "-mfpu=none",
+        "-std=c11",
+        "-O2",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fno-addrsig",
+        "-fno-unwind-tables",
+        "-fno-asynchronous-unwind-tables",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-c",
+        "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/control.c",
+        "-o",
+        "/Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/build/workspace-offline-20260930-TBQxXV/control.o"
+      ],
+      "returncode": 0,
+      "log": "compile-control.log"
+    },
+    {
+      "label": "compile-frame_pipeline",
+      "argv": [
+        "/usr/bin/clang",
+        "--target=armv7-none-eabi",
+        "-mcpu=cortex-a9",
+        "-marm",
+        "-mfloat-abi=soft",
+        "-mfpu=none",
+        "-std=c11",
+        "-O2",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fno-addrsig",
+        "-fno-unwind-tables",
+        "-fno-asynchronous-unwind-tables",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-c",
+        "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/frame_pipeline.c",
+        "-o",
+        "/Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/build/workspace-offline-20260930-TBQxXV/frame_pipeline.o"
+      ],
+      "returncode": 0,
+      "log": "compile-frame_pipeline.log"
+    },
+    {
+      "label": "compile-workspace_layout",
+      "argv": [
+        "/usr/bin/clang",
+        "--target=armv7-none-eabi",
+        "-mcpu=cortex-a9",
+        "-marm",
+        "-mfloat-abi=soft",
+        "-mfpu=none",
+        "-std=c11",
+        "-O2",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fno-addrsig",
+        "-fno-unwind-tables",
+        "-fno-asynchronous-unwind-tables",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-c",
+        "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/workspace_layout.c",
+        "-o",
+        "/Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/build/workspace-offline-20260930-TBQxXV/workspace_layout.o"
+      ],
+      "returncode": 0,
+      "log": "compile-workspace_layout.log"
+    },
+    {
+      "label": "compile-raw_workspace",
+      "argv": [
+        "/usr/bin/clang",
+        "--target=armv7-none-eabi",
+        "-mcpu=cortex-a9",
+        "-marm",
+        "-mfloat-abi=soft",
+        "-mfpu=none",
+        "-std=c11",
+        "-O2",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fno-addrsig",
+        "-fno-unwind-tables",
+        "-fno-asynchronous-unwind-tables",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-c",
+        "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/raw_workspace.c",
+        "-o",
+        "/Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/build/workspace-offline-20260930-TBQxXV/raw_workspace.o"
+      ],
+      "returncode": 0,
+      "log": "compile-raw_workspace.log"
+    },
+    {
+      "label": "compile-rec_workspace",
+      "argv": [
+        "/usr/bin/clang",
+        "--target=armv7-none-eabi",
+        "-mcpu=cortex-a9",
+        "-marm",
+        "-mfloat-abi=soft",
+        "-mfpu=none",
+        "-std=c11",
+        "-O2",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fno-addrsig",
+        "-fno-unwind-tables",
+        "-fno-asynchronous-unwind-tables",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-c",
+        "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/rec_workspace.c",
+        "-o",
+        "/Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/build/workspace-offline-20260930-TBQxXV/rec_workspace.o"
+      ],
+      "returncode": 0,
+      "log": "compile-rec_workspace.log"
+    },
+    {
+      "label": "test_control",
+      "argv": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "-B",
+        "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/tests/test_control.py",
+        "-v"
+      ],
+      "returncode": 0,
+      "log": "test_control.log"
+    },
+    {
+      "label": "test_frame_pipeline",
+      "argv": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "-B",
+        "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/tests/test_frame_pipeline.py",
+        "-v"
+      ],
+      "returncode": 0,
+      "log": "test_frame_pipeline.log"
+    },
+    {
+      "label": "test_workspace_layout",
+      "argv": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "-B",
+        "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_workspace_layout.py",
+        "-v"
+      ],
+      "returncode": 0,
+      "log": "test_workspace_layout.log"
+    },
+    {
+      "label": "test_raw_workspace",
+      "argv": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "-B",
+        "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_raw_workspace.py",
+        "-v"
+      ],
+      "returncode": 0,
+      "log": "test_raw_workspace.log"
+    },
+    {
+      "label": "test_rec_workspace",
+      "argv": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "-B",
+        "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_rec_workspace.py",
+        "-v"
+      ],
+      "returncode": 0,
+      "log": "test_rec_workspace.log"
+    },
+    {
+      "label": "test_workspace_layout-optimized",
+      "argv": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "-B",
+        "-O",
+        "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_workspace_layout.py",
+        "-v"
+      ],
+      "returncode": 0,
+      "log": "test_workspace_layout-optimized.log"
+    },
+    {
+      "label": "test_raw_workspace-optimized",
+      "argv": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "-B",
+        "-O",
+        "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_raw_workspace.py",
+        "-v"
+      ],
+      "returncode": 0,
+      "log": "test_raw_workspace-optimized.log"
+    },
+    {
+      "label": "test_rec_workspace-optimized",
+      "argv": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "-B",
+        "-O",
+        "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_rec_workspace.py",
+        "-v"
+      ],
+      "returncode": 0,
+      "log": "test_rec_workspace-optimized.log"
+    }
+  ],
+  "sources": {
+    "control.c": "707fecec870d66921bdda438a7b3889227fbac39ee0610b22296b09357fdf59b",
+    "frame_pipeline.c": "6be864c8cef31fcc4b9979c2e1eebb16aad38fc6b78d989691c71cfcc6f1a8f1",
+    "native/workspace_layout.c": "e62123c2c72e8986af44c1ddb19ed96ce645233aa4fb79b0e643268ea7c5a10e",
+    "native/raw_workspace.c": "efc71e9199ed4922df63fbebd0370758b04f1304e30596565ac158a2fc0031ec",
+    "native/rec_workspace.c": "f87be3bd39061e3adbe74fa48787317ad2b6004baca60ad8441d1e3b2d419098",
+    "control.h": "9305a64c6df2dad186d4ea8d3dacd275c9c90cb23db82c8d7ad3158972f8f347",
+    "frame_pipeline.h": "7f36528a2cec866917adfc1df619568a2a0a5617401aa7b1b880fd982416f0ee",
+    "native/workspace_layout.h": "b5bd034f7545e60f57cf26edd309862b7e7b0528e8ac3be60a7d91c776847613",
+    "native/raw_workspace.h": "ffc9a9a9d03536a18fce4912c1643e82ba55ca4f273fb4cfc0a5f46595e1a4a3",
+    "native/rec_workspace.h": "cf55a8e6164ba2d92706925b8d14222df2091d1a0db27fdfa56d05d12a343d1b",
+    "tests/test_control.py": "97b9c1ea654fc0ed00efafa7b74cc68df886795927ff2af458a8b3e30c0e3685",
+    "tests/test_frame_pipeline.py": "dfd767f0c597e609f636128f2020624287d3454d848337276bd84d321499d731",
+    "native/test_workspace_layout.py": "a6ba7ba1ba6e5e06eb137ee7042ac144cb2e3a9aa6c397c945155bdf4e45ddf3",
+    "native/test_raw_workspace.py": "64ccb0467f9cc7be45609ed9e87853f1558c4554561359a039d3365303c6b637",
+    "native/test_rec_workspace.py": "c8c6dd1ce36b5d93912ea48bd5736932790778a182ebcadc741cdddc859fc721",
+    "native/rec_workspace_fixture.c": "c023e3d700fcf956b92547a90ded65520f9e05ad99f5be6a62935954d1cbbf9d",
+    "native/build_workspace_offline.py": "ffe9cd64a48906fac0910e3d753ce76313721686c4359f2ceecbd1eb6686ab4c"
+  },
+  "compiler": "Apple clang version 21.0.0 (clang-2100.3.27.1)\nTarget: arm64-apple-darwin27.0.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+  "python": "3.9.6 (default, Jul 10 2026, 15:39:47) \n[Clang 21.0.0 (clang-2100.3.27.1)]",
+  "unicorn": "2.1.4",
+  "verification_complete": true,
+  "limitations": [
+    "Physical memory availability, allocator exclusion and DMA/producer drain use test fixtures.",
+    "RAW tests execute native descriptor wrappers; REC integration is host execution plus ARM compilation.",
+    "Complete REC ARM execution requires linking; text relocations were not discarded.",
+    "Output spans are benefit-only budgets, not worst-case JPEG or enforced DMA bounds.",
+    "No native producer-facts provider, installed REC/failure/stop hooks or compression worker is supplied.",
+    "14-bit layout arithmetic does not bypass the existing control rejection."
+  ]
+}

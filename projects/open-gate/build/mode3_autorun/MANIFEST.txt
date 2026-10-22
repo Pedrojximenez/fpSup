@@ -1,0 +1,12 @@
+Sigma fp mode 3 open gate 3032x2020 @29.97 TEST AutoRun
+
+AutoRun.txt bytes=32768 sha256=d77ff24f5c32aa4ece34700ea135fc52312658c0b025d77b0390a89bbde8a1fc
+rowpatch_mode3 bytes=232 sha256=77c36edc47fe3ccc3ebd2a5e5c194cba0d19133b7e8764ebaa6cc596865d47b2
+reference_firmware sha256=92a8ee993f6c3d66c251e88d45a2ccd5135c6cf7342717784321c2ed506e2fb4
+sensor=mode 3 MONIT1_30 6064x4042 1:1 full 3:2, quiet analog group
+timing=hmax 445 tail 735 vmax 5398 -> 29.97003 fps, rolling 24.982 ms
+pipeline=RWZM 2.0x -> 3032x2020, active 3000x2000
+fragment mem set lines=71 (previous build was 199 and its final arms did not take)
+hook=0xC043A19C stock=0xE1A00004 branch=0xEB0BD597
+dispfit=absent; menu label=absent
+restore=remove or rename AutoRun.txt, then fully power-cycle

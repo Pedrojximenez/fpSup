@@ -1,0 +1,74 @@
+{
+  "firmware_sha256": "92a8ee993f6c3d66c251e88d45a2ccd5135c6cf7342717784321c2ed506e2fb4",
+  "candidate_bytes": 200,
+  "stock_three_speeds": [
+    "24000/1001",
+    "24000/1001",
+    "24000/1001"
+  ],
+  "controls": [
+    {
+      "case": "private18",
+      "master_current_timecode_rate": [
+        "18/1",
+        "18/1",
+        "24000/1001"
+      ]
+    },
+    {
+      "case": "marker_off",
+      "master_current_timecode_rate": [
+        "24000/1001",
+        "24000/1001",
+        "24000/1001"
+      ]
+    },
+    {
+      "case": "raw12",
+      "master_current_timecode_rate": [
+        "24000/1001",
+        "24000/1001",
+        "24000/1001"
+      ]
+    },
+    {
+      "case": "native_axis",
+      "master_current_timecode_rate": [
+        "24000/1001",
+        "24000/1001",
+        "24000/1001"
+      ]
+    },
+    {
+      "case": "stale_snapshot",
+      "master_current_timecode_rate": [
+        "24000/1001",
+        "24000/1001",
+        "24000/1001"
+      ]
+    },
+    {
+      "case": "native24",
+      "master_current_timecode_rate": [
+        "24/1",
+        "24/1",
+        "24000/1001"
+      ]
+    }
+  ],
+  "pcm": {
+    "encoding": 1,
+    "channels": 2,
+    "sample_rate": 48000,
+    "bytes_per_second": 192000,
+    "block_align": 4,
+    "bits_per_sample": 16
+  },
+  "bwf_time_reference": 48048,
+  "iXML_only_changed": true,
+  "limits": [
+    "Candidate exists only in Unicorn memory and validation files",
+    "Private 18p selection/REC/timecode bridge is not deployed",
+    "DSP hardware sample clock and live A/V sync are unmeasured"
+  ]
+}

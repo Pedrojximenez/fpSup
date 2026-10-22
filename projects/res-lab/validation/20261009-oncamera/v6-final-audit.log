@@ -1,0 +1,40 @@
+screen: LV_CINE_MEDIUM
+  code   412/412 B  7.7 KiB/s   verify 412/412 B  777 KiB/s   verify 412 bytes in 0.0s (342 KiB/s)      
+  code   412 bytes in 0.1s (3.9 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 32768 bytes in 0.000s (71.2 MB/s)      
+  remote  \AutoRun.txt  32768 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x53B00980 (36864 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 32768 of 32768
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/v6-final-readback/AutoRun.txt
+Verified \AutoRun.txt 32768
+  code   412/412 B  97.2 KiB/s   verify 412/412 B  555 KiB/s   verify 412 bytes in 0.0s (311 KiB/s)      
+  code   412 bytes in 0.0s (63.2 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 27668 bytes in 0.000s (66.2 MB/s)      
+  remote  \fpSup\LOADER.BIN  27668 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x53B00980 (31764 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 27668 of 27668
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/v6-final-readback/LOADER.BIN
+Verified \fpSup\LOADER.BIN 27668
+  code   412/412 B  104.6 KiB/s   verify 412/412 B  509 KiB/s   verify 412 bytes in 0.0s (278 KiB/s)      
+  code   412 bytes in 0.0s (64.4 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 73344 bytes in 0.001s (135.3 MB/s)      
+  remote  \fpSup\32RESCUS.BIN  73344 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x53B00980 (77440 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 73344 of 73344
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/v6-final-readback/32RESCUS.BIN
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/final_audit.py", line 29, in <module>
+    assert local.read_bytes()==source.read_bytes(),remote
+AssertionError: \fpSup\32RESCUS.BIN

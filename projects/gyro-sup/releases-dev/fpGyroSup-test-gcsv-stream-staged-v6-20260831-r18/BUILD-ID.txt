@@ -1,0 +1,41 @@
+fpGyroSup GCSV-only staged streaming experiment r18
+Build date: 2026-08-31
+Camera/firmware: SIGMA fp Ver.5.02
+Build type: release AutoRun, no USB shell
+Base: r17 GCSV-only 32 KiB A/B + 64 KiB card chunks
+
+Measured reason for this build:
+- r17 retained 153,807 of an expected 154,088 samples (99.817637%).
+- Its only discontinuity was about 100.440 ms at 18.352104 seconds.
+- The writer previously held a raw half in WRITING while formatting and during
+  every synchronous card write.  Thus only the other 1.534-second half could
+  absorb samples during media latency, despite 3.069 seconds total raw capacity.
+
+Three-stage writer transaction:
+1. Format one sealed raw block completely into an independent text staging area.
+2. Publish the source raw half EMPTY, making both 32 KiB halves reusable.
+3. Drain the staged text to the card in bounded 64 KiB calls with 5 ms yields.
+
+Fixed memory layout:
+- O_TEXT..O_BUF_B is a 0x36000-byte (216 KiB) staging area.
+- One maximum block is bounded to 3,836 rows * 53 bytes plus its small header,
+  at most 203,564 bytes, leaving 17,620 bytes of guard space.
+- Streaming buffer B moves to 0x50000..0x58000; O_READ remains at 0x5B000,
+  leaving a further 12 KiB guard before the read region.
+- Memory remains fixed and independent of recording duration.
+
+Unchanged safety boundaries:
+- The 2,500 Hz callback only copies raw gyro/accelerometer data.
+- Formatting performs no media I/O and has a preflight worst-case capacity check.
+- The existing writer task remains the only formatter and media caller.
+- Card calls remain 64 KiB maximum and retain the 5 ms cooperative yield.
+- Native lifecycle, transaction lock, JSON generation and task priority are
+  unchanged.  No GYR file is opened, written, read back or recovered.
+
+Verification:
+- 48 unit, exact-format, capacity, ordering, layout and safety tests pass.
+- Stream logger: 3,676 bytes, ending at 0xC072EEC0 below 0xC072EFB4.
+- PGEN pool code: 7,544 bytes; 7,560 bytes on card.
+- Static tests prove no F_WRITE exists in the block formatter and that raw EMPTY
+  is published before stream command 5 can drain staged text.
+- This is an experimental hardware build, not fp-gyro-sup-v1.1.

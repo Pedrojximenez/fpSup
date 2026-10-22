@@ -1,0 +1,76 @@
+{
+  "clip": "A001_028",
+  "requested": 1,
+  "finished": 1,
+  "count": 1,
+  "bytes": 2095104,
+  "sampling": "first/middle/finished-count index; not a complete sequence check",
+  "transport": "maintained read_bulk with source-address suffix per chunk",
+  "frames": [
+    {
+      "number": 1,
+      "path": "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-m12-recurrence/v39-280-wide-startup/A001_028-000001.DNG",
+      "transfer_return_code": 0,
+      "main_ifd": {
+        "NewSubfileType": 0,
+        "ImageWidth": 2000,
+        "ImageLength": 672,
+        "BitsPerSample": 12,
+        "Compression": 1,
+        "StripOffsets": 78848,
+        "StripByteCounts": 2016008,
+        "BlackLevel": [
+          "262122/1024",
+          "262122/1024",
+          "262122/1024",
+          "262122/1024"
+        ],
+        "WhiteLevel": 4095,
+        "DefaultCropOrigin": [
+          8,
+          5
+        ],
+        "DefaultCropSize": [
+          1984,
+          662
+        ],
+        "BaselineExposure": "2378/1024",
+        "FrameRate": "120000/1001"
+      },
+      "ifds": [
+        {
+          "ExposureTime": "1/320",
+          "ISO": 2500
+        },
+        {
+          "NewSubfileType": 0,
+          "ImageWidth": 2000,
+          "ImageLength": 672,
+          "BitsPerSample": 12,
+          "Compression": 1,
+          "StripOffsets": 78848,
+          "StripByteCounts": 2016008,
+          "BlackLevel": [
+            "262122/1024",
+            "262122/1024",
+            "262122/1024",
+            "262122/1024"
+          ],
+          "WhiteLevel": 4095,
+          "DefaultCropOrigin": [
+            8,
+            5
+          ],
+          "DefaultCropSize": [
+            1984,
+            662
+          ],
+          "BaselineExposure": "2378/1024",
+          "FrameRate": "120000/1001"
+        }
+      ],
+      "geometry_matches": true,
+      "bit_depth_matches": true
+    }
+  ]
+}

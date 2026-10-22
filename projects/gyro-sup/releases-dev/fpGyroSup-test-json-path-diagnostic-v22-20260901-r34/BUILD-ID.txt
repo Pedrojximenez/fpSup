@@ -1,0 +1,43 @@
+fpGyroSup r34 r33-base JSON path diagnostic
+Build date: 2026-09-01
+Camera/firmware: SIGMA fp Ver.5.02
+Build type: release AutoRun, no USB shell
+Base: exact r33 GCSV drop/anchor probe
+
+Purpose:
+- Diagnose why a normally stopped clip can unlock without creating JSON.
+- This build does not claim to fix JSON or intermittent GCSV completeness.
+
+Changes from r33:
+- The existing JSON builder and twelve-retry policy remain intact.
+- Each JSON attempt records the last reached phase in two previously unused
+  state words; no recording-time GCSV path is changed.
+- Immediately before a queue event is consumed without JSON, r34 tries to
+  create a tiny same-basename .jdg file:
+    FPJ1;reason=N;kind=N;volume=N;attempts=N;phase=N
+- reason=1: kind 2 auto-completed without invoking the JSON builder.
+- reason=2: a normal JSON event exhausted all twelve immediate attempts.
+- A successful JSON event creates no .jdg file.
+
+Phase values for reason=2:
+  1 entered builder
+  2 lifecycle disabled before metadata
+  3 rate/mode was zero
+  4 width was zero
+  5 height was zero
+  6 lens query 0x0d failed
+  7 lifecycle disabled after query 0x0d
+  8 lens 0x0d block was too short
+  9 lens query 0x2d failed
+ 10 lifecycle disabled after query 0x2d
+ 11 lifecycle disabled immediately before JSON file writing
+ 12 file-writer gate or volume rejected
+ 13 JSON F_OPEN failed
+ 14 JSON F_WRITE returned zero
+ 99 JSON F_WRITE returned nonzero (normally followed by JSON completion)
+
+Limits:
+- If the same media failure also prevents the diagnostic .jdg from opening,
+  both JSON and JDG may be absent; that result still points toward media open.
+- r33's #FPD1 GCSV trailer remains enabled and unchanged.
+- Experimental diagnostic build; not fp-gyro-sup-v1.1.

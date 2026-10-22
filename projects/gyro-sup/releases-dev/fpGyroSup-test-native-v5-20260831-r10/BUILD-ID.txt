@@ -1,0 +1,22 @@
+fpGyroSup native WaitEncoding transaction r10
+Build date: 2026-08-31
+Camera/firmware: SIGMA fp Ver.5.02
+Build type: release AutoRun, no USB shell
+
+Purpose:
+- Keep the field-tested MovieRecording start gate and native clip lifecycle.
+- Treat DNG/GYR/GCSV/JSON as one native camera transaction.
+- Publish StillImageProcessing through the official category-0x80 updater.
+- Set the firmware's separate WaitEnc latch and dispatch its native DoWaitEnc
+  event so the record key is routed to WaitEncoding instead of Standby.
+- Keep both states across all GCSV yields, JSON, retries, and queued takes.
+- Clear StillImageProcessing on every scheduler exit; the firmware's own
+  EncodeProcessingObserver clears WaitEnc and restores Standby.
+
+Unchanged from r9:
+- GCSV code is byte-for-byte identical, including 16 KiB writes and 5 ms yields.
+- No boot scan or recovery rewrite.
+- No global F_WRITE phase probe.
+
+Every ordinary image restores the original C03660E8 firmware prologue left by
+an earlier diagnostic boot before C072F000 can be reused.

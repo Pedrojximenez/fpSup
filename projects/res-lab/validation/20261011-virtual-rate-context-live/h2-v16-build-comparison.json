@@ -1,0 +1,15 @@
+{
+  "consumer_bytes": 185536,
+  "consumer_sha256": "a2c6dc20277c4340130191ef0346c14cc48476c87d1673708c1e1e846f504f64",
+  "version": 16,
+  "plain_debug_consumer_equal": true,
+  "producer_loader_autorun_unchanged": true,
+  "rcd_sha256": "835d214cf4c0b17d26f075e6ce3f749fe346ac88fb7c9ab4b9fe3642f15cbc99",
+  "offline": {
+    "full_h2_profile_and_v15_negative": "2 passed,54.186s",
+    "existing_virtual240_280_and_dynamic_apply": "2 passed,62.191s",
+    "invalid_timing_ARM_and_malformed_python": "passed in initial run,54.623s",
+    "initial_test_errors": "HDRCOPY fourth positional argument was LR in maintained harness. Corrected by setting emulated R3 explicitly; production artifact unchanged."
+  },
+  "hardware_acceptance": false
+}

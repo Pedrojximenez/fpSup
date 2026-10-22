@@ -1,0 +1,18 @@
+{
+  "mode": "ordinary",
+  "tests": 1,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "passed": true,
+  "artifacts": {
+    "candidate-card/AutoRun.txt": "889800fa363c75bfe0d9da43da82312276388a8929748ce05221ce0da931bb4c",
+    "candidate-card/fpSup/LOADER.BIN": "0f63b167bc8c6dd259a5ec7c465ac00aff7d5e9f25594b36c8eba6684cea4af1",
+    "candidate-card/fpSup/10LOSS.BIN": "50494b8ba178918eeed8e14d4df72016ec68d6f9daa5c473a705b15e50f3f1f4",
+    "candidate-v2-fast/AutoRun.txt": "6c6b566e9d8866be193aaefe6dd58ffb06f41ad9a658dce6152241eca050ce4a",
+    "candidate-v2-fast/fpSup.BIN": "2edf75f93f2335a228ea984d8e020e83854ffa6aa25d98b1074248062c236be4",
+    "candidate-v2-fast/lossless.bin": "fb7fb46a3e1cd29fecd25043f5c6207a7c3c5fcd9a82a79ba2f6b038db05b4cd"
+  },
+  "camera_tested": false,
+  "selection": "test_card_emulation.CardEmulationTests.test_power_off_restores_the_new_sites_twice"
+}

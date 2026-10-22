@@ -1,0 +1,17 @@
+{
+  "cases": [
+    {
+      "case": "no-dictionary",
+      "passed": true
+    },
+    {
+      "case": "missing-key",
+      "passed": true
+    },
+    {
+      "case": "translated-stock-key",
+      "passed": true
+    }
+  ],
+  "limitations": "Executes native localized-text fallback only. Dictionary acquisition/lookup are mocked; rendering and actual dictionary attachment are not tested."
+}

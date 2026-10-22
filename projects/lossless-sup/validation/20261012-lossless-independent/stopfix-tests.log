@@ -1,0 +1,14 @@
+test_branch_and_all_twelve_direct_call_sites (test_stop_release.StopReleaseTests) ... ok
+test_busy_manager_does_not_release (test_stop_release.StopReleaseTests) ... ok
+test_empty_queue_preserves_callee_registers (test_stop_release.StopReleaseTests) ... ok
+test_parent_decrement_mutation_is_detected (test_stop_release.StopReleaseTests) ... ok
+test_parent_survives_until_active_child_completes (test_stop_release.StopReleaseTests) ... ok
+test_sequential_duplicate_release_is_noop (test_stop_release.StopReleaseTests) ... ok
+test_standalone_exclusive_conflict_keeps_prior_owner (test_stop_release.StopReleaseTests) ... ok
+test_standalone_loader_stale_repair_and_power_off (test_stop_release.StopReleaseTests) ... ok
+test_stock_drops_44_but_patch_releases_44 (test_stop_release.StopReleaseTests) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 5.660s
+
+OK

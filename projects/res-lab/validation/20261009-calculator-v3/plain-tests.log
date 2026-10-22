@@ -1,0 +1,31 @@
+test_exclusive_conflict_does_not_arm (test_v3_reslab.CalculatorTests) ... ok
+test_export_and_numbering (test_v3_reslab.CalculatorTests) ... ok
+test_geometry_and_assets_at_several_sizes (test_v3_reslab.CalculatorTests) ... ok
+test_invalid_geometry_and_missing_directory_fail (test_v3_reslab.CalculatorTests) ... ok
+test_native_calculator_page_and_save_action (test_v3_reslab.CalculatorTests) ... ok
+test_nbr_refusal_restores_navigation (test_v3_reslab.CalculatorTests) ... ok
+test_no_recording_core_and_restoration (test_v3_reslab.CalculatorTests) ... ok
+test_raw14_remains_calculable_but_cannot_export (test_v3_reslab.CalculatorTests) ... ok
+test_registers_and_calculates_without_camera_settings (test_v3_reslab.CalculatorTests) ... ok
+test_rescustom_reads_export_and_uses_virtual_geometry (test_v3_reslab.CalculatorTests) ... ok
+test_save_key_callback_exports_and_resets_key (test_v3_reslab.CalculatorTests) ... FAIL
+test_short_write_corruption_and_trailing_bytes_fail (test_v3_reslab.CalculatorTests) ... ok
+
+======================================================================
+FAIL: test_save_key_callback_exports_and_resets_key (test_v3_reslab.CalculatorTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_v3_reslab.py", line 140, in test_save_key_callback_exports_and_resets_key
+    names={x['name'] for x in inv['resources']};self.assertTrue({'LAB001_QS','LAB001_SET','LAB001_FONT',f'font_S_imageSize_{w}',f'font_S_imageSize_{h}'}<=names)
+AssertionError: Lists differ: ['nbr', 'nbr', 'subscribe', 'subscribe', '[7268 chars]ost'] != []
+
+First list contains 754 additional elements.
+First extra element 0:
+'nbr'
+
+Diff is 9582 characters long. Set self.maxDiff to None to see it.
+
+----------------------------------------------------------------------
+Ran 12 tests in 620.287s
+
+FAILED (failures=1)

@@ -1,0 +1,56 @@
+[
+  {
+    "rate": 240,
+    "clip": "A001_084",
+    "requested": 101,
+    "finished": 101,
+    "automatic_stop": true,
+    "stop_reason": "vbuf",
+    "native_rec_zero": true,
+    "hdmi_standby": true,
+    "engine_fps": 239.76023864746094,
+    "sensor_fps": 239.76023976023976,
+    "profile_hits_before": {
+      "M12_LEGACY_HITS": 1,
+      "M12_LEGACY_PID": 60
+    },
+    "profile_hits_after": {
+      "M12_LEGACY_HITS": 335,
+      "M12_LEGACY_PID": 60
+    },
+    "cpu_header_hits": 101,
+    "local_bulk_hit_delta": 1,
+    "local_bulk_bytes": 4194304,
+    "max_identical_hdmi_frames": 3,
+    "hdmi_full_archive_verified": true,
+    "visual_observation": "No obvious displaced patch in reviewed transition contact; blurred scene and short SD take limit conclusion. First/middle/last RAW decode only.",
+    "hardware_acceptance": false
+  },
+  {
+    "rate": 280,
+    "clip": "A001_085",
+    "requested": 94,
+    "finished": 94,
+    "automatic_stop": true,
+    "stop_reason": "vbuf",
+    "native_rec_zero": true,
+    "hdmi_standby": true,
+    "engine_fps": 279.72027587890625,
+    "sensor_fps": 279.72027972027973,
+    "profile_hits_before": {
+      "M12_LEGACY_HITS": 336,
+      "M12_LEGACY_PID": 62
+    },
+    "profile_hits_after": {
+      "M12_LEGACY_HITS": 735,
+      "M12_LEGACY_PID": 62
+    },
+    "cpu_header_hits": 94,
+    "local_bulk_hit_delta": 1,
+    "local_bulk_bytes": 4194304,
+    "max_identical_hdmi_frames": 4,
+    "hdmi_full_archive_verified": true,
+    "visual_observation": "No obvious displaced patch in reviewed transition contact; blurred scene and short SD take limit conclusion. First/middle/last RAW decode only.",
+    "hardware_acceptance": false
+  }
+]

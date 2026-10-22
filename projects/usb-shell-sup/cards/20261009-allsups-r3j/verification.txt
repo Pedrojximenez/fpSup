@@ -1,0 +1,8 @@
+2026-10-09 r3j offline verification.
+18 management behavioral tests plus one test of six isolated faulty variants passed: 19 unittest tests in 106.164 seconds.
+All six faults detected, including forwarding fifth-slot choices to the fourth slot.
+Six management native-parser/matcher tests passed in 13.001 seconds.
+Default released non-management loader unchanged (test_without_allsups_the_loader_is_byte_for_byte_the_releases).
+AutoRun SHA-256 remains 0c5107fff1262ad8ca3bb675329b71c80926c8b35cdd40931b387639b45edbf0.
+Source whitespace check passed.
+Hardware evidence is recorded separately in ../20261009-allsups-r3j-live1/RESULTS.md.

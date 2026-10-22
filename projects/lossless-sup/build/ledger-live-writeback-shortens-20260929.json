@@ -1,0 +1,71 @@
+{
+ "schema_version": 1,
+ "kind": "live_the_cameras_own_buffer_is_writable_and_a_shorter_node_is_honoured",
+ "date": "2026-09-29",
+ "scope": "LIVE on the camera, firmware 5.02.0.V91, model w71c1. Hook at 0xC03A5490, the final flush. No codec ran, nothing was allocated, no block was held. Two clips: mode 2 into A001_205 and mode 3 into A001_207.",
+
+ "headline": "at the flush site we may write into the camera's OWN frame buffer and shorten the writer's node, and the card honours both. That removes the buffer pool entirely: the memory in-camera lossless compression needs is one scratch block, not the 64 MiB an aggregation batch would otherwise demand.",
+
+ "why_it_was_asked": "the allocator gives 16 MiB in total and one aggregation batch is 64 MiB, both measured earlier the same day, so a pool of our own buffers cannot be one batch deep. The camera's own buffers already are: the write path owns them and they already survive to the flush.",
+
+ "mode_2_write_the_cameras_buffer": {
+  "what": "a two-word mark at DNG_LEN-16, in the trailing padding after the raster, through the uncached alias with a barrier. The node length was not touched, so the clip stays valid.",
+  "state": {"entries": 8, "frames_altered": 8, "shape_refused": 0,
+            "error": null, "hook": "restored",
+            "camera_buffer": "0x556ECC00", "node_length_before": 3244544},
+  "card": "all eight files carry MSL3 with their OWN sequence, 0 through 7, at the full 3,244,544 bytes",
+  "the_contrast_that_matters": "the round-robin run earlier the same day wrote OUR two slots and forty files came back with only four distinct contents, because the card reads a buffer at the batch flush. Writing the CAMERA'S buffer gives every file its own content, because every frame has its own buffer and the camera does not recycle it until the batch is done. The camera's buffers are already a pool one batch deep.",
+  "the_freeze_history_does_not_apply_here": "copy-back wrote the camera's seg structure at the CinemaDNG writer 0xC0722AFC and froze, one success in five; copy-back-length-only froze with the copy removed, isolating the seg[1] write. This is a different site and a different structure -- the writer's own stack node -- and eight writes ran clean.",
+  "level": "L"
+ },
+
+ "mode_3_write_and_shorten": {
+  "what": "the same mark, moved to SHORT_LEN-16, plus the node length set from 3,244,544 to 1,396,736 -- the size of the compressed CinemaDNG G4b actually wrote on 2026-09-23, so the value under test is a real one.",
+  "state": {"entries": 8, "frames_altered": 8, "shape_refused": 0,
+            "error": null, "hook": "restored",
+            "node_length_before": 3244544, "node_length_readback": 1396736},
+  "card": {
+   "method": "getfile asked for the FULL 3,244,544 bytes; the camera reports what it actually has",
+   "frame 1": "actual 1396736 of 3244544",
+   "frame 2": "actual 1396736 of 3244544",
+   "frame 4": "actual 1396736 of 3244544",
+   "frame 8": "actual 1396736 of 3244544",
+   "frame 9": "actual 3244544 of 3244544",
+   "reading": "the eight frames the probe altered are exactly the shortened length and the first frame past its bound is stock. The mark reads MSL3 sequence 0 at SHORT_LEN-16 in frame 1."
+  },
+  "expected_and_accepted": "every altered file is a truncated DNG and that clip is not playable. That was the point of the experiment, not a fault.",
+  "level": "L"
+ },
+
+ "what_this_settles": {
+  "the_memory_question": "answered. A design that puts the compressed frame back into the camera's own buffer needs no pool at all: one scratch block to encode into, which the 16 MiB ceiling covers many times over.",
+  "the_two_shapes_it_permits": [
+   {
+    "shape": "synchronous",
+    "how": "encode frame N from its own buffer into scratch, copy back, set the length, return",
+    "cost": "G5 measured 13.65 ms per FHD frame: 33 percent of a 24p period, 41 percent at 30p, 82 percent at 59.94p"
+   },
+   {
+    "shape": "asynchronous, one frame late",
+    "how": "at frame N's call, copy frame N's pixels into scratch, write frame N-K's ALREADY FINISHED compressed output into frame N's own buffer, set the length to that known size, submit frame N's encode and return",
+    "cost": "a 3.24 MB memcpy per frame instead of a 13.65 ms block, and scratch for K sources plus K outputs -- about 9.3 MB at K=2, inside the 16 MiB ceiling",
+    "note": "frame N's FILE then holds frame N-K's picture. That is the operator's own 'late frame' model, and it is what makes the length known in time."
+   }
+  ],
+  "still_to_prove": "neither shape has been run with the codec in it. Every piece exists and has been measured separately: the asynchronous encode completes in place (2026-09-29), the camera's buffer is writable here, and a shorter node is honoured here."
+ },
+
+ "corrections": [
+  {
+   "what_was_wrong": "'putting the compressed frame back in the camera's own buffer forces a SYNCHRONOUS encode', stated as a property of the route.",
+   "why_it_was_wrong": "it is a property of one arrangement, not of the route. The length must be known during frame N's own call; it does not have to be frame N's length. The operator asked why the encode was not already asynchronous, which it is, and the framing was too narrow.",
+   "the_truth": "a one-frame-late pipeline keeps the encode asynchronous, because the size it writes was computed frames earlier."
+  }
+ ],
+
+ "tooling_added": {
+  "writeback_length_probe.S": "372 to 420 bytes depending on mode. Three modes so a freeze has ONE candidate cause: 2 writes the buffer only, 1 shortens only, 3 does both. Gated on the exact stock length, bounded at 8 altered frames and 24 hook entries, restores the site before doing anything and re-arms last. Allocates nothing.",
+  "writeback_length_driver.py": "borrows lossless.codec.code and lossless.codec.state at the codec chain's own fixed sizes; refuses to install unless both hook sites read stock; proves at build time that both HOOK_ARMED and MODE reach the assembler, because a run that reports mode 3 while running mode 2 would be believed.",
+  "test_writeback_length.py": "29 tests, fourteen mutations all caught. One mutation initially slipped: 'accepts any length' passed because the test asserted that 'bne shape_bad' merely EXISTS, and it appears several times. Scoped to the comparison itself."
+ }
+}

@@ -1,0 +1,79 @@
+test_00_default_off_registration (__main__.NativePortTests) ... ok
+test_01_ready_ui_never_claimed (__main__.NativePortTests) ... ok
+test_02_result_translation_table (__main__.NativePortTests) ... ok
+test_03_name_content_checked (__main__.NativePortTests) ... ok
+test_04_register_only_creates_off (__main__.NativePortTests) ... ok
+test_05_foreign_descriptor_not_adopted (__main__.NativePortTests) ... ok
+test_06_subscribe_failure_retains_context (__main__.NativePortTests) ... ok
+test_07_callback_to_policy_restores_canonical (__main__.NativePortTests) ... ok
+test_08_echo_during_publish_suppressed (__main__.NativePortTests) ... ok
+test_09_nested_callback_refused (__main__.NativePortTests) ... ok
+test_10_close_without_exclusion_is_busy (__main__.NativePortTests) ... ok
+test_11_quiesce_absent_keeps_ticket (__main__.NativePortTests) ... ok
+test_12_unsubscribe_requires_held_exclusion (__main__.NativePortTests) ... ok
+test_13_full_retirement (__main__.NativePortTests) ... ok
+test_14_quiesce_provider_not_trusted (__main__.NativePortTests) ... ok
+test_15_native_set_failure_sticky (__main__.NativePortTests) ... ok
+test_16_facts_absent_blocks_rec (__main__.NativePortTests) ... ok
+test_17_presentation_unapplied_counted (__main__.NativePortTests) ... ok
+test_18_foreign_descriptor_rejected_by_read_publish (__main__.NativePortTests) ... ok
+test_19_init_and_bind_validation (__main__.NativePortTests) ... ok
+test_20_initial_publish_failure (__main__.NativePortTests) ... ok
+test_21_late_event_after_close (__main__.NativePortTests) ... ok
+test_arm_thumb_softfloat_object (__main__.NativePortTests)
+The adapter compiles for the camera CPU with no FP/NEON dependency. ... ok
+
+----------------------------------------------------------------------
+Ran 23 tests in 1.438s
+
+OK
+{
+  "kind": "host_executed_native_binding_ops_port",
+  "passed": true,
+  "tests_run": 23,
+  "skipped": 0,
+  "scenarios": 22,
+  "each_scenario_runs": [
+    "host -O2 in-process",
+    "asan+ubsan -O1 executable"
+  ],
+  "camera_accessed": false,
+  "deployable": false,
+  "native_call_layer": "substituted on host; separately executed into original instructions by test_native_variable.py",
+  "rendering_proved": false,
+  "ready_ui_claimable": false,
+  "exclusion_provider_required": true,
+  "quiescence_provider_required": true,
+  "undefined_symbols": [
+    "fp_nv_init",
+    "fp_nv_inspect",
+    "fp_nv_read",
+    "fp_nv_register_off",
+    "fp_nv_set_canonical",
+    "fp_nv_subscribe",
+    "fp_nv_unsubscribe_locked",
+    "fpl_binding_notify",
+    "fpl_binding_refresh"
+  ],
+  "requires_relocated_rodata": true,
+  "source_hashes": {
+    "control.c": "707fecec870d66921bdda438a7b3889227fbac39ee0610b22296b09357fdf59b",
+    "ui_control.c": "88f0431e15c753aa5bfa3c70ea946fc1300ff745b8d92d2549fa40eb41e3deef",
+    "binding/binding.c": "df2439658db275f5ca2d6ff05469d955b2163287bed70dbb4c02df8816f3df47",
+    "native/native_port.c": "94451c566096fa6634d176349ccd4ee04dbe5539888753ce44441990bf63e213",
+    "native/port_fixture.c": "bc5ace983f4ce396f985276c733884215ac34efb64e445851045416164ae999f",
+    "native/native_port.h": "fef7450e87e99ddc2b470f7319389a0043789ac52afd8222bd04bf6984095a8a",
+    "binding/binding.h": "4eda432c964d0de26e40f40b6e76c5aa9c771a92bad1e7f4a3903ac134236897",
+    "native/native_variable.h": "fdb37c8f04c841aa45f509b1d255430a3500d6184c1ae004330cb18a3fe31e3f",
+    "ui_control.h": "0af299ffd4a9085edc81f1ed742b72baed7694178d95364f6846e59afd1666f3",
+    "control.h": "9305a64c6df2dad186d4ea8d3dacd275c9c90cb23db82c8d7ad3158972f8f347"
+  },
+  "test_sha256": "cefa64336d2710cd1cf17e086b9a573ae86993f7d247e86001edfc356958ae52",
+  "remaining": [
+    "native page/row installation and rendering",
+    "choice permission port",
+    "notification exclusion and source-event quiescence providers",
+    "persistent preference",
+    "REC/codec/writer/header/playback"
+  ]
+}

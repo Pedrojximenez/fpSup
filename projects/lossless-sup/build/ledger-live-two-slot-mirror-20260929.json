@@ -1,0 +1,76 @@
+{
+ "schema_version": 1,
+ "kind": "live_two_slot_pool_works_and_0x12_is_not_the_release_signal",
+ "date": "2026-09-29",
+ "scope": "LIVE on the camera, firmware 5.02.0.V91, model w71c1. Hook at 0xC03A5490 (the final flush), mirror only -- no codec. Two camera-allocated 4 MiB blocks, acquired and recorded by the camera itself. DESTRUCTIVE in the intended way: two frames of clip A001_199 were written from our slots instead of the camera's own buffers.",
+
+ "the_question": "G5 (2026-09-23) wrote eight compressed frames from ONE buffer and the eight files came out byte-identical. Its ledger could not tell a late per-frame DMA from a batched write at clip close. This run adds a second slot and a candidate release signal and asks both questions at once.",
+
+ "result_one_A_POOL_WORKS": {
+  "claim": "two slots produced two CORRECT and DISTINCT frames on the card. This is the first time a buffer pool has worked in this project.",
+  "evidence": {
+   "clip": "\\CINEMA\\A001_199",
+   "A001_199_20260929_000001.DNG": "MSL2 at 0x3181F0, sequence 0, sha256 9825b2f370a2f6cd...",
+   "A001_199_20260929_000002.DNG": "MSL2 at 0x3181F0, sequence 1, sha256 5fd8a4582157907b...",
+   "both": "3,244,544 bytes, the stock length, and the two hashes differ",
+   "the_rest_of_the_clip": "frames 3 and beyond carry no mark: the probe refused them for want of a free slot and left them entirely native, buffer and length"
+  },
+  "why_the_watermark_matters": "a byte-identical mirror cannot prove itself -- if the redirect never took, the card would receive the original and look the same. Two words in the trailing padding after the raster, the magic and the frame's own sequence, are what make 'the card read OUR slot' and 'slot reused for two frames' both visible.",
+  "level": "L"
+ },
+
+ "result_two_0x12_IS_NOT_THE_RELEASE_SIGNAL": {
+  "claim": "the frames our slots held stayed at 0x0D in frame[0x1104] for the whole remaining life of the hook. 0x12 never arrived once.",
+  "numbers": {
+   "hook_entries": 24,
+   "frames_redirected": 2,
+   "frames_refused_no_free_slot": 22,
+   "releases_observed": 0,
+   "last_frame_state_seen": "13 (0x0D)",
+   "slot_0": "HELD, frame 0xC352405C, sequence 0, held_tick 944, free_tick 0",
+   "slot_1": "HELD, frame 0xC3522F34, sequence 1, held_tick 945, free_tick 0",
+   "shape_refused": 0,
+   "error": null,
+   "hook": "restored, read back 0xEB0BD652"
+  },
+  "what_this_kills": "the inference of 2026-09-28 that frame[0x1104] reaching 0x12 is a usable per-frame release signal, taken from the CinemaDNG manager at 0xC03A11F0 reclaiming frame[0x68] only from 0x12 frames. The manager may well do that; the state word is not observable from the flush site in time to recycle a slot.",
+  "a_likely_reason_NOT_established": "the two frame pointers are 0xC352405C and 0xC3522F34, exactly 0x1128 apart, so frame objects are a contiguous array with stride 0x1128 -- a ring. If the ring is a few deep, the object we kept a pointer to is reused by a later frame within the clip and its state word stops describing OUR frame, which is consistent with always reading 0x0D. This is an inference from two pointers and is NOT established.",
+  "level": "L for the numbers, I for the ring"
+ },
+
+ "what_is_still_open": [
+  "WHEN the card consumes a slot. This run never recycled a slot, so a correct pair of files bounds nothing: the content would be right whether the card read it immediately or at clip close.",
+  "how deep a pool has to be. 1 is not enough (G5). 2 is enough for 2 frames that are never reused, which is a different statement."
+ ],
+
+ "the_way_forward_does_not_need_0x12": {
+  "the_experiment": "round-robin over M slots with NO release signal: reuse the oldest slot unconditionally, for 8 frames, and read every file's watermark sequence off the card. Every file carrying its own sequence means M is deep enough; a repeated sequence means a slot was reused before the card had read it.",
+  "why_this_is_better": "it measures the thing the architecture actually needs -- the pool depth -- instead of looking for a signal that may not exist. It also answers G5's open question directly: if M=2 survives eight frames at 59.94p, the card cannot be batching at clip close.",
+  "the_corruption_is_silent": "G5 established that a reused buffer produces files that still decode, still carry twelve tiles and still have offsets matching their SOI markers. The watermark sequence is the only check that catches it."
+ },
+
+ "corrections": [
+  {
+   "what_was_wrong": "'the remaining blocker is that every writer call must produce a file, because skipping one aborts the clip'.",
+   "the_truth": "that constraint is real but it is not on the critical path. A delayed pipeline never skips: each writer call writes a file, and the file it writes is an earlier frame's compressed result. The blocker is the buffer lifetime, which is what this run went after."
+  },
+  {
+   "what_was_wrong": "'26.1 ms is the encode time, and it fits inside a 41.7 ms frame period'.",
+   "the_truth": "two errors. The 26,073 microseconds is submit to the poll that OBSERVED completion, bounded below by when the next hook entry came -- an upper bound, not the encode time. And the camera is at 59.94 fps, a 16.7 ms period, not 24p. The measured encode time is G5's own: 13,640 to 13,657 microseconds for eight consecutive FHD frames, spread 17 microseconds. That is 82 percent of a 59.94p period, 33 percent of a 24p one."
+  },
+  {
+   "what_was_wrong": "a forum post about 'every second and third DNG compressed' was used to corroborate our own timing.",
+   "the_truth": "withdrawn. That is unverified hearsay being used to explain a measurement, which is backwards. Our own measurements are better and say something different."
+  },
+  {
+   "what_was_wrong": "'recording will not start, the card is nearly full' -- concluded from is_recording reading 0 after every MOV pulse.",
+   "the_truth": "recording worked the whole time; the operator said so and the evidence agreed, since power_preflight PASSED and that needs a real FHD CinemaDNG frame to be written. is_recording is unreliable on this boot. The probe's own state block is the measure and always was."
+  }
+ ],
+
+ "tooling_added": {
+  "two_slot_mirror_driver.py": "arms, reads and restores the probe. 27 tests, nine mutations all caught.",
+  "the_arena": "the state claim is sized to this probe's OWN layout, 68 bytes for 17 words, not the reused module's 256. After the codec chain, acquire-second and the memory-read tools the arena had 72 bytes free; claiming another probe's size is what would not fit.",
+  "the_shared_code_claim": "lossless.codec.code at the codec chain's own fixed size, so the claim is idempotent and costs no arena. take_over_shared_region proves BOTH hook sites read their stock word, clears the region in 64-word chunks and proves the clear took -- the property that matters is that nothing is executing there, not that the bytes are zero. flush.require_clear_install_regions reads the whole 1,792-byte claim in one mem get, which is 448 lines of shell text and times the transport out."
+ }
+}

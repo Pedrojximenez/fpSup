@@ -1,0 +1,14 @@
+fpGyroSup native lifecycle phase probe r7
+Build date: 2026-08-31
+Camera/firmware: SIGMA fp Ver.5.02
+Build type: release AutoRun, no USB shell
+
+Purpose:
+- Confirm whether periodic 16 KiB GYR writes repeatedly enter the shared media
+  path during the same CinemaDNG write phase.
+- Retain the first four and final four full-block observations in RAM.
+- Add no diagnostic file I/O while recording.
+- Restore the original shared-write prologue automatically on an invalid/soft
+  restart; all later ordinary builds also carry an explicit restore section.
+
+This is a diagnostic build, not a shipping build.

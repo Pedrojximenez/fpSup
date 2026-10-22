@@ -1,0 +1,149 @@
+{
+  "label": "tagged-240-small-lossless-v17-quiet",
+  "started": false,
+  "stopped": false,
+  "runtime_before": {
+    "endpoint": "0xc072e290",
+    "consumer_base": "0x451d4780",
+    "consumer_state": "0x452012c0",
+    "registry": {
+      "magic": 826495574,
+      "abi": 2,
+      "lock": 0,
+      "provider": 1111575634,
+      "generation": 6,
+      "result": 0,
+      "detail": 0,
+      "count": 1,
+      "packs": 5,
+      "asset_used": 235540,
+      "row": 1
+    },
+    "consumer": {
+      "flag": 1,
+      "current": 2,
+      "res_value": 2,
+      "format_latch": 0,
+      "nrows": 2,
+      "nentries": 17,
+      "nmodes": 2
+    },
+    "selected": 2,
+    "rows": [
+      {
+        "index": 0,
+        "on": 1,
+        "width": 992,
+        "height": 662,
+        "stock": 2,
+        "menu_row": 2,
+        "pack": "0x452106c0",
+        "label": "H2S240",
+        "ui_result": 1
+      },
+      {
+        "index": 1,
+        "on": 1,
+        "width": 640,
+        "height": 426,
+        "stock": 2,
+        "menu_row": 3,
+        "pack": "0x45554dc0",
+        "label": "VRC000",
+        "ui_result": 1
+      }
+    ],
+    "producer_base": "0x45402dc0",
+    "producer_state": "0x45497b78",
+    "producer": {
+      "result": 1,
+      "app": 3331322648,
+      "reader": 3332398568,
+      "entry": 3332533760,
+      "page": 1161870700,
+      "nbr": 1161997056,
+      "nbr_len": 3000,
+      "core_base": 1161866112,
+      "pages_state": 1,
+      "out_w": 640,
+      "out_h": 426,
+      "ro_w": 2016,
+      "ro_h": 672,
+      "ro_sx": 3,
+      "ro_sy": 6,
+      "bin_h": 1,
+      "bin_v": 1,
+      "axis_armed": 1,
+      "modes_rows": 2,
+      "mode_sel": 1,
+      "canvas_valid": 1,
+      "crop_w": 0,
+      "crop_h": 0,
+      "ratio": 0,
+      "edit_field": 0,
+      "editing": 0,
+      "crop_lock": 0,
+      "lens_on": 0,
+      "lens_factor": 133,
+      "small_edit": 0,
+      "applied_geometry": 12,
+      "applied_valid": 1,
+      "bin_kh": 0,
+      "bin_kv": 0,
+      "bin_mode": 0,
+      "output_policy": 0,
+      "lock_num": 992,
+      "lock_den": 662,
+      "save_name": 0,
+      "name_text": 1701667150,
+      "name_field": 0,
+      "name_editing": 0
+    },
+    "mode_ids": [
+      9,
+      12
+    ],
+    "loaded_headers": {
+      "32RESCUS.BIN": {
+        "file_len": 185792,
+        "block_size": 996544,
+        "id": 1398096722,
+        "version": 17,
+        "min_services": 3
+      },
+      "50RESLAB.BIN": {
+        "file_len": 609720,
+        "block_size": 881024,
+        "id": 1111575634,
+        "version": 17,
+        "min_services": 3
+      }
+    },
+    "file_management": {
+      "available": [
+        "H2S240",
+        "HS",
+        "OG2K",
+        "OG35K",
+        "OG3K",
+        "OG4K",
+        "S16"
+      ],
+      "explicit_enable_count": 1,
+      "enabled_labels": [
+        "H2S240"
+      ],
+      "record_valid": true,
+      "ui_owner": "0x452a5840",
+      "ui_header": [
+        843465554,
+        0,
+        1159729856,
+        1159623256,
+        3331322648,
+        0,
+        0
+      ]
+    }
+  }
+}

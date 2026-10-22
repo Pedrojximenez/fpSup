@@ -1,0 +1,20 @@
+test_save_command_is_not_bound_to_button_value (test_virtual_rcd.NativeUI) ... ok
+test_settings_page_matches_reference_and_keeps_rate_variants (test_virtual_rcd.NativeUI) ... ok
+test_tool_settings_return_to_manager_with_native_state_machine (test_virtual_rcd.NativeUI) ... ERROR
+
+======================================================================
+ERROR: test_tool_settings_return_to_manager_with_native_state_machine (test_virtual_rcd.NativeUI)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_virtual_rcd.py", line 369, in test_tool_settings_return_to_manager_with_native_state_machine
+    matches = PG.native_switch(pages, queries)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/sl_pages.py", line 358, in native_switch
+    probe.open(blob=pack, magic=False, cursor=12, version=VERSION)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/research/ui/tools/nbu_probe/nbu_probe.py", line 484, in open
+    raise ProbeError("synthetic container too large")
+nbu_probe.ProbeError: synthetic container too large
+
+----------------------------------------------------------------------
+Ran 3 tests in 1.295s
+
+FAILED (errors=1)

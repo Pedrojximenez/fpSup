@@ -1,0 +1,26 @@
+{
+  "status": "passed",
+  "camera_operations": false,
+  "fp_input_conversion_calibrated": false,
+  "on_camera_ready": false,
+  "candidates": [
+    {
+      "file": "ARRI_LogC3-to-Gamma24_Rec709_D65-Classic_33.cube",
+      "source_preserved_exactly": true,
+      "source_sha256": "29212a71808ab22f2819b904b3730fa4231b5841d883e43ec17610096dc38879",
+      "nodes": 35937,
+      "float32_bytes": 431244,
+      "float32_max_absolute_node_error": 2.9800415024539006e-08,
+      "prepared_settings": "prepared-classic/settings.json"
+    },
+    {
+      "file": "ARRI_LogC3-to-Gamma24_Rec709_D65-v1_33.cube",
+      "source_preserved_exactly": true,
+      "source_sha256": "241aff344709aa90b468f8658144888db38f29f9aa1b3c0d917cf327ca3b354e",
+      "nodes": 35937,
+      "float32_bytes": 431244,
+      "float32_max_absolute_node_error": 2.9800415024539006e-08,
+      "prepared_settings": "prepared-v1/settings.json"
+    }
+  ]
+}

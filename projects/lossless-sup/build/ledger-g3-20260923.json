@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "kind": "live_g3_read_only_final_flush",
+  "date": "2026-09-23",
+  "operator_scope": "live camera, read-only observer; no codec call, no allocation, no DNG mutation",
+  "camera": {
+    "model": "w71c1",
+    "firmware": "5.02.0.V91",
+    "git_hash": "13aa621060efff11aaba9b21ad925005302605cf",
+    "media": "SD",
+    "backend": "stock CinemaDNG writer"
+  },
+  "source": {
+    "commit": null,
+    "worktree_dirty": null,
+    "git_available": false,
+    "files": {
+      "fpSup/raw/lossless_codec/exact_flush_writer_probe.S": "d0a156a74bf56e1e9a0f81ef65d9ad30aa793376c9fcca5bdeab7f6a1febc73f",
+      "fpSup/raw/lossless_codec/exact_flush_writer_probe.py": "869fc36f20f1929afbac28eef0bd6120affa32b96f847ba5b0c30908f7cb9ac5",
+      "fpSup/raw/lossless_codec/probe_placement.py": "c73c5d5e555b6eb20d7a84f15a296f39d9101e9b0501f58a42518f995020363d"
+    }
+  },
+  "hook": {
+    "site": "0xC03A5490",
+    "original": "0xEB0BD652",
+    "installed": "0xEB0E22FB",
+    "restored": "0xEB0BD652",
+    "target": "0xC069ADE0",
+    "context_guard": "8 words at 0xC03A5484..0xC03A54A4 verified"
+  },
+  "lease": {
+    "kind": "cave claim (first live use)",
+    "code": "0xC072E084",
+    "code_bytes": 480,
+    "state": "0xC072E264",
+    "state_bytes": 256,
+    "arena": "0xC072E064..0xC072EFB4",
+    "boot_id": 14847342,
+    "publication": "rom-dcache-icache/callfn/v1, between the code write and the hook write"
+  },
+  "frames": {
+    "entered": 1,
+    "finished": 1
+  },
+  "timing": {
+    "flush_elapsed_us": 372,
+    "budget_24p_us": 41708,
+    "fraction_of_budget": 0.0089,
+    "t0": "0x20C70D07",
+    "t1": "0x20C70E7B"
+  },
+  "integrity": {
+    "writer_list": {
+      "node_count": 1,
+      "node_next": 0,
+      "node_buffer": "0x53B02C00",
+      "node_length": 3244544,
+      "node_kind": 2,
+      "head_equals_expected": true
+    },
+    "dng_magic": "0x002A4949",
+    "shape_flags": "0x1FF",
+    "shape_verdict": "PASS",
+    "flush_return_64bit": {
+      "low": 3244544,
+      "high": 0
+    }
+  },
+  "notes": [
+    "Two defects were found and fixed while running this stage. The install survey used the claimed CODE with the stale fixed CODE_LIMIT, so it tried to read 9 KB in one mem get and every word came back omitted. And cache publication ran BEFORE the image was written, publishing an empty region; it now runs between the writes and the hook write, with a test asserting that order.",
+    "The first live arm of 2026-09-23 therefore ran with an unpublished image. It was restored without being fired."
+  ],
+  "explicitly_established": [
+    {
+      "level": "L",
+      "claim": "the writer registers exactly one node per FHD frame: {buffer, length, kind=2}, node_next=0, and the list head is that node"
+    },
+    {
+      "level": "L",
+      "claim": "the flush call at 0xC03A5490 -> 0xC069ADE0 consumes that list and returns the full 3,244,544-byte length as a 64-bit value"
+    },
+    {
+      "level": "L",
+      "claim": "the flush call occupies 372 us, 0.89% of the 23.976 frame budget"
+    },
+    {
+      "level": "L",
+      "claim": "the exact FHD writer shape is stable: all nine shape flags set, DNG magic present"
+    },
+    {
+      "level": "L",
+      "claim": "a cave claim, ROM cache publication and a computed armed word work on the camera; the probe self-restored its hook"
+    }
+  ],
+  "explicitly_not_established": [
+    "that the bytes have physically reached the card when the flush returns: 3,244,544 bytes in 372 us implies 8.7 GB/s, so this is a submit or accept, not a card write",
+    "source buffer lifetime, which is the question the stage was meant to settle; the firmware's own 8-deep buffer ring is the only indication and it points the other way",
+    "shape stability across more than one frame; count is 1",
+    "flush p50/p95/p99/max, which G3 asks for and one sample cannot give",
+    "behaviour across different SD cards",
+    "backlog growth, missed completions or double completions over a run",
+    "thermal behaviour",
+    "anything about injecting a different buffer or length into that node"
+  ]
+}

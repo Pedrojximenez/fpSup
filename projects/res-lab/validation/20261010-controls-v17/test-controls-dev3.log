@@ -1,0 +1,30 @@
+test_binning_recipe_survives_save_commit_and_real_driver_shims (test_reslab_controls.ControlsTests) ... FAIL
+test_filters_cover_sensor_areas_width_buckets_and_stable_sort (test_reslab_controls.ControlsTests) ... FAIL
+test_output_lock_free_auto_and_crop_lock_are_separate (test_reslab_controls.ControlsTests) ... ok
+
+======================================================================
+FAIL: test_binning_recipe_survives_save_commit_and_real_driver_shims (test_reslab_controls.ControlsTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_reslab_controls.py", line 89, in test_binning_recipe_survives_save_commit_and_real_driver_shims
+    regs=V.RC.Cam.callr(c,site,r0=0x1234,r1=driver,r4=0x5678,sp=V.T.STACK-0x1000)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/res-custom/test_v3_rescustom.py", line 387, in callr
+    raise self.error
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/v3/test_v3.py", line 140, in _safe_hook
+    self._hook(mu, addr, size, data)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_virtual_rcd.py", line 94, in _hook
+    raise AssertionError(f'unmodeled firmware execution {addr:#x}')
+AssertionError: unmodeled firmware execution 0xc032ddf4
+
+======================================================================
+FAIL: test_filters_cover_sensor_areas_width_buckets_and_stable_sort (test_reslab_controls.ControlsTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_reslab_controls.py", line 24, in test_filters_cover_sensor_areas_width_buckets_and_stable_sort
+    self.assertTrue(groups[-1],area)
+AssertionError: set() is not true : 6
+
+----------------------------------------------------------------------
+Ran 3 tests in 95.738s
+
+FAILED (failures=2)

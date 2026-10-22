@@ -1,0 +1,14 @@
+test_archived_geometry_sensor240_native30_and_original_writer (__main__.H2Rcd) ... ERROR
+
+======================================================================
+ERROR: test_archived_geometry_sensor240_native30_and_original_writer (__main__.H2Rcd)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/test_h2_rcd.py", line 80, in test_archived_geometry_sensor240_native30_and_original_writer
+    self.assertEqual(bytes(cam.mu.mem_read(params,16)),descriptor)
+TypeError: call() got an unexpected keyword argument 'r3'
+
+----------------------------------------------------------------------
+Ran 1 test in 27.082s
+
+FAILED (errors=1)

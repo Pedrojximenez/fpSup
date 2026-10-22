@@ -1,0 +1,77 @@
+{
+  "result": "HDMI-removed SD failed: req94/fin94, native vbuf. User returned SSD reporting similar early stops; four new takes are short and the first two have displaced TIFF headers. USB return shows a new resident allocation with FLAG/CUR/FPSLATCH0 and no native log, so individual SSD takes cannot yet be assigned to the four-word-patched configuration.",
+  "other_boot_differences": {
+    "before_consumer": {
+      "flag": 1,
+      "current": 1,
+      "res_value": 2,
+      "format_latch": 0,
+      "nrows": 2,
+      "nentries": 17,
+      "nmodes": 2
+    },
+    "after_consumer": {
+      "flag": 1,
+      "current": 1,
+      "res_value": 2,
+      "format_latch": 0,
+      "nrows": 2,
+      "nentries": 14,
+      "nmodes": 3
+    },
+    "before_vm_words": [
+      230,
+      12,
+      1,
+      0,
+      0,
+      21627210,
+      394126,
+      30,
+      1159734880,
+      1159734944,
+      1159735080,
+      1159735152,
+      1159735240,
+      1159735296,
+      0,
+      0
+    ],
+    "after_vm_words": [
+      230,
+      12,
+      1,
+      0,
+      0,
+      21627210,
+      394126,
+      30,
+      1159734368,
+      1159734432,
+      1159734568,
+      1159734640,
+      1159734728,
+      1159734784,
+      0,
+      0
+    ],
+    "clamp_comparison": {
+      "offset": 60,
+      "word_index": 15,
+      "before": 0,
+      "after": 0,
+      "correction": "The previous prose incorrectly claimed1 to0; both preserved raw arrays show0."
+    }
+  },
+  "note": "Not an exact one-variable trial: power restart cleared the prior idle producer Apply and rebuilt the mode table. The H2 entry and four rate edits are the same. VM.CLAMP is0 in both captured raw arrays; the earlier1-to0 claim was an indexing error. Neither SD combination passed sustained recording.",
+  "expected_file_bandwidth_MBps": 262.5777422577423,
+  "bandwidth_note": "Expected demand from timing and file size, not measured sensor cadence. This exceeds the user estimated SD200MB/s.",
+  "current_ram_patch": "cleared; USB return allocation differs and FLAG/CUR/FPSLATCH are0",
+  "current_mode": null,
+  "current_processing_fps": null,
+  "current_nominal": null,
+  "current_application_rate": "30000/1001",
+  "sensor_timing_fps": 239.76023976023976,
+  "ssd_request": "Keep power on and HDMI disconnected; no reboot/settings change; one20s take, no replay if auto-stopped; reconnect camera USB.",
+  "ssd_evidence": "sensor-only-no-hdmi-ssd-return/ssd-files/manifest.json"
+}

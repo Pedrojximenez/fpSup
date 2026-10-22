@@ -1,0 +1,29 @@
+fpGyroSup native MovieSaving transaction r12
+Build date: 2026-08-31
+Camera/firmware: SIGMA fp Ver.5.02
+Build type: release AutoRun, no USB shell
+
+Purpose:
+- Keep DNG/GYR/GCSV/JSON inside one native movie-saving transaction.
+- Extend category-0x80 MovieSaving (byte 2) through the official status updater.
+- Use the same status that the firmware's core recording manager checks before
+  admitting CinemaDNG start and that WaitPowerOff observes before shutdown.
+- Acquire only from a fully idle native snapshot, then repeat the complete
+  status check against a fresh snapshot immediately before publication.
+- Keep MovieSaving owned across all GCSV yields, JSON, retries, and queued
+  takes; release it from the scheduler's single common exit.
+
+Removed from r11:
+- StillImageProcessing ownership.
+- WaitEnc / SetWaitEnc / DoWaitEnc.
+- EventMessageMgr 0x46 wake and the 5 ms UI-state handoff.
+
+Unchanged from r11:
+- GCSV machine code is byte-for-byte identical, including 16 KiB writes and
+  5 ms yields.
+- No boot scan or recovery rewrite.
+- No global F_WRITE phase probe.
+- AutoRun.txt and VSHL.BIN are byte-for-byte identical.
+
+Every ordinary image restores the original C03660E8 firmware prologue left by
+an earlier diagnostic boot before C072F000 can be reused.

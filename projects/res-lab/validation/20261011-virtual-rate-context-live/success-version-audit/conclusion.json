@@ -1,0 +1,51 @@
+{
+  "clip": "/Users/dido/Movies/fpsup/hightspeed/A001_193",
+  "camera_recording_start": "2026-09-29T09:14:25+08:00",
+  "last_frame_file_time": "2026-09-29T09:14:46+08:00",
+  "date_confirmation": "First/middle/last internal DNG EXIF, WAV RIFF and original filesystem timestamps agree",
+  "likely_version_family": "September 29 H2 RAM prototype, before the new DNG rate hook was successfully installed",
+  "evidence": [
+    "08:55 local verified H2 install, M12 and complete 27-word recipe agreement",
+    "09:14 camera clip time falls before 09:16 host first new rate-hook install attempt",
+    "09:16 install failed in preflight with zero writes; old H2 was reported retained",
+    "1008x672 / 992x662 / 12-bit / FrameRate30000/1001 agrees with this predecessor"
+  ],
+  "historical_clock_correlation": {
+    "same_camera_serial": 91411817,
+    "capture_windows": [
+      {
+        "host_start": "2026-09-29T00:55:10.107000+00:00",
+        "host_end": "2026-09-29T00:55:42.199000+00:00",
+        "camera_wall_time": "2026-09-29T08:56:38",
+        "camera_ahead_seconds": [
+          55.801,
+          88.893
+        ]
+      },
+      {
+        "host_start": "2026-09-29T01:33:10.115000+00:00",
+        "host_end": "2026-09-29T01:33:13.453000+00:00",
+        "camera_wall_time": "2026-09-29T09:34:09",
+        "camera_ahead_seconds": [
+          55.547,
+          59.885
+        ]
+      }
+    ],
+    "intersected_camera_ahead_seconds": [
+      55.801,
+      59.885
+    ],
+    "inferred_clip_host_local_start_range": [
+      "2026-09-29T09:13:25.115000+08:00",
+      "2026-09-29T09:13:30.199000+08:00"
+    ],
+    "assumptions": "Same camera clock and +08:00 wall-time setting across two nearby captures. Capture occurs between host tool start and successful result. Integer timestamp granularity included.",
+    "caveat": "Bounded historical clock inference; no independent oscillator calibration or exact recorded-frame timestamp."
+  },
+  "exact_binary_or_commit_identified": false,
+  "r10_is_exact_successful_clip_version": false,
+  "r10_status": "A different later success reference, built October 1; not the September 29 clip provenance",
+  "new_difference": "Historical H2 used native p13, leaving PARAM+0x88=0; r10's p83 leaves it at4",
+  "limitations": "No archived record explicitly names this exact September29 A001_193 take, no embedded custom build hash found in examined standard tags, and no full recorded canvas/installed binary snapshot at the clip time. This is a strongly supported version-family inference, not exact binary identification or a proven repair."
+}

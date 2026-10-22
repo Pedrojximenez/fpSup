@@ -1,0 +1,23 @@
+{
+  "context": "standby after trial; inactive fields may be stale, not atomic record snapshot",
+  "channels": [
+    {
+      "channel": 0,
+      "words": {
+        "0xc31df574": 1114636288,
+        "0xc31df5e8": 0,
+        "0xc31dfb78": 0
+      },
+      "fps": 60.0
+    },
+    {
+      "channel": 1,
+      "words": {
+        "0xc31df724": 0,
+        "0xc31df798": 0,
+        "0xc31e0600": 0
+      },
+      "fps": 0.0
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "source": "Actual archived 25-pair H2 live readback applied to independent native profile defaults",
+  "profiles_source": "/Users/dido/Developer.localized/SIGMAfp_re/research/other/external/FP3K-technical-handoff-2026-09-10/analysis/firmware/raw-profiles.json",
+  "profiles_sha256": "9139be317dc048081801093f40d337a20cbfc7756b317b296ccd6944707914d2",
+  "runtime_pairs": {
+    "0x0": 1008,
+    "0x4": 672,
+    "0xc": 1008,
+    "0x10": 672,
+    "0x20": 992,
+    "0x24": 992,
+    "0x28": 662,
+    "0x2c": 662,
+    "0x60": 2048,
+    "0x64": 2048,
+    "0x80": 7,
+    "0x84": 7,
+    "0x90": 1,
+    "0xb0": 1,
+    "0xc0": 0,
+    "0xd0": 1024,
+    "0xd4": 1024,
+    "0xd8": 1008,
+    "0xdc": 1008,
+    "0xe0": 672,
+    "0xe4": 672,
+    "0xf4": 1008,
+    "0xf8": 672,
+    "0xfc": 1073741824,
+    "0x100": 1073741824
+  },
+  "p13_vs_p83_after_runtime_pairs_excluding_fps_latch": {
+    "0x88": [
+      0,
+      4
+    ]
+  },
+  "engine_fps_word_excluded": "Both paths replace +0x30 from FPSLATCH. No full 65-word canvas snapshot of A001_193 is available.",
+  "early_stop_root_cause_established": false,
+  "hardware_changes_made": false
+}

@@ -1,0 +1,2760 @@
+{
+  "mode_count": 70,
+  "cases": 142800,
+  "issues": {
+    "width_exceeds_cut_readout": 16032,
+    "height_exceeds_cut_readout": 14112,
+    "record_cannot_hold_visible_crop": 5430
+  },
+  "examples": [
+    {
+      "mode": 0,
+      "raw": [
+        6064,
+        4042
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "bin": [
+        1,
+        1
+      ],
+      "ratio": 2,
+      "crop_requested": [
+        6000,
+        0
+      ],
+      "output_requested": [
+        6064,
+        4042
+      ],
+      "lead": 0,
+      "result": [
+        592,
+        320,
+        1,
+        1,
+        6000,
+        0,
+        2,
+        208,
+        1306,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        6064,
+        330,
+        224,
+        1316,
+        1,
+        208,
+        592,
+        1306,
+        320,
+        16,
+        1,
+        0,
+        1023,
+        1023,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1023,
+        12542,
+        224,
+        6064,
+        1316,
+        330,
+        6064,
+        4042,
+        1065353216,
+        1065353216
+      ],
+      "errors": [
+        "width_exceeds_cut_readout"
+      ]
+    },
+    {
+      "mode": 0,
+      "raw": [
+        6064,
+        4042
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "bin": [
+        1,
+        1
+      ],
+      "ratio": 2,
+      "crop_requested": [
+        6000,
+        0
+      ],
+      "output_requested": [
+        6064,
+        4042
+      ],
+      "lead": 1,
+      "result": [
+        592,
+        320,
+        1,
+        1,
+        6000,
+        0,
+        2,
+        208,
+        1306,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        6064,
+        330,
+        224,
+        1316,
+        1,
+        208,
+        592,
+        1306,
+        320,
+        16,
+        1,
+        0,
+        1023,
+        1023,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1023,
+        12542,
+        224,
+        6064,
+        1316,
+        330,
+        6064,
+        4042,
+        1065353216,
+        1065353216
+      ],
+      "errors": [
+        "width_exceeds_cut_readout"
+      ]
+    },
+    {
+      "mode": 0,
+      "raw": [
+        6064,
+        4042
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "bin": [
+        1,
+        1
+      ],
+      "ratio": 2,
+      "crop_requested": [
+        6000,
+        0
+      ],
+      "output_requested": [
+        16,
+        2
+      ],
+      "lead": 0,
+      "result": [
+        592,
+        320,
+        1,
+        1,
+        6000,
+        0,
+        2,
+        208,
+        1306,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        6064,
+        330,
+        224,
+        1316,
+        1,
+        208,
+        592,
+        1306,
+        320,
+        16,
+        1,
+        0,
+        1023,
+        1023,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1023,
+        12542,
+        224,
+        6064,
+        1316,
+        330,
+        6064,
+        4042,
+        1065353216,
+        1065353216
+      ],
+      "errors": [
+        "width_exceeds_cut_readout"
+      ]
+    },
+    {
+      "mode": 0,
+      "raw": [
+        6064,
+        4042
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "bin": [
+        1,
+        1
+      ],
+      "ratio": 2,
+      "crop_requested": [
+        6000,
+        0
+      ],
+      "output_requested": [
+        16,
+        2
+      ],
+      "lead": 1,
+      "result": [
+        592,
+        320,
+        1,
+        1,
+        6000,
+        0,
+        2,
+        208,
+        1306,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        6064,
+        330,
+        224,
+        1316,
+        1,
+        208,
+        592,
+        1306,
+        320,
+        16,
+        1,
+        0,
+        1023,
+        1023,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1023,
+        12542,
+        224,
+        6064,
+        1316,
+        330,
+        6064,
+        4042,
+        1065353216,
+        1065353216
+      ],
+      "errors": [
+        "width_exceeds_cut_readout"
+      ]
+    },
+    {
+      "mode": 0,
+      "raw": [
+        6064,
+        4042
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "bin": [
+        1,
+        1
+      ],
+      "ratio": 2,
+      "crop_requested": [
+        6000,
+        0
+      ],
+      "output_requested": [
+        3024,
+        2020
+      ],
+      "lead": 0,
+      "result": [
+        592,
+        320,
+        1,
+        1,
+        6000,
+        0,
+        2,
+        208,
+        1306,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        6064,
+        330,
+        224,
+        1316,
+        1,
+        208,
+        592,
+        1306,
+        320,
+        16,
+        1,
+        0,
+        1023,
+        1023,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1023,
+        12542,
+        224,
+        6064,
+        1316,
+        330,
+        6064,
+        4042,
+        1065353216,
+        1065353216
+      ],
+      "errors": [
+        "width_exceeds_cut_readout"
+      ]
+    },
+    {
+      "mode": 0,
+      "raw": [
+        6064,
+        4042
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "bin": [
+        1,
+        1
+      ],
+      "ratio": 2,
+      "crop_requested": [
+        6000,
+        0
+      ],
+      "output_requested": [
+        3024,
+        2020
+      ],
+      "lead": 1,
+      "result": [
+        592,
+        320,
+        1,
+        1,
+        6000,
+        0,
+        2,
+        208,
+        1306,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        6064,
+        330,
+        224,
+        1316,
+        1,
+        208,
+        592,
+        1306,
+        320,
+        16,
+        1,
+        0,
+        1023,
+        1023,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1023,
+        12542,
+        224,
+        6064,
+        1316,
+        330,
+        6064,
+        4042,
+        1065353216,
+        1065353216
+      ],
+      "errors": [
+        "width_exceeds_cut_readout"
+      ]
+    },
+    {
+      "mode": 0,
+      "raw": [
+        6064,
+        4042
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "bin": [
+        1,
+        1
+      ],
+      "ratio": 2,
+      "crop_requested": [
+        0,
+        3978
+      ],
+      "output_requested": [
+        6064,
+        4042
+      ],
+      "lead": 0,
+      "result": [
+        592,
+        320,
+        1,
+        1,
+        0,
+        3978,
+        2,
+        1968,
+        106,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        608,
+        4042,
+        1984,
+        116,
+        1,
+        1968,
+        592,
+        106,
+        320,
+        16,
+        1,
+        0,
+        1023,
+        10213,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1023,
+        1023,
+        1984,
+        608,
+        116,
+        4042,
+        6064,
+        4042,
+        1065353216,
+        1065353216
+      ],
+      "errors": [
+        "height_exceeds_cut_readout"
+      ]
+    },
+    {
+      "mode": 0,
+      "raw": [
+        6064,
+        4042
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "bin": [
+        1,
+        1
+      ],
+      "ratio": 2,
+      "crop_requested": [
+        0,
+        3978
+      ],
+      "output_requested": [
+        6064,
+        4042
+      ],
+      "lead": 1,
+      "result": [
+        592,
+        320,
+        1,
+        1,
+        0,
+        3978,
+        2,
+        1968,
+        106,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        608,
+        4042,
+        1984,
+        116,
+        1,
+        1968,
+        592,
+        106,
+        320,
+        16,
+        1,
+        0,
+        1023,
+        10213,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1023,
+        1023,
+        1984,
+        608,
+        116,
+        4042,
+        6064,
+        4042,
+        1065353216,
+        1065353216
+      ],
+      "errors": [
+        "height_exceeds_cut_readout"
+      ]
+    },
+    {
+      "mode": 0,
+      "raw": [
+        6064,
+        4042
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "bin": [
+        1,
+        1
+      ],
+      "ratio": 2,
+      "crop_requested": [
+        0,
+        3978
+      ],
+      "output_requested": [
+        16,
+        2
+      ],
+      "lead": 0,
+      "result": [
+        592,
+        320,
+        1,
+        1,
+        0,
+        3978,
+        2,
+        1968,
+        106,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        608,
+        4042,
+        1984,
+        116,
+        1,
+        1968,
+        592,
+        106,
+        320,
+        16,
+        1,
+        0,
+        1023,
+        10213,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1023,
+        1023,
+        1984,
+        608,
+        116,
+        4042,
+        6064,
+        4042,
+        1065353216,
+        1065353216
+      ],
+      "errors": [
+        "height_exceeds_cut_readout"
+      ]
+    },
+    {
+      "mode": 0,
+      "raw": [
+        6064,
+        4042
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "bin": [
+        1,
+        1
+      ],
+      "ratio": 2,
+      "crop_requested": [
+        0,
+        3978
+      ],
+      "output_requested": [
+        16,
+        2
+      ],
+      "lead": 1,
+      "result": [
+        592,
+        320,
+        1,
+        1,
+        0,
+        3978,
+        2,
+        1968,
+        106,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        608,
+        4042,
+        1984,
+        116,
+        1,
+        1968,
+        592,
+        106,
+        320,
+        16,
+        1,
+        0,
+        1023,
+        10213,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1023,
+        1023,
+        1984,
+        608,
+        116,
+        4042,
+        6064,
+        4042,
+        1065353216,
+        1065353216
+      ],
+      "errors": [
+        "height_exceeds_cut_readout"
+      ]
+    },
+    {
+      "mode": 0,
+      "raw": [
+        6064,
+        4042
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "bin": [
+        1,
+        1
+      ],
+      "ratio": 2,
+      "crop_requested": [
+        0,
+        3978
+      ],
+      "output_requested": [
+        3024,
+        2020
+      ],
+      "lead": 0,
+      "result": [
+        592,
+        320,
+        1,
+        1,
+        0,
+        3978,
+        2,
+        1968,
+        106,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        608,
+        4042,
+        1984,
+        116,
+        1,
+        1968,
+        592,
+        106,
+        320,
+        16,
+        1,
+        0,
+        1023,
+        10213,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1023,
+        1023,
+        1984,
+        608,
+        116,
+        4042,
+        6064,
+        4042,
+        1065353216,
+        1065353216
+      ],
+      "errors": [
+        "height_exceeds_cut_readout"
+      ]
+    },
+    {
+      "mode": 0,
+      "raw": [
+        6064,
+        4042
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "bin": [
+        1,
+        1
+      ],
+      "ratio": 2,
+      "crop_requested": [
+        0,
+        3978
+      ],
+      "output_requested": [
+        3024,
+        2020
+      ],
+      "lead": 1,
+      "result": [
+        592,
+        320,
+        1,
+        1,
+        0,
+        3978,
+        2,
+        1968,
+        106,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        608,
+        4042,
+        1984,
+        116,
+        1,
+        1968,
+        592,
+        106,
+        320,
+        16,
+        1,
+        0,
+        1023,
+        10213,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1023,
+        1023,
+        1984,
+        608,
+        116,
+        4042,
+        6064,
+        4042,
+        1065353216,
+        1065353216
+      ],
+      "errors": [
+        "height_exceeds_cut_readout"
+      ]
+    },
+    {
+      "mode": 0,
+      "raw": [
+        6064,
+        4042
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "bin": [
+        1,
+        1
+      ],
+      "ratio": 2,
+      "crop_requested": [
+        6000,
+        3978
+      ],
+      "output_requested": [
+        6064,
+        4042
+      ],
+      "lead": 0,
+      "result": [
+        592,
+        320,
+        1,
+        1,
+        6000,
+        3978,
+        2,
+        208,
+        106,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        6064,
+        4042,
+        224,
+        116,
+        1,
+        208,
+        592,
+        106,
+        320,
+        16,
+        1,
+        0,
+        1023,
+        1023,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1023,
+        1023,
+        224,
+        6064,
+        116,
+        4042,
+        6064,
+        4042,
+        1065353216,
+        1065353216
+      ],
+      "errors": [
+        "width_exceeds_cut_readout",
+        "height_exceeds_cut_readout"
+      ]
+    },
+    {
+      "mode": 0,
+      "raw": [
+        6064,
+        4042
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "bin": [
+        1,
+        1
+      ],
+      "ratio": 2,
+      "crop_requested": [
+        6000,
+        3978
+      ],
+      "output_requested": [
+        6064,
+        4042
+      ],
+      "lead": 1,
+      "result": [
+        592,
+        320,
+        1,
+        1,
+        6000,
+        3978,
+        2,
+        208,
+        106,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        6064,
+        4042,
+        224,
+        116,
+        1,
+        208,
+        592,
+        106,
+        320,
+        16,
+        1,
+        0,
+        1023,
+        1023,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1023,
+        1023,
+        224,
+        6064,
+        116,
+        4042,
+        6064,
+        4042,
+        1065353216,
+        1065353216
+      ],
+      "errors": [
+        "width_exceeds_cut_readout",
+        "height_exceeds_cut_readout"
+      ]
+    },
+    {
+      "mode": 0,
+      "raw": [
+        6064,
+        4042
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "bin": [
+        1,
+        1
+      ],
+      "ratio": 2,
+      "crop_requested": [
+        6000,
+        3978
+      ],
+      "output_requested": [
+        16,
+        2
+      ],
+      "lead": 0,
+      "result": [
+        592,
+        320,
+        1,
+        1,
+        6000,
+        3978,
+        2,
+        208,
+        106,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        6064,
+        4042,
+        224,
+        116,
+        1,
+        208,
+        592,
+        106,
+        320,
+        16,
+        1,
+        0,
+        1023,
+        1023,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1023,
+        1023,
+        224,
+        6064,
+        116,
+        4042,
+        6064,
+        4042,
+        1065353216,
+        1065353216
+      ],
+      "errors": [
+        "width_exceeds_cut_readout",
+        "height_exceeds_cut_readout"
+      ]
+    },
+    {
+      "mode": 0,
+      "raw": [
+        6064,
+        4042
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "bin": [
+        1,
+        1
+      ],
+      "ratio": 2,
+      "crop_requested": [
+        6000,
+        3978
+      ],
+      "output_requested": [
+        16,
+        2
+      ],
+      "lead": 1,
+      "result": [
+        592,
+        320,
+        1,
+        1,
+        6000,
+        3978,
+        2,
+        208,
+        106,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        6064,
+        4042,
+        224,
+        116,
+        1,
+        208,
+        592,
+        106,
+        320,
+        16,
+        1,
+        0,
+        1023,
+        1023,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1023,
+        1023,
+        224,
+        6064,
+        116,
+        4042,
+        6064,
+        4042,
+        1065353216,
+        1065353216
+      ],
+      "errors": [
+        "width_exceeds_cut_readout",
+        "height_exceeds_cut_readout"
+      ]
+    },
+    {
+      "mode": 0,
+      "raw": [
+        6064,
+        4042
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "bin": [
+        1,
+        1
+      ],
+      "ratio": 2,
+      "crop_requested": [
+        6000,
+        3978
+      ],
+      "output_requested": [
+        3024,
+        2020
+      ],
+      "lead": 0,
+      "result": [
+        592,
+        320,
+        1,
+        1,
+        6000,
+        3978,
+        2,
+        208,
+        106,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        6064,
+        4042,
+        224,
+        116,
+        1,
+        208,
+        592,
+        106,
+        320,
+        16,
+        1,
+        0,
+        1023,
+        1023,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1023,
+        1023,
+        224,
+        6064,
+        116,
+        4042,
+        6064,
+        4042,
+        1065353216,
+        1065353216
+      ],
+      "errors": [
+        "width_exceeds_cut_readout",
+        "height_exceeds_cut_readout"
+      ]
+    },
+    {
+      "mode": 0,
+      "raw": [
+        6064,
+        4042
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "bin": [
+        1,
+        1
+      ],
+      "ratio": 2,
+      "crop_requested": [
+        6000,
+        3978
+      ],
+      "output_requested": [
+        3024,
+        2020
+      ],
+      "lead": 1,
+      "result": [
+        592,
+        320,
+        1,
+        1,
+        6000,
+        3978,
+        2,
+        208,
+        106,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        6064,
+        4042,
+        224,
+        116,
+        1,
+        208,
+        592,
+        106,
+        320,
+        16,
+        1,
+        0,
+        1023,
+        1023,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1023,
+        1023,
+        224,
+        6064,
+        116,
+        4042,
+        6064,
+        4042,
+        1065353216,
+        1065353216
+      ],
+      "errors": [
+        "width_exceeds_cut_readout",
+        "height_exceeds_cut_readout"
+      ]
+    },
+    {
+      "mode": 98,
+      "raw": [
+        3032,
+        2012
+      ],
+      "scale": [
+        2,
+        2
+      ],
+      "bin": [
+        3,
+        1
+      ],
+      "ratio": 7,
+      "crop_requested": [
+        0,
+        0
+      ],
+      "output_requested": [
+        3032,
+        2012
+      ],
+      "lead": 0,
+      "result": [
+        1104,
+        400,
+        3,
+        1,
+        0,
+        0,
+        7,
+        1376,
+        1308,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        1008,
+        410,
+        704,
+        410,
+        1,
+        688,
+        1104,
+        400,
+        400,
+        16,
+        1,
+        1,
+        1023,
+        1023,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1675,
+        5025,
+        704,
+        1008,
+        410,
+        410,
+        3032,
+        2012,
+        1073741824,
+        1073741824
+      ],
+      "errors": [
+        "width_exceeds_cut_readout",
+        "record_cannot_hold_visible_crop"
+      ]
+    },
+    {
+      "mode": 98,
+      "raw": [
+        3032,
+        2012
+      ],
+      "scale": [
+        2,
+        2
+      ],
+      "bin": [
+        3,
+        1
+      ],
+      "ratio": 7,
+      "crop_requested": [
+        0,
+        0
+      ],
+      "output_requested": [
+        3032,
+        2012
+      ],
+      "lead": 1,
+      "result": [
+        1104,
+        400,
+        3,
+        1,
+        0,
+        0,
+        7,
+        1376,
+        1308,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        1008,
+        410,
+        704,
+        410,
+        1,
+        688,
+        1104,
+        400,
+        400,
+        16,
+        1,
+        1,
+        1023,
+        1023,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1675,
+        5025,
+        704,
+        1008,
+        410,
+        410,
+        3032,
+        2012,
+        1073741824,
+        1073741824
+      ],
+      "errors": [
+        "width_exceeds_cut_readout",
+        "record_cannot_hold_visible_crop"
+      ]
+    },
+    {
+      "mode": 98,
+      "raw": [
+        3032,
+        2012
+      ],
+      "scale": [
+        2,
+        2
+      ],
+      "bin": [
+        3,
+        1
+      ],
+      "ratio": 7,
+      "crop_requested": [
+        0,
+        0
+      ],
+      "output_requested": [
+        16,
+        2
+      ],
+      "lead": 0,
+      "result": [
+        1104,
+        400,
+        3,
+        1,
+        0,
+        0,
+        7,
+        1376,
+        1308,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        1008,
+        410,
+        704,
+        410,
+        1,
+        688,
+        1104,
+        400,
+        400,
+        16,
+        1,
+        1,
+        1023,
+        1023,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1675,
+        5025,
+        704,
+        1008,
+        410,
+        410,
+        3032,
+        2012,
+        1073741824,
+        1073741824
+      ],
+      "errors": [
+        "width_exceeds_cut_readout",
+        "record_cannot_hold_visible_crop"
+      ]
+    },
+    {
+      "mode": 98,
+      "raw": [
+        3032,
+        2012
+      ],
+      "scale": [
+        2,
+        2
+      ],
+      "bin": [
+        3,
+        1
+      ],
+      "ratio": 7,
+      "crop_requested": [
+        0,
+        0
+      ],
+      "output_requested": [
+        16,
+        2
+      ],
+      "lead": 1,
+      "result": [
+        1104,
+        400,
+        3,
+        1,
+        0,
+        0,
+        7,
+        1376,
+        1308,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        1008,
+        410,
+        704,
+        410,
+        1,
+        688,
+        1104,
+        400,
+        400,
+        16,
+        1,
+        1,
+        1023,
+        1023,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1675,
+        5025,
+        704,
+        1008,
+        410,
+        410,
+        3032,
+        2012,
+        1073741824,
+        1073741824
+      ],
+      "errors": [
+        "width_exceeds_cut_readout",
+        "record_cannot_hold_visible_crop"
+      ]
+    },
+    {
+      "mode": 98,
+      "raw": [
+        3032,
+        2012
+      ],
+      "scale": [
+        2,
+        2
+      ],
+      "bin": [
+        3,
+        1
+      ],
+      "ratio": 7,
+      "crop_requested": [
+        0,
+        0
+      ],
+      "output_requested": [
+        1504,
+        1006
+      ],
+      "lead": 0,
+      "result": [
+        1104,
+        400,
+        3,
+        1,
+        0,
+        0,
+        7,
+        1376,
+        1308,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        1008,
+        410,
+        704,
+        410,
+        1,
+        688,
+        1104,
+        400,
+        400,
+        16,
+        1,
+        1,
+        1023,
+        1023,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1675,
+        5025,
+        704,
+        1008,
+        410,
+        410,
+        3032,
+        2012,
+        1073741824,
+        1073741824
+      ],
+      "errors": [
+        "width_exceeds_cut_readout",
+        "record_cannot_hold_visible_crop"
+      ]
+    },
+    {
+      "mode": 98,
+      "raw": [
+        3032,
+        2012
+      ],
+      "scale": [
+        2,
+        2
+      ],
+      "bin": [
+        3,
+        1
+      ],
+      "ratio": 7,
+      "crop_requested": [
+        0,
+        0
+      ],
+      "output_requested": [
+        1504,
+        1006
+      ],
+      "lead": 1,
+      "result": [
+        1104,
+        400,
+        3,
+        1,
+        0,
+        0,
+        7,
+        1376,
+        1308,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        1008,
+        410,
+        704,
+        410,
+        1,
+        688,
+        1104,
+        400,
+        400,
+        16,
+        1,
+        1,
+        1023,
+        1023,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1675,
+        5025,
+        704,
+        1008,
+        410,
+        410,
+        3032,
+        2012,
+        1073741824,
+        1073741824
+      ],
+      "errors": [
+        "width_exceeds_cut_readout",
+        "record_cannot_hold_visible_crop"
+      ]
+    },
+    {
+      "mode": 98,
+      "raw": [
+        3032,
+        2012
+      ],
+      "scale": [
+        2,
+        2
+      ],
+      "bin": [
+        3,
+        1
+      ],
+      "ratio": 7,
+      "crop_requested": [
+        1504,
+        1006
+      ],
+      "output_requested": [
+        3032,
+        2012
+      ],
+      "lead": 0,
+      "result": [
+        1104,
+        400,
+        3,
+        1,
+        1504,
+        1006,
+        7,
+        1984,
+        479,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        1008,
+        820,
+        1008,
+        303,
+        1,
+        992,
+        1104,
+        293,
+        400,
+        16,
+        1,
+        1,
+        1023,
+        1023,
+        0,
+        1,
+        0,
+        0,
+        0,
+        2512,
+        2512,
+        1008,
+        1008,
+        303,
+        820,
+        3032,
+        2012,
+        1073741824,
+        1073741824
+      ],
+      "errors": [
+        "width_exceeds_cut_readout",
+        "record_cannot_hold_visible_crop"
+      ]
+    },
+    {
+      "mode": 98,
+      "raw": [
+        3032,
+        2012
+      ],
+      "scale": [
+        2,
+        2
+      ],
+      "bin": [
+        3,
+        1
+      ],
+      "ratio": 7,
+      "crop_requested": [
+        1504,
+        1006
+      ],
+      "output_requested": [
+        3032,
+        2012
+      ],
+      "lead": 1,
+      "result": [
+        1104,
+        400,
+        3,
+        1,
+        1504,
+        1006,
+        7,
+        1984,
+        479,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        1008,
+        820,
+        1008,
+        303,
+        1,
+        992,
+        1104,
+        293,
+        400,
+        16,
+        1,
+        1,
+        1023,
+        1023,
+        0,
+        1,
+        0,
+        0,
+        0,
+        2512,
+        2512,
+        1008,
+        1008,
+        303,
+        820,
+        3032,
+        2012,
+        1073741824,
+        1073741824
+      ],
+      "errors": [
+        "width_exceeds_cut_readout",
+        "record_cannot_hold_visible_crop"
+      ]
+    },
+    {
+      "mode": 98,
+      "raw": [
+        3032,
+        2012
+      ],
+      "scale": [
+        2,
+        2
+      ],
+      "bin": [
+        3,
+        1
+      ],
+      "ratio": 7,
+      "crop_requested": [
+        1504,
+        1006
+      ],
+      "output_requested": [
+        16,
+        2
+      ],
+      "lead": 0,
+      "result": [
+        1104,
+        400,
+        3,
+        1,
+        1504,
+        1006,
+        7,
+        1984,
+        479,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        1008,
+        820,
+        1008,
+        303,
+        1,
+        992,
+        1104,
+        293,
+        400,
+        16,
+        1,
+        1,
+        1023,
+        1023,
+        0,
+        1,
+        0,
+        0,
+        0,
+        2512,
+        2512,
+        1008,
+        1008,
+        303,
+        820,
+        3032,
+        2012,
+        1073741824,
+        1073741824
+      ],
+      "errors": [
+        "width_exceeds_cut_readout",
+        "record_cannot_hold_visible_crop"
+      ]
+    },
+    {
+      "mode": 98,
+      "raw": [
+        3032,
+        2012
+      ],
+      "scale": [
+        2,
+        2
+      ],
+      "bin": [
+        3,
+        1
+      ],
+      "ratio": 7,
+      "crop_requested": [
+        1504,
+        1006
+      ],
+      "output_requested": [
+        16,
+        2
+      ],
+      "lead": 1,
+      "result": [
+        1104,
+        400,
+        3,
+        1,
+        1504,
+        1006,
+        7,
+        1984,
+        479,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        1008,
+        820,
+        1008,
+        303,
+        1,
+        992,
+        1104,
+        293,
+        400,
+        16,
+        1,
+        1,
+        1023,
+        1023,
+        0,
+        1,
+        0,
+        0,
+        0,
+        2512,
+        2512,
+        1008,
+        1008,
+        303,
+        820,
+        3032,
+        2012,
+        1073741824,
+        1073741824
+      ],
+      "errors": [
+        "width_exceeds_cut_readout",
+        "record_cannot_hold_visible_crop"
+      ]
+    },
+    {
+      "mode": 98,
+      "raw": [
+        3032,
+        2012
+      ],
+      "scale": [
+        2,
+        2
+      ],
+      "bin": [
+        3,
+        1
+      ],
+      "ratio": 7,
+      "crop_requested": [
+        1504,
+        1006
+      ],
+      "output_requested": [
+        1504,
+        1006
+      ],
+      "lead": 0,
+      "result": [
+        1104,
+        400,
+        3,
+        1,
+        1504,
+        1006,
+        7,
+        1984,
+        479,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        1008,
+        820,
+        1008,
+        303,
+        1,
+        992,
+        1104,
+        293,
+        400,
+        16,
+        1,
+        1,
+        1023,
+        1023,
+        0,
+        1,
+        0,
+        0,
+        0,
+        2512,
+        2512,
+        1008,
+        1008,
+        303,
+        820,
+        3032,
+        2012,
+        1073741824,
+        1073741824
+      ],
+      "errors": [
+        "width_exceeds_cut_readout",
+        "record_cannot_hold_visible_crop"
+      ]
+    },
+    {
+      "mode": 98,
+      "raw": [
+        3032,
+        2012
+      ],
+      "scale": [
+        2,
+        2
+      ],
+      "bin": [
+        3,
+        1
+      ],
+      "ratio": 7,
+      "crop_requested": [
+        1504,
+        1006
+      ],
+      "output_requested": [
+        1504,
+        1006
+      ],
+      "lead": 1,
+      "result": [
+        1104,
+        400,
+        3,
+        1,
+        1504,
+        1006,
+        7,
+        1984,
+        479,
+        0,
+        0,
+        1
+      ],
+      "canvas": [
+        1008,
+        820,
+        1008,
+        303,
+        1,
+        992,
+        1104,
+        293,
+        400,
+        16,
+        1,
+        1,
+        1023,
+        1023,
+        0,
+        1,
+        0,
+        0,
+        0,
+        2512,
+        2512,
+        1008,
+        1008,
+        303,
+        820,
+        3032,
+        2012,
+        1073741824,
+        1073741824
+      ],
+      "errors": [
+        "width_exceeds_cut_readout",
+        "record_cannot_hold_visible_crop"
+      ]
+    }
+  ],
+  "modes": {
+    "0": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 180,
+        "height_exceeds_cut_readout": 168
+      }
+    },
+    "97": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 180,
+        "height_exceeds_cut_readout": 168
+      }
+    },
+    "98": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 228,
+        "height_exceeds_cut_readout": 180,
+        "record_cannot_hold_visible_crop": 60
+      }
+    },
+    "3": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 180,
+        "height_exceeds_cut_readout": 168
+      }
+    },
+    "121": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 180,
+        "height_exceeds_cut_readout": 168
+      }
+    },
+    "6": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 192,
+        "height_exceeds_cut_readout": 180
+      }
+    },
+    "122": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 192,
+        "height_exceeds_cut_readout": 180
+      }
+    },
+    "95": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 180,
+        "height_exceeds_cut_readout": 168
+      }
+    },
+    "100": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 192,
+        "height_exceeds_cut_readout": 180
+      }
+    },
+    "7": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 180,
+        "height_exceeds_cut_readout": 168
+      }
+    },
+    "123": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 180,
+        "height_exceeds_cut_readout": 168
+      }
+    },
+    "102": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 192,
+        "height_exceeds_cut_readout": 180
+      }
+    },
+    "124": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 192,
+        "height_exceeds_cut_readout": 180
+      }
+    },
+    "101": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 180,
+        "height_exceeds_cut_readout": 168
+      }
+    },
+    "108": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 192,
+        "height_exceeds_cut_readout": 180
+      }
+    },
+    "27": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 228,
+        "height_exceeds_cut_readout": 204,
+        "record_cannot_hold_visible_crop": 60
+      }
+    },
+    "115": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 228,
+        "height_exceeds_cut_readout": 204,
+        "record_cannot_hold_visible_crop": 60
+      }
+    },
+    "88": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 264,
+        "height_exceeds_cut_readout": 228,
+        "record_cannot_hold_visible_crop": 150
+      }
+    },
+    "116": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 264,
+        "height_exceeds_cut_readout": 228,
+        "record_cannot_hold_visible_crop": 150
+      }
+    },
+    "106": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 228,
+        "height_exceeds_cut_readout": 204,
+        "record_cannot_hold_visible_crop": 60
+      }
+    },
+    "125": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 228,
+        "height_exceeds_cut_readout": 204,
+        "record_cannot_hold_visible_crop": 60
+      }
+    },
+    "107": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 264,
+        "height_exceeds_cut_readout": 228,
+        "record_cannot_hold_visible_crop": 150
+      }
+    },
+    "126": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 264,
+        "height_exceeds_cut_readout": 228,
+        "record_cannot_hold_visible_crop": 150
+      }
+    },
+    "109": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 228,
+        "height_exceeds_cut_readout": 204,
+        "record_cannot_hold_visible_crop": 60
+      }
+    },
+    "110": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 264,
+        "height_exceeds_cut_readout": 228,
+        "record_cannot_hold_visible_crop": 150
+      }
+    },
+    "58": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 228,
+        "height_exceeds_cut_readout": 204,
+        "record_cannot_hold_visible_crop": 60
+      }
+    },
+    "89": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 228,
+        "height_exceeds_cut_readout": 204,
+        "record_cannot_hold_visible_crop": 60
+      }
+    },
+    "103": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 264,
+        "height_exceeds_cut_readout": 228,
+        "record_cannot_hold_visible_crop": 150
+      }
+    },
+    "118": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 264,
+        "height_exceeds_cut_readout": 228,
+        "record_cannot_hold_visible_crop": 150
+      }
+    },
+    "104": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 228,
+        "height_exceeds_cut_readout": 204,
+        "record_cannot_hold_visible_crop": 60
+      }
+    },
+    "105": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 264,
+        "height_exceeds_cut_readout": 228,
+        "record_cannot_hold_visible_crop": 150
+      }
+    },
+    "111": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 228,
+        "height_exceeds_cut_readout": 204,
+        "record_cannot_hold_visible_crop": 60
+      }
+    },
+    "127": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 228,
+        "height_exceeds_cut_readout": 204,
+        "record_cannot_hold_visible_crop": 60
+      }
+    },
+    "112": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 264,
+        "height_exceeds_cut_readout": 228,
+        "record_cannot_hold_visible_crop": 150
+      }
+    },
+    "128": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 264,
+        "height_exceeds_cut_readout": 228,
+        "record_cannot_hold_visible_crop": 150
+      }
+    },
+    "113": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 228,
+        "height_exceeds_cut_readout": 204,
+        "record_cannot_hold_visible_crop": 60
+      }
+    },
+    "114": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 264,
+        "height_exceeds_cut_readout": 228,
+        "record_cannot_hold_visible_crop": 150
+      }
+    },
+    "139": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 264,
+        "height_exceeds_cut_readout": 204,
+        "record_cannot_hold_visible_crop": 120
+      }
+    },
+    "56": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 264,
+        "height_exceeds_cut_readout": 204,
+        "record_cannot_hold_visible_crop": 120
+      }
+    },
+    "140": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 264,
+        "height_exceeds_cut_readout": 288,
+        "record_cannot_hold_visible_crop": 240
+      }
+    },
+    "11": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 228,
+        "height_exceeds_cut_readout": 180,
+        "record_cannot_hold_visible_crop": 60
+      }
+    },
+    "117": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 228,
+        "height_exceeds_cut_readout": 180,
+        "record_cannot_hold_visible_crop": 60
+      }
+    },
+    "12": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 264,
+        "height_exceeds_cut_readout": 288,
+        "record_cannot_hold_visible_crop": 240
+      }
+    },
+    "129": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 192,
+        "height_exceeds_cut_readout": 168
+      }
+    },
+    "130": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 192,
+        "height_exceeds_cut_readout": 168
+      }
+    },
+    "131": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 264,
+        "height_exceeds_cut_readout": 204,
+        "record_cannot_hold_visible_crop": 120
+      }
+    },
+    "132": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 264,
+        "height_exceeds_cut_readout": 228,
+        "record_cannot_hold_visible_crop": 150
+      }
+    },
+    "133": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 264,
+        "height_exceeds_cut_readout": 228,
+        "record_cannot_hold_visible_crop": 150
+      }
+    },
+    "134": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 264,
+        "height_exceeds_cut_readout": 228,
+        "record_cannot_hold_visible_crop": 150
+      }
+    },
+    "10": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 180,
+        "height_exceeds_cut_readout": 180
+      }
+    },
+    "135": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 228,
+        "height_exceeds_cut_readout": 204,
+        "record_cannot_hold_visible_crop": 60
+      }
+    },
+    "136": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 264,
+        "height_exceeds_cut_readout": 228,
+        "record_cannot_hold_visible_crop": 150
+      }
+    },
+    "8": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 264,
+        "height_exceeds_cut_readout": 204,
+        "record_cannot_hold_visible_crop": 120
+      }
+    },
+    "9": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 264,
+        "height_exceeds_cut_readout": 288,
+        "record_cannot_hold_visible_crop": 240
+      }
+    },
+    "141": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 180,
+        "height_exceeds_cut_readout": 168
+      }
+    },
+    "142": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 180,
+        "height_exceeds_cut_readout": 168
+      }
+    },
+    "143": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 228,
+        "height_exceeds_cut_readout": 180,
+        "record_cannot_hold_visible_crop": 60
+      }
+    },
+    "144": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 192,
+        "height_exceeds_cut_readout": 168
+      }
+    },
+    "145": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 192,
+        "height_exceeds_cut_readout": 168
+      }
+    },
+    "146": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 264,
+        "height_exceeds_cut_readout": 204,
+        "record_cannot_hold_visible_crop": 120
+      }
+    },
+    "147": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 264,
+        "height_exceeds_cut_readout": 204,
+        "record_cannot_hold_visible_crop": 120
+      }
+    },
+    "148": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 264,
+        "height_exceeds_cut_readout": 204,
+        "record_cannot_hold_visible_crop": 120
+      }
+    },
+    "149": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 264,
+        "height_exceeds_cut_readout": 204,
+        "record_cannot_hold_visible_crop": 120
+      }
+    },
+    "150": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 264,
+        "height_exceeds_cut_readout": 204,
+        "record_cannot_hold_visible_crop": 120
+      }
+    },
+    "151": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 180,
+        "height_exceeds_cut_readout": 168
+      }
+    },
+    "152": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 192,
+        "height_exceeds_cut_readout": 180
+      }
+    },
+    "218": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 228,
+        "height_exceeds_cut_readout": 204,
+        "record_cannot_hold_visible_crop": 60
+      }
+    },
+    "219": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 264,
+        "height_exceeds_cut_readout": 228,
+        "record_cannot_hold_visible_crop": 150
+      }
+    },
+    "220": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 228,
+        "height_exceeds_cut_readout": 204,
+        "record_cannot_hold_visible_crop": 60
+      }
+    },
+    "221": {
+      "cases": 2040,
+      "issues": {
+        "width_exceeds_cut_readout": 264,
+        "height_exceeds_cut_readout": 228,
+        "record_cannot_hold_visible_crop": 150
+      }
+    }
+  },
+  "seconds": 6.506,
+  "passed": false
+}

@@ -1,0 +1,7 @@
+splash : FPSUPUI/  193536 bytes; hardware untested; keep beside AutoRun.txt and fpSup.BIN
+binary : fpSup.BIN  32768 bytes, 321 section(s), entry 0x000067B0
+worker : 1840 bytes = 432 bootstrap (runs in the staging buffer) + 1408 copied to an allocation of its own
+start  : echo handler 0xC0BAC2F8 -> 0xC072DE64 (loader)
+patches: 7 firmware (iface+push), 0 screen
+wrote  : /Users/dido/Developer.localized/SIGMAfp_re/projects/sensor-lab/cards/20260930-240-menu-r3-allopen/fast-debug/AutoRun.txt  216 lines  sha256=35a3141f4163c8c1
+clean  : 148 commands, no dumps and no diagnostics

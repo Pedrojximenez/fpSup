@@ -1,0 +1,75 @@
+{
+  "firmware": "/Users/dido/Developer.localized/SIGMAfp_re/out/MAIN_c0000000.bin",
+  "firmware_sha256": "92a8ee993f6c3d66c251e88d45a2ccd5135c6cf7342717784321c2ed506e2fb4",
+  "old_clear_and_wake": {
+    "draw_thread_event_bits": "0x4",
+    "controller_pending_bits": "0x3",
+    "draw_context_force_byte": 0,
+    "gui_draw_modes": [
+      0
+    ],
+    "event_updates": [
+      [
+        "0xc3002034",
+        "set",
+        "0x1"
+      ],
+      [
+        "0xc3002034",
+        "set",
+        "0x2"
+      ],
+      [
+        "0xc3001014",
+        "mask",
+        "0xffffbfff"
+      ],
+      [
+        "0xc3001014",
+        "set",
+        "0x4"
+      ]
+    ]
+  },
+  "fixed_full_redraw_request": {
+    "draw_thread_event_bits": "0x14",
+    "controller_pending_bits": "0xf",
+    "draw_context_force_byte": 1,
+    "gui_draw_modes": [
+      2
+    ],
+    "event_updates": [
+      [
+        "0xc3002034",
+        "set",
+        "0x1"
+      ],
+      [
+        "0xc3002034",
+        "set",
+        "0x2"
+      ],
+      [
+        "0xc3001014",
+        "set",
+        "0x10"
+      ],
+      [
+        "0xc3002034",
+        "set",
+        "0xf"
+      ],
+      [
+        "0xc3001014",
+        "mask",
+        "0xffffbfff"
+      ],
+      [
+        "0xc3001014",
+        "set",
+        "0x4"
+      ]
+    ]
+  },
+  "scope": "Offline native ARM control flow; no LCD/presentation/timing claim."
+}

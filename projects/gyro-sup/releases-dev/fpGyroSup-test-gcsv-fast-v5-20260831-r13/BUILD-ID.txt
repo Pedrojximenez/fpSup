@@ -1,0 +1,34 @@
+fpGyroSup GCSV decimal fast path r13
+Build date: 2026-08-31
+Camera/firmware: SIGMA fp Ver.5.02
+Build type: release AutoRun, no USB shell
+Base release: fp-gyro-sup-v1.1 / commit 933e320
+
+Purpose:
+- Reduce the CPU cost of converting six-axis samples to decimal GCSV text.
+- Preserve v1.1's native MovieSaving transaction, 16 KiB media writes and
+  5 ms cooperative yield between chunks.
+
+Changes from v1.1:
+- Timestamp formatting is now unsigned u32. One-hour timestamps no longer turn
+  negative after 0x7fffffff us (35:47.483648).
+- Exact /100 uses reciprocal multiply 0x51EB851F and a 00..99 pair table.
+- Six bounded sensor columns use a stackless signed-16 formatter with at most
+  one reciprocal multiply.
+- Timestamp formatting consumes two digits per loop.
+
+Host verification:
+- Every value from -32768 through 32768 matches Python decimal output.
+- 100,000 deterministic random u32 values plus boundary values match.
+- The retained A001_061 and A001_062 reference logs match for all 1,628,032
+  formatted fields.
+- Reciprocal multiplies on those two captures fall from 5,038,310 to 947,397
+  (81.2% fewer); sensor-column reciprocal multiplies fall 92.1%.
+- 39 unit/safety tests pass.
+
+Binary identity:
+- AutoRun.txt is byte-for-byte fpGyroSup v1.1.
+- VSHL.BIN is byte-for-byte fpGyroSup v1.1.
+- Only PGEN.BIN changes.
+- PGEN pool code: 7,688 bytes; 7,704 bytes on the card.
+- Native lifecycle enabled; boot recovery disabled.

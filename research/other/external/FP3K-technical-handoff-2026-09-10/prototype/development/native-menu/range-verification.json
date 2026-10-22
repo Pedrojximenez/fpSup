@@ -1,0 +1,84 @@
+{
+  "resource": "0xc1a7099c",
+  "maximum_address": "0xc1a709bc",
+  "original_maximum": 1.0,
+  "cases": [
+    {
+      "maximum": 1.0,
+      "terminal": 0,
+      "requested": [
+        0,
+        1,
+        2,
+        3,
+        -1
+      ],
+      "result": [
+        0.0,
+        1.0,
+        1.0,
+        1.0,
+        0.0
+      ],
+      "passed": true
+    },
+    {
+      "maximum": 2.0,
+      "terminal": 0,
+      "requested": [
+        0,
+        1,
+        2,
+        3,
+        -1
+      ],
+      "result": [
+        0.0,
+        1.0,
+        2.0,
+        1.0,
+        1.0
+      ],
+      "passed": true
+    },
+    {
+      "maximum": 1.0,
+      "terminal": 1,
+      "requested": [
+        0,
+        1,
+        2,
+        3,
+        -1
+      ],
+      "result": [
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "passed": true
+    },
+    {
+      "maximum": 2.0,
+      "terminal": 1,
+      "requested": [
+        0,
+        1,
+        2,
+        3,
+        -1
+      ],
+      "result": [
+        0.0,
+        1.0,
+        2.0,
+        0.0,
+        2.0
+      ],
+      "passed": true
+    }
+  ],
+  "limitations": "Native constructor and property range/wrap code execute. Generic property access, event publication and numeric text formatting mocked; native integer-valued float comparisons execute. Properties supplied from verified NBU mask/descriptor layout. Does not emulate physical dial input or the full GUI."
+}

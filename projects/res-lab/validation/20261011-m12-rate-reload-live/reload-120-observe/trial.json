@@ -1,0 +1,1128 @@
+{
+  "phase": "captured",
+  "label": "reload-120-observe",
+  "requested_rank": 0,
+  "requested_quality_enum": 0,
+  "stop_after_seconds": 4.0,
+  "start_sent": true,
+  "stop_sent": false,
+  "observed_recording": true,
+  "rec_samples": [
+    [
+      0.18263529200000028,
+      1
+    ],
+    [
+      0.2308245419999999,
+      1
+    ],
+    [
+      0.282862167,
+      1
+    ],
+    [
+      0.3309468750000002,
+      1
+    ],
+    [
+      0.38076220799999994,
+      1
+    ],
+    [
+      0.4312533330000001,
+      1
+    ],
+    [
+      0.4808466250000001,
+      1
+    ],
+    [
+      0.5341522920000001,
+      1
+    ],
+    [
+      0.7222188330000001,
+      1
+    ],
+    [
+      0.7722346250000001,
+      1
+    ],
+    [
+      0.8221640829999999,
+      1
+    ],
+    [
+      1.0015007500000002,
+      1
+    ],
+    [
+      1.060316208,
+      1
+    ],
+    [
+      1.122765,
+      1
+    ],
+    [
+      1.186114417,
+      1
+    ],
+    [
+      1.2430273750000003,
+      1
+    ],
+    [
+      1.361307083,
+      1
+    ],
+    [
+      1.4177641670000003,
+      0
+    ]
+  ],
+  "runtime_before": {
+    "endpoint": "0xc072e200",
+    "consumer_base": "0x4504c680",
+    "consumer_state": "0x45078740",
+    "registry": {
+      "magic": 826495574,
+      "abi": 2,
+      "lock": 0,
+      "provider": 1111575634,
+      "generation": 3,
+      "result": 0,
+      "detail": 0,
+      "count": 1,
+      "packs": 2,
+      "asset_used": 94216,
+      "row": 5
+    },
+    "consumer": {
+      "flag": 1,
+      "current": 6,
+      "res_value": 2,
+      "format_latch": 0,
+      "nrows": 6,
+      "nentries": 62,
+      "nmodes": 7
+    },
+    "selected": 6,
+    "rows": [
+      {
+        "index": 0,
+        "on": 1,
+        "width": 992,
+        "height": 662,
+        "stock": 2,
+        "menu_row": 2,
+        "pack": "0x45087cc0",
+        "label": "HS",
+        "ui_result": 1
+      },
+      {
+        "index": 1,
+        "on": 1,
+        "width": 2000,
+        "height": 1334,
+        "stock": 2,
+        "menu_row": 3,
+        "pack": "0x45093700",
+        "label": "OG2K",
+        "ui_result": 1
+      },
+      {
+        "index": 2,
+        "on": 1,
+        "width": 3456,
+        "height": 2304,
+        "stock": 3,
+        "menu_row": 4,
+        "pack": "0x45094cc0",
+        "label": "OG35K",
+        "ui_result": 1
+      },
+      {
+        "index": 3,
+        "on": 1,
+        "width": 3008,
+        "height": 2000,
+        "stock": 2,
+        "menu_row": 5,
+        "pack": "0x450969c0",
+        "label": "OG3K",
+        "ui_result": 1
+      },
+      {
+        "index": 4,
+        "on": 1,
+        "width": 3840,
+        "height": 2560,
+        "stock": 3,
+        "menu_row": 6,
+        "pack": "0x45097c40",
+        "label": "OG4K",
+        "ui_result": 1
+      },
+      {
+        "index": 5,
+        "on": 1,
+        "width": 992,
+        "height": 662,
+        "stock": 2,
+        "menu_row": 7,
+        "pack": "0x45478a40",
+        "label": "VRC000",
+        "ui_result": 1
+      }
+    ],
+    "producer_base": "0x452ef500",
+    "producer_state": "0x453842b8",
+    "producer": {
+      "result": 1,
+      "app": 3331322648,
+      "reader": 3332398568,
+      "entry": 3332533760,
+      "page": 1160742060,
+      "nbr": 1160868416,
+      "nbr_len": 3000,
+      "core_base": 1160737472,
+      "pages_state": 1,
+      "out_w": 992,
+      "out_h": 662,
+      "ro_w": 2016,
+      "ro_h": 672,
+      "ro_sx": 3,
+      "ro_sy": 6,
+      "bin_h": 1,
+      "bin_v": 1,
+      "axis_armed": 1,
+      "modes_rows": 2,
+      "mode_sel": 1,
+      "canvas_valid": 1,
+      "crop_w": 0,
+      "crop_h": 0,
+      "ratio": 0,
+      "edit_field": 0,
+      "editing": 0,
+      "crop_lock": 0,
+      "lens_on": 0,
+      "lens_factor": 133,
+      "small_edit": 0,
+      "applied_geometry": 12,
+      "applied_valid": 1,
+      "bin_kh": 0,
+      "bin_kv": 0,
+      "bin_mode": 0,
+      "output_policy": 0,
+      "lock_num": 992,
+      "lock_den": 662,
+      "save_name": 0,
+      "name_text": 1701667150,
+      "name_field": 0,
+      "name_editing": 0
+    },
+    "mode_ids": [
+      9,
+      12
+    ],
+    "loaded_headers": {
+      "32RESCUS.BIN": {
+        "file_len": 183104,
+        "block_size": 993856,
+        "id": 1398096722,
+        "version": 10,
+        "min_services": 3
+      },
+      "50RESLAB.BIN": {
+        "file_len": 609720,
+        "block_size": 881024,
+        "id": 1111575634,
+        "version": 17,
+        "min_services": 3
+      }
+    },
+    "file_management": {
+      "available": [
+        "HS",
+        "OG2K",
+        "OG35K",
+        "OG3K",
+        "OG4K",
+        "S16"
+      ],
+      "explicit_enable_count": 0,
+      "enabled_labels": [],
+      "record_valid": true,
+      "ui_owner": "0x4511ccc0",
+      "ui_header": [
+        843465554,
+        0,
+        1158121280,
+        1158014936,
+        3331322648,
+        0,
+        0
+      ]
+    },
+    "fps_state": {
+      "VR_UI": 1,
+      "VR_WHY": 1,
+      "VRATE": 0,
+      "VR_COMMITS": 7,
+      "DIRTY": 1,
+      "PICKOK": 1,
+      "FPSLATCH": 1114636288,
+      "LAST_ENT": 7072,
+      "HITS": 145532
+    },
+    "engine_state_valid": true,
+    "engine_fps": 60.0,
+    "picked_entry": {
+      "FIVE": 5,
+      "PID": 59,
+      "MODE": 236,
+      "KEYPTR": 1158128372,
+      "ROW": 5,
+      "W0": 21627210,
+      "W1": 395036,
+      "ENGFPS": 1114636288,
+      "NOMINAL": 120,
+      "VM": 6,
+      "VAR": 16,
+      "VRATE": 0
+    },
+    "frame_cycles": 600600,
+    "sensor_timing_fps": 119.88011988011988,
+    "fps_gui": {
+      "MV_FrameRate": "OK:MV_FrameRate -> 8\n\n",
+      "EXCL_FrameRate": "OK:EXCL_FrameRate -> 0\n\n"
+    },
+    "fps_getter": "7\n\n",
+    "quality_getter": "0\n\n",
+    "screen": "LV_CINE_MEDIUM",
+    "rate_notification": {
+      "RATE_LVOWED": 0,
+      "RATE_LV_RELOADS": 7
+    },
+    "loaded_core_sha256": "aab156d8c28f97099df33f15133e6b0e092e02b520acc3de013d01f62e7dbbb7",
+    "rate_shims": [
+      {
+        "site": "0xc057a6f8",
+        "target": "0x450781a8",
+        "sha256": "e91d4ef6cbf39ff2c10801107c5b6370da5848469b11873b35a82d413850a123"
+      },
+      {
+        "site": "0xc05821b8",
+        "target": "0x4507822c",
+        "sha256": "a051ecbf009f4e61255e0f8c426734fb37279a3b4325b333869b17cc72f40f09"
+      }
+    ]
+  },
+  "native_observations": [
+    {
+      "elapsed": 0.18263604200000016,
+      "recording_before": 1,
+      "words": {
+        "pool_free": [
+          95
+        ],
+        "capture_count_limit": [
+          0,
+          87833
+        ],
+        "writer_requests": [
+          0
+        ],
+        "writer_finished": [
+          0
+        ],
+        "engine": [
+          1114636288
+        ]
+      },
+      "elapsed_end": 0.18436970799999997
+    },
+    {
+      "elapsed": 0.2308251670000001,
+      "recording_before": 1,
+      "words": {
+        "pool_free": [
+          95
+        ],
+        "capture_count_limit": [
+          0,
+          87833
+        ],
+        "writer_requests": [
+          0
+        ],
+        "writer_finished": [
+          0
+        ],
+        "engine": [
+          1114636288
+        ]
+      },
+      "elapsed_end": 0.23477725000000027
+    },
+    {
+      "elapsed": 0.28286283300000004,
+      "recording_before": 1,
+      "words": {
+        "pool_free": [
+          95
+        ],
+        "capture_count_limit": [
+          0,
+          87833
+        ],
+        "writer_requests": [
+          0
+        ],
+        "writer_finished": [
+          0
+        ],
+        "engine": [
+          1114636288
+        ]
+      },
+      "elapsed_end": 0.2849345000000001
+    },
+    {
+      "elapsed": 0.33094749999999995,
+      "recording_before": 1,
+      "words": {
+        "pool_free": [
+          95
+        ],
+        "capture_count_limit": [
+          0,
+          87833
+        ],
+        "writer_requests": [
+          0
+        ],
+        "writer_finished": [
+          0
+        ],
+        "engine": [
+          1114636288
+        ]
+      },
+      "elapsed_end": 0.33324512500000014
+    },
+    {
+      "elapsed": 0.38076266700000017,
+      "recording_before": 1,
+      "words": {
+        "pool_free": [
+          95
+        ],
+        "capture_count_limit": [
+          0,
+          87833
+        ],
+        "writer_requests": [
+          0
+        ],
+        "writer_finished": [
+          0
+        ],
+        "engine": [
+          1114636288
+        ]
+      },
+      "elapsed_end": 0.3827567080000003
+    },
+    {
+      "elapsed": 0.431254083,
+      "recording_before": 1,
+      "words": {
+        "pool_free": [
+          95
+        ],
+        "capture_count_limit": [
+          0,
+          87833
+        ],
+        "writer_requests": [
+          0
+        ],
+        "writer_finished": [
+          0
+        ],
+        "engine": [
+          1114636288
+        ]
+      },
+      "elapsed_end": 0.43355341699999994
+    },
+    {
+      "elapsed": 0.4808472079999999,
+      "recording_before": 1,
+      "words": {
+        "pool_free": [
+          95
+        ],
+        "capture_count_limit": [
+          0,
+          87833
+        ],
+        "writer_requests": [
+          0
+        ],
+        "writer_finished": [
+          0
+        ],
+        "engine": [
+          1114636288
+        ]
+      },
+      "elapsed_end": 0.48315666700000004
+    },
+    {
+      "elapsed": 0.5341529169999999,
+      "recording_before": 1,
+      "words": {
+        "pool_free": [
+          95
+        ],
+        "capture_count_limit": [
+          0,
+          87833
+        ],
+        "writer_requests": [
+          0
+        ],
+        "writer_finished": [
+          0
+        ],
+        "engine": [
+          1114636288
+        ]
+      },
+      "elapsed_end": 0.5390071670000001
+    },
+    {
+      "elapsed": 0.7222196249999999,
+      "recording_before": 1,
+      "words": {
+        "pool_free": [
+          77
+        ],
+        "capture_count_limit": [
+          18,
+          87833
+        ],
+        "writer_requests": [
+          18
+        ],
+        "writer_finished": [
+          0
+        ],
+        "engine": [
+          1114636288
+        ]
+      },
+      "elapsed_end": 0.7263989170000003
+    },
+    {
+      "elapsed": 0.7722352079999999,
+      "recording_before": 1,
+      "words": {
+        "pool_free": [
+          71
+        ],
+        "capture_count_limit": [
+          24,
+          87833
+        ],
+        "writer_requests": [
+          24
+        ],
+        "writer_finished": [
+          0
+        ],
+        "engine": [
+          1114636288
+        ]
+      },
+      "elapsed_end": 0.7761040830000001
+    },
+    {
+      "elapsed": 0.8221646670000002,
+      "recording_before": 1,
+      "words": {
+        "pool_free": [
+          65
+        ],
+        "capture_count_limit": [
+          44,
+          87833
+        ],
+        "writer_requests": [
+          44
+        ],
+        "writer_finished": [
+          0
+        ],
+        "engine": [
+          1114636288
+        ]
+      },
+      "elapsed_end": 0.9516738330000003
+    },
+    {
+      "elapsed": 1.001501167,
+      "recording_before": 1,
+      "words": {
+        "pool_free": [
+          44
+        ],
+        "capture_count_limit": [
+          51,
+          87833
+        ],
+        "writer_requests": [
+          52
+        ],
+        "writer_finished": [
+          0
+        ],
+        "engine": [
+          1114636288
+        ]
+      },
+      "elapsed_end": 1.0105513330000002
+    },
+    {
+      "elapsed": 1.060317083,
+      "recording_before": 1,
+      "words": {
+        "pool_free": [
+          37
+        ],
+        "capture_count_limit": [
+          60,
+          87833
+        ],
+        "writer_requests": [
+          57
+        ],
+        "writer_finished": [
+          0
+        ],
+        "engine": [
+          1114636288
+        ]
+      },
+      "elapsed_end": 1.077093833
+    },
+    {
+      "elapsed": 1.1227657920000003,
+      "recording_before": 1,
+      "words": {
+        "pool_free": [
+          29
+        ],
+        "capture_count_limit": [
+          66,
+          87833
+        ],
+        "writer_requests": [
+          57
+        ],
+        "writer_finished": [
+          0
+        ],
+        "engine": [
+          1114636288
+        ]
+      },
+      "elapsed_end": 1.135110458
+    },
+    {
+      "elapsed": 1.1861151670000003,
+      "recording_before": 1,
+      "words": {
+        "pool_free": [
+          21
+        ],
+        "capture_count_limit": [
+          74,
+          87833
+        ],
+        "writer_requests": [
+          57
+        ],
+        "writer_finished": [
+          0
+        ],
+        "engine": [
+          1114636288
+        ]
+      },
+      "elapsed_end": 1.1928181670000002
+    },
+    {
+      "elapsed": 1.2430280830000002,
+      "recording_before": 1,
+      "words": {
+        "pool_free": [
+          15
+        ],
+        "capture_count_limit": [
+          80,
+          87833
+        ],
+        "writer_requests": [
+          57
+        ],
+        "writer_finished": [
+          0
+        ],
+        "engine": [
+          1114636288
+        ]
+      },
+      "elapsed_end": 1.2524397919999999
+    },
+    {
+      "elapsed": 1.361307792,
+      "recording_before": 1,
+      "words": {
+        "pool_free": [
+          1
+        ],
+        "capture_count_limit": [
+          94,
+          87833
+        ],
+        "writer_requests": [
+          57
+        ],
+        "writer_finished": [
+          0
+        ],
+        "engine": [
+          1114636288
+        ]
+      },
+      "elapsed_end": 1.3715677920000002
+    },
+    {
+      "elapsed": 1.4177647080000002,
+      "recording_before": 0,
+      "words": {
+        "pool_free": [
+          1
+        ],
+        "capture_count_limit": [
+          94,
+          87833
+        ],
+        "writer_requests": [
+          57
+        ],
+        "writer_finished": [
+          0
+        ],
+        "engine": [
+          1114636288
+        ]
+      },
+      "elapsed_end": 1.4226800830000002
+    }
+  ],
+  "file_tool_slot": "slot now slot = sd0\n\n",
+  "clips_before": {
+    "A001_001": "20261010",
+    "A001_002": "20261010",
+    "A001_003": "20261010",
+    "A001_004": "20261010",
+    "A001_005": "20261010",
+    "A001_006": "20261010",
+    "A001_007": "20261010",
+    "A001_008": "20261010",
+    "A001_009": "20261010",
+    "A001_010": "20261010",
+    "A001_011": "20261010",
+    "A001_012": "20261010",
+    "A001_013": "20261010",
+    "A001_014": "20261010",
+    "A001_015": "20261010",
+    "A001_016": "20261011",
+    "A001_017": "20261011",
+    "A001_018": "20261011",
+    "A001_019": "20261011",
+    "A001_020": "20261011",
+    "A001_021": "20261011",
+    "A001_022": "20261011",
+    "A001_023": "20261011",
+    "A001_024": "20261011",
+    "A001_025": "20261011",
+    "A001_026": "20261011",
+    "A001_027": "20261011",
+    "A001_028": "20261011",
+    "A001_029": "20261011",
+    "A001_030": "20261011",
+    "A001_031": "20261011",
+    "A001_032": "20261011",
+    "A001_033": "20261011",
+    "A001_034": "20261011",
+    "A001_035": "20261011",
+    "A001_036": "20261011",
+    "A001_037": "20261011",
+    "A001_038": "20261011",
+    "A001_039": "20261011",
+    "A001_040": "20261011",
+    "A001_041": "20261011",
+    "A001_042": "20261011",
+    "A001_043": "20261011",
+    "A001_044": "20261011",
+    "A001_045": "20261011",
+    "A001_046": "20261011",
+    "A001_047": "20261011",
+    "A001_048": "20261011",
+    "A001_049": "20261011",
+    "A001_050": "20261011"
+  },
+  "capture_pid": 67947,
+  "scene_before": {
+    "p99": 244.0,
+    "spatial_std": 51.53141823691923
+  },
+  "overlay_before": {
+    "rec_pixels": 0,
+    "standby_pixels": 199,
+    "standby_visible": true
+  },
+  "capture_frames_before_start": 24,
+  "spontaneous_stop": true,
+  "native_rec_zero_after": true,
+  "capture_frames": 300,
+  "overlay_after": [
+    {
+      "rec_pixels": 0,
+      "standby_pixels": 202,
+      "standby_visible": true
+    },
+    {
+      "rec_pixels": 0,
+      "standby_pixels": 201,
+      "standby_visible": true
+    },
+    {
+      "rec_pixels": 0,
+      "standby_pixels": 201,
+      "standby_visible": true
+    },
+    {
+      "rec_pixels": 0,
+      "standby_pixels": 201,
+      "standby_visible": true
+    },
+    {
+      "rec_pixels": 0,
+      "standby_pixels": 199,
+      "standby_visible": true
+    }
+  ],
+  "standby_after": true,
+  "record_log": "slot=1, cnt=2/600\nsize=131072*978816(119GB), free=80%, exFAT, UHS-II\ntime       : 2026/10/11 15:21:04 \nrec factor : Nothing \nui factor  : Nothing \nbattery    : OK \ntemp(BAT)  : OK \ntemp(BODY) : OK \ntemp(LCD)  : OK \ntemp(CMOS) : OK \nfile-size=1095168, bulk-size=67108864(61.3)\nreq_cnt=94, fin_cnt=94, vbuf/94/87833, raw1\nrequest  ,finish   ,diff,gap ,reqcnt,fincnt,diff,sdb,MB/s\n      913,     1367, 454, 913,    57,     1,  56,  1, 137\n     1640,     2023, 383, 273,    94,    58,  36, 59, 105\n",
+  "clips_after": {
+    "A001_001": "20261010",
+    "A001_002": "20261010",
+    "A001_003": "20261010",
+    "A001_004": "20261010",
+    "A001_005": "20261010",
+    "A001_006": "20261010",
+    "A001_007": "20261010",
+    "A001_008": "20261010",
+    "A001_009": "20261010",
+    "A001_010": "20261010",
+    "A001_011": "20261010",
+    "A001_012": "20261010",
+    "A001_013": "20261010",
+    "A001_014": "20261010",
+    "A001_015": "20261010",
+    "A001_016": "20261011",
+    "A001_017": "20261011",
+    "A001_018": "20261011",
+    "A001_019": "20261011",
+    "A001_020": "20261011",
+    "A001_021": "20261011",
+    "A001_022": "20261011",
+    "A001_023": "20261011",
+    "A001_024": "20261011",
+    "A001_025": "20261011",
+    "A001_026": "20261011",
+    "A001_027": "20261011",
+    "A001_028": "20261011",
+    "A001_029": "20261011",
+    "A001_030": "20261011",
+    "A001_031": "20261011",
+    "A001_032": "20261011",
+    "A001_033": "20261011",
+    "A001_034": "20261011",
+    "A001_035": "20261011",
+    "A001_036": "20261011",
+    "A001_037": "20261011",
+    "A001_038": "20261011",
+    "A001_039": "20261011",
+    "A001_040": "20261011",
+    "A001_041": "20261011",
+    "A001_042": "20261011",
+    "A001_043": "20261011",
+    "A001_044": "20261011",
+    "A001_045": "20261011",
+    "A001_046": "20261011",
+    "A001_047": "20261011",
+    "A001_048": "20261011",
+    "A001_049": "20261011",
+    "A001_050": "20261011",
+    "A001_051": "20261011"
+  },
+  "new_clips": [
+    "A001_051"
+  ],
+  "runtime_after": {
+    "endpoint": "0xc072e200",
+    "consumer_base": "0x4504c680",
+    "consumer_state": "0x45078740",
+    "registry": {
+      "magic": 826495574,
+      "abi": 2,
+      "lock": 0,
+      "provider": 1111575634,
+      "generation": 3,
+      "result": 0,
+      "detail": 0,
+      "count": 1,
+      "packs": 2,
+      "asset_used": 94216,
+      "row": 5
+    },
+    "consumer": {
+      "flag": 1,
+      "current": 6,
+      "res_value": 2,
+      "format_latch": 0,
+      "nrows": 6,
+      "nentries": 62,
+      "nmodes": 7
+    },
+    "selected": 6,
+    "rows": [
+      {
+        "index": 0,
+        "on": 1,
+        "width": 992,
+        "height": 662,
+        "stock": 2,
+        "menu_row": 2,
+        "pack": "0x45087cc0",
+        "label": "HS",
+        "ui_result": 1
+      },
+      {
+        "index": 1,
+        "on": 1,
+        "width": 2000,
+        "height": 1334,
+        "stock": 2,
+        "menu_row": 3,
+        "pack": "0x45093700",
+        "label": "OG2K",
+        "ui_result": 1
+      },
+      {
+        "index": 2,
+        "on": 1,
+        "width": 3456,
+        "height": 2304,
+        "stock": 3,
+        "menu_row": 4,
+        "pack": "0x45094cc0",
+        "label": "OG35K",
+        "ui_result": 1
+      },
+      {
+        "index": 3,
+        "on": 1,
+        "width": 3008,
+        "height": 2000,
+        "stock": 2,
+        "menu_row": 5,
+        "pack": "0x450969c0",
+        "label": "OG3K",
+        "ui_result": 1
+      },
+      {
+        "index": 4,
+        "on": 1,
+        "width": 3840,
+        "height": 2560,
+        "stock": 3,
+        "menu_row": 6,
+        "pack": "0x45097c40",
+        "label": "OG4K",
+        "ui_result": 1
+      },
+      {
+        "index": 5,
+        "on": 1,
+        "width": 992,
+        "height": 662,
+        "stock": 2,
+        "menu_row": 7,
+        "pack": "0x45478a40",
+        "label": "VRC000",
+        "ui_result": 1
+      }
+    ],
+    "producer_base": "0x452ef500",
+    "producer_state": "0x453842b8",
+    "producer": {
+      "result": 1,
+      "app": 3331322648,
+      "reader": 3332398568,
+      "entry": 3332533760,
+      "page": 1160742060,
+      "nbr": 1160868416,
+      "nbr_len": 3000,
+      "core_base": 1160737472,
+      "pages_state": 1,
+      "out_w": 992,
+      "out_h": 662,
+      "ro_w": 2016,
+      "ro_h": 672,
+      "ro_sx": 3,
+      "ro_sy": 6,
+      "bin_h": 1,
+      "bin_v": 1,
+      "axis_armed": 1,
+      "modes_rows": 2,
+      "mode_sel": 1,
+      "canvas_valid": 1,
+      "crop_w": 0,
+      "crop_h": 0,
+      "ratio": 0,
+      "edit_field": 0,
+      "editing": 0,
+      "crop_lock": 0,
+      "lens_on": 0,
+      "lens_factor": 133,
+      "small_edit": 0,
+      "applied_geometry": 12,
+      "applied_valid": 1,
+      "bin_kh": 0,
+      "bin_kv": 0,
+      "bin_mode": 0,
+      "output_policy": 0,
+      "lock_num": 992,
+      "lock_den": 662,
+      "save_name": 0,
+      "name_text": 1701667150,
+      "name_field": 0,
+      "name_editing": 0
+    },
+    "mode_ids": [
+      9,
+      12
+    ],
+    "loaded_headers": {
+      "32RESCUS.BIN": {
+        "file_len": 183104,
+        "block_size": 993856,
+        "id": 1398096722,
+        "version": 10,
+        "min_services": 3
+      },
+      "50RESLAB.BIN": {
+        "file_len": 609720,
+        "block_size": 881024,
+        "id": 1111575634,
+        "version": 17,
+        "min_services": 3
+      }
+    },
+    "file_management": {
+      "available": [
+        "HS",
+        "OG2K",
+        "OG35K",
+        "OG3K",
+        "OG4K",
+        "S16"
+      ],
+      "explicit_enable_count": 0,
+      "enabled_labels": [],
+      "record_valid": true,
+      "ui_owner": "0x4511ccc0",
+      "ui_header": [
+        843465554,
+        0,
+        1158121280,
+        1158014936,
+        3331322648,
+        0,
+        0
+      ]
+    },
+    "fps_state": {
+      "VR_UI": 1,
+      "VR_WHY": 1,
+      "VRATE": 0,
+      "VR_COMMITS": 7,
+      "DIRTY": 1,
+      "PICKOK": 1,
+      "FPSLATCH": 1114636288,
+      "LAST_ENT": 7072,
+      "HITS": 146812
+    },
+    "engine_state_valid": true,
+    "engine_fps": 60.0,
+    "picked_entry": {
+      "FIVE": 5,
+      "PID": 59,
+      "MODE": 236,
+      "KEYPTR": 1158128372,
+      "ROW": 5,
+      "W0": 21627210,
+      "W1": 395036,
+      "ENGFPS": 1114636288,
+      "NOMINAL": 120,
+      "VM": 6,
+      "VAR": 16,
+      "VRATE": 0
+    },
+    "frame_cycles": 600600,
+    "sensor_timing_fps": 119.88011988011988,
+    "fps_gui": {
+      "MV_FrameRate": "OK:MV_FrameRate -> 8\n\n",
+      "EXCL_FrameRate": "OK:EXCL_FrameRate -> 0\n\n"
+    },
+    "fps_getter": "7\n\n",
+    "quality_getter": "0\n\n",
+    "screen": "LV_CINE_MEDIUM",
+    "rate_notification": {
+      "RATE_LVOWED": 0,
+      "RATE_LV_RELOADS": 7
+    },
+    "loaded_core_sha256": "aab156d8c28f97099df33f15133e6b0e092e02b520acc3de013d01f62e7dbbb7",
+    "rate_shims": [
+      {
+        "site": "0xc057a6f8",
+        "target": "0x450781a8",
+        "sha256": "e91d4ef6cbf39ff2c10801107c5b6370da5848469b11873b35a82d413850a123"
+      },
+      {
+        "site": "0xc05821b8",
+        "target": "0x4507822c",
+        "sha256": "a051ecbf009f4e61255e0f8c426734fb37279a3b4325b333869b17cc72f40f09"
+      }
+    ]
+  }
+}

@@ -1,0 +1,23 @@
+
+======================================================================
+FAIL: test_shorter_replacement_has_real_eof_in_root_and_subdirectory (test_putfile_replace.ReplaceTests) (path='\\AutoRun.txt')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/test_putfile_replace.py", line 57, in test_shorter_replacement_has_real_eof_in_root_and_subdirectory
+    self.assertEqual(files[path], b'new\n')
+AssertionError: b'new\ncommands and tail' != b'new\n'
+
+======================================================================
+FAIL: test_shorter_replacement_has_real_eof_in_root_and_subdirectory (test_putfile_replace.ReplaceTests) (path='\\fpSup\\50RESLAB.BIN')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/test_putfile_replace.py", line 57, in test_shorter_replacement_has_real_eof_in_root_and_subdirectory
+    self.assertEqual(files[path], b'new\n')
+AssertionError: b'new\ncommands and tail' != b'new\n'
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+FAILED (failures=2)
+
+Caught both root and subfolder old-tail mutations; actual sources unchanged.

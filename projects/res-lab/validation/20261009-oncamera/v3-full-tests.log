@@ -1,0 +1,30 @@
+.E....................
+======================================================================
+ERROR: test_tool_settings_return_to_manager_with_native_state_machine (test_virtual_rcd.NativeUI)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/research/ui/tools/nbu_probe/nbu_probe.py", line 394, in _call
+    self.uc.emu_start(entry | 1, self.STOP + 2, timeout=self.TIMEOUT_US,
+  File "/Users/dido/Library/Python/3.9/lib/python/site-packages/unicorn/unicorn_py3/unicorn.py", line 766, in emu_start
+    raise UcError(status)
+unicorn.unicorn_py3.unicorn.UcError: Invalid memory read (UC_ERR_READ_UNMAPPED)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_virtual_rcd.py", line 324, in test_tool_settings_return_to_manager_with_native_state_machine
+    matches = PG.native_switch(pages, queries)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/sl_pages.py", line 359, in native_switch
+    traces = probe.records(64)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/research/ui/tools/nbu_probe/nbu_probe.py", line 541, in records
+    trace = self.record()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/research/ui/tools/nbu_probe/nbu_probe.py", line 526, in record
+    trace.result = self._call(INTERPRETER[0], self.CTX)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/research/ui/tools/nbu_probe/nbu_probe.py", line 398, in _call
+    raise ProbeError(f"unicorn stopped at 0x{pc:08X}: {exc}") from exc
+nbu_probe.ProbeError: unicorn stopped at 0xC05E5DBE: Invalid memory read (UC_ERR_READ_UNMAPPED)
+
+----------------------------------------------------------------------
+Ran 22 tests in 448.166s
+
+FAILED (errors=1)

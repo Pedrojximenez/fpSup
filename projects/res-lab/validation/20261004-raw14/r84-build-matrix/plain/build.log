@@ -1,0 +1,7 @@
+splash : FPSUPUI/  193536 bytes; hardware untested; keep beside AutoRun.txt and fpSup.BIN
+binary : fpSup.BIN  61440 bytes, 295 section(s), entry 0x0000D884
+worker : none -- no task either, the loader runs in the callback
+start  : echo handler 0xC0BAC2F8 -> 0xC072DE64 (loader)
+patches: 0 firmware (-), 0 screen
+wrote  : /Users/dido/Developer.localized/SIGMAfp_re/projects/sensor-lab/validation/20261004-raw14/r84-build-matrix/.plain.building-rrc9sua0/card/AutoRun.txt  168 lines  sha256=5dc89b8506e8ce40
+clean  : 112 commands, no dumps and no diagnostics

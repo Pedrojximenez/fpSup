@@ -1,0 +1,71 @@
+# SIGMA fp Ver.5.02 - MMA8452Q non-invasive snapshot probe
+# Purpose: validate the firmware-maintained calibrated XYZ globals at
+#          0xC377790C, 0xC377790E, 0xC3777910 before installing a 100 Hz hook.
+#
+# Test: boot with this AutoRun, then tilt/translate the camera in all axes while
+#       the color bars are visible. 25 snapshots are taken ~100 ms apart.
+#       Two short pulses mean the capture completed.
+# RAM-only and read-only with respect to the IMU driver.
+
+display monitor 0 1
+display colorbar 1 0
+ctrl sleep 500
+mem save \ACC000.BIN 0xC377790C,,0x20
+ctrl sleep 100
+mem save \ACC001.BIN 0xC377790C,,0x20
+ctrl sleep 100
+mem save \ACC002.BIN 0xC377790C,,0x20
+ctrl sleep 100
+mem save \ACC003.BIN 0xC377790C,,0x20
+ctrl sleep 100
+mem save \ACC004.BIN 0xC377790C,,0x20
+ctrl sleep 100
+mem save \ACC005.BIN 0xC377790C,,0x20
+ctrl sleep 100
+mem save \ACC006.BIN 0xC377790C,,0x20
+ctrl sleep 100
+mem save \ACC007.BIN 0xC377790C,,0x20
+ctrl sleep 100
+mem save \ACC008.BIN 0xC377790C,,0x20
+ctrl sleep 100
+mem save \ACC009.BIN 0xC377790C,,0x20
+ctrl sleep 100
+mem save \ACC010.BIN 0xC377790C,,0x20
+ctrl sleep 100
+mem save \ACC011.BIN 0xC377790C,,0x20
+ctrl sleep 100
+mem save \ACC012.BIN 0xC377790C,,0x20
+ctrl sleep 100
+mem save \ACC013.BIN 0xC377790C,,0x20
+ctrl sleep 100
+mem save \ACC014.BIN 0xC377790C,,0x20
+ctrl sleep 100
+mem save \ACC015.BIN 0xC377790C,,0x20
+ctrl sleep 100
+mem save \ACC016.BIN 0xC377790C,,0x20
+ctrl sleep 100
+mem save \ACC017.BIN 0xC377790C,,0x20
+ctrl sleep 100
+mem save \ACC018.BIN 0xC377790C,,0x20
+ctrl sleep 100
+mem save \ACC019.BIN 0xC377790C,,0x20
+ctrl sleep 100
+mem save \ACC020.BIN 0xC377790C,,0x20
+ctrl sleep 100
+mem save \ACC021.BIN 0xC377790C,,0x20
+ctrl sleep 100
+mem save \ACC022.BIN 0xC377790C,,0x20
+ctrl sleep 100
+mem save \ACC023.BIN 0xC377790C,,0x20
+ctrl sleep 100
+mem save \ACC024.BIN 0xC377790C,,0x20
+display colorbar 0 0
+ctrl sleep 250
+display colorbar 1 0
+ctrl sleep 180
+display colorbar 0 0
+ctrl sleep 180
+display colorbar 1 0
+ctrl sleep 180
+display colorbar 0 0
+

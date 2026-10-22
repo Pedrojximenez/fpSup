@@ -1,0 +1,35 @@
+fpGyroSup r29 sparse native-rate accelerometer GCSV test build
+Build date: 2026-08-31
+Camera/firmware: SIGMA fp Ver.5.02
+Build type: release AutoRun, no USB shell
+Base: exact r17 two-slot 32 KiB raw buffering + 64 KiB GCSV writes
+
+Only functional change from r17:
+- Every 2,500 Hz gyroscope sample still produces t,gx,gy,gz.
+- A row appends ax,ay,az only when the r17 timestamp cursor consumes a new
+  accelerometer record (normally about 47 Hz).
+- Rows with no new accelerometer record end immediately after gz.  No empty
+  comma fields and no synthetic zero accelerometer samples are emitted.
+- The GCSV header remains t,gx,gy,gz,ax,ay,az; Gyroflow's flexible parser adds
+  gyro for four-column rows and accelerometer only for seven-column rows.
+
+Unchanged r17 boundaries:
+- Two 32 KiB raw halves and their proven sequence/publication logic.
+- The callback only copies raw samples; it formats nothing and calls no media API.
+- One writer task, 64 KiB complete-line media writes and the 5 ms yield.
+- 2,500 Hz gyro capture, native lifecycle, record/power locks and JSON generation.
+- No GYR file, recovery conversion, decimation or sensor-rate change.
+
+Expected effect:
+- Preserve native accelerometer samples without repeating each value on about
+  53 gyroscope rows.
+- Remove almost all per-row accelerometer formatting/copy bytes, approaching
+  the measured gyro-only size reduction while retaining accelerometer data.
+
+Binary verification:
+- AutoRun.txt and VSHL.BIN are byte-for-byte identical to r17.
+- PGEN changes four checked r17 instructions and appends a 12-byte conditional
+  comma stub; all branch destinations are decoded and asserted during build.
+- PGEN pool code grows from 7,488 to 7,500 bytes; card file grows from 7,504 to
+  7,516 bytes.
+- Experimental hardware build; not fp-gyro-sup-v1.1.

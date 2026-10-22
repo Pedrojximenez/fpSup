@@ -1,0 +1,30 @@
+test_saved_files_reserve_virtual_row_at_next_boot (test_reslab_sidebar.SidebarTests) ... FAIL
+test_save_exports_current_recipe_and_preserves_active_virtual (test_reslab_sidebar.SidebarTests) ... FAIL
+
+======================================================================
+FAIL: test_saved_files_reserve_virtual_row_at_next_boot (test_reslab_sidebar.SidebarTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_reslab_sidebar.py", line 95, in test_saved_files_reserve_virtual_row_at_next_boot
+    c=self.boot(rcds=files);s=c.s()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_reslab_sidebar.py", line 15, in boot
+    return V.VirtualTests.boot(self, **kw)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_virtual_rcd.py", line 140, in boot
+    self.assertNotEqual(cam.service(),0)
+AssertionError: 0 == 0
+
+======================================================================
+FAIL: test_save_exports_current_recipe_and_preserves_active_virtual (test_reslab_sidebar.SidebarTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_reslab_sidebar.py", line 81, in test_save_exports_current_recipe_and_preserves_active_virtual
+    self.assertEqual([s for n,s in c.text_events if n=='SL_E_Text'][-1],'Saved LAB001.RCD')
+AssertionError: 'Saved ' != 'Saved LAB001.RCD'
+- Saved 
++ Saved LAB001.RCD
+
+
+----------------------------------------------------------------------
+Ran 2 tests in 70.185s
+
+FAILED (failures=2)

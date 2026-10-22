@@ -1,0 +1,69 @@
+{
+ "schema_version": 1,
+ "kind": "live_the_camera_writes_a_compressed_dng_that_decodes",
+ "date": "2026-09-29",
+ "scope": "LIVE on the camera, firmware 5.02.0.V91, model w71c1. Hook at 0xC03A5490. FHD 12-bit 59.94p, clip \\CINEMA\\A001_219. Two camera-allocated 4 MiB blocks. Nothing was assembled on the host: the files were pulled off the card and handed straight to LibRaw.",
+
+ "headline": "eight frames of a live clip were compressed by the camera's own hardware, given a trailing IFD by the camera, written to the card, and decoded by LibRaw to the same data a stock frame of the same clip decodes to. 1,426,432 bytes against 3,244,544.",
+
+ "the_files": {
+  "1 to 8": "1,426,432 bytes each; payload at 0x13400 begins ff d8 ff c3",
+  "9 and 10": "3,244,544 bytes, stock -- exactly the probe's bound of eight",
+  "the_ifd_the_camera_wrote": {
+   "root_pointer": 1424768,
+   "entries": 59,
+   "Compression": 7,
+   "TileWidth": 512, "TileLength": 368,
+   "TileOffsets": "12 entries at 1,425,484",
+   "TileByteCounts": "12 entries at 1,425,532",
+   "checked": "the twelve offsets match the twelve SOI markers in the file exactly, and offset_table - ifd_at is 716, which is ifd_size 714 rounded up to a word"
+  },
+  "decoded": {
+   "shape": "1090 x 1936, uint16",
+   "compressed frame 1": "min 257  max 1169  mean 512.8",
+   "stock frame 9": "min 257  max 1169  mean 512.8",
+   "reading": "identical. The clip renders almost black because BlackLevel is 1023 and the data sits at 512 -- the STOCK frame renders the same way with the same code, so that is the scene, not the file. An earlier clip with a lit subject rendered correctly from the same path."
+  },
+  "level": "L"
+ },
+
+ "the_bug_that_wedged_the_camera_three_times": {
+  "what": "ifd_at is 0x13400 plus the payload, and the payload is whatever the codec produced -- 1,343,147 on the first run, which put ifd_at at ...3. Every stm in copy_ifd and every str in write_tables then went to an unaligned address.",
+  "why_it_is_fatal": "ARM's ldm and stm require word alignment whatever SCTLR.A says. An unaligned one on the CinemaDNG writer's own thread is a Data Abort, and the camera stopped answering.",
+  "why_nothing_caught_it": "the host tool builds the same layout and never sees it: Python has no alignment. Offline verification of the LAYOUT is not verification of the CODE that writes it.",
+  "the_fix": ["ifd_at rounded up to 16 before anything uses it",
+              "the table pointer rounded up to 4, because ifd_size is 714 and 714 is not a multiple of four",
+              "the cap given 18 more bytes for the two round-ups",
+              "the file length taken from count_table, which carries both, rather than re-derived"],
+  "how_it_was_isolated": "the trailer was split into three levels -- none, written but inert, complete -- so one run could tell the copying from the root pointer. Level 1 wedged, which said copying. The operator said from the start that it had to be the trailer itself and was right.",
+  "level": "L for the wedge, C for the cause, L for the fix working"
+ },
+
+ "corrections": [
+  {
+   "what_was_wrong": "the first wedge was blamed on the 2000-frame bound leaving the hook armed across clips, and the operator was asked to power-cycle on that reasoning.",
+   "the_truth": "the same probe wedged at a bound of 8. The bound was never the cause; the trailer's alignment was."
+  },
+  {
+   "what_was_wrong": "'the root pointer is 1,424,256 and the tables imply 1,425,484, a difference of 1,228 against an ifd_size of 714' -- read off the file mid-diagnosis.",
+   "the_truth": "a hex arithmetic slip. The root pointer is 1,424,768 and the difference is 716, which is 714 rounded up to a word. The camera's trailer was self-consistent all along."
+  },
+  {
+   "what_was_wrong": "the first render of a camera-written file was read as a broken decode.",
+   "the_truth": "the stock frame of the same clip renders identically. The clip is dark: BlackLevel 1023 against data at 512. The control should have been run before the conclusion."
+  }
+ ],
+
+ "known_imperfection": {
+  "what": "BlackLevel reads 1024 in our files and 1023 in the camera's own.",
+  "why": "the IFD template was built from a frame of clip A001_200, and that tag's value is stored inline in the entry, so it is frozen from the template's frame.",
+  "cost": "one unit of black level. No image data is affected: the tile bytes are never touched.",
+  "the_fix": "build the template from a frame of the clip being recorded, or read the handful of inline tags off the frame's own IFD at hook time."
+ },
+
+ "what_is_left": [
+  "losslessness ON THIS PATH. The engine's bitstream was proven lossless on 2026-09-23 against a surviving stock copy, and nothing here touches the tile bytes, but no frame has yet been compressed AND kept alongside its own original.",
+  "asynchronous scheduling. This build waits inside the flush call: 13.65 ms against a 16.7 ms period at 59.94p. The asynchronous encode was proven separately on 2026-09-29.",
+  "a whole clip. The bound is eight frames."
+ ]
+}

@@ -1,0 +1,102 @@
+{
+ "schema_version": 1,
+ "kind": "live_source_location_isolated_and_full_lifecycle_cycle",
+ "date": "2026-09-28",
+ "operator_scope": "ON THE CAMERA, authorised. Fresh boot after a power cycle. Full chain: preflight, scratch, acquire-second, bound-probe-two-copy, release. One short FHD CinemaDNG clip per armed phase. seg never written, the frame read only, nothing of ours written to the card.",
+ "variant": "bound-probe-two-copy",
+ "purpose": "NOT a bound test. It separates the two things that could have made F_ENC refuse earlier today: the CONTENT of the source, or the BLOCK it lives in.",
+ "the_pair_that_isolates_it": {
+  "run_1_refused": {
+   "variant": "bound-probe-two",
+   "source": "LCG-generated, incompressible, in block B",
+   "geometry": "1936x1090, 12 tiles, declared 0x305000",
+   "init_ret": 1,
+   "enc_ret": 0,
+   "size_ret": 0,
+   "error": 18,
+   "output_bytes": 0,
+   "microseconds_before_refusing": 9816
+  },
+  "run_2_accepted": {
+   "variant": "bound-probe-two-copy",
+   "source": "the CAMERA'S OWN pixels, copied into block B",
+   "geometry": "identical",
+   "block": "identical, 0x45578400",
+   "init_ret": 1,
+   "enc_ret": 1,
+   "size_ret": 1,
+   "error": 0,
+   "output_bytes": 958464,
+   "microseconds": 13767
+  },
+  "held_constant": [
+   "geometry and tile count",
+   "the declared length 0x305000",
+   "the destination block A and the guard placement",
+   "the source block B, same handle, same uncached alias",
+   "the image apart from the fill loop"
+  ],
+  "therefore": "the source's LOCATION is not the reason. The engine reads happily from a 4 MiB block we allocated ourselves. Earlier today's refusal was about the source's CONTENT."
+ },
+ "measured_run_2": {
+  "tile_sizes": [
+   59366,
+   86480,
+   81645,
+   62751,
+   61973,
+   102777,
+   105277,
+   81124,
+   67746,
+   95547,
+   90442,
+   63336
+  ],
+  "tile_sum": 958464,
+  "reported_total": 958464,
+  "accounting": "EXACT. The sum of the twelve equals the reported total, with no discrepancy of the kind the 9/27 ledger recorded.",
+  "compression_this_scene": "3.303x against the 3,165,360-byte raster",
+  "guards": [
+   "0xA55AA55A",
+   "0xA55AA55A",
+   "0xA55AA55A",
+   "0xA55AA55A",
+   "0xA55AA55A"
+  ],
+  "guards_mean_nothing_here": "the output is 958 KB against a declared 3,166,208 B, so nothing came near them. Stated because five intact guards is exactly what a bound pass looks like.",
+  "declared_length": {
+   "constant": "0x305000",
+   "readback_value": "0x305000",
+   "readback_address": "0xC302CDE0"
+  },
+  "encode_microseconds": 13767,
+  "comparison": "C2 measured 13,753 microseconds encoding a real frame on 2026-09-26. 13,767 here, from our own block instead of the frame buffer - within 0.1%. The source living in our block does not cost measurable encode time."
+ },
+ "full_lifecycle_proven_live_end_to_end": {
+  "acquisition": "block A 0x45178000 recorded by the scratch preflight at its allocation site; block B 0x45578400 recorded by acquire_second_block.S. Both records device-written, both blocks carrying a mark naming themselves.",
+  "second_live_run_of_acquire": "same addresses, status 0 - reproducible across a power cycle.",
+  "verification": "the host checked both records and both marks before arming; the probe re-checked them at hook time before writing a byte into block B.",
+  "reclaim": "release freed B FIRST (its record lives inside A), then A, both with free_result 0, both recorded. The surviving state block reads free_done = 0x45455246 RELEASED, free_error 0.",
+  "significance": "this is CURRENT_DEVELOPMENT §3 item 1's definition of done - both regions traceable from acquisition to reclaim - now with live evidence rather than offline only."
+ },
+ "what_is_NOT_established": [
+  "the bound. Neither run says anything about what the engine does at its declared output length: one produced nothing, the other produced 958 KB against a 3.17 MB limit.",
+  "WHY content matters. In this pair, 'incompressible content' and 'an output that would exceed the declared length' are perfectly confounded: the LCG source demands 3,392,834 B (host-measured) and the real frame demands 958 KB. Either could be the discriminator.",
+  "that the engine enforces the limit by refusing. That is a HYPOTHESIS this pair is consistent with, not a finding.",
+  "one run each. No repeats."
+ ],
+ "the_test_that_separates_the_last_two": {
+  "design": "a GENERATED but COMPRESSIBLE source in block B - a smooth ramp, not an LCG - at the same geometry and the same block.",
+  "if_accepted": "then 'generated versus real pixels' is not the discriminator and the output SIZE is. That would be real evidence that the engine refuses work whose output would exceed the length it was handed - which is a better answer for zero-copy than the guard words could ever give, because refusal is safe and an overrun is not.",
+  "if_refused": "then the engine discriminates on something about generated data itself, and the bound cannot be approached this way at all.",
+  "cost": "one fill-loop variant, one power cycle, the chain again, one clip."
+ },
+ "camera_left_in": {
+  "hook": "0xEBFDE061 stock, nothing armed",
+  "memory": "both blocks FREED and recorded; nothing leaked",
+  "state_block": "error 0, free_done RELEASED"
+ },
+ "camera_accessed": true,
+ "deployable": false
+}

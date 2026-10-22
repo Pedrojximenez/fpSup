@@ -1,0 +1,112 @@
+{
+  "date": "2026-09-27",
+  "stage": "/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/handoff/skills",
+  "destination": "/Users/dido/.codex/skills",
+  "items": [
+    {
+      "name": "fp-camera-control",
+      "action": "install",
+      "sources": [
+        {
+          "path": "/Users/dido/Developer.localized/SIGMAfp_re/.claude/skills/fp-camera-control/SKILL.md",
+          "sha256": "2b62c3f13478edf97e89e9d9ebc79cabe7cfa9472b4167d05acd142c4adc3431"
+        },
+        {
+          "path": "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/.claude/skills/fp-camera/SKILL.md",
+          "sha256": "4cb6486c7af02d73d10ab10863aa615bfe8fb99a1b7b1413ddc13ad434856286"
+        }
+      ],
+      "files": [
+        {
+          "relative": "SKILL.md",
+          "sha256": "6ad91d31a82a3ee625bcba40e197c6176ce04db69cf3dc8a171ca790f8b548c9",
+          "previous_sha256": null
+        },
+        {
+          "relative": "agents/openai.yaml",
+          "sha256": "778d4236d90cda2eb1b6c4dfc22692fe5743a72f5b9b8e218170bad09bf2e651",
+          "previous_sha256": null
+        }
+      ]
+    },
+    {
+      "name": "fp-unicorn-emulation",
+      "action": "install",
+      "sources": [
+        {
+          "path": "/Users/dido/Developer.localized/SIGMAfp_re/.claude/skills/fp-unicorn-emulation/SKILL.md",
+          "sha256": "08ba219d19f0b7e6c58369d7cc5df9ad9ccc77d2405d0dee8ac6baccaa53ab5a"
+        }
+      ],
+      "files": [
+        {
+          "relative": "SKILL.md",
+          "sha256": "da5e2ce1c04902bac59b40716ba992ac667e40a8b103301f4c8614ecab45f90a",
+          "previous_sha256": null
+        },
+        {
+          "relative": "agents/openai.yaml",
+          "sha256": "a021ecbe5253de935941c95a25e6878be0e9eea9c0963372029ed738ab097757",
+          "previous_sha256": null
+        }
+      ]
+    },
+    {
+      "name": "fp-merged-card",
+      "action": "install",
+      "sources": [
+        {
+          "path": "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/.claude/skills/fp-merged-card/SKILL.md",
+          "sha256": "1044776338d0b808b782556b46912d7f59a0e4d066ed2eca2a220b19610b9591"
+        }
+      ],
+      "files": [
+        {
+          "relative": "SKILL.md",
+          "sha256": "0736b43e3ea6931cb166d83d2616e03a64a01b546ec3abd0749e6b0741ffe504",
+          "previous_sha256": null
+        },
+        {
+          "relative": "agents/openai.yaml",
+          "sha256": "ec5e9c01e7b7e2b738004f8e6ddc6c1d390335b6019795dc9a67d9ca6dbf5f2c",
+          "previous_sha256": null
+        }
+      ]
+    },
+    {
+      "name": "fp-usb-shell",
+      "action": "update",
+      "sources": [
+        {
+          "path": "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/.claude/skills/fp-usb-shell/SKILL.md",
+          "sha256": "464b74585798f27bd2e9cab44275cb26065cdf5eaabf250db3e3b5953085bbce"
+        }
+      ],
+      "files": [
+        {
+          "relative": "SKILL.md",
+          "sha256": "8012915f088d00196bb8abb792efad491f83de0c09df64e1a2894a11844e005c",
+          "previous_sha256": "0ccc4bb1d604e8271a2717668ff8b0392936563045a0dc063f39b5a31d998ae9"
+        },
+        {
+          "relative": "agents/openai.yaml",
+          "sha256": "1bcb181b953d7d4918c8875776698a66f66457aded04ab9c085c95eeb3c532ed",
+          "previous_sha256": "1bcb181b953d7d4918c8875776698a66f66457aded04ab9c085c95eeb3c532ed"
+        },
+        {
+          "relative": "references/upstream-fp-usb-shell.md",
+          "sha256": "464b74585798f27bd2e9cab44275cb26065cdf5eaabf250db3e3b5953085bbce",
+          "previous_sha256": "5a9b9e8b9cd1085fd18f6b4976f5a4bbceb54a5053deb1048621075cf9759d3e"
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "frontmatter": "passed official quick_validate",
+    "metadata": "passed",
+    "local_links": "passed",
+    "scenario_review": "5 offline scenarios reviewed; stale AF routing, standby scope, and AF artifact limitations corrected"
+  },
+  "installed": true,
+  "installed_file_count": 9
+}

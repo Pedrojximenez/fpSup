@@ -1,0 +1,148 @@
+#!/usr/bin/env python3
+"""Lifecycle helper for a background FPShell daemon."""
+
+import argparse
+import json
+import os
+import pathlib
+import signal
+import socket
+import subprocess
+import sys
+import time
+
+
+ROOT = pathlib.Path(__file__).resolve().parent
+
+
+def exchange(path: str, request: str, timeout: float = 2.0) -> str:
+    with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as client:
+        client.settimeout(timeout)
+        client.connect(path)
+        client.sendall(request.encode("ascii") + b"\n")
+        data = bytearray()
+        while not data.endswith(b"\n"):
+            chunk = client.recv(4096)
+            if not chunk:
+                break
+            data.extend(chunk)
+    return data.decode("utf-8", errors="replace").strip()
+
+
+def paths(socket_path: str) -> tuple[pathlib.Path, pathlib.Path]:
+    return pathlib.Path(socket_path + ".pid"), pathlib.Path(socket_path + ".log")
+
+
+def emit(args: argparse.Namespace, ok: bool, **fields: object) -> int:
+    value = {"ok": ok, **fields}
+    if args.json_output:
+        print(json.dumps(value, ensure_ascii=False, separators=(",", ":")))
+    else:
+        print(fields.get("message") or fields.get("response") or fields.get("error", ""))
+    return 0 if ok else 1
+
+
+def start(args: argparse.Namespace) -> int:
+    try:
+        current = exchange(args.socket, "STATUS", 0.25)
+        return emit(args, False, error="daemon already running", response=current)
+    except OSError:
+        pass
+
+    pid_path, log_path = paths(args.socket)
+    command = [str(ROOT / "fpshelld"), "--socket", args.socket,
+               "--arm-wait", str(args.arm_wait), "--inter-wait-ms", str(args.inter_wait_ms),
+               "--limit", str(args.limit)]
+    if args.mock:
+        command.append("--mock")
+    log_path.parent.mkdir(parents=True, exist_ok=True)
+    with log_path.open("ab") as log:
+        process = subprocess.Popen(
+            command, stdin=subprocess.DEVNULL, stdout=log, stderr=log,
+            start_new_session=True,
+        )
+    pid_path.write_text(str(process.pid) + "\n", encoding="ascii")
+    deadline = time.monotonic() + args.wait
+    last_error = "transport did not become ready"
+    while time.monotonic() < deadline:
+        returncode = process.poll()
+        if returncode is not None:
+            last_error = f"daemon exited with status {returncode}; see {log_path}"
+            break
+        try:
+            response = exchange(args.socket, "STATUS", 0.5)
+            if response.startswith("OK "):
+                return emit(args, True, message="FPShell ready", response=response,
+                            pid=process.pid, log=str(log_path))
+        except OSError as error:
+            last_error = str(error)
+        time.sleep(0.1)
+    if process.poll() is None:
+        process.send_signal(signal.SIGTERM)
+        try:
+            process.wait(timeout=5)
+        except subprocess.TimeoutExpired:
+            last_error += "; daemon is still stopping"
+    try:
+        pid_path.unlink()
+    except FileNotFoundError:
+        pass
+    return emit(args, False, error=last_error, log=str(log_path))
+
+
+def status(args: argparse.Namespace) -> int:
+    try:
+        response = exchange(args.socket, "STATUS")
+        return emit(args, response.startswith("OK "), response=response)
+    except OSError as error:
+        return emit(args, False, error=str(error))
+
+
+def stop(args: argparse.Namespace) -> int:
+    pid_path, _ = paths(args.socket)
+    try:
+        response = exchange(args.socket, "QUIT")
+    except OSError as error:
+        return emit(args, False, error=str(error))
+    deadline = time.monotonic() + args.wait
+    while pathlib.Path(args.socket).exists() and time.monotonic() < deadline:
+        time.sleep(0.05)
+    try:
+        pid_path.unlink()
+    except FileNotFoundError:
+        pass
+    stopped = not pathlib.Path(args.socket).exists()
+    return emit(args, stopped, response=response,
+                error=None if stopped else "daemon did not stop before timeout")
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="manage the local FPShell daemon")
+    parser.add_argument("--socket", default=os.environ.get("FPSHELL_SOCKET", "/tmp/fpshell.sock"))
+    parser.add_argument("--json", action="store_true", dest="json_output")
+    subcommands = parser.add_subparsers(dest="command", required=True)
+    launch = subcommands.add_parser("start")
+    launch.add_argument("--mock", action="store_true")
+    launch.add_argument("--arm-wait", type=int, default=32)
+    launch.add_argument("--inter-wait-ms", type=int, default=2500)
+    launch.add_argument("--limit", type=int, default=4)
+    launch.add_argument("--wait", type=float, default=100.0)
+    subcommands.add_parser("status")
+    halt = subcommands.add_parser("stop")
+    halt.add_argument("--wait", type=float, default=10.0)
+    return parser.parse_args()
+
+
+def main() -> int:
+    args = parse_args()
+    if args.command == "start":
+        if args.arm_wait < 0 or args.inter_wait_ms < 0 or args.limit <= 0 or args.wait <= 0:
+            return emit(args, False, error="invalid numeric option")
+        return start(args)
+    if args.command == "status":
+        return status(args)
+    return stop(args)
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

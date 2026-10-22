@@ -1,0 +1,59 @@
+{
+  "script": "/Users/dido/Documents/Codex/2026-08-16/4/outputs/AutoRun_Stretched_ID83_Test.txt",
+  "script_sha256": "f7eec25f1c40f8883648447a2360c140b601968bd0ce9d6223a6b318a7d1c88a",
+  "payload_sha256": "ff3450f03966cd7a3a1a4759b3d16b599de17d8bd8f5d9c2cfb34ee2c5be2ed1",
+  "all_2048_samples_match_stretched_id83": true,
+  "is_identity": false,
+  "formula": "T83(x * 1918 / 2047), linearly interpolated and rounded",
+  "max_input_headroom_gain_stops": 0.09390838200527976,
+  "samples": {
+    "0": {
+      "stretched": 0,
+      "identity": 0
+    },
+    "128": {
+      "stretched": 2272,
+      "identity": 512
+    },
+    "256": {
+      "stretched": 3184,
+      "identity": 1024
+    },
+    "512": {
+      "stretched": 4400,
+      "identity": 2049
+    },
+    "1024": {
+      "stretched": 6024,
+      "identity": 4097
+    },
+    "1536": {
+      "stretched": 7216,
+      "identity": 6146
+    },
+    "1918": {
+      "stretched": 7959,
+      "identity": 7674
+    },
+    "2047": {
+      "stretched": 8190,
+      "identity": 8190
+    }
+  },
+  "no_clip_family5_rom_id50": {
+    "rom_id": 50,
+    "zero_index": 49,
+    "address": "0xC09A2F34",
+    "minimum": 0,
+    "maximum": 8191,
+    "terminal_plateau_start": 2047,
+    "terminal_plateau_length": 1,
+    "terminal_plateau_input_fraction": 1.0,
+    "table_domain_ev_to_full_scale": -0.0,
+    "longest_near_top_run_start": 1919,
+    "longest_near_top_run_end": 2046,
+    "longest_near_top_run_value": 8190,
+    "unique_output_values": 1193
+  },
+  "caveat": "Script content verified, not camera execution, readback, or observed LCD result."
+}

@@ -1,0 +1,46 @@
+{
+ "schema_version": 1,
+ "kind": "static_the_release_signal_is_a_state_word_not_the_callback",
+ "date": "2026-09-28",
+ "operator_scope": "STATIC ONLY. capstone over out/MAIN_c0000000.bin. No camera, no card. Static reading has misled this project before - the writer vtable was read 8 bytes off - so every claim here is [C] and needs live confirmation.",
+ "why": "today's live work established that copy-back's mechanism freezes the camera, leaving compress (our own buffer in seg[0] and seg[1]) as the only proven route. Its blocker is knowing when our buffer is free again. BUFFER_DESIGN §5 names one candidate for that and marks it unproven.",
+ "finding_1_the_named_candidate_cannot_fire_on_SD": {
+  "claim": "C03A55D0(frame, status) has exactly ONE caller, 0xC03A54C4, and that call is skipped whenever the aggregation flag is set.",
+  "evidence": "a full scan for BL -> 0xC03A55D0 over 0xC0000000..0xC3000000 finds one site. The control flow at that site is: 0xC03A5490 bl C069ADE0 (the write); r6,r7 = its 64-bit result; 0xC03A549C ldrb r3,[fp,#0xd]; cmp r3,#0; bne 0xC03A54F4 - branching PAST the status computation and the completion call.",
+  "why_it_matters": "fp+0xD is the aggregation flag. The project established live on 2026-09-24 that manager+0xD comes from settings[0x9C] via MenuItemMediaWriteMode::v3, that v3 forces 1 unless the menu value is >= 2, and that on SD it is always 1 and cannot be turned off. So on SD this BL never executes and C03A55D0 never runs.",
+  "consequence": "BUFFER_DESIGN §5's release candidate does not exist on the target path. A pool built on it would wait for a callback that never arrives."
+ },
+ "finding_2_what_the_aggregated_path_does_instead": {
+  "at_submit": "0xC03A54F4 onward: on a zero result it writes frame[0x1104] = 0xD, reads frame[0x10FC], calls C03A52D0(manager, frame[0x10FC], 4, 1), then posts via C001A048 with r1 = 0x800000. The error path at 0xC03A5558 writes the SAME 0xD, so 0xD is 'terminal at submit', not 'succeeded'.",
+  "not_a_reuse_signal": "0xD is written immediately after C069ADE0 returns, and G3 measured that return at 372 us for 3.2 MB - 8.7 GB/s, i.e. queued, not written. BUFFER_DESIGN §5 already says the submit return cannot be a reuse notification, and 0xD is that same moment."
+ },
+ "finding_3_the_signal_that_does_look_like_release": {
+  "state_0x12": "written to frame[0x1104] at TWO sites in the card/filesystem layer, 0xC0384444 and 0xC038F6A4, each after five teardown calls that all take frame[0x10FC]: C037B248, C037D580, C037D898, C037DD08, C037E060. Each is immediately followed by C0397038(frame, r6, 5, 0).",
+  "who_consumes_it": "0xC03A11F0 in the CinemaDNG manager: it loads frame[0x1104], compares with 0x12, and does nothing unless it matches. On a match it reads frame[0x68] - which C1 established is the frame's ALLOCATION BASE - and harvests it into a table at manager+0x178 with a stride of 0x60, recording frame[0x10] and frame[0x14].",
+  "reading": "the manager reclaims a frame's buffer only from frames in state 0x12. That makes 0x12 the transition after which the buffer is no longer being read - which is exactly the release signal a pool needs.",
+  "the_state_values_seen": {
+   "0": "0xC0384A5C, 0xC037B574",
+   "8": "0xC037741C",
+   "9": "0xC037AFA0",
+   "0xA": "0xC0387AE8",
+   "0xD": "submit, both success and error",
+   "0x12": "0xC0384444, 0xC038F6A4"
+  },
+  "hedge": "that 0x12 means 'the data has left our buffer' is an INFERENCE from who reads it and what they do with frame[0x68]. It is not proven, and the five teardown calls have not been read."
+ },
+ "the_next_step_this_points_to": {
+  "a_release_observation_probe": "non-destructive: no redirect, no encode, nothing written differently to the card. It records, per frame, when the frame is submitted and when it reaches 0x12, and the difference is the hold time BUFFER_DESIGN §6 says the real pool size N depends on.",
+  "hook_options": {
+   "one_site_each": "0xC038445C and 0xC038F33C, the BL to C0397038 right after each 0x12 store. Fires exactly once per frame per media path, but there are two sites and it is not established which one SD uses - hooking only one may observe nothing.",
+   "the_dispatcher": "C0397038 itself: one site to arm, catches both paths, and filtering on r2 == 5 with frame[0x1104] == 0x12 isolates the release. It has 22 callers, so the handler runs on every state transition of every frame and must be cheap and bounded - which for observation is a feature, because the whole per-frame timeline comes out of it."
+  },
+  "recommendation": "hook the dispatcher, filter, and log frame, frame[0x1104], frame[0x68], frame[0x10FC] and a tick into a ring in our own block. If it never fires, the site is wrong and nothing has been risked."
+ },
+ "what_must_be_revised_in_the_notes": [
+  "BUFFER_DESIGN §5: the located candidate C03A55D0 should be recorded as unreachable on SD, with the aggregation flag as the reason, and 0x12 recorded as the candidate that replaces it.",
+  "BUFFER_DESIGN §1: the copy-back baseline should be withdrawn - today's live runs froze the camera three times on the seg[1] store, once with the copy removed - and the own-slots route restored as the main line.",
+  "CURRENT_DEVELOPMENT §4's ordering: post-encode cost on the copy-back baseline is measuring a path that fails."
+ ],
+ "camera_accessed": false,
+ "deployable": false
+}

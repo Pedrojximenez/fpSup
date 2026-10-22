@@ -1,0 +1,15 @@
+fpGyroSup stream baseline r37 (2026-09-03) — SIGMA fp Ver.5.02, release AutoRun (no shell), GCSV-only stream.
+= r36 (1250 Hz two-tap + sparse accel) + seam continuity + JSON dimensions from the take's own DNG.
+PGEN ae19da252532 is byte-identical to the build verified live on A001_007.
+
+Verified live (USB-shell hot-reload, same camera):
+  drops   : controlled A/B, same heavy shake, PGEN only changed — r23 S_DROPPED=3402 (97.757%) -> r36 0 (99.994%).
+            Root cause proven via S_DROPPED matching GCSV gaps: a 32 KiB slot's text under heavy motion needed
+            three 64 KiB F_WRITEs, each waiting ~0.5 s for the card lock behind video (our writer prio 28 vs 6);
+            r36 keeps a slot under 64 KiB -> one write -> no overflow. Byte bandwidth was never the limit.
+  seams   : block anchors carried callback latency (tail up to ~4 ms). gcsvgen now continues the 2500 Hz grid
+            across a seam when S_DROPPED is unchanged since the previous block (10 ms guard); a counted drop
+            re-anchors. A001_007: intervals only 800/600 us (600 = odd-block tail), residual 0, monotonic.
+  json    : GEOMETRY 0xC37CE210 reads 0x0 across whole stream-mode takes, so profilegen reads ImageWidth/Length
+            from IFD0 of the take's DNG (TopFile 0xC358E148 + gcsv folder). A001_004..007: 1936x1090 mode 106.
+Card layout: AutoRun.txt, VSHL.BIN, PGEN.BIN at root (GYRO/ folder not needed for stream). Do not mix versions.

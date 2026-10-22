@@ -1,0 +1,278 @@
+{
+  "schema": "sigma-fp-subject-observation/v1",
+  "firmware": "SIGMA fp Ver.5.02",
+  "byte_order": "little",
+  "geometry_eligible": false,
+  "face_group": {
+    "source": {
+      "kind": "parsed_face_group",
+      "address": "0xC37CCAAC",
+      "manager_address": "0xC37CCA9C",
+      "manager_offset": 16,
+      "group_index": 0,
+      "length_bytes": 156,
+      "producer": "C05AAFF8"
+    },
+    "raw": {
+      "primary_xy": [
+        0,
+        0
+      ],
+      "primary_size": [
+        0,
+        0
+      ],
+      "detector_xy": [
+        0,
+        0
+      ],
+      "detector_size": [
+        0,
+        0
+      ],
+      "native_angle": 0,
+      "native_tracking_id": 0,
+      "native_score": 0,
+      "size": 0,
+      "parsed_valid": 0
+    },
+    "field_layout": {
+      "primary_xy": {
+        "offset": 0,
+        "type": "i32",
+        "count": 2,
+        "source": "C05A9AF0/C05BAC90 signed coordinate path; conversion may be bypassed"
+      },
+      "primary_size": {
+        "offset": 8,
+        "type": "u32",
+        "count": 2,
+        "source": "C05AAFF8 copies P+10 to G+08/+0C"
+      },
+      "detector_xy": {
+        "offset": 16,
+        "type": "i32",
+        "count": 2,
+        "source": "C05AAFF8: P center minus half P+10 size; can be negative"
+      },
+      "detector_size": {
+        "offset": 24,
+        "type": "u32",
+        "count": 2,
+        "source": "C05AAFF8 copies P+10 to G+18/+1C"
+      },
+      "native_angle": {
+        "offset": 32,
+        "type": "u16",
+        "count": 1,
+        "source": "C05AAFF8 copies P+18 u16; not a verified yaw angle"
+      },
+      "native_tracking_id": {
+        "offset": 36,
+        "type": "u32",
+        "count": 1,
+        "source": "C05AAFF8 copies P+1C to G+24, not G+34"
+      },
+      "native_score": {
+        "offset": 40,
+        "type": "u32",
+        "count": 1,
+        "source": "C05AAFF8 copies P+14; not geometry confidence"
+      },
+      "size": {
+        "offset": 44,
+        "type": "u32",
+        "count": 1,
+        "source": "C05AAFF8 copies raw square P+10 size"
+      },
+      "parsed_valid": {
+        "offset": 48,
+        "type": "byte",
+        "count": 1,
+        "source": "C05AAFF8 parsed-result flag, not physical-scale validity"
+      }
+    },
+    "bytes_hex": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "coordinate_reference": null,
+    "source_completion_epoch": null,
+    "geometry_eligible": false,
+    "limitations": [
+      "Native slot and tracking ID do not establish persistent target identity.",
+      "Only primary x/y undergo a mode-dependent transform; reference/crop is unavailable.",
+      "Native angle is not verified yaw; native score/valid do not establish geometric reliability.",
+      "Eye subrecords and uninterpreted bytes remain preserved only in bytes_hex."
+    ]
+  },
+  "aat_publication": {
+    "source": {
+      "kind": "aat_status_publication",
+      "address": "0xC3033E00",
+      "status_address": "0xC303384C",
+      "status_offset": 1460,
+      "manager_address": "0xC37CCA9C",
+      "manager_offset": 832,
+      "length_bytes": 40,
+      "producer": "C05AC690 -> C05A9900"
+    },
+    "raw": {
+      "path_count": 0,
+      "result_xywh": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "af_input_xywh": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "valid": 0,
+      "ever_found": 0,
+      "quality": 0,
+      "additional_result": 0
+    },
+    "field_layout": {
+      "path_count": {
+        "offset": 0,
+        "type": "u32",
+        "count": 1,
+        "source": "M+3DC path counter conditionally copied to M+340; not frame ID"
+      },
+      "result_xywh": {
+        "offset": 4,
+        "type": "i32",
+        "count": 4,
+        "source": "M+344..350 from GetResult; backend can provide a fixed box"
+      },
+      "af_input_xywh": {
+        "offset": 20,
+        "type": "i32",
+        "count": 4,
+        "source": "M+354..360; C02763C0 consumes this before AF reshape"
+      },
+      "valid": {
+        "offset": 36,
+        "type": "byte",
+        "count": 1,
+        "source": "M+364; C02761C8 checks published S+5D8"
+      },
+      "ever_found": {
+        "offset": 37,
+        "type": "byte",
+        "count": 1,
+        "source": "M+365 from AAT found-history flag"
+      },
+      "quality": {
+        "offset": 38,
+        "type": "byte",
+        "count": 1,
+        "source": "M+366; one C02761C8 gate is >19, not the complete adoption decision"
+      },
+      "additional_result": {
+        "offset": 39,
+        "type": "byte",
+        "count": 1,
+        "source": "M+367 from GetResult+11; preserve without added interpretation"
+      }
+    },
+    "bytes_hex": "00000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "coordinate_reference": null,
+    "source_completion_epoch": null,
+    "geometry_eligible": false,
+    "limitations": [
+      "path_count is a conditionally copied AAT path counter, not exposure or frame identity.",
+      "The two signed rectangles are distinct; af_input_xywh precedes AF output reshape.",
+      "Positive dimensions, valid, ever_found, and quality do not prove physical scale or actual AF adoption."
+    ]
+  },
+  "aat_model": {
+    "source": {
+      "kind": "aat_color_tracker_model",
+      "address": "0xC37CDFA8",
+      "length_bytes": 44,
+      "producer": "C05B6CF8; field writers C05B7880/C05B2DC0/C05B7D98"
+    },
+    "raw": {
+      "center_xy": [
+        0,
+        0
+      ],
+      "semi_axes": [
+        0,
+        0
+      ],
+      "native_angle": 0,
+      "hits_mapped_quality": 0,
+      "semi_axes_area_ratio": 0
+    },
+    "field_layout": {
+      "center_xy": {
+        "offset": 0,
+        "type": "u16",
+        "count": 2,
+        "source": "C05B7880 writes center; C05B7968 reads unsigned coordinates"
+      },
+      "semi_axes": {
+        "offset": 4,
+        "type": "u16",
+        "count": 2,
+        "source": "C05B7880/C05B2DC0 model semi-axes; not physical object depth"
+      },
+      "native_angle": {
+        "offset": 8,
+        "type": "i32",
+        "count": 1,
+        "source": "C05B7968 reads signed 32-bit model angle, not pose/yaw"
+      },
+      "hits_mapped_quality": {
+        "offset": 12,
+        "type": "byte",
+        "count": 1,
+        "source": "C05B7D98 maps global hits to a byte; not raw hits or scale reliability"
+      },
+      "semi_axes_area_ratio": {
+        "offset": 13,
+        "type": "byte",
+        "count": 1,
+        "source": "C05B7D98: semi_axis_0*semi_axis_1*100/maxAxis^2; not hit density"
+      }
+    },
+    "bytes_hex": "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "coordinate_reference": null,
+    "source_completion_epoch": null,
+    "geometry_eligible": false,
+    "limitations": [
+      "Model semi-axes adapt and can differ from GetResult, search-window, and adopted AF ROI dimensions.",
+      "hits_mapped_quality is not raw hits or geometric reliability; semi_axes_area_ratio is not hit density.",
+      "Model angle is not subject pose; no depth, normalized size, or AAT scale-validation flag is inferred."
+    ]
+  },
+  "geometry": {
+    "scale_q16": null,
+    "coordinate_reference": null,
+    "target_generation": null,
+    "context_generation": null,
+    "scale_generation": null,
+    "source_sequence": null,
+    "source_completion_epoch": null,
+    "exposure_sequence": null,
+    "projection_stable": null,
+    "lens_stationary": null,
+    "lens_position": null,
+    "optical_anchor": null,
+    "focus_event_sequence": null,
+    "flags": {
+      "scale_valid": false,
+      "identity_valid": false,
+      "time_valid": false,
+      "projection_stable": false,
+      "lens_stationary": false,
+      "aat_scale_validated": false
+    },
+    "motion_authorized": false
+  },
+  "input_capture": "native-preflight.jsonl",
+  "input_is_sequential_nonatomic_reads": true
+}

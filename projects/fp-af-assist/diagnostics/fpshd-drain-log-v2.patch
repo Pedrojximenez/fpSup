@@ -1,0 +1,47 @@
+--- fpshd-diagnostic.c	2026-09-16 07:28:30
++++ fpshd-diagnostic-v2.c	2026-09-16 07:45:11
+@@ -115,6 +115,34 @@
+             clock_rc, (long long)ts.tv_sec, ts.tv_nsec, hex);
+     errno = saved_errno;
+ }
++
++/* Observe only the return of each drain transfer that already exists.  The
++ * frame logger and all drain decisions remain unchanged.  This counter is
++ * local to drain diagnostics, separate from the frame-error counter above.
++ */
++static void diagnostic_drain_log(uint32_t sequence, int iteration, int rc,
++                                 int moved, const unsigned char *bytes)
++{
++    static unsigned long long count;
++    static const char digits[] = "0123456789abcdef";
++    int saved_errno = errno;
++    struct timespec ts = { -1, -1 };
++    char hex[FRAME_SIZE * 2 + 1];
++    size_t captured = moved > 0 ? (size_t)moved : 0;
++    if (captured > FRAME_SIZE) captured = FRAME_SIZE;
++    int clock_rc = clock_gettime(CLOCK_MONOTONIC_RAW, &ts);
++    for (size_t i = 0; i < captured; i++) {
++        hex[i * 2] = digits[bytes[i] >> 4];
++        hex[i * 2 + 1] = digits[bytes[i] & 15];
++    }
++    hex[captured * 2] = 0;
++    fprintf(stderr, "FPSH_DIAG_DRAIN source=drain count=%llu seq=%u "
++            "drain_iteration=%d rc=%d moved=%d expected=%d captured=%zu "
++            "clock=MONOTONIC_RAW clock_rc=%d raw_sec=%lld raw_nsec=%ld hex=%s\n",
++            ++count, sequence, iteration, rc, moved, CMD_LINE_MAX, captured,
++            clock_rc, (long long)ts.tv_sec, ts.tv_nsec, hex);
++    errno = saved_errno;
++}
+ #endif
+ 
+ static uint32_t crc32(const uint8_t *p, size_t n)
+@@ -189,6 +217,9 @@
+          * instead of five hundred. */
+         int rc = libusb_bulk_transfer(g_cam, EP_IN, junk, sizeof junk,
+                                       &moved, 20);
++#ifdef FPSH_DIAGNOSTIC_FRAME_LOG
++        diagnostic_drain_log(g_seq, i, rc, moved, junk);
++#endif
+         if (rc == LIBUSB_ERROR_PIPE) { libusb_clear_halt(g_cam, EP_IN); continue; }
+         if (rc == LIBUSB_ERROR_OVERFLOW) continue;
+         if (rc != 0 || moved == 0) break;

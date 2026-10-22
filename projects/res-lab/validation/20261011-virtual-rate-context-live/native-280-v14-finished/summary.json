@@ -1,0 +1,69 @@
+{
+  "origin_us": 327898824,
+  "vbuf_ms": 971.591,
+  "vbuf_payload": [
+    1145328897,
+    4294967295,
+    94,
+    84053
+  ],
+  "before_vbuf": {
+    "submitted": 3,
+    "completed": 0,
+    "released": 0
+  },
+  "first_written_frames": [
+    {
+      "slot": 94,
+      "submit_ms": 684.049,
+      "complete_ms": 1151.681,
+      "release_ms": 1376.574,
+      "complete_to_release_ms": 224.893
+    },
+    {
+      "slot": 95,
+      "submit_ms": 742.258,
+      "complete_ms": 1151.711,
+      "release_ms": 1376.881,
+      "complete_to_release_ms": 225.17
+    },
+    {
+      "slot": 0,
+      "submit_ms": 820.869,
+      "complete_ms": 1151.723,
+      "release_ms": 1377.486,
+      "complete_to_release_ms": 225.763
+    }
+  ],
+  "limitations": "DEBUG changes scheduling; header bracket includes Gyro2 and the confirmed CPU-copy path (94/94 hits); completion and release are not durable-media or no-mosaic proof.",
+  "header_bracket_ms": {
+    "min": 0.986,
+    "median": 2.325,
+    "max": 35.137
+  },
+  "sensor_callbacks": {
+    "count": 117,
+    "median_gap_us": 3574.0,
+    "limitation": "callback cadence does not establish exposure or complete recorded frames"
+  },
+  "metadata_brackets_ms": {
+    "10110304-10110305": {
+      "count": 94,
+      "min": 0.05999999999994543,
+      "median": 0.08549999999996771,
+      "max": 1.4470000000000027
+    },
+    "10110305-10110306": {
+      "count": 94,
+      "min": 0.30299999999999727,
+      "median": 0.6285000000000309,
+      "max": 7.59800000000007
+    },
+    "10110306-10110307": {
+      "count": 94,
+      "min": 0.98599999999999,
+      "median": 2.3250000000000455,
+      "max": 35.136999999999944
+    }
+  }
+}

@@ -1,0 +1,87 @@
+test_a_full_screen_vector_is_not_grown (__main__.Modes) ... ok
+test_a_full_state_machine_vector_is_not_grown (__main__.Modes) ... ok
+test_a_list_not_found_is_not_touched (__main__.Modes) ... ok
+test_a_mode_chosen_resets_the_output (__main__.Modes)
+MODE row changed (SL_M_Sel): the largest output at AUTO, binning 1 x 1, ... ok
+test_a_model_that_is_not_modelcsv_is_not_touched (__main__.Modes) ... ok
+test_a_reader_of_another_app_registers_nothing (__main__.Modes) ... ok
+test_a_refused_pack_is_not_retried (__main__.Modes) ... ok
+test_an_instance_already_there_is_not_loaded_again (__main__.Modes) ... ok
+test_an_unsolvable_budget_cell_drops_the_mode (__main__.Modes)
+With the shipped tables every cell a mode reaches is solvable, so this ... ok
+test_any_rate_scan_is_the_union_and_bad_index_lists_nothing (__main__.Modes) ... ok
+test_auto_is_the_area_shape (__main__.Modes)
+AUTO holds the shape of the sensor area the mode covers, not its raster's ... ok
+test_auto_raw_and_the_squeezes (__main__.Modes)
+AUTO keeps the readout's shape (both sides scaled alike), a squeeze is AUTO ... ok
+test_counts (__main__.Modes) ... ok
+test_donor_timing_comes_from_the_stock_copy (__main__.Modes) ... ok
+test_every_failing_step_stops_there (__main__.Modes) ... ok
+test_every_mutation_is_caught (__main__.Modes) ... test_exact_steps (__main__.Modes)
+W = num t, H = den t, W x16, H even: the step per ratio. ... ok
+test_filter_fps_is_the_only_rate_narrowing_of_modes (__main__.Modes)
+Any and explicit FILTER FPS keep the same MODE rows as the user's ... ok
+test_filter_narrows_the_mode_list (__main__.Modes)
+FILTER's rows narrow the MODE list for the menu bit depth, across ... ok
+test_live_view_follows_the_shape (__main__.Modes)
+Camera r69: M7 (16:9) squeezed in live view, the six preview profiles ... ok
+test_mode_0_is_listed_only_when_it_solves (__main__.Modes)
+M0 shares AXIS's 'auto' value: listed when its own conditions pass, ... ok
+test_no_pages_in_the_file_registers_nothing (__main__.Modes) ... ok
+test_no_pages_no_panel (__main__.Modes) ... ok
+test_no_settings_manager_touches_nothing (__main__.Modes) ... ok
+test_no_static_name_is_a_field_name (__main__.Modes)
+The ARM build prefixes sl_modes.c's statics (sl_modes__x), and a field ... ok
+test_not_installed_touches_nothing (__main__.Modes) ... ok
+test_nothing_matching_is_one_greyed_row (__main__.Modes) ... ok
+test_only_user_fps_changed_does_not_rebuild (__main__.Modes) ... ok
+test_pages_register_once_and_take_the_shared_pool (__main__.Modes) ... ok
+test_rate240_changes_the_readout_but_not_the_mode_list (__main__.Modes) ... ok
+test_ratio_names (__main__.Modes)
+Every label names its shape, or a decimal (the user): full-width 16:9 is ... ok
+test_record_settings_follow_the_mode (__main__.Modes)
+The record settings' Frame rate and Bit depth rows grey (0,0) what the ... ok
+test_rewrites_the_model_to_the_scan (__main__.Modes) ... ok
+test_scan_is_the_recipes_acceptance (__main__.Modes) ... ok
+test_the_crop_goes_back_to_zero (__main__.Modes)
+A ratio held (AUTO; 2.76:1 steps 1104 px): every Down makes the cut asked for ... ok
+test_the_crop_row (__main__.Modes)
+Crop: pixels cut from the readout, centred (the user): its editor writes ... ok
+test_the_data_rate (__main__.Modes)
+W x H x bits x fps / 8 in MB/s, from the bit-depth and frame-rate settings. ... ok
+test_the_hidden_15_fps_does_not_narrow_the_list (__main__.Modes) ... ok
+test_the_interface_is_judged_by_its_slots_not_its_address (__main__.Modes)
+r10 on camera: the interface was not at 0xC2E01DB0 and nothing was written. ... ok
+test_the_list_follows_bit_depth_but_not_the_user_rate (__main__.Modes)
+sl_menu_live follows bit depth. The user's FPS changes the readout, ... ok
+test_the_mode_diagram (__main__.Modes)
+White = the sensor drawn 420 x 280 at (40, 180); green = the area the chosen ... ok
+test_the_mode_row_text_and_cap (__main__.Modes)
+SL_ModeMax = rows - 1 (the lists' caps), SL_M_Text = the chosen row's ... ok
+test_the_panel_declares_our_profile (__main__.Modes)
+OUTPUT -> our own profile row (sl_modes.c declare_post): every field the ... ok
+test_the_panel_drives_axis (__main__.Modes)
+OUTPUT -> AXIS (sl_modes.c axis_post): raster / mode = the chosen mode, ... ok
+test_the_panel_is_edited_in_place (__main__.Modes)
+OUTPUT's info panel, the date / time page's way: subscribed once with the ... ok
+test_the_ratio_holds_width_and_height (__main__.Modes)
+The Ratio row (sl_lists SCALE_ROWS) really holds W:H (the user): the edited ... ok
+test_the_ratio_row_maximizes (__main__.Modes)
+The Ratio row moved: the output is the largest at the new ratio (the user ... ok
+test_the_record_envelope (__main__.Modes)
+The envelope seam, at the old per-side stock maximum (4176 x 2182): the ... ok
+
+======================================================================
+FAIL: test_every_mutation_is_caught (__main__.Modes) (mutation='axis written at boot')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/sl_menu/test_sl_modes.py", line 1322, in test_every_mutation_is_caught
+    type(self).lib = build(self.tmp.name, seam)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/sl_menu/test_sl_modes.py", line 66, in build
+    raise AssertionError('mutation seam not found once: ' + old[:60])
+AssertionError: mutation seam not found once:     if (!m->axis_armed || !m->ro_w
+
+----------------------------------------------------------------------
+Ran 48 tests in 137.015s
+
+FAILED (failures=1)

@@ -1,0 +1,75 @@
+{
+  "name": "LUMIX S 40/F2",
+  "n_focal": 1,
+  "focal_axis_0p1mm": [
+    400
+  ],
+  "n_step": 12,
+  "scale": "defocus_per_pulse_um = defocus_raw / 65536.0 (16.16 fixed)",
+  "cell": "{ step_pos, defocus_raw, dpp_um }; step_pos=對焦步位, dpp=每脈衝離焦量(µm)",
+  "table": [
+    [
+      {
+        "step_pos": 5927,
+        "defocus_raw": 0,
+        "dpp_um": 0.0
+      },
+      {
+        "step_pos": 6229,
+        "defocus_raw": 28300,
+        "dpp_um": 0.43182
+      },
+      {
+        "step_pos": 6660,
+        "defocus_raw": 69048,
+        "dpp_um": 1.05359
+      },
+      {
+        "step_pos": 7104,
+        "defocus_raw": 111459,
+        "dpp_um": 1.70073
+      },
+      {
+        "step_pos": 7560,
+        "defocus_raw": 155459,
+        "dpp_um": 2.37212
+      },
+      {
+        "step_pos": 8031,
+        "defocus_raw": 201359,
+        "dpp_um": 3.07249
+      },
+      {
+        "step_pos": 8517,
+        "defocus_raw": 249184,
+        "dpp_um": 3.80225
+      },
+      {
+        "step_pos": 9021,
+        "defocus_raw": 299254,
+        "dpp_um": 4.56625
+      },
+      {
+        "step_pos": 9541,
+        "defocus_raw": 351395,
+        "dpp_um": 5.36186
+      },
+      {
+        "step_pos": 10083,
+        "defocus_raw": 406232,
+        "dpp_um": 6.19861
+      },
+      {
+        "step_pos": 10659,
+        "defocus_raw": 465021,
+        "dpp_um": 7.09566
+      },
+      {
+        "step_pos": 11069,
+        "defocus_raw": 507147,
+        "dpp_um": 7.73845
+      }
+    ]
+  ],
+  "source": "lens_data+0x10c58 (parser FUN_c0338510); wire 來源=鏡頭內部 ROM 0x356BB via L-mount CmdRead"
+}

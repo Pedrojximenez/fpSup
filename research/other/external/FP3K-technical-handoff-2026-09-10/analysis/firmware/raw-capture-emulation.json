@@ -1,0 +1,57 @@
+{
+  "code_bytes": 1020,
+  "code_sha256": "c03eac8185417b4c99dc1f72061fb9efc31d59dfe9c801af7ed333f88ebfcd40",
+  "capture_bytes": 99904,
+  "allocation_bytes": 131072,
+  "cases": [
+    {
+      "case": "short_take",
+      "passed": true,
+      "simulated_ms": 33000,
+      "file_calls": 1
+    },
+    {
+      "case": "late_stop",
+      "passed": true,
+      "simulated_ms": 38000,
+      "file_calls": 1
+    },
+    {
+      "case": "no_take",
+      "passed": true,
+      "simulated_ms": 33000,
+      "file_calls": 1
+    },
+    {
+      "case": "always_recording",
+      "passed": true,
+      "simulated_ms": 90000,
+      "file_calls": 0
+    },
+    {
+      "case": "finalizing",
+      "passed": true,
+      "simulated_ms": 90000,
+      "file_calls": 0
+    },
+    {
+      "case": "bad_pool",
+      "passed": true,
+      "simulated_ms": 0,
+      "file_calls": 0
+    },
+    {
+      "case": "small_pool",
+      "passed": true,
+      "simulated_ms": 0,
+      "file_calls": 0
+    },
+    {
+      "case": "corrupt_body",
+      "passed": true,
+      "simulated_ms": 0,
+      "file_calls": 0
+    }
+  ],
+  "limitations": "Sleep and file handlers are stubs. No physical camera, flash, filesystem or media contention is modeled. Bootstrap integrity cannot be guaranteed by its own checksum."
+}

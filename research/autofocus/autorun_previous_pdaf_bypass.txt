@@ -1,0 +1,37 @@
+# SIGMA fp Ver.5.02 - PdafCorrect cross-mode bypass experiment
+# RAM-only; a full cold boot restores executable RAM.
+# Start cue: 1 color-bar pulse. Successful completion: 2 pulses.
+#
+# PdafCorrect entry: 0xC030FB20
+# Authoritative firmware first word: 0xE92D4DF0 (PUSH {...,LR})
+# Temporary first word:              0xE12FFF1E (BX LR)
+# This bypasses PdafCorrect in every sensor mode while preserving the native
+# Bayer acquisition, StillCreateRaw, DNG compression, and card-write paths.
+
+display monitor 0 1
+display colorbar 1 0
+ctrl sleep 700
+display colorbar 0 0
+ctrl sleep 400
+
+# Save the authoritative entry before changing executable RAM.
+mem save \PDPRE.BIN 0xC030FB20,,0x10
+
+# Cross-mode bypass: PdafCorrect returns immediately.
+mem set 0xC030FB20 0xE12FFF1E
+
+# Save readback evidence and a marker only after the patch is installed.
+mem save \PDPST.BIN 0xC030FB20,,0x10
+mem set 0xC072E540 0x46414450
+mem set 0xC072E544 0x53505942
+mem set 0xC072E548 0xE92D4DF0
+mem set 0xC072E54C 0xE12FFF1E
+mem save \PDBYP.BIN 0xC072E540,,0x10
+
+display colorbar 1 0
+ctrl sleep 700
+display colorbar 0 0
+ctrl sleep 400
+display colorbar 1 0
+ctrl sleep 700
+display colorbar 0 0

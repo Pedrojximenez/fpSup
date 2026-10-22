@@ -1,0 +1,102 @@
+{
+ "schema_version": 1,
+ "kind": "live_c1_read_only_frame_reference_survey",
+ "date": "2026-09-26",
+ "operator_scope": "live camera, read-only. The flush probe armed twice and self-restored both times. No codec, no allocation, no write to the frame, the DNG or any setting. Two recordings of about three seconds.",
+ "camera": {
+  "model": "w71c1",
+  "firmware": "5.02.0.V91",
+  "media": "SD",
+  "app_current": 2,
+  "mode": "CINE, FHD RAW12 24p",
+  "boot": "fresh; cave reported no claims this boot, both hook sites original",
+  "menu_SetMediaWriteMode": 0
+ },
+ "question": "copy-back overwrites the buffer the writer hands us. A clone shares frame[0x68] rather than getting its own allocation, so does a clone exist when the flush runs?",
+ "verdict": "NO CLONE EXISTS. Reproduced on two independent runs.",
+ "measured": {
+  "run_1": {
+   "flush_elapsed_us": 6208,
+   "frame_id": 0
+  },
+  "run_2": {
+   "flush_elapsed_us": 382,
+   "frame_id": 54
+  },
+  "identical_in_both": {
+   "frame_kind": 1,
+   "frame_buffer": "0x53B00C00",
+   "frame_header_bytes": "0x15400",
+   "frame_clones_made": 0,
+   "frame_refcount": 0,
+   "frame_owner_id": "0xFFFFFFFF",
+   "frame_clones_requested": 1,
+   "frame_buffer_is_seg0": 0,
+   "node_buffer": "0x53B02C00",
+   "node_length": "0x318200",
+   "dng_magic": "0x002A4949",
+   "shape": "PASS"
+  }
+ },
+ "the_answer": {
+  "level": "L",
+  "claim": "no Dup2 ever ran on this frame, so nothing else holds its buffer",
+  "argument": "Dup2 increments BOTH frame[0x1110] and frame[0x1114] on the owner, and it is the only place either is incremented - established statically in ledger-frame-sharing-static-20260924.json. Both read 0 on both runs. frame[0x1C0] reads 1, so a clone was REQUESTED and none was made, which is exactly the part static reading could not settle: the two call sites of FUN_c0374ee8 differ and one is ungated.",
+  "consequence": "copy-back is not exposed to the shared-clone hazard on this path."
+ },
+ "two_of_my_four_pass_conditions_were_wrong_guesses": [
+  {
+   "condition": "frame_refcount == 1",
+   "why_it_was_wrong": "I read it as 'one holder'. It counts CLONES, so 0 is the good answer and 1 would have been the bad one. My condition was inverted.",
+   "measured": 0
+  },
+  {
+   "condition": "frame_owner_id == 0",
+   "why_it_was_wrong": "I guessed 0 was the 'I am the owner' sentinel. It is 0xFFFFFFFF. Dup2 writes the owner's id into a CLONE's field, so a non-clone never has it set.",
+   "measured": "0xFFFFFFFF"
+  },
+  {
+   "condition": "frame_buffer_is_seg0 == 1",
+   "why_it_was_wrong": "I assumed frame[0x68] is the buffer the writer registers. It is the ALLOCATION base; the DNG starts 0x2000 into it. See the correction below.",
+   "measured": 0
+  },
+  {
+   "condition": "frame_clones_made == 0",
+   "held": true,
+   "measured": 0
+  }
+ ],
+ "note_on_reinterpreting": "Three of four conditions did not hold as written and I am still calling the substance a pass. The load-bearing fact is narrower than the four conditions and does not depend on them: Dup2 is the only writer of frame[0x1110] and frame[0x1114], and both are 0. Either being non-zero would have been a fail and neither was. The other two conditions were guesses about sentinel values that the measurement corrected.",
+ "structural_correction_to_yesterdays_capacity_ledger": {
+  "corrects": "ledger-copyback-capacity-20260924.json",
+  "what_i_said": "the allocation is exactly the stock DNG size, 3,244,544 bytes, and the 8,704-byte gap between ring slots is the allocator's granularity",
+  "what_is_true": "frame[0x128] is 0x15400 = 87,040, not the 0x13400 = 78,848 I assumed. The allocation is 87,040 + 3,165,696 = 3,252,736 = 0x31A200. The DNG the writer registers starts 0x2000 = 8,192 bytes INTO that allocation and ends exactly where it ends. The gap between ring slots is therefore 512 bytes, not 8,704.",
+  "arithmetic_that_confirms_it": "frame[0x68] + frame[0x128] = 0x53B00C00 + 0x15400 = 0x53B16000, and seg[0] + 0x13400 = 0x53B02C00 + 0x13400 = 0x53B16000. The same pixel start from two different bases. This is also what confirms flush_arg1 is the frame object and that these offsets are the right ones.",
+  "does_not_change_the_design": "The copy-back rule is file_bytes <= seg[1] and it is unchanged: we write only inside the region the writer handed us. What is corrected is a claim about what surrounds that region, not the bound. There are 8,192 bytes before seg[0] in the same allocation; nothing establishes that they are ours and copy-back does not need them."
+ },
+ "frame_kind_is_1_not_2": {
+  "level": "L",
+  "claim": "frame[4] reads 1 on the CinemaDNG movie path, not 2 as I inferred from FUN_c037a990's branches",
+  "consequence": "the movie frame takes FUN_c037a990's DEFAULT branch, which is the one whose formula I analysed: frame[0x128] + round_up(payload, 512). So the allocation arithmetic stands. It also means FUN_c0397cd8 does not consult the bracketing settings, which is why frame[0x1C0] stays at its default of 1."
+ },
+ "an_outlier_that_repeating_caught": {
+  "level": "L",
+  "observation": "the first run reported 6,208 us, 17 times the 356-382 us measured on 2026-09-24 and again on run 2",
+  "handling": "n = 1 is not a measurement. The second run, with the cave cleared and the probe verified fresh, reported 382 us.",
+  "plausible_cause": "run 1 was the first recording after a replug and a fresh boot, so filesystem or card first-write work is a candidate. NOT established.",
+  "not_concluded": "6,208 us is still 522 MB/s for 3,244,544 bytes, which no SD card sustains, so even the outlier is not a full transfer. Nothing here changes the submit-versus-transfer reading."
+ },
+ "explicitly_not_established": [
+  "that no clone exists on OTHER paths or other recording modes. Two runs, one mode, one clip each.",
+  "what the 8,192 bytes before seg[0] are for, or whether anything reads them",
+  "whether the writer's buffer is aliased at +0x40000000. C1 is read-only and does not test the alias; C2's first frame is what settles it.",
+  "the aggregation state on this boot. menu SetMediaWriteMode reads 0, but the settings slot was not read this session and the menu value is not what the CinemaDNG init consults.",
+  "anything about copy-back itself: C1 only removes one hazard from its path"
+ ],
+ "camera_left_as_found": {
+  "hook_0xC03A5490": "0xEB0BD652 original",
+  "is_recording": 0,
+  "note": "the cave holds the flush probe's code from the second arm; inert, hook restored, cleared by a power cycle. Two clips were recorded and left on the card."
+ },
+ "deployable": false
+}

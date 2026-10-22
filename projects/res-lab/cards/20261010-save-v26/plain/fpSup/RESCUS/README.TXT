@@ -1,0 +1,1 @@
+Res Lab applies completed edits through Virtual RCD in memory. SAVE exports named RCD files here (1-7 A-Z/0-9 characters; blank uses LABnnn). Existing names are never overwritten. res-custom reads saved files at the next boot.

@@ -1,0 +1,15 @@
+Sigma fp OG3K 3032x2012 open gate, 23.976 to 59.94
+
+AutoRun.txt bytes=32768 sha256=c97d013c9a6ddbaac22c25d759ce2dbc04063884b90f781ad84628249fb14cec
+rowpatch_v4 bytes=232 sha256=7d44029ee80b58f3fd09394f7f615643c60e233aad0122051feb0b2c8af4bb4a
+dispfit_v2  bytes=204 sha256=460ae4b40203216689a1d8740625bac51093c89ac27c5d1706a971d07fd3aae4
+reference_firmware sha256=92a8ee993f6c3d66c251e88d45a2ccd5135c6cf7342717784321c2ed506e2fb4
+rates=23.976 24 25 29.97 48 50 59.94, all exact (shipping timings)
+sensor=modes 109 218 125 106 220 115 27 widened to 2012 rows
+readout=12.435 ms (hmax 445) or 12.575 ms (hmax 450); quiet analog group
+not patched=100 fps (needs mode 117), 119.88 (impossible, cap is 108.4)
+fragment mem set lines=140
+hook=0xC043A19C branch=0xEB0BD597
+dispfit=absent; geometry tested alone this build
+menu=label unchanged; the three-row list is a separate build
+restore=remove or rename AutoRun.txt, then fully power-cycle

@@ -1,0 +1,70 @@
+fpLossless／STOPFX 拆分
+2026-10-12｜離線候選版，尚未實機驗證或寫卡
+
+結論與使用範圍
+
+05STOPFX.BIN 可以作為 SIGMA fp Ver.5.02 的獨立 Loader v3 模組使用，
+無須 lossless，也不需要重新編譯這個補丁。它只負責異常停錄的原廠佇列回收，
+不含 64 MiB／幀數優化，不會補回丟棄影格，亦不能回收安裝補丁前已遺失的項目。
+
+依使用者決定，停錄回收已從 lossless 移除：
+- native/card.S 移除 C0377118 的 guard、寫入與 EXCL claim。
+- build_card.py 不再把該位址列為 lossless 的 journal 區段。
+- build_v3_lossless.py 的宣告數從 16 改為 15。
+- lossless 保留動態幀數上限及壓縮紀錄身分檢查；C／header 來源與上一版完全相同。
+  僅 launcher 與建置宣告有產品程式變更。
+
+目前兩個模組的責任
+
+05STOPFX.BIN：獨立修正 C0377118，轉到 C03776A0 的原廠引用計數釋放流程。
+10LOSS.BIN：壓縮、RAW 回退、64 MiB／動態幀數控制、壓縮描述身分保護。
+各自宣告與修改各自的位址，關機由同一 loader 還原。
+lossless builder 不會自動加入 05STOPFX.BIN；使用者可選擇是否搭配。
+
+提供的 paired-card/ 與 lossless-stopfix-separate-20261012.zip 內，兩個模組仍是分開的
+/fpSup/05STOPFX.BIN、/fpSup/10LOSS.BIN，由 Loader v3 各自載入。
+組包只複製已保存的檔案，沒有修改任何 BIN 或 AutoRun 內容。
+candidate-card/、candidate-trace/ 是只含 LOSS 的一般／診斷 builder 輸出。
+candidate-v2-fast/ 是舊版相容性回歸產物，也不再內嵌 stopfix；
+但獨立 v3 BIN 不能直接加到 v2 卡來啟用此修正。
+
+舊包注意事項
+
+先前 20261012-bulk-stop-integration/lossless-bulk-stop-20261012.zip 的 10LOSS.BIN
+仍是內嵌 stopfix 的歷史候選，不能與 05STOPFX.BIN 並用。
+需要兩者時請使用本次 paired-card 裡的拆分版 10LOSS.BIN。
+相容的 v3 loader／AutoRun 不需因此更新；一般、診斷及 v2 Fast 的 AutoRun 均與前版逐位元組相同。
+
+驗證方式與結果
+
+本次 112 項案例全數通過，0 失敗、0 錯誤、0 略過：一般版 72、診斷版 36、Fast 4。
+
+run_candidate_tests.py 直接讀取本目錄保存的 BIN 與 AutoRun，並載入原始 316-byte STOPFX。
+正式結果與數量記錄於 validation.json、ordinary-emulation.json、trace-emulation.json、fast-emulation.json。
+測試範圍包括：
+- LOSS 單獨載入不修改或宣告 stopfix 位址。
+- STFX 單獨載入、STFX＋LOSS 同載，含兩種先後順序。
+- STFX 自己修復上次殘留的 patch，兩個模組均可關機還原。
+- 故意把 stopfix claim 加回 LOSS 的反例會被相容性測試抓到。
+- 原廠 pop/drop 與引用計數回收、父子關係、循序重複回收、busy 分支。
+- 新批次 hook、callback 次數、ABI／堆疊與旗標、loader／選單及既有 Fast 路徑。
+Fast 的 4 項共用 harness 測試替代 payload entry；一般版套件另執行真實 LOSS entry。
+未重跑未修改的純 C 主機套件；上一版的 181 項結果與來源 hash 保留在相鄰整合驗證目錄。
+
+檔案識別
+
+STOPFX：316 bytes，與 Downloads 原件及先前審查副本逐位元組相同。
+SHA-256：f9f26a092c5676ead5771ba8be4aac9c3734e9ed0cd144002a73b3f6b657c9d9
+拆分 LOSS 一般版：a24e1dde7e973c423f32c3b1c30a42acd039fa2fddebc83c27674e911de3ba9f
+拆分 LOSS 診斷版：eb7b31f249e6c36081c1dc57b2debf3d9d01fa6d64bd009f30c0e0440c54c06e
+source.diff 與 before/ 保留本次差異與修改前狀態。
+unchanged-loader.json 記錄未變的 AutoRun／loader／shell／UI 位元組。
+paired-card/composition.json、MANIFEST.sha256 記錄組合來源及最終檔案識別。
+
+仍未證明的部分
+
+離線測試對媒體、allocator、鎖與任務邊界有替代，不能證明相機上的最壞排程或 DMA 時序。
+原廠 registry+0x190 busy 時仍直接返回，不保證所有併發情境都完成回收。
+100 ms 批次初始延遲與管線保留量亦待實機量測。後續實機需驗證正常／異常停止、
+連續多段 ON/OFF、pool 與 RAW 回復基準、靜態拍攝取消／錯誤及關機再開機。
+本次未操作相機、寫卡、修改共用 loader、commit、push 或發布。

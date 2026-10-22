@@ -1,0 +1,80 @@
+{
+  "passed": true,
+  "selected_A9_native_menu_row": 2,
+  "size": [
+    992,
+    662
+  ],
+  "native_consumer_selected": 1,
+  "qs_resources": {
+    "A9_QS": "e0.xci",
+    "A9_SET": "e1.xci",
+    "A9_FONT": "e2.xci",
+    "font_S_imageSize_992": "e3.xci",
+    "font_S_imageSize_662": "e4.xci"
+  },
+  "qs_windows": [
+    {
+      "log": "qs-a9-actual-v35.log",
+      "draw": [
+        {
+          "filename": "e0.xci",
+          "size": [
+            86,
+            49
+          ],
+          "last_timestamp": 1146260397
+        },
+        {
+          "filename": "e2.xci",
+          "size": [
+            150,
+            38
+          ],
+          "last_timestamp": 1146246832
+        }
+      ]
+    },
+    {
+      "log": "qs-a9-stable-actual-v35.log",
+      "draw": [
+        {
+          "filename": "e0.xci",
+          "size": [
+            86,
+            49
+          ],
+          "last_timestamp": 1211806482
+        },
+        {
+          "filename": "e2.xci",
+          "size": [
+            150,
+            38
+          ],
+          "last_timestamp": 1211789492
+        }
+      ]
+    }
+  ],
+  "final_enabled": [
+    "OG2K",
+    "OG35K",
+    "OG3K",
+    "OG4K",
+    "S16"
+  ],
+  "A9_retained_disabled": true,
+  "final_rows": [
+    "OG2K",
+    "OG35K",
+    "OG3K",
+    "OG4K",
+    "S16",
+    "VRC000"
+  ],
+  "final_consumer_selected": 0,
+  "final_card_consumer_sha256": "18f1535b17e92452dbac5c170698e3487669480c801bb4bf78f508b9c0cd5a6d",
+  "code_matches_v35_outside_RCS1": true,
+  "RCS1_checksum_valid": true
+}

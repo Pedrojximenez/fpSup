@@ -1,0 +1,89 @@
+{
+  "date": "2026-09-16",
+  "kind": "canonical_offline_integration",
+  "camera_accessed": false,
+  "deployable": false,
+  "installed_hooks": [],
+  "merged_artifact_generated": false,
+  "source_hashes": {
+    "lossless/control.c": "791516174718f6c4f7b19fc0d859abe9f3e1c4bd935398c5956265423ee19dc5",
+    "lossless/control.h": "e59d29f4f8e6aec65f86c27d0d15ec7ec99e429c127a51bc82ac1fe3019276cd",
+    "lossless/ui_control.c": "88f0431e15c753aa5bfa3c70ea946fc1300ff745b8d92d2549fa40eb41e3deef",
+    "lossless/ui_control.h": "0af299ffd4a9085edc81f1ed742b72baed7694178d95364f6846e59afd1666f3",
+    "lossless/binding/binding.c": "df2439658db275f5ca2d6ff05469d955b2163287bed70dbb4c02df8816f3df47",
+    "lossless/binding/binding.h": "4eda432c964d0de26e40f40b6e76c5aa9c771a92bad1e7f4a3903ac134236897",
+    "lossless/binding/binding_fixture.c": "2e961b7634cb12a00efb0da18591578124341ed171587b49942448a1810ca4e3",
+    "lossless/binding/test_binding.py": "18283df299e6710a44954b04c8410a3ed7021f1adc5bf54e35085e2b70e32cfc",
+    "lossless/menu/build_menu_candidate.py": "f54c828616f7dd11f7d75a8cc28a2574f7ff18aa71a40ee1342c1daea3b0dc2c",
+    "lossless/menu/test_menu_candidate.py": "252dfb193b08564d588a888b68a58e0281fb5b44f2c45fe4b196535d177093b3",
+    "lossless/menu/verify_recipe.py": "9cb63d76eb41bda8a09bfded49a0da6bd10483b00f8d574095f68ef63b7ffe2f",
+    "lossless/menu/test_recipe.py": "69838a65753c73fcf3485fad1f22138e38ca47f1511722d03516e794c2cb47da"
+  },
+  "suites": [
+    {
+      "name": "control_ui",
+      "tests": 32,
+      "passed": true,
+      "skips": 0,
+      "log": "test_all_128_readiness_combinations (test_control.ControlTests) ... ok\ntest_boot_clears_stale_state_to_off (test_control.ControlTests) ... ok\ntest_camera_arm_cross_compiles (test_control.ControlTests) ... ok\ntest_changes_locked_for_raw_and_lossless_takes (test_control.ControlTests) ... ok\ntest_counter_overflow_stops (test_control.ControlTests) ... ok\ntest_every_target_predicate_is_required (test_control.ControlTests) ... ok\ntest_explicit_binding_interlock_blocks_raw_and_lossless (test_control.ControlTests) ... ok\ntest_fault_sticky_but_off_can_restore_stock_recording (test_control.ControlTests) ... ok\ntest_fault_stops_without_mixing_raw_and_lossless (test_control.ControlTests) ... ok\ntest_invalid_state_is_never_written (test_control.ControlTests) ... ok\ntest_invalid_values_are_not_boolean_coerced (test_control.ControlTests) ... ok\ntest_menu_changes_only_private_requested_word (test_control.ControlTests) ... ok\ntest_no_next_take_before_cleanup (test_control.ControlTests) ... ok\ntest_nulls_and_out_of_take_calls (test_control.ControlTests) ... ok\ntest_off_requires_no_codec_or_target (test_control.ControlTests) ... ok\ntest_product_is_standalone_and_not_shippable (test_control.ControlTests) ... ok\ntest_recheck_at_rec_after_switching_to_og (test_control.ControlTests) ... ok\ntest_recheck_lost_readiness_at_rec (test_control.ControlTests) ... ok\ntest_struct_abi (test_control.ControlTests) ... ok\ntest_two_takes_retain_selection_not_frame_state (test_control.ControlTests) ... ok\ntest_unready_on_is_rejected_without_mutation (test_control.ControlTests) ... ok\ntest_attach_once_and_no_owner_replacement (test_ui_control.UITests) ... ok\ntest_cine_mainb2_and_actual_private_widget_are_required (test_ui_control.UITests) ... ok\ntest_detach_and_recreated_owner_invalidates_old_callback (test_ui_control.UITests) ... ok\ntest_off_on_changes_only_product_preference (test_ui_control.UITests) ... ok\ntest_recording_locks_both_values (test_ui_control.UITests) ... ok\ntest_still_transition_hides_row (test_ui_control.UITests) ... ok\ntest_unready_backend_cannot_appear_usable (test_ui_control.UITests) ... ok\ntest_unsupported_geometry_disables_on_but_allows_off (test_ui_control.UITests) ... ok\ntest_warm_boot_invalidates_old_callback (test_ui_control.UITests) ... ok\ntest_wrong_owner_and_stale_generation_are_ignored (test_ui_control.UITests) ... ok\ntest_zero_session_is_invalid (test_ui_control.UITests) ... ok\n\n----------------------------------------------------------------------\nRan 32 tests in 0.821s\n\nOK\n"
+    },
+    {
+      "name": "binding",
+      "tests": 30,
+      "passed": true,
+      "skips": 0,
+      "log": "test_arm_softfloat_compilation (__main__.BindingTests) ... ok\ntest_close_menu_then_record (__main__.BindingTests) ... ok\ntest_context_failure (__main__.BindingTests) ... ok\ntest_default_off (__main__.BindingTests) ... ok\ntest_failed_cancel_releases_exclusion (__main__.BindingTests) ... ok\ntest_foreign_subscriber (__main__.BindingTests) ... ok\ntest_fresh_producer_context (__main__.BindingTests) ... ok\ntest_generation_exhaustion (__main__.BindingTests) ... ok\ntest_initial_publish_failure (__main__.BindingTests) ... ok\ntest_invalid_integer_restored (__main__.BindingTests) ... ok\ntest_no_live_session_reset (__main__.BindingTests) ... ok\ntest_notification_exclusion_before_cancel (__main__.BindingTests) ... ok\ntest_postregister_lookup_failure (__main__.BindingTests) ... ok\ntest_private_choice_only (__main__.BindingTests) ... ok\ntest_publish_echo_reentry (__main__.BindingTests) ... ok\ntest_publish_failure_rolls_back (__main__.BindingTests) ... ok\ntest_read_failure (__main__.BindingTests) ... ok\ntest_readiness_never_invented (__main__.BindingTests) ... ok\ntest_reap_read_failure (__main__.BindingTests) ... ok\ntest_recording_locked (__main__.BindingTests) ... ok\ntest_recovery_redraw_failure (__main__.BindingTests) ... ok\ntest_register_failure_no_retry (__main__.BindingTests) ... ok\ntest_registry_replaced (__main__.BindingTests) ... ok\ntest_still_preserves_preference (__main__.BindingTests) ... ok\ntest_subscribe_failure_retains_ticket (__main__.BindingTests) ... ok\ntest_unknown_variable_not_adopted (__main__.BindingTests) ... ok\ntest_unready_on_restored (__main__.BindingTests) ... ok\ntest_unsubscribe_failure_no_retry (__main__.BindingTests) ... ok\ntest_unsubscribe_is_not_quiescence (__main__.BindingTests) ... ok\ntest_wrong_page_no_side_effects (__main__.BindingTests) ... ok\n\n----------------------------------------------------------------------\nRan 30 tests in 0.444s\n\nOK\n"
+    },
+    {
+      "name": "menu",
+      "tests": 35,
+      "passed": true,
+      "skips": 0,
+      "log": "...................................\n----------------------------------------------------------------------\nRan 35 tests in 0.728s\n\nOK\n"
+    },
+    {
+      "name": "fixed_recipe",
+      "tests": 8,
+      "passed": true,
+      "skips": 0,
+      "log": "........\n----------------------------------------------------------------------\nRan 8 tests in 0.122s\n\nOK\n"
+    }
+  ],
+  "reader_lease": {
+    "test_groups": 53,
+    "sanitizers": [
+      "address",
+      "undefined"
+    ],
+    "evidence": "reader-lease-tests-20260916.json"
+  },
+  "native_binding": {
+    "tests": 18,
+    "skips": 0,
+    "evidence": "native-binding-probe-20260916.json",
+    "runtime_ready": false
+  },
+  "candidate": {
+    "profile": "pure-fixed-gated",
+    "directory": "mainb2-pure-fixed-20260916",
+    "page": {
+      "path": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/build/mainb2-pure-fixed-20260916/MainB2.fpLossless.gated.page",
+      "length": 179725,
+      "sha256": "33946d01b1fd9bca7cba72ef55ef53e16a0469a00e5a29f35896a46e43023633"
+    },
+    "pool": {
+      "path": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/build/mainb2-pure-fixed-20260916/MainB2.fpLossless.strings",
+      "length": 176240,
+      "sha256": "ea773283be884f8c40ca1f08d759d94157d3d58200398a92805ef3f8cd09ad96"
+    },
+    "runtime_gates": 5
+  },
+  "scope": "Host C and ARM compile checks are not native UI; instruction emulation uses explicit service substitutes; no recorder implementation or camera proof.",
+  "remaining": [
+    "native page selector and parser ABI",
+    "native variable/rendering port",
+    "notification exclusion and source-event quiescence",
+    "native resource allocation and retained lifetime",
+    "REC/codec/header/writer/playback integration"
+  ]
+}

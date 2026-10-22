@@ -1,0 +1,24 @@
+test_settings_page_matches_reference_and_keeps_rate_variants (test_virtual_rcd.NativeUI) ... ok
+test_allocation_failure_and_busy_at_commit_preserve_recipe (test_virtual_rcd.VirtualTests) ... ok
+test_apply_without_file_and_live_canvas (test_virtual_rcd.VirtualTests) ... ok
+test_bad_checksum_rejected_without_changing_active_tables (test_virtual_rcd.VirtualTests) ... ok
+test_busy_during_stop_restarts_without_commit (test_virtual_rcd.VirtualTests) ... ok
+test_contract_abi_and_status (test_virtual_rcd.VirtualTests) ... ok
+test_invalid_geometry_raw14_rate_and_format (test_virtual_rcd.VirtualTests) ... ok
+test_live_view_stop_commit_start_and_uhd_setter (test_virtual_rcd.VirtualTests) ... ok
+test_memory_budget_failure_and_reentrancy_preserve_recipe (test_virtual_rcd.VirtualTests) ... ok
+test_memory_recipe_is_not_restored_from_saved_row_identity (test_virtual_rcd.VirtualTests) ... ok
+test_missing_consumer_is_unavailable_and_keeps_stock_page (test_virtual_rcd.VirtualTests) ... ok
+test_mode_and_geometry_updates_keep_one_entry_and_immutable_assets (test_virtual_rcd.VirtualTests) ... ok
+test_real_apply_key_callback (test_virtual_rcd.VirtualTests) ... ok
+test_reapplying_same_recipe_reuses_assets (test_virtual_rcd.VirtualTests) ... ok
+test_recording_guards_preserve_active_recipe (test_virtual_rcd.VirtualTests) ... ok
+test_registry_supports_more_than_two_providers_without_table_growth (test_virtual_rcd.VirtualTests) ... ok
+test_settings_alias_and_recording_page_preservation (test_virtual_rcd.VirtualTests) ... ok
+test_shutdown_restores_claimed_words (test_virtual_rcd.VirtualTests) ... ok
+test_static_format_remains_available_after_dynamic_rebuild (test_virtual_rcd.VirtualTests) ... ok
+
+----------------------------------------------------------------------
+Ran 19 tests in 392.965s
+
+OK

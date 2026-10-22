@@ -1,0 +1,25 @@
+screen: LV_CINE_MEDIUM
+  tagged 16380/51454 B  2649 KiB/s   tagged 32760/51454 B  2455 KiB/s   tagged 49140/51454 B  2227 KiB/s   tagged 51454/51454 B  2227 KiB/s   tagged 51454 bytes in 0.0s (2167 KiB/s)      
+  tagged 116/116 B  246 KiB/s   tagged 116 bytes in 0.0s (113 KiB/s)      
+  tagged 116/116 B  181 KiB/s   tagged 116 bytes in 0.0s (87 KiB/s)      
+  tagged 80/80 B  126 KiB/s   tagged 80 bytes in 0.0s (52 KiB/s)      
+  tagged 104/104 B  172 KiB/s   tagged 104 bytes in 0.0s (75 KiB/s)      
+  tagged 60/60 B  104 KiB/s   tagged 60 bytes in 0.0s (50 KiB/s)      
+screen: LV_CINE_MEDIUM
+  tagged 16380/51454 B  3280 KiB/s   tagged 32760/51454 B  2293 KiB/s   tagged 49140/51454 B  2374 KiB/s   tagged 51454/51454 B  2367 KiB/s   tagged 51454 bytes in 0.0s (2301 KiB/s)      
+  tagged 116/116 B  184 KiB/s   tagged 116 bytes in 0.0s (92 KiB/s)      
+  tagged 116/116 B  216 KiB/s   tagged 116 bytes in 0.0s (110 KiB/s)      
+  tagged 80/80 B  144 KiB/s   tagged 80 bytes in 0.0s (75 KiB/s)      
+  tagged 104/104 B  203 KiB/s   tagged 104 bytes in 0.0s (102 KiB/s)      
+  tagged 60/60 B  116 KiB/s   tagged 60 bytes in 0.0s (37 KiB/s)      
+{
+  "label": "tagged-280-inner-v14-native-trace",
+  "new_clips": [
+    "A001_074"
+  ],
+  "stop_sent": false,
+  "spontaneous_stop": true,
+  "standby_after": true,
+  "phase": "captured",
+  "record_log": "slot=1, cnt=27/600\nsize=131072*978816(119GB), free=77%, exFAT, UHS-II\ntime       : 2026/10/11 18:21:16 \nrec factor : Nothing \nui factor  : Nothing \nbattery    : OK \ntemp(BAT)  : OK \ntemp(BODY) : OK \ntemp(LCD)  : OK \ntemp(CMOS) : OK \nfile-size=1095168, bulk-size=67108864(61.3)\nreq_cnt=94, fin_cnt=94, vbuf/94/84053, raw1\nrequest  ,finish   ,diff,gap ,reqcnt,fincnt,diff,sdb,MB/s\n      815,     1036, 221, 815,     4,     1,   3,  1,  19\n     1262,     1284,  22, 226,     8,     5,   3,  6, 199\n     1285,     1308,  23,   1,    12,     8,   4,  9, 238\n     1308,     1331,  23,   0,    15,    12,   3, 13, 190\n     1333,     1560, 227,   2,    19,    15,   4, 16,  24\n     1560,     1576,  16,   0,    22,    19,   3, 20, 273\n     1577,     1593,  16,   1,    26,    22,   4, 23, 342\n     1594,     1610,  16,   1,    29,    26,   3, 27, 273\n     1612,     1634,  22,   2,    33,    29,   4, 30, 248\n     1635,     1650,  15,   1,    36,    33,   3, 34, 292\n     1651,     1667,  16,   1,    40,    37,   3, 38, 273\n     1668,     1684,  16,   1,    44,    40,   4, 41, 342\n     1685,     1707,  22,   1,    47,    44,   3, 45, 199\n     1709,     1725,  16,   2,    51,    47,   4, 48, 342\n     1726,     1742,  16,   1,    54,    51,   3, 52, 273\n     1743,     1759,  16,   1,    58,    54,   4, 55, 342\n     1760,     1782,  22,   1,    61,    58,   3, 59, 199\n     1821,     1837,  16,  39,    65,    61,   4, 62, 342\n     1838,     1854,  16,   1,    68,    65,   3, 66, 273\n     1855,     1870,  15,   1,    72,    69,   3, 70, 292\n     1871,     1893,  22,   1,    76,    72,   4, 73, 248\n     1894,     1910,  16,   1,    79,    76,   3, 77, 273\n     1912,     1928,  16,   2,    83,    79,   4, 80, 342\n     1929,     1945,  16,   1,    86,    83,   3, 84, 273\n     1946,     1968,  22,   1,    90,    86,   4, 87, 248\n     1968,     1984,  16,   0,    93,    90,   3, 91, 273\n     1985,     1991,   6,   1,    94,    93,   1, 92, 365\n"
+}

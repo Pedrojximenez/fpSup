@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "kind": "offline_canonical_segment0_contract",
+  "date": "2026-09-23",
+  "operator_scope": "offline; no camera. G4 step 1: the host artifact and the intended camera writer must agree byte for byte",
+  "camera": {
+    "model": "w71c1",
+    "firmware": "5.02.0.V91",
+    "note": "target of the contract; nothing was run on it"
+  },
+  "source": {
+    "commit": null,
+    "worktree_dirty": null,
+    "git_available": false,
+    "files": {
+      "projects/lossless-sup/tools/canonical_header.py": "f3aa6caf664b6f1d95e1680a9e2345926395d0a0ca82742e8559b8d30c873cec",
+      "projects/lossless-sup/tools/test_canonical_header.py": "1e2bb8c58ede9c0e905814537e91fc36709134343c2b3330d33d0912938e4e8e",
+      "projects/lossless-sup/tools/mkcompressed_safe.py": "1a71bfc9497ede4b0958a841984cb14551e7ca2bc07d4de026cf1af2e8ae5742",
+      "projects/lossless-sup/tools/tiff_guard.py": "99bf006a90821ccbb2b9d542d2a8008895d6245e23df59116947209d93c55aba"
+    }
+  },
+  "profile": {
+    "geometry": "1936x1090",
+    "tile": "512x368",
+    "tiles": 12,
+    "predictor": 1,
+    "bit_depth": 12
+  },
+  "per_frame": {
+    "tile_byte_counts_from_live_camera": [
+      71288,
+      123173,
+      133359,
+      88116,
+      91305,
+      131008,
+      165622,
+      120042,
+      102725,
+      113451,
+      136318,
+      110089
+    ],
+    "payload_bytes": 1386496,
+    "source": "build/ledger-g2-20260923.json"
+  },
+  "integrity": {
+    "segment0_bytes": 79872,
+    "original_header_bytes": 78848,
+    "ifd_and_tile_tables_bytes": 810,
+    "spec_says": 810,
+    "padding_bytes": 214,
+    "root_pointer_committed_by_build": false,
+    "fixture": "codex/evidence/opengate_ev_bug_20260914/dng/A001_083_FHD_f07.DNG"
+  },
+  "notes": [
+    "The layout is an owned expanded header rather than an in-place edit because the old zero-run approach was overturned: the MakerNote's declared range covers the run the old tool chose, leaving 92 legal bytes against the 810 needed.",
+    "Header construction is deliberately separated from encoding. The camera has the blobs and the host trial has its own encoder; only a shared header contract makes the two comparable."
+  ],
+  "explicitly_established": [
+    {
+      "level": "H",
+      "claim": "the section 4.4 layout is realisable: the new IFD plus both tile arrays occupy exactly 810 bytes for a 12-tile 512x368 frame, inside the 1,024 bytes the expanded header adds"
+    },
+    {
+      "level": "H",
+      "claim": "two independent implementations agree byte for byte on segment 0: mkcompressed_safe.py encoding a real stock DNG, and canonical_header.py building from tile sizes alone"
+    },
+    {
+      "level": "H",
+      "claim": "the contract builds a valid segment 0 from the tile sizes the camera actually produced on 2026-09-23"
+    },
+    {
+      "level": "C",
+      "claim": "the root pointer is returned beside the bytes rather than written into them, so the commit-last ordering cannot be got wrong by a caller"
+    },
+    {
+      "level": "H",
+      "claim": "verify() rejects a tile pointed inside the header, overlapping tiles, a changed original header, tables that do not fit, and non-positive tile counts"
+    }
+  ],
+  "explicitly_not_established": [
+    "that the camera writer can produce this segment 0; nothing camera-side was written",
+    "that a DNG built this way decodes: no LibRaw or NLE check was run in this work",
+    "cache visibility of the tables before the root pointer is committed, which is a camera-side ordering problem this module only expresses",
+    "the 12-byte non-pixel tail the stock file carries after its raster",
+    "any geometry other than 512x368 with 12 tiles",
+    "behaviour when the codec output exceeds what the tile arrays were sized for"
+  ]
+}

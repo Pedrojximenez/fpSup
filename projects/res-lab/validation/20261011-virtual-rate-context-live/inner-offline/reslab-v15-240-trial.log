@@ -1,0 +1,25 @@
+screen: LV_CINE_MEDIUM
+  tagged 16380/51794 B  2561 KiB/s   tagged 32760/51794 B  2425 KiB/s   tagged 49140/51794 B  2307 KiB/s   tagged 51794/51794 B  2313 KiB/s   tagged 51794 bytes in 0.0s (2226 KiB/s)      
+  tagged 116/116 B  167 KiB/s   tagged 116 bytes in 0.0s (85 KiB/s)      
+  tagged 116/116 B  170 KiB/s   tagged 116 bytes in 0.0s (59 KiB/s)      
+  tagged 80/80 B  116 KiB/s   tagged 80 bytes in 0.0s (50 KiB/s)      
+  tagged 104/104 B  187 KiB/s   tagged 104 bytes in 0.0s (77 KiB/s)      
+  tagged 60/60 B  50 KiB/s   tagged 60 bytes in 0.0s (31 KiB/s)      
+screen: LV_CINE_MEDIUM
+  tagged 16380/51794 B  2867 KiB/s   tagged 32760/51794 B  1999 KiB/s   tagged 49140/51794 B  2214 KiB/s   tagged 51794/51794 B  2230 KiB/s   tagged 51794 bytes in 0.0s (2168 KiB/s)      
+  tagged 116/116 B  92 KiB/s   tagged 116 bytes in 0.0s (53 KiB/s)      
+  tagged 116/116 B  71 KiB/s   tagged 116 bytes in 0.0s (48 KiB/s)      
+  tagged 80/80 B  107 KiB/s   tagged 80 bytes in 0.0s (55 KiB/s)      
+  tagged 104/104 B  186 KiB/s   tagged 104 bytes in 0.0s (92 KiB/s)      
+  tagged 60/60 B  16 KiB/s   tagged 60 bytes in 0.0s (12 KiB/s)      
+{
+  "label": "tagged-240-sensorlab-v15-quiet",
+  "new_clips": [
+    "A001_084"
+  ],
+  "stop_sent": false,
+  "spontaneous_stop": true,
+  "standby_after": true,
+  "phase": "captured",
+  "record_log": "slot=1, cnt=29/600\nsize=131072*978816(119GB), free=75%, exFAT, UHS-II\ntime       : 2026/10/11 19:31:06 \nrec factor : Nothing \nui factor  : Nothing \nbattery    : OK \ntemp(BAT)  : OK \ntemp(BODY) : OK \ntemp(LCD)  : OK \ntemp(CMOS) : OK \nfile-size=1095168, bulk-size=67108864(61.3)\nreq_cnt=101, fin_cnt=101, vbuf/101/82037, raw1\nrequest  ,finish   ,diff,gap ,reqcnt,fincnt,diff,sdb,MB/s\n      656,      671,  15, 656,     4,     1,   3, 62, 292\n      692,      904, 212,  21,     8,     4,   4,  6,  25\n      905,      918,  13,   1,    11,     8,   3,  2, 336\n      919,      933,  14,   1,    15,    11,   4,  2, 391\n      935,      950,  15,   2,    18,    15,   3,  4, 292\n      951,      973,  22,   1,    22,    18,   4,  8, 248\n      973,      989,  16,   0,    25,    22,   3,  8, 273\n     1002,     1019,  17,  13,    29,    26,   3,  8, 257\n     1024,     1252, 228,   5,    33,    29,   4, 23,  24\n     1253,     1269,  16,   1,    36,    33,   3, 27, 273\n     1270,     1286,  16,   1,    40,    36,   4, 30, 342\n     1286,     1302,  16,   0,    43,    40,   3, 34, 273\n     1303,     1325,  22,   1,    47,    43,   4, 37, 248\n     1327,     1343,  16,   2,    50,    47,   3, 41, 273\n     1344,     1359,  15,   1,    54,    50,   4, 44, 365\n     1360,     1376,  16,   1,    57,    54,   3, 48, 273\n     1377,     1399,  22,   1,    61,    58,   3, 52, 199\n     1404,     1420,  16,   5,    65,    61,   4, 55, 342\n     1421,     1437,  16,   1,    68,    65,   3, 59, 273\n     1438,     1453,  15,   1,    72,    68,   4, 62, 365\n     1454,     1476,  22,   1,    75,    72,   3, 66, 199\n     1477,     1493,  16,   1,    79,    75,   4, 69, 342\n     1495,     1511,  16,   2,    82,    79,   3, 73, 273\n     1512,     1528,  16,   1,    86,    82,   4, 76, 342\n     1529,     1550,  21,   1,    89,    86,   3, 80, 208\n     1552,     1567,  15,   2,    93,    90,   3, 84, 292\n     1570,     1586,  16,   3,    97,    93,   4, 87, 342\n     1587,     1602,  15,   1,   100,    97,   3, 91, 292\n     1603,     1610,   7,   1,   101,   100,   1, 92, 312\n"
+}

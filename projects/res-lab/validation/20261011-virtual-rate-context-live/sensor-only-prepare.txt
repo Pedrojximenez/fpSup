@@ -1,0 +1,15 @@
+screen: LV_CINE_MEDIUM
+  tagged 16380/52744 B  2064 KiB/s   tagged 32760/52744 B  2123 KiB/s   tagged 49140/52744 B  2079 KiB/s   tagged 52744/52744 B  2093 KiB/s   tagged 52744 bytes in 0.0s (2000 KiB/s)      
+  tagged 116/116 B  170 KiB/s   tagged 116 bytes in 0.0s (89 KiB/s)      
+  tagged 116/116 B  193 KiB/s   tagged 116 bytes in 0.0s (69 KiB/s)      
+  tagged 80/80 B  109 KiB/s   tagged 80 bytes in 0.0s (27 KiB/s)      
+  tagged 104/104 B  159 KiB/s   tagged 104 bytes in 0.0s (83 KiB/s)      
+  tagged 60/60 B  87 KiB/s   tagged 60 bytes in 0.0s (46 KiB/s)      
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/sensor_only_ram.py", line 142, in <module>
+    prepare()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/sensor_only_ram.py", line 104, in prepare
+    old = owned(r, False)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/sensor_only_ram.py", line 32, in owned
+    assert r['registry']['lock'] == 0 and r['registry']['provider'] == 0
+AssertionError

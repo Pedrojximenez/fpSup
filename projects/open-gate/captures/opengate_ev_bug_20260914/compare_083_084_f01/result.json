@@ -1,0 +1,45 @@
+{
+  "narrow": {
+    "ImageWidth": 1936,
+    "ImageHeight": 1090,
+    "StripOffsets": 78848,
+    "StripByteCounts": 3165372,
+    "BlackLevel": "255.9931641 255.9931641 255.9931641 255.9931641",
+    "ExposureTime": 0.01666666667,
+    "ISO": 800,
+    "FNumber": 2,
+    "BaselineExposure": 3
+  },
+  "wide": {
+    "ImageWidth": 3024,
+    "ImageHeight": 2010,
+    "StripOffsets": 78848,
+    "StripByteCounts": 9117360,
+    "BlackLevel": "256 256 256 256",
+    "ExposureTime": 0.01666666667,
+    "ISO": 800,
+    "FNumber": 2,
+    "BaselineExposure": 3
+  },
+  "mapping": {
+    "correlation": 0.9972525238990784,
+    "shift_cfa_cells": [
+      0,
+      0
+    ],
+    "sample_count": 338221
+  },
+  "wide_over_narrow": {
+    "median_pixel_ratio": 1.0111054182052612,
+    "median_pixel_ev": 0.01593342097325958,
+    "median_distribution_ratio": 1.0126131772994995,
+    "median_distribution_ev": 0.01808316350705752,
+    "mean_distribution_ratio": 1.0106614828109741,
+    "mean_distribution_ev": 0.015299852977083193,
+    "log2_ratio_p10_p50_p90": [
+      -0.0282158050686121,
+      0.01593342050909996,
+      0.07611799985170364
+    ]
+  }
+}

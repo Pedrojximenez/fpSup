@@ -1,0 +1,89 @@
+{
+ "schema_version": 1,
+ "kind": "offline_static_semantics_of_the_sd_aggregation_and_completion_path",
+ "date": "2026-09-24",
+ "operator_scope": "offline only. No camera, no card, no hook armed. Reading out/decomp/full and out/seg0_c0000000.bin.",
+ "answers": "ROADMAP 16 item 1 / NATIVE_BUFFER_PATTERNS 6 item 1: the return and failure semantics of C0646C60, and the native early-submit path.",
+ "builds_on": "notes/NATIVE_BUFFER_PATTERNS.md, which corrected the vtable offset and located C03A55D0. The chain used here is that note's, not the withdrawn one.",
+ "c0646c60_return_semantics": {
+  "verdict": "0 = success, negative = failure. Not 1.",
+  "derivation": [
+   "FUN_c0646c60 converts the address and returns FUN_c0646580's value, or -3 on bad parameters.",
+   "FUN_c0646580 initialises local_6c = 0, returns -3 on bad parameters, returns FUN_c01eb730/790's value early only when that value != 1 (i.e. only on failure), and otherwise returns local_6c, which is FUN_c0646248's value.",
+   "FUN_c0646248 assigns its result variable ONLY when an inner call != 1, so on success it returns its initial 0."
+  ],
+  "why_it_mattered": "The two callers of C03A55D0 looked like they disagreed. FUN_c03a5348 calls it with 0 for success and -1 for failure; FUN_c063f140 passes C0646C60's return. A sibling function, FUN_c0646d38, returns 1 for success, and inferring the same convention for C0646580 would have made a SUCCESSFUL batch arrive at C03A55D0 as an error. Reading the function itself shows 0, so the two paths agree. This is a resolved concern, not a defect.",
+  "c03a55d0_convention": "C03A55D0(frame, status): status != 0 is logged through the error path at severity 3 and passed to C03A52D0(manager, frame[0x10FC], 4, status != 0) as the error flag. frame[0x1104] is set to 0xD either way."
+ },
+ "batch_status_is_per_batch_not_per_frame": {
+  "level": "C",
+  "claim": "FUN_c063f140 computes ONE status and hands that same value to every cookie: for (i = 0; i < vol[0x4850]; i++) cb(vol[0x4854 + i*4], status). The NOTIFICATION is per frame; the VERDICT is per batch. A batch that fails marks every frame in it failed, and a frame cannot be told apart from its neighbours by status."
+ },
+ "native_flush_triggers": {
+  "level": "C",
+  "where": "FUN_c063f380",
+  "list": [
+   {
+    "trigger": "physical discontiguity",
+    "code": "vol[0x4a54] != 0 && vol[0x4a54] + vol[0x4a58]/sector != next_lba -> FUN_c063f140",
+    "note": "the batch only accumulates while the card LBAs stay contiguous"
+   },
+   {
+    "trigger": "descriptor arena unavailable",
+    "code": "vol[0x484c] == 0 -> FUN_c063f140"
+   },
+   {
+    "trigger": "accumulated bytes reach the threshold",
+    "code": "vol[0x4828] <= vol[0x4a58] -> FUN_c063f140",
+    "note": "vol[0x4828] is the 0x04000000 threshold after alignment to volume geometry"
+   },
+   {
+    "trigger": "cookie array full",
+    "code": "vol[0x4850] == 0x80 -> FUN_c063f140",
+    "note": "128 cookies maximum"
+   }
+  ],
+  "also": "FUN_c063f310 is the drain-and-DISABLE path, not a per-frame flush: it clears vol[0x4828] and vol[0x484c]. Called with a non-zero second argument it first zeroes vol[0x4a54], which makes FUN_c063f140 skip the transfer entirely and report status 0 to every pending cookie."
+ },
+ "the_switch": {
+  "level": "C",
+  "claim": "manager+0xD decides whether C03A55D0 is a fence at all.",
+  "evidence": "In FUN_c03a5348: when manager[0xD] is set it marks frame[0x1104] = 0xC and calls C03A52D0(..., 3, 0) BEFORE the submit, and does NOT call C03A55D0 itself; when manager[0xD] is clear it calls C03A55D0(frame, total == 0 ? -1 : 0) immediately after FUN_c069ade0 returns. C03A5050 installs the aggregation with the same flag.",
+  "consequence": [
+   "flag SET   -> C03A55D0 arrives later, from FUN_c063f140, after a real transfer. This is a usable release fence.",
+   "flag CLEAR -> C03A55D0 arrives at submit time, which G3 measured at 372 us for 3.2 MB. Useless as a fence."
+  ],
+  "status": "NOT ESTABLISHED for the CinemaDNG movie path on this firmware. It is one byte and it decides the whole design."
+ },
+ "batch_arithmetic": {
+  "level": "I",
+  "threshold_bytes": 67108864,
+  "note": "0x04000000 before alignment to volume geometry; the aligned value is vol[0x4828]",
+  "frames_per_batch": {
+   "stock_raw_3244544": 20.7,
+   "g4b_measured_compressed_1396736": 48.0,
+   "worst_case_compressed_4037760": 16.6
+  },
+  "native_ring_from_tapseg": {
+   "slots_observed": "about 28",
+   "spacing": 3253248,
+   "total_MiB": 86.9,
+   "observation": "86.9 MiB against 20.7 stock frames per batch is about seven frames of margin. The ring appears to be sized for the batch policy, though the slot count is inferred from observed addresses and is not a measurement."
+  },
+  "consequence_for_a_slot_array": "If aggregation is on at this threshold, an own slot array must survive a whole batch. For G4b-sized compressed frames that is about 49 slots, roughly 196 MiB at 4 MiB each - more than the native ring. COMPRESSION MAKES THIS WORSE, NOT BETTER: smaller files mean MORE frames accumulate before the byte threshold is reached. This is the concrete form of the warning in NATIVE_BUFFER_PATTERNS section 3.",
+  "caveats": [
+   "the discontiguity and 128-cookie triggers may fire long before the byte threshold, which would make the real batch much shorter; neither has been measured",
+   "the accumulated count includes bytes padded out to filesystem geometry, so dividing the threshold by the file size is an upper bound on frames per batch, not a prediction",
+   "the ring slot count is inferred from a tapseg address range, per NATIVE_BUFFER_PATTERNS section 4 item 1"
+  ]
+ },
+ "explicitly_not_established": [
+  "whether manager+0xD is set during CinemaDNG movie recording. Everything above branches on it.",
+  "how often the discontiguity trigger fires in practice. If a new file per frame breaks LBA contiguity, the batch would flush every frame and C03A55D0 would become a usable fence with about one frame of latency - but G5's eight identical frames argue it did not flush per frame, and these two readings are not reconciled here.",
+  "whether FUN_c063f140 can be called safely from our own context. It manipulates volume state and the descriptor arena and is reached under the caller's locks.",
+  "the actual value of vol[0x4828] after geometry alignment on the card in use",
+  "anything about what G3 and G5 were actually running with: the flag value on those runs was not captured"
+ ],
+ "camera_accessed": false,
+ "deployable": false
+}

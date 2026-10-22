@@ -1,0 +1,89 @@
+fpLossless 幀數優化與異常停錄釋放整合
+2026-10-12｜離線候選版，尚未部署或實機驗證
+
+已完成
+
+1. 保留原廠 64 MiB 批次容量，加入動態幀數上限。
+   96 個位置是原廠影格描述子池，不擴充它，也不額外配置 128 MiB。
+   兩批的意思是：可用位置扣掉停止及管線餘裕後，每批最多使用一半。
+   若壓縮後檔案太小，尚未填滿 64 MiB 就先達到幀數上限，便提早結算。
+   若高解析度或未壓縮影格很大，容量門檻會先觸發。兩個條件先到者生效。
+
+   每批上限 = floor((開錄可用位置 - 2 - 4 - ceil(向上取整 fps × T)) / 2)
+   T 初始為 100 ms；當段觀察到更長的 writer 返回等待，就增加 T、縮小上限。
+   初始可用 96 格時：24p 為 43 幀，59.94p 為 42 幀；59.94p + 300 ms 為 36 幀。
+   剩餘位置低於保留量時更早結算；位置讀值不可信或預算不足時每檔結算。
+   原廠計數尚未包含目前檔案，所以新判斷將目前影格一起算入。
+
+   不假設每幀都能壓縮。每 32 個送出檔案重新累積 RAW／壓縮混合樣本，
+   顯示壓縮比例、平均檔案大小、估計填滿 64 MiB 的幀數及資料率。
+   解析度與壓縮率由實際檔案大小反映；平均值只供觀察，不放寬安全上限。
+
+2. 整合社群 stopfix，改走原廠引用計數釋放。
+   C0377118：E92D4030 → EA000160，轉到 C03776A0。
+   異常停錄清空佇列時，原本只移除項目的路徑改成移除並交由原廠回收。
+   仍有子物件的父物件繼續保留，最後引用完成後才釋放；循序重複釋放不重複回收。
+   這是共用停止流程，所以選單 OFF 也有這項修正。
+   它不能補回已丟棄而未寫入的影格，也不修復壓縮引擎 stall。
+
+3. 防止跨段殘留的壓縮紀錄誤套新影格。
+   檔案緩衝地址之外，再核對 native frame 指標及 frame+0x1100 的錄影世代。
+   地址重用但身分不符時，只清除舊的壓縮描述，不釋放目前記憶體，不修改 RAW 表頭。
+   原廠世代由 C0376AF8 增加、C0376B10 讀取；反組譯保存在 native-generation.txt。
+   這是錄影世代，不冒充每次配置都遞增的 allocation token，也不證明任意併發 ABA 安全。
+
+4. 載入與還原。
+   新增 C063F828 的 Thumb 批次判斷 hook 與 C0377118 的 stopfix。
+   建置核對原廠指令；v3 對兩處要求 EXCL，v2/v3 都納入 journal，關機還原。
+   批次 hook 僅在已接受的 lossless 段、目前 writer frame、原廠 CinemaDNG callback 下生效。
+   OFF、其他檔案或其他 callback 仍採原廠檔案數判斷。
+   不要再搭配獨立 05STOPFX.BIN：它與整合版占用同一 EXCL 位址，會使後載入的 LOSS 被拒絕。
+
+主要來源
+
+fpSup/lossless/native/bulk_policy.c、bulk_policy.h：兩批預算、fps／等待時間、混合檔案統計。
+fpSup/lossless/native/card.c、card.S：writer 範圍、原廠批次接點、stopfix、ABI 與載入保護。
+fpSup/lossless/native/frame_hold.c、frame_hold.h、flush_site.c、flush_site.h：壓縮紀錄身分檢查。
+fpSup/lossless/build_card.py、build_v3_lossless.py：新增接點、編譯單元及正確狀態配置。
+fpSup/lossless/card_status.py：幀數上限、剩餘位置、壓縮比例及舊紀錄清除次數。
+README.md 與 projects/lossless-sup/notes/EARLY_STOP_94.md：說明新版策略與舊實機證據的區別。
+source.diff 只包含本次修改；before/ 保存修改前來源，未納入工作區其他既有修改。
+
+驗證結果
+
+最終涵蓋共 286 個案例，零略過（普通／診斷版會重複部分情境）。
+- 主機 C 測試 181：初輪 180 通過；1 項既有 mutation 定位文字因改寫而失效，更新後補驗通過。
+- 一般 v3＋舊版封裝 68：初輪 67 通過；1 項新關機測試誤用未啟用的除錯指標，
+  改從實際註冊的回呼物件取址後補驗通過。實際雙次還原均通過。
+- 診斷版 33：全數通過。
+- 保存的 Fast 封裝 4：loader hook、AutoRun abort、無效深度及其他腳本辨識全數通過。
+  這 4 項沿用共用 harness、替代 payload entry；上面的 68 項另執行真正 lossless entry。
+
+測試涵蓋：FPS 與兩批預算、混合 RAW/壓縮、整數溢位、目前影格計數、低水位提前結算、
+舊紀錄重用、雙 lane、停止與釋放、真實 ARM/Thumb 接點、參數/堆疊/旗標、每檔回呼一次、
+EXCL 衝突、冷開機/舊 patch 修復、關機還原，以及破壞保護條件時能被測試抓出的 mutations。
+run_candidate_tests.py 直接讀取保存的候選包；沒有用另一份重建結果冒充已驗證 bytes。
+保留初輪失敗記錄與補驗結果，不把測試工具修正隱藏成首輪全過。
+
+產物與可追溯性
+
+candidate-card/：一般 v3 完整候選卡；對應 lossless-bulk-stop-20261012.zip。
+candidate-trace/：增加追蹤的 v3 完整候選卡。
+candidate-v2-fast/：既有 v2／Fast Start 3 封裝，用於相容性回歸。
+10LOSS.BIN（一般版）SHA-256：50494b8ba178918eeed8e14d4df72016ec68d6f9daa5c473a705b15e50f3f1f4
+10LOSS.BIN（診斷版）SHA-256：0aba48b2c9b098fa11c266dbf245e198a0bf1ced13425ebc9a9d9ebf990f8a5a
+
+與本次修改前 baseline-card 相比，兩個 v3 版本的 AutoRun、LOADER、USB shell 及全部 UI
+檔案逐位元組不變；unchanged-loader.json 記錄 hash。一般版常駐狀態增加 2,164 bytes，
+整塊配置由 286,720 增為 290,816 bytes（包含程式增加與配置對齊）。
+各候選卡附 build.json、layout.json、檔案清單；總驗證摘要見 validation.json。
+
+仍待實機確認的邊界
+
+100 ms 初值、4 個管線位置及兩批模型是保守起點，尚未量得實機最壞排程／完成通知延遲。
+writer 返回不是 DMA 完成或資料已持久寫入的證明；離線媒體、allocator、鎖與任務邊界有明確替代。
+原廠 registry+0x190 busy 分支仍直接返回，這時本次 stopfix 不會回收已移出的項目；
+測試刻意保留並揭露此限制，不能宣稱所有併發情境都已無洩漏。
+需實機比較各解析度／fps 的長錄、一般/高壓縮畫面、RAW 回退、ON/OFF 交替、反覆自動停錄後
+可用 RAW 容量與描述子回復、DNG 可解碼性，以及 SD/SSD 吞吐與關機再開機。
+本次未連接相機、未寫卡、未修改韌體檔案或共用 loader，亦未 commit/push/發布。

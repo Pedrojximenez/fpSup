@@ -1,0 +1,20 @@
+test_real_installer_bounds_declared_slmp_length_before_parsing (test_v3_reslab.ResLabV3Tests) ... 
+======================================================================
+FAIL: test_real_installer_bounds_declared_slmp_length_before_parsing (test_v3_reslab.ResLabV3Tests) (declared=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_v3_reslab.py", line 387, in test_real_installer_bounds_declared_slmp_length_before_parsing
+    self.assertEqual(reads, [], 'reject the declared length before reading SLMP fields')
+AssertionError: Lists differ: [1157858240] != []
+
+First list contains 1 additional elements.
+First extra element 0:
+1157858240
+
+- [1157858240]
++ [] : reject the declared length before reading SLMP fields
+
+----------------------------------------------------------------------
+Ran 1 test in 4.191s
+
+FAILED (failures=1)

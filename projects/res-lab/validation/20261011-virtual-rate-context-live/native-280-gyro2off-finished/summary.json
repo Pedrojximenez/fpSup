@@ -1,0 +1,49 @@
+{
+  "origin_us": 749495947,
+  "vbuf_ms": 999.017,
+  "vbuf_payload": [
+    1145328897,
+    4294967295,
+    94,
+    84363
+  ],
+  "before_vbuf": {
+    "submitted": 5,
+    "completed": 0,
+    "released": 0
+  },
+  "first_written_frames": [
+    {
+      "slot": 4,
+      "submit_ms": 683.397,
+      "complete_ms": 1361.876,
+      "release_ms": 1583.032,
+      "complete_to_release_ms": 221.156
+    },
+    {
+      "slot": 5,
+      "submit_ms": 711.487,
+      "complete_ms": 1361.896,
+      "release_ms": 1583.278,
+      "complete_to_release_ms": 221.382
+    },
+    {
+      "slot": 6,
+      "submit_ms": 754.719,
+      "complete_ms": 1361.906,
+      "release_ms": 1583.518,
+      "complete_to_release_ms": 221.612
+    }
+  ],
+  "limitations": "DEBUG changes scheduling. Gyro2 disabled for this boot; bracket spans native header-copy call and surrounding caller code. Callbacks/releases do not establish durable-media integrity or no-mosaic.",
+  "header_bracket_ms": {
+    "min": 0.219,
+    "median": 2.101,
+    "max": 8.987
+  },
+  "sensor_callbacks": {
+    "count": 124,
+    "median_gap_us": 3575,
+    "limitation": "callback cadence does not establish exposure or complete recorded frames"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "producer_version": 17,
+  "producer_sha256": "dad8226db751fe10c2cac1f2f21269cc746957c7aacc5b19bec83dd027da155f",
+  "findings": [
+    {
+      "source": "projects/open-gate/build/sl_menu/sl_modes.c:1466",
+      "behavior": "declare_post unconditionally chooses PARAM+0x1C class1"
+    },
+    {
+      "source": "projects/open-gate/build/sl_menu/sl_modes.c:1476",
+      "behavior": "declare_post unconditionally clears PARAM+0x88"
+    },
+    {
+      "source": "projects/open-gate/build/rl_v3.c:127",
+      "behavior": "rl_canvas_safe rejects all no-bin unequal preview H/V products"
+    },
+    {
+      "source": "projects/open-gate/build/rl_v3.c:138",
+      "behavior": "rl_canvas_safe requires class1 and PARAM+0x88 zero"
+    },
+    {
+      "source": "projects/open-gate/build/rl_v3.c:239",
+      "behavior": "rate-specific overlay changes B0 only; processing class/window/reduction remain shared"
+    }
+  ],
+  "counterexample": "Archived r10 M12 high path has class2,88=4,previewH2048/V1024; current generic rules exclude this complete known predecessor. Current v15 consumer override is guarded and tested, but is not a generic producer correction.",
+  "conclusion": "Geometry validation does not establish native processing-path validity or sustained recording. Generic model requires calibration by native path; do not weaken safety checks globally.",
+  "early_stop_root_cause_established": false,
+  "user_fov_report_requires_verification": true,
+  "actual_ARM_encoder_counterexample": "passed;46.586seconds;current canvas accepted, independently archived r10 canvas rejected"
+}

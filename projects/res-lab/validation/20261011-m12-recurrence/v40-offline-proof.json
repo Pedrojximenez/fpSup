@@ -1,0 +1,21 @@
+{
+  "phase": "offline_verified",
+  "candidate_sha256": "4358fce4127aedebbff0b93ea9db91f0a2805ae4cc013552dabc2f43e31c99dc",
+  "passed_cases": [
+    "test_contract_abi_and_status",
+    "test_apply_without_file_and_live_canvas",
+    "test_invalid_geometry_raw14_rate_and_format",
+    "test_high_rate_carrier_preserves_timing_and_geometry"
+  ],
+  "carrier_enum": 3,
+  "engine_fps": 60.0,
+  "sensor_vmax": [
+    910,
+    780
+  ],
+  "frozen_r78_geometry": "unchanged",
+  "negative_v39": "two carrier mismatches detected",
+  "fixture_repair": "Fourth ARM argument must be written to r3; Camera.call fifth positional argument was LR. Production bytes unchanged.",
+  "limitations": "OS/menu-setter stubs; no real DMA/cadence/picture/stop validation",
+  "camera_deployed": false
+}

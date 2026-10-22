@@ -1,0 +1,10 @@
+screen: LV_CINE_MEDIUM
+  tagged 16380/50436 B  2161 KiB/s   tagged 32760/50436 B  2091 KiB/s   tagged 49140/50436 B  2378 KiB/s   tagged 50436/50436 B  2071 KiB/s   tagged 50436 bytes in 0.0s (1935 KiB/s)      
+  tagged 116/116 B  164 KiB/s   tagged 116 bytes in 0.0s (79 KiB/s)      
+  tagged 116/116 B  51 KiB/s   tagged 116 bytes in 0.0s (38 KiB/s)      
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-m12-rate-reload-live/record_trial.py", line 183, in <module>
+    main()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-m12-rate-reload-live/record_trial.py", line 78, in main
+    assert r['quality_getter'].strip()==str(quality)
+AssertionError

@@ -1,0 +1,20 @@
+fpSup2 SD write record — 2026-10-04 15:19 Asia/Taipei
+
+Target: /Volumes/fpSup2, /dev/disk4s1, exFAT, 119 GiB.
+Before write: only AutoRun.txt, fpSup.BIN and FPSUPUI were present at the card root.
+The current boot files were backed up to
+archive/fpSup2-20261004-prewrite-remounted/ before replacement.
+
+Wrote and read back:
+  AutoRun.txt  32768 bytes  SHA-256 5dc89b8506e8ce408276a9eab61fbb9fda94d4a194b65f2fd17c9e410b8fe642
+  fpSup.BIN   426280 bytes SHA-256 2c1ae8954be883e45f3d87bba25ec00d497aa29f0aea817cf229b4265aa3cf84
+
+The existing FPSUPUI/0.BIN..4.BIN already matched the generated files
+byte-for-byte and were not replaced. No DCIM or CINEMA directory was present
+when the card remounted; this operation did not remove media files.
+
+This is the standalone Sensor Lab r81 debug card with Fast Start off. It is
+validated offline only. Subsequent user feedback reported an immediate REC
+freeze. Analysis of this exact BIN found that its picker passes the COLTAB+4
+pointer as the profile ID after USER packing. This card is known bad and must
+not be used for another recording trial.

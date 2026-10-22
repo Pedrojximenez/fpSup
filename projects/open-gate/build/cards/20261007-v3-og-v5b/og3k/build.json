@@ -1,0 +1,399 @@
+{
+ "product": "fpSup-OG3K, Loader v3 sup",
+ "file": "30OG3K.BIN",
+ "sup_id": "OG3K",
+ "version": 1,
+ "card": false,
+ "from_card": null,
+ "sha256": "46bd705fd25e965bb4103447f4363e21b5685bc8ee0bc66c635d8075c6e1a437",
+ "facts": {
+  "img_off": 14336,
+  "fpui_off": 34816,
+  "file_len": 53256,
+  "scratch_off": 53256,
+  "claims": 32,
+  "fixes": 8,
+  "hooks": 14,
+  "target": "og3k",
+  "label": "OG3K",
+  "entry": 4659,
+  "tab_off": 13152,
+  "text": 13120,
+  "block": 53312,
+  "image": 20480,
+  "fpui": 18440,
+  "pack": 3740,
+  "images": [
+   "30OG3K_QS",
+   "30OG3K_SET",
+   "30OG3K_FONT"
+  ],
+  "enum": 4,
+  "v3_growth": 117,
+  "pic_proof_ogv": "0x10000000",
+  "hooks_list": [
+   {
+    "site": "0xC043A19C",
+    "to": "0xC0732400",
+    "kind": "BL",
+    "next": "0xC073011C",
+    "replay": "0xC07325FC"
+   },
+   {
+    "site": "0xC0437B48",
+    "to": "0xC0731A00",
+    "kind": "B",
+    "next": "0xC0730108",
+    "replay": "0xC0731ABC"
+   },
+   {
+    "site": "0xC005C020",
+    "to": "0xC0731800",
+    "kind": "B",
+    "next": "0xC073010C",
+    "replay": "0xC0731990"
+   },
+   {
+    "site": "0xC005BE58",
+    "to": "0xC0731400",
+    "kind": "B",
+    "next": "0xC0730128",
+    "replay": "0xC073153C"
+   },
+   {
+    "site": "0xC0306EA0",
+    "to": "0xC0730200",
+    "kind": "B",
+    "next": "0xC0730110",
+    "replay": "0xC0730244"
+   },
+   {
+    "site": "0xC0306EEC",
+    "to": "0xC0730280",
+    "kind": "B",
+    "next": "0xC0730114",
+    "replay": "0xC07302C4"
+   },
+   {
+    "site": "0xC0437E98",
+    "to": "0xC0731D00",
+    "kind": "B",
+    "next": "0xC0730118",
+    "replay": "0xC0731EF4"
+   },
+   {
+    "site": "0xC043BE68",
+    "to": "0xC0732200",
+    "kind": "B",
+    "next": "0xC0730120",
+    "replay": "0xC0732290"
+   },
+   {
+    "site": "0xC03A6DD8",
+    "to": "0xC0732900",
+    "kind": "B",
+    "next": "0xC0730124",
+    "replay": "0xC0732958"
+   },
+   {
+    "site": "0xC02092CC",
+    "to": "0xC0730A00",
+    "kind": "BL",
+    "next": "0xC0730104",
+    "replay": "0x00000000"
+   },
+   {
+    "site": "0xC0218AEC",
+    "to": "0xC0730A00",
+    "kind": "BL",
+    "next": "0xC0730104",
+    "replay": "0x00000000"
+   },
+   {
+    "site": "0xC0219260",
+    "to": "0xC0730A00",
+    "kind": "BL",
+    "next": "0xC0730104",
+    "replay": "0x00000000"
+   },
+   {
+    "site": "0xC03AA568",
+    "to": "0xC0730A00",
+    "kind": "BL",
+    "next": "0xC0730104",
+    "replay": "0x00000000"
+   },
+   {
+    "site": "0xC043CCF8",
+    "to": "0xC0730800",
+    "kind": "B",
+    "next": "0xC0730100",
+    "replay": "0xC0730950"
+   }
+  ],
+  "claims_list": [
+   {
+    "address": "0xC043A19C",
+    "bytes": 4,
+    "kind": "CHAIN",
+    "writes": false
+   },
+   {
+    "address": "0xC0437B48",
+    "bytes": 4,
+    "kind": "CHAIN",
+    "writes": false
+   },
+   {
+    "address": "0xC005C020",
+    "bytes": 4,
+    "kind": "CHAIN",
+    "writes": false
+   },
+   {
+    "address": "0xC005BE58",
+    "bytes": 4,
+    "kind": "CHAIN",
+    "writes": false
+   },
+   {
+    "address": "0xC0306EA0",
+    "bytes": 4,
+    "kind": "CHAIN",
+    "writes": false
+   },
+   {
+    "address": "0xC0306EEC",
+    "bytes": 4,
+    "kind": "CHAIN",
+    "writes": false
+   },
+   {
+    "address": "0xC0437E98",
+    "bytes": 4,
+    "kind": "CHAIN",
+    "writes": false
+   },
+   {
+    "address": "0xC043BE68",
+    "bytes": 4,
+    "kind": "CHAIN",
+    "writes": false
+   },
+   {
+    "address": "0xC03A6DD8",
+    "bytes": 4,
+    "kind": "CHAIN",
+    "writes": false
+   },
+   {
+    "address": "0xC02092CC",
+    "bytes": 4,
+    "kind": "CHAIN",
+    "writes": false
+   },
+   {
+    "address": "0xC0218AEC",
+    "bytes": 4,
+    "kind": "CHAIN",
+    "writes": false
+   },
+   {
+    "address": "0xC0219260",
+    "bytes": 4,
+    "kind": "CHAIN",
+    "writes": false
+   },
+   {
+    "address": "0xC03AA568",
+    "bytes": 4,
+    "kind": "CHAIN",
+    "writes": false
+   },
+   {
+    "address": "0xC043CCF8",
+    "bytes": 4,
+    "kind": "CHAIN",
+    "writes": false
+   },
+   {
+    "address": "0xC0BDB9CC",
+    "bytes": 4,
+    "kind": "CHAIN",
+    "writes": false
+   },
+   {
+    "address": "0xC0BDBC28",
+    "bytes": 4,
+    "kind": "CHAIN",
+    "writes": false
+   },
+   {
+    "address": "0xC0BDBC60",
+    "bytes": 4,
+    "kind": "CHAIN",
+    "writes": false
+   },
+   {
+    "address": "0xC0BDBC8C",
+    "bytes": 4,
+    "kind": "CHAIN",
+    "writes": false
+   },
+   {
+    "address": "0xC0BDBC90",
+    "bytes": 4,
+    "kind": "CHAIN",
+    "writes": false
+   },
+   {
+    "address": "0xC0BDBC94",
+    "bytes": 4,
+    "kind": "CHAIN",
+    "writes": false
+   },
+   {
+    "address": "0xC0B59544",
+    "bytes": 8,
+    "kind": "EXCL",
+    "writes": false
+   },
+   {
+    "address": "0xC0B59A24",
+    "bytes": 8,
+    "kind": "EXCL",
+    "writes": false
+   },
+   {
+    "address": "0xC05E5B58",
+    "bytes": 4,
+    "kind": "SHARED_UI",
+    "writes": false
+   },
+   {
+    "address": "0xC05E5BEC",
+    "bytes": 4,
+    "kind": "SHARED_UI",
+    "writes": false
+   },
+   {
+    "address": "0xC05E61C8",
+    "bytes": 4,
+    "kind": "SHARED_UI",
+    "writes": false
+   },
+   {
+    "address": "0xC05E61E0",
+    "bytes": 4,
+    "kind": "SHARED_UI",
+    "writes": false
+   },
+   {
+    "address": "0xC05E6400",
+    "bytes": 4,
+    "kind": "SHARED_UI",
+    "writes": false
+   },
+   {
+    "address": "0xC05D90F0",
+    "bytes": 4,
+    "kind": "SHARED_UI",
+    "writes": false
+   },
+   {
+    "address": "0xC05E84D8",
+    "bytes": 4,
+    "kind": "SHARED_UI",
+    "writes": false
+   },
+   {
+    "address": "0xC06BDA3C",
+    "bytes": 8,
+    "kind": "SHARED_UI",
+    "writes": false
+   },
+   {
+    "address": "0xC06BDA48",
+    "bytes": 4,
+    "kind": "SHARED_UI",
+    "writes": false
+   },
+   {
+    "address": "0x55435351",
+    "bytes": 0,
+    "kind": "SHARED_UI",
+    "writes": false
+   }
+  ],
+  "patches": [],
+  "dropped_stock_writes": 34,
+  "restore": "0xC0731600",
+  "uia_apply_off": 63,
+  "cave0": "0xC0730000",
+  "table": "0xC0731000",
+  "fmt_keys": [
+   "OG3K23_98",
+   "OG3K24",
+   "OG3K25",
+   "OG3K30",
+   "OG3K48",
+   "OG3K50",
+   "OG3K60",
+   "OG3K100"
+  ],
+  "flag": "0xC0731C08",
+  "fmtlatch": "0xC0731C20",
+  "donor_timing": "0xC0B59540",
+  "gtab_words": [
+   "0xC0BDB9CC",
+   "0xC0BDBC28",
+   "0xC0BDBC60",
+   "0xC0BDBC8C",
+   "0xC0BDBC90",
+   "0xC0BDBC94",
+   "0xC0B59544",
+   "0xC0B59A24"
+  ]
+ },
+ "sources": {
+  "projects/open-gate/build/build_v3_og.py": "45659565780356e088ac85e463a25fcae5e5aa7c6b524fc14773d205889641bf",
+  "projects/open-gate/build/og_v3.c": "1f1dceaad07152c0dd3987a1ac98edcee101d05efb41e8c4ba0bef5034c9276e",
+  "projects/open-gate/build/og_pic.inc": "3be1b6fa6189d229e54a1e43a03135040dca04768844216202de002526da9613",
+  "projects/open-gate/build/og3k_plan.py": "78265399860977874bd78047ede13c01848f26727d04e45b67b66410605ce864",
+  "projects/open-gate/build/build_og3k_ui_candidate.py": "5e73fc39f1ef9998796403cd57eb441f0eb16a79e863f2ce1b554ccfb724d8b1",
+  "projects/open-gate/build/fmttable.S": "46e8ceef6e8189b9bebba45626f60d67526328ab88d2e766db16713f02b1c6ab",
+  "projects/open-gate/build/og3kfps.S": "6af5c197e6808a4af9a60eb4fec3aff23ea63dc6adcf5b2954c53a0254bce481",
+  "projects/open-gate/build/og3kname.S": "3e202e0e07368925d59aa7d9cd2baf7fbbdcc07a38df680ee9f2fb0741379b20",
+  "projects/open-gate/build/og3ksel.S": "e8df698f45b2126b3b66258d7ed64e2486d33f824a7adc3fa53374503b387980",
+  "projects/open-gate/build/og3kaspect.S": "f527d48418395cb53bb039e22bd85b076221a21c1f27ef8e670606a515a22fd6",
+  "projects/open-gate/build/og3kaspect2.S": "b2a4dffd81589934808aa5789dc8b1007b5b1aab0cbc1c3e7369dad8152ea84d",
+  "projects/open-gate/build/og3kout.S": "4e8ca1635e657f6d438bdca21287eca1272446f2b293f3696004d5c172524c27",
+  "projects/open-gate/build/og3kcanvas.S": "e9823fcc216ce4d94be1b02194d7ad66b67adad829a25c9f74946985dd80bf04",
+  "projects/open-gate/build/og3kpbsel.S": "12f04b0e1ce2dd00081932d461b53ed550952e95a5b9de596fb8f6da1e840389",
+  "projects/open-gate/build/og3kgs.S": "66e9368e4b9c6233fad7f4d6ece0fc2415d52035a839b4fa54b32212a9bbbba3",
+  "projects/open-gate/build/og3kfmt.S": "9ff6a62342d40fbf3c2a1189b2f90bfc5d6a686df1dff59547864eada9f27272",
+  "projects/open-gate/build/og3krestore.S": "193ba9770d7f3f8a9e99031a3c88fc6ea462f70b1f5b3eb46fed3382f9ec7976",
+  "fpSup/uishare/fv_handler.S": "ca3a8844aeb31297e1369c863565ba8746bd093fa92fdbfda42c4792a18c3f0c",
+  "fpSup/uishare/qs_apply.c": "6dfec7ae1b86f1d7f06e88e87ce4f6fa9b39e714cde589e2143e92bfa5c9fa85",
+  "fpSup/uishare/qs_apply.h": "7e814aaf2928db1d855c973f19abb47ab61207bb1f10ff0085c49ba47550e369",
+  "fpSup/uishare/qs_layer.S": "056194667edd4d823d7926721c0ebaf8a6743c2114cf45e32fd4101bb0aa87fc",
+  "fpSup/uishare/qs_layer.c": "e103cb19c56f9934d3581a7dcbbd83bc6d43f1416b7cd4439e9ad8c6828a783b",
+  "fpSup/uishare/qs_layer.h": "0fbb4abf673e362be8a41e80808bd288d923512e6b25b6b38668f9644ea37c93",
+  "fpSup/uishare/section.S": "4d6d116b4582c10e2b62b0995246f779d7f2388047e440d210d66da22bcfca38",
+  "fpSup/uishare/ui_apply.c": "4b6bad26312cfe102477f159cab5e7e34198176c1a9bcacf300b19d7c6fe432d",
+  "fpSup/uishare/ui_apply.h": "17b18c4047b039909f11e3a1a3b92a7cb6dbf8a20a50596f6644661417871b75",
+  "fpSup/uishare/ui_apply_fixture.c": "1b8a0c6e5dc7b0cdf115cd29a2f4585623487d0f5fd44fa897723eb738f6d865",
+  "fpSup/uishare/ui_pool.c": "4ecb12d15a2eeebb2e052d3dbde104f5bc1fded3e99e3388f77e3bb8626b4cf3",
+  "fpSup/uishare/ui_pool.h": "93b55987f1fb1fbd1f166da2dbcb75aea1e25eede68d0ddbb676a17a1423ebc4",
+  "fpSup/uishare/ui_pool_fixture.c": "b60c914608d3d758aa5d868676a2fc9993a09c84c0f675fd72ffbbf58c85a9a2",
+  "fpSup/uishare/ui_strings.S": "fbc35bbc5a62c5e695507dd522403ff41befb8dd139ea92fd4e38f6e069d1572",
+  "fpSup/uishare/ui_strings_code.h": "94b85f5b4d4cec28a7c6e0061437f250cc8fbad8f810489be0e29ed47ca28469",
+  "fpSup/uishare/ui/__init__.py": "5642a4646eed1615405edd3b0cc269fefb3c3ff7399fd3f568854a2522b51384",
+  "fpSup/uishare/ui/chain.py": "0c3f3eebc05dcfa03c1e0ef5bf1bb5871e834f160345f433c71e8098229926be",
+  "fpSup/uishare/ui/enums.py": "b00793485e5211c231ee17cc225dd9f05782af96c96a4621156f1486923442c4",
+  "fpSup/uishare/ui/fpui.py": "31b26e6d3f5e9bc3ffcd33b2e3c8080e0656c94c43da2899f08934a1b30ad4be",
+  "fpSup/uishare/ui/options.py": "dca6946d31265ba411689f75b576ab5541287cf304557d810a6c51ab464d3170",
+  "fpSup/uishare/ui/qs.py": "51888acdd74031d296984335a3a27234750cb912aa38885ffb46be58874a747a",
+  "fpSup/uishare/ui/rows.py": "faa4d6c2003eca1c210b5dc463cf1c3d2bef01db4e7715415da9e3120f7ac1f5"
+ }
+}

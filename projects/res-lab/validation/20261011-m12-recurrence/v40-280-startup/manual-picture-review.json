@@ -1,0 +1,41 @@
+{
+  "diagnostic_only": true,
+  "visible_fault": true,
+  "observation": "Central vertical split; left and right show different horizontal scale in transition. Native30 carrier does not resolve the original narrow M12 high-rate defect.",
+  "visually_inspected_frames": [
+    20,
+    32,
+    40,
+    48,
+    52,
+    56,
+    58,
+    60,
+    62,
+    64,
+    66,
+    70,
+    78,
+    90,
+    140,
+    239
+  ],
+  "high_delta_candidates": [
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74
+  ],
+  "native_carrier": 3,
+  "virtual_rank": 27972,
+  "original_geometry_r78_unchanged": true,
+  "standby_after": true,
+  "raw_frames_finished": 1,
+  "limits": "Short startup/stop window, not continuous high-rate recording; blur limits fine-detail inspection but central split is visible. Magenta threshold alone misses it."
+}

@@ -1,0 +1,46 @@
+fpGyroSup r32 r29-base honest cross-block timestamp continuity
+Build date: 2026-08-31
+Camera/firmware: SIGMA fp Ver.5.02
+Build type: release AutoRun, no USB shell
+Base: exact r29 sparse native-rate accelerometer GCSV
+
+Observed reason for this build:
+- Five r31 short clips retained every DNG frame and had no gyro interval over
+  0.935 ms, but their nominal 400-us completeness was only 99.975979% to
+  99.982341%.
+- Inside every raw block all intervals were exactly 400 us.  Every excess was
+  concentrated at a raw-block boundary: 3 to 17 forward-only seams per clip,
+  totalling 1,179 to 5,354 us.
+- r31 also produced no JSON in five of five clips.  This build therefore does
+  not inherit r30/r31 writer snapshot or JSON experiments.
+
+Only functional change from r29:
+- Stream open clears three previously unused timestamp words at
+  state+0x1D8..state+0x1E0.
+- The first raw block keeps its original hardware-relative anchor.
+- Later blocks compare their raw anchor with a separately retained uncorrected
+  raw-anchor timeline.  This measures each seam locally, so removed jitter can
+  never accumulate into a false large gap.
+- A local forward discrepancy of at most 1,000 us is treated as ordinary slot
+  hand-off jitter and the corrected previous-row+400-us timestamp is used.
+- A local forward discrepancy over 1,000 us is added to the corrected output
+  timeline.  Thus the known r29 40.545-ms back-pressure loss remains visible
+  and is not relabelled as complete data.
+- At the end of each block both corrected-next and raw-anchor-next are saved.
+
+Explicitly unchanged from r29:
+- r29 VSHL two-slot writer ownership, including keeping WRITING until the PGEN
+  formatter/media call returns.
+- Native lifecycle, JSON generation, event queue, recording/power locks and
+  task priorities.  This restores the last configuration proven to emit JSON.
+- 2,500 Hz callback, sparse approximately 50 Hz accel rows, 64 KiB complete-line
+  writes, 5 ms yield, decimal formatters and GCSV header tscale.
+- No writer-private snapshot, third slot, GYR file or sensor decimation.
+
+Safety and binary verification:
+- AutoRun.txt and VSHL.BIN are byte-for-byte identical to r29.
+- Five checked old PGEN instructions become three helper calls plus two NOPs;
+  all other old PGEN bytes are unchanged except the body-length header.
+- The appended helper is 136 bytes.  PGEN grows from 7,516 to 7,652 bytes and
+  remains far below the fixed 64 KiB loader window.
+- Experimental hardware build; not fp-gyro-sup-v1.1.

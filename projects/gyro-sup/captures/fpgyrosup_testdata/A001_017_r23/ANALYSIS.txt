@@ -1,0 +1,48 @@
+fpGyroSup r23 high-motion test: A001_017
+Date: 2026-08-31
+
+Integrity
+- 1,813 DNG frames, numbered 000001..001813 with no gaps or duplicates.
+- Every DNG is 3,244,544 bytes.
+- JSON parses successfully.
+- GCSV is newline-terminated and contains 151,514 numeric seven-column rows.
+- No malformed, truncated or non-numeric GCSV row was found.
+
+Established completeness metric (ceil(last timestamp / 400 us))
+- Last timestamp: 61,725,125 us
+- Expected rows: 154,313
+- Present rows: 151,514
+- Missing rows: 2,799
+- Completeness: 98.186154%
+
+Large gaps (position, interval, estimated missing rows)
+- 36.482926 s: 380.942 ms, 951
+- 44.483175 s: 41.746 ms, 103
+- 47.563434 s: 284.950 ms, 711
+- 50.883710 s: 280.961 ms, 701
+- 57.244235 s: 122.815 ms, 306
+
+Load
+- Average row length: 36.360 bytes; range 27..45.
+- Per-axis absolute maxima: X 32767, Y 32692, Z 32768.
+- 4,711 rows touched a signed 16-bit saturation boundary.
+- 11.551% of all gyro values occupied five decimal digits.
+- At 40..45 s, 60.80% were five-digit values; average row 41.29 bytes and
+  the bin retained 99.1600%.
+- At 45..50 s, 64.39% were five-digit values; average row 41.68 bytes and
+  the bin retained 94.3040%.
+
+Comparison
+- r21 A001_014: 150,624 / 153,614 = 98.053563%, missing 2,990.
+- r22 A001_015: 156,584 / 160,364 = 97.642862%, missing 3,780.
+- r23 A001_017: 151,514 / 154,313 = 98.186154%, missing 2,799.
+- r23 improved by 0.543292 percentage points and 981 missing rows versus r22,
+  despite substantially stronger motion and more saturation.
+
+Conclusion
+- The decimal lookup materially improves throughput and never falls back to
+  signed division, including saturated sensor values.
+- It does not provide enough sustained margin for the strongest 2,500 Hz
+  high-motion intervals. Further tiny formatter optimisations are unlikely to
+  eliminate the remaining whole-batch gaps; the next useful work is structural
+  scheduling/back-pressure analysis rather than another arithmetic micro-pass.

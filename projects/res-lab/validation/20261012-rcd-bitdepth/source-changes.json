@@ -1,0 +1,90 @@
+{
+  "changed_sources": [
+    {
+      "path": "projects/open-gate/build/build_v3_reslab.py",
+      "before_sha256": "35b7584103d3074084f04cbe6c01ea08fd11cb2598ced33007a3c24f1643d327",
+      "after_sha256": "fe8fd7445a626eb44d18732d8a43f199d912ab5d55c73a676d9c63cd8f596603"
+    },
+    {
+      "path": "projects/open-gate/build/res-custom/VIRTUAL_RCD.md",
+      "before_sha256": "4aee0d65fc518a834397ecf34dcf316adcdb661d07699630164271957bb89252",
+      "after_sha256": "e0aeab6a86efe16571aad415befd51bb803bc7d56579e4c2dca45c09e7943a29"
+    },
+    {
+      "path": "projects/open-gate/build/res-custom/build_v3_rescustom.py",
+      "before_sha256": "2bdc173b89092412045294bcdc4099ae4ffbab44ddb79a389e8170f6b11d992c",
+      "after_sha256": "994d9b66dc56ad129cec8bccae30d57c5eb9a9ad294fb1d41b2277109ed5a660"
+    },
+    {
+      "path": "projects/open-gate/build/res-custom/jose_formats.py",
+      "before_sha256": "96472d15a305641532249530e7cb8ede83c16f6b6233a9b55a8ce8ed24350547",
+      "after_sha256": "afbf0b0f130595f20a1074cb4596450e181b5bcbe9112746cbd18162fc00e88f"
+    },
+    {
+      "path": "projects/open-gate/build/res-custom/ogc.c",
+      "before_sha256": "240f0c0c8b38c3c3b984fa57ad8f4ed16d3755f93487e772a15d088e2a07089b",
+      "after_sha256": "ac90b11ca5cf1022b79c01653a1728109cb11cab06db2491474bce88a1d089b5"
+    },
+    {
+      "path": "projects/open-gate/build/res-custom/ogc_layout.py",
+      "before_sha256": "3e78cd3f7517436d1c5adc270e01ea3bfbe6b0f404bd9b0b963d0a0c846a429d",
+      "after_sha256": "f90bd24219dbf9878a5c2107ddfffe19ec1e5b0684b339b8323c8cccfab34675"
+    },
+    {
+      "path": "projects/open-gate/build/res-custom/ogc_rowdata.py",
+      "before_sha256": "d44aa3ff457d7b2ecb6ba77b70039fbe7406afc5fae0a8c6593d904b7faddfbc",
+      "after_sha256": "a871b333718606798224152fa3419afc95e3c0c0c0dfc4594e00de672c015990"
+    },
+    {
+      "path": "projects/open-gate/build/res-custom/ogc_shims.S",
+      "before_sha256": "ceb25488169792d4eac0699c50d38c196be8754073e91d894179ba5c8307171f",
+      "after_sha256": "498d8977b9ab80fbd8a06369f08ea0ae41593b1b0f4155970e2e8f4478b04ca6"
+    },
+    {
+      "path": "projects/open-gate/build/res-custom/ogc_virtual.c",
+      "before_sha256": "27fe531e8b9b77d870e2fcbb0bfb9af5ceb46c63646cb57ade7eda72bf3da186",
+      "after_sha256": "1e212e1a5a936360785169dce31bfa893ff2143c5f50f2dfe1a3cc73ae202444"
+    },
+    {
+      "path": "projects/open-gate/build/res-custom/rcd.py",
+      "before_sha256": "45cbaf75e444c86fa91c95622260219aefb7de6f45e8173b60e3207538026fb9",
+      "after_sha256": "c2808fb9e8d5e419f06e17fe4a34844c60872775c51bc529d205fc9875304c3c"
+    },
+    {
+      "path": "projects/open-gate/build/res-custom/test_v3_rescustom.py",
+      "before_sha256": "301aa564dcc25b7972fc6822a779037cd6a3c0f0531138833a1e2edb76889f9a",
+      "after_sha256": "a024f16b31dd570a54075382652bc464e431c4f64010ddb237de04329ac61ab2"
+    },
+    {
+      "path": "projects/open-gate/build/rl_v3.c",
+      "before_sha256": "a7b1a8e2844348535a4f9c20047972f1797f02135bd4d796e1e508fd24e8daa9",
+      "after_sha256": "ee2dcdb77ac500b8a3dc6fd4ff897072bf5749c78c5247067bedfc5e80d6727c"
+    },
+    {
+      "path": "projects/open-gate/build/res-custom/test_rcd_bitdepth.py",
+      "after_sha256": "95183fd038719a87b83eb797aa4beeac97de624a7a5dc20c99c9dfa8b429bc95",
+      "new": true
+    },
+    {
+      "path": "projects/open-gate/build/test_v3_reslab.py",
+      "after_sha256": "02a714676297a527102344b59975a7e43f2fd5c13fcc2cf14a237198158bef55",
+      "change": "RCD depth export assertion / real UI installer policy test"
+    },
+    {
+      "path": "projects/open-gate/build/test_virtual_rcd_rates.py",
+      "after_sha256": "36c2e12c4ba42e9be96f94128f3a23ff55a02f0dbe93beea3cbefb8198999b54",
+      "change": "RCD depth export assertion / real UI installer policy test"
+    },
+    {
+      "path": "projects/res-lab/README.md",
+      "before_sha256": "a4f32294f0ac09e2b91469f0032df5155f1523dc05a190e286f3b84f86385d46",
+      "after_sha256": "60ba35feb8f79e180cea5dffbce4f3d63f4c1331da559f55c8291ec4ac1d21bd"
+    }
+  ],
+  "shared_loader_modified": false,
+  "hardware_deployed": false,
+  "core_version": 4,
+  "payload_version": 18,
+  "wire_version": 3,
+  "virtual_abi": 2
+}

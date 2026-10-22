@@ -1,0 +1,464 @@
+{
+  "status": "diagnostic-native-ring-read-complete",
+  "date_utc": "2026-10-09T05:53:42.263968+00:00",
+  "source_address": "0x49801000",
+  "atomic_frame": false,
+  "producer_frozen": false,
+  "frame_lease_owned": false,
+  "pixel_format_verified": false,
+  "camera_image_writes": false,
+  "camera_card_writes": false,
+  "injected_code": false,
+  "camera_cache_flush": false,
+  "transport_read_window_temporarily_modified": true,
+  "original_state": {
+    "color_mode": 12,
+    "app_current": 2,
+    "is_recording": 0,
+    "stored_record_mode": 1,
+    "applied_record_mode": 1,
+    "relative_gain": 1170,
+    "boot_id": 4040737
+  },
+  "original_controls": {
+    "SetColorModeEffect": 0,
+    "SetColorModeContrast": 0,
+    "SetColorModeSaturation": 0,
+    "SetToneControlMode": 0,
+    "SetToneManualHighlight": 0,
+    "SetToneManualShadow": 0
+  },
+  "descriptor": {
+    "address": "0xC30255B4",
+    "words": [
+      0,
+      3,
+      1,
+      1620,
+      911,
+      0,
+      0,
+      0,
+      4,
+      39846912,
+      40891392,
+      41935872,
+      42980352,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1
+    ],
+    "width": 1620,
+    "height": 911
+  },
+  "mem_caps_before": {
+    "xfer": 16776192,
+    "pool": 1157966272,
+    "pool_size": 1048576,
+    "windows": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  "raw_sha256": "14c72f31e92ff99e055c2cb2eaf1284e594cb52e386b8c8fbb2b6c75fb9a5c86",
+  "raw_bytes": 4177920,
+  "mem_caps_after": {
+    "xfer": 16776192,
+    "pool": 1157966272,
+    "pool_size": 1048576,
+    "windows": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  "read_window_revoked": true,
+  "final_state": {
+    "color_mode": 12,
+    "app_current": 2,
+    "is_recording": 0,
+    "stored_record_mode": 1,
+    "applied_record_mode": 1,
+    "relative_gain": 1170,
+    "boot_id": 4040737
+  },
+  "final_controls": {
+    "SetColorModeEffect": 0,
+    "SetColorModeContrast": 0,
+    "SetColorModeSaturation": 0,
+    "SetToneControlMode": 0,
+    "SetToneManualHighlight": 0,
+    "SetToneManualShadow": 0
+  },
+  "state_unchanged": true,
+  "transcript": [
+    {
+      "time_utc": "2026-10-09T05:53:42.275060+00:00",
+      "command": "STATUS",
+      "reply": "OK name=fpshd version=3.2.0 protocol=1 frame=64 payload=44 transport=EP01-EP82 iface=0 camera=open seq=36648 ep83=host_candidate upload=UP01-probed mem=MEM1-probed quarantine=0 fault=none"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.275656+00:00",
+      "command": "TMO 1500 SHL menu SetColorMode",
+      "reply": "OK 12\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.276053+00:00",
+      "command": "TMO 1500 SHL status get app_current",
+      "reply": "OK app_current -> 2\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.276327+00:00",
+      "command": "TMO 1500 SHL status get is_recording",
+      "reply": "OK is_recording -> 0\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.276629+00:00",
+      "command": "TMO 1500 SHL mem get 0xC31C01B0,,0x4",
+      "reply": "OK get : A:0xc31c01b0, D:0x00000001\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.277057+00:00",
+      "command": "TMO 1500 SHL mem get 0xC31F86E0,,0x4",
+      "reply": "OK get : A:0xc31f86e0, D:0x00000001\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.277303+00:00",
+      "command": "TMO 1500 SHL mem get 0xC343B5A0,,0x4",
+      "reply": "OK get : A:0xc343b5a0, D:0x00000492\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.277553+00:00",
+      "command": "TMO 1500 SHL mem get 0xC072F6F8,,0x4",
+      "reply": "OK get : A:0xc072f6f8, D:0x003DA821\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.278038+00:00",
+      "command": "TMO 1500 SHL menu SetColorModeEffect",
+      "reply": "OK 0\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.278583+00:00",
+      "command": "TMO 1500 SHL menu SetColorModeContrast",
+      "reply": "OK 0\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.279104+00:00",
+      "command": "TMO 1500 SHL menu SetColorModeSaturation",
+      "reply": "OK 0\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.279498+00:00",
+      "command": "TMO 1500 SHL menu SetToneControlMode",
+      "reply": "OK 0\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.279933+00:00",
+      "command": "TMO 1500 SHL menu SetToneManualHighlight",
+      "reply": "OK 0\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.280297+00:00",
+      "command": "TMO 1500 SHL menu SetToneManualShadow",
+      "reply": "OK 0\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.280879+00:00",
+      "command": "TMO 1500 SHL mem get 0xC30255B4,,0x20",
+      "reply": "OKX 676574203A20413A307863333032353562342C20443A307830303030303030300A676574203A20413A307863333032353562382C20443A307830303030303030330A676574203A20413A307863333032353562632C20443A307830303030303030310A676574203A20413A307863333032353563302C20443A307830303030303635340A676574203A20413A307863333032353563342C20443A307830303030303338460A676574203A20413A307863333032353563382C20443A307830303030303030300A676574203A20413A307863333032353563632C20443A307830303030303030300A676574203A20413A307863333032353564302C20443A307830303030303030300A"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.281316+00:00",
+      "command": "TMO 1500 SHL mem get 0xC30255D4,,0x20",
+      "reply": "OKX 676574203A20413A307863333032353564342C20443A307830303030303030340A676574203A20413A307863333032353564382C20443A307830323630303430300A676574203A20413A307863333032353564632C20443A307830323646463430300A676574203A20413A307863333032353565302C20443A307830323746453430300A676574203A20413A307863333032353565342C20443A307830323846443430300A676574203A20413A307863333032353565382C20443A307830303030303030300A676574203A20413A307863333032353565632C20443A307830303030303030300A676574203A20413A307863333032353566302C20443A307830303030303030300A"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.281741+00:00",
+      "command": "TMO 1500 SHL mem get 0xC30255F4,,0x20",
+      "reply": "OKX 676574203A20413A307863333032353566342C20443A307830303030303030300A676574203A20413A307863333032353566382C20443A307830303030303030300A676574203A20413A307863333032353566632C20443A307830303030303030300A676574203A20413A307863333032353630302C20443A307830303030303030300A676574203A20413A307863333032353630342C20443A307830303030303030300A676574203A20413A307863333032353630382C20443A307830303030303030300A676574203A20413A307863333032353630632C20443A307830303030303030300A676574203A20413A307863333032353631302C20443A307830303030303030300A"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.282184+00:00",
+      "command": "TMO 1500 SHL mem get 0xC3025614,,0x20",
+      "reply": "OKX 676574203A20413A307863333032353631342C20443A307830303030303030300A676574203A20413A307863333032353631382C20443A307830303030303030300A676574203A20413A307863333032353631632C20443A307830303030303030300A676574203A20413A307863333032353632302C20443A307830303030303030300A676574203A20413A307863333032353632342C20443A307830303030303030300A676574203A20413A307863333032353632382C20443A307830303030303030300A676574203A20413A307863333032353632632C20443A307830303030303030300A676574203A20413A307863333032353633302C20443A307830303030303030310A"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.285356+00:00",
+      "command": "STATUS",
+      "reply": "OK name=fpshd version=3.2.0 protocol=1 frame=64 payload=44 transport=EP01-EP82 iface=0 camera=open seq=36666 ep83=host_candidate upload=UP01-probed mem=MEM1-probed quarantine=0 fault=none"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.285844+00:00",
+      "command": "TMO 1500 SHL menu SetColorMode",
+      "reply": "OK 12\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.286171+00:00",
+      "command": "TMO 1500 SHL status get app_current",
+      "reply": "OK app_current -> 2\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.286545+00:00",
+      "command": "TMO 1500 SHL status get is_recording",
+      "reply": "OK is_recording -> 0\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.287049+00:00",
+      "command": "TMO 1500 SHL mem get 0xC31C01B0,,0x4",
+      "reply": "OK get : A:0xc31c01b0, D:0x00000001\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.287400+00:00",
+      "command": "TMO 1500 SHL mem get 0xC31F86E0,,0x4",
+      "reply": "OK get : A:0xc31f86e0, D:0x00000001\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.287685+00:00",
+      "command": "TMO 1500 SHL mem get 0xC343B5A0,,0x4",
+      "reply": "OK get : A:0xc343b5a0, D:0x00000492\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.288052+00:00",
+      "command": "TMO 1500 SHL mem get 0xC072F6F8,,0x4",
+      "reply": "OK get : A:0xc072f6f8, D:0x003DA821\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.289135+00:00",
+      "command": "STATUS",
+      "reply": "OK name=fpshd version=3.2.0 protocol=1 frame=64 payload=44 transport=EP01-EP82 iface=0 camera=open seq=36675 ep83=host_candidate upload=UP01-probed mem=MEM1-probed quarantine=0 fault=none"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.289655+00:00",
+      "command": "TMO 1500 SHL menu SetColorMode",
+      "reply": "OK 12\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.290009+00:00",
+      "command": "TMO 1500 SHL status get app_current",
+      "reply": "OK app_current -> 2\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.290322+00:00",
+      "command": "TMO 1500 SHL status get is_recording",
+      "reply": "OK is_recording -> 0\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.290629+00:00",
+      "command": "TMO 1500 SHL mem get 0xC31C01B0,,0x4",
+      "reply": "OK get : A:0xc31c01b0, D:0x00000001\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.290939+00:00",
+      "command": "TMO 1500 SHL mem get 0xC31F86E0,,0x4",
+      "reply": "OK get : A:0xc31f86e0, D:0x00000001\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.291246+00:00",
+      "command": "TMO 1500 SHL mem get 0xC343B5A0,,0x4",
+      "reply": "OK get : A:0xc343b5a0, D:0x00000492\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.291548+00:00",
+      "command": "TMO 1500 SHL mem get 0xC072F6F8,,0x4",
+      "reply": "OK get : A:0xc072f6f8, D:0x003DA821\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.292032+00:00",
+      "command": "TMO 1500 SHL menu SetColorModeEffect",
+      "reply": "OK 0\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.292444+00:00",
+      "command": "TMO 1500 SHL menu SetColorModeContrast",
+      "reply": "OK 0\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.292868+00:00",
+      "command": "TMO 1500 SHL menu SetColorModeSaturation",
+      "reply": "OK 0\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.293285+00:00",
+      "command": "TMO 1500 SHL menu SetToneControlMode",
+      "reply": "OK 0\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.293893+00:00",
+      "command": "TMO 1500 SHL menu SetToneManualHighlight",
+      "reply": "OK 0\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.294273+00:00",
+      "command": "TMO 1500 SHL menu SetToneManualShadow",
+      "reply": "OK 0\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.325362+00:00",
+      "command": "STATUS",
+      "reply": "OK name=fpshd version=3.2.0 protocol=1 frame=64 payload=44 transport=EP01-EP82 iface=0 camera=open seq=36689 ep83=host_candidate upload=UP01-probed mem=MEM1-probed quarantine=0 fault=none"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.326770+00:00",
+      "command": "STATUS",
+      "reply": "OK name=fpshd version=3.2.0 protocol=1 frame=64 payload=44 transport=EP01-EP82 iface=0 camera=open seq=36692 ep83=host_candidate upload=UP01-probed mem=MEM1-probed quarantine=0 fault=none"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.327192+00:00",
+      "command": "TMO 1500 SHL menu SetColorMode",
+      "reply": "OK 12\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.327613+00:00",
+      "command": "TMO 1500 SHL status get app_current",
+      "reply": "OK app_current -> 2\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.327985+00:00",
+      "command": "TMO 1500 SHL status get is_recording",
+      "reply": "OK is_recording -> 0\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.328355+00:00",
+      "command": "TMO 1500 SHL mem get 0xC31C01B0,,0x4",
+      "reply": "OK get : A:0xc31c01b0, D:0x00000001\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.328675+00:00",
+      "command": "TMO 1500 SHL mem get 0xC31F86E0,,0x4",
+      "reply": "OK get : A:0xc31f86e0, D:0x00000001\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.329000+00:00",
+      "command": "TMO 1500 SHL mem get 0xC343B5A0,,0x4",
+      "reply": "OK get : A:0xc343b5a0, D:0x00000492\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.329375+00:00",
+      "command": "TMO 1500 SHL mem get 0xC072F6F8,,0x4",
+      "reply": "OK get : A:0xc072f6f8, D:0x003DA821\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.329777+00:00",
+      "command": "TMO 1500 SHL menu SetColorModeEffect",
+      "reply": "OK 0\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.330199+00:00",
+      "command": "TMO 1500 SHL menu SetColorModeContrast",
+      "reply": "OK 0\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.330621+00:00",
+      "command": "TMO 1500 SHL menu SetColorModeSaturation",
+      "reply": "OK 0\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.331008+00:00",
+      "command": "TMO 1500 SHL menu SetToneControlMode",
+      "reply": "OK 0\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.331491+00:00",
+      "command": "TMO 1500 SHL menu SetToneManualHighlight",
+      "reply": "OK 0\\n"
+    },
+    {
+      "time_utc": "2026-10-09T05:53:42.331889+00:00",
+      "command": "TMO 1500 SHL menu SetToneManualShadow",
+      "reply": "OK 0\\n"
+    }
+  ],
+  "probe_sha256": "2752025650abd28437d67e4320fc368e96d793785f9fd5ff7ce32ae895608afd",
+  "putfile_sha256": "064fd89859b29cd0766cf9c2663adf7aa27691b84aeada9b2c40edf3ba26a5b6"
+}

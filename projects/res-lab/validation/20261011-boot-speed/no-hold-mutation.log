@@ -1,0 +1,15 @@
+test_last_frame_after_the_load_then_redraw_restored (v3.test_v3.LoaderV3Tests) ... FAIL
+
+======================================================================
+FAIL: test_last_frame_after_the_load_then_redraw_restored (v3.test_v3.LoaderV3Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/v3/test_v3.py", line 475, in test_last_frame_after_the_load_then_redraw_restored
+    self.assertEqual(cam.slept, 0)
+AssertionError: 2000 != 0
+
+----------------------------------------------------------------------
+Ran 1 test in 0.600s
+
+FAILED (failures=1)
+PASS: reintroducing the 2-second wait was detected by the ARM execution test

@@ -1,0 +1,15 @@
+{
+  "remote": "git@git:bei/sigma_fp_re_usbshell.git",
+  "repository_url": "http://git:3000/bei/sigma_fp_re_usbshell",
+  "baseline_branch": "snapshots/reslab-m12-before-240p-20261011",
+  "baseline_commit": "13890262b461a637195cbd211959b3c0947aa5bf",
+  "candidate_branch": "fix/reslab-m12-rate-reload-20261011",
+  "candidate_commit": "4822a94d64c04c7d15f432c7659107bee4d14378",
+  "candidate_parent": "13890262b461a637195cbd211959b3c0947aa5bf",
+  "verified_remote_refs": {
+    "fix/reslab-m12-rate-reload-20261011": "4822a94d64c04c7d15f432c7659107bee4d14378",
+    "snapshots/reslab-m12-before-240p-20261011": "13890262b461a637195cbd211959b3c0947aa5bf"
+  },
+  "verified_at": "2026-10-11T06:00:14.344978+00:00",
+  "hardware_tested": false
+}

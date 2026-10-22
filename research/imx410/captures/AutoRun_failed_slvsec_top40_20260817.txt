@@ -1,0 +1,82 @@
+# SIGMA fp Ver.5.02 - shift still source window upward by 40 lines
+# Keeps output height at 4042: source [40,4082] -> [0,4042].
+# Start cue: one color-bar pulse. Take ONE photo 5-15 seconds later.
+# Completion cue: two pulses. RAM-only; cold boot restores all code.
+
+display monitor 0 1
+display colorbar 1 0
+ctrl sleep 700
+display colorbar 0 0
+ctrl sleep 400
+
+# Result: raw_ptr, hold_entered, release, mode, bit_type, frame_count.
+mem set 0xC072E500 0xDEADBEEF
+mem set 0xC072E504 0x00000000
+mem set 0xC072E508 0x00000000
+mem set 0xC072E50C 0xDEADBEEF
+mem set 0xC072E510 0xDEADBEEF
+mem set 0xC072E514 0xDEADBEEF
+
+# Wrapper called at AcqStartExp immediately before receiver start.
+# Write 0x30100024 = 0x00000FCA, then call original FUN_c0126560(r0).
+mem set 0xC072DD00 0xE92D4010
+mem set 0xC072DD04 0xE1A04000
+mem set 0xC072DD08 0xE3001024
+mem set 0xC072DD0C 0xE3431010
+mem set 0xC072DD10 0xE3002FCA
+mem set 0xC072DD14 0xE5812000
+mem set 0xC072DD18 0xE1A00004
+mem set 0xC072DD1C 0xE3063560
+mem set 0xC072DD20 0xE34C3012
+mem set 0xC072DD24 0xE12FFF33
+mem set 0xC072DD28 0xE8BD8010
+
+# Proven post-DMA hold wrapper.
+mem set 0xC072DE64 0xE92D4070
+mem set 0xC072DE68 0xE1A04001
+mem set 0xC072DE6C 0xE308CA38
+mem set 0xC072DE70 0xE34CC031
+mem set 0xC072DE74 0xE12FFF3C
+mem set 0xC072DE78 0xE5945030
+mem set 0xC072DE7C 0xE30E6500
+mem set 0xC072DE80 0xE34C6072
+mem set 0xC072DE84 0xE5865000
+mem set 0xC072DE88 0xE3A00001
+mem set 0xC072DE8C 0xE5860004
+mem set 0xC072DE90 0xE5940014
+mem set 0xC072DE94 0xE586000C
+mem set 0xC072DE98 0xE5940018
+mem set 0xC072DE9C 0xE5860010
+mem set 0xC072DEA0 0xE5940024
+mem set 0xC072DEA4 0xE5860014
+mem set 0xC072DEA8 0xE5960008
+mem set 0xC072DEAC 0xE3500000
+mem set 0xC072DEB0 0x1A000004
+mem set 0xC072DEB4 0xE3A00064
+mem set 0xC072DEB8 0xE300C5D8
+mem set 0xC072DEBC 0xE34CC037
+mem set 0xC072DEC0 0xE12FFF3C
+mem set 0xC072DEC4 0xEAFFFFF7
+mem set 0xC072DEC8 0xE8BD8070
+
+# Activate wrappers last.
+mem set 0xC031813C 0xEB1056EF
+mem set 0xC0315DD4 0xEB106022
+
+ctrl sleep 20000
+
+# Top ~197 RAW14 rows, receiver state, and proof metadata.
+mem save \TOPRAW00.BIN 0x5F900C00,,0x00200000
+mem save \TOPSLV00.BIN 0x30100000,,0x00001000
+mem save \TOPMETA0.BIN 0xC072E500,,0x00000020
+
+mem set 0xC072E508 0x00000001
+ctrl sleep 7000
+
+display colorbar 1 0
+ctrl sleep 700
+display colorbar 0 0
+ctrl sleep 400
+display colorbar 1 0
+ctrl sleep 700
+display colorbar 0 0

@@ -1,0 +1,270 @@
+.syntax unified
+.arm
+.text
+.global stage5_hook
+
+/*
+ * SIGMA fp Ver.5.02 Stage-5 gyro logger.
+ * Load address: 0xC072DE64. Hook site: 0xC00D0794.
+ *
+ * File header (32 bytes):
+ *   u32 magic = 'GFS5'; u32 version = 2; u32 sample_period_us = 2500;
+ *   u32 start_us; u32 camera_id; u32 reel_no; u32 clip_no; u32 initial_head.
+ * Batch header (16 bytes), followed by sample_count raw 8-byte samples:
+ *   u32 magic = 'GFT1'; u32 timestamp_us; u32 sample_count; u32 flags (bit0=wrap).
+ */
+
+.equ STATE_ACTIVE,  0xC072E4C4
+.equ STATE_COUNT,   0xC072E4C8
+.equ STATE_HEAD,    0xC072E4CC
+.equ STATE_STARTVD, 0xC072E4D0
+.equ FILE_OBJECT,   0xC072E464
+.equ FILE_PATH,     0xC072E500
+.equ USER_BASE,     0x44F6ADC0
+.equ USER_END,      0x456EADC0
+.equ PATH_MGR_SD,   0xC3438400
+.equ GYRO_DESC_PTR, 0xC31E3FCC
+
+.macro ldr_addr reg, value
+    movw    \reg, #:lower16:\value
+    movt    \reg, #:upper16:\value
+.endm
+
+stage5_hook:
+    /* Ten registers keeps the public-call stack 8-byte aligned. */
+    push    {r3-r11, lr}
+
+    /* Original instruction replaced at 0xC00D0794. */
+    movw    ip, #0xC6F9
+    movt    ip, #0xC01E
+    blx     ip
+    mov     r11, r0
+
+    /* Camera's real MovieRecording state: LensIsTr singleton + 0x157. */
+    movw    ip, #0xB2D0
+    movt    ip, #0xC035
+    blx     ip
+    ldrb    r5, [r0, #0x157]
+
+    ldr_addr r6, STATE_ACTIVE
+    ldr     r7, [r6]
+    cmp     r5, #0
+    beq     recording_stopped
+    cmp     r7, #0
+    bne     drain_ring
+
+recording_started:
+    mov     r0, #1
+    str     r0, [r6]
+
+    /* Monotonic TickTimer timestamp in microseconds. */
+    movw    ip, #0xB6E0
+    movt    ip, #0xC002
+    blx     ip
+    ldr_addr r1, STATE_STARTVD
+    str     r0, [r1]
+
+    /* Build root sidecar name. Manager holds the previous clip, so add one. */
+    ldr_addr r8, PATH_MGR_SD
+    ldr_addr r9, FILE_PATH
+    ldrb    r0, [r8, #8]
+    strb    r0, [r9, #1]
+    add     r0, r9, #2
+    ldr     r1, [r8, #0x0c]
+    bl      put_decimal_3
+    add     r0, r9, #6
+    ldr     r1, [r8, #0x10]
+    add     r1, r1, #1
+    bl      put_decimal_3
+
+    /* Initialize the 32-byte file header. */
+    ldr_addr r10, USER_BASE
+    movw    r0, #0x4647
+    movt    r0, #0x3553              /* little-endian 'GFS5' */
+    str     r0, [r10, #0]
+    mov     r0, #2
+    str     r0, [r10, #4]
+    movw    r0, #2500
+    str     r0, [r10, #8]
+    ldr_addr r0, STATE_STARTVD
+    ldr     r0, [r0]
+    str     r0, [r10, #12]
+    ldrb    r0, [r8, #8]
+    str     r0, [r10, #16]
+    ldr     r0, [r8, #0x0c]
+    str     r0, [r10, #20]
+    ldr     r0, [r8, #0x10]
+    add     r0, r0, #1
+    str     r0, [r10, #24]
+
+    /* Snapshot the current gyro head; do not copy pre-record history. */
+    ldr_addr r0, GYRO_DESC_PTR
+    ldr     r0, [r0]
+    ldr     r0, [r0, #0x60]
+    ldr     r1, [r0]
+    str     r1, [r10, #28]
+    ldr_addr r0, STATE_HEAD
+    str     r1, [r0]
+    ldr_addr r0, STATE_COUNT
+    mov     r1, #32
+    str     r1, [r0]
+    b       return_original
+
+drain_ring:
+    /* r8=ring base, r5=new head, r6=old head. */
+    ldr_addr r0, GYRO_DESC_PTR
+    ldr     r0, [r0]
+    ldr     r8, [r0, #0x60]
+    ldr     r5, [r8]
+    ldr_addr r0, STATE_HEAD
+    ldr     r6, [r0]
+    cmp     r5, r6
+    beq     return_original
+
+    /* Read monotonic microsecond timestamp before copying. */
+    movw    ip, #0xB6E0
+    movt    ip, #0xC002
+    blx     ip
+    mov     r9, r0
+    mov     r10, #0                  /* flags */
+    cmp     r5, r6
+    subhi   r4, r5, r6
+    bhi     have_byte_count
+    movw    r4, #0x12C4
+    add     r4, r4, r5
+    sub     r4, r4, r6
+    mov     r10, #1                 /* ring wrapped */
+have_byte_count:
+    mov     r3, r4, lsr #3          /* sample_count */
+
+    /* Reserve/write the batch header, failing closed if the 8 MiB buffer is full. */
+    ldr_addr r7, STATE_COUNT
+    ldr     r2, [r7]
+    ldr_addr r1, USER_BASE
+    add     r0, r1, r2
+    add     ip, r0, #16
+    add     ip, ip, r4
+    ldr_addr r1, USER_END
+    cmp     ip, r1
+    bhi     return_original
+    movw    r1, #0x4647
+    movt    r1, #0x3154              /* little-endian 'GFT1' */
+    str     r1, [r0, #0]
+    str     r9, [r0, #4]
+    str     r3, [r0, #8]
+    str     r10, [r0, #12]
+    add     r2, r2, #16
+    str     r2, [r7]
+
+    /* Copy one or two ring spans. copy_span takes [r0,r1). */
+    add     r0, r6, #4
+    cmp     r5, r6
+    bhi     no_wrap_copy
+    movw    r2, #0x12C4
+    add     r1, r8, r2
+    bl      copy_span
+    add     r0, r8, #4
+    add     r1, r5, #4
+    bl      copy_span
+    b       update_head
+no_wrap_copy:
+    add     r1, r5, #4
+    bl      copy_span
+update_head:
+    ldr_addr r0, STATE_HEAD
+    str     r5, [r0]
+    b       return_original
+
+recording_stopped:
+    cmp     r7, #0
+    beq     return_original
+    mov     r0, #0
+    str     r0, [r6]
+    ldr_addr r0, STATE_COUNT
+    ldr     r0, [r0]
+    cmp     r0, #32
+    bls     return_original
+
+    /* Validated Stage-3 file API sequence. */
+    movw    ip, #0x4658
+    movt    ip, #0xC044
+    blx     ip
+    mov     r1, #0
+    movw    ip, #0x4698
+    movt    ip, #0xC044
+    blx     ip
+    mov     r1, r0
+    ldr_addr r0, FILE_OBJECT
+    movw    ip, #0x5E90
+    movt    ip, #0xC036
+    blx     ip
+    ldr_addr r0, FILE_OBJECT
+    ldr_addr r1, FILE_PATH
+    movw    r2, #0x0402
+    movw    ip, #0x5FB0
+    movt    ip, #0xC036
+    blx     ip
+    ldr_addr r0, FILE_OBJECT
+    ldr_addr r1, USER_BASE
+    ldr_addr r2, STATE_COUNT
+    ldr     r2, [r2]
+    movw    ip, #0x60E8
+    movt    ip, #0xC036
+    blx     ip
+    ldr_addr r0, FILE_OBJECT
+    movw    ip, #0x6020
+    movt    ip, #0xC036
+    blx     ip
+    ldr_addr r0, FILE_OBJECT
+    mov     r1, #2
+    movw    ip, #0x5ED0
+    movt    ip, #0xC036
+    blx     ip
+
+return_original:
+    mov     r0, r11
+    pop     {r3-r11, pc}
+
+/* Copy bytes [r0,r1) into USER_BASE + *STATE_COUNT. r7 must point to STATE_COUNT. */
+copy_span:
+    ldr     r2, [r7]
+    ldr_addr r3, USER_BASE
+    add     r3, r3, r2
+    ldr_addr ip, USER_END
+1:
+    cmp     r0, r1
+    beq     2f
+    cmp     r3, ip
+    bhs     2f
+    ldrb    r2, [r0], #1
+    strb    r2, [r3], #1
+    b       1b
+2:
+    ldr_addr r2, USER_BASE
+    sub     r3, r3, r2
+    str     r3, [r7]
+    bx      lr
+
+/* Store value 0..999 as exactly three ASCII digits. r0=dst, r1=value. */
+put_decimal_3:
+    mov     r2, #'0'
+3:
+    cmp     r1, #100
+    blo     4f
+    sub     r1, r1, #100
+    add     r2, r2, #1
+    b       3b
+4:
+    strb    r2, [r0], #1
+    mov     r2, #'0'
+5:
+    cmp     r1, #10
+    blo     6f
+    sub     r1, r1, #10
+    add     r2, r2, #1
+    b       5b
+6:
+    strb    r2, [r0], #1
+    add     r1, r1, #'0'
+    strb    r1, [r0]
+    bx      lr

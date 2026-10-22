@@ -1,0 +1,19 @@
+{
+  "emulator": "Unicorn 2.1.4",
+  "stock_loader_rows": 306,
+  "words_per_row": 67,
+  "stock_dimension_getter_pairs": 306,
+  "nonzero_and_zero_overrides_passed": true,
+  "format_enum_conversion": {
+    "7": 0,
+    "8": 1,
+    "9": 3,
+    "10": 4,
+    "11": 2,
+    "65543": 0,
+    "65545": 3,
+    "65546": 4
+  },
+  "writes_checked": "Only destination parameter structure and local stack; firmware mapped read/execute.",
+  "limitations": "Validates local ARM routines, not sensor operation, scaling filters, buffer DMA, recording, or image quality."
+}

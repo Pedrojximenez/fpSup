@@ -1,0 +1,105 @@
+{
+  "schema": "fpSup-known-colour-trial-1",
+  "date_utc": "2026-10-09T06:55:29.883486+00:00",
+  "camera_operations": false,
+  "executed_on_camera": false,
+  "input_space": "ARRI Wide Gamut 3 / LogC3 / Full Range",
+  "output_space": "Rec.709 D65 / Gamma 2.4 / Full Range",
+  "input_is_calibrated_fp_data": false,
+  "native_input_conversion_verified": false,
+  "input_format": "float64 cube-domain RGB; not a camera buffer",
+  "reference": "full original cube, tetrahedral interpolation, strength 1, no output clamp",
+  "source_sha256": "29212a71808ab22f2819b904b3730fa4231b5841d883e43ec17610096dc38879",
+  "sample_count": 14648,
+  "groups": [
+    {
+      "name": "fit_lattice_17",
+      "start": 0,
+      "count": 4913,
+      "role": "fit"
+    },
+    {
+      "name": "holdout_cell_centres_16",
+      "start": 4913,
+      "count": 4096,
+      "role": "holdout"
+    },
+    {
+      "name": "neutral_ramp_513",
+      "start": 9009,
+      "count": 513,
+      "role": "diagnostic"
+    },
+    {
+      "name": "R_ramp_513",
+      "start": 9522,
+      "count": 513,
+      "role": "diagnostic"
+    },
+    {
+      "name": "G_ramp_513",
+      "start": 10035,
+      "count": 513,
+      "role": "diagnostic"
+    },
+    {
+      "name": "B_ramp_513",
+      "start": 10548,
+      "count": 513,
+      "role": "diagnostic"
+    },
+    {
+      "name": "C_ramp_513",
+      "start": 11061,
+      "count": 513,
+      "role": "diagnostic"
+    },
+    {
+      "name": "M_ramp_513",
+      "start": 11574,
+      "count": 513,
+      "role": "diagnostic"
+    },
+    {
+      "name": "Y_ramp_513",
+      "start": 12087,
+      "count": 513,
+      "role": "diagnostic"
+    },
+    {
+      "name": "holdout_random_2048",
+      "start": 12600,
+      "count": 2048,
+      "role": "holdout"
+    }
+  ],
+  "hardware_output_provided": false,
+  "fidelity_measured": false,
+  "holdout_disjoint_from_fit_lattice": true,
+  "before_native_execution": [
+    "verified colour-input conversion",
+    "owned input/output buffers and native job completion",
+    "exact format/stride/bit depth and original state restoration"
+  ],
+  "comparison": [
+    "same input sample ID through stock path",
+    "same input sample ID through native fitted matrix/tone",
+    "same input sample ID through native fit plus CPU residual",
+    "compare against target on separate holdout samples"
+  ],
+  "assets": {
+    "input_rgb_f64.npy": {
+      "bytes": 351680,
+      "sha256": "bc697bc4ab28ed988ba16dedeea2997e791cf7db57283662d6fc83c7cc7ab3a9"
+    },
+    "target_rgb_f64.npy": {
+      "bytes": 351680,
+      "sha256": "e091fad0ee7abffbb5736a7bbb9cfd1475dd128a94113175403d45b0dafbb7f7"
+    },
+    "source.cube": {
+      "bytes": 970314,
+      "sha256": "29212a71808ab22f2819b904b3730fa4231b5841d883e43ec17610096dc38879"
+    }
+  },
+  "generator_sha256": "93f3512bc71aac63404b2eb7d79696b7b9e12ce0ada1f0bdad62d65a1a137ac8"
+}

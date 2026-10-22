@@ -1,0 +1,10 @@
+test_both_load_orders_and_power_off (test_lossless_stopfix.ModuleCompatibilityTests) ... ok
+test_lossless_alone_does_not_claim_or_modify_the_stop_site (test_lossless_stopfix.ModuleCompatibilityTests) ... ok
+test_mutation_reintroducing_stop_claim_is_detected (test_lossless_stopfix.ModuleCompatibilityTests) ... ok
+test_stopfix_repairs_its_own_stale_word (test_lossless_stopfix.ModuleCompatibilityTests) ... ok
+test_unrelated_word_is_not_guarded_written_or_journaled (test_lossless_stopfix.V2IsolationTests) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 10.985s
+
+OK

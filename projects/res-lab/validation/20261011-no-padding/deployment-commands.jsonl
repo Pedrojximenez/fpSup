@@ -1,0 +1,542 @@
+{"time": "2026-10-11T02:31:36.409176", "command": "status get is_recording", "reply": "is_recording -> 0\n\n"}
+{"time": "2026-10-11T02:31:36.409739", "command": "sdcard slot", "reply": "slot now slot = sd0\n\n"}
+{"time": "2026-10-11T02:31:36.413040", "command": "mem get 0xC2F211DC,,4", "reply": "get : A:0xc2f211dc, D:0x00000001\n\n"}
+{"time": "2026-10-11T02:31:36.413574", "command": "mem get 0xC2F20FE8,,4", "reply": "get : A:0xc2f20fe8, D:0xC03DA158\n\n"}
+{"time": "2026-10-11T02:31:36.414230", "command": "mem get 0xC2F211DC,,4", "reply": "get : A:0xc2f211dc, D:0x00000001\n\n"}
+{"time": "2026-10-11T02:31:36.415661", "command": "dir \\", "reply": "                                          .\n2026/10/07  10:20:36 <DIR>                .Spotlight-V100\n2026/10/10  11:59:52 <DIR>                CINEMA\n2026/10/07  20:25:26 <DIR>                fpSup\n2026/10/07  20:26:02                 4096 ._fpSup\n2025/12/31  08:00:00                32768 AutoRun.txt\n2026/10/07  20:26:02                 4096 ._AutoRun.txt\n2026/10/07  15:00:02 <DIR>                .Trashes\n2026/10/10  18:14:18 <DIR>                DCIM\n"}
+{"time": "2026-10-11T02:31:37.525176", "command": "mem get 0xC072F050,,0x4", "reply": "get : A:0xc072f050, D:0x450529C0\n\n"}
+{"time": "2026-10-11T02:31:37.525980", "command": "mem get 0xC072F054,,0x4", "reply": "get : A:0xc072f054, D:0x00100000\n\n"}
+{"time": "2026-10-11T02:31:37.526327", "command": "mem get 0xC072F050,,0x4", "reply": "get : A:0xc072f050, D:0x450529C0\n\n"}
+{"time": "2026-10-11T02:31:37.526679", "command": "mem set 0xC072E43C 0x00000000", "reply": "set : A:0xc072e43c, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:37.527049", "command": "mem set 0xC072E440 0x00000000", "reply": "set : A:0xc072e440, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:37.527566", "command": "mem set 0xC072E444 0x00000000", "reply": "set : A:0xc072e444, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:37.530396", "command": "mem set 0xC072E448 0x00000000", "reply": "set : A:0xc072e448, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:37.530902", "command": "mem set 0xC072E44C 0x00000000", "reply": "set : A:0xc072e44c, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:37.531229", "command": "mem set 0xC072E450 0x00009000", "reply": "set : A:0xc072e450, D:0x00009000 \n\n"}
+{"time": "2026-10-11T02:31:37.533454", "command": "mem set 0xC072E454 0x450629C0", "reply": "set : A:0xc072e454, D:0x450629C0 \n\n"}
+{"time": "2026-10-11T02:31:37.533967", "command": "mem set 0xC072E458 0x00000001", "reply": "set : A:0xc072e458, D:0x00000001 \n\n"}
+{"time": "2026-10-11T02:31:37.534394", "command": "mem set 0xC072E45C 0x7475415C", "reply": "set : A:0xc072e45c, D:0x7475415C \n\n"}
+{"time": "2026-10-11T02:31:37.534742", "command": "mem set 0xC072E460 0x6E75526F", "reply": "set : A:0xc072e460, D:0x6E75526F \n\n"}
+{"time": "2026-10-11T02:31:37.535063", "command": "mem set 0xC072E464 0x7478742E", "reply": "set : A:0xc072e464, D:0x7478742E \n\n"}
+{"time": "2026-10-11T02:31:37.535400", "command": "mem set 0xC072E468 0x00000000", "reply": "set : A:0xc072e468, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:37.570595", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC03D99A0\n\n"}
+{"time": "2026-10-11T02:31:37.602431", "command": "mem set 0xC072E740 0xE92D41F0", "reply": "set : A:0xc072e740, D:0xE92D41F0 \n\n"}
+{"time": "2026-10-11T02:31:37.603014", "command": "mem set 0xC072E744 0xE1A08000", "reply": "set : A:0xc072e744, D:0xE1A08000 \n\n"}
+{"time": "2026-10-11T02:31:37.603411", "command": "mem set 0xC072E748 0xE30E4738", "reply": "set : A:0xc072e748, D:0xE30E4738 \n\n"}
+{"time": "2026-10-11T02:31:37.603748", "command": "mem set 0xC072E74C 0xE34C4072", "reply": "set : A:0xc072e74c, D:0xE34C4072 \n\n"}
+{"time": "2026-10-11T02:31:37.604065", "command": "mem set 0xC072E750 0xE3510001", "reply": "set : A:0xc072e750, D:0xE3510001 \n\n"}
+{"time": "2026-10-11T02:31:37.604357", "command": "mem set 0xC072E754 0xBA000019", "reply": "set : A:0xc072e754, D:0xBA000019 \n\n"}
+{"time": "2026-10-11T02:31:37.604754", "command": "mem set 0xC072E758 0xE5925000", "reply": "set : A:0xc072e758, D:0xE5925000 \n\n"}
+{"time": "2026-10-11T02:31:37.605126", "command": "mem set 0xC072E75C 0xE5946000", "reply": "set : A:0xc072e75c, D:0xE5946000 \n\n"}
+{"time": "2026-10-11T02:31:37.605468", "command": "mem set 0xC072E760 0xE3A07000", "reply": "set : A:0xc072e760, D:0xE3A07000 \n\n"}
+{"time": "2026-10-11T02:31:37.605737", "command": "mem set 0xC072E764 0xE4D50001", "reply": "set : A:0xc072e764, D:0xE4D50001 \n\n"}
+{"time": "2026-10-11T02:31:37.606026", "command": "mem set 0xC072E768 0xE3500000", "reply": "set : A:0xc072e768, D:0xE3500000 \n\n"}
+{"time": "2026-10-11T02:31:37.606346", "command": "mem set 0xC072E76C 0x0A00000D", "reply": "set : A:0xc072e76c, D:0x0A00000D \n\n"}
+{"time": "2026-10-11T02:31:37.606648", "command": "mem set 0xC072E770 0xEB000019", "reply": "set : A:0xc072e770, D:0xEB000019 \n\n"}
+{"time": "2026-10-11T02:31:37.606941", "command": "mem set 0xC072E774 0xE3500000", "reply": "set : A:0xc072e774, D:0xE3500000 \n\n"}
+{"time": "2026-10-11T02:31:37.607352", "command": "mem set 0xC072E778 0xBA00000A", "reply": "set : A:0xc072e778, D:0xBA00000A \n\n"}
+{"time": "2026-10-11T02:31:37.607752", "command": "mem set 0xC072E77C 0xE1A03200", "reply": "set : A:0xc072e77c, D:0xE1A03200 \n\n"}
+{"time": "2026-10-11T02:31:37.608088", "command": "mem set 0xC072E780 0xE4D50001", "reply": "set : A:0xc072e780, D:0xE4D50001 \n\n"}
+{"time": "2026-10-11T02:31:37.608456", "command": "mem set 0xC072E784 0xE3500000", "reply": "set : A:0xc072e784, D:0xE3500000 \n\n"}
+{"time": "2026-10-11T02:31:37.608792", "command": "mem set 0xC072E788 0x0A000006", "reply": "set : A:0xc072e788, D:0x0A000006 \n\n"}
+{"time": "2026-10-11T02:31:37.609055", "command": "mem set 0xC072E78C 0xEB000012", "reply": "set : A:0xc072e78c, D:0xEB000012 \n\n"}
+{"time": "2026-10-11T02:31:37.609364", "command": "mem set 0xC072E790 0xE3500000", "reply": "set : A:0xc072e790, D:0xE3500000 \n\n"}
+{"time": "2026-10-11T02:31:37.609950", "command": "mem set 0xC072E794 0xBA000003", "reply": "set : A:0xc072e794, D:0xBA000003 \n\n"}
+{"time": "2026-10-11T02:31:37.610330", "command": "mem set 0xC072E798 0xE1833000", "reply": "set : A:0xc072e798, D:0xE1833000 \n\n"}
+{"time": "2026-10-11T02:31:37.610651", "command": "mem set 0xC072E79C 0xE4C63001", "reply": "set : A:0xc072e79c, D:0xE4C63001 \n\n"}
+{"time": "2026-10-11T02:31:37.610973", "command": "mem set 0xC072E7A0 0xE2877001", "reply": "set : A:0xc072e7a0, D:0xE2877001 \n\n"}
+{"time": "2026-10-11T02:31:37.614044", "command": "mem set 0xC072E7A4 0xEAFFFFEE", "reply": "set : A:0xc072e7a4, D:0xEAFFFFEE \n\n"}
+{"time": "2026-10-11T02:31:37.614574", "command": "mem set 0xC072E7A8 0xE5846000", "reply": "set : A:0xc072e7a8, D:0xE5846000 \n\n"}
+{"time": "2026-10-11T02:31:37.615013", "command": "mem set 0xC072E7AC 0xE5940004", "reply": "set : A:0xc072e7ac, D:0xE5940004 \n\n"}
+{"time": "2026-10-11T02:31:37.615583", "command": "mem set 0xC072E7B0 0xE0800007", "reply": "set : A:0xc072e7b0, D:0xE0800007 \n\n"}
+{"time": "2026-10-11T02:31:37.616259", "command": "mem set 0xC072E7B4 0xE5840004", "reply": "set : A:0xc072e7b4, D:0xE5840004 \n\n"}
+{"time": "2026-10-11T02:31:37.616696", "command": "mem set 0xC072E7B8 0xE28F1044", "reply": "set : A:0xc072e7b8, D:0xE28F1044 \n\n"}
+{"time": "2026-10-11T02:31:37.617104", "command": "mem set 0xC072E7BC 0xEA000000", "reply": "set : A:0xc072e7bc, D:0xEA000000 \n\n"}
+{"time": "2026-10-11T02:31:37.617475", "command": "mem set 0xC072E7C0 0xE28F1040", "reply": "set : A:0xc072e7c0, D:0xE28F1040 \n\n"}
+{"time": "2026-10-11T02:31:37.617848", "command": "mem set 0xC072E7C4 0xE598C000", "reply": "set : A:0xc072e7c4, D:0xE598C000 \n\n"}
+{"time": "2026-10-11T02:31:37.618224", "command": "mem set 0xC072E7C8 0xE30B0B38", "reply": "set : A:0xc072e7c8, D:0xE30B0B38 \n\n"}
+{"time": "2026-10-11T02:31:37.618649", "command": "mem set 0xC072E7CC 0xE34C00BA", "reply": "set : A:0xc072e7cc, D:0xE34C00BA \n\n"}
+{"time": "2026-10-11T02:31:37.618997", "command": "mem set 0xC072E7D0 0xE12FFF3C", "reply": "set : A:0xc072e7d0, D:0xE12FFF3C \n\n"}
+{"time": "2026-10-11T02:31:37.619331", "command": "mem set 0xC072E7D4 0xE3A00000", "reply": "set : A:0xc072e7d4, D:0xE3A00000 \n\n"}
+{"time": "2026-10-11T02:31:37.619716", "command": "mem set 0xC072E7D8 0xE8BD81F0", "reply": "set : A:0xc072e7d8, D:0xE8BD81F0 \n\n"}
+{"time": "2026-10-11T02:31:37.620060", "command": "mem set 0xC072E7DC 0xE2401030", "reply": "set : A:0xc072e7dc, D:0xE2401030 \n\n"}
+{"time": "2026-10-11T02:31:37.620428", "command": "mem set 0xC072E7E0 0xE351000A", "reply": "set : A:0xc072e7e0, D:0xE351000A \n\n"}
+{"time": "2026-10-11T02:31:37.620807", "command": "mem set 0xC072E7E4 0x31A00001", "reply": "set : A:0xc072e7e4, D:0x31A00001 \n\n"}
+{"time": "2026-10-11T02:31:37.621150", "command": "mem set 0xC072E7E8 0x312FFF1E", "reply": "set : A:0xc072e7e8, D:0x312FFF1E \n\n"}
+{"time": "2026-10-11T02:31:37.621510", "command": "mem set 0xC072E7EC 0xE3C01020", "reply": "set : A:0xc072e7ec, D:0xE3C01020 \n\n"}
+{"time": "2026-10-11T02:31:37.621941", "command": "mem set 0xC072E7F0 0xE2411041", "reply": "set : A:0xc072e7f0, D:0xE2411041 \n\n"}
+{"time": "2026-10-11T02:31:37.622274", "command": "mem set 0xC072E7F4 0xE3510006", "reply": "set : A:0xc072e7f4, D:0xE3510006 \n\n"}
+{"time": "2026-10-11T02:31:37.622607", "command": "mem set 0xC072E7F8 0x3281000A", "reply": "set : A:0xc072e7f8, D:0x3281000A \n\n"}
+{"time": "2026-10-11T02:31:37.622899", "command": "mem set 0xC072E7FC 0x23E00000", "reply": "set : A:0xc072e7fc, D:0x23E00000 \n\n"}
+{"time": "2026-10-11T02:31:37.623290", "command": "mem set 0xC072E800 0xE12FFF1E", "reply": "set : A:0xc072e800, D:0xE12FFF1E \n\n"}
+{"time": "2026-10-11T02:31:37.623665", "command": "mem set 0xC072E804 0x00006B6F", "reply": "set : A:0xc072e804, D:0x00006B6F \n\n"}
+{"time": "2026-10-11T02:31:37.624098", "command": "mem set 0xC072E808 0x6B6C7562", "reply": "set : A:0xc072e808, D:0x6B6C7562 \n\n"}
+{"time": "2026-10-11T02:31:37.624695", "command": "mem set 0xC072E80C 0x64616F6C", "reply": "set : A:0xc072e80c, D:0x64616F6C \n\n"}
+{"time": "2026-10-11T02:31:37.625259", "command": "mem set 0xC072E810 0x6F6E203A", "reply": "set : A:0xc072e810, D:0x6F6E203A \n\n"}
+{"time": "2026-10-11T02:31:37.625644", "command": "mem set 0xC072E814 0x74616420", "reply": "set : A:0xc072e814, D:0x74616420 \n\n"}
+{"time": "2026-10-11T02:31:37.626095", "command": "mem set 0xC072E818 0x00000061", "reply": "set : A:0xc072e818, D:0x00000061 \n\n"}
+{"time": "2026-10-11T02:31:37.627654", "command": "mem get 0xC072E740,,0xDC", "reply": "get : A:0xc072e740, D:0xE92D41F0\nget : A:0xc072e744, D:0xE1A08000\nget : A:0xc072e748, D:0xE30E4738\nget : A:0xc072e74c, D:0xE34C4072\nget : A:0xc072e750, D:0xE3510001\nget : A:0xc072e754, D:0xBA000019\nget : A:0xc072e758, D:0xE5925000\nget : A:0xc072e75c, D:0xE5946000\nget : A:0xc072e760, D:0xE3A07000\nget : A:0xc072e764, D:0xE4D50001\nget : A:0xc072e768, D:0xE3500000\nget : A:0xc072e76c, D:0x0A00000D\nget : A:0xc072e770, D:0xEB000019\nget : A:0xc072e774, D:0xE3500000\nget : A:0xc072e778, D:0xBA00000A\nget : A:0xc072e77c, D:0xE1A03200\nget : A:0xc072e780, D:0xE4D50001\nget : A:0xc072e784, D:0xE3500000\nget : A:0xc072e788, D:0x0A000006\nget : A:0xc072e78c, D:0xEB000012\nget : A:0xc072e790, D:0xE3500000\nget : A:0xc072e794, D:0xBA000003\nget : A:0xc072e798, D:0xE1833000\nget : A:0xc072e79c, D:0xE4C63001\nget : A:0xc072e7a0, D:0xE2877001\nget : A:0xc072e7a4, D:0xEAFFFFEE\nget : A:0xc072e7a8, D:0xE5846000\nget : A:0xc072e7ac, D:0xE5940004\nget : A:0xc072e7b0, D:0xE0800007\nget : A:0xc072e7b4, D:0xE5840004\nget : A:0xc072e7b8, D:0xE28F1044\nget : A:0xc072e7bc, D:0xEA000000\nget : A:0xc072e7c0, D:0xE28F1040\nget : A:0xc072e7c4, D:0xE598C000\nget : A:0xc072e7c8, D:0xE30B0B38\nget : A:0xc072e7cc, D:0xE34C00BA\nget : A:0xc072e7d0, D:0xE12FFF3C\nget : A:0xc072e7d4, D:0xE3A00000\nget : A:0xc072e7d8, D:0xE8BD81F0\nget : A:0xc072e7dc, D:0xE2401030\nget : A:0xc072e7e0, D:0xE351000A\nget : A:0xc072e7e4, D:0x31A00001\nget : A:0xc072e7e8, D:0x312FFF1E\nget : A:0xc072e7ec, D:0xE3C01020\nget : A:0xc072e7f0, D:0xE2411041\nget : A:0xc072e7f4, D:0xE3510006\nget : A:0xc072e7f8, D:0x3281000A\nget : A:0xc072e7fc, D:0x23E00000\nget : A:0xc072e800, D:0xE12FFF1E\nget : A:0xc072e804, D:0x00006B6F\nget : A:0xc072e808, D:0x6B6C7562\nget : A:0xc072e80c, D:0x64616F6C\nget : A:0xc072e810, D:0x6F6E203A\nget : A:0xc072e814, D:0x74616420\nget : A:0xc072e818, D:0x00000061\n"}
+{"time": "2026-10-11T02:31:37.631045", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC03D99A0\n\n"}
+{"time": "2026-10-11T02:31:37.631559", "command": "mem set 0xC0BAC2F8 0xC072E740", "reply": "set : A:0xc0bac2f8, D:0xC072E740 \n\n"}
+{"time": "2026-10-11T02:31:37.632201", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC072E740\n\n"}
+{"time": "2026-10-11T02:31:37.632793", "command": "mem set 0xC072E738 0xC072E538", "reply": "set : A:0xc072e738, D:0xC072E538 \n\n"}
+{"time": "2026-10-11T02:31:37.633368", "command": "mem set 0xC072E73C 0x00000000", "reply": "set : A:0xc072e73c, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:37.635150", "command": "mem get 0xC072E738,,0x8", "reply": "get : A:0xc072e738, D:0xC072E538\nget : A:0xc072e73c, D:0x00000000\n\n"}
+{"time": "2026-10-11T02:31:37.635984", "command": "echo f0412de90080a0e138440ee372404ce30100a0e3080084e50000a0e3040084e5140094e5000050e31600001ae05084e20000a0e3000085e5040085e5080085e50c0085e50500a0e10a10a0e3182094e50030a0e340c70de301c04ce33cff2fe10500a0e1f0c70de301c04ce33cff2fe1140084e5000050e30200001a0500a0e3080084e5330000ea58c604e344c04ce33cff2fe10010a0e398c604e344c04ce33cff2fe10010a0e11c0094e590ce05e336c04ce33cff2fe11c0094e5241084e2202094e5b0cf05e336c04ce33cff2fe10c0084e5000050e30300a003080084050f00000a1c0094e5141094e5182094e5", "reply": "ok \n"}
+{"time": "2026-10-11T02:31:37.636579", "command": "echo 043084e260c006e336c04ce33cff2fe1100084e5000050e30460a0030260a013086084e51c0094e520c006e336c04ce33cff2fe11c0094e50210a0e3d0ce05e336c04ce33cff2fe1080094e5020050e318108f0224108f1200c098e5380b0be3ba004ce33cff2fe10000a0e3f081bde867657466696c653a207265616400000067657466696c653a204641494c45442c20726561642073746174757320617420307843303732463730380000", "reply": "ok \n"}
+{"time": "2026-10-11T02:31:37.637062", "command": "mem get 0xC072E738,,0x8", "reply": "get : A:0xc072e738, D:0xC072E6D4\nget : A:0xc072e73c, D:0x0000019C\n\n"}
+{"time": "2026-10-11T02:31:37.637670", "command": "mem set 0xC0BAC2F8 0xC03D99A0", "reply": "set : A:0xc0bac2f8, D:0xC03D99A0 \n\n"}
+{"time": "2026-10-11T02:31:37.638096", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC03D99A0\n\n"}
+{"time": "2026-10-11T02:31:37.670696", "command": "mem set 0xC072E840 0xE92D41F0", "reply": "set : A:0xc072e840, D:0xE92D41F0 \n\n"}
+{"time": "2026-10-11T02:31:37.671199", "command": "mem set 0xC072E844 0xE3510002", "reply": "set : A:0xc072e844, D:0xE3510002 \n\n"}
+{"time": "2026-10-11T02:31:37.671618", "command": "mem set 0xC072E848 0x3A000008", "reply": "set : A:0xc072e848, D:0x3A000008 \n\n"}
+{"time": "2026-10-11T02:31:37.672020", "command": "mem set 0xC072E84C 0xE1A04002", "reply": "set : A:0xc072e84c, D:0xE1A04002 \n\n"}
+{"time": "2026-10-11T02:31:37.672410", "command": "mem set 0xC072E850 0xE5940000", "reply": "set : A:0xc072e850, D:0xE5940000 \n\n"}
+{"time": "2026-10-11T02:31:37.673066", "command": "mem set 0xC072E854 0xEB000023", "reply": "set : A:0xc072e854, D:0xEB000023 \n\n"}
+{"time": "2026-10-11T02:31:37.673488", "command": "mem set 0xC072E858 0xE1A05000", "reply": "set : A:0xc072e858, D:0xE1A05000 \n\n"}
+{"time": "2026-10-11T02:31:37.673779", "command": "mem set 0xC072E85C 0xE5940004", "reply": "set : A:0xc072e85c, D:0xE5940004 \n\n"}
+{"time": "2026-10-11T02:31:37.674156", "command": "mem set 0xC072E860 0xEB000020", "reply": "set : A:0xc072e860, D:0xEB000020 \n\n"}
+{"time": "2026-10-11T02:31:37.674899", "command": "mem set 0xC072E864 0xE1A06000", "reply": "set : A:0xc072e864, D:0xE1A06000 \n\n"}
+{"time": "2026-10-11T02:31:37.675274", "command": "mem set 0xC072E868 0xE3A04000", "reply": "set : A:0xc072e868, D:0xE3A04000 \n\n"}
+{"time": "2026-10-11T02:31:37.675575", "command": "mem set 0xC072E86C 0xEA000003", "reply": "set : A:0xc072e86c, D:0xEA000003 \n\n"}
+{"time": "2026-10-11T02:31:37.675847", "command": "mem set 0xC072E870 0xE30E4438", "reply": "set : A:0xc072e870, D:0xE30E4438 \n\n"}
+{"time": "2026-10-11T02:31:37.676154", "command": "mem set 0xC072E874 0xE34C4072", "reply": "set : A:0xc072e874, D:0xE34C4072 \n\n"}
+{"time": "2026-10-11T02:31:37.676452", "command": "mem set 0xC072E878 0xE5945000", "reply": "set : A:0xc072e878, D:0xE5945000 \n\n"}
+{"time": "2026-10-11T02:31:37.676872", "command": "mem set 0xC072E87C 0xE5946004", "reply": "set : A:0xc072e87c, D:0xE5946004 \n\n"}
+{"time": "2026-10-11T02:31:37.677174", "command": "mem set 0xC072E880 0xE3040000", "reply": "set : A:0xc072e880, D:0xE3040000 \n\n"}
+{"time": "2026-10-11T02:31:37.677455", "command": "mem set 0xC072E884 0xE1560000", "reply": "set : A:0xc072e884, D:0xE1560000 \n\n"}
+{"time": "2026-10-11T02:31:37.677713", "command": "mem set 0xC072E888 0x81A06000", "reply": "set : A:0xc072e888, D:0x81A06000 \n\n"}
+{"time": "2026-10-11T02:31:37.681240", "command": "mem set 0xC072E88C 0xE30F0050", "reply": "set : A:0xc072e88c, D:0xE30F0050 \n\n"}
+{"time": "2026-10-11T02:31:37.681800", "command": "mem set 0xC072E890 0xE34C0072", "reply": "set : A:0xc072e890, D:0xE34C0072 \n\n"}
+{"time": "2026-10-11T02:31:37.786880", "command": "mem set 0xC072E894 0xE5907000", "reply": "set : A:0xc072e894, D:0xE5907000 \n\n"}
+{"time": "2026-10-11T02:31:37.787473", "command": "mem set 0xC072E898 0xE3020000", "reply": "set : A:0xc072e898, D:0xE3020000 \n\n"}
+{"time": "2026-10-11T02:31:37.788101", "command": "mem set 0xC072E89C 0xE0877000", "reply": "set : A:0xc072e89c, D:0xE0877000 \n\n"}
+{"time": "2026-10-11T02:31:37.788639", "command": "mem set 0xC072E8A0 0xE3A00000", "reply": "set : A:0xc072e8a0, D:0xE3A00000 \n\n"}
+{"time": "2026-10-11T02:31:37.789023", "command": "mem set 0xC072E8A4 0xE1500006", "reply": "set : A:0xc072e8a4, D:0xE1500006 \n\n"}
+{"time": "2026-10-11T02:31:37.789434", "command": "mem set 0xC072E8A8 0x2A000003", "reply": "set : A:0xc072e8a8, D:0x2A000003 \n\n"}
+{"time": "2026-10-11T02:31:37.789737", "command": "mem set 0xC072E8AC 0xE7D58000", "reply": "set : A:0xc072e8ac, D:0xE7D58000 \n\n"}
+{"time": "2026-10-11T02:31:37.790083", "command": "mem set 0xC072E8B0 0xE7C78000", "reply": "set : A:0xc072e8b0, D:0xE7C78000 \n\n"}
+{"time": "2026-10-11T02:31:37.790495", "command": "mem set 0xC072E8B4 0xE2800001", "reply": "set : A:0xc072e8b4, D:0xE2800001 \n\n"}
+{"time": "2026-10-11T02:31:37.791013", "command": "mem set 0xC072E8B8 0xEAFFFFF9", "reply": "set : A:0xc072e8b8, D:0xEAFFFFF9 \n\n"}
+{"time": "2026-10-11T02:31:37.791442", "command": "mem set 0xC072E8BC 0xE7875006", "reply": "set : A:0xc072e8bc, D:0xE7875006 \n\n"}
+{"time": "2026-10-11T02:31:37.791757", "command": "mem set 0xC072E8C0 0xE2866004", "reply": "set : A:0xc072e8c0, D:0xE2866004 \n\n"}
+{"time": "2026-10-11T02:31:37.792072", "command": "mem set 0xC072E8C4 0xE30F0040", "reply": "set : A:0xc072e8c4, D:0xE30F0040 \n\n"}
+{"time": "2026-10-11T02:31:37.792364", "command": "mem set 0xC072E8C8 0xE34C0072", "reply": "set : A:0xc072e8c8, D:0xE34C0072 \n\n"}
+{"time": "2026-10-11T02:31:37.792713", "command": "mem set 0xC072E8CC 0xE5806000", "reply": "set : A:0xc072e8cc, D:0xE5806000 \n\n"}
+{"time": "2026-10-11T02:31:37.793042", "command": "mem set 0xC072E8D0 0xE2466004", "reply": "set : A:0xc072e8d0, D:0xE2466004 \n\n"}
+{"time": "2026-10-11T02:31:37.793357", "command": "mem set 0xC072E8D4 0xE3540000", "reply": "set : A:0xc072e8d4, D:0xE3540000 \n\n"}
+{"time": "2026-10-11T02:31:37.793642", "command": "mem set 0xC072E8D8 0x10855006", "reply": "set : A:0xc072e8d8, D:0x10855006 \n\n"}
+{"time": "2026-10-11T02:31:37.793914", "command": "mem set 0xC072E8DC 0x15845000", "reply": "set : A:0xc072e8dc, D:0x15845000 \n\n"}
+{"time": "2026-10-11T02:31:37.794218", "command": "mem set 0xC072E8E0 0xE3A00000", "reply": "set : A:0xc072e8e0, D:0xE3A00000 \n\n"}
+{"time": "2026-10-11T02:31:37.794484", "command": "mem set 0xC072E8E4 0xE8BD81F0", "reply": "set : A:0xc072e8e4, D:0xE8BD81F0 \n\n"}
+{"time": "2026-10-11T02:31:37.797390", "command": "mem set 0xC072E8E8 0xE3A01000", "reply": "set : A:0xc072e8e8, D:0xE3A01000 \n\n"}
+{"time": "2026-10-11T02:31:37.797797", "command": "mem set 0xC072E8EC 0xE4D02001", "reply": "set : A:0xc072e8ec, D:0xE4D02001 \n\n"}
+{"time": "2026-10-11T02:31:37.798097", "command": "mem set 0xC072E8F0 0xE2423030", "reply": "set : A:0xc072e8f0, D:0xE2423030 \n\n"}
+{"time": "2026-10-11T02:31:37.798364", "command": "mem set 0xC072E8F4 0xE3530009", "reply": "set : A:0xc072e8f4, D:0xE3530009 \n\n"}
+{"time": "2026-10-11T02:31:37.798995", "command": "mem set 0xC072E8F8 0x9A000004", "reply": "set : A:0xc072e8f8, D:0x9A000004 \n\n"}
+{"time": "2026-10-11T02:31:37.799367", "command": "mem set 0xC072E8FC 0xE3822020", "reply": "set : A:0xc072e8fc, D:0xE3822020 \n\n"}
+{"time": "2026-10-11T02:31:37.800249", "command": "mem set 0xC072E900 0xE2423061", "reply": "set : A:0xc072e900, D:0xE2423061 \n\n"}
+{"time": "2026-10-11T02:31:37.801508", "command": "mem set 0xC072E904 0xE3530005", "reply": "set : A:0xc072e904, D:0xE3530005 \n\n"}
+{"time": "2026-10-11T02:31:37.802125", "command": "mem set 0xC072E908 0x8A000003", "reply": "set : A:0xc072e908, D:0x8A000003 \n\n"}
+{"time": "2026-10-11T02:31:37.802695", "command": "mem set 0xC072E90C 0xE283300A", "reply": "set : A:0xc072e90c, D:0xE283300A \n\n"}
+{"time": "2026-10-11T02:31:37.803289", "command": "mem set 0xC072E910 0xE1A01201", "reply": "set : A:0xc072e910, D:0xE1A01201 \n\n"}
+{"time": "2026-10-11T02:31:37.803660", "command": "mem set 0xC072E914 0xE0811003", "reply": "set : A:0xc072e914, D:0xE0811003 \n\n"}
+{"time": "2026-10-11T02:31:37.804141", "command": "mem set 0xC072E918 0xEAFFFFF3", "reply": "set : A:0xc072e918, D:0xEAFFFFF3 \n\n"}
+{"time": "2026-10-11T02:31:37.804440", "command": "mem set 0xC072E91C 0xE1A00001", "reply": "set : A:0xc072e91c, D:0xE1A00001 \n\n"}
+{"time": "2026-10-11T02:31:37.804912", "command": "mem set 0xC072E920 0xE12FFF1E", "reply": "set : A:0xc072e920, D:0xE12FFF1E \n\n"}
+{"time": "2026-10-11T02:31:37.806153", "command": "mem get 0xC072E840,,0xE4", "reply": "get : A:0xc072e840, D:0xE92D41F0\nget : A:0xc072e844, D:0xE3510002\nget : A:0xc072e848, D:0x3A000008\nget : A:0xc072e84c, D:0xE1A04002\nget : A:0xc072e850, D:0xE5940000\nget : A:0xc072e854, D:0xEB000023\nget : A:0xc072e858, D:0xE1A05000\nget : A:0xc072e85c, D:0xE5940004\nget : A:0xc072e860, D:0xEB000020\nget : A:0xc072e864, D:0xE1A06000\nget : A:0xc072e868, D:0xE3A04000\nget : A:0xc072e86c, D:0xEA000003\nget : A:0xc072e870, D:0xE30E4438\nget : A:0xc072e874, D:0xE34C4072\nget : A:0xc072e878, D:0xE5945000\nget : A:0xc072e87c, D:0xE5946004\nget : A:0xc072e880, D:0xE3040000\nget : A:0xc072e884, D:0xE1560000\nget : A:0xc072e888, D:0x81A06000\nget : A:0xc072e88c, D:0xE30F0050\nget : A:0xc072e890, D:0xE34C0072\nget : A:0xc072e894, D:0xE5907000\nget : A:0xc072e898, D:0xE3020000\nget : A:0xc072e89c, D:0xE0877000\nget : A:0xc072e8a0, D:0xE3A00000\nget : A:0xc072e8a4, D:0xE1500006\nget : A:0xc072e8a8, D:0x2A000003\nget : A:0xc072e8ac, D:0xE7D58000\nget : A:0xc072e8b0, D:0xE7C78000\nget : A:0xc072e8b4, D:0xE2800001\nget : A:0xc072e8b8, D:0xEAFFFFF9\nget : A:0xc072e8bc, D:0xE7875006\nget : A:0xc072e8c0, D:0xE2866004\nget : A:0xc072e8c4, D:0xE30F0040\nget : A:0xc072e8c8, D:0xE34C0072\nget : A:0xc072e8cc, D:0xE5806000\nget : A:0xc072e8d0, D:0xE2466004\nget : A:0xc072e8d4, D:0xE3540000\nget : A:0xc072e8d8, D:0x10855006\nget : A:0xc072e8dc, D:0x15845000\nget : A:0xc072e8e0, D:0xE3A00000\nget : A:0xc072e8e4, D:0xE8BD81F0\nget : A:0xc072e8e8, D:0xE3A01000\nget : A:0xc072e8ec, D:0xE4D02001\nget : A:0xc072e8f0, D:0xE2423030\nget : A:0xc072e8f4, D:0xE3530009\nget : A:0xc072e8f8, D:0x9A000004\nget : A:0xc072e8fc, D:0xE3822020\nget : A:0xc072e900, D:0xE2423061\nget : A:0xc072e904, D:0xE3530005\nget : A:0xc072e908, D:0x8A000003\nget : A:0xc072e90c, D:0xE283300A\nget : A:0xc072e910, D:0xE1A01201\nget : A:0xc072e914, D:0xE0811003\nget : A:0xc072e918, D:0xEAFFFFF3\nget : A:0xc072e91c, D:0xE1A00001\nget : A:0xc072e920, D:0xE12FFF1E\n"}
+{"time": "2026-10-11T02:31:37.806573", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC03D99A0\n\n"}
+{"time": "2026-10-11T02:31:37.806867", "command": "mem set 0xC0BAC2F8 0xC072E840", "reply": "set : A:0xc0bac2f8, D:0xC072E840 \n\n"}
+{"time": "2026-10-11T02:31:37.807123", "command": "echo C072E538 19C", "reply": "\u00f0A-\u00e9\u0000\u0080\u00a0\u00e18D\u000e\u00e3r@L\u00e3\u0001\u0000\u00a0\u00e3\b\u0000\u0084\u00e5\u0000\u0000\u00a0\u00e3\u0004\u0000\u0084\u00e5\u0014\u0000\u0094\u00e5\u0000\u0000P\u00e3\u0016\u0000\u0000\u001a\u00e0P\u0084\u00e2\u0000\u0000\u00a0\u00e3\u0000\u0000\u0085\u00e5\u0004\u0000\u0085\u00e5\b\u0000\u0085\u00e5\f\u0000\u0085\u00e5\u0005\u0000\u00a0\u00e1\n\u0010\u00a0\u00e3\u0018 \u0094\u00e5\u00000\u00a0\u00e3@\u00c7\r\u00e3\u0001\u00c0L\u00e3<\u00ff/\u00e1\u0005\u0000\u00a0\u00e1\u00f0\u00c7\r\u00e3\u0001\u00c0L\u00e3<\u00ff/\u00e1\u0014\u0000\u0084\u00e5\u0000\u0000P\u00e3\u0002\u0000\u0000\u001a\u0005\u0000\u00a0\u00e3\b\u0000\u0084\u00e53\u0000\u0000\u00eaX\u00c6\u0004\u00e3D\u00c0L\u00e3<\u00ff/\u00e1\u0000\u0010\u00a0\u00e3\u0098\u00c6\u0004\u00e3D\u00c0L\u00e3<\u00ff/\u00e1\u0000\u0010\u00a0\u00e1\u001c\u0000\u0094\u00e5\u0090\u00ce\u0005\u00e36\u00c0L\u00e3<\u00ff/\u00e1\u001c\u0000\u0094\u00e5$\u0010\u0084\u00e2  \u0094\u00e5\u00b0\u00cf\u0005\u00e36\u00c0L\u00e3<\u00ff/\u00e1\f\u0000\u0084\u00e5\u0000\u0000P\u00e3\u0003\u0000\u00a0\u0003\b\u0000\u0084\u0005\u000f\u0000\u0000\n\u001c\u0000\u0094\u00e5\u0014\u0010\u0094\u00e5\u0018 \u0094\u00e5\u00040\u0084\u00e2`\u00c0\u0006\u00e36\u00c0L\u00e3<\u00ff/\u00e1\u0010\u0000\u0084\u00e5\u0000\u0000P\u00e3\u0004`\u00a0\u0003\u0002`\u00a0\u0013\b`\u0084\u00e5\u001c\u0000\u0094\u00e5 \u00c0\u0006\u00e36\u00c0L\u00e3<\u00ff/\u00e1\u001c\u0000\u0094\u00e5\u0002\u0010\u00a0\u00e3\u00d0\u00ce\u0005\u00e36\u00c0L\u00e3<\u00ff/\u00e1\b\u0000\u0094\u00e5\u0002\u0000P\u00e3\u0018\u0010\u008f\u0002$\u0010\u008f\u0012\u0000\u00c0\u0098\u00e58\u000b\u000b\u00e3\u00ba\u0000L\u00e3<\u00ff/\u00e1\u0000\u0000\u00a0\u00e3\u00f0\u0081\u00bd\u00e8getfile: read\u0000\u0000\u0000getfile: FAILED, read status at 0xC072F708\u0000\u00008\u00e5r\u00c0"}
+{"time": "2026-10-11T02:31:37.807623", "command": "mem set 0xC0BAC2F8 0xC03D99A0", "reply": "set : A:0xc0bac2f8, D:0xC03D99A0 \n\n"}
+{"time": "2026-10-11T02:31:37.807963", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC03D99A0\n\n"}
+{"time": "2026-10-11T02:31:37.808292", "command": "mem set 0xC0BAC2F8 0xC072E538", "reply": "set : A:0xc0bac2f8, D:0xC072E538 \n\n"}
+{"time": "2026-10-11T02:31:37.808687", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC072E538\n\n"}
+{"time": "2026-10-11T02:31:37.814404", "command": "echo", "reply": "getfile: read \n"}
+{"time": "2026-10-11T02:31:37.814837", "command": "mem set 0xC0BAC2F8 0xC03D99A0", "reply": "set : A:0xc0bac2f8, D:0xC03D99A0 \n\n"}
+{"time": "2026-10-11T02:31:37.815149", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC03D99A0\n\n"}
+{"time": "2026-10-11T02:31:37.815679", "command": "mem get 0xC072E44C,,0x4", "reply": "get : A:0xc072e44c, D:0x5F900980\n\n"}
+{"time": "2026-10-11T02:31:37.816250", "command": "mem get 0xC072E438,,0x14", "reply": "get : A:0xc072e438, D:0x00000000\nget : A:0xc072e43c, D:0x00008000\nget : A:0xc072e440, D:0x00000002\nget : A:0xc072e444, D:0x00000001\nget : A:0xc072e448, D:0x00000001\n"}
+{"time": "2026-10-11T02:31:37.865312", "command": "mem set 0xC072E538 0xE92D4FF8", "reply": "set : A:0xc072e538, D:0xE92D4FF8 \n\n"}
+{"time": "2026-10-11T02:31:37.865870", "command": "mem set 0xC072E53C 0xE1A08000", "reply": "set : A:0xc072e53c, D:0xE1A08000 \n\n"}
+{"time": "2026-10-11T02:31:37.866415", "command": "mem set 0xC072E540 0xE30E4438", "reply": "set : A:0xc072e540, D:0xE30E4438 \n\n"}
+{"time": "2026-10-11T02:31:37.867063", "command": "mem set 0xC072E544 0xE34C4072", "reply": "set : A:0xc072e544, D:0xE34C4072 \n\n"}
+{"time": "2026-10-11T02:31:37.867511", "command": "mem set 0xC072E548 0xE3A00000", "reply": "set : A:0xc072e548, D:0xE3A00000 \n\n"}
+{"time": "2026-10-11T02:31:37.868144", "command": "mem set 0xC072E54C 0xE584001C", "reply": "set : A:0xc072e54c, D:0xE584001C \n\n"}
+{"time": "2026-10-11T02:31:37.868585", "command": "mem set 0xC072E550 0xE5949000", "reply": "set : A:0xc072e550, D:0xE5949000 \n\n"}
+{"time": "2026-10-11T02:31:37.869014", "command": "mem set 0xC072E554 0xE5940004", "reply": "set : A:0xc072e554, D:0xE5940004 \n\n"}
+{"time": "2026-10-11T02:31:37.869607", "command": "mem set 0xC072E558 0xE5941008", "reply": "set : A:0xc072e558, D:0xE5941008 \n\n"}
+{"time": "2026-10-11T02:31:37.869996", "command": "mem set 0xC072E55C 0xE594200C", "reply": "set : A:0xc072e55c, D:0xE594200C \n\n"}
+{"time": "2026-10-11T02:31:37.870365", "command": "mem set 0xC072E560 0xE5943010", "reply": "set : A:0xc072e560, D:0xE5943010 \n\n"}
+{"time": "2026-10-11T02:31:37.870699", "command": "mem set 0xC072E564 0xE594A014", "reply": "set : A:0xc072e564, D:0xE594A014 \n\n"}
+{"time": "2026-10-11T02:31:37.871014", "command": "mem set 0xC072E568 0xE5946020", "reply": "set : A:0xc072e568, D:0xE5946020 \n\n"}
+{"time": "2026-10-11T02:31:37.871442", "command": "mem set 0xC072E56C 0xE5947024", "reply": "set : A:0xc072e56c, D:0xE5947024 \n\n"}
+{"time": "2026-10-11T02:31:37.871858", "command": "mem set 0xC072E570 0xE1A04006", "reply": "set : A:0xc072e570, D:0xE1A04006 \n\n"}
+{"time": "2026-10-11T02:31:37.872270", "command": "mem set 0xC072E574 0xE1A05007", "reply": "set : A:0xc072e574, D:0xE1A05007 \n\n"}
+{"time": "2026-10-11T02:31:37.872640", "command": "mem set 0xC072E578 0xE12FFF39", "reply": "set : A:0xc072e578, D:0xE12FFF39 \n\n"}
+{"time": "2026-10-11T02:31:37.873054", "command": "mem set 0xC072E57C 0xE30E4438", "reply": "set : A:0xc072e57c, D:0xE30E4438 \n\n"}
+{"time": "2026-10-11T02:31:37.873381", "command": "mem set 0xC072E580 0xE34C4072", "reply": "set : A:0xc072e580, D:0xE34C4072 \n\n"}
+{"time": "2026-10-11T02:31:37.873705", "command": "mem set 0xC072E584 0xE5840018", "reply": "set : A:0xc072e584, D:0xE5840018 \n\n"}
+{"time": "2026-10-11T02:31:37.873977", "command": "mem set 0xC072E588 0xE3000000", "reply": "set : A:0xc072e588, D:0xE3000000 \n\n"}
+{"time": "2026-10-11T02:31:37.874365", "command": "mem set 0xC072E58C 0xE34D009E", "reply": "set : A:0xc072e58c, D:0xE34D009E \n\n"}
+{"time": "2026-10-11T02:31:37.874711", "command": "mem set 0xC072E590 0xE584001C", "reply": "set : A:0xc072e590, D:0xE584001C \n\n"}
+{"time": "2026-10-11T02:31:37.875010", "command": "mem set 0xC072E594 0xE598C000", "reply": "set : A:0xc072e594, D:0xE598C000 \n\n"}
+{"time": "2026-10-11T02:31:37.875392", "command": "mem set 0xC072E598 0xE30B0B38", "reply": "set : A:0xc072e598, D:0xE30B0B38 \n\n"}
+{"time": "2026-10-11T02:31:37.875682", "command": "mem set 0xC072E59C 0xE34C00BA", "reply": "set : A:0xc072e59c, D:0xE34C00BA \n\n"}
+{"time": "2026-10-11T02:31:37.876008", "command": "mem set 0xC072E5A0 0xE28F1008", "reply": "set : A:0xc072e5a0, D:0xE28F1008 \n\n"}
+{"time": "2026-10-11T02:31:37.876369", "command": "mem set 0xC072E5A4 0xE12FFF3C", "reply": "set : A:0xc072e5a4, D:0xE12FFF3C \n\n"}
+{"time": "2026-10-11T02:31:37.876725", "command": "mem set 0xC072E5A8 0xE3A00000", "reply": "set : A:0xc072e5a8, D:0xE3A00000 \n\n"}
+{"time": "2026-10-11T02:31:37.877067", "command": "mem set 0xC072E5AC 0xE8BD8FF8", "reply": "set : A:0xc072e5ac, D:0xE8BD8FF8 \n\n"}
+{"time": "2026-10-11T02:31:37.877352", "command": "mem set 0xC072E5B0 0x6C6C6163", "reply": "set : A:0xc072e5b0, D:0x6C6C6163 \n\n"}
+{"time": "2026-10-11T02:31:37.877954", "command": "mem set 0xC072E5B4 0x203A6E66", "reply": "set : A:0xc072e5b4, D:0x203A6E66 \n\n"}
+{"time": "2026-10-11T02:31:37.881683", "command": "mem set 0xC072E5B8 0x75746572", "reply": "set : A:0xc072e5b8, D:0x75746572 \n\n"}
+{"time": "2026-10-11T02:31:37.882453", "command": "mem set 0xC072E5BC 0x64656E72", "reply": "set : A:0xc072e5bc, D:0x64656E72 \n\n"}
+{"time": "2026-10-11T02:31:37.883021", "command": "mem set 0xC072E5C0 0xA0000000", "reply": "set : A:0xc072e5c0, D:0xA0000000 \n\n"}
+{"time": "2026-10-11T02:31:37.884140", "command": "mem get 0xC072E538,,0x8C", "reply": "get : A:0xc072e538, D:0xE92D4FF8\nget : A:0xc072e53c, D:0xE1A08000\nget : A:0xc072e540, D:0xE30E4438\nget : A:0xc072e544, D:0xE34C4072\nget : A:0xc072e548, D:0xE3A00000\nget : A:0xc072e54c, D:0xE584001C\nget : A:0xc072e550, D:0xE5949000\nget : A:0xc072e554, D:0xE5940004\nget : A:0xc072e558, D:0xE5941008\nget : A:0xc072e55c, D:0xE594200C\nget : A:0xc072e560, D:0xE5943010\nget : A:0xc072e564, D:0xE594A014\nget : A:0xc072e568, D:0xE5946020\nget : A:0xc072e56c, D:0xE5947024\nget : A:0xc072e570, D:0xE1A04006\nget : A:0xc072e574, D:0xE1A05007\nget : A:0xc072e578, D:0xE12FFF39\nget : A:0xc072e57c, D:0xE30E4438\nget : A:0xc072e580, D:0xE34C4072\nget : A:0xc072e584, D:0xE5840018\nget : A:0xc072e588, D:0xE3000000\nget : A:0xc072e58c, D:0xE34D009E\nget : A:0xc072e590, D:0xE584001C\nget : A:0xc072e594, D:0xE598C000\nget : A:0xc072e598, D:0xE30B0B38\nget : A:0xc072e59c, D:0xE34C00BA\nget : A:0xc072e5a0, D:0xE28F1008\nget : A:0xc072e5a4, D:0xE12FFF3C\nget : A:0xc072e5a8, D:0xE3A00000\nget : A:0xc072e5ac, D:0xE8BD8FF8\nget : A:0xc072e5b0, D:0x6C6C6163\nget : A:0xc072e5b4, D:0x203A6E66\nget : A:0xc072e5b8, D:0x75746572\nget : A:0xc072e5bc, D:0x64656E72\nget : A:0xc072e5c0, D:0xA0000000\n"}
+{"time": "2026-10-11T02:31:37.885607", "command": "mem set 0xC072E438 0xC001D7A0", "reply": "set : A:0xc072e438, D:0xC001D7A0 \n\n"}
+{"time": "2026-10-11T02:31:37.886045", "command": "mem set 0xC072E43C 0xC072E518", "reply": "set : A:0xc072e43c, D:0xC072E518 \n\n"}
+{"time": "2026-10-11T02:31:37.886505", "command": "mem set 0xC072E440 0x00000002", "reply": "set : A:0xc072e440, D:0x00000002 \n\n"}
+{"time": "2026-10-11T02:31:37.886914", "command": "mem set 0xC072E444 0x00000000", "reply": "set : A:0xc072e444, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:37.887389", "command": "mem set 0xC072E448 0x00000000", "reply": "set : A:0xc072e448, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:37.887880", "command": "mem set 0xC072E44C 0x00000000", "reply": "set : A:0xc072e44c, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:37.888687", "command": "mem set 0xC072E450 0x00000000", "reply": "set : A:0xc072e450, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:37.889099", "command": "mem set 0xC072E454 0x00000000", "reply": "set : A:0xc072e454, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:37.889579", "command": "mem set 0xC072E458 0x00000000", "reply": "set : A:0xc072e458, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:37.890009", "command": "mem set 0xC072E45C 0x00000000", "reply": "set : A:0xc072e45c, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:37.890805", "command": "mem get 0xC072E438,,0x28", "reply": "get : A:0xc072e438, D:0xC001D7A0\nget : A:0xc072e43c, D:0xC072E518\nget : A:0xc072e440, D:0x00000002\nget : A:0xc072e444, D:0x00000000\nget : A:0xc072e448, D:0x00000000\nget : A:0xc072e44c, D:0x00000000\nget : A:0xc072e450, D:0x00000000\nget : A:0xc072e454, D:0x00000000\nget : A:0xc072e458, D:0x00000000\nget : A:0xc072e45c, D:0x00000000\n"}
+{"time": "2026-10-11T02:31:37.891524", "command": "mem set 0xC0BAC2F8 0xC072E538", "reply": "set : A:0xc0bac2f8, D:0xC072E538 \n\n"}
+{"time": "2026-10-11T02:31:37.892132", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC072E538\n\n"}
+{"time": "2026-10-11T02:31:37.892629", "command": "echo", "reply": "callfn: returned \n"}
+{"time": "2026-10-11T02:31:37.893114", "command": "mem set 0xC0BAC2F8 0xC03D99A0", "reply": "set : A:0xc0bac2f8, D:0xC03D99A0 \n\n"}
+{"time": "2026-10-11T02:31:37.893540", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC03D99A0\n\n"}
+{"time": "2026-10-11T02:31:37.894071", "command": "mem get 0xC072E450,,0x8", "reply": "get : A:0xc072e450, D:0x00000000\nget : A:0xc072e454, D:0xD09E0000\n\n"}
+{"time": "2026-10-11T02:31:37.898869", "command": "dir \\fpSup", "reply": "                                          .\n2026/10/11  02:10:52               182720 32RESCUS.BIN\n2026/10/07  20:26:02                 4096 ._32RESCUS.BIN\n2026/10/07  20:25:26 <DIR>                UI\n2026/10/07  20:26:02                 4096 ._UI\n2026/10/11  02:10:14                27652 LOADER.BIN\n2026/10/07  20:26:02                 4096 ._LOADER.BIN\n2025/12/31  08:00:00                 4208 20GYR2.BIN\n2026/10/07  20:26:02                 4096 ._20GYR2.BIN\n2026/10/10  21:24:16                38644 45RAWV.BIN\n2026/10/07  20:26:02                 4096 ._45RAWV.BIN\n2026/10/08  13:24:08                25936 40FLIP.BIN\n2026/10/07  20:26:02                 4096 ._40FLIP.BIN\n2026/10/10  09:08:52                70944 10LOSS.BIN\n2026/10/07  20:26:02                 4096 ._10LOSS.BIN\n2025/12/31  08:00:00                 4552 00SHELL.BIN\n2026/10/07  20:26:02                 4096 ._00SHELL.BIN\n2026/10/07  20:25:26 <DIR>                RESCUS\n2026/10/07  20:26:02                 4096 ._RESCUS\n2026/10/11  02:21:34                 4096 LOAD.LOG\n2026/10/11  00:26:28               609720 50RESLAB.BIN\n"}
+{"time": "2026-10-11T02:31:37.900128", "command": "mem get 0xC072F050,,0x4", "reply": "get : A:0xc072f050, D:0x450529C0\n\n"}
+{"time": "2026-10-11T02:31:37.900923", "command": "mem get 0xC072F054,,0x4", "reply": "get : A:0xc072f054, D:0x00100000\n\n"}
+{"time": "2026-10-11T02:31:37.901358", "command": "mem get 0xC072F050,,0x4", "reply": "get : A:0xc072f050, D:0x450529C0\n\n"}
+{"time": "2026-10-11T02:31:37.901744", "command": "mem set 0xC072E43C 0x00000000", "reply": "set : A:0xc072e43c, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:37.902082", "command": "mem set 0xC072E440 0x00000000", "reply": "set : A:0xc072e440, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:37.902434", "command": "mem set 0xC072E444 0x00000000", "reply": "set : A:0xc072e444, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:37.902798", "command": "mem set 0xC072E448 0x00000000", "reply": "set : A:0xc072e448, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:37.903256", "command": "mem set 0xC072E44C 0x00000000", "reply": "set : A:0xc072e44c, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:37.903684", "command": "mem set 0xC072E450 0x00007C04", "reply": "set : A:0xc072e450, D:0x00007C04 \n\n"}
+{"time": "2026-10-11T02:31:37.904064", "command": "mem set 0xC072E454 0x450629C0", "reply": "set : A:0xc072e454, D:0x450629C0 \n\n"}
+{"time": "2026-10-11T02:31:37.904437", "command": "mem set 0xC072E458 0x00000001", "reply": "set : A:0xc072e458, D:0x00000001 \n\n"}
+{"time": "2026-10-11T02:31:37.904882", "command": "mem set 0xC072E45C 0x5370665C", "reply": "set : A:0xc072e45c, D:0x5370665C \n\n"}
+{"time": "2026-10-11T02:31:37.905192", "command": "mem set 0xC072E460 0x4C5C7075", "reply": "set : A:0xc072e460, D:0x4C5C7075 \n\n"}
+{"time": "2026-10-11T02:31:37.905487", "command": "mem set 0xC072E464 0x4544414F", "reply": "set : A:0xc072e464, D:0x4544414F \n\n"}
+{"time": "2026-10-11T02:31:37.905755", "command": "mem set 0xC072E468 0x49422E52", "reply": "set : A:0xc072e468, D:0x49422E52 \n\n"}
+{"time": "2026-10-11T02:31:37.906010", "command": "mem set 0xC072E46C 0x0000004E", "reply": "set : A:0xc072e46c, D:0x0000004E \n\n"}
+{"time": "2026-10-11T02:31:37.938766", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC03D99A0\n\n"}
+{"time": "2026-10-11T02:31:37.939283", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC03D99A0\n\n"}
+{"time": "2026-10-11T02:31:37.940872", "command": "mem set 0xC0BAC2F8 0xC072E740", "reply": "set : A:0xc0bac2f8, D:0xC072E740 \n\n"}
+{"time": "2026-10-11T02:31:37.941409", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC072E740\n\n"}
+{"time": "2026-10-11T02:31:37.941788", "command": "mem set 0xC072E738 0xC072E538", "reply": "set : A:0xc072e738, D:0xC072E538 \n\n"}
+{"time": "2026-10-11T02:31:37.942118", "command": "mem set 0xC072E73C 0x00000000", "reply": "set : A:0xc072e73c, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:37.942453", "command": "mem get 0xC072E738,,0x8", "reply": "get : A:0xc072e738, D:0xC072E538\nget : A:0xc072e73c, D:0x00000000\n\n"}
+{"time": "2026-10-11T02:31:37.943003", "command": "echo f0412de90080a0e138440ee372404ce30100a0e3080084e50000a0e3040084e5140094e5000050e31600001ae05084e20000a0e3000085e5040085e5080085e50c0085e50500a0e10a10a0e3182094e50030a0e340c70de301c04ce33cff2fe10500a0e1f0c70de301c04ce33cff2fe1140084e5000050e30200001a0500a0e3080084e5330000ea58c604e344c04ce33cff2fe10010a0e398c604e344c04ce33cff2fe10010a0e11c0094e590ce05e336c04ce33cff2fe11c0094e5241084e2202094e5b0cf05e336c04ce33cff2fe10c0084e5000050e30300a003080084050f00000a1c0094e5141094e5182094e5", "reply": "ok \n"}
+{"time": "2026-10-11T02:31:37.943503", "command": "echo 043084e260c006e336c04ce33cff2fe1100084e5000050e30460a0030260a013086084e51c0094e520c006e336c04ce33cff2fe11c0094e50210a0e3d0ce05e336c04ce33cff2fe1080094e5020050e318108f0224108f1200c098e5380b0be3ba004ce33cff2fe10000a0e3f081bde867657466696c653a207265616400000067657466696c653a204641494c45442c20726561642073746174757320617420307843303732463730380000", "reply": "ok \n"}
+{"time": "2026-10-11T02:31:37.943925", "command": "mem get 0xC072E738,,0x8", "reply": "get : A:0xc072e738, D:0xC072E6D4\nget : A:0xc072e73c, D:0x0000019C\n\n"}
+{"time": "2026-10-11T02:31:37.944321", "command": "mem set 0xC0BAC2F8 0xC03D99A0", "reply": "set : A:0xc0bac2f8, D:0xC03D99A0 \n\n"}
+{"time": "2026-10-11T02:31:37.944654", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC03D99A0\n\n"}
+{"time": "2026-10-11T02:31:37.947214", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC03D99A0\n\n"}
+{"time": "2026-10-11T02:31:37.947658", "command": "mem set 0xC0BAC2F8 0xC072E840", "reply": "set : A:0xc0bac2f8, D:0xC072E840 \n\n"}
+{"time": "2026-10-11T02:31:37.947982", "command": "echo C072E538 19C", "reply": "\u00f0A-\u00e9\u0000\u0080\u00a0\u00e18D\u000e\u00e3r@L\u00e3\u0001\u0000\u00a0\u00e3\b\u0000\u0084\u00e5\u0000\u0000\u00a0\u00e3\u0004\u0000\u0084\u00e5\u0014\u0000\u0094\u00e5\u0000\u0000P\u00e3\u0016\u0000\u0000\u001a\u00e0P\u0084\u00e2\u0000\u0000\u00a0\u00e3\u0000\u0000\u0085\u00e5\u0004\u0000\u0085\u00e5\b\u0000\u0085\u00e5\f\u0000\u0085\u00e5\u0005\u0000\u00a0\u00e1\n\u0010\u00a0\u00e3\u0018 \u0094\u00e5\u00000\u00a0\u00e3@\u00c7\r\u00e3\u0001\u00c0L\u00e3<\u00ff/\u00e1\u0005\u0000\u00a0\u00e1\u00f0\u00c7\r\u00e3\u0001\u00c0L\u00e3<\u00ff/\u00e1\u0014\u0000\u0084\u00e5\u0000\u0000P\u00e3\u0002\u0000\u0000\u001a\u0005\u0000\u00a0\u00e3\b\u0000\u0084\u00e53\u0000\u0000\u00eaX\u00c6\u0004\u00e3D\u00c0L\u00e3<\u00ff/\u00e1\u0000\u0010\u00a0\u00e3\u0098\u00c6\u0004\u00e3D\u00c0L\u00e3<\u00ff/\u00e1\u0000\u0010\u00a0\u00e1\u001c\u0000\u0094\u00e5\u0090\u00ce\u0005\u00e36\u00c0L\u00e3<\u00ff/\u00e1\u001c\u0000\u0094\u00e5$\u0010\u0084\u00e2  \u0094\u00e5\u00b0\u00cf\u0005\u00e36\u00c0L\u00e3<\u00ff/\u00e1\f\u0000\u0084\u00e5\u0000\u0000P\u00e3\u0003\u0000\u00a0\u0003\b\u0000\u0084\u0005\u000f\u0000\u0000\n\u001c\u0000\u0094\u00e5\u0014\u0010\u0094\u00e5\u0018 \u0094\u00e5\u00040\u0084\u00e2`\u00c0\u0006\u00e36\u00c0L\u00e3<\u00ff/\u00e1\u0010\u0000\u0084\u00e5\u0000\u0000P\u00e3\u0004`\u00a0\u0003\u0002`\u00a0\u0013\b`\u0084\u00e5\u001c\u0000\u0094\u00e5 \u00c0\u0006\u00e36\u00c0L\u00e3<\u00ff/\u00e1\u001c\u0000\u0094\u00e5\u0002\u0010\u00a0\u00e3\u00d0\u00ce\u0005\u00e36\u00c0L\u00e3<\u00ff/\u00e1\b\u0000\u0094\u00e5\u0002\u0000P\u00e3\u0018\u0010\u008f\u0002$\u0010\u008f\u0012\u0000\u00c0\u0098\u00e58\u000b\u000b\u00e3\u00ba\u0000L\u00e3<\u00ff/\u00e1\u0000\u0000\u00a0\u00e3\u00f0\u0081\u00bd\u00e8getfile: read\u0000\u0000\u0000getfile: FAILED, read status at 0xC072F708\u0000\u00008\u00e5r\u00c0"}
+{"time": "2026-10-11T02:31:37.948369", "command": "mem set 0xC0BAC2F8 0xC03D99A0", "reply": "set : A:0xc0bac2f8, D:0xC03D99A0 \n\n"}
+{"time": "2026-10-11T02:31:37.949021", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC03D99A0\n\n"}
+{"time": "2026-10-11T02:31:37.949467", "command": "mem set 0xC0BAC2F8 0xC072E538", "reply": "set : A:0xc0bac2f8, D:0xC072E538 \n\n"}
+{"time": "2026-10-11T02:31:37.949891", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC072E538\n\n"}
+{"time": "2026-10-11T02:31:37.954683", "command": "echo", "reply": "getfile: read \n"}
+{"time": "2026-10-11T02:31:37.955122", "command": "mem set 0xC0BAC2F8 0xC03D99A0", "reply": "set : A:0xc0bac2f8, D:0xC03D99A0 \n\n"}
+{"time": "2026-10-11T02:31:37.955407", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC03D99A0\n\n"}
+{"time": "2026-10-11T02:31:37.955718", "command": "mem get 0xC072E44C,,0x4", "reply": "get : A:0xc072e44c, D:0x5F900980\n\n"}
+{"time": "2026-10-11T02:31:37.956097", "command": "mem get 0xC072E438,,0x14", "reply": "get : A:0xc072e438, D:0xC001D7A0\nget : A:0xc072e43c, D:0x00006C04\nget : A:0xc072e440, D:0x00000002\nget : A:0xc072e444, D:0x00000001\nget : A:0xc072e448, D:0x00000001\n"}
+{"time": "2026-10-11T02:31:37.997440", "command": "mem set 0xC072E538 0xE92D4FF8", "reply": "set : A:0xc072e538, D:0xE92D4FF8 \n\n"}
+{"time": "2026-10-11T02:31:37.997925", "command": "mem set 0xC072E53C 0xE1A08000", "reply": "set : A:0xc072e53c, D:0xE1A08000 \n\n"}
+{"time": "2026-10-11T02:31:37.998216", "command": "mem set 0xC072E540 0xE30E4438", "reply": "set : A:0xc072e540, D:0xE30E4438 \n\n"}
+{"time": "2026-10-11T02:31:37.998513", "command": "mem set 0xC072E544 0xE34C4072", "reply": "set : A:0xc072e544, D:0xE34C4072 \n\n"}
+{"time": "2026-10-11T02:31:37.999205", "command": "mem set 0xC072E548 0xE3A00000", "reply": "set : A:0xc072e548, D:0xE3A00000 \n\n"}
+{"time": "2026-10-11T02:31:37.999896", "command": "mem set 0xC072E54C 0xE584001C", "reply": "set : A:0xc072e54c, D:0xE584001C \n\n"}
+{"time": "2026-10-11T02:31:38.000260", "command": "mem set 0xC072E550 0xE5949000", "reply": "set : A:0xc072e550, D:0xE5949000 \n\n"}
+{"time": "2026-10-11T02:31:38.000950", "command": "mem set 0xC072E554 0xE5940004", "reply": "set : A:0xc072e554, D:0xE5940004 \n\n"}
+{"time": "2026-10-11T02:31:38.001423", "command": "mem set 0xC072E558 0xE5941008", "reply": "set : A:0xc072e558, D:0xE5941008 \n\n"}
+{"time": "2026-10-11T02:31:38.001864", "command": "mem set 0xC072E55C 0xE594200C", "reply": "set : A:0xc072e55c, D:0xE594200C \n\n"}
+{"time": "2026-10-11T02:31:38.002359", "command": "mem set 0xC072E560 0xE5943010", "reply": "set : A:0xc072e560, D:0xE5943010 \n\n"}
+{"time": "2026-10-11T02:31:38.002725", "command": "mem set 0xC072E564 0xE594A014", "reply": "set : A:0xc072e564, D:0xE594A014 \n\n"}
+{"time": "2026-10-11T02:31:38.003065", "command": "mem set 0xC072E568 0xE5946020", "reply": "set : A:0xc072e568, D:0xE5946020 \n\n"}
+{"time": "2026-10-11T02:31:38.003524", "command": "mem set 0xC072E56C 0xE5947024", "reply": "set : A:0xc072e56c, D:0xE5947024 \n\n"}
+{"time": "2026-10-11T02:31:38.003882", "command": "mem set 0xC072E570 0xE1A04006", "reply": "set : A:0xc072e570, D:0xE1A04006 \n\n"}
+{"time": "2026-10-11T02:31:38.004236", "command": "mem set 0xC072E574 0xE1A05007", "reply": "set : A:0xc072e574, D:0xE1A05007 \n\n"}
+{"time": "2026-10-11T02:31:38.004522", "command": "mem set 0xC072E578 0xE12FFF39", "reply": "set : A:0xc072e578, D:0xE12FFF39 \n\n"}
+{"time": "2026-10-11T02:31:38.004927", "command": "mem set 0xC072E57C 0xE30E4438", "reply": "set : A:0xc072e57c, D:0xE30E4438 \n\n"}
+{"time": "2026-10-11T02:31:38.005313", "command": "mem set 0xC072E580 0xE34C4072", "reply": "set : A:0xc072e580, D:0xE34C4072 \n\n"}
+{"time": "2026-10-11T02:31:38.005696", "command": "mem set 0xC072E584 0xE5840018", "reply": "set : A:0xc072e584, D:0xE5840018 \n\n"}
+{"time": "2026-10-11T02:31:38.006106", "command": "mem set 0xC072E588 0xE3000000", "reply": "set : A:0xc072e588, D:0xE3000000 \n\n"}
+{"time": "2026-10-11T02:31:38.006434", "command": "mem set 0xC072E58C 0xE34D009E", "reply": "set : A:0xc072e58c, D:0xE34D009E \n\n"}
+{"time": "2026-10-11T02:31:38.006740", "command": "mem set 0xC072E590 0xE584001C", "reply": "set : A:0xc072e590, D:0xE584001C \n\n"}
+{"time": "2026-10-11T02:31:38.007020", "command": "mem set 0xC072E594 0xE598C000", "reply": "set : A:0xc072e594, D:0xE598C000 \n\n"}
+{"time": "2026-10-11T02:31:38.007294", "command": "mem set 0xC072E598 0xE30B0B38", "reply": "set : A:0xc072e598, D:0xE30B0B38 \n\n"}
+{"time": "2026-10-11T02:31:38.007769", "command": "mem set 0xC072E59C 0xE34C00BA", "reply": "set : A:0xc072e59c, D:0xE34C00BA \n\n"}
+{"time": "2026-10-11T02:31:38.008215", "command": "mem set 0xC072E5A0 0xE28F1008", "reply": "set : A:0xc072e5a0, D:0xE28F1008 \n\n"}
+{"time": "2026-10-11T02:31:38.008563", "command": "mem set 0xC072E5A4 0xE12FFF3C", "reply": "set : A:0xc072e5a4, D:0xE12FFF3C \n\n"}
+{"time": "2026-10-11T02:31:38.008918", "command": "mem set 0xC072E5A8 0xE3A00000", "reply": "set : A:0xc072e5a8, D:0xE3A00000 \n\n"}
+{"time": "2026-10-11T02:31:38.009200", "command": "mem set 0xC072E5AC 0xE8BD8FF8", "reply": "set : A:0xc072e5ac, D:0xE8BD8FF8 \n\n"}
+{"time": "2026-10-11T02:31:38.009665", "command": "mem set 0xC072E5B0 0x6C6C6163", "reply": "set : A:0xc072e5b0, D:0x6C6C6163 \n\n"}
+{"time": "2026-10-11T02:31:38.010077", "command": "mem set 0xC072E5B4 0x203A6E66", "reply": "set : A:0xc072e5b4, D:0x203A6E66 \n\n"}
+{"time": "2026-10-11T02:31:38.010826", "command": "mem set 0xC072E5B8 0x75746572", "reply": "set : A:0xc072e5b8, D:0x75746572 \n\n"}
+{"time": "2026-10-11T02:31:38.011191", "command": "mem set 0xC072E5BC 0x64656E72", "reply": "set : A:0xc072e5bc, D:0x64656E72 \n\n"}
+{"time": "2026-10-11T02:31:38.014512", "command": "mem set 0xC072E5C0 0xA0000000", "reply": "set : A:0xc072e5c0, D:0xA0000000 \n\n"}
+{"time": "2026-10-11T02:31:38.015782", "command": "mem get 0xC072E538,,0x8C", "reply": "get : A:0xc072e538, D:0xE92D4FF8\nget : A:0xc072e53c, D:0xE1A08000\nget : A:0xc072e540, D:0xE30E4438\nget : A:0xc072e544, D:0xE34C4072\nget : A:0xc072e548, D:0xE3A00000\nget : A:0xc072e54c, D:0xE584001C\nget : A:0xc072e550, D:0xE5949000\nget : A:0xc072e554, D:0xE5940004\nget : A:0xc072e558, D:0xE5941008\nget : A:0xc072e55c, D:0xE594200C\nget : A:0xc072e560, D:0xE5943010\nget : A:0xc072e564, D:0xE594A014\nget : A:0xc072e568, D:0xE5946020\nget : A:0xc072e56c, D:0xE5947024\nget : A:0xc072e570, D:0xE1A04006\nget : A:0xc072e574, D:0xE1A05007\nget : A:0xc072e578, D:0xE12FFF39\nget : A:0xc072e57c, D:0xE30E4438\nget : A:0xc072e580, D:0xE34C4072\nget : A:0xc072e584, D:0xE5840018\nget : A:0xc072e588, D:0xE3000000\nget : A:0xc072e58c, D:0xE34D009E\nget : A:0xc072e590, D:0xE584001C\nget : A:0xc072e594, D:0xE598C000\nget : A:0xc072e598, D:0xE30B0B38\nget : A:0xc072e59c, D:0xE34C00BA\nget : A:0xc072e5a0, D:0xE28F1008\nget : A:0xc072e5a4, D:0xE12FFF3C\nget : A:0xc072e5a8, D:0xE3A00000\nget : A:0xc072e5ac, D:0xE8BD8FF8\nget : A:0xc072e5b0, D:0x6C6C6163\nget : A:0xc072e5b4, D:0x203A6E66\nget : A:0xc072e5b8, D:0x75746572\nget : A:0xc072e5bc, D:0x64656E72\nget : A:0xc072e5c0, D:0xA0000000\n"}
+{"time": "2026-10-11T02:31:38.016276", "command": "mem set 0xC072E438 0xC001D7A0", "reply": "set : A:0xc072e438, D:0xC001D7A0 \n\n"}
+{"time": "2026-10-11T02:31:38.016781", "command": "mem set 0xC072E43C 0xC072E518", "reply": "set : A:0xc072e43c, D:0xC072E518 \n\n"}
+{"time": "2026-10-11T02:31:38.017286", "command": "mem set 0xC072E440 0x00000002", "reply": "set : A:0xc072e440, D:0x00000002 \n\n"}
+{"time": "2026-10-11T02:31:38.017702", "command": "mem set 0xC072E444 0x00000000", "reply": "set : A:0xc072e444, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:38.018069", "command": "mem set 0xC072E448 0x00000000", "reply": "set : A:0xc072e448, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:38.018470", "command": "mem set 0xC072E44C 0x00000000", "reply": "set : A:0xc072e44c, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:38.018808", "command": "mem set 0xC072E450 0x00000000", "reply": "set : A:0xc072e450, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:38.019136", "command": "mem set 0xC072E454 0x00000000", "reply": "set : A:0xc072e454, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:38.020068", "command": "mem set 0xC072E458 0x00000000", "reply": "set : A:0xc072e458, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:38.020589", "command": "mem set 0xC072E45C 0x00000000", "reply": "set : A:0xc072e45c, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:38.021336", "command": "mem get 0xC072E438,,0x28", "reply": "get : A:0xc072e438, D:0xC001D7A0\nget : A:0xc072e43c, D:0xC072E518\nget : A:0xc072e440, D:0x00000002\nget : A:0xc072e444, D:0x00000000\nget : A:0xc072e448, D:0x00000000\nget : A:0xc072e44c, D:0x00000000\nget : A:0xc072e450, D:0x00000000\nget : A:0xc072e454, D:0x00000000\nget : A:0xc072e458, D:0x00000000\nget : A:0xc072e45c, D:0x00000000\n"}
+{"time": "2026-10-11T02:31:38.021741", "command": "mem set 0xC0BAC2F8 0xC072E538", "reply": "set : A:0xc0bac2f8, D:0xC072E538 \n\n"}
+{"time": "2026-10-11T02:31:38.022100", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC072E538\n\n"}
+{"time": "2026-10-11T02:31:38.022507", "command": "echo", "reply": "callfn: returned \n"}
+{"time": "2026-10-11T02:31:38.022856", "command": "mem set 0xC0BAC2F8 0xC03D99A0", "reply": "set : A:0xc0bac2f8, D:0xC03D99A0 \n\n"}
+{"time": "2026-10-11T02:31:38.023130", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC03D99A0\n\n"}
+{"time": "2026-10-11T02:31:38.023495", "command": "mem get 0xC072E450,,0x8", "reply": "get : A:0xc072e450, D:0x00000000\nget : A:0xc072e454, D:0xD09E0000\n\n"}
+{"time": "2026-10-11T02:31:38.025010", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC03D99A0\n\n"}
+{"time": "2026-10-11T02:31:38.025339", "command": "mem get 0xC072F050,,0x4", "reply": "get : A:0xc072f050, D:0x450529C0\n\n"}
+{"time": "2026-10-11T02:31:38.025633", "command": "mem get 0xC072F054,,0x4", "reply": "get : A:0xc072f054, D:0x00100000\n\n"}
+{"time": "2026-10-11T02:31:38.025900", "command": "mem get 0xC072F050,,0x4", "reply": "get : A:0xc072f050, D:0x450529C0\n\n"}
+{"time": "2026-10-11T02:31:38.026252", "command": "mem set 0x450629C0 0xC0DE0000", "reply": "set : A:0x450629c0, D:0xC0DE0000 \n\n"}
+{"time": "2026-10-11T02:31:38.026622", "command": "mem set 0x450632B4 0xC0DE0001", "reply": "set : A:0x450632b4, D:0xC0DE0001 \n\n"}
+{"time": "2026-10-11T02:31:38.026917", "command": "mem set 0x45063BA8 0xC0DE0002", "reply": "set : A:0x45063ba8, D:0xC0DE0002 \n\n"}
+{"time": "2026-10-11T02:31:38.027397", "command": "mem get 0x450629C0,,0x4", "reply": "get : A:0x450629c0, D:0xC0DE0000\n\n"}
+{"time": "2026-10-11T02:31:38.027740", "command": "mem get 0x450632B4,,0x4", "reply": "get : A:0x450632b4, D:0xC0DE0001\n\n"}
+{"time": "2026-10-11T02:31:38.028064", "command": "mem get 0x45063BA8,,0x4", "reply": "get : A:0x45063ba8, D:0xC0DE0002\n\n"}
+{"time": "2026-10-11T02:31:39.031951", "command": "mem get 0x450629C0,,0x4", "reply": "get : A:0x450629c0, D:0xC0DE0000\n\n"}
+{"time": "2026-10-11T02:31:39.032617", "command": "mem get 0x450632B4,,0x4", "reply": "get : A:0x450632b4, D:0xC0DE0001\n\n"}
+{"time": "2026-10-11T02:31:39.033488", "command": "mem get 0x45063BA8,,0x4", "reply": "get : A:0x45063ba8, D:0xC0DE0002\n\n"}
+{"time": "2026-10-11T02:31:39.035732", "command": "mem set 0xC072E440 0x00000000", "reply": "set : A:0xc072e440, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:39.036171", "command": "mem set 0xC072E444 0x00000000", "reply": "set : A:0xc072e444, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:39.036647", "command": "mem set 0xC072E448 0x00000000", "reply": "set : A:0xc072e448, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:39.037205", "command": "mem set 0xC072E44C 0x450629C0", "reply": "set : A:0xc072e44c, D:0x450629C0 \n\n"}
+{"time": "2026-10-11T02:31:39.037652", "command": "mem set 0xC072E450 0x00000DE9", "reply": "set : A:0xc072e450, D:0x00000DE9 \n\n"}
+{"time": "2026-10-11T02:31:39.038024", "command": "mem set 0xC072E454 0x450637AC", "reply": "set : A:0xc072e454, D:0x450637AC \n\n"}
+{"time": "2026-10-11T02:31:39.038401", "command": "mem set 0xC072E458 0x00000007", "reply": "set : A:0xc072e458, D:0x00000007 \n\n"}
+{"time": "2026-10-11T02:31:39.038760", "command": "mem set 0xC072E45C 0x7475415C", "reply": "set : A:0xc072e45c, D:0x7475415C \n\n"}
+{"time": "2026-10-11T02:31:39.039054", "command": "mem set 0xC072E460 0x6E75526F", "reply": "set : A:0xc072e460, D:0x6E75526F \n\n"}
+{"time": "2026-10-11T02:31:39.039350", "command": "mem set 0xC072E464 0x7478742E", "reply": "set : A:0xc072e464, D:0x7478742E \n\n"}
+{"time": "2026-10-11T02:31:39.039765", "command": "mem set 0xC072E468 0x00000000", "reply": "set : A:0xc072e468, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:39.075211", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC03D99A0\n\n"}
+{"time": "2026-10-11T02:31:39.076091", "command": "mem set 0xC0BAC2F8 0xC072E740", "reply": "set : A:0xc0bac2f8, D:0xC072E740 \n\n"}
+{"time": "2026-10-11T02:31:39.076565", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC072E740\n\n"}
+{"time": "2026-10-11T02:31:39.076895", "command": "mem set 0xC072E738 0xC072E538", "reply": "set : A:0xc072e738, D:0xC072E538 \n\n"}
+{"time": "2026-10-11T02:31:39.077280", "command": "mem set 0xC072E73C 0x00000000", "reply": "set : A:0xc072e73c, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:39.077635", "command": "mem get 0xC072E738,,0x8", "reply": "get : A:0xc072e738, D:0xC072E538\nget : A:0xc072e73c, D:0x00000000\n\n"}
+{"time": "2026-10-11T02:31:39.078154", "command": "echo f0412de90080a0e138440ee372404ce30100a0e3080084e558c604e344c04ce33cff2fe10010a0e398c604e344c04ce33cff2fe10010a0e11c0094e590ce05e336c04ce33cff2fe11c0094e5241084e2202094e5b0cf05e336c04ce33cff2fe10c0084e5000050e30300a003080084050f00000a1c0094e5141094e5185094e50520a0e1e8c006e336c04ce33cff2fe1100084e5000050e30460a0030260a013086084e51c0094e520c006e336c04ce33cff2fe11c0094e50210a0e3d0ce05e336c04ce33cff2fe1080094e5020050e318108f0228108f1200c098e5380b0be3ba004ce33cff2fe10000a0e3f081bde8", "reply": "ok \n"}
+{"time": "2026-10-11T02:31:39.078453", "command": "echo 70757466696c653a207772697474656e000000a070757466696c653a204641494c45442c20726561642073746174757320617420307843303732463730380000", "reply": "ok \n"}
+{"time": "2026-10-11T02:31:39.078865", "command": "mem get 0xC072E738,,0x8", "reply": "get : A:0xc072e738, D:0xC072E668\nget : A:0xc072e73c, D:0x00000130\n\n"}
+{"time": "2026-10-11T02:31:39.082781", "command": "mem set 0xC0BAC2F8 0xC03D99A0", "reply": "set : A:0xc0bac2f8, D:0xC03D99A0 \n\n"}
+{"time": "2026-10-11T02:31:39.083621", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC03D99A0\n\n"}
+{"time": "2026-10-11T02:31:39.084331", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC03D99A0\n\n"}
+{"time": "2026-10-11T02:31:39.084786", "command": "mem set 0xC0BAC2F8 0xC072E840", "reply": "set : A:0xc0bac2f8, D:0xC072E840 \n\n"}
+{"time": "2026-10-11T02:31:39.085147", "command": "echo C072E538 130", "reply": "\u00f0A-\u00e9\u0000\u0080\u00a0\u00e18D\u000e\u00e3r@L\u00e3\u0001\u0000\u00a0\u00e3\b\u0000\u0084\u00e5X\u00c6\u0004\u00e3D\u00c0L\u00e3<\u00ff/\u00e1\u0000\u0010\u00a0\u00e3\u0098\u00c6\u0004\u00e3D\u00c0L\u00e3<\u00ff/\u00e1\u0000\u0010\u00a0\u00e1\u001c\u0000\u0094\u00e5\u0090\u00ce\u0005\u00e36\u00c0L\u00e3<\u00ff/\u00e1\u001c\u0000\u0094\u00e5$\u0010\u0084\u00e2  \u0094\u00e5\u00b0\u00cf\u0005\u00e36\u00c0L\u00e3<\u00ff/\u00e1\f\u0000\u0084\u00e5\u0000\u0000P\u00e3\u0003\u0000\u00a0\u0003\b\u0000\u0084\u0005\u000f\u0000\u0000\n\u001c\u0000\u0094\u00e5\u0014\u0010\u0094\u00e5\u0018P\u0094\u00e5\u0005 \u00a0\u00e1\u00e8\u00c0\u0006\u00e36\u00c0L\u00e3<\u00ff/\u00e1\u0010\u0000\u0084\u00e5\u0000\u0000P\u00e3\u0004`\u00a0\u0003\u0002`\u00a0\u0013\b`\u0084\u00e5\u001c\u0000\u0094\u00e5 \u00c0\u0006\u00e36\u00c0L\u00e3<\u00ff/\u00e1\u001c\u0000\u0094\u00e5\u0002\u0010\u00a0\u00e3\u00d0\u00ce\u0005\u00e36\u00c0L\u00e3<\u00ff/\u00e1\b\u0000\u0094\u00e5\u0002\u0000P\u00e3\u0018\u0010\u008f\u0002(\u0010\u008f\u0012\u0000\u00c0\u0098\u00e58\u000b\u000b\u00e3\u00ba\u0000L\u00e3<\u00ff/\u00e1\u0000\u0000\u00a0\u00e3\u00f0\u0081\u00bd\u00e8putfile: written\u0000\u0000\u0000\u00a0putfile: FAILED, read status at 0xC072F708\u0000\u00008\u00e5r\u00c0"}
+{"time": "2026-10-11T02:31:39.085593", "command": "mem set 0xC0BAC2F8 0xC03D99A0", "reply": "set : A:0xc0bac2f8, D:0xC03D99A0 \n\n"}
+{"time": "2026-10-11T02:31:39.086042", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC03D99A0\n\n"}
+{"time": "2026-10-11T02:31:39.087411", "command": "dir \\", "reply": "                                          .\n2026/10/07  10:20:36 <DIR>                .Spotlight-V100\n2026/10/10  11:59:52 <DIR>                CINEMA\n2026/10/07  20:25:26 <DIR>                fpSup\n2026/10/07  20:26:02                 4096 ._fpSup\n2025/12/31  08:00:00                32768 AutoRun.txt\n2026/10/07  20:26:02                 4096 ._AutoRun.txt\n2026/10/07  15:00:02 <DIR>                .Trashes\n2026/10/10  18:14:18 <DIR>                DCIM\n"}
+{"time": "2026-10-11T02:31:39.132434", "command": "fl del \\AutoRun.txt", "reply": "file del \nOK\n\n"}
+{"time": "2026-10-11T02:31:39.134234", "command": "dir \\", "reply": "                                          .\n2026/10/07  10:20:36 <DIR>                .Spotlight-V100\n2026/10/10  11:59:52 <DIR>                CINEMA\n2026/10/07  20:25:26 <DIR>                fpSup\n2026/10/07  20:26:02                 4096 ._fpSup\n2026/10/07  20:26:02                 4096 ._AutoRun.txt\n2026/10/07  15:00:02 <DIR>                .Trashes\n2026/10/10  18:14:18 <DIR>                DCIM\n"}
+{"time": "2026-10-11T02:31:39.134770", "command": "mem set 0xC0BAC2F8 0xC072E538", "reply": "set : A:0xc0bac2f8, D:0xC072E538 \n\n"}
+{"time": "2026-10-11T02:31:39.135162", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC072E538\n\n"}
+{"time": "2026-10-11T02:31:39.209854", "command": "echo", "reply": "putfile: written \n"}
+{"time": "2026-10-11T02:31:39.210461", "command": "mem set 0xC0BAC2F8 0xC03D99A0", "reply": "set : A:0xc0bac2f8, D:0xC03D99A0 \n\n"}
+{"time": "2026-10-11T02:31:39.210970", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC03D99A0\n\n"}
+{"time": "2026-10-11T02:31:39.211600", "command": "mem get 0xC072E440,,0xC", "reply": "get : A:0xc072e440, D:0x00000002\nget : A:0xc072e444, D:0x00000001\nget : A:0xc072e448, D:0x00000001\n\n"}
+{"time": "2026-10-11T02:31:39.212788", "command": "dir \\", "reply": "                                          .\n2026/10/07  10:20:36 <DIR>                .Spotlight-V100\n2026/10/10  11:59:52 <DIR>                CINEMA\n2026/10/07  20:25:26 <DIR>                fpSup\n2026/10/07  20:26:02                 4096 ._fpSup\n2026/10/11  02:32:38                 3561 AutoRun.txt\n2026/10/07  20:26:02                 4096 ._AutoRun.txt\n2026/10/07  15:00:02 <DIR>                .Trashes\n2026/10/10  18:14:18 <DIR>                DCIM\n"}
+{"time": "2026-10-11T02:31:39.322011", "command": "dir \\", "reply": "                                          .\n2026/10/07  10:20:36 <DIR>                .Spotlight-V100\n2026/10/10  11:59:52 <DIR>                CINEMA\n2026/10/07  20:25:26 <DIR>                fpSup\n2026/10/07  20:26:02                 4096 ._fpSup\n2026/10/11  02:32:38                 3561 AutoRun.txt\n2026/10/07  20:26:02                 4096 ._AutoRun.txt\n2026/10/07  15:00:02 <DIR>                .Trashes\n2026/10/10  18:14:18 <DIR>                DCIM\n"}
+{"time": "2026-10-11T02:31:39.323183", "command": "mem get 0xC072F050,,0x4", "reply": "get : A:0xc072f050, D:0x450529C0\n\n"}
+{"time": "2026-10-11T02:31:39.323670", "command": "mem get 0xC072F054,,0x4", "reply": "get : A:0xc072f054, D:0x00100000\n\n"}
+{"time": "2026-10-11T02:31:39.324082", "command": "mem get 0xC072F050,,0x4", "reply": "get : A:0xc072f050, D:0x450529C0\n\n"}
+{"time": "2026-10-11T02:31:39.325024", "command": "mem set 0xC072E43C 0x00000000", "reply": "set : A:0xc072e43c, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:39.325779", "command": "mem set 0xC072E440 0x00000000", "reply": "set : A:0xc072e440, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:39.432434", "command": "mem set 0xC072E444 0x00000000", "reply": "set : A:0xc072e444, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:39.433050", "command": "mem set 0xC072E448 0x00000000", "reply": "set : A:0xc072e448, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:39.433450", "command": "mem set 0xC072E44C 0x00000000", "reply": "set : A:0xc072e44c, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:39.539913", "command": "mem set 0xC072E450 0x00001DE9", "reply": "set : A:0xc072e450, D:0x00001DE9 \n\n"}
+{"time": "2026-10-11T02:31:39.540528", "command": "mem set 0xC072E454 0x450629C0", "reply": "set : A:0xc072e454, D:0x450629C0 \n\n"}
+{"time": "2026-10-11T02:31:39.540934", "command": "mem set 0xC072E458 0x00000001", "reply": "set : A:0xc072e458, D:0x00000001 \n\n"}
+{"time": "2026-10-11T02:31:39.541313", "command": "mem set 0xC072E45C 0x7475415C", "reply": "set : A:0xc072e45c, D:0x7475415C \n\n"}
+{"time": "2026-10-11T02:31:39.541648", "command": "mem set 0xC072E460 0x6E75526F", "reply": "set : A:0xc072e460, D:0x6E75526F \n\n"}
+{"time": "2026-10-11T02:31:39.542036", "command": "mem set 0xC072E464 0x7478742E", "reply": "set : A:0xc072e464, D:0x7478742E \n\n"}
+{"time": "2026-10-11T02:31:39.542632", "command": "mem set 0xC072E468 0x00000000", "reply": "set : A:0xc072e468, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:39.574943", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC03D99A0\n\n"}
+{"time": "2026-10-11T02:31:39.575535", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC03D99A0\n\n"}
+{"time": "2026-10-11T02:31:39.576035", "command": "mem set 0xC0BAC2F8 0xC072E740", "reply": "set : A:0xc0bac2f8, D:0xC072E740 \n\n"}
+{"time": "2026-10-11T02:31:39.578175", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC072E740\n\n"}
+{"time": "2026-10-11T02:31:39.578708", "command": "mem set 0xC072E738 0xC072E538", "reply": "set : A:0xc072e738, D:0xC072E538 \n\n"}
+{"time": "2026-10-11T02:31:39.579047", "command": "mem set 0xC072E73C 0x00000000", "reply": "set : A:0xc072e73c, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:39.579394", "command": "mem get 0xC072E738,,0x8", "reply": "get : A:0xc072e738, D:0xC072E538\nget : A:0xc072e73c, D:0x00000000\n\n"}
+{"time": "2026-10-11T02:31:39.583191", "command": "echo f0412de90080a0e138440ee372404ce30100a0e3080084e50000a0e3040084e5140094e5000050e31600001ae05084e20000a0e3000085e5040085e5080085e50c0085e50500a0e10a10a0e3182094e50030a0e340c70de301c04ce33cff2fe10500a0e1f0c70de301c04ce33cff2fe1140084e5000050e30200001a0500a0e3080084e5330000ea58c604e344c04ce33cff2fe10010a0e398c604e344c04ce33cff2fe10010a0e11c0094e590ce05e336c04ce33cff2fe11c0094e5241084e2202094e5b0cf05e336c04ce33cff2fe10c0084e5000050e30300a003080084050f00000a1c0094e5141094e5182094e5", "reply": "ok \n"}
+{"time": "2026-10-11T02:31:39.584442", "command": "echo 043084e260c006e336c04ce33cff2fe1100084e5000050e30460a0030260a013086084e51c0094e520c006e336c04ce33cff2fe11c0094e50210a0e3d0ce05e336c04ce33cff2fe1080094e5020050e318108f0224108f1200c098e5380b0be3ba004ce33cff2fe10000a0e3f081bde867657466696c653a207265616400000067657466696c653a204641494c45442c20726561642073746174757320617420307843303732463730380000", "reply": "ok \n"}
+{"time": "2026-10-11T02:31:39.585104", "command": "mem get 0xC072E738,,0x8", "reply": "get : A:0xc072e738, D:0xC072E6D4\nget : A:0xc072e73c, D:0x0000019C\n\n"}
+{"time": "2026-10-11T02:31:39.585628", "command": "mem set 0xC0BAC2F8 0xC03D99A0", "reply": "set : A:0xc0bac2f8, D:0xC03D99A0 \n\n"}
+{"time": "2026-10-11T02:31:39.586037", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC03D99A0\n\n"}
+{"time": "2026-10-11T02:31:39.586489", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC03D99A0\n\n"}
+{"time": "2026-10-11T02:31:39.586942", "command": "mem set 0xC0BAC2F8 0xC072E840", "reply": "set : A:0xc0bac2f8, D:0xC072E840 \n\n"}
+{"time": "2026-10-11T02:31:39.587339", "command": "echo C072E538 19C", "reply": "\u00f0A-\u00e9\u0000\u0080\u00a0\u00e18D\u000e\u00e3r@L\u00e3\u0001\u0000\u00a0\u00e3\b\u0000\u0084\u00e5\u0000\u0000\u00a0\u00e3\u0004\u0000\u0084\u00e5\u0014\u0000\u0094\u00e5\u0000\u0000P\u00e3\u0016\u0000\u0000\u001a\u00e0P\u0084\u00e2\u0000\u0000\u00a0\u00e3\u0000\u0000\u0085\u00e5\u0004\u0000\u0085\u00e5\b\u0000\u0085\u00e5\f\u0000\u0085\u00e5\u0005\u0000\u00a0\u00e1\n\u0010\u00a0\u00e3\u0018 \u0094\u00e5\u00000\u00a0\u00e3@\u00c7\r\u00e3\u0001\u00c0L\u00e3<\u00ff/\u00e1\u0005\u0000\u00a0\u00e1\u00f0\u00c7\r\u00e3\u0001\u00c0L\u00e3<\u00ff/\u00e1\u0014\u0000\u0084\u00e5\u0000\u0000P\u00e3\u0002\u0000\u0000\u001a\u0005\u0000\u00a0\u00e3\b\u0000\u0084\u00e53\u0000\u0000\u00eaX\u00c6\u0004\u00e3D\u00c0L\u00e3<\u00ff/\u00e1\u0000\u0010\u00a0\u00e3\u0098\u00c6\u0004\u00e3D\u00c0L\u00e3<\u00ff/\u00e1\u0000\u0010\u00a0\u00e1\u001c\u0000\u0094\u00e5\u0090\u00ce\u0005\u00e36\u00c0L\u00e3<\u00ff/\u00e1\u001c\u0000\u0094\u00e5$\u0010\u0084\u00e2  \u0094\u00e5\u00b0\u00cf\u0005\u00e36\u00c0L\u00e3<\u00ff/\u00e1\f\u0000\u0084\u00e5\u0000\u0000P\u00e3\u0003\u0000\u00a0\u0003\b\u0000\u0084\u0005\u000f\u0000\u0000\n\u001c\u0000\u0094\u00e5\u0014\u0010\u0094\u00e5\u0018 \u0094\u00e5\u00040\u0084\u00e2`\u00c0\u0006\u00e36\u00c0L\u00e3<\u00ff/\u00e1\u0010\u0000\u0084\u00e5\u0000\u0000P\u00e3\u0004`\u00a0\u0003\u0002`\u00a0\u0013\b`\u0084\u00e5\u001c\u0000\u0094\u00e5 \u00c0\u0006\u00e36\u00c0L\u00e3<\u00ff/\u00e1\u001c\u0000\u0094\u00e5\u0002\u0010\u00a0\u00e3\u00d0\u00ce\u0005\u00e36\u00c0L\u00e3<\u00ff/\u00e1\b\u0000\u0094\u00e5\u0002\u0000P\u00e3\u0018\u0010\u008f\u0002$\u0010\u008f\u0012\u0000\u00c0\u0098\u00e58\u000b\u000b\u00e3\u00ba\u0000L\u00e3<\u00ff/\u00e1\u0000\u0000\u00a0\u00e3\u00f0\u0081\u00bd\u00e8getfile: read\u0000\u0000\u0000getfile: FAILED, read status at 0xC072F708\u0000\u00008\u00e5r\u00c0"}
+{"time": "2026-10-11T02:31:39.588334", "command": "mem set 0xC0BAC2F8 0xC03D99A0", "reply": "set : A:0xc0bac2f8, D:0xC03D99A0 \n\n"}
+{"time": "2026-10-11T02:31:39.588715", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC03D99A0\n\n"}
+{"time": "2026-10-11T02:31:39.589170", "command": "mem set 0xC0BAC2F8 0xC072E538", "reply": "set : A:0xc0bac2f8, D:0xC072E538 \n\n"}
+{"time": "2026-10-11T02:31:39.589582", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC072E538\n\n"}
+{"time": "2026-10-11T02:31:39.593004", "command": "echo", "reply": "getfile: read \n"}
+{"time": "2026-10-11T02:31:39.593612", "command": "mem set 0xC0BAC2F8 0xC03D99A0", "reply": "set : A:0xc0bac2f8, D:0xC03D99A0 \n\n"}
+{"time": "2026-10-11T02:31:39.594024", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC03D99A0\n\n"}
+{"time": "2026-10-11T02:31:39.594393", "command": "mem get 0xC072E44C,,0x4", "reply": "get : A:0xc072e44c, D:0x5F900980\n\n"}
+{"time": "2026-10-11T02:31:39.595278", "command": "mem get 0xC072E438,,0x14", "reply": "get : A:0xc072e438, D:0xC001D7A0\nget : A:0xc072e43c, D:0x00000DE9\nget : A:0xc072e440, D:0x00000002\nget : A:0xc072e444, D:0x00000001\nget : A:0xc072e448, D:0x00000001\n"}
+{"time": "2026-10-11T02:31:39.643745", "command": "mem set 0xC072E538 0xE92D4FF8", "reply": "set : A:0xc072e538, D:0xE92D4FF8 \n\n"}
+{"time": "2026-10-11T02:31:39.644306", "command": "mem set 0xC072E53C 0xE1A08000", "reply": "set : A:0xc072e53c, D:0xE1A08000 \n\n"}
+{"time": "2026-10-11T02:31:39.644935", "command": "mem set 0xC072E540 0xE30E4438", "reply": "set : A:0xc072e540, D:0xE30E4438 \n\n"}
+{"time": "2026-10-11T02:31:39.645453", "command": "mem set 0xC072E544 0xE34C4072", "reply": "set : A:0xc072e544, D:0xE34C4072 \n\n"}
+{"time": "2026-10-11T02:31:39.645985", "command": "mem set 0xC072E548 0xE3A00000", "reply": "set : A:0xc072e548, D:0xE3A00000 \n\n"}
+{"time": "2026-10-11T02:31:39.646473", "command": "mem set 0xC072E54C 0xE584001C", "reply": "set : A:0xc072e54c, D:0xE584001C \n\n"}
+{"time": "2026-10-11T02:31:39.648953", "command": "mem set 0xC072E550 0xE5949000", "reply": "set : A:0xc072e550, D:0xE5949000 \n\n"}
+{"time": "2026-10-11T02:31:39.649460", "command": "mem set 0xC072E554 0xE5940004", "reply": "set : A:0xc072e554, D:0xE5940004 \n\n"}
+{"time": "2026-10-11T02:31:39.649919", "command": "mem set 0xC072E558 0xE5941008", "reply": "set : A:0xc072e558, D:0xE5941008 \n\n"}
+{"time": "2026-10-11T02:31:39.650361", "command": "mem set 0xC072E55C 0xE594200C", "reply": "set : A:0xc072e55c, D:0xE594200C \n\n"}
+{"time": "2026-10-11T02:31:39.651123", "command": "mem set 0xC072E560 0xE5943010", "reply": "set : A:0xc072e560, D:0xE5943010 \n\n"}
+{"time": "2026-10-11T02:31:39.651837", "command": "mem set 0xC072E564 0xE594A014", "reply": "set : A:0xc072e564, D:0xE594A014 \n\n"}
+{"time": "2026-10-11T02:31:39.652352", "command": "mem set 0xC072E568 0xE5946020", "reply": "set : A:0xc072e568, D:0xE5946020 \n\n"}
+{"time": "2026-10-11T02:31:39.652745", "command": "mem set 0xC072E56C 0xE5947024", "reply": "set : A:0xc072e56c, D:0xE5947024 \n\n"}
+{"time": "2026-10-11T02:31:39.653317", "command": "mem set 0xC072E570 0xE1A04006", "reply": "set : A:0xc072e570, D:0xE1A04006 \n\n"}
+{"time": "2026-10-11T02:31:39.653858", "command": "mem set 0xC072E574 0xE1A05007", "reply": "set : A:0xc072e574, D:0xE1A05007 \n\n"}
+{"time": "2026-10-11T02:31:39.654321", "command": "mem set 0xC072E578 0xE12FFF39", "reply": "set : A:0xc072e578, D:0xE12FFF39 \n\n"}
+{"time": "2026-10-11T02:31:39.654779", "command": "mem set 0xC072E57C 0xE30E4438", "reply": "set : A:0xc072e57c, D:0xE30E4438 \n\n"}
+{"time": "2026-10-11T02:31:39.655219", "command": "mem set 0xC072E580 0xE34C4072", "reply": "set : A:0xc072e580, D:0xE34C4072 \n\n"}
+{"time": "2026-10-11T02:31:39.655635", "command": "mem set 0xC072E584 0xE5840018", "reply": "set : A:0xc072e584, D:0xE5840018 \n\n"}
+{"time": "2026-10-11T02:31:39.656117", "command": "mem set 0xC072E588 0xE3000000", "reply": "set : A:0xc072e588, D:0xE3000000 \n\n"}
+{"time": "2026-10-11T02:31:39.656563", "command": "mem set 0xC072E58C 0xE34D009E", "reply": "set : A:0xc072e58c, D:0xE34D009E \n\n"}
+{"time": "2026-10-11T02:31:39.656948", "command": "mem set 0xC072E590 0xE584001C", "reply": "set : A:0xc072e590, D:0xE584001C \n\n"}
+{"time": "2026-10-11T02:31:39.657266", "command": "mem set 0xC072E594 0xE598C000", "reply": "set : A:0xc072e594, D:0xE598C000 \n\n"}
+{"time": "2026-10-11T02:31:39.657629", "command": "mem set 0xC072E598 0xE30B0B38", "reply": "set : A:0xc072e598, D:0xE30B0B38 \n\n"}
+{"time": "2026-10-11T02:31:39.658073", "command": "mem set 0xC072E59C 0xE34C00BA", "reply": "set : A:0xc072e59c, D:0xE34C00BA \n\n"}
+{"time": "2026-10-11T02:31:39.658479", "command": "mem set 0xC072E5A0 0xE28F1008", "reply": "set : A:0xc072e5a0, D:0xE28F1008 \n\n"}
+{"time": "2026-10-11T02:31:39.658881", "command": "mem set 0xC072E5A4 0xE12FFF3C", "reply": "set : A:0xc072e5a4, D:0xE12FFF3C \n\n"}
+{"time": "2026-10-11T02:31:39.659459", "command": "mem set 0xC072E5A8 0xE3A00000", "reply": "set : A:0xc072e5a8, D:0xE3A00000 \n\n"}
+{"time": "2026-10-11T02:31:39.660454", "command": "mem set 0xC072E5AC 0xE8BD8FF8", "reply": "set : A:0xc072e5ac, D:0xE8BD8FF8 \n\n"}
+{"time": "2026-10-11T02:31:39.661104", "command": "mem set 0xC072E5B0 0x6C6C6163", "reply": "set : A:0xc072e5b0, D:0x6C6C6163 \n\n"}
+{"time": "2026-10-11T02:31:39.661516", "command": "mem set 0xC072E5B4 0x203A6E66", "reply": "set : A:0xc072e5b4, D:0x203A6E66 \n\n"}
+{"time": "2026-10-11T02:31:39.662010", "command": "mem set 0xC072E5B8 0x75746572", "reply": "set : A:0xc072e5b8, D:0x75746572 \n\n"}
+{"time": "2026-10-11T02:31:39.662629", "command": "mem set 0xC072E5BC 0x64656E72", "reply": "set : A:0xc072e5bc, D:0x64656E72 \n\n"}
+{"time": "2026-10-11T02:31:39.663103", "command": "mem set 0xC072E5C0 0xA0000000", "reply": "set : A:0xc072e5c0, D:0xA0000000 \n\n"}
+{"time": "2026-10-11T02:31:39.666664", "command": "mem get 0xC072E538,,0x8C", "reply": "get : A:0xc072e538, D:0xE92D4FF8\nget : A:0xc072e53c, D:0xE1A08000\nget : A:0xc072e540, D:0xE30E4438\nget : A:0xc072e544, D:0xE34C4072\nget : A:0xc072e548, D:0xE3A00000\nget : A:0xc072e54c, D:0xE584001C\nget : A:0xc072e550, D:0xE5949000\nget : A:0xc072e554, D:0xE5940004\nget : A:0xc072e558, D:0xE5941008\nget : A:0xc072e55c, D:0xE594200C\nget : A:0xc072e560, D:0xE5943010\nget : A:0xc072e564, D:0xE594A014\nget : A:0xc072e568, D:0xE5946020\nget : A:0xc072e56c, D:0xE5947024\nget : A:0xc072e570, D:0xE1A04006\nget : A:0xc072e574, D:0xE1A05007\nget : A:0xc072e578, D:0xE12FFF39\nget : A:0xc072e57c, D:0xE30E4438\nget : A:0xc072e580, D:0xE34C4072\nget : A:0xc072e584, D:0xE5840018\nget : A:0xc072e588, D:0xE3000000\nget : A:0xc072e58c, D:0xE34D009E\nget : A:0xc072e590, D:0xE584001C\nget : A:0xc072e594, D:0xE598C000\nget : A:0xc072e598, D:0xE30B0B38\nget : A:0xc072e59c, D:0xE34C00BA\nget : A:0xc072e5a0, D:0xE28F1008\nget : A:0xc072e5a4, D:0xE12FFF3C\nget : A:0xc072e5a8, D:0xE3A00000\nget : A:0xc072e5ac, D:0xE8BD8FF8\nget : A:0xc072e5b0, D:0x6C6C6163\nget : A:0xc072e5b4, D:0x203A6E66\nget : A:0xc072e5b8, D:0x75746572\nget : A:0xc072e5bc, D:0x64656E72\nget : A:0xc072e5c0, D:0xA0000000\n"}
+{"time": "2026-10-11T02:31:39.667561", "command": "mem set 0xC072E438 0xC001D7A0", "reply": "set : A:0xc072e438, D:0xC001D7A0 \n\n"}
+{"time": "2026-10-11T02:31:39.668292", "command": "mem set 0xC072E43C 0xC072E518", "reply": "set : A:0xc072e43c, D:0xC072E518 \n\n"}
+{"time": "2026-10-11T02:31:39.668808", "command": "mem set 0xC072E440 0x00000002", "reply": "set : A:0xc072e440, D:0x00000002 \n\n"}
+{"time": "2026-10-11T02:31:39.669267", "command": "mem set 0xC072E444 0x00000000", "reply": "set : A:0xc072e444, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:39.669664", "command": "mem set 0xC072E448 0x00000000", "reply": "set : A:0xc072e448, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:39.670034", "command": "mem set 0xC072E44C 0x00000000", "reply": "set : A:0xc072e44c, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:39.670509", "command": "mem set 0xC072E450 0x00000000", "reply": "set : A:0xc072e450, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:39.671029", "command": "mem set 0xC072E454 0x00000000", "reply": "set : A:0xc072e454, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:39.671618", "command": "mem set 0xC072E458 0x00000000", "reply": "set : A:0xc072e458, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:39.672163", "command": "mem set 0xC072E45C 0x00000000", "reply": "set : A:0xc072e45c, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:39.672978", "command": "mem get 0xC072E438,,0x28", "reply": "get : A:0xc072e438, D:0xC001D7A0\nget : A:0xc072e43c, D:0xC072E518\nget : A:0xc072e440, D:0x00000002\nget : A:0xc072e444, D:0x00000000\nget : A:0xc072e448, D:0x00000000\nget : A:0xc072e44c, D:0x00000000\nget : A:0xc072e450, D:0x00000000\nget : A:0xc072e454, D:0x00000000\nget : A:0xc072e458, D:0x00000000\nget : A:0xc072e45c, D:0x00000000\n"}
+{"time": "2026-10-11T02:31:39.673442", "command": "mem set 0xC0BAC2F8 0xC072E538", "reply": "set : A:0xc0bac2f8, D:0xC072E538 \n\n"}
+{"time": "2026-10-11T02:31:39.674031", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC072E538\n\n"}
+{"time": "2026-10-11T02:31:39.674626", "command": "echo", "reply": "callfn: returned \n"}
+{"time": "2026-10-11T02:31:39.675064", "command": "mem set 0xC0BAC2F8 0xC03D99A0", "reply": "set : A:0xc0bac2f8, D:0xC03D99A0 \n\n"}
+{"time": "2026-10-11T02:31:39.675393", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC03D99A0\n\n"}
+{"time": "2026-10-11T02:31:39.676060", "command": "mem get 0xC072E450,,0x8", "reply": "get : A:0xc072e450, D:0x00000000\nget : A:0xc072e454, D:0xD09E0000\n\n"}
+{"time": "2026-10-11T02:31:39.677430", "command": "mem get 0xC072F050,,0x4", "reply": "get : A:0xc072f050, D:0x450529C0\n\n"}
+{"time": "2026-10-11T02:31:39.677804", "command": "mem get 0xC072F054,,0x4", "reply": "get : A:0xc072f054, D:0x00100000\n\n"}
+{"time": "2026-10-11T02:31:39.678270", "command": "mem get 0xC072F050,,0x4", "reply": "get : A:0xc072f050, D:0x450529C0\n\n"}
+{"time": "2026-10-11T02:31:39.683379", "command": "mem set 0xC072E43C 0x00000000", "reply": "set : A:0xc072e43c, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:39.684311", "command": "mem set 0xC072E440 0x00000000", "reply": "set : A:0xc072e440, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:39.684996", "command": "mem set 0xC072E444 0x00000000", "reply": "set : A:0xc072e444, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:39.685483", "command": "mem set 0xC072E448 0x00000000", "reply": "set : A:0xc072e448, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:39.685946", "command": "mem set 0xC072E44C 0x00000000", "reply": "set : A:0xc072e44c, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:39.686393", "command": "mem set 0xC072E450 0x00007C04", "reply": "set : A:0xc072e450, D:0x00007C04 \n\n"}
+{"time": "2026-10-11T02:31:39.686823", "command": "mem set 0xC072E454 0x450629C0", "reply": "set : A:0xc072e454, D:0x450629C0 \n\n"}
+{"time": "2026-10-11T02:31:39.687757", "command": "mem set 0xC072E458 0x00000001", "reply": "set : A:0xc072e458, D:0x00000001 \n\n"}
+{"time": "2026-10-11T02:31:39.688414", "command": "mem set 0xC072E45C 0x5370665C", "reply": "set : A:0xc072e45c, D:0x5370665C \n\n"}
+{"time": "2026-10-11T02:31:39.688841", "command": "mem set 0xC072E460 0x4C5C7075", "reply": "set : A:0xc072e460, D:0x4C5C7075 \n\n"}
+{"time": "2026-10-11T02:31:39.689317", "command": "mem set 0xC072E464 0x4544414F", "reply": "set : A:0xc072e464, D:0x4544414F \n\n"}
+{"time": "2026-10-11T02:31:39.689753", "command": "mem set 0xC072E468 0x49422E52", "reply": "set : A:0xc072e468, D:0x49422E52 \n\n"}
+{"time": "2026-10-11T02:31:39.690180", "command": "mem set 0xC072E46C 0x0000004E", "reply": "set : A:0xc072e46c, D:0x0000004E \n\n"}
+{"time": "2026-10-11T02:31:39.727243", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC03D99A0\n\n"}
+{"time": "2026-10-11T02:31:39.727847", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC03D99A0\n\n"}
+{"time": "2026-10-11T02:31:39.728338", "command": "mem set 0xC0BAC2F8 0xC072E740", "reply": "set : A:0xc0bac2f8, D:0xC072E740 \n\n"}
+{"time": "2026-10-11T02:31:39.728754", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC072E740\n\n"}
+{"time": "2026-10-11T02:31:39.729273", "command": "mem set 0xC072E738 0xC072E538", "reply": "set : A:0xc072e738, D:0xC072E538 \n\n"}
+{"time": "2026-10-11T02:31:39.729623", "command": "mem set 0xC072E73C 0x00000000", "reply": "set : A:0xc072e73c, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:39.732700", "command": "mem get 0xC072E738,,0x8", "reply": "get : A:0xc072e738, D:0xC072E538\nget : A:0xc072e73c, D:0x00000000\n\n"}
+{"time": "2026-10-11T02:31:39.733469", "command": "echo f0412de90080a0e138440ee372404ce30100a0e3080084e50000a0e3040084e5140094e5000050e31600001ae05084e20000a0e3000085e5040085e5080085e50c0085e50500a0e10a10a0e3182094e50030a0e340c70de301c04ce33cff2fe10500a0e1f0c70de301c04ce33cff2fe1140084e5000050e30200001a0500a0e3080084e5330000ea58c604e344c04ce33cff2fe10010a0e398c604e344c04ce33cff2fe10010a0e11c0094e590ce05e336c04ce33cff2fe11c0094e5241084e2202094e5b0cf05e336c04ce33cff2fe10c0084e5000050e30300a003080084050f00000a1c0094e5141094e5182094e5", "reply": "ok \n"}
+{"time": "2026-10-11T02:31:39.734387", "command": "echo 043084e260c006e336c04ce33cff2fe1100084e5000050e30460a0030260a013086084e51c0094e520c006e336c04ce33cff2fe11c0094e50210a0e3d0ce05e336c04ce33cff2fe1080094e5020050e318108f0224108f1200c098e5380b0be3ba004ce33cff2fe10000a0e3f081bde867657466696c653a207265616400000067657466696c653a204641494c45442c20726561642073746174757320617420307843303732463730380000", "reply": "ok \n"}
+{"time": "2026-10-11T02:31:39.735228", "command": "mem get 0xC072E738,,0x8", "reply": "get : A:0xc072e738, D:0xC072E6D4\nget : A:0xc072e73c, D:0x0000019C\n\n"}
+{"time": "2026-10-11T02:31:39.735817", "command": "mem set 0xC0BAC2F8 0xC03D99A0", "reply": "set : A:0xc0bac2f8, D:0xC03D99A0 \n\n"}
+{"time": "2026-10-11T02:31:39.736264", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC03D99A0\n\n"}
+{"time": "2026-10-11T02:31:39.736755", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC03D99A0\n\n"}
+{"time": "2026-10-11T02:31:39.737245", "command": "mem set 0xC0BAC2F8 0xC072E840", "reply": "set : A:0xc0bac2f8, D:0xC072E840 \n\n"}
+{"time": "2026-10-11T02:31:39.737695", "command": "echo C072E538 19C", "reply": "\u00f0A-\u00e9\u0000\u0080\u00a0\u00e18D\u000e\u00e3r@L\u00e3\u0001\u0000\u00a0\u00e3\b\u0000\u0084\u00e5\u0000\u0000\u00a0\u00e3\u0004\u0000\u0084\u00e5\u0014\u0000\u0094\u00e5\u0000\u0000P\u00e3\u0016\u0000\u0000\u001a\u00e0P\u0084\u00e2\u0000\u0000\u00a0\u00e3\u0000\u0000\u0085\u00e5\u0004\u0000\u0085\u00e5\b\u0000\u0085\u00e5\f\u0000\u0085\u00e5\u0005\u0000\u00a0\u00e1\n\u0010\u00a0\u00e3\u0018 \u0094\u00e5\u00000\u00a0\u00e3@\u00c7\r\u00e3\u0001\u00c0L\u00e3<\u00ff/\u00e1\u0005\u0000\u00a0\u00e1\u00f0\u00c7\r\u00e3\u0001\u00c0L\u00e3<\u00ff/\u00e1\u0014\u0000\u0084\u00e5\u0000\u0000P\u00e3\u0002\u0000\u0000\u001a\u0005\u0000\u00a0\u00e3\b\u0000\u0084\u00e53\u0000\u0000\u00eaX\u00c6\u0004\u00e3D\u00c0L\u00e3<\u00ff/\u00e1\u0000\u0010\u00a0\u00e3\u0098\u00c6\u0004\u00e3D\u00c0L\u00e3<\u00ff/\u00e1\u0000\u0010\u00a0\u00e1\u001c\u0000\u0094\u00e5\u0090\u00ce\u0005\u00e36\u00c0L\u00e3<\u00ff/\u00e1\u001c\u0000\u0094\u00e5$\u0010\u0084\u00e2  \u0094\u00e5\u00b0\u00cf\u0005\u00e36\u00c0L\u00e3<\u00ff/\u00e1\f\u0000\u0084\u00e5\u0000\u0000P\u00e3\u0003\u0000\u00a0\u0003\b\u0000\u0084\u0005\u000f\u0000\u0000\n\u001c\u0000\u0094\u00e5\u0014\u0010\u0094\u00e5\u0018 \u0094\u00e5\u00040\u0084\u00e2`\u00c0\u0006\u00e36\u00c0L\u00e3<\u00ff/\u00e1\u0010\u0000\u0084\u00e5\u0000\u0000P\u00e3\u0004`\u00a0\u0003\u0002`\u00a0\u0013\b`\u0084\u00e5\u001c\u0000\u0094\u00e5 \u00c0\u0006\u00e36\u00c0L\u00e3<\u00ff/\u00e1\u001c\u0000\u0094\u00e5\u0002\u0010\u00a0\u00e3\u00d0\u00ce\u0005\u00e36\u00c0L\u00e3<\u00ff/\u00e1\b\u0000\u0094\u00e5\u0002\u0000P\u00e3\u0018\u0010\u008f\u0002$\u0010\u008f\u0012\u0000\u00c0\u0098\u00e58\u000b\u000b\u00e3\u00ba\u0000L\u00e3<\u00ff/\u00e1\u0000\u0000\u00a0\u00e3\u00f0\u0081\u00bd\u00e8getfile: read\u0000\u0000\u0000getfile: FAILED, read status at 0xC072F708\u0000\u00008\u00e5r\u00c0"}
+{"time": "2026-10-11T02:31:39.738225", "command": "mem set 0xC0BAC2F8 0xC03D99A0", "reply": "set : A:0xc0bac2f8, D:0xC03D99A0 \n\n"}
+{"time": "2026-10-11T02:31:39.739199", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC03D99A0\n\n"}
+{"time": "2026-10-11T02:31:39.739698", "command": "mem set 0xC0BAC2F8 0xC072E538", "reply": "set : A:0xc0bac2f8, D:0xC072E538 \n\n"}
+{"time": "2026-10-11T02:31:39.740021", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC072E538\n\n"}
+{"time": "2026-10-11T02:31:39.744887", "command": "echo", "reply": "getfile: read \n"}
+{"time": "2026-10-11T02:31:39.745390", "command": "mem set 0xC0BAC2F8 0xC03D99A0", "reply": "set : A:0xc0bac2f8, D:0xC03D99A0 \n\n"}
+{"time": "2026-10-11T02:31:39.745795", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC03D99A0\n\n"}
+{"time": "2026-10-11T02:31:39.746188", "command": "mem get 0xC072E44C,,0x4", "reply": "get : A:0xc072e44c, D:0x5F900980\n\n"}
+{"time": "2026-10-11T02:31:39.749143", "command": "mem get 0xC072E438,,0x14", "reply": "get : A:0xc072e438, D:0xC001D7A0\nget : A:0xc072e43c, D:0x00006C04\nget : A:0xc072e440, D:0x00000002\nget : A:0xc072e444, D:0x00000001\nget : A:0xc072e448, D:0x00000001\n"}
+{"time": "2026-10-11T02:31:39.783226", "command": "mem set 0xC072E538 0xE92D4FF8", "reply": "set : A:0xc072e538, D:0xE92D4FF8 \n\n"}
+{"time": "2026-10-11T02:31:39.785723", "command": "mem set 0xC072E53C 0xE1A08000", "reply": "set : A:0xc072e53c, D:0xE1A08000 \n\n"}
+{"time": "2026-10-11T02:31:39.786251", "command": "mem set 0xC072E540 0xE30E4438", "reply": "set : A:0xc072e540, D:0xE30E4438 \n\n"}
+{"time": "2026-10-11T02:31:39.787180", "command": "mem set 0xC072E544 0xE34C4072", "reply": "set : A:0xc072e544, D:0xE34C4072 \n\n"}
+{"time": "2026-10-11T02:31:39.787730", "command": "mem set 0xC072E548 0xE3A00000", "reply": "set : A:0xc072e548, D:0xE3A00000 \n\n"}
+{"time": "2026-10-11T02:31:39.788309", "command": "mem set 0xC072E54C 0xE584001C", "reply": "set : A:0xc072e54c, D:0xE584001C \n\n"}
+{"time": "2026-10-11T02:31:39.788728", "command": "mem set 0xC072E550 0xE5949000", "reply": "set : A:0xc072e550, D:0xE5949000 \n\n"}
+{"time": "2026-10-11T02:31:39.789099", "command": "mem set 0xC072E554 0xE5940004", "reply": "set : A:0xc072e554, D:0xE5940004 \n\n"}
+{"time": "2026-10-11T02:31:39.789695", "command": "mem set 0xC072E558 0xE5941008", "reply": "set : A:0xc072e558, D:0xE5941008 \n\n"}
+{"time": "2026-10-11T02:31:39.791050", "command": "mem set 0xC072E55C 0xE594200C", "reply": "set : A:0xc072e55c, D:0xE594200C \n\n"}
+{"time": "2026-10-11T02:31:39.791487", "command": "mem set 0xC072E560 0xE5943010", "reply": "set : A:0xc072e560, D:0xE5943010 \n\n"}
+{"time": "2026-10-11T02:31:39.791918", "command": "mem set 0xC072E564 0xE594A014", "reply": "set : A:0xc072e564, D:0xE594A014 \n\n"}
+{"time": "2026-10-11T02:31:39.792521", "command": "mem set 0xC072E568 0xE5946020", "reply": "set : A:0xc072e568, D:0xE5946020 \n\n"}
+{"time": "2026-10-11T02:31:39.792930", "command": "mem set 0xC072E56C 0xE5947024", "reply": "set : A:0xc072e56c, D:0xE5947024 \n\n"}
+{"time": "2026-10-11T02:31:39.793398", "command": "mem set 0xC072E570 0xE1A04006", "reply": "set : A:0xc072e570, D:0xE1A04006 \n\n"}
+{"time": "2026-10-11T02:31:39.793988", "command": "mem set 0xC072E574 0xE1A05007", "reply": "set : A:0xc072e574, D:0xE1A05007 \n\n"}
+{"time": "2026-10-11T02:31:39.794365", "command": "mem set 0xC072E578 0xE12FFF39", "reply": "set : A:0xc072e578, D:0xE12FFF39 \n\n"}
+{"time": "2026-10-11T02:31:39.794725", "command": "mem set 0xC072E57C 0xE30E4438", "reply": "set : A:0xc072e57c, D:0xE30E4438 \n\n"}
+{"time": "2026-10-11T02:31:39.795036", "command": "mem set 0xC072E580 0xE34C4072", "reply": "set : A:0xc072e580, D:0xE34C4072 \n\n"}
+{"time": "2026-10-11T02:31:39.795470", "command": "mem set 0xC072E584 0xE5840018", "reply": "set : A:0xc072e584, D:0xE5840018 \n\n"}
+{"time": "2026-10-11T02:31:39.795876", "command": "mem set 0xC072E588 0xE3000000", "reply": "set : A:0xc072e588, D:0xE3000000 \n\n"}
+{"time": "2026-10-11T02:31:39.796230", "command": "mem set 0xC072E58C 0xE34D009E", "reply": "set : A:0xc072e58c, D:0xE34D009E \n\n"}
+{"time": "2026-10-11T02:31:39.799429", "command": "mem set 0xC072E590 0xE584001C", "reply": "set : A:0xc072e590, D:0xE584001C \n\n"}
+{"time": "2026-10-11T02:31:39.799911", "command": "mem set 0xC072E594 0xE598C000", "reply": "set : A:0xc072e594, D:0xE598C000 \n\n"}
+{"time": "2026-10-11T02:31:39.800271", "command": "mem set 0xC072E598 0xE30B0B38", "reply": "set : A:0xc072e598, D:0xE30B0B38 \n\n"}
+{"time": "2026-10-11T02:31:39.801261", "command": "mem set 0xC072E59C 0xE34C00BA", "reply": "set : A:0xc072e59c, D:0xE34C00BA \n\n"}
+{"time": "2026-10-11T02:31:39.801711", "command": "mem set 0xC072E5A0 0xE28F1008", "reply": "set : A:0xc072e5a0, D:0xE28F1008 \n\n"}
+{"time": "2026-10-11T02:31:39.802163", "command": "mem set 0xC072E5A4 0xE12FFF3C", "reply": "set : A:0xc072e5a4, D:0xE12FFF3C \n\n"}
+{"time": "2026-10-11T02:31:39.803026", "command": "mem set 0xC072E5A8 0xE3A00000", "reply": "set : A:0xc072e5a8, D:0xE3A00000 \n\n"}
+{"time": "2026-10-11T02:31:39.803508", "command": "mem set 0xC072E5AC 0xE8BD8FF8", "reply": "set : A:0xc072e5ac, D:0xE8BD8FF8 \n\n"}
+{"time": "2026-10-11T02:31:39.803943", "command": "mem set 0xC072E5B0 0x6C6C6163", "reply": "set : A:0xc072e5b0, D:0x6C6C6163 \n\n"}
+{"time": "2026-10-11T02:31:39.804362", "command": "mem set 0xC072E5B4 0x203A6E66", "reply": "set : A:0xc072e5b4, D:0x203A6E66 \n\n"}
+{"time": "2026-10-11T02:31:39.804792", "command": "mem set 0xC072E5B8 0x75746572", "reply": "set : A:0xc072e5b8, D:0x75746572 \n\n"}
+{"time": "2026-10-11T02:31:39.805172", "command": "mem set 0xC072E5BC 0x64656E72", "reply": "set : A:0xc072e5bc, D:0x64656E72 \n\n"}
+{"time": "2026-10-11T02:31:39.805554", "command": "mem set 0xC072E5C0 0xA0000000", "reply": "set : A:0xc072e5c0, D:0xA0000000 \n\n"}
+{"time": "2026-10-11T02:31:39.806542", "command": "mem get 0xC072E538,,0x8C", "reply": "get : A:0xc072e538, D:0xE92D4FF8\nget : A:0xc072e53c, D:0xE1A08000\nget : A:0xc072e540, D:0xE30E4438\nget : A:0xc072e544, D:0xE34C4072\nget : A:0xc072e548, D:0xE3A00000\nget : A:0xc072e54c, D:0xE584001C\nget : A:0xc072e550, D:0xE5949000\nget : A:0xc072e554, D:0xE5940004\nget : A:0xc072e558, D:0xE5941008\nget : A:0xc072e55c, D:0xE594200C\nget : A:0xc072e560, D:0xE5943010\nget : A:0xc072e564, D:0xE594A014\nget : A:0xc072e568, D:0xE5946020\nget : A:0xc072e56c, D:0xE5947024\nget : A:0xc072e570, D:0xE1A04006\nget : A:0xc072e574, D:0xE1A05007\nget : A:0xc072e578, D:0xE12FFF39\nget : A:0xc072e57c, D:0xE30E4438\nget : A:0xc072e580, D:0xE34C4072\nget : A:0xc072e584, D:0xE5840018\nget : A:0xc072e588, D:0xE3000000\nget : A:0xc072e58c, D:0xE34D009E\nget : A:0xc072e590, D:0xE584001C\nget : A:0xc072e594, D:0xE598C000\nget : A:0xc072e598, D:0xE30B0B38\nget : A:0xc072e59c, D:0xE34C00BA\nget : A:0xc072e5a0, D:0xE28F1008\nget : A:0xc072e5a4, D:0xE12FFF3C\nget : A:0xc072e5a8, D:0xE3A00000\nget : A:0xc072e5ac, D:0xE8BD8FF8\nget : A:0xc072e5b0, D:0x6C6C6163\nget : A:0xc072e5b4, D:0x203A6E66\nget : A:0xc072e5b8, D:0x75746572\nget : A:0xc072e5bc, D:0x64656E72\nget : A:0xc072e5c0, D:0xA0000000\n"}
+{"time": "2026-10-11T02:31:39.806950", "command": "mem set 0xC072E438 0xC001D7A0", "reply": "set : A:0xc072e438, D:0xC001D7A0 \n\n"}
+{"time": "2026-10-11T02:31:39.807295", "command": "mem set 0xC072E43C 0xC072E518", "reply": "set : A:0xc072e43c, D:0xC072E518 \n\n"}
+{"time": "2026-10-11T02:31:39.807672", "command": "mem set 0xC072E440 0x00000002", "reply": "set : A:0xc072e440, D:0x00000002 \n\n"}
+{"time": "2026-10-11T02:31:39.808012", "command": "mem set 0xC072E444 0x00000000", "reply": "set : A:0xc072e444, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:39.808420", "command": "mem set 0xC072E448 0x00000000", "reply": "set : A:0xc072e448, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:39.808776", "command": "mem set 0xC072E44C 0x00000000", "reply": "set : A:0xc072e44c, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:39.809133", "command": "mem set 0xC072E450 0x00000000", "reply": "set : A:0xc072e450, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:39.809656", "command": "mem set 0xC072E454 0x00000000", "reply": "set : A:0xc072e454, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:39.809976", "command": "mem set 0xC072E458 0x00000000", "reply": "set : A:0xc072e458, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:39.810329", "command": "mem set 0xC072E45C 0x00000000", "reply": "set : A:0xc072e45c, D:0x00000000 \n\n"}
+{"time": "2026-10-11T02:31:39.810884", "command": "mem get 0xC072E438,,0x28", "reply": "get : A:0xc072e438, D:0xC001D7A0\nget : A:0xc072e43c, D:0xC072E518\nget : A:0xc072e440, D:0x00000002\nget : A:0xc072e444, D:0x00000000\nget : A:0xc072e448, D:0x00000000\nget : A:0xc072e44c, D:0x00000000\nget : A:0xc072e450, D:0x00000000\nget : A:0xc072e454, D:0x00000000\nget : A:0xc072e458, D:0x00000000\nget : A:0xc072e45c, D:0x00000000\n"}
+{"time": "2026-10-11T02:31:39.811232", "command": "mem set 0xC0BAC2F8 0xC072E538", "reply": "set : A:0xc0bac2f8, D:0xC072E538 \n\n"}
+{"time": "2026-10-11T02:31:39.811512", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC072E538\n\n"}
+{"time": "2026-10-11T02:31:39.811775", "command": "echo", "reply": "callfn: returned \n"}
+{"time": "2026-10-11T02:31:39.812058", "command": "mem set 0xC0BAC2F8 0xC03D99A0", "reply": "set : A:0xc0bac2f8, D:0xC03D99A0 \n\n"}
+{"time": "2026-10-11T02:31:39.812425", "command": "mem get 0xC0BAC2F8,,0x4", "reply": "get : A:0xc0bac2f8, D:0xC03D99A0\n\n"}
+{"time": "2026-10-11T02:31:39.812916", "command": "mem get 0xC072E450,,0x8", "reply": "get : A:0xc072e450, D:0x00000000\nget : A:0xc072e454, D:0xD09E0000\n\n"}

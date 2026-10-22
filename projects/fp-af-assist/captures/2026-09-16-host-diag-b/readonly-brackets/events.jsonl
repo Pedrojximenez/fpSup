@@ -1,0 +1,27 @@
+{"monotonic": 0.041565583, "event": "exchange", "request": "TMO 1000 SHL version", "reply": "OK model       = w71c1 \\nxc version  = V91 \\nrel version = 5.02.0.V91  \\ngit hash    = 13aa621060efff11aaba9b21ad925005302605cf \\n\n", "elapsed_s": 0.0014905829999999967}
+{"monotonic": 0.048370458, "event": "exchange", "request": "TMO 1000 SHL mem get 0xC3476408,,0x4", "reply": "OK get : A:0xc3476408, D:0x00000001\\n\n", "elapsed_s": 0.0009666670000000044}
+{"monotonic": 0.055371583, "event": "exchange", "request": "TMO 1000 SHL mem get 0xC3476414,,0x4", "reply": "OK get : A:0xc3476414, D:0xC0B8EEEC\\n\n", "elapsed_s": 0.0007884999999999975}
+{"monotonic": 0.061668958, "event": "exchange", "request": "TMO 1000 SHL mem get 0xC0BAC2F8,,0x4", "reply": "OK get : A:0xc0bac2f8, D:0xC03D99A0\\n\n", "elapsed_s": 0.0004244170000000033}
+{"monotonic": 0.067760791, "event": "exchange", "request": "TMO 1000 SHL mem get 0xC30338C8,,0x4", "reply": "OK get : A:0xc30338c8, D:0x00000000\\n\n", "elapsed_s": 0.0005611670000000013}
+{"monotonic": 0.074596125, "event": "exchange", "request": "TMO 1000 SHL mem get 0xC30338D0,,0x4", "reply": "OK get : A:0xc30338d0, D:0x00010000\\n\n", "elapsed_s": 0.0005890409999999985}
+{"monotonic": 0.082170166, "event": "exchange", "request": "TMO 1000 SHL mem get 0xC3033A6C,,0x4", "reply": "OK get : A:0xc3033a6c, D:0x00000000\\n\n", "elapsed_s": 0.0022902499999999937}
+{"monotonic": 0.089018, "event": "exchange", "request": "TMO 1000 SHL mem get 0xC31F8CB4,,0x8", "reply": "OK get : A:0xc31f8cb4, D:0x00000001\\nget : A:0xc31f8cb8, D:0x00000001\\n\n", "elapsed_s": 0.0005879579999999995}
+{"monotonic": 0.090668375, "event": "exchange", "request": "TMO 1000 SHL mem get 0xC32985E8,,0x4", "reply": "OK get : A:0xc32985e8, D:0x000029F9\\n\n", "elapsed_s": 0.0012547089999999927}
+{"monotonic": 0.091051041, "event": "exchange", "request": "TMO 1000 SHL mem get 0xC32986B4,,0x4", "reply": "OK get : A:0xc32986b4, D:0x00008F84\\n\n", "elapsed_s": 0.00029858299999999116}
+{"monotonic": 0.09144, "event": "exchange", "request": "TMO 1000 SHL mem get 0xC31F8CB4,,0x8", "reply": "OK get : A:0xc31f8cb4, D:0x00000001\\nget : A:0xc31f8cb8, D:0x00000001\\n\n", "elapsed_s": 0.00035041699999999176}
+{"monotonic": 0.091509625, "event": "diagnostic_bracket", "index": 0, "raw": {"phase_before": 1, "mode_before": 1, "h": 10745, "l": 36740, "phase_after": 1, "mode_after": 1, "started_at": 0.088410458, "finished_at": 0.091505708}, "scientifically_validated": false}
+{"monotonic": 0.098255833, "event": "exchange", "request": "TMO 1000 SHL mem get 0xC0BAC2F8,,0x4", "reply": "OK get : A:0xc0bac2f8, D:0xC03D99A0\\n\n", "elapsed_s": 0.0008119170000000092}
+{"monotonic": 0.104156375, "event": "exchange", "request": "TMO 1000 SHL mem get 0xC30338C8,,0x4", "reply": "OK get : A:0xc30338c8, D:0x00000000\\n\n", "elapsed_s": 0.00044137500000000773}
+{"monotonic": 0.1108895, "event": "exchange", "request": "TMO 1000 SHL mem get 0xC30338D0,,0x4", "reply": "OK get : A:0xc30338d0, D:0x00010000\\n\n", "elapsed_s": 0.0004619580000000123}
+{"monotonic": 0.117737, "event": "exchange", "request": "TMO 1000 SHL mem get 0xC3033A6C,,0x4", "reply": "OK get : A:0xc3033a6c, D:0x00000000\\n\n", "elapsed_s": 0.0005953330000000034}
+{"monotonic": 0.124421833, "event": "exchange", "request": "TMO 1000 SHL mem get 0xC31F8CB4,,0x8", "reply": "OK get : A:0xc31f8cb4, D:0x00000000\\nget : A:0xc31f8cb8, D:0x00000001\\n\n", "elapsed_s": 0.0004400420000000016}
+{"monotonic": 0.12479725, "event": "exchange", "request": "TMO 1000 SHL mem get 0xC32985E8,,0x4", "reply": "OK get : A:0xc32985e8, D:0x000029F4\\n\n", "elapsed_s": 0.0002874999999999961}
+{"monotonic": 0.125122125, "event": "exchange", "request": "TMO 1000 SHL mem get 0xC32986B4,,0x4", "reply": "OK get : A:0xc32986b4, D:0x00008FA8\\n\n", "elapsed_s": 0.00027950000000000197}
+{"monotonic": 0.125572791, "event": "exchange", "request": "TMO 1000 SHL mem get 0xC31F8CB4,,0x8", "reply": "OK get : A:0xc31f8cb4, D:0x00000000\\nget : A:0xc31f8cb8, D:0x00000001\\n\n", "elapsed_s": 0.00042483399999998506}
+{"monotonic": 0.12561125, "event": "diagnostic_bracket", "index": 1, "raw": {"phase_before": 0, "mode_before": 1, "h": 10740, "l": 36776, "phase_after": 0, "mode_after": 1, "started_at": 0.12397025, "finished_at": 0.125609291}, "scientifically_validated": false}
+{"monotonic": 0.132347833, "event": "exchange", "request": "TMO 1000 SHL mem get 0xC0BAC2F8,,0x4", "reply": "OK get : A:0xc0bac2f8, D:0xC03D99A0\\n\n", "elapsed_s": 0.0005044589999999849}
+{"monotonic": 0.139072666, "event": "exchange", "request": "TMO 1000 SHL mem get 0xC30338C8,,0x4", "reply": "OK get : A:0xc30338c8, D:0x00000000\\n\n", "elapsed_s": 0.0004683749999999931}
+{"monotonic": 0.148641125, "event": "exchange", "request": "TMO 1000 SHL mem get 0xC30338D0,,0x4", "reply": "OK get : A:0xc30338d0, D:0x00010000\\n\n", "elapsed_s": 0.003308792000000005}
+{"monotonic": 0.155357166, "event": "exchange", "request": "TMO 1000 SHL mem get 0xC3033A6C,,0x4", "reply": "OK get : A:0xc3033a6c, D:0x00000000\\n\n", "elapsed_s": 0.00046404099999999837}
+{"monotonic": 0.162192333, "event": "exchange", "request": "TMO 1000 SHL mem get 0xC31F8CB4,,0x8", "reply": "OK get : A:0xc31f8cb4, D:0x00000002\\nget : A:0xc31f8cb8, D:0x00000001\\n\n", "elapsed_s": 0.0005614590000000141}
+{"monotonic": 0.230988958, "event": "exchange", "request": "TMO 1000 SHL mem get 0xC32985E8,,0x4", "reply": "ERR shl frame0 rc=0(LIBUSB_SUCCESS / LIBUSB_TRANSFER_COMPLETED) moved=12/64\n", "elapsed_s": 0.068716}

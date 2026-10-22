@@ -1,0 +1,40 @@
+test_failed_persistence_and_recording_do_not_change_selection (test_reslab_saved_rows.SavedRows) ... FAIL
+test_full_list_save_then_choose_and_reboot_into_native_qs (test_reslab_saved_rows.SavedRows) ... ok
+test_room_auto_enables_saved_file_and_empty_selection_is_persistent (test_reslab_saved_rows.SavedRows) ... ok
+test_empty_name_uses_auto_and_invalid_or_reserved_name_never_writes (test_reslab_save_names.SaveNameTests) ... ok
+test_filter_expansion_publishes_range_before_stable_selection (test_reslab_save_names.SaveNameTests) ... ok
+test_name_keys_and_save_do_not_change_geometry_or_active_consumer (test_reslab_save_names.SaveNameTests) ... ok
+test_save_page_has_only_name_and_save_controls_mode_is_read_only (test_reslab_save_names.SaveNameTests) ... FAIL
+test_short_and_seven_character_names_resources_and_consumer_load (test_reslab_save_names.SaveNameTests) ... ok
+test_numeric_edit_commits_on_done_without_apply (test_reslab_sidebar.SidebarTests) ... ok
+test_native_sidebar_page_and_save_is_third_tab (test_reslab_sidebar.SidebarTests) ... ok
+test_shutdown_restores_claimed_words (test_virtual_rcd.VirtualTests) ... ok
+test_settings_open_uses_both_native_requests_and_preserves_recording (test_virtual_rcd.VirtualTests) ... ok
+
+======================================================================
+FAIL: test_failed_persistence_and_recording_do_not_change_selection (test_reslab_saved_rows.SavedRows)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_reslab_saved_rows.py", line 74, in test_failed_persistence_and_recording_do_not_change_selection
+    self.assertEqual(bytes(c.mu.mem_read(cfg,V.L.CFG['BYTES'])),before)
+AssertionError: b'RCS1\x01\x00\x00\x00\x00\x00\x00\x00\x00\[279 chars]\x00' != b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\[339 chars]\x00'
+
+======================================================================
+FAIL: test_save_page_has_only_name_and_save_controls_mode_is_read_only (test_reslab_save_names.SaveNameTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_reslab_save_names.py", line 101, in test_save_page_has_only_name_and_save_controls_mode_is_read_only
+    self.assertEqual([r['key'] for r in B.specs()[101]],['NAME','SAVE'])
+AssertionError: Lists differ: ['NAME', 'SAVE'] != ['NAME', 'SAVE', 'FILE', 'ENABLE']
+
+Second list contains 2 additional elements.
+First extra element 2:
+'FILE'
+
+- ['NAME', 'SAVE']
++ ['NAME', 'SAVE', 'FILE', 'ENABLE']
+
+----------------------------------------------------------------------
+Ran 12 tests in 373.875s
+
+FAILED (failures=2)

@@ -1,0 +1,24 @@
+screen: LV_CINE_MEDIUM
+  tagged 16380/51454 B  2360 KiB/s   tagged 32760/51454 B  1872 KiB/s   tagged 49140/51454 B  2086 KiB/s   tagged 51454/51454 B  2099 KiB/s   tagged 51454 bytes in 0.0s (2022 KiB/s)      
+  tagged 116/116 B  106 KiB/s   tagged 116 bytes in 0.0s (59 KiB/s)      
+  tagged 116/116 B  205 KiB/s   tagged 116 bytes in 0.0s (101 KiB/s)      
+  tagged 80/80 B  115 KiB/s   tagged 80 bytes in 0.0s (57 KiB/s)      
+  tagged 104/104 B  200 KiB/s   tagged 104 bytes in 0.0s (25 KiB/s)      
+  tagged 60/60 B  40 KiB/s   tagged 60 bytes in 0.0s (26 KiB/s)      
+screen: LV_CINE_MEDIUM
+  tagged 16380/51454 B  2040 KiB/s   tagged 32760/51454 B  2038 KiB/s   tagged 49140/51454 B  2355 KiB/s   tagged 51454/51454 B  2097 KiB/s   tagged 51454 bytes in 0.0s (1941 KiB/s)      
+  tagged 116/116 B  167 KiB/s   tagged 116 bytes in 0.0s (84 KiB/s)      
+  tagged 116/116 B  142 KiB/s   tagged 116 bytes in 0.0s (74 KiB/s)      
+  tagged 80/80 B  141 KiB/s   tagged 80 bytes in 0.0s (59 KiB/s)      
+  tagged 104/104 B  198 KiB/s   tagged 104 bytes in 0.0s (96 KiB/s)      
+  tagged 60/60 B  15 KiB/s   tagged 60 bytes in 0.0s (11 KiB/s)      
+{
+  "label": "tagged-120-inner-v14-quiet",
+  "new_clips": [
+    "A001_076"
+  ],
+  "stop_sent": true,
+  "standby_after": true,
+  "phase": "captured",
+  "record_log": "slot=1, cnt=7/600\nsize=131072*978816(119GB), free=76%, exFAT, UHS-II\ntime       : 2026/10/11 18:26:35 \nrec factor : Nothing \nui factor  : Button \nbattery    : OK \ntemp(BAT)  : OK \ntemp(BODY) : OK \ntemp(LCD)  : OK \ntemp(CMOS) : OK \nfile-size=1095168, bulk-size=67108864(61.3)\nreq_cnt=392, fin_cnt=392, key\nrequest  ,finish   ,diff,gap ,reqcnt,fincnt,diff,sdb,MB/s\n     1086,     1335, 249,1086,    57,     1,  56,  6, 250\n     1543,     1793, 250, 208,   114,    57,  57,  5, 254\n     2003,     2250, 247, 210,   171,   114,  57,  5, 257\n     2462,     2712, 250, 212,   228,   171,  57,  5, 254\n     2919,     3167, 248, 207,   285,   228,  57,  5, 256\n     3377,     3626, 249, 210,   342,   285,  57,  5, 255\n     3777,     4026, 249, 151,   392,   342,  50, 44, 224\n"
+}

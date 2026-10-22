@@ -1,0 +1,32 @@
+test_high_rate_carrier_preserves_timing_and_geometry (__main__.Native30Tests) ... test_contract_abi_and_status (test_virtual_rcd.VirtualTests) ... ok
+test_apply_without_file_and_live_canvas (test_virtual_rcd.VirtualTests) ... ok
+test_invalid_geometry_raw14_rate_and_format (test_virtual_rcd.VirtualTests) ... ok
+
+======================================================================
+ERROR: test_high_rate_carrier_preserves_timing_and_geometry (__main__.Native30Tests) (rank=23976)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-m12-recurrence/test_native30.py", line 73, in test_high_rate_carrier_preserves_timing_and_geometry
+    self.assertEqual(cam.call(vtv, state, 0, 0, 3, thumb=True, sp=V.T.STACK - 0x1000)[0], nominal)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/v3/test_v3.py", line 259, in call
+    mu.emu_start(pc | (1 if thumb else 0), DONE, count=20_000_000)
+  File "/Users/dido/Library/Python/3.9/lib/python/site-packages/unicorn/unicorn_py3/unicorn.py", line 766, in emu_start
+    raise UcError(status)
+unicorn.unicorn_py3.unicorn.UcError: Invalid memory fetch (UC_ERR_FETCH_UNMAPPED)
+
+======================================================================
+ERROR: test_high_rate_carrier_preserves_timing_and_geometry (__main__.Native30Tests) (rank=27972)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-m12-recurrence/test_native30.py", line 73, in test_high_rate_carrier_preserves_timing_and_geometry
+    self.assertEqual(cam.call(vtv, state, 0, 0, 3, thumb=True, sp=V.T.STACK - 0x1000)[0], nominal)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/v3/test_v3.py", line 259, in call
+    mu.emu_start(pc | (1 if thumb else 0), DONE, count=20_000_000)
+  File "/Users/dido/Library/Python/3.9/lib/python/site-packages/unicorn/unicorn_py3/unicorn.py", line 766, in emu_start
+    raise UcError(status)
+unicorn.unicorn_py3.unicorn.UcError: Invalid memory fetch (UC_ERR_FETCH_UNMAPPED)
+
+----------------------------------------------------------------------
+Ran 4 tests in 203.717s
+
+FAILED (errors=2)

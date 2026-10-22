@@ -1,0 +1,96 @@
+{
+ "schema_version": 1,
+ "kind": "offline_emulation_environment_triage_and_skip_gate",
+ "date": "2026-09-27",
+ "operator_scope": "offline only. No camera, no card. Host test-harness work plus one fresh emulation run.",
+ "prompted_by": "CURRENT_DEVELOPMENT.md §6: test_codec_emulation exited 132 with no Python traceback on the project owner's run; not to be counted as a pass, nor as evidence about ARM behaviour.",
+ "what_132_is": "128+4 = SIGILL. A fault inside unicorn's JIT is a signal, not a Python exception: the interpreter dies where it stands, so there is no traceback and unittest prints nothing. A bare 132 is indistinguishable from the suite finding a real defect and from the tests never having run.",
+ "reproduction_attempt": {
+  "result": "NOT REPRODUCED on this machine",
+  "working_run": {
+   "tests": 10,
+   "outcome": "OK",
+   "exit": 0,
+   "skipped": 0
+  },
+  "environment": {
+   "python": "3.9.6",
+   "executable": "/Library/Developer/CommandLineTools/usr/bin/python3",
+   "machine": "arm64",
+   "platform": "macOS-27.0-arm64-arm-64bit",
+   "arch_of_interpreter": "arm64",
+   "unicorn": "2.1.4",
+   "unicorn_path": "/Users/dido/Library/Python/3.9/lib/python/site-packages/unicorn/__init__.py",
+   "unicorn_lib": "/Users/dido/Library/Python/3.9/lib/python/site-packages/unicorn/lib/libunicorn.2.dylib",
+   "unicorn_lib_arch": "arm64"
+  },
+  "interpreters_checked": [
+   {
+    "path": "/usr/bin/python3",
+    "python": "3.9.6",
+    "machine": "arm64",
+    "unicorn": "2.1.4"
+   },
+   {
+    "path": "/opt/homebrew/bin/python3",
+    "python": "3.14.7",
+    "machine": "arm64",
+    "unicorn": "ModuleNotFoundError",
+    "note": "would raise ImportError and SKIP, so it cannot be the source of a SIGILL"
+   }
+  ],
+  "unicorn_native_lib_arch": "arm64",
+  "second_repo_path_ruled_out": "/Users/dido/Developer is a symlink to Developer.localized; find located exactly one emulate_codec_probe.py, so a divergent stale copy is not the explanation.",
+  "cause": "NOT ESTABLISHED. No interpreter available here reproduces it. SIGILL points at unicorn's code generation on the machine that ran it, not at the probe's ARM source, but that is an inference from the signal number only."
+ },
+ "what_was_built_instead": {
+  "principle": "the cause cannot be chased from a machine that does not reproduce it, but a bare exit 132 can be made impossible. §3 item 3 requires offline tests to have clear pass/fail/skip.",
+  "emulation_capability.py": "asks 'can unicorn execute this probe here?' in a CHILD process, where a fatal signal is a returncode this module can read, and turns the answer into a SKIP reason naming the signal. Decodes both spellings: subprocess's negative returncode and a shell's 128+n.",
+  "the_child_runs_the_real_workload": "emulate_codec_probe.py --selfcheck performs one complete copy-back emulation, not a toy instruction sequence: the failure class is 'unicorn cannot execute THIS workload here', and a canary proving a mov works would pass on a machine the real run still kills.",
+  "test_codec_emulation_gate": "the capability is consulted BEFORE emulate_codec_probe (and therefore unicorn) is imported into the test process, so even a fatal fault while loading the library becomes a skip.",
+  "FP_SKIP_EMULATION": "an environment switch to force the skip, for a machine where the child is not worth running.",
+  "escape_hatch_is_not_a_pass": "exit 0 without the SELFCHECK OK token, a wrong answer from a run that completed, and a timeout are all 'not usable'. Only the token plus exit 0 is a pass."
+ },
+ "tests": {
+  "new": "fpSup/raw/lossless_codec/test_emulation_capability.py, 13 tests",
+  "method": "each case replaces the self-check child with a script that fails a specific way, so the gate is exercised by an ACTUAL process death rather than a mock returning a number",
+  "cases": [
+   "child killed by SIGILL",
+   "child exiting 132",
+   "child killed by SIGSEGV",
+   "traceback in the child",
+   "child ran but got the wrong answer",
+   "child hangs (timeout)",
+   "exit 0 without the token",
+   "token plus exit 0",
+   "missing emulator file",
+   "FP_SKIP_EMULATION wins",
+   "environment() does not import unicorn into its own process",
+   "environment() names interpreter and arch",
+   "the gate runs the shipped emulator"
+  ],
+  "mutations_that_each_failed_a_test": [
+   "accept any exit 0, drop the token check",
+   "drop the 128+n decoding",
+   "ignore FP_SKIP_EMULATION",
+   "report a timeout as usable",
+   "stop naming the signal",
+   "make environment() import unicorn in-process"
+  ],
+  "suite_after": {
+   "fpSup/raw/lossless_codec": "163 tests OK, 0 skipped",
+   "projects/lossless-sup/tools": "73 tests OK"
+  }
+ },
+ "a_defect_found_in_my_own_new_test": "test_the_environment_report_does_not_import_unicorn_in_process first asserted `'unicorn' not in sys.modules`, which passed standalone and FAILED under `unittest discover` - the emulation tests legitimately import unicorn into the same process. The property is about what environment() does, not about the process, so it is now asked in a clean interpreter. It passed the first time for the wrong reason; discover caught it.",
+ "a_stale_debug_path_fixed_in_passing": "emulate_codec_probe.py's __main__ still printed state(0xDC/0xE0/0xE4) as file_bytes/copy_bytes/fit. Those offsets were moved to RESULT_OFF when the state block filled up, and 0xE4 is now a scratch guard record that a gate reads - so the module's own debug output would have printed guard magic as 'fit'. It now uses result().",
+ "explicitly_not_established": [
+  "why the owner's run got SIGILL. The gate makes it report a skip; it does not diagnose it.",
+  "that the probe's ARM source is sound on real hardware. Emulated is not on the camera.",
+  "anything about the codec, timing, or the +0x40000000 alias.",
+  "a skip is not evidence about the probe. It records that the machine could not answer."
+ ],
+ "how_the_owner_can_produce_the_diagnosis": "python3 emulation_capability.py in fpSup/raw/lossless_codec prints usable/reason, the interpreter, arch, unicorn version and native-library arch, and the child's last 20 lines. Run with the SAME interpreter and working directory as the failing run; comparing that report against reproduction_attempt.environment above is what would locate the difference.",
+ "camera_accessed": false,
+ "deployable": false
+}

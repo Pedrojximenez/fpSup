@@ -1,0 +1,43 @@
+fp handover 新增 DMA 分析審查
+2026-10-11
+
+結論
+05STOPFX.BIN 與上一份完全相同，維持「建議採用為實驗候選，未上機驗收」的判斷。
+新增的 dma-alias-resolved.md 不採用其「RAW 0x50000000 不需轉換」結論。
+本次六項離線測試通過、零跳過；未操作相機或修改正式產品程式。
+
+關鍵錯誤
+交接文件把原廠初始化的 +0x40000000 結果誤認為控制器 DMA 位址。
+實際初始化會存兩個視角：context+0x38 是 TRB 的低位址，context+0x64 是 CPU 存取別名。
+以目前 EP82 IN 所用 ctx2 為例：
+  原本 cached 指標       C31E32E0
+  控制器 TRB 位址        031E32E0（context+38 table）
+  CPU uncached TRB 指標  431E32E0（context+64 table）
+
+C01E6B80 的 StartTransfer 從 +38 table 取 031E32E0，交給 C01E6A48；
+C01E6AAA 直接將它寫入 DEPCMDPAR1，沒有再加 40000000。
+因此交接文件所稱 431E32E0「控制器位址」的解讀與實际呼叫路徑相反。
+
+資料指標也有最後一步
+原廠 bulk send C01E5880 收到來源 50000000 時，保留這個 CPU 指標；
+C01E591E 再減 40000000，C01E5922 把 10000000 寫入 TRB bufptr。
+六項測試執行真實 Thumb 指令並確認上述 table、StartTransfer 參數和 payload bufptr。
+也確認 C31E32C0 與 431E32C0 最終都產生 031E32C0，cached 路徑另有 cache 維護呼叫。
+把 CPU table 錯當 DMA table 的反例能被測試抓到。
+
+這证明的是原廠 USB 路徑實際使用的地址；尚未實機驗證其他地址是否另有硬體別名。
+初始化算術不能單獨證明 RAW 50000000 能直接被 USB DMA 正確讀取。
+目前 worker 的 TO_BUS 減 40000000 與原廠 payload 路徑一致，不因交接文件改成 identity。
+
+Stop leak 與試驗說明
+同 hash 的 316-byte STFX 已在前輪通過十項離線驗證，這份包沒有新增實機結果。
+它修異常停止後的節點回收；不是之前 EARLY_STOP_94 首次滿池的批次設定修正。
+交接文件的「no risk」StartTransfer 試驗會修改 TRB 和端點狀態，不能当唯讀觀測。
+引用的 RAW_PUSH 是 EP84 的歷史配置；現行端點及所有權須依 source 核對。
+將 RAW 固定 4 KiB 與 CinemaDNG 左上角比對也必須先對齊幀、packing、OB、stride 和影像布局；
+不能因為不同就改用另一個 alias。
+
+驗證限制
+MMIO 僅是模擬記憶體。端點選擇、鎖、cache 動作、命令接受和 USB wait 有明確替代。
+沒有模擬 DMA 可達性、USB 完成、感光元件幀時序、buffer lease 或畫面內容一致性。
+細節與來源 hash：review.json、test-results.json、native-address-paths.asm.txt。

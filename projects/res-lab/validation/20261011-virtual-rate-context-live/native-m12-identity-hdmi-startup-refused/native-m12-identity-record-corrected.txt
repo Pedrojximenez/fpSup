@@ -1,0 +1,11 @@
+screen: LV_CINE_MEDIUM
+  tagged 16380/52744 B  1636 KiB/s   tagged 32760/52744 B  1916 KiB/s   tagged 49140/52744 B  1842 KiB/s   tagged 52744/52744 B  1824 KiB/s   tagged 52744 bytes in 0.0s (1766 KiB/s)      
+  tagged 116/116 B  144 KiB/s   tagged 116 bytes in 0.0s (77 KiB/s)      
+  tagged 116/116 B  174 KiB/s   tagged 116 bytes in 0.0s (85 KiB/s)      
+  tagged 80/80 B  59 KiB/s   tagged 80 bytes in 0.0s (36 KiB/s)      
+  tagged 104/104 B  138 KiB/s   tagged 104 bytes in 0.0s (62 KiB/s)      
+  tagged 60/60 B  48 KiB/s   tagged 60 bytes in 0.0s (30 KiB/s)      
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/record_native_m12_identity.py", line 43, in <module>
+    assert record_trial.overlay(np.asarray(Image.open(shot).convert('RGB')))['standby_visible']
+AssertionError

@@ -1,0 +1,42 @@
+test_capture_becomes_busy_is_reported_without_inventing_continuous_idle (test_af_native_preflight.PreflightTests) ... ok
+test_display_flags_and_pointers_do_not_confer_subject_validity (test_af_native_preflight.PreflightTests) ... ok
+test_each_capture_busy_byte_movie_and_shutter_stop_before_hooks (test_af_native_preflight.PreflightTests) ... ok
+test_each_context_entry_return_mismatch_stops_on_that_block (test_af_native_preflight.PreflightTests) ... ok
+test_each_hook_mismatch_stops_on_that_exact_read (test_af_native_preflight.PreflightTests) ... ok
+test_each_identity_token_required_before_memory (test_af_native_preflight.PreflightTests) ... ok
+test_echo_owner_change_at_end_is_failure (test_af_native_preflight.PreflightTests) ... ok
+test_fixed_memory_ranges_no_pointer_chasing_even_plausible_values (test_af_native_preflight.PreflightTests) ... ok
+test_host_not_open_stops_before_version (test_af_native_preflight.PreflightTests) ... ok
+test_inactive_or_uninitialized_sources_never_become_valid (test_af_native_preflight.PreflightTests) ... ok
+test_invalid_local_contract_stops_before_any_io (test_af_native_preflight.PreflightTests) ... ok
+test_movie_guard_is_low_byte_not_adjacent_bytes (test_af_native_preflight.PreflightTests) ... ok
+test_no_producer_completion_inferred_from_task_metadata (test_af_native_preflight.PreflightTests) ... ok
+test_only_fixed_getters_and_zero_body_task_queries (test_af_native_preflight.PreflightTests) ... ok
+test_production_parser_keeps_u32_bytes_without_semantic_coercion (test_af_native_preflight.PreflightTests) ... ok
+test_setting_changed_during_read_is_evidence_not_authority (test_af_native_preflight.PreflightTests) ... ok
+test_strict_parser_rejects_missing_extra_bad_or_duplicate_addresses (test_af_native_preflight.PreflightTests) ... ok
+test_subject_diagnostics_are_opt_in (test_af_native_preflight.PreflightTests) ... ok
+test_subject_path_fixed_ranges_and_no_added_native_getters (test_af_native_preflight.PreflightTests) ... ok
+test_subject_path_identity_failure_prevents_additional_reads (test_af_native_preflight.PreflightTests) ... ok
+test_subject_path_short_reply_stops_without_retry_or_later_reads (test_af_native_preflight.PreflightTests) ... ok
+test_success_is_read_only_and_retains_unknown_authority (test_af_native_preflight.PreflightTests) ... ok
+test_transport_exception_never_retries_or_continues (test_af_native_preflight.PreflightTests) ... ok
+test_unknown_echo_owner_stops_before_capture_or_hooks (test_af_native_preflight.PreflightTests) ... ok
+test_aat_counter_is_u32_and_rectangles_are_two_separate_i32_tuples (test_af_subject_observation.NativeSubjectDecoderTests) ... ok
+test_exact_length_is_required_for_each_source (test_af_subject_observation.NativeSubjectDecoderTests) ... ok
+test_face_coordinates_preserve_negative_top_left_and_signed_boundaries (test_af_subject_observation.NativeSubjectDecoderTests) ... ok
+test_face_offsets_use_group_relative_id_and_size_with_separate_tuples (test_af_subject_observation.NativeSubjectDecoderTests) ... ok
+test_face_slot_changes_only_source_address_not_bytes_or_identity (test_af_subject_observation.NativeSubjectDecoderTests) ... ok
+test_face_slot_range_and_type_are_checked_even_without_face_bytes (test_af_subject_observation.NativeSubjectDecoderTests) ... ok
+test_field_layout_describes_byte_offsets_and_types (test_af_subject_observation.NativeSubjectDecoderTests) ... ok
+test_missing_sources_remain_missing_with_no_geometry_authority (test_af_subject_observation.NativeSubjectDecoderTests) ... ok
+test_model_is_direct_struct_with_u16_axes_i32_angle_and_quality_bytes (test_af_subject_observation.NativeSubjectDecoderTests) ... ok
+test_only_immutable_bytes_or_none_are_accepted (test_af_subject_observation.NativeSubjectDecoderTests) ... ok
+test_positive_sizes_valid_quality_and_three_sources_do_not_enable_geometry (test_af_subject_observation.NativeSubjectDecoderTests) ... ok
+test_results_are_independent_and_full_unparsed_bytes_are_retained (test_af_subject_observation.NativeSubjectDecoderTests) ... ok
+test_u32_face_boundaries_and_i32_model_angle_are_not_clamped (test_af_subject_observation.NativeSubjectDecoderTests) ... ok
+
+----------------------------------------------------------------------
+Ran 37 tests in 0.067s
+
+OK

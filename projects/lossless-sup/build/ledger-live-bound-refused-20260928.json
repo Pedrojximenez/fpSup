@@ -1,0 +1,94 @@
+{
+ "schema_version": 1,
+ "kind": "live_two_block_bound_probe_refused",
+ "date": "2026-09-28",
+ "operator_scope": "ON THE CAMERA, authorised. Same boot as ledger-live-two-block-20260928: both blocks acquired earlier in that session. One short FHD CinemaDNG clip. seg never written, frame never touched, nothing written to the card by the probe.",
+ "variant": "bound-probe-two",
+ "image_sha256": "20f0cf096482138def29342531ff90a8172edfa53efff889981284761df7fb1d",
+ "source_sha256": "7b4bc9c407253afb...",
+ "geometry": "PRODUCT: 1936x1090, 512x368 tiles, 12 tiles, declared 0x305000",
+ "blocks": {
+  "destination_A": "0x45178000",
+  "source_B": "0x45578400",
+  "both": "device-written records, both marked, both held, verified by the host before arming and by the probe at hook time"
+ },
+ "measured": {
+  "phase": 9,
+  "stage": 8,
+  "error": 18,
+  "error_meaning": "ERR_ENCODE",
+  "init_ret": 1,
+  "enc_ret": 0,
+  "size_ret": 0,
+  "tile_count": 0,
+  "tile_sizes": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "compressed_size": 0,
+  "encode_microseconds": 9816,
+  "guards": [
+   "0xA55AA55A",
+   "0xA55AA55A",
+   "0xA55AA55A",
+   "0xA55AA55A",
+   "0xA55AA55A"
+  ],
+  "declared_constant": "0x305000",
+  "declared_readback": {
+   "address": "0xC302CDE0",
+   "value": "0x305000"
+  },
+  "encode_entered": 1,
+  "block_adopted": 1,
+  "hook": "self-restored"
+ },
+ "verdict": {
+  "result": "refused",
+  "by": "projects/lossless-sup/tools/bound_criterion.py, written BEFORE this run",
+  "reasons": [
+   "the probe reported error 18",
+   "enc_ret was 0, not 1",
+   "size_ret was 0, not 1",
+   "a tile size is zero or negative",
+   "the output stopped at 0 bytes, 100% below the declared length: the guards are unchanged because nothing reached them"
+  ],
+  "why_this_matters": "five unchanged guards is what a bound PASS looks like. Here they are unchanged because the engine produced nothing at all. The criterion refusing this is the whole reason it was written first."
+ },
+ "what_this_run_DOES_establish": {
+  "geometry_is_not_the_discriminator": "the 9/26 refusal and the 9/27 success differed in geometry, tile count AND source at the same time, so the note recorded that no cause could be isolated. This run uses the SAME product geometry and tile count as the 9/27 success and changes only the source - and is refused. Geometry is therefore out.",
+  "what_is_left": "the source. Two candidates still not separated: the CONTENT (incompressible generated data) and the LOCATION (an allocator block we own, versus the camera's own frame buffer at S_BUF+PIXEL_OFF).",
+  "the_failure_classification_worked_live": "size_ret 0 with a zero tile table and compressed_size 0. Before the F_SIZE gate added this week, this exact state summed an untouched table and reported a number that read as a compressed size. It now reports ERR_ENCODE and sums nothing.",
+  "the_declared_length_readback": "0xC302CDE0 held 0x305000 at hook time, which is the first LIVE confirmation of a value that had only ever been read statically. It is the length the NATIVE path declared for this frame, not what our own F_INIT was given.",
+  "incidental": "the engine spent 9,816 microseconds before refusing, so the refusal is not a cheap parameter check on entry. Not explained."
+ },
+ "explicitly_not_established": [
+  "NOTHING about the engine's behaviour at its declared output length. It never produced a byte.",
+  "no bound, in either direction. This is not evidence that the engine respects the limit, nor that it overruns it.",
+  "why F_ENC refused. Three hypotheses remain: content, source location, or something else entirely.",
+  "the 9,816 microseconds is one reading of one refusal."
+ ],
+ "camera_left_in": {
+  "hook": "0xEBFDE061, stock; nothing armed",
+  "blocks": "BOTH 4 MiB blocks deliberately leaked. release REFUSED, correctly: enc_ret=0 with encode_entered=1 means the engine may still own the buffer, so neither block may be freed (ROADMAP 5.4). The refusal happens before any F_FREE call, so both are protected.",
+  "reclaim": "a power cycle. Re-arming is also refused, because the state block no longer shows a clean scratch preflight - the next attempt needs the whole chain again from preflight."
+ },
+ "the_next_experiment_this_points_to": {
+  "question": "is the refusal about the source's CONTENT or its LOCATION?",
+  "test": "generate a COMPRESSIBLE source into block B - a smooth ramp rather than an LCG - at the same geometry, same block, same everything else.",
+  "reading": "still refused => the refusal is about where the source lives, not how big its output would be, and the bound question needs a different approach entirely. Accepted => the refusal is size-related, which would itself be evidence that the engine enforces its declared length by REFUSING rather than by overrunning or truncating - a better outcome for zero-copy than the guards could ever show.",
+  "cost": "one fill-loop change, one rebuilt image, the whole chain again from preflight, one clip."
+ },
+ "camera_accessed": true,
+ "deployable": false
+}

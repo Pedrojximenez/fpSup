@@ -1,0 +1,11 @@
+2026-10-09 final r3j2 verification.
+18 management behavioral tests + six isolated faulty variants: 19 unittest tests OK (106.164 s).
+Six final native parser/matcher tests OK (13.053 s).
+The subsequent native-font presence guard generates exactly the saved final UI bytes.
+Final C code unchanged from r3j; only title rectangle changed in r3j2.
+Default loader 7260 B: full SHA-256 41f3218ac1405962eee7182528e969531de4e11adf0c7a0b4868dda79f8cf67c.
+AutoRun unchanged. git diff --check passed.
+Two shell reboots; fifth row, grouped status, native English footers, provider callback eligibility, page boundaries, original FSDS preservation and fixture cleanup verified on camera.
+All final loader/UI/AutoRun bytes match r3j2-camera; disabled FLIP/SHEL table exactly equals pre-trial backup.
+No reboot after restoring SHEL disabled. Final FT_Y6, recording=0, camera language=7.
+Detailed evidence: ../20261009-allsups-r3j-live1/RESULTS.md and final-readback.json.

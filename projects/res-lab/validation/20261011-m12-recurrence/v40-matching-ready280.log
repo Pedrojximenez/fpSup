@@ -1,0 +1,39 @@
+screen: LV_CINE_MEDIUM
+{
+  "fps_state": {
+    "VR_UI": 1,
+    "VR_WHY": 1,
+    "VRATE": 27972,
+    "VR_COMMITS": 5,
+    "DIRTY": 1,
+    "PICKOK": 1,
+    "FPSLATCH": 1106247680,
+    "LAST_ENT": 7200,
+    "HITS": 77029
+  },
+  "sensor_timing_fps": 279.72027972027973,
+  "fps_getter": "3\n\n",
+  "producer_r78_differences": {},
+  "consumer_r78_differences": {
+    "0xc": {
+      "r78": 2000,
+      "current": 1008
+    },
+    "0x20": {
+      "r78": 1984,
+      "current": 992
+    },
+    "0x60": {
+      "r78": 1023,
+      "current": 2048
+    },
+    "0xd8": {
+      "r78": 2000,
+      "current": 1008
+    }
+  },
+  "consumer_canvas_variant": {
+    "0xb0": 1
+  },
+  "standby_at_end": true
+}

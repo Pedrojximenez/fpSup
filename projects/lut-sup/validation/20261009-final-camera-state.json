@@ -1,0 +1,85 @@
+{
+  "daemon": "OK name=fpshd version=3.2.0 protocol=1 frame=64 payload=44 transport=EP01-EP82 iface=0 camera=open seq=13148 ep83=host_candidate upload=UP01-probed mem=MEM1-probed quarantine=0 fault=none",
+  "state": {
+    "color_mode": 12,
+    "app_current": 2,
+    "is_recording": 0,
+    "stored_record_mode": 1,
+    "applied_record_mode": 1,
+    "relative_gain": 1170,
+    "boot_id": 4040737
+  },
+  "movie_format": 0,
+  "CDNG_quality": 0,
+  "imager_mode": "imager mode_now \r\nNo ,mode                         ,enum,bit,size     ,frame ,fps ,aspect ,crop,\n053,MONIT1_60                    ,0008, 12,2016x1344,016683,0060,  3: 2 ,full,\r\nshutter:00010002,gain:001170\r\nframe_count:00050614,trans_count:00050607\r\ngain_state: through\r\nsmall_raw\r\nbase_size h:2016 v:1344\r\nraw_zoom  h:1024 v:1024\r\nhvbin     h:0001 v:0001\r\nbef_size  h:2016 v:1344\r\noffset    h:0000 v:0000\r\nv_down_sample    v:0001",
+  "color_setter_hook": "0xe15a0006",
+  "gain_hook": "0xe595200c",
+  "transcript": [
+    {
+      "time_utc": "2026-10-09T04:39:23.242205+00:00",
+      "command": "STATUS",
+      "reply": "OK name=fpshd version=3.2.0 protocol=1 frame=64 payload=44 transport=EP01-EP82 iface=0 camera=open seq=13148 ep83=host_candidate upload=UP01-probed mem=MEM1-probed quarantine=0 fault=none"
+    },
+    {
+      "time_utc": "2026-10-09T04:39:23.245166+00:00",
+      "command": "TMO 1500 SHL menu SetColorMode",
+      "reply": "OK 12\\n"
+    },
+    {
+      "time_utc": "2026-10-09T04:39:23.246308+00:00",
+      "command": "TMO 1500 SHL status get app_current",
+      "reply": "OK app_current -> 2\\n"
+    },
+    {
+      "time_utc": "2026-10-09T04:39:23.246824+00:00",
+      "command": "TMO 1500 SHL status get is_recording",
+      "reply": "OK is_recording -> 0\\n"
+    },
+    {
+      "time_utc": "2026-10-09T04:39:23.247234+00:00",
+      "command": "TMO 1500 SHL mem get 0xC31C01B0,,0x4",
+      "reply": "OK get : A:0xc31c01b0, D:0x00000001\\n"
+    },
+    {
+      "time_utc": "2026-10-09T04:39:23.247702+00:00",
+      "command": "TMO 1500 SHL mem get 0xC31F86E0,,0x4",
+      "reply": "OK get : A:0xc31f86e0, D:0x00000001\\n"
+    },
+    {
+      "time_utc": "2026-10-09T04:39:23.248021+00:00",
+      "command": "TMO 1500 SHL mem get 0xC343B5A0,,0x4",
+      "reply": "OK get : A:0xc343b5a0, D:0x00000492\\n"
+    },
+    {
+      "time_utc": "2026-10-09T04:39:23.248416+00:00",
+      "command": "TMO 1500 SHL mem get 0xC072F6F8,,0x4",
+      "reply": "OK get : A:0xc072f6f8, D:0x003DA821\\n"
+    },
+    {
+      "time_utc": "2026-10-09T04:39:23.248874+00:00",
+      "command": "TMO 1500 SHL menu SetMovRecFormat",
+      "reply": "OK 0\\n"
+    },
+    {
+      "time_utc": "2026-10-09T04:39:23.249420+00:00",
+      "command": "TMO 1500 SHL menu SetMovCinemaDNGQuality",
+      "reply": "OK 0\\n"
+    },
+    {
+      "time_utc": "2026-10-09T04:39:23.250224+00:00",
+      "command": "TMO 1500 SHL imager mode_now",
+      "reply": "OKX 696D61676572206D6F64655F6E6F77200D0A4E6F202C6D6F6465202020202020202020202020202020202020202020202020202C656E756D2C6269742C73697A6520202020202C6672616D65202C667073202C617370656374202C63726F702C0A3035332C4D4F4E4954315F363020202020202020202020202020202020202020202C303030382C2031322C3230313678313334342C3031363638332C303036302C2020333A2032202C66756C6C2C0D0A736875747465723A30303031303030322C6761696E3A3030313137300D0A6672616D655F636F756E743A30303035303631342C7472616E735F636F756E743A30303035303630370D0A6761696E5F73746174653A207468726F7567680D0A736D616C6C5F7261770D0A626173655F73697A6520683A3230313620763A313334340D0A7261775F7A6F6F6D2020683A3130323420763A313032340D0A687662696E2020202020683A3030303120763A303030310D0A6265665F73697A652020683A3230313620763A313334340D0A6F666673657420202020683A3030303020763A303030300D0A765F646F776E5F73616D706C6520202020763A303030310D0A"
+    },
+    {
+      "time_utc": "2026-10-09T04:39:23.250499+00:00",
+      "command": "TMO 1500 SHL mem get 0xC0075CF4,,0x4",
+      "reply": "OK get : A:0xc0075cf4, D:0xE15A0006\\n"
+    },
+    {
+      "time_utc": "2026-10-09T04:39:23.251309+00:00",
+      "command": "TMO 1500 SHL mem get 0xC0313244,,0x4",
+      "reply": "OK get : A:0xc0313244, D:0xE595200C\\n"
+    }
+  ],
+  "state_matches_original": true
+}

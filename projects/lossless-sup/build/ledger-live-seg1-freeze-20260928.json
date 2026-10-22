@@ -1,0 +1,30 @@
+{
+ "schema_version": 1,
+ "kind": "live_the_seg1_write_is_what_freezes",
+ "date": "2026-09-28",
+ "operator_scope": "ON THE CAMERA, authorised. Fresh boot, settings verified FHD 0x318200, preflight and scratch both PASS minutes earlier. The operator pressed the record key; the host sent ZERO USB traffic during the clip.",
+ "variant": "copy-back-length-only",
+ "what_it_does": "PHASE 7 with the 1.5 MB copy into the camera's frame buffer REMOVED. Encode, the 78,848-byte header copy and the IFD patch all happen in OUR arena. The only action that touches anything of the camera's is one store: seg[1] = file_bytes.",
+ "result": "THE CAMERA FROZE. Shell stopped answering, camera stayed enumerated, no state block readable.",
+ "the_conclusion": {
+  "finding": "shortening seg[1] while seg[0] still points at the camera's own frame buffer is what freezes the camera. The 1.5 MB copy is not the cause - removing it changed nothing.",
+  "why_this_isolates_it": "in this variant the seg[1] store is the ONLY thing touching the camera's state. Everything else is inside our own 4 MiB block.",
+  "the_contrast_that_makes_it_specific": "G4b on 2026-09-23 (compress, PHASE 5) changed seg[0] to OUR buffer AND shortened seg[1], and the camera wrote a valid compressed CinemaDNG to the card. So shortening the length is not fatal in itself. Doing it on a buffer that is still the camera's is.",
+  "mechanism": "NOT ESTABLISHED. The hypothesis worth testing: the camera's frame buffer belongs to a pool whose accounting expects the whole length back, and shortening the descriptor desynchronises the batch completion path (C063F140 -> C0646C60, per-cookie C03A55D0(frame, status)). Our own buffer is not in that pool. This is a hypothesis with an address to look at, not a result.",
+  "why_C2_succeeded_once": "unexplained. copy-back is now one success in five attempts: C2 on 9/26 passed, its re-run froze, two copy-back attempts froze today, and this strict subset of it froze too."
+ },
+ "the_strategic_consequence": {
+  "copy_back_is_not_viable_as_designed": "its whole point was to avoid holding our own buffer across the flush by leaving seg[0] alone and changing only the length. That is precisely the action that freezes.",
+  "the_route_that_works": "compress (PHASE 5): our own buffer in seg[0], seg[1] shortened to match. Proven live on 2026-09-23, LibRaw decoded the result.",
+  "its_known_blocker": "G5 on 2026-09-23 showed one buffer is not enough - the aggregation batch still holds it when the next frame arrives. That needs an output pool with a release callback, which is bounded work with a known shape.",
+  "what_must_be_revisited": "CURRENT_DEVELOPMENT §1 dropped 'own output pool plus release callback' as a shared prerequisite BECAUSE C2 succeeded. That premise is now one success in five, and the one action C2 depends on has frozen the camera three times under clean conditions. §1's decision should be reversed: the pool is the prerequisite again."
+ },
+ "the_remaining_half_of_the_pair": {
+  "variant": "copy-back-copy-only - the copy kept, seg[1] left exactly as handed over",
+  "what_it_would_add": "whether there are TWO independent causes or one. If it does not freeze, writing into the camera's frame buffer is safe and the descriptor store is the sole cause, which matters for any later design that wants to put data there. If it does freeze, the copy is a second, independent problem.",
+  "not_blocking": "the decisive answer is already in hand; this only makes it airtight."
+ },
+ "camera_accessed": true,
+ "camera_left_in": "FROZEN, enumerated, shell not answering. A power cycle is required.",
+ "deployable": false
+}

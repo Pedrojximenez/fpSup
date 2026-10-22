@@ -1,0 +1,58 @@
+{
+ "schema_version": 1,
+ "kind": "offline_static_reading_of_the_non_aggregated_write_path",
+ "date": "2026-09-24",
+ "operator_scope": "offline only. No camera, no card, no hook armed.",
+ "question": "Media Write Mode has exactly one consumer, the CinemaDNG aggregation switch. So what does the write path DO in the other position?",
+ "the_setting_has_one_consumer": {
+  "level": "C",
+  "claim": "FUN_c03a5050 is the only reader of settings[0x9C] in the firmware.",
+  "method": [
+   "the settings block is reached only through FUN_c0021c40(obj) = *(obj + 0x5C); the singleton 0xC30751D4 is referenced only inside its own accessor FUN_c0021c00, so every access goes through it",
+   "303 functions call FUN_c0021c40; 7 also mention +0x9c anywhere in their body; 6 of those read +0x9c from a DIFFERENT object (FUN_c0017ac8's singleton 0xC3033834+0x18, or an unrelated struct). FUN_c03a5050 is the only one that reads it from the settings block.",
+   "an independent sweep of every byte-sized access at +0x9c across the whole decompilation finds 19 distinct functions; all but MenuItemMediaWriteMode::v3 (the writer) and FUN_c03a5050 (the reader) are offset collisions on other structures."
+  ],
+  "consequence": "the Media Write Mode menu item IS the SD aggregation switch for CinemaDNG. It does nothing else in this firmware."
+ },
+ "aggregation_off_is_a_different_path": {
+  "level": "C",
+  "where": "FUN_c063f380",
+  "selector": "cVar5 = (vol[0x4828] == 0), so cVar5 == 1 means aggregation OFF, 0 means ON, and 2 is a fallback set when the descriptor arena cannot be obtained",
+  "off_path_sequence": [
+   "local_6c = (*vol[0x4838])()   -- acquire a descriptor arena",
+   "FUN_c063f048(&local_50)       -- build the range descriptors for THIS write only",
+   "FUN_c0646c60(vol, 4, vol+0x5c8, 5, lba, offset, len, local_6c)  -- issue the transfer",
+   "(*vol[0x4848])()              -- RELEASE the descriptor arena, immediately",
+   "if (result < 0) return result"
+  ],
+  "on_path_for_contrast": "the aggregation branch never releases the arena here. It keeps it in vol[0x484c] and only FUN_c063f140 releases it, with (*vol[0x4848])(), and then re-acquires a fresh one with (*vol[0x4838])(). The pairing at 0x4838/0x4848 is confirmed by that same function."
+ },
+ "the_inference": {
+  "level": "I",
+  "claim": "with aggregation OFF the transfer completes before FUN_c0646c60 returns, so our arena is free when FUN_c069ade0 returns.",
+  "argument": "The descriptor arena holds the physical pointers the device reads from. The OFF path releases it on the very next line after the transfer call. If the transfer were still outstanding, that release would hand back the structure the DMA is still reading. The ON path, where the transfer is by construction deferred, does NOT release it - it holds the arena for the whole batch. The two paths differ in exactly the way they would have to if one is synchronous and the other is not.",
+  "why_it_is_I_and_not_C": "FUN_c0646c60 could in principle copy the descriptors into device-owned storage before returning, which would make the release safe without the transfer being complete. That was not traced.",
+  "explains": [
+   "G3: 3,244,544 bytes returned in 372 us, an impossible 8.7 GB/s. With aggregation ON the submit only appends range descriptors and issues nothing, so there is no transfer to take time.",
+   "G5: eight frames accumulated into one batch, nothing transferred until the batch flushed, and by then the single arena held only the last frame's payload. Every file then carried that payload truncated to its own registered length - which is exactly the measured result, including frame 4 being a clean 1,024-byte-shorter PREFIX of frame 1 rather than a different encode."
+  ]
+ },
+ "what_this_would_mean_if_it_holds": [
+  "The blocker may be a menu setting, not a memory problem. In the non-aggregating position a SINGLE arena would be correct, with no slot array, no release notification, no copy-back and no extra memory.",
+  "It also removes the batch arithmetic problem entirely: there is no batch, so the fact that compressed frames accumulate 48 to a batch instead of 20.7 stops mattering.",
+  "The cost is throughput. Aggregation presumably exists to make card writes efficient; turning it off will change the per-frame write cost, and the 24p budget has to be re-measured, not assumed. This could be the real price and it is not yet known."
+ ],
+ "explicitly_not_established": [
+  "that FUN_c0646c60 is synchronous. This is the [I] above, from the descriptor-arena release, not a traced fact.",
+  "which menu position maps to which value. MenuItemMediaWriteMode::v3 sets the byte to 1 when a gating item's value is 0, otherwise to (this item's value == 1); the gating item was not identified, and the option resource names CM_MediaWriteModeAj and CM_MediaWriteModeFix were not resolved to displayed labels or to enum values.",
+  "which value G3 and G5 ran with. Neither recorded it, so neither can be reinterpreted with confidence - the explanation above is consistent with them, not proven by them.",
+  "the write throughput with aggregation off, and therefore whether compressed recording still fits the frame budget in that position",
+  "whether the setting can be changed from the shell without menu save (menu SetMediaWriteMode with an argument writes the setting; the project rule against menu save / setting save still applies)"
+ ],
+ "cheapest_next_facts": [
+  "menu SetMediaWriteMode with no argument: read-only, one command, tells us the current value and hence what G3/G5 most likely ran with",
+  "if it is the aggregating position, re-running G5 in the other position is the direct test of the whole hypothesis"
+ ],
+ "camera_accessed": false,
+ "deployable": false
+}

@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/build_v3_reslab.py", line 276, in <module>
+    if __name__ == '__main__': main()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/build_v3_reslab.py", line 247, in main
+    core, core_facts, _ = RC.build_core(pathlib.Path(d),virtual=True)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/res-custom/build_v3_rescustom.py", line 335, in build_core
+    text = compile_core(tmp, tab_off)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/res-custom/build_v3_rescustom.py", line 170, in compile_core
+    raise BuildError('ogc.c:\n' + r.stderr)
+build_v3_rescustom.BuildError: ogc.c:
+In file included from /var/folders/20/mb8w7p_x7nlfpctnt7qd77b00000gn/T/rlcalc-bzg05o9h/c0/unity.c:223:
+In file included from /var/folders/20/mb8w7p_x7nlfpctnt7qd77b00000gn/T/rlcalc-bzg05o9h/c0/ogc.c:2311:
+/var/folders/20/mb8w7p_x7nlfpctnt7qd77b00000gn/T/rlcalc-bzg05o9h/c0/ogc_binfilt.c:31:79: error: invalid suffix '+3' on integer constant
+   31 |             B8(driver+0x1c+3*i)=side;B8(driver+0x1d+3*i)=middle;B8(driver+0x1e+3*i)=side;
+      |                                                                               ^
+1 error generated.
+

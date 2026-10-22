@@ -1,0 +1,60 @@
+[
+  {
+    "card": "/Users/dido/Developer.localized/SIGMAfp_re/projects/sensor-lab/validation/20261004-raw14/18p-bridge-veto-reviewed",
+    "bin_sha256": "9f0c6f33625c614434e3d4111d761a42dd95a0e69a1e5b78f4c7b86e52f6c05e",
+    "recording_enabled": false,
+    "modes": [
+      {
+        "mode": 0,
+        "recipe_rate_index": 11,
+        "start_results": {
+          "0x03": 0,
+          "0x0F": 0,
+          "0x23": 0
+        },
+        "non_start_result": 7,
+        "negative_cases_refused": 8
+      },
+      {
+        "mode": 141,
+        "recipe_rate_index": 11,
+        "start_results": {
+          "0x03": 0,
+          "0x0F": 0,
+          "0x23": 0
+        },
+        "non_start_result": 7,
+        "negative_cases_refused": 8
+      }
+    ]
+  },
+  {
+    "card": "/Users/dido/Developer.localized/SIGMAfp_re/projects/sensor-lab/validation/20261004-raw14/18p-bridge-diagnostic-reviewed",
+    "bin_sha256": "ac42f65c529a1d17b94fd8b50e7f6a650f746635067fd17f200ad8d7465cf47b",
+    "recording_enabled": true,
+    "modes": [
+      {
+        "mode": 0,
+        "recipe_rate_index": 11,
+        "start_results": {
+          "0x03": 7,
+          "0x0F": 7,
+          "0x23": 7
+        },
+        "non_start_result": 7,
+        "negative_cases_refused": 8
+      },
+      {
+        "mode": 141,
+        "recipe_rate_index": 11,
+        "start_results": {
+          "0x03": 7,
+          "0x0F": 7,
+          "0x23": 7
+        },
+        "non_start_result": 7,
+        "negative_cases_refused": 8
+      }
+    ]
+  }
+]

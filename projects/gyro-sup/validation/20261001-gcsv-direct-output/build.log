@@ -1,0 +1,198 @@
+
+before-gcsv-plain
+binary : fpSup.BIN  32768 bytes, 8 section(s), entry 0x0000041C
+worker : none -- no task either, the loader runs in the callback
+start  : echo handler 0xC0BAC2F8 -> 0xC072DE64 (loader)
+patches: 0 firmware (-), 3 screen
+wrote  : /Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/validation/20261001-gcsv-direct-output/builds/before-gcsv-plain/AutoRun.txt  169 lines  sha256=15d1c118a7c62da7
+clean  : 118 commands, no dumps and no diagnostics
+
+        0xC0058310      4  hook site mode
+        0xC03790B8      4  hook site start
+        0xC038C484      4  hook site stop
+        0xC050D4C8      4  hook site accel
+
+  /Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/validation/20261001-gcsv-direct-output/builds/before-gcsv-plain/AutoRun.txt  612 commands
+  /Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/validation/20261001-gcsv-direct-output/builds/before-gcsv-plain/fpSup.BIN  32768 bytes
+
+before-gcsv-debug
+binary : fpSup.BIN  32768 bytes, 12 section(s), entry 0x0000448C
+worker : 1840 bytes = 432 bootstrap (runs in the staging buffer) + 1408 copied to an allocation of its own
+start  : echo handler 0xC0BAC2F8 -> 0xC072DE64 (loader)
+patches: 1 firmware (iface), 3 screen
+wrote  : /Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/validation/20261001-gcsv-direct-output/builds/before-gcsv-debug/AutoRun.txt  170 lines  sha256=54070a2c8475eeb3
+clean  : 118 commands, no dumps and no diagnostics
+
+        0xC0058310      4  hook site mode
+        0xC03790B8      4  hook site start
+        0xC038C484      4  hook site stop
+        0xC050D4C8      4  hook site accel
+
+  /Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/validation/20261001-gcsv-direct-output/builds/before-gcsv-debug/AutoRun.txt  613 commands
+  /Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/validation/20261001-gcsv-direct-output/builds/before-gcsv-debug/fpSup.BIN  32768 bytes
+
+before-gcsv-fast
+splash : FPSUPUI/  193536 bytes; hardware untested; keep beside AutoRun.txt and fpSup.BIN
+binary : fpSup.BIN  32768 bytes, 9 section(s), entry 0x000007DC
+worker : none -- no task either, the loader runs in the callback
+start  : echo handler 0xC0BAC2F8 -> 0xC072DE64 (loader)
+patches: 0 firmware (-), 0 screen
+wrote  : /Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/validation/20261001-gcsv-direct-output/builds/before-gcsv-fast/AutoRun.txt  215 lines  sha256=8383a3b22d08068a
+clean  : 148 commands, no dumps and no diagnostics
+
+        0xC0058310      4  hook site mode
+        0xC03790B8      4  hook site start
+        0xC038C484      4  hook site stop
+        0xC050D4C8      4  hook site accel
+
+  /Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/validation/20261001-gcsv-direct-output/builds/before-gcsv-fast/AutoRun.txt  631 commands
+  /Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/validation/20261001-gcsv-direct-output/builds/before-gcsv-fast/fpSup.BIN  32768 bytes
+
+before-base-plain
+binary : fpSup.BIN  32768 bytes, 8 section(s), entry 0x0000041C
+worker : none -- no task either, the loader runs in the callback
+start  : echo handler 0xC0BAC2F8 -> 0xC072DE64 (loader)
+patches: 0 firmware (-), 3 screen
+wrote  : /Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/validation/20261001-gcsv-direct-output/builds/before-base-plain/AutoRun.txt  169 lines  sha256=15d1c118a7c62da7
+clean  : 118 commands, no dumps and no diagnostics
+
+        0xC0058310      4  hook site mode
+        0xC03790B8      4  hook site start
+        0xC038C484      4  hook site stop
+        0xC050D4C8      4  hook site accel
+
+  /Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/validation/20261001-gcsv-direct-output/builds/before-base-plain/AutoRun.txt  612 commands
+  /Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/validation/20261001-gcsv-direct-output/builds/before-base-plain/fpSup.BIN  32768 bytes
+
+before-base-debug
+binary : fpSup.BIN  32768 bytes, 12 section(s), entry 0x00004254
+worker : 1840 bytes = 432 bootstrap (runs in the staging buffer) + 1408 copied to an allocation of its own
+start  : echo handler 0xC0BAC2F8 -> 0xC072DE64 (loader)
+patches: 1 firmware (iface), 3 screen
+wrote  : /Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/validation/20261001-gcsv-direct-output/builds/before-base-debug/AutoRun.txt  170 lines  sha256=54070a2c8475eeb3
+clean  : 118 commands, no dumps and no diagnostics
+
+        0xC0058310      4  hook site mode
+        0xC03790B8      4  hook site start
+        0xC038C484      4  hook site stop
+        0xC050D4C8      4  hook site accel
+
+  /Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/validation/20261001-gcsv-direct-output/builds/before-base-debug/AutoRun.txt  613 commands
+  /Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/validation/20261001-gcsv-direct-output/builds/before-base-debug/fpSup.BIN  32768 bytes
+
+before-base-fast
+splash : FPSUPUI/  193536 bytes; hardware untested; keep beside AutoRun.txt and fpSup.BIN
+binary : fpSup.BIN  32768 bytes, 9 section(s), entry 0x000007DC
+worker : none -- no task either, the loader runs in the callback
+start  : echo handler 0xC0BAC2F8 -> 0xC072DE64 (loader)
+patches: 0 firmware (-), 0 screen
+wrote  : /Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/validation/20261001-gcsv-direct-output/builds/before-base-fast/AutoRun.txt  215 lines  sha256=8383a3b22d08068a
+clean  : 148 commands, no dumps and no diagnostics
+
+        0xC0058310      4  hook site mode
+        0xC03790B8      4  hook site start
+        0xC038C484      4  hook site stop
+        0xC050D4C8      4  hook site accel
+
+  /Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/validation/20261001-gcsv-direct-output/builds/before-base-fast/AutoRun.txt  631 commands
+  /Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/validation/20261001-gcsv-direct-output/builds/before-base-fast/fpSup.BIN  32768 bytes
+
+after-gcsv-plain
+binary : fpSup.BIN  32768 bytes, 8 section(s), entry 0x0000041C
+worker : none -- no task either, the loader runs in the callback
+start  : echo handler 0xC0BAC2F8 -> 0xC072DE64 (loader)
+patches: 0 firmware (-), 3 screen
+wrote  : /Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/validation/20261001-gcsv-direct-output/builds/after-gcsv-plain/AutoRun.txt  169 lines  sha256=15d1c118a7c62da7
+clean  : 118 commands, no dumps and no diagnostics
+
+        0xC0058310      4  hook site mode
+        0xC03790B8      4  hook site start
+        0xC038C484      4  hook site stop
+        0xC050D4C8      4  hook site accel
+
+  /Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/validation/20261001-gcsv-direct-output/builds/after-gcsv-plain/AutoRun.txt  612 commands
+  /Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/validation/20261001-gcsv-direct-output/builds/after-gcsv-plain/fpSup.BIN  32768 bytes
+
+after-gcsv-debug
+binary : fpSup.BIN  32768 bytes, 12 section(s), entry 0x0000451C
+worker : 1840 bytes = 432 bootstrap (runs in the staging buffer) + 1408 copied to an allocation of its own
+start  : echo handler 0xC0BAC2F8 -> 0xC072DE64 (loader)
+patches: 1 firmware (iface), 3 screen
+wrote  : /Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/validation/20261001-gcsv-direct-output/builds/after-gcsv-debug/AutoRun.txt  170 lines  sha256=54070a2c8475eeb3
+clean  : 118 commands, no dumps and no diagnostics
+
+        0xC0058310      4  hook site mode
+        0xC03790B8      4  hook site start
+        0xC038C484      4  hook site stop
+        0xC050D4C8      4  hook site accel
+
+  /Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/validation/20261001-gcsv-direct-output/builds/after-gcsv-debug/AutoRun.txt  613 commands
+  /Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/validation/20261001-gcsv-direct-output/builds/after-gcsv-debug/fpSup.BIN  32768 bytes
+
+after-gcsv-fast
+splash : FPSUPUI/  193536 bytes; hardware untested; keep beside AutoRun.txt and fpSup.BIN
+binary : fpSup.BIN  32768 bytes, 9 section(s), entry 0x000007DC
+worker : none -- no task either, the loader runs in the callback
+start  : echo handler 0xC0BAC2F8 -> 0xC072DE64 (loader)
+patches: 0 firmware (-), 0 screen
+wrote  : /Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/validation/20261001-gcsv-direct-output/builds/after-gcsv-fast/AutoRun.txt  215 lines  sha256=8383a3b22d08068a
+clean  : 148 commands, no dumps and no diagnostics
+
+        0xC0058310      4  hook site mode
+        0xC03790B8      4  hook site start
+        0xC038C484      4  hook site stop
+        0xC050D4C8      4  hook site accel
+
+  /Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/validation/20261001-gcsv-direct-output/builds/after-gcsv-fast/AutoRun.txt  631 commands
+  /Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/validation/20261001-gcsv-direct-output/builds/after-gcsv-fast/fpSup.BIN  32768 bytes
+
+after-base-plain
+binary : fpSup.BIN  32768 bytes, 8 section(s), entry 0x0000041C
+worker : none -- no task either, the loader runs in the callback
+start  : echo handler 0xC0BAC2F8 -> 0xC072DE64 (loader)
+patches: 0 firmware (-), 3 screen
+wrote  : /Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/validation/20261001-gcsv-direct-output/builds/after-base-plain/AutoRun.txt  169 lines  sha256=15d1c118a7c62da7
+clean  : 118 commands, no dumps and no diagnostics
+
+        0xC0058310      4  hook site mode
+        0xC03790B8      4  hook site start
+        0xC038C484      4  hook site stop
+        0xC050D4C8      4  hook site accel
+
+  /Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/validation/20261001-gcsv-direct-output/builds/after-base-plain/AutoRun.txt  612 commands
+  /Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/validation/20261001-gcsv-direct-output/builds/after-base-plain/fpSup.BIN  32768 bytes
+
+after-base-debug
+binary : fpSup.BIN  32768 bytes, 12 section(s), entry 0x000042DC
+worker : 1840 bytes = 432 bootstrap (runs in the staging buffer) + 1408 copied to an allocation of its own
+start  : echo handler 0xC0BAC2F8 -> 0xC072DE64 (loader)
+patches: 1 firmware (iface), 3 screen
+wrote  : /Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/validation/20261001-gcsv-direct-output/builds/after-base-debug/AutoRun.txt  170 lines  sha256=54070a2c8475eeb3
+clean  : 118 commands, no dumps and no diagnostics
+
+        0xC0058310      4  hook site mode
+        0xC03790B8      4  hook site start
+        0xC038C484      4  hook site stop
+        0xC050D4C8      4  hook site accel
+
+  /Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/validation/20261001-gcsv-direct-output/builds/after-base-debug/AutoRun.txt  613 commands
+  /Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/validation/20261001-gcsv-direct-output/builds/after-base-debug/fpSup.BIN  32768 bytes
+
+after-base-fast
+splash : FPSUPUI/  193536 bytes; hardware untested; keep beside AutoRun.txt and fpSup.BIN
+binary : fpSup.BIN  32768 bytes, 9 section(s), entry 0x000007DC
+worker : none -- no task either, the loader runs in the callback
+start  : echo handler 0xC0BAC2F8 -> 0xC072DE64 (loader)
+patches: 0 firmware (-), 0 screen
+wrote  : /Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/validation/20261001-gcsv-direct-output/builds/after-base-fast/AutoRun.txt  215 lines  sha256=8383a3b22d08068a
+clean  : 148 commands, no dumps and no diagnostics
+
+        0xC0058310      4  hook site mode
+        0xC03790B8      4  hook site start
+        0xC038C484      4  hook site stop
+        0xC050D4C8      4  hook site accel
+
+  /Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/validation/20261001-gcsv-direct-output/builds/after-base-fast/AutoRun.txt  631 commands
+  /Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/validation/20261001-gcsv-direct-output/builds/after-base-fast/fpSup.BIN  32768 bytes
+
+All 12 builds and six AutoRun comparisons passed.

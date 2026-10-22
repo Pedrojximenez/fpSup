@@ -1,0 +1,14 @@
+test_binning_recipe_survives_save_commit_and_real_driver_shims (test_reslab_controls.ControlsTests) ... FAIL
+
+======================================================================
+FAIL: test_binning_recipe_survives_save_commit_and_real_driver_shims (test_reslab_controls.ControlsTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_reslab_controls.py", line 114, in test_binning_recipe_survives_save_commit_and_real_driver_shims
+    self.assertEqual(c.w(out+0x24),1,'branch C must not divide horizontal pixels twice')
+AssertionError: 3 != 1 : branch C must not divide horizontal pixels twice
+
+----------------------------------------------------------------------
+Ran 1 test in 28.892s
+
+FAILED (failures=1)

@@ -1,0 +1,64 @@
+test_auto_commit_assertion_detects_missing_callback (test_reslab_sidebar.SidebarTests) ... ERROR
+test_crop_shape_and_independent_lens_composition (test_reslab_sidebar.SidebarTests) ... ok
+test_native_sidebar_page_and_save_is_third_tab (test_reslab_sidebar.SidebarTests) ... ok
+test_numeric_edit_commits_on_done_without_apply (test_reslab_sidebar.SidebarTests) ... ok
+test_ordinary_mode_lens_and_custom_policy (test_reslab_sidebar.SidebarTests) ... ok
+test_recording_rejects_auto_commit_and_keeps_old_geometry (test_reslab_sidebar.SidebarTests) ... ok
+test_rescustom_loads_saved_geometry (test_reslab_sidebar.SidebarTests) ... FAIL
+test_save_exports_current_recipe_and_preserves_active_virtual (test_reslab_sidebar.SidebarTests) ... ok
+test_save_rejects_short_write_corruption_and_tail (test_reslab_sidebar.SidebarTests) ... test_binning_keeps_its_matching_native_tap (test_reslab_preview_route.PreviewRouteTests) ... ok
+test_m12_r78_geometry_survives_virtual_rcd_and_native_selection (test_reslab_preview_route.PreviewRouteTests) ... M12: 29 producer fields, standby region and 64 geometry/profile words and sensor timing match r78 (nominal FPS encoding differs); native route {'enabled': [0, 0, 1], 'mux': [1, 3], 'main_zoom': [2048, 1024], 'secondary_zoom': [1024, 1024], 'record': 1}
+ok
+
+======================================================================
+ERROR: test_auto_commit_assertion_detects_missing_callback (test_reslab_sidebar.SidebarTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_reslab_sidebar.py", line 39, in test_auto_commit_assertion_detects_missing_callback
+    self.key(c,35);self.key(c,34);self.key(c,36)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_reslab_sidebar.py", line 20, in key
+    def key(self, cam, value): self.change(cam,'SL_O_Key',value)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_reslab_sidebar.py", line 18, in change
+    cam.call(cam.subs[name],d,thumb=True,sp=V.T.STACK-0x1000)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/v3/test_v3.py", line 259, in call
+    mu.emu_start(pc | (1 if thumb else 0), DONE, count=20_000_000)
+  File "/Users/dido/Library/Python/3.9/lib/python/site-packages/unicorn/unicorn_py3/unicorn.py", line 766, in emu_start
+    raise UcError(status)
+unicorn.unicorn_py3.unicorn.UcError: Invalid memory write (UC_ERR_WRITE_UNMAPPED)
+
+======================================================================
+FAIL: test_rescustom_loads_saved_geometry (test_reslab_sidebar.SidebarTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_v3_reslab.py", line 204, in test_rescustom_reads_export_and_uses_virtual_geometry
+    lab=self.boot();lab.prepare();lab.geometry();self.assertEqual(lab.export(),1);data=lab.written['\\fpSup\\RESCUS\\LAB001.RCD']
+AssertionError: 2 != 1
+
+======================================================================
+FAIL: test_save_rejects_short_write_corruption_and_tail (test_reslab_sidebar.SidebarTests) (kw={'write_fail': True})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_v3_reslab.py", line 179, in test_short_write_corruption_and_trailing_bytes_fail
+    cam=self.boot(**kw);cam.prepare();cam.geometry();self.assertEqual(cam.export(),5)
+AssertionError: 2 != 5
+
+======================================================================
+FAIL: test_save_rejects_short_write_corruption_and_tail (test_reslab_sidebar.SidebarTests) (kw={'damage': True})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_v3_reslab.py", line 179, in test_short_write_corruption_and_trailing_bytes_fail
+    cam=self.boot(**kw);cam.prepare();cam.geometry();self.assertEqual(cam.export(),5)
+AssertionError: 2 != 5
+
+======================================================================
+FAIL: test_save_rejects_short_write_corruption_and_tail (test_reslab_sidebar.SidebarTests) (kw={'tail': True})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_v3_reslab.py", line 179, in test_short_write_corruption_and_trailing_bytes_fail
+    cam=self.boot(**kw);cam.prepare();cam.geometry();self.assertEqual(cam.export(),5)
+AssertionError: 2 != 5
+
+----------------------------------------------------------------------
+Ran 11 tests in 289.476s
+
+FAILED (failures=4, errors=1)

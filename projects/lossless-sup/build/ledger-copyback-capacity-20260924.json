@@ -1,0 +1,55 @@
+{
+ "schema_version": 1,
+ "kind": "offline_static_capacity_of_the_native_raw_frame_buffer",
+ "date": "2026-09-24",
+ "operator_scope": "offline only. No camera.",
+ "answers": "NATIVE_BUFFER_PATTERNS.md section 4 item 1 and item 3: how large is the buffer the writer hands us, and what may we copy back into it?",
+ "why_it_matters": "the product targets BOTH SD and SSD. Copy-back is the only design that covers both, because it holds no buffer of ours and so does not depend on whether SD aggregation can be disabled. Its one hard blocker was capacity.",
+ "the_allocation": {
+  "level": "C",
+  "where": "FUN_c037a990 @ 0xC037A990",
+  "code": "iVar5 = FUN_c02da770(frame + 0x10); uVar4 = FUN_c001cf78(10); FUN_c001cfd8(uVar4, frame + 0x68, *(int*)(frame + 0x128) + ((iVar5 + 0x1FF) & ~0x1FF), 0x400, 0)",
+  "reading": "size = frame[0x128] (the header bytes) + the payload rounded up to 512. Class 10 is RAW. 0x400 is the ADDRESS alignment, not a size rounding.",
+  "fhd_arithmetic": {
+   "header": 78848,
+   "payload": 3165696,
+   "sum": 3244544,
+   "matches": "the node length measured live four times: 0x318200 = 3,244,544"
+  },
+  "conclusion": "the native RAW frame buffer is allocated at exactly the stock DNG size. There is no spare room in it."
+ },
+ "the_8704_bytes_are_not_headroom": {
+  "level": "C",
+  "claim": "the 0x31A400 spacing observed by tapseg is 8,704 bytes more than the 3,244,544 allocation, but that is the allocator's own granularity between blocks, not writable space inside ours.",
+  "supersedes": "HW_LOSSLESS_JPEG_CODEC.md reads that gap as 'the frame ring has 8,704 bytes of slack'. It is slack in the RING, not in the BUFFER, and nothing establishes that writing into it is safe."
+ },
+ "the_rule_that_needs_no_assumption": {
+  "level": "C",
+  "rule": "copy back only when file_bytes <= seg[1]",
+  "argument": "seg[1] is the length the writer itself hands us at FUN_c069ac88, and the buffer demonstrably holds a DNG of that length. So seg[1] bytes are safe to write by construction - no knowledge of the allocator, the ring, the spacing or the descriptor is needed. This is the same discipline the hook has followed from the start: work only on what you are handed.",
+  "note": "the allocation trace above says the true capacity IS seg[1], so the rule is exact rather than merely conservative."
+ },
+ "therefore_the_raw_fallback_is_required": {
+  "level": "C",
+  "numbers": {
+   "available": 3244544,
+   "g4b_measured_compressed_file": 1396736,
+   "worst_case_compressed_file": 4037760
+  },
+  "claim": "typical compressed frames fit with room to spare; the worst case does not fit at all. So a frame whose encode does not fit must be left alone and written as stock RAW. This is not optional.",
+  "why_it_is_sound": "the decision is made AFTER the encode, from the size table, so it is known rather than predicted. It is a different thing from COMPRESSION_PRECHECK, which estimates before encoding and must never be used to size a buffer. The cost of a frame that does not fit is one wasted encode, about 13.6 ms, and no correctness risk: nothing is modified, so the stock frame writes exactly as it would have.",
+  "relation_to_roadmap": "this is the adaptive mixed mode ROADMAP already contemplates, with the trigger changed from 'is it worth compressing' to 'does it fit'."
+ },
+ "covers_both_media": {
+  "level": "I",
+  "claim": "the allocation is class 10 RAW regardless of media, and the rule uses only seg[1], so copy-back should behave the same for SD and for SSD. Whether SD aggregation can be disabled stops mattering, because we hold no buffer."
+ },
+ "explicitly_not_established": [
+  "that writing the whole seg[1] bytes of that buffer is safe with respect to OTHER readers. FUN_c0374bf0's owner/clone mechanism proves shared references exist; the 74-frame mark-only test only wrote one word into padding. This is NATIVE_BUFFER_PATTERNS section 4 item 2 and it is still open.",
+  "the copy cost in the direction we need. G4a measured 72.3 MB/s reading buf and writing our arena; copy-back is the reverse pairing and was never measured. At that rate a 1,396,736-byte file costs about 19.3 ms, which with a 13.6 ms encode is 79% of the 24p budget, marginal at 29.97p and impossible at 60p.",
+  "what FUN_c02da770 returns exactly; the arithmetic is confirmed against the measured node length rather than traced to its source",
+  "whether SSD recording uses the same frame allocation path"
+ ],
+ "camera_accessed": false,
+ "deployable": false
+}

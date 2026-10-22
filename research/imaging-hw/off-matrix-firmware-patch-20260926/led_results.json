@@ -1,0 +1,80 @@
+{
+ "build": {
+  "L1_offOriginal": {
+   "sha256": "7cbc254e5c393b3e6baf4bc27ca0b988b08dfd5a20a004096498cb8381d2f60c",
+   "raw_sha256": "7a61c25027688ba7f9d086527d091bfaeca76890d6e769499bc7c52db9493516"
+  },
+  "L2_offNormalMatrix": {
+   "sha256": "caab7033c9935791b1c1a5b3cffa489ff2a524408471a587807db58810a73879",
+   "raw_sha256": "7a61c25027688ba7f9d086527d091bfaeca76890d6e769499bc7c52db9493516",
+   "bytes_changed_vs_L1": 46
+  },
+  "L3_camNormalMatrix": {
+   "sha256": "4abec95ca0b6cdf72b264d560e89400f6e76ca2612c2f51333da46ffa49f13e6",
+   "raw_sha256": "59a84befe2603d38639527ca8ff8bd4a4e8471603d4f924a5da9596f3ec07586"
+  }
+ },
+ "measure": {
+  "led_mask": {
+   "threshold_on_L1_max_channel": 0.3,
+   "pixels": 204,
+   "bbox_xyxy": [
+    772,
+    662,
+    802,
+    682
+   ]
+  },
+  "led_mean_rgb": {
+   "L1_offOriginal": [
+    0.3612,
+    0.4865,
+    0.6302
+   ],
+   "L2_offNormalMatrix": [
+    0.4153,
+    0.4679,
+    0.6614
+   ],
+   "L3_camNormalMatrix": [
+    0.4105,
+    0.4688,
+    0.6599
+   ]
+  },
+  "led_saturation": {
+   "L1_offOriginal": 0.5085,
+   "L2_offNormalMatrix": 0.4362,
+   "L3_camNormalMatrix": 0.4451
+  },
+  "pairs": {
+   "L1_offOriginal->L2_offNormalMatrix": {
+    "led_dE76": {
+     "mean": 9.693,
+     "p50": 9.992,
+     "p99": 18.199,
+     "max": 19.894
+    },
+    "frame_dE76_mean": 0.0106
+   },
+   "L1_offOriginal->L3_camNormalMatrix": {
+    "led_dE76": {
+     "mean": 9.316,
+     "p50": 9.713,
+     "p99": 16.183,
+     "max": 19.141
+    },
+    "frame_dE76_mean": 0.0191
+   },
+   "L2_offNormalMatrix->L3_camNormalMatrix": {
+    "led_dE76": {
+     "mean": 1.612,
+     "p50": 1.262,
+     "p99": 5.374,
+     "max": 6.386
+    },
+    "frame_dE76_mean": 0.0229
+   }
+  }
+ }
+}

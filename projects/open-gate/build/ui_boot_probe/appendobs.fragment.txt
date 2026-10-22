@@ -1,0 +1,27 @@
+# --- GUI parser boot-timing observer; observation only ----------------
+# This must be the first executable section in AutoRun.
+# appendobs.S: 76 bytes at 0xC0733000
+mem set 0xC0733000 0x4A0DB40F
+mem set 0xC0733004 0x480D6813
+mem set 0xC0733008 0xD20F4283
+mem set 0xC073300C 0x69819801
+mem set 0xC0733010 0x42914A0B
+mem set 0xC0733014 0x4A0BD002
+mem set 0xC0733018 0xD1074291
+mem set 0xC073301C 0x68134A06
+mem set 0xC0733020 0x60996058
+mem set 0xC0733024 0x60189800
+mem set 0xC0733028 0x6013330C
+mem set 0xC073302C 0xB530BC0F
+mem set 0xC0733030 0xF8DF4605
+mem set 0xC0733034 0x4760C014
+mem set 0xC0733038 0xC07330F0
+mem set 0xC073303C 0xC0734000
+mem set 0xC0733040 0xC18E92DC
+mem set 0xC0733044 0xC18E92F0
+mem set 0xC0733048 0xC05E2CAD
+# Reset the write cursor; old bytes beyond it are deliberately ignored.
+mem set 0xC07330F0 0xC0733100
+# Arm last. Stock is push {r4,r5,lr}; mov r5,r0.
+mem set 0xC05E2CA8 0xB9AAF150
+# --- END GUI parser boot-timing observer ------------------------------

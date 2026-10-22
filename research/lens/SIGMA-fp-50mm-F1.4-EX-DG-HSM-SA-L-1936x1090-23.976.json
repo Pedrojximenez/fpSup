@@ -1,0 +1,60 @@
+{
+  "name": "SIGMA fp - SIGMA 50mm F1.4 EX DG HSM (SA via L-mount adapter) - 1936x1090 @23.976 (mode 109)",
+  "note": "Generated from the recorded mode and the firmware's IMX410 mode tables. Mode 109: readout 3032x1708 with 2x2 binning, covering the full sensor width. Focal 50.0 mm therefore lands at 2696.379 px. Readout time is 10.556 ms. Distortion is left at zero because it has not been measured.",
+  "calibrated_by": "firmware IMX410 mode tables (SIGMAfp_re)",
+  "camera_brand": "SIGMA",
+  "camera_model": "fp",
+  "lens_model": "SIGMA 50mm F1.4 EX DG HSM (SA via L-mount adapter)",
+  "camera_setting": "1936x1090 @23.976 CinemaDNG",
+  "calib_dimension": {
+    "w": 1936,
+    "h": 1090
+  },
+  "orig_dimension": {
+    "w": 1936,
+    "h": 1090
+  },
+  "output_dimension": {
+    "w": 1936,
+    "h": 1090
+  },
+  "identifier": "sigma_fp_mode109_1936x1090_50mm",
+  "calibrator_version": "1.5.0",
+  "compatible_settings": [],
+  "frame_readout_time": 10.556,
+  "frame_readout_direction": "TopToBottom",
+  "input_horizontal_stretch": 1.0,
+  "input_vertical_stretch": 1.0,
+  "num_images": 0,
+  "fps": 23.976,
+  "focal_length": 50.0,
+  "crop_factor": 1.0,
+  "fisheye_params": {
+    "RMS_error": 0.0,
+    "camera_matrix": [
+      [
+        2696.3788300835654,
+        0.0,
+        968.0
+      ],
+      [
+        0.0,
+        2696.3788300835654,
+        545.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "distortion_coeffs": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "sync_settings": {},
+  "official": false
+}

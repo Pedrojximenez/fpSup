@@ -1,0 +1,18 @@
+[
+  {
+    "name": "recording-guard",
+    "test": "test_recording_guards_preserve_active_recipe",
+    "detected": "assertion",
+    "failures": 1,
+    "errors": 0,
+    "sha256": "37b8e738793091d5f0243228f22a997f34da677311d4fb83563b9c95c63f8f7c"
+  },
+  {
+    "name": "rcd-checksum",
+    "test": "test_bad_checksum_rejected_without_changing_active_tables",
+    "detected": "assertion",
+    "failures": 1,
+    "errors": 0,
+    "sha256": "8b750d84a0aa34809c9473529bfd6bf085a3ca3d427645f3efd0a16b514ba7e2"
+  }
+]

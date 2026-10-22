@@ -1,0 +1,33 @@
+{
+  "crop-minimum": {
+    "detected": true,
+    "issues": {
+      "output_alignment": 28560,
+      "no_canvas_for_fitted_geometry": 28560
+    },
+    "cases": 142800
+  },
+  "fixed-ratio": {
+    "detected": true,
+    "issues": {
+      "width_exceeds_cut_readout": 16032,
+      "height_exceeds_cut_readout": 14112,
+      "record_cannot_hold_visible_crop": 5430
+    },
+    "cases": 142800
+  },
+  "preview-alignment": {
+    "detected": true,
+    "issues": {
+      "preview_raster_exceeds_source": 258
+    },
+    "cases": 142800
+  },
+  "zoom-domain": {
+    "detected": true,
+    "issues": {
+      "zoom_outside_planner_domain": 57954
+    },
+    "cases": 142800
+  }
+}

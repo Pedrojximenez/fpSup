@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_sensor_lab_card.py", line 285, in <module>
+    main()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_sensor_lab_card.py", line 263, in main
+    B.build(directory, debug=debug, fast=fast, axis=axis)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/build_sensor_lab_card.py", line 157, in build
+    raise RuntimeError(f"shared builder failed; see {output / 'build.log'}")
+RuntimeError: shared builder failed; see /Users/dido/Developer.localized/SIGMAfp_re/projects/sensor-lab/cards/20260930-240-menu/plain/build.log
+
+Shared builder detail:
+binary is 455556 bytes, past loader MAXLEN 61440

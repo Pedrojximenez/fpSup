@@ -1,0 +1,42 @@
+{
+  "passed": true,
+  "pack_sha256": "a5a32f4faa7d70e631ea3c439d0c5bbe8084e8ea8e910fab702695013ca75817",
+  "registered": [
+    {
+      "pointer": 269484496,
+      "name": "FP3K_L",
+      "plugin": "xcimage",
+      "variants": 1
+    },
+    {
+      "pointer": 269484592,
+      "name": "FP3K_M",
+      "plugin": "xcimage",
+      "variants": 1
+    },
+    {
+      "pointer": 269484688,
+      "name": "FP3K_QS",
+      "plugin": "xcimage",
+      "variants": 1
+    },
+    {
+      "pointer": 269484784,
+      "name": "FP3K_SET",
+      "plugin": "xcimage",
+      "variants": 1
+    },
+    {
+      "pointer": 269484880,
+      "name": "FP3K_FONT",
+      "plugin": "xcimage",
+      "variants": 1
+    }
+  ],
+  "files_resolved": 5,
+  "mocked": [
+    "bounded allocation",
+    "resource registry and deferred property attachment"
+  ],
+  "limitations": "Native pack parsing, names, variants, and file resolution exercised. Renderer/resource instantiation remains untested."
+}

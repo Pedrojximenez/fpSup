@@ -1,0 +1,17 @@
+  ok   test_any_video_base_gives_the_same_row
+  ok   test_binned_record_lands_on_branch_c
+  FAIL test_every_mutation_is_caught: mutation not caught: preview ceil16 past source
+  ok   test_external_6k_32_readouts
+  ok   test_large_anisotropic_record_uses_a_bounded_stock_preview
+  ok   test_m12_auto_previews_the_record_shape
+  ok   test_m98_half_size_preview_alignment_stays_inside_source
+  ok   test_m98_raw_previews_inside_its_source
+  ok   test_partial_anisotropic_preview_preserves_record_factors
+  ok   test_preview_never_past_its_source
+  ok   test_r69_m7_previews_like_stock_uhd30
+  ok   test_record_tap_keeps_zoom_and_bin_distinct
+  ok   test_reproduces_every_stock_movie_row
+  ok   test_standby_shows_what_recording_shows
+  ok   test_stills_and_shell_bases_are_not_video
+
+14/15 passed

@@ -1,0 +1,11 @@
+test_a2p_permission_changes_real_storage_and_confirmation (__main__.NativeCases) ... ok
+test_cursor_type_one_registers_and_runs_reverse_callback (__main__.NativeCases) ... ok
+test_read_only_permission_has_no_reverse_write (__main__.NativeCases) ... ok
+test_storage_write_mutation_is_caught (__main__.NativeCases) ... ok
+test_unknown_execution_is_refused (__main__.NativeCases) ... ok
+test_zero_permission_does_not_drain_pending_repeat (__main__.NativeCases) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.467s
+
+OK

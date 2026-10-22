@@ -1,0 +1,36 @@
+{
+  "firmware_sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622",
+  "resource": "../Common/Strings/English.nloc",
+  "native_texts": {
+    "Footer01": "<!font_G_bt_ok_K153,CENTER>OK<!28sp,CENTER><!font_G_bt_menu_K153,CENTER>Back",
+    "Footer02": "<!font_G_bt_right_K153,CENTER>Further Options",
+    "Footer03": "<!font_G_bt_menu_K153,CENTER>Back",
+    "Footer05": "<!font_G_bt_ok_K153,CENTER>OK<!28sp,CENTER><!font_G_bt_menu_K153,CENTER>Cancel",
+    "1339": "Version",
+    "1348": "Current Version",
+    "1343": "Firmware Update",
+    "0301": "Format",
+    "1033": "Memory Media Format",
+    "1036": "<Media> Format",
+    "2100": "Load from QR Code",
+    "2098": "Save QR Code"
+  },
+  "used": {
+    "normal_footer": "Footer01",
+    "popup_footer": "Footer05",
+    "settings_footer": "Footer02"
+  },
+  "no_exact_native_equivalent": [
+    "Enable",
+    "Disable",
+    "Page",
+    "Manage Sups",
+    "Unload on restart",
+    "Load on restart",
+    "Load failed",
+    "Write failed",
+    "SD Card Tools",
+    "About fpSup"
+  ],
+  "language_policy": "Build-time English resource reuse; no change to camera language."
+}

@@ -1,0 +1,43 @@
+{
+  "files": [
+    {
+      "source": "/Users/dido/Downloads/fp-stop-leak-fix/w2-stop-path-notes.md",
+      "copy": "projects/res-lab/validation/20261011-virtual-rate-context-live/reference-stop-leak/fp-stop-leak-fix/w2-stop-path-notes.md",
+      "bytes": 6689,
+      "sha256": "38bf697fef7f44acbaa193d721fd620147a949c89d06a8044908e9a9c10ca64f"
+    },
+    {
+      "source": "/Users/dido/Downloads/fp-stop-leak-fix/MANIFEST.txt",
+      "copy": "projects/res-lab/validation/20261011-virtual-rate-context-live/reference-stop-leak/fp-stop-leak-fix/MANIFEST.txt",
+      "bytes": 449,
+      "sha256": "47af70fcfff166335f00b1d7f93996a0d43c21f237b4dbebcba7ee766eb8f143"
+    },
+    {
+      "source": "/Users/dido/Downloads/fp-stop-leak-fix/05STOPFX.BIN",
+      "copy": "projects/res-lab/validation/20261011-virtual-rate-context-live/reference-stop-leak/fp-stop-leak-fix/05STOPFX.BIN",
+      "bytes": 316,
+      "sha256": "f9f26a092c5676ead5771ba8be4aac9c3734e9ed0cd144002a73b3f6b657c9d9"
+    },
+    {
+      "source": "/Users/dido/Downloads/fp-stop-leak-fix/bei-stop-leak-fix.txt",
+      "copy": "projects/res-lab/validation/20261011-virtual-rate-context-live/reference-stop-leak/fp-stop-leak-fix/bei-stop-leak-fix.txt",
+      "bytes": 5368,
+      "sha256": "6b456703b10d2680d720418600196e6d8813d00d7be97f15248bcfb319228271"
+    },
+    {
+      "source": "/Users/dido/Downloads/fp-phase-detect/bei-phase-detect.txt",
+      "copy": "projects/res-lab/validation/20261011-virtual-rate-context-live/reference-stop-leak/fp-phase-detect/bei-phase-detect.txt",
+      "bytes": 3966,
+      "sha256": "03ea2d167f6daf5fefc62ddfc13393e292b0bb2acd40ecfa25a828c4b94aaae9"
+    },
+    {
+      "source": "/Users/dido/Downloads/fp-phase-detect/af-deepdive-notes.md",
+      "copy": "projects/res-lab/validation/20261011-virtual-rate-context-live/reference-stop-leak/fp-phase-detect/af-deepdive-notes.md",
+      "bytes": 7831,
+      "sha256": "8c32242a4265ae8d04c7b216991cfcefa4f06f42aa9f00a078e68acf5ae48b44"
+    }
+  ],
+  "executed": false,
+  "camera_deployed": false,
+  "review": "Stop-flush proposal matches native prologue and branch target. Present live standby pool returned96/96 three times; all current take requests completed. PDAF notes concern AF and provide no tested recording-path correction."
+}

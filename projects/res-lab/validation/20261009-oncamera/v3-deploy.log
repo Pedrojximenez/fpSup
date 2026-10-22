@@ -1,0 +1,74 @@
+  stage  73408 bytes in 0.001s (80.1 MB/s)      
+  verify 73408 bytes in 0.001s (141.4 MB/s)      
+  stage  73408 bytes in 0.01s (5.2 MB/s), MEM1, read back whole          
+  code   304/304 B  5.1 KiB/s   verify 304/304 B  577 KiB/s   verify 304 bytes in 0.0s (274 KiB/s)      
+  code   304 bytes in 0.1s (2.5 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  code   412/412 B  128.5 KiB/s   verify 412/412 B  604 KiB/s   verify 412 bytes in 0.0s (340 KiB/s)      
+  code   412 bytes in 0.0s (76.6 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 73408 bytes in 0.000s (147.4 MB/s)      
+  local   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/cards/20261009-virtual-rcd-v3/debug/fpSup/32RESCUS.BIN  73408 bytes
+  remote  \fpSup\32RESCUS.BIN  mode 0x7
+  buffer  0x450629C0, file object 0x45074880
+  proof   region takes writes and still holds them a second later
+  restored echo -> 0xC03D99A0
+  reply   putfile: written
+  status  2 — written
+  open    1     write  1   (both are flags, not counts)
+  WARNING 32RESCUS.BIN did not appear in dir
+  remote  \fpSup\32RESCUS.BIN  73408 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x5F900980 (77504 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 73408 of 73408
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/v3-readback/32RESCUS.BIN
+Verified \fpSup\32RESCUS.BIN 73408
+  stage  451168 bytes in 0.002s (273.3 MB/s)      
+  verify 451168 bytes in 0.001s (336.9 MB/s)      
+  stage  451168 bytes in 0.00s (132.1 MB/s), MEM1, read back whole          
+  code   304/304 B  65.7 KiB/s   verify 304/304 B  563 KiB/s   verify 304 bytes in 0.0s (252 KiB/s)      
+  code   304 bytes in 0.0s (45.3 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  code   412/412 B  111.9 KiB/s   verify 412/412 B  604 KiB/s   verify 412 bytes in 0.0s (306 KiB/s)      
+  code   412 bytes in 0.0s (69.2 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 451168 bytes in 0.001s (325.8 MB/s)      
+  local   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/cards/20261009-virtual-rcd-v3/debug/fpSup/50RESLAB.BIN  451168 bytes
+  remote  \fpSup\50RESLAB.BIN  mode 0x7
+  buffer  0x450629C0, file object 0x450D0C20
+  proof   region takes writes and still holds them a second later
+  restored echo -> 0xC03D99A0
+  reply   putfile: written
+  status  2 — written
+  open    1     write  1   (both are flags, not counts)
+  WARNING 50RESLAB.BIN did not appear in dir
+  remote  \fpSup\50RESLAB.BIN  451168 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x5F900980 (455264 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 451168 of 451168
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/callfn.py", line 48, in call
+    sh('echo', retries=0)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/live_camera.py", line 36, in checked_sh
+    raise RuntimeError(f'Uncertain outcome; command will not be replayed: {line}: {reply}')
+RuntimeError: Uncertain outcome; command will not be replayed: echo: ERR shl frame0 rc=-1(LIBUSB_ERROR_IO) moved=0/64
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/deploy_v3.py", line 17, in <module>
+    assert not importlib.import_module('getfile').main()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/getfile.py", line 152, in main
+    call(0xC001D7A0, r0=P + 0xE0, r1=2, verbose=False)   # free
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/callfn.py", line 50, in call
+    set_echo_handler(ECHO_ORIG)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/putfile.py", line 405, in set_echo_handler
+    mem_set(ECHO_SLOT, handler)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/putfile.py", line 377, in mem_set
+    sh(f'mem set 0x{addr:08X} 0x{value:08X}')
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/live_camera.py", line 36, in checked_sh
+    raise RuntimeError(f'Uncertain outcome; command will not be replayed: {line}: {reply}')
+RuntimeError: Uncertain outcome; command will not be replayed: mem set 0xC0BAC2F8 0xC03D99A0: ERR shl cmd rc=-5(LIBUSB_ERROR_NOT_FOUND) moved=0/64
+

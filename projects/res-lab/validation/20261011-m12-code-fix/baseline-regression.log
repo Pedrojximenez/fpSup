@@ -1,0 +1,35 @@
+test_same_carrier_round_trip_reloads_after_both_native_callbacks (test_reslab_rate_commit.RateCommitTests) ... 
+======================================================================
+FAIL: test_same_carrier_round_trip_reloads_after_both_native_callbacks (test_reslab_rate_commit.RateCommitTests) (site='0xc057a6f8')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_reslab_rate_commit.py", line 100, in test_same_carrier_round_trip_reloads_after_both_native_callbacks
+    self.assertEqual(cam.lv, LV_CYCLE * count)
+AssertionError: Lists differ: [] != [('schedule', 6), 'LV_STOP', 'LV_START', ('schedule', 3)]
+
+Second list contains 4 additional elements.
+First extra element 0:
+('schedule', 6)
+
+- []
++ [('schedule', 6), 'LV_STOP', 'LV_START', ('schedule', 3)]
+
+======================================================================
+FAIL: test_same_carrier_round_trip_reloads_after_both_native_callbacks (test_reslab_rate_commit.RateCommitTests) (site='0xc05821b8')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_reslab_rate_commit.py", line 100, in test_same_carrier_round_trip_reloads_after_both_native_callbacks
+    self.assertEqual(cam.lv, LV_CYCLE * count)
+AssertionError: Lists differ: [] != [('schedule', 6), 'LV_STOP', 'LV_START', ('schedule', 3)]
+
+Second list contains 4 additional elements.
+First extra element 0:
+('schedule', 6)
+
+- []
++ [('schedule', 6), 'LV_STOP', 'LV_START', ('schedule', 3)]
+
+----------------------------------------------------------------------
+Ran 1 test in 64.398s
+
+FAILED (failures=2)

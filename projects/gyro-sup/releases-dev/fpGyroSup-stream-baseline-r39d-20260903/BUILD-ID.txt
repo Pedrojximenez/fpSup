@@ -1,0 +1,15 @@
+fpGyroSup stream baseline r39d (2026-09-03) — SIGMA fp Ver.5.02, release AutoRun (no shell), GCSV-only stream.
+= r38e logger (AutoRun.txt / VSHL.BIN byte-identical to r38e) + PGEN r39d.  Verified on a cold-booted debug card
+(same loader, same PGEN, plus the USB shell): boot -> immediate 5 s take -> two 15 s takes 6 s apart:
+all three takes logged (no gaps), all three JSONs written during the take (EARLY_RES=1 at block 2, SKIP=3),
+JSON byte-identical to the shell-card reference.
+  dims : live CameraMgrSetting block (FUN_c0206e98() + 0x40: .h/.v) + CinemaDNG border 16/10.
+         (r39a/b/c read 0xC3758B98 -- the USB shell's `setting readcam` mirror, 0 on a release card: that is why
+         the first release card had no JSON at all.)
+  lens : the firmware's lens-info singleton (FUN_c03341c8 -> 0xC3464980: name +0x24, focal tenths +0x68).
+         No lens-bus access anywhere any more; the bus path remains only as the stop-time fallback when the
+         singleton holds no name.  Removing the boot-time bus reads also fixed the first-take-after-boot miss
+         seen on the r39c cards (A001_001 / A001_004).
+  json : written during the take once the clip is established and the mode sampled; stop-time job skips it.
+  attach: r38e firmware-mirrored MovieRecording read; 0x21 path still not exercised live.
+Card layout: AutoRun.txt, VSHL.BIN, PGEN.BIN at root.  Do not mix versions.

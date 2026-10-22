@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/build_v3_reslab.py", line 279, in <module>
+    if __name__ == '__main__': main()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/build_v3_reslab.py", line 250, in main
+    core, core_facts, _ = RC.build_core(pathlib.Path(d),virtual=True)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/res-custom/build_v3_rescustom.py", line 343, in build_core
+    text = compile_core(tmp, tab_off)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/res-custom/build_v3_rescustom.py", line 172, in compile_core
+    text = elf_text.load_text(obj)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/research/ui/tools/arm_text/elf_text.py", line 170, in load_text
+    _require(sec.info != text_index, ".text relocation is unsupported; this helper is not a linker")
+  File "/Users/dido/Developer.localized/SIGMAfp_re/research/ui/tools/arm_text/elf_text.py", line 41, in _require
+    raise ELFError(message)
+elf_text.ELFError: .text relocation is unsupported; this helper is not a linker

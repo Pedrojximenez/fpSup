@@ -1,0 +1,24 @@
+{
+  "candidate_sha256": "51cd29c8f7eea3e6ff78f6398b82d5b0bffa2033f6afc875047c2217606a297f",
+  "candidate_bytes": 184832,
+  "candidate_version": 15,
+  "plain_debug_consumer_equal": true,
+  "same_auto_run_loader_producer": {
+    "AutoRun.txt": true,
+    "fpSup/LOADER.BIN": true,
+    "fpSup/50RES-Lab v0.1.0test.BIN": true
+  },
+  "status": "SD_and_SSD_failed_early_stop_user_reports_recording_size_change",
+  "not_deployed": false,
+  "exact_old_65word_test": "passed for240/280",
+  "low_rate_and_guard_test": "passed after correcting120p fixture flag",
+  "v14_negative": "failed as expected on11words;31.769seconds",
+  "initial_fixture_failure": "120p compared to30p frozen B0=0, corrected from archived120 B0=1;candidate unchanged",
+  "header_regression": "6 tests passed;190.373seconds",
+  "card_installed_sha256": "5932f1aad4b871161e33a30716cf143bb99f2a0f8277a0f3a9f788fd9e9dc83a",
+  "card_full_readback": "passed;CFG preserved;AutoRun/loader/producer unchanged",
+  "hardware_acceptance": false,
+  "loaded_core_sha256": "cb8b3d543525d61d627615e420b9725ddbddd84721c6d889d69270c98d4fe111",
+  "hook_bodies_verified": 5,
+  "first_boot_profile_hits": 0
+}

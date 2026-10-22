@@ -1,0 +1,70 @@
+{
+ "schema_version": 1,
+ "kind": "live_the_sd_aggregation_batch_is_measured_and_it_sets_the_pool_size",
+ "date": "2026-09-29",
+ "scope": "LIVE on the camera, firmware 5.02.0.V91, model w71c1. Hook at 0xC03A5490, mirror only, no codec. Two camera-allocated 4 MiB blocks, round robin with NO release signal. FHD 12-bit 59.94p, clip \\CINEMA\\A001_203, 40 frames redirected, all 40 files read back and their watermarks decoded.",
+
+ "headline": "a buffer handed to the CinemaDNG writer is not read when the writer is called. It is read when the SD aggregation batch containing it is flushed, and the batch is 64 MiB of accumulated payload. That number, not the codec and not the frame rate, is what sets the size of the buffer pool in-camera compression needs.",
+
+ "the_measurement": {
+  "method": "round robin over two slots: frame N overwrites slot N mod 2, no release signal of any kind. Each write stamps MSL2 plus the frame's own sequence into the trailing padding. The sequence a file carries on the card is therefore the sequence of the LAST write to that slot before the card read it.",
+  "state_block": {"entries": 40, "frames_redirected": 40,
+                  "frames_refused": 0, "releases_observed": 0,
+                  "shape_refused": 0, "error": null, "hook": "restored"},
+  "files": {
+   "1 to 21": "every file carries sequence 19 or 20, by slot parity",
+   "22 to 40": "every file carries sequence 38 or 39, by slot parity",
+   "distinct_hashes": "four in forty: two per batch, one per slot"
+  },
+  "so": "the card read BOTH slots once at about frame 20, and once again at about frame 39. Files 1 to 21 were all written from the slot contents as of frame 19/20; files 22 to 40 from the contents as of frame 38/39."
+ },
+
+ "the_batch_is_64_MiB": {
+  "arithmetic": {
+   "frame_bytes": 3244544,
+   "20 frames": "64,890,880 B = 61.88 MiB, below the threshold, no flush",
+   "21 frames": "68,135,424 B = 64.98 MiB, at or above the threshold, FLUSH",
+   "observed_boundary": "between file 21 and file 22, exactly there"
+  },
+  "the_static_reading_it_confirms": {
+   "ledger": "ledger-sd-aggregation-static-20260924.json",
+   "where": "FUN_c063f380",
+   "trigger": "vol[0x4828] <= vol[0x4a58] -> FUN_c063f140",
+   "note_from_that_ledger": "vol[0x4828] is the 0x04000000 threshold after alignment to volume geometry",
+   "0x04000000": "67,108,864 = 64 MiB",
+   "status_before_today": "that ledger is [C], static only, and the live attempt of the same day (ledger-live-mediawritemode-20260924) came back NOT TESTED because aggregation could not be turned off. This run is the first live confirmation."
+  },
+  "the_other_cap": "the cookie array holds 128 entries (vol[0x4850] == 0x80), so a batch is at most 128 frames whatever the byte total. With heavy compression the cookie cap binds before the byte threshold does.",
+  "level": "L"
+ },
+
+ "what_this_means_for_the_architecture": {
+  "the_pool_size": "one batch's worth of OUR OWN output must stay untouched. That is 64 MiB, or 128 frames, whichever comes first. Compression does not reduce it: smaller frames only mean more of them fit in the same 64 MiB.",
+  "in_blocks": "64 MiB is sixteen 4 MiB blocks, or one larger allocation if the allocator will give one. Two blocks have been obtained live; whether sixteen, or one of 64 MiB, can be is NOT established and is the next thing to test.",
+  "with_heavy_compression": "at G4b's measured 57 percent reduction a frame is about 1.4 MB, so 64 MiB is about 46 frames -- under the 128 cookie cap, so the byte threshold still binds. At the 4.5 percent of the synthetic source it would be about 437 frames, so the cookie cap would bind first and the pool would be 128 x 0.15 MB, about 19 MB. Real footage sits nearer the first case.",
+  "what_it_kills": "any design with a small fixed pool. G5's single buffer and today's two slots both fail for the same reason, and the failure is silent: every file decodes, carries its tiles and has offsets matching its SOI markers.",
+  "what_it_does_not_kill": "the architecture. The lag is finite and bounded by a known threshold, not by clip length. The earlier reading of this run -- 'at or near clip close' from the 8-frame version -- was wrong, and the 40-frame version is what showed it."
+ },
+
+ "the_alternative_route_still_open": {
+  "aggregation_off": "ledger-aggregation-off-path-20260924.json reads FUN_c063f380's non-aggregating path and infers [I] that the transfer completes before FUN_c0646c60 returns, which would make a SINGLE arena correct. ledger-live-mediawritemode-20260924.json could not turn aggregation off, so it is untested. Today's measurement makes it worth another attempt: it would replace a 64 MiB pool with one buffer."
+ },
+
+ "corrections": [
+  {
+   "what_was_wrong": "the 8-frame round robin was read as \"G5's SHAPE: the card read the slots at or near clip close. A pool of this shape cannot work at any depth we can afford.\" The tool said it and so did I.",
+   "why_it_was_wrong": "eight frames is shorter than one batch, so every file saturates at the last write and the run cannot see a boundary. The verdict was a real reading of the data and the data did not go far enough.",
+   "the_truth": "the lag is one aggregation batch, which is 64 MiB and finite. The 40-frame run shows two batches and the boundary between them."
+  },
+  {
+   "what_was_wrong": "'frame[0x1104] reaching 0x12 is the release signal', inferred statically on 2026-09-28.",
+   "the_truth": "refuted live earlier today (ledger-live-two-slot-mirror-20260929). The release signal that exists is the batch flush, and the batch is what today's run measured."
+  }
+ ],
+
+ "what_is_still_open": [
+  "whether the allocator will give 64 MiB, as one block or as sixteen. Two 4 MiB blocks are the most obtained so far.",
+  "whether the flush can be OBSERVED, so slots are recycled on the batch rather than on a count. FUN_c063f140 is the flush and its per-batch status goes to every cookie; a hook there would be the release notification this project has been looking for.",
+  "whether aggregation can be turned off at all, which would make the pool a single buffer."
+ ]
+}

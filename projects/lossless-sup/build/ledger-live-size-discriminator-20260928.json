@@ -1,0 +1,97 @@
+{
+ "schema_version": 1,
+ "kind": "live_size_is_the_discriminator",
+ "date": "2026-09-28",
+ "operator_scope": "ON THE CAMERA, authorised, told the operator before starting. Fresh boot. Chain: preflight, scratch, acquire-second, bound-probe-two-ramp, release. seg never written, the frame never touched, nothing of ours written to the card.",
+ "the_three_runs_that_settle_it": {
+  "all_held_constant": [
+   "geometry 1936x1090, 12 tiles of 512x368",
+   "declared length 0x305000 = 3,166,208 B",
+   "destination block A at +0, guards at +0x305000",
+   "the source in block B through the uncached alias",
+   "the image apart from the fill loop"
+  ],
+  "1_incompressible_synthetic": {
+   "variant": "bound-probe-two",
+   "host_demand": 3392834,
+   "percent_of_declared": 107.2,
+   "result": "REFUSED, enc_ret 0, error 18, 0 bytes out, 9,816 us before refusing"
+  },
+  "2_the_cameras_own_pixels": {
+   "variant": "bound-probe-two-copy",
+   "host_demand": "not host-reproducible",
+   "actual_output": 958464,
+   "percent_of_declared": 30.3,
+   "result": "ACCEPTED, enc_ret 1, 13,767 us"
+  },
+  "3_compressible_synthetic": {
+   "variant": "bound-probe-two-ramp",
+   "host_demand": 264752,
+   "percent_of_declared": 8.4,
+   "actual_output": 283648,
+   "result": "ACCEPTED, enc_ret 1, 13,655 us"
+  },
+  "conclusion": "synthetic data is not what the engine objects to: run 3 is synthetic and was accepted. Of the two explanations the earlier pair confounded - the source being generated, or its output exceeding the declared length - only the second survives. The engine refuses work whose output would not fit the length it was handed, and it refuses it by REFUSING rather than by overrunning or truncating: 0 bytes out, guards untouched."
+ },
+ "measured_run_3": {
+  "tile_sizes": [
+   23633,
+   23633,
+   23633,
+   23633,
+   23633,
+   23633,
+   23633,
+   23633,
+   23633,
+   23633,
+   23633,
+   23685
+  ],
+  "tile_sum": 283648,
+  "reported_total": 283648,
+  "accounting": "EXACT",
+  "guards": [
+   "0xA55AA55A",
+   "0xA55AA55A",
+   "0xA55AA55A",
+   "0xA55AA55A",
+   "0xA55AA55A"
+  ],
+  "source_hash_matched_the_host_generator": true,
+  "source_hash_significance": "the camera's own fill and the host's generate_flat produce byte-identical data. Checked under emulation first and now confirmed live, which is what makes the demand figure above describe the data the camera actually encoded.",
+  "encode_microseconds": 13655,
+  "calibration": "the camera produced 283,648 B where the host encoder needs 264,752 - the camera is 7.1% above the host's optimal-per-tile Huffman estimate for this pattern. Any prediction built on the host encoder needs at least that much margin. One pattern, one run."
+ },
+ "verdict_on_run_3": {
+  "result": "refused, correctly",
+  "reasons": [
+   "the host encoder does not need more than the declared length for this pattern, so the run did not put the limit under any pressure",
+   "the output stopped 91.0% below the declared length: the guards are unchanged because nothing reached them"
+  ],
+  "note": "this run was never a bound test and the criterion says so. Its value is the discriminator, not a verdict."
+ },
+ "what_this_means_for_zero_copy": {
+  "gained": "the engine's response to work it cannot fit is a refusal before it writes anything. That is a far better property than the guard words could ever have shown, because a refusal is safe and an overrun is not.",
+  "NOT_gained": "this does NOT authorise encoding in place over a frame's RAW. The refusal here happened with a source in one block and a destination in another, and produced no output. Whether the decision is made BEFORE writing begins or partway through is not established - and in place, a refusal partway through has already destroyed the RAW it was reading. ROADMAP's position stands: even if the hardware stops, in-place encoding may destroy the source first.",
+  "still_open": [
+   "where the threshold is. Three points: 8.4% accepted, 30.3% accepted, 107.2% refused. A bisection would be needed to say the boundary is the declared length itself rather than something near it.",
+   "whether the refusal is a pre-flight estimate or a mid-encode abort. The 9,816 microseconds before refusing is the only clue, and it is one reading.",
+   "everything about read/write ordering in place."
+  ]
+ },
+ "an_operational_lesson_recorded_for_the_first_time": {
+  "what_happened": "after the power cycle the first preflight failed with the frame length reading 0x80E600 = 8,447,488 B instead of 0x318200. The camera had come back in UHD: SetMovRecSize 2->3, SetMovCinemaDNGQuality 0->4, SetMovFramerate 3->12.",
+  "why": "the project forbids `menu save`, so every menu value we set lives in RAM only and a power cycle returns to what is in flash. No earlier session power-cycled and then kept testing, so this had never shown up.",
+  "the_rule": "after ANY power cycle, re-apply SetMovRecSize 2, SetMovCinemaDNGQuality 0, SetMovFramerate 3 and verify, BEFORE arming anything. The probe caught it - it refused a frame that did not match its geometry - but it cost a clip and an arming.",
+  "the_probe_behaved_correctly": "kind was 2 and the LR was right; it was the length check that refused. A probe that had trusted the geometry would have handed a 3.1 MB tile plan to an 8.4 MB frame."
+ },
+ "camera_left_in": {
+  "hook": "0xEBFDE061 stock, nothing armed",
+  "memory": "both blocks freed and recorded, free_result 0 each, state block reads RELEASED",
+  "settings": "FHD RAW12 restored in RAM; they will revert again on the next power cycle"
+ },
+ "runs_of_acquire_second_so_far": "three, across two boots, all status 0, all with adjacent blocks 1 KiB apart - the device-side disjointness check passing its hardest case every time",
+ "camera_accessed": true,
+ "deployable": false
+}

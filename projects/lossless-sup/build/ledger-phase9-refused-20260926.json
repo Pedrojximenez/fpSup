@@ -1,0 +1,71 @@
+{
+ "schema_version": 1,
+ "kind": "live_phase9_engine_refused_the_reduced_geometry",
+ "date": "2026-09-26",
+ "operator_scope": "live camera, NON-DESTRUCTIVE as designed: the source was generated in our own retained block, the destination was in it too, seg was never written and the frame reached the card untouched. One recording. The probe self-restored its hook.",
+ "camera": {
+  "model": "w71c1",
+  "firmware": "5.02.0.V91",
+  "media": "SD",
+  "mode": "CINE, FHD RAW12 24p",
+  "boot": "fresh, cave empty"
+ },
+ "question": "does the engine stop at the destination LENGTH the firmware hands it?",
+ "verdict": "NOT ANSWERED. The engine REFUSED the job, so nothing was written and the guards prove nothing.",
+ "measured": {
+  "phase": 9,
+  "count": 1,
+  "stage": 8,
+  "error": 0,
+  "init_return": 1,
+  "encode_return": 0,
+  "size_return": 1,
+  "encode_entered": 1,
+  "block_adopted": 1,
+  "retained_handle": "0x45178400",
+  "guards": {
+   "at_declared": "0xA55AA55A",
+   "plus_4": "0xA55AA55A",
+   "plus_8": "0xA55AA55A",
+   "plus_C": "0xA55AA55A",
+   "plus_0x400": "0xA55AA55A",
+   "all_intact": true
+  },
+  "declared_length_readback": "0x19E000 = 1,695,744",
+  "size_table": "garbage (0xFFFFFFFF and similar); F_SIZE returned 1 but the encode had failed"
+ },
+ "what_the_intact_guards_do_and_do_not_show": "F_INIT succeeded, so the declared length was computed and readback confirms it is exactly round_up(12 * 1536 * 736 / 8, 1024) = 1,695,744, which is what ledger-engine-output-bound-20260926 predicted. But F_ENC returned 0: the engine wrote nothing, so five intact guards say only that our own writes survived. The bound question is untouched.",
+ "probable_cause": {
+  "level": "I",
+  "claim": "the engine refuses a geometry that is not the configured sensor geometry",
+  "argument": "1536x736 was chosen only so a source and a destination would both fit in one 4 MiB block. FUN_c062f5a8's row-band loop is driven by FUN_c062f478 on the same struct, and the engine is a single global configured for the current mode, so a geometry it was never set up for is a plausible refusal. Every successful encode in this project has used 1936x1090.",
+  "not_established": "no error code is available beyond F_ENC returning 0, and nothing was traced to confirm which check refused"
+ },
+ "a_defect_in_my_own_probe": {
+  "defect": "PHASE=9 checks init_return but not encode_return before summing the size table",
+  "consequence": "it produced compressed_size_sum = 0xBCFFEFB0 and a table of 0xFFFFFFFF, numbers a careless reader could take for data. error stayed 0 and stage reached 8, so the run LOOKED clean.",
+  "fix_needed": "fail on encode_return != 1, as every other phase does"
+ },
+ "the_release_policy_worked": {
+  "level": "L",
+  "claim": "release refused to free the block: 'the codec was entered and did not succeed (enc_ret=0); it may still own the buffer. Power-cycle instead of freeing.' That is the documented asymmetric policy behaving exactly as written, and it is the right call - the engine has no ownership arbitration.",
+  "consequence": "the block at 0x45178400 stays retained until a power cycle. Deliberate, not a leak to fix."
+ },
+ "what_this_costs_the_plan": [
+  "The bound cannot be measured with a reduced geometry, so it cannot be measured inside one 4 MiB block: at 1936x1090 the source is 3,165,696 and the declared destination 3,166,208, which is 6.33 MB together.",
+  "Two blocks would do it - a second 4 MiB allocation succeeded earlier today at 0x45578800 - with the noise source in one and the destination plus guards in the other.",
+  "A cheaper diagnostic comes first: run the same probe at the PRODUCT geometry with the source left as the camera's own frame, read-only, and the destination in our block. A real frame compresses and will never reach the limit, so it does not answer the bound - but it answers whether the geometry was the refusal, which decides whether the two-block version is worth building."
+ ],
+ "explicitly_not_established": [
+  "whether the engine respects its declared output length. That is still the whole question.",
+  "that the geometry was the refusal. It is the leading candidate and nothing else was ruled out.",
+  "whether the LCG source would even be incompressible to this codec; the encode never ran on it",
+  "the read-versus-write pointer race, which remains a separate untested hazard"
+ ],
+ "camera_left_as_found": {
+  "hook_0xC0722AFC": "0xEBFDE061 original",
+  "is_recording": 0,
+  "retained_block_0x45178400": "RETAINED by policy after a failed encode; clears on a power cycle"
+ },
+ "deployable": false
+}

@@ -1,0 +1,61 @@
+{
+  "section": {
+    "c_base": 264,
+    "c_text": 9390,
+    "ui_off": 9656,
+    "ui_len": 11444,
+    "blob_len": 21104,
+    "state_off": 21120,
+    "state_bytes": 64,
+    "block_bytes": 24576,
+    "functions": {
+      "fpf_changed": 1,
+      "fpf_card_init": 173,
+      "uia_apply": 617
+    }
+  },
+  "row": {
+    "page": "Y2_5_1",
+    "objects": 27,
+    "first_local_id": 35080,
+    "row_bytes": 8416,
+    "header_grow": 240,
+    "relocations": 259,
+    "strings": [
+      "fpScreenFlip_Row",
+      "MV_fpScreenFlip",
+      "Off",
+      "180",
+      "Mirror",
+      "180+Mirror",
+      "Screen Flip",
+      "Y2_5_1",
+      "Y2_5_1.tools.rows"
+    ]
+  },
+  "fpui_sha256": "6a093cfec324462e2917a2e634d6f502b20ddbb1d07e40cf092c146dd421ce6e",
+  "command": [
+    "/Library/Developer/CommandLineTools/usr/bin/python3",
+    "-B",
+    "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/build_autorun.py",
+    "--loader",
+    "--banner",
+    "fpSup-DEV-FLIP!",
+    "--boot-bin",
+    "screenflip.bin:0",
+    "--out",
+    "../../projects/screenflip/cards/screenflip-2026-10-04/dev/AutoRun.txt",
+    "--no-ep-patches",
+    "--also-bin",
+    "0xC05E5B58:/var/folders/20/mb8w7p_x7nlfpctnt7qd77b00000gn/T/fpflip-card-vgsjmt03/site_C05E5B58.bin",
+    "--also-bin",
+    "0xC05E61C8:/var/folders/20/mb8w7p_x7nlfpctnt7qd77b00000gn/T/fpflip-card-vgsjmt03/site_C05E61C8.bin",
+    "--also-bin",
+    "0xC05E61E0:/var/folders/20/mb8w7p_x7nlfpctnt7qd77b00000gn/T/fpflip-card-vgsjmt03/site_C05E61E0.bin"
+  ],
+  "sha256": {
+    "AutoRun.txt": "5dc89b8506e8ce408276a9eab61fbb9fda94d4a194b65f2fd17c9e410b8fe642",
+    "fpSup.BIN": "32c6b6f2c49586a82cf59f5a35fc9c12903e965ad36b9cc929c1241f8db62153"
+  },
+  "status": "OFFLINE_ONLY_NOT_CAMERA_TESTED"
+}

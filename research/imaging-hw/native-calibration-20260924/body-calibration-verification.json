@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "purpose": "Read-only native fp calibration provenance verification; not a color accuracy validation",
+  "files": {
+    "A": {
+      "path": "/Users/dido/Developer.localized/SIGMAfp_re/codex/fp-colormatrix-ab-20260923/A_original.DNG",
+      "sha256": "8b838d0a27b5a8a11a39ff903933793930706b7a6b46f7a4ef8e08a400e2c324",
+      "raw_strips_sha256": "8bee54820bf5d3b1e213d4076e7a7165a9efe9140865379b390e56cad4863336"
+    },
+    "C": {
+      "path": "/Users/dido/Developer.localized/SIGMAfp_re/codex/fp-colormatrix-ab-20260923/C_firmware_normal.DNG",
+      "sha256": "7b9187a28ccb1cbe9d73b8be202b49cfa408cf8c166b12ef1ef77f6e9307b7ae",
+      "raw_strips_sha256": "8bee54820bf5d3b1e213d4076e7a7165a9efe9140865379b390e56cad4863336"
+    },
+    "genuine_normal": {
+      "path": "/Users/dido/Developer.localized/SIGMAfp_re/research/imaging-hw/color-characterisation/captures/_SDI5625.DNG",
+      "sha256": "0e2d43289d2fbcf420fc8c704a1fa507e7c94503932e4513a62614781939934e"
+    }
+  },
+  "ROM": {
+    "path": "/Users/dido/Developer.localized/SIGMAfp_re/out/MAIN_c0000000.bin",
+    "sha256": "92a8ee993f6c3d66c251e88d45a2ccd5135c6cf7342717784321c2ed506e2fb4"
+  },
+  "calibration": {
+    "private_tag": "Sigma MakerNote 0x11F",
+    "body_counts_inferred_from_exact_f32_ratios": [337, 511, 685],
+    "firmware_reference_counts": [323, 511, 672],
+    "float32_diagonal": [1.0433436632156372, 1.0, 1.0193452835083008],
+    "same_private_calibration_A_C_genuine_normal": true,
+    "standard_CameraCalibration1_and_2_absent": {"A": true, "C": true, "genuine_normal": true}
+  },
+  "AsShotNeutral": {
+    "A": [256, 499, 512, 512, 256, 439],
+    "C": [256, 499, 512, 512, 256, 439],
+    "genuine_normal": [256, 556, 512, 512, 256, 444]
+  },
+  "matrices": {
+    "50721": {
+      "name": "ColorMatrix1",
+      "A_exact_OFF_writer_reconstruction": true,
+      "C_exact_normal_writer_reconstruction": true,
+      "C_equals_genuine_normal_payload": true,
+      "C_numerators": [[14643, -7511, -5102], [-3330, 11711, -604], [-748, 1634, 5867]],
+      "denominator": 10000,
+      "C_payload_sha256": "ef6d1b7dcff8dd88cf37ba9bf2c129b2e5281435245ddda466ec739b426af42a"
+    },
+    "50722": {
+      "name": "ColorMatrix2",
+      "A_exact_OFF_writer_reconstruction": true,
+      "C_exact_normal_writer_reconstruction": true,
+      "C_equals_genuine_normal_payload": true,
+      "C_numerators": [[8252, -2044, -1744], [-4961, 11648, 631], [-1137, 1581, 3549]],
+      "denominator": 10000,
+      "C_payload_sha256": "fe32315360949e04f374f7a27402d6377e913f3b9404d7f0d24eae0c2ce1d71e"
+    }
+  },
+  "A_vs_C": {
+    "same_size": true,
+    "modified_bytes": 46,
+    "allowed_payload_span_bytes": 144,
+    "all_changes_within_two_CM_payloads": true,
+    "everything_else_byte_identical": true
+  },
+  "interpretation": {
+    "firmware_formula": "CM_stored = inverse(D_body) @ CM_ROM, then trunc(value*10000)/10000",
+    "C_requires_second_per_body_correction": false,
+    "AsShotNeutral_preserved_in_C": true,
+    "no_DNG_created_or_modified_in_this_audit": true,
+    "not_established": ["metrological color accuracy", "spectral sensitivity or factory measurement illuminant", "Resolve interpretation of Sigma-private tag", "full upstream white balance derivation"]
+  }
+}

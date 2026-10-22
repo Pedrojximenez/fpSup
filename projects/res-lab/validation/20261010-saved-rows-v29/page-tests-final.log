@@ -1,0 +1,16 @@
+test_native_allocation_graph_and_dynamic_text_components (test_rescustom_files_page.FilePage) ... ok
+test_only_consumer_variables_are_written_by_file_controls (test_rescustom_files_page.FilePage) ... FAIL
+test_return_to_manager_uses_original_state_matcher (test_rescustom_files_page.FilePage) ... ok
+
+======================================================================
+FAIL: test_only_consumer_variables_are_written_by_file_controls (test_rescustom_files_page.FilePage)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_rescustom_files_page.py", line 53, in test_only_consumer_variables_are_written_by_file_controls
+    self.assertFalse(any(n.startswith(('SL_','FT_')) for n in names),names)
+AssertionError: True is not false : {'RC_Key', 'CM_MenuTabNo', 'ST_COLBKT_ColorBktSelect', 'MENU_ReturnScreen', 'LV_ModeButtonMenuFlag', 'FT_Focus', 'SYS_TabFocused', 'RC_Focus', 'PB_MENUTabDirect', 'AppVariable0000', 'LV_ShootingStyle'}
+
+----------------------------------------------------------------------
+Ran 3 tests in 6.190s
+
+FAILED (failures=1)

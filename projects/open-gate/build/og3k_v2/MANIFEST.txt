@@ -1,0 +1,38 @@
+SIGMA fp OG3K — 3:2 open gate 3032x2012,選單第三列,八個格率
+
+AutoRun.txt bytes=32723 sha256=ee478821f20f23439ecd69c0f23eb5e38b9f59546a50cdde91991d2d0e8c21e3
+reference_firmware sha256=92a8ee993f6c3d66c251e88d45a2ccd5135c6cf7342717784321c2ed506e2fb4
+writes=426 commands=475 limit=648
+
+payloads:
+  fmttable         132B @0xC0730800 sha256=ee17cf9a743dbacf
+  og3kname          88B @0xC0731A00 sha256=509ca6267a38cd06
+  rowpatch_og3k    252B @0xC072F800 sha256=8fee9c2ed6199d2b
+  og3ksel          128B @0xC0731800 sha256=23d56d62591a4d88
+  og3kaspect        36B @0xC0731B00 sha256=301c085fc05783b9
+  og3kaspect2       36B @0xC0731B40 sha256=db67e53fc13d4ee2
+  og3kout          388B @0xC0731D00 sha256=77144ea71dd7a4b5
+
+hooks (最後才武裝):
+  0xC043A19C bl → 0xC072F800  原廠 0xE1A00004  畫布幾何
+  0xC005C020 b  → 0xC0731800  原廠 0xE92D4070  解析度 setter
+  0xC0306EA0 b  → 0xC0731B00  原廠 0xE3A00003  長寬比 C0306EA0
+  0xC0306EEC b  → 0xC0731B40  原廠 0xE3A00003  長寬比 C0306EEC
+  0xC0437E98 b  → 0xC0731D00  原廠 0xE92D4030  主輸出描述子
+  0xC043CCF8 b  → 0xC0730800  原廠 0xE92D4CF0  picker(最後 arm)
+
+格率 → 感測器模式 / 時序來源:
+  OG3K23_98  mode 98   時序抄自 mode 109  hmax 445 vmax 6748 → 23.976 fps  捲簾 12.44 ms
+  OG3K24     mode 98   時序抄自 mode 218  hmax 445 vmax 6740 → 24.000 fps  捲簾 12.44 ms
+  OG3K25     mode 98   時序抄自 mode 125  hmax 450 vmax 6400 → 25.000 fps  捲簾 12.57 ms
+  OG3K30     mode 98   時序抄自 mode 106  hmax 445 vmax 5398 → 29.970 fps  捲簾 12.44 ms
+  OG3K48     mode 98   時序抄自 mode 220  hmax 445 vmax 3370 → 48.000 fps  捲簾 12.44 ms
+  OG3K50     mode 98   時序抄自 mode 115  hmax 450 vmax 3200 → 50.000 fps  捲簾 12.57 ms
+  OG3K60     mode 98   時序抄自 mode 27   hmax 445 vmax 2698 → 59.940 fps  捲簾 12.44 ms
+  OG3K100    mode 117  時序抄自 mode 89   hmax 330 vmax 2182 → 100.000 fps  捲簾 9.22 ms
+
+預覽 profile(跟著旗標切換 PARAM+0x28):0xc0bdb9cc, 0xc0bdbc28, 0xc0bdbc60, 0xc0bdbc8c, 0xc0bdbc90, 0xc0bdbc94
+選單 CSV:89 bytes
+
+已知缺陷:錄影時 live view 右側一條細空隙(殘影)。錄影檔案不受影響。
+還原:移除或改名 AutoRun.txt,然後完整斷電重開。

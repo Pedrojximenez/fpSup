@@ -1,0 +1,18 @@
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/build_v3_reslab.py", line 276, in <module>
+    if __name__ == '__main__': main()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/build_v3_reslab.py", line 244, in main
+    data, facts = build(pathlib.Path(d),virtual=a.virtual_rcd)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/build_v3_reslab.py", line 168, in build
+    area = struct.pack('<I', len(menu := slmp(virtual))) + bytes(4092) + menu
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/build_v3_reslab.py", line 73, in slmp
+    pages, refs_by = PG.lab_pages(img, res['pool'])
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/sl_pages.py", line 146, in lab_pages
+    page, abs_refs = SZ.assemble(build(img, pool, refs), refs)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/sl_lab_page.py", line 1289, in build_lab_page
+    return sl_lab_sidebar.build(img, pool, refs)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/sl_lab_sidebar.py", line 220, in build
+    compact(row,mapping,pool,refs,spec.get('diagram_mode',False))
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/sl_lab_sidebar.py", line 100, in compact
+    struct.pack_into('>ffff',root,32,float(X+8),float(Y+32),580.,48.)
+struct.error: pack_into requires a buffer of at least 48 bytes for packing 16 bytes at offset 32 (actual buffer size is 40)

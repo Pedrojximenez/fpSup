@@ -1,0 +1,14 @@
+test_missing_post_commit_phase_is_detected (test_reslab_rate_commit.RateCommitTests) ... ok
+test_native_setter_only_notifies_when_carrier_changes (test_reslab_rate_commit.RateCommitTests) ... ok
+test_post_commit_guards_consume_pending_reload (test_reslab_rate_commit.RateCommitTests) ... ok
+test_repeating_a_rate_and_changing_native_carrier_do_not_extra_reload (test_reslab_rate_commit.RateCommitTests) ... ok
+test_same_carrier_round_trip_reloads_after_both_native_callbacks (test_reslab_rate_commit.RateCommitTests) ... ok
+test_shutdown_restores_rate_hook_sites (test_reslab_rate_commit.RateCommitTests) ... ok
+test_hook_is_journalled_restored_and_missing_hook_is_detected (test_reslab_record_rate.RecordRateTests) ... ok
+test_selected_sensor_cadence_reaches_dng_rational (test_reslab_record_rate.RecordRateTests) ... ok
+test_unpicked_inactive_and_changed_carrier_keep_native_rate (test_reslab_record_rate.RecordRateTests) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 449.705s
+
+OK

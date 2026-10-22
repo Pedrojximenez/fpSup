@@ -1,0 +1,1256 @@
+{
+  "card": "/Users/dido/Developer.localized/SIGMAfp_re/projects/sensor-lab/cards/20261004-b25-menu-r84-raw14-guard/debug",
+  "bin_sha256": "3b7ca9b7215baf385b335b32794a3935e760da7ebae2704d608cf434a13de251",
+  "manifest_sha256": "c26dc59e32b9722f9dfe53cb3e9d52be5eafc4e270ab09304ce76eb9a794e3fb",
+  "autorun_sha256": "5dc89b8506e8ce408276a9eab61fbb9fda94d4a194b65f2fd17c9e410b8fe642",
+  "raw14_modes": 8,
+  "rate_entries": 11,
+  "ui_rate_entries": 10,
+  "supported_count": 20,
+  "unsupported_count": 68,
+  "supported": [
+    {
+      "mode": 6,
+      "axis_mode": 6,
+      "name": "MONIT1_30_HD",
+      "rate": "23_98",
+      "fps": 23.976023976023978,
+      "ui_rate": true,
+      "raster": [
+        4176,
+        2174
+      ],
+      "profile": 87,
+      "donor": 6
+    },
+    {
+      "mode": 6,
+      "axis_mode": 6,
+      "name": "MONIT1_30_HD",
+      "rate": "24",
+      "fps": 24.0,
+      "ui_rate": true,
+      "raster": [
+        4176,
+        2174
+      ],
+      "profile": 87,
+      "donor": 6
+    },
+    {
+      "mode": 6,
+      "axis_mode": 6,
+      "name": "MONIT1_30_HD",
+      "rate": "25",
+      "fps": 25.0,
+      "ui_rate": true,
+      "raster": [
+        4176,
+        2174
+      ],
+      "profile": 87,
+      "donor": 6
+    },
+    {
+      "mode": 6,
+      "axis_mode": 6,
+      "name": "MONIT1_30_HD",
+      "rate": "30",
+      "fps": 29.97002997002997,
+      "ui_rate": true,
+      "raster": [
+        4176,
+        2174
+      ],
+      "profile": 87,
+      "donor": 6
+    },
+    {
+      "mode": 95,
+      "axis_mode": 95,
+      "name": "MONIT1_24_HD",
+      "rate": "23_98",
+      "fps": 23.976023976023978,
+      "ui_rate": true,
+      "raster": [
+        5712,
+        3216
+      ],
+      "profile": 87,
+      "donor": 95
+    },
+    {
+      "mode": 95,
+      "axis_mode": 95,
+      "name": "MONIT1_24_HD",
+      "rate": "24",
+      "fps": 24.0,
+      "ui_rate": true,
+      "raster": [
+        5712,
+        3216
+      ],
+      "profile": 87,
+      "donor": 95
+    },
+    {
+      "mode": 100,
+      "axis_mode": 100,
+      "name": "MONIT1_24_HD_LOWP",
+      "rate": "23_98",
+      "fps": 23.976023976023978,
+      "ui_rate": true,
+      "raster": [
+        4176,
+        2174
+      ],
+      "profile": 87,
+      "donor": 100
+    },
+    {
+      "mode": 100,
+      "axis_mode": 100,
+      "name": "MONIT1_24_HD_LOWP",
+      "rate": "24",
+      "fps": 24.0,
+      "ui_rate": true,
+      "raster": [
+        4176,
+        2174
+      ],
+      "profile": 87,
+      "donor": 100
+    },
+    {
+      "mode": 100,
+      "axis_mode": 100,
+      "name": "MONIT1_24_HD_LOWP",
+      "rate": "25",
+      "fps": 25.0,
+      "ui_rate": true,
+      "raster": [
+        4176,
+        2174
+      ],
+      "profile": 87,
+      "donor": 100
+    },
+    {
+      "mode": 100,
+      "axis_mode": 100,
+      "name": "MONIT1_24_HD_LOWP",
+      "rate": "30",
+      "fps": 29.97002997002997,
+      "ui_rate": true,
+      "raster": [
+        4176,
+        2174
+      ],
+      "profile": 87,
+      "donor": 100
+    },
+    {
+      "mode": 122,
+      "axis_mode": 122,
+      "name": "MONIT1_25_HD",
+      "rate": "23_98",
+      "fps": 23.976023976023978,
+      "ui_rate": true,
+      "raster": [
+        4176,
+        2174
+      ],
+      "profile": 87,
+      "donor": 122
+    },
+    {
+      "mode": 122,
+      "axis_mode": 122,
+      "name": "MONIT1_25_HD",
+      "rate": "24",
+      "fps": 24.0,
+      "ui_rate": true,
+      "raster": [
+        4176,
+        2174
+      ],
+      "profile": 87,
+      "donor": 122
+    },
+    {
+      "mode": 122,
+      "axis_mode": 122,
+      "name": "MONIT1_25_HD",
+      "rate": "25",
+      "fps": 25.0,
+      "ui_rate": true,
+      "raster": [
+        4176,
+        2174
+      ],
+      "profile": 87,
+      "donor": 122
+    },
+    {
+      "mode": 122,
+      "axis_mode": 122,
+      "name": "MONIT1_25_HD",
+      "rate": "30",
+      "fps": 29.97002997002997,
+      "ui_rate": true,
+      "raster": [
+        4176,
+        2174
+      ],
+      "profile": 87,
+      "donor": 122
+    },
+    {
+      "mode": 129,
+      "axis_mode": 129,
+      "name": "ACQ_CROP",
+      "rate": "23_98",
+      "fps": 23.976023976023978,
+      "ui_rate": true,
+      "raster": [
+        3968,
+        2640
+      ],
+      "profile": 87,
+      "donor": 129
+    },
+    {
+      "mode": 129,
+      "axis_mode": 129,
+      "name": "ACQ_CROP",
+      "rate": "24",
+      "fps": 24.0,
+      "ui_rate": true,
+      "raster": [
+        3968,
+        2640
+      ],
+      "profile": 87,
+      "donor": 129
+    },
+    {
+      "mode": 129,
+      "axis_mode": 129,
+      "name": "ACQ_CROP",
+      "rate": "25",
+      "fps": 25.0,
+      "ui_rate": true,
+      "raster": [
+        3968,
+        2640
+      ],
+      "profile": 87,
+      "donor": 129
+    },
+    {
+      "mode": 144,
+      "axis_mode": 144,
+      "name": "ACQ_CONTINUOUS_CROP",
+      "rate": "23_98",
+      "fps": 23.976023976023978,
+      "ui_rate": true,
+      "raster": [
+        3968,
+        2640
+      ],
+      "profile": 87,
+      "donor": 144
+    },
+    {
+      "mode": 144,
+      "axis_mode": 144,
+      "name": "ACQ_CONTINUOUS_CROP",
+      "rate": "24",
+      "fps": 24.0,
+      "ui_rate": true,
+      "raster": [
+        3968,
+        2640
+      ],
+      "profile": 87,
+      "donor": 144
+    },
+    {
+      "mode": 144,
+      "axis_mode": 144,
+      "name": "ACQ_CONTINUOUS_CROP",
+      "rate": "25",
+      "fps": 25.0,
+      "ui_rate": true,
+      "raster": [
+        3968,
+        2640
+      ],
+      "profile": 87,
+      "donor": 144
+    }
+  ],
+  "unsupported": [
+    {
+      "mode": 0,
+      "axis_mode": 256,
+      "name": "ACQ",
+      "rate": "23_98",
+      "fps": 23.976023976023978,
+      "ui_rate": true,
+      "raster": [
+        6064,
+        4042
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 19.409143
+    },
+    {
+      "mode": 0,
+      "axis_mode": 256,
+      "name": "ACQ",
+      "rate": "24",
+      "fps": 24.0,
+      "ui_rate": true,
+      "raster": [
+        6064,
+        4042
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 19.409143
+    },
+    {
+      "mode": 0,
+      "axis_mode": 256,
+      "name": "ACQ",
+      "rate": "25",
+      "fps": 25.0,
+      "ui_rate": true,
+      "raster": [
+        6064,
+        4042
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 19.409143
+    },
+    {
+      "mode": 0,
+      "axis_mode": 256,
+      "name": "ACQ",
+      "rate": "30",
+      "fps": 29.97002997002997,
+      "ui_rate": true,
+      "raster": [
+        6064,
+        4042
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 19.409143
+    },
+    {
+      "mode": 0,
+      "axis_mode": 256,
+      "name": "ACQ",
+      "rate": "48",
+      "fps": 48.0,
+      "ui_rate": true,
+      "raster": [
+        6064,
+        4042
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 19.409143
+    },
+    {
+      "mode": 0,
+      "axis_mode": 256,
+      "name": "ACQ",
+      "rate": "50",
+      "fps": 50.0,
+      "ui_rate": true,
+      "raster": [
+        6064,
+        4042
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 19.409143
+    },
+    {
+      "mode": 0,
+      "axis_mode": 256,
+      "name": "ACQ",
+      "rate": "60",
+      "fps": 59.94005994005994,
+      "ui_rate": true,
+      "raster": [
+        6064,
+        4042
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 19.409143
+    },
+    {
+      "mode": 0,
+      "axis_mode": 256,
+      "name": "ACQ",
+      "rate": "100",
+      "fps": 100.0,
+      "ui_rate": true,
+      "raster": [
+        6064,
+        4042
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 19.409143
+    },
+    {
+      "mode": 0,
+      "axis_mode": 256,
+      "name": "ACQ",
+      "rate": "120",
+      "fps": 119.88011988011988,
+      "ui_rate": true,
+      "raster": [
+        6064,
+        4042
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 19.409143
+    },
+    {
+      "mode": 0,
+      "axis_mode": 256,
+      "name": "ACQ",
+      "rate": "240",
+      "fps": 239.76023976023976,
+      "ui_rate": true,
+      "raster": [
+        6064,
+        4042
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 19.409143
+    },
+    {
+      "mode": 0,
+      "axis_mode": 256,
+      "name": "ACQ",
+      "rate": "400",
+      "fps": 400.0,
+      "ui_rate": false,
+      "raster": [
+        6064,
+        4042
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 19.409143
+    },
+    {
+      "mode": 6,
+      "axis_mode": 6,
+      "name": "MONIT1_30_HD",
+      "rate": "48",
+      "fps": 48.0,
+      "ui_rate": true,
+      "raster": [
+        4176,
+        2174
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 35.536883
+    },
+    {
+      "mode": 6,
+      "axis_mode": 6,
+      "name": "MONIT1_30_HD",
+      "rate": "50",
+      "fps": 50.0,
+      "ui_rate": true,
+      "raster": [
+        4176,
+        2174
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 35.536883
+    },
+    {
+      "mode": 6,
+      "axis_mode": 6,
+      "name": "MONIT1_30_HD",
+      "rate": "60",
+      "fps": 59.94005994005994,
+      "ui_rate": true,
+      "raster": [
+        4176,
+        2174
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 35.536883
+    },
+    {
+      "mode": 6,
+      "axis_mode": 6,
+      "name": "MONIT1_30_HD",
+      "rate": "100",
+      "fps": 100.0,
+      "ui_rate": true,
+      "raster": [
+        4176,
+        2174
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 35.536883
+    },
+    {
+      "mode": 6,
+      "axis_mode": 6,
+      "name": "MONIT1_30_HD",
+      "rate": "120",
+      "fps": 119.88011988011988,
+      "ui_rate": true,
+      "raster": [
+        4176,
+        2174
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 35.536883
+    },
+    {
+      "mode": 6,
+      "axis_mode": 6,
+      "name": "MONIT1_30_HD",
+      "rate": "240",
+      "fps": 239.76023976023976,
+      "ui_rate": true,
+      "raster": [
+        4176,
+        2174
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 35.536883
+    },
+    {
+      "mode": 6,
+      "axis_mode": 6,
+      "name": "MONIT1_30_HD",
+      "rate": "400",
+      "fps": 400.0,
+      "ui_rate": false,
+      "raster": [
+        4176,
+        2174
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 35.536883
+    },
+    {
+      "mode": 95,
+      "axis_mode": 95,
+      "name": "MONIT1_24_HD",
+      "rate": "25",
+      "fps": 25.0,
+      "ui_rate": true,
+      "raster": [
+        5712,
+        3216
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 24.468739
+    },
+    {
+      "mode": 95,
+      "axis_mode": 95,
+      "name": "MONIT1_24_HD",
+      "rate": "30",
+      "fps": 29.97002997002997,
+      "ui_rate": true,
+      "raster": [
+        5712,
+        3216
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 24.468739
+    },
+    {
+      "mode": 95,
+      "axis_mode": 95,
+      "name": "MONIT1_24_HD",
+      "rate": "48",
+      "fps": 48.0,
+      "ui_rate": true,
+      "raster": [
+        5712,
+        3216
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 24.468739
+    },
+    {
+      "mode": 95,
+      "axis_mode": 95,
+      "name": "MONIT1_24_HD",
+      "rate": "50",
+      "fps": 50.0,
+      "ui_rate": true,
+      "raster": [
+        5712,
+        3216
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 24.468739
+    },
+    {
+      "mode": 95,
+      "axis_mode": 95,
+      "name": "MONIT1_24_HD",
+      "rate": "60",
+      "fps": 59.94005994005994,
+      "ui_rate": true,
+      "raster": [
+        5712,
+        3216
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 24.468739
+    },
+    {
+      "mode": 95,
+      "axis_mode": 95,
+      "name": "MONIT1_24_HD",
+      "rate": "100",
+      "fps": 100.0,
+      "ui_rate": true,
+      "raster": [
+        5712,
+        3216
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 24.468739
+    },
+    {
+      "mode": 95,
+      "axis_mode": 95,
+      "name": "MONIT1_24_HD",
+      "rate": "120",
+      "fps": 119.88011988011988,
+      "ui_rate": true,
+      "raster": [
+        5712,
+        3216
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 24.468739
+    },
+    {
+      "mode": 95,
+      "axis_mode": 95,
+      "name": "MONIT1_24_HD",
+      "rate": "240",
+      "fps": 239.76023976023976,
+      "ui_rate": true,
+      "raster": [
+        5712,
+        3216
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 24.468739
+    },
+    {
+      "mode": 95,
+      "axis_mode": 95,
+      "name": "MONIT1_24_HD",
+      "rate": "400",
+      "fps": 400.0,
+      "ui_rate": false,
+      "raster": [
+        5712,
+        3216
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 24.468739
+    },
+    {
+      "mode": 100,
+      "axis_mode": 100,
+      "name": "MONIT1_24_HD_LOWP",
+      "rate": "48",
+      "fps": 48.0,
+      "ui_rate": true,
+      "raster": [
+        4176,
+        2174
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 35.536883
+    },
+    {
+      "mode": 100,
+      "axis_mode": 100,
+      "name": "MONIT1_24_HD_LOWP",
+      "rate": "50",
+      "fps": 50.0,
+      "ui_rate": true,
+      "raster": [
+        4176,
+        2174
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 35.536883
+    },
+    {
+      "mode": 100,
+      "axis_mode": 100,
+      "name": "MONIT1_24_HD_LOWP",
+      "rate": "60",
+      "fps": 59.94005994005994,
+      "ui_rate": true,
+      "raster": [
+        4176,
+        2174
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 35.536883
+    },
+    {
+      "mode": 100,
+      "axis_mode": 100,
+      "name": "MONIT1_24_HD_LOWP",
+      "rate": "100",
+      "fps": 100.0,
+      "ui_rate": true,
+      "raster": [
+        4176,
+        2174
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 35.536883
+    },
+    {
+      "mode": 100,
+      "axis_mode": 100,
+      "name": "MONIT1_24_HD_LOWP",
+      "rate": "120",
+      "fps": 119.88011988011988,
+      "ui_rate": true,
+      "raster": [
+        4176,
+        2174
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 35.536883
+    },
+    {
+      "mode": 100,
+      "axis_mode": 100,
+      "name": "MONIT1_24_HD_LOWP",
+      "rate": "240",
+      "fps": 239.76023976023976,
+      "ui_rate": true,
+      "raster": [
+        4176,
+        2174
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 35.536883
+    },
+    {
+      "mode": 100,
+      "axis_mode": 100,
+      "name": "MONIT1_24_HD_LOWP",
+      "rate": "400",
+      "fps": 400.0,
+      "ui_rate": false,
+      "raster": [
+        4176,
+        2174
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 35.536883
+    },
+    {
+      "mode": 122,
+      "axis_mode": 122,
+      "name": "MONIT1_25_HD",
+      "rate": "48",
+      "fps": 48.0,
+      "ui_rate": true,
+      "raster": [
+        4176,
+        2174
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 35.536883
+    },
+    {
+      "mode": 122,
+      "axis_mode": 122,
+      "name": "MONIT1_25_HD",
+      "rate": "50",
+      "fps": 50.0,
+      "ui_rate": true,
+      "raster": [
+        4176,
+        2174
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 35.536883
+    },
+    {
+      "mode": 122,
+      "axis_mode": 122,
+      "name": "MONIT1_25_HD",
+      "rate": "60",
+      "fps": 59.94005994005994,
+      "ui_rate": true,
+      "raster": [
+        4176,
+        2174
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 35.536883
+    },
+    {
+      "mode": 122,
+      "axis_mode": 122,
+      "name": "MONIT1_25_HD",
+      "rate": "100",
+      "fps": 100.0,
+      "ui_rate": true,
+      "raster": [
+        4176,
+        2174
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 35.536883
+    },
+    {
+      "mode": 122,
+      "axis_mode": 122,
+      "name": "MONIT1_25_HD",
+      "rate": "120",
+      "fps": 119.88011988011988,
+      "ui_rate": true,
+      "raster": [
+        4176,
+        2174
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 35.536883
+    },
+    {
+      "mode": 122,
+      "axis_mode": 122,
+      "name": "MONIT1_25_HD",
+      "rate": "240",
+      "fps": 239.76023976023976,
+      "ui_rate": true,
+      "raster": [
+        4176,
+        2174
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 35.536883
+    },
+    {
+      "mode": 122,
+      "axis_mode": 122,
+      "name": "MONIT1_25_HD",
+      "rate": "400",
+      "fps": 400.0,
+      "ui_rate": false,
+      "raster": [
+        4176,
+        2174
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 35.536883
+    },
+    {
+      "mode": 129,
+      "axis_mode": 129,
+      "name": "ACQ_CROP",
+      "rate": "30",
+      "fps": 29.97002997002997,
+      "ui_rate": true,
+      "raster": [
+        3968,
+        2640
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 29.38068
+    },
+    {
+      "mode": 129,
+      "axis_mode": 129,
+      "name": "ACQ_CROP",
+      "rate": "48",
+      "fps": 48.0,
+      "ui_rate": true,
+      "raster": [
+        3968,
+        2640
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 29.38068
+    },
+    {
+      "mode": 129,
+      "axis_mode": 129,
+      "name": "ACQ_CROP",
+      "rate": "50",
+      "fps": 50.0,
+      "ui_rate": true,
+      "raster": [
+        3968,
+        2640
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 29.38068
+    },
+    {
+      "mode": 129,
+      "axis_mode": 129,
+      "name": "ACQ_CROP",
+      "rate": "60",
+      "fps": 59.94005994005994,
+      "ui_rate": true,
+      "raster": [
+        3968,
+        2640
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 29.38068
+    },
+    {
+      "mode": 129,
+      "axis_mode": 129,
+      "name": "ACQ_CROP",
+      "rate": "100",
+      "fps": 100.0,
+      "ui_rate": true,
+      "raster": [
+        3968,
+        2640
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 29.38068
+    },
+    {
+      "mode": 129,
+      "axis_mode": 129,
+      "name": "ACQ_CROP",
+      "rate": "120",
+      "fps": 119.88011988011988,
+      "ui_rate": true,
+      "raster": [
+        3968,
+        2640
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 29.38068
+    },
+    {
+      "mode": 129,
+      "axis_mode": 129,
+      "name": "ACQ_CROP",
+      "rate": "240",
+      "fps": 239.76023976023976,
+      "ui_rate": true,
+      "raster": [
+        3968,
+        2640
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 29.38068
+    },
+    {
+      "mode": 129,
+      "axis_mode": 129,
+      "name": "ACQ_CROP",
+      "rate": "400",
+      "fps": 400.0,
+      "ui_rate": false,
+      "raster": [
+        3968,
+        2640
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 29.38068
+    },
+    {
+      "mode": 141,
+      "axis_mode": 141,
+      "name": "ACQ_CONTINUOUS",
+      "rate": "23_98",
+      "fps": 23.976023976023978,
+      "ui_rate": true,
+      "raster": [
+        6064,
+        4042
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 19.314279
+    },
+    {
+      "mode": 141,
+      "axis_mode": 141,
+      "name": "ACQ_CONTINUOUS",
+      "rate": "24",
+      "fps": 24.0,
+      "ui_rate": true,
+      "raster": [
+        6064,
+        4042
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 19.314279
+    },
+    {
+      "mode": 141,
+      "axis_mode": 141,
+      "name": "ACQ_CONTINUOUS",
+      "rate": "25",
+      "fps": 25.0,
+      "ui_rate": true,
+      "raster": [
+        6064,
+        4042
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 19.314279
+    },
+    {
+      "mode": 141,
+      "axis_mode": 141,
+      "name": "ACQ_CONTINUOUS",
+      "rate": "30",
+      "fps": 29.97002997002997,
+      "ui_rate": true,
+      "raster": [
+        6064,
+        4042
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 19.314279
+    },
+    {
+      "mode": 141,
+      "axis_mode": 141,
+      "name": "ACQ_CONTINUOUS",
+      "rate": "48",
+      "fps": 48.0,
+      "ui_rate": true,
+      "raster": [
+        6064,
+        4042
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 19.314279
+    },
+    {
+      "mode": 141,
+      "axis_mode": 141,
+      "name": "ACQ_CONTINUOUS",
+      "rate": "50",
+      "fps": 50.0,
+      "ui_rate": true,
+      "raster": [
+        6064,
+        4042
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 19.314279
+    },
+    {
+      "mode": 141,
+      "axis_mode": 141,
+      "name": "ACQ_CONTINUOUS",
+      "rate": "60",
+      "fps": 59.94005994005994,
+      "ui_rate": true,
+      "raster": [
+        6064,
+        4042
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 19.314279
+    },
+    {
+      "mode": 141,
+      "axis_mode": 141,
+      "name": "ACQ_CONTINUOUS",
+      "rate": "100",
+      "fps": 100.0,
+      "ui_rate": true,
+      "raster": [
+        6064,
+        4042
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 19.314279
+    },
+    {
+      "mode": 141,
+      "axis_mode": 141,
+      "name": "ACQ_CONTINUOUS",
+      "rate": "120",
+      "fps": 119.88011988011988,
+      "ui_rate": true,
+      "raster": [
+        6064,
+        4042
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 19.314279
+    },
+    {
+      "mode": 141,
+      "axis_mode": 141,
+      "name": "ACQ_CONTINUOUS",
+      "rate": "240",
+      "fps": 239.76023976023976,
+      "ui_rate": true,
+      "raster": [
+        6064,
+        4042
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 19.314279
+    },
+    {
+      "mode": 141,
+      "axis_mode": 141,
+      "name": "ACQ_CONTINUOUS",
+      "rate": "400",
+      "fps": 400.0,
+      "ui_rate": false,
+      "raster": [
+        6064,
+        4042
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 19.314279
+    },
+    {
+      "mode": 144,
+      "axis_mode": 144,
+      "name": "ACQ_CONTINUOUS_CROP",
+      "rate": "30",
+      "fps": 29.97002997002997,
+      "ui_rate": true,
+      "raster": [
+        3968,
+        2640
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 29.38068
+    },
+    {
+      "mode": 144,
+      "axis_mode": 144,
+      "name": "ACQ_CONTINUOUS_CROP",
+      "rate": "48",
+      "fps": 48.0,
+      "ui_rate": true,
+      "raster": [
+        3968,
+        2640
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 29.38068
+    },
+    {
+      "mode": 144,
+      "axis_mode": 144,
+      "name": "ACQ_CONTINUOUS_CROP",
+      "rate": "50",
+      "fps": 50.0,
+      "ui_rate": true,
+      "raster": [
+        3968,
+        2640
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 29.38068
+    },
+    {
+      "mode": 144,
+      "axis_mode": 144,
+      "name": "ACQ_CONTINUOUS_CROP",
+      "rate": "60",
+      "fps": 59.94005994005994,
+      "ui_rate": true,
+      "raster": [
+        3968,
+        2640
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 29.38068
+    },
+    {
+      "mode": 144,
+      "axis_mode": 144,
+      "name": "ACQ_CONTINUOUS_CROP",
+      "rate": "100",
+      "fps": 100.0,
+      "ui_rate": true,
+      "raster": [
+        3968,
+        2640
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 29.38068
+    },
+    {
+      "mode": 144,
+      "axis_mode": 144,
+      "name": "ACQ_CONTINUOUS_CROP",
+      "rate": "120",
+      "fps": 119.88011988011988,
+      "ui_rate": true,
+      "raster": [
+        3968,
+        2640
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 29.38068
+    },
+    {
+      "mode": 144,
+      "axis_mode": 144,
+      "name": "ACQ_CONTINUOUS_CROP",
+      "rate": "240",
+      "fps": 239.76023976023976,
+      "ui_rate": true,
+      "raster": [
+        3968,
+        2640
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 29.38068
+    },
+    {
+      "mode": 144,
+      "axis_mode": 144,
+      "name": "ACQ_CONTINUOUS_CROP",
+      "rate": "400",
+      "fps": 400.0,
+      "ui_rate": false,
+      "raster": [
+        3968,
+        2640
+      ],
+      "reason": "below donor minimum blanking at requested fps",
+      "max_fps_with_blanking": 29.38068
+    }
+  ],
+  "full_height_limit": {
+    "mode_ids": [
+      0,
+      141
+    ],
+    "height": 4042,
+    "physical_fps_ceiling": 19.553199,
+    "minimum_engine_fps": 23.976023976023978
+  }
+}

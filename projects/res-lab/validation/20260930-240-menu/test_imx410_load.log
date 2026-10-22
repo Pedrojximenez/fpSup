@@ -1,0 +1,207 @@
+IMX410 全功能版 安裝
+
+  預檢 4911 個位址全部可讀
+  狀態:installed    非原廠的原廠資料:0 個位址
+★ 同一份已完整安裝;零寫入
+  ok   test_already_installed_is_a_noop
+IMX410 全功能版 安裝
+
+  預檢 4911 個位址全部可讀
+  狀態:stock    非原廠的原廠資料:0 個位址
+  計畫 4876 筆;改了 4624 字;payload 與 hook 都讀回過
+★ 就緒(只限本次 session;換版本前拔電池)
+IMX410 全功能版 安裝
+
+  預檢 4911 個位址全部可讀
+  狀態:stock    非原廠的原廠資料:0 個位址
+★ body 寫入失敗:注入的失敗 @0xC06BDB0C;一個 hook 都沒掛
+  ok   test_body_failure_rolls_back_external_writes
+  ok   test_camera_io_unwraps_mem_get
+IMX410 全功能版 安全檢查
+
+  預檢 4911 個位址全部可讀
+  狀態:stock    非原廠的原廠資料:0 個位址
+★ 可以安裝;預計改 4624 字;本次零寫入
+IMX410 全功能版 安全檢查
+
+  預檢 4911 個位址全部可讀
+  狀態:foreign    非原廠的原廠資料:19 個位址
+★ 相機不是乾淨原廠,也不是本版 —— 可能跑著別的產品,或裝了一半。
+  要往下走只能明確解除:
+    ./imx410_load.py --disarm
+    (最壞情況是凍結 -> 拔電池 -> 卡上的產品回來,不用換卡)
+IMX410 全功能版 安全檢查
+
+  預檢 4911 個位址全部可讀
+  狀態:installed    非原廠的原廠資料:0 個位址
+★ 同一份已完整安裝;零寫入
+  ok   test_check_never_writes
+IMX410 全功能版 安裝
+
+  預檢 4911 個位址全部可讀
+  狀態:foreign    非原廠的原廠資料:19 個位址
+  已解除:19 個 hook 回原廠,還原 19 個原廠字
+  計畫 4876 筆;改了 4276 字;payload 與 hook 都讀回過
+★ 就緒(只限本次 session;換版本前拔電池)
+  ok   test_disarm_restores_foreign_firmware_data
+IMX410 全功能版 安裝
+
+  預檢 4911 個位址全部可讀
+  狀態:foreign    非原廠的原廠資料:19 個位址
+  已解除:19 個 hook 回原廠,還原 19 個原廠字
+  計畫 4876 筆;改了 4276 字;payload 與 hook 都讀回過
+★ 就緒(只限本次 session;換版本前拔電池)
+  ok   test_disarm_then_install
+IMX410 全功能版 安裝
+
+  預檢 4911 個位址全部可讀
+  狀態:foreign    非原廠的原廠資料:19 個位址
+  已解除:19 個 hook 回原廠,還原 19 個原廠字
+  計畫 4876 筆;改了 4276 字;payload 與 hook 都讀回過
+★ 就緒(只限本次 session;換版本前拔電池)
+  ok   test_disarm_unhooks_before_touching_payloads
+IMX410 全功能版 安裝
+
+  預檢 4911 個位址全部可讀
+  狀態:foreign    非原廠的原廠資料:19 個位址
+★ 相機不是乾淨原廠,也不是本版 —— 可能跑著別的產品,或裝了一半。
+  要往下走只能明確解除:
+    ./imx410_load.py --disarm
+    (最壞情況是凍結 -> 拔電池 -> 卡上的產品回來,不用換卡)
+  ok   test_foreign_refuses_without_disarm
+  ok   test_foreign_set_is_derived_not_hardcoded
+IMX410 全功能版 安裝
+
+  預檢 4911 個位址全部可讀
+  狀態:stock    非原廠的原廠資料:0 個位址
+  計畫 4876 筆;改了 4624 字;payload 與 hook 都讀回過
+★ 就緒(只限本次 session;換版本前拔電池)
+IMX410 全功能版 安裝
+
+  預檢 4911 個位址全部可讀
+  狀態:stock    非原廠的原廠資料:0 個位址
+★ hook commit 失敗:注入的失敗 @0xC00A8858;已要求全部回原廠
+  ok   test_hook_failure_rolls_back_hooks
+IMX410 全功能版 安裝
+
+  預檢 4911 個位址全部可讀
+  狀態:stock    非原廠的原廠資料:0 個位址
+  計畫 4876 筆;改了 4624 字;payload 與 hook 都讀回過
+★ 就緒(只限本次 session;換版本前拔電池)
+  ok   test_hooks_are_armed_last
+IMX410 全功能版 安裝
+
+  預檢 4911 個位址全部可讀
+  狀態:foreign    非原廠的原廠資料:0 個位址
+★ 相機不是乾淨原廠,也不是本版 —— 可能跑著別的產品,或裝了一半。
+  要往下走只能明確解除:
+    ./imx410_load.py --disarm
+    (最壞情況是凍結 -> 拔電池 -> 卡上的產品回來,不用換卡)
+  ok   test_installed_but_drifted_refuses
+  ok   test_loader_does_not_invent_shell_commands
+IMX410 全功能版 安裝
+
+  預檢 4911 個位址全部可讀
+  狀態:clean    非原廠的原廠資料:0 個位址
+  (前幾階段已就位,繼續)
+  計畫 4876 筆;改了 4623 字;payload 與 hook 都讀回過
+★ 就緒(只限本次 session;換版本前拔電池)
+  ok   test_our_own_partial_is_allowed
+IMX410 全功能版 安裝
+
+  預檢 4911 個位址全部可讀
+  狀態:foreign    非原廠的原廠資料:1 個位址
+★ 相機不是乾淨原廠,也不是本版 —— 可能跑著別的產品,或裝了一半。
+  要往下走只能明確解除:
+    ./imx410_load.py --disarm
+    (最壞情況是凍結 -> 拔電池 -> 卡上的產品回來,不用換卡)
+  ok   test_partial_with_a_foreign_value_refuses
+  ok   test_picker_is_armed_last
+IMX410 全功能版 安裝
+
+  預檢 4911 個位址全部可讀
+  狀態:stock    非原廠的原廠資料:0 個位址
+★ body 寫入失敗:寫入完成但讀回失敗;一個 hook 都沒掛
+  ok   test_post_write_failure_rolls_back_the_uncertain_word
+  ok   test_read_retries_like_the_write_path_does
+  ok   test_read_still_gives_up_eventually
+IMX410 全功能版 安全檢查
+
+  預檢 4911 個位址全部可讀
+  狀態:installed    非原廠的原廠資料:0 個位址
+★ 同一份已完整安裝;零寫入
+  ok   test_runtime_slots_do_not_look_foreign
+  ok   test_short_batch_reply_recovers_every_missing_word
+  ok   test_snapshot_batches_runs
+  階段:只寫 body
+IMX410 全功能版 安裝
+
+  預檢 4905 個位址全部可讀
+  狀態:stock    非原廠的原廠資料:0 個位址
+  計畫 4857 筆;改了 4605 字;payload 與 hook 都讀回過
+★ 就緒(只限本次 session;換版本前拔電池)
+  階段:canvas
+IMX410 全功能版 安裝
+
+  預檢 4905 個位址全部可讀
+  狀態:clean    非原廠的原廠資料:0 個位址
+  (前幾階段已就位,繼續)
+  計畫 4858 筆;改了 1 字;payload 與 hook 都讀回過
+★ 就緒(只限本次 session;換版本前拔電池)
+  階段:canvas, display
+IMX410 全功能版 安裝
+
+  預檢 4905 個位址全部可讀
+  狀態:clean    非原廠的原廠資料:0 個位址
+  (前幾階段已就位,繼續)
+  計畫 4861 筆;改了 3 字;payload 與 hook 都讀回過
+★ 就緒(只限本次 session;換版本前拔電池)
+  階段:canvas, display, fps
+IMX410 全功能版 安裝
+
+  預檢 4906 個位址全部可讀
+  狀態:clean    非原廠的原廠資料:0 個位址
+  (前幾階段已就位,繼續)
+  計畫 4866 筆;改了 5 字;payload 與 hook 都讀回過
+★ 就緒(只限本次 session;換版本前拔電池)
+  階段:canvas, display, fps, menu
+IMX410 全功能版 安裝
+
+  預檢 4911 個位址全部可讀
+  狀態:clean    非原廠的原廠資料:0 個位址
+  (前幾階段已就位,繼續)
+  計畫 4875 筆;改了 9 字;payload 與 hook 都讀回過
+★ 就緒(只限本次 session;換版本前拔電池)
+  階段:canvas, display, fps, menu, picker
+IMX410 全功能版 安裝
+
+  預檢 4911 個位址全部可讀
+  狀態:clean    非原廠的原廠資料:0 個位址
+  (前幾階段已就位,繼續)
+  計畫 4876 筆;改了 1 字;payload 與 hook 都讀回過
+★ 就緒(只限本次 session;換版本前拔電池)
+  ok   test_staged_install_is_idempotent
+IMX410 全功能版 安裝
+
+  預檢 4911 個位址全部可讀
+  狀態:stock    非原廠的原廠資料:0 個位址
+  計畫 4876 筆;改了 4624 字;payload 與 hook 都讀回過
+★ 就緒(只限本次 session;換版本前拔電池)
+  ok   test_stock_installs
+IMX410 全功能版 安裝
+
+  預檢 4911 個位址全部可讀
+  狀態:stock    非原廠的原廠資料:0 個位址
+  回復不完整,必須拔電池:cache 同步失敗
+★ body 寫入失敗:cache 同步失敗;一個 hook 都沒掛
+  ok   test_sync_failure_aborts_before_arming
+IMX410 全功能版 安裝
+
+  預檢 4911 個位址全部可讀
+  狀態:stock    非原廠的原廠資料:0 個位址
+  計畫 4876 筆;改了 4624 字;payload 與 hook 都讀回過
+★ 就緒(只限本次 session;換版本前拔電池)
+  ok   test_sync_runs_after_body_and_before_hooks
+  ok   test_write_readback_mismatch_retries_boundedly
+
+27/27 passed

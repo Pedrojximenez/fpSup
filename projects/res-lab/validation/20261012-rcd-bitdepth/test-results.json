@@ -1,0 +1,56 @@
+{
+  "offline_only": true,
+  "physical_camera_access": false,
+  "deployed": false,
+  "unit_checks_verified": 111,
+  "suites": [
+    {
+      "name": "test_v3_rescustom",
+      "checks": 65,
+      "status": "passed across full run and focused reruns",
+      "initial_run": {
+        "checks": 65,
+        "passed": 60,
+        "failed": 5,
+        "seconds": 448.72
+      },
+      "resolution": "Four expectations updated for RCD-owned rates and additional bit CSV copies; one pre-existing withdrawn engine60 expectation confirmed on exact v17 baseline and corrected without changing cadence logic."
+    },
+    {
+      "name": "test_rcd_bitdepth",
+      "checks": 7,
+      "status": "passed",
+      "policy_masks": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "uhd_picker_canvas_combinations": 96,
+      "detected_hook_mutations": 2
+    },
+    {
+      "name": "test_virtual_rcd_rates",
+      "checks": 2,
+      "status": "passed",
+      "seconds": 106.765,
+      "real_arm_ui_installer": true
+    },
+    {
+      "name": "test_virtual_rcd + test_v3_reslab",
+      "checks": 37,
+      "status": "passed",
+      "seconds": 2031.348
+    }
+  ],
+  "boot_artifact_variants": {
+    "checks": 3,
+    "status": "passed",
+    "evidence": "boot-variants.json"
+  },
+  "shared_loader_source_modified": false,
+  "hardware_recording_verified": false
+}

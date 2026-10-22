@@ -1,0 +1,123 @@
+  code   412/412 B  2.2 KiB/s   verify 412/412 B  422 KiB/s   verify 412 bytes in 0.0s (206 KiB/s)      
+  code   412 bytes in 0.4s (1.1 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 32768 bytes in 0.001s (54.9 MB/s)      
+  code   412/412 B  47.6 KiB/s   verify 412/412 B  545 KiB/s   verify 412 bytes in 0.1s (4 KiB/s)      
+  code   412 bytes in 0.1s (3.5 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 77120 bytes in 0.001s (103.4 MB/s)      
+  code   412/412 B  60.7 KiB/s   verify 412/412 B  683 KiB/s   verify 412 bytes in 0.0s (216 KiB/s)      
+  code   412 bytes in 0.0s (40.3 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 27668 bytes in 0.000s (91.3 MB/s)      
+  code   412/412 B  79.1 KiB/s   verify 412/412 B  642 KiB/s   verify 412 bytes in 0.0s (325 KiB/s)      
+  code   412 bytes in 0.0s (53.6 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 607608 bytes in 0.002s (283.3 MB/s)      
+  stage  609720 bytes in 0.003s (211.1 MB/s)      
+  verify 609720 bytes in 0.002s (263.6 MB/s)      
+  stage  609720 bytes in 0.01s (103.6 MB/s), MEM1, read back whole          
+  code   304/304 B  38.6 KiB/s   verify 304/304 B  456 KiB/s   verify 304 bytes in 0.0s (236 KiB/s)      
+  code   304 bytes in 0.0s (29.2 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  code   412/412 B  81.6 KiB/s   verify 412/412 B  499 KiB/s   verify 412 bytes in 0.0s (281 KiB/s)      
+  code   412 bytes in 0.0s (52.8 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 609720 bytes in 0.002s (355.5 MB/s)      
+  stage  139136 bytes in 0.001s (98.5 MB/s)      
+  verify 139136 bytes in 0.001s (250.7 MB/s)      
+  stage  139136 bytes in 0.00s (58.2 MB/s), MEM1, read back whole          
+  code   304/304 B  49.0 KiB/s   verify 304/304 B  482 KiB/s   verify 304 bytes in 0.0s (231 KiB/s)      
+  code   304 bytes in 0.0s (34.2 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  code   412/412 B  94.6 KiB/s   verify 412/412 B  541 KiB/s   verify 412 bytes in 0.0s (243 KiB/s)      
+  code   412 bytes in 0.0s (57.5 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 139136 bytes in 0.001s (194.6 MB/s)      
+  remote  \AutoRun.txt  32768 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x5F900980 (36864 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 32768 of 32768
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261010-saved-rows-v29/deploy-v33/before-AutoRun.txt
+  remote  \fpSup\32RESCUS.BIN  77120 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x5F900980 (81216 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 77120 of 77120
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261010-saved-rows-v29/deploy-v33/before-32RESCUS.BIN
+  remote  \fpSup\LOADER.BIN  27668 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x5F900980 (31764 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 27668 of 27668
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261010-saved-rows-v29/deploy-v33/before-LOADER.BIN
+  remote  \fpSup\50RESLAB.BIN  607608 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x5F900980 (611704 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 607608 of 607608
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261010-saved-rows-v29/deploy-v33/before-50RESLAB.BIN
+  local   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/cards/20261010-save-v33/debug/fpSup/50RESLAB.BIN  609720 bytes
+  remote  \fpSup\50RESLAB.BIN  mode 0x7
+  buffer  0x450629C0, file object 0x450F7778
+  proof   region takes writes and still holds them a second later
+  restored echo -> 0xC03D99A0
+  reply   putfile: written
+  status  2 — written
+  open    1     write  1   (both are flags, not counts)
+  WARNING 50RESLAB.BIN did not appear in dir
+  remote  \fpSup\50RESLAB.BIN  609720 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x5F900980 (613816 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 609720 of 609720
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261010-saved-rows-v29/deploy-v33/installed-50RESLAB.BIN
+  local   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261010-saved-rows-v29/deploy-v33/prepared-32RESCUS.BIN  139136 bytes
+  remote  \fpSup\32RESCUS.BIN  mode 0x7
+  buffer  0x450629C0, file object 0x45084940
+  proof   region takes writes and still holds them a second later
+  restored echo -> 0xC03D99A0
+  reply   putfile: written
+  status  2 — written
+  open    1     write  1   (both are flags, not counts)
+  WARNING 32RESCUS.BIN did not appear in dir
+  remote  \fpSup\32RESCUS.BIN  139136 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x5F900980 (143232 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 139136 of 139136
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261010-saved-rows-v29/deploy-v33/installed-32RESCUS.BIN
+{
+  "old_card": "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/cards/20261010-save-v25/debug",
+  "new_card": "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/cards/20261010-save-v33/debug",
+  "phase": "verified",
+  "consumer_settings_preserved": {
+    "sha256": "f0245e95122ffc54815906c87cff9fbccf0fcbda1d5c3fa4948622a45eb69701",
+    "label": "VRC000",
+    "stock": 2,
+    "flags": 0,
+    "checksum_valid": true
+  },
+  "files": [
+    {
+      "name": "50RESLAB.BIN",
+      "bytes": 609720,
+      "sha256": "dad8226db751fe10c2cac1f2f21269cc746957c7aacc5b19bec83dd027da155f",
+      "candidate_sha256": "dad8226db751fe10c2cac1f2f21269cc746957c7aacc5b19bec83dd027da155f",
+      "backup_sha256": "3c216d4b36d74393c7ea8f7ea81ac54e54faa204d2c98d8ca452b68d4aebd060"
+    },
+    {
+      "name": "32RESCUS.BIN",
+      "bytes": 139136,
+      "sha256": "242781efc9d195c6fd3eaddf8e99e14856100e1f7f37930604641ac4036d61db",
+      "candidate_sha256": "e7c147ec391bcc6379db893337ba670aa9643da71063c4154204226a1c08dd34",
+      "backup_sha256": "f0245e95122ffc54815906c87cff9fbccf0fcbda1d5c3fa4948622a45eb69701"
+    }
+  ],
+  "passed": true
+}

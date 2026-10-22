@@ -1,0 +1,27 @@
+--- 
++++ 
+@@ -46,6 +46,24 @@
+ 
+ .global shims_start
+ shims_start:
++
++/* Only the CinemaDNG header call site. The C guard either synchronously copies
++ * the native header or leaves all arguments for the original DMA routine. */
++.global hdrcopy
++hdrcopy:
++    push    {r0, r1, r2, r3, r4, lr}
++    mov     r1, r0
++    CALLC   FN_HDRCOPY
++    cmp     r0, #0
++    pop     {r0, r1, r2, r3, r4, lr}
++    beq     1f
++    mov     r0, #0
++    bx      lr
++1:  PASS    NX_HDRCOPY
++.global hdrcopy_replay
++hdrcopy_replay:
++    LDA     ip, 0xC00FBB91
++    bx      ip
+ 
+ /* Run the original recorder getter, then adjust its rational without entering
+  * interactive settings. Retain the original function's r0 return as well. */

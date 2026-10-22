@@ -1,0 +1,22 @@
+test_archived_geometry_sensor240_native30_and_original_writer (__main__.H2Rcd) ... FAIL
+test_invalid_timing_rejected_before_publication (__main__.H2Rcd) ... ok
+test_python_parser_rejects_malformed_and_optional_capture_section (__main__.H2Rcd) ... ok
+
+======================================================================
+FAIL: test_archived_geometry_sensor240_native30_and_original_writer (__main__.H2Rcd)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/test_h2_rcd.py", line 80, in test_archived_geometry_sensor240_native30_and_original_writer
+    self.assertEqual(cam.call(fn('HDRCOPY'),s,params,0xc3585994,0xc038c780,
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/v3/test_v3.py", line 262, in call
+    raise self.error
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/v3/test_v3.py", line 140, in _safe_hook
+    self._hook(mu, addr, size, data)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_virtual_rcd.py", line 94, in _hook
+    raise AssertionError(f'unmodeled firmware execution {addr:#x}')
+AssertionError: unmodeled firmware execution 0xc038c780
+
+----------------------------------------------------------------------
+Ran 3 tests in 54.623s
+
+FAILED (failures=1)

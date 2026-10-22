@@ -1,0 +1,395 @@
+{
+  "input_sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622",
+  "scope": "native getter and constructor-prefix execution only",
+  "not_executed": [
+    "property registration",
+    "allocator",
+    "renderer",
+    "UI events",
+    "camera"
+  ],
+  "components": {
+    "controlAppState": {
+      "plugin_table": "0xc2e01314",
+      "constructor": "0xc05f1441",
+      "property_table": "0xc2e0122c",
+      "count": 8,
+      "properties": [
+        {
+          "index": 0,
+          "type": 11,
+          "name": "sync-request",
+          "default_raw": 0
+        },
+        {
+          "index": 1,
+          "type": 2,
+          "name": "app-sync-request",
+          "default_raw": 0
+        },
+        {
+          "index": 2,
+          "type": 2,
+          "name": "to-uic",
+          "default_raw": 0
+        },
+        {
+          "index": 3,
+          "type": 2,
+          "name": "skip-anim",
+          "default_raw": 0
+        },
+        {
+          "index": 4,
+          "type": 2,
+          "name": "send-all-shared-context",
+          "default_raw": 0
+        },
+        {
+          "index": 5,
+          "type": 2,
+          "name": "view-state-event",
+          "default_raw": 0
+        },
+        {
+          "index": 6,
+          "type": 2,
+          "name": "essential",
+          "default_raw": 0
+        },
+        {
+          "index": 7,
+          "type": 2,
+          "name": "to-all-shared-context",
+          "default_raw": 0
+        }
+      ],
+      "constructor_instructions_before_capture": 8
+    },
+    "controlAppVariable": {
+      "plugin_table": "0xc2e01440",
+      "constructor": "0xc05f1ef9",
+      "property_table": "0xc2e01340",
+      "count": 8,
+      "properties": [
+        {
+          "index": 0,
+          "type": 11,
+          "name": "destination-variable",
+          "default_raw": 0
+        },
+        {
+          "index": 1,
+          "type": 9,
+          "name": "source-type",
+          "default_raw": 3269465028
+        },
+        {
+          "index": 2,
+          "type": 11,
+          "name": "source-variable",
+          "default_raw": 0
+        },
+        {
+          "index": 3,
+          "type": 14,
+          "name": "object-id",
+          "default_raw": 0
+        },
+        {
+          "index": 4,
+          "type": 11,
+          "name": "component-name",
+          "default_raw": 0
+        },
+        {
+          "index": 5,
+          "type": 11,
+          "name": "component-tag",
+          "default_raw": 0
+        },
+        {
+          "index": 6,
+          "type": 11,
+          "name": "component-property",
+          "default_raw": 0
+        },
+        {
+          "index": 7,
+          "type": 11,
+          "name": "value",
+          "default_raw": 0
+        }
+      ],
+      "constructor_instructions_before_capture": 8
+    },
+    "controlFocus": {
+      "plugin_table": "0xc2e01594",
+      "constructor": "0xc05f21f9",
+      "property_table": "0xc2e01474",
+      "count": 5,
+      "properties": [
+        {
+          "index": 0,
+          "type": 9,
+          "name": "operation",
+          "default_raw": 3269465276
+        },
+        {
+          "index": 1,
+          "type": 14,
+          "name": "object-id",
+          "default_raw": 0
+        },
+        {
+          "index": 2,
+          "type": 2,
+          "name": "do-loop",
+          "default_raw": 0
+        },
+        {
+          "index": 3,
+          "type": 11,
+          "name": "layout-item-index",
+          "default_raw": 0
+        },
+        {
+          "index": 4,
+          "type": 11,
+          "name": "focus-variable",
+          "default_raw": 0
+        }
+      ],
+      "constructor_instructions_before_capture": 8
+    },
+    "controlTimer": {
+      "plugin_table": "0xc2e01604",
+      "constructor": "0xc05f2391",
+      "property_table": "0xc2e015c0",
+      "count": 2,
+      "properties": [
+        {
+          "index": 0,
+          "type": 14,
+          "name": "object-id",
+          "default_raw": 0
+        },
+        {
+          "index": 1,
+          "type": 9,
+          "name": "operation",
+          "default_raw": 3269465584
+        }
+      ],
+      "constructor_instructions_before_capture": 8
+    },
+    "changePropertyByControl": {
+      "plugin_table": "0xc2e01824",
+      "constructor": "0xc05f3759",
+      "property_table": "0xc2e0177c",
+      "count": 6,
+      "properties": [
+        {
+          "index": 0,
+          "type": 14,
+          "name": "object-id",
+          "default_raw": 0
+        },
+        {
+          "index": 1,
+          "type": 11,
+          "name": "component-name",
+          "default_raw": 0
+        },
+        {
+          "index": 2,
+          "type": 11,
+          "name": "component-tag",
+          "default_raw": 0
+        },
+        {
+          "index": 3,
+          "type": 11,
+          "name": "component-property",
+          "default_raw": 0
+        },
+        {
+          "index": 4,
+          "type": 11,
+          "name": "formula",
+          "default_raw": 0
+        },
+        {
+          "index": 5,
+          "type": 9,
+          "name": "decimal-places",
+          "default_raw": 3269466140
+        }
+      ],
+      "constructor_instructions_before_capture": 8
+    },
+    "controlValueEvent": {
+      "plugin_table": "0xc2e02ba4",
+      "constructor": "0xc05fb439",
+      "property_table": "0xc2e02944",
+      "count": 12,
+      "properties": [
+        {
+          "index": 0,
+          "type": 10,
+          "name": "type",
+          "default_raw": 3269470700
+        },
+        {
+          "index": 1,
+          "type": 1,
+          "name": "equal-value",
+          "default_raw": 3269470816
+        },
+        {
+          "index": 2,
+          "type": 1,
+          "name": "greater-than-value",
+          "default_raw": 3269470816
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "name": "lower-than-value",
+          "default_raw": 3269470816
+        },
+        {
+          "index": 4,
+          "type": 1,
+          "name": "range-lowerlimit-value",
+          "default_raw": 3269470816
+        },
+        {
+          "index": 5,
+          "type": 1,
+          "name": "range-upperlimit-value",
+          "default_raw": 3269470816
+        },
+        {
+          "index": 6,
+          "type": 10,
+          "name": "previous-type",
+          "default_raw": 3269470944
+        },
+        {
+          "index": 7,
+          "type": 1,
+          "name": "previous-equal-value",
+          "default_raw": 3269470816
+        },
+        {
+          "index": 8,
+          "type": 1,
+          "name": "previous-greater-than-value",
+          "default_raw": 3269470816
+        },
+        {
+          "index": 9,
+          "type": 1,
+          "name": "previous-lower-than-value",
+          "default_raw": 3269470816
+        },
+        {
+          "index": 10,
+          "type": 1,
+          "name": "previous-range-lowerlimit-value",
+          "default_raw": 3269470816
+        },
+        {
+          "index": 11,
+          "type": 1,
+          "name": "previous-range-upperlimit-value",
+          "default_raw": 3269470816
+        }
+      ],
+      "constructor_instructions_before_capture": 18
+    },
+    "focusEvent": {
+      "plugin_table": "0xc2e02ce8",
+      "constructor": "0xc05fbed1",
+      "property_table": "0xc2e02cac",
+      "count": 1,
+      "properties": [
+        {
+          "index": 0,
+          "type": 10,
+          "name": "type",
+          "default_raw": 3269471436
+        }
+      ],
+      "constructor_instructions_before_capture": 14
+    },
+    "keyEvent": {
+      "plugin_table": "0xc2e02de4",
+      "constructor": "0xc05fc149",
+      "property_table": "0xc2e02d14",
+      "count": 5,
+      "properties": [
+        {
+          "index": 0,
+          "type": 10,
+          "name": "type",
+          "default_raw": 3269471588
+        },
+        {
+          "index": 1,
+          "type": 10,
+          "name": "keys",
+          "default_raw": 3269471628
+        },
+        {
+          "index": 2,
+          "type": 2,
+          "name": "keycode",
+          "default_raw": 0
+        },
+        {
+          "index": 3,
+          "type": 0,
+          "name": "args",
+          "default_raw": 3269471672
+        },
+        {
+          "index": 4,
+          "type": 2,
+          "name": "do-propagate",
+          "default_raw": 0
+        }
+      ],
+      "constructor_instructions_before_capture": 14
+    },
+    "screenEvent": {
+      "plugin_table": "0xc2e02e80",
+      "constructor": "0xc05fc2e1",
+      "property_table": "0xc2e02e10",
+      "count": 1,
+      "properties": [
+        {
+          "index": 0,
+          "type": 10,
+          "name": "type",
+          "default_raw": 3269471792
+        }
+      ],
+      "constructor_instructions_before_capture": 14
+    }
+  },
+  "failures": [],
+  "missing": [
+    "animationClip",
+    "appVariableChangeEvent",
+    "appVariableEvent",
+    "controlAnimation",
+    "controlValue",
+    "drawImage",
+    "drawRect",
+    "drawText",
+    "objectBase",
+    "timerEvent"
+  ]
+}

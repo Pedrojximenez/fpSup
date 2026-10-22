@@ -1,0 +1,14 @@
+{
+  "scope": "offline unit tests only, no hardware I/O",
+  "command": "/usr/bin/python3 -B -m unittest -v test_af_native_preflight test_af_subject_observation",
+  "tests_run": 40,
+  "failures": 0,
+  "skips": 0,
+  "log": "subject-watch-offline-tests.log",
+  "source_sha256": {
+    "af_native_preflight.py": "6e3b3597c4c80a25f544c636766e7abd6345e302cc9a353ffbfe9d71c9e3873f",
+    "test_af_native_preflight.py": "1aadfedb51154d4ca275b62506372a29b415238f52525dcf24a55cc55262bf29",
+    "af_subject_observation.py": "7b07629563c3d61a869a077f0a595d17cc4b00a508ddd7873ea72722ff26f3d1",
+    "test_af_subject_observation.py": "bdb5a0f0f4297e74d49e2583c322cec390ac60aab4b7d6dee79401597c344bca"
+  }
+}

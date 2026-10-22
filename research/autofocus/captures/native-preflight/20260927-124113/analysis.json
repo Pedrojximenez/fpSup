@@ -1,0 +1,45 @@
+{
+  "schema": "fp.native-observer.preflight-analysis/v1",
+  "initial_transport_failure": "LIBUSB_ERROR_NO_DEVICE on version OUT, moved=0/64",
+  "recovery": "Same daemon PID 69735: source confirms NO_DEVICE closes handle. Host STATUS then camera=closed, one native version request succeeds, new complete preflight captured separately. No daemon restart.",
+  "camera_ram_writes": 0,
+  "lens_commands": 0,
+  "hook_installations": 0,
+  "four_hook_words_match": true,
+  "twelve_context_guards_match": true,
+  "echo_original_before_after": true,
+  "settings_unchanged_within_capture": true,
+  "settings_changed_since_previous_capture": {
+    "menu SetFocusPosition": {
+      "previous": "480 373 64 64",
+      "current": "144 373 64 64"
+    }
+  },
+  "capture_idle_at_both_observations": true,
+  "boot_stamp_unchanged_since_previous_capture": true,
+  "worker_publication_unchanged": true,
+  "face_group0_all_zero": true,
+  "aat_model_and_states_all_zero": true,
+  "aat_backends_and_selector_all_zero": true,
+  "aat_publication_all_zero": true,
+  "face_detection_menu_setting": null,
+  "visible_face_box_user_report": null,
+  "native_snapshot_coherent": false,
+  "geometry_eligible": false,
+  "deployment_ready": false,
+  "exchange_events_completed_preflight": 64,
+  "failed_events_completed_preflight": 0,
+  "evidence_sha256": {
+    "connection-revalidation.jsonl": "06c8cfba172696943709ebcc5aa18508d28c05667d485bbf51c0704603390b12",
+    "native-preflight-revalidated.jsonl": "621d98526d6eff70b4eb65f5302d99ee0c654ba95fcbe6f86a3a0fe51b426139",
+    "native-preflight.jsonl": "ed0e57ea64bb25a2550e395bdd120ba12bcbc3ab3d1b77283e77cba0da6d6695",
+    "native-subject-decoded.json": "83a0dff4b5352c9193f7dece396728c41bab348c2794d6c157a364eb74b2dfe3",
+    "preflight-revalidated-summary.json": "319f04b61e08bb006e09fe2231f33d9f8c27a6f07277e011ac7ef031238eb041",
+    "preflight-summary.json": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "user_observation": {
+    "initial": "已有人臉框，請繼續檢查資料位置",
+    "correction": "其實fp的自動對焦輔助辨識很爛，我很難判斷有沒有人臉筐",
+    "interpretation": "Face box visibility unconfirmed; do not treat the initial report as ground truth."
+  }
+}

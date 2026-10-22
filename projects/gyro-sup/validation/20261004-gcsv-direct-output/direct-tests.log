@@ -1,0 +1,16 @@
+test_all_signed_16bit_and_negated_accel_minimum (test_gcsv_direct.DirectOutputTests) ... ok
+test_all_unsigned_16bit_and_unsigned_32bit_boundaries (test_gcsv_direct.DirectOutputTests) ... ok
+test_before_after_instruction_counts_and_output_identity (test_gcsv_direct.DirectOutputTests) ... ok
+test_held_rows_survive_input_reuse_and_unusual_sequences (test_gcsv_direct.DirectOutputTests) ... ok
+test_json_helpers_in_gcsv_and_base (test_gcsv_direct.DirectOutputTests) ... ok
+test_missing_cross_call_copy_mutation_is_detected (test_gcsv_direct.DirectOutputTests) ... ok
+test_number_abi_and_output_guards_at_every_alignment (test_gcsv_direct.DirectOutputTests) ... ok
+test_sample_counter_wrap_is_uint32 (test_gcsv_direct.DirectOutputTests) ... ok
+test_tiny_budgets_keep_the_same_bytes (test_gcsv_direct.DirectOutputTests) ... ok
+test_writer_preserves_one_write_and_baseline_bytes (test_gcsv_direct.DirectOutputTests) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 16.465s
+
+OK
+EXECUTED=10 FAILURES=0 ERRORS=0 SKIPS=0 EXIT=0

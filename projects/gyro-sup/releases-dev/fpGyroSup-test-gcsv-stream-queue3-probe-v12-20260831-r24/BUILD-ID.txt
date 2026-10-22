@@ -1,0 +1,56 @@
+fpGyroSup GCSV-only r23 + ordered three-slot back-pressure queue r24
+Build date: 2026-08-31
+Camera/firmware: SIGMA fp Ver.5.02
+Build type: release AutoRun, no USB shell
+Base: r23 four-digit lookup and fused gyro formatter
+
+Reason for this build:
+- r23 A001_017 retained 151,514 / 154,313 rows (98.186154%) while the DNG
+  sequence remained continuous.  Five large GCSV gaps appeared after blocks
+  whose formatted text required a third synchronous 64 KiB write.
+- The existing two 32 KiB halves provide only one place for the callback while
+  the writer owns the other.  A long third F_WRITE can therefore keep WRITING
+  alive past the filling half's 1.534-second deadline.
+- r24 tests the structural bottleneck without changing the proven formatter,
+  write size, write pacing or sensor rate.
+
+r24 changes:
+- GCSV-only recording now has three fixed 32 KiB raw slots.  A is unchanged at
+  state+0x1000; B remains at +0x30000; C occupies the adjacent free window at
+  +0x38000.  C ends exactly at +0x40000.
+- The callback seals FILLING -> READY, walks the next two slots in ring order,
+  and claims only EMPTY.  It never overwrites READY or WRITING data.
+- The writer scans all three READY slots and always consumes the lowest
+  published sequence, so physical slot position cannot reorder GCSV rows.
+- Compared with r23, the extra slot adds another 3,836 gyro samples, or
+  1.5344 seconds at 2,500 Hz.  With two slots available behind a stalled writer,
+  the queue has about 3.07 seconds of raw-data headroom.
+- A RAM-only diagnostic block records formatter calls, total 64 KiB flushes,
+  blocks needing three or more flushes, and dropped samples split by formatter,
+  F_WRITE, post-write sleep and other phases.
+- The diagnostic block creates no recording-time file or media call.  The
+  existing post-record JSON task appends it as `fpgyrosup_backpressure`.
+
+Explicitly unchanged:
+- Gyro input remains 2,500 Hz.  There is no decimation, dropped-sample policy,
+  DLPF change, sample-rate register write or sensor clock change.
+- r23's four-digit lookup, fused X/Y/Z formatter and cached accel text remain.
+- GCSV text still uses complete-line 64 KiB writes and the same 5 ms cooperative
+  yield.  This build deliberately does not enlarge F_WRITE calls.
+- Native lifecycle, recording/power lock, JSON task and priorities are unchanged.
+- Memory remains bounded and independent of recording duration.
+- This GCSV-only stream creates no GYR file.
+
+Verification:
+- All 56 exact-format, queue, layout, lifecycle, phase-probe and safety tests pass.
+- The producer state-space test claims only EMPTY or reports back-pressure.
+- The writer state-space test always selects the lowest READY sequence.
+- A/B/C, profile, GCSV text, diagnostic and read regions do not overlap.
+- The probe logger is 3,876 bytes and ends at 0xC072EF88, leaving 44 bytes below
+  the fixed parking stub.
+- PGEN pool code is 48,288 bytes; 48,304 bytes on card.  The fixed 64 KiB loader
+  window retains 17,248 bytes of headroom.
+- The ordinary two-slot GYR build and its phase-probe build still assemble and
+  remain inside their original injection window.
+- AutoRun is byte-identical to r23; VSHL and PGEN both change.
+- This is an experimental hardware build, not fp-gyro-sup-v1.1.

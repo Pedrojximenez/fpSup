@@ -1,0 +1,81 @@
+fpGyroSup r35 r34-base immediate JSON-return diagnostic
+Build date: 2026-09-01
+Camera/firmware: SIGMA fp Ver.5.02
+Build type: release AutoRun, no USB shell
+Base: exact r34 JSON path diagnostic
+
+Observed before this build:
+- A normal 11m34s r34 take stayed in SD-writing protection for several minutes.
+- Its GCSV closed cleanly, but neither JSON nor r34's JDG existed.
+- r34 wrote JDG only at final queue consumption.  A builder failure followed
+  by lifecycle/stream early return could therefore bypass the probe entirely.
+- The same take independently proved one producer drop_batch of 150 gyro
+  samples.  That recording-time back-pressure issue is not changed here.
+
+Only functional changes from r34:
+- The body+0x458 JSON call now uses an appended FPJ2 wrapper.  It times the
+  unchanged builder and snapshots lifecycle and stream state immediately when
+  the builder returns.
+- Immediately before the first builder call it writes a reason-0 breadcrumb.
+  If the builder itself never returns, that breadcrumb remains on card.
+- On the first failed builder return, before the old main loop can early-return,
+  it overwrites the same-basename JDG once.  Attempts 2..11 do not routinely
+  add media opens.
+- A later return writes only when it exposes an invalid lifecycle/stream gate
+  or a builder call taking at least one second, avoiding twelve extra media opens.
+- Every builder success overwrites reason 0.  Thus reason 0 remaining means the
+  builder never returned (unless the later JDG overwrite itself failed), while
+  reason 8 with no JSON exposes a writer/close/directory-commit discrepancy.
+- At kind-2 auto-completion or twelve-failure consumption, the final outcome
+  overwrites that JDG.
+- The diagnostic F_CTOR now receives the event volume in r1.  r34 accidentally
+  left r1 pointing into its text buffer, so its JDG open path was not valid.
+- FPJ2 format:
+    FPJ2;reason=N;kind=N;volume=N;attempts=N;phase=N;elapsed_us=N;lifecycle=N;stream=N
+
+Reasons:
+  0 pre-builder breadcrumb; builder had not returned yet
+  1 kind-2 auto-completion; builder was not called
+  2 twelve JSON failures exhausted
+  3 first JSON builder return was failure
+  4 a later failed builder call took at least one second
+  5 builder failure returned after lifecycle changed away from 1
+  6 builder failure returned while stream state was nonzero
+  7 builder succeeded but took at least one second
+  8 builder reported success in under one second
+
+Phases inherited from r34:
+  1 entered builder
+  2 lifecycle disabled before metadata
+  3 rate/mode zero
+  4 width zero
+  5 height zero
+  6 lens query 0x0d failed
+  7 lifecycle disabled after query 0x0d
+  8 lens 0x0d block too short
+  9 lens query 0x2d failed
+ 10 lifecycle disabled after query 0x2d
+ 11 lifecycle disabled before file writer
+ 12 file-writer gate/volume rejected
+ 13 JSON F_OPEN failed
+ 14 JSON F_WRITE returned zero
+ 99 JSON F_WRITE returned nonzero, followed by a later failure gate
+
+Binary isolation:
+- AutoRun.txt and VSHL.BIN are byte-for-byte identical to r34/r33.
+- In the complete old r34 PGEN body, exactly two checked BL instructions change.
+- The r34 phase hooks remain unchanged; a 964-byte tail contains all FPJ2 code.
+- Therefore gyro callback, two-slot writer, GCSV formatting/writes, timestamp
+  continuity and FPD1 probe are all byte-identical to r34.
+
+Diagnostic limitation:
+- If the JSON builder never returns, reason 0 remains.  If even the breadcrumb's
+  JDG F_OPEN is refused by the media layer, the card can still contain neither
+  JSON nor JDG.  Unlike r34, a normal returned metadata/lifecycle failure is
+  captured before queue early exit.
+- If final command 3 fails or the seven-entry post queue is already full, no
+  JSON event reaches this PGEN wrapper, so no FPJ2 can be created.
+- FPJ2 deliberately adds one tiny pre-builder and one result media transaction.
+  It is a diagnostic build and may slightly perturb post-stop timing; it adds
+  no recording-time callback, format or media work.
+- Experimental diagnostic build; not fp-gyro-sup-v1.1.

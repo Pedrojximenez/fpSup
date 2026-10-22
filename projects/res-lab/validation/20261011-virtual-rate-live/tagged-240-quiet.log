@@ -1,0 +1,18 @@
+screen: LV_CINE_MEDIUM
+  tagged 16380/50658 B  2324 KiB/s   tagged 32760/50658 B  2152 KiB/s   tagged 49140/50658 B  2178 KiB/s   tagged 50658/50658 B  2154 KiB/s   tagged 50658 bytes in 0.0s (2071 KiB/s)      
+  tagged 116/116 B  138 KiB/s   tagged 116 bytes in 0.0s (29 KiB/s)      
+  tagged 116/116 B  193 KiB/s   tagged 116 bytes in 0.1s (1 KiB/s)      
+  tagged 84/84 B  114 KiB/s   tagged 84 bytes in 0.0s (55 KiB/s)      
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-live/record_trial.py", line 210, in <module>
+    main()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-live/record_trial.py", line 132, in main
+    current = rec(clock)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-live/record_trial.py", line 39, in rec
+    out = clock.command(C.live.checked_sh,'status get is_recording',action)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-m12-recurrence/trial_clock.py", line 52, in command
+    reply = send(command)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/live_camera.py", line 36, in checked_sh
+    raise RuntimeError(f'Uncertain outcome; command will not be replayed: {line}: {reply}')
+RuntimeError: Uncertain outcome; command will not be replayed: status get is_recording: ERR shl frame0 rc=-7(LIBUSB_ERROR_TIMEOUT) moved=0/64
+

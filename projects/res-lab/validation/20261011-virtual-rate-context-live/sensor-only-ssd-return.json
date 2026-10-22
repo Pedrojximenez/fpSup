@@ -1,0 +1,18 @@
+{
+  "user_result": "SSD still stops within seconds; USB reconnected",
+  "source": "direct user report followed by native standby read",
+  "native_rec_zero": true,
+  "latest_record_log": "slot=5, cnt=4/600\nsize=524288*3906772(1907GB), free=41%, exFAT, 5000Mbps\ntime       : 2026/10/12 00:09:44 \nrec factor : Nothing \nui factor  : Nothing \nbattery    : OK \ntemp(BAT)  : OK \ntemp(BODY) : OK \ntemp(LCD)  : OK \ntemp(CMOS) : OK \nfile-size=1095168, bulk-size=67108864(61.3)\nreq_cnt=94, fin_cnt=94, vbuf/94/215785, raw1\nrequest  ,finish   ,diff,gap ,reqcnt,fincnt,diff,sdb,MB/s\n     1046,     1202, 156,1046,     6,     1,   5,  1,  42\n     1459,     1630, 171, 257,    49,     7,  42,  8, 275\n     1651,     1824, 173,  21,    92,    49,  43, 50, 278\n     1826,     1838,  12,   2,    94,    92,   2, 51, 273\n",
+  "native_m12_timing_address": "0xc0b59a40",
+  "native_m12_timing_words": [
+    12,
+    21627210,
+    394126,
+    526310,
+    680,
+    16383,
+    262143,
+    0
+  ],
+  "sd_slot": "slot now slot = sd0\n\n"
+}

@@ -1,0 +1,300 @@
+{
+  "version": "0.3.5-preview3",
+  "status": "Integrated experimental candidate; camera validation pending; not installed",
+  "firmware": "Sigma fp 5.02",
+  "explicit_sleep_ms": 0,
+  "commands": 171,
+  "bootstrap_address": "0xc0732100",
+  "bootstrap_status": "0xc0732500",
+  "resident": {
+    "status": "EXPERIMENTAL OFFLINE BUILD; not installed or camera validated",
+    "base": "0xc072de64",
+    "state": "0xc0732000",
+    "bytes": 15620,
+    "sha256": "8cf489ef8ad5e4c8723adac4dd421f6943a5d4f6338c030f70148764901b243e",
+    "hooks": [
+      {
+        "address": "0xc057a6a0",
+        "entry": "resolution_select"
+      },
+      {
+        "address": "0xc05931d0",
+        "entry": "resolution_display"
+      },
+      {
+        "address": "0xc005c020",
+        "entry": "set_resolution"
+      },
+      {
+        "address": "0xc005be58",
+        "entry": "set_format"
+      },
+      {
+        "address": "0xc005bef0",
+        "entry": "set_quality"
+      },
+      {
+        "address": "0xc005c0b8",
+        "entry": "set_rate"
+      },
+      {
+        "address": "0xc005bb60",
+        "entry": "set_crop"
+      },
+      {
+        "address": "0xc0062ec8",
+        "entry": "set_media"
+      },
+      {
+        "address": "0xc05824d0",
+        "entry": "qs_resolution_select"
+      },
+      {
+        "address": "0xc059c640",
+        "entry": "hud_display_a"
+      },
+      {
+        "address": "0xc059c9f0",
+        "entry": "hud_display_b"
+      },
+      {
+        "address": "0xc05e84d8",
+        "entry": "ui_load"
+      },
+      {
+        "address": "0xc05e6400",
+        "entry": "ui_record"
+      },
+      {
+        "address": "0xc05e5b58",
+        "entry": "ui_string"
+      },
+      {
+        "address": "0xc0437e98",
+        "entry": "preview_output"
+      },
+      {
+        "address": "0xc0306ea0",
+        "entry": "preview_layout"
+      }
+    ],
+    "symbols": {
+      "payload_end": "0xc0731b68",
+      "install_bad": "0xc072e138",
+      "hooks": "0xc07318c4",
+      "install_mismatch": "0xc072e110",
+      "csv_stock": "0xc0731aac",
+      "patch_table": "0xc0731984",
+      "csv_new": "0xc0731b08",
+      "verify_install": "0xc072dfe4",
+      "install_rollback": "0xc072e07c",
+      "resolution_select": "0xc072e144",
+      "select_begin": "0xc072e158",
+      "qs_resolution_select": "0xc072e150",
+      "select_refresh": "0xc072e1f0",
+      "idle_check": "0xc072e66c",
+      "select_stock": "0xc072e19c",
+      "compatible": "0xc072e440",
+      "transition": "0xc072e4e4",
+      "select_write": "0xc072e1b8",
+      "refresh": "0xc072e2a8",
+      "resolution_display": "0xc072e1fc",
+      "lv_name": "0xc072edb4",
+      "display_stock": "0xc072e288",
+      "var_name": "0xc072e6e0",
+      "display_done": "0xc072e294",
+      "display_original": "0xc072e298",
+      "hud_display_a": "0xc072ec74",
+      "hud_display_b": "0xc072ece0",
+      "set_resolution": "0xc072e310",
+      "set_resolution_original": "0xc072e320",
+      "settings_change": "0xc072e3d0",
+      "set_format": "0xc072e330",
+      "set_format_original": "0xc072e340",
+      "set_quality": "0xc072e350",
+      "set_quality_original": "0xc072e360",
+      "set_rate": "0xc072e370",
+      "set_rate_original": "0xc072e380",
+      "set_crop": "0xc072e390",
+      "set_crop_original": "0xc072e3a0",
+      "set_media": "0xc072e3b0",
+      "set_media_original": "0xc072e3c0",
+      "settings_forward": "0xc072e408",
+      "settings_reject": "0xc072e430",
+      "settings_return": "0xc072e424",
+      "incompatible": "0xc072e4dc",
+      "transition_refuse": "0xc072e650",
+      "transition_ok": "0xc072e5f0",
+      "transition_expected": "0xc072e554",
+      "config_table": "0xc0731a8c",
+      "transition_mismatch": "0xc072e648",
+      "verify_transition": "0xc072e5b8",
+      "transition_rollback": "0xc072e60c",
+      "busy": "0xc072e6d8",
+      "ui_load": "0xc072e6f0",
+      "ui_load_original": "0xc072e7c4",
+      "ui_load_done": "0xc072e738",
+      "ensure_ui_pack": "0xc072e740",
+      "ensure_ui_new": "0xc072e768",
+      "ensure_ui_result": "0xc072e7b4",
+      "ui_pack": "0xc07300b8",
+      "ui_pack_end": "0xc0731764",
+      "ui_string": "0xc072e7d4",
+      "ui_string_stock": "0xc072e81c",
+      "ui_aliases": "0xc072edc4",
+      "ui_string_original": "0xc072e830",
+      "ui_record": "0xc072e840",
+      "ui_record_stock": "0xc072ec44",
+      "ui_trace_qs": "0xc072ed4c",
+      "ui_records": "0xc072ee14",
+      "ui_record_find": "0xc072e8a0",
+      "ui_record_found": "0xc072e8d0",
+      "ui_record_hash": "0xc072e8f4",
+      "ui_literal_delta": "0xc072eaf0",
+      "ui_replace_word": "0xc072ea40",
+      "ui_layout_copy": "0xc072ea84",
+      "ui_copy_prefix": "0xc072e954",
+      "ui_insert_limit": "0xc072e9ac",
+      "ui_copy_tail": "0xc072e9c8",
+      "ui_copy_done": "0xc072e9e4",
+      "ui_copy_tail_loop": "0xc072e9d4",
+      "ui_count_store": "0xc072ea08",
+      "ui_copy_parse": "0xc072ea0c",
+      "ui_record_original": "0xc072ec64",
+      "ui_record_return": "0xc072ec5c",
+      "ui_layout_property": "0xc072eaac",
+      "ui_clone_property": "0xc072eba8",
+      "ui_edits": "0xc072fffc",
+      "ui_apply_delta": "0xc072eb18",
+      "ui_delta_next": "0xc072eb28",
+      "ui_delta_tail": "0xc072eb88",
+      "hud_display_a_stock": "0xc072ecc0",
+      "hud_display_a_original": "0xc072ecd0",
+      "hud_display_b_stock": "0xc072ed2c",
+      "hud_display_b_original": "0xc072ed3c",
+      "ui_trace_done": "0xc072edb0",
+      "ui_name_l": "0xc072ede3",
+      "ui_name_m": "0xc072edea",
+      "ui_name_qs": "0xc072edf1",
+      "ui_name_set": "0xc072edf9",
+      "ui_name_lh": "0xc072ee02",
+      "ui_name_mh": "0xc072ee0c",
+      "ui_summary_label": "0xc072ede0",
+      "preview_output_template": "0xc0731764",
+      "preview_output": "0xc0731790",
+      "preview_output_stock": "0xc0731850",
+      "preview_output_idle": "0xc07317f4",
+      "preview_output_hash": "0xc0731810",
+      "preview_output_hash_loop": "0xc0731824",
+      "preview_layout": "0xc0731868",
+      "preview_layout_done": "0xc07318a4",
+      "preview_layout_resume": "0xc07318c0",
+      "checksum_word": "0xc0731b64",
+      "menu_install": "0xc072de64"
+    },
+    "configuration": "Existing CinemaDNG,12-bit,true24,crop off,SSD required; selecting another recording setting deselects3K",
+    "limitations": [
+      "Capture transition and settings guards require camera validation.",
+      "Native resource caching/literal text rendering not yet exercised on a camera.",
+      "Not a flash update; RAM hooks only.",
+      "All-photosite reducer semantics remain unproven."
+    ],
+    "preview_experiment": {
+      "table_changes": [
+        {
+          "address": 3233659340,
+          "expected": 1125,
+          "replacement": 1334,
+          "profile": 5,
+          "parameter_offset": 40,
+          "category": "preview"
+        },
+        {
+          "address": 3233664148,
+          "expected": 1135,
+          "replacement": 1344,
+          "profile": 429,
+          "parameter_offset": 16,
+          "category": "preview"
+        },
+        {
+          "address": 3233660476,
+          "expected": 1125,
+          "replacement": 1334,
+          "profile": 429,
+          "parameter_offset": 40,
+          "category": "preview"
+        },
+        {
+          "address": 3233655580,
+          "expected": 1135,
+          "replacement": 1344,
+          "profile": 429,
+          "parameter_offset": 224,
+          "category": "preview"
+        }
+      ],
+      "state_bytes": 64,
+      "layout_hook": {
+        "address": "0xc0306ea0",
+        "scope": "Private 3K and native display device kind 1",
+        "aspect": [
+          3,
+          2
+        ],
+        "diagnostic_offsets": [
+          56,
+          60
+        ],
+        "limitations": "Native movie display-fit branch; hardware execution and visible framing not established."
+      },
+      "output_hook": {
+        "address": "0xc0437e98",
+        "primary_channel": 0,
+        "dimensions": [
+          1620,
+          1080
+        ],
+        "policy_objects": [
+          "0xc375eb68",
+          "0xc375ed3c"
+        ],
+        "guards": "Private 3K active, exact owner and template pointers, FNV of all 44 stock template bytes. Otherwise stock accessor.",
+        "behavior": "Returns an immutable private output template; only width/height and matching visible dimensions change. Format, allocation limit and video flags preserved."
+      },
+      "qs_diagnostic_bits": {
+        "0": "first QS limit",
+        "1": "second QS limit",
+        "2": "first QS footer",
+        "3": "second QS footer"
+      },
+      "qs_seen_offset": 48,
+      "qs_extended_offset": 52,
+      "limitations": [
+        "Only fresh source construction sees table changes; the current standby source can remain cached until a native transition.",
+        "Buffer-size calculations verified against observed source objects; actual allocations and display framing require camera testing.",
+        "QS regression is being diagnosed, not claimed fixed."
+      ]
+    }
+  },
+  "files": {
+    "AutoRun.txt": {
+      "bytes": 5401,
+      "sha256": "c63eae39730677b1582bd1ca5a7093ddff684f2d58237e0b93b43e9b6be34760"
+    },
+    "FP3KMENU.BIN": {
+      "bytes": 15620,
+      "sha256": "8cf489ef8ad5e4c8723adac4dd421f6943a5d4f6338c030f70148764901b243e"
+    },
+    "loader.bin": {
+      "bytes": 652,
+      "sha256": "cd62c3f482db7a56d53190a0a92f89686ee3f7b50a745f2e86cecc3c8c81c219"
+    }
+  },
+  "limitations": [
+    "No timed startup delay; actual camera startup timing remains unmeasured.",
+    "Native resource caching, UI rendering and live selection behavior require the integrated camera demo.",
+    "Select another resolution before leaving CINE or removing SSD; physical switches/removal and preset paths are not all intercepted.",
+    "Unsupported settings reject 3K selection; dynamic greying is not implemented."
+  ]
+}

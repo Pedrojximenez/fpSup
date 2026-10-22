@@ -1,0 +1,42 @@
+{
+  "version": "0.1",
+  "method": "bounded_settled_H_contrast",
+  "status": "fault",
+  "reason": "read-only observation failed: shell response not successful: b'ERR shl frame0 rc=0(LIBUSB_SUCCESS / LIBUSB_TRANSFER_COMPLETED) moved=12/64\\n'",
+  "confirmed": false,
+  "optical_focus_verified": false,
+  "initial_position": null,
+  "selected_position": null,
+  "final_position": null,
+  "last_verified_position": null,
+  "observations": [],
+  "moves": [],
+  "events": [
+    {
+      "kind": "finished",
+      "status": "fault",
+      "reason": "read-only observation failed: shell response not successful: b'ERR shl frame0 rc=0(LIBUSB_SUCCESS / LIBUSB_TRANSFER_COMPLETED) moved=12/64\\n'"
+    }
+  ],
+  "quadratic_target": null,
+  "stop": {
+    "verified": true,
+    "request": {
+      "requested": false,
+      "reason": "no owned pending movement"
+    },
+    "completion": {
+      "native_done": true,
+      "position": 10707
+    },
+    "optical_stop_verified": false
+  },
+  "limits": {
+    "radius": 100,
+    "max_step": 100,
+    "max_moves": 12,
+    "improvement": 0.03
+  },
+  "error_type": "SamplingError",
+  "cleanup_complete": true
+}

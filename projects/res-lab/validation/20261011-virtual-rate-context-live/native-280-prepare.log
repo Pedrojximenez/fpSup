@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/native_rec_trace.py", line 116, in <module>
+    if __name__ == '__main__': main()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/native_rec_trace.py", line 94, in main
+    assert header(bit)[1][1:4] == [CAPACITY,header(bit)[1][0],0]
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/native_rec_trace.py", line 45, in header
+    assert 0xC3000000 <= base < base+count*28 <= 0xC4000000 or 0x45000000 <= base < base+count*28 <= 0x60000000
+AssertionError

@@ -1,0 +1,733 @@
+{
+  "purpose": "A/C Resolve export behavior; not absolute color accuracy validation",
+  "files": {
+    "A": {
+      "path": "/Users/dido/Developer.localized/SIGMAfp_re/codex/fp-colormatrix-ab-20260923/Timeline 1_01_00_02_24.tif",
+      "sha256": "2804b2518cb121028137448c0da7f0b75a7117b259b0f13a34b914af2396b1fe",
+      "width": 2000,
+      "height": 1334,
+      "dtype": "uint16",
+      "has_ICC_profile": false,
+      "has_TransferFunction": false,
+      "has_WhitePoint": false,
+      "has_PrimaryChromaticities": false
+    },
+    "C": {
+      "path": "/Users/dido/Developer.localized/SIGMAfp_re/codex/fp-colormatrix-ab-20260923/Timeline 1_01_00_07_15.tif",
+      "sha256": "4aa9d7a07e1fe22d3a88babfe9f0d7b6671b284a8ffe9fa56c93b8e1c2d9f028",
+      "width": 2000,
+      "height": 1334,
+      "dtype": "uint16",
+      "has_ICC_profile": false,
+      "has_TransferFunction": false,
+      "has_WhitePoint": false,
+      "has_PrimaryChromaticities": false
+    }
+  },
+  "mapping_evidence": "User confirmed the second/latest-timecode file is C; earlier export is byte-identical to previous A.",
+  "new_A_pixels_exactly_equal_previous_A": true,
+  "new_A_file_hash_equals_previous_A": true,
+  "C_pixels_equal_old_B_probe": false,
+  "active_rows_half_open": [
+    104,
+    1230
+  ],
+  "A": {
+    "min_RGB": [
+      128,
+      192,
+      128
+    ],
+    "max_RGB": [
+      42944,
+      44928,
+      44608
+    ],
+    "mean_RGB": [
+      14277.71421669627,
+      14466.31653285968,
+      13412.820404973358
+    ],
+    "zero_fraction_RGB": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "max65535_fraction_RGB": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gcd_of_stored_codes": 64,
+    "unique_values_per_channel": [
+      670,
+      700,
+      696
+    ]
+  },
+  "C": {
+    "min_RGB": [
+      64,
+      192,
+      128
+    ],
+    "max_RGB": [
+      42240,
+      45120,
+      44416
+    ],
+    "mean_RGB": [
+      13983.755964476022,
+      14607.255843694495,
+      12944.538145648312
+    ],
+    "zero_fraction_RGB": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "max65535_fraction_RGB": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gcd_of_stored_codes": 64,
+    "unique_values_per_channel": [
+      658,
+      703,
+      693
+    ]
+  },
+  "difference_stored_values": {
+    "MAE_codes16": 336.1088644168144,
+    "RMSE_codes16": 456.7358768953226,
+    "P95_abs_codes16": 896.0,
+    "P99_abs_codes16": 1408.0000000000005,
+    "max_abs_codes16": 6080.0
+  },
+  "changed_pixels_fraction_active": 0.9983148312611012,
+  "fits_all_unclipped": {
+    "training_samples": 225149,
+    "spatial_holdout_samples": 224830,
+    "linear": {
+      "C_from_A_column_matrix": [
+        [
+          1.3054198810668416,
+          -0.5231958195885643,
+          0.21746330964553262
+        ],
+        [
+          -0.09096005837515313,
+          1.2051448640660472,
+          -0.1139487718030178
+        ],
+        [
+          0.08530382602053628,
+          -0.558259880164438,
+          1.475880415768201
+        ]
+      ],
+      "eigenvalues_real_imag": [
+        [
+          1.7529974453062651,
+          0.0
+        ],
+        [
+          1.233086702273424,
+          0.0
+        ],
+        [
+          1.0003610133213996,
+          0.0
+        ]
+      ],
+      "neutral_111_output": [
+        0.9996873711238099,
+        1.0002360338878762,
+        1.0029243616242993
+      ],
+      "determinant": 2.1623782045418025,
+      "rank": 3,
+      "condition": 99.83680152890297,
+      "holdout_matrix": {
+        "MAE_codes16": 34.33167955121981,
+        "RMSE_codes16": 51.806727948626914,
+        "P95_abs_codes16": 85.71582786553851,
+        "P99_abs_codes16": 138.32509106443146,
+        "max_abs_codes16": 1833.4963004666076
+      },
+      "holdout_identity": {
+        "MAE_codes16": 337.386434194725,
+        "RMSE_codes16": 460.6808783151772,
+        "P95_abs_codes16": 896.0000000000002,
+        "P99_abs_codes16": 1408.0000000000023,
+        "max_abs_codes16": 6080.0
+      },
+      "holdout_exposure_only": {
+        "MAE_codes16": 324.9432903213434,
+        "RMSE_codes16": 425.2390557462433,
+        "P95_abs_codes16": 843.9554337552523,
+        "P99_abs_codes16": 1314.6475508910344,
+        "max_abs_codes16": 5914.807146875123
+      },
+      "exposure_only_scale": 0.9893341391319165,
+      "holdout_affine": {
+        "MAE_codes16": 33.881158604689816,
+        "RMSE_codes16": 50.24509504984427,
+        "P95_abs_codes16": 84.22661947211402,
+        "P99_abs_codes16": 134.27494149722546,
+        "max_abs_codes16": 1743.4544405449994
+      },
+      "affine_offset_decoded": [
+        -0.0002777430679963572,
+        3.916583525948197e-05,
+        0.0006460146432440952
+      ],
+      "holdout_decoded_relative_L2": 0.0031887860050171276
+    },
+    "sRGB": {
+      "C_from_A_column_matrix": [
+        [
+          1.2756440650502612,
+          -0.4935508164538233,
+          0.21597733331707208
+        ],
+        [
+          -0.08676394812703205,
+          1.2163393910192102,
+          -0.12869188398724254
+        ],
+        [
+          0.054928195411994125,
+          -0.46482080903417294,
+          1.4106184394320884
+        ]
+      ],
+      "eigenvalues_real_imag": [
+        [
+          1.6891965034834457,
+          0.0
+        ],
+        [
+          1.2130882939406047,
+          0.0
+        ],
+        [
+          1.0003170980775105,
+          0.0
+        ]
+      ],
+      "neutral_111_output": [
+        0.9980705819135098,
+        1.0008835589049354,
+        1.0007258258099097
+      ],
+      "determinant": 2.0497942843240975,
+      "rank": 3,
+      "condition": 69.27467242152005,
+      "holdout_matrix": {
+        "MAE_codes16": 38.02459809457155,
+        "RMSE_codes16": 66.20972620582931,
+        "P95_abs_codes16": 92.94321031483467,
+        "P99_abs_codes16": 297.121924819915,
+        "max_abs_codes16": 1010.2765078578032
+      },
+      "holdout_identity": {
+        "MAE_codes16": 337.386434194725,
+        "RMSE_codes16": 460.6808783151772,
+        "P95_abs_codes16": 896.0000000000002,
+        "P99_abs_codes16": 1408.0000000000023,
+        "max_abs_codes16": 6080.0
+      },
+      "holdout_exposure_only": {
+        "MAE_codes16": 324.6977551892003,
+        "RMSE_codes16": 425.2060526763103,
+        "P95_abs_codes16": 851.343380129311,
+        "P99_abs_codes16": 1347.629051984705,
+        "max_abs_codes16": 5953.508990065964
+      },
+      "exposure_only_scale": 0.9841732109624719,
+      "holdout_affine": {
+        "MAE_codes16": 37.8113784677918,
+        "RMSE_codes16": 62.813577227283574,
+        "P95_abs_codes16": 89.43898551625847,
+        "P99_abs_codes16": 259.7540435694858,
+        "max_abs_codes16": 983.7377891507791
+      },
+      "affine_offset_decoded": [
+        -5.335838766894486e-05,
+        4.2119239267890976e-05,
+        6.98206097999642e-05
+      ],
+      "holdout_decoded_relative_L2": 0.0030575222868420107
+    },
+    "2.2": {
+      "C_from_A_column_matrix": [
+        [
+          1.2721315802028659,
+          -0.48873323923898143,
+          0.21408553716208292
+        ],
+        [
+          -0.08536854184758953,
+          1.2149940088926587,
+          -0.12855472207728055
+        ],
+        [
+          0.06002591427504245,
+          -0.46930727888032786,
+          1.410614625102301
+        ]
+      ],
+      "eigenvalues_real_imag": [
+        [
+          1.6895934352965434,
+          0.0
+        ],
+        [
+          1.2077322678677311,
+          0.0
+        ],
+        [
+          1.000414511033551,
+          0.0
+        ]
+      ],
+      "neutral_111_output": [
+        0.9974838781259674,
+        1.0010707449677887,
+        1.0013332604970158
+      ],
+      "determinant": 2.041422352863899,
+      "rank": 3,
+      "condition": 64.53153782191455,
+      "holdout_matrix": {
+        "MAE_codes16": 121.67592835734511,
+        "RMSE_codes16": 450.9135203930306,
+        "P95_abs_codes16": 322.1871981725595,
+        "P99_abs_codes16": 2645.1637821945087,
+        "max_abs_codes16": 4958.427549888945
+      },
+      "holdout_identity": {
+        "MAE_codes16": 337.386434194725,
+        "RMSE_codes16": 460.6808783151772,
+        "P95_abs_codes16": 896.0000000000002,
+        "P99_abs_codes16": 1408.0000000000023,
+        "max_abs_codes16": 6080.0
+      },
+      "holdout_exposure_only": {
+        "MAE_codes16": 325.18924317674794,
+        "RMSE_codes16": 428.69213346015044,
+        "P95_abs_codes16": 870.1367622336006,
+        "P99_abs_codes16": 1358.4891231363608,
+        "max_abs_codes16": 5964.094378898729
+      },
+      "exposure_only_scale": 0.9836100215850946,
+      "holdout_affine": {
+        "MAE_codes16": 97.32272164734694,
+        "RMSE_codes16": 334.00668791227383,
+        "P95_abs_codes16": 285.18214970164166,
+        "P99_abs_codes16": 1838.5470335838938,
+        "max_abs_codes16": 4862.369441323643
+      },
+      "affine_offset_decoded": [
+        -7.587841182351985e-05,
+        6.563206378633502e-05,
+        0.00013231697089678522
+      ],
+      "holdout_decoded_relative_L2": 0.003442430560277792
+    },
+    "2.4": {
+      "C_from_A_column_matrix": [
+        [
+          1.2689002078972307,
+          -0.485695152749889,
+          0.2139984125865486
+        ],
+        [
+          -0.0868272479584554,
+          1.218281397818167,
+          -0.13042335728405657
+        ],
+        [
+          0.05521893242567131,
+          -0.4568282180734333,
+          1.402291262337145
+        ]
+      ],
+      "eigenvalues_real_imag": [
+        [
+          1.6829032952487668,
+          0.0
+        ],
+        [
+          1.2063351619999756,
+          0.0
+        ],
+        [
+          1.0002344108038008,
+          0.0
+        ]
+      ],
+      "neutral_111_output": [
+        0.9972034677338903,
+        1.0010307925756552,
+        1.000681976689383
+      ],
+      "determinant": 2.0306213073237855,
+      "rank": 3,
+      "condition": 62.379312533105754,
+      "holdout_matrix": {
+        "MAE_codes16": 156.8839264771584,
+        "RMSE_codes16": 589.1924733372759,
+        "P95_abs_codes16": 443.59588080228133,
+        "P99_abs_codes16": 3366.3070424581583,
+        "max_abs_codes16": 5769.893561607279
+      },
+      "holdout_identity": {
+        "MAE_codes16": 337.386434194725,
+        "RMSE_codes16": 460.6808783151772,
+        "P95_abs_codes16": 896.0000000000002,
+        "P99_abs_codes16": 1408.0000000000023,
+        "max_abs_codes16": 6080.0
+      },
+      "holdout_exposure_only": {
+        "MAE_codes16": 325.39134979367947,
+        "RMSE_codes16": 429.5210860192066,
+        "P95_abs_codes16": 872.3499637186156,
+        "P99_abs_codes16": 1364.2104115636907,
+        "max_abs_codes16": 5969.936369613557
+      },
+      "exposure_only_scale": 0.9830294459954836,
+      "holdout_affine": {
+        "MAE_codes16": 127.25902935782105,
+        "RMSE_codes16": 458.23275978020916,
+        "P95_abs_codes16": 371.7310233248495,
+        "P99_abs_codes16": 2838.8189316830567,
+        "max_abs_codes16": 5658.110939902154
+      },
+      "affine_offset_decoded": [
+        -5.0828421738726084e-05,
+        5.2948316435640815e-05,
+        8.967625911733505e-05
+      ],
+      "holdout_decoded_relative_L2": 0.003607542630565689
+    }
+  },
+  "flat_selection": "Every channel in both files between .04 and .90; each image 4-neighbour RGB range < .006; exclude borders.",
+  "fits_flat_unclipped": {
+    "training_samples": 105160,
+    "spatial_holdout_samples": 104904,
+    "linear": {
+      "C_from_A_column_matrix": [
+        [
+          1.3280540344469796,
+          -0.5523369120395082,
+          0.22529873570591757
+        ],
+        [
+          -0.0905734826174021,
+          1.2073096629807687,
+          -0.11652400680087428
+        ],
+        [
+          0.05987649379537463,
+          -0.5346237694557824,
+          1.4765484088443988
+        ]
+      ],
+      "eigenvalues_real_imag": [
+        [
+          1.7484477232979396,
+          0.0
+        ],
+        [
+          1.262960535217951,
+          0.0
+        ],
+        [
+          1.0005038477562584,
+          0.0
+        ]
+      ],
+      "neutral_111_output": [
+        1.001015858113389,
+        1.0002121735624923,
+        1.0018011331839909
+      ],
+      "determinant": 2.209333079347322,
+      "rank": 3,
+      "condition": 111.60760740362342,
+      "holdout_matrix": {
+        "MAE_codes16": 30.190295076841032,
+        "RMSE_codes16": 45.15610053565785,
+        "P95_abs_codes16": 71.83757977374589,
+        "P99_abs_codes16": 107.16884542483429,
+        "max_abs_codes16": 1800.9531026259867
+      },
+      "holdout_identity": {
+        "MAE_codes16": 355.7263784031117,
+        "RMSE_codes16": 452.52800652028526,
+        "P95_abs_codes16": 767.9999999999991,
+        "P99_abs_codes16": 1344.0000000000007,
+        "max_abs_codes16": 6016.0
+      },
+      "holdout_exposure_only": {
+        "MAE_codes16": 328.28260201184617,
+        "RMSE_codes16": 403.4443868732335,
+        "P95_abs_codes16": 638.8137258789196,
+        "P99_abs_codes16": 1234.4932748288943,
+        "max_abs_codes16": 5845.422216560392
+      },
+      "exposure_only_scale": 0.9890317783282145,
+      "holdout_affine": {
+        "MAE_codes16": 30.18449571474675,
+        "RMSE_codes16": 44.69726046655921,
+        "P95_abs_codes16": 71.6289772749852,
+        "P99_abs_codes16": 107.28971387183051,
+        "max_abs_codes16": 1742.1801839552681
+      },
+      "affine_offset_decoded": [
+        9.320596170392826e-05,
+        1.0088179695804829e-05,
+        0.0004006183689399363
+      ],
+      "holdout_decoded_relative_L2": 0.0024388102671009755
+    },
+    "sRGB": {
+      "C_from_A_column_matrix": [
+        [
+          1.283665448085336,
+          -0.5039676908228038,
+          0.2193621764833366
+        ],
+        [
+          -0.0921228054183594,
+          1.2233284123138417,
+          -0.1310243400708757
+        ],
+        [
+          0.045194421158413656,
+          -0.45275064746826593,
+          1.4070277819108201
+        ]
+      ],
+      "eigenvalues_real_imag": [
+        [
+          1.6910658012961637,
+          0.0
+        ],
+        [
+          1.2230824096853201,
+          0.0
+        ],
+        [
+          0.9998734313285133,
+          0.0
+        ]
+      ],
+      "neutral_111_output": [
+        0.9990599337458688,
+        1.0001812668246066,
+        0.9994715556009679
+      ],
+      "determinant": 2.0680510515779815,
+      "rank": 3,
+      "condition": 75.41392143347379,
+      "holdout_matrix": {
+        "MAE_codes16": 28.35150299723852,
+        "RMSE_codes16": 40.88725648052208,
+        "P95_abs_codes16": 64.10403650322634,
+        "P99_abs_codes16": 89.68409967769509,
+        "max_abs_codes16": 875.2636783812967
+      },
+      "holdout_identity": {
+        "MAE_codes16": 355.7263784031117,
+        "RMSE_codes16": 452.52800652028526,
+        "P95_abs_codes16": 767.9999999999991,
+        "P99_abs_codes16": 1344.0000000000007,
+        "max_abs_codes16": 6016.0
+      },
+      "holdout_exposure_only": {
+        "MAE_codes16": 329.55934510589714,
+        "RMSE_codes16": 404.3135072215662,
+        "P95_abs_codes16": 643.7974713336521,
+        "P99_abs_codes16": 1250.7228083476587,
+        "max_abs_codes16": 5881.976555195419
+      },
+      "exposure_only_scale": 0.9832911170229096,
+      "holdout_affine": {
+        "MAE_codes16": 28.149653166327308,
+        "RMSE_codes16": 40.00139288842236,
+        "P95_abs_codes16": 63.781143896696356,
+        "P99_abs_codes16": 86.84847995615664,
+        "max_abs_codes16": 858.6504801395771
+      },
+      "affine_offset_decoded": [
+        2.2511761349120315e-06,
+        1.0241533236343872e-05,
+        3.329051111868684e-05
+      ],
+      "holdout_decoded_relative_L2": 0.0028163963668193376
+    },
+    "2.2": {
+      "C_from_A_column_matrix": [
+        [
+          1.2817647158805099,
+          -0.5014129594215095,
+          0.21838014510679465
+        ],
+        [
+          -0.0922110898804826,
+          1.2240206099625976,
+          -0.1316728012996391
+        ],
+        [
+          0.04460187494528281,
+          -0.4496321201306126,
+          1.4042815095267456
+        ]
+      ],
+      "eigenvalues_real_imag": [
+        [
+          1.688655716378208,
+          0.0
+        ],
+        [
+          1.221661926251826,
+          0.0
+        ],
+        [
+          0.9997491927398214,
+          0.0
+        ]
+      ],
+      "neutral_111_output": [
+        0.9987319015657949,
+        1.000136718782476,
+        0.9992512643414158
+      ],
+      "determinant": 2.062448988297322,
+      "rank": 3,
+      "condition": 69.82581479421721,
+      "holdout_matrix": {
+        "MAE_codes16": 32.019121360889045,
+        "RMSE_codes16": 75.15171727430823,
+        "P95_abs_codes16": 68.42020630653916,
+        "P99_abs_codes16": 135.15423730244297,
+        "max_abs_codes16": 4767.619266850775
+      },
+      "holdout_identity": {
+        "MAE_codes16": 355.7263784031117,
+        "RMSE_codes16": 452.52800652028526,
+        "P95_abs_codes16": 767.9999999999991,
+        "P99_abs_codes16": 1344.0000000000007,
+        "max_abs_codes16": 6016.0
+      },
+      "holdout_exposure_only": {
+        "MAE_codes16": 331.59858084130923,
+        "RMSE_codes16": 407.437063342264,
+        "P95_abs_codes16": 652.5553518550107,
+        "P99_abs_codes16": 1266.5305650605974,
+        "max_abs_codes16": 5892.960309213891
+      },
+      "exposure_only_scale": 0.982677271577091,
+      "holdout_affine": {
+        "MAE_codes16": 31.428792010702995,
+        "RMSE_codes16": 69.09798158356999,
+        "P95_abs_codes16": 68.0775851630729,
+        "P99_abs_codes16": 118.79766060988094,
+        "max_abs_codes16": 4679.981924252962
+      },
+      "affine_offset_decoded": [
+        1.8685227156432952e-07,
+        1.8914840837638034e-05,
+        5.1670229084861735e-05
+      ],
+      "holdout_decoded_relative_L2": 0.003006778005485147
+    },
+    "2.4": {
+      "C_from_A_column_matrix": [
+        [
+          1.2758918998016324,
+          -0.49502864288435733,
+          0.2173446334056956
+        ],
+        [
+          -0.0924805561668887,
+          1.2257558095254326,
+          -0.13310457627429287
+        ],
+        [
+          0.044327041751454695,
+          -0.44307012464790935,
+          1.3977701015691064
+        ]
+      ],
+      "eigenvalues_real_imag": [
+        [
+          1.683638895808661,
+          0.0
+        ],
+        [
+          1.2161473204411537,
+          0.0
+        ],
+        [
+          0.9996315946463582,
+          0.0
+        ]
+      ],
+      "neutral_111_output": [
+        0.9982078903229707,
+        1.0001706770842511,
+        0.9990270186726518
+      ],
+      "determinant": 2.0467986022662896,
+      "rank": 3,
+      "condition": 66.32003062681684,
+      "holdout_matrix": {
+        "MAE_codes16": 35.245503005703156,
+        "RMSE_codes16": 118.47088845157047,
+        "P95_abs_codes16": 71.94413154803452,
+        "P99_abs_codes16": 171.98584011977363,
+        "max_abs_codes16": 5890.390556168562
+      },
+      "holdout_identity": {
+        "MAE_codes16": 355.7263784031117,
+        "RMSE_codes16": 452.52800652028526,
+        "P95_abs_codes16": 767.9999999999991,
+        "P99_abs_codes16": 1344.0000000000007,
+        "max_abs_codes16": 6016.0
+      },
+      "holdout_exposure_only": {
+        "MAE_codes16": 332.13970168443655,
+        "RMSE_codes16": 408.4615136146619,
+        "P95_abs_codes16": 656.5053004449359,
+        "P99_abs_codes16": 1270.152861333658,
+        "max_abs_codes16": 5898.713368000516
+      },
+      "exposure_only_scale": 0.9819956656095312,
+      "holdout_affine": {
+        "MAE_codes16": 34.360469674787424,
+        "RMSE_codes16": 107.86411816717515,
+        "P95_abs_codes16": 71.94166949681997,
+        "P99_abs_codes16": 147.93737350780125,
+        "max_abs_codes16": 5819.157757965217
+      },
+      "affine_offset_decoded": [
+        1.051043120862851e-06,
+        1.7962913379053596e-05,
+        4.0700688624153604e-05
+      ],
+      "holdout_decoded_relative_L2": 0.0032675037685071188
+    }
+  },
+  "limits": [
+    "TIFF has no profile/transfer/primaries declaration; fitting a transfer is not measuring the actual export configuration.",
+    "Matrix is fitted to this single limited-gamut scene, not a calibration, IDT, or LUT to reuse.",
+    "Identical A baseline supports stability but does not prove identical per-clip settings for C.",
+    "AsShotNeutral metadata identical does not guarantee identical inferred CCT or interpolation weights after changing ColorMatrix.",
+    "Integer outputs cannot retain negative values or values above full scale; scaling/quantization can limit precision."
+  ]
+}

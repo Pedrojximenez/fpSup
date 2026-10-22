@@ -1,0 +1,50 @@
+fpGyroSup GCSV-only r22 + four-digit lookup and fused gyro formatter r23
+Build date: 2026-08-31
+Camera/firmware: SIGMA fp Ver.5.02
+Build type: release AutoRun, no USB shell
+Base: r22 GCSV-only streaming pipeline
+
+Reason for this build:
+- r21 and r22 are nearly complete while the camera is stable, then lose whole
+  groups during stronger motion.  More motion makes signed gyro values longer
+  and raises each row from roughly 34 bytes to 38--41 bytes.
+- r22 A001_015 retained 156,584 / 160,364 rows (97.642862%) and had four large
+  gaps of 200.628--528.811 ms.  The aligned accel-text copy was safe but did not
+  recover enough CPU margin.
+- Small reciprocal and byte-loop changes are therefore at their useful limit.
+  r23 changes the class of the signed-value formatter instead of shaving a few
+  instructions from the old division path.
+
+r23 changes:
+- PGEN now contains a build-generated 40,000-byte table: every zero-padded
+  decimal value from 0000 through 9999, four aligned bytes per entry.
+- Signed sensor values use comparisons, a direct table index and byte stores.
+  They no longer execute UMULL/MLS reciprocal division.  Values 10000--32768
+  emit their 1/2/3 leading digit and look up the remaining four digits.
+- The 2,500 Hz X/Y/Z path uses one put_gyro3 call.  It loads the table address
+  once, reads the native record offsets 0, 2 and 6, and emits the three trailing
+  commas itself.  The record pad at offset 4 is explicitly skipped.
+- Destination writes remain bytewise, so no unaligned word store was added.
+- The cached accel-copy optimisation from r22 remains enabled.
+
+Explicitly unchanged:
+- Gyro input remains 2,500 Hz.  There is no decimation, dropped-sample policy,
+  DLPF change, sample-rate register write or sensor clock change.
+- Timestamp put_uint, two fixed 32 KiB raw halves, 64 KiB complete-line writes,
+  5 ms cooperative yield, native lifecycle, recording/power lock, JSON task and
+  priorities are unchanged.
+- Memory use remains bounded and independent of recording duration.  The lookup
+  occupies unused PGEN code-window space, not either recording buffer.
+- This GCSV-only stream creates no GYR file.
+
+Verification:
+- All 51 exact-format, layout, lifecycle and safety tests pass.
+- Every signed value from -32768 through +32768 matches host decimal output.
+- 10,000 fused random X/Y/pad/Z records preserve X,Y,Z order and the trailing
+  commas; the pad is never formatted.
+- The assembled 40,000 table bytes are compared byte-for-byte with all expected
+  0000..9999 entries.
+- PGEN pool code is 47,736 bytes; 47,752 bytes on card.  The fixed 64 KiB loader
+  window retains 17,800 bytes of headroom.
+- AutoRun and VSHL are byte-identical to r17/r22; only PGEN changes.
+- This is an experimental hardware build, not fp-gyro-sup-v1.1.

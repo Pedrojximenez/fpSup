@@ -1,0 +1,101 @@
+{
+ "schema_version": 1,
+ "kind": "offline_unicorn_emulation_of_phase7_copyback",
+ "date": "2026-09-25",
+ "operator_scope": "offline only. No camera. The probe's ARM code executed under unicorn against out/MAIN_c0000000.bin with the codec stubbed in Python.",
+ "why": "every previous test of PHASE=7 asserted on the SOURCE TEXT. That catches a deleted line; it does not catch code that assembles, reads plausibly and copies the wrong bytes to the wrong place. Copy-back writes into the camera's own frame buffer.",
+ "harness": "fpSup/raw/lossless_codec/emulate_codec_probe.py; tests in test_codec_emulation.py",
+ "what_the_harness_does": [
+  "maps the firmware image writable at 0xC0000000, so the probe restores its own hook word in place",
+  "maps the arena (0x45000000) and the writer's buffer (0x53B00000) TWICE each, at the handle and at handle+0x40000000, onto ONE host buffer via mem_map_ptr. Two separate regions would have let the copy appear to work while writing where nothing reads.",
+  "seeds what the host seeds: S_ALLOCATOR, S_HANDLE, the two proof magics, the three guard words the scratch phase leaves, and the 1 KiB IFD template plus its two table offsets",
+  "puts a REAL stock header at the buffer so the header copy and the template patch operate on genuine camera metadata",
+  "stubs F_INIT/F_ENC/F_SIZE/F_CLOCK and the original FUN_c069ac88, and RAISES on any other firmware address so an unmocked call fails loudly instead of running the image's code and returning garbage"
+ ],
+ "two_defects_found_that_source_text_tests_could_not_find": [
+  {
+   "defect": "every successful copy-back reported ERR_SOURCE (22)",
+   "cause": "finish_source compares buffer[PIXEL_OFF] with its BEFORE value. Copy-back deliberately replaces 0x13400..0x13800 with the new IFD and tile tables, so the comparison always failed.",
+   "consequence_if_shipped": "release would refuse to free a block that is fine, and the one phase where changing the source is the INTENT would carry a 'the source was damaged' error - masking a real one",
+   "fix": "PHASE=7 records the AFTER values and skips the verdict, with the reasoning written next to it: the BEFORE values are taken before the encode and the encode finishes before the copy, so the ordering already guarantees the codec read an undamaged source. verify_compressed_dng on the card's file is the stronger replacement."
+  },
+  {
+   "defect": "S_STAGE could not tell 'copied' from 'skipped'",
+   "cause": "`complete` overwrites S_STAGE with 8 on the way out, so stages 11 and 12 never reach the host",
+   "consequence_if_shipped": "a test asserted stages that no reader would ever see",
+   "fix": "S_FIT is the verdict and nothing else writes it; 11/12 are documented as progress markers that survive only a fault before `complete`"
+  }
+ ],
+ "what_the_emulation_establishes": [
+  {
+   "level": "H",
+   "claim": "a fitting frame is copied and ONLY seg[1] changes. The original routine is reached with seg[0] still pointing at the camera's buffer (0x53B00000), never at our arena, and with the compressed length."
+  },
+  {
+   "level": "H",
+   "claim": "the bytes that land in the buffer are a valid compressed CinemaDNG: verify_compressed_dng.check passes on them, including the length rule and the byte-for-byte survival of the original header from offset 8 to 78,848. This is the same checker that will be pointed at the card."
+  },
+  {
+   "level": "H",
+   "claim": "bytes past the copy are the original frame, byte for byte: the copy writes file_bytes, not the whole buffer"
+  },
+  {
+   "level": "H",
+   "claim": "a frame that does not fit touches NOTHING. The buffer is byte-identical afterwards, seg[1] still holds the stock length, and the writer is given that stock length. Refusing is not an error."
+  },
+  {
+   "level": "H",
+   "claim": "the boundary is exactly the handed length: a file of precisely seg[1] bytes is accepted and one copy unit more is refused"
+  },
+  {
+   "level": "H",
+   "claim": "no F_ALLOC, F_GET or F_FREE on either path; F_ENC and the original routine on both"
+  },
+  {
+   "level": "H",
+   "claim": "the hook word self-restores and the stack returns to where it started"
+  },
+  {
+   "level": "H",
+   "claim": "a wrong ordering kind is refused with ERR_KIND and the frame is untouched"
+  },
+  {
+   "level": "H",
+   "claim": "the 'compress' kind still hands the writer OUR arena where copy-back leaves the camera's buffer in place - the distinction the whole design rests on"
+  }
+ ],
+ "mutations_run": [
+  {
+   "mutation": "drop the admission check",
+   "failures": 3
+  },
+  {
+   "mutation": "set seg[1] but never copy",
+   "failures": 1
+  },
+  {
+   "mutation": "skip path publishes the new length anyway",
+   "failures": 1
+  },
+  {
+   "mutation": "copy through the CACHED alias instead of uncached",
+   "failures": 0,
+   "note": "A GAP, and not a fixable one. Both aliases are mapped onto one host buffer, so the emulator cannot tell them apart - the aliasing is a hardware property. Pinned instead by test_copyback_uses_the_uncached_alias_on_both_sides in the source-text tests, which does fail on that mutation."
+  }
+ ],
+ "a_correction_to_an_earlier_report": {
+  "what_i_said": "on 2026-09-24 I reported verify_compressed_dng's 9 tests and canonical_header's 13 as passing",
+  "what_was_true": "all 22 SKIPPED. The stock DNG fixture had moved in the repo restructure, from codex/evidence/... to projects/open-gate/captures/..., and the tests call skipTest when it is absent, which unittest reports as OK.",
+  "found_by": "the emulator needed the same fixture and failed loudly with FileNotFoundError, which the tests had been swallowing",
+  "fixed": "the path is corrected in test_canonical_header.py, test_verify_camera_payload.py, test_verify_compressed_dng.py and the emulator. All 51 tools tests now run with zero skips."
+ },
+ "explicitly_not_established": [
+  "anything about the REAL codec: F_ENC is a Python stub that writes framed filler, so this says the plumbing is right, not that the camera's bitstream is",
+  "timing. The clock is a stub that advances by a fixed amount.",
+  "whether the writer's buffer really is aliased at +0x40000000 on the camera. The emulator asserts it by construction; only the camera can refute it.",
+  "whether anything else holds that buffer. That is the C1 survey and it is still the gate before any live copy-back.",
+  "that the real firmware routines would have behaved as the stubs did"
+ ],
+ "camera_accessed": false,
+ "deployable": false
+}

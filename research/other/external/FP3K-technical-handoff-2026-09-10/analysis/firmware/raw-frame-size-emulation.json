@@ -1,0 +1,118 @@
+{
+  "firmware_sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622",
+  "entry": "0xc03d9630",
+  "executed_chain": [
+    "0xc03d9630",
+    "0xc03d9668",
+    "0xc01aaa30 Thumb",
+    "0xc0135d40 Thumb",
+    "0xc0135db8 Thumb"
+  ],
+  "format": 0,
+  "cases": [
+    {
+      "width": 3856,
+      "height": 2170,
+      "firmware_bytes": 12551292,
+      "packed_pixel_bytes_floor": 12551280,
+      "difference_from_packed_pixels": 12
+    },
+    {
+      "width": 3032,
+      "height": 2020,
+      "firmware_bytes": 9186968,
+      "packed_pixel_bytes_floor": 9186960,
+      "difference_from_packed_pixels": 8
+    },
+    {
+      "width": 3000,
+      "height": 2000,
+      "firmware_bytes": 9000000,
+      "packed_pixel_bytes_floor": 9000000,
+      "difference_from_packed_pixels": 0
+    },
+    {
+      "width": 6064,
+      "height": 4042,
+      "firmware_bytes": 36766044,
+      "packed_pixel_bytes_floor": 36766032,
+      "difference_from_packed_pixels": 12
+    },
+    {
+      "width": 0,
+      "height": 2020,
+      "firmware_bytes": 0,
+      "packed_pixel_bytes_floor": 0,
+      "difference_from_packed_pixels": 0
+    },
+    {
+      "width": 3032,
+      "height": 0,
+      "firmware_bytes": 0,
+      "packed_pixel_bytes_floor": 0,
+      "difference_from_packed_pixels": 0
+    },
+    {
+      "width": 1,
+      "height": 1,
+      "firmware_bytes": 20,
+      "packed_pixel_bytes_floor": 1,
+      "difference_from_packed_pixels": 19
+    },
+    {
+      "width": 11,
+      "height": 2,
+      "firmware_bytes": 36,
+      "packed_pixel_bytes_floor": 33,
+      "difference_from_packed_pixels": 3
+    },
+    {
+      "width": 12,
+      "height": 2,
+      "firmware_bytes": 40,
+      "packed_pixel_bytes_floor": 36,
+      "difference_from_packed_pixels": 4
+    },
+    {
+      "width": 13,
+      "height": 2,
+      "firmware_bytes": 56,
+      "packed_pixel_bytes_floor": 39,
+      "difference_from_packed_pixels": 17
+    },
+    {
+      "width": 3031,
+      "height": 2020,
+      "firmware_bytes": 9186968,
+      "packed_pixel_bytes_floor": 9183930,
+      "difference_from_packed_pixels": 3038
+    },
+    {
+      "width": 3033,
+      "height": 2020,
+      "firmware_bytes": 9195044,
+      "packed_pixel_bytes_floor": 9189990,
+      "difference_from_packed_pixels": 5054
+    }
+  ],
+  "matching_stock_dng_frames": [
+    "diagnostics/v003-uhd24-retry/clip/A001_001_20500316_000001.DNG",
+    "diagnostics/v003-uhd24-retry/clip/A001_001_20500316_000002.DNG",
+    "diagnostics/v003-uhd24-retry/clip/A001_001_20500316_000003.DNG",
+    "diagnostics/v003-uhd24-retry/clip/A001_001_20500316_000004.DNG",
+    "diagnostics/v003-uhd24-retry/clip/A001_001_20500316_000005.DNG",
+    "diagnostics/v003-uhd24-retry/clip/A001_001_20500316_000006.DNG",
+    "diagnostics/v003-uhd24-retry/clip/A001_001_20500316_000007.DNG",
+    "diagnostics/v003-uhd24-retry/clip/A001_001_20500316_000008.DNG",
+    "diagnostics/v003-uhd24-retry/clip/A001_001_20500316_000009.DNG",
+    "diagnostics/v003-uhd24-retry/clip/A001_001_20500316_000010.DNG"
+  ],
+  "candidate_3032x2020": {
+    "raw_bytes": 9186968,
+    "raw_bytes_rounded_to_512": 9187328,
+    "file_bytes_if_stock_78848_byte_header_is_retained": 9266176,
+    "header_size_is_assumed_for_candidate": true
+  },
+  "validation": "Unmodified firmware executed without stubs; only stack writes permitted; bounded execution.",
+  "limitations": "Validates byte-count calculation only. Does not prove live DMA allocation, recording route, DNG metadata propagation, sensor timing, or all-pixel reduction."
+}

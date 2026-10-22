@@ -1,0 +1,95 @@
+{
+  "t0": 1790362078.1531332,
+  "regions": {
+    "frame_desc": {
+      "addr": "0xC3439404",
+      "bytes": 128,
+      "source": "RAW_PUSH.md §1.1"
+    },
+    "isp_shadow": {
+      "addr": "0x30210000",
+      "bytes": 9216,
+      "source": "isp-path-audit §1 / raw-front-audit §1"
+    },
+    "sigseq_lut_desc": {
+      "addr": "0x30200000",
+      "bytes": 512,
+      "source": "isp-path-audit §8"
+    },
+    "tone_sw_desc": {
+      "addr": "0xC31D7554",
+      "bytes": 152,
+      "source": "isp-path-audit §8"
+    },
+    "tone_cache": {
+      "addr": "0xC3414D28",
+      "bytes": 128,
+      "source": "isp-path-audit §8"
+    },
+    "tone_singleton": {
+      "addr": "0xC3414470",
+      "bytes": 416,
+      "source": "isp-path-audit §3/§8"
+    },
+    "native_gain": {
+      "addr": "0xC34143B8",
+      "bytes": 184,
+      "source": "matrix-gamma-audit §3"
+    },
+    "disp_csc_bank1": {
+      "addr": "0x30190800",
+      "bytes": 64,
+      "source": "display-route-audit"
+    },
+    "disp_csc_bank0": {
+      "addr": "0x30190860",
+      "bytes": 64,
+      "source": "display-route-audit"
+    },
+    "disp_gamma_a": {
+      "addr": "0x30190940",
+      "bytes": 48,
+      "source": "display-route-audit"
+    },
+    "disp_csc_bank2": {
+      "addr": "0x30190C70",
+      "bytes": 64,
+      "source": "display-route-audit"
+    },
+    "disp_gamma_b": {
+      "addr": "0x30190CB0",
+      "bytes": 48,
+      "source": "display-route-audit"
+    }
+  },
+  "mode_before": "imager mode_now \r\nNo ,mode                         ,enum,bit,size     ,frame ,fps ,aspect ,crop,\n024,MONIT1_24_HD_LOWP4           ,0109, 12,3032x1708,041708,0024, 16: 9 ,full,\r\nshutter:00020834,gain:003744\r\nframe_count:00005745,trans_count:00003048\r\ngain_state: movie_raw_12bit\r\nstill_raw\r\nbase_size h:1936 v:1090\r\nraw_zoom  h:1600 v:1600\r\nhvbin     h:0001 v:0001\r\nbef_size  h:3025 v:1703\r\noffset    h:0002 v:0002\r\nsmall_raw\r\nbase_size h:1936 v:1090\r\nraw_zoom  h:1600 v:1600\r\nhvbin     h:0001 v:0001\r\nbef_size  h:3025 v:1703\r\noffset    h:0002 v:0002\r\nv_down_sample    v:0001\r\n",
+  "mode_after": "imager mode_now \r\nNo ,mode                         ,enum,bit,size     ,frame ,fps ,aspect ,crop,\n024,MONIT1_24_HD_LOWP4           ,0109, 12,3032x1708,041708,0024, 16: 9 ,full,\r\nshutter:00020834,gain:003744\r\nframe_count:00005773,trans_count:00003076\r\ngain_state: movie_raw_12bit\r\nstill_raw\r\nbase_size h:1936 v:1090\r\nraw_zoom  h:1600 v:1600\r\nhvbin     h:0001 v:0001\r\nbef_size  h:3025 v:1703\r\noffset    h:0002 v:0002\r\nsmall_raw\r\nbase_size h:1936 v:1090\r\nraw_zoom  h:1600 v:1600\r\nhvbin     h:0001 v:0001\r\nbef_size  h:3025 v:1703\r\noffset    h:0002 v:0002\r\nv_down_sample    v:0001\r\n",
+  "desc_before": {
+    "opcode": 3,
+    "sens_mode": 0,
+    "bitdepth_enum": 0,
+    "bitdepth": 12,
+    "ob": 0,
+    "endian": 0,
+    "pics": 0,
+    "shutter0": 0,
+    "gain0": 0,
+    "raw_addr0": "0x00000000",
+    "small_raw_addr0": "0x00000000"
+  },
+  "desc_after": {
+    "opcode": 3,
+    "sens_mode": 0,
+    "bitdepth_enum": 0,
+    "bitdepth": 12,
+    "ob": 0,
+    "endian": 0,
+    "pics": 0,
+    "shutter0": 0,
+    "gain0": 0,
+    "raw_addr0": "0x00000000",
+    "small_raw_addr0": "0x00000000"
+  },
+  "coherent": true,
+  "t1": 1790362079.378366
+}

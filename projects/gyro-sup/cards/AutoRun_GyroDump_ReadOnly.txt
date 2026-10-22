@@ -1,0 +1,26 @@
+# SIGMA fp Ver.5.02 - Gyro/IMU READ-ONLY dump (Gyroflow feasibility validation)
+# =============================================================================
+# READ-ONLY: only 'mem save' (dump RAM to card). NO 'mem set', NO register/PROM/
+# firmware writes. Nothing is modified; power-cycle leaves the camera unchanged.
+#
+# WHAT IT CAPTURES:
+#   Gyro ring lives in sub-ARM shared RAM, behind a runtime pointer at 0xC31E3FCC
+#   (ring_base = *(*(0xC31E3FCC) + 0x60), 600 samples x 4x int16 = X,Y,Z,seq).
+#   These four dumps cover the whole plausible shared-RAM span 0xC31C0000-0xC31F0000
+#   (in 64 KB chunks) and STOP before the 0xC31F7xxx OIS MMIO (which must not be read).
+#   GYROCAL is the offset/axis-remap calibration block (needed for the .gcsv scales).
+#
+# BEFORE INSERTING (important):
+#   Pick up the camera and PAN / WOBBLE it for ~2 seconds, then insert this card
+#   while (or right after) moving. The ring holds only ~0.6 s of history, so motion
+#   during that window is what proves the data is real gyro (not just static bias).
+#
+# AFTER: copy GYRO_A/B/C.BIN + GYROCAL.BIN off the card and send them back.
+#   From them I resolve the exact ring address, decode X/Y/Z, confirm it responds
+#   to motion, and estimate the sample rate. (If the ring turns out to sit outside
+#   this span, GYRO_C contains 0xC31E3FCC so I can hand you a 1-line precise pass 2.)
+# =============================================================================
+mem save \GYRO_A.BIN 0xC31C0000,,0x10000
+mem save \GYRO_B.BIN 0xC31D0000,,0x10000
+mem save \GYRO_C.BIN 0xC31E0000,,0x10000
+mem save \GYROCAL.BIN 0xC307B548,,0x244

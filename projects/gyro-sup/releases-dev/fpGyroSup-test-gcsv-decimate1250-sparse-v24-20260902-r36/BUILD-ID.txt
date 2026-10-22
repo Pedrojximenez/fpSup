@@ -1,0 +1,49 @@
+fpGyroSup r36  1250 Hz two-tap decimation + sparse accelerometer
+Build date: 2026-09-02
+Camera/firmware: SIGMA fp Ver.5.02
+Build type: release AutoRun, no USB shell
+Baseline: r23 two-slot 32 KiB raw + 64 KiB media write (byte-identical PGEN 3e729c0b
+          when built from source with SLOT_COUNT=2), NOT the r29..r35 JSON-probe
+          binary-patch line.  Rebuilt cleanly from fpSup/gyro source.
+
+What changed from the r23 baseline (two source edits, both in the writer's
+recording-time GCSV formatter; the 2500 Hz callback and the block framing are
+untouched):
+
+1. 1250 Hz output by two-tap anti-alias averaging.
+   Each GCSV row is the average of two adjacent 2500 Hz samples, (s0+s1)>>1 per
+   axis, timestamped at their midpoint.  This is a box FIR, not decimation by
+   dropping: it attenuates vibration above the new 625 Hz Nyquist before the rate
+   is halved, so no high-frequency energy aliases into Gyroflow's band.  A lone
+   final sample in an odd-count block is emitted un-averaged at its own time.
+   The gyro stays captured at the full 2500 Hz in RAM; only the written rate
+   halves.
+
+2. Sparse accelerometer.
+   Accel columns are written only on the ~47 Hz rows that actually consumed a
+   new record.  Gyro-only rows end after gz with no trailing comma (never
+   "..,gz,,"), which Gyroflow reads as a gyro row.  The first row of a take
+   carries gravity.
+
+Why this attacks the drops:
+   The measured drop trigger (A001_017 back-pressure analysis) is a block whose
+   text crosses a THIRD synchronous 64 KiB write while the other raw half fills.
+   Halving the rows (decimation) and shrinking most rows to four columns (sparse)
+   cuts a block's text from ~140 KB to well under 64 KB, so a block needs a
+   single 64 KiB write.  The three-write case that caused every large gap should
+   disappear.
+
+Verification done host-side (no camera):
+ - PGEN builds; 40 unit/format/layout/safety tests pass.
+ - The decimation and sparse loops were disassembled and checked instruction by
+   instruction (stack balance, asr sign, sample stride, trailing-comma drop,
+   64 KiB flush, pair/single step).
+ - An end-to-end row model reproduces the exact loop and checks midpoint timing,
+   the 2-tap average, the odd tail, sparse column selection and no trailing comma.
+
+Scope / not addressed here:
+ - This build does NOT contain the r35 JSON FPJ2 probe.  The JSON width=0 issue
+   is a separate line and is unchanged by this build.  If a take produces GCSV
+   but no JSON, that is the known width=0 path, not a decimation fault -- judge
+   the drops from the GCSV alone.
+ - Experimental hardware build, not fp-gyro-sup-v1.1.

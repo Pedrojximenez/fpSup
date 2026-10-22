@@ -1,0 +1,22 @@
+test_data_only_high_entries_and_native_switch (__main__.Engine30) ... FAIL
+
+======================================================================
+FAIL: test_data_only_high_entries_and_native_switch (__main__.Engine30)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-m12-recurrence/test_engine30.py", line 80, in test_data_only_high_entries_and_native_switch
+    self.assertEqual(near60_switch(cam), expected_switch)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-m12-recurrence/test_engine30.py", line 38, in near60_switch
+    cam.call(0xc01cef08, r0=0, r1=param, thumb=True, sp=V.T.STACK-0x1000)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/v3/test_v3.py", line 262, in call
+    raise self.error
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/v3/test_v3.py", line 140, in _safe_hook
+    self._hook(mu, addr, size, data)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_virtual_rcd.py", line 94, in _hook
+    raise AssertionError(f'unmodeled firmware execution {addr:#x}')
+AssertionError: unmodeled firmware execution 0xc0015058
+
+----------------------------------------------------------------------
+Ran 1 test in 33.447s
+
+FAILED (failures=1)

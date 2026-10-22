@@ -1,0 +1,144 @@
+{
+ "schema_version": 1,
+ "kind": "offline_two_block_lifecycle_and_bound_criterion",
+ "date": "2026-09-27",
+ "operator_scope": "offline only. No camera, no card, no deployment. Host source, host tests and unicorn execution of the ARM.",
+ "task": "CURRENT_DEVELOPMENT.md §3, all four items. No C3, no zero-copy, no predictor on the camera.",
+ "item_1_lifecycle": {
+  "problem": "the second block's handle arrived as `--source-handle` from an earlier run's log. Range, alignment and non-overlap were checked on both sides and prove the SHAPE of a handle, not that the memory is ours. `release` managed only the first block. Running scratch twice to get a second one conflicts with the gates, and clearing state to get around that would discard the evidence the gates protect.",
+  "solution": "every allocation is recorded BY THE CODE THAT CALLS THE ALLOCATOR, in a 16-word record inside block A, plus a mark inside the block being described.",
+  "record_fields": [
+   "magic (written last)",
+   "role",
+   "allocator object",
+   "handle",
+   "bytes requested",
+   "end",
+   "tick at acquisition",
+   "invocation seq",
+   "purpose (WORK/SRCE)",
+   "mark magic",
+   "tick of the last still-held check",
+   "state (held/unclear/freed)",
+   "free result",
+   "free tick"
+  ],
+  "who_writes_what": {
+   "block A": "exact_writer_scratch_preflight.S, where F_GET returns. Writes the mark into the block and reads it back before recording anything; the record's magic goes in last so an interrupted write fails rather than passes.",
+   "block B": "acquire_second_block.S (NEW, 604 bytes), called by the host through callfn in task context - the same mechanism release already uses for F_FREE. Verifies A's record, mark and same-boot tick; allocates; checks the 0x4..0x7 quarter, 1 KiB alignment, no wrap, and non-overlap with A ON THE DEVICE; writes and reads back B's mark; then writes the record.",
+   "hook time": "PHASE 9 re-verifies both records and both marks through one subroutine, and additionally checks B is disjoint from the frame the camera handed us - the only place that check can be made, since the acquire step runs with no frame in flight and the fill writes 3.1 MB.",
+   "reclaim": "the host frees B first, because B's record lives inside A; marks A freed BEFORE freeing A, since after the free those words belong to whoever gets the block next; records each free result in the record it belongs to."
+  },
+  "no_longer_possible": "`--source-handle` is gone from the CLI. A handle cannot be introduced by the host at all: the probe reads it from the record, and the record is checked against the mark inside the block it names.",
+  "new_host_actions": [
+   "acquire-second",
+   "lifecycle",
+   "bound-result"
+  ],
+  "same_boot_witness": "the free-running 1 MHz tick recorded at acquisition, compared at acquire time. Honest limits: 32 bits at 1 MHz wraps about every 71.6 minutes and a wrap shows up as a refusal (the safe direction); a reboot whose recorded tick was very small could slip through. The tick corroborates; the mark is the evidence.",
+  "what_the_mark_does_NOT_prove": "that we hold the block NOW. A block freed and handed to another owner keeps our two words until that owner overwrites them. The mark says this memory once carried our mark and names itself; the record's state field plus the release discipline is what says we still hold it.",
+  "hook_time_omission_and_why": "the clock comparison is NOT repeated at hook time. The image has 20 bytes of headroom, and between arming and the hook firing a reboot is impossible - the armed word lives in RAM and a reboot takes the hook with it. That argument is the reason for the omission; if it is wrong, the omission is wrong with it."
+ },
+ "item_2_failure_classification": {
+  "F_SIZE": "its return was stored and never tested, so a refused call left an untouched table to be summed and reported as a compressed size. Now gated: ERR_SIZE_CALL, and the tile words are left as the call left them and NOT summed.",
+  "guards": "the encode-failure branch read two of five, leaving the other three holding whatever the last run put there - indistinguishable from a guard that survived. All five are now read on every path through one shared routine, which is what made 'all five, every time' affordable.",
+  "init_failure": "reads no guards and says so: no encode was attempted, so the result words stay at their seeded values rather than being filled with readings nobody took.",
+  "declared_length": "the result field was the PROBE_DECLARED constant. It is still stored, labelled as the constant, and a SEPARATE pair of words now holds an actual reading of the firmware's own destination-length variable (0xC302CDE0) together with that address. What the reading is evidence of is narrow: the length the NATIVE path declared for this frame, not what our own F_INIT call was given.",
+  "stale_results": "the state block is seeded at every arming; the result words are not, and they live in a retained block. A run that failed before reading the guards would have reported the PREVIOUS run's five words - and unchanged guards are what a pass looks like. The host now clears them at arming.",
+  "unclear_ownership": "entered-and-not-succeeded refuses the whole reclaim, both blocks, not just the destination: the engine was handed both. A refusal after acquisition frees the block it took, so nothing is orphaned without a record."
+ },
+ "item_3_behavioural_tests": {
+  "host": "test_single_frame_codec_probe.py TwoBlockLifecycleTests, 25 tests. FakeShell gained sparse block memory, so records and marks are read and written the way the camera would; a read outside a registered block still raises, because a test that silently reads zeroes proves nothing.",
+  "arm_execution": "test_two_block_emulation.py, 38 tests, against out/MAIN_c0000000.bin under unicorn. AcquireEmulator covers: clean acquisition and a complete record; no scratch proof; missing record; missing magic (partial initialisation); wrong handle; wrong role; not held; missing mark; mark naming another block; clock gone backwards; a second block already held (re-entry, old record must survive); one already freed (replaceable); allocator gives nothing; no block returned; wrong quarter, misalignment and overlap (each freed again); memory that will not hold the mark (freed again). BoundProbeEmulator covers: the clean run, source in B and destination in A through the uncached alias, the generated fill, the declared readback, the frame untouched and seg handed on unchanged, an engine that overruns showing in the guards, every record and mark failure, and init/encode/size failures.",
+  "a_real_bug_emulation_found": "verify_life's failure paths end at finish_source, which reads the segment, DNG and pixel pointers out of r5/r6/r7 and needs the entry stack. The block-B call site was AFTER `push {r5, r6, r7, r10}`, so a refusal jumped there with this phase's working values in those registers and the stack 16 bytes deep; the pop at the tail then restored the wrong registers and the return went nowhere. On a camera this would have been a freeze, not a wrong number. The checks now sit before the push. No source-text assertion could have found it.",
+  "mutations_that_each_failed_a_test": {
+   "host (8)": [
+    "accept a block with no mark",
+    "free block A first",
+    "do not mark B freed",
+    "re-acquire over a held record",
+    "let the host write any record field",
+    "arm without checking the record",
+    "skip the state==held check",
+    "ignore overlap after acquiring"
+   ],
+   "arm (9)": [
+    "remove the F_SIZE gate",
+    "read two guards instead of five",
+    "skip the mark check in verify_life",
+    "skip the state==held check",
+    "take the source from block A instead of B",
+    "do not free on a refused acquisition",
+    "skip the clock check",
+    "skip the overlap check",
+    "allow re-entry over a held record"
+   ]
+  },
+  "a_mutation_that_survived_and_what_was_done": "removing the 'no record at all' branch in arm_bound_probe_two changed nothing, because check_life_record refuses the same case with a message that also mentions acquire-second. The branch exists to give different guidance for a missing record than for a malformed one, so the test now pins that guidance and the mutation fails."
+ },
+ "item_4_bound_criterion": {
+  "file": "projects/lossless-sup/tools/bound_criterion.py, 21 tests",
+  "principle": "five unchanged guards are equally consistent with 'the engine stopped where it was told' and with 'the output was nowhere near the limit'. The difference is whether the input demanded more than the limit, and that is a host question.",
+  "measurement": {
+   "encoder": "research/slimRAW ljenc.py - the project's own lossless-JPEG encoder, 2 components, predictor 1, per-tile adaptive Huffman. Imported rather than reimplemented, and round-tripped through ljpeg.decode_tile in a test, because otherwise the byte counts are the output of a program nothing has checked.",
+   "pattern": "generated on the host from the probe's own three constants (seed 0x12345679, x*1664525+1013904223, word = x ^ x>>16), and a test asserts those constants still match the ARM source.",
+   "source_bytes": 3165360,
+   "source_sha256_prefix": "7b4bc9c407253afb",
+   "tiles": "12, of which only 6 are whole: 1936/512 leaves a 400-wide column and 1090/368 a 354-tall row",
+   "encoded_bytes": 3392834,
+   "cost_model_bytes": 3380650,
+   "declared_length": 3166208,
+   "margin_bytes": 226626,
+   "bits_per_sample": 12.8624,
+   "demand_exceeds_declared": true
+  },
+  "a_first_version_was_wrong": "counting only the six whole tiles covered 53.6% of the frame, came to 1,817,514 B and concluded the pattern did NOT demand more than the limit. Tiles are now encoded CLIPPED to the active area, which is a lower bound on the demand: the engine pads the partial tiles and pays something for every padded sample, whatever the padding rule turns out to be, so its output cannot be smaller. The demand therefore does not rest on a padding contract that is decoded rather than proven.",
+  "verdicts": {
+   "bound_enforced": "the only pass. Requires: error 0; init, encode and size all returned 1; the host demand exceeds the declared length for the SAME pattern (hashes compared); no zero tile size; the tile sizes sum to the reported total; the output reached the limit (within one tile of twelve); all five guards hold the magic.",
+   "bound_exceeded": "a guard changed - a result of its own, and the one that would mean the destination must be sized from a bound rather than from the declared length.",
+   "refused": "anything else, with the reasons listed.",
+   "undecidable": "a field is missing from the record; the criterion does not fill one in."
+  },
+  "explicitly_not_a_pass": [
+   "a refused init, encode or size call",
+   "a size table that does not sum to the reported total (the 9/27 ledger's 128-byte gap has exactly this shape)",
+   "a zero tile size",
+   "an output far below the declared length",
+   "five unchanged guards on their own",
+   "a pattern the limit can absorb"
+  ],
+  "record_saved": "read_bound_result collects the whole 64-word state block, all twelve tile sizes, the three return codes, the error and stage, the five guards, the declared constant AND the readback with its address, the encode time, both lifecycle records, and sha256 of both the generated pattern and the assembled image."
+ },
+ "image_sizes_after_the_change": {
+  "note": "the claim is 0x700 = 1792 bytes and the cave arena has no room for a second one, so every byte was accounted for. copy-back is UNCHANGED, deliberately: it reached a camera as it stands, and the record check it does not need is assembled for PHASE 9 only.",
+  "scratch": "1,084 -> 1,260 of 1,280",
+  "copy-back": "1,764, unchanged",
+  "bound-probe": "1,716 -> 1,648",
+  "bound-probe-frame": "1,668 -> 1,600",
+  "bound-probe-two": "1,708 -> 1,756 of 1,792",
+  "acquire_second_block": "604 (new; shares the code claim, run before the image is written)"
+ },
+ "test_totals": {
+  "fpSup/raw/lossless_codec": "229 tests OK, 0 skipped",
+  "projects/lossless-sup/tools": "94 tests OK, 0 skipped"
+ },
+ "files": {
+  "fpSup/raw/lossless_codec/acquire_second_block.S": "bbcee7d607dabfda",
+  "fpSup/raw/lossless_codec/single_frame_encode_discard_probe.S": "9d381505f3be9818",
+  "fpSup/raw/lossless_codec/exact_writer_scratch_preflight.S": "bf6b10186c8c48ad",
+  "fpSup/raw/lossless_codec/single_frame_codec_probe.py": "1d4c07da54d403aa",
+  "fpSup/raw/lossless_codec/emulate_two_block.py": "e943b26ee3f15547",
+  "projects/lossless-sup/tools/bound_criterion.py": "d0024be20047bbe9"
+ },
+ "explicitly_not_established": [
+  "NOTHING RAN ON A CAMERA. No camera authorisation was sought or given for any of this.",
+  "acquire_second_block.S has never executed on the camera. Calling our own published routine through callfn is the same mechanism release uses for a firmware address, but this chain has not done it before.",
+  "the hardware bound is NOT established. What is established is a criterion for deciding, and that the probe's own pattern demands 7.2% more than the declared length - measured on the host.",
+  "emulated is not on the camera: not the real allocator, not the real codec, no timing, and the +0x40000000 alias is assumed here and only proven by C2.",
+  "the mark does not prove present ownership; see item_1.what_the_mark_does_NOT_prove.",
+  "two 4 MiB blocks is a candidate experimental layout, not a safe capacity proof for all inputs."
+ ],
+ "camera_accessed": false,
+ "deployable": false,
+ "next_step_requires": "separate authorisation for a camera run. The definition of done for this patch was offline: both regions traceable, failures that do not orphan or produce false positives, and offline tests with clear pass/fail/skip."
+}

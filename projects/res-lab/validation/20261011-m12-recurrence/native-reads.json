@@ -1,0 +1,412 @@
+[
+  {
+    "time": "2026-10-11T04:11:25.493390",
+    "command": "status get is_recording",
+    "reply": "is_recording -> 0\n\n"
+  },
+  {
+    "time": "2026-10-11T04:11:25.494431",
+    "command": "menu SetMovFrame",
+    "reply": "not found command \"SetMovFrame\"\n\n"
+  },
+  {
+    "time": "2026-10-11T04:11:25.495037",
+    "command": "menu SetMovRecSize",
+    "reply": "2\n\n"
+  },
+  {
+    "time": "2026-10-11T04:11:25.495841",
+    "command": "imager mode_now",
+    "reply": "imager mode_now \r\nNo ,mode                         ,enum,bit,size     ,frame ,fps ,aspect ,crop,\n053,MONIT1_60                    ,0008, 12,2016x1344,016683,0060,  3: 2 ,full,\r\nshutter:00001563,gain:003744\r\nframe_count:00092839,trans_count:00092735\r\ngain_state: through\r\nsmall_raw\r\nbase_size h:2016 v:1344\r\nraw_zoom  h:1024 v:1024\r\nhvbin     h:0001 v:0001\r\nbef_size  h:2016 v:1344\r\noffset    h:0000 v:0000\r\nv_down_sample    v:0001\r\n"
+  },
+  {
+    "time": "2026-10-11T04:11:25.500263",
+    "command": "dir \\fpSup",
+    "reply": "                                          .\n2025/12/31  08:00:00               182720 32RESCUS.BIN\n2026/10/10  11:39:20                 4096 ._32RESCUS.BIN\n2026/10/10  11:38:46 <DIR>                UI\n2026/10/10  11:39:20                 4096 ._UI\n2025/12/31  08:00:00                29276 LOADER.BIN\n2026/10/10  11:39:20                 4096 ._LOADER.BIN\n2025/12/31  08:00:00                 4208 20GYR2.BIN\n2026/10/10  11:39:20                 4096 ._20GYR2.BIN\n2025/12/31  08:00:00                38644 45RAWV.BIN\n2026/10/10  11:39:20                 4096 ._45RAWV.BIN\n2025/12/31  08:00:00                25936 40FLIP.BIN\n2026/10/10  11:39:20                 4096 ._40FLIP.BIN\n2026/10/11  03:52:28                70944 10LOSS.BIN\n2026/10/10  11:39:22                 4096 ._10LOSS.BIN\n2025/12/31  08:00:00                 4552 00SHELL.BIN\n2026/10/10  11:39:22                 4096 ._00SHELL.BIN\n2026/10/10  11:38:46 <DIR>                RESCUS\n2026/10/10  11:39:22                 4096 ._RESCUS\n2025/12/31  08:00:00               609720 50RESLAB.BIN\n2026/10/10  11:39:22                 4096 ._50RESLAB.BIN\n2026/10/11  03:47:34                 4096 LOAD.LOG\n"
+  },
+  {
+    "time": "2026-10-11T04:11:46.341222",
+    "command": "status get is_recording",
+    "reply": "is_recording -> 1\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:18.306469",
+    "command": "status get is_recording",
+    "reply": "is_recording -> 0\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.205596",
+    "command": "status get is_recording",
+    "reply": "is_recording -> 0\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.209536",
+    "command": "mem get 0xC043CCF8,,0x4",
+    "reply": "get : A:0xc043ccf8, D:0xEA0BC55E\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.211498",
+    "command": "mem get 0xC072E278,,0x18",
+    "reply": "get : A:0xc072e278, D:0xE51FF004\nget : A:0xc072e27c, D:0x45143D58\nget : A:0xc072e280, D:0x31435256\nget : A:0xc072e284, D:0x00000002\nget : A:0xc072e288, D:0x4511CCB3\nget : A:0xc072e28c, D:0x45144E00\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.212088",
+    "command": "mem get 0x451455DC,,0x4",
+    "reply": "get : A:0x451455dc, D:0x4519BFC0\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.212756",
+    "command": "mem get 0x4519BFC0,,0x2C",
+    "reply": "get : A:0x4519bfc0, D:0x31435256\nget : A:0x4519bfc4, D:0x00000002\nget : A:0x4519bfc8, D:0x00000000\nget : A:0x4519bfcc, D:0x42414C52\nget : A:0x4519bfd0, D:0x00000007\nget : A:0x4519bfd4, D:0x00000000\nget : A:0x4519bfd8, D:0x00000000\nget : A:0x4519bfdc, D:0x00000001\nget : A:0x4519bfe0, D:0x00000004\nget : A:0x4519bfe4, D:0x0002E010\nget : A:0x4519bfe8, D:0x00000005\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.213871",
+    "command": "mem get 0xC05E82F0,,0x4",
+    "reply": "get : A:0xc05e82f0, D:0xB882F146\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.214506",
+    "command": "mem get 0xC072E3F8,,0x8",
+    "reply": "get : A:0xc072e3f8, D:0xF000F8DF\nget : A:0xc072e3fc, D:0x453BBC15\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.215167",
+    "command": "mem get 0x45118EC0,,0x20",
+    "reply": "get : A:0x45118ec0, D:0x31425346\nget : A:0x45118ec4, D:0x00000020\nget : A:0x45118ec8, D:0x0002C9C0\nget : A:0x45118ecc, D:0x000F28C0\nget : A:0x45118ed0, D:0x00004943\nget : A:0x45118ed4, D:0x53554352\nget : A:0x45118ed8, D:0x00000009\nget : A:0x45118edc, D:0x00000003\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.216132",
+    "command": "mem get 0x453BBBC0,,0x20",
+    "reply": "get : A:0x453bbbc0, D:0x31425346\nget : A:0x453bbbc4, D:0x00000020\nget : A:0x453bbbc8, D:0x00094DB8\nget : A:0x453bbbcc, D:0x000D7180\nget : A:0x453bbbd0, D:0x000057CB\nget : A:0x453bbbd4, D:0x42414C52\nget : A:0x453bbbd8, D:0x00000011\nget : A:0x453bbbdc, D:0x00000003\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.219536",
+    "command": "mem get 0x45450978,,0x4",
+    "reply": "get : A:0x45450978, D:0x00000001\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.219915",
+    "command": "mem get 0x4545097C,,0x4",
+    "reply": "get : A:0x4545097c, D:0xC68FF318\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.220230",
+    "command": "mem get 0x45450980,,0x4",
+    "reply": "get : A:0x45450980, D:0xC6A05DE8\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.220513",
+    "command": "mem get 0x45450984,,0x4",
+    "reply": "get : A:0x45450984, D:0xC6A26E00\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.221398",
+    "command": "mem get 0x45450988,,0x4",
+    "reply": "get : A:0x45450988, D:0x453C4B6C\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.221816",
+    "command": "mem get 0x45451920,,0x4",
+    "reply": "get : A:0x45451920, D:0x453E3900\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.222342",
+    "command": "mem get 0x45451924,,0x4",
+    "reply": "get : A:0x45451924, D:0x00000BB8\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.222743",
+    "command": "mem get 0x45451B20,,0x4",
+    "reply": "get : A:0x45451b20, D:0x453C3980\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.223259",
+    "command": "mem get 0x45451938,,0x4",
+    "reply": "get : A:0x45451938, D:0x00000001\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.223768",
+    "command": "mem get 0x454519C0,,0x4",
+    "reply": "get : A:0x454519c0, D:0x000003E0\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.224185",
+    "command": "mem get 0x454519C4,,0x4",
+    "reply": "get : A:0x454519c4, D:0x00000296\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.224525",
+    "command": "mem get 0x454519E0,,0x4",
+    "reply": "get : A:0x454519e0, D:0x000007E0\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.224907",
+    "command": "mem get 0x454519E4,,0x4",
+    "reply": "get : A:0x454519e4, D:0x000002A0\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.225330",
+    "command": "mem get 0x454519EC,,0x4",
+    "reply": "get : A:0x454519ec, D:0x00000003\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.225690",
+    "command": "mem get 0x454519F0,,0x4",
+    "reply": "get : A:0x454519f0, D:0x00000006\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.226008",
+    "command": "mem get 0x454519C8,,0x4",
+    "reply": "get : A:0x454519c8, D:0x00000001\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.226333",
+    "command": "mem get 0x454519CC,,0x4",
+    "reply": "get : A:0x454519cc, D:0x00000001\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.226766",
+    "command": "mem get 0x45451964,,0x4",
+    "reply": "get : A:0x45451964, D:0x00000001\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.227239",
+    "command": "mem get 0x4545194C,,0x4",
+    "reply": "get : A:0x4545194c, D:0x00000002\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.227613",
+    "command": "mem get 0x454519DC,,0x4",
+    "reply": "get : A:0x454519dc, D:0x00000001\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.228050",
+    "command": "mem get 0x45451BA4,,0x4",
+    "reply": "get : A:0x45451ba4, D:0x00000001\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.228452",
+    "command": "mem get 0x454519F4,,0x4",
+    "reply": "get : A:0x454519f4, D:0x00000000\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.228816",
+    "command": "mem get 0x454519F8,,0x4",
+    "reply": "get : A:0x454519f8, D:0x00000000\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.229621",
+    "command": "mem get 0x454519D8,,0x4",
+    "reply": "get : A:0x454519d8, D:0x00000000\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.229934",
+    "command": "mem get 0x454519D0,,0x4",
+    "reply": "get : A:0x454519d0, D:0x00000000\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.230208",
+    "command": "mem get 0x454519D4,,0x4",
+    "reply": "get : A:0x454519d4, D:0x00000000\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.230589",
+    "command": "mem get 0x45451BCC,,0x4",
+    "reply": "get : A:0x45451bcc, D:0x00000000\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.230972",
+    "command": "mem get 0x45451BD0,,0x4",
+    "reply": "get : A:0x45451bd0, D:0x00000000\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.231279",
+    "command": "mem get 0x45451BD4,,0x4",
+    "reply": "get : A:0x45451bd4, D:0x00000085\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.231769",
+    "command": "mem get 0x45451BD8,,0x4",
+    "reply": "get : A:0x45451bd8, D:0x00000000\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.232098",
+    "command": "mem get 0x45451BDC,,0x4",
+    "reply": "get : A:0x45451bdc, D:0x0000000C\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.232421",
+    "command": "mem get 0x45451C08,,0x4",
+    "reply": "get : A:0x45451c08, D:0x00000001\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.232715",
+    "command": "mem get 0x45451B24,,0x4",
+    "reply": "get : A:0x45451b24, D:0x00000000\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.233013",
+    "command": "mem get 0x45451B28,,0x4",
+    "reply": "get : A:0x45451b28, D:0x00000000\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.233373",
+    "command": "mem get 0x45451B2C,,0x4",
+    "reply": "get : A:0x45451b2c, D:0x00000000\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.235937",
+    "command": "mem get 0x45451C0C,,0x4",
+    "reply": "get : A:0x45451c0c, D:0x00000000\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.236476",
+    "command": "mem get 0x45451C10,,0x4",
+    "reply": "get : A:0x45451c10, D:0x000003E0\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.236790",
+    "command": "mem get 0x45451C14,,0x4",
+    "reply": "get : A:0x45451c14, D:0x00000296\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.237111",
+    "command": "mem get 0x45451C98,,0x4",
+    "reply": "get : A:0x45451c98, D:0x00005348\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.237783",
+    "command": "mem get 0x45451CA0,,0x4",
+    "reply": "get : A:0x45451ca0, D:0x522E5348\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.238212",
+    "command": "mem get 0x45451CB8,,0x4",
+    "reply": "get : A:0x45451cb8, D:0x00000002\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.238610",
+    "command": "mem get 0x45451CBC,,0x4",
+    "reply": "get : A:0x45451cbc, D:0x00000000\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.239558",
+    "command": "mem get 0x45451970,,0x48",
+    "reply": "get : A:0x45451970, D:0x918E0C09\nget : A:0x45451974, D:0x986C9765\nget : A:0x45451978, D:0x66070379\nget : A:0x4545197c, D:0x7D0A8261\nget : A:0x45451980, D:0x8574737E\nget : A:0x45451984, D:0xDA6D928F\nget : A:0x45451988, D:0x6B6ADB6E\nget : A:0x4545198c, D:0xDD88DC87\nget : A:0x45451990, D:0x8362581B\nget : A:0x45451994, D:0x59807F84\nget : A:0x45451998, D:0x6F727176\nget : A:0x4545199c, D:0x75696870\nget : A:0x454519a0, D:0x8B673A0B\nget : A:0x454519a4, D:0x94089386\nget : A:0x454519a8, D:0x8C389695\nget : A:0x454519ac, D:0x00000C09\nget : A:0x454519b0, D:0x00000000\nget : A:0x454519b4, D:0x00000000\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.240733",
+    "command": "mem get 0x45144E00,,0x64",
+    "reply": "get : A:0x45144e00, D:0x3143474F\nget : A:0x45144e04, D:0x00000001\nget : A:0x45144e08, D:0x00000001\nget : A:0x45144e0c, D:0x00000002\nget : A:0x45144e10, D:0x00000006\nget : A:0x45144e14, D:0x00000002\nget : A:0x45144e18, D:0x00000000\nget : A:0x45144e1c, D:0x00000000\nget : A:0x45144e20, D:0x00000001\nget : A:0x45144e24, D:0x436FC29F\nget : A:0x45144e28, D:0x00000000\nget : A:0x45144e2c, D:0x00001B20\nget : A:0x45144e30, D:0x00000006\nget : A:0x45144e34, D:0x00000A80\nget : A:0x45144e38, D:0x0000003B\nget : A:0x45144e3c, D:0x00000D20\nget : A:0x45144e40, D:0x00000007\nget : A:0x45144e44, D:0x00002800\nget : A:0x45144e48, D:0x0000004A\nget : A:0x45144e4c, D:0x000000E6\nget : A:0x45144e50, D:0x0000772D\nget : A:0x45144e54, D:0x0000039C\nget : A:0x45144e58, D:0x0000000D\nget : A:0x45144e5c, D:0x00017B40\nget : A:0x45144e60, D:0x00000001\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.241249",
+    "command": "mem get 0x45145020,,0x4",
+    "reply": "get : A:0x45145020, D:0x00000006\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.241602",
+    "command": "mem get 0x45144E34,,0x4",
+    "reply": "get : A:0x45144e34, D:0x00000A80\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.242547",
+    "command": "mem get 0x45145880,,0x70",
+    "reply": "get : A:0x45145880, D:0x00000007\nget : A:0x45145884, D:0x0000004A\nget : A:0x45145888, D:0x00000002\nget : A:0x4514588c, D:0x00000001\nget : A:0x45145890, D:0x000007D0\nget : A:0x45145894, D:0x00000536\nget : A:0x45145898, D:0x00001CE0\nget : A:0x4514589c, D:0x00001D44\nget : A:0x451458a0, D:0x00000000\nget : A:0x451458a4, D:0x00000009\nget : A:0x451458a8, D:0x00000536\nget : A:0x451458ac, D:0x00000006\nget : A:0x451458b0, D:0x4B32474F\nget : A:0x451458b4, D:0x00000000\nget : A:0x451458b8, D:0x00000002\nget : A:0x451458bc, D:0x00000002\nget : A:0x451458c0, D:0x4000000A\nget : A:0x451458c4, D:0x4000000B\nget : A:0x451458c8, D:0x4000000C\nget : A:0x451458cc, D:0x451541C0\nget : A:0x451458d0, D:0x00001260\nget : A:0x451458d4, D:0xC68FF318\nget : A:0x451458d8, D:0x00000001\nget : A:0x451458dc, D:0x00000001\nget : A:0x451458e0, D:0x000023B0\nget : A:0x451458e4, D:0x00000001\nget : A:0x451458e8, D:0x00000001\nget : A:0x451458ec, D:0x00002BC4\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.243616",
+    "command": "mem get 0x451458F0,,0x70",
+    "reply": "get : A:0x451458f0, D:0x00000009\nget : A:0x451458f4, D:0x0000004B\nget : A:0x451458f8, D:0x00000002\nget : A:0x451458fc, D:0x00000001\nget : A:0x45145900, D:0x00000D80\nget : A:0x45145904, D:0x00000900\nget : A:0x45145908, D:0x00001DB0\nget : A:0x4514590c, D:0x00001E1C\nget : A:0x45145910, D:0x00000009\nget : A:0x45145914, D:0x0000000A\nget : A:0x45145918, D:0x00000536\nget : A:0x4514591c, D:0x00000076\nget : A:0x45145920, D:0x3533474F\nget : A:0x45145924, D:0x0000004B\nget : A:0x45145928, D:0x00000003\nget : A:0x4514592c, D:0x00000003\nget : A:0x45145930, D:0x4000000E\nget : A:0x45145934, D:0x4000000F\nget : A:0x45145938, D:0x40000010\nget : A:0x4514593c, D:0x45155780\nget : A:0x45145940, D:0x00001B2C\nget : A:0x45145944, D:0xC68FF318\nget : A:0x45145948, D:0x00000001\nget : A:0x4514594c, D:0x00000001\nget : A:0x45145950, D:0x000023D8\nget : A:0x45145954, D:0x00000002\nget : A:0x45145958, D:0x00000005\nget : A:0x4514595c, D:0x00000BB5\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.244681",
+    "command": "mem get 0x45145960,,0x70",
+    "reply": "get : A:0x45145960, D:0x00000004\nget : A:0x45145964, D:0x0000004C\nget : A:0x45145968, D:0x00000002\nget : A:0x4514596c, D:0x00000001\nget : A:0x45145970, D:0x00000BC0\nget : A:0x45145974, D:0x000007D0\nget : A:0x45145978, D:0x00001E88\nget : A:0x4514597c, D:0x00001EAC\nget : A:0x45145980, D:0x00000013\nget : A:0x45145984, D:0x00000009\nget : A:0x45145988, D:0x00000536\nget : A:0x4514598c, D:0x0000002A\nget : A:0x45145990, D:0x4B33474F\nget : A:0x45145994, D:0x00000000\nget : A:0x45145998, D:0x00000002\nget : A:0x4514599c, D:0x00000004\nget : A:0x451459a0, D:0x40000012\nget : A:0x451459a4, D:0x40000013\nget : A:0x451459a8, D:0x40000014\nget : A:0x451459ac, D:0x45157480\nget : A:0x451459b0, D:0x00000E94\nget : A:0x451459b4, D:0xC68FF318\nget : A:0x451459b8, D:0x00000001\nget : A:0x451459bc, D:0x00000001\nget : A:0x451459c0, D:0x00002474\nget : A:0x451459c4, D:0x00000001\nget : A:0x451459c8, D:0x00000001\nget : A:0x451459cc, D:0x000028EF\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.245915",
+    "command": "mem get 0x451459D0,,0x70",
+    "reply": "get : A:0x451459d0, D:0x00000008\nget : A:0x451459d4, D:0x0000004D\nget : A:0x451459d8, D:0x00000002\nget : A:0x451459dc, D:0x00000001\nget : A:0x451459e0, D:0x00000F00\nget : A:0x451459e4, D:0x00000A00\nget : A:0x451459e8, D:0x00001F18\nget : A:0x451459ec, D:0x00001F94\nget : A:0x451459f0, D:0x0000001C\nget : A:0x451459f4, D:0x0000000A\nget : A:0x451459f8, D:0x00000536\nget : A:0x451459fc, D:0x00000076\nget : A:0x45145a00, D:0x4B34474F\nget : A:0x45145a04, D:0x00000000\nget : A:0x45145a08, D:0x00000003\nget : A:0x45145a0c, D:0x00000005\nget : A:0x45145a10, D:0x40000016\nget : A:0x45145a14, D:0x40000017\nget : A:0x45145a18, D:0x40000018\nget : A:0x45145a1c, D:0x45158700\nget : A:0x45145a20, D:0x00000B7C\nget : A:0x45145a24, D:0xC68FF318\nget : A:0x45145a28, D:0x00000001\nget : A:0x45145a2c, D:0x00000001\nget : A:0x45145a30, D:0x0000249C\nget : A:0x45145a34, D:0x00000003\nget : A:0x45145a38, D:0x00000005\nget : A:0x45145a3c, D:0x00000BB5\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.247680",
+    "command": "mem get 0x45145A40,,0x70",
+    "reply": "get : A:0x45145a40, D:0x00000005\nget : A:0x45145a44, D:0x0000004E\nget : A:0x45145a48, D:0x00000003\nget : A:0x45145a4c, D:0x00000001\nget : A:0x45145a50, D:0x00000830\nget : A:0x45145a54, D:0x000004D6\nget : A:0x45145a58, D:0x00002000\nget : A:0x45145a5c, D:0x00002064\nget : A:0x45145a60, D:0x00000026\nget : A:0x45145a64, D:0x00000009\nget : A:0x45145a68, D:0x00000000\nget : A:0x45145a6c, D:0x00000006\nget : A:0x45145a70, D:0x00363153\nget : A:0x45145a74, D:0x00000000\nget : A:0x45145a78, D:0x00000002\nget : A:0x45145a7c, D:0x00000006\nget : A:0x45145a80, D:0x4000001A\nget : A:0x45145a84, D:0x4000001B\nget : A:0x45145a88, D:0x4000001C\nget : A:0x45145a8c, D:0x45159740\nget : A:0x45145a90, D:0x0000171C\nget : A:0x45145a94, D:0xC68FF318\nget : A:0x45145a98, D:0x00000001\nget : A:0x45145a9c, D:0x00000001\nget : A:0x45145aa0, D:0x000025AC\nget : A:0x45145aa4, D:0x00000001\nget : A:0x45145aa8, D:0x00000003\nget : A:0x45145aac, D:0x00002710\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.248548",
+    "command": "mem get 0x45145AB0,,0x70",
+    "reply": "get : A:0x45145ab0, D:0x4D4E4600\nget : A:0x45145ab4, D:0x0000004F\nget : A:0x45145ab8, D:0x00000002\nget : A:0x45145abc, D:0x00000001\nget : A:0x45145ac0, D:0x000003E0\nget : A:0x45145ac4, D:0x00000296\nget : A:0x45145ac8, D:0x000020D0\nget : A:0x45145acc, D:0x000021BC\nget : A:0x45145ad0, D:0x0000002F\nget : A:0x45145ad4, D:0x0000000C\nget : A:0x45145ad8, D:0x00000000\nget : A:0x45145adc, D:0x0000002A\nget : A:0x45145ae0, D:0x30435256\nget : A:0x45145ae4, D:0x00003030\nget : A:0x45145ae8, D:0x00000002\nget : A:0x45145aec, D:0x00000007\nget : A:0x45145af0, D:0x4000001E\nget : A:0x45145af4, D:0x4000001F\nget : A:0x45145af8, D:0x40000020\nget : A:0x45145afc, D:0x45502340\nget : A:0x45145b00, D:0x0000B804\nget : A:0x45145b04, D:0x00000000\nget : A:0x45145b08, D:0x00000000\nget : A:0x45145b0c, D:0x00000001\nget : A:0x45145b10, D:0x00002628\nget : A:0x45145b14, D:0x00000001\nget : A:0x45145b18, D:0x00000001\nget : A:0x45145b1c, D:0x0000760B\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.248959",
+    "command": "mem get 0x451450C0,,0x4",
+    "reply": "get : A:0x451450c0, D:0x00000005\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.249497",
+    "command": "mem get 0x451450C4,,0x8",
+    "reply": "get : A:0x451450c4, D:0x4B32474F\nget : A:0x451450c8, D:0x00000000\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.249916",
+    "command": "mem get 0x451450CC,,0x8",
+    "reply": "get : A:0x451450cc, D:0x3533474F\nget : A:0x451450d0, D:0x0000004B\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.253380",
+    "command": "mem get 0x451450D4,,0x8",
+    "reply": "get : A:0x451450d4, D:0x4B33474F\nget : A:0x451450d8, D:0x00000000\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.253938",
+    "command": "mem get 0x451450DC,,0x8",
+    "reply": "get : A:0x451450dc, D:0x4B34474F\nget : A:0x451450e0, D:0x00000000\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.254869",
+    "command": "mem get 0x451450E4,,0x8",
+    "reply": "get : A:0x451450e4, D:0x00363153\nget : A:0x451450e8, D:0x00000000\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.255340",
+    "command": "mem get 0x4514502C,,0x4",
+    "reply": "get : A:0x4514502c, D:0x45118EE0\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.256286",
+    "command": "mem get 0x45118EE0,,0x60",
+    "reply": "get : A:0x45118ee0, D:0x00000000\nget : A:0x45118ee4, D:0x00000000\nget : A:0x45118ee8, D:0x00000000\nget : A:0x45118eec, D:0x00000000\nget : A:0x45118ef0, D:0x00000000\nget : A:0x45118ef4, D:0x00000000\nget : A:0x45118ef8, D:0x00000000\nget : A:0x45118efc, D:0x00000000\nget : A:0x45118f00, D:0x00000000\nget : A:0x45118f04, D:0x00000000\nget : A:0x45118f08, D:0x00000000\nget : A:0x45118f0c, D:0x00000000\nget : A:0x45118f10, D:0x00000000\nget : A:0x45118f14, D:0x00000000\nget : A:0x45118f18, D:0x00000000\nget : A:0x45118f1c, D:0x00000000\nget : A:0x45118f20, D:0x00000000\nget : A:0x45118f24, D:0x00000000\nget : A:0x45118f28, D:0x00000000\nget : A:0x45118f2c, D:0x00000000\nget : A:0x45118f30, D:0x00000000\nget : A:0x45118f34, D:0x00000000\nget : A:0x45118f38, D:0x00000000\nget : A:0x45118f3c, D:0x00000000\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.256782",
+    "command": "mem get 0x45145510,,0x4",
+    "reply": "get : A:0x45145510, D:0x451E9380\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:26.257346",
+    "command": "mem get 0x451E9380,,0x1C",
+    "reply": "get : A:0x451e9380, D:0x32464352\nget : A:0x451e9384, D:0x00000000\nget : A:0x451e9388, D:0x45144E00\nget : A:0x451e938c, D:0x4512AE98\nget : A:0x451e9390, D:0xC68FF318\nget : A:0x451e9394, D:0x00000000\nget : A:0x451e9398, D:0x00000000\n"
+  },
+  {
+    "time": "2026-10-11T04:12:49.201165",
+    "command": "menu SetMovFramerate",
+    "reply": "7\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:49.201758",
+    "command": "menu SetMovCinemaDNGQuality",
+    "reply": "0\n\n"
+  },
+  {
+    "time": "2026-10-11T04:12:49.203574",
+    "command": "rec log-out",
+    "reply": "slot=1, cnt=26/600\nsize=131072*978816(119GB), free=84%, exFAT, UHS-II\ntime       : 2026/10/11 04:13:18 \nrec factor : Nothing \nui factor  : Nothing \nbattery    : OK \ntemp(BAT)  : OK \ntemp(BODY) : OK \ntemp(LCD)  : OK \ntemp(CMOS) : OK \nfile-size=1095168, bulk-size=67108864(61.3)\nreq_cnt=94, fin_cnt=94, vbuf/94/92001, raw1\nrequest  ,finish   ,diff,gap ,reqcnt,fincnt,diff,sdb,MB/s\n      932,      948,  16, 932,     4,     1,   3,  2, 273\n     1178,     1194,  16, 230,     8,     4,   4,  4, 342\n     1444,     1667, 223, 250,    12,     9,   3, 10,  19\n     1671,     1687,  16,   4,    16,    12,   4, 13, 342\n     1688,     1704,  16,   1,    19,    16,   3, 17, 273\n     1705,     1721,  16,   1,    23,    19,   4, 20, 342\n     1722,     1744,  22,   1,    26,    23,   3, 24, 199\n     1745,     1762,  17,   1,    30,    26,   4, 27, 322\n     1765,     1781,  16,   3,    33,    30,   3, 31, 273\n     1783,     1799,  16,   2,    37,    33,   4, 34, 342\n     1801,     1823,  22,   2,    40,    37,   3, 38, 199\n     1824,     1840,  16,   1,    44,    41,   3, 42, 273\n     1844,     1860,  16,   4,    48,    44,   4, 45, 342\n     1861,     1877,  16,   1,    51,    48,   3, 49, 273\n     1878,     1900,  22,   1,    55,    51,   4, 52, 248\n     1902,     1918,  16,   2,    58,    55,   3, 56, 273\n     1919,     1935,  16,   1,    62,    58,   4, 59, 342\n     1940,     1956,  16,   5,    65,    62,   3, 63, 273\n     1957,     1979,  22,   1,    69,    65,   4, 66, 248\n     1981,     1997,  16,   2,    72,    69,   3, 70, 273\n     1999,     2015,  16,   2,    76,    73,   3, 74, 273\n     2019,     2035,  16,   4,    80,    76,   4, 77, 342\n     2036,     2058,  22,   1,    83,    80,   3, 81, 199\n     2059,     2075,  16,   1,    87,    83,   4, 84, 342\n     2076,     2092,  16,   1,    90,    87,   3, 88, 273\n     2094,     2110,  16,   2,    94,    90,   4, 89, 342\n"
+  },
+  {
+    "time": "2026-10-11T04:12:49.215991",
+    "command": "dir \\DCIM\\100SIGMA",
+    "reply": "                                          .\n2026/10/10  18:14:18               172632 SS__1638.JPG\n2026/10/10  21:05:02               138755 SS__1639.JPG\n2026/10/10  21:05:50               109584 SS__1640.JPG\n2026/10/10  21:06:24               122733 SS__1641.JPG\n2026/10/10  21:07:16               103522 SS__1642.JPG\n2026/10/10  21:07:46               152741 SS__1643.JPG\n2026/10/10  21:08:44               150588 SS__1644.JPG\n2026/10/10  21:09:58               156537 SS__1645.JPG\n2026/10/10  21:25:30               112381 SS__1646.JPG\n2026/10/10  21:25:52               178597 SS__1647.JPG\n2026/10/10  21:26:12               198385 SS__1648.JPG\n2026/10/10  21:27:50               199673 SS__1649.JPG\n2026/10/10  21:28:34               191038 SS__1650.JPG\n2026/10/10  21:30:22               198386 SS__1651.JPG\n2026/10/10  21:31:20               175998 SS__1652.JPG\n2026/10/10  21:33:42               194645 SS__1653.JPG\n2026/10/10  21:54:40               171535 SS__1654.JPG\n2026/10/10  21:57:28               190566 SS__1655.JPG\n2026/10/10  21:57:38               193269 SS__1656.JPG\n2026/10/10  22:00:36               165321 SS__1657.JPG\n2026/10/10  22:10:20               186726 SS__1658.JPG\n2026/10/10  22:59:00               124997 SS__1659.JPG\n2026/10/10  23:00:18               171535 SS__1660.JPG\n2026/10/10  23:22:14               162549 SS__1661.JPG\n2026/10/10  23:22:46               134230 SS__1662.JPG\n2026/10/10  23:23:26               134230 SS__1663.JPG\n2026/10/10  23:25:22               145641 SS__1664.JPG\n2026/10/10  23:25:46               188760 SS__1665.JPG\n2026/10/11  00:08:26               136826 SS__1666.JPG\n2026/10/11  00:11:22                99887 SS__1667.JPG\n2026/10/11  00:11:50                99611 SS__1668.JPG\n2026/10/11  00:29:52               141320 SS__1669.JPG\n2026/10/11  04:11:18               308106 SS__1670.JPG\n"
+  }
+]

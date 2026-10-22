@@ -1,0 +1,21 @@
+  local   projects/res-lab/cards/20261009-virtual-rcd-v2-final/debug/fpSup/50RESLAB.BIN  451168 bytes
+  remote  \fpSup\50RESLAB.BIN  mode 0x7
+  buffer  0x450629C0, file object 0x450D0C20
+  proof   region takes writes and still holds them a second later
+  restored echo -> 0xC03D99A0
+  reply   putfile: written
+  status  2 — written
+  open    1     write  1   (both are flags, not counts)
+  WARNING 50RESLAB.BIN did not appear in dir
+
+  stage  451168 bytes in 0.002s (240.6 MB/s)      
+
+  verify 451168 bytes in 0.001s (321.8 MB/s)      
+
+  stage  451168 bytes in 0.02s (27.8 MB/s), MEM1, read back whole          
+
+  code   304/304 B  4.6 KiB/s 
+  verify 304/304 B  535 KiB/s 
+  verify 304 bytes in 0.0s (240 KiB/s)      
+
+  code   304 bytes in 0.1s (2.3 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          

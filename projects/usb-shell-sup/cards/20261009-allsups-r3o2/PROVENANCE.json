@@ -1,0 +1,97 @@
+{
+  "candidate": "r3o2",
+  "files": {
+    "AutoRun.txt": {
+      "bytes": 32768,
+      "sha256": "0c5107fff1262ad8ca3bb675329b71c80926c8b35cdd40931b387639b45edbf0"
+    },
+    "fpSup/LOADER.BIN": {
+      "bytes": 27668,
+      "sha256": "07907bb42890968fa813431adb56bf5819b705186e2b0924744761e26876d07f"
+    },
+    "fpSup/UI/ALLSUPS.BIN": {
+      "bytes": 347378,
+      "sha256": "acd15bdad956f36bb44818b089bd6aa3745ecbe08f93dc4f1cd8430a8db57204"
+    }
+  },
+  "source": {
+    "fpSup/uishare/tab/manage_page.py": {
+      "bytes": 33564,
+      "sha256": "6394d8b3c0993118ac33dfb0ae5f70b4f949373969cfa8b2e681805a55eb037e"
+    },
+    "fpSup/uishare/tab/manager_logo.py": {
+      "bytes": 3620,
+      "sha256": "9404dc83f5020ed97ec4ec293aba87dfdfa9b1142e1d3fc0484c0568a2ce767c"
+    },
+    "fpSup/uishare/tab/build_ft6.py": {
+      "bytes": 12914,
+      "sha256": "75f3b0168b46d443635d532ed6641d392f5eb863c807c8f88f12977eaf220f4b"
+    },
+    "fpSup/uishare/tab/test_manage_page.py": {
+      "bytes": 7506,
+      "sha256": "e8a6af8dd4a4a0f204c6c5b33b0231efbaabb1818b1c2b8c1cbbc23e249d3648"
+    },
+    "fpSup/uishare/tab/test_ft6.py": {
+      "bytes": 14232,
+      "sha256": "1cdedb4897b799357b13ee111ead075e9e26e2a1cf3feacf9bb6eb1008197879"
+    },
+    "fpSup/fp_usb_shell/v3/allsups.c": {
+      "bytes": 31704,
+      "sha256": "fbe4dbe763ddf7ce1a763886ac648d211068d4ded8ad5188a1e0b845815858fb"
+    },
+    "fpSup/fp_usb_shell/v3/sloader.c": {
+      "bytes": 29551,
+      "sha256": "07cf9c9ec13ce5ba78498a3c80e95b395baf1e8c376668f749174566a6ca4f7b"
+    },
+    "fpSup/fp_usb_shell/v3/test_allsups.py": {
+      "bytes": 18596,
+      "sha256": "0de5b72679fc5b542052fc64cb5642f5a3b15f1bf175dc968aa59af043221e17"
+    },
+    "fpSup/fp_usb_shell/v3/build_v3.py": {
+      "bytes": 13355,
+      "sha256": "99cf0cf37e267df5e7ff78971ae91de488c3218954c0c321bb427c9db963325a"
+    },
+    "logo2.png": {
+      "bytes": 1853539,
+      "sha256": "5785bbf1d0e255ffbd893389d52e8e53932ae742e8f7f88e48d487767c79b8e1"
+    }
+  },
+  "deployment": "UI only; management Loader and AutoRun exactly match r3n14",
+  "native_reference": [
+    "1520",
+    "1521",
+    "1522"
+  ],
+  "tests": {
+    "native": {
+      "count": 12,
+      "seconds": 18.5,
+      "result": "passed",
+      "log": "../20261009-allsups-r3n-live1/tests-native-r3o2.txt"
+    },
+    "management_baseline": {
+      "candidate": "r3n19",
+      "count": 18,
+      "code": "unchanged"
+    },
+    "mutation": "r3o1 baseline: expected home lock/action fault rejected; r3o2 independent action regression includes About"
+  },
+  "camera": {
+    "result": "passed",
+    "deployment": "UI only; full readback and directory size verified",
+    "readback": "../20261009-allsups-r3n-live1/final-readback-r3o2.json",
+    "trial": "all three disabled home rows stay FT_Y6 on Right/OK; SupManager Right/OK entry and Menu Return pass",
+    "screen": "FT_Y6",
+    "home_focus": 3451,
+    "language": 0,
+    "recording": 0,
+    "FSDS": "all128 bytes unchanged; empty disabled list",
+    "captures": [
+      "1558 complete home, all three rows grey",
+      "1561 About focus stays grey"
+    ],
+    "reboot": "one single-send shell reboot; clean QUIT of owned old daemon"
+  },
+  "change": "About fpSup home entry also native grey and SelectLock; no Right/OK action. Only SupManager remains active on home.",
+  "source_rebuild": "ALLSUPS exact byte match"
+}

@@ -1,0 +1,24 @@
+{
+  "status": "failed",
+  "camera_setting_changes": [],
+  "direct_camera_memory_writes": false,
+  "injected_code": false,
+  "recording_started": false,
+  "card_deployment": false,
+  "source_rom_sha256": "92a8ee993f6c3d66c251e88d45a2ccd5135c6cf7342717784321c2ed506e2fb4",
+  "daemon": "OK name=fpshd version=3.2.0 protocol=1 frame=64 payload=44 transport=EP01-EP82 iface=0 camera=open seq=2342 ep83=host_candidate upload=UP01-probed mem=MEM1-probed quarantine=0 fault=none",
+  "error": "shell failed or reply uncertain: ERR shl cmd rc=-4(LIBUSB_ERROR_NO_DEVICE) moved=0/64",
+  "transcript": [
+    {
+      "time_utc": "2026-10-09T04:26:49.492644+00:00",
+      "command": "STATUS",
+      "reply": "OK name=fpshd version=3.2.0 protocol=1 frame=64 payload=44 transport=EP01-EP82 iface=0 camera=open seq=2342 ep83=host_candidate upload=UP01-probed mem=MEM1-probed quarantine=0 fault=none"
+    },
+    {
+      "time_utc": "2026-10-09T04:26:49.493048+00:00",
+      "command": "TMO 1500 SHL status get is_recording",
+      "reply": "ERR shl cmd rc=-4(LIBUSB_ERROR_NO_DEVICE) moved=0/64"
+    }
+  ],
+  "probe_sha256": "3a4b114142c8886a692ca62abc220c5ac80296d323e3f9fb0bf2333bf18e8497"
+}

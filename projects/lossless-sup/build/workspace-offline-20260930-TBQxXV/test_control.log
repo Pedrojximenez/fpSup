@@ -1,0 +1,38 @@
+test_all_128_readiness_combinations (__main__.ControlTests) ... ok
+test_boot_clears_stale_state_to_off (__main__.ControlTests) ... ok
+test_camera_arm_cross_compiles (__main__.ControlTests) ... ok
+test_changes_locked_for_raw_and_lossless_takes (__main__.ControlTests) ... ok
+test_continuous_take_has_no_40_frame_limit (__main__.ControlTests) ... ok
+test_counter_saturates_without_stopping_a_continuous_take (__main__.ControlTests) ... ok
+test_direct_entry_does_not_make_menu_on_ready (__main__.ControlTests) ... ok
+test_direct_entry_does_not_relax_format_or_explicit_interlock (__main__.ControlTests) ... ok
+test_direct_entry_omits_only_ui_for_all_128_combinations (__main__.ControlTests) ... ok
+test_direct_entry_rechecks_each_take_and_keeps_fault_sticky (__main__.ControlTests) ... ok
+test_direct_entry_requires_real_state_and_context (__main__.ControlTests) ... ok
+test_direct_readiness_guard_mutation_is_detected (__main__.ControlTests) ... ok
+test_every_target_predicate_is_required (__main__.ControlTests) ... ok
+test_explicit_binding_interlock_blocks_raw_and_lossless (__main__.ControlTests) ... ok
+test_fault_sticky_but_off_can_restore_stock_recording (__main__.ControlTests) ... ok
+test_fault_stops_without_mixing_raw_and_lossless (__main__.ControlTests) ... ok
+test_format_safety_assertions_detect_isolated_mutations (__main__.ControlTests) ... ok
+test_geometry_bounds_and_tile_capacity_are_not_overflowable (__main__.ControlTests) ... ok
+test_invalid_state_is_never_written (__main__.ControlTests) ... ok
+test_invalid_values_are_not_boolean_coerced (__main__.ControlTests) ... ok
+test_menu_changes_only_private_requested_word (__main__.ControlTests) ... ok
+test_no_next_take_before_cleanup (__main__.ControlTests) ... ok
+test_nulls_and_out_of_take_calls (__main__.ControlTests) ... ok
+test_off_requires_no_codec_or_target (__main__.ControlTests) ... ok
+test_product_is_standalone_and_not_shippable (__main__.ControlTests) ... ok
+test_recheck_at_rec_after_switching_to_unsupported_depth (__main__.ControlTests) ... ok
+test_recheck_lost_readiness_at_rec (__main__.ControlTests) ... ok
+test_requested_direct_fast2_build_keeps_usb_shell_without_menu (__main__.ControlTests) ... ok
+test_requested_format_matrix_requires_its_own_readiness (__main__.ControlTests) ... ok
+test_struct_abi (__main__.ControlTests) ... ok
+test_two_takes_retain_selection_not_frame_state (__main__.ControlTests) ... ok
+test_unready_on_is_rejected_without_mutation (__main__.ControlTests) ... ok
+test_unsupported_depths_do_not_inherit_codec_readiness (__main__.ControlTests) ... ok
+
+----------------------------------------------------------------------
+Ran 33 tests in 1.612s
+
+OK

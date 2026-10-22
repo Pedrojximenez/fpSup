@@ -1,0 +1,31 @@
+test_disabling_instant_removes_previous_warm_hook_but_keeps_foreign_site (v3.test_boot_options.BootOptionsTests) ... ok
+test_fast_miss_then_hit_copies_loader_and_closes_script (v3.test_boot_options.BootOptionsTests) ... ok
+test_four_options_load_real_v3_and_restore_products (v3.test_boot_options.BootOptionsTests) ... ok
+test_instant_missing_file_preserves_native_fallback_arguments (v3.test_boot_options.BootOptionsTests) ... ok
+test_instant_warm_restart_reloads_sup_and_skips_autorun (v3.test_boot_options.BootOptionsTests) ... ok
+test_manager_saves_complete_envelope_with_disabled_list (v3.test_boot_options.BootOptionsTests) ... ok
+test_merge_embeds_the_exact_current_builder_pairs (v3.test_boot_options.BootOptionsTests) ... ok
+test_wrong_loader_hook_word_never_arms_instant (v3.test_boot_options.BootOptionsTests) ... ok
+test_a_failed_write_rolls_back_the_persistent_list (v3.test_allsups.AllSupsTests) ... ok
+test_audio_style_settings_hint_tracks_popup_selection_and_cancel (v3.test_allsups.AllSupsTests) ... ok
+test_bad_data_file_changes_nothing (v3.test_allsups.AllSupsTests) ... ok
+test_every_private_field_gets_its_layer_offset (v3.test_allsups.AllSupsTests) ... ok
+test_explicit_choices_write_only_the_selected_sup (v3.test_allsups.AllSupsTests) ... ok
+test_fifth_slot_has_its_own_choice_and_selection_callbacks (v3.test_allsups.AllSupsTests) ... ok
+test_loads_last_as_the_loader (v3.test_allsups.AllSupsTests) ... ok
+test_more_settings_is_forwarded_only_while_enabled_and_loaded (v3.test_allsups.AllSupsTests) ... ok
+test_no_data_file_changes_nothing (v3.test_allsups.AllSupsTests) ... ok
+test_no_sup_and_legacy_rows_are_not_switchable (v3.test_allsups.AllSupsTests) ... ok
+test_normal_full_screen_vector_is_left_to_the_native_registrar (v3.test_allsups.AllSupsTests) ... ok
+test_page_ids (v3.test_allsups.AllSupsTests) ... ok
+test_pagination_reaches_every_sup_including_past_seventeen (v3.test_allsups.AllSupsTests) ... ok
+test_power_off_puts_every_site_back (v3.test_allsups.AllSupsTests) ... ok
+test_refused_registration_keeps_only_the_string_layer (v3.test_allsups.AllSupsTests) ... ok
+test_site_held_exclusively_releases_the_page (v3.test_allsups.AllSupsTests) ... ok
+test_the_list_and_its_variables (v3.test_allsups.AllSupsTests) ... ok
+test_without_allsups_restores_the_ui_without_waiting (v3.test_allsups.AllSupsTests) ... ok
+
+----------------------------------------------------------------------
+Ran 26 tests in 134.705s
+
+OK

@@ -1,0 +1,7 @@
+splash : FPSUPUI/  193536 bytes; hardware untested; keep beside AutoRun.txt and fpSup.BIN
+binary : fpSup.BIN  61440 bytes, 306 section(s), entry 0x0000E870
+worker : 2328 bytes = 432 bootstrap (runs in the staging buffer) + 1896 copied to an allocation of its own
+start  : echo handler 0xC0BAC2F8 -> 0xC072DE64 (loader)
+patches: 7 firmware (iface+push), 0 screen
+wrote  : /Users/dido/Developer.localized/SIGMAfp_re/projects/sensor-lab/validation/20261004-raw14/18p-bridge-veto-matrix/.fast-debug.building-am8v4lx5/card/AutoRun.txt  216 lines  sha256=b00ce0dc23fbee33
+clean  : 148 commands, no dumps and no diagnostics

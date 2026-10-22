@@ -1,0 +1,160 @@
+{
+ "schema_version": 1,
+ "kind": "live_asynchronous_self_issued_lossless_encode_completes_during_recording",
+ "date": "2026-09-29",
+ "scope": "LIVE on the camera, firmware 5.02.0.V91, model w71c1. Host-pulsed MOVON/MOVOFF, FHD CinemaDNG, hook at 0xC0722AFC. Everything the engine touched is inside our own retained 4 MiB block; seg was never read for its buffer nor written, and every frame reached the card as stock.",
+ "headline": "the hardware lossless-JPEG codec was driven ASYNCHRONOUSLY by our own code, from inside the CinemaDNG writer hook, during a live recording: submit and return on one frame, completion observed on the next. The destination holds a real lossless JPEG.",
+ "the_three_things_that_were_missing": {
+  "1_the_owner_word_is_not_a_busy_flag": {
+   "address": "0xC37CF87C",
+   "was_believed": "1 = busy; our own preflight gated on == 0 and refused three live runs in a row with ERR_MODE_BUSY (8). That refusal was reported to the operator as 'the camera is stuck'. The operator said it was not stuck. The operator was right.",
+   "is": "an owner selector. 0 = closed, 1 and 2 = open and held by that client. C062FFF8 latches 1 and installs the callback at +0x04 from request+0x2C; the mode-2 setup latches 2 and installs at +0x38. The mode-1 starter C0630208 and the mode-2 starter C06303F8 each gate on their own value.",
+   "fix": "both preflights and both host predicates now refuse only a value no setup path can produce (cmp #2 / bhi, and <= 2 on the host). Live: power_preflight PASS and scratch_preflight PASS with codec_mode = 1.",
+   "evidence": "[C] capstone; [L] three refusals then two passes"
+  },
+  "2_programming_the_engine_is_not_starting_it": {
+   "was_believed": "C062FFF8(&req) submits the work.",
+   "is": "C062FFF8 validates the request, memcpys 0x30 bytes to 0xC37CF884, writes every engine register at 0x300D0040, installs the callback and latches mode 1 - and stops. The GO bit is [0x300D0000] |= 2, set ONLY by the mode-1 starter C0630208 (thumb wrapper C062FEB1).",
+   "fix": "PHASE 11 now calls C062FEB1 immediately after the submit and records its return. Live: start_ret = 0.",
+   "evidence": "[C] capstone; [L] start_ret = 0"
+  },
+  "3_the_completion_path_needs_the_device_OPEN": {
+   "was_believed": "nothing; this step had simply never been looked for.",
+   "is": "completion is hardware -> IRQ 0x29 -> C0630431 -> [0xC37CF880] -> set_flg. The IRQ handler is installed and enabled only by the open routine C062FEE8, which latches 'installed' in 0xC37CF878. That word read 0x00000000 live: the ISR had NEVER been installed this boot, so the hardware could finish and nothing could signal it.",
+   "the_open_C062FEE8": [
+    "C0708C60(1) - codec power on",
+    "C06304F0()",
+    "C07095A8(5, 1) - clock on",
+    "if [0xC37CF878] == 0: C0016A7C(0x29, {1, 0xC0630431}) then C000FAD8(0x29, 1) then [0xC37CF878] = 1",
+    "C000FCA0(0x29, 1) - ENABLE IRQ 0x29",
+    "C0630480(1)",
+    "returns 0 on success"
+   ],
+   "the_close_C062FF68": [
+    "[0xC37CF87C] = 0   <-- this is what writes the owner word back to 0",
+    "C06304F0()",
+    "C000FCA0(0x29, 0) - disable IRQ 0x29",
+    "C0630480(0)",
+    "C07095A8(5, 0) - clock off",
+    "C0708C60(0) - power off",
+    "returns 0 on success. The ISR install latch 0xC37CF878 stays 1; only the enable is toggled."
+   ],
+   "why_the_synchronous_path_never_hit_this": "F_ENC's own chain contains the open. Bypassing F_ENC to go asynchronous bypassed the open with it.",
+   "evidence": "[L] 0xC37CF878 = 0 before, = 1 after; [C] capstone for both routines"
+  }
+ },
+ "the_result": {
+  "how_it_was_driven": "preflight (clip) -> scratch (clip) -> arm async-submit -> HOST callfn C062FEE9 (open) -> clip -> read -> HOST callfn C062FF69 (close) -> release",
+  "record": {
+   "stage": 3,
+   "stage_name": "complete",
+   "init_ret": 1,
+   "submit_ret": 0,
+   "start_ret": 0,
+   "flag_id": "0x96 (150)",
+   "polls": 1,
+   "last_twai_return": 0,
+   "pattern": 1,
+   "t_submit": 3976892487,
+   "t_done": 3976918560,
+   "microseconds_to_completion": 26073,
+   "size_ret": 1
+  },
+  "reading_the_returns": "F_INIT and F_SIZE return 1 on SUCCESS - F_INIT's tail is cmp r0,#0 / moveq r1,#1 / movne r1,#0, so the inner 0 becomes 1. init_ret = 1 was never an error.",
+  "the_pattern": "1 = bit 0 = done. Bit 2 = error is NOT set. On the three failed runs it was 0x442, which contains neither bit - twai_flg does not write the pattern on E_TMOUT.",
+  "timing": "26,073 microseconds from submit to the poll that OBSERVED completion, so the true encode time is <= 26.1 ms. One FHD frame's compression fits inside one 41.7 ms frame period, and asynchronously it overlaps.",
+  "the_output_is_a_real_lossless_jpeg": {
+   "destination": "0x45317000",
+   "first_bytes": "ff d8 ff c3 00 0e 0c 01 70 01 00 02 00 11 00 01 11 00 ff c4 00 15 ...",
+   "decoded": "SOI, then SOF3 (lossless JPEG) length 0x000E, precision 0x0C = 12 bits, 0x0170 = 368 rows, 0x0200 = 512 columns, 1 component, sampling 0x11, Tq 0; then two DHT segments. 512x368 is exactly the tile geometry the probe declared."
+  },
+  "the_size_table": {
+   "address_passed": "0x45568400 (request+0x24 = table + round_up(table_len, 1024))",
+   "words_read": "515C0000 515C0000 515C0000 515C0000 515C0000 585C0000",
+   "decoded": "big-endian: 0x5C51 = 23,633 bytes for five tiles and 0x5C58 = 23,640 for the sixth, total about 141,810 bytes",
+   "ratio": "141,810 of 3,165,360 source bytes = 4.5 percent, on the deliberately compressible synthetic source (samples alternating 1024 and 3072)"
+  },
+  "guards_all_intact": {
+   "work +0x3F0000": "0xA55AA55A",
+   "size table +0x3F1030": "0xA55AA55A",
+   "temporary table +0x3F1430": "0xA55AA55A",
+   "allocation end +0x3FFFFC": "0xA55AA55A",
+   "source at +0x000000": "40000C40 0C40000C 000C4000 40000C40, the fill unchanged"
+  },
+  "the_clip": "recorded normally. The stop pulse needed a second attempt (is_recording read 1 twice), which is the documented MOVON behaviour, not a fault of the probe.",
+  "second_run_with_the_size_table_corrected": {
+   "why": "the first run completed a real encode and still reported sum 0. F_SIZE delegates to C062FA48, which takes the table pointer from [0xC302CDD4+0x10] and the LOOP BOUND from [0xC302CDEC], then byte-reverses each entry into the caller's array. The probe had pointed the hardware at table + round_up(len, 1024) - 0x400 past where F_SIZE looks - and the tile count is set by the driver C062F6F8, which this phase deliberately does not run, so the loop ran zero times.",
+   "the_fix": [
+    "request+0x24 now carries the engine's own table pointer (A_ENG10) verbatim",
+    "the phase publishes PROBE_TILES to 0xC302CDEC before submitting. Safe during recording because the camera writes RAW and compresses nothing, so the codec has no other user.",
+    "net zero bytes: the round-up arithmetic that was removed paid for the tile-count store, and async-submit is still exactly 1792"
+   ],
+   "record": {
+    "stage": 3,
+    "stage_name": "complete",
+    "submit_ret": 0,
+    "start_ret": 0,
+    "polls": 1,
+    "last_twai_return": 0,
+    "pattern": 1,
+    "t_submit": 503549978,
+    "t_done": 503576151,
+    "microseconds_to_completion": 26173,
+    "size_ret": 1,
+    "sum": 141805
+   },
+   "the_sum_is_now_right": "141,805 bytes, and it agrees EXACTLY with the table read by hand: 5 tiles at 0x5C51 = 23,633 plus one at 0x5C58 = 23,640. 141,805 of 3,165,360 source bytes = 4.48 percent.",
+   "table_now_where_F_SIZE_reads": "0x45568000: 515C0000 x5 then 585C0000, big-endian entries as the hardware writes them",
+   "destination": "FF D8 FF C3 again, unchanged",
+   "guards": "all four 0xA55AA55A; codec closed with C062FF69 and the block released, free_result 0",
+   "why_this_matters_beyond_tidiness": "the DNG's tile offset table needs the per-tile byte counts. Getting them out through the firmware's own F_SIZE, rather than by a host read, is a requirement of the architecture and not a reporting nicety."
+  }
+ },
+ "the_request_abi_now_fully_read": {
+  "note": "C0630178..C0630202 is the SECOND HALF of C062FFF8 - the push at C062FFFC and the pop at C0630202 match. Everything below is one function.",
+  "+0x00": "width in pixels, 8..0x4000, multiple of 8",
+  "+0x04": "height, 2..0x4000, even",
+  "+0x08": "depth code: 0 -> 12 bits, 1 -> 14, 2 -> 16, 3 -> 10; anything else is refused",
+  "+0x0C": "tile width, 0x20..0x200, multiple of 0x20",
+  "+0x10": "tile height, 2..0x200, even",
+  "+0x14": "SOURCE POINTER, 1 KiB aligned",
+  "+0x18": "SOURCE LENGTH, 1 KiB aligned (it is ADDED to +0x14 at C0630198 to program 0x300D008C)",
+  "+0x1C": "DESTINATION POINTER, 1 KiB aligned",
+  "+0x20": "DESTINATION LENGTH, 1 KiB aligned (added to +0x1C at C06301B8)",
+  "+0x24": "SIZE TABLE POINTER, 1 KiB aligned",
+  "+0x28": "size table length, not validated",
+  "+0x2C": "COMPLETION CALLBACK, not validated; C06301EC installs it at [0xC37CF880]",
+  "all_five_1KiB_checks": "C06300A6..C06300C2, lsls #0x16 on each; any failure returns 1 without touching the hardware"
+ },
+ "corrections": [
+  {
+   "what_was_wrong": "'nothing in the image ever writes 0 back to 0xC37CF87C', stated earlier today and written into the source comment and the test docstring.",
+   "why_it_was_wrong": "the literal scan required the movw/movt pair to be adjacent. At C062FF70 a movs sits between them, so the close routine's write was missed.",
+   "the_truth": "C062FF7A writes 0. The word means closed (0) versus open and owned (1 or 2). The gate relaxation to 'refuse only what no setup path can latch' remains correct; only the stated reason was wrong."
+  },
+  {
+   "what_was_wrong": "ERR_MODE_BUSY on three consecutive runs was attributed to 'the self-issued submit left the codec marked busy and nothing clears it', and the operator was told a power cycle was required.",
+   "the_truth": "the refusal was our own gate misreading a normal owner value. No power cycle was needed and the camera was never stuck."
+  },
+  {
+   "what_was_wrong": "'+0x04 of the engine block is the source length, and it read 0, so we submitted a zero-length job' - said in the same breath as reading the record.",
+   "the_truth": "that word is in the ENGINE PARAMETER BLOCK 0xC302CDD4, which the probe never uses; it reads ENG0/8/C/10/14. The request was well formed and submit_ret = 0 was genuine."
+  },
+  {
+   "what_was_wrong": "'request+0x18 was given PROBE_DECLARED (0x305000) where it should be the SOURCE length (0x304CB0)', written into this ledger's first draft.",
+   "the_truth": "+0x18 must be 1 KiB aligned - C06300AC checks it - and PROBE_DECLARED is defined as round_up(12*1936*1090/8, 1024), which IS the rounded source length. The field was correct; the objection was not. The constant's name is what misled, not the value."
+  },
+  {
+   "what_was_wrong": "'the recorded sum is 0 because the probe sums the table at TABLE_OFF while the request points the engine at TABLE_OFF + 0x400'.",
+   "the_truth": "half right. The probe never sums a table: it calls F_SIZE. The two real causes were the misplaced table pointer AND the unset tile count at 0xC302CDEC. Both are fixed and the second run reports sum 141805."
+  }
+ ],
+ "known_imperfections_in_the_probe_not_in_the_result": [
+  "none outstanding. Both items recorded earlier today are resolved or were wrong; see corrections."
+ ],
+ "what_this_unblocks": "the dynamic architecture's executable path. Hijack a frame, submit its compression, return immediately, let later frames pass, observe completion on a later writer call, then hand the compressed payload to CinemaDNG as a late submit. Every step of that is now measured rather than assumed. The remaining open question is unchanged and is NOT about the codec: every writer call must still produce a file, because skipping one aborts the clip.",
+ "operator_authorisations_used": [
+  "reading 0xC37CF878, 0xC37CF87C, 0xC37CF880, 0xC37CF884, 0x300D0000..0x300D0050 and our own block",
+  "calling C062FEE9 (open) and C062FF69 (close) from the host, agreed to explicitly after the risk was stated: no paired close inside the open, so power and clock stay on until closed; reversible by a power cycle"
+ ]
+}

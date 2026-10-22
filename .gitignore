@@ -1,0 +1,15 @@
+# Local dependencies, caches, and operating-system metadata
+**/node_modules/
+**/__pycache__/
+**/.next/
+**/.vinext/
+**/.wrangler/
+**/.vercel/
+**/.venv/
+**/venv/
+**/.DS_Store
+**/._*
+*.pyc
+*.pyo
+*.tsbuildinfo
+.env*

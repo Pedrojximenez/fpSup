@@ -1,0 +1,68 @@
+{
+  "test_groups": 53,
+  "records_walked_per_complete_parse": 1538,
+  "native_binding_ready": false,
+  "camera_accessed": false,
+  "kind": "offline_reader_view_lease_adapter_tests",
+  "candidate_profile": "pure-fixed-gated",
+  "deployable": false,
+  "host_sanitizers": [
+    "address",
+    "undefined"
+  ],
+  "arm_compile_only": {
+    "length": 3428,
+    "sha256": "554a3e76b23b8c7737729c0fb1930c584a4afff993394e028314441006c11c1f",
+    "undefined_symbols": []
+  },
+  "inputs": {
+    "seg0": {
+      "path": "/Users/dido/Developer.localized/SIGMAfp_re/out/seg0_c0000000.bin",
+      "length": 49245696,
+      "sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622"
+    },
+    "page": {
+      "path": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/build/mainb2-pure-fixed-20260916/MainB2.fpLossless.gated.page",
+      "length": 179725,
+      "sha256": "33946d01b1fd9bca7cba72ef55ef53e16a0469a00e5a29f35896a46e43023633"
+    },
+    "pool": {
+      "path": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/build/mainb2-pure-fixed-20260916/MainB2.fpLossless.strings",
+      "length": 176240,
+      "sha256": "ea773283be884f8c40ca1f08d759d94157d3d58200398a92805ef3f8cd09ad96"
+    }
+  },
+  "tools": {
+    "reader_lease.h": {
+      "length": 3923,
+      "sha256": "83fa6279926b3f3c38d2a5aae82e9c4728c0aae11be101aaa075bddb5977d654"
+    },
+    "reader_lease.c": {
+      "length": 10097,
+      "sha256": "04a31150b85b8a7238d156cf197c98204e5ad75c85beceb10c5606b8afb40c04"
+    },
+    "test_reader_lease.c": {
+      "length": 10664,
+      "sha256": "2397cd658f830ea9e878fa2dd3be44db9bcb01c0cada62fd80e232f80572e9a0"
+    },
+    "run_tests.py": {
+      "length": 4215,
+      "sha256": "336dd823b960dac1c7434ee1803c4840e0ac679edba78d3d23c898548944fe9e"
+    }
+  },
+  "compiler": "Apple clang version 21.0.0 (clang-2100.3.27.1)",
+  "gates": [
+    "NATIVE_PAGE_SELECTOR_AND_READER_BINDING_UNIMPLEMENTED",
+    "NATIVE_PARSE_RESULT_AND_UNWIND_ABI_UNPROVEN",
+    "CACHE_FIRST_PARSE_PROVENANCE_UNIMPLEMENTED",
+    "NATIVE_ALLOCATION_AND_PARTIAL_PARSE_CLEANUP_UNPROVEN",
+    "RETAINED_STRING_AND_CALLBACK_LIFETIME_UNPROVEN",
+    "OG_HOOK_DISPATCH_NOT_MERGED",
+    "PRIVATE_VARIABLE_NAVIGATION_RENDERING_GATES_REMAIN"
+  ],
+  "old_candidate_rejection": {
+    "exit_code": 1,
+    "message": "Refusing unpinned page: {'length': 179826, 'sha256': 'ce1bd3b2f4b7a15cd7adc22d08db2ed292ae10686b3ef0fcf86b6f82760ebcdd'}",
+    "before_compile": true
+  }
+}

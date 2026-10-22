@@ -1,0 +1,76 @@
+{
+ "schema_version": 1,
+ "kind": "offline_static_search_for_a_hardware_output_bound",
+ "date": "2026-09-26",
+ "operator_scope": "offline only. No camera.",
+ "question": "zero-copy lets the codec overwrite its own source, so a frame that expands is unrecoverable. A predictor cannot guard that. Is there a BOUND instead of a guess?",
+ "verdict": "PROBABLY YES, AND IT IS THE RIGHT SIZE. The engine is handed a destination LENGTH, set to the source size rounded up to 1 KiB. Whether the hardware enforces it is the one thing left.",
+ "f_init_has_no_caller_supplied_cap": {
+  "level": "C",
+  "claim": "all nine words of F_INIT's struct are accounted for and none is an output capacity",
+  "mapping": {
+   "[0]": "width",
+   "[1]": "height",
+   "[2]": "depth, through FUN_c03d9668",
+   "[3]": "tile width",
+   "[4]": "tile height",
+   "[5]": "src",
+   "[6]": "output",
+   "[7]": "size table",
+   "[8]": "read as a BYTE, a flag; our probe passes 0"
+  },
+  "evidence": "FUN_c05a6890 copies them into a 0x24-byte struct - nine words exactly - and calls FUN_c062f5a8"
+ },
+ "the_engine_sets_a_destination_length": {
+  "level": "C",
+  "where": "FUN_c062f5a8 @ 0xC062F5A8",
+  "registers": {
+   "_DAT_c302cdd4": "init[5], the source pointer",
+   "_DAT_c302cdd8": "round_up(depth * width * height / 8, 1024)",
+   "_DAT_c302cddc": "init[6], the destination pointer",
+   "_DAT_c302cde0": "round_up(depth * width * height / 8, 1024) - the same value",
+   "_DAT_c302cde4": "init[7], the size table",
+   "_DAT_c302cde8": "tiles_x * tiles_y * 4, the size table's length"
+  },
+  "identification": {
+   "level": "I",
+   "claim": "_DAT_c302cde0 is the DESTINATION length",
+   "argument": "the descriptor built at blk_c06.c:42648-42651 lays them out as local_3c = cdd4, local_38 = cdd8, local_34 = cddc, local_30 = cde0 - a (pointer, length) pair for the source and another for the destination. cde8 sitting next to cde4 as the size table's length is the same pattern a third time, which is what makes the reading more than a guess."
+  }
+ },
+ "the_numbers_fit_exactly": {
+  "level": "I",
+  "fhd": {
+   "source_bytes": 3165360,
+   "engine_destination_length": 3166208,
+   "note_on_the_length": "round_up(3,165,360, 1024)",
+   "allocation": 3252736,
+   "allocation_formula": "frame[0x128] + round_up(source, 512) = 87,040 + 3,165,696",
+   "zero_copy_output_starts_at": "seg[0] + 0x13400 = allocation base + frame[0x128]",
+   "room_to_the_allocation_end": 3165696,
+   "overrun_if_the_engine_writes_its_full_length": 512,
+   "gap_after_the_allocation_measured_in_c1": 512
+  },
+  "claim": "the engine's declared destination length exceeds the room by exactly 512 bytes, and the gap C1 measured after the allocation is exactly 512 bytes. The allocator rounds the payload to 512, the engine rounds to 1024, and the ring leaves 512 - three numbers that fit together rather than by chance.",
+  "consequence": "if the engine enforces its length, the worst case for zero-copy is 512 bytes into an inter-block gap that appears to exist, NOT an unbounded overrun. That is a different situation from 'assume it compresses' entirely."
+ },
+ "what_this_changes": [
+  "The predictor is no longer the only thing standing between zero-copy and a destroyed frame, and it should not be asked to be: ledger-precheck-prototype-20260926 showed it is defeatable by construction (-91.7%).",
+  "A bound the hardware enforces is not a heuristic. If it holds, zero-copy is safe by construction for any content, and the predictor goes back to being what COMPRESSION_PRECHECK intends: an adaptive-mixed policy input.",
+  "The 512-byte question is small, specific and testable, where 'will this frame compress' is neither."
+ ],
+ "explicitly_not_established": [
+  "THAT THE ENGINE ENFORCES THE LENGTH. This is the whole question and it is a hardware behaviour: the registers are written, and nothing read here shows what happens when the output reaches that value.",
+  "whether _DAT_c302cdd8 and _DAT_c302cde0 are src-length and dst-length respectively rather than the other way round; both hold the same value, so the pairing in the descriptor is the only discriminator and it is an inference",
+  "what init[8], the byte flag, selects. The else branch of FUN_c062f5a8 computes a much larger length, ((depth * width * ((height + 0x1FF) >> 9)) & 0x7FFFFF) * 0x40, so the flag changes the length model and our probe has always passed 0.",
+  "whether the 512-byte gap after the allocation is genuinely unused, or belongs to the allocator's bookkeeping",
+  "anything about the read-versus-write pointer race, which is a separate hazard: the output starting at the source's own address is safe only if the engine never writes ahead of what it has read"
+ ],
+ "cheapest_next_facts": [
+  "offline: what reads _DAT_c302cde0 further down, and whether any status or error path references reaching it",
+  "non-destructive on the camera: encode in place entirely INSIDE our own 4 MiB block - copy the source in, set src == dst, and compare the result against a normal out-of-place encode of the same data. That answers the pointer race without touching the camera's buffer.",
+  "non-destructive: feed the engine deliberately incompressible content in our own block with dst length set as the firmware sets it, and see whether it stops at the declared length or runs past a guard word placed after it"
+ ],
+ "camera_accessed": false,
+ "deployable": false
+}

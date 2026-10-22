@@ -1,0 +1,17 @@
+fpSup-Formats v0.6.1 + fpSup-Lossless-Mem v0.1.3m3 + fpSup-Gyro-Data v1.14.1d1: notes for the fpSup-Merge catalogue
+(tools/card-composer/build_catalogue.py).  composer.html is your current main with exactly these
+changes, built and tested (test_compose.js / test_catalog_ui.js).
+
+1. Copy releases/* into fpSup/releases/ as they are.
+2. PRODUCTS: add ['fmt-s16', 'fmt-og2k', 'fmt-og3k', 'fmt-og35k', 'fmt-og4k', 'lossless-mem', 'gyro-data'] (entries as in composer.html's catalogue: build_catalogue.py in this package's
+   composer-src/ is the edited file).  Move 'og3k', 'og2k', 'lossless' and 'gyro' to category 'deprecated'
+   (the page opens on 'shooting', so they are hidden until someone picks that category);
+   og3k/og2k exclude the five fmt-* tiles, lossless and lossless-mem exclude each other,
+   gyro-data excludes gyro and gyro-base.
+3. ORDER: append ['fmt-s16', 'fmt-og2k', 'fmt-og3k', 'fmt-og35k', 'fmt-og4k', 'lossless-mem', 'gyro-data']; no existing combination moves.
+4. template.html: two cards with data past the loader's read (Lossless-Mem and Gyro-Data) are
+   chained instead of refused (tailClash): Lossless's first, each but the last padded to 4 KiB.
+   With one such card the bytes are as before.  test_compose.js checks it the same way.
+5. template.html: the page opens with gyro-data, the five fmt-* tiles, lossless-mem and raw-view
+   ticked (was gyro + og3k).  Optional: keep your own default if you prefer.
+Questions: Jose Hurtado (https://elcacharrista.com).

@@ -1,0 +1,21 @@
+test_all_four_depths_round_source_and_destination_lengths_up (__main__.NativeCodecContractTests) ... ok
+test_error_pattern_closes_without_postprocessing (__main__.NativeCodecContractTests) ... ok
+test_failed_submit_and_start_do_not_invent_cleanup (__main__.NativeCodecContractTests) ... ok
+test_init_preserves_supplied_pointer_aliases (__main__.NativeCodecContractTests) ... ok
+test_legacy_native_stub_stack_alignment_map_is_explicit (__main__.NativeCodecContractTests) ... ok
+test_mutated_source_alignment_gate_is_detected (__main__.NativeCodecContractTests) ... ok
+test_mutating_rounding_postprocess_and_close_is_detected (__main__.NativeCodecContractTests) ... ok
+test_native_success_corrects_tile_end_closes_and_returns_one (__main__.NativeCodecContractTests) ... ok
+test_non_timeout_wait_failure_does_not_close (__main__.NativeCodecContractTests) ... ok
+test_original_driver_zero_height_at_exact_tile_row_multiple (__main__.NativeCodecContractTests) ... ok
+test_partial_close_failure_is_not_success_even_with_owner_zero (__main__.NativeCodecContractTests) ... ok
+test_repeated_timeout_has_no_native_bounded_exit (__main__.NativeCodecContractTests) ... ok
+test_request_validator_requires_all_five_kib_aligned_fields (__main__.NativeCodecContractTests) ... ok
+test_source_tail_is_not_proven_by_stock_file_length (__main__.NativeCodecContractTests) ... ok
+test_timeout_retries_start_without_resubmitting (__main__.NativeCodecContractTests) ... ok
+test_unknown_call_fails_loudly (__main__.NativeCodecContractTests) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 1.012s
+
+OK

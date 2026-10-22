@@ -1,0 +1,37 @@
+fpGyroSup v1 -- SIGMA fp, firmware Ver.5.02 only
+
+Copy everything beside this file -- AutoRun.txt, VSHL.BIN, PGEN.BIN and the
+GYRO folder -- into the ROOT of an SD card. Put the card in the camera and
+power on; a progress bar runs to "fpSup!", about 18 seconds. Then shoot.
+
+Each CinemaDNG clip then leaves three files on the card:
+
+    \GYRO\A001_017.GYR                 raw gyro log
+    \CINEMA\A001_017\A001_017.gcsv     gyro + accelerometer, for Gyroflow
+    \CINEMA\A001_017\A001_017.json     lens profile, for Gyroflow
+
+MOV is not covered yet. A MOV take still gets its .GYR, so the gyro data is
+captured, but no .gcsv and no .json -- both are named from the CinemaDNG clip
+folder that a MOV does not have. Recording is unaffected.
+
+Nothing is flashed. This is a RAM injection: take the battery out and the
+camera is exactly as it was. Remove the three files from the card to stop it.
+
+Full notes: https://github.com/ijigen/fpSup/tree/main/gyro/release
+
+---
+
+把這個檔旁邊的東西 —— AutoRun.txt、VSHL.BIN、PGEN.BIN 和 GYRO 資料夾 —— 整批
+複製到 SD 卡的「根目錄」。卡片放進相機開機,進度條跑到「fpSup!」,約 18 秒。
+之後照常拍攝。
+
+每一段 CinemaDNG 結束後,卡上就有上面那三個檔。
+
+目前不支援 MOV。錄 MOV 一樣會有 .GYR(陀螺資料照收),但不會有 .gcsv 和 .json
+—— 這兩個檔的路徑是從 CinemaDNG 的片段資料夾組出來的,MOV 沒有那個資料夾。
+不影響錄影。
+
+不會寫入韌體。這是 RAM 注入,拔掉電池相機就完全復原。把那三個檔從卡片刪掉
+就停用。
+
+僅適用韌體 Ver.5.02。

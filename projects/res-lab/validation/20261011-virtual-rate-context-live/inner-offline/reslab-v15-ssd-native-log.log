@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/camera.py", line 174, in <module>
+    main()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/camera.py", line 117, in main
+    assert recording() == 0
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/camera.py", line 33, in recording
+    reply = live.checked_sh('status get is_recording')
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/live_camera.py", line 36, in checked_sh
+    raise RuntimeError(f'Uncertain outcome; command will not be replayed: {line}: {reply}')
+RuntimeError: Uncertain outcome; command will not be replayed: status get is_recording: ERR shl cmd rc=-4(LIBUSB_ERROR_NO_DEVICE) moved=0/64
+

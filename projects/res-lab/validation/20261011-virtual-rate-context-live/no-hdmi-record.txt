@@ -1,0 +1,143 @@
+screen: LV_CINE_MEDIUM
+  tagged 16380/52744 B  2938 KiB/s   tagged 32760/52744 B  2687 KiB/s   tagged 49140/52744 B  2451 KiB/s   tagged 52744/52744 B  2235 KiB/s   tagged 52744 bytes in 0.0s (2170 KiB/s)      
+  tagged 116/116 B  33 KiB/s   tagged 116 bytes in 0.0s (24 KiB/s)      
+  tagged 116/116 B  168 KiB/s   tagged 116 bytes in 0.0s (77 KiB/s)      
+  tagged 80/80 B  90 KiB/s   tagged 80 bytes in 0.0s (53 KiB/s)      
+  tagged 104/104 B  210 KiB/s   tagged 104 bytes in 0.0s (78 KiB/s)      
+  tagged 60/60 B  115 KiB/s   tagged 60 bytes in 0.0s (46 KiB/s)      
+  tagged 16380/37160 B  2764 KiB/s   tagged 32760/37160 B  2600 KiB/s   tagged 37160/37160 B  2515 KiB/s   tagged 37160 bytes in 0.0s (2374 KiB/s)      
+screen: LV_CINE_MEDIUM
+  code   412/412 B  2.3 KiB/s   verify 412/412 B  530 KiB/s   verify 412 bytes in 0.0s (242 KiB/s)      
+  code   412 bytes in 0.2s (2.3 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  tagged 16380/465256 B  3047 KiB/s   tagged 32760/465256 B  2388 KiB/s   tagged 49140/465256 B  2508 KiB/s   tagged 65520/465256 B  2694 KiB/s   tagged 81900/465256 B  2519 KiB/s   tagged 98280/465256 B  2577 KiB/s   tagged 114660/465256 B  2554 KiB/s   tagged 131040/465256 B  2518 KiB/s   tagged 147420/465256 B  2600 KiB/s   tagged 163800/465256 B  2554 KiB/s   tagged 180180/465256 B  2558 KiB/s   tagged 196560/465256 B  2602 KiB/s   tagged 212940/465256 B  2566 KiB/s   tagged 229320/465256 B  2543 KiB/s   tagged 245700/465256 B  2536 KiB/s   tagged 262080/465256 B  2528 KiB/s   tagged 278460/465256 B  2570 KiB/s   tagged 294840/465256 B  2489 KiB/s   tagged 311220/465256 B  2519 KiB/s   tagged 327600/465256 B  2522 KiB/s   tagged 343980/465256 B  2515 KiB/s   tagged 360360/465256 B  2536 KiB/s   tagged 376740/465256 B  2521 KiB/s   tagged 393120/465256 B  2515 KiB/s   tagged 409500/465256 B  2543 KiB/s   tagged 425880/465256 B  2512 KiB/s   tagged 442260/465256 B  2532 KiB/s   tagged 458640/465256 B  2532 KiB/s   tagged 465256/465256 B  2527 KiB/s   tagged 465256 bytes in 0.2s (2513 KiB/s)      
+  remote  \DCIM\100SIGMA\SS__1679.JPG  465256 bytes, mode 0x1
+  buffer  from the firmware, file object 0x45062FC0
+  reply   getfile: read
+  buffer  0x5F900980 (469352 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 465256 of 465256
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/screenshots/1679-no-hdmi-before-ram.jpg
+Screenshot: /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/screenshots/1679-no-hdmi-before-ram.jpg
+screen: LV_CINE_MEDIUM
+  tagged 16380/52744 B  3129 KiB/s   tagged 32760/52744 B  2581 KiB/s   tagged 49140/52744 B  2588 KiB/s   tagged 52744/52744 B  2582 KiB/s   tagged 52744 bytes in 0.0s (2459 KiB/s)      
+  tagged 116/116 B  240 KiB/s   tagged 116 bytes in 0.0s (112 KiB/s)      
+  tagged 116/116 B  198 KiB/s   tagged 116 bytes in 0.0s (90 KiB/s)      
+  tagged 80/80 B  130 KiB/s   tagged 80 bytes in 0.0s (56 KiB/s)      
+  tagged 104/104 B  176 KiB/s   tagged 104 bytes in 0.0s (75 KiB/s)      
+  tagged 60/60 B  68 KiB/s   tagged 60 bytes in 0.0s (31 KiB/s)      
+{
+  "state": "0x452012c0",
+  "entry": "0x45201ee0",
+  "entry_words": [
+    5,
+    74,
+    230,
+    1159732980,
+    0,
+    844313160,
+    808661044,
+    0,
+    0,
+    21627210,
+    394126,
+    1106247680,
+    30,
+    0,
+    0,
+    0
+  ],
+  "vm": "0x45202400",
+  "vm_words": [
+    230,
+    12,
+    1,
+    0,
+    0,
+    21627210,
+    394126,
+    30,
+    1159734368,
+    1159734432,
+    1159734568,
+    1159734640,
+    1159734728,
+    1159734784,
+    0,
+    0
+  ],
+  "tim": "0x45202460",
+  "tim_words": [
+    230,
+    21627210,
+    394126,
+    526310,
+    680,
+    16383,
+    262143,
+    0
+  ],
+  "sensor_timing_fps": 239.76023976023976,
+  "native_engine_word": 1114636288,
+  "native_engine_fps": 60.0,
+  "consumer_canvas_fps": 30.0,
+  "global_bulk_bytes": 67108864,
+  "native_application_rate": "30000/1001",
+  "shutter_nominal": 30,
+  "sensor_mode_id": 230,
+  "native_identity": false,
+  "nominal_note": "Virtual clone nominal setting is active.",
+  "sensor_cadence_measured": false
+}
+screen: LV_CINE_MEDIUM
+  tagged 16380/52744 B  2434 KiB/s   tagged 32760/52744 B  2857 KiB/s   tagged 49140/52744 B  2564 KiB/s   tagged 52744/52744 B  2420 KiB/s   tagged 52744 bytes in 0.0s (2301 KiB/s)      
+  tagged 116/116 B  142 KiB/s   tagged 116 bytes in 0.0s (27 KiB/s)      
+  tagged 116/116 B  117 KiB/s   tagged 116 bytes in 0.0s (65 KiB/s)      
+  tagged 80/80 B  21 KiB/s   tagged 80 bytes in 0.0s (17 KiB/s)      
+  tagged 104/104 B  122 KiB/s   tagged 104 bytes in 0.0s (69 KiB/s)      
+  tagged 60/60 B  111 KiB/s   tagged 60 bytes in 0.0s (14 KiB/s)      
+screen: LV_CINE_MEDIUM
+  code   412/412 B  101.5 KiB/s   verify 412/412 B  713 KiB/s   verify 412 bytes in 0.0s (338 KiB/s)      
+  code   412 bytes in 0.0s (64.9 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  tagged 16380/464988 B  2680 KiB/s   tagged 32760/464988 B  270 KiB/s   tagged 49140/464988 B  381 KiB/s   tagged 65520/464988 B  482 KiB/s   tagged 81900/464988 B  582 KiB/s   tagged 98280/464988 B  661 KiB/s   tagged 114660/464988 B  741 KiB/s   tagged 131040/464988 B  799 KiB/s   tagged 147420/464988 B  863 KiB/s   tagged 163800/464988 B  934 KiB/s   tagged 180180/464988 B  980 KiB/s   tagged 196560/464988 B  1038 KiB/s   tagged 212940/464988 B  1099 KiB/s   tagged 229320/464988 B  1130 KiB/s   tagged 245700/464988 B  1179 KiB/s   tagged 262080/464988 B  1218 KiB/s   tagged 278460/464988 B  1249 KiB/s   tagged 294840/464988 B  1296 KiB/s   tagged 311220/464988 B  1317 KiB/s   tagged 327600/464988 B  1355 KiB/s   tagged 343980/464988 B  1385 KiB/s   tagged 360360/464988 B  1413 KiB/s   tagged 376740/464988 B  1448 KiB/s   tagged 393120/464988 B  1460 KiB/s   tagged 409500/464988 B  1490 KiB/s   tagged 425880/464988 B  1523 KiB/s   tagged 442260/464988 B  1120 KiB/s   tagged 458640/464988 B  1149 KiB/s   tagged 464988/464988 B  908 KiB/s   tagged 464988 bytes in 0.5s (904 KiB/s)      
+  remote  \DCIM\100SIGMA\SS__1680.JPG  464988 bytes, mode 0x1
+  buffer  from the firmware, file object 0x45062FC0
+  reply   getfile: read
+  buffer  0x5F900980 (469084 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 464988 of 464988
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/screenshots/1680-no-hdmi-before-record.jpg
+Screenshot: /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/screenshots/1680-no-hdmi-before-record.jpg
+screen: LV_CINE_MEDIUM
+  code   412/412 B  83.2 KiB/s   verify 412/412 B  677 KiB/s   verify 412 bytes in 0.0s (345 KiB/s)      
+  code   412 bytes in 0.0s (55.1 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  tagged 16380/464902 B  2994 KiB/s   tagged 32760/464902 B  2756 KiB/s   tagged 49140/464902 B  2688 KiB/s   tagged 65520/464902 B  2617 KiB/s   tagged 81900/464902 B  2435 KiB/s   tagged 98280/464902 B  2511 KiB/s   tagged 114660/464902 B  2633 KiB/s   tagged 131040/464902 B  2559 KiB/s   tagged 147420/464902 B  2600 KiB/s   tagged 163800/464902 B  2594 KiB/s   tagged 180180/464902 B  2576 KiB/s   tagged 196560/464902 B  2602 KiB/s   tagged 212940/464902 B  2563 KiB/s   tagged 229320/464902 B  2570 KiB/s   tagged 245700/464902 B  2607 KiB/s   tagged 262080/464902 B  2517 KiB/s   tagged 278460/464902 B  2548 KiB/s   tagged 294840/464902 B  2545 KiB/s   tagged 311220/464902 B  2536 KiB/s   tagged 327600/464902 B  2546 KiB/s   tagged 343980/464902 B  2510 KiB/s   tagged 360360/464902 B  2522 KiB/s   tagged 376740/464902 B  2522 KiB/s   tagged 393120/464902 B  2517 KiB/s   tagged 409500/464902 B  2544 KiB/s   tagged 425880/464902 B  2543 KiB/s   tagged 442260/464902 B  2537 KiB/s   tagged 458640/464902 B  2565 KiB/s   tagged 464902/464902 B  2513 KiB/s   tagged 464902 bytes in 0.2s (2500 KiB/s)      
+  remote  \DCIM\100SIGMA\SS__1681.JPG  464902 bytes, mode 0x1
+  buffer  from the firmware, file object 0x45062FC0
+  reply   getfile: read
+  buffer  0x53B00980 (468998 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 464902 of 464902
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/screenshots/1681-no-hdmi-after-record.jpg
+Screenshot: /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/screenshots/1681-no-hdmi-after-record.jpg
+screen: LV_CINE_MEDIUM
+  tagged 16380/52744 B  2129 KiB/s   tagged 32760/52744 B  2462 KiB/s   tagged 49140/52744 B  2171 KiB/s   tagged 52744/52744 B  2113 KiB/s   tagged 52744 bytes in 0.0s (2011 KiB/s)      
+  tagged 116/116 B  165 KiB/s   tagged 116 bytes in 0.0s (58 KiB/s)      
+  tagged 116/116 B  1 KiB/s   tagged 116 bytes in 0.1s (1 KiB/s)      
+  tagged 80/80 B  89 KiB/s   tagged 80 bytes in 0.0s (47 KiB/s)      
+  tagged 104/104 B  150 KiB/s   tagged 104 bytes in 0.0s (78 KiB/s)      
+  tagged 60/60 B  95 KiB/s   tagged 60 bytes in 0.0s (47 KiB/s)      
+{
+  "phase": "captured",
+  "recording_at_target": 0,
+  "stop_sent": false,
+  "spontaneous_stop": true,
+  "requested": 94,
+  "finished": 94,
+  "new_clips": [
+    "A001_092"
+  ],
+  "record_log": "slot=1, cnt=3/600\nsize=131072*978816(119GB), free=74%, exFAT, UHS-II\ntime       : 2026/10/12 00:50:36 \nrec factor : Nothing \nui factor  : Nothing \nbattery    : OK \ntemp(BAT)  : OK \ntemp(BODY) : OK \ntemp(LCD)  : OK \ntemp(CMOS) : OK \nfile-size=1095168, bulk-size=67108864(61.3)\nreq_cnt=94, fin_cnt=94, vbuf/94/81009, raw1\nrequest  ,finish   ,diff,gap ,reqcnt,fincnt,diff,sdb,MB/s\n      920,     1036, 116, 920,    10,     1,   9,  1,  94\n     1297,     1769, 472, 261,    67,    11,  56, 12, 132\n     1776,     1903, 127,   7,    94,    67,  27, 40, 241\n"
+}

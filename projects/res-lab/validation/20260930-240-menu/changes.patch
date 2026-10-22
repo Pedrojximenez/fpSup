@@ -1,0 +1,1994 @@
+--- a/projects/open-gate/build/build_sensor_lab_card.py
++++ b/projects/open-gate/build/build_sensor_lab_card.py
+@@ -31,6 +31,7 @@
+ sys.path.insert(0, str(HERE))
+ import imx410_plan as PL
+ from imx410_full import TIMING
++from imx410_block import _PROFILE_JSON
+ 
+ # The mark other Fast cards use (skill `fp-merged-card`); outside our cave.
+ LOADER_HOOK_MARK = 0xC072E040
+@@ -122,16 +123,20 @@
+     output = Path(output).resolve()
+     if output.exists():
+         raise ValueError(f"output must be new: {output}")
+-    items = card_items(axis)
+-    output.mkdir(parents=True)
+     sources = {Path(__file__), PL.FIRMWARE, HERE / "imx410_plan.py",
+                HERE / "imx410_block.py", HERE / "imx410_full.py",
++               HERE / "armasm.py", HERE / "og3k_plan.py",
++               HERE / "imx410_rate_native.py", HERE / "imx410_rate_ui.py",
++               HERE / "imx410_rate_lv.py", ROOT / "research/ui/tools/native_ui_audit.py",
++               ROOT / "research/ui/tools/nbu_probe/nbu_format.py", ROOT / _PROFILE_JSON,
+                SHELL / "build_autorun.py", SHELL / "armasm.py",
+                SHELL / "patches.py", SHELL / "boot_splash.py"}
+     sources.update(HERE / source for _, source, _ in PL.payloads())
+     sources.update((SHELL / "templates").glob("*.S"))
+     sources.update((SHELL / "camera").glob("*.S"))
+     source_hashes = {str(p.relative_to(ROOT)): sha(p) for p in sorted(sources)}
++    items = card_items(axis)
++    output.mkdir(parents=True)
+     with tempfile.TemporaryDirectory(prefix="sensor-lab-sections-") as tmp:
+         command = [sys.executable, "-B", str(SHELL / "build_autorun.py"),
+                    "--loader", "--banner", "Sensor Lab test", "--out",
+--- a/projects/open-gate/build/imx410_plan.py
++++ b/projects/open-gate/build/imx410_plan.py
+@@ -20,6 +20,9 @@
+ import sys
+ 
+ from armasm import assemble
++import imx410_rate_native as RATE_NATIVE
++import imx410_rate_ui as RATE_UI
++import imx410_rate_lv as RATE_LV
+ from imx410_block import (ratestr_table,  # noqa: F401
+                           AXIS_WORDS, CANVAS_MAX_PAIRS, CANVAS_TEMPLATE,
+                           RECIPE_WORDS, aspect_q_table, axis_words,
+@@ -318,35 +321,18 @@
+ WITH_RATE_FROM_MENU = True
+ RATESTR = 0xC0730160                # 11 筆 x 8 bytes
+ 
+-# ---- 第十列選得到:enum<->列 配對表搬進 cave ---------------------------------
+-# 2026-09-29。§8.3 拆 `fpsup-formats-v0.3.0a` 拆出來的手法,套到格率那張表上。
+-#
+-# 原廠 `0xC2E44EE4` 只有九筆,而 `0xC2E44EE4 + 9*8 = 0xC2E44F2C` 正好是下一張
+-# 表(`Qual:*` 字串表)的起點 —— **一格預留都沒有**,原地擴張不可能。
+-#
+-# 但表位址與筆數是 `FUN_c06cb6d0` 裡**三個指令的立即值**,不是 literal pool
+-# 也不是資料指標,所以搬表 = 改三個字。零 trampoline、零 payload。
+-#
+-#     0xC06CB6DC  movw r2,#0x4ee4  ->  #lo(RATE_PAIR)
+-#     0xC06CB6E0  movt r2,#0xc2e4  ->  #hi(RATE_PAIR)
+-#     0xC06CB6E8  mov  r2,#9       ->  #10
+-#
+-# 第十筆是 `(5, 9)`:**列舉值 5 在原廠兩張表裡都是洞** —— 配對表跳過它,
+-# `FUN_c00c9bd0` 的有理數 switch 也把它送進預設分支(§8.3 的表)。
+-# 有理數那條我們自己用 imx410_rate.S 接管了,所以 enum 5 拿得到 240000/1001。
+-#
+-# ★ 搬表還順手免疫一件事:配對表本體在 `0xC2E4xxxx`,那一區看起來是開機時
+-#   從 `0xC2DExxxx` 的 ROM 母本填的工作區(§8.5)。原地改那九筆可能被重填
+-#   洗掉;搬到 cave + 改指令不會。
+-#
+-# 一個 patch 同時覆蓋選單與 QS —— 整個映像裡只有 `0xC06CB6DC` 一處拼出
+-# `0xC2E44EE4`,有測試釘住這個唯一性(§8.5)。
++# ---- 收合摘要的 export enum <-> 狀態配對表 -------------------------------
++# 2026-09-30 原生路徑核對：這是摘要轉換器，不是清單輸入表。
++# 第十筆必須是 (export 11, state 9)。export 5 在原廠 picker suffix
++# C043CAF0 會走 assert；internal 5 則是 59.94，兩者不能混為新 240。
++# 真正 row/internal/export/rank 與媒體限制由 imx410_rate_native 提供；
++# 三個 movw/movt/count 字仍負責把原廠九筆摘要表搬到私人區。
+ WITH_RATE_PAIR = True
+ RATE_PAIR = 0xC0730100              # 10 筆 x {列舉值, 列索引} = 80 B
+ RATE_PAIR_STOCK_TBL = 0xC2E44EE4
+ RATE_PAIR_STOCK_N = 9
+ RATE_PAIR_N = 10
+-RATE_PAIR_NEW_ENUM = 5              # 原廠的空號,見上
++RATE_PAIR_NEW_ENUM = 11             # 原廠 picker 的 240 export enum
+ # 三個要改的指令(位址, 原廠字)
+ RATE_PAIR_LO = 0xC06CB6DC           # movw r2, #0x4ee4
+ RATE_PAIR_HI = 0xC06CB6E0           # movt r2, #0xc2e4
+@@ -369,7 +355,7 @@
+ 
+ 
+ def rate_pair_table(img):
+-    """原廠九筆 + 第十筆 `(5, 9)`,小端位元組。
++    """原廠九筆 + 第十筆 `(11, 9)`,小端位元組。
+ 
+     原廠那九筆**逐字照抄**,不重新產生 —— 抄比算安全,而且抄的時候順便
+     驗證它真的是 `(enum, 索引)` 且索引是 0..8 連號。
+@@ -386,16 +372,14 @@
+     return b"".join(struct.pack("<II", *p) for p in pairs)
+ 
+ 
+-# ---- 格率清單類別 —— 還沒做,位址先記著 -------------------------------------
+-# `FUN_c04a1120` 依媒體與解析度回傳 0..5 的清單類別碼,挑六個 B2_5_5 變體之一
+-# (§8.5)。所有分支都 `b` 到 `0xC04A121C` 的 `mov r0,r1`,所以 hook 在那裡
+-# 就能覆寫類別碼 —— `fpsup-formats-v0.3.0a` 的 `regfrclass` 就在同一顆。
+-#
+-# 我們要它**固定回類別 0**(全開變體),因為使用者 2026-09-29 決定
+-# **不依媒體反灰**(`imx410_menu.MEDIA_GATING = False`):反灰只擋物理上
+-# 做不到的,不擋只是風險高的。壓住之後那六個變體我們只維護第一份。
+-FRCLASS_HOOK, FRCLASS_STOCK = 0xC04A121C, 0xE1A00001   # mov r0, r1
+-WITH_FRCLASS = False                # 還沒做:需要 payload,見 §8.6
++# Native row/internal/export conversion, CUSTOM CinemaDNG list and cap gates.
++# Individually pinned hooks, exercised by test_imx410_rate_native against
++# original firmware functions; stock behavior is retained outside FLAG=1/FMT=0.
++WITH_RATE_NATIVE = True
++WITH_RATE_UI = True
++WITH_RATE_LV = True
++FRCLASS_HOOK, FRCLASS_STOCK = 0xC04A121C, 0xE1A00001
++WITH_FRCLASS = WITH_RATE_NATIVE
+ 
+ SEL_HOOK, SEL_STOCK = 0xC005C020, 0xE92D4070     # 解析度 setter
+ NAM_HOOK, NAM_STOCK = 0xC0437B48, 0xE92D4BF0     # 解析度名發射器
+@@ -522,11 +506,13 @@
+             ("og3kname",       "og3kname.S",      NAME_CODE),
+             ("og3kfmt",        "og3kfmt.S",       OGFMT_CODE),
+             ("og3krestore",    "og3krestore.S",   RESTORE_CODE),
+-            ("og3kout",        "og3kout.S",       OUT_CODE))
++            ("og3kout",        "og3kout.S",       OUT_CODE),
++            *(RATE_NATIVE.payloads() if WITH_RATE_NATIVE else ()))
+ 
+ 
+ def defines():
+     return {
++        **(RATE_NATIVE.defines() if WITH_RATE_NATIVE else {}),
+         "og3krecipe": [f"AXIS={AXIS:#x}", f"RECIPE={RECIPE:#x}",
+                        f"RATETAB={RATETAB:#x}", f"TMGTAB={TMGTAB:#x}",
+                        f"CTMPL={CTMPL:#x}", f"CANVAS={CANVAS:#x}",
+@@ -569,6 +555,9 @@
+     """(起, 迄, 名稱) —— 這份計畫會寫到的每一塊。"""
+     bl = bl or blobs()
+     out = [(addr, addr + len(bl[name]), name) for name, _, addr in payloads()]
++    if WITH_RATE_NATIVE:
++        out += [(a, a + len(data), name)
++                for name, a, data in RATE_NATIVE.tables(FIRMWARE.read_bytes())]
+     out += [(AXIS, AXIS + AXIS_WORDS * 4, "AXIS"),
+             (RECIPE, RECIPE + RECIPE_WORDS * 4, "RECIPE"),
+             (ENTRY_ADDR, ENTRY_ADDR + 48, "ENTRY"),
+@@ -629,6 +618,8 @@
+                               (ASP_HOOK, ASP_STOCK, "長寬比1"),
+                               (ASP2_HOOK, ASP2_STOCK, "長寬比2"),
+                               (GS_HOOK, GS_STOCK, "增益分派"),
++                              *(((RAT_HOOK, RAT_STOCK, "容器格率"),)
++                                if WITH_RATE else ()),
+                               *(((RNG_HOOK, RNG_STOCK, "範圍檢查"),)
+                                 if WITH_RANGE else ()),
+                               (SEL_HOOK, SEL_STOCK, "解析度 setter"),
+@@ -638,6 +629,11 @@
+         got = int.from_bytes(img[addr - B: addr - B + 4], "little")
+         if got != stock:
+             bad.append(f"{name} hook {addr:#x} 是 {got:#010x},預期 {stock:#010x}")
++    if WITH_RATE_NATIVE:
++        try:
++            RATE_NATIVE.patches(img)  # validates every native bridge site
++        except ValueError as error:
++            bad.append(str(error))
+     for addr, stock, note in FPS_HOOKS:
+         got = int.from_bytes(img[addr - B: addr - B + 4], "little")
+         if got != stock:
+@@ -702,6 +698,13 @@
+     # 1. 資料表(hook 還沒武裝,先寫什麼都安全)
+     words(RATETAB, rate_table(), "格率常數表")
+     words(RATNUM, ratnum_table(), "容器格率有理數表")
++    if WITH_RATE_NATIVE:
++        for name, address, data in RATE_NATIVE.tables(img):
++            words(address, data, name)
++    if WITH_RATE_UI:
++        items.extend(RATE_UI.patches(img))
++    if WITH_RATE_LV:
++        items.extend(RATE_LV.patches(img))
+ 
+     # ---- 選單第十列 239.76 fps ------------------------------------------
+     if WITH_RATE_ROW:
+@@ -812,6 +815,11 @@
+         put(RATE_PAIR_CNT, _mov_imm(2, RATE_PAIR_N),
+             f"配對表筆數 {RATE_PAIR_STOCK_N} -> {RATE_PAIR_N}")
+ 
++    if WITH_RATE_NATIVE:
++        native_hooks = {site for site, _, _, _, _ in RATE_NATIVE.HOOKS}
++        items.extend(patch for patch in RATE_NATIVE.patches(img)
++                     if patch[0] not in native_hooks)
++
+     # 7. hook —— 最後才武裝
+     # ★ 順序:**依賴端先、picker 最後**。og3k_plan 的 HOOKS 註解就是這麼寫的,
+     # og3k_load 還特地註明「不要排序」。picker 是唯一會讓整組活起來的那一顆 ——
+@@ -868,7 +876,10 @@
+         ("menu", [(SEL_HOOK, SEL_CODE, "b", "解析度 setter hook"),
+                   (NAM_HOOK, NAME_CODE, "b", "解析度名 hook"),
+                   (OFM_HOOK, OGFMT_CODE, "b", "錄影格式 setter hook"),
+-                  (OUT_HOOK, OUT_CODE, "b", "主輸出描述子 hook")]),
++                  (OUT_HOOK, OUT_CODE, "b", "主輸出描述子 hook"),
++                  *([(site, target, op.lower(), note + " hook")
++                     for site, target, _stock, op, note in RATE_NATIVE.HOOKS]
++                    if WITH_RATE_NATIVE else [])]),
+         # ★ picker 是 **B 不是 BL**。og3k_plan.HOOKS 寫的就是 "b"。
+         # BL 會把 lr 蓋成 0xC043CCFC;pass 路徑把它還原之後,位移的原廠 push
+         # 就把「跳回自己第二條指令」存成返回位址,原廠函式結尾 pop {...,pc}
+@@ -918,18 +929,18 @@
+ # Current open items only. Historical experiments remain in IMX410_FULL_DESIGN.
+ MISSING = (
+     "機上 mode 選單與依 mode 更新反灰尚未完成;目前可在機上控制格率與位深,其餘軸仍由主機設定。",
+-    "選單新增列的收合摘要/圖示仍需實機驗收;CUSTOM 游標、位深/格率連動及 Invalid MovSize 驗證器訊息待確認。",
++    "Settings 的 240 摘要及待機文字已有離線修補;實際渲染仍待驗收。QS 的 240 圖示/動畫尚未補齊,不能宣稱整套選單完成。",
+     "14-bit 的增益政策、CDNG packed 14 vs 16 bpp 容器、回放仍待驗證;TAB3 共用與 RAW14 donor 可求解不代表可出貨。",
+     "回放須依每段素材自己的幾何重建;目前回放 hooks 尚未接,og3kname 仍使用初始尺寸。",
+     "CRCT 錄影側須非 unity RWZM 才可能選到 Hbin2;I0/I 成對驗證未做。x5 沒有係數證據。",
+     "CG_BIN/CG_FILL/CG_WINDOW 仍由安裝時決定;RWZM 與 >60 fps 閘門已是執行期。",
+     "RAW 可用緩衝容量未量測;burst 不再把 94 個描述子冒充最低格數,448 MiB 僅是假說。",
+-    "不依媒體反灰是目標政策;WITH_FRCLASS 仍關閉,相機原廠 SD/SSD 媒體限制尚在。",
++    "CUSTOM CinemaDNG 的清單與格率限制已接管;240 的原生列舉往返有離線驗證,實機選單與設定生命週期待驗收。",
+     "輸出尺寸上下界、≥100 fps SSD 路徑及非等向 RWZM 的更多組合仍待實機驗證。",
+     "240 容器 FrameRate 已有 A001_171 證據;時間碼與音訊同步尚未確認。",
+     "mode 0 與自動選擇哨兵共用值;全高 RAW14 低於選單最低格率,暫不可強制選 ACQ。",
+     "無解仍退回固定 FHD30;不跟選單格率,也不表示 RAW14 無解時能產生正確 14-bit 素材。",
+-    "測試卡須上機驗證開機/不錄影/關機/再開約十輪及跨卡暖啟動;Fast 與多產品合併未開放。",
++    "測試卡須上機驗證開機/不錄影/關機/再開約十輪及跨卡暖啟動;Fast 仍是開發卡,多產品合併未開放。",
+ )
+ 
+ 
+--- /dev/null
++++ b/projects/open-gate/build/imx410_rate_lv.py
+@@ -0,0 +1,429 @@
++#!/usr/bin/env python3
++"""Native text for the dedicated CINE frame-rate labels, including 240/15.
++
++Rebuild only the four stock LV resource sets, within their original slots.
++No new objects, strings, XCI resources or interpreter hooks.  The dedicated
++FrameRate drawable changes from image to text; its original owner/component,
++binding and animation property count remain.  The text curve has eleven
++keys: the nine visible stock rates, then 240, then the original hidden 15.
++
++Header key capacities of ten become eleven conservatively.  Width/offset
++curves keep their property slots but use a constant full-width text box, and reserve the saved bytes as declared clip-tail padding. Every following
++record keeps its original address; adjacent sets and index entries never move.
++"""
++from __future__ import annotations
++
++from collections.abc import Mapping
++from functools import lru_cache
++import hashlib
++from pathlib import Path
++import struct
++import sys
++
++ROOT = Path(__file__).resolve().parents[3]
++sys.path.insert(0, str(ROOT / 'research/ui/tools/nbu_probe'))
++sys.path.insert(0, str(ROOT / 'research/ui/tools'))
++import nbu_format as N
++import native_ui_audit as A
++
++BASE, POOL_START, POOL_SIZE = 0xC0000000, 0xC18C0474, 0x2B018
++LABELS = ('23.98', '24', '25', '29.97', '48', '50', '59.94', '100', '119.88', '240', '15')
++LABEL_OFFSETS = (0x473C, 0x47A8, 0x4894, 0x4ACC, 0x53BC, 0x54CC, 0x5614,
++                 0x21D4, 0x29EC, 0x47B4, 0x3400)
++TIMES = (0, 33, 66, 100, 133, 166, 200, 233, 266, 300, 333)
++SETS = (
++    dict(name='LV_CINE_LARGE', start=0xC1E0A87E, end=0xC1E59DAA,
++         sha='512397247faa384a52085aa34eb99ba00f9b92d5753a188e876f792a31f65be2',
++         owner=7356, draw=0xC1E40075, clip=0xC1E400A9, group=0xC1E4021D,
++         images=325, texts=29, properties=2, width=164, height=43, shrink=67,
++         font_donor=0xC1E49188, font_size=31, key_budgets=15, font_mask=0x40000014),
++    dict(name='LV_CINE_MEDIUM', start=0xC1E59DAA, end=0xC1EAA1ED,
++         sha='9e460497a3baabcdc8b2cd7a86fe5bb4148797d2796d7ad3137eb8c36463e58d',
++         owner=926, draw=0xC1E8E924, clip=0xC1E8E95C, group=0xC1E8EB48,
++         images=324, texts=29, properties=3, width=152, height=35, shrink=161,
++         font_donor=0xC1E99617, font_size=25, key_budgets=19, font_mask=0x40000014),
++    dict(name='LV_STILLlike_LARGE', start=0xC1F69EAE, end=0xC1FB9B35,
++         sha='6b338994dc0861a093a269d9f261c5c43ebdbcee47de7d69e7acb5390d788689',
++         owner=6324, draw=0xC1FA3E4B, clip=0xC1FA3E7F, group=0xC1FA4097,
++         images=331, texts=28, properties=2, width=164, height=43, shrink=67,
++         font_donor=0xC1FA900E, font_size=31, key_budgets=15, font_mask=0x40000004),
++    dict(name='LV_STILLlike_MEDIUM', start=0xC1FB9B35, end=0xC200D526,
++         sha='baf2690376fec332711ff1623e012ca5ec94ea2744dd9952493a4323aa524ae8',
++         owner=926, draw=0xC1FF7A23, clip=0xC1FF7A5B, group=0xC1FF7C73,
++         images=358, texts=28, properties=2, width=152, height=35, shrink=71,
++         font_donor=0xC1FFC9E0, font_size=25, key_budgets=18, font_mask=0x40000004),
++)
++SET_SPANS = tuple(dict(name=s['name'], start=s['start'] & ~3,
++                      end=(s['end']+3) & ~3) for s in SETS)
++
++
++def _put(data, at, value):
++    out = bytearray(data)
++    struct.pack_into('>I', out, at, value)
++    return bytes(out)
++
++
++def _capacity_header(record, spec):
++    raw = bytearray(record.body)
++    n = struct.unpack_from('>I', raw, 8)[0]
++    for i in range(n):
++        at = 12+i*8
++        name, count = struct.unpack_from('>II', raw, at)
++        if name in (0x253E4, 0x2541C):
++            wanted = spec['images'] if name == 0x253E4 else spec['texts']
++            if count != wanted:
++                raise ValueError('unexpected LV drawable allocation counts')
++            struct.pack_into('>I', raw, at+4, count+(-1 if name == 0x253E4 else 1))
++    cursor = 12+n*8
++    # groups: count * three words, then clip property capacities.
++    groups = struct.unpack_from('>I', raw, cursor)[0]
++    cursor += 4+groups*12
++    clips = struct.unpack_from('>I', raw, cursor)[0]
++    cursor += 4+clips*4
++    keys = struct.unpack_from('>I', raw, cursor)[0]
++    cursor += 4
++    # Original interpreter C05E687C..C05E6890 only accumulates the arena
++    # budget: N*0x34 key bytes + 0x20 curve + N*4 vector pointers. It does
++    # not initialize keys. C05E2738/C05D7430 separately creates count=0,
++    # capacity=N. Kind 2 is already used by stock image AND text curves.
++    grown = 0
++    for i in range(keys):
++        at = cursor+i*4
++        if struct.unpack_from('>I', raw, at)[0] == 10:
++            struct.pack_into('>I', raw, at, 11)
++            grown += 1
++    if grown != spec['key_budgets']:
++        raise ValueError('LV key-capacity inventory changed')
++    return bytes(raw)
++
++
++def _property(kind, component, name, dimension, keys):
++    keys = tuple(keys)
++    out = struct.pack('>5I', len(keys), kind, component, name, dimension)
++    for time, value in keys:
++        out += b'\0\0' + struct.pack('>I', time)
++        out += struct.pack('>f' if kind == 1 else '>I', value)
++    return out
++
++
++def rebuild(image, spec):
++    raw = image[spec['start']-BASE:spec['end']-BASE]
++    if hashlib.sha256(raw).hexdigest() != spec['sha']:
++        raise ValueError('LV resource set differs from pinned stock: '+spec['name'])
++    pool = image[POOL_START-BASE:POOL_START-BASE+POOL_SIZE]
++    if tuple(N.string_at(pool, p) for p in LABEL_OFFSETS) != LABELS:
++        raise ValueError('LV frame-rate literal string pool changed')
++    text_name = pool.find(b'\0text\0')+1
++    if text_name <= 0:
++        raise ValueError('text property name missing')
++    records = N.split(raw)
++    by_address = {spec['start']+r.offset: r for r in records}
++    draw, clip, group = [by_address[spec[k]] for k in ('draw', 'clip', 'group')]
++    old_clip = A.parse_clip(A.Record(0, clip.to_bytes()), lambda p: N.string_at(pool, p))
++    if old_clip['owner_id'] != spec['owner'] or old_clip['clip_id'] != 4 or \
++            len(old_clip['properties']) != spec['properties'] or \
++            [(p['name'], p['component_ref']) for p in old_clip['properties']] != \
++            [('image', 3)] + [('rect', 3)]*(spec['properties']-1):
++        raise ValueError('LV FrameRate is no longer the dedicated image drawable')
++    decoded_group = N.decode_image_array(group, pool)
++    if decoded_group['group'] != 'FrameRate' or decoded_group['owner'] != spec['owner'] or \
++            decoded_group['pairs'] != [(spec['owner'], 4)] or decoded_group['entries'][0]['b'] != 300:
++        raise ValueError('LV FrameRate group changed')
++    # Same-page TC3_HighLight is a native numeric text donor, with explicit
++    # font-size. Use the stock CINE TC3_HighLight left alignment (0) in all
++    # four layouts; STILLlike donors leave the alignment implicit. Keep
++    # FrameRate's original origin and maximum box.
++    font = by_address[spec['font_donor']]
++    if font.tag != 0x10005 or font.words(1)[0] != 0x2541C or \
++            struct.unpack_from('>2I', font.body, 20) != (spec['font_mask'], spec['font_size']):
++        raise ValueError('same-page numeric font donor changed')
++    pair_size = draw.size + clip.size
++    draw.body = struct.pack('>6I', 0x2541C, 32, 0xFFFFFFFF, spec['owner'], 3, 0x40002015) + \
++        struct.pack('>I', LABEL_OFFSETS[0]) + b'\0' + font.body[24:28] + struct.pack('>I', 0) + struct.pack('>I4f', 0xFFFFFFFF,
++            0, 0, spec['width'], spec['height'])
++    props = [_property(2, 3, text_name, 0, zip(TIMES, LABEL_OFFSETS))]
++    # Keep the same property slots/count to preserve allocation ordering.
++    rect_name = pool.find(b'\0rect\0')+1
++    props.append(_property(1, 3, rect_name, 2, [(0, float(spec['width']))]))
++    if spec['properties'] == 3:
++        props.append(_property(1, 3, rect_name, 0, [(0, 0.0)]))
++    if rect_name <= 0:
++        raise ValueError('rect property name changed')
++    clip.body = struct.pack('>5I', 0x24974, spec['properties'], 0xFFFFFFFF,
++                            spec['owner'], 4) + b''.join(props)
++    # The original interpreter's common epilogue C05E7B06..C05E7B1A
++    # skips declared bytes that the semantic handler did not consume.
++    # Keep draw+clip's total size, so no subsequent record is relocated.
++    padding = pair_size - draw.size - clip.size
++    if padding != spec['shrink'] or padding < 0:
++        raise ValueError('LV local pair no longer fits its original slot')
++    clip.body += bytes(padding)
++    group.body = _put(group.body, 28, 333)
++    records[0].body = _capacity_header(records[0], spec)
++    result = N.join(records)
++    if len(result) != len(raw):
++        raise ValueError('LV resource no longer fits the original slot')
++    return result
++
++
++def patches(image):
++    """Local draw+clip pairs, group endpoint words and changed header words."""
++    out = []
++    for spec in SETS:
++        lo, hi = spec['start'] & ~3, (spec['end']+3) & ~3
++        old = image[lo-BASE:hi-BASE]
++        new = bytearray(old)
++        new[spec['start']-lo:spec['end']-lo] = rebuild(image, spec)
++        stock_rows = N.split(image[spec['start']-BASE:spec['end']-BASE])
++        old_clip = next(r for r in stock_rows if spec['start']+r.offset == spec['clip'])
++        header_end = (spec['start']+stock_rows[0].size+3) & ~3
++        ranges = [(at,at+4) for at in range(lo,header_end,4)
++                  if old[at-lo:at-lo+4] != new[at-lo:at-lo+4]]
++        ranges += [(spec['draw'] & ~3, (spec['clip']+old_clip.size+3) & ~3),
++                   ((spec['group']+36) & ~3, (spec['group']+40+3) & ~3)]
++        merged = []
++        for start,end in sorted(ranges):
++            if merged and start <= merged[-1][1]:
++                merged[-1] = (merged[-1][0],max(end,merged[-1][1]))
++            else:
++                merged.append((start,end))
++        out += [(at,struct.unpack_from('<I',new,at-lo)[0],'240/15 fps native LV text')
++                for start,end in merged for at in range(start,end,4)]
++    return out
++
++
++def _parse_clip(record, resolve):
++    """Strict semantic decode plus zero tail allowed by the stock interpreter."""
++    cursor = 20
++    for _ in range(record.words(2)[1]):
++        count = struct.unpack_from('>I',record.body,cursor)[0]
++        cursor += 20+count*10
++    if cursor > len(record.body) or any(record.body[cursor:]):
++        raise ValueError('nonzero or truncated LV clip-tail padding')
++    semantic = N.Record(record.tag,record.offset,record.body[:cursor])
++    return A.parse_clip(A.Record(0,semantic.to_bytes()),resolve)
++
++
++@lru_cache(maxsize=4)
++def _stock_services(name):
++    import nbu_probe as P
++    p = P.NbuProbe(P.load_firmware(ROOT/'out/seg0_c0000000.bin'))
++    p.install_arena()
++    p.map_set(name)
++    return tuple(sorted(p.discovered))
++
++
++@lru_cache(maxsize=4)
++def _expected_set(name):
++    stock = (ROOT/'out/MAIN_c0000000.bin').read_bytes()
++    return rebuild(stock, next(s for s in SETS if s['name'] == name))
++
++
++def verify_installed(image_or_words, *, base_image=None, native=False):
++    if isinstance(image_or_words, (bytes, bytearray)):
++        image = bytes(image_or_words)
++    else:
++        if base_image is None:
++            raise ValueError('word verification requires base_image')
++        image = bytearray(base_image)
++        items = image_or_words.items() if isinstance(image_or_words, Mapping) else image_or_words
++        for row in items:
++            a, value = row[:2]
++            if BASE <= a <= BASE+len(image)-4:
++                struct.pack_into('<I', image, a-BASE, value)
++        image = bytes(image)
++    pool = image[POOL_START-BASE:POOL_START-BASE+POOL_SIZE]
++    results = []
++    for spec in SETS:
++        installed = image[spec['start']-BASE:spec['end']-BASE]
++        if installed != _expected_set(spec['name']):
++            raise ValueError('installed LV set differs from exact guarded rebuild: '+spec['name'])
++        rows = N.split(installed)
++        clip = next(r for r in rows if r.tag == 0x1000A and r.words(5)[3:5] == (spec['owner'], 4))
++        d = _parse_clip(clip, lambda p: N.string_at(pool, p))
++        prop = d['properties'][0]
++        labels = tuple(N.string_at(pool, k['value']) for k in prop['keys'])
++        if prop['name'] != 'text' or labels != LABELS or tuple(k['time'] for k in prop['keys']) != TIMES:
++            raise ValueError('installed LV state labels are incorrect')
++        group = next(N.decode_image_array(r, pool) for r in rows
++                     if r.tag == 0x1000B and r.words(5)[4] == spec['owner'])
++        if group['entries'][0]['b'] != 333:
++            raise ValueError('LV group cannot reach the preserved 15 fps state')
++        draw = next(r for r in rows if r.tag == 0x10005 and r.words(4)[3] == spec['owner'])
++        if draw.words(1)[0] != 0x2541C or draw.body[28] != 0:
++            raise ValueError('LV label is not literal drawText')
++        if sum(r.size for r in rows) != spec['end']-spec['start']:
++            raise ValueError('LV set exceeded its slot')
++        item = dict(set=spec['name'], row9=labels[9], row10=labels[10],
++                    records=len(rows), native_interpreter_executed=False, gui_rendered=False)
++        if native:
++            import nbu_probe as P
++            p = P.NbuProbe(image[:P.SEG0_SIZE])
++            p.install_arena()
++            p.allow(*p.OBJECT_FACTORY, 'stock object factory')
++            for a in _stock_services(spec['name']):
++                p.stub(a, 'stock UI construction service')
++            p.open_set(spec['name'])
++            for record in rows:
++                t = p.record()
++                if (t.token, t.cursor_in, t.consumed) != (record.tag, record.offset, record.size) or p.error_flag():
++                    raise ValueError('native parser disagrees with LV records')
++            if p.traces[-1].result != 1 or p.survey or p.discovered:
++                raise ValueError('LV native parse did not terminate under fixed allow-list')
++            item['native_interpreter_executed'] = True
++            parsed = _verify_native_clip(image, clip.to_bytes(), clip.size-spec['shrink'])
++            if parsed['labels'] != list(LABELS) or parsed['times'] != list(TIMES):
++                raise ValueError('native clip parser disagrees with installed keys')
++            native_keys = [dict(time=t,value=pointer-POOL_START)
++                           for t,pointer in zip(parsed['times'],parsed['pointers'])]
++            item['native_clip_parser'] = parsed
++            item['native_curve_text_states'] = _verify_native_curve_and_text(
++                P.NbuProbe(image[:P.SEG0_SIZE]), native_keys)
++        results.append(item)
++    return results
++
++
++def _verify_native_curve_and_text(p, keys):
++    """Execute stock kind-2 curve construction, key selection and drawText setter.
++
++    Keys come from the installed NBU. The harness supplies key storage and
++    duplicates strings, but does not choose the key or implement the setter.
++    Original drawText metadata/vtable and dirty callback are used. Numeric
++    int64-to-float conversion is the only arithmetic service stub (all times
++    here are exactly representable); the interpolation/selection code is real.
++    """
++    from unicorn.arm_const import UC_ARM_REG_S0
++    real = (
++        (0xC05E2738, 0xC05E2776), (0xC05D7430, 0xC05D745C),
++        (0xC05E28B8, 0xC05E2900), (0xC05D74D8, 0xC05D7534),
++        (0xC05EDB08, 0xC05EDB10), (0xC05EDB38, 0xC05EDB3E),
++        (0xC05E2280, 0xC05E2324), (0xC05E2970, 0xC05E2988),
++        (0xC05D6990, 0xC05D6BA0), (0xC05D6BB8, 0xC05D6BE0),
++        (0xC05D5670, 0xC05D56F2), (0xC05D54C8, 0xC05D5534),
++        (0xC05EC910, 0xC05EC956), (0xC05D6FC0, 0xC05D6FC6),
++        (0xC05FE518, 0xC05FE51C), (0xC05FE308, 0xC05FE318),
++        (0xC05FDA20, 0xC05FDA38), (0xC05D7148, 0xC05D7160),
++    )
++    for lo, hi in real:
++        p.allow(lo, hi, 'stock curve/drawText implementation')
++    def convert(probe, args):
++        value = args[0] | (args[1] << 32)
++        probe.uc.reg_write(UC_ARM_REG_S0, struct.unpack('<I', struct.pack('<f', value))[0])
++        return 0
++    def duplicate(probe, args):
++        data = probe.string(args[1]).encode()+b'\0'
++        pointer = probe._allocate(len(data))
++        probe.write(pointer, data)
++        return pointer
++    p.stub(0xC01F82CC, 'exact small timestamp int64-to-float', handler=convert)
++    p.stub(0xC05D9B40, 'allocator string duplication', handler=duplicate)
++    p.stub(0xC05D9D18, 'empty external property registry')
++    p.stub(0xC05D9B80, 'allocator string release')
++    # Use a fresh bounded arena for this independent native component probe.
++    out, state = p._allocate(4), p._allocate(0x40)
++    if p._call(0xC05E2738, p.ALLOCATOR, 2, len(keys), out):
++        raise ValueError('native string curve allocation failed')
++    curve = p.words(out)[0]
++    if p.words(curve+0x10, 2) != (0, len(keys)):
++        raise ValueError('native curve capacity unexpectedly initializes live keys')
++    for key in keys:
++        pointer = p._allocate(0x34)
++        p.write(pointer, struct.pack('<Q', key['time']))
++        p.write_words(pointer+8, 1, 0, p.ALLOCATOR, 0, POOL_START+key['value'])
++        if p._call(0xC05E28C8, curve, pointer):
++            raise ValueError('native string key append failed')
++    if p.words(curve+0x10, 2) != (len(keys), len(keys)):
++        raise ValueError('native curve did not receive all installed keys')
++    component, context = p._allocate(0x100), p._allocate(0x100)
++    indexes, data, private = p._allocate(0x100), p._allocate(0x400), p._allocate(0x100)
++    p.write_words(component, context)
++    p.write_words(context+0xC, p.ALLOCATOR)
++    p.write_words(component+0x10, 0xC2E03A14, 32, 0xC2E035AC, indexes, data)
++    p.write_words(component+0x34, private)
++    labels = []
++    # Exact endpoints and points between them exercise native step selection.
++    for time, expected in [(t, s) for t, s in zip(TIMES, LABELS)] + [(316, '240'), (334, '15')]:
++        p.write(state+0x1C, struct.pack('<f', time))
++        value = p._call(0xC05E2970, curve, state)
++        if p.string(value) != expected:
++            raise ValueError('native text curve selected the wrong frame-rate key')
++        p._call(0xC05D6BB8, component, 0, value)
++        stored = p.words(data)[0]
++        if p.string(stored) != expected or not p.words(private+8)[0] & 1 or p.words(data+8)[0] != 0:
++            raise ValueError('native drawText setter did not store/dirty literal label')
++        labels.append((time, p.string(stored)))
++    if any(c.address in (0xC05EC220, 0xC05EC478) for c in p.calls):
++        raise ValueError('numeric LV label unexpectedly used localization resolver')
++    # Positive control proves the same real setter can detect and route markup;
++    # numeric labels above must never reach either resolver service.
++    marker = p._allocate(32)
++    p.write(marker, b'<!positive-control>\0')
++    resolver = p._allocate(32)
++    p.stub(0xC05EC220, 'positive-control resolver creation', ret=resolver)
++    p.stub(0xC05EC478, 'positive-control resolver assignment')
++    before = len(p.calls)
++    p._call(0xC05D6BB8, component, 0, marker)
++    calls = [c.address for c in p.calls[before:] if c.address in (0xC05EC220, 0xC05EC478)]
++    if calls != [0xC05EC220, 0xC05EC478] or p.words(data+12)[0] != resolver:
++        raise ValueError('native literal/markup positive control failed')
++    return labels
++
++
++def _verify_native_clip(image, clip, semantic_length):
++    """Run the complete original clip reader, then its declared-length skip.
++
++    Object lookup, allocation and ownership services use bounded storage;
++    field, key, timestamp and string-pool decoding executes original firmware.
++    """
++    import nbu_probe as P
++    from unicorn import UC_HOOK_CODE
++    from unicorn.arm_const import UC_ARM_REG_SP, UC_ARM_REG_R1
++    p = P.NbuProbe(image[:P.SEG0_SIZE]); p.install_arena()
++    p.allow(0xC05E5F10,0xC05E5F1E,'native object id converter')
++    component, owner, klass = [p._allocate(0x80) for _ in range(3)]
++    p.stub(0xC05D9E80,'known animation clip class lookup',ret=klass)
++    p.stub(0xC05E82A0,'known existing owner lookup',ret=owner)
++    def create(q,args):
++        out=q.words(q.uc.reg_read(UC_ARM_REG_SP)+4)[0]
++        q.write_words(out,component)
++        return 0
++    p.stub(0xC05D5968,'bounded clip component constructor',handler=create)
++    for a in (0xC05D5DB8,0xC05E1A58,0xC05E2798,0xC05D1490,0xC05D5D08,0xC05EDB10):
++        p.stub(a,'component/curve ownership service')
++    curves, strings, skips = {}, [], []
++    def curve(q,args):
++        addr=q._allocate(0x40)
++        q.write_words(addr+8,args[1])
++        q.write_words(args[3],addr)
++        curves[addr]={'kind':args[1],'capacity':args[2],'keys':[]}
++        return 0
++    p.stub(0xC05E2738,'bounded curve storage constructor',handler=curve)
++    p.stub(0xC05EDB90,'bounded native key storage',handler=lambda q,a:q._allocate(0x40))
++    def string(q,args):
++        q.write_words(args[0]+0x18,args[1]);strings.append(q.string(args[1]));return 0
++    p.stub(0xC05EDBE8,'string ownership storage',handler=string)
++    def append(q,args):
++        curves[args[0]]['keys'].append(q.words(args[1],13));return 0
++    p.stub(0xC05E28C8,'curve key storage append',handler=append)
++    def attach(q,args):
++        curves[args[1]].update(component=args[2],property=q.string(args[3]));return 0
++    p.stub(0xC05E1C28,'attach parsed curve to component',handler=attach)
++    p.open(blob=clip,magic=False,cursor=0,pool=(0x2B018,0xC18C0474),owner=True)
++    p.write_words(p.OWNER+0xC,p.ALLOCATOR)
++    def capture(uc,a,size,_):
++        if a==P.SKIP:
++            skips.append((p.words(p.CTX+4)[0],uc.reg_read(UC_ARM_REG_R1)))
++    p.uc.hook_add(UC_HOOK_CODE,capture)
++    result=p.record()
++    assert result.result==0 and result.consumed==len(clip) and not p.error_flag()
++    assert len(curves)==struct.unpack_from('>I',clip,12)[0]
++    for c in curves.values():assert len(c['keys'])==c['capacity']
++    padding=len(clip)-semantic_length
++    assert skips==([(semantic_length,padding)] if padding else []),skips
++    text=next(c for c in curves.values() if c.get('property')=='text')
++    assert text['kind']==2
++    return {'labels':strings,'times':[k[0] for k in text['keys']],
++            'pointers':[k[6] for k in text['keys']], 'skip':skips,
++            'curves':len(curves),'consumed':result.consumed,
++            'pool_parser_executed':True,'sp_restored':True}
++
+--- /dev/null
++++ b/projects/open-gate/build/imx410_rate_native.S
+@@ -0,0 +1,74 @@
++.syntax unified
++.arm
++.text
++/* Native frame-rate glue. Each ROLE is an independent leaf trampoline.
++ * Guards use published CUSTOM + CinemaDNG state; no firmware call or BSS writes.
++ * Preserve NZCVQ and scratch registers around the displaced instruction.
++ */
++.macro LDA reg, value
++ movw \reg, #:lower16:\value
++ movt \reg, #:upper16:\value
++.endm
++.macro RETURN_TO address
++ ldr pc, [pc, #-4]
++ .word \address
++.endm
++.global entry
++entry:
++#if ROLE == 5
++ /* The native lazy cache may already exist before AutoRun. Return owned data. */
++ LDA r0, LEGAL_DESC
++ RETURN_TO 0xC00A885C
++#else
++ push {r1,r2,r3,ip}
++ mrs r2,cpsr
++#if ROLE == 1
++ mov r0,r1
++#endif
++ LDA r3, FLAG
++ ldr r3,[r3]
++ cmp r3,#1
++ bne stock
++ LDA r3, FMTLATCH
++ ldr r3,[r3]
++ cmp r3,#0
++ bne stock
++#if ROLE == 1
++ mov r0,#0
++#elif ROLE == 2
++ /* r1 is restored below, so save the selected comparison operand in its slot. */
++ str r6,[sp]
++#else
++ LDA r3, LIST
++ str r3,[r0]
++ mov r3,#10
++ str r3,[r0,#4]
++ msr cpsr_f,r2
++ pop {r1,r2,r3,ip}
++ bx lr
++#endif
++ b done
++stock:
++#if ROLE == 2
++ str r4,[sp]
++#elif ROLE == 3
++ msr cpsr_f,r2
++ pop {r1,r2,r3,ip}
++ push {r4,r5,lr}
++ RETURN_TO 0xC049A78C
++#elif ROLE == 4
++ msr cpsr_f,r2
++ pop {r1,r2,r3,ip}
++ sub sp,sp,#8
++ RETURN_TO 0xC05332AC
++#endif
++done:
++ msr cpsr_f,r2
++ pop {r1,r2,r3,ip}
++#if ROLE == 1
++ RETURN_TO 0xC04A1220
++#elif ROLE == 2
++ RETURN_TO 0xC00A87E8
++#endif
++
++#endif
+--- /dev/null
++++ b/projects/open-gate/build/imx410_rate_native.py
+@@ -0,0 +1,114 @@
++"""Native 240 fps menu/setting bridge; immutable tables and CUSTOM-only gates.
++
++Three distinct enum domains must not be confused: row 9, setting enum 8,
++export/picker enum 11. Export enum 5 enters a native assert; setting 5 is 59.94.
++"""
++from pathlib import Path
++import struct
++from armasm import assemble
++
++B = 0xC0000000
++INTERNAL, EXPORT, RANK = 8, 11, 23976
++FLAG, FMTLATCH = 0xC0731C08, 0xC0731C20
++RANK_TABLE, LEGAL_TABLE = 0xC0730000, 0xC0730088
++LEGAL_DESC = 0xC07300D8
++INPUT_PAIR, RATE_LIST = 0xC07301C0, 0xC0730220
++STOCK_ORDER = (1, 12, 2, 3, 13, 4, 5, 6, 7)
++# Only these named sites are altered outside owned cave memory.
++MAPPING_SITES = (
++ (0xC0063528, 0xE3051F60, 'rank table low'),
++ (0xC006352C, 0xE34C1073, 'rank table high'),
++ (0xC0063530, 0xE3A0300A, 'rank table count'),
++ (0xC06BDB0C, 0xE3002224, 'input pair table low'),
++ (0xC06BDB10, 0xE34C22E4, 'input pair table high'),
++ (0xC06BDB18, 0xE3A0200A, 'input pair table count'),
++)
++HOOKS = (
++ (0xC04A121C, 0xC0732A20, 0xE1A00001, 'B', 'native rate list class'),
++ (0xC00A87E4, 0xC0732AA0, 0xE1A01004, 'B', 'native rate normaliser cap'),
++ (0xC049A788, 0xC0732B20, 0xE92D4030, 'B', 'native menu rate list'),
++ (0xC05332A8, 0xC0732BA0, 0xE24DD008, 'B', 'native Quick Set rate list'),
++ (0xC00A8858, 0xC0732C10, 0xE1A00005, 'B', 'native legal/export cached table'),
++)
++EXTERNAL_SITES = tuple(a for a, _, _ in MAPPING_SITES) + tuple(h[0] for h in HOOKS)
++
++
++def _word(img, a):
++ return struct.unpack_from('<I', img, a-B)[0]
++
++
++def _mov(rd, imm, high=False):
++ return (0xE3400000 if high else 0xE3000000) | ((imm>>12)&15)<<16 | rd<<12 | (imm&0xfff)
++
++
++def _b(site, target):
++ delta=target-site-8
++ if delta%4 or not -(1<<25)<=delta<(1<<25): raise ValueError('branch out of range')
++ return 0xEA000000 | ((delta>>2)&0xffffff)
++
++
++def tables(img):
++ rank=img[0xC0735F60-B:0xC0735FD8-B]
++ triples=tuple(struct.unpack_from('<III', rank, i*12) for i in range(10))
++ expected=((0,0,1500),(1,1,2398),(12,2,2400),(2,3,2500),(3,4,2997),
++           (13,6,4800),(4,7,5000),(5,8,5994),(6,9,10000),(7,10,11988))
++ if triples != expected: raise ValueError('native rank table differs')
++ legal=img[0xC0742250-B:0xC0742298-B]
++ if tuple(struct.unpack_from('<II',legal,i*8) for i in range(9)) != tuple(t[:2] for t in expected[1:]):
++  raise ValueError('native legal/export table differs')
++ pairs=img[0xC2E40224-B:0xC2E40274-B]
++ if tuple(struct.unpack_from('<II',pairs,i*8) for i in range(10)) != tuple((v,i) for i,v in enumerate(STOCK_ORDER)) + ((0,9),):
++  raise ValueError('native input pair table differs')
++ for a in (0xC0CDACD8,0xC0D026F4):
++  if struct.unpack_from('<9I',img,a-B) != STOCK_ORDER: raise ValueError('native rate list differs')
++ # Preserve hidden internal 0 (15 fps), at row 10; visible row 9 is now 240 fps.
++ pairs=pairs[:72]+struct.pack('<4I',INTERNAL,9,0,10)
++ return [('native_rank',RANK_TABLE,rank+struct.pack('<III',INTERNAL,EXPORT,RANK)),
++         ('native_legal',LEGAL_TABLE,legal+struct.pack('<II',INTERNAL,EXPORT)),
++         ('native_legal_descriptor',LEGAL_DESC,struct.pack('<II',LEGAL_TABLE,10)),
++         ('native_input_pair',INPUT_PAIR,pairs),
++         ('native_rate_list',RATE_LIST,struct.pack('<10I',*STOCK_ORDER,INTERNAL))]
++
++
++def payloads():
++ return [(f'native_rate_{role}',str(Path(__file__).with_suffix('.S')),target)
++         for role,(_,target,_,_,_) in enumerate(HOOKS,1)]
++
++
++def defines():
++ return {f'native_rate_{role}':[f'ROLE={role}',f'FLAG={FLAG:#x}',
++         f'FMTLATCH={FMTLATCH:#x}',f'LIST={RATE_LIST:#x}',
++         f'LEGAL_DESC={LEGAL_DESC:#x}'] for role in range(1,6)}
++
++
++def blobs():
++ d=defines()
++ out={name:assemble(src,defines=d[name]) for name,src,_ in payloads()}
++ if any(len(blob)>0x80 for blob in out.values()): raise ValueError('native rate slot overflow')
++ return out
++
++
++def patches(img):
++ for a,stock,note in MAPPING_SITES:
++  if _word(img,a)!=stock: raise ValueError(f'{note}: stock word differs at {a:#x}')
++ for a,_,stock,_,note in HOOKS:
++  if _word(img,a)!=stock: raise ValueError(f'{note}: stock word differs at {a:#x}')
++ values=(_mov(1,RANK_TABLE&0xffff),_mov(1,RANK_TABLE>>16,True),0xE3A0300B,
++         _mov(2,INPUT_PAIR&0xffff),_mov(2,INPUT_PAIR>>16,True),0xE3A0200B)
++ return [(a,v,note) for (a,_,note),v in zip(MAPPING_SITES,values)] + [
++         (a,_b(a,target),note) for a,target,_,_,note in HOOKS]
++
++
++def installed_words(img):
++ """Test-only convenience; exact-card verification should pass decoded card words."""
++ out={a:w for a,w,_ in patches(img)}
++ compiled=blobs()
++ chunks=tables(img)+[(name,a,compiled[name]) for name,_,a in payloads()]
++ for _,addr,blob in chunks:
++  out.update((addr+i,struct.unpack_from('<I',blob,i)[0]) for i in range(0,len(blob),4))
++ return out
++
++FRCLASS_HOOK, FRCLASS_STOCK = HOOKS[0][0], HOOKS[0][2]
++FRMAX_HOOK, FRMAX_STOCK = HOOKS[1][0], HOOKS[1][2]
++
++LEGAL_HOOK, LEGAL_STOCK = HOOKS[4][0], HOOKS[4][2]
+--- /dev/null
++++ b/projects/open-gate/build/imx410_rate_ui.py
+@@ -0,0 +1,271 @@
++#!/usr/bin/env python3
++"""Sensor Lab's tenth Settings summary label, as bounded NBU data patches.
++
++The popup CSV and enum converter do not create a tenth collapsed label.  The
++stock B2_5 has nine IconText children and eight unused, empty Icon children.
++Borrow its first empty Icon for the new text child, retaining that object's
++ID and RGB lock animation.  No resource index, loader or interpreter hook is
++changed.  Build-time input is the original Ver.5.02 image, not live memory.
++
++An explicit opaque-white initial color replaces the donor's redundant alpha
++animation (both keys were 1.0).  This leaves the set three bytes SHORTER.  The
++terminator is followed by three zero bytes; the next set keeps its address.
++Allocation capacities stay at their stock upper bounds, except the drawable
++class counts, which transfer one instance from drawImage to drawText.
++
++This proves serialized structure, not rendering or object ordering on camera.
++"""
++from __future__ import annotations
++
++import hashlib
++from pathlib import Path
++import struct
++import sys
++from collections.abc import Mapping
++from functools import lru_cache
++
++ROOT = Path(__file__).resolve().parents[3]
++sys.path.insert(0, str(ROOT / "research/ui/tools/nbu_probe"))
++import nbu_format as N
++
++BASE = 0xC0000000
++SET_START, SET_END = 0xC1A5C590, 0xC1A792FB
++SET_SHA256 = "6e0d023dbacad3326f24bccca3dcbae58449a5cf07074546ccfa401a77d44080"
++POOL_START, POOL_SIZE = 0xC18C0474, 0x2B018
++TEXT_PARENT, ICON_PARENT, BORROWED_ID = 4448, 4457, 4458
++TEXT_PARENT_RECORD, ICON_PARENT_RECORD = 0xC1A7638D, 0xC1A76E8A
++DONOR_START, DONOR_END = 0xC1A76E05, 0xC1A76E8A
++BORROW_START, BORROW_END = 0xC1A76EFA, 0xC1A7701A
++
++
++def _put(data: bytes, offset: int, value: int) -> bytes:
++    out = bytearray(data)
++    struct.pack_into(">I", out, offset, value)
++    return bytes(out)
++
++
++def rebuild(image: bytes) -> bytes:
++    """Return the original-sized B2_5 slot, with exactly one new summary label."""
++    original = image[SET_START - BASE:SET_END - BASE]
++    if hashlib.sha256(original).hexdigest() != SET_SHA256:
++        raise ValueError("B2_5 differs from the pinned stock set")
++    pool = image[POOL_START - BASE:POOL_START - BASE + POOL_SIZE]
++    for offset, name in ((0x47B4, "240"), (0x14938, "IconText10"),
++                         (0x2541C, "drawText"), (0x253E4, "drawImage")):
++        if N.string_at(pool, offset) != name:
++            raise ValueError(f"NBU pool mismatch: {name}")
++    records = N.split(original)
++    by_address = {SET_START + r.offset: r for r in records}
++    # Same component count and ID as the empty-image donor, but its new parent
++    # is the text toggler. The parser appends it after the nine existing labels.
++    donor = [r for r in records if DONOR_START <= SET_START+r.offset < DONOR_END]
++    source = [r for r in records if BORROW_START <= SET_START+r.offset < BORROW_END]
++    if [r.tag for r in donor] != [0x10003, 0x10004, 0x10005] or \
++            [r.tag for r in source] != [0x10003, 0x10004, 0x10005, 0x1000A]:
++        raise ValueError("summary/empty-icon donor shape changed")
++    if source[0].words(7) != (3, 0, 0, BORROWED_ID, ICON_PARENT, 0x145D0, 0):
++        raise ValueError("empty icon identity changed")
++    if source[2].body[-4:] != bytes(4):
++        raise ValueError("borrowed icon is no longer empty")
++    obj = _put(source[0].body, 16, TEXT_PARENT)
++    obj = _put(obj, 20, 0x14938)  # existing name pool: IconText10
++    base = _put(donor[1].body, 12, BORROWED_ID)
++    text = _put(donor[2].body, 12, BORROWED_ID)
++    if struct.unpack_from(">I", text, 20)[0] != 0x40000001:
++        raise ValueError("drawText property mask changed")
++    text = _put(text, 20, 0x40002001)  # text + explicit color + rect
++    text = _put(text, 24, 0x47B4)    # literal '240', not a localization ID
++    text = text[:28] + b"\0" + struct.pack(">I", 0xFFFFFFFF) + text[29:]
++    # animationClip body has a 20-byte prologue and four 40-byte properties.
++    clip = source[3].body
++    expected_alpha = struct.pack(">5I", 2, 1, 1, 0x24F08, 3) + \
++        b"\0\0" + struct.pack(">If", 33, 1.0) + \
++        b"\x01\0" + struct.pack(">If", 66, 1.0)
++    if len(clip) != 180 or clip[-40:] != expected_alpha:
++        raise ValueError("donor alpha is not the redundant opaque constant")
++    clip = _put(clip[:-40], 4, 3)
++    replacement = [N.Record(tag, 0, body) for tag, body in
++                   ((0x10003, obj), (0x10004, base), (0x10005, text),
++                    (0x1000A, clip))]
++
++    for address, old_count, count in ((TEXT_PARENT_RECORD, 9, 10),
++                                       (ICON_PARENT_RECORD, 8, 7)):
++        r = by_address[address]
++        if r.tag != 0x10003 or r.words(3)[2] != old_count:
++            raise ValueError("summary parent child count changed")
++        r.body = _put(r.body, 8, count)
++    header = records[0]
++    if header.tag != 0x10002:
++        raise ValueError("missing allocation header")
++    classes = struct.unpack_from(">I", header.body, 8)[0]
++    seen = set()
++    for i in range(classes):
++        at = 12 + i * 8
++        name, count = struct.unpack_from(">II", header.body, at)
++        if name in (0x253E4, 0x2541C):
++            expected, delta = (62, -1) if name == 0x253E4 else (61, 1)
++            if count != expected:
++                raise ValueError("drawable allocation capacity changed")
++            header.body = _put(header.body, at + 4, count + delta)
++            seen.add(name)
++    if len(seen) != 2:
++        raise ValueError("missing drawable allocation classes")
++    out = []
++    for r in records:
++        address = SET_START + r.offset
++        if address == BORROW_START:
++            out.extend(replacement)
++        if not BORROW_START <= address < BORROW_END:
++            out.append(r)
++    rebuilt = N.join(out)
++    if len(rebuilt) != len(original) - 3:
++        raise ValueError("summary patch no longer fits its original set")
++    return rebuilt + bytes(3)
++
++
++def patches(image: bytes) -> list[tuple[int, int, str]]:
++    """Return changed aligned words; shared stage2 journals every word."""
++    rebuilt = rebuild(image)
++    lo, hi = SET_START & ~3, (SET_END + 3) & ~3
++    old = image[lo - BASE:hi - BASE]
++    new = bytearray(old)
++    new[SET_START-lo:SET_END-lo] = rebuilt
++    return [(lo + at, struct.unpack_from("<I", new, at)[0],
++             "240 fps Settings collapsed summary")
++            for at in range(0, len(new), 4) if old[at:at+4] != new[at:at+4]]
++
++
++@lru_cache(maxsize=1)
++def _native_stock_services():
++    """The stock stream defines the fixed construction-call allow-list."""
++    import nbu_probe as P
++    stock = P.load_firmware(ROOT / 'out/seg0_c0000000.bin')
++    baseline = P.NbuProbe(stock)
++    baseline.install_arena()
++    baseline.map_set('B2_5')
++    return tuple(sorted(baseline.discovered))
++
++
++def _verify_summary_selector(probe, children):
++    """Execute stock toggleVisible setter and its real visibility loop.
++
++    Object lookup/count/enumeration and the final visibility write are bounded
++    stubs for the parsed NBU children. The index clamp and iteration execute
++    original instructions, including the stock range derived from child count.
++    """
++    from unicorn.arm_const import UC_ARM_REG_S0
++    state, component, owner = probe.RAM+0x70000, probe.RAM+0x70100, probe.RAM+0x70200
++    probe.write(state, bytes(0x40))
++    ids = {probe.RAM+0x71000+i*0x100: oid for i, oid in enumerate(children)}
++    handles = list(ids)
++    visible = {}
++    def point_state(p, args):
++        p.write_words(args[1], state)
++        return 0
++    def point_owner(p, args):
++        p.write_words(args[1], owner)
++        return 0
++    def count(p, args):
++        p.write_words(args[1], len(handles))
++        return 0
++    def child(p, args):
++        if args[0] != owner or not 0 <= args[1] < len(handles):
++            raise ValueError('native toggleVisible enumerated outside parsed children')
++        p.write_words(args[2], handles[args[1]])
++        return 0
++    def show(p, args):
++        if args[0] not in ids or args[1] not in (0, 1):
++            raise ValueError('invalid native child visibility request')
++        visible[ids[args[0]]] = args[1]
++        return 0
++    probe.stub(0xC05D7148, 'toggleVisible component state', handler=point_state)
++    probe.stub(0xC05D70E8, 'toggleVisible owner', handler=point_owner)
++    probe.stub(0xC0600EA8, 'toggleVisible owner object', ret=owner)
++    probe.stub(0xC05D1ED0, 'parsed child count', handler=count)
++    probe.stub(0xC05D1EE8, 'parsed child at index', handler=child)
++    probe.stub(0xC05DAEC8, 'owner active', ret=0)
++    probe.stub(0xC05D02C8, 'set child visibility', handler=show)
++    probe.allow(0xC05FB680, 0xC05FB6F8, 'stock toggleVisible select-value setter')
++    probe.allow(0xC05FB548, 0xC05FB5B8, 'stock toggleVisible child visibility loop')
++    probe.uc.reg_write(UC_ARM_REG_S0, struct.unpack('<I', struct.pack('<f', 9.0))[0])
++    if probe._call(0xC05FB680, component) != 0:
++        raise ValueError('native summary select-value setter failed')
++    if probe.words(state+0x2C)[0] != 9:
++        raise ValueError('native summary index was clamped below the tenth child')
++    if probe._call(0xC05FB548, component) != 0:
++        raise ValueError('native summary visibility update failed')
++    if visible != {oid: int(oid == BORROWED_ID) for oid in children}:
++        raise ValueError('native summary did not select only the 240 text child')
++    return BORROWED_ID
++
++
++def verify_installed(image_or_words, *, base_image: bytes | None = None,
++                     native: bool = False) -> dict:
++    """Verify the actual installed B2_5, including other product data edits.
++
++    Accept either full firmware memory bytes or {address: word}/plan tuples
++    applied to an explicitly provided base_image.  No whole-set stock hash is
++    required here: that pin protects authoring in rebuild(), while this checks
++    the installed structure.  native=True executes the original interpreter
++    over these exact bytes, with stock UI construction services stubbed and
++    no implicit acceptance of additional calls.  It does not render the GUI.
++    """
++    if isinstance(image_or_words, (bytes, bytearray)):
++        image = bytes(image_or_words)
++    else:
++        if base_image is None:
++            raise ValueError('word verification requires base_image')
++        image = bytearray(base_image)
++        rows = image_or_words.items() if isinstance(image_or_words, Mapping) else image_or_words
++        for row in rows:
++            address, value = row[:2]
++            if BASE <= address <= BASE + len(image)-4:
++                struct.pack_into('<I', image, address-BASE, value)
++        image = bytes(image)
++    if len(image) < SET_END-BASE:
++        raise ValueError('installed image does not contain B2_5')
++    pool = image[POOL_START-BASE:POOL_START-BASE+POOL_SIZE]
++    rows = N.split(image[SET_START-BASE:SET_END-BASE])
++    objs = {r.words(7)[3]: r for r in rows if r.tag == 0x10003}
++    children = [r.words(7)[3] for r in rows if r.tag == 0x10003
++                and r.words(7)[4] == TEXT_PARENT]
++    if children != list(range(4449, 4457)) + [29946, BORROWED_ID] or \
++            objs[TEXT_PARENT].words(7)[2] != 10:
++        raise ValueError('installed Settings summary lacks the tenth child')
++    if objs[ICON_PARENT].words(7)[2] != 7:
++        raise ValueError('installed empty-icon parent count is inconsistent')
++    texts = [r for r in rows if r.tag == 0x10005 and r.words(4)[3] == BORROWED_ID]
++    if len(texts) != 1:
++        raise ValueError('installed 240 text component missing or duplicated')
++    text = texts[0].body
++    if len(text) != 49 or struct.unpack_from('>I', text, 20)[0] != 0x40002001 or \
++            N.string_at(pool, struct.unpack_from('>I', text, 24)[0]) != '240' or text[28] != 0:
++        raise ValueError('installed 240 label is not literal native text')
++    if struct.unpack_from('>I', text, 29)[0] != 0xFFFFFFFF:
++        raise ValueError('installed 240 label has lost its opaque initial color')
++    end = sum(r.size for r in rows)
++    if end != SET_END-SET_START-3 or image[SET_START-BASE+end:SET_END-BASE] != bytes(3):
++        raise ValueError('installed B2_5 no longer fits the original slot')
++    result = {'summary_children': children, 'literal_text': '240',
++              'record_count': len(rows), 'bytes_parsed': end,
++              'native_interpreter_executed': False, 'gui_rendered': False}
++    if native:
++        import nbu_probe as P
++        if len(image) < P.SEG0_SIZE:
++            raise ValueError('native parsing requires the complete seg0 memory')
++        probe = P.NbuProbe(image[:P.SEG0_SIZE])
++        probe.install_arena()
++        probe.allow(*probe.OBJECT_FACTORY, 'stock object factory')
++        for address in _native_stock_services():
++            probe.stub(address, 'stock UI construction service')
++        probe.open_set('B2_5')
++        for record in rows:
++            trace = probe.record()
++            if (trace.token, trace.cursor_in, trace.consumed) != \
++                    (record.tag, record.offset, record.size) or probe.error_flag():
++                raise ValueError('native parser disagrees with installed NBU records')
++        if probe.traces[-1].result != 1 or probe.survey or probe.discovered:
++            raise ValueError('native parse did not terminate under the fixed allow-list')
++        result['native_interpreter_executed'] = True
++        result['native_selected_summary_child'] = _verify_summary_selector(probe, children)
++    return result
+--- a/projects/open-gate/build/test_imx410_menu.py
++++ b/projects/open-gate/build/test_imx410_menu.py
+@@ -154,10 +154,13 @@
+         assert k in rates, k
+ 
+ 
+-def test_the_frame_rate_class_hook_site_is_stock():
+-    """壓住類別函式的位址先保留著,確認它還是原廠的 `mov r0, r1`。"""
++def test_the_frame_rate_class_hook_is_installed_and_stock_is_pinned():
++    """Native execution/guard tests live in test_imx410_rate_native.py."""
+     import struct
+-    assert PL.WITH_FRCLASS is False, "做了的話這個測試要改成檢查真的有寫"
++    assert PL.WITH_FRCLASS and PL.WITH_RATE_NATIVE
++    installed = {a: v for a, v, _ in PL.plan()}
++    spec = next(h for h in PL.RATE_NATIVE.HOOKS if h[0] == PL.FRCLASS_HOOK)
++    assert installed[PL.FRCLASS_HOOK] == PL._b(spec[0], spec[1])
+     got = struct.unpack_from("<I", IMG, PL.FRCLASS_HOOK - 0xC0000000)[0]
+     assert got == PL.FRCLASS_STOCK, hex(got)
+ 
+--- a/projects/open-gate/build/test_imx410_plan.py
++++ b/projects/open-gate/build/test_imx410_plan.py
+@@ -27,6 +27,12 @@
+ 
+ def test_hooks_are_stock_in_the_image():
+     assert PL.hook_errors(IMG) == []
++
++
++def test_frame_rate_hook_rejects_a_nonstock_instruction():
++    mutant = bytearray(IMG)
++    struct.pack_into("<I", mutant, PL.RAT_HOOK - B, 0xE1A00000)
++    assert any(hex(PL.RAT_HOOK) in error for error in PL.hook_errors(mutant))
+ 
+ 
+ def test_order_is_clean():
+@@ -103,7 +109,9 @@
+              (PL.OFM_HOOK, PL.OGFMT_CODE, 0xEA),
+              *(((PL.RAT_HOOK, PL.RATE_CODE, 0xEA),) if PL.WITH_RATE else ()),
+              (PL.OUT_HOOK, PL.OUT_CODE, 0xEA)) + tuple(
+-                 (a, PL.FPS_CODE, 0xEB) for a, _, _ in PL.FPS_HOOKS)
++                 (a, PL.FPS_CODE, 0xEB) for a, _, _ in PL.FPS_HOOKS) + tuple(
++                 (a, target, 0xEA) for a, target, _, _, _ in PL.RATE_NATIVE.HOOKS
++                 if PL.WITH_RATE_NATIVE)
+     tail = {a: v for a, v, _ in items[-len(HOOKS):]}
+     assert len(tail) == len(HOOKS), tail
+     for hook, target, op in HOOKS:
+@@ -258,6 +266,9 @@
+     #   容器格率 hook(FUN_c00c9bd0)是 OG3K 沒有的站點,理由與單獨驗證
+     #   寫在 imx410_plan.WITH_RATE 的註解裡。
+     allowed = {PL.RAT_HOOK} if PL.WITH_RATE else set()
++    if PL.WITH_RATE_NATIVE:
++        # Dedicated guards/ABI/native roundtrips: test_imx410_rate_native.py.
++        allowed.update(site for site, _, _, _, _ in PL.RATE_NATIVE.HOOKS)
+     assert extra <= allowed, ("武裝了 OG3K 沒有、也沒列進例外的 hook:"
+                               + ", ".join(hex(a) for a in sorted(extra - allowed)))
+ 
+@@ -491,10 +502,10 @@
+     assert not [v for v in ids.values() if b"bit" in v.lower()], ids
+ 
+ 
+-def test_menu_and_qs_share_one_rate_converter():
++def test_menu_and_qs_share_one_summary_rate_converter():
+     """格率轉換器出現在兩個**不同**的指標陣列裡,但是同一個函式。
+ 
+-    所以 §8.3 改那三個立即值會同時覆蓋選單與 QS —— 不需要第二份 patch。
++    這只證明共用摘要轉換器；真正輸入、合法值與顯示物件還有獨立路徑。
+     如果哪天這個假設破了(兩邊指向不同函式),這個測試會先叫。見 §8.5。
+     """
+     fn = 0xC06CB6D0
+@@ -544,6 +555,16 @@
+         for a in (PL.RATE_PAIR_LO, PL.RATE_PAIR_HI, PL.RATE_PAIR_CNT):
+             ok.append((a, a + 4, "配對表立即值"))
+ 
++    if PL.WITH_RATE_NATIVE:
++        ok.extend((a, a + 4, note) for a, _stock, note in PL.RATE_NATIVE.MAPPING_SITES)
++    if PL.WITH_RATE_UI:
++        ok.append((PL.RATE_UI.SET_START & ~3, (PL.RATE_UI.SET_END + 3) & ~3,
++                   "240 Settings summary NBU set"))
++
++    if PL.WITH_RATE_LV:
++        ok.extend((s['start'], s['end'], s['name'] + " fps label")
++                  for s in PL.RATE_LV.SET_SPANS)
++
+     stray = []
+     for a, _v, note in PL.plan():
+         if PL.CAVE_LO <= a < PL.CAVE_HI:
+@@ -566,6 +587,24 @@
+     assert tbl[:len(stock)] == stock
+     assert struct.unpack_from("<II", tbl, len(stock)) == (
+         PL.RATE_PAIR_NEW_ENUM, PL.RATE_PAIR_STOCK_N)
++
++
++def test_summary_pair_uses_export_eleven_for_240():
++    # Independent of PL.RATE_PAIR_NEW_ENUM: export 5 asserts in the picker,
++    # internal 5 is 59.94. Neither is the native export 11 for the 240 suffix.
++    assert struct.unpack_from("<II", PL.rate_pair_table(IMG), 9 * 8) == (11, 9)
++
++
++def test_native_tables_precede_mapping_code_and_hooks():
++    items = PL.plan()
++    order = {a: i for i, (a, _, _) in enumerate(items)}
++    private = [a + i for _, a, data in PL.RATE_NATIVE.tables(IMG)
++               for i in range(0, len(data), 4)]
++    assert max(order[a] for a in private) < min(
++        order[a] for a in PL.RATE_NATIVE.EXTERNAL_SITES)
++    # Independent hook lookup: each named branch must be an armed stage.
++    armed = {s for _, group in PL._stages() for s, _, _, _ in group}
++    assert {h[0] for h in PL.RATE_NATIVE.HOOKS} <= armed
+ 
+ 
+ def test_rate_pair_instructions_decode_back_to_what_we_meant():
+--- /dev/null
++++ b/projects/open-gate/build/test_imx410_rate_lv.py
+@@ -0,0 +1,98 @@
++#!/usr/bin/env python3
++"""Offline LV resource, capacity and original curve/drawText checks."""
++import struct
++import unittest
++import imx410_rate_lv as L
++IMAGE=(L.ROOT/'out/MAIN_c0000000.bin').read_bytes()
++POOL=IMAGE[L.POOL_START-L.BASE:L.POOL_START-L.BASE+L.POOL_SIZE]
++def rows(image,s):return L.N.split(image[s['start']-L.BASE:s['end']-L.BASE])
++def header(rs):return L.A.parse_header(L.A.Record(0,rs[0].to_bytes()),lambda p:L.N.string_at(POOL,p))
++
++class RateLV(unittest.TestCase):
++ @classmethod
++ def setUpClass(cls):
++  cls.words=L.patches(IMAGE);im=bytearray(IMAGE)
++  for a,v,_ in cls.words:struct.pack_into('<I',im,a-L.BASE,v)
++  cls.image=bytes(im)
++ def test_four_sets_local_patch_runs(self):
++  self.assertEqual(len(L.SETS),4);self.assertEqual(len(self.words),437)
++  self.assertEqual(sum(i==0 or a!=self.words[i-1][0]+4 for i,(a,_,_) in enumerate(self.words)),52)
++  self.assertEqual(len({a for a,_,_ in self.words}),len(self.words))
++  self.assertTrue(all(any(s['start']<=a<s['end'] for s in L.SET_SPANS) for a,_,_ in self.words))
++ def test_neighbors_and_set_boundaries(self):
++  cursor=0
++  for s in L.SETS:
++   lo,hi=s['start']-L.BASE,s['end']-L.BASE
++   self.assertEqual(self.image[cursor:lo],IMAGE[cursor:lo])
++   old,new=rows(IMAGE,s),rows(self.image,s)
++   self.assertEqual(sum(r.size for r in new),hi-lo)
++   # Only the clip after the larger drawText moves; every later record
++   # retains its original address, so no tail-wide patch is necessary.
++   for a,b in zip(old,new):
++    if s['start']+a.offset!=s['clip']:self.assertEqual(a.offset,b.offset)
++   self.assertEqual(self.image[hi-8:hi],IMAGE[hi-8:hi]);cursor=hi
++  self.assertEqual(self.image[cursor:],IMAGE[cursor:])
++ def test_stock_pins_fail_closed(self):
++  for s in L.SETS:
++   im=bytearray(IMAGE);im[s['draw']-L.BASE-1]^=1
++   with self.assertRaisesRegex(ValueError,'pinned stock'):L.rebuild(im,s)
++ def test_header_budgets_and_object_identity(self):
++  for s in L.SETS:
++   old,new=rows(IMAGE,s),rows(self.image,s);a,b=header(old),header(new)
++   self.assertEqual(len(old),len(new))
++   self.assertEqual([r.to_bytes() for r in old if r.tag==0x10003],[r.to_bytes() for r in new if r.tag==0x10003])
++   for k in ('objects','special_objects','groups','clip_property_counts','trailing_budget'):self.assertEqual(a[k],b[k])
++   for k in a['component_counts']:
++    delta=-1 if k=='drawImage' else 1 if k=='drawText' else 0
++    self.assertEqual(a['component_counts'][k]+delta,b['component_counts'][k])
++   self.assertEqual([11 if n==10 else n for n in a['property_key_counts']],b['property_key_counts'])
++   def properties(rs):return [p for r in rs if r.tag==0x1000A for p in L._parse_clip(r,lambda p:L.N.string_at(POOL,p))['properties']]
++   self.assertEqual(len(properties(old)),len(properties(new)))
++   self.assertGreaterEqual(sum(b['property_key_counts']),sum(len(p['keys']) for p in properties(new)))
++ def test_original_rate_order_and_hidden_15(self):
++  for s in L.SETS:
++   old=next(r for r in rows(IMAGE,s) if r.tag==0x1000A and r.words(5)[3:5]==(s['owner'],4))
++   p=L.A.parse_clip(L.A.Record(0,old.to_bytes()),lambda p:L.N.string_at(POOL,p))['properties'][0]
++   self.assertEqual([L.N.string_at(POOL,k['value']).split('_fps_')[1] for k in p['keys']],['1','24','2','3','48','4','5','6','7','15'])
++  result=L.verify_installed(dict((a,v) for a,v,_ in self.words),base_image=IMAGE)
++  self.assertEqual([(r['row9'],r['row10']) for r in result],[('240','15')]*4)
++ def test_literal_donor_font_and_box(self):
++  for s in L.SETS:
++   r=next(r for r in rows(self.image,s) if r.tag==0x10005 and r.words(4)[3]==s['owner'])
++   self.assertEqual(r.words(6),(0x2541C,32,0xFFFFFFFF,s['owner'],3,0x40002015));self.assertEqual(r.body[28],0)
++   self.assertEqual(struct.unpack_from('>3I',r.body,29),(s['font_size'],0,0xFFFFFFFF))
++   self.assertEqual(struct.unpack_from('>4f',r.body,41),(0,0,s['width'],s['height']))
++ def test_native_header_is_arena_capacity_only(self):
++  import nbu_probe as P
++  for s in L.SETS:
++   allocated=[]
++   for image in (IMAGE,self.image):
++    p=P.NbuProbe(image[:P.SEG0_SIZE]);p.install_arena()
++    # Equal class-size stand-in isolates key-budget arithmetic. Transferring
++    # one drawable keeps total component count, so this term cancels.
++    p.stub(0xC05D9E88,'class-size allocation arithmetic',ret=0)
++    raw=rows(image,s)[0].to_bytes();p.open(blob=raw,magic=False,cursor=0,pool=(L.POOL_SIZE,L.POOL_START),owner=True)
++    t=p.record();self.assertEqual(t.consumed,len(raw))
++    allocated.append([c.args[1] for c in t.calls if c.address==0xC05E8EF8])
++   self.assertEqual(len(allocated[0]),1);self.assertEqual(allocated[1][0]-allocated[0][0],s['key_budgets']*56)
++ def test_native_installed_parser_curve_and_setter(self):
++  result=L.verify_installed(self.image,native=True);self.assertEqual(len(result),4)
++  for r in result:
++   self.assertTrue(r['native_interpreter_executed']);self.assertFalse(r['gui_rendered'])
++   states=dict(r['native_curve_text_states'])
++   self.assertEqual((states[300],states[333],states[316],states[334]),('240','15','240','15'))
++ def test_native_clip_padding_is_skipped_not_interpreted(self):
++  for spec in L.SETS:
++   clip=next(r for r in rows(self.image,spec) if r.tag==0x1000A and r.words(5)[3:5]==(spec['owner'],4))
++   data=clip.to_bytes();semantic=len(data)-spec['shrink']
++   result=L._verify_native_clip(self.image,data,semantic)
++   self.assertEqual(result['labels'],list(L.LABELS));self.assertEqual(result['times'],list(L.TIMES))
++   poison=data[:semantic]+bytes([0xA5])*spec['shrink']
++   self.assertEqual(L._verify_native_clip(self.image,poison,semantic),result)
++   self.assertEqual(result['skip'],[(semantic,spec['shrink'])])
++ def test_native_curve_rejects_wrong_240_key(self):
++  import nbu_probe as P
++  keys=[dict(time=t,value=v) for t,v in zip(L.TIMES,L.LABEL_OFFSETS)];keys[9]['value']=L.LABEL_OFFSETS[10]
++  with self.assertRaisesRegex(ValueError,'wrong frame-rate key'):L._verify_native_curve_and_text(P.NbuProbe(IMAGE[:P.SEG0_SIZE]),keys)
++
++if __name__=='__main__':unittest.main(verbosity=2)
+--- /dev/null
++++ b/projects/open-gate/build/test_imx410_rate_native.py
+@@ -0,0 +1,223 @@
++#!/usr/bin/env python3
++"""Execute native menu mappings and both gates, optionally from exact BIN words."""
++from pathlib import Path
++import struct
++from unicorn import Uc, UC_ARCH_ARM, UC_MODE_ARM, UC_HOOK_CODE
++from unicorn.arm_const import *
++import imx410_rate_native as N
++
++ROOT=Path(__file__).resolve().parents[3]
++IMG=(ROOT/'out/MAIN_c0000000.bin').read_bytes()
++MEM=0x40000000
++DONE=MEM+0xff00
++STACK=MEM+0xe000
++OBJ=MEM+0x100
++VT=MEM+0x200
++OUT=MEM+0x1000
++CFG=MEM+0x1100
++REGS=(UC_ARM_REG_R0,UC_ARM_REG_R1,UC_ARM_REG_R2,UC_ARM_REG_R3,
++      UC_ARM_REG_R4,UC_ARM_REG_R5,UC_ARM_REG_R6,UC_ARM_REG_R7,
++      UC_ARM_REG_R8,UC_ARM_REG_R9,UC_ARM_REG_R10,UC_ARM_REG_R11,UC_ARM_REG_R12)
++
++
++def p32(x): return struct.pack('<I',x)
++
++
++class Native:
++ def __init__(self,words):
++  self.mu=Uc(UC_ARCH_ARM,UC_MODE_ARM)
++  self.mu.mem_map(N.B,0x04000000)
++  self.mu.mem_write(N.B,IMG)
++  self.mu.mem_map(MEM,0x10000)
++  for a,w in words.items(): self.mu.mem_write(a,p32(w))
++  self.mu.mem_write(OBJ+4,p32(VT))
++  self.mu.mem_write(VT+0x60,p32(0xC06BDB00))
++  self.mu.mem_write(VT+0x4e0,p32(0xC06CB6D0))
++  self.klass=0
++  self.initialise=True
++  self.trace=[]
++  self.boundaries={}
++  self.mu.hook_add(UC_HOOK_CODE,self._hook)
++ def word(self,a): return struct.unpack('<I',self.mu.mem_read(a,4))[0]
++ def _return(self,value=None):
++  if value is not None:self.mu.reg_write(UC_ARM_REG_R0,value)
++  self.mu.reg_write(UC_ARM_REG_PC,self.mu.reg_read(UC_ARM_REG_LR))
++ def _hook(self,u,a,size,data):
++  self.trace.append(a)
++  if a in (0xC04A1220,0xC00A87E8,0xC049A78C,0xC05332AC):
++   self.boundaries[a]=([u.reg_read(r) for r in REGS],u.reg_read(UC_ARM_REG_CPSR),u.reg_read(UC_ARM_REG_SP))
++  if a==DONE:u.emu_stop();return
++  if a==0xC0013090:self._return(int(self.initialise));return
++  if a==0xC00131E4:self._return(1);return
++  if a==0xC049EC58:self._return(OBJ);return
++  if a==0xC049ED20:
++   assert u.reg_read(UC_ARM_REG_R1)==0x19
++   self._return(self.klass);return
++  if a==0xC01F578C:
++   dst,src,n=(u.reg_read(r) for r in REGS[:3])
++   raw=bytes(u.mem_read(src,n)).split(b'\0')[0][:n]
++   u.mem_write(dst,raw+b'\0'*(n-len(raw)))
++   self._return(dst);return
++  allowed=((0xC0063520,0xC0063714),(0xC00A8818,0xC00A8900),
++           (0xC00A87E4,0xC00A8818),(0xC06BDA58,0xC06BDB28),
++           (0xC06CCD70,0xC06CCDCC),(0xC06CF630,0xC06CF684),
++           (0xC06CB678,0xC06CB6F8),(0xC06CF070,0xC06CF0CC),
++           (0xC049A788,0xC049A890),(0xC05332A8,0xC05332D0),
++           (0xC04A121C,0xC04A1224),(0xC043CAF0,0xC043CC54),
++           (0xC0732A20,0xC0732C20))
++  assert any(lo<=a<hi for lo,hi in allowed),f'unexpected native execution {a:#x}'
++ def state(self,flag=1,fmt=0):
++  self.mu.mem_write(N.FLAG,p32(flag));self.mu.mem_write(N.FMTLATCH,p32(fmt))
++ def call(self,pc,values=None,stack=None):
++  for i,r in enumerate(REGS):self.mu.reg_write(r,0xa1000000+i)
++  for r,v in (values or {}).items():self.mu.reg_write(r,v)
++  self.mu.reg_write(UC_ARM_REG_SP,STACK)
++  self.mu.reg_write(UC_ARM_REG_LR,DONE)
++  self.mu.reg_write(UC_ARM_REG_CPSR,0xa8000013)
++  if stack:self.mu.mem_write(STACK,struct.pack('<'+'I'*len(stack),*stack))
++  self.trace=[]
++  self.boundaries={}
++  self.mu.emu_start(pc,DONE+4,count=10000)
++  assert self.mu.reg_read(UC_ARM_REG_PC)==DONE,'native function did not return'
++  assert self.mu.reg_read(UC_ARM_REG_SP)==STACK+(len(stack)*4 if stack else 0),'stack not restored'
++  return self.mu.reg_read(UC_ARM_REG_R0)
++ def rate_class(self,k):
++  return self.call(N.FRCLASS_HOOK,{UC_ARM_REG_R1:k},[0x14,0x15,0x16,DONE])
++ def normalise(self,value,cap):
++  return self.call(N.FRMAX_HOOK,{UC_ARM_REG_R4:cap,UC_ARM_REG_R6:value},
++       [0,0,0,0x14,0x15,0x16,0x17,0x18,0x1a,0x1b,DONE])
++ def listing(self,qs=False):
++  self.call(0xC05332A8 if qs else 0xC049A788,{UC_ARM_REG_R0:OUT})
++  ptr,n=self.word(OUT),self.word(OUT+4)
++  return tuple(struct.unpack('<'+'I'*n,self.mu.mem_read(ptr,n*4)))
++ def convert(self,value,to_row=False):
++  return self.call(0xC06BDA58 if to_row else 0xC06BDAB0,
++                   {UC_ARM_REG_R0:OBJ,UC_ARM_REG_R1:value})
++ def summary(self,value):
++  return self.call(0xC06CB678,{UC_ARM_REG_R0:OBJ,UC_ARM_REG_R1:value})
++ def export(self,value):return self.call(0xC00636A8,{UC_ARM_REG_R0:value})
++ def rank(self,value):return self.call(0xC0063548,{UC_ARM_REG_R0:value})
++ def suffix(self,export):
++  self.mu.mem_write(CFG+0x10,p32(export))
++  self.call(0xC043CAF0,{UC_ARM_REG_R0:OBJ,UC_ARM_REG_R1:OUT,UC_ARM_REG_R2:CFG})
++  return bytes(self.mu.mem_read(OUT,16)).split(b'\0')[0].decode('ascii')
++
++
++def verify_installed(words):
++ """Use caller-provided installed words, with no compilation/rebuild in this path."""
++ n=Native(words)
++ n.state()
++ assert n.listing()==N.STOCK_ORDER+(8,)
++ assert n.listing(qs=True)==N.STOCK_ORDER+(8,)
++ internal=n.convert(9)
++ assert internal==8 and n.convert(8,to_row=True)==9
++ assert n.convert(10)==0 and n.convert(0,to_row=True)==10
++ export=n.export(internal)
++ assert export==11 and n.rank(internal)==23976
++ assert n.suffix(export)=='240'
++ summary=None
++ if 0xC06CB6DC in words:
++  summary=n.summary(export)
++  assert summary==9,('wrong 240 summary',summary)
++  assert n.summary(8)==6 and n.summary(10)==8
++ assert n.call(0xC00A88B0,{UC_ARM_REG_R0:8})==11
++ assert n.call(0xC00A8860,{UC_ARM_REG_R0:8})==8
++ # AutoRun can run after this native lazy cache has already been populated.
++ n.initialise=False
++ n.mu.mem_write(0xC31CBBD4,struct.pack('<II',0xC0742250,9))
++ assert n.call(0xC00A88B0,{UC_ARM_REG_R0:8})==11
++ assert n.call(0xC00A8860,{UC_ARM_REG_R0:8})==8
++ assert n.normalise(8,5)==8
++ assert n.normalise(8,7)==8
++ for internal,export,suffix in [(5,8,'60'),(7,10,'120')]:
++  assert n.export(internal)==export
++  assert n.suffix(export)==suffix
++  assert n.normalise(internal,5)==internal
++ for flag,fmt in [(0,0),(1,1),(1,0xffffffff),(2,0)]:
++  n.state(flag,fmt)
++  for klass in range(6):assert n.rate_class(klass)==klass
++  assert n.normalise(7,5)==5
++  assert n.normalise(5,7)==5
++  n.klass=0
++  assert n.listing()==N.STOCK_ORDER
++  assert n.listing(qs=True)==N.STOCK_ORDER
++  n.klass=3
++  assert n.listing()==N.STOCK_ORDER[:7]
++ n.state()
++ for klass in range(6):assert n.rate_class(klass)==0
++ n.rate_class(5)
++ assert n.mu.reg_read(UC_ARM_REG_R1)==5
++ assert n.mu.reg_read(UC_ARM_REG_R2)==0xa1000002
++ assert n.mu.reg_read(UC_ARM_REG_R3)==0xa1000003
++ assert n.mu.reg_read(UC_ARM_REG_R12)==0xa100000c
++ assert n.mu.reg_read(UC_ARM_REG_CPSR)&0xf8000000==0xa8000000
++ return {'row':9,'internal':8,'export':11,'rank':23976,'suffix':'240','summary_state':summary,
++         'native_checks':'menu/QS, row roundtrip, export/rank, cap, guards, stock 59.94/119.88'}
++
++
++def test_native_installed_roundtrip():
++ assert verify_installed(N.installed_words(IMG))['suffix']=='240'
++
++
++def test_native_stock_guards():
++ for a,_,_ in N.MAPPING_SITES + tuple((h[0],h[2],h[4]) for h in N.HOOKS):
++  bad=bytearray(IMG);struct.pack_into('<I',bad,a-N.B,0)
++  try:N.patches(bad)
++  except ValueError:pass
++  else:raise AssertionError(f'missing original-word guard {a:#x}')
++
++
++def test_native_hook_abi():
++ n=Native(N.installed_words(IMG))
++ n.call(N.LEGAL_HOOK,{UC_ARM_REG_R5:0xC31CBBD4},[0x14,0x15,DONE])
++ assert n.mu.reg_read(UC_ARM_REG_R0)==N.LEGAL_DESC
++ assert n.mu.reg_read(UC_ARM_REG_CPSR)&0xf8000000==0xa8000000
++ for i in (1,2,3,6,7,8,9,10,11,12):assert n.mu.reg_read(REGS[i])==0xa1000000+i
++ for flag,fmt in [(1,0),(0,0),(1,1),(1,0xffffffff)]:
++  n.state(flag,fmt)
++  n.rate_class(5)
++  regs,flags,sp=n.boundaries[0xC04A1220]
++  assert regs[0]==(0 if (flag,fmt)==(1,0) else 5)
++  assert regs[1:]==[5]+[0xa1000000+i for i in range(2,13)]
++  assert flags&0xf8000000==0xa8000000 and sp==STACK
++  n.normalise(8,5)
++  regs,flags,sp=n.boundaries[0xC00A87E8]
++  assert regs[1]==(8 if (flag,fmt)==(1,0) else 5)
++  for i in (0,2,3,5,7,8,9,10,11,12):assert regs[i]==0xa1000000+i
++  assert regs[4]==5 and regs[6]==8
++  assert flags&0xf8000000==0xa8000000 and sp==STACK
++  for qs,back,sp_delta in [(False,0xC049A78C,-12),(True,0xC05332AC,-8)]:
++   n.klass=0;n.listing(qs)
++   if (flag,fmt)==(1,0):
++    assert back not in n.boundaries
++    assert n.mu.reg_read(UC_ARM_REG_CPSR)&0xf8000000==0xa8000000
++    for i,r in enumerate(REGS[1:],1):assert n.mu.reg_read(r)==0xa1000000+i
++   else:
++    regs,flags,sp=n.boundaries[back]
++    assert regs==[OUT]+[0xa1000000+i for i in range(1,13)]
++    assert flags&0xf8000000==0xa8000000 and sp==STACK+sp_delta
++
++
++def test_native_mutants_are_detected():
++ words=N.installed_words(IMG)
++ variants={
++  'input row maps to 15':{N.INPUT_PAIR+9*8:0},
++  'export falls into assert':{N.RANK_TABLE+10*12+4:5},
++  'cached legal table not redirected':{N.LEGAL_HOOK:N.LEGAL_STOCK},
++  'normaliser gate absent':{N.FRMAX_HOOK:N.FRMAX_STOCK},
++  'class gate absent':{N.FRCLASS_HOOK:N.FRCLASS_STOCK},
++  'main menu gate absent':{N.HOOKS[2][0]:N.HOOKS[2][2]},
++  'class guard removed':{N.HOOKS[0][1]+28:0xE320F000},
++  'QS gate absent':{N.HOOKS[3][0]:N.HOOKS[3][2]},
++ }
++ for label,changes in variants.items():
++  bad=dict(words);bad.update(changes)
++  try:verify_installed(bad)
++  except (AssertionError,ValueError):pass
++  else:raise AssertionError(f'undetected mutant: {label}')
++
++
++if __name__=='__main__':
++ for name,fn in sorted(globals().copy().items()):
++  if name.startswith('test_') and callable(fn):fn();print(name,'PASS',flush=True)
++ print('4/4 native rate tests passed',flush=True)
+--- /dev/null
++++ b/projects/open-gate/build/test_imx410_rate_ui.py
+@@ -0,0 +1,159 @@
++#!/usr/bin/env python3
++"""Offline structural and original-interpreter checks for the 240 summary.
++
++The native interpreter's allocation service and UI constructors are stubs.
++Passing this suite does not assert that a camera has drawn the new label.
++"""
++from __future__ import annotations
++
++from collections import Counter
++from pathlib import Path
++import struct
++import sys
++import unittest
++
++import imx410_rate_ui as U
++sys.path.insert(0, str(U.ROOT / "research/ui/tools"))
++import native_ui_audit as A
++
++IMAGE = (U.ROOT / "out/MAIN_c0000000.bin").read_bytes()
++POOL = IMAGE[U.POOL_START-U.BASE:U.POOL_START-U.BASE+U.POOL_SIZE]
++
++
++def patched_image():
++    im = bytearray(IMAGE)
++    for address, value, _ in U.patches(IMAGE):
++        struct.pack_into("<I", im, address-U.BASE, value)
++    return bytes(im)
++
++
++def records(image):
++    return U.N.split(image[U.SET_START-U.BASE:U.SET_END-U.BASE])
++
++
++def objects(rows):
++    return {r.words(7)[3]: r for r in rows if r.tag == 0x10003}
++
++
++def check_summary(image):
++    rows = records(image)
++    objs = objects(rows)
++    children = [r for r in rows if r.tag == 0x10003
++                and r.words(7)[4] == U.TEXT_PARENT]
++    assert len(children) == objs[U.TEXT_PARENT].words(7)[2] == 10
++    assert [r.words(7)[3] for r in children] == list(range(4449, 4457)) + [29946, 4458]
++    assert objs[U.ICON_PARENT].words(7)[2] == 7
++    assert len([r for r in objs.values() if r.words(7)[4] == U.ICON_PARENT]) == 7
++    text = [r for r in rows if r.tag == 0x10005
++            and r.words(4)[3] == U.BORROWED_ID]
++    assert len(text) == 1
++    raw = text[0].body
++    assert struct.unpack_from(">I", raw, 0)[0] == 0x2541C
++    assert struct.unpack_from(">I", raw, 20)[0] == 0x40002001
++    assert U.N.string_at(POOL, struct.unpack_from(">I", raw, 24)[0]) == "240"
++    assert raw[28] == 0, "literal label must not enter the nloc resolver"
++    assert struct.unpack_from(">I", raw, 29)[0] == 0xFFFFFFFF
++    assert struct.unpack_from(">4f", raw, 33) == (0, 0, 532, 54)
++
++
++class SummaryStructure(unittest.TestCase):
++    @classmethod
++    def setUpClass(cls):
++        cls.patched = patched_image()
++        cls.old, cls.new = records(IMAGE), records(cls.patched)
++
++    def test_tenth_native_text_child_is_literal_240(self):
++        check_summary(self.patched)
++
++    def test_only_set_bytes_change_and_next_set_stays_in_place(self):
++        lo, hi = U.SET_START-U.BASE, U.SET_END-U.BASE
++        self.assertEqual(self.patched[:lo], IMAGE[:lo])
++        self.assertEqual(self.patched[hi:], IMAGE[hi:])
++        self.assertEqual(self.patched[hi-3:hi], bytes(3))
++        self.assertEqual(sum(r.size for r in self.new), hi-lo-3)
++        self.assertEqual(self.new[-1].tag, 0xFFFFFFFF)
++
++    def test_first_nine_labels_and_all_other_object_ids_remain(self):
++        old, new = objects(self.old), objects(self.new)
++        self.assertEqual(set(old), set(new))
++        changed = {U.TEXT_PARENT, U.ICON_PARENT, U.BORROWED_ID}
++        for oid in set(old)-changed:
++            self.assertEqual(old[oid].body, new[oid].body, oid)
++        for oid in list(range(4449, 4457)) + [29946]:
++            a = [r.body for r in self.old if r.tag == 0x10005 and r.words(4)[3] == oid]
++            b = [r.body for r in self.new if r.tag == 0x10005 and r.words(4)[3] == oid]
++            self.assertEqual(a, b, oid)
++
++    def test_native_layout_and_rgb_animation_are_preserved(self):
++        old_base = next(r for r in self.old if r.tag == 0x10004 and r.words(4)[3] == 29946)
++        new_base = next(r for r in self.new if r.tag == 0x10004 and r.words(4)[3] == 4458)
++        self.assertEqual(old_base.body[:12] + old_base.body[16:],
++                         new_base.body[:12] + new_base.body[16:])
++        clips = []
++        for rows in (self.old, self.new):
++            r = next(r for r in rows if r.tag == 0x1000A and r.words(4)[3] == 4458)
++            clips.append(A.parse_clip(A.Record(0, r.to_bytes()), lambda x: U.N.string_at(POOL, x)))
++        self.assertEqual(clips[0]['properties'][:3], clips[1]['properties'])
++        self.assertEqual([k['value'] for k in clips[0]['properties'][3]['keys']], [1.0, 1.0])
++        self.assertEqual(Counter(r.tag for r in self.old), Counter(r.tag for r in self.new))
++
++    def test_drawable_capacity_transfer_and_conservative_animation_budgets(self):
++        old = A.parse_header(A.Record(0, self.old[0].to_bytes()), lambda x: U.N.string_at(POOL, x))
++        new = A.parse_header(A.Record(0, self.new[0].to_bytes()), lambda x: U.N.string_at(POOL, x))
++        expected = dict(old['component_counts'])
++        expected['drawImage'] -= 1
++        expected['drawText'] += 1
++        self.assertEqual(new['component_counts'], expected)
++        for key in ('objects', 'special_objects', 'groups', 'clip_property_counts',
++                    'property_key_counts', 'trailing_budget'):
++            self.assertEqual(old[key], new[key], key)
++
++    def test_popup_controller_and_bit_depth_records_do_not_move(self):
++        for start, length in ((0xC1A74B24, 64), (0xC1A690B7, 64)):
++            a = start-U.BASE
++            self.assertEqual(IMAGE[a:a+length], self.patched[a:a+length])
++
++    def test_installed_word_helper_accepts_the_real_controller_edit(self):
++        words = {a: w for a, w, _ in U.patches(IMAGE)}
++        words[0xC1A74B44] = 0x00001041  # PL's BE float 9.0, same exact slot
++        result = U.verify_installed(words, base_image=IMAGE)
++        self.assertEqual(result['literal_text'], '240')
++        self.assertEqual(len(result['summary_children']), 10)
++        self.assertFalse(result['native_interpreter_executed'])
++
++    def test_changed_firmware_is_rejected(self):
++        mutant = bytearray(IMAGE)
++        mutant[U.BORROW_START-U.BASE] ^= 1
++        with self.assertRaises(ValueError):
++            U.patches(bytes(mutant))
++
++    def test_missing_tenth_parent_count_and_wrong_literal_flag_are_detected(self):
++        mutant = bytearray(self.patched)
++        struct.pack_into('>I', mutant, U.TEXT_PARENT_RECORD-U.BASE+16, 9)
++        with self.assertRaises(AssertionError):
++            check_summary(bytes(mutant))
++        r = next(r for r in self.new if r.tag == 0x10005 and r.words(4)[3] == 4458)
++        mutant = bytearray(self.patched)
++        mutant[U.SET_START-U.BASE+r.offset+8+28] = 1
++        with self.assertRaises(AssertionError):
++            check_summary(bytes(mutant))
++
++
++class NativeInterpreter(unittest.TestCase):
++    def test_original_interpreter_consumes_the_changed_set(self):
++        image = bytearray(patched_image())
++        struct.pack_into('<I', image, 0xC1A74B44-U.BASE, 0x00001041)
++        result = U.verify_installed(image, native=True)
++        self.assertTrue(result['native_interpreter_executed'])
++        self.assertEqual(result['native_selected_summary_child'], 4458)
++        self.assertFalse(result['gui_rendered'])
++
++    def test_native_selector_detects_a_missing_tenth_child(self):
++        import nbu_probe as P
++        probe = P.NbuProbe(IMAGE[:P.SEG0_SIZE])
++        with self.assertRaisesRegex(ValueError, 'clamped'):
++            U._verify_summary_selector(probe, list(range(4449, 4457)) + [29946])
++
++
++if __name__ == '__main__':
++    unittest.main(verbosity=2)
+--- a/projects/open-gate/build/test_sensor_lab_card.py
++++ b/projects/open-gate/build/test_sensor_lab_card.py
+@@ -82,7 +82,7 @@
+             allowed = (address in self.by_addr or
+                        T.CAVE_LOW <= address < T.CAVE_LOW + 0x200 or
+                        PL.CAVE_LO <= address < PL.CAVE_HI or
+-                       address in (PL.SEL_HOOK, PL.PIK_HOOK))
++                       address in (PL.SEL_HOOK, PL.PIK_HOOK, PL.RAT_HOOK))
+             if not allowed:
+                 raise AssertionError(f"unstubbed firmware execution at {address:#x}")
+         return super()._hook(mu, address, size, data)
+@@ -164,11 +164,53 @@
+     got = list(struct.unpack(f"<{RECIPE_WORDS}I", mu.mem_read(PL.RECIPE, RECIPE_WORDS * 4)))
+     assert got == want and actual.word(PL.BITLATCH) == 1
+ 
++    # Exercise the native menu converters from the delivered bytes, then feed
++    # the real suffix into the installed picker. These are three different enum
++    # spaces; a synthetic CUST240 key alone would miss the old export-5 assert.
++    from test_imx410_rate_native import verify_installed
++    installed = {a + i: struct.unpack_from("<I", data, i)[0]
++                 for a, _, data in records if a >= 0x40000000
++                 for i in range(0, len(data), 4)}
++    native_rate = verify_installed(installed)
++    assert native_rate["suffix"] == "240" and native_rate["summary_state"] == 9
++    from imx410_rate_ui import verify_installed as verify_summary
++    summary = verify_summary(installed, base_image=PL.FIRMWARE.read_bytes(), native=True)
++    assert summary["native_selected_summary_child"] == 4458
++    from imx410_rate_lv import verify_installed as verify_liveview, SETS as LV_SETS
++    liveview = verify_liveview(installed, base_image=PL.FIRMWARE.read_bytes(), native=True)
++    assert len(liveview) == len(LV_SETS) and all(v["row9"] == "240" and v["row10"] == "15"
++                                      for v in liveview)
++    high = SensorCamera(directory, preference=1, movie_format=0)
++    high.boot()
++    ax120 = axis_words(bit=12, rate="120", raster=(2016, 672), rwzm=(2048, 1024))
++    ax240 = axis_words(bit=12, rate="240", raster=(2016, 672), rwzm=(2048, 1024))
++    mu = high.mu
++    mu.mem_write(PL.AXIS, struct.pack("<9I", *ax120))
++    mu.mem_write(0xC2F1E654, struct.pack("<4I", 0xC0B59500, 70, 0xC0B59DC0, 70))
++    mu.mem_write(0xC343B588, struct.pack("<I", 0xC2F1E654))
++    key = ("CUST" + native_rate["suffix"]).encode() + b"\0"
++    mu.mem_write(0xC3000600, key.ljust(32, b"\0"))
++    mu.mem_write(0xC3000720, struct.pack("<I", 0))  # native RAW12 enum
++    for reg, value in ((UC_ARM_REG_R0, 0xC3000300), (UC_ARM_REG_R1, 0xC0BE5B50),
++                       (UC_ARM_REG_R2, 0xC3000600), (UC_ARM_REG_R6, 0xC3000700),
++                       (UC_ARM_REG_LR, 0xC043B92C), (UC_ARM_REG_SP, T.STACK - 0x1000)):
++        mu.reg_write(reg, value)
++    high.stop_at.add(0xC043B92C)
++    mu.emu_start(PL.PIK_HOOK, 0xC043B92C, count=2_000_000)
++    assert list(struct.unpack("<9I", mu.mem_read(PL.AXIS, 36))) == ax240
++    want = expected_recipe(PL.Registry(), ax240)
++    assert want[9] == 1
++    got = list(struct.unpack(f"<{RECIPE_WORDS}I", mu.mem_read(PL.RECIPE, RECIPE_WORDS * 4)))
++    assert got == want and high.word(PL.PICKOK) == 1
++    assert high.r(UC_ARM_REG_R0) == PL.ENTRY_ADDR
++    high.call(PL.RAT_HOOK, r0=0xC3000800, sp=T.STACK - 0x1000)
++    assert struct.unpack("<II", mu.mem_read(0xC3000800, 8)) == (240000, 1001)
++
+     # Mutate the delivered BIN, not shared source: move one runtime declaration
+     # into unused private cave so stage2 no longer journals that native word.
+     mutant = bytearray(cam.blob)
+     index = next(i for i, (a, _, _) in enumerate(records) if a == runtime[0])
+-    struct.pack_into("<I", mutant, 16 + index * 8, 0xC0730300)
++    struct.pack_into("<I", mutant, 16 + index * 8, 0xC0732C80)
+     broken = SensorCamera(directory, blob=bytes(mutant))
+     broken.boot()
+     j = broken.word(broken.registered[0][0] + 8)
+@@ -195,29 +237,36 @@
+     return dict(directory=str(directory), checks=["exact-bytes", "entry-ABI", "cache-order",
+                 "journal-146-runtime-words", "power-off-twice", "warm-image",
+                 "saved-selection", "MOV-guard", "missing-BIN", "packaged-RAW14-picker",
++                "packaged-native-240-menu", "packaged-240-summary-visibility",
++                "packaged-240-LV-text-and-preserved-15", "packaged-240-picker-and-FrameRate",
+                 "journal-coverage-mutation", "entry-alignment-mutation"], artifacts=manifest["artifacts"])
+ 
+ 
+ def main():
+     parser = argparse.ArgumentParser(description=__doc__)
+     parser.add_argument("--out", type=Path)
++    parser.add_argument("--axis-preset")
+     args = parser.parse_args()
+     output = args.out or Path(tempfile.mkdtemp(prefix="sensor-lab-card-test-"))
+     output.mkdir(parents=True, exist_ok=True)
+     results = []
++    axis = None
++    if args.axis_preset:
++        from imx410_axis import preset_axis
++        axis, _ = preset_axis(PL.Registry(), args.axis_preset)
+     # Fast Start 2 is a supported dev-card variant (SUP_BUILD_RULES: a product that
+     # supports Fast verifies its own plain, debug AND Fast combinations).
+     for fast in (False, True):
+         for debug in (False, True):
+             name = ("fast-" if fast else "") + ("debug" if debug else "plain")
+             directory = output / name
+-            B.build(directory, debug=debug, fast=fast)
++            B.build(directory, debug=debug, fast=fast, axis=axis)
+             results.append(verify(directory))
+             print(f"PASS {name}: {len(results[-1]['checks'])} checks", flush=True)
+             variant = output / f"{name}-alternate-axis"
+-            axis = list(PL.INITIAL_AXIS)
+-            axis[5] = 1600
+-            B.build(variant, debug=debug, axis=axis, fast=fast)
++            alternate_axis = list(axis or PL.INITIAL_AXIS)
++            alternate_axis[5] = 1600
++            B.build(variant, debug=debug, axis=alternate_axis, fast=fast)
+             assert (variant / "AutoRun.txt").read_bytes() == (directory / "AutoRun.txt").read_bytes()
+             assert (variant / "fpSup.BIN").read_bytes() != (directory / "fpSup.BIN").read_bytes()
+             if fast:
+--- a/projects/open-gate/notes/IMX410_FULL_DESIGN.md
++++ b/projects/open-gate/notes/IMX410_FULL_DESIGN.md
+@@ -1082,6 +1082,9 @@
+ 在第一次上機前都要有答案。
+ 
+ ### 8.3 ★ 配對表「搬家」的辦法 —— 改三個立即值,不用 hook [C]
++
++> 2026-09-30 訂正：本節把 export 摘要表當成整條選單契約，並錯把 export 5 當新 240；
++> 原廠實作與實際執行否定這兩點。以下保留歷史，現行修補以 §8.11 為準。
+ 
+ 2026-09-29,拆 `fpsup-formats-v0.3.0a`(社群那張開了六個解析度的卡)。
+ 它解掉的正是我們第 ④ 件卡住的事:**enum↔列 配對表筆數寫死、沒有預留**。
+@@ -1266,6 +1269,9 @@
+ 
+ ### 8.5 ★ QS(快速設定)—— 結論:我們加的列**不用另外做 QS** [C]
+ 
++> 2026-09-30 訂正：本節把 export 摘要表當成整條選單契約，並錯把 export 5 當新 240；
++> 原廠實作與實際執行否定這兩點。以下保留歷史，現行修補以 §8.11 為準。
++
+ 2026-09-29。加了選單列之後要確認 QS 那一層會不會脫節。答案是**不會**,
+ 而且理由是可驗的,不是猜的。
+ 
+@@ -1771,6 +1777,48 @@
+ 解析度     選單的解析度決定鍵的**前半**,而我們的名字發射器無條件發 "CUST",
+            所以使用者選哪一列我們看不出來 —— 這一條要另外想
+ ```
++
++### 8.11 240 看不到／選不到：三種列舉與獨立顯示物件（2026-09-30）
++
++使用者要求先修 240。這次只做本機來源、建置與離線 ARM/NBU 執行；未上機。
++§8.3/8.5 的「一張表就涵蓋 Settings/QS」不成立：`C2E44EE4` 是 export enum →
++收合摘要狀態表，真正選列輸入是另一張表。
++
++240 的路徑是 **row 9 → internal 8 → export 11 → 原廠字串 `240` → `CUST240`**。
++`internal 5` 原本是 59.94；`export 5` 在原生 `C043CAF0` 進 assert，不能拿來填洞。
++這裡的 internal enum 與感測器 mode 編號是不同空間。
++
++| 層 | 原廠來源 | 本輪修正 |
++|---|---|---|
++| 清單 row/internal | `C06BDB00` → `C2E40224` | 私有 11 筆，加入 `(8,9)`；15 fps `(0,9)` 保留到 row 10 |
++| 排序／picker export | `C0063520` → `C0735F60` | 保留 10 筆，追加 `(8,11,23976)` |
++| 合法值／另一份 config export | `C00A8818` → `C0742250` | 私有 10 筆；供應者不依賴開機早已初始化的舊 BSS 快取 |
++| 主清單／QS 值清單 | `C049A788` / `C05332A8` | CUSTOM CinemaDNG 才供應十筆；其他狀態走原廠清單 |
++| 媒體限制類別／選值正規化 | `C04A121C` / `C00A87E4` | 僅 `FLAG=1 && FMTLATCH=0` 放行自訂格率 |
++| 收合摘要值 | `C06CB6D0` → `C2E44EE4` | 追加 `(export 11,state 9)`，前九筆不變 |
++| Settings 文字 | `B2_5` / IconText parent 4448 | 借用空白 Icon01，新增第十個 literal `240` child |
++
++CSV 的尾 CRLF、移除整個 IMAGE 欄、游標上限 9 仍保留。它們只解決 popup 的
++可解析與游標範圍，不能代替原生值轉換與 Settings/QS/LV 各自的顯示資源。
++Settings NBU 在原槽重建，縮短 3 bytes 並補零；相鄰集合與前九個文字維持原內容。
++關機時所有被改的原生指令與 NBU 字均由共用 loader journal 還原。
++
++新程式在 `imx410_rate_native.py/.S`、`imx410_rate_ui.py`，由既有 `imx410_plan` 納入，
++沒有另建 loader。測試以原廠函式實跑 row/internal/export/suffix、格率比較及摘要狀態，
++另測 guard、ABI、初始化快取，以及錯 enum／漏 gate 的突變。精確 BIN 的 picker 以
++2016×672、RWZM 2048/1024 合法幾何驗證從 120 同步到 240 與 `FrameRate=240000/1001`。
++預設 3032×2012 並不支援 240；本輪不自動改變使用者尺寸。
++
++LV_CINE 與 LV_STILLlike 的 LARGE/MEDIUM 四套格率圖示另改成原生文字，
++保留前九個格率、240 與原隱藏 15。四套的 draw＋clip 總長維持原廠大小，
++group、後續 record 與集合邊界都不移動；只需 437 words／52 runs，不新增 hook 或圖資。
++字體沿用同頁已知數字文字，數字動畫採原廠已使用的 kind=2/text 格式。
++節省的位元組保留在宣告的 clip 尾端，原生解析器會跳過；四頁的非零 padding 對照也通過。
++原生讀出的 11 個時間與字串指標再送進原生 curve／drawText setter，證明 300→240、333→15。
++初版搬動尾部造成 BIN 超過 61,440 bytes，已由 Build 守衛攔下；沒有放寬 MAXLEN 或改共用載入器。
++QS 的圖片／動畫尚未補齊，不能因值清單新增成功就宣稱 QS 畫面完成。
++實際主選單渲染、設定保存／重入、QS/LV 與開關機仍須分別記錄上機結果。
++本輪精確產物與通過／限制見 [240 修補驗證](../../sensor-lab/validation/20260930-240-menu/RESULTS.md)。
+ 
+ ## 9. 引擎怎麼用
+ 
+@@ -3378,15 +3426,15 @@
+ 已解決的舊項目及實驗過程保留在 §1–14；本節只列目前缺口。
+ 
+ 1. 機上 mode 選單與依 mode 更新反灰尚未完成;目前可在機上控制格率與位深,其餘軸仍由主機設定。
+-2. 選單新增列的收合摘要/圖示仍需實機驗收;CUSTOM 游標、位深/格率連動及 Invalid MovSize 驗證器訊息待確認。
++2. Settings 的 240 摘要及待機文字已有離線修補;實際渲染仍待驗收。QS 的 240 圖示/動畫尚未補齊,不能宣稱整套選單完成。
+ 3. 14-bit 的增益政策、CDNG packed 14 vs 16 bpp 容器、回放仍待驗證;TAB3 共用與 RAW14 donor 可求解不代表可出貨。
+ 4. 回放須依每段素材自己的幾何重建;目前回放 hooks 尚未接,og3kname 仍使用初始尺寸。
+ 5. CRCT 錄影側須非 unity RWZM 才可能選到 Hbin2;I0/I 成對驗證未做。x5 沒有係數證據。
+ 6. CG_BIN/CG_FILL/CG_WINDOW 仍由安裝時決定;RWZM 與 >60 fps 閘門已是執行期。
+ 7. RAW 可用緩衝容量未量測;burst 不再把 94 個描述子冒充最低格數,448 MiB 僅是假說。
+-8. 不依媒體反灰是目標政策;WITH_FRCLASS 仍關閉,相機原廠 SD/SSD 媒體限制尚在。
++8. CUSTOM CinemaDNG 的清單與格率限制已接管;240 的原生列舉往返有離線驗證,實機選單與設定生命週期待驗收。
+ 9. 輸出尺寸上下界、≥100 fps SSD 路徑及非等向 RWZM 的更多組合仍待實機驗證。
+ 10. 240 容器 FrameRate 已有 A001_171 證據;時間碼與音訊同步尚未確認。
+ 11. mode 0 與自動選擇哨兵共用值;全高 RAW14 低於選單最低格率,暫不可強制選 ACQ。
+ 12. 無解仍退回固定 FHD30;不跟選單格率,也不表示 RAW14 無解時能產生正確 14-bit 素材。
+-13. 測試卡須上機驗證開機/不錄影/關機/再開約十輪及跨卡暖啟動;Fast 與多產品合併未開放。
++13. 測試卡須上機驗證開機/不錄影/關機/再開約十輪及跨卡暖啟動;Fast 仍是開發卡,多產品合併未開放。
+--- a/projects/sensor-lab/README.md
++++ b/projects/sensor-lab/README.md
+@@ -9,7 +9,20 @@
+ 不搬動原本的程式，也不另複製載入器。
+ 完整機制與實機歷史見 [IMX410_FULL_DESIGN](../open-gate/notes/IMX410_FULL_DESIGN.md)。
+ 
+-## 本輪完成
++## 240 fps 主選單修補（本輪優先）
++
++已補齊主選單第十列的原生轉換、CUSTOM CinemaDNG 下的媒體限制、收合摘要，
++以及四種待機版面的格率文字。原本把 export 5 當成新格率，會進原廠 assert；
++現行路徑是 row 9 → internal 8 → export 11 → `CUST240`。已初始化的原廠值表快取也已處理。
++59.94、119.88 與離開 CUSTOM 後的原廠限制保留；15 fps 的隱藏狀態另保留。
++
++最新驗證見 [240 修補紀錄](validation/20260930-240-menu/RESULTS.md)。
++本輪測試卡使用 **H2：12-bit、2016×672 光柵、RWZM 2048/1024、1008×672 輸出**，
++讓 240 有合法配方。一般 3032×2012 預設尺寸不支援 240；本次沒有新增自動改尺寸的行為。
++**QS 的 240 圖示與動畫仍未補齊；本輪驗收入口是 Settings 主選單。**
++實際 LCD 字體／位置、選單生命週期及開關機仍須上機確認，不能以離線解析冒充實機通過。
++
++## 先前收尾完成
+ 
+ - 原生位深選單同步到 AXIS 後才重算配方；12/14-bit 共用 TAB3 時，14-bit 的鎖存值改為正確的 enum 1。只讀三個已核對原廠呼叫點的設定，其他呼叫不解參考未知 r6。
+ - 主機選單納入可求解的 RAW14 與第十列 240，統一正消隱預算。可求解不等於已上機。
+@@ -24,13 +37,14 @@
+ [`build_sensor_lab_card.py`](../open-gate/build/build_sensor_lab_card.py) 只把產品內容交給
+ 共用 `build_autorun.py --loader`，以 `--vshl-entry 0xC0731600` 指定會返回的初始化入口。
+ 普通版用 `--no-shell`；debug 由共用 `entries.S` 依序呼叫 worker → restore。
+-**目前只支援獨立普通卡與 debug 卡；Fast、合併卡及其他產品已搬移 mode table 的情況不在支援範圍。**
++**普通與 debug 是獨立測試卡；Fast 是既有 builder 支援的開發組合，會寫持久設定區，未因本次離線驗證而獲准上機。多產品合併及其他產品已搬移 mode table 的情況不在支援範圍。**
+ 
+-本機產物：[20260930-preflight](cards/20260930-preflight/)。
++最新 240 測試產物：[20260930-240-menu-r2](cards/20260930-240-menu-r2/)。
++前輪產物 [20260930-preflight](cards/20260930-preflight/) 保留作比較，不含本次 240 修補。
+ `plain/` 是普通測試卡；`debug/` 帶 USB shell，供下一輪觀測。
+-兩個 `*-alternate-axis/` 目錄僅作「換配方不改 AutoRun」的比較，不是建議上機版本。
++各個 `*-alternate-axis/` 目錄僅作「換配方不改 AutoRun」的比較，不是建議上機版本。
+ 每張卡的 `MANIFEST.json` 記錄來源與產物 SHA-256、entry、區段、journal 位址和限制；
+-[`verification.json`](cards/20260930-preflight/verification.json) 記錄精確成品的模擬結果。
++[`verification.json`](cards/20260930-240-menu-r2/verification.json) 記錄精確成品的模擬結果。
+ 沒有覆蓋 frozen release。
+ 
+ 從專案根目錄建到**全新目錄**：
+@@ -38,7 +52,7 @@
+ ```sh
+ python3 -B projects/open-gate/build/build_sensor_lab_card.py --out /tmp/sensor-lab-plain-new
+ python3 -B projects/open-gate/build/build_sensor_lab_card.py --debug --out /tmp/sensor-lab-debug-new
+-python3 -B projects/open-gate/build/test_sensor_lab_card.py --out /tmp/sensor-lab-verification-new
++python3 -B projects/open-gate/build/test_sensor_lab_card.py --axis-preset H2 --out /tmp/sensor-lab-verification-new
+ ```
+ 
+ 相容的配方／payload／entry 更新不要求換 AutoRun，已比較實際檔案。
+@@ -46,6 +60,8 @@
+ SHA-256 僅用於本機追溯，未加入 runtime 配對或版本檢查。
+ 
+ ## 離線驗證
++
++下表保留前輪基準；240 修補的最新通過數、突變測試、來源與產物雜湊見 [本輪紀錄](validation/20260930-240-menu/RESULTS.md)。
+ 
+ | 範圍 | 結果 | 證據 |
+ |---|---|---|
+@@ -69,7 +85,7 @@
+ 建議首輪使用 `debug/` 的精確產物，先驗證載入與選單連動：
+ 
+ 1. 確認相機與卡片現況、保存原始檔案，讀回部署後的 SHA-256。
+-2. 開機後驗 entry 狀態、CUSTOM 游標、選單摘要，以及切換 8/10/12-bit 與基準格率時的 AXIS／RECIPE；14-bit 留給有合法 RAW14 配方的專項。
++2. 本輪先固定 CinemaDNG／12-bit／CUSTOM／H2 幾何，從 Settings 選 119.88 → 240 → 119.88，再重入；核對選取、摘要、待機文字及 AXIS／RECIPE。QS、RAW14 與錄影另列專項。
+ 3. 先做不錄影的開機→關機→再開約十輪，並另做上一張卡切到這張卡的暖開機驗證。
+ 4. 前述穩定後，再分開安排基準 12-bit 短片、RAW14 封裝／曝光、CRCT I0/I 與高格率測試。
+ 

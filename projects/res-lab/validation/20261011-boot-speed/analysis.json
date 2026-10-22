@@ -1,0 +1,61 @@
+{
+  "baseline": {
+    "load_start_us": 3380137,
+    "load_done_us": 7658333,
+    "load_elapsed_us": 4278196,
+    "timing_scope": "one current camera boot; done stamp excludes LOAD.LOG write, completion drawing, 2-second hold, AutoRun tail",
+    "sup_candidates": 7,
+    "sup_total_bytes": 936724
+  },
+  "autorun": {
+    "bytes": 32768,
+    "sha256": "0c5107fff1262ad8ca3bb675329b71c80926c8b35cdd40931b387639b45edbf0",
+    "handoff_end_offset": 3310,
+    "commands_before_handoff": 108,
+    "osdfile_before_handoff": 12,
+    "bootstrap_words": 81,
+    "tail_bytes": 29458,
+    "tail_visible_chars": 28968,
+    "pad_visible_chars": 28728,
+    "character_delay_restored_before_handoff": true,
+    "store_boot_present": false,
+    "warm_loader_hook_present": false,
+    "tail_execution": "v3 entries and loader return; native parser reaches tail; no current timing measurement of tail duration"
+  },
+  "changes": {
+    "splash_default_ms": 0,
+    "sleep_call_omitted": true,
+    "ui_draws_kept": 3,
+    "native_full_redraw_kept": true,
+    "autorun_changed": false
+  },
+  "tests": {
+    "boot_chain_loader_hook_splash_v3": 51,
+    "supmanager": 18,
+    "two_second_regression_mutation_detected": true
+  },
+  "postboot": {
+    "standby": true,
+    "loader_bytes": 27652,
+    "loader_sha256": "ecae97aff1c484d878f1ae5c277bc1b9607860f49601c4832c08da97ff0b801a",
+    "full_readback_equal": true,
+    "load_start_us": 3346261,
+    "load_done_us": 8235800,
+    "load_elapsed_us": 4889539,
+    "native_draw_restored": true,
+    "echo_restored": true,
+    "active_autorun_sample": {
+      "seconds_since_reboot_reply": 61.847618,
+      "depth": 2,
+      "line_callback": "0xC03DA7A8",
+      "context": "0xC3756A14"
+    },
+    "finished_autorun_sample": {
+      "seconds_since_reboot_reply": 112.358911,
+      "depth": 1,
+      "line_callback": "0xC03DA158"
+    },
+    "boot_scope": "one USB-attached software reboot; reply IO disconnect expected; exact power-on and LCD timing unmeasured",
+    "daemon_pid": 22493
+  }
+}

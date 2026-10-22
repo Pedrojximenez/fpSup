@@ -1,0 +1,821 @@
+{
+  "input_sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622",
+  "scope": "native getters/14 constructor prefixes plus 4 static argument windows",
+  "not_executed": [
+    "property registration",
+    "allocator",
+    "renderer",
+    "UI events",
+    "camera",
+    "controlAnimation/drawImage/drawRect/drawText constructors"
+  ],
+  "custom_record_decoders": [
+    "animationClip: separate 0x1000a serialized structure"
+  ],
+  "components": {
+    "objectBase": {
+      "plugin_table": "0xc2dff8c8",
+      "constructor": "0xc05d4621",
+      "property_table": "0xc2dff5f4",
+      "declared_count": 13,
+      "count": 13,
+      "properties": [
+        {
+          "index": 0,
+          "type": 6,
+          "name": "position",
+          "default_raw": 3269457600,
+          "descriptor_address": "0xc2dff5f4"
+        },
+        {
+          "index": 1,
+          "type": 6,
+          "name": "size",
+          "default_raw": 3269457644,
+          "descriptor_address": "0xc2dff600"
+        },
+        {
+          "index": 2,
+          "type": 1,
+          "name": "angle",
+          "default_raw": 3269457676,
+          "descriptor_address": "0xc2dff60c"
+        },
+        {
+          "index": 3,
+          "type": 6,
+          "name": "scale",
+          "default_raw": 3269457736,
+          "descriptor_address": "0xc2dff618"
+        },
+        {
+          "index": 4,
+          "type": 7,
+          "name": "transform-origin",
+          "default_raw": 3269457816,
+          "descriptor_address": "0xc2dff624"
+        },
+        {
+          "index": 5,
+          "type": 1,
+          "name": "opacity",
+          "default_raw": 3269457892,
+          "descriptor_address": "0xc2dff630"
+        },
+        {
+          "index": 6,
+          "type": 2,
+          "name": "is-visible",
+          "default_raw": 0,
+          "descriptor_address": "0xc2dff63c"
+        },
+        {
+          "index": 7,
+          "type": 2,
+          "name": "do-clip",
+          "default_raw": 0,
+          "descriptor_address": "0xc2dff648"
+        },
+        {
+          "index": 8,
+          "type": 0,
+          "name": "tab-index",
+          "default_raw": 3269457968,
+          "descriptor_address": "0xc2dff654"
+        },
+        {
+          "index": 9,
+          "type": 2,
+          "name": "is-tab-group",
+          "default_raw": 0,
+          "descriptor_address": "0xc2dff660"
+        },
+        {
+          "index": 10,
+          "type": 9,
+          "name": "tab-group-focus-rule",
+          "default_raw": 3269458024,
+          "descriptor_address": "0xc2dff66c"
+        },
+        {
+          "index": 11,
+          "type": 2,
+          "name": "is-active",
+          "default_raw": 0,
+          "descriptor_address": "0xc2dff678"
+        },
+        {
+          "index": 12,
+          "type": 2,
+          "name": "is-render-group",
+          "default_raw": 0,
+          "descriptor_address": "0xc2dff684"
+        }
+      ],
+      "provenance": {
+        "method": "native_constructor_prefix_capture",
+        "instructions_before_capture": 7
+      }
+    },
+    "appVariableEvent": {
+      "plugin_table": "0xc2e00180",
+      "constructor": "0xc05e4961",
+      "property_table": "0xc2e000a0",
+      "declared_count": 6,
+      "count": 6,
+      "properties": [
+        {
+          "index": 0,
+          "type": 9,
+          "name": "type",
+          "default_raw": 3269460220,
+          "descriptor_address": "0xc2e000a0"
+        },
+        {
+          "index": 1,
+          "type": 11,
+          "name": "variable-name",
+          "default_raw": 0,
+          "descriptor_address": "0xc2e000ac"
+        },
+        {
+          "index": 2,
+          "type": 0,
+          "name": "component-id",
+          "default_raw": 0,
+          "descriptor_address": "0xc2e000b8"
+        },
+        {
+          "index": 3,
+          "type": 11,
+          "name": "property-name",
+          "default_raw": 0,
+          "descriptor_address": "0xc2e000c4"
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "name": "property-subindex",
+          "default_raw": 0,
+          "descriptor_address": "0xc2e000d0"
+        },
+        {
+          "index": 5,
+          "type": 9,
+          "name": "decimal-places",
+          "default_raw": 3269460316,
+          "descriptor_address": "0xc2e000dc"
+        }
+      ],
+      "provenance": {
+        "method": "native_constructor_prefix_capture",
+        "instructions_before_capture": 14
+      }
+    },
+    "appVariableChangeEvent": {
+      "plugin_table": "0xc2e00310",
+      "constructor": "0xc05e5739",
+      "property_table": "0xc2e001b0",
+      "declared_count": 8,
+      "count": 8,
+      "properties": [
+        {
+          "index": 0,
+          "type": 11,
+          "name": "variable-name",
+          "default_raw": 0,
+          "descriptor_address": "0xc2e001b0"
+        },
+        {
+          "index": 1,
+          "type": 10,
+          "name": "type",
+          "default_raw": 3269460532,
+          "descriptor_address": "0xc2e001bc"
+        },
+        {
+          "index": 2,
+          "type": 1,
+          "name": "equal-value",
+          "default_raw": 0,
+          "descriptor_address": "0xc2e001c8"
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "name": "greater-than-value",
+          "default_raw": 0,
+          "descriptor_address": "0xc2e001d4"
+        },
+        {
+          "index": 4,
+          "type": 1,
+          "name": "lower-than-value",
+          "default_raw": 0,
+          "descriptor_address": "0xc2e001e0"
+        },
+        {
+          "index": 5,
+          "type": 1,
+          "name": "range-lowerlimit-value",
+          "default_raw": 0,
+          "descriptor_address": "0xc2e001ec"
+        },
+        {
+          "index": 6,
+          "type": 1,
+          "name": "range-upperlimit-value",
+          "default_raw": 0,
+          "descriptor_address": "0xc2e001f8"
+        },
+        {
+          "index": 7,
+          "type": 11,
+          "name": "equal-string",
+          "default_raw": 3269460736,
+          "descriptor_address": "0xc2e00204"
+        }
+      ],
+      "provenance": {
+        "method": "native_constructor_prefix_capture",
+        "instructions_before_capture": 14
+      }
+    },
+    "controlAppState": {
+      "plugin_table": "0xc2e01314",
+      "constructor": "0xc05f1441",
+      "property_table": "0xc2e0122c",
+      "declared_count": 8,
+      "count": 8,
+      "properties": [
+        {
+          "index": 0,
+          "type": 11,
+          "name": "sync-request",
+          "default_raw": 0,
+          "descriptor_address": "0xc2e0122c"
+        },
+        {
+          "index": 1,
+          "type": 2,
+          "name": "app-sync-request",
+          "default_raw": 0,
+          "descriptor_address": "0xc2e01238"
+        },
+        {
+          "index": 2,
+          "type": 2,
+          "name": "to-uic",
+          "default_raw": 0,
+          "descriptor_address": "0xc2e01244"
+        },
+        {
+          "index": 3,
+          "type": 2,
+          "name": "skip-anim",
+          "default_raw": 0,
+          "descriptor_address": "0xc2e01250"
+        },
+        {
+          "index": 4,
+          "type": 2,
+          "name": "send-all-shared-context",
+          "default_raw": 0,
+          "descriptor_address": "0xc2e0125c"
+        },
+        {
+          "index": 5,
+          "type": 2,
+          "name": "view-state-event",
+          "default_raw": 0,
+          "descriptor_address": "0xc2e01268"
+        },
+        {
+          "index": 6,
+          "type": 2,
+          "name": "essential",
+          "default_raw": 0,
+          "descriptor_address": "0xc2e01274"
+        },
+        {
+          "index": 7,
+          "type": 2,
+          "name": "to-all-shared-context",
+          "default_raw": 0,
+          "descriptor_address": "0xc2e01280"
+        }
+      ],
+      "provenance": {
+        "method": "native_constructor_prefix_capture",
+        "instructions_before_capture": 8
+      }
+    },
+    "controlAppVariable": {
+      "plugin_table": "0xc2e01440",
+      "constructor": "0xc05f1ef9",
+      "property_table": "0xc2e01340",
+      "declared_count": 8,
+      "count": 8,
+      "properties": [
+        {
+          "index": 0,
+          "type": 11,
+          "name": "destination-variable",
+          "default_raw": 0,
+          "descriptor_address": "0xc2e01340"
+        },
+        {
+          "index": 1,
+          "type": 9,
+          "name": "source-type",
+          "default_raw": 3269465028,
+          "descriptor_address": "0xc2e0134c"
+        },
+        {
+          "index": 2,
+          "type": 11,
+          "name": "source-variable",
+          "default_raw": 0,
+          "descriptor_address": "0xc2e01358"
+        },
+        {
+          "index": 3,
+          "type": 14,
+          "name": "object-id",
+          "default_raw": 0,
+          "descriptor_address": "0xc2e01364"
+        },
+        {
+          "index": 4,
+          "type": 11,
+          "name": "component-name",
+          "default_raw": 0,
+          "descriptor_address": "0xc2e01370"
+        },
+        {
+          "index": 5,
+          "type": 11,
+          "name": "component-tag",
+          "default_raw": 0,
+          "descriptor_address": "0xc2e0137c"
+        },
+        {
+          "index": 6,
+          "type": 11,
+          "name": "component-property",
+          "default_raw": 0,
+          "descriptor_address": "0xc2e01388"
+        },
+        {
+          "index": 7,
+          "type": 11,
+          "name": "value",
+          "default_raw": 0,
+          "descriptor_address": "0xc2e01394"
+        }
+      ],
+      "provenance": {
+        "method": "native_constructor_prefix_capture",
+        "instructions_before_capture": 8
+      }
+    },
+    "controlFocus": {
+      "plugin_table": "0xc2e01594",
+      "constructor": "0xc05f21f9",
+      "property_table": "0xc2e01474",
+      "declared_count": 5,
+      "count": 5,
+      "properties": [
+        {
+          "index": 0,
+          "type": 9,
+          "name": "operation",
+          "default_raw": 3269465276,
+          "descriptor_address": "0xc2e01474"
+        },
+        {
+          "index": 1,
+          "type": 14,
+          "name": "object-id",
+          "default_raw": 0,
+          "descriptor_address": "0xc2e01480"
+        },
+        {
+          "index": 2,
+          "type": 2,
+          "name": "do-loop",
+          "default_raw": 0,
+          "descriptor_address": "0xc2e0148c"
+        },
+        {
+          "index": 3,
+          "type": 11,
+          "name": "layout-item-index",
+          "default_raw": 0,
+          "descriptor_address": "0xc2e01498"
+        },
+        {
+          "index": 4,
+          "type": 11,
+          "name": "focus-variable",
+          "default_raw": 0,
+          "descriptor_address": "0xc2e014a4"
+        }
+      ],
+      "provenance": {
+        "method": "native_constructor_prefix_capture",
+        "instructions_before_capture": 8
+      }
+    },
+    "controlTimer": {
+      "plugin_table": "0xc2e01604",
+      "constructor": "0xc05f2391",
+      "property_table": "0xc2e015c0",
+      "declared_count": 2,
+      "count": 2,
+      "properties": [
+        {
+          "index": 0,
+          "type": 14,
+          "name": "object-id",
+          "default_raw": 0,
+          "descriptor_address": "0xc2e015c0"
+        },
+        {
+          "index": 1,
+          "type": 9,
+          "name": "operation",
+          "default_raw": 3269465584,
+          "descriptor_address": "0xc2e015cc"
+        }
+      ],
+      "provenance": {
+        "method": "native_constructor_prefix_capture",
+        "instructions_before_capture": 8
+      }
+    },
+    "changePropertyByControl": {
+      "plugin_table": "0xc2e01824",
+      "constructor": "0xc05f3759",
+      "property_table": "0xc2e0177c",
+      "declared_count": 6,
+      "count": 6,
+      "properties": [
+        {
+          "index": 0,
+          "type": 14,
+          "name": "object-id",
+          "default_raw": 0,
+          "descriptor_address": "0xc2e0177c"
+        },
+        {
+          "index": 1,
+          "type": 11,
+          "name": "component-name",
+          "default_raw": 0,
+          "descriptor_address": "0xc2e01788"
+        },
+        {
+          "index": 2,
+          "type": 11,
+          "name": "component-tag",
+          "default_raw": 0,
+          "descriptor_address": "0xc2e01794"
+        },
+        {
+          "index": 3,
+          "type": 11,
+          "name": "component-property",
+          "default_raw": 0,
+          "descriptor_address": "0xc2e017a0"
+        },
+        {
+          "index": 4,
+          "type": 11,
+          "name": "formula",
+          "default_raw": 0,
+          "descriptor_address": "0xc2e017ac"
+        },
+        {
+          "index": 5,
+          "type": 9,
+          "name": "decimal-places",
+          "default_raw": 3269466140,
+          "descriptor_address": "0xc2e017b8"
+        }
+      ],
+      "provenance": {
+        "method": "native_constructor_prefix_capture",
+        "instructions_before_capture": 8
+      }
+    },
+    "controlValue": {
+      "plugin_table": "0xc2e02918",
+      "constructor": "0xc05fab71",
+      "property_table": "0xc2e027c8",
+      "declared_count": 5,
+      "count": 5,
+      "properties": [
+        {
+          "index": 0,
+          "type": 1,
+          "name": "min-value",
+          "default_raw": 3269470236,
+          "descriptor_address": "0xc2e027c8"
+        },
+        {
+          "index": 1,
+          "type": 1,
+          "name": "max-value",
+          "default_raw": 3269470296,
+          "descriptor_address": "0xc2e027d4"
+        },
+        {
+          "index": 2,
+          "type": 1,
+          "name": "value",
+          "default_raw": 3269470352,
+          "descriptor_address": "0xc2e027e0"
+        },
+        {
+          "index": 3,
+          "type": 2,
+          "name": "is-value-loop",
+          "default_raw": 0,
+          "descriptor_address": "0xc2e027ec"
+        },
+        {
+          "index": 4,
+          "type": 9,
+          "name": "terminal-type",
+          "default_raw": 3269470432,
+          "descriptor_address": "0xc2e027f8"
+        }
+      ],
+      "provenance": {
+        "method": "native_constructor_prefix_capture",
+        "instructions_before_capture": 14
+      }
+    },
+    "controlValueEvent": {
+      "plugin_table": "0xc2e02ba4",
+      "constructor": "0xc05fb439",
+      "property_table": "0xc2e02944",
+      "declared_count": 12,
+      "count": 12,
+      "properties": [
+        {
+          "index": 0,
+          "type": 10,
+          "name": "type",
+          "default_raw": 3269470700,
+          "descriptor_address": "0xc2e02944"
+        },
+        {
+          "index": 1,
+          "type": 1,
+          "name": "equal-value",
+          "default_raw": 3269470816,
+          "descriptor_address": "0xc2e02950"
+        },
+        {
+          "index": 2,
+          "type": 1,
+          "name": "greater-than-value",
+          "default_raw": 3269470816,
+          "descriptor_address": "0xc2e0295c"
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "name": "lower-than-value",
+          "default_raw": 3269470816,
+          "descriptor_address": "0xc2e02968"
+        },
+        {
+          "index": 4,
+          "type": 1,
+          "name": "range-lowerlimit-value",
+          "default_raw": 3269470816,
+          "descriptor_address": "0xc2e02974"
+        },
+        {
+          "index": 5,
+          "type": 1,
+          "name": "range-upperlimit-value",
+          "default_raw": 3269470816,
+          "descriptor_address": "0xc2e02980"
+        },
+        {
+          "index": 6,
+          "type": 10,
+          "name": "previous-type",
+          "default_raw": 3269470944,
+          "descriptor_address": "0xc2e0298c"
+        },
+        {
+          "index": 7,
+          "type": 1,
+          "name": "previous-equal-value",
+          "default_raw": 3269470816,
+          "descriptor_address": "0xc2e02998"
+        },
+        {
+          "index": 8,
+          "type": 1,
+          "name": "previous-greater-than-value",
+          "default_raw": 3269470816,
+          "descriptor_address": "0xc2e029a4"
+        },
+        {
+          "index": 9,
+          "type": 1,
+          "name": "previous-lower-than-value",
+          "default_raw": 3269470816,
+          "descriptor_address": "0xc2e029b0"
+        },
+        {
+          "index": 10,
+          "type": 1,
+          "name": "previous-range-lowerlimit-value",
+          "default_raw": 3269470816,
+          "descriptor_address": "0xc2e029bc"
+        },
+        {
+          "index": 11,
+          "type": 1,
+          "name": "previous-range-upperlimit-value",
+          "default_raw": 3269470816,
+          "descriptor_address": "0xc2e029c8"
+        }
+      ],
+      "provenance": {
+        "method": "native_constructor_prefix_capture",
+        "instructions_before_capture": 18
+      }
+    },
+    "focusEvent": {
+      "plugin_table": "0xc2e02ce8",
+      "constructor": "0xc05fbed1",
+      "property_table": "0xc2e02cac",
+      "declared_count": 1,
+      "count": 1,
+      "properties": [
+        {
+          "index": 0,
+          "type": 10,
+          "name": "type",
+          "default_raw": 3269471436,
+          "descriptor_address": "0xc2e02cac"
+        }
+      ],
+      "provenance": {
+        "method": "native_constructor_prefix_capture",
+        "instructions_before_capture": 14
+      }
+    },
+    "keyEvent": {
+      "plugin_table": "0xc2e02de4",
+      "constructor": "0xc05fc149",
+      "property_table": "0xc2e02d14",
+      "declared_count": 5,
+      "count": 5,
+      "properties": [
+        {
+          "index": 0,
+          "type": 10,
+          "name": "type",
+          "default_raw": 3269471588,
+          "descriptor_address": "0xc2e02d14"
+        },
+        {
+          "index": 1,
+          "type": 10,
+          "name": "keys",
+          "default_raw": 3269471628,
+          "descriptor_address": "0xc2e02d20"
+        },
+        {
+          "index": 2,
+          "type": 2,
+          "name": "keycode",
+          "default_raw": 0,
+          "descriptor_address": "0xc2e02d2c"
+        },
+        {
+          "index": 3,
+          "type": 0,
+          "name": "args",
+          "default_raw": 3269471672,
+          "descriptor_address": "0xc2e02d38"
+        },
+        {
+          "index": 4,
+          "type": 2,
+          "name": "do-propagate",
+          "default_raw": 0,
+          "descriptor_address": "0xc2e02d44"
+        }
+      ],
+      "provenance": {
+        "method": "native_constructor_prefix_capture",
+        "instructions_before_capture": 14
+      }
+    },
+    "screenEvent": {
+      "plugin_table": "0xc2e02e80",
+      "constructor": "0xc05fc2e1",
+      "property_table": "0xc2e02e10",
+      "declared_count": 1,
+      "count": 1,
+      "properties": [
+        {
+          "index": 0,
+          "type": 10,
+          "name": "type",
+          "default_raw": 3269471792,
+          "descriptor_address": "0xc2e02e10"
+        }
+      ],
+      "provenance": {
+        "method": "native_constructor_prefix_capture",
+        "instructions_before_capture": 14
+      }
+    },
+    "timerEvent": {
+      "plugin_table": "0xc2e02f54",
+      "constructor": "0xc05fc6b9",
+      "property_table": "0xc2e02f14",
+      "declared_count": 2,
+      "count": 2,
+      "properties": [
+        {
+          "index": 0,
+          "type": 0,
+          "name": "timeout",
+          "default_raw": 0,
+          "descriptor_address": "0xc2e02f14"
+        },
+        {
+          "index": 1,
+          "type": 2,
+          "name": "repeat",
+          "default_raw": 0,
+          "descriptor_address": "0xc2e02f20"
+        }
+      ],
+      "provenance": {
+        "method": "native_constructor_prefix_capture",
+        "instructions_before_capture": 14
+      }
+    }
+  },
+  "failures": [
+    {
+      "component": "controlAnimation",
+      "plugin_table": "0xc2e01200",
+      "constructor": "0xc05f1201",
+      "reason": "unexpected call in argument window",
+      "last_instructions": [
+        "0xc05f1268",
+        "0xc05f126c"
+      ]
+    },
+    {
+      "component": "drawImage",
+      "plugin_table": "0xc2e033a4",
+      "constructor": "0xc05fd299",
+      "reason": "unexpected call in argument window",
+      "last_instructions": [
+        "0xc05fd380",
+        "0xc05fd384"
+      ]
+    },
+    {
+      "component": "drawRect",
+      "plugin_table": "0xc2e03548",
+      "constructor": "0xc05fd779",
+      "reason": "unexpected call in argument window",
+      "last_instructions": [
+        "0xc05fd900",
+        "0xc05fd904"
+      ]
+    },
+    {
+      "component": "drawText",
+      "plugin_table": "0xc2e03a14",
+      "constructor": "0xc05fe1a9",
+      "reason": "unexpected call in argument window",
+      "last_instructions": [
+        "0xc05fe2b0",
+        "0xc05fe2b4"
+      ]
+    }
+  ],
+  "missing": [
+    "controlAnimation",
+    "drawImage",
+    "drawRect",
+    "drawText"
+  ]
+}

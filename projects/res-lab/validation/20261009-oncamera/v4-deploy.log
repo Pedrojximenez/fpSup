@@ -1,0 +1,26 @@
+  stage  73344 bytes in 0.001s (52.5 MB/s)      
+  verify 73344 bytes in 0.000s (178.0 MB/s)      
+  stage  73344 bytes in 0.01s (5.8 MB/s), MEM1, read back whole          
+  code   304/304 B  5.6 KiB/s   verify 304/304 B  592 KiB/s   verify 304 bytes in 0.0s (289 KiB/s)      
+  code   304 bytes in 0.1s (2.8 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  code   412/412 B  98.6 KiB/s   verify 412/412 B  840 KiB/s   verify 412 bytes in 0.0s (394 KiB/s)      
+  code   412 bytes in 0.0s (67.1 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 73344 bytes in 0.000s (167.8 MB/s)      
+  local   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/cards/20261009-virtual-rcd-v4/debug/fpSup/32RESCUS.BIN  73344 bytes
+  remote  \fpSup\32RESCUS.BIN  mode 0x7
+  buffer  0x450629C0, file object 0x45074840
+  proof   region takes writes and still holds them a second later
+  restored echo -> 0xC03D99A0
+  reply   putfile: written
+  status  2 — written
+  open    1     write  1   (both are flags, not counts)
+  WARNING 32RESCUS.BIN did not appear in dir
+  remote  \fpSup\32RESCUS.BIN  73344 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x5F900980 (77440 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 73344 of 73344
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/v4-readback/32RESCUS.BIN
+Verified \fpSup\32RESCUS.BIN 73344

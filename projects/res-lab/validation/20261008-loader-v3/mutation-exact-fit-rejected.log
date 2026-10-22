@@ -1,0 +1,14 @@
+test_real_installer_accepts_exact_fit_without_reopening_the_file (test_v3_reslab.ResLabV3Tests) ... FAIL
+
+======================================================================
+FAIL: test_real_installer_accepts_exact_fit_without_reopening_the_file (test_v3_reslab.ResLabV3Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_v3_reslab.py", line 334, in test_real_installer_accepts_exact_fit_without_reopening_the_file
+    self.assertEqual(cam.w(mark + M_RESULT), 1, 'the real emitted installer must install')
+AssertionError: 6 != 1 : the real emitted installer must install
+
+----------------------------------------------------------------------
+Ran 1 test in 1.573s
+
+FAILED (failures=1)

@@ -1,0 +1,1722 @@
+--- before/fpSup/lossless/README.md
++++ after/fpSup/lossless/README.md
+@@ -1,4 +1,63 @@
+ # fpLossless — standalone lossless RAW compression
++
++## 2026-10-12: adaptive batch count and stop-release integration
++
++The current builders produce an **offline development candidate**, including
++the menu, native recording hooks and shared loader. The older status below is
++retained as history. This increment has not been tested on a camera.
++
++- Keep the stock **64 MiB** byte target. A second native flush trigger limits
++  frames in a batch to half the available descriptor budget, after reserving
++  two stop slots, four pipeline slots, and arrivals during a writer return.
++  FPS is rounded upward; the initial return allowance is **100 ms**, then only
++  increases to the longest observed return in that take. These reserves are
++  policy assumptions pending hardware measurement, not a no-stall guarantee.
++- Actual mixed RAW/compressed bytes drive the existing byte trigger. A rolling
++  32-file sample reports compression fraction, mean file size and the estimated
++  frames needed for 64 MiB. The estimate never relaxes the count/free-slot
++  guards. Resolution and RAW fallbacks are thus reflected in actual file sizes.
++- The count hook applies only to the current admitted lossless writer frame
++  with the stock CinemaDNG callback. Low/unknown free descriptor counts force
++  an earlier native flush. OFF and unrelated filesystem calls retain their
++  original count decision.
++- Integrate the community stop fix: `C0377118` branches to `C03776A0`, so discarded
++  queue entries take the native reference-counted release path. This shared
++  stop-path correction also applies with the menu OFF. It does not recover
++  discarded images or cure encoder stalls. A busy registry still follows its
++  native early return; concurrent hardware behavior remains unverified.
++- Flush metadata now checks the native frame pointer and generation as well
++  as the file buffer address; reused addresses retire mismatched metadata
++  without freeing live memory or applying a previous frame's compressed header.
++
++Both added patch sites are guarded, journaled, exclusively claimed in v3 and
++restored on shutdown. **Do not combine the integrated `10LOSS.BIN` with the
++standalone `05STOPFX.BIN`**: their exclusive stop-site claims conflict, and the
++loader refuses the later lossless module without arming it.
++
++Build from `fpSup/` into a new empty directory:
++
++```sh
++python3 -B lossless/build_v3_lossless.py --out /absolute/new/directory --card
++# Add --trace for the diagnostic variant.
++```
++
++Focused offline tests:
++
++```sh
++cd lossless/native
++python3 -B -m unittest test_bulk_policy test_frame_hold test_record_diag
++cd ..
++python3 -B -X faulthandler -m unittest test_bulk_native test_stop_release test_v3_lossless test_card_emulation
++```
++
++`card_status.py` reads the matching build's `layout.json` and reports batch cap,
++FPS reserve, pool pressure, mixed file statistics and retired stale metadata.
++Source changes, exact candidate bytes, validation logs and hardware limitations:
++[`20261012-bulk-stop-integration`](../../projects/lossless-sup/validation/20261012-bulk-stop-integration/).
++The updated mechanism is also recorded in
++[`EARLY_STOP_94.md`](../../projects/lossless-sup/notes/EARLY_STOP_94.md).
++
++## Historical status — 2026-09-30
+ 
+ Development source, **not an installable recording product**. No AutoRun,
+ VSHL, firmware patch or camera deployment is emitted by this directory yet.
+--- before/fpSup/lossless/build_card.py
++++ after/fpSup/lossless/build_card.py
+@@ -84,6 +84,8 @@
+     0xC05C2D10: (0xE92D44F0, 'player pool make: push {r4, r5, r6, r7, sl, lr}'),
+     0xC038BD08: (0xE594300C, 'CinemaDNG event observation: ldr r3, [r4, #0xc]'),
+     0xC037DEF8: (0xEB000042, 'native FIFO discard observation: bl C037E008'),
++    0xC063F828: (0x9805D102, 'Thumb aggregation count gate: bne C063F830; ldr r0,[sp,#20]'),
++    0xC0377118: (0xE92D4030, 'stop queue release: redirect pop/drop to native raw del'),
+     # the row's private strings hang on these (uishare/NESTED_HOOKS.md);
+     # other sups declare the same stock words, and identical sections fold
+     0xC05E5B58: (0x3FFFF1B1, 'string resolve (nested string layers)'),
+@@ -128,13 +130,22 @@
+     'discard_raw', 'discard_completion', 'discard_teardown', 'discard_other',
+     'drop_next', 'drop_used', 'drop_overwritten', 'drops',
+     'writer_calls', 'writer_zero', 'writer_nonzero', 'writer_low', 'writer_high')]
++FIELDS += ['rec.facts.seen.fps_num', 'rec.facts.seen.fps_den']
++FIELDS += ['bulk_policy.' + name for name in (
++    'enabled', 'fps_ceil', 'start_free', 'latency_us', 'arrival_reserve',
++    'frame_limit', 'free_watermark', 'budget_exhausted', 'checks',
++    'count_flushes', 'pressure_flushes', 'unknown_pool', 'submitted', 'compressed',
++    'raw', 'failed_returns', 'sample_frames', 'sample_compressed', 'sample_bytes',
++    'mean_bytes', 'predicted_frames')]
++FIELDS += ['bulk_writer_frame', 'bulk_writer_start', 'bulk_writer_compressed']
++FIELDS += ['hold.stale_commits', 'hold_b.stale_commits']
+ UNITS = ['control.c', 'frame_pipeline.c', 'native/workspace_layout.c', 'uishare/ui_pool.c',
+          'uishare/ui_apply.c',
+          'native/menu_page.c',
+          'native/raw_workspace.c', 'native/rec_workspace.c', 'native/producer_facts.c',
+          'native/rec_hook.c', 'native/codec_job.c', 'native/trailer.c',
+          'native/frame_hold.c', 'native/flush_site.c', 'native/play_decode.c',
+-         'native/record_diag.c',
++         'native/record_diag.c', 'native/bulk_policy.c',
+          'native/card.c']
+ ENTRIES = {'OFF_INIT': 'fpl_card_init', 'OFF_REC': 'fpl_card_rec',
+            'OFF_ARRIVE': 'fpl_card_arrive', 'OFF_STOP': 'fpl_card_stop',
+@@ -142,7 +153,7 @@
+            'OFF_PLAY': 'fpl_card_play', 'OFF_CLIP': 'fpl_card_clip',
+            'OFF_END': 'fpl_card_play_end', 'OFF_POOL': 'fpl_card_play_pool',
+            'OFF_WRITTEN': 'fpl_card_written', 'OFF_EVENT': 'fpl_card_event',
+-           'OFF_DISCARD': 'fpl_card_discard'}
++           'OFF_DISCARD': 'fpl_card_discard', 'OFF_BULK': 'fpl_card_bulk'}
+ CFLAGS = ['--target=armv7a-none-eabi', '-mcpu=cortex-a9', '-mthumb', '-mfloat-abi=soft',
+           '-mfpu=none', '-mstackrealign', '-ffreestanding', '-fno-builtin', '-nostdlib', '-fno-jump-tables',
+           '-fropi', '-fno-addrsig', '-O2', '-std=c11', '-Wall', '-Wextra', '-Werror',
+--- before/fpSup/lossless/build_v3_lossless.py
++++ after/fpSup/lossless/build_v3_lossless.py
+@@ -10,7 +10,7 @@
+   - the file IS the block: [FSB1 header][card.S][compiled C][FPUI], the state
+     after it in the zeroed tail. No allocation, no copy, no second read of a
+     file: the row's FPUI block rides in the sup (card.c FPL_MENU_OFF).
+-  - entry(block, svc) claims all thirteen sites and the engine first, checks
++  - entry(block, svc) claims all sixteen sites and the engine first, checks
+     the layers below, takes its cave block from svc->cave_alloc, and only then
+     starts the codec task and installs the row, then arms. A refusal anywhere
+     before that returns SL_RELEASE with nothing written.
+@@ -42,11 +42,11 @@
+ SUP_ID = 'LOSS'
+ VERSION = 1
+ SETTINGS_OFF = 0
+-SITE_COUNT = 14                    # card.S `claims`; the same sites as build_card.SITES
++SITE_COUNT = 16                    # card.S `claims`; the same sites as build_card.SITES
+ KINDS = {1: 'CHAIN', 2: 'EXCL', 3: 'SHARED_UI'}
+ WANT_KIND = {0xC038BFF0: 2, 0xC05BDDAC: 2,                     # arrive, clip size
+              0xC05E5B58: 3, 0xC05E61C8: 3, 0xC05E61E0: 3,     # uishare string layers
+-             0xC0B9E5D8: 2}                                   # bulk size (data)
++             0xC0B9E5D8: 2, 0xC063F828: 2, 0xC0377118: 2}     # bulk data/gate, stop release
+ 
+ 
+ def menu_block():
+@@ -141,7 +141,7 @@
+ 
+ 
+ def check_claims(launcher, at):
+-    """The claims table as assembled: the thirteen sites build_card declares,
++    """The claims table as assembled: the sites build_card declares,
+     each stock word the one in BOTH reference images, the kinds as decided."""
+     n, = struct.unpack_from('<I', launcher, at)
+     rows = [struct.unpack_from('<3I', launcher, at + 4 + 12 * i) for i in range(n)]
+@@ -202,7 +202,8 @@
+                   '+40 resident base, +44 blob length', 'state_bytes': facts['state_bytes'],
+         'fields': facts['layout']}, indent=1) + '\n')
+     sources = [pathlib.Path(__file__), HERE / 'build_card.py', HERE / 'native' / 'card.S'] + \
+-              [(FPSUP if u.startswith('uishare/') else HERE) / u for u in C.UNITS]
++              [(FPSUP if u.startswith('uishare/') else HERE) / u for u in C.UNITS] + \
++              list((HERE / 'native').glob('*.h'))
+     (meta / 'build.json').write_text(json.dumps({
+         'product': 'fpLossless, Loader v3 sup', 'file': NAME, 'sup_id': SUP_ID,
+         'version': VERSION, 'card': a.card, 'trace': a.trace,  'blob': {k: v for k, v in facts.items()
+--- before/fpSup/lossless/card_status.py
++++ after/fpSup/lossless/card_status.py
+@@ -179,6 +179,26 @@
+         print(f'  file-layer bulk this take: {b:,} B ({b / 2**20:.1f} MiB'
+               f'{", stock" if b == 0x4000000 else ""}); writer already open at REC: '
+               f'{v["bulk_writer_open"]} (must be 0, or the value came too late)')
++    if 'bulk_policy.frame_limit' in v:
++        p = {k.removeprefix('bulk_policy.'): x for k, x in v.items()
++             if k.startswith('bulk_policy.')}
++        print(f'  batch frame cap {p["frame_limit"]}, two batches; '
++              f'initial slots {p["start_free"]}, fps reserve {p["arrival_reserve"]}, '
++              f'free-slot trigger <= {p["free_watermark"]}; '
++              f'writer allowance {p["latency_us"] / 1000:.1f} ms '
++              f'(budget exhausted {p["budget_exhausted"]})')
++        n = p['sample_frames']
++        ratio = p['sample_compressed'] / n if n else 0
++        fps = v.get('rec.facts.seen.fps_num', 0) / max(1, v.get('rec.facts.seen.fps_den', 1))
++        print(f'  observed mixed submissions: {p["compressed"]} compressed / '
++              f'{p["raw"]} RAW; recent {n} frames {ratio:.0%} compressed, '
++              f'mean {p["mean_bytes"]:,} B, estimated {fps * p["mean_bytes"] / 2**20:.1f} MiB/s, '
++              f'{p["predicted_frames"]} frames per 64 MiB (estimate only)')
++        print(f'  early batches: count {p["count_flushes"]}, pressure {p["pressure_flushes"]}, '
++              f'unknown pool {p["unknown_pool"]}; failed writer returns {p["failed_returns"]}')
++    if 'hold.stale_commits' in v:
++        print(f'  stale compression metadata retired after buffer reuse: '
++              f'{v["hold.stale_commits"] + v["hold_b.stale_commits"]}')
+     print(f'  this take {v["take_frames"]} frames (the first left uncompressed); clips opening '
+           f'on a stock frame {v["play.clips_first_stock"]}')
+     print(f'  clips opened {v["play.clips"]}, ours {v["play.clips_ours"]} (frame size '
+--- /dev/null
++++ after/fpSup/lossless/native/bulk_policy.c
+@@ -0,0 +1,109 @@
++#include "bulk_policy.h"
++
++#define START_LATENCY_US 100000u
++#define HANDOFF_SLOTS 4u
++#define STOP_HEADROOM 2u
++
++/* ARMv7 build has no compiler division runtime. Bounded 32-bit long division. */
++static uint32_t divide(uint32_t n, uint32_t d) {
++    uint32_t q = 0, r = 0;
++    if (!d) return UINT32_MAX;
++    for (uint32_t bit = 32; bit; --bit) {
++        uint32_t carry = r >> 31;
++        r = (r << 1) | ((n >> (bit - 1)) & 1u);
++        if (carry || r >= d) { r -= d; q |= 1u << (bit - 1); }
++    }
++    return q;
++}
++static uint32_t ceil_div(uint32_t n, uint32_t d) {
++    uint32_t q = divide(n, d);
++    return q + (q != UINT32_MAX && n - q * d != 0);
++}
++static void increment(uint32_t *n) { if (*n != UINT32_MAX) ++*n; }
++
++static void limits(struct fpl_bulk_policy *p) {
++    uint32_t reserve, used;
++    if (!p->fps_ceil || p->fps_ceil > 240u || p->start_free > FPL_BULK_POOL_SLOTS ||
++        p->start_free <= STOP_HEADROOM) {
++        p->arrival_reserve = FPL_BULK_POOL_SLOTS;
++        p->free_watermark = FPL_BULK_POOL_SLOTS;
++        p->frame_limit = 1;
++        p->budget_exhausted = 1;
++        return;
++    }
++    /* Clamp before multiplication; a one-second stall already exhausts the
++     * frame budget at high rates. Do not overflow into a generous limit. */
++    uint32_t us = p->latency_us > 1000000u ? 1000000u : p->latency_us;
++    reserve = ceil_div(p->fps_ceil * us, 1000000u);
++    if (p->latency_us > 1000000u) reserve = FPL_BULK_POOL_SLOTS;
++    p->arrival_reserve = reserve;
++    used = STOP_HEADROOM + HANDOFF_SLOTS + reserve;
++    p->free_watermark = used < FPL_BULK_POOL_SLOTS ? used : FPL_BULK_POOL_SLOTS;
++    p->budget_exhausted = p->start_free <= used + 1u;
++    p->frame_limit = p->budget_exhausted ? 1u : (p->start_free - used) / 2u;
++}
++
++void fpl_bulk_reset(struct fpl_bulk_policy *p) {
++    if (!p) return;
++    uint32_t *w = (uint32_t *)p;
++    for (uint32_t i = 0; i < sizeof(*p) / sizeof(*w); ++i) w[i] = 0;
++}
++
++void fpl_bulk_begin(struct fpl_bulk_policy *p, uint32_t num, uint32_t den,
++                    uint32_t free_slots) {
++    if (!p) return;
++    fpl_bulk_reset(p);
++    p->enabled = 1;
++    p->fps_ceil = den ? ceil_div(num, den) : 0;
++    p->start_free = free_slots;
++    p->latency_us = START_LATENCY_US;
++    limits(p);
++}
++
++uint32_t fpl_bulk_should_flush(struct fpl_bulk_policy *p, uint32_t pending,
++                               uint32_t free_slots) {
++    if (!p || !p->enabled) return pending == 128u;
++    increment(&p->checks);
++    if (free_slots > FPL_BULK_POOL_SLOTS) {
++        increment(&p->unknown_pool);
++        return 1;                       /* unknown pressure: send this file */
++    }
++    if (free_slots <= p->free_watermark) {
++        increment(&p->pressure_flushes);
++        return 1;
++    }
++    if (pending >= p->frame_limit - 1u) {
++        increment(&p->count_flushes);
++        return 1;
++    }
++    return 0;
++}
++
++void fpl_bulk_observe(struct fpl_bulk_policy *p, uint32_t low, uint32_t high,
++                       uint32_t compressed, uint32_t elapsed_us) {
++    if (!p || !p->enabled) return;
++    if (elapsed_us > p->latency_us) {
++        p->latency_us = elapsed_us;
++        limits(p);
++    }
++    if (!low || high || low > FPL_BULK_BYTES * 4u) {
++        increment(&p->failed_returns);
++        return;
++    }
++    increment(&p->submitted);
++    if (compressed) increment(&p->compressed); else increment(&p->raw);
++    /* A short window includes the mandatory first RAW frame and every RAW
++     * fallback. Overflow closes the preceding window before adding a file. */
++    if (p->window_frames == FPL_BULK_WINDOW ||
++        low > UINT32_MAX - p->window_bytes) {
++        p->window_frames = p->window_compressed = p->window_bytes = 0;
++    }
++    ++p->window_frames;
++    p->window_compressed += compressed != 0;
++    p->window_bytes += low;
++    p->sample_frames = p->window_frames;
++    p->sample_compressed = p->window_compressed;
++    p->sample_bytes = p->window_bytes;
++    p->mean_bytes = divide(p->sample_bytes, p->sample_frames);
++    p->predicted_frames = ceil_div(FPL_BULK_BYTES, p->mean_bytes);
++}
+--- /dev/null
++++ after/fpSup/lossless/native/bulk_policy.h
+@@ -0,0 +1,35 @@
++#ifndef FPLOSSLESS_BULK_POLICY_H
++#define FPLOSSLESS_BULK_POLICY_H
++#include <stdint.h>
++
++#define FPL_BULK_BYTES 0x04000000u
++#define FPL_BULK_POOL_SLOTS 96u
++#define FPL_BULK_WINDOW 32u
++
++/* Two batches share the stock pool. Four further slots cover the codec /
++ * writer handoff, in addition to arrivals during a writer return. The initial
++ * 100 ms allowance is a conservative starting assumption, not a measured
++ * device guarantee. A longer observed return only tightens this take's cap.
++ * The native free-slot watermark remains an independent early trigger. */
++struct fpl_bulk_policy {
++    uint32_t enabled, fps_ceil, start_free, latency_us;
++    uint32_t arrival_reserve, frame_limit, free_watermark, budget_exhausted;
++    uint32_t checks, count_flushes, pressure_flushes, unknown_pool;
++    uint32_t submitted, compressed, raw, failed_returns;
++    uint32_t window_frames, window_compressed, window_bytes;
++    uint32_t sample_frames, sample_compressed, sample_bytes;
++    uint32_t mean_bytes, predicted_frames;
++};
++
++void fpl_bulk_reset(struct fpl_bulk_policy *);
++void fpl_bulk_begin(struct fpl_bulk_policy *, uint32_t fps_num, uint32_t fps_den,
++                    uint32_t free_slots);
++/* pending excludes the current file: its data is already in the native
++ * batch, but its cookie is appended only AFTER this decision. */
++uint32_t fpl_bulk_should_flush(struct fpl_bulk_policy *, uint32_t pending,
++                               uint32_t free_slots);
++/* Native submission return, not proof of DMA completion / durable storage.
++ * Mixed compressed + RAW sizes are observed rather than guessed from ON. */
++void fpl_bulk_observe(struct fpl_bulk_policy *, uint32_t low, uint32_t high,
++                       uint32_t compressed, uint32_t elapsed_us);
++#endif
+--- before/fpSup/lossless/native/card.S
++++ after/fpSup/lossless/native/card.S
+@@ -58,6 +58,12 @@
+ .equ SITE_DISCARD, 0xC037DEF8    /* each frame popped by C037DEE0             */
+ .equ STOCK_DISCARD,0xEB000042    /* bl C037E008                               */
+ .equ REAL_DISCARD, 0xC037E008
++.equ SITE_BULK,    0xC063F828    /* Thumb: bne C063F830; ldr r0,[sp,#20] */
++.equ STOCK_BULK,   0x9805D102
++.equ SITE_RELEASE, 0xC0377118    /* raw/yuv/jpg/writer pending queue flush */
++.equ STOCK_RELEASE,0xE92D4030
++.equ PATCH_RELEASE,0xEA000160    /* b C03776A0: pop + native refcounted release */
++.equ CAVE_BYTES,   104
+ 
+ /* Passed in by the builder: BLOB_LEN, BLOCK_BYTES, STATE_OFF and the C
+  * entry offsets from c_base (Thumb, bit 0 set). */
+@@ -89,7 +95,6 @@
+ .equ SL_EXCL,      2
+ .equ SL_SHARED_UI, 3
+ .equ ENGINE,       0x300D0000    /* the lossless engine: claim_res id         */
+-.equ CAVE_BYTES,   96
+ .equ REAL_PREPARE, 0xC03A2438
+ 
+ /* An insertion site with a layer below: the site must already branch the
+@@ -285,6 +290,10 @@
+     LDA     ip, OFF_DISCARD
+     add     ip, r4, ip
+     str     ip, [r0]
++    RESIDENT r0, w_bulk
++    LDA     ip, OFF_BULK
++    add     ip, r4, ip
++    str     ip, [r0]
+ 
+     LDA     ip, F_DCACHE
+     blx     ip
+@@ -363,14 +372,24 @@
+     ldr     r2, [r0]
+     cmp     r2, r1
+     bne     out
++    LDA     r0, SITE_BULK
++    LDA     r1, STOCK_BULK
++    ldr     r2, [r0]
++    cmp     r2, r1
++    bne     out
++    LDA     r0, SITE_RELEASE
++    LDA     r1, STOCK_RELEASE
++    ldr     r2, [r0]
++    cmp     r2, r1
++    bne     out
+ 
+     /* The host record stays at +32. Player veneers at +48, diagnostics at
+-     * +80; all are owned by this launcher's single 96-byte cave block. */
++     * +80, Thumb bulk veneer at +96; one owned cave block. */
+     LDA     r7, CAVE_BUMP
+     ldr     r8, [r7]                    @ r8 = our cave block
+     tst     r8, #3
+     bne     out
+-    add     r9, r8, #96
++    add     r9, r8, #CAVE_BYTES
+     LDA     r10, CAVE_END
+     cmp     r9, r10
+     bhi     out                         @ the cave is full: arm nothing
+@@ -418,6 +437,10 @@
+     str     r0, [r8, #88]
+     RESIDENT r1, discard_shim
+     str     r1, [r8, #92]
++    LDA     r0, 0xF000F8DF             @ Thumb ldr.w pc, [pc, #0]
++    str     r0, [r8, #96]
++    RESIDENT r1, bulk_shim             @ even: enter the ARM shim
++    str     r1, [r8, #100]
+ 
+     LDA     ip, F_DCACHE
+     blx     ip
+@@ -465,6 +488,12 @@
+     add     r1, r8, #88
+     mov     r2, #0xEB000000             @ bl: continue into the real cleanup
+     bl      encode
++    LDA     r0, SITE_BULK
++    add     r1, r8, #96
++    bl      encode_thumb
++    LDA     r0, SITE_RELEASE
++    LDA     r1, PATCH_RELEASE
++    str     r1, [r0]
+ 
+     LDA     ip, F_DCACHE
+     blx     ip
+@@ -505,6 +534,31 @@
+     str     r3, [r0]
+     bx      lr
+ 
++/* Thumb B.W, preserving LR at the insertion site. Both halves are installed
++ * as one aligned word. The cave is within signed 25-bit branch reach. */
++encode_thumb:
++    push    {r4, r5}
++    sub     r3, r1, r0
++    sub     r3, r3, #4
++    ubfx    ip, r3, #12, #10
++    orr     ip, ip, #0xF000
++    ubfx    r4, r3, #24, #1
++    orr     ip, ip, r4, lsl #10
++    ubfx    r5, r3, #1, #11
++    orr     r5, r5, #0x9000
++    ubfx    r1, r3, #23, #1
++    eor     r1, r1, r4
++    eor     r1, r1, #1
++    orr     r5, r5, r1, lsl #13
++    ubfx    r1, r3, #22, #1
++    eor     r1, r1, r4
++    eor     r1, r1, #1
++    orr     r5, r5, r1, lsl #11
++    orr     ip, ip, r5, lsl #16
++    str     ip, [r0]
++    pop     {r4, r5}
++    bx      lr
++
+ /* ---- the shims, reached through the veneers ------------------------------ */
+ 
+ /* C03A33C8: bl C03A2438(camera, request). The Movie task's internal stack
+@@ -553,7 +607,7 @@
+     push    {r0, r1, r2, r3, r4, r5, ip, lr}
+     mov     r5, sp
+     bic     sp, sp, #7
+-    ldr     r1, g_card
++    ldr     r2, g_card                 @ writer, frame, card
+     ldr     ip, w_flush
+     blx     ip
+     ldmia   r5, {r0, r1, r2, r3}
+@@ -570,6 +624,33 @@
+     msr     cpsr_f, r4
+     mov     sp, r5
+     pop     {r0, r1, r2, r3, r4, r5, ip, pc}
++
++/* C063F828: r2 is the prior cookie count, r11 the current scatter request,
++ * original SP+20 the native volume. The current file is NOT in the cookie
++ * array yet. Preserve every register and incoming comparison flags; only
++ * choose which original continuation is taken. No new I/O context. */
++bulk_shim:
++    push    {r0, r1, r2, r3, r4, r5, ip, lr}
++    mov     r5, sp
++    bic     sp, sp, #7
++    mrs     r4, cpsr
++    ldr     r0, [r5, #52]              @ original SP+20
++    ldr     r1, [r11, #8]              @ current frame cookie
++    ldr     r3, g_card
++    ldr     ip, w_bulk
++    blx     ip
++    cmp     r0, #0
++    bne     bulk_send
++    msr     cpsr_f, r4
++    mov     sp, r5
++    pop     {r0, r1, r2, r3, r4, r5, ip, lr}
++    ldr     pc, bulk_keep
++bulk_send:
++    msr     cpsr_f, r4
++    mov     sp, r5
++    pop     {r0, r1, r2, r3, r4, r5, ip, lr}
++    ldr     r0, [sp, #20]              @ replay displaced native volume load
++    ldr     pc, bulk_flush
+ 
+ /* C038BD08: r4=message, r6=the dispatcher's already-looked-up frame or 0.
+  * Replay the load and preserve the flags and LR of this non-call site. */
+@@ -683,12 +764,15 @@
+ w_written:   .word 0
+ w_event:     .word 0
+ w_discard:   .word 0
++w_bulk:      .word 0
+ stop_resume: .word STOP_RESUME
+ flush_real:  .word REAL_FLUSH
+ end_resume:  .word END_RESUME
+ pool_resume: .word POOL_RESUME
+ event_resume:.word EVENT_RESUME
+ discard_real:.word REAL_DISCARD
++bulk_keep:   .word 0xC063F831
++bulk_flush:  .word 0xC063F82D
+ #if V3
+ play_next:   .word 0
+ /* A layer below an insertion site: the stock instruction we would replay is
+@@ -706,7 +790,7 @@
+ /* What this sup changes: { address, stock word, kind }. The stock words are
+  * checked against the reference image by build_v3_lossless.py. */
+ claims:
+-    .word 14
++    .word 16
+     .word SITE_REC,     STOCK_REC,     SL_CHAIN
+     .word SITE_ARRIVE,  STOCK_ARRIVE,  SL_EXCL     @ replaces blx r3: not a branch
+     .word SITE_STOP,    STOCK_STOP,    SL_CHAIN
+@@ -717,6 +801,8 @@
+     .word SITE_POOL,    STOCK_POOL,    SL_CHAIN
+     .word SITE_EVENT,   STOCK_EVENT,   SL_CHAIN
+     .word SITE_DISCARD, STOCK_DISCARD, SL_CHAIN
++    .word SITE_BULK,    STOCK_BULK,    SL_EXCL
++    .word SITE_RELEASE, STOCK_RELEASE, SL_EXCL
+     .word 0xC05E5B58,   0x3FFFF1B1,    SL_SHARED_UI   @ uishare string layers
+     .word 0xC05E61C8,   0x428A6942,    SL_SHARED_UI
+     .word 0xC05E61E0,   0x69406902,    SL_SHARED_UI
+--- before/fpSup/lossless/native/card.c
++++ after/fpSup/lossless/native/card.c
+@@ -36,6 +36,7 @@
+ #include "menu_page.h"
+ #include "play_decode.h"
+ #include "record_diag.h"
++#include "bulk_policy.h"
+ 
+ #define FPL_CARD_MAGIC 0x44524143u               /* "CARD" */
+ #define FPL_TRACE      512u
+@@ -47,15 +48,11 @@
+  * descriptor (MPoolFixed<4380,96>: REC stops at 94 in flight) until then. Stock
+  * BULK is 64 MB, ~20 stock FHD files; compressed FHD files are ~0.8 MB, so a
+  * commit needed ~80 of them and REC stopped at frame 94 (projects/lossless-sup/
+- * notes/EARLY_STOP_94.md). For a compressed take BULK is FPL_BULK_FILES stock
+- * frames' worth -- a commit within a few files whatever the resolution or the
+- * compression -- and stock for every other take. FUN_c03A5050 reads the word at
+- * the first file, after REC preparation. */
++ * notes/EARLY_STOP_94.md). Keep the stock byte target; the native cookie-limit
++ * hook also sends a batch before our two-batch / fps / free-slot budget runs
++ * out. Actual mixed RAW + compressed files determine which limit wins. */
+ #define FPL_BULK_CFG   0xc0b9e5d8u        /* {bulk bytes, 0, 256 KiB, FUN_c03A55D0} */
+ #define FPL_BULK_STOCK 0x04000000u
+-#define FPL_BULK_FILES 3u
+-#define FPL_BULK_MIN   0x00400000u
+-#define FPL_FILE_HEAD  0x13400u           /* the DNG header before the raster */
+ /* Lossless RAW ON/OFF, kept in this sup's own file (Loader v3 passes its path):
+  * card.S `settings`, 16 bytes {"FLST", version 1, 0/1, check}. Read from the
+  * block at boot; rewritten in place (open 7, seek, write, read back) by the codec
+@@ -272,6 +269,11 @@
+      * is done), or 'W' (0x57) when the writer's final flush returned. */
+     uint32_t elog_n;
+     uint32_t elog[FPL_ELOG][2];
++    /* Scope the shared filesystem hook to the exact CinemaDNG frame in this
++     * writer call. Host offsets always come from this build's layout.json. */
++    struct fpl_bulk_policy bulk_policy;
++    uintptr_t bulk_writer_frame;
++    uint32_t bulk_writer_start, bulk_writer_compressed;
+ };
+ 
+ static void card_saturate(uint32_t *v) { if (*v != UINT32_MAX) ++*v; }
+@@ -477,14 +479,6 @@
+     *(volatile uint32_t *)FPL_BULK_CFG = bytes;
+     c->bulk = bytes;
+ }
+-/* FPL_BULK_FILES stock files of this take's geometry, within [MIN, STOCK]. */
+-static uint32_t card_bulk_for(uint32_t raster) {
+-    uint32_t file = (raster + FPL_FILE_HEAD + 0x1ffu) & ~0x1ffu;
+-    if (!raster || file > FPL_BULK_STOCK / FPL_BULK_FILES) return FPL_BULK_STOCK;
+-    file *= FPL_BULK_FILES;
+-    return file < FPL_BULK_MIN ? FPL_BULK_MIN : file;
+-}
+-
+ USED uint32_t fpl_card_rec(uintptr_t camera, const uint32_t *request, struct fpl_card *c) {
+     uint32_t dispatch;
+     if (!card_valid(c) || !request || !FPL_REC_IS_START(request[0]))
+@@ -498,9 +492,11 @@
+     c->trace_n = 0;
+     c->elog_n = 0;
+     card_irq_restore(mask);
+-    /* every take starts stock; only an admitted compressed take changes it */
++    /* Keep the stock byte target; only an admitted take enables the count gate. */
+     c->bulk_writer_open = *(volatile const uint8_t *)(0xc359be4cu + 0xcu);
+     card_bulk(c, FPL_BULK_STOCK);
++    fpl_bulk_reset(&c->bulk_policy);
++    c->bulk_writer_frame = 0;
+     fpl_play_end(&c->play);             /* a scratch playback left: back to the pool */
+     if (!fpl_menu_on(&c->menu)) {
+         /* Lossless RAW is OFF (the default): the take is exactly stock */
+@@ -516,7 +512,8 @@
+     if (dispatch) {
+         if (start_hold(c)) {
+             card_saturate(&c->rec_admitted);
+-            card_bulk(c, card_bulk_for(c->rec.facts.seen.raster));
++            fpl_bulk_begin(&c->bulk_policy, c->rec.facts.seen.fps_num,
++                            c->rec.facts.seen.fps_den, card_pool_left());
+         } else {
+             card_saturate(&c->rec_raw);
+         }
+@@ -589,9 +586,27 @@
+     }
+ }
+ 
+-USED void fpl_card_flush(uintptr_t writer, struct fpl_card *c) {
++USED void fpl_card_flush(uintptr_t writer, uintptr_t frame, struct fpl_card *c) {
+     if (!card_valid(c)) return;
+-    fpl_flush_before(writer, &c->hold, &c->hold_b, &c->flush);
++    uint32_t applied = c->flush.applied;
++    fpl_flush_before(writer, frame, &c->hold, &c->hold_b, &c->flush);
++    c->bulk_writer_compressed = c->flush.applied != applied;
++    c->bulk_writer_start = card_tick_us();
++    c->bulk_writer_frame = c->bulk_policy.enabled ? frame : 0;
++}
++
++/* C063F828: the native aggregation routine already owns its volume context.
++ * Only change its decision for the exact frame our outer writer submitted,
++ * with the original CinemaDNG callback. Other volumes, files and OFF takes
++ * retain the original predicate. The shim follows the native flush path;
++ * this observer performs no media I/O and does not release frame memory. */
++USED uint32_t fpl_card_bulk(uintptr_t volume, uintptr_t frame, uint32_t pending,
++                            struct fpl_card *c) {
++    if (!card_valid(c) || !c->bulk_policy.enabled || !frame ||
++        c->bulk_writer_frame != frame || !volume || (volume & 3u) ||
++        (*(volatile const uint32_t *)(volume + 0x4834u) & ~1u) != 0xc03a55d0u)
++        return pending == 128u;
++    return fpl_bulk_should_flush(&c->bulk_policy, pending, card_pool_left());
+ }
+ 
+ /* The writer's full r0:r1 result, observed after the native call. A nonzero
+@@ -605,6 +620,11 @@
+ 
+ USED void fpl_card_written(struct fpl_card *c, uint32_t low, uint32_t high) {
+     if (!card_valid(c)) return;
++    if (c->bulk_writer_frame) {
++        fpl_bulk_observe(&c->bulk_policy, low, high, c->bulk_writer_compressed,
++                          card_tick_us() - c->bulk_writer_start);
++        c->bulk_writer_frame = 0;
++    }
+     uint32_t mask = card_irq_off();
+ #ifdef FPL_DIAG_TRACE
+     card_elog(c, 0x57u);
+--- before/fpSup/lossless/native/flush_site.c
++++ after/fpSup/lossless/native/flush_site.c
+@@ -27,7 +27,7 @@
+ 
+ static void saturate(uint32_t *v) { if (*v != UINT32_MAX) ++*v; }
+ 
+-uint32_t fpl_flush_before(uintptr_t writer, struct fpl_frame_hold *h,
++uint32_t fpl_flush_before(uintptr_t writer, uintptr_t frame, struct fpl_frame_hold *h,
+                           struct fpl_frame_hold *h2, struct fpl_flush_stats *s) {
+     const struct fpl_hold_commit *c;
+     struct fpl_trailer t;
+@@ -45,9 +45,12 @@
+     node = writer + WRITER_NODE;
+     buffer = peek(node + NODE_BUFFER);
+     length = peek(node + NODE_LENGTH);
+-    if (buffer && !(buffer & 3u) && !fpl_hold_peek(h, buffer) && fpl_hold_peek(h2, buffer))
+-        h = h2;                          /* the second lane's promise */
+-    if (!buffer || (buffer & 3u) || !(c = fpl_hold_peek(h, buffer))) {
++    c = buffer && !(buffer & 3u) ? fpl_hold_peek_frame(h, buffer, frame) : 0;
++    if (!c && buffer && !(buffer & 3u)) {
++        c = fpl_hold_peek_frame(h2, buffer, frame);
++        if (c) h = h2;                   /* the second lane's current promise */
++    }
++    if (!c) {
+         saturate(&s->no_promise);
+         return FPL_OK;
+     }
+--- before/fpSup/lossless/native/flush_site.h
++++ after/fpSup/lossless/native/flush_site.h
+@@ -30,6 +30,6 @@
+ #endif
+ 
+ /* The promise may be in either hold (two lanes); the second may be NULL. */
+-uint32_t fpl_flush_before(uintptr_t writer, struct fpl_frame_hold *,
++uint32_t fpl_flush_before(uintptr_t writer, uintptr_t frame, struct fpl_frame_hold *,
+                           struct fpl_frame_hold *, struct fpl_flush_stats *);
+ #endif
+--- before/fpSup/lossless/native/frame_hold.c
++++ after/fpSup/lossless/native/frame_hold.c
+@@ -29,6 +29,7 @@
+ #define FRAME_RESERVE     0x128u
+ #define FRAME_HEADER      0x14cu
+ #define FRAME_STATE       0x1104u
++#define FRAME_GENERATION  0x1100u
+ #define FRAME_CLONES      0x1114u
+ #define FRAME_OWNER       0x1118u
+ #define OWNS_ALLOCATION   0xffffffffu
+@@ -250,6 +251,8 @@
+         c->tile_height = h->job.tile_height;
+         c->capacity = capacity;
+         c->stock_bytes = lease->stock_file_bytes;
++        c->frame = h->frame;
++        c->generation = peek(h->frame + FRAME_GENERATION);
+         barrier();
+         c->file = file;                      /* published */
+         barrier();
+@@ -779,6 +782,23 @@
+         if (h->ring[n].file == file) { barrier(); return &h->ring[n]; }
+     return 0;
+ }
++/* The writer owns the live current frame. A stopped take may have left a
++ * promise whose buffer has since returned to the allocator. Retire only
++ * metadata for that reused file address; never free a buffer here. */
++const struct fpl_hold_commit *fpl_hold_peek_frame(struct fpl_frame_hold *h,
++                                                 uintptr_t file, uintptr_t frame) {
++    if (!hold_valid(h) || !file || !frame) return 0;
++    for (uint32_t n = 0; n < FPL_HOLD_COMMITS; ++n) {
++        struct fpl_hold_commit *c = &h->ring[n];
++        if (c->file != file) continue;
++        barrier();
++        if (c->frame == frame && c->generation == peek(frame + FRAME_GENERATION))
++            return c;
++        fpl_hold_consumed(h, c);
++        saturate(&h->stale_commits);
++    }
++    return 0;
++}
+ void fpl_hold_consumed(struct fpl_frame_hold *h, const struct fpl_hold_commit *c) {
+     if (!hold_valid(h) || c < h->ring || c >= h->ring + FPL_HOLD_COMMITS) return;
+     barrier();
+--- before/fpSup/lossless/native/frame_hold.h
++++ after/fpSup/lossless/native/frame_hold.h
+@@ -52,6 +52,8 @@
+     uint32_t payload, tiles;            /* padded payload bytes after 0x13400 */
+     uint32_t tile_width, tile_height;   /* the grid it was compressed with */
+     uint32_t capacity, stock_bytes;     /* the file buffer's; the stock length */
++    uintptr_t frame;                   /* native descriptor that published it */
++    uint32_t generation;               /* frame+0x1100: reject pool/address reuse */
+     uint32_t tile_bytes[FPL_CODEC_TILE_MAX];   /* host order */
+ };
+ 
+@@ -128,6 +130,7 @@
+                                            every lane was busy */
+     struct fpl_codec_input lane_in;
+     uint32_t tile_force;                /* tile_grid.h; set before the take */
++    uint32_t stale_commits;             /* metadata retired after buffer reuse */
+ };
+ enum fpl_hold_refusal {
+     FPL_HOLD_R_DESCRIPTOR = 0, FPL_HOLD_R_RESERVE = 1, FPL_HOLD_R_HANDLE = 2,
+@@ -205,8 +208,12 @@
+ uint32_t fpl_lanes_task_wait(struct fpl_frame_hold *const lane[2], uint32_t ticks);
+ uint32_t fpl_lanes_stop(struct fpl_frame_hold *const lane[2]);
+ 
+-/* Writer's task, at the flush: the commit for this file buffer, or NULL.
++/* Unscoped inspection for fixtures; production writer uses peek_frame below.
+  * The entry stays valid until fpl_hold_consumed() is called with it. */
+ const struct fpl_hold_commit *fpl_hold_peek(struct fpl_frame_hold *, uintptr_t file);
++/* Writer lookup also verifies native descriptor identity and generation;
++ * mismatched metadata at a reused buffer address is consumed, never applied. */
++const struct fpl_hold_commit *fpl_hold_peek_frame(struct fpl_frame_hold *,
++                                                 uintptr_t file, uintptr_t frame);
+ void fpl_hold_consumed(struct fpl_frame_hold *, const struct fpl_hold_commit *);
+ #endif
+--- before/fpSup/lossless/native/frame_hold_fixture.c
++++ after/fpSup/lossless/native/frame_hold_fixture.c
+@@ -510,7 +510,7 @@
+     wr_quiet(WRITER + 0x8C, WRITER + 0x0C);
+     wr_quiet(WRITER + 0x0C + 4, (uint32_t)(current_handle(id) + 0x2000u));
+     wr_quiet(WRITER + 0x0C + 8, length ? length : 0x13400u + ((raster_bytes() + 0x1ffu) & ~0x1ffu));
+-    return fpl_flush_before(WRITER, &hold, &hold_b, &flush_stats);
++    return fpl_flush_before(WRITER, frame_at(id), &hold, &hold_b, &flush_stats);
+ }
+ void fpl_fixture_writer_shape(uint32_t count) { writer_count = count; }
+ void fpl_fixture_file_poke(uint32_t id, uint32_t offset, uint32_t value) {
+@@ -525,6 +525,7 @@
+     case 4: return flush_stats.trailer_failed;
+     case 5: return flush_stats.shape;
+     case 6: return rd_quiet(handle_of(0) + 0x2000u + 4);    /* unused */
++    case 7: return hold.stale_commits + hold_b.stale_commits;
+     default: return 0xFFFFFFFFu;
+     }
+ }
+--- /dev/null
++++ after/fpSup/lossless/native/test_bulk_policy.py
+@@ -0,0 +1,182 @@
++"""Compile the production policy; bounded arithmetic, mixed streams and mutations.
++
++Media completion is simulated here. The exact native insertion path is covered
++separately by test_bulk_native.py; neither suite proves camera timing.
++"""
++import ctypes as C
++from pathlib import Path
++import subprocess
++import tempfile
++import unittest
++
++HERE = Path(__file__).resolve().parent
++MIB = 1 << 20
++
++
++class Policy(C.Structure):
++    _fields_ = [(n, C.c_uint32) for n in (
++        'enabled', 'fps_ceil', 'start_free', 'latency_us', 'arrival_reserve',
++        'frame_limit', 'free_watermark', 'budget_exhausted', 'checks',
++        'count_flushes', 'pressure_flushes', 'unknown_pool', 'submitted',
++        'compressed', 'raw', 'failed_returns', 'window_frames',
++        'window_compressed', 'window_bytes', 'sample_frames', 'sample_compressed',
++        'sample_bytes', 'mean_bytes', 'predicted_frames')]
++
++
++def build(out, mutation=None):
++    source = HERE / 'bulk_policy.c'
++    if mutation:
++        old, new = mutation
++        text = source.read_text()
++        if text.count(old) != 1:
++            raise AssertionError('mutation seam is not unique')
++        source = out / 'mutant.c'
++        source.write_text(text.replace(old, new))
++    lib = out / 'policy.dylib'
++    subprocess.run(['clang', '-shared', '-fPIC', '-O2', '-std=c11', '-Wall',
++                    '-Wextra', '-Werror', '-I', str(HERE), str(source), '-o', str(lib)],
++                   check=True, capture_output=True, text=True)
++    lib = C.CDLL(str(lib))
++    for name, nargs, result in [('reset', 0, None), ('begin', 3, None),
++                                ('should_flush', 2, C.c_uint32), ('observe', 4, None)]:
++        fn = getattr(lib, 'fpl_bulk_' + name)
++        fn.argtypes = [C.POINTER(Policy)] + [C.c_uint32] * nargs
++        fn.restype = result
++    return lib
++
++
++class BulkPolicyTests(unittest.TestCase):
++    @classmethod
++    def setUpClass(cls):
++        cls.tmp = tempfile.TemporaryDirectory(prefix='fpl-bulk-')
++        cls.lib = build(Path(cls.tmp.name))
++
++    @classmethod
++    def tearDownClass(cls):
++        cls.tmp.cleanup()
++
++    def begin(self, num=60000, den=1001, free=96, lib=None):
++        p = Policy()
++        (lib or self.lib).fpl_bulk_begin(C.byref(p), num, den, free)
++        return p
++
++    def flush(self, p, pending, free=90):
++        return self.lib.fpl_bulk_should_flush(C.byref(p), pending, free)
++
++    def test_fps_and_two_batches_leave_explicit_headroom(self):
++        for num, den in [(24000, 1001), (25, 1), (30000, 1001), (48, 1),
++                         (60000, 1001), (120, 1), (240, 1)]:
++            for free in (96, 80, 48):
++                p = self.begin(num, den, free)
++                self.assertFalse(p.budget_exhausted)
++                self.assertLessEqual(2 * p.frame_limit + 4 + p.arrival_reserve + 2, free)
++        self.assertEqual(self.begin(24000, 1001).frame_limit, 43)
++        self.assertEqual(self.begin(60000, 1001).frame_limit, 42)
++        self.assertLess(self.begin(240, 1).frame_limit, self.begin(24, 1).frame_limit)
++
++    def test_count_includes_current_file_before_cookie_append(self):
++        p = self.begin()
++        self.assertEqual(self.flush(p, p.frame_limit - 2), 0)
++        self.assertEqual(self.flush(p, p.frame_limit - 1), 1)
++        self.assertEqual(self.flush(p, 128), 1)
++
++    def test_pressure_can_send_a_single_file(self):
++        p = self.begin()
++        self.assertEqual(self.flush(p, 0, p.free_watermark + 1), 0)
++        self.assertEqual(self.flush(p, 0, p.free_watermark), 1)
++        self.assertEqual(p.pressure_flushes, 1)
++
++    def test_unknown_pool_never_allows_waiting(self):
++        p = self.begin()
++        self.assertEqual(self.flush(p, 0, 0xffff), 1)
++        self.assertEqual(p.unknown_pool, 1)
++
++    def test_missing_or_exhausted_budget_sends_each_file(self):
++        for num, den, free in [(0, 1, 96), (60, 0, 96), (241, 1, 96),
++                                (60, 1, 0), (60, 1, 0xffff), (60, 1, 12),
++                                (0xffffffff, 1, 96)]:
++            p = self.begin(num, den, free)
++            self.assertEqual((p.frame_limit, p.budget_exhausted), (1, 1))
++            self.assertEqual(self.flush(p, 0), 1)
++        self.assertEqual(self.begin(0xffffffff, 0xffffffff).fps_ceil, 1)
++
++    def test_longer_native_return_tightens_cap_and_never_reopens_it(self):
++        p = self.begin(60, 1)
++        self.lib.fpl_bulk_observe(C.byref(p), MIB, 0, 1, 500000)
++        self.assertEqual((p.arrival_reserve, p.frame_limit), (30, 30))
++        self.lib.fpl_bulk_observe(C.byref(p), MIB, 0, 1, 1000)
++        self.assertEqual((p.latency_us, p.frame_limit), (500000, 30))
++        self.lib.fpl_bulk_observe(C.byref(p), MIB, 0, 1, 0xffffffff)
++        self.assertEqual((p.frame_limit, p.budget_exhausted), (1, 1))
++
++    def test_mixed_output_uses_actual_raw_and_compressed_sizes(self):
++        p = self.begin()
++        for _ in range(16):
++            self.lib.fpl_bulk_observe(C.byref(p), 3 * MIB, 0, 0, 1000)
++            self.lib.fpl_bulk_observe(C.byref(p), MIB, 0, 1, 1000)
++        self.assertEqual((p.submitted, p.raw, p.compressed), (32, 16, 16))
++        self.assertEqual((p.mean_bytes, p.predicted_frames), (2 * MIB, 32))
++        self.assertEqual((p.sample_frames, p.sample_compressed), (32, 16))
++        self.lib.fpl_bulk_observe(C.byref(p), MIB // 2, 0, 1, 1000)
++        self.assertEqual((p.sample_frames, p.predicted_frames), (1, 128))
++        self.assertEqual(p.frame_limit, 42, 'an estimate must not relax the count guard')
++
++    def test_bad_writer_returns_do_not_become_compression_samples(self):
++        p = self.begin()
++        for low, high in [(0, 0), (MIB, 1), (0xffffffff, 0)]:
++            self.lib.fpl_bulk_observe(C.byref(p), low, high, 1, 2000)
++        self.assertEqual((p.failed_returns, p.submitted, p.sample_frames), (3, 0, 0))
++
++    def test_sample_byte_sum_cannot_wrap(self):
++        p = self.begin()
++        for _ in range(32):
++            self.lib.fpl_bulk_observe(C.byref(p), 256 * MIB, 0, 0, 1000)
++        self.assertEqual(p.mean_bytes, 256 * MIB)
++        self.assertEqual(p.predicted_frames, 1)
++
++    def test_off_reset_and_null_follow_native_predicate(self):
++        p = self.begin()
++        self.lib.fpl_bulk_reset(C.byref(p))
++        self.assertEqual(bytes(p), bytes(C.sizeof(p)))
++        for pending in (0, 42, 127, 128):
++            self.assertEqual(self.flush(p, pending, 0), pending == 128)
++            self.assertEqual(self.lib.fpl_bulk_should_flush(None, pending, 0), pending == 128)
++
++    def test_mixed_stream_never_waits_for_more_than_the_frame_budget(self):
++        # Actual byte threshold and frame threshold race, as in the native
++        # path. Returning slots/media here is an explicit simulation.
++        for sizes in ([MIB // 2] * 500, [9 * MIB] * 500,
++                      [MIB, 3 * MIB] * 250, [MIB // 2] * 100 + [9 * MIB] * 100):
++            p = self.begin()
++            count = data = peak = flushes = 0
++            for size in sizes:
++                count += 1
++                data += size
++                peak = max(peak, count)
++                if data >= 64 * MIB or self.flush(p, count - 1, 96 - count - 4):
++                    count = data = 0
++                    flushes += 1
++            self.assertLessEqual(peak, p.frame_limit)
++            self.assertGreater(flushes, 0)
++
++    def test_mutations_are_detected(self):
++        mutants = [
++            ('(p->start_free - used) / 2u', '(p->start_free - used)', 'two'),
++            ('pending >= p->frame_limit - 1u', 'pending >= p->frame_limit', 'current'),
++            ('free_slots <= p->free_watermark', 'free_slots == 0u', 'pressure'),
++        ]
++        for old, new, name in mutants:
++            with self.subTest(name=name), tempfile.TemporaryDirectory(prefix='fpl-bulk-mut-') as tmp:
++                lib = build(Path(tmp), (old, new))
++                p = self.begin(lib=lib)
++                with self.assertRaises(AssertionError):
++                    if name == 'two':
++                        self.assertLessEqual(2 * p.frame_limit + 4 + p.arrival_reserve + 2, 96)
++                    elif name == 'current':
++                        self.assertEqual(lib.fpl_bulk_should_flush(C.byref(p), p.frame_limit - 1, 90), 1)
++                    else:
++                        self.assertEqual(lib.fpl_bulk_should_flush(C.byref(p), 0, p.free_watermark), 1)
++
++
++if __name__ == '__main__':
++    unittest.main()
+--- before/fpSup/lossless/native/test_frame_hold.py
++++ after/fpSup/lossless/native/test_frame_hold.py
+@@ -629,6 +629,36 @@
+         self.assertEqual(self.lib.fpl_fixture_file_word(1, 4), 8)
+         self.assertEqual(self.fget(2), 1)                     # no promise
+ 
++    def test_reused_descriptor_and_buffer_cannot_apply_a_previous_generation(self):
++        self.frames(1, 2)
++        self.lib.fpl_fixture_frame_field(1, 0x1100, 17)
++        self.lib.fpl_fixture_arrive(1)
++        self.lib.fpl_fixture_arrive(2)
++        self.assertNotEqual(self.lib.fpl_fixture_flush(1, 0), NONE)
++        # The old frame was dropped; its descriptor and allocation are now a
++        # different RAW frame, including a fresh stock header and raster.
++        self.lib.fpl_fixture_frame_field(1, 0x1100, 18)
++        self.lib.fpl_fixture_header(1)
++        self.lib.fpl_fixture_file_poke(1, 0x13400, raw(7))
++        stock = 0x13400 + ((self.get(RASTER) + 0x1FF) & ~0x1FF)
++        self.assertEqual(self.lib.fpl_fixture_writer_flush(1, 0), OK)
++        self.assertEqual((self.fget(0), self.fget(1), self.fget(7)), (stock, 0, 1))
++        self.assertEqual(self.lib.fpl_fixture_file_word(1, 4), 8)
++        self.assertEqual(self.lib.fpl_fixture_file_word(1, 0x13400), raw(7))
++        self.assertEqual(self.lib.fpl_fixture_flush(1, 0), NONE)
++
++    def test_another_descriptor_reusing_the_buffer_cannot_use_old_metadata(self):
++        self.frames(1, 2, 3)
++        self.lib.fpl_fixture_arrive(1)
++        self.lib.fpl_fixture_arrive(2)
++        old_handle = 0x10000000 + self.get(8000 + 1)
++        self.lib.fpl_fixture_frame_field(3, 0x68, old_handle)
++        self.lib.fpl_fixture_header(3)
++        stock = 0x13400 + ((self.get(RASTER) + 0x1FF) & ~0x1FF)
++        self.assertEqual(self.lib.fpl_fixture_writer_flush(3, 0), OK)
++        self.assertEqual((self.fget(0), self.fget(1), self.fget(7)), (stock, 0, 1))
++        self.assertEqual(self.lib.fpl_fixture_file_word(3, 4), 8)
++
+     def test_a_different_length_is_left_alone_and_the_promise_kept(self):
+         self.frames(1, 2)
+         self.lib.fpl_fixture_arrive(1)
+@@ -785,6 +815,14 @@
+ 
+ class FlushMutationTests(unittest.TestCase):
+     MUTATIONS = {
++        'ignores native generation': (
++            'frame_hold.c',
++            '        if (c->frame == frame && c->generation == peek(frame + FRAME_GENERATION))',
++            '        if (c->frame == frame)'),
++        'ignores native descriptor identity': (
++            'frame_hold.c',
++            '        if (c->frame == frame && c->generation == peek(frame + FRAME_GENERATION))',
++            '        if (c->generation == peek(frame + FRAME_GENERATION))'),
+         'ignores the stock length': (
+             'flush_site.c', '    if (length != c->stock_bytes) {',
+             '    if (length != c->stock_bytes && 0) {'),
+@@ -1346,8 +1384,8 @@
+             '        result = fpl_codec_job_abort(&h->job) == FPL_OK ? FPL_UNSUPPORTED : FPL_FAULT;',
+             '        result = fpl_codec_job_abort(&h->job) == FPL_OK ? FPL_FAULT : FPL_FAULT;'),
+         'flush looks in one lane only': (
+-            'flush_site.c', '        h = h2;                          /* the second lane\'s promise */',
+-            '        (void)h2;'),
++            'flush_site.c', '        c = fpl_hold_peek_frame(h2, buffer, frame);',
++            '        c = 0;'),
+     }
+ 
+     def test_every_mutation_is_caught(self):
+--- /dev/null
++++ after/fpSup/lossless/test_bulk_native.py
+@@ -0,0 +1,230 @@
++"""Run the built LOSS hook and original Thumb aggregation / callback loop.
++
++The volume and writer are synthetic. Media transfer, descriptor arena get/free
++and the final completion callback are explicit substitutes. The native cookie
++loop, current-cookie ordering and counter reset execute real firmware bytes.
++This proves the insertion ABI and scoped decisions, not hardware timing.
++"""
++import pathlib
++import struct
++import tempfile
++import unittest
++
++import test_v3_lossless as V
++from unicorn.arm_const import (UC_ARM_REG_R0, UC_ARM_REG_R1, UC_ARM_REG_R2,
++                               UC_ARM_REG_R3, UC_ARM_REG_R4, UC_ARM_REG_R5,
++                               UC_ARM_REG_R6, UC_ARM_REG_R7, UC_ARM_REG_R8,
++                               UC_ARM_REG_R9, UC_ARM_REG_R10, UC_ARM_REG_R11,
++                               UC_ARM_REG_SP, UC_ARM_REG_LR, UC_ARM_REG_CPSR)
++
++VOLUME, SCATTER, FRAME, WRITER = 0x45610000, 0x45602000, 0x45604000, 0x45600000
++POOL = 0xC2A00000
++TRANSFER, CALLBACK, ARENA_FREE, ARENA_GET = 0xC0646C60, 0xC03A55D0, 0xC0100100, 0xC0100120
++PENDING = [0x45640000 + 4 * n for n in range(128)]
++REGS = (UC_ARM_REG_R0, UC_ARM_REG_R1, UC_ARM_REG_R2, UC_ARM_REG_R3,
++        UC_ARM_REG_R4, UC_ARM_REG_R5, UC_ARM_REG_R6, UC_ARM_REG_R7,
++        UC_ARM_REG_R8, UC_ARM_REG_R9, UC_ARM_REG_R10, UC_ARM_REG_R11)
++
++
++class BulkCamera(V.LosslessCamera):
++    def __init__(self, *args, **kwargs):
++        self.testing_bulk = False
++        self.completed, self.transfers, self.continuations = [], [], []
++        self.reached_end = False
++        super().__init__(*args, **kwargs)
++
++    def _hook(self, mu, addr, size, data):
++        if self.testing_bulk:
++            if addr == self.bulk_c:
++                if self.r(UC_ARM_REG_SP) & 7:
++                    raise AssertionError('new C call is not aligned')
++                self.bulk_args = tuple(self.r(r) for r in REGS[:4])
++            if addr in (0xC063F82C, 0xC063F830):
++                self.continuations.append((addr, tuple(self.r(r) for r in REGS),
++                                           self.r(UC_ARM_REG_SP), self.r(UC_ARM_REG_LR),
++                                           self.r(UC_ARM_REG_CPSR) & 0xF0000000))
++            if addr == TRANSFER:
++                self.transfers.append((self.r(UC_ARM_REG_R0), self.w(VOLUME + 0x4850)))
++                return self._ret(0)
++            if addr == CALLBACK:
++                self.completed.append((self.r(UC_ARM_REG_R0), self.r(UC_ARM_REG_R1)))
++                return self._ret(0)
++            if addr == ARENA_FREE:
++                return self._ret(0)
++            if addr == ARENA_GET:
++                return self._ret(0x45603000)
++            if addr == 0xC063F888:
++                self.reached_end = True
++                mu.emu_stop()
++                return
++            allowed = (0xC063F140 <= addr < 0xC063F220 or
++                       0xC063F81C <= addr < 0xC063F888 or
++                       self.blob <= addr < self.blob_end or
++                       self.cave <= addr < self.cave + 104)
++            if not allowed:
++                raise AssertionError(f'unexpected native execution {addr:#x}')
++        return super()._hook(mu, addr, size, data)
++
++
++class BulkNativeTests(unittest.TestCase):
++    @classmethod
++    def setUpClass(cls):
++        with tempfile.TemporaryDirectory(prefix='fpl-bulk-native-') as tmp:
++            cls.sup, cls.facts = V.L.sup_file(pathlib.Path(tmp))
++        from armasm import symbols
++        cls.sym = symbols(V.HERE / 'native/card.S', cls.facts['defines'])
++
++    def boot(self):
++        cam = BulkCamera(*V.T.card(('10LOSS.BIN', self.sup)))
++        cam.boot()
++        block = next(a for kind, a, _, name in cam.log()
++                     if kind == 'LOADED' and name == '10LOSS.BIN')
++        cam.blob = block + V.B.SL_HEADER_LEN
++        cam.blob_end = cam.blob + self.facts['blob_len']
++        cam.card_state = cam.blob + self.facts['state_off']
++        cam.cave = cam.w(V.T.cave.CAVE_BUMP) - 104
++        cam.bulk_c = cam.blob + self.facts['c_base'] + (self.facts['entries']['fpl_card_bulk'] & ~1)
++        self.assertLess(cam.heap_next, WRITER)
++        for at in (TRANSFER, CALLBACK, ARENA_FREE, ARENA_GET):
++            cam.put(at, 0xE12FFF1E)
++        cam.put(VOLUME + 0x4834, CALLBACK)
++        cam.put(VOLUME + 0x4838, ARENA_GET)
++        cam.put(VOLUME + 0x4848, ARENA_FREE)
++        cam.put(VOLUME + 0x484C, 0x45603000)
++        cam.put(VOLUME + 0x4A54, 1024)
++        cam.put(VOLUME + 0x4A58, 1 << 20)
++        cam.put(SCATTER + 8, FRAME)
++        cam.put(0xC2F1F3D8, POOL)
++        cam.put(POOL + 0x112C, 90)
++        for name, value in [('enabled', 1), ('fps_ceil', 60), ('start_free', 96),
++                            ('latency_us', 100000), ('arrival_reserve', 6),
++                            ('frame_limit', 42), ('free_watermark', 12)]:
++            self.set_field(cam, 'bulk_policy.' + name, value)
++        self.set_field(cam, 'bulk_writer_frame', FRAME)
++        return cam
++
++    def set_field(self, cam, name, value):
++        cam.put(cam.card_state + self.facts['layout'][name], value)
++
++    def field(self, cam, name):
++        return cam.w(cam.card_state + self.facts['layout'][name])
++
++    def enter(self, cam, pending, delta=0):
++        cam.put(VOLUME + 0x4850, pending)
++        for i in range(pending):
++            cam.put(VOLUME + 0x4854 + 4 * i, PENDING[i])
++        sp = V.T.STACK - 0x1000 - delta
++        cam.put(sp + 20, VOLUME)
++        for n, reg in enumerate(REGS):
++            cam.mu.reg_write(reg, 0x11000000 + n)
++        cam.mu.reg_write(UC_ARM_REG_R11, SCATTER)
++        cam.mu.reg_write(UC_ARM_REG_SP, sp)
++        cam.mu.reg_write(UC_ARM_REG_LR, 0x47000080)
++        cam.testing_bulk = True
++        try:
++            cam.mu.emu_start(0xC063F81D, 0, count=100000)
++        finally:
++            cam.testing_bulk = False
++            if cam.error:
++                raise cam.error
++        self.assertTrue(cam.reached_end, 'native path did not reach its bounded end')
++        at, regs, after_sp, lr, flags = cam.continuations[0]
++        self.assertEqual(after_sp, sp)
++        self.assertEqual(lr, 0x47000080)
++        self.assertEqual(flags, 0x60000000 if pending == 128 else 0x80000000)
++        self.assertEqual(regs[1:4], (0x11000001, pending, 0x11000003))
++        self.assertEqual(regs[4:8], tuple(0x11000000 + n for n in range(4, 8)))
++        self.assertEqual(regs[8:], (0x4850, 0x11000009, 0x1100000A, SCATTER))
++        self.assertEqual(regs[0], VOLUME if at == 0xC063F82C else 0x11000000)
++        self.assertEqual(cam.bulk_args, (VOLUME, FRAME, pending, cam.card_state))
++        self.assertEqual(cam.r(UC_ARM_REG_SP), sp)
++
++    def assert_sent(self, cam, pending):
++        self.assertEqual(cam.transfers, [(VOLUME, pending)])
++        self.assertEqual(cam.completed, [(f, 0) for f in PENDING[:pending]] + [(FRAME, 0)])
++        self.assertEqual((cam.w(VOLUME + 0x4850), cam.w(VOLUME + 0x4A58)), (0, 0))
++
++    def test_limit_sends_prior_cookies_then_current_exactly_once(self):
++        cam = self.boot()
++        self.enter(cam, 41)
++        self.assert_sent(cam, 41)
++        self.assertEqual(self.field(cam, 'bulk_policy.count_flushes'), 1)
++
++    def test_below_limit_appends_current_cookie_without_transfer(self):
++        cam = self.boot()
++        self.enter(cam, 40)
++        self.assertEqual((cam.transfers, cam.completed), ([], []))
++        self.assertEqual(cam.w(VOLUME + 0x4850), 41)
++        self.assertEqual(cam.w(VOLUME + 0x4854 + 40 * 4), FRAME)
++
++    def test_pressure_sends_current_with_no_prior_cookie(self):
++        cam = self.boot()
++        cam.put(POOL + 0x112C, 12)
++        self.enter(cam, 0)
++        self.assert_sent(cam, 0)
++
++    def test_misaligned_native_stack_is_aligned_for_new_c(self):
++        cam = self.boot()
++        self.enter(cam, 41, delta=4)
++        self.assert_sent(cam, 41)
++
++    def test_off_or_foreign_frame_keeps_native_128_rule(self):
++        for field in ('bulk_policy.enabled', 'bulk_writer_frame'):
++            for pending in (41, 128):
++                with self.subTest(field=field, pending=pending):
++                    cam = self.boot()
++                    self.set_field(cam, field, 0)
++                    self.enter(cam, pending)
++                    if pending == 128:
++                        self.assert_sent(cam, pending)
++                    else:
++                        self.assertEqual(cam.transfers, [])
++                        self.assertEqual(cam.w(VOLUME + 0x4850), pending + 1)
++
++    def test_foreign_volume_callback_keeps_native_rule(self):
++        cam = self.boot()
++        cam.put(VOLUME + 0x4834, 0)
++        self.enter(cam, 41)
++        self.assertEqual(cam.transfers, [])
++
++    def test_writer_scope_and_elapsed_return_are_connected(self):
++        cam = self.boot()
++        self.set_field(cam, 'bulk_writer_frame', 0)
++        before = cam.blob + self.facts['c_base'] + self.facts['entries']['fpl_card_flush']
++        after = cam.blob + self.facts['c_base'] + self.facts['entries']['fpl_card_written']
++        cam.call(before, r0=WRITER, r1=FRAME, r2=cam.card_state, sp=V.T.STACK - 0x1000,
++                 thumb=True)
++        self.assertEqual(self.field(cam, 'bulk_writer_frame'), FRAME)
++        self.enter(cam, 41)
++        cam.now += 500000
++        cam.call(after, r0=cam.card_state, r1=3 << 20, r2=0, sp=V.T.STACK - 0x1000,
++                 thumb=True)
++        self.assertEqual(self.field(cam, 'bulk_writer_frame'), 0)
++        self.assertEqual(self.field(cam, 'bulk_policy.raw'), 1)
++        self.assertGreaterEqual(self.field(cam, 'bulk_policy.latency_us'), 500000)
++        self.assertLess(self.field(cam, 'bulk_policy.frame_limit'), 42)
++
++    def test_mutation_omitting_new_gate_is_detected(self):
++        cam = self.boot()
++        cam.put(V.BULK_GATE, V.SITES[V.BULK_GATE][0])
++        # The old native predicate cannot send 42 small files. Run without
++        # shim ABI assertions, then prove the expected release assertion fails.
++        cam.put(VOLUME + 0x4850, 41)
++        sp = V.T.STACK - 0x1000
++        cam.put(sp + 20, VOLUME)
++        cam.mu.reg_write(UC_ARM_REG_SP, sp)
++        cam.mu.reg_write(UC_ARM_REG_R11, SCATTER)
++        cam.testing_bulk = True
++        try:
++            cam.mu.emu_start(0xC063F81D, 0, count=100000)
++        finally:
++            cam.testing_bulk = False
++        if cam.error:
++            raise cam.error
++        with self.assertRaises(AssertionError):
++            self.assert_sent(cam, 41)
++        self.assertEqual(cam.w(VOLUME + 0x4850), 42)
++
++
++if __name__ == '__main__':
++    unittest.main()
+--- before/fpSup/lossless/test_card_emulation.py
++++ after/fpSup/lossless/test_card_emulation.py
+@@ -39,10 +39,11 @@
+          'event': (0xC038BD08, 0xE594300C), 'discard': (0xC037DEF8, 0xEB000042)}
+ VENEER_AT = {'rec': 0, 'arrive': 8, 'stop': 16, 'flush': 24,      # the record at +32
+              'play': 48, 'clip': 56, 'end': 64, 'pool': 72, 'event': 80, 'discard': 88}
+-CAVE_BYTES = 96
++CAVE_BYTES = 104
+ CAVE_BUMP, CAVE_ARENA, CAVE_END = 0xC072E060, 0xC072E064, 0xC072EFB4
+ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+ import build_card  # noqa: E402
++import build_card as build_card_module  # noqa: E402
+ CARD_BLOCK = build_card.BLOCK_BYTES     # the launcher's USER block, as built
+ CARD_OFFSETS = tuple(build_card.ENTRIES)
+ BLOCK = 0x45300000                    # where our allocation lands in emulation:
+@@ -206,6 +207,8 @@
+         cam = self.boot()
+         for name, (site, stock) in SITES.items():
+             self.assertEqual(cam.word(site), stock, name)
++        for site in (0xC063F828, 0xC0377118):
++            self.assertEqual(cam.word(site), build_card_module.SITES[site][0])
+ 
+     def test_it_allocates_its_own_user_block_copies_publishes_then_arms(self):
+         cam = self.boot()
+@@ -279,6 +282,35 @@
+         for name, (site, stock) in SITES.items():
+             self.assertEqual(cam.word(site), stock, name)
+ 
++    def test_new_bulk_and_release_sites_are_guarded_and_installed(self):
++        for site in (0xC063F828, 0xC0377118):
++            with self.subTest(site=hex(site)):
++                cam = self.boot()
++                cam.mu.mem_write(site, struct.pack('<I', 0xE1A00000))
++                self.launch(cam)
++                self.assertEqual(cam.word(CAVE_BUMP), CAVE_ARENA)
++                for _, (old_site, stock) in SITES.items():
++                    self.assertEqual(cam.word(old_site), stock)
++        cam = self.boot()
++        self.launch(cam)
++        self.assertEqual(cam.word(0xC0377118), 0xEA000160)
++        from capstone import Cs, CS_ARCH_ARM, CS_MODE_THUMB
++        inst = list(Cs(CS_ARCH_ARM, CS_MODE_THUMB).disasm(
++            bytes(cam.mu.mem_read(0xC063F828, 4)), 0xC063F828))[0]
++        self.assertEqual((inst.mnemonic, int(inst.op_str[1:], 16)), ('b.w', CAVE_ARENA + 96))
++
++    def test_power_off_restores_the_new_sites_twice(self):
++        cam = self.boot()
++        self.launch(cam)
++        # Product builds omit the optional LH_MARK debug pointer. Use the
++        # object actually registered with both native power-off lists.
++        self.assertEqual([flag for _, flag in cam.registered], [0, 1])
++        journal = cam.registered[0][0]
++        for _ in range(2):
++            cam.call(cam.word(journal + 4), r0=journal, r1=4)
++            for site in (0xC063F828, 0xC0377118):
++                self.assertEqual(cam.word(site), build_card_module.SITES[site][0])
++
+     # ---- through the veneers ------------------------------------------
+     def enter(self, cam, name, regs, lr=T.DONE, r4=0x44444444, stack_delta=0):
+         site = SITES[name][0]
+@@ -339,9 +371,8 @@
+         self.assertEqual(cam.irq_depth, 0)
+ 
+     def test_an_off_take_leaves_the_bulk_size_stock(self):
+-        """EARLY_STOP_94.md: only an admitted compressed take changes the file
+-        layer's bulk size; every other take starts from the stock 64 MB, even
+-        when the word was left at another value."""
++        """Every take starts from the stock 64 MiB byte target, even when the
++        word was left at another value. OFF leaves the new count gate disabled."""
+         cam = self.armed()
+         cam.mu.mem_write(BULK, struct.pack('<I', 0x00C00000))
+         cam.mu.mem_write(BULK_WRITER + 0xC, b'\0')
+@@ -351,6 +382,7 @@
+         self.assertEqual(cam.word(BULK), 0x04000000)
+         self.assertEqual(self.field(cam, 'bulk'), 0x04000000)
+         self.assertEqual(self.field(cam, 'bulk_writer_open'), 0)
++        self.assertEqual(self.field(cam, 'bulk_policy.enabled'), 0)
+ 
+     def test_mutation_omitting_rec_alignment_is_caught(self):
+         cam = self.armed()
+--- /dev/null
++++ after/fpSup/lossless/test_stop_release.py
+@@ -0,0 +1,255 @@
++"""Stock stop-queue release instructions used by the integrated lossless patch.
++
++Promoted from the 2026-10-11 community review. The built LOSS install/restore
++and exclusive claim are covered by test_v3_lossless/test_card_emulation.
++Actual queue, parent/child reference and RAW cleanup instructions execute;
++locks and allocator/pool-return boundaries are explicit substitutes. No real
++DMA, scheduling, concurrent descriptor reuse or camera I/O is tested.
++"""
++import hashlib
++import pathlib
++import struct
++import sys
++import unittest
++
++HERE = pathlib.Path(__file__).resolve().parent
++ROOT = HERE.parents[1]
++sys.path.insert(0, str(ROOT / 'fpSup/raw/lossless_codec'))
++sys.path.insert(0, str(ROOT / 'fpSup/fp_usb_shell/v3'))
++from test_native_writer_contract import StockWriter, STOP, STACK
++
++IMAGE = ROOT / 'out/seg0_c0000000.bin'
++IMAGE_SHA = 'aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622'
++SITE, STOCK, PATCH = 0xC0377118, 0xE92D4030, 0xEA000160
++MGR, OBJ, NODE, RAW = 0x45002000, 0x45002400, 0x48000000, 0x49000000
++RANGES = [(SITE, 0xC0377150), (0xC03776A0, 0xC0377730),
++          (0xC0375030, 0xC0375178), (0xC03753C0, 0xC0375400),
++          (0xC03768D8, 0xC0376AF8), (0xC0381008, 0xC0381090),
++          (0xC0374180, 0xC03741D0), (0xC03777B8, 0xC03779D8),
++          (0xC037B1F0, 0xC037B248), (0xC037D880, 0xC037D898),
++          (0xC037E008, 0xC037E060)]
++CALLS = [0xC0377688, 0xC03840C0, 0xC03840D8, 0xC03841BC,
++         0xC03842E8, 0xC0384300, 0xC038F3F8, 0xC038F410,
++         0xC038F51C, 0xC038F524, 0xC0398D34, 0xC0398D3C]
++
++
++def pinned(path, expected):
++    data = path.read_bytes()
++    if hashlib.sha256(data).hexdigest() != expected:
++        raise AssertionError('input hash mismatch: ' + str(path))
++    return data
++
++
++class Flush(StockWriter):
++    def __init__(self, patched=True):
++        super().__init__(pinned(IMAGE, IMAGE_SHA))
++        self.mu.mem_map(NODE, 0x100000)
++        self.returned, self.buffers, self.locks = [], [], {}
++        self.raw_bytes = {}
++        if patched:
++            self.put(SITE, PATCH)
++        self.substitutes = {
++            0xC0019DC0: lambda: self.ret(0x1234),
++            0xC001A048: self.ret, 0xC001A288: self.ret,
++            0xC0374220: lambda: self.ret(MGR),
++            0xC0377348: lambda: self.ret(OBJ),
++            0xC037AED8: lambda: self.ret(OBJ + 0x100),
++            0xC037D580: lambda: self.ret(OBJ + 0x200),
++            0xC037DD08: lambda: self.ret(OBJ + 0x300),
++            0xC0010298: self.queue_lock,
++            0xC00102D0: self.queue_unlock,
++            0xC036DCC8: lambda: self.ret(0),
++            0xC00101C0: self.manager_lock,
++            0xC0010210: self.manager_unlock,
++            0xC001D3D0: self.buffer_free,
++            0xC0380580: self.pool_return,
++        }
++        # Match the maintained v3 harness: also place bx lr at every substituted
++        # boundary because a PC write from a Unicorn hook can be ignored.
++        for address in self.substitutes:
++            self.put(address, 0xE12FFF1E)
++
++    def queue_lock(self):
++        token, owner = self.r('r0'), self.r('r1')
++        if owner in self.locks:
++            raise AssertionError('recursive queue acquisition')
++        self.locks[owner] = token
++        self.put(token, owner)
++        self.ret(token)
++
++    def queue_unlock(self):
++        owner = self.get(self.r('r0'))
++        if self.locks.pop(owner, None) is None:
++            raise AssertionError('unowned queue unlock')
++        self.ret()
++
++    def manager_lock(self):
++        if self.r('r0') != MGR or MGR in self.locks:
++            raise AssertionError('unexpected manager acquisition')
++        self.locks[MGR] = 0xCAFE
++        self.ret(0xCAFE)
++
++    def manager_unlock(self):
++        if (self.r('r0'), self.r('r1')) != (MGR, 0xCAFE):
++            raise AssertionError('unexpected manager unlock')
++        if self.locks.pop(MGR, None) != 0xCAFE:
++            raise AssertionError('unowned manager unlock')
++        self.ret()
++
++    def buffer_free(self):
++        handle = self.get(self.r('r0'))
++        if handle not in self.raw_bytes or handle in self.buffers:
++            raise AssertionError('unknown or duplicate RAW buffer release')
++        self.buffers.append(handle)
++        self.ret()
++
++    def pool_return(self):
++        frame = self.r('r0')
++        if self.r('r1') != 3 or frame in self.returned:
++            raise AssertionError('unknown or duplicate node return')
++        if not NODE <= frame < NODE + 96 * 0x2000:
++            raise AssertionError('out-of-pool node')
++        self.returned.append(frame)
++        self.ret()
++
++    def node(self, slot, parent=0xFFFFFFFF, refs=0, raw_refs=0, raw_slot=None):
++        frame = NODE + slot * 0x2000
++        self.put(MGR + 4 + slot * 4, frame)
++        self.put(MGR + 0x18C, self.get(MGR + 0x18C) + 1)
++        for off, value in [(4, 1), (0x10FC, slot), (0x1118, parent),
++                           (0x1110, refs), (0x1114, raw_refs)]:
++            self.put(frame + off, value)
++        if raw_slot is None:
++            raw_slot = slot
++        handle = RAW + raw_slot * 0x2000
++        self.raw_bytes[handle] = 1441792
++        self.put(frame + 0x68, handle)
++        self.put(frame + 0x6C, 1441792)
++        self.put(frame + 0x70, 10)
++        # All other native buffer wrappers are absent (allocator type 15).
++        for off in list(range(0x74, 0x128, 12)) + [0x12C, 0x18C, 0xFD0, 0xFDC, 0xFE8]:
++            self.put(frame + off + 8, 15)
++        return frame
++
++    def queue(self, frames):
++        self.put(OBJ + 0x14, frames[0] if frames else 0)
++        self.put(OBJ + 0x18, frames[-1] if frames else 0)
++        for i, frame in enumerate(frames):
++            self.put(frame + 0x110C, frames[i + 1] if i + 1 < len(frames) else 0)
++
++    def invoke(self, addr=SITE, **registers):
++        self.allowed, self.stops, self.stubs = RANGES, {STOP}, self.substitutes
++        self.reached = None
++        self.setr('sp', STACK - 0x100)
++        self.setr('lr', STOP)
++        for name, value in registers.items():
++            self.setr(name, value)
++        self.mu.emu_start(addr, 0, count=200000)
++        if self.reached != STOP:
++            raise AssertionError('did not return within instruction budget')
++        if self.r('sp') != STACK - 0x100 or self.locks:
++            raise AssertionError('stack or lock not restored')
++
++
++class StopReleaseTests(unittest.TestCase):
++    def test_branch_and_all_twelve_direct_call_sites(self):
++        from capstone import Cs, CS_ARCH_ARM, CS_MODE_ARM
++        image = pinned(IMAGE, IMAGE_SHA)
++        md = Cs(CS_ARCH_ARM, CS_MODE_ARM)
++        ins = list(md.disasm(struct.pack('<I', PATCH), SITE))[0]
++        self.assertEqual((ins.mnemonic, ins.op_str), ('b', '#0xc03776a0'))
++        actual = []
++        for off in range(0, len(image) - 4, 4):
++            w = struct.unpack_from('<I', image, off)[0]
++            if w >> 24 != 0xEB:
++                continue
++            imm = w & 0xFFFFFF
++            if imm & 0x800000:
++                imm -= 0x1000000
++            if 0xC0000000 + off + 8 + imm * 4 == SITE:
++                actual.append(0xC0000000 + off)
++        self.assertEqual(actual, CALLS)
++        getters = {0xC037AED8, 0xC037D580, 0xC037DD08, 0xC0374220}
++        for a in actual:
++            following = list(md.disasm(image[a + 4 - 0xC0000000:a + 12 - 0xC0000000], a + 4))
++            first = following[0]
++            if first.mnemonic == 'bl':
++                self.assertIn(int(first.op_str[1:], 16), getters)
++            else:
++                self.assertEqual([(i.mnemonic, i.op_str) for i in following],
++                                 [('mov', 'r1, #1'), ('mov', 'r0, r1')])
++
++    def test_stock_drops_44_but_patch_releases_44(self):
++        for patched in (False, True):
++            r = Flush(patched)
++            frames = [r.node(i) for i in range(44)]
++            r.queue(frames)
++            r.invoke(r0=OBJ)
++            self.assertEqual((r.get(OBJ + 0x14), r.get(OBJ + 0x18)), (0, 0))
++            self.assertEqual(len(r.returned), 44 if patched else 0)
++            self.assertEqual(len(r.buffers), 44 if patched else 0)
++            self.assertEqual(r.get(MGR + 0x18C), 0 if patched else 44)
++            for i in range(44):
++                self.assertEqual(r.get(MGR + 4 + i * 4), 0 if patched else frames[i])
++
++    def test_parent_survives_until_active_child_completes(self):
++        r = Flush()
++        parent = r.node(0, refs=2, raw_refs=2)
++        queued = r.node(1, parent=0, raw_slot=0)
++        active = r.node(2, parent=0, raw_slot=0)
++        r.queue([queued])
++        r.invoke(r0=OBJ)
++        self.assertEqual(r.returned, [queued])
++        self.assertEqual(r.buffers, [])
++        self.assertEqual((r.get(parent + 0x1110), r.get(parent + 0x1114)), (1, 1))
++        self.assertEqual(r.get(MGR + 4), parent)
++        r.invoke(0xC0375030, r0=MGR, r1=2)
++        self.assertEqual(r.returned, [queued, active, parent])
++        self.assertEqual(len(r.buffers), 1)
++        self.assertEqual(r.get(MGR + 0x18C), 0)
++
++    def test_sequential_duplicate_release_is_noop(self):
++        r = Flush()
++        parent = r.node(0, refs=1, raw_refs=1)
++        child = r.node(1, parent=0, raw_slot=0)
++        r.queue([child])
++        r.invoke(r0=OBJ)
++        r.invoke(0xC0375030, r0=MGR, r1=1)
++        r.invoke(0xC0375030, r0=MGR, r1=0)
++        self.assertEqual(r.returned, [child, parent])
++        self.assertEqual(len(r.buffers), 1)
++        self.assertEqual(r.get(parent + 0x1110), 0)
++
++    def test_empty_queue_preserves_callee_registers(self):
++        r = Flush()
++        regs = {f'r{i}': 0x11220000 + i for i in range(4, 12)}
++        r.queue([])
++        r.invoke(r0=OBJ, **regs)
++        self.assertEqual({n: r.r(n) for n in regs}, regs)
++        self.assertEqual(r.returned, [])
++
++    def test_busy_manager_does_not_release(self):
++        r = Flush()
++        frame = r.node(0)
++        r.mu.mem_write(MGR + 0x190, b'\x01')
++        r.queue([frame])
++        r.invoke(r0=OBJ)
++        self.assertEqual(r.returned, [])
++        self.assertEqual(r.get(MGR + 4), frame)
++        # A busy manager still loses the popped queue; patch is not a busy-flag fix.
++        self.assertEqual(r.get(OBJ + 0x14), 0)
++
++    def test_parent_decrement_mutation_is_detected(self):
++        r = Flush()
++        parent = r.node(0, refs=1, raw_refs=1)
++        child = r.node(1, parent=0, raw_slot=0)
++        r.put(0xC0375100, 0xE1A02002)  # private mov r2,r2 instead of sub r2,r2,#1
++        r.queue([child])
++        r.invoke(r0=OBJ)
++        with self.assertRaises(AssertionError):
++            self.assertEqual(r.get(MGR + 4), 0)
++        self.assertEqual(r.get(MGR + 4), parent)
++
++
++if __name__ == '__main__':
++    unittest.main()
+--- before/fpSup/lossless/test_v3_lossless.py
++++ after/fpSup/lossless/test_v3_lossless.py
+@@ -36,6 +36,7 @@
+ REC, ARRIVE, STOP, FLUSH = 0xC03A33C8, 0xC038BFF0, 0xC0398D88, 0xC03A5490
+ PLAY, CLIP, END, POOL = 0xC05C0EA4, 0xC05BDDAC, 0xC05C2E90, 0xC05C2D10
+ EVENT, DISCARD = 0xC038BD08, 0xC037DEF8
++BULK_GATE, STOP_RELEASE = 0xC063F828, 0xC0377118
+ ENGINE = 0x300D0000
+ VENEER_AT = {REC: 0, ARRIVE: 8, STOP: 16, FLUSH: 24, PLAY: 48, CLIP: 56,
+              END: 64, POOL: 72, EVENT: 80, DISCARD: 88}
+@@ -113,7 +114,7 @@
+         self.assertIn((ENGINE, 0, 2, 0, 1, 0), claims)         # claim_res, EXCL
+         kinds = {a: k for a, n, k, _, res, _ in claims if not res}
+         self.assertEqual(kinds, {a: L.WANT_KIND.get(a, 1) for a in SITES})
+-        cave = cam.w(T.cave.CAVE_BUMP) - 96                      # card.S CAVE_BYTES
++        cave = cam.w(T.cave.CAVE_BUMP) - 104                     # card.S CAVE_BYTES
+         self.assertEqual(cave, (T.cave.CAVE_ARENA + 7) & ~7)     # cave_alloc: 8-aligned
+         base, blob = self.block(cam), self.blob(cam)
+         for site, off in VENEER_AT.items():
+@@ -134,6 +135,13 @@
+         # the call sites call what was below them: the firmware
+         self.assertEqual(cam.w(blob + self.sym['flush_real']), 0xC069ADE0)
+         self.assertEqual(cam.w(blob + self.sym['discard_real']), 0xC037E008)
++        self.assertEqual(cam.w(STOP_RELEASE), 0xEA000160)
++        from capstone import Cs, CS_ARCH_ARM, CS_MODE_THUMB
++        ins = list(Cs(CS_ARCH_ARM, CS_MODE_THUMB).disasm(
++            bytes(cam.mu.mem_read(BULK_GATE, 4)), BULK_GATE))[0]
++        self.assertEqual((ins.mnemonic, int(ins.op_str[1:], 16)), ('b.w', cave + 96))
++        self.assertEqual(cam.w(cave + 96), 0xF000F8DF)
++        self.assertEqual(cam.w(cave + 100), blob + self.sym['bulk_shim'])
+ 
+     def test_power_off_puts_every_site_back(self):
+         cam = self.boot()
+@@ -142,7 +150,8 @@
+             self.assertEqual(cam.w(a), stock, hex(a))
+ 
+     def test_a_patch_left_by_last_boot_is_repaired_then_armed(self):
+-        stale = {REC: 0xEB0DEAD0, STOP: 0xEA0DEAD0, CLIP: 0xE1A00000}
++        stale = {REC: 0xEB0DEAD0, STOP: 0xEA0DEAD0, CLIP: 0xE1A00000,
++                 STOP_RELEASE: 0xEA000160, BULK_GATE: 0xB800F000}
+         cam = self.boot(stale=stale)
+         self.assertEqual(self.outcome(cam), 'LOADED')
+         repaired = {a for c, a, _, t in cam.log() if c == 'REPAIRED'}
+@@ -173,6 +182,19 @@
+         o = self.other('OTHR', (ARRIVE, 1, 0))
+         cam = self.boot(('05OTHER.BIN', o))
+         self.assert_released_clean(cam, held=(ARRIVE,))
++
++    def test_bulk_gate_and_stop_release_are_exclusive(self):
++        for site in (BULK_GATE, STOP_RELEASE):
++            with self.subTest(site=hex(site)):
++                o = self.other('OTHR', (site, 1, 0))
++                cam = self.boot(('05OTHER.BIN', o))
++                self.assert_released_clean(cam, held=(site,))
++
++    def test_standalone_stopfix_conflict_refuses_lossless(self):
++        other = B.patch_sup('STFX', [(STOP_RELEASE, struct.pack('<I', 0xEA000160), 2)])
++        cam = self.boot(('05STOPFX.BIN', other))
++        self.assert_released_clean(cam, held=(STOP_RELEASE,))
++        self.assertEqual(cam.w(STOP_RELEASE), 0xEA000160)
+ 
+     def test_an_exclusive_hold_on_a_chain_site_releases(self):
+         o = self.other('OTHR', (FLUSH, 2, 0))
+@@ -350,6 +372,14 @@
+         cam = self.boot(('05OTHER.BIN', o), sup=self.mutate_kind(CLIP, 1))
+         self.assertEqual(self.outcome(cam), 'LOADED')              # the guard is the kind
+ 
++    def test_mutation_new_sites_as_chain_is_caught(self):
++        for site in (BULK_GATE, STOP_RELEASE):
++            other = self.other('OTHR', (site, 1, 0))
++            cam = self.boot(('05OTHER.BIN', other), sup=self.mutate_kind(site, 1))
++            with self.assertRaises(AssertionError):
++                self.assert_released_clean(cam, held=(site,))
++            self.assertEqual(self.outcome(cam), 'LOADED')
++
+     def test_mutation_skipping_the_engine_claim_is_caught(self):
+         sup = bytearray(self.sup)
+         # `LDA r1, ENGINE`: movw r1, #0 ; movt r1, #0x300D -> make the id 0x300E0000
+--- before/projects/lossless-sup/notes/EARLY_STOP_94.md
++++ after/projects/lossless-sup/notes/EARLY_STOP_94.md
+@@ -1,4 +1,39 @@
+-# 開錄就停:每次 94 幀(2026-10-06 上機,已修正)
++# 開錄就停：94 幀問題與批次策略
++
++## 2026-10-12 整合更新（離線候選版，尚未實機驗證）
++
++以下新策略取代 10/06 的「3 × 原始幀大小」批次設定。後面的上機數字均屬於舊策略，不能當作新版已上機的證據。
++
++- 原廠的 96 個描述子位置保留，64 MiB（67,108,864 bytes，非 64 megabits）容量門檻也保留。
++  增加檔案數與剩餘位置兩道提早結算條件，呼叫原廠既有批次結算流程。
++- 開錄時讀取可用位置 `S`；每批上限 `N = floor((S - 2 - 4 - ceil(fps × T)) / 2)`。
++  fps 先向上取整；`T` 初始為 100 ms，再依當段最慢的 writer 返回時間增加。
++  2 個位置保留給停止邊界、4 個保留給壓縮與交接；除以 2 實現「兩批影格的餘裕」。
++  這些保留數是初始政策，尚未量得實機最壞延遲。預算不足或資料不可信時退到每檔結算。
++- 例：開錄可用 96 個位置、24p 時上限 43 幀，59.94p 時上限 42 幀；
++  59.94p 若觀察到 300 ms 的返回等待，上限降到 36 幀。剩餘位置低於保留量時更早結算。
++- **不增加 128 MiB 緩衝，也不把 96 改成 192。** 如果 64 MiB 所需幀數超過兩批預算，
++  就先結算未滿 64 MiB 的批次。容量與幀數兩個條件，先到者生效。
++- 解析度、壓縮率與未壓縮影格由實際檔案 byte 數反映。每 32 個檔案重新累積混合樣本，
++  顯示壓縮比例、平均大小、估計填滿 64 MiB 的幀數與資料率。估算只供觀察，
++  不作為放寬幀数上限的依據；不能假設 lossless ON 就每幀都壓縮。
++- 新的檔案數 hook 僅對當次已接受的 lossless writer 影格與原廠 CinemaDNG callback 生效。
++  原廠 pending 計數尚未含正在送出的檔案，因此上限比較使用 `pending + 1`。
++
++同時整合社群 stopfix：`C0377118: E92D4030 → EA000160`，轉到 `C03776A0`，
++將原本只移出佇列的清理改走原廠引用計數釋放；仍有子物件時保留父物件，最後引用完成才回收。
++這是共用停錄路徑，lossless OFF 也會使用。它修正被丟棄影格的資源回收，不能補回未寫出的影格，
++也沒有解決壓縮引擎 stall。原廠 registry busy 分支依然直接返回，硬體併發行為須實機確認。
++
++釋放後緩衝地址會被重用，因此 flush 的壓縮紀錄除了 file buffer 地址，也核對 frame 指標及
++原廠 `frame+0x1100` generation；不符就清除舊紀錄，避免將舊壓縮表頭套到新的 RAW 影格。
++兩個新修改點均有原廠位元檢查、v3 EXCL 宣告與關機還原。整合版不能再搭配獨立 `05STOPFX.BIN`；
++重複宣告時 loader 會拒絕後載入的 lossless，避免重複修改。
++
++完整來源差異、候選包、測試記錄與限制：
++[`20261012-bulk-stop-integration`](../validation/20261012-bulk-stop-integration/)。
++
++## 2026-10-06 舊策略與實機紀錄
+ 
+ ## 機制(反組譯 + 上機事件記錄證實)
+ 

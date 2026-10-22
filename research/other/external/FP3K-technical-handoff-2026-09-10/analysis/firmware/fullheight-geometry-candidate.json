@@ -1,0 +1,67 @@
+{
+  "status": "OFFLINE GEOMETRY CANDIDATE ONLY; INCOMPLETE, NOT DEPLOYABLE",
+  "baseline": {
+    "profile": 429,
+    "row": 286,
+    "sensor_mode": 151,
+    "hardware_confirmed": true
+  },
+  "parameter_hypothesis": [
+    {
+      "offset": "0xdc",
+      "stock": 3856,
+      "hypothetical": 3032,
+      "table_entry_address": "0xc0be35c4"
+    },
+    {
+      "offset": "0xe4",
+      "stock": 2170,
+      "hypothetical": 2020,
+      "table_entry_address": "0xc0be3a8c"
+    },
+    {
+      "offset": "0x24",
+      "stock": 3840,
+      "hypothetical": 3000,
+      "table_entry_address": "0xc0be2c34"
+    },
+    {
+      "offset": "0x2c",
+      "stock": 2160,
+      "hypothetical": 2000,
+      "table_entry_address": "0xc0be30fc"
+    },
+    {
+      "offset": "0x64",
+      "stock": 1600,
+      "hypothetical": 2048,
+      "table_entry_address": "0xc0be1914"
+    },
+    {
+      "offset": "0xd4",
+      "stock": 1600,
+      "hypothetical": 2048,
+      "table_entry_address": "0xc0be1ddc"
+    }
+  ],
+  "raw_raster": [
+    3032,
+    2020
+  ],
+  "visible_crop": [
+    3000,
+    2000
+  ],
+  "target_sensor_raster": [
+    6064,
+    4042
+  ],
+  "unresolved": [
+    "Exact full-height 24/25/30 sensor timing and receiver configuration",
+    "Filter semantics: all-pixel combination versus discard/interpolation",
+    "Allocation and buffer queue capacity, alignment and ownership",
+    "Preview geometry and Bayer phase",
+    "DNG headers, strip sizes and output frame timing",
+    "Sustained recording and existing early-stop cause"
+  ]
+}

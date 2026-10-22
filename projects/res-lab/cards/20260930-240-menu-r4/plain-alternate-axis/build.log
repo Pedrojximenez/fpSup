@@ -1,0 +1,6 @@
+binary : fpSup.BIN  32768 bytes, 312 section(s), entry 0xC0731600
+worker : none -- no task either, the loader runs in the callback
+start  : echo handler 0xC0BAC2F8 -> 0xC072DE64 (loader)
+patches: 0 firmware (-), 3 screen
+wrote  : /Users/dido/Developer.localized/SIGMAfp_re/projects/sensor-lab/cards/20260930-240-menu-r4/plain-alternate-axis/AutoRun.txt  169 lines  sha256=57845e1b8d422289
+clean  : 118 commands, no dumps and no diagnostics

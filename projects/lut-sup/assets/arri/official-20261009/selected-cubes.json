@@ -1,0 +1,84 @@
+{
+  "official_page": "https://www.arri.com/en/learn/camera-systems/tools/lut-generator",
+  "package_sha256": "bf9a26d138378424964079fc9201474dd5b97ad586cc711457bfa2145ffe2bd3",
+  "cubes": [
+    {
+      "file": "ARRI_LogC3-to-Gamma24_Rec709_D65-Classic_33.cube",
+      "archive_member": "ARRI_LogC3_v1-2-1_LUT_Package/LUTs/ARRI_LogC3-to-Gamma24_Rec709_D65-Classic_33.cube",
+      "source_bytes": 970314,
+      "title": "",
+      "source_sha256": "29212a71808ab22f2819b904b3730fa4231b5841d883e43ec17610096dc38879",
+      "size1d": 0,
+      "size3d": 33,
+      "range1d": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          1.0,
+          1.0,
+          1.0
+        ]
+      ],
+      "range3d": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          1.0,
+          1.0,
+          1.0
+        ]
+      ],
+      "input_space": "ARRI Wide Gamut 3 / LogC3",
+      "output_space": "Rec.709 D65 / Gamma 2.4",
+      "on_camera_ready": false,
+      "fp_input_conversion_calibrated": false,
+      "prepared_settings": "prepared-classic/settings.json"
+    },
+    {
+      "file": "ARRI_LogC3-to-Gamma24_Rec709_D65-v1_33.cube",
+      "archive_member": "ARRI_LogC3_v1-2-1_LUT_Package/LUTs/ARRI_LogC3-to-Gamma24_Rec709_D65-v1_33.cube",
+      "source_bytes": 970314,
+      "title": "",
+      "source_sha256": "241aff344709aa90b468f8658144888db38f29f9aa1b3c0d917cf327ca3b354e",
+      "size1d": 0,
+      "size3d": 33,
+      "range1d": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          1.0,
+          1.0,
+          1.0
+        ]
+      ],
+      "range3d": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          1.0,
+          1.0,
+          1.0
+        ]
+      ],
+      "input_space": "ARRI Wide Gamut 3 / LogC3",
+      "output_space": "Rec.709 D65 / Gamma 2.4",
+      "on_camera_ready": false,
+      "fp_input_conversion_calibrated": false,
+      "prepared_settings": "prepared-v1/settings.json"
+    }
+  ],
+  "camera_operations": false,
+  "cube_preserved_exactly": true
+}

@@ -1,0 +1,1085 @@
+{
+ "product": "fpSup res-custom, the multi-format OpenGate core and its data files (Loader v3)",
+ "card": {
+  "\\\\fpSup\\\\32RESCUS.BIN": "32RESCUS.BIN",
+  "\\\\fpSup\\\\RESCUS\\\\OG3K.RCD": "RESCUS/OG3K.RCD",
+  "\\\\fpSup\\\\RESCUS\\\\OG2K.RCD": "RESCUS/OG2K.RCD"
+ },
+ "files": {
+  "32RESCUS.BIN": {
+   "sha256": "03643d32a3229a03a1e1e4f7cee09032279148e3b511147108f15fda32f35532",
+   "bytes": 43520,
+   "facts": {
+    "file": "32RESCUS.BIN",
+    "label": "RCUS",
+    "block": 268032,
+    "entry": 11975,
+    "layout0": "0xC0730000",
+    "cfg_off": 32,
+    "cfg_bytes": 96,
+    "s_coord": "0xC0731000",
+    "text": 28234,
+    "pairs_rewritten": 69,
+    "uia_apply_off": 159,
+    "hooks": [
+     {
+      "site": "0xC005C020",
+      "to": "0xC073005C",
+      "kind": 0,
+      "next": "0xC0731084",
+      "replay": "0xC0730094"
+     },
+     {
+      "site": "0xC005BE58",
+      "to": "0xC07300A4",
+      "kind": 0,
+      "next": "0xC0731088",
+      "replay": "0xC07300DC"
+     },
+     {
+      "site": "0xC043A19C",
+      "to": "0xC07300EC",
+      "kind": 1,
+      "next": "0xC073108C",
+      "replay": "0xC073012C"
+     },
+     {
+      "site": "0xC043A18C",
+      "to": "0xC0730134",
+      "kind": 1,
+      "next": "0xC0731090",
+      "replay": "0xC0730178"
+     },
+     {
+      "site": "0xC0437B48",
+      "to": "0xC0730180",
+      "kind": 0,
+      "next": "0xC0731094",
+      "replay": "0xC07301C4"
+     },
+     {
+      "site": "0xC0306EA0",
+      "to": "0xC07301D4",
+      "kind": 0,
+      "next": "0xC0731098",
+      "replay": "0xC0730208"
+     },
+     {
+      "site": "0xC0306EEC",
+      "to": "0xC0730218",
+      "kind": 0,
+      "next": "0xC073109C",
+      "replay": "0xC073024C"
+     },
+     {
+      "site": "0xC0437E98",
+      "to": "0xC073025C",
+      "kind": 0,
+      "next": "0xC07310A0",
+      "replay": "0xC07302B0"
+     },
+     {
+      "site": "0xC03A6DD8",
+      "to": "0xC07302C0",
+      "kind": 0,
+      "next": "0xC07310A4",
+      "replay": "0xC07302E8"
+     },
+     {
+      "site": "0xC0320BA0",
+      "to": "0xC07302F8",
+      "kind": 0,
+      "next": "0xC07310A8",
+      "replay": "0xC0730374"
+     },
+     {
+      "site": "0xC0320B38",
+      "to": "0xC0730384",
+      "kind": 0,
+      "next": "0xC07310AC",
+      "replay": "0xC0730400"
+     },
+     {
+      "site": "0xC0320E90",
+      "to": "0xC0730410",
+      "kind": 0,
+      "next": "0xC07310B0",
+      "replay": "0xC073048C"
+     },
+     {
+      "site": "0xC0320F60",
+      "to": "0xC073049C",
+      "kind": 0,
+      "next": "0xC07310B4",
+      "replay": "0xC0730518"
+     },
+     {
+      "site": "0xC0320EF8",
+      "to": "0xC0730528",
+      "kind": 0,
+      "next": "0xC07310B8",
+      "replay": "0xC07305A4"
+     },
+     {
+      "site": "0xC0320C00",
+      "to": "0xC07305B4",
+      "kind": 0,
+      "next": "0xC07310BC",
+      "replay": "0xC0730630"
+     },
+     {
+      "site": "0xC0326DB8",
+      "to": "0xC0730640",
+      "kind": 0,
+      "next": "0xC07310C0",
+      "replay": "0xC07306BC"
+     },
+     {
+      "site": "0xC031FFA0",
+      "to": "0xC07306CC",
+      "kind": 0,
+      "next": "0xC07310C4",
+      "replay": "0xC0730748"
+     },
+     {
+      "site": "0xC02092CC",
+      "to": "0xC0730758",
+      "kind": 1,
+      "next": "0xC07310C8",
+      "replay": "0x00000000"
+     },
+     {
+      "site": "0xC0218AEC",
+      "to": "0xC073079C",
+      "kind": 1,
+      "next": "0xC07310CC",
+      "replay": "0x00000000"
+     },
+     {
+      "site": "0xC0219260",
+      "to": "0xC07307E0",
+      "kind": 1,
+      "next": "0xC07310D0",
+      "replay": "0x00000000"
+     },
+     {
+      "site": "0xC03AA568",
+      "to": "0xC0730824",
+      "kind": 1,
+      "next": "0xC07310D4",
+      "replay": "0x00000000"
+     },
+     {
+      "site": "0xC057A6A0",
+      "to": "0xC07309AC",
+      "kind": 0,
+      "next": "0xC07310D8",
+      "replay": "0xC07309E8"
+     },
+     {
+      "site": "0xC05824D0",
+      "to": "0xC07309F8",
+      "kind": 0,
+      "next": "0xC07310DC",
+      "replay": "0xC0730A34"
+     },
+     {
+      "site": "0xC0088C60",
+      "to": "0xC0730A44",
+      "kind": 1,
+      "next": "0xC07310E0",
+      "replay": "0x00000000"
+     },
+     {
+      "site": "0xC031AC38",
+      "to": "0xC0730868",
+      "kind": 0,
+      "next": "0xC07310E4",
+      "replay": "0xC07308AC"
+     },
+     {
+      "site": "0xC031ACD8",
+      "to": "0xC07308BC",
+      "kind": 0,
+      "next": "0xC07310E8",
+      "replay": "0xC0730904"
+     },
+     {
+      "site": "0xC031B660",
+      "to": "0xC0730914",
+      "kind": 1,
+      "next": "0xC07310EC",
+      "replay": "0x00000000"
+     },
+     {
+      "site": "0xC03249A0",
+      "to": "0xC0730954",
+      "kind": 0,
+      "next": "0xC07310F0",
+      "replay": "0xC073099C"
+     },
+     {
+      "site": "0xC05E6400",
+      "to": "0xC0730A84",
+      "kind": 2,
+      "next": "0xC07310F4",
+      "replay": "0xC0730AB0"
+     },
+     {
+      "site": "0xC05D90F0",
+      "to": "0xC0730AC0",
+      "kind": 2,
+      "next": "0xC07310F8",
+      "replay": "0xC0730AEC"
+     },
+     {
+      "site": "0xC05E84D8",
+      "to": "0xC0730AFC",
+      "kind": 2,
+      "next": "0xC07310FC",
+      "replay": "0xC0730B2C"
+     },
+     {
+      "site": "0xC043CCF8",
+      "to": "0xC0730000",
+      "kind": 0,
+      "next": "0xC0731080",
+      "replay": "0xC073004C"
+     }
+    ],
+    "hook_names": {
+     "0xC043CCF8": "picker",
+     "0xC005C020": "setter",
+     "0xC005BE58": "fmtset",
+     "0xC043A19C": "canvas",
+     "0xC043A18C": "vpro",
+     "0xC0437B48": "name",
+     "0xC0306EA0": "aspect",
+     "0xC0306EEC": "aspect2",
+     "0xC0437E98": "out",
+     "0xC03A6DD8": "gs",
+     "0xC0320BA0": "lk_tim",
+     "0xC0320B38": "lk_meta",
+     "0xC0320E90": "lk_r28",
+     "0xC0320F60": "lk_r38",
+     "0xC0320EF8": "lk_r14",
+     "0xC0320C00": "lk_r68",
+     "0xC0326DB8": "lk_reg",
+     "0xC031FFA0": "lk_r10",
+     "0xC02092CC": "fps1",
+     "0xC0218AEC": "fps2",
+     "0xC0219260": "fps3",
+     "0xC03AA568": "fps4",
+     "0xC057A6A0": "cmt_set",
+     "0xC05824D0": "cmt_qs",
+     "0xC0088C60": "save",
+     "0xC031AC38": "ac38",
+     "0xC031ACD8": "acd8",
+     "0xC031B660": "zg",
+     "0xC03249A0": "v32",
+     "0xC05E6400": "qsrec",
+     "0xC05D90F0": "qslay",
+     "0xC05E84D8": "qsload"
+    },
+    "claims": [
+     {
+      "address": "0xC005C020",
+      "bytes": 4,
+      "kind": 1
+     },
+     {
+      "address": "0xC005BE58",
+      "bytes": 4,
+      "kind": 1
+     },
+     {
+      "address": "0xC043A19C",
+      "bytes": 4,
+      "kind": 1
+     },
+     {
+      "address": "0xC043A18C",
+      "bytes": 4,
+      "kind": 1
+     },
+     {
+      "address": "0xC0437B48",
+      "bytes": 4,
+      "kind": 1
+     },
+     {
+      "address": "0xC0306EA0",
+      "bytes": 4,
+      "kind": 1
+     },
+     {
+      "address": "0xC0306EEC",
+      "bytes": 4,
+      "kind": 1
+     },
+     {
+      "address": "0xC0437E98",
+      "bytes": 4,
+      "kind": 1
+     },
+     {
+      "address": "0xC03A6DD8",
+      "bytes": 4,
+      "kind": 1
+     },
+     {
+      "address": "0xC0320BA0",
+      "bytes": 4,
+      "kind": 1
+     },
+     {
+      "address": "0xC0320B38",
+      "bytes": 4,
+      "kind": 1
+     },
+     {
+      "address": "0xC0320E90",
+      "bytes": 4,
+      "kind": 1
+     },
+     {
+      "address": "0xC0320F60",
+      "bytes": 4,
+      "kind": 1
+     },
+     {
+      "address": "0xC0320EF8",
+      "bytes": 4,
+      "kind": 1
+     },
+     {
+      "address": "0xC0320C00",
+      "bytes": 4,
+      "kind": 1
+     },
+     {
+      "address": "0xC0326DB8",
+      "bytes": 4,
+      "kind": 1
+     },
+     {
+      "address": "0xC031FFA0",
+      "bytes": 4,
+      "kind": 1
+     },
+     {
+      "address": "0xC02092CC",
+      "bytes": 4,
+      "kind": 1
+     },
+     {
+      "address": "0xC0218AEC",
+      "bytes": 4,
+      "kind": 1
+     },
+     {
+      "address": "0xC0219260",
+      "bytes": 4,
+      "kind": 1
+     },
+     {
+      "address": "0xC03AA568",
+      "bytes": 4,
+      "kind": 1
+     },
+     {
+      "address": "0xC057A6A0",
+      "bytes": 4,
+      "kind": 1
+     },
+     {
+      "address": "0xC05824D0",
+      "bytes": 4,
+      "kind": 1
+     },
+     {
+      "address": "0xC0088C60",
+      "bytes": 4,
+      "kind": 1
+     },
+     {
+      "address": "0xC031AC38",
+      "bytes": 4,
+      "kind": 1
+     },
+     {
+      "address": "0xC031ACD8",
+      "bytes": 4,
+      "kind": 1
+     },
+     {
+      "address": "0xC031B660",
+      "bytes": 4,
+      "kind": 1
+     },
+     {
+      "address": "0xC03249A0",
+      "bytes": 4,
+      "kind": 1
+     },
+     {
+      "address": "0xC05E6400",
+      "bytes": 4,
+      "kind": 1
+     },
+     {
+      "address": "0xC05D90F0",
+      "bytes": 4,
+      "kind": 1
+     },
+     {
+      "address": "0xC05E84D8",
+      "bytes": 4,
+      "kind": 1
+     },
+     {
+      "address": "0xC043CCF8",
+      "bytes": 4,
+      "kind": 1
+     },
+     {
+      "address": "0xC05E5B58",
+      "bytes": 4,
+      "kind": 3
+     },
+     {
+      "address": "0xC05E5BEC",
+      "bytes": 4,
+      "kind": 3
+     },
+     {
+      "address": "0xC05E61C8",
+      "bytes": 4,
+      "kind": 3
+     },
+     {
+      "address": "0xC05E61E0",
+      "bytes": 4,
+      "kind": 3
+     },
+     {
+      "address": "0xC06BDA3C",
+      "bytes": 8,
+      "kind": 2
+     },
+     {
+      "address": "0xC06BDA48",
+      "bytes": 4,
+      "kind": 2
+     }
+    ],
+    "ui_sites": [
+     "0xC05E5B58",
+     "0xC05E5BEC",
+     "0xC05E61C8",
+     "0xC05E61E0"
+    ],
+    "shims": {
+     "$a": 0,
+     "shims_start": 0,
+     "picker": 0,
+     "picker_replay": 76,
+     "setter": 92,
+     "setter_replay": 148,
+     "fmtset": 164,
+     "fmtset_replay": 220,
+     "canvas": 236,
+     "canvas_replay": 300,
+     "vpro": 308,
+     "vpro_replay": 376,
+     "name": 384,
+     "name_replay": 452,
+     "aspect": 468,
+     "aspect_replay": 520,
+     "aspect2": 536,
+     "aspect2_replay": 588,
+     "out": 604,
+     "out_replay": 688,
+     "gs": 704,
+     "gs_replay": 744,
+     "lk_tim": 760,
+     "lk_tim_replay": 884,
+     "lk_meta": 900,
+     "lk_meta_replay": 1024,
+     "lk_r28": 1040,
+     "lk_r28_replay": 1164,
+     "lk_r38": 1180,
+     "lk_r38_replay": 1304,
+     "lk_r14": 1320,
+     "lk_r14_replay": 1444,
+     "lk_r68": 1460,
+     "lk_r68_replay": 1584,
+     "lk_reg": 1600,
+     "lk_reg_replay": 1724,
+     "lk_r10": 1740,
+     "lk_r10_replay": 1864,
+     "fps1": 1880,
+     "fps2": 1948,
+     "fps3": 2016,
+     "fps4": 2084,
+     "ac38": 2152,
+     "ac38_replay": 2220,
+     "acd8": 2236,
+     "acd8_replay": 2308,
+     "zg": 2324,
+     "v32": 2388,
+     "v32_replay": 2460,
+     "cmt_set": 2476,
+     "cmt_set_replay": 2536,
+     "cmt_qs": 2552,
+     "cmt_qs_replay": 2612,
+     "save": 2628,
+     "qsrec": 2692,
+     "qsrec_replay": 2736,
+     "qslay": 2752,
+     "qslay_replay": 2796,
+     "qsload": 2812,
+     "qsload_replay": 2860,
+     "shims_end": 2880
+    },
+    "fns": {
+     "PICK": 256,
+     "SEL": 260,
+     "FMT": 264,
+     "CANVAS": 268,
+     "NAME": 272,
+     "OUT": 276,
+     "VLOOK": 280,
+     "V32": 284,
+     "AC38": 288,
+     "FPS": 292,
+     "CMT": 296,
+     "SAVE": 300,
+     "QSREC": 304,
+     "QSLAY": 308,
+     "QSLOAD": 312,
+     "UIA": 316
+    },
+    "S": {
+     "MAGIC": 0,
+     "VERSION": 4,
+     "FLAG": 8,
+     "ASPECT": 12,
+     "CUR": 16,
+     "RESVAL": 20,
+     "FMTLATCH": 24,
+     "BITLATCH": 28,
+     "PICKOK": 32,
+     "FPSLATCH": 36,
+     "PBROW": 40,
+     "LAST_ENT": 44,
+     "NROWS": 48,
+     "ROWS": 52,
+     "NENT": 56,
+     "ENTS": 60,
+     "NVM": 64,
+     "VMS": 68,
+     "VPID0": 72,
+     "VMID0": 76,
+     "HITS": 80,
+     "OUT_HITS": 84,
+     "SEL_COUNT": 88,
+     "LOOK_HITS": 92,
+     "RLOG": 96,
+     "NEXT": 128,
+     "FN": 256,
+     "TPL0": 320,
+     "TPL2": 368,
+     "PAIRS": 416,
+     "BASEROW": 480,
+     "QS_TAB": 512,
+     "QS_N": 516,
+     "QS_READY": 520,
+     "QS_DEPTH": 524,
+     "QS_BUF": 528,
+     "QS_PRE": 532,
+     "QS_BOOT": 536,
+     "QS_INRELOAD": 540,
+     "SEL": 544,
+     "DIRTY": 548,
+     "PATH": 552,
+     "CFG": 556,
+     "FOBJ": 560,
+     "PAIRN": 564,
+     "SAVES": 568,
+     "SAVE_FAILS": 572,
+     "VMDONOR": 576,
+     "QS_HITS": 640,
+     "QS_PASS": 644,
+     "QS_ERR": 648,
+     "QS_RELOADS": 652,
+     "QS_PACKFAIL": 656,
+     "QS_FULL": 660,
+     "RCD_FOUND": 672,
+     "RCD_OK": 676,
+     "RCD_BAD": 680,
+     "RCD_WHY": 684,
+     "DATA": 688,
+     "DATA_CAP": 692,
+     "DATA_USED": 696,
+     "ENABLE_FN": 700,
+     "NAVAIL": 704,
+     "AVAIL": 708,
+     "S_END": 836,
+     "UI_OK": 840,
+     "RCD_WHYS": 848,
+     "BODY": 1024
+    },
+    "ROW": {
+     "ENUM": 0,
+     "PID": 4,
+     "ASPECT": 8,
+     "ON": 12,
+     "AW": 16,
+     "AH": 20,
+     "REC": 24,
+     "PB": 28,
+     "ENT0": 32,
+     "NENT": 36,
+     "PREV_H": 40,
+     "BASE": 44,
+     "LABEL": 48,
+     "STOCK": 56,
+     "MROW": 60,
+     "QSID": 64,
+     "PACK": 76,
+     "PACKLEN": 80,
+     "PACKCTX": 84,
+     "PACKST": 88,
+     "UIRES": 92,
+     "SIZE": 96
+    },
+    "ENT": {
+     "FIVE": 0,
+     "PID": 4,
+     "MODE": 8,
+     "KEYPTR": 12,
+     "ROW": 16,
+     "KEY": 20,
+     "W0": 36,
+     "W1": 40,
+     "ENGFPS": 44,
+     "NOMINAL": 48,
+     "VM": 52,
+     "SIZE": 64
+    },
+    "VM": {
+     "ID": 0,
+     "DONOR": 4,
+     "FILLED": 8,
+     "REGFILLED": 12,
+     "ZFILLED": 16,
+     "TW0": 20,
+     "TW1": 24,
+     "NOM": 28,
+     "PTR": 32,
+     "CLAMP": 60,
+     "R10": 64,
+     "R10OK": 68,
+     "OVR": 72,
+     "NOVR": 76,
+     "BUF": 96,
+     "SIZE": 1472
+    },
+    "VM_BUF": {
+     "TIM": 96,
+     "META": 160,
+     "R28": 296,
+     "R38": 368,
+     "R14": 456,
+     "R68": 512,
+     "REG": 648,
+     "ZOOM": 1328
+    },
+    "img_off": 38400,
+    "scratch_off": 91648,
+    "fobj_off": 91904,
+    "file_len": 43520,
+    "tpl_off": 30040,
+    "qstab_off": 30840,
+    "tt_off": 37824,
+    "qsbuf_off": 96000,
+    "data_off": 104192,
+    "formats": [
+     "og3k",
+     "og2k"
+    ],
+    "rows": [
+     {
+      "label": "OG3K",
+      "stock_value": 2,
+      "aspect": 2,
+      "clamp": 1,
+      "profile": 83,
+      "enum": 4,
+      "base_row": 42,
+      "entries": [
+       {
+        "key": "OG3K23_98",
+        "donor": 98,
+        "w0": 38339005,
+        "w1": 268892,
+        "engfps": 1103101952,
+        "nominal": 24
+       },
+       {
+        "key": "OG3K24",
+        "donor": 98,
+        "w0": 75039165,
+        "w1": 268884,
+        "engfps": 1103101952,
+        "nominal": 24
+       },
+       {
+        "key": "OG3K25",
+        "donor": 98,
+        "w0": 29491650,
+        "w1": 268544,
+        "engfps": 1103626240,
+        "nominal": 25
+       },
+       {
+        "key": "OG3K30",
+        "donor": 98,
+        "w0": 48169405,
+        "w1": 267542,
+        "engfps": 1106247680,
+        "nominal": 30
+       },
+       {
+        "key": "OG3K48",
+        "donor": 98,
+        "w0": 52101565,
+        "w1": 265514,
+        "engfps": 1111490560,
+        "nominal": 48
+       },
+       {
+        "key": "OG3K50",
+        "donor": 98,
+        "w0": 29491650,
+        "w1": 265344,
+        "engfps": 1112014848,
+        "nominal": 50
+       },
+       {
+        "key": "OG3K60",
+        "donor": 98,
+        "w0": 67830205,
+        "w1": 264842,
+        "engfps": 1114636288,
+        "nominal": 60
+       },
+       {
+        "key": "OG3K100",
+        "donor": 117,
+        "w0": 17695050,
+        "w1": 264326,
+        "engfps": 1112014848,
+        "nominal": 0
+       }
+      ],
+      "prev_h": 1334,
+      "act": [
+       3008,
+       2000
+      ],
+      "canvas_rec": [
+       [
+        0,
+        3024
+       ],
+       [
+        4,
+        2010
+       ],
+       [
+        144,
+        1
+       ],
+       [
+        192,
+        0
+       ]
+      ],
+      "canvas_pb": [
+       [
+        12,
+        3024
+       ],
+       [
+        16,
+        2010
+       ],
+       [
+        28,
+        2
+       ],
+       [
+        32,
+        3008
+       ],
+       [
+        40,
+        2000
+       ],
+       [
+        96,
+        1024
+       ],
+       [
+        100,
+        1024
+       ],
+       [
+        208,
+        1024
+       ],
+       [
+        212,
+        1024
+       ],
+       [
+        216,
+        3024
+       ],
+       [
+        224,
+        2010
+       ],
+       [
+        244,
+        3024
+       ],
+       [
+        248,
+        2010
+       ]
+      ],
+      "row_text": "OG3K 3008x2000",
+      "summary": "OG3K",
+      "pack": [
+       704,
+       3732
+      ],
+      "overrides": [],
+      "target": "og3k"
+     },
+     {
+      "label": "OG2K",
+      "stock_value": 2,
+      "aspect": 2,
+      "clamp": 1,
+      "profile": 13,
+      "enum": 7,
+      "base_row": 6,
+      "entries": [
+       {
+        "key": "OG2K23_98",
+        "donor": 139,
+        "w0": 38339005,
+        "w1": 399964,
+        "engfps": 1103101952,
+        "nominal": 24
+       },
+       {
+        "key": "OG2K24",
+        "donor": 139,
+        "w0": 45875645,
+        "w1": 399957,
+        "engfps": 1103101952,
+        "nominal": 24
+       },
+       {
+        "key": "OG2K25",
+        "donor": 139,
+        "w0": 55706045,
+        "w1": 399687,
+        "engfps": 1103626240,
+        "nominal": 25
+       },
+       {
+        "key": "OG2K30",
+        "donor": 139,
+        "w0": 48169405,
+        "w1": 398614,
+        "engfps": 1106247680,
+        "nominal": 30
+       },
+       {
+        "key": "OG2K48",
+        "donor": 139,
+        "w0": 52101565,
+        "w1": 396586,
+        "engfps": 1111490560,
+        "nominal": 48
+       },
+       {
+        "key": "OG2K50",
+        "donor": 139,
+        "w0": 57016765,
+        "w1": 396451,
+        "engfps": 1112014848,
+        "nominal": 50
+       },
+       {
+        "key": "OG2K60",
+        "donor": 139,
+        "w0": 38666685,
+        "w1": 395915,
+        "engfps": 1114636288,
+        "nominal": 60
+       },
+       {
+        "key": "OG2K100",
+        "donor": 139,
+        "w0": 57672125,
+        "w1": 394833,
+        "engfps": 1112014848,
+        "nominal": 100
+       }
+      ],
+      "prev_h": 1334,
+      "act": [
+       2000,
+       1334
+      ],
+      "canvas_rec": [
+       [
+        0,
+        2016
+       ],
+       [
+        4,
+        1344
+       ],
+       [
+        12,
+        2016
+       ],
+       [
+        16,
+        1344
+       ],
+       [
+        32,
+        2000
+       ],
+       [
+        36,
+        2000
+       ],
+       [
+        40,
+        1334
+       ],
+       [
+        44,
+        1334
+       ],
+       [
+        144,
+        1
+       ],
+       [
+        192,
+        0
+       ],
+       [
+        216,
+        2016
+       ],
+       [
+        224,
+        1344
+       ]
+      ],
+      "canvas_pb": [
+       [
+        12,
+        2016
+       ],
+       [
+        16,
+        1344
+       ],
+       [
+        28,
+        2
+       ],
+       [
+        32,
+        2000
+       ],
+       [
+        40,
+        1334
+       ],
+       [
+        96,
+        1024
+       ],
+       [
+        100,
+        1024
+       ],
+       [
+        208,
+        1024
+       ],
+       [
+        212,
+        1024
+       ],
+       [
+        216,
+        2016
+       ],
+       [
+        224,
+        1344
+       ],
+       [
+        244,
+        2016
+       ],
+       [
+        248,
+        1344
+       ]
+      ],
+      "row_text": "OG2K 2000x1334",
+      "summary": "OG2K",
+      "pack": [
+       768,
+       4704
+      ],
+      "overrides": [],
+      "target": "og2k"
+     }
+    ]
+   }
+  },
+  "RESCUS/OG3K.RCD": {
+   "sha256": "9b4f0a14be1fc650dabca4d6ec8f386ecd527c20c81b95a34200e7145e49b4ee",
+   "bytes": 4436,
+   "facts": {
+    "label": "OG3K",
+    "target": "og3k"
+   }
+  },
+  "RESCUS/OG2K.RCD": {
+   "sha256": "e77b7407a12600d990c53e7731588565c1338b8b7478dabc71112b52e8a338e7",
+   "bytes": 5472,
+   "facts": {
+    "label": "OG2K",
+    "target": "og2k"
+   }
+  }
+ }
+}

@@ -1,0 +1,844 @@
+{
+  "phase": "captured",
+  "label": "reload-120-control",
+  "requested_rank": 0,
+  "stop_after_seconds": 4.0,
+  "start_sent": true,
+  "stop_sent": true,
+  "observed_recording": true,
+  "rec_samples": [
+    [
+      0.16262987499999992,
+      1
+    ],
+    [
+      0.21097641699999992,
+      1
+    ],
+    [
+      0.2620662499999997,
+      1
+    ],
+    [
+      0.3044080829999998,
+      1
+    ],
+    [
+      0.35283687499999994,
+      1
+    ],
+    [
+      0.40385800000000005,
+      1
+    ],
+    [
+      0.47860499999999995,
+      1
+    ],
+    [
+      0.5295847500000002,
+      1
+    ],
+    [
+      0.5767017079999999,
+      1
+    ],
+    [
+      0.6281189170000001,
+      1
+    ],
+    [
+      0.679221208,
+      1
+    ],
+    [
+      0.7303926249999999,
+      1
+    ],
+    [
+      0.9377170420000001,
+      1
+    ],
+    [
+      1.0544844169999998,
+      1
+    ],
+    [
+      1.1812548330000001,
+      1
+    ],
+    [
+      1.222957583,
+      1
+    ],
+    [
+      1.2897489169999998,
+      1
+    ],
+    [
+      1.3384090829999997,
+      1
+    ],
+    [
+      1.4736423749999998,
+      1
+    ],
+    [
+      1.523044333,
+      1
+    ],
+    [
+      1.580111167,
+      1
+    ],
+    [
+      1.630830208,
+      1
+    ],
+    [
+      1.6722755,
+      1
+    ],
+    [
+      1.790541625,
+      1
+    ],
+    [
+      1.8404815829999999,
+      1
+    ],
+    [
+      1.8985551250000001,
+      1
+    ],
+    [
+      1.9900687920000002,
+      1
+    ],
+    [
+      2.0388743750000002,
+      1
+    ],
+    [
+      2.088222958,
+      1
+    ],
+    [
+      2.139190958,
+      1
+    ],
+    [
+      2.188966458,
+      1
+    ],
+    [
+      2.239427208,
+      1
+    ],
+    [
+      2.2889260419999995,
+      1
+    ],
+    [
+      2.339018917,
+      1
+    ],
+    [
+      2.3906668749999995,
+      1
+    ],
+    [
+      2.5071054169999996,
+      1
+    ],
+    [
+      2.614900792,
+      1
+    ],
+    [
+      2.732735125,
+      1
+    ],
+    [
+      2.7980303330000003,
+      1
+    ],
+    [
+      2.8491593749999997,
+      1
+    ],
+    [
+      2.941012792,
+      1
+    ],
+    [
+      2.983022917,
+      1
+    ],
+    [
+      3.099699917,
+      1
+    ],
+    [
+      3.2236169579999996,
+      1
+    ],
+    [
+      3.3248639169999996,
+      1
+    ],
+    [
+      3.417095458,
+      1
+    ],
+    [
+      3.4750986249999998,
+      1
+    ],
+    [
+      3.5830172499999997,
+      1
+    ],
+    [
+      3.6332405,
+      1
+    ],
+    [
+      3.6829614999999998,
+      1
+    ],
+    [
+      3.742357583,
+      1
+    ],
+    [
+      3.901222708,
+      1
+    ],
+    [
+      3.9511600000000002,
+      1
+    ],
+    [
+      4.058071083,
+      1
+    ]
+  ],
+  "runtime_before": {
+    "endpoint": "0xc072e200",
+    "consumer_base": "0x4504c680",
+    "consumer_state": "0x45078740",
+    "registry": {
+      "magic": 826495574,
+      "abi": 2,
+      "lock": 0,
+      "provider": 1111575634,
+      "generation": 3,
+      "result": 0,
+      "detail": 0,
+      "count": 1,
+      "packs": 2,
+      "asset_used": 94216,
+      "row": 5
+    },
+    "consumer": {
+      "flag": 1,
+      "current": 6,
+      "res_value": 2,
+      "format_latch": 0,
+      "nrows": 6,
+      "nentries": 62,
+      "nmodes": 7
+    },
+    "selected": 6,
+    "rows": [
+      {
+        "index": 0,
+        "on": 1,
+        "width": 992,
+        "height": 662,
+        "stock": 2,
+        "menu_row": 2,
+        "pack": "0x45087cc0",
+        "label": "HS",
+        "ui_result": 1
+      },
+      {
+        "index": 1,
+        "on": 1,
+        "width": 2000,
+        "height": 1334,
+        "stock": 2,
+        "menu_row": 3,
+        "pack": "0x45093700",
+        "label": "OG2K",
+        "ui_result": 1
+      },
+      {
+        "index": 2,
+        "on": 1,
+        "width": 3456,
+        "height": 2304,
+        "stock": 3,
+        "menu_row": 4,
+        "pack": "0x45094cc0",
+        "label": "OG35K",
+        "ui_result": 1
+      },
+      {
+        "index": 3,
+        "on": 1,
+        "width": 3008,
+        "height": 2000,
+        "stock": 2,
+        "menu_row": 5,
+        "pack": "0x450969c0",
+        "label": "OG3K",
+        "ui_result": 1
+      },
+      {
+        "index": 4,
+        "on": 1,
+        "width": 3840,
+        "height": 2560,
+        "stock": 3,
+        "menu_row": 6,
+        "pack": "0x45097c40",
+        "label": "OG4K",
+        "ui_result": 1
+      },
+      {
+        "index": 5,
+        "on": 1,
+        "width": 992,
+        "height": 662,
+        "stock": 2,
+        "menu_row": 7,
+        "pack": "0x45478a40",
+        "label": "VRC000",
+        "ui_result": 1
+      }
+    ],
+    "producer_base": "0x452ef500",
+    "producer_state": "0x453842b8",
+    "producer": {
+      "result": 1,
+      "app": 3331322648,
+      "reader": 3332398568,
+      "entry": 3332533760,
+      "page": 1160742060,
+      "nbr": 1160868416,
+      "nbr_len": 3000,
+      "core_base": 1160737472,
+      "pages_state": 1,
+      "out_w": 992,
+      "out_h": 662,
+      "ro_w": 2016,
+      "ro_h": 672,
+      "ro_sx": 3,
+      "ro_sy": 6,
+      "bin_h": 1,
+      "bin_v": 1,
+      "axis_armed": 1,
+      "modes_rows": 2,
+      "mode_sel": 1,
+      "canvas_valid": 1,
+      "crop_w": 0,
+      "crop_h": 0,
+      "ratio": 0,
+      "edit_field": 0,
+      "editing": 0,
+      "crop_lock": 0,
+      "lens_on": 0,
+      "lens_factor": 133,
+      "small_edit": 0,
+      "applied_geometry": 12,
+      "applied_valid": 1,
+      "bin_kh": 0,
+      "bin_kv": 0,
+      "bin_mode": 0,
+      "output_policy": 0,
+      "lock_num": 992,
+      "lock_den": 662,
+      "save_name": 0,
+      "name_text": 1701667150,
+      "name_field": 0,
+      "name_editing": 0
+    },
+    "mode_ids": [
+      9,
+      12
+    ],
+    "loaded_headers": {
+      "32RESCUS.BIN": {
+        "file_len": 183104,
+        "block_size": 993856,
+        "id": 1398096722,
+        "version": 10,
+        "min_services": 3
+      },
+      "50RESLAB.BIN": {
+        "file_len": 609720,
+        "block_size": 881024,
+        "id": 1111575634,
+        "version": 17,
+        "min_services": 3
+      }
+    },
+    "file_management": {
+      "available": [
+        "HS",
+        "OG2K",
+        "OG35K",
+        "OG3K",
+        "OG4K",
+        "S16"
+      ],
+      "explicit_enable_count": 0,
+      "enabled_labels": [],
+      "record_valid": true,
+      "ui_owner": "0x4511ccc0",
+      "ui_header": [
+        843465554,
+        0,
+        1158121280,
+        1158014936,
+        3331322648,
+        0,
+        0
+      ]
+    },
+    "fps_state": {
+      "VR_UI": 1,
+      "VR_WHY": 1,
+      "VRATE": 0,
+      "VR_COMMITS": 4,
+      "DIRTY": 1,
+      "PICKOK": 1,
+      "FPSLATCH": 1114636288,
+      "LAST_ENT": 7072,
+      "HITS": 77848
+    },
+    "engine_state_valid": true,
+    "engine_fps": 60.0,
+    "picked_entry": {
+      "FIVE": 5,
+      "PID": 59,
+      "MODE": 236,
+      "KEYPTR": 1158128372,
+      "ROW": 5,
+      "W0": 21627210,
+      "W1": 395036,
+      "ENGFPS": 1114636288,
+      "NOMINAL": 120,
+      "VM": 6,
+      "VAR": 16,
+      "VRATE": 0
+    },
+    "frame_cycles": 600600,
+    "sensor_timing_fps": 119.88011988011988,
+    "fps_gui": {
+      "MV_FrameRate": "OK:MV_FrameRate -> 8\n\n",
+      "EXCL_FrameRate": "OK:EXCL_FrameRate -> 0\n\n"
+    },
+    "fps_getter": "7\n\n",
+    "quality_getter": "0\n\n",
+    "screen": "LV_CINE_MEDIUM",
+    "rate_notification": {
+      "RATE_LVOWED": 0,
+      "RATE_LV_RELOADS": 4
+    },
+    "loaded_core_sha256": "aab156d8c28f97099df33f15133e6b0e092e02b520acc3de013d01f62e7dbbb7",
+    "rate_shims": [
+      {
+        "site": "0xc057a6f8",
+        "target": "0x450781a8",
+        "sha256": "e91d4ef6cbf39ff2c10801107c5b6370da5848469b11873b35a82d413850a123"
+      },
+      {
+        "site": "0xc05821b8",
+        "target": "0x4507822c",
+        "sha256": "a051ecbf009f4e61255e0f8c426734fb37279a3b4325b333869b17cc72f40f09"
+      }
+    ]
+  },
+  "file_tool_slot": "slot now slot = sd0\n\n",
+  "clips_before": {
+    "A001_001": "20261010",
+    "A001_002": "20261010",
+    "A001_003": "20261010",
+    "A001_004": "20261010",
+    "A001_005": "20261010",
+    "A001_006": "20261010",
+    "A001_007": "20261010",
+    "A001_008": "20261010",
+    "A001_009": "20261010",
+    "A001_010": "20261010",
+    "A001_011": "20261010",
+    "A001_012": "20261010",
+    "A001_013": "20261010",
+    "A001_014": "20261010",
+    "A001_015": "20261010",
+    "A001_016": "20261011",
+    "A001_017": "20261011",
+    "A001_018": "20261011",
+    "A001_019": "20261011",
+    "A001_020": "20261011",
+    "A001_021": "20261011",
+    "A001_022": "20261011",
+    "A001_023": "20261011",
+    "A001_024": "20261011",
+    "A001_025": "20261011",
+    "A001_026": "20261011",
+    "A001_027": "20261011",
+    "A001_028": "20261011",
+    "A001_029": "20261011",
+    "A001_030": "20261011",
+    "A001_031": "20261011",
+    "A001_032": "20261011",
+    "A001_033": "20261011",
+    "A001_034": "20261011",
+    "A001_035": "20261011",
+    "A001_036": "20261011",
+    "A001_037": "20261011",
+    "A001_038": "20261011",
+    "A001_039": "20261011",
+    "A001_040": "20261011",
+    "A001_041": "20261011",
+    "A001_042": "20261011",
+    "A001_043": "20261011",
+    "A001_044": "20261011",
+    "A001_045": "20261011"
+  },
+  "capture_pid": 66980,
+  "scene_before": {
+    "p99": 255.0,
+    "spatial_std": 57.17147073165221
+  },
+  "overlay_before": {
+    "rec_pixels": 0,
+    "standby_pixels": 206,
+    "standby_visible": true
+  },
+  "capture_frames_before_start": 25,
+  "native_rec_zero_after": true,
+  "capture_frames": 300,
+  "overlay_after": [
+    {
+      "rec_pixels": 0,
+      "standby_pixels": 209,
+      "standby_visible": true
+    },
+    {
+      "rec_pixels": 0,
+      "standby_pixels": 210,
+      "standby_visible": true
+    },
+    {
+      "rec_pixels": 0,
+      "standby_pixels": 203,
+      "standby_visible": true
+    },
+    {
+      "rec_pixels": 0,
+      "standby_pixels": 209,
+      "standby_visible": true
+    },
+    {
+      "rec_pixels": 0,
+      "standby_pixels": 211,
+      "standby_visible": true
+    }
+  ],
+  "standby_after": true,
+  "record_log": "slot=1, cnt=8/600\nsize=131072*978816(119GB), free=81%, exFAT, UHS-II\ntime       : 2026/10/11 15:01:53 \nrec factor : Nothing \nui factor  : Button \nbattery    : OK \ntemp(BAT)  : OK \ntemp(BODY) : OK \ntemp(LCD)  : OK \ntemp(CMOS) : OK \nfile-size=1095168, bulk-size=67108864(61.3)\nreq_cnt=400, fin_cnt=400, key\nrequest  ,finish   ,diff,gap ,reqcnt,fincnt,diff,sdb,MB/s\n     1070,     1314, 244,1070,    57,     1,  56,  6, 255\n     1523,     1773, 250, 209,   114,    57,  57,  5, 254\n     1978,     2225, 247, 205,   171,   114,  57,  5, 257\n     2433,     2679, 246, 208,   228,   171,  57,  5, 258\n     2891,     3136, 245, 212,   285,   228,  57,  5, 259\n     3344,     3592, 248, 208,   342,   285,  57,  5, 256\n     3801,     4064, 263, 209,   399,   342,  57, 36, 241\n     4076,     4233, 157,  12,   400,   400,   0, 37,   6\n",
+  "clips_after": {
+    "A001_001": "20261010",
+    "A001_002": "20261010",
+    "A001_003": "20261010",
+    "A001_004": "20261010",
+    "A001_005": "20261010",
+    "A001_006": "20261010",
+    "A001_007": "20261010",
+    "A001_008": "20261010",
+    "A001_009": "20261010",
+    "A001_010": "20261010",
+    "A001_011": "20261010",
+    "A001_012": "20261010",
+    "A001_013": "20261010",
+    "A001_014": "20261010",
+    "A001_015": "20261010",
+    "A001_016": "20261011",
+    "A001_017": "20261011",
+    "A001_018": "20261011",
+    "A001_019": "20261011",
+    "A001_020": "20261011",
+    "A001_021": "20261011",
+    "A001_022": "20261011",
+    "A001_023": "20261011",
+    "A001_024": "20261011",
+    "A001_025": "20261011",
+    "A001_026": "20261011",
+    "A001_027": "20261011",
+    "A001_028": "20261011",
+    "A001_029": "20261011",
+    "A001_030": "20261011",
+    "A001_031": "20261011",
+    "A001_032": "20261011",
+    "A001_033": "20261011",
+    "A001_034": "20261011",
+    "A001_035": "20261011",
+    "A001_036": "20261011",
+    "A001_037": "20261011",
+    "A001_038": "20261011",
+    "A001_039": "20261011",
+    "A001_040": "20261011",
+    "A001_041": "20261011",
+    "A001_042": "20261011",
+    "A001_043": "20261011",
+    "A001_044": "20261011",
+    "A001_045": "20261011",
+    "A001_046": "20261011"
+  },
+  "new_clips": [
+    "A001_046"
+  ],
+  "runtime_after": {
+    "endpoint": "0xc072e200",
+    "consumer_base": "0x4504c680",
+    "consumer_state": "0x45078740",
+    "registry": {
+      "magic": 826495574,
+      "abi": 2,
+      "lock": 0,
+      "provider": 1111575634,
+      "generation": 3,
+      "result": 0,
+      "detail": 0,
+      "count": 1,
+      "packs": 2,
+      "asset_used": 94216,
+      "row": 5
+    },
+    "consumer": {
+      "flag": 1,
+      "current": 6,
+      "res_value": 2,
+      "format_latch": 0,
+      "nrows": 6,
+      "nentries": 62,
+      "nmodes": 7
+    },
+    "selected": 6,
+    "rows": [
+      {
+        "index": 0,
+        "on": 1,
+        "width": 992,
+        "height": 662,
+        "stock": 2,
+        "menu_row": 2,
+        "pack": "0x45087cc0",
+        "label": "HS",
+        "ui_result": 1
+      },
+      {
+        "index": 1,
+        "on": 1,
+        "width": 2000,
+        "height": 1334,
+        "stock": 2,
+        "menu_row": 3,
+        "pack": "0x45093700",
+        "label": "OG2K",
+        "ui_result": 1
+      },
+      {
+        "index": 2,
+        "on": 1,
+        "width": 3456,
+        "height": 2304,
+        "stock": 3,
+        "menu_row": 4,
+        "pack": "0x45094cc0",
+        "label": "OG35K",
+        "ui_result": 1
+      },
+      {
+        "index": 3,
+        "on": 1,
+        "width": 3008,
+        "height": 2000,
+        "stock": 2,
+        "menu_row": 5,
+        "pack": "0x450969c0",
+        "label": "OG3K",
+        "ui_result": 1
+      },
+      {
+        "index": 4,
+        "on": 1,
+        "width": 3840,
+        "height": 2560,
+        "stock": 3,
+        "menu_row": 6,
+        "pack": "0x45097c40",
+        "label": "OG4K",
+        "ui_result": 1
+      },
+      {
+        "index": 5,
+        "on": 1,
+        "width": 992,
+        "height": 662,
+        "stock": 2,
+        "menu_row": 7,
+        "pack": "0x45478a40",
+        "label": "VRC000",
+        "ui_result": 1
+      }
+    ],
+    "producer_base": "0x452ef500",
+    "producer_state": "0x453842b8",
+    "producer": {
+      "result": 1,
+      "app": 3331322648,
+      "reader": 3332398568,
+      "entry": 3332533760,
+      "page": 1160742060,
+      "nbr": 1160868416,
+      "nbr_len": 3000,
+      "core_base": 1160737472,
+      "pages_state": 1,
+      "out_w": 992,
+      "out_h": 662,
+      "ro_w": 2016,
+      "ro_h": 672,
+      "ro_sx": 3,
+      "ro_sy": 6,
+      "bin_h": 1,
+      "bin_v": 1,
+      "axis_armed": 1,
+      "modes_rows": 2,
+      "mode_sel": 1,
+      "canvas_valid": 1,
+      "crop_w": 0,
+      "crop_h": 0,
+      "ratio": 0,
+      "edit_field": 0,
+      "editing": 0,
+      "crop_lock": 0,
+      "lens_on": 0,
+      "lens_factor": 133,
+      "small_edit": 0,
+      "applied_geometry": 12,
+      "applied_valid": 1,
+      "bin_kh": 0,
+      "bin_kv": 0,
+      "bin_mode": 0,
+      "output_policy": 0,
+      "lock_num": 992,
+      "lock_den": 662,
+      "save_name": 0,
+      "name_text": 1701667150,
+      "name_field": 0,
+      "name_editing": 0
+    },
+    "mode_ids": [
+      9,
+      12
+    ],
+    "loaded_headers": {
+      "32RESCUS.BIN": {
+        "file_len": 183104,
+        "block_size": 993856,
+        "id": 1398096722,
+        "version": 10,
+        "min_services": 3
+      },
+      "50RESLAB.BIN": {
+        "file_len": 609720,
+        "block_size": 881024,
+        "id": 1111575634,
+        "version": 17,
+        "min_services": 3
+      }
+    },
+    "file_management": {
+      "available": [
+        "HS",
+        "OG2K",
+        "OG35K",
+        "OG3K",
+        "OG4K",
+        "S16"
+      ],
+      "explicit_enable_count": 0,
+      "enabled_labels": [],
+      "record_valid": true,
+      "ui_owner": "0x4511ccc0",
+      "ui_header": [
+        843465554,
+        0,
+        1158121280,
+        1158014936,
+        3331322648,
+        0,
+        0
+      ]
+    },
+    "fps_state": {
+      "VR_UI": 1,
+      "VR_WHY": 1,
+      "VRATE": 0,
+      "VR_COMMITS": 4,
+      "DIRTY": 1,
+      "PICKOK": 1,
+      "FPSLATCH": 1114636288,
+      "LAST_ENT": 7072,
+      "HITS": 80423
+    },
+    "engine_state_valid": true,
+    "engine_fps": 60.0,
+    "picked_entry": {
+      "FIVE": 5,
+      "PID": 59,
+      "MODE": 236,
+      "KEYPTR": 1158128372,
+      "ROW": 5,
+      "W0": 21627210,
+      "W1": 395036,
+      "ENGFPS": 1114636288,
+      "NOMINAL": 120,
+      "VM": 6,
+      "VAR": 16,
+      "VRATE": 0
+    },
+    "frame_cycles": 600600,
+    "sensor_timing_fps": 119.88011988011988,
+    "fps_gui": {
+      "MV_FrameRate": "OK:MV_FrameRate -> 8\n\n",
+      "EXCL_FrameRate": "OK:EXCL_FrameRate -> 0\n\n"
+    },
+    "fps_getter": "7\n\n",
+    "quality_getter": "0\n\n",
+    "screen": "LV_CINE_MEDIUM",
+    "rate_notification": {
+      "RATE_LVOWED": 0,
+      "RATE_LV_RELOADS": 4
+    },
+    "loaded_core_sha256": "aab156d8c28f97099df33f15133e6b0e092e02b520acc3de013d01f62e7dbbb7",
+    "rate_shims": [
+      {
+        "site": "0xc057a6f8",
+        "target": "0x450781a8",
+        "sha256": "e91d4ef6cbf39ff2c10801107c5b6370da5848469b11873b35a82d413850a123"
+      },
+      {
+        "site": "0xc05821b8",
+        "target": "0x4507822c",
+        "sha256": "a051ecbf009f4e61255e0f8c426734fb37279a3b4325b333869b17cc72f40f09"
+      }
+    ]
+  }
+}

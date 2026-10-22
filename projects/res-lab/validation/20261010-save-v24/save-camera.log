@@ -1,0 +1,104 @@
+screen: SL_LAB
+  code   412/412 B  7.2 KiB/s   verify 412/412 B  733 KiB/s   verify 412 bytes in 0.0s (380 KiB/s)      
+  code   412 bytes in 0.1s (3.5 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 190566 bytes in 0.001s (242.8 MB/s)      
+  remote  \DCIM\100SIGMA\SS__1655.JPG  190566 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x5F900980 (194662 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 190566 of 190566
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261010-sidebar-v13/screenshots/1655-v24-name.jpg
+Screenshot: /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261010-sidebar-v13/screenshots/1655-v24-name.jpg
+  code   412/412 B  84.8 KiB/s   verify 412/412 B  669 KiB/s   verify 412 bytes in 0.0s (309 KiB/s)      
+  code   412 bytes in 0.0s (56.1 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 48068 bytes in 0.001s (63.0 MB/s)      
+  code   412/412 B  95.1 KiB/s   verify 412/412 B  748 KiB/s   verify 412 bytes in 0.0s (318 KiB/s)      
+  code   412 bytes in 0.0s (63.0 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 48068 bytes in 0.001s (88.2 MB/s)      
+  code   412/412 B  74.9 KiB/s   verify 412/412 B  433 KiB/s   verify 412 bytes in 0.0s (233 KiB/s)      
+  code   412 bytes in 0.0s (44.8 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 193269 bytes in 0.001s (161.6 MB/s)      
+  remote  \fpSup\RESCUS\A9.RCD  48068 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x5F900980 (52164 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 48068 of 48068
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261010-save-v24/A9.RCD
+  remote  \fpSup\RESCUS\B9.RCD  48068 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x5F900980 (52164 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 48068 of 48068
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261010-save-v24/B9.RCD
+  remote  \DCIM\100SIGMA\SS__1656.JPG  193269 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x5F900980 (197365 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 193269 of 193269
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261010-sidebar-v13/screenshots/1656-v24-saved.jpg
+Screenshot: /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261010-sidebar-v13/screenshots/1656-v24-saved.jpg
+  code   412/412 B  80.4 KiB/s   verify 412/412 B  586 KiB/s   verify 412 bytes in 0.0s (316 KiB/s)      
+  code   412 bytes in 0.0s (54.9 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  direct 48068 bytes in 0.000s (128.9 MB/s)      
+  remote  \fpSup\RESCUS\B9.RCD  48068 bytes, mode 0x1
+  buffer  from the firmware, file object 0x450629C0
+  reply   getfile: read
+  buffer  0x5F900980 (52164 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 48068 of 48068
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261010-save-v24/B9-collision.RCD
+{
+  "passed": true,
+  "files": [
+    {
+      "name": "A9.RCD",
+      "bytes": 48068,
+      "sha256": "76a296e2a567a673f74693b8e33409fe83fce2fc6c08acfd53af92abce490096",
+      "label": "A9",
+      "act": [
+        992,
+        662
+      ],
+      "modes": [
+        [
+          12,
+          30219,
+          330,
+          0,
+          6
+        ]
+      ]
+    },
+    {
+      "name": "B9.RCD",
+      "bytes": 48068,
+      "sha256": "dbef761504ff846a91638e5e0bd69543d99c6937c0978804ce3e5225fb4e2c7f",
+      "label": "B9",
+      "act": [
+        992,
+        662
+      ],
+      "modes": [
+        [
+          12,
+          30219,
+          330,
+          0,
+          6
+        ]
+      ]
+    }
+  ],
+  "mode": "M12 2016x672",
+  "geometry_and_consumer_unchanged": true,
+  "test_files_removed": true
+}

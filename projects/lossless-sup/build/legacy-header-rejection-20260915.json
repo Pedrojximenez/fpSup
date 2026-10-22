@@ -1,0 +1,1663 @@
+{
+  "scope": "host TIFF/RAW-format verification only; no camera, playback or hardware timing claim",
+  "run_directory": "/Users/dido/Developer.localized/SIGMAfp_re/codex/fplossless_host_trial/run-fr9l0bc1",
+  "builder": "/Users/dido/Developer.localized/SIGMAfp_re/research/slimRAW/mkcompressed.py",
+  "builder_source_hashes_before": {
+    "/Users/dido/Developer.localized/SIGMAfp_re/research/slimRAW/mkcompressed.py": "c2af838ffa860402372996f052a6ca902fe6eef49e5aca4064094ad3d51445e1",
+    "/Users/dido/Developer.localized/SIGMAfp_re/research/slimRAW/tiff.py": "1c242f755dd8308aaf853e3a6690c60206f8f201e599dc231a1ab2490badbc16",
+    "/Users/dido/Developer.localized/SIGMAfp_re/research/slimRAW/tilegeom.py": "e6fbc7f90e27f6ad80ce4c14e60a516f3c5a5279673831d7fbce115c2eb5b5f3",
+    "/Users/dido/Developer.localized/SIGMAfp_re/research/slimRAW/ljenc.py": "3bb4e158ec6eaf25eb753f2ae86ca1c22485f683084edb4e028fd3ed90ca4c05",
+    "/Users/dido/Developer.localized/SIGMAfp_re/research/slimRAW/ljcost.py": "7c9d986bd5cde62cf14244c016ee493bf96249979a0833a2958608586deb473c"
+  },
+  "builder_sources_unchanged": true,
+  "tile": [
+    512,
+    368
+  ],
+  "predictor": 1,
+  "file_align": 512,
+  "files": [
+    {
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/codex/evidence/opengate_ev_bug_20260914/dng/A001_083_FHD_f07.DNG",
+      "source_bytes": 3244544,
+      "source_sha256_before": "1f7aa8bb512d73de109eeb2683c2d616352ca281ac234df239a899ea7eda3c2f",
+      "output": null,
+      "output_bytes": null,
+      "ratio_source_over_output": null,
+      "output_sha256": null,
+      "preflight": {
+        "width": 1936,
+        "height": 1090,
+        "frame_pixels": 2110240,
+        "raw_offset": 78848,
+        "raw_bytes": 3165372,
+        "packed_pixel_bytes": 3165360,
+        "strip_nonpixel_tail_bytes": 12,
+        "strip_nonpixel_tail_sha256": "882df7fbb88c7bb3e38d318a8a47bd8d6b48d28406d8ae1a2cd9a9a04d2dbed0",
+        "tile": [
+          512,
+          368
+        ],
+        "tile_count": 12,
+        "predictor": 1,
+        "file_align": 512,
+        "new_ifd_range": [
+          68612,
+          69422
+        ],
+        "builder_zero_run_bytes": 3410,
+        "protected_ranges": [
+          {
+            "start": 8,
+            "end": 710,
+            "label": "IFD0 structure",
+            "nested": false
+          },
+          {
+            "start": 710,
+            "end": 774,
+            "label": "IFD0 tag 270 value",
+            "nested": false
+          },
+          {
+            "start": 774,
+            "end": 780,
+            "label": "IFD0 tag 271 value",
+            "nested": false
+          },
+          {
+            "start": 780,
+            "end": 791,
+            "label": "IFD0 tag 272 value",
+            "nested": false
+          },
+          {
+            "start": 792,
+            "end": 800,
+            "label": "IFD0 tag 282 value",
+            "nested": false
+          },
+          {
+            "start": 800,
+            "end": 808,
+            "label": "IFD0 tag 283 value",
+            "nested": false
+          },
+          {
+            "start": 808,
+            "end": 833,
+            "label": "IFD0 tag 305 value",
+            "nested": false
+          },
+          {
+            "start": 834,
+            "end": 854,
+            "label": "IFD0 tag 306 value",
+            "nested": false
+          },
+          {
+            "start": 854,
+            "end": 918,
+            "label": "IFD0 tag 315 value",
+            "nested": false
+          },
+          {
+            "start": 918,
+            "end": 982,
+            "label": "IFD0 tag 33432 value",
+            "nested": false
+          },
+          {
+            "start": 982,
+            "end": 993,
+            "label": "IFD0 tag 50708 value",
+            "nested": false
+          },
+          {
+            "start": 994,
+            "end": 1026,
+            "label": "IFD0 tag 50714 value",
+            "nested": false
+          },
+          {
+            "start": 1026,
+            "end": 1034,
+            "label": "IFD0 tag 50719 value",
+            "nested": false
+          },
+          {
+            "start": 1034,
+            "end": 1042,
+            "label": "IFD0 tag 50720 value",
+            "nested": false
+          },
+          {
+            "start": 1042,
+            "end": 1114,
+            "label": "IFD0 tag 50721 value",
+            "nested": false
+          },
+          {
+            "start": 1114,
+            "end": 1186,
+            "label": "IFD0 tag 50722 value",
+            "nested": false
+          },
+          {
+            "start": 1186,
+            "end": 1210,
+            "label": "IFD0 tag 50728 value",
+            "nested": false
+          },
+          {
+            "start": 1210,
+            "end": 1218,
+            "label": "IFD0 tag 50730 value",
+            "nested": false
+          },
+          {
+            "start": 1218,
+            "end": 1226,
+            "label": "IFD0 tag 50731 value",
+            "nested": false
+          },
+          {
+            "start": 1226,
+            "end": 1234,
+            "label": "IFD0 tag 50732 value",
+            "nested": false
+          },
+          {
+            "start": 1234,
+            "end": 1243,
+            "label": "IFD0 tag 50735 value",
+            "nested": false
+          },
+          {
+            "start": 1244,
+            "end": 1276,
+            "label": "IFD0 tag 50736 value",
+            "nested": false
+          },
+          {
+            "start": 72022,
+            "end": 78756,
+            "label": "IFD0 tag 50740 value",
+            "nested": false
+          },
+          {
+            "start": 1276,
+            "end": 1292,
+            "label": "IFD0 tag 50781 value",
+            "nested": false
+          },
+          {
+            "start": 1292,
+            "end": 1308,
+            "label": "IFD0 tag 50829 value",
+            "nested": false
+          },
+          {
+            "start": 1308,
+            "end": 1320,
+            "label": "IFD0 tag 50937 value",
+            "nested": false
+          },
+          {
+            "start": 1320,
+            "end": 2184,
+            "label": "IFD0 tag 50938 value",
+            "nested": false
+          },
+          {
+            "start": 2184,
+            "end": 3048,
+            "label": "IFD0 tag 50939 value",
+            "nested": false
+          },
+          {
+            "start": 3048,
+            "end": 4072,
+            "label": "IFD0 tag 50940 value",
+            "nested": false
+          },
+          {
+            "start": 4072,
+            "end": 16636,
+            "label": "IFD0 tag 51022 value",
+            "nested": false
+          },
+          {
+            "start": 16636,
+            "end": 16652,
+            "label": "IFD0 tag 51041 value",
+            "nested": false
+          },
+          {
+            "start": 16652,
+            "end": 16660,
+            "label": "IFD0 tag 51043 value",
+            "nested": false
+          },
+          {
+            "start": 16660,
+            "end": 16668,
+            "label": "IFD0 tag 51044 value",
+            "nested": false
+          },
+          {
+            "start": 16668,
+            "end": 16676,
+            "label": "IFD0 tag 51058 value",
+            "nested": false
+          },
+          {
+            "start": 16676,
+            "end": 17246,
+            "label": "IFD0/Exif[0] structure",
+            "nested": true
+          },
+          {
+            "start": 17246,
+            "end": 17254,
+            "label": "IFD0/Exif[0] tag 33434 value",
+            "nested": true
+          },
+          {
+            "start": 17254,
+            "end": 17262,
+            "label": "IFD0/Exif[0] tag 33437 value",
+            "nested": true
+          },
+          {
+            "start": 17262,
+            "end": 17282,
+            "label": "IFD0/Exif[0] tag 36867 value",
+            "nested": true
+          },
+          {
+            "start": 17282,
+            "end": 17302,
+            "label": "IFD0/Exif[0] tag 36868 value",
+            "nested": true
+          },
+          {
+            "start": 17302,
+            "end": 17309,
+            "label": "IFD0/Exif[0] tag 36880 value",
+            "nested": true
+          },
+          {
+            "start": 17310,
+            "end": 17317,
+            "label": "IFD0/Exif[0] tag 36881 value",
+            "nested": true
+          },
+          {
+            "start": 17318,
+            "end": 17325,
+            "label": "IFD0/Exif[0] tag 36882 value",
+            "nested": true
+          },
+          {
+            "start": 17326,
+            "end": 17334,
+            "label": "IFD0/Exif[0] tag 37377 value",
+            "nested": true
+          },
+          {
+            "start": 17334,
+            "end": 17342,
+            "label": "IFD0/Exif[0] tag 37378 value",
+            "nested": true
+          },
+          {
+            "start": 17342,
+            "end": 17350,
+            "label": "IFD0/Exif[0] tag 37379 value",
+            "nested": true
+          },
+          {
+            "start": 17350,
+            "end": 17358,
+            "label": "IFD0/Exif[0] tag 37380 value",
+            "nested": true
+          },
+          {
+            "start": 17358,
+            "end": 17366,
+            "label": "IFD0/Exif[0] tag 37381 value",
+            "nested": true
+          },
+          {
+            "start": 17366,
+            "end": 17374,
+            "label": "IFD0/Exif[0] tag 37382 value",
+            "nested": true
+          },
+          {
+            "start": 17374,
+            "end": 17382,
+            "label": "IFD0/Exif[0] tag 37386 value",
+            "nested": true
+          },
+          {
+            "start": 17684,
+            "end": 72022,
+            "label": "IFD0/Exif[0] tag 37500 value",
+            "nested": true
+          },
+          {
+            "start": 17382,
+            "end": 17454,
+            "label": "IFD0/Exif[0] tag 37510 value",
+            "nested": true
+          },
+          {
+            "start": 17454,
+            "end": 17462,
+            "label": "IFD0/Exif[0] tag 41486 value",
+            "nested": true
+          },
+          {
+            "start": 17462,
+            "end": 17470,
+            "label": "IFD0/Exif[0] tag 41487 value",
+            "nested": true
+          },
+          {
+            "start": 17470,
+            "end": 17478,
+            "label": "IFD0/Exif[0] tag 41988 value",
+            "nested": true
+          },
+          {
+            "start": 17478,
+            "end": 17511,
+            "label": "IFD0/Exif[0] tag 42016 value",
+            "nested": true
+          },
+          {
+            "start": 17512,
+            "end": 17524,
+            "label": "IFD0/Exif[0] tag 42033 value",
+            "nested": true
+          },
+          {
+            "start": 17524,
+            "end": 17556,
+            "label": "IFD0/Exif[0] tag 42034 value",
+            "nested": true
+          },
+          {
+            "start": 17556,
+            "end": 17580,
+            "label": "IFD0/Exif[0] tag 42035 value",
+            "nested": true
+          },
+          {
+            "start": 17580,
+            "end": 17676,
+            "label": "IFD0/Exif[0] tag 42036 value",
+            "nested": true
+          },
+          {
+            "start": 17676,
+            "end": 17684,
+            "label": "IFD0/Exif[0] tag 42240 value",
+            "nested": true
+          }
+        ],
+        "ifd_paths": [
+          "IFD0",
+          "IFD0/Exif[0]"
+        ],
+        "metadata_collisions": [
+          {
+            "start": 17684,
+            "end": 72022,
+            "label": "IFD0/Exif[0] tag 37500 value",
+            "nested": true
+          }
+        ]
+      },
+      "frame_pixels": 2110240,
+      "status": "REJECTED",
+      "reason": "existing builder would overwrite recursively referenced metadata",
+      "source_sha256_after": "1f7aa8bb512d73de109eeb2683c2d616352ca281ac234df239a899ea7eda3c2f",
+      "source_unchanged": true
+    },
+    {
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/captures/fpGFTest_pre_stage4_20260817_2207/CINEMA/A001_001/A001_001_20260817_000001.DNG",
+      "source_bytes": 3244544,
+      "source_sha256_before": "be24301255b9a2f33e96f99d8a70370bd99233db6b5052a8317d04b60fe70314",
+      "output": null,
+      "output_bytes": null,
+      "ratio_source_over_output": null,
+      "output_sha256": null,
+      "preflight": {
+        "width": 1936,
+        "height": 1090,
+        "frame_pixels": 2110240,
+        "raw_offset": 78848,
+        "raw_bytes": 3165372,
+        "packed_pixel_bytes": 3165360,
+        "strip_nonpixel_tail_bytes": 12,
+        "strip_nonpixel_tail_sha256": "9eafd13e712c0fcb4e408826cd7445a83df514168d0d4dbc1d17d01a8382c990",
+        "tile": [
+          512,
+          368
+        ],
+        "tile_count": 12,
+        "predictor": 1,
+        "file_align": 512,
+        "new_ifd_range": [
+          60946,
+          61756
+        ],
+        "builder_zero_run_bytes": 11076,
+        "protected_ranges": [
+          {
+            "start": 8,
+            "end": 710,
+            "label": "IFD0 structure",
+            "nested": false
+          },
+          {
+            "start": 710,
+            "end": 774,
+            "label": "IFD0 tag 270 value",
+            "nested": false
+          },
+          {
+            "start": 774,
+            "end": 780,
+            "label": "IFD0 tag 271 value",
+            "nested": false
+          },
+          {
+            "start": 780,
+            "end": 791,
+            "label": "IFD0 tag 272 value",
+            "nested": false
+          },
+          {
+            "start": 792,
+            "end": 800,
+            "label": "IFD0 tag 282 value",
+            "nested": false
+          },
+          {
+            "start": 800,
+            "end": 808,
+            "label": "IFD0 tag 283 value",
+            "nested": false
+          },
+          {
+            "start": 808,
+            "end": 833,
+            "label": "IFD0 tag 305 value",
+            "nested": false
+          },
+          {
+            "start": 834,
+            "end": 854,
+            "label": "IFD0 tag 306 value",
+            "nested": false
+          },
+          {
+            "start": 854,
+            "end": 918,
+            "label": "IFD0 tag 315 value",
+            "nested": false
+          },
+          {
+            "start": 918,
+            "end": 982,
+            "label": "IFD0 tag 33432 value",
+            "nested": false
+          },
+          {
+            "start": 982,
+            "end": 993,
+            "label": "IFD0 tag 50708 value",
+            "nested": false
+          },
+          {
+            "start": 994,
+            "end": 1026,
+            "label": "IFD0 tag 50714 value",
+            "nested": false
+          },
+          {
+            "start": 1026,
+            "end": 1034,
+            "label": "IFD0 tag 50719 value",
+            "nested": false
+          },
+          {
+            "start": 1034,
+            "end": 1042,
+            "label": "IFD0 tag 50720 value",
+            "nested": false
+          },
+          {
+            "start": 1042,
+            "end": 1114,
+            "label": "IFD0 tag 50721 value",
+            "nested": false
+          },
+          {
+            "start": 1114,
+            "end": 1186,
+            "label": "IFD0 tag 50722 value",
+            "nested": false
+          },
+          {
+            "start": 1186,
+            "end": 1210,
+            "label": "IFD0 tag 50728 value",
+            "nested": false
+          },
+          {
+            "start": 1210,
+            "end": 1218,
+            "label": "IFD0 tag 50730 value",
+            "nested": false
+          },
+          {
+            "start": 1218,
+            "end": 1226,
+            "label": "IFD0 tag 50731 value",
+            "nested": false
+          },
+          {
+            "start": 1226,
+            "end": 1234,
+            "label": "IFD0 tag 50732 value",
+            "nested": false
+          },
+          {
+            "start": 1234,
+            "end": 1243,
+            "label": "IFD0 tag 50735 value",
+            "nested": false
+          },
+          {
+            "start": 1244,
+            "end": 1276,
+            "label": "IFD0 tag 50736 value",
+            "nested": false
+          },
+          {
+            "start": 72022,
+            "end": 78756,
+            "label": "IFD0 tag 50740 value",
+            "nested": false
+          },
+          {
+            "start": 1276,
+            "end": 1292,
+            "label": "IFD0 tag 50781 value",
+            "nested": false
+          },
+          {
+            "start": 1292,
+            "end": 1308,
+            "label": "IFD0 tag 50829 value",
+            "nested": false
+          },
+          {
+            "start": 1308,
+            "end": 1320,
+            "label": "IFD0 tag 50937 value",
+            "nested": false
+          },
+          {
+            "start": 1320,
+            "end": 2184,
+            "label": "IFD0 tag 50938 value",
+            "nested": false
+          },
+          {
+            "start": 2184,
+            "end": 3048,
+            "label": "IFD0 tag 50939 value",
+            "nested": false
+          },
+          {
+            "start": 3048,
+            "end": 4072,
+            "label": "IFD0 tag 50940 value",
+            "nested": false
+          },
+          {
+            "start": 4072,
+            "end": 16636,
+            "label": "IFD0 tag 51022 value",
+            "nested": false
+          },
+          {
+            "start": 16636,
+            "end": 16652,
+            "label": "IFD0 tag 51041 value",
+            "nested": false
+          },
+          {
+            "start": 16652,
+            "end": 16660,
+            "label": "IFD0 tag 51043 value",
+            "nested": false
+          },
+          {
+            "start": 16660,
+            "end": 16668,
+            "label": "IFD0 tag 51044 value",
+            "nested": false
+          },
+          {
+            "start": 16668,
+            "end": 16676,
+            "label": "IFD0 tag 51058 value",
+            "nested": false
+          },
+          {
+            "start": 16676,
+            "end": 17246,
+            "label": "IFD0/Exif[0] structure",
+            "nested": true
+          },
+          {
+            "start": 17246,
+            "end": 17254,
+            "label": "IFD0/Exif[0] tag 33434 value",
+            "nested": true
+          },
+          {
+            "start": 17254,
+            "end": 17262,
+            "label": "IFD0/Exif[0] tag 33437 value",
+            "nested": true
+          },
+          {
+            "start": 17262,
+            "end": 17282,
+            "label": "IFD0/Exif[0] tag 36867 value",
+            "nested": true
+          },
+          {
+            "start": 17282,
+            "end": 17302,
+            "label": "IFD0/Exif[0] tag 36868 value",
+            "nested": true
+          },
+          {
+            "start": 17302,
+            "end": 17309,
+            "label": "IFD0/Exif[0] tag 36880 value",
+            "nested": true
+          },
+          {
+            "start": 17310,
+            "end": 17317,
+            "label": "IFD0/Exif[0] tag 36881 value",
+            "nested": true
+          },
+          {
+            "start": 17318,
+            "end": 17325,
+            "label": "IFD0/Exif[0] tag 36882 value",
+            "nested": true
+          },
+          {
+            "start": 17326,
+            "end": 17334,
+            "label": "IFD0/Exif[0] tag 37377 value",
+            "nested": true
+          },
+          {
+            "start": 17334,
+            "end": 17342,
+            "label": "IFD0/Exif[0] tag 37378 value",
+            "nested": true
+          },
+          {
+            "start": 17342,
+            "end": 17350,
+            "label": "IFD0/Exif[0] tag 37379 value",
+            "nested": true
+          },
+          {
+            "start": 17350,
+            "end": 17358,
+            "label": "IFD0/Exif[0] tag 37380 value",
+            "nested": true
+          },
+          {
+            "start": 17358,
+            "end": 17366,
+            "label": "IFD0/Exif[0] tag 37381 value",
+            "nested": true
+          },
+          {
+            "start": 17366,
+            "end": 17374,
+            "label": "IFD0/Exif[0] tag 37382 value",
+            "nested": true
+          },
+          {
+            "start": 17374,
+            "end": 17382,
+            "label": "IFD0/Exif[0] tag 37386 value",
+            "nested": true
+          },
+          {
+            "start": 17684,
+            "end": 72022,
+            "label": "IFD0/Exif[0] tag 37500 value",
+            "nested": true
+          },
+          {
+            "start": 17382,
+            "end": 17454,
+            "label": "IFD0/Exif[0] tag 37510 value",
+            "nested": true
+          },
+          {
+            "start": 17454,
+            "end": 17462,
+            "label": "IFD0/Exif[0] tag 41486 value",
+            "nested": true
+          },
+          {
+            "start": 17462,
+            "end": 17470,
+            "label": "IFD0/Exif[0] tag 41487 value",
+            "nested": true
+          },
+          {
+            "start": 17470,
+            "end": 17478,
+            "label": "IFD0/Exif[0] tag 41988 value",
+            "nested": true
+          },
+          {
+            "start": 17478,
+            "end": 17511,
+            "label": "IFD0/Exif[0] tag 42016 value",
+            "nested": true
+          },
+          {
+            "start": 17512,
+            "end": 17524,
+            "label": "IFD0/Exif[0] tag 42033 value",
+            "nested": true
+          },
+          {
+            "start": 17524,
+            "end": 17556,
+            "label": "IFD0/Exif[0] tag 42034 value",
+            "nested": true
+          },
+          {
+            "start": 17556,
+            "end": 17580,
+            "label": "IFD0/Exif[0] tag 42035 value",
+            "nested": true
+          },
+          {
+            "start": 17580,
+            "end": 17676,
+            "label": "IFD0/Exif[0] tag 42036 value",
+            "nested": true
+          },
+          {
+            "start": 17676,
+            "end": 17684,
+            "label": "IFD0/Exif[0] tag 42240 value",
+            "nested": true
+          }
+        ],
+        "ifd_paths": [
+          "IFD0",
+          "IFD0/Exif[0]"
+        ],
+        "metadata_collisions": [
+          {
+            "start": 17684,
+            "end": 72022,
+            "label": "IFD0/Exif[0] tag 37500 value",
+            "nested": true
+          }
+        ]
+      },
+      "frame_pixels": 2110240,
+      "status": "REJECTED",
+      "reason": "existing builder would overwrite recursively referenced metadata",
+      "source_sha256_after": "be24301255b9a2f33e96f99d8a70370bd99233db6b5052a8317d04b60fe70314",
+      "source_unchanged": true
+    },
+    {
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/captures/fpGFTest_pre_stage4_20260817_2207/CINEMA/A001_002/A001_002_20260817_000001.DNG",
+      "source_bytes": 3244544,
+      "source_sha256_before": "f2c50bc0b728c7ee2ac7c40ca4f54cc4c0351288dec0a92b74861a3bcfba49af",
+      "output": null,
+      "output_bytes": null,
+      "ratio_source_over_output": null,
+      "output_sha256": null,
+      "preflight": {
+        "width": 1936,
+        "height": 1090,
+        "frame_pixels": 2110240,
+        "raw_offset": 78848,
+        "raw_bytes": 3165372,
+        "packed_pixel_bytes": 3165360,
+        "strip_nonpixel_tail_bytes": 12,
+        "strip_nonpixel_tail_sha256": "9bc90c11e40c43a6d5705f01cfbfd852d84ea55aa8fa0251a0586da2b16cfddc",
+        "tile": [
+          512,
+          368
+        ],
+        "tile_count": 12,
+        "predictor": 1,
+        "file_align": 512,
+        "new_ifd_range": [
+          60946,
+          61756
+        ],
+        "builder_zero_run_bytes": 11076,
+        "protected_ranges": [
+          {
+            "start": 8,
+            "end": 710,
+            "label": "IFD0 structure",
+            "nested": false
+          },
+          {
+            "start": 710,
+            "end": 774,
+            "label": "IFD0 tag 270 value",
+            "nested": false
+          },
+          {
+            "start": 774,
+            "end": 780,
+            "label": "IFD0 tag 271 value",
+            "nested": false
+          },
+          {
+            "start": 780,
+            "end": 791,
+            "label": "IFD0 tag 272 value",
+            "nested": false
+          },
+          {
+            "start": 792,
+            "end": 800,
+            "label": "IFD0 tag 282 value",
+            "nested": false
+          },
+          {
+            "start": 800,
+            "end": 808,
+            "label": "IFD0 tag 283 value",
+            "nested": false
+          },
+          {
+            "start": 808,
+            "end": 833,
+            "label": "IFD0 tag 305 value",
+            "nested": false
+          },
+          {
+            "start": 834,
+            "end": 854,
+            "label": "IFD0 tag 306 value",
+            "nested": false
+          },
+          {
+            "start": 854,
+            "end": 918,
+            "label": "IFD0 tag 315 value",
+            "nested": false
+          },
+          {
+            "start": 918,
+            "end": 982,
+            "label": "IFD0 tag 33432 value",
+            "nested": false
+          },
+          {
+            "start": 982,
+            "end": 993,
+            "label": "IFD0 tag 50708 value",
+            "nested": false
+          },
+          {
+            "start": 994,
+            "end": 1026,
+            "label": "IFD0 tag 50714 value",
+            "nested": false
+          },
+          {
+            "start": 1026,
+            "end": 1034,
+            "label": "IFD0 tag 50719 value",
+            "nested": false
+          },
+          {
+            "start": 1034,
+            "end": 1042,
+            "label": "IFD0 tag 50720 value",
+            "nested": false
+          },
+          {
+            "start": 1042,
+            "end": 1114,
+            "label": "IFD0 tag 50721 value",
+            "nested": false
+          },
+          {
+            "start": 1114,
+            "end": 1186,
+            "label": "IFD0 tag 50722 value",
+            "nested": false
+          },
+          {
+            "start": 1186,
+            "end": 1210,
+            "label": "IFD0 tag 50728 value",
+            "nested": false
+          },
+          {
+            "start": 1210,
+            "end": 1218,
+            "label": "IFD0 tag 50730 value",
+            "nested": false
+          },
+          {
+            "start": 1218,
+            "end": 1226,
+            "label": "IFD0 tag 50731 value",
+            "nested": false
+          },
+          {
+            "start": 1226,
+            "end": 1234,
+            "label": "IFD0 tag 50732 value",
+            "nested": false
+          },
+          {
+            "start": 1234,
+            "end": 1243,
+            "label": "IFD0 tag 50735 value",
+            "nested": false
+          },
+          {
+            "start": 1244,
+            "end": 1276,
+            "label": "IFD0 tag 50736 value",
+            "nested": false
+          },
+          {
+            "start": 72022,
+            "end": 78756,
+            "label": "IFD0 tag 50740 value",
+            "nested": false
+          },
+          {
+            "start": 1276,
+            "end": 1292,
+            "label": "IFD0 tag 50781 value",
+            "nested": false
+          },
+          {
+            "start": 1292,
+            "end": 1308,
+            "label": "IFD0 tag 50829 value",
+            "nested": false
+          },
+          {
+            "start": 1308,
+            "end": 1320,
+            "label": "IFD0 tag 50937 value",
+            "nested": false
+          },
+          {
+            "start": 1320,
+            "end": 2184,
+            "label": "IFD0 tag 50938 value",
+            "nested": false
+          },
+          {
+            "start": 2184,
+            "end": 3048,
+            "label": "IFD0 tag 50939 value",
+            "nested": false
+          },
+          {
+            "start": 3048,
+            "end": 4072,
+            "label": "IFD0 tag 50940 value",
+            "nested": false
+          },
+          {
+            "start": 4072,
+            "end": 16636,
+            "label": "IFD0 tag 51022 value",
+            "nested": false
+          },
+          {
+            "start": 16636,
+            "end": 16652,
+            "label": "IFD0 tag 51041 value",
+            "nested": false
+          },
+          {
+            "start": 16652,
+            "end": 16660,
+            "label": "IFD0 tag 51043 value",
+            "nested": false
+          },
+          {
+            "start": 16660,
+            "end": 16668,
+            "label": "IFD0 tag 51044 value",
+            "nested": false
+          },
+          {
+            "start": 16668,
+            "end": 16676,
+            "label": "IFD0 tag 51058 value",
+            "nested": false
+          },
+          {
+            "start": 16676,
+            "end": 17246,
+            "label": "IFD0/Exif[0] structure",
+            "nested": true
+          },
+          {
+            "start": 17246,
+            "end": 17254,
+            "label": "IFD0/Exif[0] tag 33434 value",
+            "nested": true
+          },
+          {
+            "start": 17254,
+            "end": 17262,
+            "label": "IFD0/Exif[0] tag 33437 value",
+            "nested": true
+          },
+          {
+            "start": 17262,
+            "end": 17282,
+            "label": "IFD0/Exif[0] tag 36867 value",
+            "nested": true
+          },
+          {
+            "start": 17282,
+            "end": 17302,
+            "label": "IFD0/Exif[0] tag 36868 value",
+            "nested": true
+          },
+          {
+            "start": 17302,
+            "end": 17309,
+            "label": "IFD0/Exif[0] tag 36880 value",
+            "nested": true
+          },
+          {
+            "start": 17310,
+            "end": 17317,
+            "label": "IFD0/Exif[0] tag 36881 value",
+            "nested": true
+          },
+          {
+            "start": 17318,
+            "end": 17325,
+            "label": "IFD0/Exif[0] tag 36882 value",
+            "nested": true
+          },
+          {
+            "start": 17326,
+            "end": 17334,
+            "label": "IFD0/Exif[0] tag 37377 value",
+            "nested": true
+          },
+          {
+            "start": 17334,
+            "end": 17342,
+            "label": "IFD0/Exif[0] tag 37378 value",
+            "nested": true
+          },
+          {
+            "start": 17342,
+            "end": 17350,
+            "label": "IFD0/Exif[0] tag 37379 value",
+            "nested": true
+          },
+          {
+            "start": 17350,
+            "end": 17358,
+            "label": "IFD0/Exif[0] tag 37380 value",
+            "nested": true
+          },
+          {
+            "start": 17358,
+            "end": 17366,
+            "label": "IFD0/Exif[0] tag 37381 value",
+            "nested": true
+          },
+          {
+            "start": 17366,
+            "end": 17374,
+            "label": "IFD0/Exif[0] tag 37382 value",
+            "nested": true
+          },
+          {
+            "start": 17374,
+            "end": 17382,
+            "label": "IFD0/Exif[0] tag 37386 value",
+            "nested": true
+          },
+          {
+            "start": 17684,
+            "end": 72022,
+            "label": "IFD0/Exif[0] tag 37500 value",
+            "nested": true
+          },
+          {
+            "start": 17382,
+            "end": 17454,
+            "label": "IFD0/Exif[0] tag 37510 value",
+            "nested": true
+          },
+          {
+            "start": 17454,
+            "end": 17462,
+            "label": "IFD0/Exif[0] tag 41486 value",
+            "nested": true
+          },
+          {
+            "start": 17462,
+            "end": 17470,
+            "label": "IFD0/Exif[0] tag 41487 value",
+            "nested": true
+          },
+          {
+            "start": 17470,
+            "end": 17478,
+            "label": "IFD0/Exif[0] tag 41988 value",
+            "nested": true
+          },
+          {
+            "start": 17478,
+            "end": 17511,
+            "label": "IFD0/Exif[0] tag 42016 value",
+            "nested": true
+          },
+          {
+            "start": 17512,
+            "end": 17524,
+            "label": "IFD0/Exif[0] tag 42033 value",
+            "nested": true
+          },
+          {
+            "start": 17524,
+            "end": 17556,
+            "label": "IFD0/Exif[0] tag 42034 value",
+            "nested": true
+          },
+          {
+            "start": 17556,
+            "end": 17580,
+            "label": "IFD0/Exif[0] tag 42035 value",
+            "nested": true
+          },
+          {
+            "start": 17580,
+            "end": 17676,
+            "label": "IFD0/Exif[0] tag 42036 value",
+            "nested": true
+          },
+          {
+            "start": 17676,
+            "end": 17684,
+            "label": "IFD0/Exif[0] tag 42240 value",
+            "nested": true
+          }
+        ],
+        "ifd_paths": [
+          "IFD0",
+          "IFD0/Exif[0]"
+        ],
+        "metadata_collisions": [
+          {
+            "start": 17684,
+            "end": 72022,
+            "label": "IFD0/Exif[0] tag 37500 value",
+            "nested": true
+          }
+        ]
+      },
+      "frame_pixels": 2110240,
+      "status": "REJECTED",
+      "reason": "existing builder would overwrite recursively referenced metadata",
+      "source_sha256_after": "f2c50bc0b728c7ee2ac7c40ca4f54cc4c0351288dec0a92b74861a3bcfba49af",
+      "source_unchanged": true
+    },
+    {
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/projects/gyro-sup/captures/fpGFTest_stage4_20260817_2226/CINEMA/A001_001/A001_001_20260817_000249.DNG",
+      "source_bytes": 3244544,
+      "source_sha256_before": "8b838d0a27b5a8a11a39ff903933793930706b7a6b46f7a4ef8e08a400e2c324",
+      "output": null,
+      "output_bytes": null,
+      "ratio_source_over_output": null,
+      "output_sha256": null,
+      "preflight": {
+        "width": 1936,
+        "height": 1090,
+        "frame_pixels": 2110240,
+        "raw_offset": 78848,
+        "raw_bytes": 3165372,
+        "packed_pixel_bytes": 3165360,
+        "strip_nonpixel_tail_bytes": 12,
+        "strip_nonpixel_tail_sha256": "8688d249e9d047b4fc2fb89ce05afe9ec89252ffccdd969de6eef260dd7ffb21",
+        "tile": [
+          512,
+          368
+        ],
+        "tile_count": 12,
+        "predictor": 1,
+        "file_align": 512,
+        "new_ifd_range": [
+          60946,
+          61756
+        ],
+        "builder_zero_run_bytes": 11076,
+        "protected_ranges": [
+          {
+            "start": 8,
+            "end": 710,
+            "label": "IFD0 structure",
+            "nested": false
+          },
+          {
+            "start": 710,
+            "end": 774,
+            "label": "IFD0 tag 270 value",
+            "nested": false
+          },
+          {
+            "start": 774,
+            "end": 780,
+            "label": "IFD0 tag 271 value",
+            "nested": false
+          },
+          {
+            "start": 780,
+            "end": 791,
+            "label": "IFD0 tag 272 value",
+            "nested": false
+          },
+          {
+            "start": 792,
+            "end": 800,
+            "label": "IFD0 tag 282 value",
+            "nested": false
+          },
+          {
+            "start": 800,
+            "end": 808,
+            "label": "IFD0 tag 283 value",
+            "nested": false
+          },
+          {
+            "start": 808,
+            "end": 833,
+            "label": "IFD0 tag 305 value",
+            "nested": false
+          },
+          {
+            "start": 834,
+            "end": 854,
+            "label": "IFD0 tag 306 value",
+            "nested": false
+          },
+          {
+            "start": 854,
+            "end": 918,
+            "label": "IFD0 tag 315 value",
+            "nested": false
+          },
+          {
+            "start": 918,
+            "end": 982,
+            "label": "IFD0 tag 33432 value",
+            "nested": false
+          },
+          {
+            "start": 982,
+            "end": 993,
+            "label": "IFD0 tag 50708 value",
+            "nested": false
+          },
+          {
+            "start": 994,
+            "end": 1026,
+            "label": "IFD0 tag 50714 value",
+            "nested": false
+          },
+          {
+            "start": 1026,
+            "end": 1034,
+            "label": "IFD0 tag 50719 value",
+            "nested": false
+          },
+          {
+            "start": 1034,
+            "end": 1042,
+            "label": "IFD0 tag 50720 value",
+            "nested": false
+          },
+          {
+            "start": 1042,
+            "end": 1114,
+            "label": "IFD0 tag 50721 value",
+            "nested": false
+          },
+          {
+            "start": 1114,
+            "end": 1186,
+            "label": "IFD0 tag 50722 value",
+            "nested": false
+          },
+          {
+            "start": 1186,
+            "end": 1210,
+            "label": "IFD0 tag 50728 value",
+            "nested": false
+          },
+          {
+            "start": 1210,
+            "end": 1218,
+            "label": "IFD0 tag 50730 value",
+            "nested": false
+          },
+          {
+            "start": 1218,
+            "end": 1226,
+            "label": "IFD0 tag 50731 value",
+            "nested": false
+          },
+          {
+            "start": 1226,
+            "end": 1234,
+            "label": "IFD0 tag 50732 value",
+            "nested": false
+          },
+          {
+            "start": 1234,
+            "end": 1243,
+            "label": "IFD0 tag 50735 value",
+            "nested": false
+          },
+          {
+            "start": 1244,
+            "end": 1276,
+            "label": "IFD0 tag 50736 value",
+            "nested": false
+          },
+          {
+            "start": 72022,
+            "end": 78756,
+            "label": "IFD0 tag 50740 value",
+            "nested": false
+          },
+          {
+            "start": 1276,
+            "end": 1292,
+            "label": "IFD0 tag 50781 value",
+            "nested": false
+          },
+          {
+            "start": 1292,
+            "end": 1308,
+            "label": "IFD0 tag 50829 value",
+            "nested": false
+          },
+          {
+            "start": 1308,
+            "end": 1320,
+            "label": "IFD0 tag 50937 value",
+            "nested": false
+          },
+          {
+            "start": 1320,
+            "end": 2184,
+            "label": "IFD0 tag 50938 value",
+            "nested": false
+          },
+          {
+            "start": 2184,
+            "end": 3048,
+            "label": "IFD0 tag 50939 value",
+            "nested": false
+          },
+          {
+            "start": 3048,
+            "end": 4072,
+            "label": "IFD0 tag 50940 value",
+            "nested": false
+          },
+          {
+            "start": 4072,
+            "end": 16636,
+            "label": "IFD0 tag 51022 value",
+            "nested": false
+          },
+          {
+            "start": 16636,
+            "end": 16652,
+            "label": "IFD0 tag 51041 value",
+            "nested": false
+          },
+          {
+            "start": 16652,
+            "end": 16660,
+            "label": "IFD0 tag 51043 value",
+            "nested": false
+          },
+          {
+            "start": 16660,
+            "end": 16668,
+            "label": "IFD0 tag 51044 value",
+            "nested": false
+          },
+          {
+            "start": 16668,
+            "end": 16676,
+            "label": "IFD0 tag 51058 value",
+            "nested": false
+          },
+          {
+            "start": 16676,
+            "end": 17246,
+            "label": "IFD0/Exif[0] structure",
+            "nested": true
+          },
+          {
+            "start": 17246,
+            "end": 17254,
+            "label": "IFD0/Exif[0] tag 33434 value",
+            "nested": true
+          },
+          {
+            "start": 17254,
+            "end": 17262,
+            "label": "IFD0/Exif[0] tag 33437 value",
+            "nested": true
+          },
+          {
+            "start": 17262,
+            "end": 17282,
+            "label": "IFD0/Exif[0] tag 36867 value",
+            "nested": true
+          },
+          {
+            "start": 17282,
+            "end": 17302,
+            "label": "IFD0/Exif[0] tag 36868 value",
+            "nested": true
+          },
+          {
+            "start": 17302,
+            "end": 17309,
+            "label": "IFD0/Exif[0] tag 36880 value",
+            "nested": true
+          },
+          {
+            "start": 17310,
+            "end": 17317,
+            "label": "IFD0/Exif[0] tag 36881 value",
+            "nested": true
+          },
+          {
+            "start": 17318,
+            "end": 17325,
+            "label": "IFD0/Exif[0] tag 36882 value",
+            "nested": true
+          },
+          {
+            "start": 17326,
+            "end": 17334,
+            "label": "IFD0/Exif[0] tag 37377 value",
+            "nested": true
+          },
+          {
+            "start": 17334,
+            "end": 17342,
+            "label": "IFD0/Exif[0] tag 37378 value",
+            "nested": true
+          },
+          {
+            "start": 17342,
+            "end": 17350,
+            "label": "IFD0/Exif[0] tag 37379 value",
+            "nested": true
+          },
+          {
+            "start": 17350,
+            "end": 17358,
+            "label": "IFD0/Exif[0] tag 37380 value",
+            "nested": true
+          },
+          {
+            "start": 17358,
+            "end": 17366,
+            "label": "IFD0/Exif[0] tag 37381 value",
+            "nested": true
+          },
+          {
+            "start": 17366,
+            "end": 17374,
+            "label": "IFD0/Exif[0] tag 37382 value",
+            "nested": true
+          },
+          {
+            "start": 17374,
+            "end": 17382,
+            "label": "IFD0/Exif[0] tag 37386 value",
+            "nested": true
+          },
+          {
+            "start": 17684,
+            "end": 72022,
+            "label": "IFD0/Exif[0] tag 37500 value",
+            "nested": true
+          },
+          {
+            "start": 17382,
+            "end": 17454,
+            "label": "IFD0/Exif[0] tag 37510 value",
+            "nested": true
+          },
+          {
+            "start": 17454,
+            "end": 17462,
+            "label": "IFD0/Exif[0] tag 41486 value",
+            "nested": true
+          },
+          {
+            "start": 17462,
+            "end": 17470,
+            "label": "IFD0/Exif[0] tag 41487 value",
+            "nested": true
+          },
+          {
+            "start": 17470,
+            "end": 17478,
+            "label": "IFD0/Exif[0] tag 41988 value",
+            "nested": true
+          },
+          {
+            "start": 17478,
+            "end": 17511,
+            "label": "IFD0/Exif[0] tag 42016 value",
+            "nested": true
+          },
+          {
+            "start": 17512,
+            "end": 17524,
+            "label": "IFD0/Exif[0] tag 42033 value",
+            "nested": true
+          },
+          {
+            "start": 17524,
+            "end": 17556,
+            "label": "IFD0/Exif[0] tag 42034 value",
+            "nested": true
+          },
+          {
+            "start": 17556,
+            "end": 17580,
+            "label": "IFD0/Exif[0] tag 42035 value",
+            "nested": true
+          },
+          {
+            "start": 17580,
+            "end": 17676,
+            "label": "IFD0/Exif[0] tag 42036 value",
+            "nested": true
+          },
+          {
+            "start": 17676,
+            "end": 17684,
+            "label": "IFD0/Exif[0] tag 42240 value",
+            "nested": true
+          }
+        ],
+        "ifd_paths": [
+          "IFD0",
+          "IFD0/Exif[0]"
+        ],
+        "metadata_collisions": [
+          {
+            "start": 17684,
+            "end": 72022,
+            "label": "IFD0/Exif[0] tag 37500 value",
+            "nested": true
+          }
+        ]
+      },
+      "frame_pixels": 2110240,
+      "status": "REJECTED",
+      "reason": "existing builder would overwrite recursively referenced metadata",
+      "source_sha256_after": "8b838d0a27b5a8a11a39ff903933793930706b7a6b46f7a4ef8e08a400e2c324",
+      "source_unchanged": true
+    }
+  ],
+  "pass_count": 0,
+  "all_passed": false
+}

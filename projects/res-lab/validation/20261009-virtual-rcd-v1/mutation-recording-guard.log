@@ -1,0 +1,13 @@
+test_recording_guards_preserve_active_recipe (test_virtual_rcd.VirtualTests) ... 
+======================================================================
+FAIL: test_recording_guards_preserve_active_recipe (test_virtual_rcd.VirtualTests) (addr=3276267663)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_virtual_rcd.py", line 163, in test_recording_guards_preserve_active_recipe
+    cam.geometry(w=1920,h=1080);cam.put(addr,1);self.assertEqual(cam.apply(),4)
+AssertionError: 0 != 4
+
+----------------------------------------------------------------------
+Ran 1 test in 52.300s
+
+FAILED (failures=1)

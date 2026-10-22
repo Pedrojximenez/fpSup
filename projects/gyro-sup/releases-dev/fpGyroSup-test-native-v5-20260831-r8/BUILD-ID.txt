@@ -1,0 +1,19 @@
+fpGyroSup native transaction r8
+Build date: 2026-08-31
+Camera/firmware: SIGMA fp Ver.5.02
+Build type: release AutoRun, no USB shell
+
+Purpose:
+- Keep the successful MovieRecording start gate and native clip lifecycle.
+- Treat DNG/GYR/GCSV/JSON as one recording transaction.
+- Enter GCSV generation immediately after GYR close, without the old 5 ms
+  outer-task gap.
+- Finish each take's GCSV and then JSON before advancing to another take.
+- Keep bounded retries inside the same S_POST_BUSY run.
+
+Not included:
+- No global F_WRITE phase probe.
+- No boot scan or recovery rewrite.
+
+Every ordinary image restores the original C03660E8 firmware prologue left by
+an earlier diagnostic boot before C072F000 can be reused.

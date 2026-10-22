@@ -1,0 +1,43 @@
+test_high_rate_carrier_preserves_timing_and_geometry (native30_negative.Native30Tests) ... 
+======================================================================
+FAIL: test_high_rate_carrier_preserves_timing_and_geometry (native30_negative.Native30Tests) (rank=23976)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "projects/res-lab/validation/20261011-m12-recurrence/test_native30.py", line 50, in test_high_rate_carrier_preserves_timing_and_geometry
+    self.assertEqual((cam.w(pairs), cam.w(pairs + 4)), (3, menu_row), 'menu must commit native 29.97 carrier')
+AssertionError: Tuples differ: (7, 9) != (3, 9)
+
+First differing element 0:
+7
+3
+
+- (7, 9)
+?  ^
+
++ (3, 9)
+?  ^
+ : menu must commit native 29.97 carrier
+
+======================================================================
+FAIL: test_high_rate_carrier_preserves_timing_and_geometry (native30_negative.Native30Tests) (rank=27972)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "projects/res-lab/validation/20261011-m12-recurrence/test_native30.py", line 50, in test_high_rate_carrier_preserves_timing_and_geometry
+    self.assertEqual((cam.w(pairs), cam.w(pairs + 4)), (3, menu_row), 'menu must commit native 29.97 carrier')
+AssertionError: Tuples differ: (7, 10) != (3, 10)
+
+First differing element 0:
+7
+3
+
+- (7, 10)
+?  ^
+
++ (3, 10)
+?  ^
+ : menu must commit native 29.97 carrier
+
+----------------------------------------------------------------------
+Ran 1 test in 31.466s
+
+FAILED (failures=2)

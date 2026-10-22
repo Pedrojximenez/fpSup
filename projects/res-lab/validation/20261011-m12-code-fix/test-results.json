@@ -1,0 +1,103 @@
+{
+  "candidate_tests": [
+    {
+      "test": "test_reslab_rate_commit.RateCommitTests.test_missing_post_commit_phase_is_detected",
+      "card": "plain",
+      "status": "passed",
+      "run": "initial plain batch; other fixture failure corrected separately"
+    },
+    {
+      "test": "test_reslab_rate_commit.RateCommitTests.test_post_commit_guards_consume_pending_reload",
+      "card": "plain",
+      "status": "passed",
+      "run": "initial plain batch; other fixture failure corrected separately"
+    },
+    {
+      "test": "test_reslab_rate_commit.RateCommitTests.test_same_carrier_round_trip_reloads_after_both_native_callbacks",
+      "card": "plain",
+      "status": "passed",
+      "run": "initial plain batch; other fixture failure corrected separately"
+    },
+    {
+      "test": "test_reslab_rate_commit.RateCommitTests.test_shutdown_restores_rate_hook_sites",
+      "card": "plain",
+      "status": "passed",
+      "run": "initial plain batch; other fixture failure corrected separately"
+    },
+    {
+      "test": "test_reslab_rate_commit.RateCommitTests.test_native_setter_only_notifies_when_carrier_changes",
+      "card": "debug",
+      "status": "passed",
+      "run": "standalone native setter ROM check",
+      "seconds": 32.477
+    },
+    {
+      "test": "test_reslab_rate_commit.RateCommitTests.test_repeating_a_rate_and_changing_native_carrier_do_not_extra_reload",
+      "card": "debug",
+      "status": "passed",
+      "run": "debug-regression.log; corrected expected native enum from 12 to 3"
+    },
+    {
+      "test": "test_reslab_preview_route.PreviewRouteTests.test_m12_r78_geometry_survives_virtual_rcd_and_native_selection",
+      "card": "plain",
+      "status": "passed",
+      "run": "initial plain batch"
+    },
+    {
+      "test": "test_reslab_preview_route.PreviewRouteTests.test_binning_keeps_its_matching_native_tap",
+      "card": "plain",
+      "status": "passed",
+      "run": "initial plain batch"
+    },
+    {
+      "test": "test_virtual_rcd.VirtualTests.test_contract_abi_and_status",
+      "card": "debug",
+      "status": "passed",
+      "run": "debug-regression.log"
+    },
+    {
+      "test": "test_virtual_rcd.VirtualTests.test_shutdown_restores_claimed_words",
+      "card": "debug",
+      "status": "passed",
+      "run": "debug-regression.log"
+    },
+    {
+      "test": "test_virtual_rcd.VirtualTests.test_live_view_stop_commit_start_and_uhd_setter",
+      "card": "debug",
+      "status": "passed",
+      "run": "debug-regression.log"
+    },
+    {
+      "test": "test_virtual_rcd.NativeUI.test_settings_page_matches_reference_and_keeps_rate_variants",
+      "card": "debug",
+      "status": "passed",
+      "run": "native-ui-regression.log",
+      "seconds": 0.757
+    }
+  ],
+  "distinct_passed": 12,
+  "baseline_test": {
+    "test": "test_reslab_rate_commit.RateCommitTests.test_same_carrier_round_trip_reloads_after_both_native_callbacks",
+    "status": "expected failure",
+    "failures": 2,
+    "seconds": 64.398,
+    "log": "baseline-regression.log"
+  },
+  "initial_plain_batch": {
+    "tests": 7,
+    "passed": 6,
+    "fixture_failure": 1,
+    "seconds": 385.616,
+    "superseded_fixture_failure": "expected 12 instead of actual native enum 3"
+  },
+  "debug_batch": {
+    "real_tests_passed": 4,
+    "wrong_class_invocation": 1,
+    "seconds": 130.21,
+    "log": "debug-regression.log",
+    "wrong_invocation_superseded_by": "native-ui-regression.log"
+  },
+  "known_baseline_failure": "test_reslab_preview_route.PreviewRouteTests.test_m12_high_rates_keep_the_native_120_engine_path still expects withdrawn engine60",
+  "full_suite_passed": false,
+  "hardware_tested": false
+}

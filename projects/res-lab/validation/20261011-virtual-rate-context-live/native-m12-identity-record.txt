@@ -1,0 +1,11 @@
+screen: LV_CINE_MEDIUM
+  tagged 16380/52744 B  2385 KiB/s   tagged 32760/52744 B  2112 KiB/s   tagged 49140/52744 B  2183 KiB/s   tagged 52744/52744 B  2207 KiB/s   tagged 52744 bytes in 0.0s (2128 KiB/s)      
+  tagged 116/116 B  109 KiB/s   tagged 116 bytes in 0.0s (44 KiB/s)      
+  tagged 116/116 B  98 KiB/s   tagged 116 bytes in 0.0s (53 KiB/s)      
+  tagged 80/80 B  81 KiB/s   tagged 80 bytes in 0.0s (37 KiB/s)      
+  tagged 104/104 B  174 KiB/s   tagged 104 bytes in 0.0s (78 KiB/s)      
+  tagged 60/60 B  38 KiB/s   tagged 60 bytes in 0.0s (21 KiB/s)      
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261011-virtual-rate-context-live/record_native_m12_identity.py", line 34, in <module>
+    assert 0xc0b00000<=desc<=0xc0c00000-8
+AssertionError
