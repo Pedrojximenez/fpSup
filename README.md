@@ -2,209 +2,215 @@
   <img src="fpSup/assets/fpsup-logo.png" width="180" alt="fpSup">
 </p>
 
-<h3 align="center">SIGMA fp 韌體 Ver.5.02 的研究與開發指南</h3>
+<h3 align="center">Research and development guide for SIGMA fp firmware Ver.5.02</h3>
 
 <p align="center">
-  fp L 的韌體高度相似,也可以參考;<br>
-  但記憶體位址不同,這裡的卡和程式<b>不能直接用在 fp L 或其他韌體版本</b>。
+  The fp L firmware is very similar, so this guide is useful there too;<br>
+  but memory addresses differ, so the cards and code here <b>will not work as-is on the fp L or other firmware versions</b>.
 </p>
 
 <p align="center">
-  <a href="https://ijigen.github.io/fpSup/"><img src="https://img.shields.io/badge/fpSup-%E7%B6%B2%E7%AB%99-e0405e?style=flat" alt="fpSup 網站"></a>
-  <a href="https://ijigen.github.io/fpSup/tools/card-composer/"><img src="https://img.shields.io/badge/fpSup--Merge-%E4%B8%8B%E8%BC%89%E6%95%B4%E5%BC%B5%E5%8D%A1-e8c400?style=flat" alt="fpSup-Merge"></a>
-  <a href="https://discord.gg/XeFK5zNZpT"><img src="https://img.shields.io/badge/Discord-%E5%8A%A0%E5%85%A5-5865F2?style=flat&logo=discord&logoColor=white" alt="Discord"></a>
-  <a href="https://www.youtube.com/@fp-sup"><img src="https://img.shields.io/badge/YouTube-%E4%BD%9C%E5%93%81%E5%B1%95%E7%A4%BA-FF0000?style=flat&logo=youtube&logoColor=white" alt="YouTube"></a>
-  <a href="https://ko-fi.com/fpsup"><img src="https://img.shields.io/badge/Ko--fi-%E8%B4%8A%E5%8A%A9%E9%96%8B%E7%99%BC-FF5E5B?style=flat&logo=kofi&logoColor=white" alt="Ko-fi"></a>
+  <a href="https://ijigen.github.io/fpSup/"><img src="https://img.shields.io/badge/fpSup-website-e0405e?style=flat" alt="fpSup website"></a>
+  <a href="https://ijigen.github.io/fpSup/tools/card-composer/"><img src="https://img.shields.io/badge/fpSup--Merge-build%20a%20card-e8c400?style=flat" alt="fpSup-Merge"></a>
+  <a href="https://discord.gg/XeFK5zNZpT"><img src="https://img.shields.io/badge/Discord-join-5865F2?style=flat&logo=discord&logoColor=white" alt="Discord"></a>
+  <a href="https://www.youtube.com/@fp-sup"><img src="https://img.shields.io/badge/YouTube-showcase-FF0000?style=flat&logo=youtube&logoColor=white" alt="YouTube"></a>
+  <a href="https://ko-fi.com/fpsup"><img src="https://img.shields.io/badge/Ko--fi-support-FF5E5B?style=flat&logo=kofi&logoColor=white" alt="Ko-fi"></a>
+</p>
+
+<p align="center">
+  <b>English</b> · <a href="README.zh-CN.md">简体中文</a> · <a href="README.zh-TW.md">繁體中文</a>
 </p>
 
 > [!TIP]
-> **迷路了嗎?** 這裡是給開發者的 repo。
-> **要下載 fpSup → [fpSup 網站](https://ijigen.github.io/fpSup/)**(下載、安裝、每個工具的使用指南),
-> 或直接用 **[fpSup-Merge](https://ijigen.github.io/fpSup/tools/card-composer/)** 選好工具、下載整張卡。
-> 有問題、想回報、想聊天 → **[Discord](https://discord.gg/XeFK5zNZpT)**
+> **Lost?** This repo is for developers.
+> **To download fpSup → [the fpSup website](https://ijigen.github.io/fpSup/)** (downloads, installation, a guide for every tool),
+> or go straight to **[fpSup-Merge](https://ijigen.github.io/fpSup/tools/card-composer/)**, pick your tools and download a whole card.
+> Questions, bug reports, or just to chat → **[Discord](https://discord.gg/XeFK5zNZpT)**
 
 ---
 
-## 🛠️ 這個 repo 怎麼幫你開發
+## 🛠️ How this repo helps you build
 
 <table>
 <tr>
 <td width="33%" valign="top">
 
 ### 🔌 USB Shell
-讓電腦直接跟相機說話:讀寫記憶體、呼叫韌體函式、按鍵、截圖、高速傳檔。
+Lets your computer talk to the camera directly: read and write memory, call firmware functions, press buttons, take screenshots, move files fast.
 
-**不用拔卡、不用一直按按鈕。**
+**No pulling the card, no endless button pressing.**
 
 </td>
 <td width="33%" valign="top">
 
-### 📚 研究筆記
-韌體、感光元件、介面、儲存的事實都整理好了,**不用從零反編譯。**
+### 📚 Research notes
+Facts about the firmware, sensor, interfaces and storage are already written down, **so you don't start decompiling from zero.**
 
-想知道硬體極限 → [網站研究頁](https://ijigen.github.io/fpSup/research.html)的解說與模擬工具。
+Want to know the hardware limits → the explainers and simulators on the [website's research page](https://ijigen.github.io/fpSup/research.html).
 
 </td>
 <td width="33%" valign="top">
 
 ### 🤖 AI Skills
-給 AI 的操作手冊,讓**你的 AI** 會上機、建卡、改選單。
+Manuals written for AI, so **your AI** can drive the camera, build cards and edit menus.
 
 </td>
 </tr>
 </table>
 
-**你描述想要的功能 → AI 讀筆記、用 USB 上機測 → 一起做出你自己的 sup。** [→ 開發指南](#-開發指南)
+**You describe the feature you want → your AI reads the notes and tests on the camera over USB → together you build your own sup.** [→ Development guide](#-development-guide)
 
 ---
 
-## 💭 理念
+## 💭 Philosophy
 
-在 AI 輔助開發的過程中,我明白研究過程本身的價值。
-所以我分享的不只是成果,還有一路累積下來的**知識、工具、方法和 AI Skills**。
+Developing with AI taught me how valuable the research process itself is.
+So I'm sharing not just the results, but the **knowledge, tools, methods and AI Skills** gathered along the way.
 
 > [!IMPORTANT]
-> **但請把這些資料當作參考,而非真理。**
-> 我的 AI 犯過很多錯,其中有些錯誤可能還留在我的研究筆記或 Skills 裡。
-> 請小心別讓我的 AI 那些未經驗證的資訊污染了你的開發環境。
+> **Please treat all of this as reference, not truth.**
+> My AI has made many mistakes, and some of them may still be in my research notes or Skills.
+> Be careful not to let my AI's unverified information pollute your own development environment.
 
-### 🌱 開發與協作
+### 🌱 Development and collaboration
 
-每個人都用自己覺得最舒服的姿勢開發 —— 包括我自己。
-不需要每個人都做同一個專案,或遵守同一套規則只為了方便管理。
+Everyone should develop in whatever way feels most comfortable — me included.
+Not everyone needs to work on the same project, or follow the same rules just to make things easier to manage.
 
-我認為時代變了:**專案之間互相理解、整合的成本,在 AI 時代大幅降低了。**
-與其大家綁在一起、朝同一個目標前進,
-或許讓每個人放開手腳,由 AI 吸收掉互相理解的成本,會更好。
-即使做了相同的研究,也可能發現不同的細節。
-我不確定,但我覺得這種交互成長,可能會走得更遠。
+I think times have changed: **the cost of projects understanding and integrating with each other has dropped enormously in the AI era.**
+Rather than everyone tied together, moving toward a single goal,
+maybe it's better to let everyone work freely and let AI absorb the cost of understanding each other.
+Even when people do the same research, they may find different details.
+I'm not sure, but I think this kind of growing through each other might take us further.
 
-我鼓勵自願分享、互相學習,但每個人有權利決定要分享多少。
+I encourage voluntary sharing and learning from each other, but everyone has the right to decide how much to share.
 
-- 🐛 **歡迎用 PR 來修正錯誤、修 bug 和改進。**
-- 🌟 至於新功能和獨立的 Sup 模組,我一般鼓勵開發者自己維護自己的專案。
-- 🧩 經作者同意,我可能會把他的作品收進 **fpSup-Merge**,而且一定會註明出處。
+- 🐛 **PRs that fix mistakes, fix bugs or improve things are welcome.**
+- 🌟 For new features and independent Sup modules, I generally encourage developers to maintain their own projects.
+- 🧩 With the author's permission, I may include their work in **fpSup-Merge**, always with credit.
 
-**每個開發者都值得擁有自己發光的舞台。**
-我的目的不是把每個人的作品都收到我名下,而是讓更多人發現、享受別人創造的東西。
+**Every developer deserves their own stage to shine.**
+My goal isn't to collect everyone's work under my name, but to help more people discover and enjoy what others have made.
 
-### 🤝 人與人的連結
+### 🤝 Connecting people
 
-我不知道 fpSup 還能有意義多久。
+I don't know how long fpSup will stay meaningful.
 
-AI 進步得這麼快,也許幾年後,這些研究很多都會顯得微不足道。
-人們也許只要跟自己的 AI 聊一聊,就能解決這些問題。
-那也完全沒關係。
+AI is moving so fast that in a few years much of this research may seem trivial.
+People may solve these problems just by talking to their own AI.
+And that's completely fine.
 
-因為在這一路上,我發現對我來說,重要的不只是技術本身。
-那些實驗、失敗、發現,尤其是因為這個專案認識的人,都變成了很珍貴的東西。
-就算技術終究會過時,這些經歷和連結都會留在我心裡。
+Because along the way, I found that what matters to me isn't only the technology.
+The experiments, the failures, the discoveries, and above all the people I met through this project have become precious to me.
+Even if the technology becomes obsolete, those experiences and connections will stay with me.
 
-**我想創造人與人之間的連結。因此成立了社群 👉 [Discord](https://discord.gg/XeFK5zNZpT)**
+**I want to create connections between people. That's why I started a community 👉 [Discord](https://discord.gg/XeFK5zNZpT)**
 
-**— bei / 夏曉雨 / ijigen ❤️**(這些都是我,只是用不同的名字 😆)
-
----
-
-## 🔓 開發過程:當初我如何找到修改的入口
-
-#### 🎥 起點
-
-我常常一個人拍,自己既是攝影師也是被攝者,所以很需要可靠的自動對焦。
-超焦距、PDMOVIE Live Air、DJI Focus Pro 都試過,沒有一個讓我滿意。
-
-於是我用下班時間做了 [sigma-fp-bridge](https://github.com/ijigen/sigma-fp-bridge):用 PTP 控制對焦、做人臉偵測、預測對焦距離。
-幾乎每晚熬夜測,AI 還會用語音指揮我站到哪裡,好拿我做測試。
-
-#### 💀 死路
-
-就在我以為快要成功的時候,第一次真正拿去拍,按下錄影鍵 ——
-
-> ### 錄影中 PTP 對焦完全停了。
-
-測了那麼久,我從來沒想過要測錄影中能不能用。我覺得自己是世界上最大的白痴。😱
-
-#### 🔍 拆開韌體
-
-我不甘心,深信 SIGMA 的工程師一定留了隱藏的指令,於是讓 AI 把韌體拆開、反編譯。
-PTP 確定是死路,但也順便找到了雲台介面、工廠測試點,還有一個叫 `AutoRun.txt` 的東西。
-
-AI 一直覺得它沒什麼,只是個簡單的腳本語言。
-直到我注意到 shell 指令裡有 **`mem set`**,可以寫任意記憶體位址 —— 憑過去對逆向工程的了解,我直覺撿到寶了。
-
-> ### 🗝️ 這就是入口。
-
-#### 🌀 做一個夠大的
-
-我做了幾個小玩具貼到社團,幾乎沒有人理。大家還沒意識到,這個發現已經證明一切都可以改變。
-於是我花了一個多月,熬掉無數個夜,做出了 **fpSup-GYRO**,並公開了過程中的開發工具。
-
-而就在我即將拿下 Open Gate 的時候,國外開發者 Vitaly Li 率先發布了成功的消息。
-> 我一直知道,也許換台相機、甚至用手機就好了。
-> 但我真的很愛 fp 的設計,所以就固執地黏上了。😅
-
-我想這份對 fp 的愛,正是 fp 用戶即使非常小眾,卻如雨後春筍般誕生優秀作品的原因。
-
-📖 **更完整的開發故事與經驗 → [JOURNEY.md](JOURNEY.md)**
-或許能幫助你,尤其是想在其他相機上從零開始的人。
+**— bei / 夏曉雨 / ijigen ❤️** (all of these are me, just different names 😆)
 
 ---
 
-## 🧭 開發指南
+## 🔓 How I found the way in
+
+#### 🎥 The starting point
+
+I often shoot alone, as both the camera operator and the subject, so I really needed reliable autofocus.
+Hyperfocal, PDMOVIE Live Air, DJI Focus Pro — I tried them all, and none satisfied me.
+
+So in my spare time after work I built [sigma-fp-bridge](https://github.com/ijigen/sigma-fp-bridge): focus control over PTP, face detection, focus distance prediction.
+I stayed up testing almost every night, and the AI would even use voice to tell me where to stand so it could test on me.
+
+#### 💀 A dead end
+
+Just when I thought I was nearly there, I took it out for a real shoot for the first time and pressed record —
+
+> ### PTP focus stopped completely while recording.
+
+After all that testing, I had never once thought to test whether it worked during recording. I felt like the biggest idiot in the world. 😱
+
+#### 🔍 Opening up the firmware
+
+I couldn't let it go. I was convinced SIGMA's engineers must have left hidden commands somewhere, so I had AI take the firmware apart and decompile it.
+PTP was confirmed to be a dead end, but along the way we found the gimbal interface, factory test points, and something called `AutoRun.txt`.
+
+The AI kept thinking it was nothing, just a simple scripting language.
+Until I noticed **`mem set`** among the shell commands, which can write to any memory address — from my past reverse-engineering experience, I knew instinctively I'd struck gold.
+
+> ### 🗝️ This was the way in.
+
+#### 🌀 Build something big enough
+
+I posted a few small toys to the community, and almost nobody noticed.
+People hadn't yet realised that this discovery proved everything could be changed.
+So I spent over a month and countless sleepless nights building **fpSup-GYRO**, and released the development tools I'd made along the way.
+
+And just as I was about to reach the Open Gate milestone, developer Vitaly Li announced his success first.
+
+> I always knew I could have just switched cameras, or even used a phone.
+> But I really love the fp's design, so I stubbornly stuck with it. 😅
+
+I think this love for the fp is exactly why, small as its user base is, excellent work by developers has sprung up like mushrooms after rain.
+
+📖 **The fuller story and lessons learned → [JOURNEY.md](JOURNEY.md)** (Chinese for now)
+It may help you, especially if you want to start from scratch on another camera.
+
+---
+
+## 🧭 Development guide
 
 > [!WARNING]
-> 這個 repo 包含實驗性的韌體研究和非官方修改。
-> 有些程式碼可能不完整、未經測試,甚至有潛在危險。使用它可能導致錄影失敗、資料遺失、設定出問題,甚至讓相機無法使用。
-> **使用風險自負。**
+> This repo contains experimental firmware research and unofficial modifications.
+> Some code may be incomplete, untested or even dangerous. Using it may cause failed recordings, data loss, broken settings, or even an unusable camera.
+> **Use at your own risk.**
 
-### 💡 怎麼開始一個新功能
+### 💡 How to start a new feature
 
 | | |
 |:-:|---|
-| **1️⃣ 想清楚需求** | 你想讓 fp 做到什麼?研究方向是從需求來的,不是從索引來的。 |
-| **2️⃣ 看硬體極限** | 用[網站研究頁](https://ijigen.github.io/fpSup/research.html)判斷行不行得通:<br>・解析度、格率合不合理,資料率(MB/s)卡不卡得進儲存媒體<br>・硬體無損壓縮的能力和限制<br>・SIGMA 原本就有的感光元件模式能做到哪些事<br>・ISP 的流程:畫面從感光元件到 CinemaDNG 經過哪些關卡 |
-| **3️⃣ 交給你的 AI** | 讓它讀 [`INDEX.md`](INDEX.md)、相關的 `projects/<名字>/` 和 `.claude/skills/`,找出已經知道什麼、還缺什麼,再一起上機驗證。 |
+| **1️⃣ Know what you want** | What do you want the fp to do? Research direction comes from needs, not from an index. |
+| **2️⃣ Check the hardware limits** | Use the [website's research page](https://ijigen.github.io/fpSup/research.html) to judge whether it can work:<br>・Are the resolution and frame rate reasonable, and does the data rate (MB/s) fit the storage?<br>・What hardware lossless compression can and can't do<br>・What SIGMA's existing sensor modes can already do<br>・The ISP flow: which stages a frame passes from the sensor to CinemaDNG |
+| **3️⃣ Hand it to your AI** | Have it read [`INDEX.md`](INDEX.md), the relevant `projects/<name>/` and `.claude/skills/`, work out what is already known and what's missing, then verify on the camera together. |
 
-### 🎒 準備
+### 🎒 What you need
 
-- 📷 SIGMA fp,**韌體 Ver.5.02**(fp L 可參考,但卡不能直接用)
-- 🔌 一條 USB-C 線、一張 SD 卡
-- 💻 Mac(USB Shell 的主機工具目前在 macOS 上開發)
-- 🤖 一個能讀檔、跑指令的 AI 程式助手(Codex、Claude Code)
+- 📷 A SIGMA fp on **firmware Ver.5.02** (fp L can use this as reference, but the cards won't work directly)
+- 🔌 A USB-C cable and an SD card
+- 💻 A Mac (the USB Shell host tools are currently developed on macOS)
+- 🤖 An AI coding assistant that can read files and run commands (Codex, Claude Code)
 
-### 🚀 三步上手
+### 🚀 Three steps to get going
 
-| 步驟 | 做什麼 | 參考 |
+| Step | What to do | Reference |
 |---|---|---|
-| **1. 接上 USB Shell** | 用 fpSup-Merge 建一張帶 USB Shell 的卡 → 插上 USB → 主機工具就能讀寫記憶體、按鍵、截圖 | skill `fp-camera-control`、`fp-usb-shell` |
-| **2. 讓你的 AI 接手** | 讓它先讀 `INDEX.md` 和 `.claude/skills/`。<br>⚠️ **這些是我的 AI 寫的,有錯。** 重要的結論請自己驗證。 | |
-| **3. 做一個自己的 sup** | 建卡、測改動、發布 | `fpSup/BUILDING.md`、skill `fp-merged-card` |
+| **1. Connect the USB Shell** | Build a card with USB Shell in fpSup-Merge → plug in USB → the host tools can read/write memory, press buttons, take screenshots | skill `fp-camera-control`, `fp-usb-shell` |
+| **2. Let your AI take over** | Have it read `INDEX.md` and `.claude/skills/` first.<br>⚠️ **These were written by my AI and contain mistakes.** Verify important conclusions yourself. | |
+| **3. Build your own sup** | Build cards, test changes, release | `fpSup/BUILDING.md`, skill `fp-merged-card` |
 
-### ⚠️ 上機前要知道的
+### ⚠️ Before you touch the camera
 
-- 完成自己的功能、上機測試前,先用模擬跑過再寫卡 → skill `fp-unicorn-emulation`
-- 寫入相機設定區要小心:它會跨關機保存。過去的分析可參考 [`research/SETTINGS_AREA_FIRST_RULE.md`](research/SETTINGS_AREA_FIRST_RULE.md)(只是參考)。
-- 相機卡死了:先讀卡(hook 寫的資料還在),再拔電池冷開機。
+- Once your feature is done, run it in emulation before writing it to a card and testing on the camera → skill `fp-unicorn-emulation`
+- Be careful writing to the camera's settings area: it survives power-off. Past analysis is in [`research/SETTINGS_AREA_FIRST_RULE.md`](research/SETTINGS_AREA_FIRST_RULE.md) (reference only).
+- Camera frozen: read the card first (data written by hooks is still there), then pull the battery for a cold start.
 
 <details>
-<summary><b>📁 這個 repo 怎麼分</b></summary>
+<summary><b>📁 How this repo is laid out</b></summary>
 
 ```
-README.md       ← 你在這裡
-JOURNEY.md      ← 完整故事
-INDEX.md        ← 研究總索引:從這裡找任何主題
-research/       ← 相機本身的事實(韌體、感光元件、介面、儲存…),換個專案還成立
-projects/       ← 各 sup 與實驗的開發樹:原始碼、測試卡、驗證紀錄、失敗紀錄
-fpSup/          ← 網站、正式發布卡(releases/)、各 sup 的發布版原始碼、fpSup-Merge
-.claude/skills/ ← AI 用的操作手冊(上機、呼叫韌體函式、建卡、改選單…)
+README*.md      ← you are here (English / 简体 / 繁體)
+JOURNEY.md      ← the full story
+INDEX.md        ← master research index: find any topic from here
+research/       ← facts about the camera itself (firmware, sensor, interfaces, storage…), true for any project
+projects/       ← development trees for each sup and experiment: source, test cards, validation logs, failures
+fpSup/          ← website, released cards (releases/), release source of each sup, fpSup-Merge
+.claude/skills/ ← manuals for AI (driving the camera, calling firmware functions, building cards, editing menus…)
 ```
 
 </details>
 
 <details>
-<summary><b>📦 只想拉一部分?</b>(整個 repo 約 14 GB)</summary>
+<summary><b>📦 Only want part of it?</b> (the whole repo is about 14 GB)</summary>
 
-只要原始碼的話:
+For just the source:
 
 ```sh
 git clone --filter=blob:none --sparse https://github.com/ijigen/fpSup.git
