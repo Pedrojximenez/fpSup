@@ -1,6 +1,6 @@
 # The Journey
 
-**English** · [简体中文](JOURNEY.zh-CN.md) · [繁體中文](JOURNEY.zh-TW.md)
+**EN** / [中](JOURNEY.zh-CN.md) / [繁](JOURNEY.zh-TW.md)
 
 > The README covers how I found the way in to modify the camera. This is the full story: starting from a dead end and walking all the way to where we are now,
 > the wrong turns along the way, the things I learned, and the doors beyond fpSup that are still open.

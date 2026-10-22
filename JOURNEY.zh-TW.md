@@ -1,6 +1,6 @@
 # 開發過程
 
-[English](JOURNEY.md) · [简体中文](JOURNEY.zh-CN.md) · **繁體中文**
+[EN](JOURNEY.md) / [中](JOURNEY.zh-CN.md) / **繁**
 
 > README 講到我怎麼找到修改的入口。這裡是完整的過程:從一條死路開始,一路走到現在,
 > 中間走錯的路、學到的事,還有 fpSup 以外還開著的門。

@@ -6,7 +6,8 @@
 
 <p align="center">
   The fp L firmware is very similar, so this guide is useful there too;<br>
-  but memory addresses differ, so the cards and code here <b>will not work as-is on the fp L or other firmware versions</b>.
+  but memory addresses differ, so the cards and code here <b>will not work as-is on the fp L or other firmware versions</b>.<br>
+  Developers working on other cameras may still find <a href="JOURNEY.md">the development story and lessons</a> useful.
 </p>
 
 <p align="center">
@@ -18,7 +19,7 @@
 </p>
 
 <p align="center">
-  <b>English</b> · <a href="README.zh-CN.md">简体中文</a> · <a href="README.zh-TW.md">繁體中文</a>
+  <b>EN</b> / <a href="README.zh-CN.md">中</a> / <a href="README.zh-TW.md">繁</a>
 </p>
 
 > [!TIP]
@@ -196,7 +197,7 @@ It may help you, especially if you want to start from scratch on another camera.
 <summary><b>📁 How this repo is laid out</b></summary>
 
 ```
-README*.md      ← you are here (English / 简体 / 繁體)
+README*.md      ← you are here (EN / 中 / 繁)
 JOURNEY*.md     ← the full story
 INDEX.md        ← master research index: find any topic from here
 research/       ← facts about the camera itself (firmware, sensor, interfaces, storage…), true for any project

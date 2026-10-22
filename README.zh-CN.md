@@ -6,7 +6,8 @@
 
 <p align="center">
   fp L 的固件高度相似,也可以参考;<br>
-  但内存地址不同,这里的卡和程序<b>不能直接用在 fp L 或其他固件版本</b>。
+  但内存地址不同,这里的卡和程序<b>不能直接用在 fp L 或其他固件版本</b>。<br>
+  其他相机的开发者,或许也可以参考<a href="JOURNEY.zh-CN.md">开发故事与经验</a>。
 </p>
 
 <p align="center">
@@ -18,7 +19,7 @@
 </p>
 
 <p align="center">
-  <a href="README.md">English</a> · <b>简体中文</b> · <a href="README.zh-TW.md">繁體中文</a>
+  <a href="README.md">EN</a> / <b>中</b> / <a href="README.zh-TW.md">繁</a>
 </p>
 
 > [!TIP]
@@ -195,7 +196,7 @@ AI 一直觉得它没什么,只是个简单的脚本语言。
 <summary><b>📁 这个 repo 怎么分</b></summary>
 
 ```
-README*.md      ← 你在这里(英文 / 简体 / 繁體)
+README*.md      ← 你在这里(EN / 中 / 繁)
 JOURNEY*.md     ← 完整故事
 INDEX.md        ← 研究总索引:从这里找任何主题
 research/       ← 相机本身的事实(固件、传感器、接口、存储…),换个项目还成立

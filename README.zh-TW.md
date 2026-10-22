@@ -6,7 +6,8 @@
 
 <p align="center">
   fp L 的韌體高度相似,也可以參考;<br>
-  但記憶體位址不同,這裡的卡和程式<b>不能直接用在 fp L 或其他韌體版本</b>。
+  但記憶體位址不同,這裡的卡和程式<b>不能直接用在 fp L 或其他韌體版本</b>。<br>
+  其他相機的開發者,或許也可以參考<a href="JOURNEY.zh-TW.md">開發故事與經驗</a>。
 </p>
 
 <p align="center">
@@ -18,7 +19,7 @@
 </p>
 
 <p align="center">
-  <a href="README.md">English</a> · <a href="README.zh-CN.md">简体中文</a> · <b>繁體中文</b>
+  <a href="README.md">EN</a> / <a href="README.zh-CN.md">中</a> / <b>繁</b>
 </p>
 
 > [!TIP]
@@ -195,7 +196,7 @@ AI 一直覺得它沒什麼,只是個簡單的腳本語言。
 <summary><b>📁 這個 repo 怎麼分</b></summary>
 
 ```
-README*.md      ← 你在這裡(英文 / 简体 / 繁體)
+README*.md      ← 你在這裡(EN / 中 / 繁)
 JOURNEY*.md     ← 完整故事
 INDEX.md        ← 研究總索引:從這裡找任何主題
 research/       ← 相機本身的事實(韌體、感光元件、介面、儲存…),換個專案還成立
