@@ -10,11 +10,11 @@
 </p>
 
 <p align="center">
-  <a href="https://ijigen.github.io/fpSup/"><img src="https://img.shields.io/badge/fpSup-%E7%B6%B2%E7%AB%99-e0405e?style=for-the-badge" alt="fpSup 網站"></a>
-  <a href="https://ijigen.github.io/fpSup/tools/card-composer/"><img src="https://img.shields.io/badge/fpSup--Merge-%E4%B8%8B%E8%BC%89%E6%95%B4%E5%BC%B5%E5%8D%A1-e8c400?style=for-the-badge" alt="fpSup-Merge"></a>
-  <a href="https://discord.gg/XeFK5zNZpT"><img src="https://img.shields.io/badge/Discord-%E5%8A%A0%E5%85%A5-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Discord"></a>
-  <a href="https://www.youtube.com/@fp-sup"><img src="https://img.shields.io/badge/YouTube-%E4%BD%9C%E5%93%81%E5%B1%95%E7%A4%BA-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube"></a>
-  <a href="https://ko-fi.com/fpsup"><img src="https://img.shields.io/badge/Ko--fi-%E8%B4%8A%E5%8A%A9%E9%96%8B%E7%99%BC-FF5E5B?style=for-the-badge&logo=kofi&logoColor=white" alt="Ko-fi"></a>
+  <a href="https://ijigen.github.io/fpSup/"><img src="https://img.shields.io/badge/fpSup-%E7%B6%B2%E7%AB%99-e0405e?style=flat" alt="fpSup 網站"></a>
+  <a href="https://ijigen.github.io/fpSup/tools/card-composer/"><img src="https://img.shields.io/badge/fpSup--Merge-%E4%B8%8B%E8%BC%89%E6%95%B4%E5%BC%B5%E5%8D%A1-e8c400?style=flat" alt="fpSup-Merge"></a>
+  <a href="https://discord.gg/XeFK5zNZpT"><img src="https://img.shields.io/badge/Discord-%E5%8A%A0%E5%85%A5-5865F2?style=flat&logo=discord&logoColor=white" alt="Discord"></a>
+  <a href="https://www.youtube.com/@fp-sup"><img src="https://img.shields.io/badge/YouTube-%E4%BD%9C%E5%93%81%E5%B1%95%E7%A4%BA-FF0000?style=flat&logo=youtube&logoColor=white" alt="YouTube"></a>
+  <a href="https://ko-fi.com/fpsup"><img src="https://img.shields.io/badge/Ko--fi-%E8%B4%8A%E5%8A%A9%E9%96%8B%E7%99%BC-FF5E5B?style=flat&logo=kofi&logoColor=white" alt="Ko-fi"></a>
 </p>
 
 > [!TIP]
@@ -182,7 +182,7 @@ AI 一直覺得它沒什麼,只是個簡單的腳本語言。
 
 ### ⚠️ 上機前要知道的
 
-- 改 loader / hook 的程式碼,先用模擬跑過再寫卡 → skill `fp-unicorn-emulation`
+- 完成自己的功能、上機測試前,先用模擬跑過再寫卡 → skill `fp-unicorn-emulation`
 - 寫入相機設定區要小心:它會跨關機保存。過去的分析可參考 [`research/SETTINGS_AREA_FIRST_RULE.md`](research/SETTINGS_AREA_FIRST_RULE.md)(只是參考)。
 - 相機卡死了:先讀卡(hook 寫的資料還在),再拔電池冷開機。
 
