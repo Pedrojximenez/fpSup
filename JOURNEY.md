@@ -1,253 +1,255 @@
-# 開發過程
+# The Journey
 
-> README 講到我怎麼找到修改的入口。這裡是完整的過程:從一條死路開始,一路走到現在,
-> 中間走錯的路、學到的事,還有 fpSup 以外還開著的門。
+**English** · [简体中文](JOURNEY.zh-CN.md) · [繁體中文](JOURNEY.zh-TW.md)
+
+> The README covers how I found the way in to modify the camera. This is the full story: starting from a dead end and walking all the way to where we are now,
+> the wrong turns along the way, the things I learned, and the doors beyond fpSup that are still open.
 >
-> 日期都是 2026 年。
+> All dates are in 2026.
 
 ---
 
-## 一、起點:一個人拍片,需要對焦
+## 1. Where it started: shooting alone, needing focus
 
-我常常一個人拍,自己既是攝影師也是被攝者。
-超焦距、PDMOVIE Live Air、DJI Focus Pro 我都試過,沒有一個讓我滿意。
-有時候攝影師也會用我的器材,把這些東西全部裝上,再加一個三軸穩定器,重量就變得很誇張。😅
+I often shoot alone, as both the camera operator and the subject.
+Hyperfocal, PDMOVIE Live Air, DJI Focus Pro — I tried them all, and none of them satisfied me.
+Sometimes a camera operator uses my gear too, and with all of that mounted plus a 3-axis gimbal, the weight gets ridiculous. 😅
 
-我一直知道,也許換台相機、甚至用手機就好了。
-但我真的很愛 fp 的設計,所以就固執地黏上了。
+I always knew that maybe switching cameras, or even just using a phone, would solve it.
+But I really love the fp's design, so I stubbornly stuck with it.
 
-## 二、第一條路:PTP
+## 2. The first road: PTP
 
-6 月我開了 [sigma-fp-bridge](https://github.com/ijigen/sigma-fp-bridge),8 月開始密集開發。
+In June I started [sigma-fp-bridge](https://github.com/ijigen/sigma-fp-bridge), and in August I began developing it intensively.
 
-fp 可以透過 USB 用 PTP 協定控制。我不只照著 sigma-ptpy 做,還花很多時間試錯,
-一個一個去探 PTP 的操作碼和參數,最後真的探出了用 PTP 控制對焦的方法。
+The fp can be controlled over USB with the PTP protocol. I didn't just follow sigma-ptpy; I spent a lot of time on trial and error,
+probing PTP opcodes and parameters one by one, and eventually I really did find a way to control focus over PTP.
 
-接著我做了一套現在回頭看有點荒謬的流程:收 live view、做人臉偵測、用影像分析去預測對焦距離。
-能想到的招全部都試了,只為了只靠 live view 就讓自動對焦成立。
-那段時間幾乎每晚熬夜測,AI 還會用語音指揮我站到哪裡,好拿我做測試。
+Then I built a pipeline that, looking back, is a little absurd: grab the live view, run face detection, and use image analysis to predict the focus distance.
+I tried every trick I could think of, all just to make autofocus work from live view alone.
+For that stretch I was up late testing almost every night, with the AI even giving me voice directions on where to stand so it could use me as the test subject.
 
-就在我以為快要成功的時候,第一次真正拿去拍,按下錄影鍵 ——
-**錄影中,PTP 對焦完全停了。**
+Just when I thought I was almost there, I took it out for a real shoot for the first time, pressed record —
+**and during recording, PTP focus stopped completely.**
 
-測了那麼久,我從來沒想過要測錄影中能不能用。我覺得自己是世界上最大的白痴。😱
+After all that testing, it had never once occurred to me to test whether it worked while recording. I felt like the biggest idiot in the world. 😱
 
-## 三、打開韌體
+## 3. Opening the firmware
 
-我不甘心。既然當初能探出控制對焦的方法,我深信 SIGMA 的工程師一定還在哪裡留了隱藏的指令。
+I wouldn't let it go. Since I'd been able to find a way to control focus in the first place, I was convinced SIGMA's engineers must have left hidden commands somewhere.
 
-8 月 12 日,我讓 AI 把韌體 `FP__V502.bin` 拆開、反編譯。韌體檔沒有密碼,也沒有任何權限檢查。
+On August 12, I had the AI unpack and decompile the firmware `FP__V502.bin`. The firmware file has no password and no permission checks of any kind.
 
-結果找到了全部 PTP 相關的程式碼,也找到了鐵證:**錄影中的對焦指令是韌體刻意擋掉的**,
-PTP 這條路是死路。
+It found all of the PTP-related code, and it also found hard proof: **focus commands during recording are deliberately blocked by the firmware.**
+The PTP road was a dead end.
 
-但打開韌體之後,我看到的是一整張地圖:
-雲台介面的 PTP 協定(後來變成 [sigma-fp-gimbal-ai](https://github.com/ijigen/sigma-fp-gimbal-ai))、
-工廠測試點、各種工程介面,還有一個叫 `AutoRun.txt` 的東西。
+But once the firmware was open, what I saw was an entire map:
+the PTP protocol for the gimbal interface (which later became [sigma-fp-gimbal-ai](https://github.com/ijigen/sigma-fp-gimbal-ai)),
+factory test points, all kinds of engineering interfaces, and something called `AutoRun.txt`.
 
-## 四、入口:`AutoRun.txt` 與 `mem set`
+## 4. The way in: `AutoRun.txt` and `mem set`
 
-AI 一直覺得 `AutoRun.txt` 沒什麼。它看起來只是個簡單的腳本語言,裡面也確實沒有跟對焦有關的指令。
+The AI kept thinking `AutoRun.txt` was nothing special. It looked like just a simple scripting language, and it really had no commands related to focus.
 
-直到我注意到 shell 指令裡有 **`mem set`**,可以寫任意記憶體位址。
-憑過去對逆向工程的了解,我直覺撿到了極有價值的東西。
+Until I noticed that among the shell commands there was **`mem set`**, which can write to any memory address.
+From what I knew of reverse engineering, my gut told me I'd stumbled on something extremely valuable.
 
-8 月 14 日凌晨兩點,第一次在相機上跑 AutoRun。
-兩天後,我用改記憶體的方式在 LCD 上做出過曝提醒的曲線。
-這是第一次真的改變了相機的行為。
+At 2 a.m. on August 14, AutoRun ran on the camera for the first time.
+Two days later, by modifying memory, I put an overexposure warning curve on the LCD.
+That was the first time I actually changed how the camera behaves.
 
-韌體在開機時解壓到 RAM 裡執行;`AutoRun.txt` 在開機時改 RAM 裡的程式碼,
-新的功能放在沒用到的記憶體裡。**全部都在 RAM,拿掉卡、重開機,相機就回到原廠。**
-這是後面所有東西的基礎。
+The firmware is decompressed into RAM at boot and runs from there; `AutoRun.txt` patches the code in RAM at boot,
+and the new features live in unused memory. **It's all in RAM — take out the card, reboot, and the camera is back to stock.**
+That is the foundation of everything that came after.
 
-## 五、跟相機說話:USB Shell
+## 5. Talking to the camera: USB Shell
 
-每改一次就要拔卡、寫卡、插卡、開機,太慢了。我需要讓電腦直接跟相機說話。
+Pulling the card, writing it, reinserting it and booting for every single change was way too slow. I needed the computer to talk to the camera directly.
 
-- **8 月 17~18 日**:第一版 USB shell。v27 讓相機凍結。
-- **8 月 19 日**:搞懂相機作業系統(TK-OS)怎麼建任務,第一個我們自己建的任務在相機裡跑起來;
-  `mem set` 第一次從電腦經 USB 送進相機執行。
-- **8 月 21 日**:完整的 shell 經 USB 跑起來,相機螢幕顯示彩條。v27 凍結的原因也查到了:
-  我們搶了一個韌體不認得的 USB 端點。
-- **8 月 26 日**:USB Shell v2。改成寄生在相機自己的 PTP 端點上,讓韌體繼續管它自己的東西。
+- **August 17–18**: the first USB shell. v27 froze the camera.
+- **August 19**: figured out how the camera's operating system (TK-OS) creates tasks, and the first task we created ourselves ran inside the camera;
+  `mem set` was sent from the computer over USB into the camera and executed for the first time.
+- **August 21**: the full shell running over USB, with color bars on the camera's screen. The cause of the v27 freeze was found too:
+  we had grabbed a USB endpoint the firmware didn't recognize.
+- **August 26**: USB Shell v2. Switched to piggybacking on the camera's own PTP endpoints, letting the firmware keep managing its own stuff.
 
-這一步讓之後的開發速度完全不一樣:讀寫記憶體、呼叫韌體函式、按鍵、截圖、傳檔,全部從電腦做。
+This step completely changed the pace of development from then on: reading and writing memory, calling firmware functions, pressing buttons, taking screenshots, transferring files — all from the computer.
 
-## 六、沒人理,然後是 GYRO
+## 6. Nobody cared, and then GYRO
 
-我做了幾個小玩具,貼到 SIGMA fp 的社團,幾乎沒有人理。
-我覺得大家還沒意識到,這個發現已經證明一切都可以改變。
+I made a few little toys and posted them in the SIGMA fp groups. Almost nobody paid attention.
+I felt people hadn't yet realized that this discovery had already proven everything could be changed.
 
-**我需要一個夠大的東西。**
+**I needed something big enough.**
 
-陀螺儀記錄是 fp 使用者跟 SIGMA 要了很久的功能。fp 裡面明明有陀螺儀,資料卻沒有寫進影片。
-我花了一個多月,幾乎沒停,熬掉無數個夜。
+Gyro logging is a feature fp users had been asking SIGMA for for a long time. The fp clearly has a gyroscope inside, yet the data never gets written into the footage.
+I spent over a month on it, almost without stopping, burning through countless nights.
 
-中間最難的一關:錄影結束後,大約四次有一次會凍結。
-最後用「中繼資料檔是不是 0 bytes」當線索一步步二分,才查出是**優先權反轉**:
-我們的低優先權寫檔任務拿著檔案系統的鎖,相機自己的錄影任務等不到。
+The hardest hurdle along the way: after a recording ended, roughly one in four times the camera would freeze.
+In the end, using "is the metadata file 0 bytes?" as the clue and bisecting step by step, I found it was **priority inversion**:
+our low-priority file-writing task was holding the file system lock, and the camera's own recording task couldn't get it.
 
-**8 月 30 日,fpGyroSup v1 發布。** 同一天開了 Discord 和 Ko-fi,
-也把過程中做出來的開發工具一起公開。注意力從這裡開始。
+**On August 30, fpGyroSup v1 was released.** The same day I opened a Discord and a Ko-fi,
+and also made public the development tools built along the way. That's where the attention started.
 
-## 七、Open Gate:被搶先了
+## 7. Open Gate: beaten to it
 
-GYRO 發布之後,我開始做 Open Gate,讓 fp 錄下感光元件完整的 3:2 畫面。
-整了一天半沒睡,準備好要發布時,猛然發現被搶先了,笑死。
+After GYRO was released, I started on Open Gate, letting the fp record the sensor's full 3:2 frame.
+After a day and a half without sleep, just as I was ready to release, I suddenly realized someone had beaten me to it. LOL.
 
-**9 月 10 日,Vitaly Li 發布了世界第一個 fp Open Gate。**
+**On September 10, Vitaly Li released the world's first fp Open Gate.**
 
-沒想到反響這麼快。從「沒人理」到「有人搶在我前面」,只隔了幾個禮拜。
+I didn't expect things to move that fast. From "nobody cares" to "someone got there before me" took only a few weeks.
 
-他的做法和我的不一樣:他在影像處理器裡做 2:1 縮小,我在感光元件讀出時就縮。兩條路都走得通。
-9 月 14 日我發布 OG3K 時,第一件事就是替他署名。後來每一個 Open Gate 相關的發布,都寫著他是第一個。
+His approach was different from mine: he does the 2:1 downscale in the image processor, while I downscale at sensor readout. Both roads work.
+When I released OG3K on September 14, the first thing I did was credit him. Every Open Gate-related release since then says he was first.
 
-## 八、Lossless:自己的硬體編碼器
+## 8. Lossless: its own hardware encoder
 
-fp 拍靜態照片時有一個硬體無損壓縮引擎,錄影卻從來沒用它,所以 CinemaDNG 一直是未壓縮的,寫卡速度永遠是瓶頸。
+The fp has a hardware lossless compression engine it uses for stills, but video never used it, so CinemaDNG was always uncompressed, and card write speed was always the bottleneck.
 
-8 月 30 日,我量到這個引擎每秒能處理 1.7 億像素,FHD 壓縮錄影是可行的。
-9 月 21 日,我把研究和開發方向都公開了:引擎的成本模型、它在流程裡的位置,還做了解說頁和預算模擬器。
-10 月 3 日,第一個 Lossless 發布。
+On August 30, I measured that this engine can process 170 million pixels per second, which makes compressed FHD recording feasible.
+On September 21, I made the research and development direction public: the engine's cost model, where it sits in the pipeline, plus an explainer page and a budget simulator.
+On October 3, the first Lossless was released.
 
-## 九、撤回
+## 9. Pulling releases
 
-9 月 24 日,我因為重大 bug 撤回了四個發布。
+On September 24, I pulled four releases because of a serious bug.
 
-隔天查到原因:gyro v1.13 關機時,攔截點還指向一塊已經不在的記憶體。修好之後,其他三個版本也恢復了。
+The next day I found the cause: when gyro v1.13 powered off, a hook was still pointing at a piece of memory that no longer existed. Once that was fixed, the other three versions were restored too.
 
-撤回很難受,但我覺得這是對使用的人負責。
-你的相機是你的,我寧可撤回,也不要讓一個不確定的東西留在外面。
+Pulling releases hurts, but I think it's taking responsibility toward the people using them.
+Your camera is yours. I'd rather pull something than leave an uncertain thing out there.
 
-## 十、一位勇敢的戰士
+## 10. A brave warrior
 
-10 月 2 日,Andy_hal9000 把他的 fp 弄成了磚塊。
+On October 2, Andy_hal9000 bricked his fp.
 
-他自己改了韌體裡的一個函式、重新打包寫進去,結果相機起不來了。
-接下來他在慌亂中一路摸索:關機、拔電池,按住 DISPLAY + 上不放,再把電池裝回去 ——
-相機跑起一段開機程式,畫面甚至出現了 live view。過了十分鐘,他接上 USB,電腦讀到了相機。
-最後用一份帶 `fwup FIRMWARE` 的 AutoRun 把韌體寫回去,把相機救了回來。
+He had modified a function in the firmware himself, repacked it and flashed it, and the camera wouldn't start.
+What followed was him fumbling his way through in a panic: power off, pull the battery, hold DISPLAY + Up, then put the battery back in —
+the camera ran a piece of boot code, and the screen even showed live view. Ten minutes later he connected USB, and the computer saw the camera.
+In the end he used an AutoRun containing `fwup FIRMWARE` to write the firmware back and brought the camera back to life.
 
-細節他自己都記不清了,是事後讓 Claude 幫他寫下來的。
+He can't even remember all the details himself; he had Claude help him write it down afterward.
 
-這個方法我沒有驗證過,不能當成救援教學。但它讓我們知道:
-**fp 在關機時接上 USB,可能有一個工程開機模式。** 萬一真的變磚,也許不是絕路。
+I haven't verified this method, so it can't be treated as a recovery guide. But it tells us:
+**the fp may have an engineering boot mode when USB is connected while powered off.** If it really does get bricked, maybe that's not the end of the road.
 
-> 他後來說:寫韌體要非常小心,他只改了一個函式,結果並不好。
+> He said afterward: be very careful writing firmware — he only changed one function, and it didn't end well.
 
-## 十一、人陸續加入
+## 11. People started joining
 
-**做出自己的作品**
+**Making their own work**
 
-- **Vitaly Li**:世界第一個 fp Open Gate(FP3K)。
-- **Jose Hurtado**:做了各種不同的解析度(S16、OG3.5K、OG4K…),而且一直致力讓他的作品和 Merge 的格式相容。
-  Res-Custom 裡有他的格式;Desqueeze、Tap to Zoom 也是他的作品,他還做了自己的非官方合卡頁。
-- **Julien Acquaviva**:sigma-fp-supmod,他自己的一套 fp 修改,包含機內無損 CinemaDNG 和多種解析度。
-- **Ruari**:STOPFX,讓相機在異常停錄後清理暫存影格。
-- **lachgil**:[sigma-fp-lab](https://github.com/lachgil/sigma-fp-lab),畫面與疊圖的逆向工程;
-  做出可以指定給按鈕的 False Color / EL Zone 刻度條。
-- **willygooddeals**(GitHub:[wjhrdy](https://github.com/wjhrdy/fpSup)):Focus Inset(與 Merge 相容);
-  C1 自訂模式強制 60 Hz 防閃爍,室內拍攝不怕 P 模式選錯快門;拍 -1 ~ -3 EV 時把 live view 提亮的 mod。
-- **unremarkablegarden**:Gyro Base + HDMI,用 Atomos 這類外接錄影機時,相機照樣記錄陀螺資料,並把時間碼寫進鏡頭檔;
-  還有 Gyroflow Batch Resolve,用時間碼自動把陀螺記錄配對到外錄的片段,按一下就完成穩定。
-- **Andy_hal9000**:依 ARRI LogC3 論文做的 live view log 曲線;後轉盤修正(Dial Fix),讓不太靈的後轉盤好用很多。
+- **Vitaly Li**: the world's first fp Open Gate (FP3K).
+- **Jose Hurtado**: made all kinds of different resolutions (S16, OG3.5K, OG4K…), and has consistently worked to keep his work compatible with the Merge format.
+  Res-Custom includes his formats; Desqueeze and Tap to Zoom are his work too, and he also made his own unofficial card-merging page.
+- **Julien Acquaviva**: sigma-fp-supmod, his own set of fp modifications, including in-camera lossless CinemaDNG and multiple resolutions.
+- **Ruari**: STOPFX, which makes the camera clean up leftover frames after an abnormal recording stop.
+- **lachgil**: [sigma-fp-lab](https://github.com/lachgil/sigma-fp-lab), reverse engineering of the display and overlays;
+  made False Color / EL Zone scale bars that can be assigned to a button.
+- **willygooddeals** (GitHub: [wjhrdy](https://github.com/wjhrdy/fpSup)): Focus Inset (Merge-compatible);
+  a mod that forces 60 Hz anti-flicker in the C1 custom mode, so shooting indoors you don't have to worry about picking the wrong shutter in P mode; and a mod that brightens the live view when shooting at -1 to -3 EV.
+- **unremarkablegarden**: Gyro Base + HDMI — when using an external recorder like an Atomos, the camera still logs gyro data and writes timecode into the lens file;
+  plus Gyroflow Batch Resolve, which uses timecode to automatically match gyro logs to externally recorded clips, so stabilization is done in one click.
+- **Andy_hal9000**: a live view log curve built from the ARRI LogC3 paper; and the rear dial fix (Dial Fix), which makes a not-so-responsive rear dial much nicer to use.
 
-**讓我的作品變得更好**
+**Making my work better**
 
-- **Andy_hal9000**(我們的閃電俠 ⚡,也是走過地獄再回來的勇敢戰士:變磚之後自己找到救回來的方法):指出 AutoRun 的逐字延遲,開機時間從 11.5 秒降到 3 秒,每一張卡都用上了。
-- **Ole Berek**:《SIGMA fp Rec709 LUT & Operations Guide》。RAW-View 的顯示曲線和寬容度數據大量使用了他的研究。
-- **Luka**:用自己的 fp 逐格證明 RAW-View 不會改動 RAW;
-  還找到 CinemaDNG 色彩標籤在飽和度 +0.2 時白平衡偏冷約 1100 K 的問題,推導出修正、附上測試。
-- **CorNy**:發現 DaVinci Resolve 要第一格是未壓縮,才能正常播放混合壓縮的片段。Lossless 因此讓每段的第一格都不壓縮。
-- **CC FRANK FPV**:最早拿 OG2K + Gyro 合併卡實拍測試的使用者之一。
+- **Andy_hal9000** (our Flash ⚡, and also a brave warrior who went through hell and came back: after bricking his camera he found his own way to bring it back): pointed out AutoRun's per-character delay, bringing boot time down from 11.5 seconds to 3 seconds; every card uses it.
+- **Ole Berek**: *SIGMA fp Rec709 LUT & Operations Guide*. RAW-View's display curve and dynamic range data draw heavily on his research.
+- **Luka**: used his own fp to prove frame by frame that RAW-View doesn't alter the RAW;
+  also found that the CinemaDNG color tags make white balance about 1100 K too cool at saturation +0.2, derived a fix, and attached tests.
+- **CorNy**: discovered that DaVinci Resolve needs the first frame to be uncompressed to play mixed-compression clips properly. Because of that, Lossless leaves the first frame of every clip uncompressed.
+- **CC FRANK FPV**: one of the first users to shoot real-world tests with an OG2K + Gyro merged card.
 
-**站在巨人的肩膀上**
+**Standing on the shoulders of giants**
 
-- **Gyroflow**:沒有它,陀螺資料只是一堆數字。
-- **sigma-ptpy**:我最早研究 PTP 的起點。
+- **Gyroflow**: without it, gyro data is just a pile of numbers.
+- **sigma-ptpy**: the starting point of my early PTP research.
 
-還有 Discord 上每一個回報問題、分享素材、幫忙測試的人。
+And everyone on Discord who reported problems, shared footage, and helped test.
 
 
-我很早就做了 **fpSup-Merge**(9 月中):在網頁上選好想要的工具,就能合成一張卡,別人的作品也能和我的放在一起。
-10 月的 Loader v3 只是它的更新:改成一個 sup 一個檔案,合併起來更容易。
-我不需要把每個人的作品收到我名下,只要讓它們能並存、讓更多人看到。
+I made **fpSup-Merge** early on (mid-September): pick the tools you want on a web page and it combines them into one card, so other people's work can sit alongside mine.
+October's Loader v3 is just an update to it: one file per sup, which makes merging easier.
+I don't need to bring everyone's work under my name; I just want them to coexist and to be seen by more people.
 
 ---
 
-## 十二、和 AI 一起做
+## 12. Building it with AI
 
-這整個專案幾乎每一步都是和 AI 一起做的:**Claude**(Anthropic,在 Claude Code 裡)和 **Codex**(OpenAI)。
-反編譯、讀反組譯、找空的記憶體、寫補丁、上機測試、寫筆記,大部分都是它們在動手;我負責方向、判斷,和覺得「等等,這個不對勁」。
+Almost every step of this whole project was done together with AI: **Claude** (Anthropic, in Claude Code) and **Codex** (OpenAI).
+Decompiling, reading disassembly, finding free memory, writing patches, testing on the camera, writing notes — they did most of the hands-on work; I handled direction, judgment, and the "wait, something's off here."
 
-很多時候是兩個一起用:同一個問題讓兩邊各自看,互相檢查。
+A lot of the time I used both together: let each look at the same problem separately and check each other.
 
-| 時期 | 主要的模型 | 那時在做什麼 |
+| Period | Main model | What was being worked on |
 |---|---|---|
-| 8 月上旬 ~ 8 月下旬 | Claude Opus 5 | sigma-fp-bridge、focus-ai、gimbal-ai:PTP 對焦、反編譯韌體 |
-| 8 月中旬 ~ 9 月下旬 | Codex(GPT-5.6 Sol) | USB shell 的早期版本、凍結的追查,和 Claude 並行 |
-| 8 月下旬 ~ 9 月 | Claude Opus 5(偶爾 Opus 4.8、Fable 5.1) | USB Shell v2、GYRO、Open Gate |
-| 9 月中旬 ~ 10 月 | Codex(GPT-6 Astra,10 月起 GPT-6 / 6.1 Sol) | 建卡流程、Merge、審查 |
-| 9 月下旬 ~ 現在 | Claude Opus 5.5 | Lossless、Loader v3、Res-Custom、Gyro2,以及大部分現在的工作 |
+| Early August ~ late August | Claude Opus 5 | sigma-fp-bridge, focus-ai, gimbal-ai: PTP focus, decompiling the firmware |
+| Mid-August ~ late September | Codex (GPT-5.6 Sol) | Early versions of the USB shell, chasing freezes, in parallel with Claude |
+| Late August ~ September | Claude Opus 5 (occasionally Opus 4.8, Fable 5.1) | USB Shell v2, GYRO, Open Gate |
+| Mid-September ~ October | Codex (GPT-6 Astra; from October, GPT-6 / 6.1 Sol) | Card-building pipeline, Merge, reviews |
+| Late September ~ now | Claude Opus 5.5 | Lossless, Loader v3, Res-Custom, Gyro2, and most of the current work |
 
-<!-- 資料來源:git commit 的共同作者行、Claude Code 與 Codex 的本機紀錄。Claude 9/20 以前的本機紀錄已清掉,8 月的部分只能從 commit 推。 -->
+<!-- Sources: git commit co-author lines, local Claude Code and Codex logs. Claude's local logs before 9/20 have been cleared, so the August part can only be inferred from commits. -->
 
-模型換了好幾代,每一代都更強,但也都會犯錯。下面「走錯的路」裡,有很多是它們很有把握、最後被推翻的結論。
+The models went through several generations, each stronger than the last, but every one of them made mistakes. Many of the entries under "Wrong turns" below are conclusions they were very confident about that were eventually overturned.
 
-## 十三、我學到的事
+## 13. What I learned
 
-**1. 先在真實情境下測。**
-PTP 對焦我測了好幾個月,卻從沒在錄影中測過。在最貴的那一步之前,先問:真正用的時候是什麼狀態?
+**1. Test in the real situation first.**
+I tested PTP focus for months, but never once during recording. Before the most expensive step, ask: what state will it actually be in when it's really used?
 
-**2. AI 會低估東西,你的直覺很重要。**
-AI 把 `AutoRun.txt` 當成無聊的腳本。轉折不是 AI 找到的,是人覺得「等等,這個不對勁」。
+**2. AI underestimates things; your intuition matters.**
+The AI treated `AutoRun.txt` as a boring script. The turning point wasn't found by the AI — it was a human feeling "wait, something's off here."
 
-**3. 死路會通到別的地方。**
-PTP 是死路,但為了證明它是死路,我打開了韌體。沒有那條死路,就沒有 fpSup。
+**3. Dead ends lead somewhere else.**
+PTP was a dead end, but to prove it was a dead end, I opened the firmware. Without that dead end, there would be no fpSup.
 
-**4. 結論要能被推翻。**
-我的 AI 給過很多很有把握、但完全錯誤的結論(見下一節)。
-能抓到錯誤的方法都很樸素:用兩把獨立的尺量同一件事、一步步二分、寫進去之後讀回來確認。
+**4. Conclusions must be able to be overturned.**
+My AI gave me many very confident but completely wrong conclusions (see the next section).
+The methods that catch mistakes are all plain: measure the same thing with two independent rulers, bisect step by step, and read back after writing to confirm.
 
-**5. 卡死的時候,先保存證據。**
-相機凍結時,卡上往往還留著最後的線索。先讀卡,再重開機。
+**5. When it hangs, preserve the evidence first.**
+When the camera freezes, the card often still holds the last clues. Read the card first, then reboot.
 
-**6. 給別人署名,讓作品並存。**
-被搶先不是壞事。記下來,寫清楚是誰先做到的,然後走你自己的路。
+**6. Credit others, and let work coexist.**
+Being beaten to it isn't a bad thing. Write it down, make clear who got there first, and then go your own way.
 
-## 十四、走錯的路
+## 14. Wrong turns
 
-這些都是我(和我的 AI)曾經很有把握,後來被推翻的結論。
+These are all conclusions I (and my AI) were once very sure of, and that were later overturned.
 
-| 原本相信 | 怎麼發現錯 | 真相 |
+| What we believed | How we found it was wrong | The truth |
 |---|---|---|
-| 從外部用 PTP 就能控制對焦 | 錄影中指令被靜默忽略 | 韌體刻意擋在「拍攝閒置」狀態 |
-| `AutoRun.txt` 沒什麼 | 注意到 `mem set` | 整個 fpSup 的大門 |
-| fp 有 PDAF 可以用 | 讀韌體:相關函式無條件回 0 | fp 是純對比式對焦,PDAF 兩道閘都關著 |
-| 某個 USB 端點會卡住、要拔線 | 送 100 次,100 次立刻失敗 | 那個端點根本不存在 |
-| 錄影凍結是因為電腦一直在問相機 → 是因為連著線 → … | 結論被推翻了五次 | 連著線沒事,錄影中送指令才會卡住 |
-| 錄影後凍結是某一版的 bug | 二分法 | 優先權反轉 |
-| 「Bayer 原始資料不在記憶體裡」 | 用來證明的暫存器整段讀回 0 | 證明無效;HDMI RAW 輸出時 Bayer 就在記憶體裡 |
-| 縮放器 RWZM 不重要 | Open Gate 怎麼都差一點 | 它是 Open Gate 的最後一塊 |
-| 陀螺儀 2501.85 Hz | 兩把獨立的尺 | 2499.48 Hz |
-| 「壓縮不可行」 | 發現判斷建立在逾時錯誤上 | 可行,後來成了 Lossless |
-| 開機慢是因為指令太多 | 量每條指令的成本 | 大部分時間花在逐字延遲 |
+| Focus can be controlled externally over PTP | Commands silently ignored during recording | The firmware deliberately restricts it to the "shooting idle" state |
+| `AutoRun.txt` is nothing special | Noticed `mem set` | The front door to all of fpSup |
+| The fp has usable PDAF | Read the firmware: the relevant functions unconditionally return 0 | The fp is pure contrast-detect AF; both PDAF gates are closed |
+| A certain USB endpoint gets stuck and you have to unplug | Sent 100 times, failed immediately 100 times | That endpoint doesn't exist at all |
+| Recording freezes because the computer keeps polling the camera → because the cable is connected → … | The conclusion was overturned five times | Being connected is fine; only sending commands during recording hangs it |
+| The post-recording freeze is a bug in a particular version | Bisection | Priority inversion |
+| "Bayer raw data isn't in memory" | The registers used as proof read back 0 across the whole range | The proof was invalid; during HDMI RAW output, Bayer is in memory |
+| The RWZM scaler doesn't matter | Open Gate was always just a bit off | It's the last piece of Open Gate |
+| Gyro at 2501.85 Hz | Two independent rulers | 2499.48 Hz |
+| "Compression isn't feasible" | Found the judgment was built on a timeout error | Feasible — it later became Lossless |
+| Booting is slow because there are too many commands | Measured the cost of each command | Most of the time went to the per-character delay |
 
-## 十五、還開著的門
+## 15. Doors still open
 
-fpSup 只是這台相機的一部分。下面這些我碰過,但沒走完。如果你有興趣,門是開著的。
+fpSup is only one part of this camera. Below are things I've touched but not finished. If you're interested, the door is open.
 
-| 方向 | 現況 | 從哪讀起 |
+| Direction | Status | Where to start reading |
 |---|---|---|
-| **對焦(最初的起點)** | PDAF 兩道閘都關;機內連續對焦還缺可用的資料串流 | `projects/fp-af-assist/` |
-| 雲台介面 | PTP 雲台協定整理成手冊了;gimbal-ai 暫停 | `research/interfaces/notes/GIMBAL_MANUAL.md` |
-| 熱靴 | 是雙向的 SPI 通道;只有靜態分析,沒上過機 | `research/interfaces/notes/HOT_SHOE.md` |
-| 工廠測試點 / UART | 要拆機接線,腳位未確認 | `research/firmware/notes/HIDDEN_FEATURES.md` |
-| HDMI RAW 錄影機 | HDMI 訊號裡就是 12-bit Bayer;規格寫好了,還沒人做 | `projects/hdmi-recorder/` |
-| 同一顆 IMX410 的其他相機 | Z CAM E2-F6 全解開;Sony A7 III 反編譯了;Nikon 看過;Panasonic 加密 | 還在我的電腦裡,尚未放進 repo |
+| **Focus (where it all began)** | Both PDAF gates are closed; in-camera continuous focus still lacks a usable data stream | `projects/fp-af-assist/` |
+| Gimbal interface | The PTP gimbal protocol is written up as a manual; gimbal-ai is paused | `research/interfaces/notes/GIMBAL_MANUAL.md` |
+| Hot shoe | It's a bidirectional SPI channel; static analysis only, never tested on the camera | `research/interfaces/notes/HOT_SHOE.md` |
+| Factory test points / UART | Requires opening the camera and wiring; pinout unconfirmed | `research/firmware/notes/HIDDEN_FEATURES.md` |
+| HDMI RAW recorder | The HDMI signal is 12-bit Bayer; the spec is written, nobody has built it yet | `projects/hdmi-recorder/` |
+| Other cameras with the same IMX410 | Z CAM E2-F6 fully opened; Sony A7 III decompiled; Nikon looked at; Panasonic encrypted | Still on my computer, not yet in the repo |
 
-最早讓我開始這一切的對焦,到現在還沒解。
+The focus problem that started all of this is still unsolved.
 
-也許下一個解開它的人,就是你。
+Maybe the next person to crack it is you.
 
 **— bei**

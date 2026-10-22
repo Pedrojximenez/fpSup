@@ -151,7 +151,7 @@ And just as I was about to reach the Open Gate milestone, developer Vitaly Li an
 
 I think this love for the fp is exactly why, small as its user base is, excellent work by developers has sprung up like mushrooms after rain.
 
-📖 **The fuller story and lessons learned → [JOURNEY.md](JOURNEY.md)** (Chinese for now)
+📖 **The fuller story and lessons learned → [JOURNEY.md](JOURNEY.md)**
 It may help you, especially if you want to start from scratch on another camera.
 
 ---
@@ -197,7 +197,7 @@ It may help you, especially if you want to start from scratch on another camera.
 
 ```
 README*.md      ← you are here (English / 简体 / 繁體)
-JOURNEY.md      ← the full story
+JOURNEY*.md     ← the full story
 INDEX.md        ← master research index: find any topic from here
 research/       ← facts about the camera itself (firmware, sensor, interfaces, storage…), true for any project
 projects/       ← development trees for each sup and experiment: source, test cards, validation logs, failures
