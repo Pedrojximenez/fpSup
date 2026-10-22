@@ -21,7 +21,15 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
+      # The repository also holds research/ and projects/ (about 14 GB). The site
+      # is only fpSup/, so fetch that alone: no blobs outside the sparse paths
+      # are downloaded.
       - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout: |
+            fpSup
+            .github
       - uses: actions/configure-pages@v5
         with:
           enablement: true
@@ -30,6 +38,7 @@ jobs:
       # README.md from the commit, not from the Pages artifact, so a fix made
       # here would never reach the repository's own front page.
       - name: Releases tables are current
+        working-directory: fpSup
         run: python3 tools/build_releases.py --check
       # assets/ is generated too — tools/build_assets.py from assets/src/ — but it
       # is deliberately NOT checked here. PNG encoding is not byte-reproducible
@@ -39,7 +48,7 @@ jobs:
       # a redraw; a stale image is cosmetic, not a broken page.
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: fpSup
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
