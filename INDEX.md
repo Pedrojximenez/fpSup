@@ -2,9 +2,9 @@
 
 > **給之後的 session:先讀這份。**
 
-> ## ⛔ 第一守則(2026-10-01,最高優先,不可違背)
-> **不准讓相機設定區存下原廠不支援的值**,完成詳盡事前調查之前一律不准上機。
-> 見 [research/SETTINGS_AREA_FIRST_RULE.md](research/SETTINGS_AREA_FIRST_RULE.md)。
+> **參考:設定區的風險**(原「第一守則」,2026-10-01 訂、2026-10-22 起只當參考)
+> 相機設定區會跨關機保存,寫入原廠不支援的值前請先調查清楚。
+> 過去的分析見 [research/SETTINGS_AREA_FIRST_RULE.md](research/SETTINGS_AREA_FIRST_RULE.md)。
 
 2026-09-27 使用者指定 AF 筆記集中於 **[projects/fp-af-assist](projects/fp-af-assist/README.md)**。
 先讀 [完整開發清單](projects/fp-af-assist/PLAN.md) 與 [全部筆記索引](projects/fp-af-assist/notes/README.md)。
