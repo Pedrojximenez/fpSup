@@ -1,0 +1,128 @@
+{
+  "revision": 8,
+  "scope": "Offline browser prototype only; preset dimensions are presentation examples, not verified camera modes",
+  "formatsSeen": [
+    "CDNG 12bit",
+    "CDNG 10bit",
+    "CDNG 8bit",
+    "MOV",
+    "CDNG 8bit",
+    "CDNG 10bit",
+    "CDNG 12bit",
+    "CDNG 14bit"
+  ],
+  "customOutputExample": {
+    "fields": [
+      "解析寬度，2048 像素",
+      "解析高度，1200 像素",
+      "比例，自由"
+    ],
+    "mainHidden": true,
+    "url": "http://127.0.0.1:8766/qa-direct.html"
+  },
+  "customCropExample": {
+    "fields": [
+      "裁切寬度，4096 像素",
+      "裁切高度，2304 像素",
+      "比例，16:9"
+    ],
+    "mainHidden": true,
+    "range": {
+      "bottom": 470.515625,
+      "height": 44,
+      "left": 446.390625,
+      "right": 937.609375,
+      "top": 426.515625,
+      "width": 491.21875,
+      "x": 446.390625,
+      "y": 426.515625
+    }
+  },
+  "rangeDrag": {
+    "fields": [
+      "裁切寬度，12070 像素",
+      "裁切高度，6789 像素",
+      "比例，16:9"
+    ],
+    "input": "12070",
+    "range": "12070"
+  },
+  "restoredBeforePresetRecovery": {
+    "dc": "DC\n自訂\n4096 × 2304",
+    "format": "FORMAT\nCDNG 14bit",
+    "noInitialSave": true,
+    "order": [
+      0,
+      1,
+      2,
+      4,
+      5,
+      6,
+      20,
+      3,
+      7,
+      10,
+      11
+    ],
+    "res": "RES\n自訂\n2048 × 1200"
+  },
+  "narrowBounds": {
+    "fields": [
+      "裁切寬度，4096 像素",
+      "裁切高度，2304 像素",
+      "比例，16:9"
+    ],
+    "handle": {
+      "bottom": 220,
+      "height": 8,
+      "left": 88,
+      "right": 232,
+      "top": 212,
+      "width": 144,
+      "x": 88,
+      "y": 212
+    },
+    "input": {
+      "bottom": 211,
+      "height": 44,
+      "left": 55.75,
+      "right": 151.75,
+      "top": 167,
+      "width": 96,
+      "x": 55.75,
+      "y": 167
+    },
+    "range": {
+      "bottom": 211,
+      "height": 44,
+      "left": 161.75,
+      "right": 262.25,
+      "top": 167,
+      "width": 100.5,
+      "x": 161.75,
+      "y": 167
+    },
+    "rootWidth": 288,
+    "scrollWidth": 288
+  },
+  "dcPresetRecovery": [
+    "DC\nAPS-C\n裁切寬度\n4000\npx\n裁切高度\n2667\npx\n比例\n3:2",
+    "DC\nS35\n裁切寬度\n4000\npx\n裁切高度\n2250\npx\n比例\n16:9",
+    "DC\nHD\n裁切寬度\n6000\npx\n裁切高度\n3375\npx\n比例\n16:9",
+    "DC\nOG\n裁切寬度\n6000\npx\n裁切高度\n4000\npx\n比例\n3:2"
+  ],
+  "dcAfterRecovery": {
+    "fields": [
+      "DC，OG",
+      "裁切寬度，6000 像素",
+      "裁切高度，4000 像素",
+      "比例，3:2"
+    ],
+    "mainHidden": true,
+    "res": "2048 × 1200",
+    "title": "QS · DC",
+    "url": "http://127.0.0.1:8766/qa-direct.html"
+  },
+  "resAfterRecovery": "RES\n4K\n解析寬度\n4096\npx\n解析高度\n2731\npx\n比例\n3:2",
+  "embeddedFinal": "DC\n自訂\n裁切寬度\n4500\npx\n裁切高度\n3000\npx\n比例\n3:2"
+}

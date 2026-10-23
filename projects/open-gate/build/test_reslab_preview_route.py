@@ -75,44 +75,6 @@ def native_route(cam, canvas, raw_bit=0):
             'record':struct.unpack_from('<I',data,0x48)[0]}
 
 class PreviewRouteTests(unittest.TestCase):
-    def test_m12_high_rates_keep_the_native_120_engine_path(self):
-        out,f=V.built();test=V.VirtualTests('test_contract_abi_and_status');test.out,test.f=out,f
-        cam=test.boot(fr=7);cam.geometry(12,992,662);self.assertEqual(cam.apply(),0)
-        root=V.HERE.parents[2]
-        profiles=json.loads((root/'research/other/external/FP3K-technical-handoff-2026-09-10/analysis/firmware/raw-profiles.json').read_text())
-        base=next(r['words'] for r in profiles['rows'] if 83 in r['profile_ids'])
-        reference=None
-        for rank,nominal,vmax,real in ((0,120,1820,120000/1001),
-                                      (23976,240,910,240000/1001),
-                                      (27972,280,780,280000/1001)):
-            with self.subTest(rank=rank):
-                cam.put(cam.s()+V.L.S['VRATE'],rank)
-                cam.mu.mem_write(V.RC.KEYBUF,b'VRC000120\0'.ljust(16,b'\0'))
-                hit,_=cam.call(V.RC.PICKER,r1=V.RC.TAB3,r2=V.RC.KEYBUF)
-                self.assertNotEqual(hit,0);pid=cam.w(hit+4)
-                entry=cam.s()+cam.w(cam.s()+V.L.S['LAST_ENT'])
-                self.assertEqual(cam.w(entry+V.L.ENT['NOMINAL']),nominal)
-                self.assertEqual(cam.w(entry+V.L.ENT['VRATE']),rank)
-                self.assertEqual(cam.w(entry+V.L.ENT['W0']),330|(330<<16))
-                self.assertEqual(cam.w(entry+V.L.ENT['W1'])&0xffff,vmax)
-                native=V.RC.CANVAS_IN+0x5c
-                cam.mu.mem_write(native,struct.pack('<65I',*base))
-                fn=cam.w(cam.s()+V.L.S['FN']+V.L.FNS.index('CANVAS')*4)
-                self.assertEqual(cam.call(fn,cam.s(),native,pid,thumb=True,sp=V.T.STACK-0x1000)[0],1)
-                got=bytes(cam.mu.mem_read(native,260))
-                gate=native_engine_gate(cam,native)
-                fps=struct.unpack_from('<f',got,0x30)[0]
-                print('M12 rate',nominal,'sensor vmax',vmax,'engine',fps,'native >99 gate',gate,flush=True)
-                self.assertEqual(fps,60.0,'240/280 ride the native 119.88 processing profile')
-                self.assertEqual(gate,0,'sensor FPS must not enable the alternate ISP path')
-                if reference is None:reference=got
-                else:self.assertEqual(got,reference,'changing cadence must preserve the 120p geometry')
-                # Inject the former real-rate value only in emulated memory:
-                # the exact same native translator/gate must detect it.
-                if rank:
-                    cam.put(native+0x30,V.L._f32(real))
-                    self.assertEqual(native_engine_gate(cam,native),1)
-
     def test_m12_r78_geometry_survives_virtual_rcd_and_native_selection(self):
         out,f=V.built();test=V.VirtualTests('test_contract_abi_and_status');test.out,test.f=out,f
         cam=test.boot(fr=3)

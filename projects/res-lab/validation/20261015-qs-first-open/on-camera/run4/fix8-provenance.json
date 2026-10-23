@@ -1,0 +1,28 @@
+{
+  "variant": "combined-fix8",
+  "raw_sha256": "8614791962f823f5f979a19322ec4061a517a61eb139ecacbc06da52d8a531e6",
+  "on_card_sha256": "23424240f411cdbab5105d56d3060cc6687580b91834f0ec405876949ba459d6",
+  "bytes": 250624,
+  "changes": "12 black native text copies at +/-1 diagonal offsets, followed by 3 white text components; original object/events and native X curves. No native outline property or font override.",
+  "LV_table_bytes": 63912,
+  "bounded_limits": {
+    "entries": 16,
+    "per_record_bytes": 10240,
+    "records_per_substitution": 15,
+    "string_marks_per_substitution": 160,
+    "table_bytes": 81920
+  },
+  "tests": "Four native layout parser paths passed; final geometry/unique-ID/budget and two core regressions passed (5 tests); exact BIN with current loader/AutoRun 371 QS + 16 LV records, resource flag=1, journal restoration passed.",
+  "preserved_CFG_sha256": "be62abbe2254b1c884c280a4352039f677bf7128bd81eea87dfb30990e855640",
+  "written_to_card": true,
+  "visual_result": "Outline method visible in post-QS red-edge control 1923; final black-restored captures 1924/1925 have entire bottom information row absent and cannot approve final LCD appearance.",
+  "source_hashes": {
+    "vr_ui.py": "b79a22becf685f8027dcba816e9cd652314bedb65bcf5c591299a6e9da121675",
+    "ogc.c": "38921f9c39860b4de3b2951c741cd22daa799da6f215ecc1cbe6cd28d5acbee0",
+    "test_lv_text_style.py": "f840355cbb7b74b1770c3f36df1ea32ef10e4b8d328923e74511d9dc5cc5f500",
+    "test_v3_rescustom.py": "92704e3597ab05f9b4517df823143a49fe812ab7b10a378406cf69278b5d8e73"
+  },
+  "outline_control_pass": true,
+  "stock_style_match": false,
+  "scope": "29.97 medium CINE only; see run4 RESULTS"
+}

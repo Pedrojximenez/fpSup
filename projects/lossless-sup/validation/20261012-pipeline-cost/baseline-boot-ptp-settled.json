@@ -1,0 +1,12 @@
+{
+  "label": "baseline-boot-ptp-settled",
+  "commands": [
+    {
+      "time": 1791807337.1531851,
+      "command": "status get app_current",
+      "reply": "ERR shl bad magic 00000000 ver 0\n"
+    }
+  ],
+  "started_at": 1791807337.129777,
+  "error": "RuntimeError(\"uncertain/failed command status get app_current: 'ERR shl bad magic 00000000 ver 0\\\\n'\")"
+}

@@ -57,6 +57,9 @@ per-object stack; the entry is always the fixed trampoline 0xC0370BF0 which does
 ## 2. PRIORITY DISTRIBUTION
 
 ### 2a. Cyc-thread tasks (wrapper 0xC0370808, service 0x8047) — CONFIRMED
+
+> **⚠ 2026-10-16 更正**：0x8047 是 `tk_cre_cyc`(週期處理器)，不是任務。下表的 "prio" 其實是週期 `cyctim`(ms)；
+> 本體跑在計時器中斷情境。見 `research/firmware/notes/CPU_POLLING_HOTSPOTS.md` §0。
 caller → itskpri (dec/hex) → name (dsname, read from r1 target):
 
 | caller_addr | prio dec | hex  | name       |

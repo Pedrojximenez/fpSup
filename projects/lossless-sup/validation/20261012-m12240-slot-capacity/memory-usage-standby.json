@@ -1,0 +1,35 @@
+{
+  "commands": [
+    {
+      "time": 1791781900.044339,
+      "command": "status get is_recording",
+      "reply": "is_recording -> 0\n\n"
+    },
+    {
+      "time": 1791781900.047435,
+      "command": "memmgr bufuse",
+      "reply": "mem mode = STILL_REC (0) \nUSER         (00): [total:  31457536][used:  23761920][used(max):  23847232][remaining:   7695616][link:            ]\nOSD          (01): [total:  56623360][used:  53622080][used(max):  53622016][remaining:   3001280][link:            ]\nIMAGE        (02): [total:  17826048][used:  17822528][used(max):  17822464][remaining:      3520][link:            ]\nLVIEW        (03): [total:  50331904][used:  12515584][used(max):  12515520][remaining:  37816320][link:            ]\nMOVAUDIO     (06): [total:  13631744][used:     32960][used(max):     32896][remaining:  13598784][link:            ]\nYUV          (09): [total: 162529536][used:         0][used(max):         0][remaining: 162529536][link:            ]\nRAW          (10): [total: 543290880][used:         0][used(max): 428938240][remaining: 543290880][link:RAW_SUB     ]\nJPEG         (11): [total:  37748992][used:         0][used(max):         0][remaining:  37748992][link:            ]\nFILEINF      (12): [total:   2097408][used:         0][used(max):         0][remaining:   2097408][link:            ]\nRAW_SUB      (14): [total:  85983488][used:         0][used(max):         0][remaining:  85983488][link:            ]\n"
+    },
+    {
+      "time": 1791781900.048071,
+      "command": "memmgr heapmem",
+      "reply": "free 6291440 : max_free 6291440 \n\n"
+    },
+    {
+      "time": 1791781900.0485811,
+      "command": "rec log-out",
+      "reply": "(no data)\n\n"
+    },
+    {
+      "time": 1791781900.049044,
+      "command": "status get is_recording",
+      "reply": "is_recording -> 0\n\n"
+    }
+  ],
+  "writer": {
+    "xmp": 0,
+    "movie": 0
+  },
+  "boot": 12760957,
+  "completed_at": 1791781900.0492108
+}

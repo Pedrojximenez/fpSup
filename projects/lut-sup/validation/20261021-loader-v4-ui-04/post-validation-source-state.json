@@ -1,0 +1,12 @@
+{
+  "phase": "after validator completed successfully",
+  "artifact_hashes": "all verified unchanged",
+  "interpretation": "The accepted artifact is frozen to report.json build hashes; shared-source edits after validation do not update its runtime bytes.",
+  "later_shared_source_changes": [
+    {
+      "path": "fpSup/fp_usb_shell/v4/fpsup_ui.c",
+      "validated_build_sha256": "3aea19db1e900ca657a12fea7a17ad22ea7ed0012e78fd97a33b09ff8dd160f3",
+      "current_sha256": "b3d9b0299473f9c40885db54667f1b5fda1acf55fb2ebdaec141c409c670254f"
+    }
+  ]
+}

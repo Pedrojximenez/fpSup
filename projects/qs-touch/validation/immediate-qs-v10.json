@@ -1,0 +1,819 @@
+{
+  "scope": "Browser prototype; real mouse pointer input on Mac, not physical touch or camera",
+  "resTransition": [
+    {
+      "inert": true,
+      "ms": 17668,
+      "opacity": 1,
+      "phase": "out",
+      "title": "QS",
+      "transform": "matrix(1, 0, 0, 1, 0, 0)"
+    },
+    {
+      "inert": true,
+      "ms": 17684.7,
+      "opacity": 0.945751,
+      "phase": "out",
+      "title": "QS",
+      "transform": "matrix(1, 0, 0, 1, 0, 0.976473)"
+    },
+    {
+      "inert": true,
+      "ms": 17701.3,
+      "opacity": 0.812459,
+      "phase": "out",
+      "title": "QS",
+      "transform": "matrix(1, 0, 0, 1, 0, 3.37575)"
+    },
+    {
+      "inert": true,
+      "ms": 17718,
+      "opacity": 0.62302,
+      "phase": "out",
+      "title": "QS",
+      "transform": "matrix(1, 0, 0, 1, 0, 6.78565)"
+    },
+    {
+      "inert": true,
+      "ms": 17734.7,
+      "opacity": 0.390303,
+      "phase": "out",
+      "title": "QS",
+      "transform": "matrix(1, 0, 0, 1, 0, 10.9745)"
+    },
+    {
+      "inert": true,
+      "ms": 17751.4,
+      "opacity": 0.119252,
+      "phase": "out",
+      "title": "QS",
+      "transform": "matrix(1, 0, 0, 1, 0, 15.8535)"
+    },
+    {
+      "inert": true,
+      "ms": 17767.1,
+      "opacity": 0,
+      "phase": "in",
+      "title": "QS · RES",
+      "transform": "matrix(1, 0, 0, 1, 0, -22)"
+    },
+    {
+      "inert": true,
+      "ms": 17784.6,
+      "opacity": 0.461632,
+      "phase": "in",
+      "title": "QS · RES",
+      "transform": "matrix(1, 0, 0, 1, 0, -11.8441)"
+    },
+    {
+      "inert": true,
+      "ms": 17801.4,
+      "opacity": 0.739362,
+      "phase": "in",
+      "title": "QS · RES",
+      "transform": "matrix(1, 0, 0, 1, 0, -5.73403)"
+    },
+    {
+      "inert": true,
+      "ms": 17818.1,
+      "opacity": 0.86694,
+      "phase": "in",
+      "title": "QS · RES",
+      "transform": "matrix(1, 0, 0, 1, 0, -2.92731)"
+    },
+    {
+      "inert": true,
+      "ms": 17833.9,
+      "opacity": 0.928977,
+      "phase": "in",
+      "title": "QS · RES",
+      "transform": "matrix(1, 0, 0, 1, 0, -1.56251)"
+    },
+    {
+      "inert": true,
+      "ms": 17851.5,
+      "opacity": 0.966828,
+      "phase": "in",
+      "title": "QS · RES",
+      "transform": "matrix(1, 0, 0, 1, 0, -0.729779)"
+    },
+    {
+      "inert": true,
+      "ms": 17868.2,
+      "opacity": 0.986253,
+      "phase": "in",
+      "title": "QS · RES",
+      "transform": "matrix(1, 0, 0, 1, 0, -0.30244)"
+    },
+    {
+      "inert": true,
+      "ms": 17884.9,
+      "opacity": 0.996117,
+      "phase": "in",
+      "title": "QS · RES",
+      "transform": "matrix(1, 0, 0, 1, 0, -0.0854182)"
+    },
+    {
+      "inert": true,
+      "ms": 17901.5,
+      "opacity": 0.99978,
+      "phase": "in",
+      "title": "QS · RES",
+      "transform": "matrix(1, 0, 0, 1, 0, -0.00484692)"
+    },
+    {
+      "inert": false,
+      "ms": 17918.2,
+      "opacity": 1,
+      "phase": "idle",
+      "title": "QS · RES",
+      "transform": "none"
+    }
+  ],
+  "resCustom": {
+    "cells": [
+      "RES，自訂",
+      "解析寬度，2048 像素",
+      "解析高度，1200 像素",
+      "比例，1.71:1"
+    ],
+    "saved": {
+      "modelContent": {
+        "backgroundPercent": 47,
+        "qsItems": [
+          "ISO",
+          "快門角度",
+          "光圈",
+          "解析度",
+          "格率",
+          "錄影格式",
+          "裁切範圍",
+          "白平衡",
+          "音訊增益",
+          "假色",
+          "波形"
+        ],
+        "recording": {
+          "dc": {
+            "height": 4000,
+            "preset": "OG",
+            "ratio": "3:2",
+            "width": 6000
+          },
+          "format": "CDNG 12bit",
+          "fps": "29.97p",
+          "res": {
+            "height": 1200,
+            "preset": "自訂",
+            "ratio": "1.71:1",
+            "width": 2048
+          }
+        },
+        "selectedItem": "解析度"
+      },
+      "privateContent": {
+        "backgroundAlpha4": 7,
+        "order": [
+          0,
+          1,
+          2,
+          4,
+          5,
+          6,
+          20,
+          3,
+          7,
+          10,
+          11
+        ],
+        "page": 0,
+        "recording": {
+          "dc": {
+            "height": 4000,
+            "preset": "OG",
+            "ratio": "3:2",
+            "width": 6000
+          },
+          "format": "CDNG 12bit",
+          "res": {
+            "height": 1200,
+            "preset": "自訂",
+            "ratio": "1.71:1",
+            "width": 2048
+          }
+        },
+        "selected": 4,
+        "values": [
+          "800",
+          "180°",
+          "F2.8",
+          "5600 K",
+          "自訂",
+          "29.97p",
+          "CDNG 12bit",
+          "−12 dB",
+          "關",
+          "開",
+          "關",
+          "關",
+          "MF",
+          "單點",
+          "OFF",
+          "3",
+          "關",
+          "關",
+          "自動",
+          "關",
+          "OG"
+        ],
+        "version": 5
+      }
+    }
+  },
+  "drop": {
+    "cancelDoneButtons": 0,
+    "editing": false,
+    "saved": {
+      "modelContent": {
+        "backgroundPercent": 47,
+        "qsItems": [
+          "快門角度",
+          "ISO",
+          "光圈",
+          "解析度",
+          "格率",
+          "錄影格式",
+          "裁切範圍",
+          "白平衡",
+          "音訊增益",
+          "假色",
+          "波形"
+        ],
+        "recording": {
+          "dc": {
+            "height": 4000,
+            "preset": "OG",
+            "ratio": "3:2",
+            "width": 6000
+          },
+          "format": "CDNG 12bit",
+          "fps": "29.97p",
+          "res": {
+            "height": 1200,
+            "preset": "自訂",
+            "ratio": "1.71:1",
+            "width": 2048
+          }
+        },
+        "selectedItem": "ISO"
+      },
+      "privateContent": {
+        "backgroundAlpha4": 7,
+        "order": [
+          1,
+          0,
+          2,
+          4,
+          5,
+          6,
+          20,
+          3,
+          7,
+          10,
+          11
+        ],
+        "page": 0,
+        "recording": {
+          "dc": {
+            "height": 4000,
+            "preset": "OG",
+            "ratio": "3:2",
+            "width": 6000
+          },
+          "format": "CDNG 12bit",
+          "res": {
+            "height": 1200,
+            "preset": "自訂",
+            "ratio": "1.71:1",
+            "width": 2048
+          }
+        },
+        "selected": 0,
+        "values": [
+          "800",
+          "180°",
+          "F2.8",
+          "5600 K",
+          "自訂",
+          "29.97p",
+          "CDNG 12bit",
+          "−12 dB",
+          "關",
+          "開",
+          "關",
+          "關",
+          "MF",
+          "單點",
+          "OFF",
+          "3",
+          "關",
+          "關",
+          "自動",
+          "關",
+          "OG"
+        ],
+        "version": 5
+      }
+    }
+  },
+  "reloadAfterKeyboard": {
+    "editing": false,
+    "order": [
+      1,
+      2,
+      0,
+      4,
+      5,
+      6,
+      20,
+      3,
+      7,
+      10,
+      11
+    ],
+    "savedOnLoad": null
+  },
+  "longPressRelease": {
+    "dc": "裁切範圍，OG，點按在下方調整，點兩下進入更多選項",
+    "dimensions": false,
+    "editing": false,
+    "selected": "20"
+  },
+  "add": {
+    "catalogVisible": false,
+    "editing": false,
+    "saved": {
+      "modelContent": {
+        "backgroundPercent": 47,
+        "qsItems": [
+          "快門角度",
+          "光圈",
+          "ISO",
+          "解析度",
+          "格率",
+          "錄影格式",
+          "裁切範圍",
+          "白平衡",
+          "音訊增益",
+          "假色",
+          "波形",
+          "斑馬紋"
+        ],
+        "recording": {
+          "dc": {
+            "height": 4000,
+            "preset": "OG",
+            "ratio": "3:2",
+            "width": 6000
+          },
+          "format": "CDNG 12bit",
+          "fps": "29.97p",
+          "res": {
+            "height": 1200,
+            "preset": "自訂",
+            "ratio": "1.71:1",
+            "width": 2048
+          }
+        },
+        "selectedItem": "斑馬紋"
+      },
+      "privateContent": {
+        "backgroundAlpha4": 7,
+        "order": [
+          1,
+          2,
+          0,
+          4,
+          5,
+          6,
+          20,
+          3,
+          7,
+          10,
+          11,
+          8
+        ],
+        "page": 1,
+        "recording": {
+          "dc": {
+            "height": 4000,
+            "preset": "OG",
+            "ratio": "3:2",
+            "width": 6000
+          },
+          "format": "CDNG 12bit",
+          "res": {
+            "height": 1200,
+            "preset": "自訂",
+            "ratio": "1.71:1",
+            "width": 2048
+          }
+        },
+        "selected": 8,
+        "values": [
+          "800",
+          "180°",
+          "F2.8",
+          "5600 K",
+          "自訂",
+          "29.97p",
+          "CDNG 12bit",
+          "−12 dB",
+          "關",
+          "開",
+          "關",
+          "關",
+          "MF",
+          "單點",
+          "OFF",
+          "3",
+          "關",
+          "關",
+          "自動",
+          "關",
+          "OG"
+        ],
+        "version": 5
+      }
+    }
+  },
+  "toggleLongPress": {
+    "editing": false,
+    "falseColor": "假色，關，點按切換"
+  },
+  "singleTap": {
+    "dimensions": false,
+    "moreVisible": true,
+    "title": "QS"
+  },
+  "dcTransition": [
+    {
+      "inert": true,
+      "ms": 14329.166,
+      "opacity": 1,
+      "phase": "out",
+      "title": "QS",
+      "transform": "matrix(1, 0, 0, 1, 0, 0)"
+    },
+    {
+      "inert": true,
+      "ms": 14345.8,
+      "opacity": 0.945746,
+      "phase": "out",
+      "title": "QS",
+      "transform": "matrix(1, 0, 0, 1, 0, 0.976581)"
+    },
+    {
+      "inert": true,
+      "ms": 14362.5,
+      "opacity": 0.811463,
+      "phase": "out",
+      "title": "QS",
+      "transform": "matrix(1, 0, 0, 1, 0, 3.39367)"
+    },
+    {
+      "inert": true,
+      "ms": 14378.2,
+      "opacity": 0.634395,
+      "phase": "out",
+      "title": "QS",
+      "transform": "matrix(1, 0, 0, 1, 0, 6.58088)"
+    },
+    {
+      "inert": true,
+      "ms": 14394.8,
+      "opacity": 0.405316,
+      "phase": "out",
+      "title": "QS",
+      "transform": "matrix(1, 0, 0, 1, 0, 10.7043)"
+    },
+    {
+      "inert": true,
+      "ms": 14412.5,
+      "opacity": 0.119235,
+      "phase": "out",
+      "title": "QS",
+      "transform": "matrix(1, 0, 0, 1, 0, 15.8538)"
+    },
+    {
+      "inert": true,
+      "ms": 14429.2,
+      "opacity": 0,
+      "phase": "in",
+      "title": "QS · DC",
+      "transform": "matrix(1, 0, 0, 1, 0, -22)"
+    },
+    {
+      "inert": true,
+      "ms": 14445.9,
+      "opacity": 0.444221,
+      "phase": "in",
+      "title": "QS · DC",
+      "transform": "matrix(1, 0, 0, 1, 0, -12.2271)"
+    },
+    {
+      "inert": true,
+      "ms": 14462.6,
+      "opacity": 0.729956,
+      "phase": "in",
+      "title": "QS · DC",
+      "transform": "matrix(1, 0, 0, 1, 0, -5.94097)"
+    },
+    {
+      "inert": true,
+      "ms": 14479.2,
+      "opacity": 0.861883,
+      "phase": "in",
+      "title": "QS · DC",
+      "transform": "matrix(1, 0, 0, 1, 0, -3.03857)"
+    },
+    {
+      "inert": true,
+      "ms": 14495.9,
+      "opacity": 0.928841,
+      "phase": "in",
+      "title": "QS · DC",
+      "transform": "matrix(1, 0, 0, 1, 0, -1.5655)"
+    },
+    {
+      "inert": true,
+      "ms": 14511.6,
+      "opacity": 0.963699,
+      "phase": "in",
+      "title": "QS · DC",
+      "transform": "matrix(1, 0, 0, 1, 0, -0.798626)"
+    },
+    {
+      "inert": true,
+      "ms": 14529.3,
+      "opacity": 0.985449,
+      "phase": "in",
+      "title": "QS · DC",
+      "transform": "matrix(1, 0, 0, 1, 0, -0.320131)"
+    },
+    {
+      "inert": true,
+      "ms": 14545.7,
+      "opacity": 0.995626,
+      "phase": "in",
+      "title": "QS · DC",
+      "transform": "matrix(1, 0, 0, 1, 0, -0.0962328)"
+    },
+    {
+      "inert": true,
+      "ms": 14562.7,
+      "opacity": 0.999707,
+      "phase": "in",
+      "title": "QS · DC",
+      "transform": "matrix(1, 0, 0, 1, 0, -0.00644986)"
+    },
+    {
+      "inert": false,
+      "ms": 14579.4,
+      "opacity": 1,
+      "phase": "idle",
+      "title": "QS · DC",
+      "transform": "none"
+    }
+  ],
+  "dcCustom": {
+    "cells": [
+      "DC，CUSTOM(2.39:1)",
+      "裁切寬度，4093 像素",
+      "裁切高度，1711 像素",
+      "比例，2.39:1"
+    ],
+    "outer": "DCCUSTOM\n(2.39:1)24.49 × 10.22 mm"
+  },
+  "narrow": {
+    "cells": [
+      {
+        "label": "DC，CUSTOM(2.39:1)",
+        "scroll": 72,
+        "width": 72
+      },
+      {
+        "label": "裁切寬度，4093 像素",
+        "scroll": 72,
+        "width": 72
+      },
+      {
+        "label": "裁切高度，1711 像素",
+        "scroll": 72,
+        "width": 72
+      },
+      {
+        "label": "比例，2.39:1",
+        "scroll": 72,
+        "width": 72
+      }
+    ],
+    "docScroll": 320,
+    "docWidth": 320,
+    "input": {
+      "bottom": 213,
+      "height": 48,
+      "left": 55.75,
+      "right": 264.25,
+      "top": 165,
+      "width": 208.5,
+      "x": 55.75,
+      "y": 165
+    },
+    "rootScroll": 288,
+    "rootWidth": 288
+  },
+  "dcDoubleTap": {
+    "phase": "in",
+    "title": "QS · DC"
+  },
+  "swipe": {
+    "dc": "裁切範圍，CUSTOM(2.39:1)，點按在下方調整，點兩下進入更多選項",
+    "dimensions": false,
+    "divider": {
+      "bottom": 120.609375,
+      "height": 2,
+      "left": 16,
+      "right": 304,
+      "top": 118.609375,
+      "width": 288,
+      "x": 16,
+      "y": 118.609375
+    },
+    "page": "2 / 2"
+  },
+  "reloadFinal": {
+    "dc": "DCCUSTOM\n(2.39:1)24.49 × 10.22 mm",
+    "order": [
+      1,
+      2,
+      0,
+      4,
+      5,
+      6,
+      20,
+      3,
+      7,
+      10,
+      11,
+      8
+    ],
+    "res": "RES自訂2048 × 1200",
+    "saveDuringInitialization": null
+  },
+  "escape": {
+    "busy": null,
+    "open": false,
+    "phase": "idle",
+    "title": "QS"
+  },
+  "finalTransition": {
+    "busy": null,
+    "dimensions": true,
+    "inert": false,
+    "phase": "idle",
+    "title": "QS · DC",
+    "trace": [
+      {
+        "inert": true,
+        "ms": 25652.4,
+        "opacity": 1,
+        "phase": "out",
+        "title": "QS",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "inert": true,
+        "ms": 25669.3,
+        "opacity": 0.944875,
+        "phase": "out",
+        "title": "QS",
+        "transform": "matrix(1, 0, 0, 1, 0, 0.992257)"
+      },
+      {
+        "inert": true,
+        "ms": 25686,
+        "opacity": 0.81003,
+        "phase": "out",
+        "title": "QS",
+        "transform": "matrix(1, 0, 0, 1, 0, 3.41945)"
+      },
+      {
+        "inert": true,
+        "ms": 25702.7,
+        "opacity": 0.619885,
+        "phase": "out",
+        "title": "QS",
+        "transform": "matrix(1, 0, 0, 1, 0, 6.84207)"
+      },
+      {
+        "inert": true,
+        "ms": 25720,
+        "opacity": 0.377484,
+        "phase": "out",
+        "title": "QS",
+        "transform": "matrix(1, 0, 0, 1, 0, 11.2053)"
+      },
+      {
+        "inert": true,
+        "ms": 25736.1,
+        "opacity": 0.114961,
+        "phase": "out",
+        "title": "QS",
+        "transform": "matrix(1, 0, 0, 1, 0, 15.9307)"
+      },
+      {
+        "inert": true,
+        "ms": 25753.4,
+        "opacity": 0,
+        "phase": "in",
+        "title": "QS · DC",
+        "transform": "matrix(1, 0, 0, 1, 0, -22)"
+      },
+      {
+        "inert": true,
+        "ms": 25769.8,
+        "opacity": 0.438209,
+        "phase": "in",
+        "title": "QS · DC",
+        "transform": "matrix(1, 0, 0, 1, 0, -12.3594)"
+      },
+      {
+        "inert": true,
+        "ms": 25786.7,
+        "opacity": 0.729343,
+        "phase": "in",
+        "title": "QS · DC",
+        "transform": "matrix(1, 0, 0, 1, 0, -5.95445)"
+      },
+      {
+        "inert": true,
+        "ms": 25802.7,
+        "opacity": 0.858276,
+        "phase": "in",
+        "title": "QS · DC",
+        "transform": "matrix(1, 0, 0, 1, 0, -3.11792)"
+      },
+      {
+        "inert": true,
+        "ms": 25820,
+        "opacity": 0.928684,
+        "phase": "in",
+        "title": "QS · DC",
+        "transform": "matrix(1, 0, 0, 1, 0, -1.56894)"
+      },
+      {
+        "inert": true,
+        "ms": 25836,
+        "opacity": 0.964106,
+        "phase": "in",
+        "title": "QS · DC",
+        "transform": "matrix(1, 0, 0, 1, 0, -0.789664)"
+      },
+      {
+        "inert": true,
+        "ms": 25852.5,
+        "opacity": 0.984607,
+        "phase": "in",
+        "title": "QS · DC",
+        "transform": "matrix(1, 0, 0, 1, 0, -0.338639)"
+      },
+      {
+        "inert": true,
+        "ms": 25870,
+        "opacity": 0.995685,
+        "phase": "in",
+        "title": "QS · DC",
+        "transform": "matrix(1, 0, 0, 1, 0, -0.0949273)"
+      },
+      {
+        "inert": true,
+        "ms": 25886.2,
+        "opacity": 0.999643,
+        "phase": "in",
+        "title": "QS · DC",
+        "transform": "matrix(1, 0, 0, 1, 0, -0.00785199)"
+      },
+      {
+        "inert": false,
+        "ms": 25903.4,
+        "opacity": 1,
+        "phase": "idle",
+        "title": "QS · DC",
+        "transform": "none"
+      }
+    ]
+  },
+  "logs": [],
+  "checks": "PASS: immediate drop/add persistence, keyboard persistence and reload, long-press suppression, double tap DC/RES, independent dimensions/decimal ratio, transition direction/opacity/cleanup/Escape, 320px fit and swipe separation"
+}

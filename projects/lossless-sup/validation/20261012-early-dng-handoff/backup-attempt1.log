@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/validation/20261012-early-dng-handoff/read_file_once.py", line 24, in <module>
+    sys.exit(getfile.main())
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/getfile.py", line 51, in main
+    from putfile import CODE, CODE_END, P
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/putfile.py", line 73, in __getattr__
+    _claims()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/putfile.py", line 84, in _claims
+    globals()[nm] = cave.claim(key, n)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/cave.py", line 185, in claim
+    boot = boot_id()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/cave.py", line 125, in boot_id
+    raise CaveError(
+cave.CaveError: LOAD_DONE_US reads zero: this camera did not boot from a card whose loader stamps it.  Without a boot identity a claim cannot be told from a stale one.

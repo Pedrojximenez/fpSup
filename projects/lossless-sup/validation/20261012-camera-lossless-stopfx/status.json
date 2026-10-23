@@ -1,0 +1,252 @@
+{
+  "status": "recording_validation_passed_warm_reboot_cycle_awaits_explicit_approval",
+  "camera_tested": true,
+  "written_to_card": true,
+  "modules_remain_independent": true,
+  "direct_deployment_files": [
+    "fpSup/05STOPFX.BIN",
+    "fpSup/10LOSS.BIN"
+  ],
+  "normal_trials": [
+    {
+      "label": "fhd30-lossless-on-01",
+      "clip": "A001_099",
+      "fps_num": 30000,
+      "fps_den": 1001,
+      "requested": 589,
+      "finished": 589,
+      "compressed": 588,
+      "raw": 1,
+      "frame_limit": 42,
+      "writer_wait_max_us": 150752,
+      "stalls": 0,
+      "free_after": 96
+    },
+    {
+      "label": "fhd60-lossless-on-01",
+      "clip": "A001_100",
+      "fps_num": 60000,
+      "fps_den": 1001,
+      "requested": 1465,
+      "finished": 1465,
+      "compressed": 1390,
+      "raw": 75,
+      "frame_limit": 39,
+      "writer_wait_max_us": 175757,
+      "stalls": 2,
+      "free_after": 96
+    },
+    {
+      "label": "fhd60-after-ten-autostops",
+      "clip": "A001_112",
+      "fps_num": 60000,
+      "fps_den": 1001,
+      "requested": 884,
+      "finished": 884,
+      "compressed": 837,
+      "raw": 47,
+      "frame_limit": 39,
+      "writer_wait_max_us": 167044,
+      "stalls": 1,
+      "free_after": 96
+    }
+  ],
+  "autostop_trials": [
+    {
+      "label": "reslab3k-autostop-01",
+      "clip": "A001_102",
+      "arrivals": 86,
+      "submitted": 9,
+      "finished": 9,
+      "discarded": 77,
+      "free_after": 96,
+      "occupied_after": 0,
+      "compression_frames_written": 4,
+      "raw_frames_written": 5,
+      "pressure_flushes": 1,
+      "count_limit": 34
+    },
+    {
+      "label": "reslab3k-autostop-02",
+      "clip": "A001_103",
+      "arrivals": 86,
+      "submitted": 8,
+      "finished": 8,
+      "discarded": 78,
+      "free_after": 96,
+      "occupied_after": 0,
+      "compression_frames_written": 4,
+      "raw_frames_written": 4,
+      "pressure_flushes": 1,
+      "count_limit": 25
+    },
+    {
+      "label": "reslab3k-autostop-03",
+      "clip": "A001_104",
+      "arrivals": 86,
+      "submitted": 8,
+      "finished": 8,
+      "discarded": 78,
+      "free_after": 96,
+      "occupied_after": 0,
+      "compression_frames_written": 4,
+      "raw_frames_written": 4,
+      "pressure_flushes": 2,
+      "count_limit": 28
+    },
+    {
+      "label": "reslab3k-autostop-04",
+      "clip": "A001_105",
+      "arrivals": 86,
+      "submitted": 9,
+      "finished": 9,
+      "discarded": 77,
+      "free_after": 96,
+      "occupied_after": 0,
+      "compression_frames_written": 4,
+      "raw_frames_written": 5,
+      "pressure_flushes": 1,
+      "count_limit": 24
+    },
+    {
+      "label": "reslab3k-autostop-05",
+      "clip": "A001_106",
+      "arrivals": 86,
+      "submitted": 8,
+      "finished": 8,
+      "discarded": 78,
+      "free_after": 96,
+      "occupied_after": 0,
+      "compression_frames_written": 4,
+      "raw_frames_written": 4,
+      "pressure_flushes": 1,
+      "count_limit": 36
+    },
+    {
+      "label": "reslab3k-autostop-06",
+      "clip": "A001_107",
+      "arrivals": 86,
+      "submitted": 7,
+      "finished": 7,
+      "discarded": 79,
+      "free_after": 96,
+      "occupied_after": 0,
+      "compression_frames_written": 4,
+      "raw_frames_written": 3,
+      "pressure_flushes": 1,
+      "count_limit": 38
+    },
+    {
+      "label": "reslab3k-autostop-07",
+      "clip": "A001_108",
+      "arrivals": 86,
+      "submitted": 7,
+      "finished": 7,
+      "discarded": 79,
+      "free_after": 96,
+      "occupied_after": 0,
+      "compression_frames_written": 4,
+      "raw_frames_written": 3,
+      "pressure_flushes": 1,
+      "count_limit": 28
+    },
+    {
+      "label": "reslab3k-autostop-08",
+      "clip": "A001_109",
+      "arrivals": 86,
+      "submitted": 9,
+      "finished": 9,
+      "discarded": 77,
+      "free_after": 96,
+      "occupied_after": 0,
+      "compression_frames_written": 4,
+      "raw_frames_written": 5,
+      "pressure_flushes": 1,
+      "count_limit": 34
+    },
+    {
+      "label": "reslab3k-autostop-09",
+      "clip": "A001_110",
+      "arrivals": 86,
+      "submitted": 8,
+      "finished": 8,
+      "discarded": 78,
+      "free_after": 96,
+      "occupied_after": 0,
+      "compression_frames_written": 4,
+      "raw_frames_written": 4,
+      "pressure_flushes": 1,
+      "count_limit": 26
+    },
+    {
+      "label": "reslab3k-autostop-10",
+      "clip": "A001_111",
+      "arrivals": 86,
+      "submitted": 8,
+      "finished": 8,
+      "discarded": 78,
+      "free_after": 96,
+      "occupied_after": 0,
+      "compression_frames_written": 4,
+      "raw_frames_written": 4,
+      "pressure_flushes": 1,
+      "count_limit": 36
+    }
+  ],
+  "autostop_count": 10,
+  "autostop_total_arrivals": 860,
+  "autostop_written": 81,
+  "autostop_discarded": 779,
+  "all_autostops_recovered": true,
+  "decoded_sample_count": 11,
+  "software_reboots_verified": 1,
+  "additional_ten_reboots_executed": false,
+  "pending_reason": "Auto-review requires explicit approval for ten additional reboots; asked user.",
+  "readback": {
+    "05STOPFX.BIN": {
+      "bytes": 316,
+      "sha256": "f9f26a092c5676ead5771ba8be4aac9c3734e9ed0cd144002a73b3f6b657c9d9",
+      "different_offsets": [],
+      "byte_identical": true
+    },
+    "10LOSS.BIN": {
+      "bytes": 72608,
+      "sha256": "b59b1f4105e1d63d811c69aea16e0f2acf2cefa414eabe341939674089e7471a",
+      "different_offsets": [
+        2972,
+        2976
+      ],
+      "byte_identical": false,
+      "only_valid_saved_ON_record_changed": true,
+      "settings_offset": 2964
+    },
+    "LOADER.BIN": {
+      "bytes": 29276,
+      "sha256": "2535b983a03f12b54ca107bb9d59591506b928c60ee07835676020f261e311b3",
+      "different_offsets": [],
+      "byte_identical": true
+    },
+    "AutoRun.txt": {
+      "bytes": 4666,
+      "sha256": "2e77dfe3529006d2cb95ac01e206048efe495493434c05f1ed8fad4ecd22bf96",
+      "different_offsets": [],
+      "byte_identical": true
+    }
+  },
+  "final_settings": {
+    "menu SetMovRecFormat": "0",
+    "menu SetMovRecSize": "2",
+    "menu SetMovCinemaDNGQuality": "0",
+    "menu SetMovFramerate": "5",
+    "gui geti MV_fpLossless": "OK:MV_fpLossless -> 1",
+    "sdcard size 1": "size total = 128295370752 byte(119GiB), free = 87615078400 byte(81GiB), 68%\n(AU) total = 128295370752 byte(119GiB), free = 87615078400 byte(81GiB), 68%\nCluster=128KiB, AU=0.125MiB, AU=668450/978816"
+  },
+  "final_descriptors_free": 96,
+  "limitations": [
+    "Finite trials; no total-heap leak census.",
+    "3K overload still drops frames; fix restores resources, not frames.",
+    "Three encoder stalls in the two 59.94 fps takes; separate issue remains.",
+    "Eleven DNG samples decoded; no complete clip directory enumeration.",
+    "No SSD, stills-cancel, forced poweroff, battery removal, physical card-swap acceptance."
+  ]
+}

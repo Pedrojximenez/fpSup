@@ -1,0 +1,7 @@
+addr,context,zcam_values (used readouts),ae_name,sony_a7III_value
+0000,standby bit0 (0000|=1 / &=FE) + init 04,"04@r1,4,5,23,24,25,26,27,28,29,30,31,32",,04
+0009,AE (init + per-frame),,SPL_L,00
+000A,AE (init + per-frame),,SPL_H,00
+0055,AE (init + per-frame),,DGAIN,
+00D9,init/common,"60@r1,4,5,23,24,25,26,27,28,29,30,31,32",,
+00E9,init/common,"80@r1,4,5,23,24,25,26,27,28,29,30,31,32",,

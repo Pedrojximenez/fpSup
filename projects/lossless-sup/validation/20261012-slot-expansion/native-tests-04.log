@@ -1,0 +1,22 @@
+test_claims_restore_every_added_word (test_slot_expansion.ExpandedSlotsTests) ... ok
+test_formula_pool_registry_over_96_and_full_recovery (test_slot_expansion.ExpandedSlotsTests) ... FAIL
+test_native_cookie_129_and_completion_loop (test_slot_expansion.ExpandedSlotsTests) ... ok
+
+======================================================================
+FAIL: test_formula_pool_registry_over_96_and_full_recovery (test_slot_expansion.ExpandedSlotsTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/test_slot_expansion.py", line 156, in test_formula_pool_registry_over_96_and_full_recovery
+    cam.call(0xc0375030, cam.reg, slot)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/v3/test_v3.py", line 262, in call
+    raise self.error
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/v3/test_v3.py", line 140, in _safe_hook
+    self._hook(mu, addr, size, data)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/test_slot_expansion.py", line 75, in _hook
+    if not allowed: raise AssertionError(f'unexpected execution {addr:#x}')
+AssertionError: unexpected execution 0xc0019dc0
+
+----------------------------------------------------------------------
+Ran 3 tests in 24.386s
+
+FAILED (failures=1)

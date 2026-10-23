@@ -1,0 +1,38 @@
+test_claims_restore_every_added_word (test_slot_expansion.ExpandedSlotsTests) ... FAIL
+test_formula_pool_registry_over_96_and_full_recovery (test_slot_expansion.ExpandedSlotsTests) ... FAIL
+test_native_cookie_129_and_completion_loop (test_slot_expansion.ExpandedSlotsTests) ... FAIL
+
+======================================================================
+FAIL: test_claims_restore_every_added_word (test_slot_expansion.ExpandedSlotsTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/test_slot_expansion.py", line 177, in test_claims_restore_every_added_word
+    cam = self.boot(); self.prepare(cam)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/test_slot_expansion.py", line 97, in boot
+    self.assertEqual(len(loaded), 1, cam.log())
+AssertionError: 0 != 1 : [('START', 1401000, 0, ''), ('SKIP_NAME', 0, 0, 'LOADER.BIN'), (17, 1, 0, '')]
+
+======================================================================
+FAIL: test_formula_pool_registry_over_96_and_full_recovery (test_slot_expansion.ExpandedSlotsTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/test_slot_expansion.py", line 120, in test_formula_pool_registry_over_96_and_full_recovery
+    cam = self.boot(); n = self.prepare(cam)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/test_slot_expansion.py", line 97, in boot
+    self.assertEqual(len(loaded), 1, cam.log())
+AssertionError: 0 != 1 : [('START', 1401000, 0, ''), ('SKIP_NAME', 0, 0, 'LOADER.BIN'), (17, 1, 0, '')]
+
+======================================================================
+FAIL: test_native_cookie_129_and_completion_loop (test_slot_expansion.ExpandedSlotsTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/test_slot_expansion.py", line 146, in test_native_cookie_129_and_completion_loop
+    cam = self.boot(); self.prepare(cam)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/test_slot_expansion.py", line 97, in boot
+    self.assertEqual(len(loaded), 1, cam.log())
+AssertionError: 0 != 1 : [('START', 1401000, 0, ''), ('SKIP_NAME', 0, 0, 'LOADER.BIN'), (17, 1, 0, '')]
+
+----------------------------------------------------------------------
+Ran 3 tests in 63.512s
+
+FAILED (failures=3)

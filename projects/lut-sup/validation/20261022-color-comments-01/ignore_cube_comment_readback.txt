@@ -1,0 +1,14 @@
+test_cube_readback_failure_keeps_ram_and_refuses_replay (test_library_native.LibraryNativeTests) ... FAIL
+
+======================================================================
+FAIL: test_cube_readback_failure_keeps_ram_and_refuses_replay (test_library_native.LibraryNativeTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lut/test_library_native.py", line 283, in test_cube_readback_failure_keeps_ram_and_refuses_replay
+    self.assertEqual(c.status()['last'],-16);self.assertEqual(c.find_row('LUT color space')[1]['A'],'P3 D65')
+AssertionError: 0 != -16
+
+----------------------------------------------------------------------
+Ran 1 test in 4.446s
+
+FAILED (failures=1)

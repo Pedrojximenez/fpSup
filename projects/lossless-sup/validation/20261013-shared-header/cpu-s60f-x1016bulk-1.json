@@ -1,0 +1,47 @@
+{
+ "label": "s60f-x1016bulk-1",
+ "settings": {
+  "menu SetMovRecSize": "2",
+  "menu SetMovFramerate": "5",
+  "gui geti MV_FrameRate": "OK:MV_FrameRate -> 6",
+  "gui geti MV_fpLossless": "OK:MV_fpLossless -> 1",
+  "sdcard sdmode": "sdmode  UHS-II"
+ },
+ "before": {
+  "hold.held": 0,
+  "hold.passed": 0,
+  "hold.compressed": 0,
+  "hold.refused": 0,
+  "hold.no_benefit": 0,
+  "hold.lanes_full": 0,
+  "hold_b.held": 0,
+  "hold_b.compressed": 0,
+  "hold_b.refused": 0,
+  "hold_b.no_benefit": 0,
+  "hold.job_sum_us": 0,
+  "hold.job_count": 0,
+  "hold_b.job_sum_us": 0,
+  "hold_b.job_count": 0
+ },
+ "mon_start": 1.06,
+ "task_top": "\n# CPU = 75.0[%] \n# top 10 tasks \n# ------------------------------\n# Cnt = 10333, Overlap = 0, Prefix = 1/1000000 \n#   TaskID       Time   Rate    FuncAddr    Pri  StackRem      name\n     044       836391    41.6[%] c036ee50 (15)       7680 Byte CamSch\n     001       502181    25.0[%] c0001c60 (30)       3832 Byte inittsk\n     045       256125    12.7[%] c036ee50 (15)      13300 Byte MRecMgr\n     029        62825     3.1[%] c035c460 (11)       7056 Byte LensCycl\n     061        40269     2.0[%] c036ee50 (06)      12696 Byte SRecFile\n     063        39590     2.0[%] c0672d89 (17)       1932 Byte FdTsk\n     124        38493     1.9[%] c51549cc (12)       7708 Byte FPLCODE\n     039        29852     1.5[%] c036ee50 (17)      13792 Byte DrawMgr\n     092        28281     1.4[%] c036ee50 (14)       7440 Byte AeDev\n     095        24222     1.2[%] c036ee50 (16)       3204 Byte Level\n# Total(Sum)     2008946(   2008946) \n\n-> succeeded\n",
+ "mon_end": 3.08,
+ "stop_at": 4.15,
+ "after": {
+  "hold.held": 184,
+  "hold.passed": 0,
+  "hold.compressed": 183,
+  "hold.refused": 1,
+  "hold.no_benefit": 1,
+  "hold.lanes_full": 2,
+  "hold_b.held": 13,
+  "hold_b.compressed": 13,
+  "hold_b.refused": 0,
+  "hold_b.no_benefit": 0,
+  "hold.job_sum_us": 2537466,
+  "hold.job_count": 183,
+  "hold_b.job_sum_us": 181640,
+  "hold_b.job_count": 13
+ },
+ "record_log": "file-size=3244544, bulk-size=67108864(20.7)\nreq_cnt=200, fin_cnt=200, key\nrequest  ,finish   ,diff,gap ,reqcnt,fincnt,diff,sdb,MB/s\n     1568,     1801, 233,1568,    62,     1,  61,936, 288\n     2584,     2848, 264, 783,   126,    62,  64,932, 254\n     3513,     3776, 263, 665,   184,   126,  58,940, 255\n     4067,     4189, 122, 291,   200,   185,  15,965, 425\n"
+}

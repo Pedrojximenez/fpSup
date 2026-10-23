@@ -79,7 +79,8 @@ STRID0 = 0x40000100                # the stub's first STRBASE id
 GUI_OBJECT = 0xC37B7048            # uishare ui_pool.c: app -> screens -> screen -> reader
 VR_RAM = 0xC3F40000                # our stand-in GUI app, reader, entry table, FV table
 FV_SITE, FV_VENEER = 0xC05E5BEC, 0xC0780000
-VR_CSV_ADDRS = {a for a, _, _ in rcd.VR_CSV}
+RATE_CSV_ADDRS = {a for a, _, _ in rcd.RATE_CSV}
+VRC_MAGIC = 0x31435256            # virtual_rcd.h
 BIT_CSV_ADDRS = {a for a, _, _ in rcd.BIT_CSV}
 _BUILT = {}
 # test layers (OG_MULTIFORMAT_CORE_DESIGN.md "測試分層"): the full per-format / per-entry
@@ -125,7 +126,7 @@ class Cam(T.Camera):
                  vr=False, b25_off=0x19C130, fr=1, **kw):
         super().__init__(files, dirs, **kw)
         self.fr = fr
-        self.vr_ids, self.fv = [], []
+        self.vr_ids, self.lv_ids, self.fv = [], [], []
         self.fv_next = VR_RAM + 0x10000
         if vr:
             self.gui(b25_off)
@@ -262,9 +263,8 @@ class Cam(T.Camera):
                 self.put(out, 4)
                 return self._ret(4)
             return self.fake_vr(ops, strings, out, frag)
-        if any(c == fpui.OP_FILE and a[0] in VR_CSV_ADDRS for c, a in ops):
-            self.uia.append(('VR', blk, None))
-            if 'VR' in self.uia_fail:
+        if any(c == fpui.OP_FILE and a[0] in RATE_CSV_ADDRS for c, a in ops):
+            if 'RATE' in self.uia_fail:
                 self.put(out, 4)
                 return self._ret(4)
             return self.fake_vr(ops, strings, out, frag)
@@ -586,11 +586,12 @@ class CoreTests(unittest.TestCase):
     def test_claims_are_the_hooks_the_menu_sites_the_converter_and_the_donors(self):
         sites = {h(x['site']) for x in self.f['hooks']}
         rest = {h(c['address']) for c in self.f['claims']} - sites
-        conv = {0xC06BDA3C, 0xC06BDA48, 0xC06BDB0C, 0xC06BDB18, 0xC06CB6DC, 0xC06CB6E8}
-        self.assertEqual(rest, {h(a) for a in self.f['ui_sites']} | conv)
+        conv = {0xC06BDA3C, 0xC06BDA48}
+        clock = {0xC0189440}  # v21 default clock claim, introduced before this UI change
+        self.assertEqual(rest, {h(a) for a in self.f['ui_sites']} | conv | clock)
         for c in self.f['claims']:
             a = h(c['address'])
-            want = 3 if c['address'] in self.f['ui_sites'] else 2 if a in conv else 1
+            want = 3 if c['address'] in self.f['ui_sites'] else 2 if a in conv | clock else 1
             self.assertEqual(c['kind'], want, c)
         # the donors' timing records (98, 117, 139 +4) are claimed at the entry, from the data
         cam = self.boot()
@@ -681,6 +682,136 @@ class CoreTests(unittest.TestCase):
         cam.callr(0xC031AC38, r0=dst, r1=0, r2=vid)
         self.assertEqual(cam.w(dst + 0x1C), 0x4000)
         self.assertEqual(cam.w(vm + L.VM['NOVR']), 4)
+
+    # ---- 2026-10-20: policies the data files declare, not the core ---------------
+    def sections(self, data):
+        n, so = struct.unpack_from('<2I', data, L.RCD['NSEC'])
+        return {struct.unpack_from('<I', data, so + 16 * i)[0]: so + 16 * i for i in range(n)}
+
+    def fn(self, cam, name):
+        return cam.w(cam.S + L.S['FN'] + 4 * L.FNS.index(name))
+
+    def cfn(self, cam, name, *args):
+        """S.FN[name](S, args...): r1..r3 (call() itself sets r0..r2 only)"""
+        args = list(args) + [0] * (3 - len(args))
+        cam.mu.reg_write(UC_ARM_REG_R3, args[2] & 0xFFFFFFFF)
+        return cam.call(self.fn(cam, name), r0=cam.S, r1=args[0], r2=args[1], thumb=True,
+                        sp=T.STACK - 0x1000)[0]
+
+    def test_the_writer_policy_compiles_into_its_entries(self):
+        wr = [(10000, 0, 4, L.WR_HDRCPU), (0, 0, 6, L.WR_BATCH4M)]
+        v = self.variant('OG3K.RCD', writer=wr)
+        d = rcd.decode(v, self.img, self.stock_ids)
+        self.assertEqual(d['writer'], wr)
+        self.assertEqual(struct.unpack_from('<I', v, L.RCD['MINCORE'])[0], 5)
+        cam = self.boot(rcds={'OG2K.RCD': self.rcds['OG2K.RCD'], 'OG3K.RCD': v})
+        self.assertEqual(self.outcome(cam, '32RESCUS.BIN'), 'LOADED')
+        rows = self.decoded({'OG2K.RCD': self.rcds['OG2K.RCD'], 'OG3K.RCD': v})
+        self.assertS(cam, rows)
+        ents = cam.S + self.S(cam, L.S['ENTS'])
+        seen = set()
+        for i in range(self.S(cam, L.S['NENT'])):
+            e = ents + L.ENT['SIZE'] * i
+            r, key = cam.w(e + L.ENT['ROW']), bytes(cam.mu.mem_read(e + L.ENT['KEY'], 16)).rstrip(b'\0')
+            want = 0 if r == 0 else (L.WR_HDRCPU | 4 << 8 if key == b'OG3K100' else L.WR_BATCH4M | 6 << 8)
+            self.assertEqual(cam.w(e + L.ENT['WFLAGS']), want, key)
+            seen.add(want)
+        self.assertEqual(seen, {0, L.WR_HDRCPU | 4 << 8, L.WR_BATCH4M | 6 << 8})
+
+    def test_the_core_and_rcd_decode_agree_on_writer_policies(self):
+        base = self.variant('OG3K.RCD', label='WP', writer=[(0, 0, 4, L.WR_HDRCPU)], rates=[])   # MINCORE: the writer's alone
+        at = self.sections(base)[L.SEC_WRITER]
+        off = struct.unpack_from('<I', base, at + 4)[0]
+        def put(data, o, v):
+            return rcd.reseal(data[:o] + struct.pack('<I', v) + data[o + 4:])
+        cases = {'W0.RCD': put(base, off + 4, 12345),            # not a rank
+                 'W1.RCD': put(base, off + 8, 1),                # Crop Mode on a format without it
+                 'W2.RCD': put(base, off + 12, 0),               # no bit depth
+                 'W3.RCD': put(base, off + 12, 8),               # not a bit depth
+                 'W4.RCD': put(base, off + 16, 0),               # no flag
+                 'W5.RCD': put(base, off + 16, 4),               # unknown flag
+                 'W6.RCD': put(base, off, 2),                    # a length that does not fit
+                 'W7.RCD': put(base, at + 12, 0),                # not required
+                 'W8.RCD': put(base, L.RCD['MINCORE'], 4)}       # an older core would not know it
+        for name, data in cases.items():
+            with self.subTest(name):
+                with self.assertRaises(rcd.RcdError) as cm:
+                    rcd.decode(data, self.img, self.stock_ids)
+                self.assertEqual(cm.exception.why, 'WRITER')
+                rcds = {'OG3K.RCD': self.rcds['OG3K.RCD'], name: data}
+                cam = self.boot(rcds=rcds)
+                self.assertEqual(self.S(cam, L.S['RCD_WHY']),
+                                 sorted(rcds).index(name) << 16 | L.RCD_WHY['WRITER'])
+                self.assertEqual(self.S(cam, L.S['NROWS']), 1)
+
+    def test_the_output_descriptors_follow_the_rows_aspect(self):
+        wide = self.variant('OG3K.RCD', label='WIDE', aspect=9, enum=0x4D4E4599)
+        rcds = {'OG3K.RCD': self.rcds['OG3K.RCD'], 'S16.RCD': self.all_rcds['S16.RCD'], 'WIDE.RCD': wide}
+        cam = self.boot(rcds=rcds)
+        rows = self.decoded(rcds)
+        obj, d0, d2 = VR_RAM + 0x8000, VR_RAM + 0x8100, VR_RAM + 0x8180   # firmware RAM
+        cam.mu.mem_write(d0, struct.pack('<11I', 1620, 911, *range(1, 10)))
+        cam.mu.mem_write(d2, struct.pack('<11I', 320, 180, *range(11, 20)))
+        cam.put(obj, d0); cam.put(obj + 16, d2)
+        cam.call(FMTSET, r0=0, r1=CINEMADNG, r2=1)
+        for label, want in (('OG3K', (1080, 213)), ('WIDE', (810, 160)), ('S16', None), ('OG3K', (1080, 213))):
+            with self.subTest(label):
+                r = [x['label'] for x in rows].index(label)
+                self.commit(cam, self.row(cam, r, L.ROW['MROW']))
+                cam.call(SETTER, r0=0, r1=rows[r]['stock_value'], r2=1)
+                self.assertNotEqual(self.pick(cam, rows[r]['entries'][3]['key']), 0)
+                for idx, d, w in ((0, d0, 1620), (2, d2, 320)):
+                    got = self.cfn(cam, 'OUT', obj, idx)
+                    if want is None:
+                        self.assertEqual(got, 0)
+                        continue
+                    stock = list(struct.unpack('<11I', cam.mu.mem_read(d, 44)))
+                    stock[1] = stock[5] = want[idx // 2]          # the two heights (+0x04, +0x14)
+                    self.assertEqual(list(struct.unpack('<11I', cam.mu.mem_read(got, 44))), stock)
+                    self.assertEqual(stock[0], w)
+
+    def test_the_gain_dispatch_is_raw_movie_for_our_canvases_only(self):
+        cam = self.boot()
+        canvas = KEYBUF + 0x800
+        cam.put(0xC375D840 + 8, canvas)
+        self.live(cam, 4)
+        r = self.row_of_enum(4)
+        live, other = self.row(cam, r, L.ROW['PID']), self.row(cam, 1 - r, L.ROW['PID'])
+        for pid, want in ((live, 1), (other, 0), (5, 0), (83, 0)):
+            cam.put(canvas, pid)
+            self.assertEqual(self.cfn(cam, 'GS'), want, pid)
+        cam.put(canvas, live)
+        cam.call(FMTSET, r0=0, r1=1, r2=1)                       # MOV: nothing of ours is live
+        self.assertEqual(self.cfn(cam, 'GS'), 0)
+        cam.put(0xC375D840 + 8, 0)
+        self.assertEqual(self.cfn(cam, 'GS'), 0)
+
+    def test_a_clip_shared_by_two_formats_is_named_after_the_live_one(self):
+        twin = self.variant('OG3K.RCD', label='TWIN', enum=0x4D4E4598)
+        rcds = {'OG3K.RCD': self.rcds['OG3K.RCD'], 'TWIN.RCD': twin}
+        cam = self.boot(rcds=rcds)
+        rows = self.decoded(rcds)
+        sizes, out = KEYBUF + 0x500, KEYBUF + 0x540
+        cam.put(sizes + 8, rows[0]['act'][0]); cam.put(sizes + 0xC, rows[0]['act'][1])
+        cam.call(FMTSET, r0=0, r1=CINEMADNG, r2=1)
+        for r in (1, 0, 1):
+            self.commit(cam, self.row(cam, r, L.ROW['MROW']))
+            cam.call(SETTER, r0=0, r1=2, r2=1)
+            self.assertEqual(self.S(cam, L.S['CUR']), r + 1)
+            self.cfn(cam, 'NAME', out, sizes, 0)
+            self.assertEqual(self.S(cam, L.S['PBROW']), r + 1)
+        cam.call(FMTSET, r0=0, r1=1, r2=1)                       # nothing live: the first row
+        self.cfn(cam, 'NAME', out, sizes, 0)
+        self.assertEqual(self.S(cam, L.S['PBROW']), 1)
+
+    def test_the_fast_clock_is_opened_only_for_a_fast_format(self):
+        for names, fast in ((('OG35K.RCD', 'OG4K.RCD'), False), (('OG4K.RCD', 'S16.RCD'), True)):
+            with self.subTest(names):
+                cam = self.boot(rcds={n: self.all_rcds[n] for n in names})
+                self.assertEqual(self.outcome(cam, '32RESCUS.BIN'), 'LOADED')
+                self.assertEqual(cam.w(0xC0189440), 0x7CFFF64F if fast else self.sw(0xC0189440))
+                cam.power_off()
+                self.assertEqual(cam.w(0xC0189440), self.sw(0xC0189440))
 
     def test_bad_files_are_left_out_and_said_why(self):
         good = self.rcds['OG3K.RCD']
@@ -1521,9 +1652,12 @@ class CoreTests(unittest.TestCase):
     def test_the_gain_site_and_the_aspect_sites(self):
         cam = self.boot()
         self.live(cam, 4)
-        self.pick(cam, 'OG3K30')
+        e = self.pick(cam, 'OG3K30')
+        canvas = KEYBUF + 0x800                                 # LiveViewModeMgr +8: our canvas
+        cam.put(canvas, cam.w(e + 4))
+        cam.put(0xC375D840 + 8, canvas)
         r0, _ = cam.call(0xC03A6DD8, r0=0x77)
-        self.assertEqual(r0, 1, 'raw movie while live')
+        self.assertEqual(r0, 1, 'raw movie for our canvas')
         for site, back in ((0xC0306EA0, 0xC0306EA4), (0xC0306EEC, 0xC0306EF0)):
             cam.mu.mem_write(back, struct.pack('<I', 0xE12FFF1E))
             r0, _ = cam.call(site, r0=0x99)
@@ -1763,11 +1897,11 @@ class CoreTests(unittest.TestCase):
 
     # ---- equivalence with today's OpenGate (30OG3K / 30OG2K) ------------------------
     # ---- v3 timing (2026-10-08): the core solves it; today's words are the reference
-    def ent_by_key(self, cam, key, vrate=0):
+    def ent_by_key(self, cam, key):
         for i in range(self.S(cam, L.S['NENT'])):
             e = cam.S + self.S(cam, L.S['ENTS']) + L.ENT['SIZE'] * i
             k = bytes(cam.mu.mem_read(e + L.ENT['KEY'], 16)).split(b'\0')[0].decode()
-            if k == key and cam.w(e + L.ENT['VRATE']) == vrate:
+            if k == key:
                 return e
         raise KeyError(key)
 
@@ -1831,110 +1965,75 @@ class CoreTests(unittest.TestCase):
                         oc = bytes(oc)
                     self.assertEqual(oc, nc, f'{e["key"]} {table:#x}')
 
-    # ---- the virtual frame rates (design §15: K = 4, core-defined) --------------------
-    RANKS = [r for r, _, _ in L.VRATES]
-
-    def vr_rcds(self):
-        """OG3K as built (23.98..100, 17.98) and HS: OG2K's data on mode 12 (2016x672,
-        hmax 330, 302 fps) -- every stock rate, 239.76, 279.72, 17.98"""
+    # ---- the frame rates: the nine stock rows, greyed per format -------------------------
+    # (the virtual frame rates were retired 2026-10-20; archive/virtual-rate-20261020)
+    def fast_rcds(self):
+        """OG3K as built (23.98..100) and HS: OG2K's data on mode 12 (2016x672, hmax 330,
+        302 fps) -- every stock rate"""
         return {'OG3K.RCD': self.rcds['OG3K.RCD'],
                 'HS.RCD': self.variant('OG2K.RCD', label='HS', enum=10, modes=[(12, 30219, 330, 0, 6)])}
 
-    def vr_boot(self, **kw):
-        cam = self.boot(rcds=self.vr_rcds(), vr=True, **kw)
-        cam.vr_rows = self.decoded(self.vr_rcds())
+    def gui_boot(self, rcds=None, **kw):
+        rcds = rcds or self.fast_rcds()
+        cam = self.boot(rcds=rcds, vr=True, **kw)
+        cam.gui_rows = self.decoded(rcds)
         return cam
 
-    def vr_live(self, cam, enum):
+    def gui_live(self, cam, enum):
         cam.call(FMTSET, r0=0, r1=CINEMADNG, r2=1)
-        r = next(i for i, x in enumerate(cam.vr_rows) if x['enum'] == enum)
+        r = next(i for i, x in enumerate(cam.gui_rows) if x['enum'] == enum)
         self.commit(cam, self.row(cam, r, L.ROW['MROW']))
-        cam.call(SETTER, r0=0, r1=cam.vr_rows[r]['stock_value'], r2=1)
-
-    def rcommit(self, cam, mrow, name='rcmt2'):
-        var = KEYBUF + 0x900
-        cam.put(var + 8, mrow)
-        cam.call(self.site_of(name), r0=var)
-
-    def rpairs(self, cam):
-        n = self.S(cam, L.S['RPAIRN'])
-        return [(cam.w(cam.S + L.S['RPAIRS'] + 8 * i), cam.w(cam.S + L.S['RPAIRS'] + 8 * i + 4))
-                for i in range(n)]
-
-    def spairs(self, cam):
-        n = self.S(cam, L.S['SPAIRN'])
-        return [(cam.w(cam.S + L.S['SPAIRS'] + 8 * i), cam.w(cam.S + L.S['SPAIRS'] + 8 * i + 4))
-                for i in range(n)]
-
-    def stock_pairs(self, a, n):
-        return [struct.unpack_from('<2I', self.img, a - 0xC0000000 + 8 * i) for i in range(n)]
+        cam.call(SETTER, r0=0, r1=cam.gui_rows[r]['stock_value'], r2=1)
 
     def csv_ab(self, cam):
-        """each copy's last 9 + K rows' "a,b", as the menu reads them"""
+        """each copy's nine rows' "a,b", as the menu reads them"""
         out = []
         for stock, copy, size in cam.fv:
-            if stock not in VR_CSV_ADDRS:
+            if stock not in RATE_CSV_ADDRS:
                 continue
             lines = bytes(cam.mu.mem_read(copy, size)).decode('latin1').split('\r\n')
-            out.append([ln.rsplit(',', 2)[-2] + ',' + ln.rsplit(',', 1)[-1] for ln in lines if ln][-L.VR_ROWS:])
+            out.append([ln.rsplit(',', 2)[-2] + ',' + ln.rsplit(',', 1)[-1] for ln in lines if ln][-len(L.RATES):])
         return out
 
-    def test_the_virtual_rates_menu_goes_in(self):
-        import vr_ui
-        cam = self.vr_boot()
-        self.assertEqual((self.S(cam, L.S['VR_WHY']), self.S(cam, L.S['VR_UI'])), (1, 1))
-        ids = cam.vr_ids
-        self.assertEqual(len(ids), L.VR_K)
-        self.assertEqual([self.S(cam, L.S['VR_LABEL'] + 4 * k) for k in range(L.VR_K)], ids)
-        # the page: vr_ui's bytes, the K label ids in its marks, an FSPG copy the entry names
-        page, marks = vr_ui.b25(self.img)
-        page = bytearray(page)
-        for k, m in enumerate(marks):
-            struct.pack_into('>I', page, m, ids[k])
-        at = (NBU_BASE + cam.w(cam.b25_entry + 8)) & 0xFFFFFFFF
-        self.assertEqual(bytes(cam.mu.mem_read(at, len(page))), bytes(page))
-        self.assertEqual([cam.w(at - 128 + 4 * i) for i in range(2, 6)],
-                         [len(page), len(page), 0x1CD6B, 1])
-        self.assertTrue(cam.S + L.S['BODY'] < at, 'in the core block')
-        # the LV layouts: every run, then the label keys
-        runs, lmarks = vr_ui.lv(self.img)
-        want = {}
-        for a, _, new in runs:
-            for i, b in enumerate(new):
-                want[a + i] = b
-        for i, m in enumerate(lmarks):
-            for j, b in enumerate(struct.pack('>I', ids[i % L.VR_K])):
-                want[m + j] = b
-        got = {a: cam.mu.mem_read(a, 1)[0] for a in want}
-        self.assertEqual(got, want)
-        # the six variants got K rows each, "0,0" while nothing of ours is live; the
-        # stock nine as the firmware has them
-        self.assertEqual([s for s, _, _ in cam.fv if s in VR_CSV_ADDRS], [a for a, _, _ in rcd.VR_CSV])
-        self.assertEqual(self.csv_ab(cam), self.csv_want(set(range(9))))
-        # the rate converter: the stock nine, the K virtual rows, the hidden 15 fps last
-        stock = self.stock_pairs(0xC2E40224, 10)
-        self.assertEqual(self.rpairs(cam), [p for p in stock if p[1] != 9] +
-                         [(b, 9 + k) for k, (_, b, _) in enumerate(L.VRATES)] + [(0, 13)])
-        self.assertEqual(self.spairs(cam), self.stock_pairs(0xC2E44EE4, 9) + [(0, 13)])
-        cam.power_off()
-        for a, st, _ in runs:
-            self.assertEqual(bytes(cam.mu.mem_read(a, len(st))), st, f'LV 0x{a:08X} put back')
+    def csv_row(self, addr, size, row):
+        """the "a,b" of stock row `row` (1-based NO) in one variant"""
+        text = self.img[addr - 0xC0000000:addr - 0xC0000000 + size].decode('latin1')
+        for line in text.split('\r\n'):
+            cells = line.split(',')
+            if cells and cells[0].lstrip('\ufeff\xef\xbb\xbf') == str(row):
+                return ','.join(cells[-2:])
+        raise KeyError((hex(addr), row))
 
     def csv_want(self, on, declared=False):
-        """each variant's 13 rows: its stock "a,b" for the rows in `on`, else 0,0"""
-        return [[('1,2' if declared else rcd._csv_row(self.img, addr, size, j + 1 if j < 9 else (9 if L.VRATES[j - 9][1] == 7 else 1)))
-                 if j in on else '0,0' for j in range(L.VR_ROWS)] for addr, size, _ in rcd.VR_CSV]
+        """each variant's nine rows: its stock "a,b" for the rows in `on`, else 0,0"""
+        return [[('1,2' if declared else self.csv_row(addr, size, j + 1)) if j in on else '0,0'
+                 for j in range(len(L.RATES))] for addr, size, _ in rcd.RATE_CSV]
+
+    def test_the_frame_rate_copies_go_in_unchanged(self):
+        cam = self.gui_boot()
+        self.assertEqual((self.S(cam, L.S['RATE_WHY']), self.S(cam, L.S['RATE_UI'])), (1, 1))
+        self.assertEqual([s for s, _, _ in cam.fv if s in RATE_CSV_ADDRS], [a for a, _, _ in rcd.RATE_CSV])
+        for stock, copy, size in cam.fv:
+            if stock in RATE_CSV_ADDRS:
+                self.assertEqual(bytes(cam.mu.mem_read(copy, size)), self.stock(stock, size), hex(stock))
+        self.assertEqual(self.csv_ab(cam), self.csv_want(set(range(9))))
+        # no menu of the core's own: the frame-rate converters, the B2_5 page, the rate
+        # commit callbacks and the shutter lists' display sites are the firmware's
+        for a in (0xC06BDB0C, 0xC06BDB10, 0xC06BDB18, 0xC06CB6DC, 0xC06CB6E0, 0xC06CB6E8,
+                  0xC057A6F8, 0xC05821B8, 0xC0553CDC, 0xC00A075C, 0xC0554768):
+            self.assertEqual(cam.w(a), self.sw(a), hex(a))
+        self.assertEqual(cam.w(cam.b25_entry + 8), 0x19C130)
 
     def test_every_frame_rate_row_follows_the_live_format(self):
         """2026-10-08 (user): no row the user can choose falls back to a stock mode --
-        a stock rate without a plain entry is greyed, a virtual one with entries is not"""
-        cam = self.vr_boot()
+        a stock rate without a plain entry is greyed"""
+        cam = self.gui_boot()
         self.assertEqual(self.csv_ab(cam), self.csv_want(set(range(9))))
-        self.vr_live(cam, 4)                                    # OG3K: 23.98..100, 17.98
-        self.assertEqual(self.csv_ab(cam), self.csv_want(set(range(8)) | {11}, declared=True))
-        self.vr_live(cam, 10)                                   # HS: all, 239.76, 279.72, 17.98
-        self.assertEqual(self.csv_ab(cam), self.csv_want(set(range(12)), declared=True))
-        self.vr_live(cam, 4)
+        self.gui_live(cam, 4)                                   # OG3K: 23.98..100
+        self.assertEqual(self.csv_ab(cam), self.csv_want(set(range(8)), declared=True))
+        self.gui_live(cam, 10)                                  # HS: all nine
+        self.assertEqual(self.csv_ab(cam), self.csv_want(set(range(9)), declared=True))
+        self.gui_live(cam, 4)
         self.commit(cam, 0)                                     # a stock resolution: the firmware's
         cam.call(SETTER, r0=0, r1=3, r2=1)
         self.assertEqual(self.S(cam, L.S['FLAG']), 0)
@@ -1943,14 +2042,13 @@ class CoreTests(unittest.TestCase):
     def test_the_core_times_every_rate_as_the_reference(self):
         """v3: the entries the core makes from the modes (ogc.c gen_entry) are the
         reference's (ogc_layout.gen_entries) byte for byte in S -- PAL hmax, two modes,
-        a rate exactly at a mode's limit, Crop Mode twins, mode 12's virtual rates"""
+        a rate exactly at a mode's limit, Crop Mode twins"""
         cases = [
             dict(modes=[(12, 30219, 560, 0, 6)]),        # a synthetic hmax: an exact quotient (udiv)
             dict(modes=[(98, 2997, 445, 450, 4), (117, 10000, 330, 0, 4)]),       # 48..60 on none
             dict(modes=[(98, 11988, 445, 450, 4)]),                              # 119.88 exactly
-            dict(modes=[(12, 30219, 330, 0, 6)], flags=1 | L.RFLAG_CROP),         # all + virtual, CROP
-            dict(modes=[(139, 2398, 445, 0, 6)]),                                # 23.98 and 17.98 only
-            dict(modes=[(139, 1798, 445, 0, 6)]),                                # 17.98 only
+            dict(modes=[(12, 30219, 330, 0, 6)], flags=1 | L.RFLAG_CROP),         # all, CROP
+            dict(modes=[(139, 2398, 445, 0, 6)]),                                # 23.98 only
         ]
         for change in some(cases, 3):
             rcds = dict(self.rcds, **{'OG2K.RCD': self.variant('OG2K.RCD', **change)})
@@ -1961,8 +2059,7 @@ class CoreTests(unittest.TestCase):
         """layer 2 for the five formats: every entry the core makes keeps the format's
         hmax and x, solves to the rate's 72 MHz count (real period hmax x vmax within
         hmax / 2, hmax when the tail floor moved it), fits the mode's rows plus its stock
-        vblank (imx410_full.Registry; S16's window is Jose's, so not there), and 8.99 is
-        not made (user: the camera first)"""
+        vblank (imx410_full.Registry; S16's window is Jose's, so not there)"""
         sys.path.insert(0, str(BUILD))
         import imx410_full as X
         reg = X.Registry()
@@ -1970,14 +2067,13 @@ class CoreTests(unittest.TestCase):
             d = rcd.decode(data, self.img, self.stock_ids)
             for e in d['entries']:
                 hm, tail, vm, x = e['w0'] & 0xFFFF, e['w0'] >> 16, e['w1'] & 0xFFFF, e['w1'] >> 16
-                cyc = (next(v[0] for k, v in enumerate(L.VR_TIME) if L.VRATES[k][0] == e['vrate'])
+                cyc = (next(r['cycles'] for r in d['rates'] if r['rank'] == e['vrate'])
                        if e['vrate'] else self.cycles_of(e['key'], d['label']))
                 m = next(m for m in d['modes'] if m[0] == e['donor'])
                 self.assertIn(hm, (m[2], m[3]), e['key'])
                 self.assertEqual(x, m[4], e['key'])
                 self.assertEqual((vm, tail), L.solve(hm, cyc), e['key'])
                 self.assertLessEqual(abs(hm * vm - cyc), hm if tail - hm < L.MIN_TAIL else hm // 2 + 1, e['key'])
-                self.assertNotEqual(e['vrate'], 899)
                 if d['label'] != 'S16':
                     mode = reg.by_id[e['donor']]
                     self.assertGreaterEqual(vm - mode.raw[1], mode.vblank, e['key'])
@@ -1993,10 +2089,9 @@ class CoreTests(unittest.TestCase):
         d = rcd.decode(self.rcds['OG3K.RCD'], self.img, self.stock_ids)
         rcds = dict(self.rcds, **{'OG3K.RCD': self.variant('OG3K.RCD', modes=[(98, 3000, 445, 450, 4)],
                                                            flags=d['flags'] | L.RFLAG_CROP)})
-        cam = self.boot(rcds=rcds, vr=True)
-        cam.vr_rows = self.decoded(rcds)
-        self.vr_live(cam, 4)
-        self.assertEqual(self.csv_ab(cam), self.csv_want({0, 1, 2, 3, 11}, declared=True))
+        cam = self.gui_boot(rcds)
+        self.gui_live(cam, 4)
+        self.assertEqual(self.csv_ab(cam), self.csv_want({0, 1, 2, 3}, declared=True))
         for key, there in (('OG3K30', 1), ('OG3K30CROP', 1), ('OG3K48', 0), ('OG3K48CROP', 0)):
             self.assertEqual(bool(self.pick(cam, key)), bool(there), key)
         long7 = self.variant('OG3K.RCD', label='LONGER7', flags=d['flags'] | L.RFLAG_CROP)
@@ -2009,137 +2104,179 @@ class CoreTests(unittest.TestCase):
                          L.RCD_WHY['FIELD'], 'the core refuses it too')
 
     def test_the_rate_limit_is_the_fastest_mode(self):
-        cam = self.vr_boot()
+        cam = self.gui_boot()
         self.stub_gates(cam)
         frmax = lambda v: cam.callr(0xC00A87E4, r4=v)['r0']     # noqa: E731
-        self.vr_live(cam, 4)                                    # OG3K: 104.79
+        self.gui_live(cam, 4)                                   # OG3K: 104.79
         self.assertEqual(frmax(7), 6, '119.88 normalises to 100')
-        self.vr_live(cam, 10)                                   # HS: 302.19
+        self.gui_live(cam, 10)                                  # HS: 302.19
         self.assertEqual(frmax(7), 7)
 
-    def test_the_virtual_rates_menu_stays_out_when_it_cannot_go_in(self):
-        for kw, why in ((dict(b25_off=0x19C134), 2), (dict(uia_fail={'VR'}), 0x14)):
-            cam = self.vr_boot(**kw)
-            self.assertEqual((self.S(cam, L.S['VR_WHY']), self.S(cam, L.S['VR_UI'])), (why, 0), kw)
-            self.assertEqual(cam.w(cam.b25_entry + 8), kw.get('b25_off', 0x19C130), kw)
-            self.assertEqual(self.rpairs(cam), self.stock_pairs(0xC2E40224, 10), kw)
-            self.assertEqual(self.outcome(cam, '32RESCUS.BIN'), 'LOADED', 'the formats still go in')
-            self.vr_live(cam, 4)
-            self.rcommit(cam, 9)
-            self.assertEqual(self.S(cam, L.S['VRATE']), 0, kw)
-        cam = self.boot(rcds=self.vr_rcds())                    # no GUI at all
-        self.assertEqual((self.S(cam, L.S['VR_WHY']), self.S(cam, L.S['VR_UI'])), (2, 0))
+    def test_without_the_frame_rate_copies_the_formats_still_go_in(self):
+        cam = self.gui_boot(uia_fail={'RATE'})
+        self.assertEqual((self.S(cam, L.S['RATE_WHY']), self.S(cam, L.S['RATE_UI'])), (2, 0))
+        self.assertEqual(self.outcome(cam, '32RESCUS.BIN'), 'LOADED', 'the formats still go in')
+        self.gui_live(cam, 4)
+        self.assertEqual(self.S(cam, L.S['FLAG']), 1)
+        self.assertEqual(self.csv_ab(cam), [])
 
-    def test_a_virtual_row_commits_its_rate_and_the_pairs_follow(self):
-        cam = self.vr_boot()
-        self.vr_live(cam, 10)
-        stock = [p for p in self.stock_pairs(0xC2E40224, 10) if p[1] != 9]
-        virt = [(b, 9 + k) for k, (_, b, _) in enumerate(L.VRATES)]
-        ssum = self.stock_pairs(0xC2E44EE4, 9)
-        for name in ('rcmt1', 'rcmt2'):
-            for row, rank in ((9, 23976), (12, 0), (11, 1798), (10, 27972), (3, 0), (9, 23976)):
-                self.rcommit(cam, row, name)
-                self.assertEqual(self.S(cam, L.S['VRATE']), rank, (name, row))
-                k = row - 9 if rank else None
-                if rank:
-                    self.assertEqual(self.rpairs(cam), [virt[k]] + stock + virt[:k] + virt[k + 1:] + [(0, 13)])
-                    self.assertEqual(self.spairs(cam), [(L.VRATES[k][2], row)] + ssum + [(0, 13)])
-                else:
-                    self.assertEqual(self.rpairs(cam), stock + virt + [(0, 13)])
-                    self.assertEqual(self.spairs(cam), ssum + [(0, 13)])
-            self.rcommit(cam, 0, name)
-        self.assertEqual(self.S(cam, L.S['VR_COMMITS']), 14)
-        self.rcommit(cam, 9)
-        self.assertEqual(self.S(cam, L.S['DIRTY']), 1)
-        self.vr_live(cam, 4)                                    # OG3K has no 239.76: the rate goes
+    # ---- the declared rates (SEC_RATES) and the service --------------------------------
+    def service(self, cam, op, arg=0):
+        """the consumer's endpoint behind the picker veneer (virtual_rcd.h vrc_find)"""
+        w = cam.w(PICKER)
+        d = w & 0xFFFFFF
+        d -= 0x1000000 if d & 0x800000 else 0
+        ven = PICKER + 8 + 4 * d
+        self.assertEqual(cam.w(ven), 0xE51FF004)
+        magic, abi, fn, ctx = (cam.w(ven + 8 + 4 * k) for k in range(4))
+        self.assertEqual((magic, abi, ctx), (VRC_MAGIC, 2, cam.S))
+        return cam.call(fn & ~1, r0=ctx, r1=op, r2=arg, thumb=True, sp=T.STACK - 0x1000)[0]
+
+    def rates(self, cam):
+        buf = KEYBUF + 0xA00
+        cam.mu.mem_write(buf, struct.pack('<5I', 20 + 20 * 8, 2, 0, 0, 0) + bytes(20 * 8))
+        self.assertEqual(self.service(cam, 5, buf), 0)
+        n, chosen, live = (cam.w(buf + 8 + 4 * k) for k in range(3))
+        return chosen, live, [struct.unpack('<5I', cam.mu.mem_read(buf + 20 + 20 * i, 20)) for i in range(n)]
+
+    def test_each_format_declares_its_rates_and_the_core_makes_their_entries(self):
+        for name, data in self.all_rcds.items():
+            d = rcd.decode(data, self.img, self.stock_ids)
+            self.assertEqual(d['rates'], [dict(r) for r in L.DEFAULT_RATES], name)
+            made = {e['vrate'] for e in d['entries'] if e['vrate']}
+            fast = max(m[1] for m in d['modes'])
+            self.assertEqual(made, {r['rank'] for r in L.DEFAULT_RATES if r['rank'] <= fast}, name)
+        cam = self.boot(rcds=self.all_rcds)
+        self.assertS(cam, [dict(r, target=r['label'].lower()) for r in self.decoded(self.all_rcds)])
+
+    def test_a_file_from_before_declared_rates_has_the_rates_its_core_offered(self):
+        """v0.1.4test's five files (MINCORE 4, no SEC_RATES) were recorded by a core
+        with 239.76 / 279.72 / 17.98 of its own: core 5 reads them as declaring those,
+        in rcd.decode and in the core alike"""
+        rel = HERE.parents[3] / 'fpSup/releases/fpsup-res-custom-v0.1.4test/fpSup/RESCUS'
+        old = {p.name: p.read_bytes() for p in rel.glob('*.RCD')}
+        self.assertEqual(len(old), 5)
+        for name, data in old.items():
+            self.assertEqual(struct.unpack_from('<I', data, L.RCD['MINCORE'])[0], 4, name)
+            self.assertNotIn(L.SEC_RATES, self.sections(data), name)
+            self.assertEqual(rcd.decode(data, self.img, self.stock_ids)['rates'],
+                             [dict(r) for r in L.DEFAULT_RATES], name)
+        cam = self.boot(rcds=old)
+        self.assertEqual(self.outcome(cam, '32RESCUS.BIN'), 'LOADED')
+        self.assertS(cam, [dict(r, target=r['label'].lower()) for r in self.decoded(old)])
+        none = self.variant('OG3K.RCD', label='NR', rates=[])         # "no rates beyond the nine"
+        self.assertEqual(struct.unpack_from('<I', none, L.RCD['MINCORE'])[0], 5)
+        self.assertEqual(rcd.decode(none)['rates'], [])
+
+    def test_the_core_and_rcd_decode_agree_on_declared_rates(self):
+        base = self.variant('OG3K.RCD', label='DR')
+        at = self.sections(base)[L.SEC_RATES]
+        off = struct.unpack_from('<I', base, at + 4)[0]
+        def put(data, o, v):
+            return rcd.reseal(data[:o] + struct.pack('<I', v) + data[o + 4:])
+        r0 = off + 4                                            # the first record: 239.76
+        cases = {'R0.RCD': put(base, r0, 2398),                 # a stock rank
+                 'R1.RCD': put(base, r0, 23977),                # not num / den
+                 'R2.RCD': put(base, r0 + 4, 0),                # no numerator
+                 'R3.RCD': put(base, r0 + 12, 300301),          # not the exact cycles
+                 'R4.RCD': put(base, r0 + 16, 8),               # not a stock carrier enum
+                 'R5.RCD': put(base, r0 + 20, 0),               # no nominal
+                 'R6.RCD': put(base, r0 + 24, 0x3F000000),      # engine below 1 fps
+                 'R7.RCD': put(base, r0 + 28, 23976),           # the same rank twice
+                 'R8.RCD': put(base, off, 9),                   # a count that does not fit
+                 'R9.RCD': put(base, at + 12, 0),               # not required
+                 'RA.RCD': put(base, L.RCD['MINCORE'], 4)}      # an older core would not know it
+        for name, data in cases.items():
+            with self.subTest(name):
+                with self.assertRaises(rcd.RcdError) as cm:
+                    rcd.decode(data, self.img, self.stock_ids)
+                self.assertEqual(cm.exception.why, 'RATES')
+                rcds = {'OG3K.RCD': self.rcds['OG3K.RCD'], name: data}
+                cam = self.boot(rcds=rcds)
+                self.assertEqual(self.S(cam, L.S['RCD_WHY']),
+                                 sorted(rcds).index(name) << 16 | L.RCD_WHY['RATES'])
+                self.assertEqual(self.S(cam, L.S['NROWS']), 1)
+
+    def test_the_service_offers_and_chooses_a_declared_rate(self):
+        cam = self.gui_boot(fr=7)                               # the camera holds 119.88
+        cam.put(0xC3E80000, 0xC3E80100)                         # MovSigProcess running
+        cam.put(0xC3E80104, 1)
+        self.assertEqual(self.rates(cam), (0, 0, []), 'nothing of ours live')
+        self.assertEqual(self.service(cam, 6, 23976), 7, 'VRC_RATE: nothing live offers it')
+        self.gui_live(cam, 10)                                  # HS: mode 12, 302 fps
+        chosen, live, got = self.rates(cam)
+        self.assertEqual((chosen, live), (0, 0))
+        self.assertEqual(got, [(r['rank'], r['num'], r['den'], r['carrier'], r['nominal'])
+                               for r in L.DEFAULT_RATES])
+        hs = cam.gui_rows[[x['label'] for x in cam.gui_rows].index('HS')]
+        stock = self.pick(cam, 'HS120')
+        self.assertEqual(cam.w(stock + L.ENT['VRATE']), 0)
+        stops = cam.calls.count('LV_STOP')
+        self.assertEqual(self.service(cam, 6, 23976), 0)
+        self.assertEqual(self.S(cam, L.S['VRATE']), 23976)
+        self.assertEqual(cam.calls.count('LV_STOP'), stops + 1, 'same carrier, new cadence: rebuilt')
+        self.assertEqual(self.rates(cam)[:2], (23976, 1))
+        e = self.pick(cam, 'HS120')
+        want = next(x for x in hs['entries'] if x['vrate'] == 23976 and not x['crop'])
+        self.assertEqual((cam.w(e + L.ENT['VRATE']), cam.w(e + L.ENT['W0']), cam.w(e + L.ENT['W1']),
+                          cam.w(e + L.ENT['ENGFPS']), cam.w(e + L.ENT['RNUM']), cam.w(e + L.ENT['RDEN'])),
+                         (23976, want['w0'], want['w1'], want['engfps'], 240000, 1001))
+        self.assertEqual(cam.w(self.pick(cam, 'HS60') + L.ENT['VRATE']), 0, 'another carrier: stock')
+        # 17.98 rides 23.98: chosen while the camera holds 119.88 -- no rebuild, not live
+        stops = cam.calls.count('LV_STOP')
+        self.assertEqual(self.service(cam, 6, 1798), 0)
+        self.assertEqual(cam.calls.count('LV_STOP'), stops + 1, 'the old one (119.88) was live')
+        self.assertEqual(self.rates(cam)[:2], (1798, 0))
+        self.assertEqual(self.service(cam, 6, 12345), 7)          # VRC_RATE: not offered
+        self.assertEqual(self.S(cam, L.S['VRATE']), 1798)
+        self.assertEqual(self.service(cam, 6, 0), 0)
         self.assertEqual(self.S(cam, L.S['VRATE']), 0)
-        self.assertEqual(self.rpairs(cam), stock + virt + [(0, 13)])
+        # a format without it: the choice goes with the row
+        self.service(cam, 6, 23976)
+        self.gui_live(cam, 4)                                   # OG3K: 104.79, no 239.76
+        self.assertEqual(self.S(cam, L.S['VRATE']), 0)
 
-    def test_the_picker_takes_the_virtual_rates_entries(self):
-        cam = self.vr_boot()
-        self.vr_live(cam, 10)
-        e = self.pick(cam, 'HS120')
-        self.assertEqual((cam.w(e + L.ENT['VRATE']), cam.w(e + L.ENT['NOMINAL'])), (0, 120))
-        self.rcommit(cam, 9)
-        e = self.pick(cam, 'HS120')
-        self.assertEqual((cam.w(e + L.ENT['VRATE']), cam.w(e + L.ENT['NOMINAL'])), (23976, 240))
-        self.assertEqual(cam.w(e + L.ENT['ENGFPS']), L._f32(240000/1001),
-                         'accepted virtual cadence; the withdrawn engine60 trial is not used')
-        self.assertEqual(cam.w(e + L.ENT['W1']) & 0xFFFF, 910, 'mode 12 at 239.76: its own vmax')
-        e = self.pick(cam, 'HS23_98')
-        self.assertEqual(cam.w(e + L.ENT['VRATE']), 0, '23.98 keeps its plain entry')
-        self.rcommit(cam, 11)
-        e = self.pick(cam, 'HS23_98')
-        self.assertEqual((cam.w(e + L.ENT['VRATE']), cam.w(e + L.ENT['NOMINAL'])), (1798, 18))
-        self.rcommit(cam, 1)
-        e = self.pick(cam, 'HS23_98')
-        self.assertEqual(cam.w(e + L.ENT['VRATE']), 0)
-
-    def shim(self, cam, name):
-        return self.shim_base(cam) + self.f['shims'][name]
-
-    def vtv(self, cam):
-        """(slowest Tv of both copies, display clamp, angle-list enum, angle fps x 100)"""
-        a, b = KEYBUF + 0xC00, KEYBUF + 0xC08
-        out = []
-        for name in ('tvmin', 'tvmin2'):
-            cam.mu.mem_write(a, struct.pack('<4I', 30, 1, 1, 120))
-            r = cam.callr(self.shim(cam, name), r0=a, r1=b)
-            out.append((struct.unpack('<2I', bytes(cam.mu.mem_read(b, 8))), r['r0']))
-        nx = lambda n: cam.S + L.S['NEXT'] + 4 * L.HOOK_INDEX[n]   # noqa: E731
-        old = cam.w(nx('tvdisp')), cam.w(nx('angtv'))
-        cam.put(nx('tvdisp'), T.DONE)
-        cam.put(nx('angtv'), T.DONE)
-        sp = T.STACK - 0x1004 - 0x100
-        cam.mu.mem_write(sp + 0x28, struct.pack('<2I', 1, 125))
-        cam.callr(self.shim(cam, 'tvdisp'), sp=sp, fp=cam.fr)
-        out.append(struct.unpack('<2I', bytes(cam.mu.mem_read(sp + 0x28, 8))))
-        out.append(cam.callr(self.shim(cam, 'anglist'))['r0'])
-        cam.put(sp, cam.fr)
-        out.append(cam.callr(self.shim(cam, 'angtv'), sp=sp, r6=5000)['r6'])
-        cam.put(nx('tvdisp'), old[0])
-        cam.put(nx('angtv'), old[1])
-        return out
-
-    def test_the_shutter_range_and_angle_follow_the_virtual_rate(self):
-        cam = self.vr_boot()
-        cam.fr = 7
-        stock = [((1, 120), 1), ((1, 120), 1), (1, 125), 7, 5000]
-        self.assertEqual(self.vtv(cam), stock, 'nothing of ours live')
-        self.vr_live(cam, 10)
-        self.assertEqual(self.vtv(cam), stock, 'ours live, no virtual rate')
-        self.rcommit(cam, 9)
-        self.assertEqual(self.vtv(cam), [((1, 240), 1), ((1, 240), 1), (1, 240), 0, 23976])
-        cam.fr = 6                                              # the camera moved to 100p
-        self.assertEqual(self.vtv(cam), [((1, 120), 1), ((1, 120), 1), (1, 125), 6, 5000])
+    def test_the_dng_rate_and_the_shutter_follow_the_chosen_rate(self):
+        cam = self.gui_boot(fr=7)
+        self.gui_live(cam, 10)
+        out = KEYBUF + 0xB00
+        def dng(num, den):
+            cam.mu.mem_write(out, struct.pack('<2I', num, den))
+            got = self.cfn(cam, 'RECRATE', out)
+            return got, struct.unpack('<2I', cam.mu.mem_read(out, 8))
+        def vtv(kind, v=0, e=0xFFFFFFFF):
+            return self.cfn(cam, 'VTV', kind, v, e)
+        self.pick(cam, 'HS120')
+        self.assertEqual(dng(120000, 1001), (0, (120000, 1001)), 'the stock rate: untouched')
+        self.assertEqual((vtv(0), vtv(2, 11988)), (0, 11988))
+        self.service(cam, 6, 27972)
+        self.pick(cam, 'HS120')
+        self.assertEqual(dng(120000, 1001), (1, (280000, 1001)))
+        self.assertEqual(dng(60000, 1001), (0, (60000, 1001)), 'another carrier rational')
+        self.assertEqual((vtv(0), vtv(2, 11988)), (280, 27972))
+        self.assertEqual((vtv(0, 0, 5), vtv(2, 5994, 5)), (0, 5994), 'the site holds 59.94')
+        self.service(cam, 6, 1798)                              # rides 23.98: not live at 119.88
+        self.assertEqual((vtv(0), vtv(2, 11988)), (0, 11988))
         cam.fr = 1
-        self.rcommit(cam, 11)
-        self.assertEqual(self.vtv(cam), [((1, 18), 1), ((1, 18), 1), (1, 18), 0, 1798])
-        cam.fr = 7
-        self.rcommit(cam, 10)
-        self.assertEqual(self.vtv(cam), [((1, 280), 1), ((1, 280), 1), (1, 280), 0, 27972])
-        self.vr_live(cam, 4)                                    # OG3K: no 279.72
-        self.assertEqual(self.vtv(cam)[2:], [(1, 125), 7, 5000])
-        self.assertGreater(self.S(cam, L.S['VTV_HITS']), 0)
+        self.assertEqual((vtv(0), vtv(2, 2398)), (18, 1798))
+        self.pick(cam, 'HS23_98')
+        self.assertEqual(dng(24000, 1001), (1, (18000, 1001)))
 
-    def test_the_virtual_rate_is_saved_and_restored(self):
-        cam = self.vr_boot()
-        self.vr_live(cam, 10)
-        self.rcommit(cam, 9)
+    def test_the_chosen_rate_is_saved_and_restored(self):
+        cam = self.gui_boot(fr=7)
+        self.gui_live(cam, 10)
+        self.service(cam, 6, 23976)
         self.save(cam)
         self.assertEqual(cam.written[cam.core_path][32:32 + L.CFG['BYTES']],
                          self.record('HS', vrate=23976))
-        self.rcommit(cam, 3)
+        self.service(cam, 6, 0)
         self.save(cam)
         self.assertEqual(cam.written[cam.core_path][32:32 + L.CFG['BYTES']], self.record('HS'))
         for fr, rank, got in ((7, 23976, 23976), (6, 23976, 0), (1, 1798, 1798), (7, 27972, 27972),
                               (1, 899, 0), (7, 12345, 0)):
-            cam = self.vr_boot(record=self.record('HS', vrate=rank), fr=fr)
+            cam = self.gui_boot(record=self.record('HS', vrate=rank), fr=fr)
             self.assertEqual(self.S(cam, L.S['RLOG'] + 0xC), 1)
             self.assertEqual(self.S(cam, L.S['VRATE']), got, (fr, rank))
-            if got:
-                self.assertEqual(self.rpairs(cam)[0][1], 9 + self.RANKS.index(got))
-
 
 class ProgrammingTests(CoreTests):
     """What the firmware programs the sensor and the receiver with, for our

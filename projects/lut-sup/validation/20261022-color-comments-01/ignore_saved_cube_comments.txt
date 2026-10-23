@@ -1,0 +1,17 @@
+test_input_writes_cube_comments_and_fresh_import_uses_them (test_library_native.LibraryNativeTests) ... FAIL
+
+======================================================================
+FAIL: test_input_writes_cube_comments_and_fresh_import_uses_them (test_library_native.LibraryNativeTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lut/test_library_native.py", line 261, in test_input_writes_cube_comments_and_fresh_import_uses_them
+    self.assertEqual(again.find_row('LUT color space')[1]['A'],'Adobe RGB')
+AssertionError: 'P3 D65' != 'Adobe RGB'
+- P3 D65
++ Adobe RGB
+
+
+----------------------------------------------------------------------
+Ran 1 test in 5.821s
+
+FAILED (failures=1)

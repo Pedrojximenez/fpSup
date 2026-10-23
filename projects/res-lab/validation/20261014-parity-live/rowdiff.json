@@ -1,0 +1,259 @@
+{
+ "desc": "0xc2f1e654",
+ "vm0": {
+  "id": 230,
+  "donor": 12,
+  "filled": 1,
+  "regfilled": 1,
+  "zfilled": 0,
+  "tw0": "0x14a014a",
+  "tw1": "0x6038e",
+  "nom": 240,
+  "clamp": 0,
+  "r10": 5,
+  "r10ok": 1,
+  "novr": 0,
+  "tables": {
+   "TIM": {
+    "ptr": "0x451834a0",
+    "best_native_row": 42,
+    "count": 70,
+    "diff_words": [
+     [
+      0,
+      "e6000000",
+      "0c000000"
+     ]
+    ]
+   },
+   "META": {
+    "ptr": "0x451834e0",
+    "best_native_row": 42,
+    "count": 70,
+    "diff_words": [
+     [
+      0,
+      "e6000000",
+      "0c000000"
+     ]
+    ]
+   },
+   "R28": {
+    "ptr": "0x45183568",
+    "best_native_row": 39,
+    "count": 70,
+    "diff_words": [
+     [
+      0,
+      "e6000000",
+      "8c000000"
+     ]
+    ]
+   },
+   "R38": {
+    "ptr": "0x451835b0",
+    "best_native_row": 39,
+    "count": 70,
+    "diff_words": [
+     [
+      0,
+      "e6000000",
+      "8c000000"
+     ]
+    ]
+   },
+   "R14": {
+    "ptr": "0x45183608",
+    "best_native_row": 39,
+    "count": 70,
+    "diff_words": [
+     [
+      0,
+      "e6000000",
+      "8c000000"
+     ]
+    ]
+   },
+   "R68": {
+    "ptr": "0x45183640",
+    "best_native_row": 42,
+    "count": 70,
+    "diff_words": [
+     [
+      0,
+      "e6000000",
+      "0c000000"
+     ]
+    ]
+   },
+   "REG": {
+    "ptr": "0x451836cc",
+    "best_native_row": 42,
+    "count": 70,
+    "diff_words": [
+     [
+      0,
+      "e6000000",
+      "0c000000"
+     ]
+    ]
+   }
+  }
+ },
+ "vm1": {
+  "id": 231,
+  "donor": 12,
+  "filled": 1,
+  "regfilled": 1,
+  "zfilled": 0,
+  "tw0": "0x14a014a",
+  "tw1": "0x6038e",
+  "nom": 240,
+  "clamp": 1,
+  "r10": 5,
+  "r10ok": 1,
+  "novr": 0,
+  "tables": {
+   "TIM": {
+    "ptr": "0x45183a60",
+    "best_native_row": 42,
+    "count": 70,
+    "diff_words": [
+     [
+      0,
+      "e7000000",
+      "0c000000"
+     ]
+    ]
+   },
+   "META": {
+    "ptr": "0x45183aa0",
+    "best_native_row": 42,
+    "count": 70,
+    "diff_words": [
+     [
+      0,
+      "e7000000",
+      "0c000000"
+     ]
+    ]
+   },
+   "R28": {
+    "ptr": "0x45183b28",
+    "best_native_row": 39,
+    "count": 70,
+    "diff_words": [
+     [
+      0,
+      "e7000000",
+      "8c000000"
+     ]
+    ]
+   },
+   "R38": {
+    "ptr": "0x45183b70",
+    "best_native_row": 39,
+    "count": 70,
+    "diff_words": [
+     [
+      0,
+      "e7000000",
+      "8c000000"
+     ],
+     [
+      4,
+      "08000000",
+      "00000000"
+     ],
+     [
+      24,
+      "01c00400",
+      "01000400"
+     ]
+    ]
+   },
+   "R14": {
+    "ptr": "0x45183bc8",
+    "best_native_row": 39,
+    "count": 70,
+    "diff_words": [
+     [
+      0,
+      "e7000000",
+      "8c000000"
+     ]
+    ]
+   },
+   "R68": {
+    "ptr": "0x45183c00",
+    "best_native_row": 42,
+    "count": 70,
+    "diff_words": [
+     [
+      0,
+      "e7000000",
+      "0c000000"
+     ]
+    ]
+   },
+   "REG": {
+    "ptr": "0x45183c8c",
+    "best_native_row": 42,
+    "count": 70,
+    "diff_words": [
+     [
+      0,
+      "e7000000",
+      "0c000000"
+     ]
+    ]
+   }
+  }
+ },
+ "vm2": {
+  "id": 232,
+  "donor": 98,
+  "filled": 0,
+  "regfilled": 0,
+  "zfilled": 0,
+  "tw0": "0x0",
+  "tw1": "0x0",
+  "nom": 0,
+  "clamp": 1,
+  "r10": 0,
+  "r10ok": 0,
+  "novr": 0,
+  "tables": {
+   "TIM": "no clone",
+   "META": "no clone",
+   "R28": "no clone",
+   "R38": "no clone",
+   "R14": "no clone",
+   "R68": "no clone",
+   "REG": "no clone"
+  }
+ },
+ "vm3": {
+  "id": 233,
+  "donor": 117,
+  "filled": 0,
+  "regfilled": 0,
+  "zfilled": 0,
+  "tw0": "0x0",
+  "tw1": "0x0",
+  "nom": 0,
+  "clamp": 1,
+  "r10": 0,
+  "r10ok": 0,
+  "novr": 0,
+  "tables": {
+   "TIM": "no clone",
+   "META": "no clone",
+   "R28": "no clone",
+   "R38": "no clone",
+   "R14": "no clone",
+   "R68": "no clone",
+   "REG": "no clone"
+  }
+ }
+}

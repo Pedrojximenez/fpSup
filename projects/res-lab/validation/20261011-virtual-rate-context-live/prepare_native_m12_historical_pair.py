@@ -34,6 +34,10 @@ def prepare():
         save()
         before = R.owned(r, False)
         proof['owned_before'] = before
+        import lossless_snapshot
+        proof['lossless_before'] = lossless_snapshot.snapshot()
+        assert proof['lossless_before']['fields']['settings_on'] == 0
+        assert proof['lossless_before']['on_getter'] == 0
         assert r['screen'] == 'LV_CINE_MEDIUM'
         assert r['producer']['applied_valid'] == 0 and r['registry']['provider'] == 0
         # Validate the fixed native descriptor and unchanged native TIM before

@@ -1,0 +1,42 @@
+{
+ "target_s": 4.0,
+ "idle_before": {
+  "movie_recording": 0,
+  "xmp_file_pointer": 0,
+  "movie_writing": 0
+ },
+ "entry": {
+  "FIVE": 5,
+  "PID": 79,
+  "MODE": 231,
+  "KEYPTR": 1159208880,
+  "ROW": 1,
+  "W0": 21627210,
+  "W1": 394126,
+  "ENGFPS": 1131397791,
+  "NOMINAL": 240,
+  "VM": 1,
+  "VAR": 5,
+  "VRATE": 23976,
+  "key": "HS280120"
+ },
+ "sensor": 239.76023976023976,
+ "engine": 239.76023864746094,
+ "hits_before": {
+  "HDR_COPY_HITS": 0,
+  "BULK_HITS": 0
+ },
+ "slot": "slot now slot = sd0",
+ "rec_at_target": 0,
+ "elapsed": 4.005324583,
+ "idle_after": {
+  "movie_recording": 0,
+  "xmp_file_pointer": 0,
+  "movie_writing": 0
+ },
+ "rec_log": "slot=1, cnt=2/600\nsize=131072*978816(119GB), free=90%, exFAT, UHS-II\ntime       : 2026/10/14 10:59:17 \nrec factor : Nothing \nui factor  : Nothing \nbattery    : OK \ntemp(BAT)  : OK \ntemp(BODY) : OK \ntemp(LCD)  : OK \ntemp(CMOS) : OK \nfile-size=1095168, bulk-size=67108864(61.3)\nreq_cnt=94, fin_cnt=94, vbuf/94/98697, raw1\nrequest  ,finish   ,diff,gap ,reqcnt,fincnt,diff,sdb,MB/s\n      680,      938, 258, 680,    57,     1,  56,  1, 241\n     1181,     1558, 377, 243,    94,    58,  36, 59, 107\n",
+ "hits_after": {
+  "HDR_COPY_HITS": 0,
+  "BULK_HITS": 0
+ }
+}

@@ -1,0 +1,348 @@
+{
+  "schema": "fpSup-lut4-validation-1",
+  "tests": 66,
+  "skipped": 0,
+  "mutations": [
+    {
+      "name": "allow_preview_without_backend",
+      "compiled": true,
+      "detected": true,
+      "test": "test_loads_cached_with_resident_rows_and_dma_only_file_scratch",
+      "source_sha256": "bc6bd94de2f53b18137cffb64e851b9c9385876716884150b9bb6375112f8131"
+    },
+    {
+      "name": "skip_asset_checksum",
+      "compiled": true,
+      "detected": true,
+      "test": "test_missing_short_corrupt_trailing_and_corrupt_header_remain_unapplied",
+      "source_sha256": "3f13d78bc8276d5f2e0f912408c16df5af3ca5be8d2bd01808773703ac323838"
+    },
+    {
+      "name": "execute_pending_model",
+      "compiled": true,
+      "detected": true,
+      "test": "test_bad_input_never_changes_destination_and_pending_models_refuse",
+      "source_sha256": "d6d2e876b22b6330aa22a401442abe244a6011e13a4275221e156418190e0cd7"
+    },
+    {
+      "name": "accept_out_of_contract_xyz",
+      "compiled": true,
+      "detected": true,
+      "test": "test_bad_input_never_changes_destination_and_pending_models_refuse",
+      "source_sha256": "00cc5f950469a45dce8d354dbc994987012cd83df9f3ca4ef0067b5fcb3074d3"
+    },
+    {
+      "name": "reverse_red_blue_table_order",
+      "compiled": true,
+      "detected": true,
+      "test": "test_all_35_models_against_float_reference_and_strengths",
+      "source_sha256": "38f6e01c5919ce44466801a5a2c02c649a66f42467328e51dc97ebe32de9cd42"
+    }
+  ],
+  "numerical": {
+    "models": 35,
+    "samples_per_model": 161,
+    "comparisons": 5635,
+    "rgb_mae": 1.2566820953637038e-06,
+    "max_channel": 7.009144289204378e-05,
+    "per_model": [
+      {
+        "color": "aces",
+        "gamma": "adobe-rgb",
+        "samples": 161,
+        "rgb_mae": 1.221710235588373e-06,
+        "max_channel": 4.5413765513681315e-05
+      },
+      {
+        "color": "aces",
+        "gamma": "gamma24",
+        "samples": 161,
+        "rgb_mae": 1.3018382862889093e-06,
+        "max_channel": 5.745292534103594e-05
+      },
+      {
+        "color": "aces",
+        "gamma": "gamma26",
+        "samples": 161,
+        "rgb_mae": 1.3869100225268222e-06,
+        "max_channel": 7.009144289204378e-05
+      },
+      {
+        "color": "aces",
+        "gamma": "linear",
+        "samples": 161,
+        "rgb_mae": 5.824458253625082e-07,
+        "max_channel": 3.055903690540873e-06
+      },
+      {
+        "color": "aces",
+        "gamma": "srgb",
+        "samples": 161,
+        "rgb_mae": 1.0801597564090985e-06,
+        "max_channel": 1.2070736142323624e-05
+      },
+      {
+        "color": "adobe-rgb",
+        "gamma": "adobe-rgb",
+        "samples": 161,
+        "rgb_mae": 1.4813678930562373e-06,
+        "max_channel": 4.5413765513681315e-05
+      },
+      {
+        "color": "adobe-rgb",
+        "gamma": "gamma24",
+        "samples": 161,
+        "rgb_mae": 1.574952857623219e-06,
+        "max_channel": 5.745292534103594e-05
+      },
+      {
+        "color": "adobe-rgb",
+        "gamma": "gamma26",
+        "samples": 161,
+        "rgb_mae": 1.6561574966801974e-06,
+        "max_channel": 7.009144289204378e-05
+      },
+      {
+        "color": "adobe-rgb",
+        "gamma": "linear",
+        "samples": 161,
+        "rgb_mae": 8.110804751739804e-07,
+        "max_channel": 3.1248322807098106e-06
+      },
+      {
+        "color": "adobe-rgb",
+        "gamma": "srgb",
+        "samples": 161,
+        "rgb_mae": 1.338021277398636e-06,
+        "max_channel": 1.2043320545856995e-05
+      },
+      {
+        "color": "p3-d60",
+        "gamma": "adobe-rgb",
+        "samples": 161,
+        "rgb_mae": 1.3659886752829262e-06,
+        "max_channel": 4.5413765513677845e-05
+      },
+      {
+        "color": "p3-d60",
+        "gamma": "gamma24",
+        "samples": 161,
+        "rgb_mae": 1.4950336369795325e-06,
+        "max_channel": 5.745292534103247e-05
+      },
+      {
+        "color": "p3-d60",
+        "gamma": "gamma26",
+        "samples": 161,
+        "rgb_mae": 1.542445468475586e-06,
+        "max_channel": 7.009144289204378e-05
+      },
+      {
+        "color": "p3-d60",
+        "gamma": "linear",
+        "samples": 161,
+        "rgb_mae": 6.870764680737981e-07,
+        "max_channel": 2.921949926126821e-06
+      },
+      {
+        "color": "p3-d60",
+        "gamma": "srgb",
+        "samples": 161,
+        "rgb_mae": 1.2323591363703243e-06,
+        "max_channel": 1.2043320545856995e-05
+      },
+      {
+        "color": "p3-d65",
+        "gamma": "adobe-rgb",
+        "samples": 161,
+        "rgb_mae": 1.5009720376473864e-06,
+        "max_channel": 4.5413765513681315e-05
+      },
+      {
+        "color": "p3-d65",
+        "gamma": "gamma24",
+        "samples": 161,
+        "rgb_mae": 1.6031898499940451e-06,
+        "max_channel": 5.745292534103594e-05
+      },
+      {
+        "color": "p3-d65",
+        "gamma": "gamma26",
+        "samples": 161,
+        "rgb_mae": 1.671784954150935e-06,
+        "max_channel": 7.009144289204378e-05
+      },
+      {
+        "color": "p3-d65",
+        "gamma": "linear",
+        "samples": 161,
+        "rgb_mae": 8.915530021659254e-07,
+        "max_channel": 3.862158203138399e-06
+      },
+      {
+        "color": "p3-d65",
+        "gamma": "srgb",
+        "samples": 161,
+        "rgb_mae": 1.3423515452669068e-06,
+        "max_channel": 1.2043320545856995e-05
+      },
+      {
+        "color": "rec2020",
+        "gamma": "adobe-rgb",
+        "samples": 161,
+        "rgb_mae": 1.2247801123911312e-06,
+        "max_channel": 4.5413765513677845e-05
+      },
+      {
+        "color": "rec2020",
+        "gamma": "gamma24",
+        "samples": 161,
+        "rgb_mae": 1.2737216063597025e-06,
+        "max_channel": 5.745292534103247e-05
+      },
+      {
+        "color": "rec2020",
+        "gamma": "gamma26",
+        "samples": 161,
+        "rgb_mae": 1.4074972316580638e-06,
+        "max_channel": 7.009144289204378e-05
+      },
+      {
+        "color": "rec2020",
+        "gamma": "linear",
+        "samples": 161,
+        "rgb_mae": 5.543300921524706e-07,
+        "max_channel": 2.365378314550526e-06
+      },
+      {
+        "color": "rec2020",
+        "gamma": "srgb",
+        "samples": 161,
+        "rgb_mae": 1.063367104882215e-06,
+        "max_channel": 1.2043320545856995e-05
+      },
+      {
+        "color": "rec709",
+        "gamma": "adobe-rgb",
+        "samples": 161,
+        "rgb_mae": 1.3660340306136232e-06,
+        "max_channel": 4.5413765513677845e-05
+      },
+      {
+        "color": "rec709",
+        "gamma": "gamma24",
+        "samples": 161,
+        "rgb_mae": 1.4843205577349392e-06,
+        "max_channel": 5.745292534103247e-05
+      },
+      {
+        "color": "rec709",
+        "gamma": "gamma26",
+        "samples": 161,
+        "rgb_mae": 1.5579112925067432e-06,
+        "max_channel": 7.009144289204378e-05
+      },
+      {
+        "color": "rec709",
+        "gamma": "linear",
+        "samples": 161,
+        "rgb_mae": 7.040999560896358e-07,
+        "max_channel": 3.343953691420376e-06
+      },
+      {
+        "color": "rec709",
+        "gamma": "srgb",
+        "samples": 161,
+        "rgb_mae": 1.2340233079404064e-06,
+        "max_channel": 1.2043320545853525e-05
+      },
+      {
+        "color": "srgb",
+        "gamma": "adobe-rgb",
+        "samples": 161,
+        "rgb_mae": 1.3660340306136232e-06,
+        "max_channel": 4.5413765513677845e-05
+      },
+      {
+        "color": "srgb",
+        "gamma": "gamma24",
+        "samples": 161,
+        "rgb_mae": 1.4843205577349392e-06,
+        "max_channel": 5.745292534103247e-05
+      },
+      {
+        "color": "srgb",
+        "gamma": "gamma26",
+        "samples": 161,
+        "rgb_mae": 1.5579112925067432e-06,
+        "max_channel": 7.009144289204378e-05
+      },
+      {
+        "color": "srgb",
+        "gamma": "linear",
+        "samples": 161,
+        "rgb_mae": 7.040999560896358e-07,
+        "max_channel": 3.343953691420376e-06
+      },
+      {
+        "color": "srgb",
+        "gamma": "srgb",
+        "samples": 161,
+        "rgb_mae": 1.2340233079404064e-06,
+        "max_channel": 1.2043320545853525e-05
+      }
+    ],
+    "metric": "normalized Rec.709 Gamma2.4 channel code error; not DeltaE",
+    "includes_xyz_matrix_curve_node_and_interpolation_quantization": true,
+    "resolve_pixel_match_verified": false,
+    "camera_pixels": false
+  },
+  "card_dir": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/cards/20261021-loader-v4-01",
+  "exact_card_loaded": [
+    "LUT.BIN",
+    "SHELL.BIN",
+    "SUPMGR.BIN"
+  ],
+  "native_status": {
+    "version": 1,
+    "asset": 0,
+    "model": 0,
+    "backend": 0,
+    "color": 6,
+    "gamma": 1,
+    "strength": 100,
+    "samples": 0,
+    "outside1": 0,
+    "outside3": 0,
+    "last": -13
+  },
+  "resident_bytes": 4214016,
+  "file_hashes": {
+    "AutoRun.txt": "ee256bc56848caeb6aecfb9d8114530102c67bae768a09f67757528e64af59f9",
+    "fpSup/LOADER.BIN": "297c61855c7ba16ed05299218c524c2109227e1f23715164b56903d8b68446ba",
+    "fpSup/LUT.BIN": "b367b6833421b4f912786915ee58b4449bbb6ea1eb721bb574149efdb7ff1f87",
+    "fpSup/SUPMGR.BIN": "09f9804ad34c3c7b8c450fe23f482ac9877e87b385c85ac1c7316c0e9ff7c3ab",
+    "fpSup/SHELL.BIN": "d711f05cd7c163c17f484f686cd245ae15ca6eedc47a75cee7a5201e3f4c82ab",
+    "fpSup/LUT/settings.json": "f1d6017a8888591be4d632b35ed9390c7e2a91be4541ad80e048d528ebd82fc5",
+    "fpSup/LUT/menu.json": "9b8aba4eaefffe9ed486f1290fa3a84fa3f77fd459ec6b2091308e9a9e5e1c80",
+    "fpSup/LUT/source.cube": "57fe6949f1e37b5cd67752c824680eee7ed67c604c79a4fc322b47d68ebd82a9",
+    "fpSup/LUT/ACTIVE.LUT": "cd60c83b56323ce5372dec042451364ebb29c4ef35cf455d41aa68e4a7094df5"
+  },
+  "source_hashes": {
+    "fpSup/lut/native/lut4.c": "d62445fb945cf659a7e4accf0539722b0bf26f66a0019586bb901347bce23a91",
+    "fpSup/lut/native/lut4.h": "f07a15d2dcf6e5f432fc848826a8e2db03401aa8c5d830e81dcba543314664e1",
+    "fpSup/lut/build_sup.py": "965f597735c601d68c472aaf61c46e4b5cd972421e39a9909962b34fa4289fdd",
+    "fpSup/lut/test_sup_native.py": "2d116e1540c4508cdf3474191a22759cd2d82ccb8c89da77f2d43f6519bfe72b",
+    "fpSup/lut/color.py": "76fb55133eabe4d13fe79e2670c59584ab1150d0f7f49931f8fd3c88215c69cd",
+    "fpSup/lut/cinemadng.py": "442f56ba3e1a0b83c91e32ad3191f91c74db11919b77c5723ea7578349922c0b",
+    "fpSup/lut/monitor.py": "fde5f810259a003bbe17d13b6dcc9e1381997d6874885bd0fc925c561a7673e5",
+    "projects/lut-sup/probes/validate_sup4.py": "3fe5e4f4eb4b25532d23e03fb7deebfd66aafa04c3c49991a35ede8b024bfe6a"
+  },
+  "camera_operations": false,
+  "physical_card_written": false,
+  "on_camera_verified": false,
+  "live_view_backend_connected": false,
+  "ui_renderer_present": false,
+  "realtime_performance_verified": false,
+  "resolve_cinemadng_pixel_match_verified": false
+}

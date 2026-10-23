@@ -1,0 +1,19 @@
+{
+  "reason": "Activate fully read-back RAM admission guard; one normal reboot only",
+  "commands": [
+    {
+      "command": "status get is_recording",
+      "reply": "is_recording -> 0\n\n"
+    },
+    {
+      "command": "reboot",
+      "reply": "ERR shl frame0 rc=-1(LIBUSB_ERROR_IO) moved=0/64\n"
+    }
+  ],
+  "idle": [
+    0,
+    0
+  ],
+  "boot_before": 12760957,
+  "sent_at": 1791783313.391676
+}

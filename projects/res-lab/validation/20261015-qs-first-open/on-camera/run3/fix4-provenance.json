@@ -1,0 +1,24 @@
+{
+  "raw_sha256": "536dcb46766f2d4b8940e14532893f604a959e4d838fba40b14bf0e43e5eab59",
+  "bytes": 230016,
+  "deployed_sha256": "1584888ac0f52dc385cac77bd92d50bcf2362e5f68e3f12c8dc0368eba50fb4b",
+  "written_to_card": true,
+  "source_hashes": {
+    "ogc.c": "76a83ab88242ebcf9df7f90bbe98c49f5effdaf5217224f8a33bf5455f83fb41",
+    "vr_ui.py": "48463e02646b4b9ff7b2572cc82d0d5a18c99cadf3b6a6370da848647ef49089",
+    "ogc_layout.py": "b933f8bdb9de2290ae1abbc7df7929eb20e9301ce889d1b437cda69bd292dc23",
+    "test_lv_text_style.py": "dfed6ab9243d32fb4d70968c73cfe0b6f3c533263428e3d210a4b27bb7e08c64",
+    "test_v3_rescustom.py": "c78d4a804fca2319dda97c36aa510e787529b9eba4e180e9d9f7595580159d0e"
+  },
+  "tests": "6/6 focused tests passed, including all four native layout parsers and resource-registration flag; exact BIN 371 QS + 16 LV substitutions and journal restoration passed.",
+  "GUI": "Visual approval withdrawn; only construction was proved. Actual post-QS screenshot 1911 requires further correction.",
+  "layout": "Stock object plus text components 3,8,9; native origin curve for every stock FPS; no added child objects.",
+  "first_QS_seconds": 6.116090167,
+  "first_QS_Update_ms": 6015,
+  "first_QS_Render_ms": 98,
+  "visual_comparison": "All eight white-glyph connected component boxes and threshold mask match the stock reference within [0,631,200,682]. This is not a full-pixel JPEG equality claim.",
+  "all_11_modules_loaded": true,
+  "no_recording": true,
+  "visual_approval_withdrawn": true,
+  "correction": "1910 predates QS refresh; 1911 after QS shows narrow text, excessive spacing and no black outline. See run4."
+}

@@ -1,0 +1,157 @@
+{
+ "magic": "MRKD",
+ "count": 7,
+ "stamps": [
+  2343046,
+  2355531,
+  2393103,
+  2859021,
+  3099183,
+  9412319,
+  9799358
+ ],
+ "load_start": 9486319,
+ "load_done": 9672932,
+ "events": [
+  [
+   525361,
+   "INIT: S DISP DEV ON"
+  ],
+  [
+   742533,
+   "INIT: E DISP DEV ON"
+  ],
+  [
+   989631,
+   "UI: in notified"
+  ],
+  [
+   1198631,
+   "INIT: OPENING DISP"
+  ],
+  [
+   1202680,
+   "UI: HdmiEdidFixed"
+  ],
+  [
+   1228698,
+   "INIT: REQ START LV"
+  ],
+  [
+   1571947,
+   "DISP: 49801000,49BFD000,00000000,30000000,"
+  ],
+  [
+   1571982,
+   "DISP: 49801000,49BFD000,00000000,30000003,"
+  ],
+  [
+   1619034,
+   "DISP: 49801000,49BFD000,00000000,30000000,"
+  ],
+  [
+   1619074,
+   "DISP: 49801000,49BFD000,00000000,30000003,"
+  ],
+  [
+   1630963,
+   "INIT: IMG DISP START"
+  ],
+  [
+   1914918,
+   "INIT: NORMAL OSD DISP"
+  ],
+  [
+   1969843,
+   "UI: 2315,MfSwitch"
+  ],
+  [
+   1974015,
+   "UI: 2425,CancelFocus"
+  ],
+  [
+   1987858,
+   "UI: LvStarted"
+  ],
+  [
+   2039148,
+   "DISP: 49801000,49BFD000,00000000,30000000,"
+  ],
+  [
+   2039202,
+   "DISP: 49801000,49BFD000,00000000,30000003,"
+  ],
+  [
+   2224724,
+   "UI: LvStarted"
+  ],
+  [
+   2227873,
+   "UI: in notify"
+  ],
+  [
+   2228061,
+   "UI: HdmiConnect"
+  ],
+  [
+   2228112,
+   "UI: in notified"
+  ],
+  [
+   2228158,
+   "UI: HdmiEdidFixed"
+  ],
+  [
+   2234850,
+   "UI: in notified"
+  ],
+  [
+   2280233,
+   "UI: LvStarted"
+  ],
+  [
+   2289355,
+   "DISP: 49801000,49BFD000,00000000,30000000,"
+  ],
+  [
+   2289391,
+   "DISP: 49801000,49BFD000,00000000,30000003,"
+  ],
+  [
+   2343046,
+   "S0 AutoRun start (after the stamp routine is installed)"
+  ],
+  [
+   2355531,
+   "S1 second stamp (S1-S0 = one marker)"
+  ],
+  [
+   2393103,
+   "S2 before the first splash display"
+  ],
+  [
+   2859021,
+   "S3 after the last splash display"
+  ],
+  [
+   3099183,
+   "S4 before the store bootstrap (Fast Start 3)"
+  ],
+  [
+   9412319,
+   "S5 before the spelled-out loader"
+  ],
+  [
+   9486319,
+   "loader entered (LOAD_START_US)"
+  ],
+  [
+   9672932,
+   "loader done (LOAD_DONE_US)"
+  ],
+  [
+   9799358,
+   "S6 after the spelled-out loader returns"
+  ]
+ ]
+}

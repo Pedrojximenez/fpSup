@@ -1,0 +1,25 @@
+{
+  "initial_returncode": 1,
+  "commands": [
+    [
+      "status get is_recording",
+      "is_recording -> 0\n\n"
+    ],
+    [
+      "dir \\fpSup",
+      "                                          .\n2026/10/12  14:28:46               187520 32RESCUS.BIN\n2026/10/10  11:39:20                 4096 ._32RESCUS.BIN\n2026/10/10  11:38:46 <DIR>                UI\n2026/10/10  11:39:20                 4096 ._UI\n2026/10/11  23:09:24                29276 LOADER.BIN\n2026/10/10  11:39:20                 4096 ._LOADER.BIN\n2025/12/31  08:00:00                 4208 20GYR2.BIN\n2026/10/10  11:39:20                 4096 ._20GYR2.BIN\n2026/10/11  11:29:04                38644 45RAWV.BIN\n2026/10/10  11:39:20                 4096 ._45RAWV.BIN\n2025/12/31  08:00:00                25936 40FLIP.BIN\n2026/10/10  11:39:20                 4096 ._40FLIP.BIN\n2026/10/12  20:53:26                79904 10LOSS.BIN\n2026/10/10  11:39:22                 4096 ._10LOSS.BIN\n2025/12/31  08:00:00                 4552 00SHELL.BIN\n2026/10/10  11:39:22                 4096 ._00SHELL.BIN\n2026/10/10  11:38:46 <DIR>                RESCUS\n2026/10/10  11:39:22                 4096 ._RESCUS\n2025/12/31  08:00:00               609720 50RESLAB.BIN\n2026/10/10  11:39:22                 4096 ._50RESLAB.BIN\n2026/10/12  20:33:42                 4096 LOAD.LOG\n2026/10/12  07:40:38                  316 05STOPFX.BIN\n"
+    ],
+    [
+      "status get is_recording",
+      "is_recording -> 0\n\n"
+    ]
+  ],
+  "uncertain_write_replayed": false,
+  "reboot_sent": false,
+  "verified-readback_rc": 0,
+  "readback_verified": true,
+  "sha256": "f84c31c6f466a20bc09576c258ab09f39974356836c3451ca750f5814fcbf692",
+  "file_bytes": 79904,
+  "boot": 11595426,
+  "completed_at": 1791809551.876755
+}

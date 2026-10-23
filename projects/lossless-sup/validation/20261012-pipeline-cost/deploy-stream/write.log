@@ -1,0 +1,19 @@
+  local   /Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/validation/20261012-pipeline-cost/stream-profile/10LOSS.BIN  79904 bytes
+  remote  \fpSup\10LOSS.BIN  mode 0x7
+  buffer  0x45062FC0, file object 0x450767E0
+  proof   region takes writes and still holds them a second later
+  restored echo -> 0xC03D99A0
+  reply   ERR shl frame0 rc=-7(LIBUSB_ERROR_TIMEOUT) moved=0/64
+
+  stage  79904 bytes in 0.001s (89.4 MB/s)      
+
+  verify 79904 bytes in 0.000s (171.8 MB/s)      
+
+  stage  79904 bytes in 0.02s (4.8 MB/s), MEM1, read back whole          
+
+  code   304/304 B  1.8 KiB/s 
+  verify 304/304 B  442 KiB/s 
+  verify 304 bytes in 0.0s (217 KiB/s)      
+
+  code   304 bytes in 0.2s (1.3 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+putfile echo reply failed; write outcome is unknown

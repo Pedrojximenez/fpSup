@@ -1,0 +1,41 @@
+{
+  "host_tests": {
+    "run": 13,
+    "passed": 13,
+    "skipped": 0,
+    "hardware_access": false
+  },
+  "arm_tests": {
+    "tests_run": 3,
+    "successful": true,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "sup_sha256": "63022ae62afabb8286657fca084346755eddcde711c3563fa8f7dc8eb5eed03c",
+    "camera_operated": false,
+    "stubbed_effects": [
+      "USB",
+      "PTP sessions",
+      "lens getters/events/submit",
+      "file/RTOS/cache"
+    ],
+    "scope": "Exact delivered SUP diagnostics and new host collector; not a hardware capture"
+  },
+  "mutation": {
+    "change": "remove diagnostic operation allowlist",
+    "test": "test_motion_and_unexpected_parameters_never_sent",
+    "detected": true,
+    "exit_code": 1,
+    "coverage_correction": "Initial mutation escaped the parameterized-only cases; added no-parameter AF 9413 and focus opcodes and reran."
+  },
+  "live_usb_tested": false,
+  "dependencies": {
+    "pyusb_available_in_current_python": false,
+    "pyusb_or_libusb_installed_by_agent": false
+  },
+  "source_sha256": {
+    "diagnostics.py": "8b533605b20cb750a69bbe5b5c44f6ec683a7cc45863fd87b0dc65a5ea47979e",
+    "test_diagnostics.py": "0b72353619168eb3d772ae14da7c6f4f42959e6ab6613af7a6c6da4d9d7b87f1",
+    "test_diagnostics_arm.py": "7f9426ed5257e145f934b42749ca05b14e5971194f4239a99f4e63eab12c7e90"
+  }
+}

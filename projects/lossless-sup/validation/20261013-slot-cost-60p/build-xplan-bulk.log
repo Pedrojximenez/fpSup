@@ -1,0 +1,38 @@
+built into /Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/validation/20261013-slot-cost-60p/xplan-bulk
+{
+ "c_base": 4024,
+ "c_text": 44470,
+ "menu_off": 48512,
+ "menu_len": 30844,
+ "blob_len": 79360,
+ "state_off": 79360,
+ "state_bytes": 4866496,
+ "block_bytes": 4947968,
+ "entries": {
+  "fpl_card_init": 1,
+  "fpl_card_rec": 3363,
+  "fpl_card_arrive": 8321,
+  "fpl_card_stop": 10987,
+  "fpl_card_flush": 12071,
+  "fpl_card_task": 13291,
+  "fpl_card_play": 16161,
+  "fpl_card_clip": 17443,
+  "fpl_card_play_end": 18203,
+  "fpl_card_play_pool": 17987,
+  "fpl_card_written": 12627,
+  "fpl_card_event": 12747,
+  "fpl_card_discard": 13003
+ },
+ "symbols": {
+  "entry": 0,
+  "claims": 2732,
+  "settings": 2716,
+  "c_base": 4024,
+  "task_shim": 2604,
+  "g_card": 2616,
+  "flush_real": 2672,
+  "discard_real": 2688,
+  "stop_resume": 2668,
+  "play_next": 2692
+ }
+}

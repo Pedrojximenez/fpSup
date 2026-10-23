@@ -1,0 +1,4224 @@
+Composition {
+	CurrentTime = 0,
+	RenderRange = { 0, 119 },
+	GlobalRange = { 0, 119 },
+	CurrentID = 90,
+	HiQ = true,
+	PlaybackUpdateMode = 0,
+	StereoMode = false,
+	Version = "DaVinci Resolve Studio 21.0.4.0005",
+	SavedOutputs = 0,
+	HeldTools = 0,
+	DisabledTools = 0,
+	LockedTools = 0,
+	AudioOffset = 0,
+	Resumable = true,
+	OutputClips = {
+		"/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/identity_linear.0000.exr",
+		"/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/identity_code.0000.exr",
+		"/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/BMDFILM_xyz.0000.exr",
+		"/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/BMD4KFILM_xyz.0000.exr",
+		"/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/BMD4KFILMV3_xyz.0000.exr",
+		"/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/BMD4KVIDEOV3_xyz.0000.exr",
+		"/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/BMD46KFILM_xyz.0000.exr",
+		"/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/BMD46KFILMV3_xyz.0000.exr",
+		"/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/BMD46KVIDEOV3_xyz.0000.exr",
+		"/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/BMDPOCKET4KFILM_xyz.0000.exr",
+		"/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/BMD4KBCASTVIDEO_xyz.0000.exr",
+		"/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/BMD4KBCASTFILM_xyz.0000.exr",
+		"/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/BMDVIDEOV5_xyz.0000.exr",
+		"/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/gen1_709_linear.0000.exr",
+		"/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/srgb_decode.0000.exr",
+		"/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/srgb_encode.0000.exr",
+		"/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/film5_decode.0000.exr",
+		"/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/film5_encode.0000.exr",
+		"/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/node01.0000.exr",
+		"/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/node02.0000.exr",
+		"/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/node03.0000.exr",
+		"/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/chain.0000.exr",
+		"/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/bypass.0000.exr",
+		"/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/matrix_node01.0000.exr",
+		"/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/matrix_node03.0000.exr",
+		"/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/matrix_monitor.0000.exr",
+		"/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/monitor_q_linear709_code.0000.exr",
+		"/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/monitor_bypass_linear709_code.0000.exr"
+	},
+	CustomData = {
+		TEMPLATE_ID = "Fusion Generator"
+	},
+	Tools = {
+		identity_linear_input = Loader {
+			Clips = {
+				Clip {
+					ID = "Clip1",
+					Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/linear.exr",
+					FormatID = "OpenEXRFormat",
+					StartFrame = -1,
+					LengthSetManually = true,
+					TrimIn = 0,
+					TrimOut = 0,
+					ExtendFirst = 0,
+					ExtendLast = 0,
+					Loop = 0,
+					AspectMode = 0,
+					Depth = 0,
+					TimeCode = 0,
+					GlobalStart = 0,
+					GlobalEnd = 0
+				}
+			},
+			Inputs = {
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				["Clip1.OpenEXRFormat.DeepOutputMode"] = Input { Disabled = true, },
+				["Clip1.OpenEXRFormat.RedName"] = Input { Value = FuID { "R" }, },
+				["Clip1.OpenEXRFormat.GreenName"] = Input { Value = FuID { "G" }, },
+				["Clip1.OpenEXRFormat.BlueName"] = Input { Value = FuID { "B" }, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 55, 16.5 } },
+		},
+		identity_code_input = Loader {
+			Clips = {
+				Clip {
+					ID = "Clip1",
+					Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/code.exr",
+					FormatID = "OpenEXRFormat",
+					StartFrame = -1,
+					LengthSetManually = true,
+					TrimIn = 0,
+					TrimOut = 0,
+					ExtendFirst = 0,
+					ExtendLast = 0,
+					Loop = 0,
+					AspectMode = 0,
+					Depth = 0,
+					TimeCode = 0,
+					GlobalStart = 0,
+					GlobalEnd = 0
+				}
+			},
+			Inputs = {
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				["Clip1.OpenEXRFormat.DeepOutputMode"] = Input { Disabled = true, },
+				["Clip1.OpenEXRFormat.RedName"] = Input { Value = FuID { "R" }, },
+				["Clip1.OpenEXRFormat.GreenName"] = Input { Value = FuID { "G" }, },
+				["Clip1.OpenEXRFormat.BlueName"] = Input { Value = FuID { "B" }, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 55, 49.5 } },
+		},
+		BMDFILM_xyz_input = Loader {
+			Clips = {
+				Clip {
+					ID = "Clip1",
+					Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/linear.exr",
+					FormatID = "OpenEXRFormat",
+					StartFrame = -1,
+					LengthSetManually = true,
+					TrimIn = 0,
+					TrimOut = 0,
+					ExtendFirst = 0,
+					ExtendLast = 0,
+					Loop = 0,
+					AspectMode = 0,
+					Depth = 0,
+					TimeCode = 0,
+					GlobalStart = 0,
+					GlobalEnd = 0
+				}
+			},
+			Inputs = {
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				["Clip1.OpenEXRFormat.DeepOutputMode"] = Input { Disabled = true, },
+				["Clip1.OpenEXRFormat.RedName"] = Input { Value = FuID { "R" }, },
+				["Clip1.OpenEXRFormat.GreenName"] = Input { Value = FuID { "G" }, },
+				["Clip1.OpenEXRFormat.BlueName"] = Input { Value = FuID { "B" }, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 55, 82.5 } },
+		},
+		BMD4KFILM_xyz_input = Loader {
+			Clips = {
+				Clip {
+					ID = "Clip1",
+					Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/linear.exr",
+					FormatID = "OpenEXRFormat",
+					StartFrame = -1,
+					LengthSetManually = true,
+					TrimIn = 0,
+					TrimOut = 0,
+					ExtendFirst = 0,
+					ExtendLast = 0,
+					Loop = 0,
+					AspectMode = 0,
+					Depth = 0,
+					TimeCode = 0,
+					GlobalStart = 0,
+					GlobalEnd = 0
+				}
+			},
+			Inputs = {
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				["Clip1.OpenEXRFormat.DeepOutputMode"] = Input { Disabled = true, },
+				["Clip1.OpenEXRFormat.RedName"] = Input { Value = FuID { "R" }, },
+				["Clip1.OpenEXRFormat.GreenName"] = Input { Value = FuID { "G" }, },
+				["Clip1.OpenEXRFormat.BlueName"] = Input { Value = FuID { "B" }, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 55, 115.5 } },
+		},
+		BMD4KFILMV3_xyz_input = Loader {
+			Clips = {
+				Clip {
+					ID = "Clip1",
+					Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/linear.exr",
+					FormatID = "OpenEXRFormat",
+					StartFrame = -1,
+					LengthSetManually = true,
+					TrimIn = 0,
+					TrimOut = 0,
+					ExtendFirst = 0,
+					ExtendLast = 0,
+					Loop = 0,
+					AspectMode = 0,
+					Depth = 0,
+					TimeCode = 0,
+					GlobalStart = 0,
+					GlobalEnd = 0
+				}
+			},
+			Inputs = {
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				["Clip1.OpenEXRFormat.DeepOutputMode"] = Input { Disabled = true, },
+				["Clip1.OpenEXRFormat.RedName"] = Input { Value = FuID { "R" }, },
+				["Clip1.OpenEXRFormat.GreenName"] = Input { Value = FuID { "G" }, },
+				["Clip1.OpenEXRFormat.BlueName"] = Input { Value = FuID { "B" }, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 55, 148.5 } },
+		},
+		BMD4KVIDEOV3_xyz_input = Loader {
+			Clips = {
+				Clip {
+					ID = "Clip1",
+					Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/linear.exr",
+					FormatID = "OpenEXRFormat",
+					StartFrame = -1,
+					LengthSetManually = true,
+					TrimIn = 0,
+					TrimOut = 0,
+					ExtendFirst = 0,
+					ExtendLast = 0,
+					Loop = 0,
+					AspectMode = 0,
+					Depth = 0,
+					TimeCode = 0,
+					GlobalStart = 0,
+					GlobalEnd = 0
+				}
+			},
+			Inputs = {
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				["Clip1.OpenEXRFormat.DeepOutputMode"] = Input { Disabled = true, },
+				["Clip1.OpenEXRFormat.RedName"] = Input { Value = FuID { "R" }, },
+				["Clip1.OpenEXRFormat.GreenName"] = Input { Value = FuID { "G" }, },
+				["Clip1.OpenEXRFormat.BlueName"] = Input { Value = FuID { "B" }, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 55, 181.5 } },
+		},
+		BMD46KFILM_xyz_input = Loader {
+			Clips = {
+				Clip {
+					ID = "Clip1",
+					Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/linear.exr",
+					FormatID = "OpenEXRFormat",
+					StartFrame = -1,
+					LengthSetManually = true,
+					TrimIn = 0,
+					TrimOut = 0,
+					ExtendFirst = 0,
+					ExtendLast = 0,
+					Loop = 0,
+					AspectMode = 0,
+					Depth = 0,
+					TimeCode = 0,
+					GlobalStart = 0,
+					GlobalEnd = 0
+				}
+			},
+			Inputs = {
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				["Clip1.OpenEXRFormat.DeepOutputMode"] = Input { Disabled = true, },
+				["Clip1.OpenEXRFormat.RedName"] = Input { Value = FuID { "R" }, },
+				["Clip1.OpenEXRFormat.GreenName"] = Input { Value = FuID { "G" }, },
+				["Clip1.OpenEXRFormat.BlueName"] = Input { Value = FuID { "B" }, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 55, 214.5 } },
+		},
+		BMD46KFILMV3_xyz_input = Loader {
+			Clips = {
+				Clip {
+					ID = "Clip1",
+					Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/linear.exr",
+					FormatID = "OpenEXRFormat",
+					StartFrame = -1,
+					LengthSetManually = true,
+					TrimIn = 0,
+					TrimOut = 0,
+					ExtendFirst = 0,
+					ExtendLast = 0,
+					Loop = 0,
+					AspectMode = 0,
+					Depth = 0,
+					TimeCode = 0,
+					GlobalStart = 0,
+					GlobalEnd = 0
+				}
+			},
+			Inputs = {
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				["Clip1.OpenEXRFormat.DeepOutputMode"] = Input { Disabled = true, },
+				["Clip1.OpenEXRFormat.RedName"] = Input { Value = FuID { "R" }, },
+				["Clip1.OpenEXRFormat.GreenName"] = Input { Value = FuID { "G" }, },
+				["Clip1.OpenEXRFormat.BlueName"] = Input { Value = FuID { "B" }, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 55, 247.5 } },
+		},
+		BMD46KVIDEOV3_xyz_input = Loader {
+			Clips = {
+				Clip {
+					ID = "Clip1",
+					Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/linear.exr",
+					FormatID = "OpenEXRFormat",
+					StartFrame = -1,
+					LengthSetManually = true,
+					TrimIn = 0,
+					TrimOut = 0,
+					ExtendFirst = 0,
+					ExtendLast = 0,
+					Loop = 0,
+					AspectMode = 0,
+					Depth = 0,
+					TimeCode = 0,
+					GlobalStart = 0,
+					GlobalEnd = 0
+				}
+			},
+			Inputs = {
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				["Clip1.OpenEXRFormat.DeepOutputMode"] = Input { Disabled = true, },
+				["Clip1.OpenEXRFormat.RedName"] = Input { Value = FuID { "R" }, },
+				["Clip1.OpenEXRFormat.GreenName"] = Input { Value = FuID { "G" }, },
+				["Clip1.OpenEXRFormat.BlueName"] = Input { Value = FuID { "B" }, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 55, 280.5 } },
+		},
+		BMDPOCKET4KFILM_xyz_input = Loader {
+			Clips = {
+				Clip {
+					ID = "Clip1",
+					Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/linear.exr",
+					FormatID = "OpenEXRFormat",
+					StartFrame = -1,
+					LengthSetManually = true,
+					TrimIn = 0,
+					TrimOut = 0,
+					ExtendFirst = 0,
+					ExtendLast = 0,
+					Loop = 0,
+					AspectMode = 0,
+					Depth = 0,
+					TimeCode = 0,
+					GlobalStart = 0,
+					GlobalEnd = 0
+				}
+			},
+			Inputs = {
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				["Clip1.OpenEXRFormat.DeepOutputMode"] = Input { Disabled = true, },
+				["Clip1.OpenEXRFormat.RedName"] = Input { Value = FuID { "R" }, },
+				["Clip1.OpenEXRFormat.GreenName"] = Input { Value = FuID { "G" }, },
+				["Clip1.OpenEXRFormat.BlueName"] = Input { Value = FuID { "B" }, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 55, 313.5 } },
+		},
+		BMD4KBCASTVIDEO_xyz_input = Loader {
+			Clips = {
+				Clip {
+					ID = "Clip1",
+					Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/linear.exr",
+					FormatID = "OpenEXRFormat",
+					StartFrame = -1,
+					LengthSetManually = true,
+					TrimIn = 0,
+					TrimOut = 0,
+					ExtendFirst = 0,
+					ExtendLast = 0,
+					Loop = 0,
+					AspectMode = 0,
+					Depth = 0,
+					TimeCode = 0,
+					GlobalStart = 0,
+					GlobalEnd = 0
+				}
+			},
+			Inputs = {
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				["Clip1.OpenEXRFormat.DeepOutputMode"] = Input { Disabled = true, },
+				["Clip1.OpenEXRFormat.RedName"] = Input { Value = FuID { "R" }, },
+				["Clip1.OpenEXRFormat.GreenName"] = Input { Value = FuID { "G" }, },
+				["Clip1.OpenEXRFormat.BlueName"] = Input { Value = FuID { "B" }, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 55, 346.5 } },
+		},
+		BMD4KBCASTFILM_xyz_input = Loader {
+			Clips = {
+				Clip {
+					ID = "Clip1",
+					Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/linear.exr",
+					FormatID = "OpenEXRFormat",
+					StartFrame = -1,
+					LengthSetManually = true,
+					TrimIn = 0,
+					TrimOut = 0,
+					ExtendFirst = 0,
+					ExtendLast = 0,
+					Loop = 0,
+					AspectMode = 0,
+					Depth = 0,
+					TimeCode = 0,
+					GlobalStart = 0,
+					GlobalEnd = 0
+				}
+			},
+			Inputs = {
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				["Clip1.OpenEXRFormat.DeepOutputMode"] = Input { Disabled = true, },
+				["Clip1.OpenEXRFormat.RedName"] = Input { Value = FuID { "R" }, },
+				["Clip1.OpenEXRFormat.GreenName"] = Input { Value = FuID { "G" }, },
+				["Clip1.OpenEXRFormat.BlueName"] = Input { Value = FuID { "B" }, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 55, 379.5 } },
+		},
+		BMDVIDEOV5_xyz_input = Loader {
+			Clips = {
+				Clip {
+					ID = "Clip1",
+					Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/linear.exr",
+					FormatID = "OpenEXRFormat",
+					StartFrame = -1,
+					LengthSetManually = true,
+					TrimIn = 0,
+					TrimOut = 0,
+					ExtendFirst = 0,
+					ExtendLast = 0,
+					Loop = 0,
+					AspectMode = 0,
+					Depth = 0,
+					TimeCode = 0,
+					GlobalStart = 0,
+					GlobalEnd = 0
+				}
+			},
+			Inputs = {
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				["Clip1.OpenEXRFormat.DeepOutputMode"] = Input { Disabled = true, },
+				["Clip1.OpenEXRFormat.RedName"] = Input { Value = FuID { "R" }, },
+				["Clip1.OpenEXRFormat.GreenName"] = Input { Value = FuID { "G" }, },
+				["Clip1.OpenEXRFormat.BlueName"] = Input { Value = FuID { "B" }, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 55, 412.5 } },
+		},
+		gen1_709_linear_input = Loader {
+			Clips = {
+				Clip {
+					ID = "Clip1",
+					Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/linear.exr",
+					FormatID = "OpenEXRFormat",
+					StartFrame = -1,
+					LengthSetManually = true,
+					TrimIn = 0,
+					TrimOut = 0,
+					ExtendFirst = 0,
+					ExtendLast = 0,
+					Loop = 0,
+					AspectMode = 0,
+					Depth = 0,
+					TimeCode = 0,
+					GlobalStart = 0,
+					GlobalEnd = 0
+				}
+			},
+			Inputs = {
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				["Clip1.OpenEXRFormat.DeepOutputMode"] = Input { Disabled = true, },
+				["Clip1.OpenEXRFormat.RedName"] = Input { Value = FuID { "R" }, },
+				["Clip1.OpenEXRFormat.GreenName"] = Input { Value = FuID { "G" }, },
+				["Clip1.OpenEXRFormat.BlueName"] = Input { Value = FuID { "B" }, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 55, 445.5 } },
+		},
+		srgb_decode_input = Loader {
+			Clips = {
+				Clip {
+					ID = "Clip1",
+					Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/code.exr",
+					FormatID = "OpenEXRFormat",
+					StartFrame = -1,
+					LengthSetManually = true,
+					TrimIn = 0,
+					TrimOut = 0,
+					ExtendFirst = 0,
+					ExtendLast = 0,
+					Loop = 0,
+					AspectMode = 0,
+					Depth = 0,
+					TimeCode = 0,
+					GlobalStart = 0,
+					GlobalEnd = 0
+				}
+			},
+			Inputs = {
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				["Clip1.OpenEXRFormat.DeepOutputMode"] = Input { Disabled = true, },
+				["Clip1.OpenEXRFormat.RedName"] = Input { Value = FuID { "R" }, },
+				["Clip1.OpenEXRFormat.GreenName"] = Input { Value = FuID { "G" }, },
+				["Clip1.OpenEXRFormat.BlueName"] = Input { Value = FuID { "B" }, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 55, 478.5 } },
+		},
+		srgb_encode_input = Loader {
+			Clips = {
+				Clip {
+					ID = "Clip1",
+					Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/linear.exr",
+					FormatID = "OpenEXRFormat",
+					StartFrame = -1,
+					LengthSetManually = true,
+					TrimIn = 0,
+					TrimOut = 0,
+					ExtendFirst = 0,
+					ExtendLast = 0,
+					Loop = 0,
+					AspectMode = 0,
+					Depth = 0,
+					TimeCode = 0,
+					GlobalStart = 0,
+					GlobalEnd = 0
+				}
+			},
+			Inputs = {
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				["Clip1.OpenEXRFormat.DeepOutputMode"] = Input { Disabled = true, },
+				["Clip1.OpenEXRFormat.RedName"] = Input { Value = FuID { "R" }, },
+				["Clip1.OpenEXRFormat.GreenName"] = Input { Value = FuID { "G" }, },
+				["Clip1.OpenEXRFormat.BlueName"] = Input { Value = FuID { "B" }, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 55, 511.5 } },
+		},
+		film5_decode_input = Loader {
+			Clips = {
+				Clip {
+					ID = "Clip1",
+					Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/code.exr",
+					FormatID = "OpenEXRFormat",
+					StartFrame = -1,
+					LengthSetManually = true,
+					TrimIn = 0,
+					TrimOut = 0,
+					ExtendFirst = 0,
+					ExtendLast = 0,
+					Loop = 0,
+					AspectMode = 0,
+					Depth = 0,
+					TimeCode = 0,
+					GlobalStart = 0,
+					GlobalEnd = 0
+				}
+			},
+			Inputs = {
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				["Clip1.OpenEXRFormat.DeepOutputMode"] = Input { Disabled = true, },
+				["Clip1.OpenEXRFormat.RedName"] = Input { Value = FuID { "R" }, },
+				["Clip1.OpenEXRFormat.GreenName"] = Input { Value = FuID { "G" }, },
+				["Clip1.OpenEXRFormat.BlueName"] = Input { Value = FuID { "B" }, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 55, 544.5 } },
+		},
+		film5_encode_input = Loader {
+			Clips = {
+				Clip {
+					ID = "Clip1",
+					Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/linear.exr",
+					FormatID = "OpenEXRFormat",
+					StartFrame = -1,
+					LengthSetManually = true,
+					TrimIn = 0,
+					TrimOut = 0,
+					ExtendFirst = 0,
+					ExtendLast = 0,
+					Loop = 0,
+					AspectMode = 0,
+					Depth = 0,
+					TimeCode = 0,
+					GlobalStart = 0,
+					GlobalEnd = 0
+				}
+			},
+			Inputs = {
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				["Clip1.OpenEXRFormat.DeepOutputMode"] = Input { Disabled = true, },
+				["Clip1.OpenEXRFormat.RedName"] = Input { Value = FuID { "R" }, },
+				["Clip1.OpenEXRFormat.GreenName"] = Input { Value = FuID { "G" }, },
+				["Clip1.OpenEXRFormat.BlueName"] = Input { Value = FuID { "B" }, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 55, 577.5 } },
+		},
+		node01_input = Loader {
+			Clips = {
+				Clip {
+					ID = "Clip1",
+					Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/linear.exr",
+					FormatID = "OpenEXRFormat",
+					StartFrame = -1,
+					LengthSetManually = true,
+					TrimIn = 0,
+					TrimOut = 0,
+					ExtendFirst = 0,
+					ExtendLast = 0,
+					Loop = 0,
+					AspectMode = 0,
+					Depth = 0,
+					TimeCode = 0,
+					GlobalStart = 0,
+					GlobalEnd = 0
+				}
+			},
+			Inputs = {
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				["Clip1.OpenEXRFormat.DeepOutputMode"] = Input { Disabled = true, },
+				["Clip1.OpenEXRFormat.RedName"] = Input { Value = FuID { "R" }, },
+				["Clip1.OpenEXRFormat.GreenName"] = Input { Value = FuID { "G" }, },
+				["Clip1.OpenEXRFormat.BlueName"] = Input { Value = FuID { "B" }, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 55, 610.5 } },
+		},
+		node02_input = Loader {
+			Clips = {
+				Clip {
+					ID = "Clip1",
+					Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/code.exr",
+					FormatID = "OpenEXRFormat",
+					StartFrame = -1,
+					LengthSetManually = true,
+					TrimIn = 0,
+					TrimOut = 0,
+					ExtendFirst = 0,
+					ExtendLast = 0,
+					Loop = 0,
+					AspectMode = 0,
+					Depth = 0,
+					TimeCode = 0,
+					GlobalStart = 0,
+					GlobalEnd = 0
+				}
+			},
+			Inputs = {
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				["Clip1.OpenEXRFormat.DeepOutputMode"] = Input { Disabled = true, },
+				["Clip1.OpenEXRFormat.RedName"] = Input { Value = FuID { "R" }, },
+				["Clip1.OpenEXRFormat.GreenName"] = Input { Value = FuID { "G" }, },
+				["Clip1.OpenEXRFormat.BlueName"] = Input { Value = FuID { "B" }, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 55, 643.5 } },
+		},
+		node03_input = Loader {
+			Clips = {
+				Clip {
+					ID = "Clip1",
+					Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/code.exr",
+					FormatID = "OpenEXRFormat",
+					StartFrame = -1,
+					LengthSetManually = true,
+					TrimIn = 0,
+					TrimOut = 0,
+					ExtendFirst = 0,
+					ExtendLast = 0,
+					Loop = 0,
+					AspectMode = 0,
+					Depth = 0,
+					TimeCode = 0,
+					GlobalStart = 0,
+					GlobalEnd = 0
+				}
+			},
+			Inputs = {
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				["Clip1.OpenEXRFormat.DeepOutputMode"] = Input { Disabled = true, },
+				["Clip1.OpenEXRFormat.RedName"] = Input { Value = FuID { "R" }, },
+				["Clip1.OpenEXRFormat.GreenName"] = Input { Value = FuID { "G" }, },
+				["Clip1.OpenEXRFormat.BlueName"] = Input { Value = FuID { "B" }, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 55, 676.5 } },
+		},
+		chain_input = Loader {
+			Clips = {
+				Clip {
+					ID = "Clip1",
+					Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/linear.exr",
+					FormatID = "OpenEXRFormat",
+					StartFrame = -1,
+					LengthSetManually = true,
+					TrimIn = 0,
+					TrimOut = 0,
+					ExtendFirst = 0,
+					ExtendLast = 0,
+					Loop = 0,
+					AspectMode = 0,
+					Depth = 0,
+					TimeCode = 0,
+					GlobalStart = 0,
+					GlobalEnd = 0
+				}
+			},
+			Inputs = {
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				["Clip1.OpenEXRFormat.DeepOutputMode"] = Input { Disabled = true, },
+				["Clip1.OpenEXRFormat.RedName"] = Input { Value = FuID { "R" }, },
+				["Clip1.OpenEXRFormat.GreenName"] = Input { Value = FuID { "G" }, },
+				["Clip1.OpenEXRFormat.BlueName"] = Input { Value = FuID { "B" }, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 55, 709.5 } },
+		},
+		bypass_input = Loader {
+			Clips = {
+				Clip {
+					ID = "Clip1",
+					Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/linear.exr",
+					FormatID = "OpenEXRFormat",
+					StartFrame = -1,
+					LengthSetManually = true,
+					TrimIn = 0,
+					TrimOut = 0,
+					ExtendFirst = 0,
+					ExtendLast = 0,
+					Loop = 0,
+					AspectMode = 0,
+					Depth = 0,
+					TimeCode = 0,
+					GlobalStart = 0,
+					GlobalEnd = 0
+				}
+			},
+			Inputs = {
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				["Clip1.OpenEXRFormat.DeepOutputMode"] = Input { Disabled = true, },
+				["Clip1.OpenEXRFormat.RedName"] = Input { Value = FuID { "R" }, },
+				["Clip1.OpenEXRFormat.GreenName"] = Input { Value = FuID { "G" }, },
+				["Clip1.OpenEXRFormat.BlueName"] = Input { Value = FuID { "B" }, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 55, 742.5 } },
+		},
+		matrix_node01_input = Loader {
+			Clips = {
+				Clip {
+					ID = "Clip1",
+					Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/linear.exr",
+					FormatID = "OpenEXRFormat",
+					StartFrame = -1,
+					LengthSetManually = true,
+					TrimIn = 0,
+					TrimOut = 0,
+					ExtendFirst = 0,
+					ExtendLast = 0,
+					Loop = 0,
+					AspectMode = 0,
+					Depth = 0,
+					TimeCode = 0,
+					GlobalStart = 0,
+					GlobalEnd = 0
+				}
+			},
+			Inputs = {
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				["Clip1.OpenEXRFormat.DeepOutputMode"] = Input { Disabled = true, },
+				["Clip1.OpenEXRFormat.RedName"] = Input { Value = FuID { "R" }, },
+				["Clip1.OpenEXRFormat.GreenName"] = Input { Value = FuID { "G" }, },
+				["Clip1.OpenEXRFormat.BlueName"] = Input { Value = FuID { "B" }, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 55, 775.5 } },
+		},
+		matrix_node03_input = Loader {
+			Clips = {
+				Clip {
+					ID = "Clip1",
+					Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/linear.exr",
+					FormatID = "OpenEXRFormat",
+					StartFrame = -1,
+					LengthSetManually = true,
+					TrimIn = 0,
+					TrimOut = 0,
+					ExtendFirst = 0,
+					ExtendLast = 0,
+					Loop = 0,
+					AspectMode = 0,
+					Depth = 0,
+					TimeCode = 0,
+					GlobalStart = 0,
+					GlobalEnd = 0
+				}
+			},
+			Inputs = {
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				["Clip1.OpenEXRFormat.DeepOutputMode"] = Input { Disabled = true, },
+				["Clip1.OpenEXRFormat.RedName"] = Input { Value = FuID { "R" }, },
+				["Clip1.OpenEXRFormat.GreenName"] = Input { Value = FuID { "G" }, },
+				["Clip1.OpenEXRFormat.BlueName"] = Input { Value = FuID { "B" }, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 55, 808.5 } },
+		},
+		matrix_monitor_input = Loader {
+			Clips = {
+				Clip {
+					ID = "Clip1",
+					Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/linear.exr",
+					FormatID = "OpenEXRFormat",
+					StartFrame = -1,
+					LengthSetManually = true,
+					TrimIn = 0,
+					TrimOut = 0,
+					ExtendFirst = 0,
+					ExtendLast = 0,
+					Loop = 0,
+					AspectMode = 0,
+					Depth = 0,
+					TimeCode = 0,
+					GlobalStart = 0,
+					GlobalEnd = 0
+				}
+			},
+			Inputs = {
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				["Clip1.OpenEXRFormat.DeepOutputMode"] = Input { Disabled = true, },
+				["Clip1.OpenEXRFormat.RedName"] = Input { Value = FuID { "R" }, },
+				["Clip1.OpenEXRFormat.GreenName"] = Input { Value = FuID { "G" }, },
+				["Clip1.OpenEXRFormat.BlueName"] = Input { Value = FuID { "B" }, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 55, 841.5 } },
+		},
+		monitor_q_linear709_code_input = Loader {
+			Clips = {
+				Clip {
+					ID = "Clip1",
+					Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/code.exr",
+					FormatID = "OpenEXRFormat",
+					StartFrame = -1,
+					LengthSetManually = true,
+					TrimIn = 0,
+					TrimOut = 0,
+					ExtendFirst = 0,
+					ExtendLast = 0,
+					Loop = 0,
+					AspectMode = 0,
+					Depth = 0,
+					TimeCode = 0,
+					GlobalStart = 0,
+					GlobalEnd = 0
+				}
+			},
+			Inputs = {
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				["Clip1.OpenEXRFormat.DeepOutputMode"] = Input { Disabled = true, },
+				["Clip1.OpenEXRFormat.RedName"] = Input { Value = FuID { "R" }, },
+				["Clip1.OpenEXRFormat.GreenName"] = Input { Value = FuID { "G" }, },
+				["Clip1.OpenEXRFormat.BlueName"] = Input { Value = FuID { "B" }, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 55, 874.5 } },
+		},
+		monitor_bypass_linear709_code_input = Loader {
+			Clips = {
+				Clip {
+					ID = "Clip1",
+					Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/code.exr",
+					FormatID = "OpenEXRFormat",
+					StartFrame = -1,
+					LengthSetManually = true,
+					TrimIn = 0,
+					TrimOut = 0,
+					ExtendFirst = 0,
+					ExtendLast = 0,
+					Loop = 0,
+					AspectMode = 0,
+					Depth = 0,
+					TimeCode = 0,
+					GlobalStart = 0,
+					GlobalEnd = 0
+				}
+			},
+			Inputs = {
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				["Clip1.OpenEXRFormat.DeepOutputMode"] = Input { Disabled = true, },
+				["Clip1.OpenEXRFormat.RedName"] = Input { Value = FuID { "R" }, },
+				["Clip1.OpenEXRFormat.GreenName"] = Input { Value = FuID { "G" }, },
+				["Clip1.OpenEXRFormat.BlueName"] = Input { Value = FuID { "B" }, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 55, 907.5 } },
+		},
+		MediaOut1 = MediaOut {
+			Inputs = {
+				Index = Input { Value = "0", }
+			},
+			ViewInfo = OperatorInfo { Pos = { 440, 49.5 } },
+		},
+		identity_linear_output = Saver {
+			Inputs = {
+				ProcessWhenBlendIs00 = Input { Value = 0, },
+				Clip = Input {
+					Value = Clip {
+						Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/identity_linear.0000.exr",
+						FormatID = "OpenEXRFormat",
+						Length = 0,
+						Saving = true,
+						LengthSetManually = true,
+						AspectMode = 0,
+						Depth = 0,
+						GlobalStart = -2000000000,
+						GlobalEnd = -2000000000
+					},
+				},
+				OutputFormat = Input { Value = FuID { "OpenEXRFormat" }, },
+				["Gamut.LogType"] = Input { Value = FuID { "Bypass" }, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				Input = Input {
+					SourceOp = "identity_linear_input",
+					Source = "Output",
+				},
+				["OpenEXRFormat.Compression"] = Input { Value = 0, },
+				["OpenEXRFormat.ZipCompressionLevel"] = Input { Value = 4, },
+				["OpenEXRFormat.AlphaEnable"] = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 165, 16.5 } },
+		},
+		identity_code_output = Saver {
+			Inputs = {
+				ProcessWhenBlendIs00 = Input { Value = 0, },
+				Clip = Input {
+					Value = Clip {
+						Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/identity_code.0000.exr",
+						FormatID = "OpenEXRFormat",
+						Length = 0,
+						Saving = true,
+						LengthSetManually = true,
+						AspectMode = 0,
+						Depth = 0,
+						GlobalStart = -2000000000,
+						GlobalEnd = -2000000000
+					},
+				},
+				OutputFormat = Input { Value = FuID { "OpenEXRFormat" }, },
+				["Gamut.LogType"] = Input { Value = FuID { "Bypass" }, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				Input = Input {
+					SourceOp = "identity_code_input",
+					Source = "Output",
+				},
+				["OpenEXRFormat.Compression"] = Input { Value = 0, },
+				["OpenEXRFormat.ZipCompressionLevel"] = Input { Value = 4, },
+				["OpenEXRFormat.AlphaEnable"] = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 165, 49.5 } },
+		},
+		BMDFILM_xyz_CST1 = ofx.com.blackmagicdesign.resolvefx.ColorSpaceTransformV2 {
+			Inputs = {
+				Source = Input {
+					SourceOp = "BMDFILM_xyz_input",
+					Source = "Output",
+				},
+				colorSpaceTransformGroup = Input { Value = 1, },
+				inputColorSpace = Input { Value = FuID { "BMDFILM_COLORSPACE" }, },
+				inputGamma = Input { Value = FuID { "LINEAR_GAMMA" }, },
+				outputColorSpace = Input { Value = FuID { "XYZ_COLORSPACE" }, },
+				outputGamma = Input { Value = FuID { "LINEAR_GAMMA" }, },
+				invertTransform = Input { Value = 0, },
+				toneMappingGroup = Input { Value = 1, },
+				tmType = Input { Value = FuID { "TM_NONE" }, },
+				isSrcLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				srcLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				isDstLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				dstLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				srcLumAvg = Input {
+					Value = 9,
+					Disabled = true,
+				},
+				satRolloffStart = Input { Value = 100, },
+				satRolloffLimit = Input { Value = 10000, },
+				gamutMappingGroup = Input { Value = 1, },
+				gmType = Input { Value = FuID { "GM_NONE" }, },
+				satKnee = Input {
+					Value = 0.899999976158142,
+					Disabled = true,
+				},
+				satMax = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				advancedGroup = Input { Value = 1, },
+				isRec2408ConversionEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				isRec2390ScalingEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				doFwdOOTF = Input { Value = 0, },
+				doInvOOTF = Input { Value = 0, },
+				doCAT = Input { Value = 0, },
+				isPreTMClippingFix = Input { Value = 0, },
+				isLegacySceneProcessing = Input { Value = 0, },
+				blendGroup = Input { Value = 0, },
+				blendIn = Input { Value = 1, },
+				blend = Input { Value = 0, },
+				ignoreContentShape = Input { Value = 0, },
+				legacyIsProcessRGBOnly = Input { Value = 0, },
+				IsNoTemporalFramesReqd = Input { Value = 0, },
+				srcProcessingAlphaMode = Input { Value = -1, },
+				dstProcessingAlphaMode = Input { Value = -1, },
+				resolvefxVersion = Input { Value = "1.4", }
+			},
+			ViewInfo = OperatorInfo { Pos = { 165, 82.5 } },
+		},
+		BMDFILM_xyz_output = Saver {
+			Inputs = {
+				ProcessWhenBlendIs00 = Input { Value = 0, },
+				Clip = Input {
+					Value = Clip {
+						Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/BMDFILM_xyz.0000.exr",
+						FormatID = "OpenEXRFormat",
+						Length = 0,
+						Saving = true,
+						LengthSetManually = true,
+						AspectMode = 0,
+						Depth = 0,
+						GlobalStart = -2000000000,
+						GlobalEnd = -2000000000
+					},
+				},
+				OutputFormat = Input { Value = FuID { "OpenEXRFormat" }, },
+				["Gamut.LogType"] = Input { Value = FuID { "Bypass" }, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				Input = Input {
+					SourceOp = "BMDFILM_xyz_CST1",
+					Source = "Output",
+				},
+				["OpenEXRFormat.Compression"] = Input { Value = 0, },
+				["OpenEXRFormat.ZipCompressionLevel"] = Input { Value = 4, },
+				["OpenEXRFormat.AlphaEnable"] = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 275, 82.5 } },
+		},
+		BMD4KFILM_xyz_CST1 = ofx.com.blackmagicdesign.resolvefx.ColorSpaceTransformV2 {
+			Inputs = {
+				Source = Input {
+					SourceOp = "BMD4KFILM_xyz_input",
+					Source = "Output",
+				},
+				colorSpaceTransformGroup = Input { Value = 1, },
+				inputColorSpace = Input { Value = FuID { "BMD4KFILM_COLORSPACE" }, },
+				inputGamma = Input { Value = FuID { "LINEAR_GAMMA" }, },
+				outputColorSpace = Input { Value = FuID { "XYZ_COLORSPACE" }, },
+				outputGamma = Input { Value = FuID { "LINEAR_GAMMA" }, },
+				invertTransform = Input { Value = 0, },
+				toneMappingGroup = Input { Value = 1, },
+				tmType = Input { Value = FuID { "TM_NONE" }, },
+				isSrcLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				srcLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				isDstLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				dstLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				srcLumAvg = Input {
+					Value = 9,
+					Disabled = true,
+				},
+				satRolloffStart = Input { Value = 100, },
+				satRolloffLimit = Input { Value = 10000, },
+				gamutMappingGroup = Input { Value = 1, },
+				gmType = Input { Value = FuID { "GM_NONE" }, },
+				satKnee = Input {
+					Value = 0.899999976158142,
+					Disabled = true,
+				},
+				satMax = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				advancedGroup = Input { Value = 1, },
+				isRec2408ConversionEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				isRec2390ScalingEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				doFwdOOTF = Input { Value = 0, },
+				doInvOOTF = Input { Value = 0, },
+				doCAT = Input { Value = 0, },
+				isPreTMClippingFix = Input { Value = 0, },
+				isLegacySceneProcessing = Input { Value = 0, },
+				blendGroup = Input { Value = 0, },
+				blendIn = Input { Value = 1, },
+				blend = Input { Value = 0, },
+				ignoreContentShape = Input { Value = 0, },
+				legacyIsProcessRGBOnly = Input { Value = 0, },
+				IsNoTemporalFramesReqd = Input { Value = 0, },
+				srcProcessingAlphaMode = Input { Value = -1, },
+				dstProcessingAlphaMode = Input { Value = -1, },
+				resolvefxVersion = Input { Value = "1.4", }
+			},
+			ViewInfo = OperatorInfo { Pos = { 165, 115.5 } },
+		},
+		BMD4KFILM_xyz_output = Saver {
+			Inputs = {
+				ProcessWhenBlendIs00 = Input { Value = 0, },
+				Clip = Input {
+					Value = Clip {
+						Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/BMD4KFILM_xyz.0000.exr",
+						FormatID = "OpenEXRFormat",
+						Length = 0,
+						Saving = true,
+						LengthSetManually = true,
+						AspectMode = 0,
+						Depth = 0,
+						GlobalStart = -2000000000,
+						GlobalEnd = -2000000000
+					},
+				},
+				OutputFormat = Input { Value = FuID { "OpenEXRFormat" }, },
+				["Gamut.LogType"] = Input { Value = FuID { "Bypass" }, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				Input = Input {
+					SourceOp = "BMD4KFILM_xyz_CST1",
+					Source = "Output",
+				},
+				["OpenEXRFormat.Compression"] = Input { Value = 0, },
+				["OpenEXRFormat.ZipCompressionLevel"] = Input { Value = 4, },
+				["OpenEXRFormat.AlphaEnable"] = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 275, 115.5 } },
+		},
+		BMD4KFILMV3_xyz_CST1 = ofx.com.blackmagicdesign.resolvefx.ColorSpaceTransformV2 {
+			Inputs = {
+				Source = Input {
+					SourceOp = "BMD4KFILMV3_xyz_input",
+					Source = "Output",
+				},
+				colorSpaceTransformGroup = Input { Value = 1, },
+				inputColorSpace = Input { Value = FuID { "BMD4KFILMV3_COLORSPACE" }, },
+				inputGamma = Input { Value = FuID { "LINEAR_GAMMA" }, },
+				outputColorSpace = Input { Value = FuID { "XYZ_COLORSPACE" }, },
+				outputGamma = Input { Value = FuID { "LINEAR_GAMMA" }, },
+				invertTransform = Input { Value = 0, },
+				toneMappingGroup = Input { Value = 1, },
+				tmType = Input { Value = FuID { "TM_NONE" }, },
+				isSrcLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				srcLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				isDstLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				dstLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				srcLumAvg = Input {
+					Value = 9,
+					Disabled = true,
+				},
+				satRolloffStart = Input { Value = 100, },
+				satRolloffLimit = Input { Value = 10000, },
+				gamutMappingGroup = Input { Value = 1, },
+				gmType = Input { Value = FuID { "GM_NONE" }, },
+				satKnee = Input {
+					Value = 0.899999976158142,
+					Disabled = true,
+				},
+				satMax = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				advancedGroup = Input { Value = 1, },
+				isRec2408ConversionEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				isRec2390ScalingEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				doFwdOOTF = Input { Value = 0, },
+				doInvOOTF = Input { Value = 0, },
+				doCAT = Input { Value = 0, },
+				isPreTMClippingFix = Input { Value = 0, },
+				isLegacySceneProcessing = Input { Value = 0, },
+				blendGroup = Input { Value = 0, },
+				blendIn = Input { Value = 1, },
+				blend = Input { Value = 0, },
+				ignoreContentShape = Input { Value = 0, },
+				legacyIsProcessRGBOnly = Input { Value = 0, },
+				IsNoTemporalFramesReqd = Input { Value = 0, },
+				srcProcessingAlphaMode = Input { Value = -1, },
+				dstProcessingAlphaMode = Input { Value = -1, },
+				resolvefxVersion = Input { Value = "1.4", }
+			},
+			ViewInfo = OperatorInfo { Pos = { 165, 148.5 } },
+		},
+		BMD4KFILMV3_xyz_output = Saver {
+			Inputs = {
+				ProcessWhenBlendIs00 = Input { Value = 0, },
+				Clip = Input {
+					Value = Clip {
+						Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/BMD4KFILMV3_xyz.0000.exr",
+						FormatID = "OpenEXRFormat",
+						Length = 0,
+						Saving = true,
+						LengthSetManually = true,
+						AspectMode = 0,
+						Depth = 0,
+						GlobalStart = -2000000000,
+						GlobalEnd = -2000000000
+					},
+				},
+				OutputFormat = Input { Value = FuID { "OpenEXRFormat" }, },
+				["Gamut.LogType"] = Input { Value = FuID { "Bypass" }, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				Input = Input {
+					SourceOp = "BMD4KFILMV3_xyz_CST1",
+					Source = "Output",
+				},
+				["OpenEXRFormat.Compression"] = Input { Value = 0, },
+				["OpenEXRFormat.ZipCompressionLevel"] = Input { Value = 4, },
+				["OpenEXRFormat.AlphaEnable"] = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 275, 148.5 } },
+		},
+		BMD4KVIDEOV3_xyz_CST1 = ofx.com.blackmagicdesign.resolvefx.ColorSpaceTransformV2 {
+			Inputs = {
+				Source = Input {
+					SourceOp = "BMD4KVIDEOV3_xyz_input",
+					Source = "Output",
+				},
+				colorSpaceTransformGroup = Input { Value = 1, },
+				inputColorSpace = Input { Value = FuID { "BMD4KVIDEOV3_COLORSPACE" }, },
+				inputGamma = Input { Value = FuID { "LINEAR_GAMMA" }, },
+				outputColorSpace = Input { Value = FuID { "XYZ_COLORSPACE" }, },
+				outputGamma = Input { Value = FuID { "LINEAR_GAMMA" }, },
+				invertTransform = Input { Value = 0, },
+				toneMappingGroup = Input { Value = 1, },
+				tmType = Input { Value = FuID { "TM_NONE" }, },
+				isSrcLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				srcLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				isDstLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				dstLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				srcLumAvg = Input {
+					Value = 9,
+					Disabled = true,
+				},
+				satRolloffStart = Input { Value = 100, },
+				satRolloffLimit = Input { Value = 10000, },
+				gamutMappingGroup = Input { Value = 1, },
+				gmType = Input { Value = FuID { "GM_NONE" }, },
+				satKnee = Input {
+					Value = 0.899999976158142,
+					Disabled = true,
+				},
+				satMax = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				advancedGroup = Input { Value = 1, },
+				isRec2408ConversionEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				isRec2390ScalingEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				doFwdOOTF = Input { Value = 0, },
+				doInvOOTF = Input { Value = 0, },
+				doCAT = Input { Value = 0, },
+				isPreTMClippingFix = Input { Value = 0, },
+				isLegacySceneProcessing = Input { Value = 0, },
+				blendGroup = Input { Value = 0, },
+				blendIn = Input { Value = 1, },
+				blend = Input { Value = 0, },
+				ignoreContentShape = Input { Value = 0, },
+				legacyIsProcessRGBOnly = Input { Value = 0, },
+				IsNoTemporalFramesReqd = Input { Value = 0, },
+				srcProcessingAlphaMode = Input { Value = -1, },
+				dstProcessingAlphaMode = Input { Value = -1, },
+				resolvefxVersion = Input { Value = "1.4", }
+			},
+			ViewInfo = OperatorInfo { Pos = { 165, 181.5 } },
+		},
+		BMD4KVIDEOV3_xyz_output = Saver {
+			Inputs = {
+				ProcessWhenBlendIs00 = Input { Value = 0, },
+				Clip = Input {
+					Value = Clip {
+						Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/BMD4KVIDEOV3_xyz.0000.exr",
+						FormatID = "OpenEXRFormat",
+						Length = 0,
+						Saving = true,
+						LengthSetManually = true,
+						AspectMode = 0,
+						Depth = 0,
+						GlobalStart = -2000000000,
+						GlobalEnd = -2000000000
+					},
+				},
+				OutputFormat = Input { Value = FuID { "OpenEXRFormat" }, },
+				["Gamut.LogType"] = Input { Value = FuID { "Bypass" }, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				Input = Input {
+					SourceOp = "BMD4KVIDEOV3_xyz_CST1",
+					Source = "Output",
+				},
+				["OpenEXRFormat.Compression"] = Input { Value = 0, },
+				["OpenEXRFormat.ZipCompressionLevel"] = Input { Value = 4, },
+				["OpenEXRFormat.AlphaEnable"] = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 275, 181.5 } },
+		},
+		BMD46KFILM_xyz_CST1 = ofx.com.blackmagicdesign.resolvefx.ColorSpaceTransformV2 {
+			Inputs = {
+				Source = Input {
+					SourceOp = "BMD46KFILM_xyz_input",
+					Source = "Output",
+				},
+				colorSpaceTransformGroup = Input { Value = 1, },
+				inputColorSpace = Input { Value = FuID { "BMD46KFILM_COLORSPACE" }, },
+				inputGamma = Input { Value = FuID { "LINEAR_GAMMA" }, },
+				outputColorSpace = Input { Value = FuID { "XYZ_COLORSPACE" }, },
+				outputGamma = Input { Value = FuID { "LINEAR_GAMMA" }, },
+				invertTransform = Input { Value = 0, },
+				toneMappingGroup = Input { Value = 1, },
+				tmType = Input { Value = FuID { "TM_NONE" }, },
+				isSrcLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				srcLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				isDstLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				dstLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				srcLumAvg = Input {
+					Value = 9,
+					Disabled = true,
+				},
+				satRolloffStart = Input { Value = 100, },
+				satRolloffLimit = Input { Value = 10000, },
+				gamutMappingGroup = Input { Value = 1, },
+				gmType = Input { Value = FuID { "GM_NONE" }, },
+				satKnee = Input {
+					Value = 0.899999976158142,
+					Disabled = true,
+				},
+				satMax = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				advancedGroup = Input { Value = 1, },
+				isRec2408ConversionEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				isRec2390ScalingEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				doFwdOOTF = Input { Value = 0, },
+				doInvOOTF = Input { Value = 0, },
+				doCAT = Input { Value = 0, },
+				isPreTMClippingFix = Input { Value = 0, },
+				isLegacySceneProcessing = Input { Value = 0, },
+				blendGroup = Input { Value = 0, },
+				blendIn = Input { Value = 1, },
+				blend = Input { Value = 0, },
+				ignoreContentShape = Input { Value = 0, },
+				legacyIsProcessRGBOnly = Input { Value = 0, },
+				IsNoTemporalFramesReqd = Input { Value = 0, },
+				srcProcessingAlphaMode = Input { Value = -1, },
+				dstProcessingAlphaMode = Input { Value = -1, },
+				resolvefxVersion = Input { Value = "1.4", }
+			},
+			ViewInfo = OperatorInfo { Pos = { 165, 214.5 } },
+		},
+		BMD46KFILM_xyz_output = Saver {
+			Inputs = {
+				ProcessWhenBlendIs00 = Input { Value = 0, },
+				Clip = Input {
+					Value = Clip {
+						Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/BMD46KFILM_xyz.0000.exr",
+						FormatID = "OpenEXRFormat",
+						Length = 0,
+						Saving = true,
+						LengthSetManually = true,
+						AspectMode = 0,
+						Depth = 0,
+						GlobalStart = -2000000000,
+						GlobalEnd = -2000000000
+					},
+				},
+				OutputFormat = Input { Value = FuID { "OpenEXRFormat" }, },
+				["Gamut.LogType"] = Input { Value = FuID { "Bypass" }, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				Input = Input {
+					SourceOp = "BMD46KFILM_xyz_CST1",
+					Source = "Output",
+				},
+				["OpenEXRFormat.Compression"] = Input { Value = 0, },
+				["OpenEXRFormat.ZipCompressionLevel"] = Input { Value = 4, },
+				["OpenEXRFormat.AlphaEnable"] = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 275, 214.5 } },
+		},
+		BMD46KFILMV3_xyz_CST1 = ofx.com.blackmagicdesign.resolvefx.ColorSpaceTransformV2 {
+			Inputs = {
+				Source = Input {
+					SourceOp = "BMD46KFILMV3_xyz_input",
+					Source = "Output",
+				},
+				colorSpaceTransformGroup = Input { Value = 1, },
+				inputColorSpace = Input { Value = FuID { "BMD46KFILMV3_COLORSPACE" }, },
+				inputGamma = Input { Value = FuID { "LINEAR_GAMMA" }, },
+				outputColorSpace = Input { Value = FuID { "XYZ_COLORSPACE" }, },
+				outputGamma = Input { Value = FuID { "LINEAR_GAMMA" }, },
+				invertTransform = Input { Value = 0, },
+				toneMappingGroup = Input { Value = 1, },
+				tmType = Input { Value = FuID { "TM_NONE" }, },
+				isSrcLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				srcLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				isDstLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				dstLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				srcLumAvg = Input {
+					Value = 9,
+					Disabled = true,
+				},
+				satRolloffStart = Input { Value = 100, },
+				satRolloffLimit = Input { Value = 10000, },
+				gamutMappingGroup = Input { Value = 1, },
+				gmType = Input { Value = FuID { "GM_NONE" }, },
+				satKnee = Input {
+					Value = 0.899999976158142,
+					Disabled = true,
+				},
+				satMax = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				advancedGroup = Input { Value = 1, },
+				isRec2408ConversionEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				isRec2390ScalingEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				doFwdOOTF = Input { Value = 0, },
+				doInvOOTF = Input { Value = 0, },
+				doCAT = Input { Value = 0, },
+				isPreTMClippingFix = Input { Value = 0, },
+				isLegacySceneProcessing = Input { Value = 0, },
+				blendGroup = Input { Value = 0, },
+				blendIn = Input { Value = 1, },
+				blend = Input { Value = 0, },
+				ignoreContentShape = Input { Value = 0, },
+				legacyIsProcessRGBOnly = Input { Value = 0, },
+				IsNoTemporalFramesReqd = Input { Value = 0, },
+				srcProcessingAlphaMode = Input { Value = -1, },
+				dstProcessingAlphaMode = Input { Value = -1, },
+				resolvefxVersion = Input { Value = "1.4", }
+			},
+			ViewInfo = OperatorInfo { Pos = { 165, 247.5 } },
+		},
+		BMD46KFILMV3_xyz_output = Saver {
+			Inputs = {
+				ProcessWhenBlendIs00 = Input { Value = 0, },
+				Clip = Input {
+					Value = Clip {
+						Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/BMD46KFILMV3_xyz.0000.exr",
+						FormatID = "OpenEXRFormat",
+						Length = 0,
+						Saving = true,
+						LengthSetManually = true,
+						AspectMode = 0,
+						Depth = 0,
+						GlobalStart = -2000000000,
+						GlobalEnd = -2000000000
+					},
+				},
+				OutputFormat = Input { Value = FuID { "OpenEXRFormat" }, },
+				["Gamut.LogType"] = Input { Value = FuID { "Bypass" }, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				Input = Input {
+					SourceOp = "BMD46KFILMV3_xyz_CST1",
+					Source = "Output",
+				},
+				["OpenEXRFormat.Compression"] = Input { Value = 0, },
+				["OpenEXRFormat.ZipCompressionLevel"] = Input { Value = 4, },
+				["OpenEXRFormat.AlphaEnable"] = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 275, 247.5 } },
+		},
+		BMD46KVIDEOV3_xyz_CST1 = ofx.com.blackmagicdesign.resolvefx.ColorSpaceTransformV2 {
+			Inputs = {
+				Source = Input {
+					SourceOp = "BMD46KVIDEOV3_xyz_input",
+					Source = "Output",
+				},
+				colorSpaceTransformGroup = Input { Value = 1, },
+				inputColorSpace = Input { Value = FuID { "BMD46KVIDEOV3_COLORSPACE" }, },
+				inputGamma = Input { Value = FuID { "LINEAR_GAMMA" }, },
+				outputColorSpace = Input { Value = FuID { "XYZ_COLORSPACE" }, },
+				outputGamma = Input { Value = FuID { "LINEAR_GAMMA" }, },
+				invertTransform = Input { Value = 0, },
+				toneMappingGroup = Input { Value = 1, },
+				tmType = Input { Value = FuID { "TM_NONE" }, },
+				isSrcLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				srcLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				isDstLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				dstLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				srcLumAvg = Input {
+					Value = 9,
+					Disabled = true,
+				},
+				satRolloffStart = Input { Value = 100, },
+				satRolloffLimit = Input { Value = 10000, },
+				gamutMappingGroup = Input { Value = 1, },
+				gmType = Input { Value = FuID { "GM_NONE" }, },
+				satKnee = Input {
+					Value = 0.899999976158142,
+					Disabled = true,
+				},
+				satMax = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				advancedGroup = Input { Value = 1, },
+				isRec2408ConversionEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				isRec2390ScalingEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				doFwdOOTF = Input { Value = 0, },
+				doInvOOTF = Input { Value = 0, },
+				doCAT = Input { Value = 0, },
+				isPreTMClippingFix = Input { Value = 0, },
+				isLegacySceneProcessing = Input { Value = 0, },
+				blendGroup = Input { Value = 0, },
+				blendIn = Input { Value = 1, },
+				blend = Input { Value = 0, },
+				ignoreContentShape = Input { Value = 0, },
+				legacyIsProcessRGBOnly = Input { Value = 0, },
+				IsNoTemporalFramesReqd = Input { Value = 0, },
+				srcProcessingAlphaMode = Input { Value = -1, },
+				dstProcessingAlphaMode = Input { Value = -1, },
+				resolvefxVersion = Input { Value = "1.4", }
+			},
+			ViewInfo = OperatorInfo { Pos = { 165, 280.5 } },
+		},
+		BMD46KVIDEOV3_xyz_output = Saver {
+			Inputs = {
+				ProcessWhenBlendIs00 = Input { Value = 0, },
+				Clip = Input {
+					Value = Clip {
+						Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/BMD46KVIDEOV3_xyz.0000.exr",
+						FormatID = "OpenEXRFormat",
+						Length = 0,
+						Saving = true,
+						LengthSetManually = true,
+						AspectMode = 0,
+						Depth = 0,
+						GlobalStart = -2000000000,
+						GlobalEnd = -2000000000
+					},
+				},
+				OutputFormat = Input { Value = FuID { "OpenEXRFormat" }, },
+				["Gamut.LogType"] = Input { Value = FuID { "Bypass" }, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				Input = Input {
+					SourceOp = "BMD46KVIDEOV3_xyz_CST1",
+					Source = "Output",
+				},
+				["OpenEXRFormat.Compression"] = Input { Value = 0, },
+				["OpenEXRFormat.ZipCompressionLevel"] = Input { Value = 4, },
+				["OpenEXRFormat.AlphaEnable"] = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 275, 280.5 } },
+		},
+		BMDPOCKET4KFILM_xyz_CST1 = ofx.com.blackmagicdesign.resolvefx.ColorSpaceTransformV2 {
+			Inputs = {
+				Source = Input {
+					SourceOp = "BMDPOCKET4KFILM_xyz_input",
+					Source = "Output",
+				},
+				colorSpaceTransformGroup = Input { Value = 1, },
+				inputColorSpace = Input { Value = FuID { "BMDPOCKET4KFILM_COLORSPACE" }, },
+				inputGamma = Input { Value = FuID { "LINEAR_GAMMA" }, },
+				outputColorSpace = Input { Value = FuID { "XYZ_COLORSPACE" }, },
+				outputGamma = Input { Value = FuID { "LINEAR_GAMMA" }, },
+				invertTransform = Input { Value = 0, },
+				toneMappingGroup = Input { Value = 1, },
+				tmType = Input { Value = FuID { "TM_NONE" }, },
+				isSrcLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				srcLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				isDstLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				dstLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				srcLumAvg = Input {
+					Value = 9,
+					Disabled = true,
+				},
+				satRolloffStart = Input { Value = 100, },
+				satRolloffLimit = Input { Value = 10000, },
+				gamutMappingGroup = Input { Value = 1, },
+				gmType = Input { Value = FuID { "GM_NONE" }, },
+				satKnee = Input {
+					Value = 0.899999976158142,
+					Disabled = true,
+				},
+				satMax = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				advancedGroup = Input { Value = 1, },
+				isRec2408ConversionEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				isRec2390ScalingEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				doFwdOOTF = Input { Value = 0, },
+				doInvOOTF = Input { Value = 0, },
+				doCAT = Input { Value = 0, },
+				isPreTMClippingFix = Input { Value = 0, },
+				isLegacySceneProcessing = Input { Value = 0, },
+				blendGroup = Input { Value = 0, },
+				blendIn = Input { Value = 1, },
+				blend = Input { Value = 0, },
+				ignoreContentShape = Input { Value = 0, },
+				legacyIsProcessRGBOnly = Input { Value = 0, },
+				IsNoTemporalFramesReqd = Input { Value = 0, },
+				srcProcessingAlphaMode = Input { Value = -1, },
+				dstProcessingAlphaMode = Input { Value = -1, },
+				resolvefxVersion = Input { Value = "1.4", }
+			},
+			ViewInfo = OperatorInfo { Pos = { 165, 313.5 } },
+		},
+		BMDPOCKET4KFILM_xyz_output = Saver {
+			Inputs = {
+				ProcessWhenBlendIs00 = Input { Value = 0, },
+				Clip = Input {
+					Value = Clip {
+						Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/BMDPOCKET4KFILM_xyz.0000.exr",
+						FormatID = "OpenEXRFormat",
+						Length = 0,
+						Saving = true,
+						LengthSetManually = true,
+						AspectMode = 0,
+						Depth = 0,
+						GlobalStart = -2000000000,
+						GlobalEnd = -2000000000
+					},
+				},
+				OutputFormat = Input { Value = FuID { "OpenEXRFormat" }, },
+				["Gamut.LogType"] = Input { Value = FuID { "Bypass" }, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				Input = Input {
+					SourceOp = "BMDPOCKET4KFILM_xyz_CST1",
+					Source = "Output",
+				},
+				["OpenEXRFormat.Compression"] = Input { Value = 0, },
+				["OpenEXRFormat.ZipCompressionLevel"] = Input { Value = 4, },
+				["OpenEXRFormat.AlphaEnable"] = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 275, 313.5 } },
+		},
+		BMD4KBCASTVIDEO_xyz_CST1 = ofx.com.blackmagicdesign.resolvefx.ColorSpaceTransformV2 {
+			Inputs = {
+				Source = Input {
+					SourceOp = "BMD4KBCASTVIDEO_xyz_input",
+					Source = "Output",
+				},
+				colorSpaceTransformGroup = Input { Value = 1, },
+				inputColorSpace = Input { Value = FuID { "BMD4KBCASTVIDEO_COLORSPACE" }, },
+				inputGamma = Input { Value = FuID { "LINEAR_GAMMA" }, },
+				outputColorSpace = Input { Value = FuID { "XYZ_COLORSPACE" }, },
+				outputGamma = Input { Value = FuID { "LINEAR_GAMMA" }, },
+				invertTransform = Input { Value = 0, },
+				toneMappingGroup = Input { Value = 1, },
+				tmType = Input { Value = FuID { "TM_NONE" }, },
+				isSrcLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				srcLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				isDstLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				dstLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				srcLumAvg = Input {
+					Value = 9,
+					Disabled = true,
+				},
+				satRolloffStart = Input { Value = 100, },
+				satRolloffLimit = Input { Value = 10000, },
+				gamutMappingGroup = Input { Value = 1, },
+				gmType = Input { Value = FuID { "GM_NONE" }, },
+				satKnee = Input {
+					Value = 0.899999976158142,
+					Disabled = true,
+				},
+				satMax = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				advancedGroup = Input { Value = 1, },
+				isRec2408ConversionEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				isRec2390ScalingEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				doFwdOOTF = Input { Value = 0, },
+				doInvOOTF = Input { Value = 0, },
+				doCAT = Input { Value = 0, },
+				isPreTMClippingFix = Input { Value = 0, },
+				isLegacySceneProcessing = Input { Value = 0, },
+				blendGroup = Input { Value = 0, },
+				blendIn = Input { Value = 1, },
+				blend = Input { Value = 0, },
+				ignoreContentShape = Input { Value = 0, },
+				legacyIsProcessRGBOnly = Input { Value = 0, },
+				IsNoTemporalFramesReqd = Input { Value = 0, },
+				srcProcessingAlphaMode = Input { Value = -1, },
+				dstProcessingAlphaMode = Input { Value = -1, },
+				resolvefxVersion = Input { Value = "1.4", }
+			},
+			ViewInfo = OperatorInfo { Pos = { 165, 346.5 } },
+		},
+		BMD4KBCASTVIDEO_xyz_output = Saver {
+			Inputs = {
+				ProcessWhenBlendIs00 = Input { Value = 0, },
+				Clip = Input {
+					Value = Clip {
+						Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/BMD4KBCASTVIDEO_xyz.0000.exr",
+						FormatID = "OpenEXRFormat",
+						Length = 0,
+						Saving = true,
+						LengthSetManually = true,
+						AspectMode = 0,
+						Depth = 0,
+						GlobalStart = -2000000000,
+						GlobalEnd = -2000000000
+					},
+				},
+				OutputFormat = Input { Value = FuID { "OpenEXRFormat" }, },
+				["Gamut.LogType"] = Input { Value = FuID { "Bypass" }, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				Input = Input {
+					SourceOp = "BMD4KBCASTVIDEO_xyz_CST1",
+					Source = "Output",
+				},
+				["OpenEXRFormat.Compression"] = Input { Value = 0, },
+				["OpenEXRFormat.ZipCompressionLevel"] = Input { Value = 4, },
+				["OpenEXRFormat.AlphaEnable"] = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 275, 346.5 } },
+		},
+		BMD4KBCASTFILM_xyz_CST1 = ofx.com.blackmagicdesign.resolvefx.ColorSpaceTransformV2 {
+			Inputs = {
+				Source = Input {
+					SourceOp = "BMD4KBCASTFILM_xyz_input",
+					Source = "Output",
+				},
+				colorSpaceTransformGroup = Input { Value = 1, },
+				inputColorSpace = Input { Value = FuID { "BMD4KBCASTFILM_COLORSPACE" }, },
+				inputGamma = Input { Value = FuID { "LINEAR_GAMMA" }, },
+				outputColorSpace = Input { Value = FuID { "XYZ_COLORSPACE" }, },
+				outputGamma = Input { Value = FuID { "LINEAR_GAMMA" }, },
+				invertTransform = Input { Value = 0, },
+				toneMappingGroup = Input { Value = 1, },
+				tmType = Input { Value = FuID { "TM_NONE" }, },
+				isSrcLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				srcLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				isDstLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				dstLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				srcLumAvg = Input {
+					Value = 9,
+					Disabled = true,
+				},
+				satRolloffStart = Input { Value = 100, },
+				satRolloffLimit = Input { Value = 10000, },
+				gamutMappingGroup = Input { Value = 1, },
+				gmType = Input { Value = FuID { "GM_NONE" }, },
+				satKnee = Input {
+					Value = 0.899999976158142,
+					Disabled = true,
+				},
+				satMax = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				advancedGroup = Input { Value = 1, },
+				isRec2408ConversionEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				isRec2390ScalingEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				doFwdOOTF = Input { Value = 0, },
+				doInvOOTF = Input { Value = 0, },
+				doCAT = Input { Value = 0, },
+				isPreTMClippingFix = Input { Value = 0, },
+				isLegacySceneProcessing = Input { Value = 0, },
+				blendGroup = Input { Value = 0, },
+				blendIn = Input { Value = 1, },
+				blend = Input { Value = 0, },
+				ignoreContentShape = Input { Value = 0, },
+				legacyIsProcessRGBOnly = Input { Value = 0, },
+				IsNoTemporalFramesReqd = Input { Value = 0, },
+				srcProcessingAlphaMode = Input { Value = -1, },
+				dstProcessingAlphaMode = Input { Value = -1, },
+				resolvefxVersion = Input { Value = "1.4", }
+			},
+			ViewInfo = OperatorInfo { Pos = { 165, 379.5 } },
+		},
+		BMD4KBCASTFILM_xyz_output = Saver {
+			Inputs = {
+				ProcessWhenBlendIs00 = Input { Value = 0, },
+				Clip = Input {
+					Value = Clip {
+						Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/BMD4KBCASTFILM_xyz.0000.exr",
+						FormatID = "OpenEXRFormat",
+						Length = 0,
+						Saving = true,
+						LengthSetManually = true,
+						AspectMode = 0,
+						Depth = 0,
+						GlobalStart = -2000000000,
+						GlobalEnd = -2000000000
+					},
+				},
+				OutputFormat = Input { Value = FuID { "OpenEXRFormat" }, },
+				["Gamut.LogType"] = Input { Value = FuID { "Bypass" }, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				Input = Input {
+					SourceOp = "BMD4KBCASTFILM_xyz_CST1",
+					Source = "Output",
+				},
+				["OpenEXRFormat.Compression"] = Input { Value = 0, },
+				["OpenEXRFormat.ZipCompressionLevel"] = Input { Value = 4, },
+				["OpenEXRFormat.AlphaEnable"] = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 275, 379.5 } },
+		},
+		BMDVIDEOV5_xyz_CST1 = ofx.com.blackmagicdesign.resolvefx.ColorSpaceTransformV2 {
+			Inputs = {
+				Source = Input {
+					SourceOp = "BMDVIDEOV5_xyz_input",
+					Source = "Output",
+				},
+				colorSpaceTransformGroup = Input { Value = 1, },
+				inputColorSpace = Input { Value = FuID { "BMDVIDEOV5_COLORSPACE" }, },
+				inputGamma = Input { Value = FuID { "LINEAR_GAMMA" }, },
+				outputColorSpace = Input { Value = FuID { "XYZ_COLORSPACE" }, },
+				outputGamma = Input { Value = FuID { "LINEAR_GAMMA" }, },
+				invertTransform = Input { Value = 0, },
+				toneMappingGroup = Input { Value = 1, },
+				tmType = Input { Value = FuID { "TM_NONE" }, },
+				isSrcLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				srcLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				isDstLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				dstLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				srcLumAvg = Input {
+					Value = 9,
+					Disabled = true,
+				},
+				satRolloffStart = Input { Value = 100, },
+				satRolloffLimit = Input { Value = 10000, },
+				gamutMappingGroup = Input { Value = 1, },
+				gmType = Input { Value = FuID { "GM_NONE" }, },
+				satKnee = Input {
+					Value = 0.899999976158142,
+					Disabled = true,
+				},
+				satMax = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				advancedGroup = Input { Value = 1, },
+				isRec2408ConversionEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				isRec2390ScalingEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				doFwdOOTF = Input { Value = 0, },
+				doInvOOTF = Input { Value = 0, },
+				doCAT = Input { Value = 0, },
+				isPreTMClippingFix = Input { Value = 0, },
+				isLegacySceneProcessing = Input { Value = 0, },
+				blendGroup = Input { Value = 0, },
+				blendIn = Input { Value = 1, },
+				blend = Input { Value = 0, },
+				ignoreContentShape = Input { Value = 0, },
+				legacyIsProcessRGBOnly = Input { Value = 0, },
+				IsNoTemporalFramesReqd = Input { Value = 0, },
+				srcProcessingAlphaMode = Input { Value = -1, },
+				dstProcessingAlphaMode = Input { Value = -1, },
+				resolvefxVersion = Input { Value = "1.4", }
+			},
+			ViewInfo = OperatorInfo { Pos = { 165, 412.5 } },
+		},
+		BMDVIDEOV5_xyz_output = Saver {
+			Inputs = {
+				ProcessWhenBlendIs00 = Input { Value = 0, },
+				Clip = Input {
+					Value = Clip {
+						Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/BMDVIDEOV5_xyz.0000.exr",
+						FormatID = "OpenEXRFormat",
+						Length = 0,
+						Saving = true,
+						LengthSetManually = true,
+						AspectMode = 0,
+						Depth = 0,
+						GlobalStart = -2000000000,
+						GlobalEnd = -2000000000
+					},
+				},
+				OutputFormat = Input { Value = FuID { "OpenEXRFormat" }, },
+				["Gamut.LogType"] = Input { Value = FuID { "Bypass" }, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				Input = Input {
+					SourceOp = "BMDVIDEOV5_xyz_CST1",
+					Source = "Output",
+				},
+				["OpenEXRFormat.Compression"] = Input { Value = 0, },
+				["OpenEXRFormat.ZipCompressionLevel"] = Input { Value = 4, },
+				["OpenEXRFormat.AlphaEnable"] = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 275, 412.5 } },
+		},
+		gen1_709_linear_CST1 = ofx.com.blackmagicdesign.resolvefx.ColorSpaceTransformV2 {
+			Inputs = {
+				Source = Input {
+					SourceOp = "gen1_709_linear_input",
+					Source = "Output",
+				},
+				colorSpaceTransformGroup = Input { Value = 1, },
+				inputColorSpace = Input { Value = FuID { "BMDFILM_COLORSPACE" }, },
+				inputGamma = Input { Value = FuID { "LINEAR_GAMMA" }, },
+				outputColorSpace = Input { Value = FuID { "REC709_COLORSPACE" }, },
+				outputGamma = Input { Value = FuID { "LINEAR_GAMMA" }, },
+				invertTransform = Input { Value = 0, },
+				toneMappingGroup = Input { Value = 1, },
+				tmType = Input { Value = FuID { "TM_NONE" }, },
+				isSrcLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				srcLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				isDstLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				dstLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				srcLumAvg = Input {
+					Value = 9,
+					Disabled = true,
+				},
+				satRolloffStart = Input { Value = 100, },
+				satRolloffLimit = Input { Value = 10000, },
+				gamutMappingGroup = Input { Value = 1, },
+				gmType = Input { Value = FuID { "GM_NONE" }, },
+				satKnee = Input {
+					Value = 0.899999976158142,
+					Disabled = true,
+				},
+				satMax = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				advancedGroup = Input { Value = 1, },
+				isRec2408ConversionEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				isRec2390ScalingEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				doFwdOOTF = Input { Value = 0, },
+				doInvOOTF = Input { Value = 0, },
+				doCAT = Input { Value = 0, },
+				isPreTMClippingFix = Input { Value = 0, },
+				isLegacySceneProcessing = Input { Value = 0, },
+				blendGroup = Input { Value = 0, },
+				blendIn = Input { Value = 1, },
+				blend = Input { Value = 0, },
+				ignoreContentShape = Input { Value = 0, },
+				legacyIsProcessRGBOnly = Input { Value = 0, },
+				IsNoTemporalFramesReqd = Input { Value = 0, },
+				srcProcessingAlphaMode = Input { Value = -1, },
+				dstProcessingAlphaMode = Input { Value = -1, },
+				resolvefxVersion = Input { Value = "1.4", }
+			},
+			ViewInfo = OperatorInfo { Pos = { 165, 445.5 } },
+		},
+		gen1_709_linear_output = Saver {
+			Inputs = {
+				ProcessWhenBlendIs00 = Input { Value = 0, },
+				Clip = Input {
+					Value = Clip {
+						Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/gen1_709_linear.0000.exr",
+						FormatID = "OpenEXRFormat",
+						Length = 0,
+						Saving = true,
+						LengthSetManually = true,
+						AspectMode = 0,
+						Depth = 0,
+						GlobalStart = -2000000000,
+						GlobalEnd = -2000000000
+					},
+				},
+				OutputFormat = Input { Value = FuID { "OpenEXRFormat" }, },
+				["Gamut.LogType"] = Input { Value = FuID { "Bypass" }, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				Input = Input {
+					SourceOp = "gen1_709_linear_CST1",
+					Source = "Output",
+				},
+				["OpenEXRFormat.Compression"] = Input { Value = 0, },
+				["OpenEXRFormat.ZipCompressionLevel"] = Input { Value = 4, },
+				["OpenEXRFormat.AlphaEnable"] = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 275, 445.5 } },
+		},
+		srgb_decode_CST1 = ofx.com.blackmagicdesign.resolvefx.ColorSpaceTransformV2 {
+			Inputs = {
+				Source = Input {
+					SourceOp = "srgb_decode_input",
+					Source = "Output",
+				},
+				colorSpaceTransformGroup = Input { Value = 1, },
+				inputColorSpace = Input { Value = FuID { "REC709_COLORSPACE" }, },
+				inputGamma = Input { Value = FuID { "SRGB_GAMMA" }, },
+				outputColorSpace = Input { Value = FuID { "REC709_COLORSPACE" }, },
+				outputGamma = Input { Value = FuID { "LINEAR_GAMMA" }, },
+				invertTransform = Input { Value = 0, },
+				toneMappingGroup = Input { Value = 1, },
+				tmType = Input { Value = FuID { "TM_NONE" }, },
+				isSrcLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				srcLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				isDstLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				dstLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				srcLumAvg = Input {
+					Value = 9,
+					Disabled = true,
+				},
+				satRolloffStart = Input { Value = 100, },
+				satRolloffLimit = Input { Value = 10000, },
+				gamutMappingGroup = Input { Value = 1, },
+				gmType = Input { Value = FuID { "GM_NONE" }, },
+				satKnee = Input {
+					Value = 0.899999976158142,
+					Disabled = true,
+				},
+				satMax = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				advancedGroup = Input { Value = 1, },
+				isRec2408ConversionEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				isRec2390ScalingEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				doFwdOOTF = Input { Value = 0, },
+				doInvOOTF = Input { Value = 0, },
+				doCAT = Input { Value = 0, },
+				isPreTMClippingFix = Input { Value = 0, },
+				isLegacySceneProcessing = Input { Value = 0, },
+				blendGroup = Input { Value = 0, },
+				blendIn = Input { Value = 1, },
+				blend = Input { Value = 0, },
+				ignoreContentShape = Input { Value = 0, },
+				legacyIsProcessRGBOnly = Input { Value = 0, },
+				IsNoTemporalFramesReqd = Input { Value = 0, },
+				srcProcessingAlphaMode = Input { Value = -1, },
+				dstProcessingAlphaMode = Input { Value = -1, },
+				resolvefxVersion = Input { Value = "1.4", }
+			},
+			ViewInfo = OperatorInfo { Pos = { 165, 478.5 } },
+		},
+		srgb_decode_output = Saver {
+			Inputs = {
+				ProcessWhenBlendIs00 = Input { Value = 0, },
+				Clip = Input {
+					Value = Clip {
+						Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/srgb_decode.0000.exr",
+						FormatID = "OpenEXRFormat",
+						Length = 0,
+						Saving = true,
+						LengthSetManually = true,
+						AspectMode = 0,
+						Depth = 0,
+						GlobalStart = -2000000000,
+						GlobalEnd = -2000000000
+					},
+				},
+				OutputFormat = Input { Value = FuID { "OpenEXRFormat" }, },
+				["Gamut.LogType"] = Input { Value = FuID { "Bypass" }, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				Input = Input {
+					SourceOp = "srgb_decode_CST1",
+					Source = "Output",
+				},
+				["OpenEXRFormat.Compression"] = Input { Value = 0, },
+				["OpenEXRFormat.ZipCompressionLevel"] = Input { Value = 4, },
+				["OpenEXRFormat.AlphaEnable"] = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 275, 478.5 } },
+		},
+		srgb_encode_CST1 = ofx.com.blackmagicdesign.resolvefx.ColorSpaceTransformV2 {
+			Inputs = {
+				Source = Input {
+					SourceOp = "srgb_encode_input",
+					Source = "Output",
+				},
+				colorSpaceTransformGroup = Input { Value = 1, },
+				inputColorSpace = Input { Value = FuID { "REC709_COLORSPACE" }, },
+				inputGamma = Input { Value = FuID { "LINEAR_GAMMA" }, },
+				outputColorSpace = Input { Value = FuID { "REC709_COLORSPACE" }, },
+				outputGamma = Input { Value = FuID { "SRGB_GAMMA" }, },
+				invertTransform = Input { Value = 0, },
+				toneMappingGroup = Input { Value = 1, },
+				tmType = Input { Value = FuID { "TM_NONE" }, },
+				isSrcLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				srcLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				isDstLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				dstLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				srcLumAvg = Input {
+					Value = 9,
+					Disabled = true,
+				},
+				satRolloffStart = Input { Value = 100, },
+				satRolloffLimit = Input { Value = 10000, },
+				gamutMappingGroup = Input { Value = 1, },
+				gmType = Input { Value = FuID { "GM_NONE" }, },
+				satKnee = Input {
+					Value = 0.899999976158142,
+					Disabled = true,
+				},
+				satMax = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				advancedGroup = Input { Value = 1, },
+				isRec2408ConversionEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				isRec2390ScalingEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				doFwdOOTF = Input { Value = 0, },
+				doInvOOTF = Input { Value = 0, },
+				doCAT = Input { Value = 0, },
+				isPreTMClippingFix = Input { Value = 0, },
+				isLegacySceneProcessing = Input { Value = 0, },
+				blendGroup = Input { Value = 0, },
+				blendIn = Input { Value = 1, },
+				blend = Input { Value = 0, },
+				ignoreContentShape = Input { Value = 0, },
+				legacyIsProcessRGBOnly = Input { Value = 0, },
+				IsNoTemporalFramesReqd = Input { Value = 0, },
+				srcProcessingAlphaMode = Input { Value = -1, },
+				dstProcessingAlphaMode = Input { Value = -1, },
+				resolvefxVersion = Input { Value = "1.4", }
+			},
+			ViewInfo = OperatorInfo { Pos = { 165, 511.5 } },
+		},
+		srgb_encode_output = Saver {
+			Inputs = {
+				ProcessWhenBlendIs00 = Input { Value = 0, },
+				Clip = Input {
+					Value = Clip {
+						Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/srgb_encode.0000.exr",
+						FormatID = "OpenEXRFormat",
+						Length = 0,
+						Saving = true,
+						LengthSetManually = true,
+						AspectMode = 0,
+						Depth = 0,
+						GlobalStart = -2000000000,
+						GlobalEnd = -2000000000
+					},
+				},
+				OutputFormat = Input { Value = FuID { "OpenEXRFormat" }, },
+				["Gamut.LogType"] = Input { Value = FuID { "Bypass" }, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				Input = Input {
+					SourceOp = "srgb_encode_CST1",
+					Source = "Output",
+				},
+				["OpenEXRFormat.Compression"] = Input { Value = 0, },
+				["OpenEXRFormat.ZipCompressionLevel"] = Input { Value = 4, },
+				["OpenEXRFormat.AlphaEnable"] = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 275, 511.5 } },
+		},
+		film5_decode_CST1 = ofx.com.blackmagicdesign.resolvefx.ColorSpaceTransformV2 {
+			Inputs = {
+				Source = Input {
+					SourceOp = "film5_decode_input",
+					Source = "Output",
+				},
+				colorSpaceTransformGroup = Input { Value = 1, },
+				inputColorSpace = Input { Value = FuID { "BMDPOCKET4KFILM_COLORSPACE" }, },
+				inputGamma = Input { Value = FuID { "BMDFILMV5_GAMMA" }, },
+				outputColorSpace = Input { Value = FuID { "BMDPOCKET4KFILM_COLORSPACE" }, },
+				outputGamma = Input { Value = FuID { "LINEAR_GAMMA" }, },
+				invertTransform = Input { Value = 0, },
+				toneMappingGroup = Input { Value = 1, },
+				tmType = Input { Value = FuID { "TM_NONE" }, },
+				isSrcLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				srcLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				isDstLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				dstLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				srcLumAvg = Input {
+					Value = 9,
+					Disabled = true,
+				},
+				satRolloffStart = Input { Value = 100, },
+				satRolloffLimit = Input { Value = 10000, },
+				gamutMappingGroup = Input { Value = 1, },
+				gmType = Input { Value = FuID { "GM_NONE" }, },
+				satKnee = Input {
+					Value = 0.899999976158142,
+					Disabled = true,
+				},
+				satMax = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				advancedGroup = Input { Value = 1, },
+				isRec2408ConversionEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				isRec2390ScalingEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				doFwdOOTF = Input { Value = 0, },
+				doInvOOTF = Input { Value = 0, },
+				doCAT = Input { Value = 0, },
+				isPreTMClippingFix = Input { Value = 0, },
+				isLegacySceneProcessing = Input { Value = 0, },
+				blendGroup = Input { Value = 0, },
+				blendIn = Input { Value = 1, },
+				blend = Input { Value = 0, },
+				ignoreContentShape = Input { Value = 0, },
+				legacyIsProcessRGBOnly = Input { Value = 0, },
+				IsNoTemporalFramesReqd = Input { Value = 0, },
+				srcProcessingAlphaMode = Input { Value = -1, },
+				dstProcessingAlphaMode = Input { Value = -1, },
+				resolvefxVersion = Input { Value = "1.4", }
+			},
+			ViewInfo = OperatorInfo { Pos = { 165, 544.5 } },
+		},
+		film5_decode_output = Saver {
+			Inputs = {
+				ProcessWhenBlendIs00 = Input { Value = 0, },
+				Clip = Input {
+					Value = Clip {
+						Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/film5_decode.0000.exr",
+						FormatID = "OpenEXRFormat",
+						Length = 0,
+						Saving = true,
+						LengthSetManually = true,
+						AspectMode = 0,
+						Depth = 0,
+						GlobalStart = -2000000000,
+						GlobalEnd = -2000000000
+					},
+				},
+				OutputFormat = Input { Value = FuID { "OpenEXRFormat" }, },
+				["Gamut.LogType"] = Input { Value = FuID { "Bypass" }, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				Input = Input {
+					SourceOp = "film5_decode_CST1",
+					Source = "Output",
+				},
+				["OpenEXRFormat.Compression"] = Input { Value = 0, },
+				["OpenEXRFormat.ZipCompressionLevel"] = Input { Value = 4, },
+				["OpenEXRFormat.AlphaEnable"] = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 275, 544.5 } },
+		},
+		film5_encode_CST1 = ofx.com.blackmagicdesign.resolvefx.ColorSpaceTransformV2 {
+			Inputs = {
+				Source = Input {
+					SourceOp = "film5_encode_input",
+					Source = "Output",
+				},
+				colorSpaceTransformGroup = Input { Value = 1, },
+				inputColorSpace = Input { Value = FuID { "BMDPOCKET4KFILM_COLORSPACE" }, },
+				inputGamma = Input { Value = FuID { "LINEAR_GAMMA" }, },
+				outputColorSpace = Input { Value = FuID { "BMDPOCKET4KFILM_COLORSPACE" }, },
+				outputGamma = Input { Value = FuID { "BMDFILMV5_GAMMA" }, },
+				invertTransform = Input { Value = 0, },
+				toneMappingGroup = Input { Value = 1, },
+				tmType = Input { Value = FuID { "TM_NONE" }, },
+				isSrcLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				srcLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				isDstLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				dstLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				srcLumAvg = Input {
+					Value = 9,
+					Disabled = true,
+				},
+				satRolloffStart = Input { Value = 100, },
+				satRolloffLimit = Input { Value = 10000, },
+				gamutMappingGroup = Input { Value = 1, },
+				gmType = Input { Value = FuID { "GM_NONE" }, },
+				satKnee = Input {
+					Value = 0.899999976158142,
+					Disabled = true,
+				},
+				satMax = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				advancedGroup = Input { Value = 1, },
+				isRec2408ConversionEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				isRec2390ScalingEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				doFwdOOTF = Input { Value = 0, },
+				doInvOOTF = Input { Value = 0, },
+				doCAT = Input { Value = 0, },
+				isPreTMClippingFix = Input { Value = 0, },
+				isLegacySceneProcessing = Input { Value = 0, },
+				blendGroup = Input { Value = 0, },
+				blendIn = Input { Value = 1, },
+				blend = Input { Value = 0, },
+				ignoreContentShape = Input { Value = 0, },
+				legacyIsProcessRGBOnly = Input { Value = 0, },
+				IsNoTemporalFramesReqd = Input { Value = 0, },
+				srcProcessingAlphaMode = Input { Value = -1, },
+				dstProcessingAlphaMode = Input { Value = -1, },
+				resolvefxVersion = Input { Value = "1.4", }
+			},
+			ViewInfo = OperatorInfo { Pos = { 165, 577.5 } },
+		},
+		film5_encode_output = Saver {
+			Inputs = {
+				ProcessWhenBlendIs00 = Input { Value = 0, },
+				Clip = Input {
+					Value = Clip {
+						Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/film5_encode.0000.exr",
+						FormatID = "OpenEXRFormat",
+						Length = 0,
+						Saving = true,
+						LengthSetManually = true,
+						AspectMode = 0,
+						Depth = 0,
+						GlobalStart = -2000000000,
+						GlobalEnd = -2000000000
+					},
+				},
+				OutputFormat = Input { Value = FuID { "OpenEXRFormat" }, },
+				["Gamut.LogType"] = Input { Value = FuID { "Bypass" }, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				Input = Input {
+					SourceOp = "film5_encode_CST1",
+					Source = "Output",
+				},
+				["OpenEXRFormat.Compression"] = Input { Value = 0, },
+				["OpenEXRFormat.ZipCompressionLevel"] = Input { Value = 4, },
+				["OpenEXRFormat.AlphaEnable"] = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 275, 577.5 } },
+		},
+		node01_CST1 = ofx.com.blackmagicdesign.resolvefx.ColorSpaceTransformV2 {
+			Inputs = {
+				Source = Input {
+					SourceOp = "node01_input",
+					Source = "Output",
+				},
+				colorSpaceTransformGroup = Input { Value = 1, },
+				inputColorSpace = Input { Value = FuID { "P3D60_COLORSPACE" }, },
+				inputGamma = Input { Value = FuID { "LINEAR_GAMMA" }, },
+				outputColorSpace = Input { Value = FuID { "BMDPOCKET4KFILM_COLORSPACE" }, },
+				outputGamma = Input { Value = FuID { "BMDFILMV5_GAMMA" }, },
+				invertTransform = Input { Value = 0, },
+				toneMappingGroup = Input { Value = 1, },
+				tmType = Input { Value = FuID { "TM_NONE" }, },
+				isSrcLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				srcLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				isDstLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				dstLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				srcLumAvg = Input {
+					Value = 9,
+					Disabled = true,
+				},
+				satRolloffStart = Input { Value = 100, },
+				satRolloffLimit = Input { Value = 10000, },
+				gamutMappingGroup = Input { Value = 1, },
+				gmType = Input { Value = FuID { "GM_NONE" }, },
+				satKnee = Input {
+					Value = 0.899999976158142,
+					Disabled = true,
+				},
+				satMax = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				advancedGroup = Input { Value = 1, },
+				isRec2408ConversionEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				isRec2390ScalingEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				doFwdOOTF = Input { Value = 0, },
+				doInvOOTF = Input { Value = 0, },
+				doCAT = Input { Value = 1, },
+				isPreTMClippingFix = Input { Value = 0, },
+				isLegacySceneProcessing = Input { Value = 0, },
+				blendGroup = Input { Value = 0, },
+				blendIn = Input { Value = 1, },
+				blend = Input { Value = 0, },
+				ignoreContentShape = Input { Value = 0, },
+				legacyIsProcessRGBOnly = Input { Value = 0, },
+				IsNoTemporalFramesReqd = Input { Value = 0, },
+				srcProcessingAlphaMode = Input { Value = -1, },
+				dstProcessingAlphaMode = Input { Value = -1, },
+				resolvefxVersion = Input { Value = "1.4", }
+			},
+			ViewInfo = OperatorInfo { Pos = { 165, 610.5 } },
+		},
+		node01_output = Saver {
+			Inputs = {
+				ProcessWhenBlendIs00 = Input { Value = 0, },
+				Clip = Input {
+					Value = Clip {
+						Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/node01.0000.exr",
+						FormatID = "OpenEXRFormat",
+						Length = 0,
+						Saving = true,
+						LengthSetManually = true,
+						AspectMode = 0,
+						Depth = 0,
+						GlobalStart = -2000000000,
+						GlobalEnd = -2000000000
+					},
+				},
+				OutputFormat = Input { Value = FuID { "OpenEXRFormat" }, },
+				["Gamut.LogType"] = Input { Value = FuID { "Bypass" }, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				Input = Input {
+					SourceOp = "node01_CST1",
+					Source = "Output",
+				},
+				["OpenEXRFormat.Compression"] = Input { Value = 0, },
+				["OpenEXRFormat.ZipCompressionLevel"] = Input { Value = 4, },
+				["OpenEXRFormat.AlphaEnable"] = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 275, 610.5 } },
+		},
+		node02_CST1 = ofx.com.blackmagicdesign.resolvefx.ColorSpaceTransformV2 {
+			Inputs = {
+				Source = Input {
+					SourceOp = "node02_input",
+					Source = "Output",
+				},
+				colorSpaceTransformGroup = Input { Value = 1, },
+				inputColorSpace = Input { Value = FuID { "BMDFILM_COLORSPACE" }, },
+				inputGamma = Input { Value = FuID { "SRGB_GAMMA" }, },
+				outputColorSpace = Input { Value = FuID { "SRGB_COLORSPACE" }, },
+				outputGamma = Input { Value = FuID { "SRGB_GAMMA" }, },
+				invertTransform = Input { Value = 0, },
+				toneMappingGroup = Input { Value = 1, },
+				tmType = Input { Value = FuID { "TM_NONE" }, },
+				isSrcLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				srcLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				isDstLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				dstLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				srcLumAvg = Input {
+					Value = 9,
+					Disabled = true,
+				},
+				satRolloffStart = Input { Value = 100, },
+				satRolloffLimit = Input { Value = 10000, },
+				gamutMappingGroup = Input { Value = 1, },
+				gmType = Input { Value = FuID { "GM_NONE" }, },
+				satKnee = Input {
+					Value = 0.899999976158142,
+					Disabled = true,
+				},
+				satMax = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				advancedGroup = Input { Value = 1, },
+				isRec2408ConversionEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				isRec2390ScalingEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				doFwdOOTF = Input { Value = 0, },
+				doInvOOTF = Input { Value = 0, },
+				doCAT = Input { Value = 0, },
+				isPreTMClippingFix = Input { Value = 0, },
+				isLegacySceneProcessing = Input { Value = 0, },
+				blendGroup = Input { Value = 0, },
+				blendIn = Input { Value = 1, },
+				blend = Input { Value = 0, },
+				ignoreContentShape = Input { Value = 0, },
+				legacyIsProcessRGBOnly = Input { Value = 0, },
+				IsNoTemporalFramesReqd = Input { Value = 0, },
+				srcProcessingAlphaMode = Input { Value = -1, },
+				dstProcessingAlphaMode = Input { Value = -1, },
+				resolvefxVersion = Input { Value = "1.4", }
+			},
+			ViewInfo = OperatorInfo { Pos = { 165, 643.5 } },
+		},
+		node02_output = Saver {
+			Inputs = {
+				ProcessWhenBlendIs00 = Input { Value = 0, },
+				Clip = Input {
+					Value = Clip {
+						Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/node02.0000.exr",
+						FormatID = "OpenEXRFormat",
+						Length = 0,
+						Saving = true,
+						LengthSetManually = true,
+						AspectMode = 0,
+						Depth = 0,
+						GlobalStart = -2000000000,
+						GlobalEnd = -2000000000
+					},
+				},
+				OutputFormat = Input { Value = FuID { "OpenEXRFormat" }, },
+				["Gamut.LogType"] = Input { Value = FuID { "Bypass" }, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				Input = Input {
+					SourceOp = "node02_CST1",
+					Source = "Output",
+				},
+				["OpenEXRFormat.Compression"] = Input { Value = 0, },
+				["OpenEXRFormat.ZipCompressionLevel"] = Input { Value = 4, },
+				["OpenEXRFormat.AlphaEnable"] = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 275, 643.5 } },
+		},
+		node03_CST1 = ofx.com.blackmagicdesign.resolvefx.ColorSpaceTransformV2 {
+			Inputs = {
+				Source = Input {
+					SourceOp = "node03_input",
+					Source = "Output",
+				},
+				colorSpaceTransformGroup = Input { Value = 1, },
+				inputColorSpace = Input { Value = FuID { "BMDPOCKET4KFILM_COLORSPACE" }, },
+				inputGamma = Input { Value = FuID { "BMDFILMV5_GAMMA" }, },
+				outputColorSpace = Input { Value = FuID { "DWG_COLORSPACE" }, },
+				outputGamma = Input { Value = FuID { "DAV_INTER_OETF_GAMMA" }, },
+				invertTransform = Input { Value = 0, },
+				toneMappingGroup = Input { Value = 1, },
+				tmType = Input { Value = FuID { "TM_NONE" }, },
+				isSrcLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				srcLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				isDstLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				dstLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				srcLumAvg = Input {
+					Value = 9,
+					Disabled = true,
+				},
+				satRolloffStart = Input { Value = 100, },
+				satRolloffLimit = Input { Value = 10000, },
+				gamutMappingGroup = Input { Value = 1, },
+				gmType = Input { Value = FuID { "GM_NONE" }, },
+				satKnee = Input {
+					Value = 0.899999976158142,
+					Disabled = true,
+				},
+				satMax = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				advancedGroup = Input { Value = 1, },
+				isRec2408ConversionEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				isRec2390ScalingEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				doFwdOOTF = Input { Value = 0, },
+				doInvOOTF = Input { Value = 0, },
+				doCAT = Input { Value = 0, },
+				isPreTMClippingFix = Input { Value = 0, },
+				isLegacySceneProcessing = Input { Value = 0, },
+				blendGroup = Input { Value = 0, },
+				blendIn = Input { Value = 1, },
+				blend = Input { Value = 0, },
+				ignoreContentShape = Input { Value = 0, },
+				legacyIsProcessRGBOnly = Input { Value = 0, },
+				IsNoTemporalFramesReqd = Input { Value = 0, },
+				srcProcessingAlphaMode = Input { Value = -1, },
+				dstProcessingAlphaMode = Input { Value = -1, },
+				resolvefxVersion = Input { Value = "1.4", }
+			},
+			ViewInfo = OperatorInfo { Pos = { 165, 676.5 } },
+		},
+		node03_output = Saver {
+			Inputs = {
+				ProcessWhenBlendIs00 = Input { Value = 0, },
+				Clip = Input {
+					Value = Clip {
+						Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/node03.0000.exr",
+						FormatID = "OpenEXRFormat",
+						Length = 0,
+						Saving = true,
+						LengthSetManually = true,
+						AspectMode = 0,
+						Depth = 0,
+						GlobalStart = -2000000000,
+						GlobalEnd = -2000000000
+					},
+				},
+				OutputFormat = Input { Value = FuID { "OpenEXRFormat" }, },
+				["Gamut.LogType"] = Input { Value = FuID { "Bypass" }, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				Input = Input {
+					SourceOp = "node03_CST1",
+					Source = "Output",
+				},
+				["OpenEXRFormat.Compression"] = Input { Value = 0, },
+				["OpenEXRFormat.ZipCompressionLevel"] = Input { Value = 4, },
+				["OpenEXRFormat.AlphaEnable"] = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 275, 676.5 } },
+		},
+		chain_CST1 = ofx.com.blackmagicdesign.resolvefx.ColorSpaceTransformV2 {
+			Inputs = {
+				Source = Input {
+					SourceOp = "chain_input",
+					Source = "Output",
+				},
+				colorSpaceTransformGroup = Input { Value = 1, },
+				inputColorSpace = Input { Value = FuID { "P3D60_COLORSPACE" }, },
+				inputGamma = Input { Value = FuID { "LINEAR_GAMMA" }, },
+				outputColorSpace = Input { Value = FuID { "BMDPOCKET4KFILM_COLORSPACE" }, },
+				outputGamma = Input { Value = FuID { "BMDFILMV5_GAMMA" }, },
+				invertTransform = Input { Value = 0, },
+				toneMappingGroup = Input { Value = 1, },
+				tmType = Input { Value = FuID { "TM_NONE" }, },
+				isSrcLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				srcLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				isDstLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				dstLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				srcLumAvg = Input {
+					Value = 9,
+					Disabled = true,
+				},
+				satRolloffStart = Input { Value = 100, },
+				satRolloffLimit = Input { Value = 10000, },
+				gamutMappingGroup = Input { Value = 1, },
+				gmType = Input { Value = FuID { "GM_NONE" }, },
+				satKnee = Input {
+					Value = 0.899999976158142,
+					Disabled = true,
+				},
+				satMax = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				advancedGroup = Input { Value = 1, },
+				isRec2408ConversionEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				isRec2390ScalingEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				doFwdOOTF = Input { Value = 0, },
+				doInvOOTF = Input { Value = 0, },
+				doCAT = Input { Value = 1, },
+				isPreTMClippingFix = Input { Value = 0, },
+				isLegacySceneProcessing = Input { Value = 0, },
+				blendGroup = Input { Value = 0, },
+				blendIn = Input { Value = 1, },
+				blend = Input { Value = 0, },
+				ignoreContentShape = Input { Value = 0, },
+				legacyIsProcessRGBOnly = Input { Value = 0, },
+				IsNoTemporalFramesReqd = Input { Value = 0, },
+				srcProcessingAlphaMode = Input { Value = -1, },
+				dstProcessingAlphaMode = Input { Value = -1, },
+				resolvefxVersion = Input { Value = "1.4", }
+			},
+			ViewInfo = OperatorInfo { Pos = { 165, 709.5 } },
+		},
+		chain_CST2 = ofx.com.blackmagicdesign.resolvefx.ColorSpaceTransformV2 {
+			Inputs = {
+				Source = Input {
+					SourceOp = "chain_CST1",
+					Source = "Output",
+				},
+				colorSpaceTransformGroup = Input { Value = 1, },
+				inputColorSpace = Input { Value = FuID { "BMDFILM_COLORSPACE" }, },
+				inputGamma = Input { Value = FuID { "SRGB_GAMMA" }, },
+				outputColorSpace = Input { Value = FuID { "SRGB_COLORSPACE" }, },
+				outputGamma = Input { Value = FuID { "SRGB_GAMMA" }, },
+				invertTransform = Input { Value = 0, },
+				toneMappingGroup = Input { Value = 1, },
+				tmType = Input { Value = FuID { "TM_NONE" }, },
+				isSrcLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				srcLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				isDstLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				dstLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				srcLumAvg = Input {
+					Value = 9,
+					Disabled = true,
+				},
+				satRolloffStart = Input { Value = 100, },
+				satRolloffLimit = Input { Value = 10000, },
+				gamutMappingGroup = Input { Value = 1, },
+				gmType = Input { Value = FuID { "GM_NONE" }, },
+				satKnee = Input {
+					Value = 0.899999976158142,
+					Disabled = true,
+				},
+				satMax = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				advancedGroup = Input { Value = 1, },
+				isRec2408ConversionEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				isRec2390ScalingEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				doFwdOOTF = Input { Value = 0, },
+				doInvOOTF = Input { Value = 0, },
+				doCAT = Input { Value = 0, },
+				isPreTMClippingFix = Input { Value = 0, },
+				isLegacySceneProcessing = Input { Value = 0, },
+				blendGroup = Input { Value = 0, },
+				blendIn = Input { Value = 1, },
+				blend = Input { Value = 0, },
+				ignoreContentShape = Input { Value = 0, },
+				legacyIsProcessRGBOnly = Input { Value = 0, },
+				IsNoTemporalFramesReqd = Input { Value = 0, },
+				srcProcessingAlphaMode = Input { Value = -1, },
+				dstProcessingAlphaMode = Input { Value = -1, },
+				resolvefxVersion = Input { Value = "1.4", }
+			},
+			ViewInfo = OperatorInfo { Pos = { 275, 709.5 } },
+		},
+		chain_CST3 = ofx.com.blackmagicdesign.resolvefx.ColorSpaceTransformV2 {
+			Inputs = {
+				Source = Input {
+					SourceOp = "chain_CST2",
+					Source = "Output",
+				},
+				colorSpaceTransformGroup = Input { Value = 1, },
+				inputColorSpace = Input { Value = FuID { "BMDPOCKET4KFILM_COLORSPACE" }, },
+				inputGamma = Input { Value = FuID { "BMDFILMV5_GAMMA" }, },
+				outputColorSpace = Input { Value = FuID { "DWG_COLORSPACE" }, },
+				outputGamma = Input { Value = FuID { "DAV_INTER_OETF_GAMMA" }, },
+				invertTransform = Input { Value = 0, },
+				toneMappingGroup = Input { Value = 1, },
+				tmType = Input { Value = FuID { "TM_NONE" }, },
+				isSrcLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				srcLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				isDstLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				dstLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				srcLumAvg = Input {
+					Value = 9,
+					Disabled = true,
+				},
+				satRolloffStart = Input { Value = 100, },
+				satRolloffLimit = Input { Value = 10000, },
+				gamutMappingGroup = Input { Value = 1, },
+				gmType = Input { Value = FuID { "GM_NONE" }, },
+				satKnee = Input {
+					Value = 0.899999976158142,
+					Disabled = true,
+				},
+				satMax = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				advancedGroup = Input { Value = 1, },
+				isRec2408ConversionEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				isRec2390ScalingEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				doFwdOOTF = Input { Value = 0, },
+				doInvOOTF = Input { Value = 0, },
+				doCAT = Input { Value = 0, },
+				isPreTMClippingFix = Input { Value = 0, },
+				isLegacySceneProcessing = Input { Value = 0, },
+				blendGroup = Input { Value = 0, },
+				blendIn = Input { Value = 1, },
+				blend = Input { Value = 0, },
+				ignoreContentShape = Input { Value = 0, },
+				legacyIsProcessRGBOnly = Input { Value = 0, },
+				IsNoTemporalFramesReqd = Input { Value = 0, },
+				srcProcessingAlphaMode = Input { Value = -1, },
+				dstProcessingAlphaMode = Input { Value = -1, },
+				resolvefxVersion = Input { Value = "1.4", }
+			},
+			ViewInfo = OperatorInfo { Pos = { 385, 709.5 } },
+		},
+		chain_output = Saver {
+			Inputs = {
+				ProcessWhenBlendIs00 = Input { Value = 0, },
+				Clip = Input {
+					Value = Clip {
+						Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/chain.0000.exr",
+						FormatID = "OpenEXRFormat",
+						Length = 0,
+						Saving = true,
+						LengthSetManually = true,
+						AspectMode = 0,
+						Depth = 0,
+						GlobalStart = -2000000000,
+						GlobalEnd = -2000000000
+					},
+				},
+				OutputFormat = Input { Value = FuID { "OpenEXRFormat" }, },
+				["Gamut.LogType"] = Input { Value = FuID { "Bypass" }, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				Input = Input {
+					SourceOp = "chain_CST3",
+					Source = "Output",
+				},
+				["OpenEXRFormat.Compression"] = Input { Value = 0, },
+				["OpenEXRFormat.ZipCompressionLevel"] = Input { Value = 4, },
+				["OpenEXRFormat.AlphaEnable"] = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 495, 709.5 } },
+		},
+		bypass_CST1 = ofx.com.blackmagicdesign.resolvefx.ColorSpaceTransformV2 {
+			Inputs = {
+				Source = Input {
+					SourceOp = "bypass_input",
+					Source = "Output",
+				},
+				colorSpaceTransformGroup = Input { Value = 1, },
+				inputColorSpace = Input { Value = FuID { "P3D60_COLORSPACE" }, },
+				inputGamma = Input { Value = FuID { "LINEAR_GAMMA" }, },
+				outputColorSpace = Input { Value = FuID { "BMDPOCKET4KFILM_COLORSPACE" }, },
+				outputGamma = Input { Value = FuID { "BMDFILMV5_GAMMA" }, },
+				invertTransform = Input { Value = 0, },
+				toneMappingGroup = Input { Value = 1, },
+				tmType = Input { Value = FuID { "TM_NONE" }, },
+				isSrcLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				srcLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				isDstLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				dstLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				srcLumAvg = Input {
+					Value = 9,
+					Disabled = true,
+				},
+				satRolloffStart = Input { Value = 100, },
+				satRolloffLimit = Input { Value = 10000, },
+				gamutMappingGroup = Input { Value = 1, },
+				gmType = Input { Value = FuID { "GM_NONE" }, },
+				satKnee = Input {
+					Value = 0.899999976158142,
+					Disabled = true,
+				},
+				satMax = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				advancedGroup = Input { Value = 1, },
+				isRec2408ConversionEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				isRec2390ScalingEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				doFwdOOTF = Input { Value = 0, },
+				doInvOOTF = Input { Value = 0, },
+				doCAT = Input { Value = 1, },
+				isPreTMClippingFix = Input { Value = 0, },
+				isLegacySceneProcessing = Input { Value = 0, },
+				blendGroup = Input { Value = 0, },
+				blendIn = Input { Value = 1, },
+				blend = Input { Value = 0, },
+				ignoreContentShape = Input { Value = 0, },
+				legacyIsProcessRGBOnly = Input { Value = 0, },
+				IsNoTemporalFramesReqd = Input { Value = 0, },
+				srcProcessingAlphaMode = Input { Value = -1, },
+				dstProcessingAlphaMode = Input { Value = -1, },
+				resolvefxVersion = Input { Value = "1.4", }
+			},
+			ViewInfo = OperatorInfo { Pos = { 165, 742.5 } },
+		},
+		bypass_CST2 = ofx.com.blackmagicdesign.resolvefx.ColorSpaceTransformV2 {
+			Inputs = {
+				Source = Input {
+					SourceOp = "bypass_CST1",
+					Source = "Output",
+				},
+				colorSpaceTransformGroup = Input { Value = 1, },
+				inputColorSpace = Input { Value = FuID { "BMDPOCKET4KFILM_COLORSPACE" }, },
+				inputGamma = Input { Value = FuID { "BMDFILMV5_GAMMA" }, },
+				outputColorSpace = Input { Value = FuID { "DWG_COLORSPACE" }, },
+				outputGamma = Input { Value = FuID { "DAV_INTER_OETF_GAMMA" }, },
+				invertTransform = Input { Value = 0, },
+				toneMappingGroup = Input { Value = 1, },
+				tmType = Input { Value = FuID { "TM_NONE" }, },
+				isSrcLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				srcLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				isDstLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				dstLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				srcLumAvg = Input {
+					Value = 9,
+					Disabled = true,
+				},
+				satRolloffStart = Input { Value = 100, },
+				satRolloffLimit = Input { Value = 10000, },
+				gamutMappingGroup = Input { Value = 1, },
+				gmType = Input { Value = FuID { "GM_NONE" }, },
+				satKnee = Input {
+					Value = 0.899999976158142,
+					Disabled = true,
+				},
+				satMax = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				advancedGroup = Input { Value = 1, },
+				isRec2408ConversionEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				isRec2390ScalingEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				doFwdOOTF = Input { Value = 0, },
+				doInvOOTF = Input { Value = 0, },
+				doCAT = Input { Value = 0, },
+				isPreTMClippingFix = Input { Value = 0, },
+				isLegacySceneProcessing = Input { Value = 0, },
+				blendGroup = Input { Value = 0, },
+				blendIn = Input { Value = 1, },
+				blend = Input { Value = 0, },
+				ignoreContentShape = Input { Value = 0, },
+				legacyIsProcessRGBOnly = Input { Value = 0, },
+				IsNoTemporalFramesReqd = Input { Value = 0, },
+				srcProcessingAlphaMode = Input { Value = -1, },
+				dstProcessingAlphaMode = Input { Value = -1, },
+				resolvefxVersion = Input { Value = "1.4", }
+			},
+			ViewInfo = OperatorInfo { Pos = { 275, 742.5 } },
+		},
+		bypass_output = Saver {
+			Inputs = {
+				ProcessWhenBlendIs00 = Input { Value = 0, },
+				Clip = Input {
+					Value = Clip {
+						Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/bypass.0000.exr",
+						FormatID = "OpenEXRFormat",
+						Length = 0,
+						Saving = true,
+						LengthSetManually = true,
+						AspectMode = 0,
+						Depth = 0,
+						GlobalStart = -2000000000,
+						GlobalEnd = -2000000000
+					},
+				},
+				OutputFormat = Input { Value = FuID { "OpenEXRFormat" }, },
+				["Gamut.LogType"] = Input { Value = FuID { "Bypass" }, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				Input = Input {
+					SourceOp = "bypass_CST2",
+					Source = "Output",
+				},
+				["OpenEXRFormat.Compression"] = Input { Value = 0, },
+				["OpenEXRFormat.ZipCompressionLevel"] = Input { Value = 4, },
+				["OpenEXRFormat.AlphaEnable"] = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 385, 742.5 } },
+		},
+		matrix_node01_CST1 = ofx.com.blackmagicdesign.resolvefx.ColorSpaceTransformV2 {
+			Inputs = {
+				Source = Input {
+					SourceOp = "matrix_node01_input",
+					Source = "Output",
+				},
+				colorSpaceTransformGroup = Input { Value = 1, },
+				inputColorSpace = Input { Value = FuID { "P3D60_COLORSPACE" }, },
+				inputGamma = Input { Value = FuID { "LINEAR_GAMMA" }, },
+				outputColorSpace = Input { Value = FuID { "BMDPOCKET4KFILM_COLORSPACE" }, },
+				outputGamma = Input { Value = FuID { "LINEAR_GAMMA" }, },
+				invertTransform = Input { Value = 0, },
+				toneMappingGroup = Input { Value = 1, },
+				tmType = Input { Value = FuID { "TM_NONE" }, },
+				isSrcLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				srcLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				isDstLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				dstLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				srcLumAvg = Input {
+					Value = 9,
+					Disabled = true,
+				},
+				satRolloffStart = Input { Value = 100, },
+				satRolloffLimit = Input { Value = 10000, },
+				gamutMappingGroup = Input { Value = 1, },
+				gmType = Input { Value = FuID { "GM_NONE" }, },
+				satKnee = Input {
+					Value = 0.899999976158142,
+					Disabled = true,
+				},
+				satMax = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				advancedGroup = Input { Value = 1, },
+				isRec2408ConversionEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				isRec2390ScalingEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				doFwdOOTF = Input { Value = 0, },
+				doInvOOTF = Input { Value = 0, },
+				doCAT = Input { Value = 1, },
+				isPreTMClippingFix = Input { Value = 0, },
+				isLegacySceneProcessing = Input { Value = 0, },
+				blendGroup = Input { Value = 0, },
+				blendIn = Input { Value = 1, },
+				blend = Input { Value = 0, },
+				ignoreContentShape = Input { Value = 0, },
+				legacyIsProcessRGBOnly = Input { Value = 0, },
+				IsNoTemporalFramesReqd = Input { Value = 0, },
+				srcProcessingAlphaMode = Input { Value = -1, },
+				dstProcessingAlphaMode = Input { Value = -1, },
+				resolvefxVersion = Input { Value = "1.4", }
+			},
+			ViewInfo = OperatorInfo { Pos = { 165, 775.5 } },
+		},
+		matrix_node01_output = Saver {
+			Inputs = {
+				ProcessWhenBlendIs00 = Input { Value = 0, },
+				Clip = Input {
+					Value = Clip {
+						Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/matrix_node01.0000.exr",
+						FormatID = "OpenEXRFormat",
+						Length = 0,
+						Saving = true,
+						LengthSetManually = true,
+						AspectMode = 0,
+						Depth = 0,
+						GlobalStart = -2000000000,
+						GlobalEnd = -2000000000
+					},
+				},
+				OutputFormat = Input { Value = FuID { "OpenEXRFormat" }, },
+				["Gamut.LogType"] = Input { Value = FuID { "Bypass" }, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				Input = Input {
+					SourceOp = "matrix_node01_CST1",
+					Source = "Output",
+				},
+				["OpenEXRFormat.Compression"] = Input { Value = 0, },
+				["OpenEXRFormat.ZipCompressionLevel"] = Input { Value = 4, },
+				["OpenEXRFormat.AlphaEnable"] = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 275, 775.5 } },
+		},
+		matrix_node03_CST1 = ofx.com.blackmagicdesign.resolvefx.ColorSpaceTransformV2 {
+			Inputs = {
+				Source = Input {
+					SourceOp = "matrix_node03_input",
+					Source = "Output",
+				},
+				colorSpaceTransformGroup = Input { Value = 1, },
+				inputColorSpace = Input { Value = FuID { "BMDPOCKET4KFILM_COLORSPACE" }, },
+				inputGamma = Input { Value = FuID { "LINEAR_GAMMA" }, },
+				outputColorSpace = Input { Value = FuID { "DWG_COLORSPACE" }, },
+				outputGamma = Input { Value = FuID { "LINEAR_GAMMA" }, },
+				invertTransform = Input { Value = 0, },
+				toneMappingGroup = Input { Value = 1, },
+				tmType = Input { Value = FuID { "TM_NONE" }, },
+				isSrcLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				srcLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				isDstLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				dstLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				srcLumAvg = Input {
+					Value = 9,
+					Disabled = true,
+				},
+				satRolloffStart = Input { Value = 100, },
+				satRolloffLimit = Input { Value = 10000, },
+				gamutMappingGroup = Input { Value = 1, },
+				gmType = Input { Value = FuID { "GM_NONE" }, },
+				satKnee = Input {
+					Value = 0.899999976158142,
+					Disabled = true,
+				},
+				satMax = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				advancedGroup = Input { Value = 1, },
+				isRec2408ConversionEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				isRec2390ScalingEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				doFwdOOTF = Input { Value = 0, },
+				doInvOOTF = Input { Value = 0, },
+				doCAT = Input { Value = 0, },
+				isPreTMClippingFix = Input { Value = 0, },
+				isLegacySceneProcessing = Input { Value = 0, },
+				blendGroup = Input { Value = 0, },
+				blendIn = Input { Value = 1, },
+				blend = Input { Value = 0, },
+				ignoreContentShape = Input { Value = 0, },
+				legacyIsProcessRGBOnly = Input { Value = 0, },
+				IsNoTemporalFramesReqd = Input { Value = 0, },
+				srcProcessingAlphaMode = Input { Value = -1, },
+				dstProcessingAlphaMode = Input { Value = -1, },
+				resolvefxVersion = Input { Value = "1.4", }
+			},
+			ViewInfo = OperatorInfo { Pos = { 165, 808.5 } },
+		},
+		matrix_node03_output = Saver {
+			Inputs = {
+				ProcessWhenBlendIs00 = Input { Value = 0, },
+				Clip = Input {
+					Value = Clip {
+						Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/matrix_node03.0000.exr",
+						FormatID = "OpenEXRFormat",
+						Length = 0,
+						Saving = true,
+						LengthSetManually = true,
+						AspectMode = 0,
+						Depth = 0,
+						GlobalStart = -2000000000,
+						GlobalEnd = -2000000000
+					},
+				},
+				OutputFormat = Input { Value = FuID { "OpenEXRFormat" }, },
+				["Gamut.LogType"] = Input { Value = FuID { "Bypass" }, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				Input = Input {
+					SourceOp = "matrix_node03_CST1",
+					Source = "Output",
+				},
+				["OpenEXRFormat.Compression"] = Input { Value = 0, },
+				["OpenEXRFormat.ZipCompressionLevel"] = Input { Value = 4, },
+				["OpenEXRFormat.AlphaEnable"] = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 275, 808.5 } },
+		},
+		matrix_monitor_CST1 = ofx.com.blackmagicdesign.resolvefx.ColorSpaceTransformV2 {
+			Inputs = {
+				Source = Input {
+					SourceOp = "matrix_monitor_input",
+					Source = "Output",
+				},
+				colorSpaceTransformGroup = Input { Value = 1, },
+				inputColorSpace = Input { Value = FuID { "DWG_COLORSPACE" }, },
+				inputGamma = Input { Value = FuID { "LINEAR_GAMMA" }, },
+				outputColorSpace = Input { Value = FuID { "REC709_COLORSPACE" }, },
+				outputGamma = Input { Value = FuID { "LINEAR_GAMMA" }, },
+				invertTransform = Input { Value = 0, },
+				toneMappingGroup = Input { Value = 1, },
+				tmType = Input { Value = FuID { "TM_NONE" }, },
+				isSrcLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				srcLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				isDstLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				dstLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				srcLumAvg = Input {
+					Value = 9,
+					Disabled = true,
+				},
+				satRolloffStart = Input { Value = 100, },
+				satRolloffLimit = Input { Value = 10000, },
+				gamutMappingGroup = Input { Value = 1, },
+				gmType = Input { Value = FuID { "GM_NONE" }, },
+				satKnee = Input {
+					Value = 0.899999976158142,
+					Disabled = true,
+				},
+				satMax = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				advancedGroup = Input { Value = 1, },
+				isRec2408ConversionEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				isRec2390ScalingEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				doFwdOOTF = Input { Value = 0, },
+				doInvOOTF = Input { Value = 0, },
+				doCAT = Input { Value = 0, },
+				isPreTMClippingFix = Input { Value = 0, },
+				isLegacySceneProcessing = Input { Value = 0, },
+				blendGroup = Input { Value = 0, },
+				blendIn = Input { Value = 1, },
+				blend = Input { Value = 0, },
+				ignoreContentShape = Input { Value = 0, },
+				legacyIsProcessRGBOnly = Input { Value = 0, },
+				IsNoTemporalFramesReqd = Input { Value = 0, },
+				srcProcessingAlphaMode = Input { Value = -1, },
+				dstProcessingAlphaMode = Input { Value = -1, },
+				resolvefxVersion = Input { Value = "1.4", }
+			},
+			ViewInfo = OperatorInfo { Pos = { 165, 841.5 } },
+		},
+		matrix_monitor_output = Saver {
+			Inputs = {
+				ProcessWhenBlendIs00 = Input { Value = 0, },
+				Clip = Input {
+					Value = Clip {
+						Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/matrix_monitor.0000.exr",
+						FormatID = "OpenEXRFormat",
+						Length = 0,
+						Saving = true,
+						LengthSetManually = true,
+						AspectMode = 0,
+						Depth = 0,
+						GlobalStart = -2000000000,
+						GlobalEnd = -2000000000
+					},
+				},
+				OutputFormat = Input { Value = FuID { "OpenEXRFormat" }, },
+				["Gamut.LogType"] = Input { Value = FuID { "Bypass" }, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				Input = Input {
+					SourceOp = "matrix_monitor_CST1",
+					Source = "Output",
+				},
+				["OpenEXRFormat.Compression"] = Input { Value = 0, },
+				["OpenEXRFormat.ZipCompressionLevel"] = Input { Value = 4, },
+				["OpenEXRFormat.AlphaEnable"] = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 275, 841.5 } },
+		},
+		monitor_q_linear709_code_CST1 = ofx.com.blackmagicdesign.resolvefx.ColorSpaceTransformV2 {
+			Inputs = {
+				Source = Input {
+					SourceOp = "monitor_q_linear709_code_input",
+					Source = "Output",
+				},
+				colorSpaceTransformGroup = Input { Value = 1, },
+				inputColorSpace = Input { Value = FuID { "BMDFILM_COLORSPACE" }, },
+				inputGamma = Input { Value = FuID { "SRGB_GAMMA" }, },
+				outputColorSpace = Input { Value = FuID { "SRGB_COLORSPACE" }, },
+				outputGamma = Input { Value = FuID { "SRGB_GAMMA" }, },
+				invertTransform = Input { Value = 0, },
+				toneMappingGroup = Input { Value = 1, },
+				tmType = Input { Value = FuID { "TM_NONE" }, },
+				isSrcLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				srcLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				isDstLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				dstLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				srcLumAvg = Input {
+					Value = 9,
+					Disabled = true,
+				},
+				satRolloffStart = Input { Value = 100, },
+				satRolloffLimit = Input { Value = 10000, },
+				gamutMappingGroup = Input { Value = 1, },
+				gmType = Input { Value = FuID { "GM_NONE" }, },
+				satKnee = Input {
+					Value = 0.899999976158142,
+					Disabled = true,
+				},
+				satMax = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				advancedGroup = Input { Value = 1, },
+				isRec2408ConversionEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				isRec2390ScalingEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				doFwdOOTF = Input { Value = 0, },
+				doInvOOTF = Input { Value = 0, },
+				doCAT = Input { Value = 0, },
+				isPreTMClippingFix = Input { Value = 0, },
+				isLegacySceneProcessing = Input { Value = 0, },
+				blendGroup = Input { Value = 0, },
+				blendIn = Input { Value = 1, },
+				blend = Input { Value = 0, },
+				ignoreContentShape = Input { Value = 0, },
+				legacyIsProcessRGBOnly = Input { Value = 0, },
+				IsNoTemporalFramesReqd = Input { Value = 0, },
+				srcProcessingAlphaMode = Input { Value = -1, },
+				dstProcessingAlphaMode = Input { Value = -1, },
+				resolvefxVersion = Input { Value = "1.4", }
+			},
+			ViewInfo = OperatorInfo { Pos = { 165, 874.5 } },
+		},
+		monitor_q_linear709_code_CST2 = ofx.com.blackmagicdesign.resolvefx.ColorSpaceTransformV2 {
+			Inputs = {
+				Source = Input {
+					SourceOp = "monitor_q_linear709_code_CST1",
+					Source = "Output",
+				},
+				colorSpaceTransformGroup = Input { Value = 1, },
+				inputColorSpace = Input { Value = FuID { "BMDPOCKET4KFILM_COLORSPACE" }, },
+				inputGamma = Input { Value = FuID { "BMDFILMV5_GAMMA" }, },
+				outputColorSpace = Input { Value = FuID { "DWG_COLORSPACE" }, },
+				outputGamma = Input { Value = FuID { "DAV_INTER_OETF_GAMMA" }, },
+				invertTransform = Input { Value = 0, },
+				toneMappingGroup = Input { Value = 1, },
+				tmType = Input { Value = FuID { "TM_NONE" }, },
+				isSrcLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				srcLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				isDstLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				dstLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				srcLumAvg = Input {
+					Value = 9,
+					Disabled = true,
+				},
+				satRolloffStart = Input { Value = 100, },
+				satRolloffLimit = Input { Value = 10000, },
+				gamutMappingGroup = Input { Value = 1, },
+				gmType = Input { Value = FuID { "GM_NONE" }, },
+				satKnee = Input {
+					Value = 0.899999976158142,
+					Disabled = true,
+				},
+				satMax = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				advancedGroup = Input { Value = 1, },
+				isRec2408ConversionEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				isRec2390ScalingEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				doFwdOOTF = Input { Value = 0, },
+				doInvOOTF = Input { Value = 0, },
+				doCAT = Input { Value = 0, },
+				isPreTMClippingFix = Input { Value = 0, },
+				isLegacySceneProcessing = Input { Value = 0, },
+				blendGroup = Input { Value = 0, },
+				blendIn = Input { Value = 1, },
+				blend = Input { Value = 0, },
+				ignoreContentShape = Input { Value = 0, },
+				legacyIsProcessRGBOnly = Input { Value = 0, },
+				IsNoTemporalFramesReqd = Input { Value = 0, },
+				srcProcessingAlphaMode = Input { Value = -1, },
+				dstProcessingAlphaMode = Input { Value = -1, },
+				resolvefxVersion = Input { Value = "1.4", }
+			},
+			ViewInfo = OperatorInfo { Pos = { 275, 874.5 } },
+		},
+		monitor_q_linear709_code_CST3 = ofx.com.blackmagicdesign.resolvefx.ColorSpaceTransformV2 {
+			Inputs = {
+				Source = Input {
+					SourceOp = "monitor_q_linear709_code_CST2",
+					Source = "Output",
+				},
+				colorSpaceTransformGroup = Input { Value = 1, },
+				inputColorSpace = Input { Value = FuID { "DWG_COLORSPACE" }, },
+				inputGamma = Input { Value = FuID { "DAV_INTER_OETF_GAMMA" }, },
+				outputColorSpace = Input { Value = FuID { "REC709_COLORSPACE" }, },
+				outputGamma = Input { Value = FuID { "LINEAR_GAMMA" }, },
+				invertTransform = Input { Value = 0, },
+				toneMappingGroup = Input { Value = 1, },
+				tmType = Input { Value = FuID { "TM_NONE" }, },
+				isSrcLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				srcLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				isDstLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				dstLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				srcLumAvg = Input {
+					Value = 9,
+					Disabled = true,
+				},
+				satRolloffStart = Input { Value = 100, },
+				satRolloffLimit = Input { Value = 10000, },
+				gamutMappingGroup = Input { Value = 1, },
+				gmType = Input { Value = FuID { "GM_NONE" }, },
+				satKnee = Input {
+					Value = 0.899999976158142,
+					Disabled = true,
+				},
+				satMax = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				advancedGroup = Input { Value = 1, },
+				isRec2408ConversionEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				isRec2390ScalingEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				doFwdOOTF = Input { Value = 0, },
+				doInvOOTF = Input { Value = 0, },
+				doCAT = Input { Value = 0, },
+				isPreTMClippingFix = Input { Value = 0, },
+				isLegacySceneProcessing = Input { Value = 0, },
+				blendGroup = Input { Value = 0, },
+				blendIn = Input { Value = 1, },
+				blend = Input { Value = 0, },
+				ignoreContentShape = Input { Value = 0, },
+				legacyIsProcessRGBOnly = Input { Value = 0, },
+				IsNoTemporalFramesReqd = Input { Value = 0, },
+				srcProcessingAlphaMode = Input { Value = -1, },
+				dstProcessingAlphaMode = Input { Value = -1, },
+				resolvefxVersion = Input { Value = "1.4", }
+			},
+			ViewInfo = OperatorInfo { Pos = { 385, 874.5 } },
+		},
+		monitor_q_linear709_code_output = Saver {
+			Inputs = {
+				ProcessWhenBlendIs00 = Input { Value = 0, },
+				Clip = Input {
+					Value = Clip {
+						Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/monitor_q_linear709_code.0000.exr",
+						FormatID = "OpenEXRFormat",
+						Length = 0,
+						Saving = true,
+						LengthSetManually = true,
+						AspectMode = 0,
+						Depth = 0,
+						GlobalStart = -2000000000,
+						GlobalEnd = -2000000000
+					},
+				},
+				OutputFormat = Input { Value = FuID { "OpenEXRFormat" }, },
+				["Gamut.LogType"] = Input { Value = FuID { "Bypass" }, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				Input = Input {
+					SourceOp = "monitor_q_linear709_code_CST3",
+					Source = "Output",
+				},
+				["OpenEXRFormat.Compression"] = Input { Value = 0, },
+				["OpenEXRFormat.ZipCompressionLevel"] = Input { Value = 4, },
+				["OpenEXRFormat.AlphaEnable"] = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 495, 874.5 } },
+		},
+		monitor_bypass_linear709_code_CST1 = ofx.com.blackmagicdesign.resolvefx.ColorSpaceTransformV2 {
+			Inputs = {
+				Source = Input {
+					SourceOp = "monitor_bypass_linear709_code_input",
+					Source = "Output",
+				},
+				colorSpaceTransformGroup = Input { Value = 1, },
+				inputColorSpace = Input { Value = FuID { "BMDPOCKET4KFILM_COLORSPACE" }, },
+				inputGamma = Input { Value = FuID { "BMDFILMV5_GAMMA" }, },
+				outputColorSpace = Input { Value = FuID { "DWG_COLORSPACE" }, },
+				outputGamma = Input { Value = FuID { "DAV_INTER_OETF_GAMMA" }, },
+				invertTransform = Input { Value = 0, },
+				toneMappingGroup = Input { Value = 1, },
+				tmType = Input { Value = FuID { "TM_NONE" }, },
+				isSrcLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				srcLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				isDstLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				dstLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				srcLumAvg = Input {
+					Value = 9,
+					Disabled = true,
+				},
+				satRolloffStart = Input { Value = 100, },
+				satRolloffLimit = Input { Value = 10000, },
+				gamutMappingGroup = Input { Value = 1, },
+				gmType = Input { Value = FuID { "GM_NONE" }, },
+				satKnee = Input {
+					Value = 0.899999976158142,
+					Disabled = true,
+				},
+				satMax = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				advancedGroup = Input { Value = 1, },
+				isRec2408ConversionEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				isRec2390ScalingEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				doFwdOOTF = Input { Value = 0, },
+				doInvOOTF = Input { Value = 0, },
+				doCAT = Input { Value = 0, },
+				isPreTMClippingFix = Input { Value = 0, },
+				isLegacySceneProcessing = Input { Value = 0, },
+				blendGroup = Input { Value = 0, },
+				blendIn = Input { Value = 1, },
+				blend = Input { Value = 0, },
+				ignoreContentShape = Input { Value = 0, },
+				legacyIsProcessRGBOnly = Input { Value = 0, },
+				IsNoTemporalFramesReqd = Input { Value = 0, },
+				srcProcessingAlphaMode = Input { Value = -1, },
+				dstProcessingAlphaMode = Input { Value = -1, },
+				resolvefxVersion = Input { Value = "1.4", }
+			},
+			ViewInfo = OperatorInfo { Pos = { 165, 907.5 } },
+		},
+		monitor_bypass_linear709_code_CST2 = ofx.com.blackmagicdesign.resolvefx.ColorSpaceTransformV2 {
+			Inputs = {
+				Source = Input {
+					SourceOp = "monitor_bypass_linear709_code_CST1",
+					Source = "Output",
+				},
+				colorSpaceTransformGroup = Input { Value = 1, },
+				inputColorSpace = Input { Value = FuID { "DWG_COLORSPACE" }, },
+				inputGamma = Input { Value = FuID { "DAV_INTER_OETF_GAMMA" }, },
+				outputColorSpace = Input { Value = FuID { "REC709_COLORSPACE" }, },
+				outputGamma = Input { Value = FuID { "LINEAR_GAMMA" }, },
+				invertTransform = Input { Value = 0, },
+				toneMappingGroup = Input { Value = 1, },
+				tmType = Input { Value = FuID { "TM_NONE" }, },
+				isSrcLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				srcLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				isDstLumMaxCustomEnabled = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				dstLumMax = Input {
+					Value = 100,
+					Disabled = true,
+				},
+				srcLumAvg = Input {
+					Value = 9,
+					Disabled = true,
+				},
+				satRolloffStart = Input { Value = 100, },
+				satRolloffLimit = Input { Value = 10000, },
+				gamutMappingGroup = Input { Value = 1, },
+				gmType = Input { Value = FuID { "GM_NONE" }, },
+				satKnee = Input {
+					Value = 0.899999976158142,
+					Disabled = true,
+				},
+				satMax = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				advancedGroup = Input { Value = 1, },
+				isRec2408ConversionEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				isRec2390ScalingEnabled = Input {
+					Value = 1,
+					Disabled = true,
+				},
+				doFwdOOTF = Input { Value = 0, },
+				doInvOOTF = Input { Value = 0, },
+				doCAT = Input { Value = 0, },
+				isPreTMClippingFix = Input { Value = 0, },
+				isLegacySceneProcessing = Input { Value = 0, },
+				blendGroup = Input { Value = 0, },
+				blendIn = Input { Value = 1, },
+				blend = Input { Value = 0, },
+				ignoreContentShape = Input { Value = 0, },
+				legacyIsProcessRGBOnly = Input { Value = 0, },
+				IsNoTemporalFramesReqd = Input { Value = 0, },
+				srcProcessingAlphaMode = Input { Value = -1, },
+				dstProcessingAlphaMode = Input { Value = -1, },
+				resolvefxVersion = Input { Value = "1.4", }
+			},
+			ViewInfo = OperatorInfo { Pos = { 275, 907.5 } },
+		},
+		monitor_bypass_linear709_code_output = Saver {
+			Inputs = {
+				ProcessWhenBlendIs00 = Input { Value = 0, },
+				Clip = Input {
+					Value = Clip {
+						Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/monitor_bypass_linear709_code.0000.exr",
+						FormatID = "OpenEXRFormat",
+						Length = 0,
+						Saving = true,
+						LengthSetManually = true,
+						AspectMode = 0,
+						Depth = 0,
+						GlobalStart = -2000000000,
+						GlobalEnd = -2000000000
+					},
+				},
+				OutputFormat = Input { Value = FuID { "OpenEXRFormat" }, },
+				["Gamut.LogType"] = Input { Value = FuID { "Bypass" }, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				Input = Input {
+					SourceOp = "monitor_bypass_linear709_code_CST2",
+					Source = "Output",
+				},
+				["OpenEXRFormat.Compression"] = Input { Value = 0, },
+				["OpenEXRFormat.ZipCompressionLevel"] = Input { Value = 4, },
+				["OpenEXRFormat.AlphaEnable"] = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 385, 907.5 } },
+		}
+	},
+	Frames = {
+		{
+			FrameTypeID = "ChildFrame",
+			Mode = 3,
+			LayoutPreset = 0,
+			PresetName = "Default",
+			Left = 0,
+			Top = 0,
+			Width = 1512,
+			Height = 858,
+			ZoneInfo = { AuxRight = { Expanded = true }, ["!Left"] = {
+				}, AuxLeft = { Expanded = true }, Right = { Expanded = true, }, Left = { Expanded = false, }, ["!Right"] = {
+				} },
+			ViewInfo = { Viewer1 = { Show = true, RatioX = 1.05263157894737, RatioY = 0.01, }, InnerLeft = { PixelX = 420, RatioY = 100, }, MainSplit = { RatioX = 100, RatioY = 0.99765807962529, }, CenterSplit = { RatioX = 1, RatioY = 100, }, Viewer2 = { Show = true, RatioX = 0.947368421052629, RatioY = 0.01, }, Comments = { Show = false }, Time = { Show = true, RatioX = 100, }, InnerColumns = { RatioX = 100, RatioY = 2.0023419203747, }, Keyframes = { Show = false, }, LayoutStrip = { Show = true, }, Inspector = { Show = true, RatioX = 100, RatioY = 1, }, InnerRight = {
+				}, MediaPool = { Show = false, }, OuterColumns = { RatioX = 100, RatioY = 1, }, Effects = { Show = true, Adjust = false, RatioX = 1, RatioY = 100, MRU = 1 }, Clips = { Show = false, }, Metadata = { Show = false, }, OuterLeft = {
+				}, ViewerSplit = { RatioX = 100, RatioY = 1, }, Nodes = { Show = true, RatioX = 1, RatioY = 100, }, OuterRight = { PixelX = 420, RatioY = 100, }, ActionStrip = { Show = true, RatioX = 100, }, Spline = { Show = false, } },
+			Views = ordered() {
+				MediaPool = "MediaPoolView",
+				Effects = MultiView {
+					Active = "EffectView",
+					ViewList = ordered() {
+						EffectView = "EffectView"
+					},
+				},
+				Nodes = MultiView {
+					Active = "FlowView",
+					ViewList = ordered() {
+						FlowView = "FlowView"
+					},
+					FlowView = FlowView {
+						Flags = {
+							Navigator = true,
+							AutoHideNavigator = true,
+							AutoSnap = true,
+							RemoveRouters = true
+						},
+						NavigatorSize = { 200, 140 },
+						Direction = "Horizontal",
+						PipeStyle = "Direct",
+						RootScale = 1,
+						RootOffset = { 26, 29 }
+					}
+				},
+				Keyframes = MultiView {
+					Active = "TimelineView",
+					ViewList = ordered() {
+						TimelineView = "TimelineView"
+					},
+					TimelineView = TimelineView {
+						TreeControlState = {
+						},
+						DisplayMode = "All Tools",
+						ShowCurrentTimeTools = false,
+						Filter = "Show All",
+						ShowSelectedTools = false,
+						ShowAnimatedToolsOnly = false,
+						ShowEditBoxes = false,
+						KeyFrameView = {
+							Position = { Left = 232, Bottom = 323 },
+							ScaleX = 1.38139534883721,
+							OffsetX = -33.153488372093,
+							OffsetY = 0,
+							AutoScaling = "scroll",
+							AutoSnapTo = "frame",
+							AutoSnapToGuidelines = false,
+							GuidelinesGrabEnabled = true,
+							GuidelinesSnapTo = "none"
+						},
+						Spreadsheet = { LeftPos = 232, Visible = false }
+					}
+				},
+				Spline = MultiView {
+					Active = "SplineView",
+					ViewList = ordered() {
+						SplineView = "SplineEditorView"
+					},
+					SplineView = SplineEditorView {
+						LeftPos = 264,
+						ScaleX = 0.2,
+						ScaleY = 0.00335570469798658,
+						OffsetX = -3.4,
+						OffsetY = 0,
+						AutoScaling = "scroll",
+						AutoSnapTo = "frame",
+						AutoSnapToGuidelines = false,
+						GuidelinesSnapTo = "frame",
+						ShowKeyMarkers = false,
+						IndependentHandles = false,
+						ShowNonSplineModifiers = false,
+						GuidelinesGrabEnabled = true,
+						ShowOneToolOnly = false,
+						ShowSelectedTools = false,
+						ShowAllInputs = false,
+						Filter = "Show All"
+					}
+				},
+				Inspector = MultiView {
+					Active = "Tools",
+					ViewList = ordered() {
+						Tools = "ControlView",
+						Modifiers = "ModifierView"
+					},
+				},
+				Viewer1 = MultiView {
+					Active = "LeftView",
+					ViewList = ordered() {
+						LeftView = "PreviewContainer"
+					},
+				},
+				Viewer2 = MultiView {
+					Active = "RightView",
+					ViewList = ordered() {
+						RightView = "PreviewContainer"
+					},
+				},
+				Time = "TimeView",
+				ActionStrip = "ActionStripView",
+				LayoutStrip = "LayoutStripView",
+				Clips = "ClipsView",
+				Metadata = "MetadataView"
+			},
+			Layout = {
+				{ ID = "LayoutStrip", FixedY = 36, Resolve = false, Flat = true },
+				{
+					{
+						{ ID = "MediaPool", Fusion = false, RatioX = 1 },
+						{ ID = "Effects", RatioX = 1 },
+						Zone = "Left",
+						Rows = 2,
+						PaneID = "OuterLeft",
+						PixelX = 420
+					},
+					{
+						{
+							{
+								{ ID = "MediaPool", Fusion = false, RatioX = 1 },
+								{ ID = "Effects", RatioX = 1 },
+								PaneID = "InnerLeft",
+								MaxViews = 1,
+								PixelX = 420,
+								Rows = 2,
+								Zone = "!Left"
+							},
+							{
+								{
+									{ ID = "Viewer1", RatioY = 0.01, RatioX = 1 },
+									{ ID = "Viewer2", RatioX = 1 },
+									RatioY = 1,
+									Columns = 2,
+									PaneID = "ViewerSplit"
+								},
+								{ ID = "Time", FixedY = 83, Photo = false, Flat = true },
+								RatioX = 1,
+								Rows = 2
+							},
+							{
+								{ ID = "Inspector", RatioY = 1 },
+								{ ID = "Metadata", RatioY = 1, Fusion = false },
+								PaneID = "InnerRight",
+								MaxViews = 1,
+								PixelX = 420,
+								Rows = 2,
+								Zone = "!Right"
+							},
+							RatioY = 2,
+							Columns = 3,
+							PaneID = "InnerColumns"
+						},
+						{ ID = "ActionStrip", FixedY = 50, Flat = true },
+						{
+							{ ID = "Nodes", RatioX = 1 },
+							{ ID = "Spline", Photo = false, RatioX = 1 },
+							{ ID = "Keyframes", Photo = false, RatioX = 1 },
+							RatioY = 1,
+							Columns = 3,
+							PaneID = "MainSplit"
+						},
+						{ Fusion = false, ID = "Clips", LARGE_FixedY = 160, MEDIUM_FixedY = 138, SMALL_FixedY = 110 },
+						RatioX = 1,
+						Rows = 4,
+						PaneID = "CenterSplit"
+					},
+					{
+						{ ID = "Inspector", RatioY = 1 },
+						{ ID = "Metadata", RatioY = 1, Fusion = false },
+						Zone = "Right",
+						Rows = 2,
+						PaneID = "OuterRight",
+						PixelX = 420
+					},
+					RatioY = 1,
+					Columns = 3,
+					PaneID = "OuterColumns"
+				},
+				RatioX = 1,
+				Rows = 2,
+				RatioY = 1
+			},
+			TopBar = {
+				Left = { "Left", "MediaPool", "Effects", "Clips", "Nodes", "Console" },
+				Right = { "Spline", "Keyframes", "Metadata", "Inspector", "Right" }
+			}
+		}
+	},
+	Prefs = {
+		Comp = {
+			Interactive = {
+				Proxy = {
+					Scale = 1,
+				},
+			},
+			Views = {
+				RightView = {
+				},
+				LeftView = {
+				},
+				View1 = {
+				},
+			},
+			Paths = {
+				Map = {
+					["ResolveCaches:"] = "/Users/dido/Movies/CacheClip/7bed937f-b32e-4e4b-a993-4eacca6ecf93/1ec3dd87-19ec-4d38-b6fd-2090dc171656/7875fff4-1071-4591-8ac0-161348a8da92/Fusion",
+				},
+			},
+			FrameFormat = {
+				Rate = 24,
+				GuideRatio = 1.77777777777778,
+				DepthFull = 3,
+				DepthPreview = 3,
+				DepthInteractive = 3,
+			},
+			Unsorted = {
+				GlobalEnd = 119
+			},
+			SpellCheck = {
+			},
+		}
+	},
+}
+

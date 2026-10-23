@@ -75,10 +75,16 @@ class BuildError(RuntimeError):
     pass
 
 
-def ui_section():
+def ui_section(v4=False):
+    """v4: the same block in fpsup-ui's section (fpui_stock.c, no string layer)."""
     from ui import options as ui_options
+    block = ui_options.color_raw(rv_uidata.ICONS[0][3].read_bytes()).encode()
+    if v4:
+        sys.path.insert(0, str(FPSUP / 'fpsup-ui'))
+        import build_stock_section
+        return build_stock_section.section(block)
     import build_section
-    return build_section.section(ui_options.color_raw(rv_uidata.ICONS[0][3].read_bytes()).encode())
+    return build_section.section(block)
 
 
 def claim_rows(ui_sites):
@@ -145,12 +151,16 @@ def check_calls(code):
             last = 'other'
 
 
-def build():
+def build(v4=False, name=b''):
+    """v4 (build_v4_rawview.py): the FSB4 header (48 B, the record after it),
+    rv_*.S V4=1 (file_is before a save, the record reaching memory first),
+    fpsup-ui's section for the row; `name` (the display name) ends the file."""
+    HL = 48 if v4 else B.SL_HEADER_LEN
     for w in (R.write_csv_inc, R.write_page_inc, R.write_mat_inc, R.write_sat_inc,
               R.write_dngcm_inc):
         w()
     res_src = HERE / 'rv_resident.S'
-    rdefs = ['V3=1']
+    rdefs = ['V3=1'] + (['V4=1'] if v4 else [])
     res = assemble(res_src, rdefs)
     rs = symbols(res_src, rdefs)
     if rs['params'] != 0 or rs['sat_tab'] != 0x1D0:
@@ -159,7 +169,7 @@ def build():
     if 0x3E200 + len(res) > 0x40800:
         raise BuildError(f'resident {len(res)} B runs into the matrix copy')
     tdata = R.rv_tables.blob()
-    sec, ui = ui_section()
+    sec, ui = ui_section(v4)
     rows = claim_rows(ui['sites'])
     ctab = claims_table(rows)
 
@@ -168,6 +178,8 @@ def build():
     tail = res + tdata
     tail += b'\0' * (sec_off - len(tail)) + sec
     tail += b'\0' * (claims_off - len(tail)) + ctab
+    name_at = len(tail)
+    tail += name
 
     stub = {k: rs[k] for k in ('stub_gs', 'stub_dg', 'stub_ma', 'stub_mb', 'stub_mc', 'stub_fv',
                                'stub_ml', 'stub_ef', 'stub_en', 'stub_sa', 'stub_sn', 'stub_mj',
@@ -181,12 +193,12 @@ def build():
              f'UI_APPLY=0x{sec_off + ui["uia_apply"]:X}', f'UI_BLOCK=0x{sec_off + ui["block_off"]:X}',
              f'UI_LEN=0x{ui["block_len"]:X}', f'SAT_MAX={rv_color.SAT_MAX}',
              f'NEXT_SV=0x{rs["sv_next"]:X}', f'NEXT_PQ=0x{rs["pq_next"]:X}',
-             f'NEXT_AI=0x{rs["ai_next"]:X}']
+             f'NEXT_AI=0x{rs["ai_next"]:X}'] + (['V4=1', f'NEXT_SVC=0x{rs["sv_svc"]:X}'] if v4 else [])
         return d + [f'{k.upper()}=0x{v:X}' for k, v in stub.items()]
 
     src = HERE / 'rv_launch.S'
     probe = assemble(src, defines(0))
-    file_len = B.SL_HEADER_LEN + CFG_LEN + len(probe) + len(tail)
+    file_len = HL + CFG_LEN + len(probe) + len(tail)
     file_len += -file_len % 4
     launch = assemble(src, defines(file_len))
     ls = symbols(src, defines(file_len))
@@ -197,14 +209,23 @@ def build():
     body = cfg + launch + tail
     block = file_len + 0xFFF + ALLOC
     block += -block % 0x1000
-    data = B.make_sup(body, B.SL_HEADER_LEN + CFG_LEN, SUP_ID, VERSION, block_size=block,
-                      min_svc=2)
+    if v4:
+        sys.path.insert(0, str(FPSUP / 'loader-v4'))
+        import build_v4 as B4
+        data = bytearray(B4.make_sup(body, HL + CFG_LEN, SUP_ID, version=VERSION, block_size=block,
+                                     min_svc=5, flags=B4.SL_F_CACHED_OK))
+        if name:
+            struct.pack_into('<I', data, 44, HL + CFG_LEN + len(launch) + name_at)
+        data = bytes(data)
+    else:
+        data = B.make_sup(body, B.SL_HEADER_LEN + CFG_LEN, SUP_ID, VERSION, block_size=block,
+                          min_svc=2)
     if len(data) != file_len:
         raise BuildError('file length')
     facts = {'file_len': file_len, 'block': block, 'launch': len(launch), 'resident': len(res),
              'tables': len(tdata), 'ui_section': len(sec), 'claims': len(rows),
-             'entry': B.SL_HEADER_LEN + CFG_LEN, 'cfg_off': B.SL_HEADER_LEN,
-             'blob_off': B.SL_HEADER_LEN + CFG_LEN + len(launch),
+             'entry': HL + CFG_LEN, 'cfg_off': HL,
+             'blob_off': HL + CFG_LEN + len(launch),
              'res_syms': {k: rs[k] for k in ('sv_next', 'pq_next', 'ai_next', 'stub_sv', 'stub_gs')},
              'defines': defines(file_len),
              'claims_list': [{'address': f'0x{a:08X}', 'bytes': len(s),

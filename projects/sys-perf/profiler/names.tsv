@@ -1,0 +1,25 @@
+# addr	name  (ours; wins over vfunc symbols).  Sources: research/firmware/notes/*.md
+C0000D10	dispatcher
+C0000D64	dispatcher_idle_loop
+C0000E64	irq_hl_entry
+C0000F88	ret_int
+C00014A0	irq_vector_entry
+C000D808	timer_startup
+C000D9A8	knl_timer_handler
+C000E91C	dcache_clean_inv_all(L1+L2,irq off)
+C000E9B8	dcache_clean_all(L1+L2,irq off)
+C000EA54	dcache_clean_inv_range(irq off)
+C000EABC	icache_inv_all
+C000EB28	dcache_inv_range(irq off)
+C000EB90	dcache_clean_range(irq off)
+C000EC14	irq_disable
+C000EC24	irq_restore
+C0015058	memset
+C001510C	memcpy
+C0016000	timer_isr
+C0016210	timer_start
+C00163F8	timer_stop
+C0016978	os_tick
+C0500A68	cache_flush_maybe_all(>=10KB)
+C0683330	monitcyc_body
+C01DA808	sigpro_wait(spin_or_flag)

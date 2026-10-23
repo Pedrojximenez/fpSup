@@ -1,0 +1,38 @@
+test_all_35_models_against_float_reference_and_strengths (test_sup_native.NativeLutTests) ... ok
+test_bad_input_never_changes_destination_and_pending_models_refuse (test_sup_native.NativeLutTests) ... ok
+test_combined_shaper_domains_output_hdr_and_lookup_diagnostics (test_sup_native.NativeLutTests) ... ok
+test_fast_debug_card_and_retained_image_reinitialize_defaults (test_sup_native.NativeLutTests) ... ok
+test_full_65_grid_all_tetrahedral_orders_and_original_nodes (test_sup_native.NativeLutTests) ... ok
+test_loads_cached_with_resident_rows_and_dma_only_file_scratch (test_sup_native.NativeLutTests) ... ok
+test_missing_short_corrupt_trailing_and_corrupt_header_remain_unapplied (test_sup_native.NativeLutTests) ... ok
+test_native_row_callbacks_reach_all_groups_and_blackmagic_dependency (test_sup_native.NativeLutTests) ... ok
+test_partial_page_registration_failure_releases_all_lut_rows_and_api (test_sup_native.NativeLutTests) ... ok
+test_pure_1d_4096_entries_and_tetrahedra_all_orders (test_sup_native.NativeLutTests) ... ok
+test_released_sup_leaves_no_rows_or_service_on_conflict (test_sup_native.NativeLutTests) ... ok
+test_header_format_asset_source_and_boot_stay_independent (test_sup_native.NativePackageTests) ... ok
+test_reject_unsupported_model_and_quantization_failures_before_output (test_sup_native.NativePackageTests) ... ok
+test_absent_ui_file_leaves_lut_service_available (test_sup_ui.LutUiTests) ... FAIL
+
+======================================================================
+FAIL: test_absent_ui_file_leaves_lut_service_available (test_sup_ui.LutUiTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lut/test_sup_ui.py", line 205, in test_absent_ui_file_leaves_lut_service_available
+    self.assertEqual(U.ui_lines(c),[(0,0,'LOADER.BIN'),(1,0,'LOADER.BIN')])
+AssertionError: Lists differ: [(1, 0, 'LOADER.BIN')] != [(0, 0, 'LOADER.BIN'), (1, 0, 'LOADER.BIN')]
+
+First differing element 0:
+(1, 0, 'LOADER.BIN')
+(0, 0, 'LOADER.BIN')
+
+Second list contains 1 additional elements.
+First extra element 1:
+(1, 0, 'LOADER.BIN')
+
+- [(1, 0, 'LOADER.BIN')]
++ [(0, 0, 'LOADER.BIN'), (1, 0, 'LOADER.BIN')]
+
+----------------------------------------------------------------------
+Ran 14 tests in 50.600s
+
+FAILED (failures=1)

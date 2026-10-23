@@ -1,0 +1,14 @@
+test_loads_cached_with_resident_rows_and_dma_only_file_scratch (test_sup_native.NativeLutTests) ... FAIL
+
+======================================================================
+FAIL: test_loads_cached_with_resident_rows_and_dma_only_file_scratch (test_sup_native.NativeLutTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lut/test_sup_native.py", line 161, in test_loads_cached_with_resident_rows_and_dma_only_file_scratch
+    self.assertEqual(c.invoke(5,1),-13)
+AssertionError: 0 != -13
+
+----------------------------------------------------------------------
+Ran 1 test in 2.891s
+
+FAILED (failures=1)

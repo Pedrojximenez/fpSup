@@ -1,0 +1,15 @@
+{
+  "state": "camera operations stopped at user request; offline package ready",
+  "package": "projects/lut-sup/cards/20261021-lut4-existing-v4-01",
+  "camera_actions_performed": [
+    "standby/UI/directory reads",
+    "reviewed getfile backup with temporary RAM borrowing and echo restoration"
+  ],
+  "camera_file_writes": false,
+  "camera_restarts": 0,
+  "camera_keys_sent": 0,
+  "functional_settings_changed": false,
+  "existing_daemon_left_running": true,
+  "hardware_lut_test_started": false,
+  "next_step": "resume only when camera is available; install two new files with full readback"
+}

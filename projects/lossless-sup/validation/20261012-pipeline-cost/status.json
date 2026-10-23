@@ -1,0 +1,218 @@
+{
+  "product": "LOSS DNG packing optimization and local per-frame pipeline tool",
+  "production": {
+    "sha256": "fe35400b3354ff2218c4f3d83ada0f7bc5fe3bd8c8ed9abc12a26a9e45049e4d",
+    "bytes": 79456,
+    "profiling": false,
+    "deployment_verified": "deploy-final/verified.json"
+  },
+  "measurement": {
+    "before": {
+      "label": "baseline-60p-take",
+      "window": {
+        "cpu_percent": 96.8914,
+        "task_percent": {
+          "MRecMgr": 28.1784,
+          "ImgCtrl": 0.5869,
+          "LensCycl": 3.5273,
+          "MANAGER": 0.8191,
+          "S2R": 0.5216,
+          "R2YHDIS": 1.5224,
+          "AeDev": 1.4325,
+          "SRecFile": 4.502,
+          "VDD": 0.0553,
+          "Y2YVDIS": 0.7548,
+          "PicCorr": 0.1063,
+          "CamSch": 40.9912,
+          "FPLCODE": 6.2965,
+          "AtomosFr": 0.7712,
+          "TempChk": 0.004,
+          "GyroData": 0.0936,
+          "inittsk": 3.1086,
+          "_VSHL": 0.187,
+          "AUD_INT": 0.2582,
+          "Level": 1.02,
+          "FdTsk": 1.0617,
+          "EyeDtctn": 0.0329,
+          "LcdTh": 0.018,
+          "StOsdObs": 0.5145,
+          "DrawMgr": 1.797,
+          "LcdBrTh": 0.0894,
+          "RemoCon": 0.0323,
+          "EventMgr": 0.0325,
+          "FPFLIP": 0.1069,
+          "BtrMgr": 0.0524,
+          "LensUbat": 0.0125,
+          "ESCycl": 0.0452,
+          "ExtStrb": 0.9023,
+          "ExtEvfCh": 0.006,
+          "SDePower": 0.0237
+        }
+      },
+      "phases": {
+        "3": {
+          "count": 55,
+          "meanUs": 808.7272727272727,
+          "cpuMeanUs": 21.8,
+          "cpuSumUs": 1199,
+          "maxUs": 3389
+        },
+        "5": {
+          "count": 55,
+          "meanUs": 279.94545454545454,
+          "cpuMeanUs": 267.3272727272727,
+          "cpuSumUs": 14703,
+          "maxUs": 1353
+        },
+        "4": {
+          "count": 106,
+          "meanUs": 7252.61320754717,
+          "cpuMeanUs": 351.5660377358491,
+          "cpuSumUs": 37266,
+          "maxUs": 13954
+        },
+        "1": {
+          "count": 54,
+          "meanUs": 1318.2037037037037,
+          "cpuMeanUs": 22.666666666666668,
+          "cpuSumUs": 1224,
+          "maxUs": 9575
+        },
+        "2": {
+          "count": 54,
+          "meanUs": 2095.3518518518517,
+          "cpuMeanUs": 1417.0,
+          "cpuSumUs": 76518,
+          "maxUs": 14004
+        }
+      }
+    },
+    "after": {
+      "label": "stream-repeat-60p",
+      "window": {
+        "cpu_percent": 90.86229999999999,
+        "task_percent": {
+          "CamSch": 47.8828,
+          "FPLCODE": 3.9262,
+          "LensCycl": 3.3389,
+          "AeDev": 1.5214,
+          "LcdTh": 0.0148,
+          "MRecMgr": 18.6374,
+          "SRecFile": 2.63,
+          "Level": 1.1005,
+          "LensUbat": 0.018,
+          "SDePower": 0.0206,
+          "inittsk": 9.1377,
+          "ImgCtrl": 0.3975,
+          "AtomosFr": 2.1411,
+          "MANAGER": 0.7046,
+          "S2R": 0.5249,
+          "R2YHDIS": 1.3968,
+          "VDD": 0.0438,
+          "Y2YVDIS": 0.6556,
+          "PicCorr": 0.1023,
+          "AUD_INT": 0.2881,
+          "_VSHL": 0.1471,
+          "DrawMgr": 1.5577,
+          "RemoCon": 0.0396,
+          "GyroData": 0.1459,
+          "FdTsk": 1.4217,
+          "EyeDtctn": 0.0369,
+          "StOsdObs": 0.5676,
+          "LcdBrTh": 0.1637,
+          "ESCycl": 0.0558,
+          "ExtStrb": 1.0349,
+          "EventMgr": 0.0198,
+          "FPFLIP": 0.1066,
+          "shell": 0.0025,
+          "ExtEvfCh": 0.0052,
+          "BtrMgr": 0.0231,
+          "TempChk": 0.004
+        }
+      },
+      "phases": {
+        "5": {
+          "count": 59,
+          "meanUs": 315.3220338983051,
+          "cpuMeanUs": 304.06779661016947,
+          "cpuSumUs": 17940,
+          "maxUs": 1350
+        },
+        "4": {
+          "count": 113,
+          "meanUs": 6991.95575221239,
+          "cpuMeanUs": 105.26548672566372,
+          "cpuSumUs": 11895,
+          "maxUs": 13994
+        },
+        "1": {
+          "count": 58,
+          "meanUs": 1383.1379310344828,
+          "cpuMeanUs": 22.0,
+          "cpuSumUs": 1276,
+          "maxUs": 9601
+        },
+        "2": {
+          "count": 59,
+          "meanUs": 488.3050847457627,
+          "cpuMeanUs": 426.93220338983053,
+          "cpuSumUs": 25189,
+          "maxUs": 1185
+        },
+        "3": {
+          "count": 59,
+          "meanUs": 632.1016949152543,
+          "cpuMeanUs": 20.89830508474576,
+          "cpuSumUs": 1233,
+          "maxUs": 1922
+        }
+      }
+    },
+    "limitations": [
+      "short protected diagnostic windows",
+      "separate boots",
+      "native task time may include ISR and memory waiting",
+      "119.88p disabled in current native 12-bit menu; no high-FPS recording trial"
+    ]
+  },
+  "camera": {
+    "clip": [
+      "A001_165"
+    ],
+    "frames": 326,
+    "compressed": 297,
+    "raw": 29,
+    "free_descriptors": 404,
+    "capacity": 404,
+    "bulk": 67108864,
+    "final_settings": {
+      "menu SetMovRecFormat": "0",
+      "menu SetMovRecSize": "2",
+      "menu SetMovCinemaDNGQuality": "0",
+      "menu SetMovFramerate": "3",
+      "gui geti MV_FrameRate": "OK:MV_FrameRate -> 3",
+      "gui geti MV_fpLossless": "OK:MV_fpLossless -> 1",
+      "sdcard size 1": "size total = 128295370752 byte(119GiB), free = 32412532736 byte(30GiB), 25%\n(AU) total = 128295370752 byte(119GiB), free = 32412532736 byte(30GiB), 25%\nCluster=128KiB, AU=0.125MiB, AU=247288/978816"
+    },
+    "final_idle": {
+      "xmp_file_pointer": 0,
+      "movie_writing": 0
+    },
+    "samples": "final-normal-60p-frames/validation.json"
+  },
+  "stopfx": {
+    "author": "Ruari",
+    "unchanged": true,
+    "sha256": "f9f26a092c5676ead5771ba8be4aac9c3734e9ed0cd144002a73b3f6b657c9d9"
+  },
+  "validation": {
+    "production_saved_bin_arm": 16,
+    "frame_hold": 165,
+    "trailer_codec": 47,
+    "web_model": "test_model.js passed"
+  },
+  "remaining": [
+    "high-FPS/custom-mode verification",
+    "long recording and display-second-hand behavior are not established by this short trial"
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "format": "FPCP v1",
+  "payload_sha256": "9b3c59abb56034c5d3d8243cb8482c59c08c0829c9b116e3b863a24b692cf4cc",
+  "header": {
+    "magic": 1346588742,
+    "version": 1,
+    "requests": 6,
+    "submitted": 1,
+    "rejected": 2,
+    "replayed": 0,
+    "io_failed": 0,
+    "poisoned": 0,
+    "identity_calls": 1,
+    "last_tid": 3,
+    "last_target": 620,
+    "last_response": 8193,
+    "extended_session": 1,
+    "next_record": 4,
+    "capacity": 48,
+    "record_bytes": 24
+  },
+  "records": [
+    {
+      "sequence": 1,
+      "transaction": 2,
+      "opcode": 37122,
+      "parameter": 65537,
+      "response": 8193,
+      "detail": 0,
+      "response_name": "OK"
+    },
+    {
+      "sequence": 2,
+      "transaction": 3,
+      "opcode": 37910,
+      "parameter": 50397201,
+      "response": 8193,
+      "detail": 2,
+      "response_name": "OK"
+    },
+    {
+      "sequence": 3,
+      "transaction": 4,
+      "opcode": 37910,
+      "parameter": 50397233,
+      "response": 8197,
+      "detail": 0,
+      "response_name": "OperationNotSupported"
+    },
+    {
+      "sequence": 4,
+      "transaction": 5,
+      "opcode": 37905,
+      "parameter": 1,
+      "response": 8197,
+      "detail": 0,
+      "response_name": "OperationNotSupported"
+    }
+  ],
+  "observations": [
+    "USB 身分 hook 曾執行；不表示 DJI 已完成相機握手。",
+    "曾有原生鏡頭提交被接受；此為累計值，不表示鏡頭完成移動或合焦。",
+    "保留紀錄包含被拒絕的 03010031 數值對焦命令；尺度仍未確定。",
+    "保留紀錄包含被相容層拒絕的 SIGMA 原廠雲台對焦命令。"
+  ],
+  "limits": [
+    "僅保留最近 48 筆相容層紀錄；原廠 pass-through 命令不在此環中。",
+    "缺少某命令不表示它從未發生，初始化可能已被輪詢覆蓋。",
+    "原型沒有記錄 data payload 全文或實體鏡頭完成事件。"
+  ]
+}

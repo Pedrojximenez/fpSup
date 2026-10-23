@@ -170,31 +170,52 @@ __attribute__((used)) static uint32_t rl_encode(struct sl_menu *m, const char *l
         mx = q * 100u + rl_div((72000000u-q*den)*100u,den);
         break;
     }
-    if (!hm || mx < 1798u || mx > 100000u || t->pack_len + 1024u > t->cap) return 0;
+    const uint32_t md = 224u, cv = 248u, ui = 640u, sb = 688u, bf = 880u, bd = 904u, rc = 912u, wr = 1344u, rt = 1364u, pk = 1472u;
+    const uint32_t hi_n = 20u, rc_len = 4u + 3u*24u + 2u*(16u+8u*hi_n);   /* ends 1340 */
+    if (!hm || mx < 1798u || mx > 100000u || pk + t->pack_len + 3u > t->cap) return 0;
     rl_zero(b, t->cap);
-    const uint32_t md = 224u, cv = 248u, ui = 640u, sb = 688u, rc = 744u, bf = 880u, bd = 904u, pk = 960u;
     uint32_t len = (pk + t->pack_len + 3u) & ~3u;
+    /* The rates beyond the stock nine it declares (the consumer's defaults), and the
+     * recorder's policy at 279.72p (the only rate past the native batch and DMA-header
+     * budget): 4 MiB batches and the CPU header copy, 12-bit. */
+    const uint32_t nsec = mx >= 27972u ? 10u : 9u, rt_len = 4u + RLC_RCD_RATE_BYTES * RLC_NRATES;
     /* The producer declares its supported packed output depths explicitly. */
-    volatile uint32_t types[8];
+    volatile uint32_t types[10];
     types[0]=RLC_SEC_MODES; types[1]=RLC_SEC_CANVAS; types[2]=RLC_SEC_UI;
     types[3]=RLC_SEC_STANDBY; types[4]=RLC_SEC_RATECANVAS; types[5]=RLC_SEC_PACK;
     types[6]=RLC_SEC_BINFILT;
-    types[7]=RLC_SEC_BITDEPTH;
-    volatile uint32_t offs[8];
+    types[7]=RLC_SEC_BITDEPTH; types[8]=RLC_SEC_RATES; types[9]=RLC_SEC_WRITER;
+    volatile uint32_t offs[10];
     offs[0]=md; offs[1]=cv; offs[2]=ui; offs[3]=sb; offs[4]=rc; offs[5]=pk;;
     offs[6]=bf;
-    offs[7]=bd;
-    volatile uint32_t lens[8];
-    lens[0]=24; lens[1]=32+8*(29+13); lens[2]=48; lens[3]=52; lens[4]=124; lens[5]=t->pack_len;;
+    offs[7]=bd; offs[8]=rt; offs[9]=wr;
+    volatile uint32_t lens[10];
+    lens[0]=24; lens[1]=32+8*(29+13); lens[2]=48; lens[3]=52; lens[4]=rc_len; lens[5]=t->pack_len;;
     lens[6]=20;
-    lens[7]=4;
-    for (uint32_t i = 0; i < 8; i++) {
+    lens[7]=4; lens[8]=rt_len; lens[9]=20;
+    for (uint32_t i = 0; i < nsec; i++) {
         rl_wr((uintptr_t)b+64+16*i, types[i]); rl_wr((uintptr_t)b+68+16*i, offs[i]);
         rl_wr((uintptr_t)b+72+16*i, lens[i]); rl_wr((uintptr_t)b+76+16*i, 1);
     }
     rl_wr((uintptr_t)b+RLC_H_MAGIC, RLC_MAGIC); rl_wr((uintptr_t)b+RLC_H_VERSION, RLC_VERSION);
     rl_wr((uintptr_t)b+RLC_H_HLEN, RLC_HDR); rl_wr((uintptr_t)b+RLC_H_FLEN, len);
-    rl_wr((uintptr_t)b+RLC_H_NSEC, 8); rl_wr((uintptr_t)b+RLC_H_SECOFF, RLC_HDR);
+    rl_wr((uintptr_t)b+RLC_H_NSEC, nsec); rl_wr((uintptr_t)b+RLC_H_SECOFF, RLC_HDR);
+    {
+        _Static_assert(RLC_NRATES == 3u, "rl_v3.c lists the consumer's three default rates");
+        volatile uint32_t rate[RLC_NRATES * 7];
+        rate[0]=RLC_RATE0_RANK; rate[1]=RLC_RATE0_NUM; rate[2]=RLC_RATE0_DEN; rate[3]=RLC_RATE0_CYCLES;
+        rate[4]=RLC_RATE0_CARRIER; rate[5]=RLC_RATE0_NOMINAL; rate[6]=RLC_RATE0_ENGINE;
+        rate[7]=RLC_RATE1_RANK; rate[8]=RLC_RATE1_NUM; rate[9]=RLC_RATE1_DEN; rate[10]=RLC_RATE1_CYCLES;
+        rate[11]=RLC_RATE1_CARRIER; rate[12]=RLC_RATE1_NOMINAL; rate[13]=RLC_RATE1_ENGINE;
+        rate[14]=RLC_RATE2_RANK; rate[15]=RLC_RATE2_NUM; rate[16]=RLC_RATE2_DEN; rate[17]=RLC_RATE2_CYCLES;
+        rate[18]=RLC_RATE2_CARRIER; rate[19]=RLC_RATE2_NOMINAL; rate[20]=RLC_RATE2_ENGINE;
+        rl_wr((uintptr_t)b+rt, RLC_NRATES);
+        for (uint32_t i = 0; i < RLC_NRATES * 7u; i++) rl_wr((uintptr_t)b+rt+4+4*i, rate[i]);
+    }
+    if (nsec == 10u) {
+        rl_wr((uintptr_t)b+wr, 1); rl_wr((uintptr_t)b+wr+4, 27972u); rl_wr((uintptr_t)b+wr+8, 0);
+        rl_wr((uintptr_t)b+wr+12, 4u); rl_wr((uintptr_t)b+wr+16, RLC_WR_BATCH4M | RLC_WR_HDRCPU);
+    }
     rl_wr((uintptr_t)b+bd,7); /* this recipe supports 8, 10 and 12 bit on any medium */
     rl_wr((uintptr_t)b+bf,m->bin_h);rl_wr((uintptr_t)b+bf+4,m->bin_v);
     rl_wr((uintptr_t)b+bf+8,m->bin_kh);rl_wr((uintptr_t)b+bf+12,m->bin_kv);rl_wr((uintptr_t)b+bf+16,m->bin_mode);
@@ -239,10 +260,32 @@ __attribute__((used)) static uint32_t rl_encode(struct sl_menu *m, const char *l
      * precede the rank-zero wildcard, which is the low-rate fallback. */
     volatile uint32_t ranks[5];
     ranks[0]=10000; ranks[1]=11988; ranks[2]=23976; ranks[3]=27972; ranks[4]=0;;
+    /* 239.76/279.72 are never stock rates. There the preview rides the record
+     * path, as in the stock 100/120p CinemaDNG profiles (p379/p389) and both
+     * sustained M12 takes (H2 A001_193, r10): preview zoom and bin = record's,
+     * preview raster = act + margin, window = record matrix at the 2.0 high-rate
+     * reduction, base p83 class/0x88, 0xB0. The native CRCT selector then takes
+     * the record tap instead of a separate full-width preview. 100/119.88 and
+     * lower keep the r78 rules that record today. */
+    const uint32_t *c = m->canvas;
+    uint32_t zh = c[13] < 1024u ? 1024u : c[13], zv = c[20] < 1024u ? 1024u : c[20];
+    uint32_t pw = m->out_w + 16u, ph = m->out_h + 10u;
+    volatile uint32_t hf[20], hv[20];
+    hf[0]=0x0C; hv[0]=pw;      hf[1]=0x10; hv[1]=ph;      hf[2]=0x1C; hv[2]=2;
+    hf[3]=0x20; hv[3]=m->out_w; hf[4]=0x28; hv[4]=m->out_h; hf[5]=0x38; hv[5]=c[11] ? 16u : 1u;
+    hf[6]=0x58; hv[6]=c[11];   hf[7]=0x60; hv[7]=zh;      hf[8]=0x64; hv[8]=zh;
+    hf[9]=0x88; hv[9]=4;       hf[10]=0xB0; hv[10]=1;     hf[11]=0xC4; hv[11]=c[18];
+    hf[12]=0xD0; hv[12]=zv;    hf[13]=0xD4; hv[13]=zv;    hf[14]=0xD8; hv[14]=pw;
+    hf[15]=0xE0; hv[15]=ph;    hf[16]=0xF4; hv[16]=c[0];  hf[17]=0xF8; hv[17]=c[1];
+    hf[18]=0xFC; hv[18]=0x40000000u; hf[19]=0x100; hv[19]=0x40000000u;
     rl_wr((uintptr_t)b+rc, 5);
+    uintptr_t r=(uintptr_t)b+rc+4;
     for (uint32_t i=0; i<5; i++) {
-        uintptr_t r=(uintptr_t)b+rc+4+24*i;
-        rl_wr(r,ranks[i]); rl_wr(r+12,1); rl_wr(r+16,0xB0); rl_wr(r+20,i < 4u ? 1u : 0u);
+        uint32_t hi = i == 2u || i == 3u, n = hi ? hi_n : 1u;
+        rl_wr(r,ranks[i]); rl_wr(r+12,n);
+        if (hi) for (uint32_t j=0; j<hi_n; j++) { rl_wr(r+16+8*j,hf[j]); rl_wr(r+20+8*j,hv[j]); }
+        else { rl_wr(r+16,0xB0); rl_wr(r+20,i < 4u ? 1u : 0u); }
+        r += 16u + 8u*n;
     }
     rl_copy(b+pk, (const uint8_t *)(uintptr_t)(t->block+t->pack_off), t->pack_len);
     uint8_t *pack = b+pk;

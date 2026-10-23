@@ -1,0 +1,1318 @@
+{
+  "resolve_version": "21.0.4.5",
+  "plugin": "ofx.com.blackmagicdesign.resolvefx.ColorSpaceTransformV2",
+  "host": "Resolve Fusion timeline composition; not Camera RAW",
+  "composition_sha256": "9706f6b6c4b9e305d0a1f32efcb45cec4ba00430b9d5a53e7ef594b33549746c",
+  "jobs": {
+    "identity_linear": {
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/linear.exr",
+      "source_sha256": "f13f28859845c9571e5bccdc82bb1763f4158ebe0d79b38d306b9efd63dcdf97",
+      "output": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/identity_linear.0000.exr",
+      "nodes": [],
+      "output_sha256": "af769956c57c3c4639c82fbfb18d18bcbcc58e5d56b863c7b0c1a3b2c85c994e",
+      "exr": {
+        "width": 64,
+        "height": 16,
+        "channels": {
+          "B": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "G": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "R": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          }
+        }
+      }
+    },
+    "identity_code": {
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/code.exr",
+      "source_sha256": "d304851ca38cdc0b2c878152aaa277def3b7874114e7af6b0e756f4298a9fbb4",
+      "output": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/identity_code.0000.exr",
+      "nodes": [],
+      "output_sha256": "215e3901bec9bfcff0c6e1d2e7cc077640e4e28070f874295bd7d1348a79434f",
+      "exr": {
+        "width": 64,
+        "height": 16,
+        "channels": {
+          "B": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "G": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "R": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          }
+        }
+      }
+    },
+    "BMDFILM_xyz": {
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/linear.exr",
+      "source_sha256": "f13f28859845c9571e5bccdc82bb1763f4158ebe0d79b38d306b9efd63dcdf97",
+      "output": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/BMDFILM_xyz.0000.exr",
+      "nodes": [
+        {
+          "inputColorSpace": "BMDFILM_COLORSPACE",
+          "inputGamma": "LINEAR_GAMMA",
+          "outputColorSpace": "XYZ_COLORSPACE",
+          "outputGamma": "LINEAR_GAMMA",
+          "tmType": "TM_NONE",
+          "gmType": "GM_NONE",
+          "doFwdOOTF": 0,
+          "doInvOOTF": 0,
+          "doCAT": 0,
+          "isSrcLumMaxCustomEnabled": 0,
+          "isDstLumMaxCustomEnabled": 0
+        }
+      ],
+      "output_sha256": "262486f5b58a3a1c77dcb75b08ab94907a731cada533e32246d709acf80cc10e",
+      "exr": {
+        "width": 64,
+        "height": 16,
+        "channels": {
+          "B": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "G": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "R": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          }
+        }
+      }
+    },
+    "BMD4KFILM_xyz": {
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/linear.exr",
+      "source_sha256": "f13f28859845c9571e5bccdc82bb1763f4158ebe0d79b38d306b9efd63dcdf97",
+      "output": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/BMD4KFILM_xyz.0000.exr",
+      "nodes": [
+        {
+          "inputColorSpace": "BMD4KFILM_COLORSPACE",
+          "inputGamma": "LINEAR_GAMMA",
+          "outputColorSpace": "XYZ_COLORSPACE",
+          "outputGamma": "LINEAR_GAMMA",
+          "tmType": "TM_NONE",
+          "gmType": "GM_NONE",
+          "doFwdOOTF": 0,
+          "doInvOOTF": 0,
+          "doCAT": 0,
+          "isSrcLumMaxCustomEnabled": 0,
+          "isDstLumMaxCustomEnabled": 0
+        }
+      ],
+      "output_sha256": "af127dc708a063a3dae4c3a2db167c4e6dc68c7f8eae9c35ef9270936d5ee728",
+      "exr": {
+        "width": 64,
+        "height": 16,
+        "channels": {
+          "B": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "G": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "R": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          }
+        }
+      }
+    },
+    "BMD4KFILMV3_xyz": {
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/linear.exr",
+      "source_sha256": "f13f28859845c9571e5bccdc82bb1763f4158ebe0d79b38d306b9efd63dcdf97",
+      "output": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/BMD4KFILMV3_xyz.0000.exr",
+      "nodes": [
+        {
+          "inputColorSpace": "BMD4KFILMV3_COLORSPACE",
+          "inputGamma": "LINEAR_GAMMA",
+          "outputColorSpace": "XYZ_COLORSPACE",
+          "outputGamma": "LINEAR_GAMMA",
+          "tmType": "TM_NONE",
+          "gmType": "GM_NONE",
+          "doFwdOOTF": 0,
+          "doInvOOTF": 0,
+          "doCAT": 0,
+          "isSrcLumMaxCustomEnabled": 0,
+          "isDstLumMaxCustomEnabled": 0
+        }
+      ],
+      "output_sha256": "2d3db8564cd82e7cb52f1c5f79fa75f834fc28aa30eff90e9e1246cfcaf49399",
+      "exr": {
+        "width": 64,
+        "height": 16,
+        "channels": {
+          "B": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "G": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "R": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          }
+        }
+      }
+    },
+    "BMD4KVIDEOV3_xyz": {
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/linear.exr",
+      "source_sha256": "f13f28859845c9571e5bccdc82bb1763f4158ebe0d79b38d306b9efd63dcdf97",
+      "output": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/BMD4KVIDEOV3_xyz.0000.exr",
+      "nodes": [
+        {
+          "inputColorSpace": "BMD4KVIDEOV3_COLORSPACE",
+          "inputGamma": "LINEAR_GAMMA",
+          "outputColorSpace": "XYZ_COLORSPACE",
+          "outputGamma": "LINEAR_GAMMA",
+          "tmType": "TM_NONE",
+          "gmType": "GM_NONE",
+          "doFwdOOTF": 0,
+          "doInvOOTF": 0,
+          "doCAT": 0,
+          "isSrcLumMaxCustomEnabled": 0,
+          "isDstLumMaxCustomEnabled": 0
+        }
+      ],
+      "output_sha256": "b7b9108c2f2e9c96c4fad04f9dd84708a8c07b0da24fb73f2ad53bd6def7e728",
+      "exr": {
+        "width": 64,
+        "height": 16,
+        "channels": {
+          "B": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "G": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "R": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          }
+        }
+      }
+    },
+    "BMD46KFILM_xyz": {
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/linear.exr",
+      "source_sha256": "f13f28859845c9571e5bccdc82bb1763f4158ebe0d79b38d306b9efd63dcdf97",
+      "output": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/BMD46KFILM_xyz.0000.exr",
+      "nodes": [
+        {
+          "inputColorSpace": "BMD46KFILM_COLORSPACE",
+          "inputGamma": "LINEAR_GAMMA",
+          "outputColorSpace": "XYZ_COLORSPACE",
+          "outputGamma": "LINEAR_GAMMA",
+          "tmType": "TM_NONE",
+          "gmType": "GM_NONE",
+          "doFwdOOTF": 0,
+          "doInvOOTF": 0,
+          "doCAT": 0,
+          "isSrcLumMaxCustomEnabled": 0,
+          "isDstLumMaxCustomEnabled": 0
+        }
+      ],
+      "output_sha256": "15e611a9b841e2051bb8f23a1893938c6ce664301f20522bb77d2961bbd02835",
+      "exr": {
+        "width": 64,
+        "height": 16,
+        "channels": {
+          "B": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "G": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "R": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          }
+        }
+      }
+    },
+    "BMD46KFILMV3_xyz": {
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/linear.exr",
+      "source_sha256": "f13f28859845c9571e5bccdc82bb1763f4158ebe0d79b38d306b9efd63dcdf97",
+      "output": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/BMD46KFILMV3_xyz.0000.exr",
+      "nodes": [
+        {
+          "inputColorSpace": "BMD46KFILMV3_COLORSPACE",
+          "inputGamma": "LINEAR_GAMMA",
+          "outputColorSpace": "XYZ_COLORSPACE",
+          "outputGamma": "LINEAR_GAMMA",
+          "tmType": "TM_NONE",
+          "gmType": "GM_NONE",
+          "doFwdOOTF": 0,
+          "doInvOOTF": 0,
+          "doCAT": 0,
+          "isSrcLumMaxCustomEnabled": 0,
+          "isDstLumMaxCustomEnabled": 0
+        }
+      ],
+      "output_sha256": "abb3ec161c5e8b905697255c4d66fdd58978be316bbf42a052089d49815311b6",
+      "exr": {
+        "width": 64,
+        "height": 16,
+        "channels": {
+          "B": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "G": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "R": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          }
+        }
+      }
+    },
+    "BMD46KVIDEOV3_xyz": {
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/linear.exr",
+      "source_sha256": "f13f28859845c9571e5bccdc82bb1763f4158ebe0d79b38d306b9efd63dcdf97",
+      "output": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/BMD46KVIDEOV3_xyz.0000.exr",
+      "nodes": [
+        {
+          "inputColorSpace": "BMD46KVIDEOV3_COLORSPACE",
+          "inputGamma": "LINEAR_GAMMA",
+          "outputColorSpace": "XYZ_COLORSPACE",
+          "outputGamma": "LINEAR_GAMMA",
+          "tmType": "TM_NONE",
+          "gmType": "GM_NONE",
+          "doFwdOOTF": 0,
+          "doInvOOTF": 0,
+          "doCAT": 0,
+          "isSrcLumMaxCustomEnabled": 0,
+          "isDstLumMaxCustomEnabled": 0
+        }
+      ],
+      "output_sha256": "f077a7366e95087189cbe805c34cf5ab8ad3e148f0ed88be57207027a3187663",
+      "exr": {
+        "width": 64,
+        "height": 16,
+        "channels": {
+          "B": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "G": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "R": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          }
+        }
+      }
+    },
+    "BMDPOCKET4KFILM_xyz": {
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/linear.exr",
+      "source_sha256": "f13f28859845c9571e5bccdc82bb1763f4158ebe0d79b38d306b9efd63dcdf97",
+      "output": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/BMDPOCKET4KFILM_xyz.0000.exr",
+      "nodes": [
+        {
+          "inputColorSpace": "BMDPOCKET4KFILM_COLORSPACE",
+          "inputGamma": "LINEAR_GAMMA",
+          "outputColorSpace": "XYZ_COLORSPACE",
+          "outputGamma": "LINEAR_GAMMA",
+          "tmType": "TM_NONE",
+          "gmType": "GM_NONE",
+          "doFwdOOTF": 0,
+          "doInvOOTF": 0,
+          "doCAT": 0,
+          "isSrcLumMaxCustomEnabled": 0,
+          "isDstLumMaxCustomEnabled": 0
+        }
+      ],
+      "output_sha256": "2f7ad2ecb0c57a70b027ece7557eef242aff050d620705f296fa6b65f2a9b897",
+      "exr": {
+        "width": 64,
+        "height": 16,
+        "channels": {
+          "B": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "G": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "R": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          }
+        }
+      }
+    },
+    "BMD4KBCASTVIDEO_xyz": {
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/linear.exr",
+      "source_sha256": "f13f28859845c9571e5bccdc82bb1763f4158ebe0d79b38d306b9efd63dcdf97",
+      "output": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/BMD4KBCASTVIDEO_xyz.0000.exr",
+      "nodes": [
+        {
+          "inputColorSpace": "BMD4KBCASTVIDEO_COLORSPACE",
+          "inputGamma": "LINEAR_GAMMA",
+          "outputColorSpace": "XYZ_COLORSPACE",
+          "outputGamma": "LINEAR_GAMMA",
+          "tmType": "TM_NONE",
+          "gmType": "GM_NONE",
+          "doFwdOOTF": 0,
+          "doInvOOTF": 0,
+          "doCAT": 0,
+          "isSrcLumMaxCustomEnabled": 0,
+          "isDstLumMaxCustomEnabled": 0
+        }
+      ],
+      "output_sha256": "c6d559ad692fe55aa29fd8d303f29c7dbd5f97a51f12609250ced12ce4ae2116",
+      "exr": {
+        "width": 64,
+        "height": 16,
+        "channels": {
+          "B": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "G": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "R": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          }
+        }
+      }
+    },
+    "BMD4KBCASTFILM_xyz": {
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/linear.exr",
+      "source_sha256": "f13f28859845c9571e5bccdc82bb1763f4158ebe0d79b38d306b9efd63dcdf97",
+      "output": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/BMD4KBCASTFILM_xyz.0000.exr",
+      "nodes": [
+        {
+          "inputColorSpace": "BMD4KBCASTFILM_COLORSPACE",
+          "inputGamma": "LINEAR_GAMMA",
+          "outputColorSpace": "XYZ_COLORSPACE",
+          "outputGamma": "LINEAR_GAMMA",
+          "tmType": "TM_NONE",
+          "gmType": "GM_NONE",
+          "doFwdOOTF": 0,
+          "doInvOOTF": 0,
+          "doCAT": 0,
+          "isSrcLumMaxCustomEnabled": 0,
+          "isDstLumMaxCustomEnabled": 0
+        }
+      ],
+      "output_sha256": "2f7ad2ecb0c57a70b027ece7557eef242aff050d620705f296fa6b65f2a9b897",
+      "exr": {
+        "width": 64,
+        "height": 16,
+        "channels": {
+          "B": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "G": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "R": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          }
+        }
+      }
+    },
+    "BMDVIDEOV5_xyz": {
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/linear.exr",
+      "source_sha256": "f13f28859845c9571e5bccdc82bb1763f4158ebe0d79b38d306b9efd63dcdf97",
+      "output": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/BMDVIDEOV5_xyz.0000.exr",
+      "nodes": [
+        {
+          "inputColorSpace": "BMDVIDEOV5_COLORSPACE",
+          "inputGamma": "LINEAR_GAMMA",
+          "outputColorSpace": "XYZ_COLORSPACE",
+          "outputGamma": "LINEAR_GAMMA",
+          "tmType": "TM_NONE",
+          "gmType": "GM_NONE",
+          "doFwdOOTF": 0,
+          "doInvOOTF": 0,
+          "doCAT": 0,
+          "isSrcLumMaxCustomEnabled": 0,
+          "isDstLumMaxCustomEnabled": 0
+        }
+      ],
+      "output_sha256": "1eb049e4564eb6956d5f7a123725fe6f42618f61240cf3b691df4643f5892a4f",
+      "exr": {
+        "width": 64,
+        "height": 16,
+        "channels": {
+          "B": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "G": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "R": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          }
+        }
+      }
+    },
+    "gen1_709_linear": {
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/linear.exr",
+      "source_sha256": "f13f28859845c9571e5bccdc82bb1763f4158ebe0d79b38d306b9efd63dcdf97",
+      "output": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/gen1_709_linear.0000.exr",
+      "nodes": [
+        {
+          "inputColorSpace": "BMDFILM_COLORSPACE",
+          "inputGamma": "LINEAR_GAMMA",
+          "outputColorSpace": "REC709_COLORSPACE",
+          "outputGamma": "LINEAR_GAMMA",
+          "tmType": "TM_NONE",
+          "gmType": "GM_NONE",
+          "doFwdOOTF": 0,
+          "doInvOOTF": 0,
+          "doCAT": 0,
+          "isSrcLumMaxCustomEnabled": 0,
+          "isDstLumMaxCustomEnabled": 0
+        }
+      ],
+      "output_sha256": "1165ad0b29dbd261e8df0681d1ed7bdb98932694335c34605e4df6f6453b23fe",
+      "exr": {
+        "width": 64,
+        "height": 16,
+        "channels": {
+          "B": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "G": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "R": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          }
+        }
+      }
+    },
+    "srgb_decode": {
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/code.exr",
+      "source_sha256": "d304851ca38cdc0b2c878152aaa277def3b7874114e7af6b0e756f4298a9fbb4",
+      "output": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/srgb_decode.0000.exr",
+      "nodes": [
+        {
+          "inputColorSpace": "REC709_COLORSPACE",
+          "inputGamma": "SRGB_GAMMA",
+          "outputColorSpace": "REC709_COLORSPACE",
+          "outputGamma": "LINEAR_GAMMA",
+          "tmType": "TM_NONE",
+          "gmType": "GM_NONE",
+          "doFwdOOTF": 0,
+          "doInvOOTF": 0,
+          "doCAT": 0,
+          "isSrcLumMaxCustomEnabled": 0,
+          "isDstLumMaxCustomEnabled": 0
+        }
+      ],
+      "output_sha256": "e6b50c824bbf0240611c963fb4ffa40d83e0114070e46fbb76407fa9867001ea",
+      "exr": {
+        "width": 64,
+        "height": 16,
+        "channels": {
+          "B": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "G": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "R": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          }
+        }
+      }
+    },
+    "srgb_encode": {
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/linear.exr",
+      "source_sha256": "f13f28859845c9571e5bccdc82bb1763f4158ebe0d79b38d306b9efd63dcdf97",
+      "output": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/srgb_encode.0000.exr",
+      "nodes": [
+        {
+          "inputColorSpace": "REC709_COLORSPACE",
+          "inputGamma": "LINEAR_GAMMA",
+          "outputColorSpace": "REC709_COLORSPACE",
+          "outputGamma": "SRGB_GAMMA",
+          "tmType": "TM_NONE",
+          "gmType": "GM_NONE",
+          "doFwdOOTF": 0,
+          "doInvOOTF": 0,
+          "doCAT": 0,
+          "isSrcLumMaxCustomEnabled": 0,
+          "isDstLumMaxCustomEnabled": 0
+        }
+      ],
+      "output_sha256": "63ba8258d55412105f8ef4c193dfcb2df787f5f34ace2fde39fd2649d9ee17c5",
+      "exr": {
+        "width": 64,
+        "height": 16,
+        "channels": {
+          "B": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "G": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "R": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          }
+        }
+      }
+    },
+    "film5_decode": {
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/code.exr",
+      "source_sha256": "d304851ca38cdc0b2c878152aaa277def3b7874114e7af6b0e756f4298a9fbb4",
+      "output": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/film5_decode.0000.exr",
+      "nodes": [
+        {
+          "inputColorSpace": "BMDPOCKET4KFILM_COLORSPACE",
+          "inputGamma": "BMDFILMV5_GAMMA",
+          "outputColorSpace": "BMDPOCKET4KFILM_COLORSPACE",
+          "outputGamma": "LINEAR_GAMMA",
+          "tmType": "TM_NONE",
+          "gmType": "GM_NONE",
+          "doFwdOOTF": 0,
+          "doInvOOTF": 0,
+          "doCAT": 0,
+          "isSrcLumMaxCustomEnabled": 0,
+          "isDstLumMaxCustomEnabled": 0
+        }
+      ],
+      "output_sha256": "34179dbcec08502004e0787b886f5e85502222d0f08d6305d44c16e8f3371751",
+      "exr": {
+        "width": 64,
+        "height": 16,
+        "channels": {
+          "B": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "G": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "R": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          }
+        }
+      }
+    },
+    "film5_encode": {
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/linear.exr",
+      "source_sha256": "f13f28859845c9571e5bccdc82bb1763f4158ebe0d79b38d306b9efd63dcdf97",
+      "output": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/film5_encode.0000.exr",
+      "nodes": [
+        {
+          "inputColorSpace": "BMDPOCKET4KFILM_COLORSPACE",
+          "inputGamma": "LINEAR_GAMMA",
+          "outputColorSpace": "BMDPOCKET4KFILM_COLORSPACE",
+          "outputGamma": "BMDFILMV5_GAMMA",
+          "tmType": "TM_NONE",
+          "gmType": "GM_NONE",
+          "doFwdOOTF": 0,
+          "doInvOOTF": 0,
+          "doCAT": 0,
+          "isSrcLumMaxCustomEnabled": 0,
+          "isDstLumMaxCustomEnabled": 0
+        }
+      ],
+      "output_sha256": "85ac34d8b70cb62e0a4a5ec057c0c88acb182dc4807da2f7b1e033b84c922626",
+      "exr": {
+        "width": 64,
+        "height": 16,
+        "channels": {
+          "B": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "G": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "R": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          }
+        }
+      }
+    },
+    "node01": {
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/linear.exr",
+      "source_sha256": "f13f28859845c9571e5bccdc82bb1763f4158ebe0d79b38d306b9efd63dcdf97",
+      "output": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/node01.0000.exr",
+      "nodes": [
+        {
+          "inputColorSpace": "P3D60_COLORSPACE",
+          "inputGamma": "LINEAR_GAMMA",
+          "outputColorSpace": "BMDPOCKET4KFILM_COLORSPACE",
+          "outputGamma": "BMDFILMV5_GAMMA",
+          "tmType": "TM_NONE",
+          "gmType": "GM_NONE",
+          "doFwdOOTF": 0,
+          "doInvOOTF": 0,
+          "doCAT": 1,
+          "isSrcLumMaxCustomEnabled": 0,
+          "isDstLumMaxCustomEnabled": 0
+        }
+      ],
+      "output_sha256": "a3cb2bb564a46123bf3af5b08338f0a28a7c283fe15ac64bd6c261e24fa19bf5",
+      "exr": {
+        "width": 64,
+        "height": 16,
+        "channels": {
+          "B": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "G": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "R": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          }
+        }
+      }
+    },
+    "node02": {
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/code.exr",
+      "source_sha256": "d304851ca38cdc0b2c878152aaa277def3b7874114e7af6b0e756f4298a9fbb4",
+      "output": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/node02.0000.exr",
+      "nodes": [
+        {
+          "inputColorSpace": "BMDFILM_COLORSPACE",
+          "inputGamma": "SRGB_GAMMA",
+          "outputColorSpace": "SRGB_COLORSPACE",
+          "outputGamma": "SRGB_GAMMA",
+          "tmType": "TM_NONE",
+          "gmType": "GM_NONE",
+          "doFwdOOTF": 0,
+          "doInvOOTF": 0,
+          "doCAT": 0,
+          "isSrcLumMaxCustomEnabled": 0,
+          "isDstLumMaxCustomEnabled": 0
+        }
+      ],
+      "output_sha256": "8b0907eccbe0bbf480ba72af398fc7078a10f192b2a4dc6532a8b2c3ad51f400",
+      "exr": {
+        "width": 64,
+        "height": 16,
+        "channels": {
+          "B": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "G": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "R": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          }
+        }
+      }
+    },
+    "node03": {
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/code.exr",
+      "source_sha256": "d304851ca38cdc0b2c878152aaa277def3b7874114e7af6b0e756f4298a9fbb4",
+      "output": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/node03.0000.exr",
+      "nodes": [
+        {
+          "inputColorSpace": "BMDPOCKET4KFILM_COLORSPACE",
+          "inputGamma": "BMDFILMV5_GAMMA",
+          "outputColorSpace": "DWG_COLORSPACE",
+          "outputGamma": "DAV_INTER_OETF_GAMMA",
+          "tmType": "TM_NONE",
+          "gmType": "GM_NONE",
+          "doFwdOOTF": 0,
+          "doInvOOTF": 0,
+          "doCAT": 0,
+          "isSrcLumMaxCustomEnabled": 0,
+          "isDstLumMaxCustomEnabled": 0
+        }
+      ],
+      "output_sha256": "56a6c59a760b8c0d278b614f8d0a857e14c04afb38512889d70c1ea22b018add",
+      "exr": {
+        "width": 64,
+        "height": 16,
+        "channels": {
+          "B": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "G": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "R": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          }
+        }
+      }
+    },
+    "chain": {
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/linear.exr",
+      "source_sha256": "f13f28859845c9571e5bccdc82bb1763f4158ebe0d79b38d306b9efd63dcdf97",
+      "output": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/chain.0000.exr",
+      "nodes": [
+        {
+          "inputColorSpace": "P3D60_COLORSPACE",
+          "inputGamma": "LINEAR_GAMMA",
+          "outputColorSpace": "BMDPOCKET4KFILM_COLORSPACE",
+          "outputGamma": "BMDFILMV5_GAMMA",
+          "tmType": "TM_NONE",
+          "gmType": "GM_NONE",
+          "doFwdOOTF": 0,
+          "doInvOOTF": 0,
+          "doCAT": 1,
+          "isSrcLumMaxCustomEnabled": 0,
+          "isDstLumMaxCustomEnabled": 0
+        },
+        {
+          "inputColorSpace": "BMDFILM_COLORSPACE",
+          "inputGamma": "SRGB_GAMMA",
+          "outputColorSpace": "SRGB_COLORSPACE",
+          "outputGamma": "SRGB_GAMMA",
+          "tmType": "TM_NONE",
+          "gmType": "GM_NONE",
+          "doFwdOOTF": 0,
+          "doInvOOTF": 0,
+          "doCAT": 0,
+          "isSrcLumMaxCustomEnabled": 0,
+          "isDstLumMaxCustomEnabled": 0
+        },
+        {
+          "inputColorSpace": "BMDPOCKET4KFILM_COLORSPACE",
+          "inputGamma": "BMDFILMV5_GAMMA",
+          "outputColorSpace": "DWG_COLORSPACE",
+          "outputGamma": "DAV_INTER_OETF_GAMMA",
+          "tmType": "TM_NONE",
+          "gmType": "GM_NONE",
+          "doFwdOOTF": 0,
+          "doInvOOTF": 0,
+          "doCAT": 0,
+          "isSrcLumMaxCustomEnabled": 0,
+          "isDstLumMaxCustomEnabled": 0
+        }
+      ],
+      "output_sha256": "cadfe5afca2e16d7df52e7e61735897dfae87abd09922f46496f9c3a78bcd876",
+      "exr": {
+        "width": 64,
+        "height": 16,
+        "channels": {
+          "B": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "G": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "R": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          }
+        }
+      }
+    },
+    "bypass": {
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/linear.exr",
+      "source_sha256": "f13f28859845c9571e5bccdc82bb1763f4158ebe0d79b38d306b9efd63dcdf97",
+      "output": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/bypass.0000.exr",
+      "nodes": [
+        {
+          "inputColorSpace": "P3D60_COLORSPACE",
+          "inputGamma": "LINEAR_GAMMA",
+          "outputColorSpace": "BMDPOCKET4KFILM_COLORSPACE",
+          "outputGamma": "BMDFILMV5_GAMMA",
+          "tmType": "TM_NONE",
+          "gmType": "GM_NONE",
+          "doFwdOOTF": 0,
+          "doInvOOTF": 0,
+          "doCAT": 1,
+          "isSrcLumMaxCustomEnabled": 0,
+          "isDstLumMaxCustomEnabled": 0
+        },
+        {
+          "inputColorSpace": "BMDPOCKET4KFILM_COLORSPACE",
+          "inputGamma": "BMDFILMV5_GAMMA",
+          "outputColorSpace": "DWG_COLORSPACE",
+          "outputGamma": "DAV_INTER_OETF_GAMMA",
+          "tmType": "TM_NONE",
+          "gmType": "GM_NONE",
+          "doFwdOOTF": 0,
+          "doInvOOTF": 0,
+          "doCAT": 0,
+          "isSrcLumMaxCustomEnabled": 0,
+          "isDstLumMaxCustomEnabled": 0
+        }
+      ],
+      "output_sha256": "c9bf5d7466f47b5a46e30b2a3c5636fc35ea8d1fcf003ee31fbe8308aed8788d",
+      "exr": {
+        "width": 64,
+        "height": 16,
+        "channels": {
+          "B": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "G": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "R": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          }
+        }
+      }
+    },
+    "matrix_node01": {
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/linear.exr",
+      "source_sha256": "f13f28859845c9571e5bccdc82bb1763f4158ebe0d79b38d306b9efd63dcdf97",
+      "output": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/matrix_node01.0000.exr",
+      "nodes": [
+        {
+          "inputColorSpace": "P3D60_COLORSPACE",
+          "inputGamma": "LINEAR_GAMMA",
+          "outputColorSpace": "BMDPOCKET4KFILM_COLORSPACE",
+          "outputGamma": "LINEAR_GAMMA",
+          "tmType": "TM_NONE",
+          "gmType": "GM_NONE",
+          "doFwdOOTF": 0,
+          "doInvOOTF": 0,
+          "doCAT": 1,
+          "isSrcLumMaxCustomEnabled": 0,
+          "isDstLumMaxCustomEnabled": 0
+        }
+      ],
+      "output_sha256": "814c7af46c5a30df8ceed266e3e19989483062a6014934d7f6f65fcd85bdd0a2",
+      "exr": {
+        "width": 64,
+        "height": 16,
+        "channels": {
+          "B": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "G": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "R": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          }
+        }
+      }
+    },
+    "matrix_node03": {
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/linear.exr",
+      "source_sha256": "f13f28859845c9571e5bccdc82bb1763f4158ebe0d79b38d306b9efd63dcdf97",
+      "output": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/matrix_node03.0000.exr",
+      "nodes": [
+        {
+          "inputColorSpace": "BMDPOCKET4KFILM_COLORSPACE",
+          "inputGamma": "LINEAR_GAMMA",
+          "outputColorSpace": "DWG_COLORSPACE",
+          "outputGamma": "LINEAR_GAMMA",
+          "tmType": "TM_NONE",
+          "gmType": "GM_NONE",
+          "doFwdOOTF": 0,
+          "doInvOOTF": 0,
+          "doCAT": 0,
+          "isSrcLumMaxCustomEnabled": 0,
+          "isDstLumMaxCustomEnabled": 0
+        }
+      ],
+      "output_sha256": "94e732a94a727e9ec728cb532970b22c08fbdc2ef8ce8b48e7cc09ff99b5431b",
+      "exr": {
+        "width": 64,
+        "height": 16,
+        "channels": {
+          "B": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "G": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "R": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          }
+        }
+      }
+    },
+    "matrix_monitor": {
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/linear.exr",
+      "source_sha256": "f13f28859845c9571e5bccdc82bb1763f4158ebe0d79b38d306b9efd63dcdf97",
+      "output": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/matrix_monitor.0000.exr",
+      "nodes": [
+        {
+          "inputColorSpace": "DWG_COLORSPACE",
+          "inputGamma": "LINEAR_GAMMA",
+          "outputColorSpace": "REC709_COLORSPACE",
+          "outputGamma": "LINEAR_GAMMA",
+          "tmType": "TM_NONE",
+          "gmType": "GM_NONE",
+          "doFwdOOTF": 0,
+          "doInvOOTF": 0,
+          "doCAT": 0,
+          "isSrcLumMaxCustomEnabled": 0,
+          "isDstLumMaxCustomEnabled": 0
+        }
+      ],
+      "output_sha256": "80effd7039c46152912a5d337989c9e327472bf03841101d60f2b2a9c4f186c0",
+      "exr": {
+        "width": 64,
+        "height": 16,
+        "channels": {
+          "B": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "G": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "R": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          }
+        }
+      }
+    },
+    "monitor_q_linear709_code": {
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/code.exr",
+      "source_sha256": "d304851ca38cdc0b2c878152aaa277def3b7874114e7af6b0e756f4298a9fbb4",
+      "output": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/monitor_q_linear709_code.0000.exr",
+      "nodes": [
+        {
+          "inputColorSpace": "BMDFILM_COLORSPACE",
+          "inputGamma": "SRGB_GAMMA",
+          "outputColorSpace": "SRGB_COLORSPACE",
+          "outputGamma": "SRGB_GAMMA",
+          "tmType": "TM_NONE",
+          "gmType": "GM_NONE",
+          "doFwdOOTF": 0,
+          "doInvOOTF": 0,
+          "doCAT": 0,
+          "isSrcLumMaxCustomEnabled": 0,
+          "isDstLumMaxCustomEnabled": 0
+        },
+        {
+          "inputColorSpace": "BMDPOCKET4KFILM_COLORSPACE",
+          "inputGamma": "BMDFILMV5_GAMMA",
+          "outputColorSpace": "DWG_COLORSPACE",
+          "outputGamma": "DAV_INTER_OETF_GAMMA",
+          "tmType": "TM_NONE",
+          "gmType": "GM_NONE",
+          "doFwdOOTF": 0,
+          "doInvOOTF": 0,
+          "doCAT": 0,
+          "isSrcLumMaxCustomEnabled": 0,
+          "isDstLumMaxCustomEnabled": 0
+        },
+        {
+          "inputColorSpace": "DWG_COLORSPACE",
+          "inputGamma": "DAV_INTER_OETF_GAMMA",
+          "outputColorSpace": "REC709_COLORSPACE",
+          "outputGamma": "LINEAR_GAMMA",
+          "tmType": "TM_NONE",
+          "gmType": "GM_NONE",
+          "doFwdOOTF": 0,
+          "doInvOOTF": 0,
+          "doCAT": 0,
+          "isSrcLumMaxCustomEnabled": 0,
+          "isDstLumMaxCustomEnabled": 0
+        }
+      ],
+      "output_sha256": "b7183cc1be9c20d7be15c1033506a4dea96b666c10ccba801e8b590f27a241d9",
+      "exr": {
+        "width": 64,
+        "height": 16,
+        "channels": {
+          "B": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "G": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "R": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          }
+        }
+      }
+    },
+    "monitor_bypass_linear709_code": {
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/code.exr",
+      "source_sha256": "d304851ca38cdc0b2c878152aaa277def3b7874114e7af6b0e756f4298a9fbb4",
+      "output": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-03/vendor/monitor_bypass_linear709_code.0000.exr",
+      "nodes": [
+        {
+          "inputColorSpace": "BMDPOCKET4KFILM_COLORSPACE",
+          "inputGamma": "BMDFILMV5_GAMMA",
+          "outputColorSpace": "DWG_COLORSPACE",
+          "outputGamma": "DAV_INTER_OETF_GAMMA",
+          "tmType": "TM_NONE",
+          "gmType": "GM_NONE",
+          "doFwdOOTF": 0,
+          "doInvOOTF": 0,
+          "doCAT": 0,
+          "isSrcLumMaxCustomEnabled": 0,
+          "isDstLumMaxCustomEnabled": 0
+        },
+        {
+          "inputColorSpace": "DWG_COLORSPACE",
+          "inputGamma": "DAV_INTER_OETF_GAMMA",
+          "outputColorSpace": "REC709_COLORSPACE",
+          "outputGamma": "LINEAR_GAMMA",
+          "tmType": "TM_NONE",
+          "gmType": "GM_NONE",
+          "doFwdOOTF": 0,
+          "doInvOOTF": 0,
+          "doCAT": 0,
+          "isSrcLumMaxCustomEnabled": 0,
+          "isDstLumMaxCustomEnabled": 0
+        }
+      ],
+      "output_sha256": "c9b993cbb511939ff07449ef38008c0d2248994826e97ebbbd4e0e60460d4f43",
+      "exr": {
+        "width": 64,
+        "height": 16,
+        "channels": {
+          "B": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "G": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          },
+          "R": {
+            "type": 2,
+            "linear": 0,
+            "x_sampling": 1,
+            "y_sampling": 1
+          }
+        }
+      }
+    }
+  }
+}

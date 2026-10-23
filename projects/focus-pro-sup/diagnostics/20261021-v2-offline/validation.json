@@ -1,0 +1,16 @@
+{
+  "tests_run": 3,
+  "successful": true,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "sup_sha256": "05e339660158be642eacb75c786c9056a74b76adfedf6b641eb6f1fe26189f53",
+  "camera_operated": false,
+  "stubbed_effects": [
+    "USB",
+    "PTP sessions",
+    "lens getters/events/submit",
+    "file/RTOS/cache"
+  ],
+  "scope": "Exact delivered SUP diagnostics and new host collector; not a hardware capture"
+}

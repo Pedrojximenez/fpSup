@@ -1,0 +1,37 @@
+test_any_claim_conflict_or_cave_exhaustion_leaves_hooks_stock (__main__.Tests) ... ok
+test_bounds_clamp_and_direction_comes_from_lens (__main__.Tests) ... ok
+test_colliding_vendor_commands_never_reach_sigma_handlers (__main__.Tests) ... ok
+test_data_errors_cannot_submit_and_poison_is_not_cleared_by_open (__main__.Tests) ... ok
+test_device_info_and_standard_session_passthrough (__main__.Tests) ... ok
+test_diagnostics_are_readonly_and_ring_is_bounded (__main__.Tests) ... ok
+test_duplicate_open_does_not_clear_consumed_motion (__main__.Tests) ... ok
+test_event_and_capture_gates (__main__.Tests) ... ok
+test_executed_image_writes_are_covered_by_claims (__main__.Tests) ... ok
+test_four_relative_modes (__main__.Tests) ... ok
+test_header_and_owned_state (__main__.Tests) ... ok
+test_hook_abi_preserves_registers_and_exact_stack (__main__.Tests) ... ok
+test_invalid_modes_and_malformed_command_never_drive (__main__.Tests) ... ok
+test_mismatched_data_transaction_poisoned (__main__.Tests) ... ok
+test_mutation_data_tid_guard_is_detected (__main__.Tests) ... ok
+test_mutation_dedup_guard_is_detected (__main__.Tests) ... ok
+test_mutation_ignored_claim_conflict_is_detected (__main__.Tests) ... ok
+test_mutation_missing_data_journal_is_detected (__main__.Tests) ... ok
+test_mutation_missing_publication_is_detected (__main__.Tests) ... ok
+test_mutation_recording_guard_is_detected (__main__.Tests) ... ok
+test_no_extended_session_means_no_motion (__main__.Tests) ... ok
+test_numeric_control_is_consumed_and_rejected (__main__.Tests) ... ok
+test_ptp_identity_changes_only_native_ptp_and_keeps_original_object (__main__.Tests) ... ok
+test_recording_rejects_motion (__main__.Tests) ... ok
+test_reference_extended_identity (__main__.Tests) ... ok
+test_relocated_block_and_warm_orphan_repair (__main__.Tests) ... ok
+test_response_failure_does_not_replay_native_motion (__main__.Tests) ... ok
+test_same_transaction_never_drives_twice (__main__.Tests) ... ok
+test_shell_ownership_conflict_refuses_sup (__main__.Tests) ... ok
+test_shutdown_restores_every_claim_including_initialized_data (__main__.Tests) ... ok
+test_unsupported_lens_and_position_race_reject (__main__.Tests) ... ok
+test_wrong_firmware_guard_refuses_without_hooks (__main__.Tests) ... ok
+
+----------------------------------------------------------------------
+Ran 32 tests in 30.032s
+
+OK

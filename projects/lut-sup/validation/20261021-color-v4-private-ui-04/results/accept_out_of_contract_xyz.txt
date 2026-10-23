@@ -1,0 +1,14 @@
+test_bad_input_never_changes_destination_and_pending_models_refuse (test_sup_native.NativeLutTests) ... FAIL
+
+======================================================================
+FAIL: test_bad_input_never_changes_destination_and_pending_models_refuse (test_sup_native.NativeLutTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-color-v4-private-ui-04/source-snapshot/fpSup/lut/test_sup_native.py", line 256, in test_bad_input_never_changes_destination_and_pending_models_refuse
+    self.assertEqual(c.invoke(6,source,dest,2),-14)
+AssertionError: 0 != -14
+
+----------------------------------------------------------------------
+Ran 1 test in 3.647s
+
+FAILED (failures=1)

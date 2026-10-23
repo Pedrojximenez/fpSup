@@ -37,6 +37,9 @@
 ---
 
 ## 通道 2：顯示 scanout ring — **TILED，別解** ❌
+
+> **2026-10-15 更正：** 下列 `C070B330 / C070B3E8` 已追到 MOV codec 設定鏈，不能把它們的幾何／stride 暫存器當作顯示 scanout 一定 tiled 的證據。此節保留歷史調查；實際可線性解碼的 ring 仍以頁首 2026-10-09 實檔證據為準。[codec 分析](FP_H264_10BIT_FEASIBILITY_2026-10-15.md)
+
 - latch `0xC375BF88` → ring `0x49801000 / 0x49BFD000 / 0x49FF9000 / 0x4A3F5000`（4 × `0x3FC000` = 1920×**1088**×2）
 - 被顯示 DMA（MMIO **`0x300C0000`**，`FUN_c070b330`/`FUN_c070b3e8`，`blk_c07.c:9419-9495`）以 **16px tile** 定址：
   - width reg `_DAT_300c026c = ((W+0xf)>>4 & 0x1ff)<<2`；height reg `_DAT_300c0250 = (H-1)&0xff`

@@ -1,0 +1,822 @@
+{
+  "verdict": "do_not_promote_high_rate_stability_failed",
+  "artifact": {
+    "candidate": "projects/lossless-sup/validation/20261012-slot-expansion/candidate-final/10LOSS.BIN",
+    "sha256": "39be7d3c23a6abe0e2c96045fb49b139d69c920cd1d1a526953a655fd3414300",
+    "bytes": 78112,
+    "state_bytes": 4466180,
+    "resident_block_bytes": 4546560,
+    "replaced_files": [
+      "\\fpSup\\10LOSS.BIN"
+    ],
+    "stopfx_author": "Ruari",
+    "stopfx_sha256": "f9f26a092c5676ead5771ba8be4aac9c3734e9ed0cd144002a73b3f6b657c9d9",
+    "autorun_replaced": false,
+    "loader_replaced": false,
+    "initial_settings": "default OFF; ON selected through native menu",
+    "readback_verified": true,
+    "deployment_log": "deploy.log"
+  },
+  "trials": [
+    {
+      "evidence": "fhd30-on-01.json",
+      "clip": "A001_118",
+      "boot": 11595327,
+      "raw_geometry": [
+        1936,
+        1090
+      ],
+      "bit_depth": 12,
+      "fps": [
+        30000,
+        1001
+      ],
+      "active_at_end_of_window": true,
+      "stop_reason": "button",
+      "arrivals": 349,
+      "requested": 349,
+      "finished": 349,
+      "compressed_written": 348,
+      "raw_written": 1,
+      "discarded": 0,
+      "active_slots": 404,
+      "free_slots_after": 404,
+      "registry_occupied_after": 0,
+      "registry_count_after": 0,
+      "registry_lock_after": 0,
+      "completion_cookies_pending_after": [
+        0,
+        0
+      ],
+      "writer_idle_after": {
+        "xmp_file_pointer": 0,
+        "movie_writing": 0
+      },
+      "codec_stalls": 0,
+      "stale_commits": 0,
+      "native_bulk_bytes": 67108864,
+      "extra_count_flushes": 0,
+      "extra_pressure_flushes": 0,
+      "completion_budget_after_us": 263881,
+      "slot_plans_refused": 0
+    },
+    {
+      "evidence": "fhd60-on-01.json",
+      "clip": "A001_119",
+      "boot": 11595327,
+      "raw_geometry": [
+        1936,
+        1090
+      ],
+      "bit_depth": 12,
+      "fps": [
+        60000,
+        1001
+      ],
+      "active_at_end_of_window": false,
+      "stop_reason": "mem, raw2",
+      "arrivals": 764,
+      "requested": 759,
+      "finished": 759,
+      "compressed_written": 523,
+      "raw_written": 236,
+      "discarded": 5,
+      "active_slots": 416,
+      "free_slots_after": 416,
+      "registry_occupied_after": 0,
+      "registry_count_after": 0,
+      "registry_lock_after": 0,
+      "completion_cookies_pending_after": [
+        0,
+        0
+      ],
+      "writer_idle_after": {
+        "xmp_file_pointer": 0,
+        "movie_writing": 0
+      },
+      "codec_stalls": 0,
+      "stale_commits": 0,
+      "native_bulk_bytes": 67108864,
+      "extra_count_flushes": 0,
+      "extra_pressure_flushes": 0,
+      "completion_budget_after_us": 467583,
+      "slot_plans_refused": 0
+    },
+    {
+      "evidence": "reslab3k-stop-01.json",
+      "clip": "A001_120",
+      "boot": 11595327,
+      "raw_geometry": [
+        3024,
+        2010
+      ],
+      "bit_depth": 12,
+      "fps": [
+        100000,
+        1000
+      ],
+      "active_at_end_of_window": false,
+      "stop_reason": "mem, raw2",
+      "arrivals": 86,
+      "requested": 9,
+      "finished": 9,
+      "compressed_written": 4,
+      "raw_written": 5,
+      "discarded": 77,
+      "active_slots": 216,
+      "free_slots_after": 216,
+      "registry_occupied_after": 0,
+      "registry_count_after": 0,
+      "registry_lock_after": 0,
+      "completion_cookies_pending_after": [
+        0,
+        0
+      ],
+      "writer_idle_after": {
+        "xmp_file_pointer": 0,
+        "movie_writing": 0
+      },
+      "codec_stalls": 0,
+      "stale_commits": 0,
+      "native_bulk_bytes": 67108864,
+      "extra_count_flushes": 0,
+      "extra_pressure_flushes": 0,
+      "completion_budget_after_us": 467583,
+      "slot_plans_refused": 0
+    },
+    {
+      "evidence": "reslab3k-stop-02.json",
+      "clip": "A001_121",
+      "boot": 11595327,
+      "raw_geometry": [
+        3024,
+        2010
+      ],
+      "bit_depth": 12,
+      "fps": [
+        100000,
+        1000
+      ],
+      "active_at_end_of_window": false,
+      "stop_reason": "mem, raw2",
+      "arrivals": 86,
+      "requested": 9,
+      "finished": 9,
+      "compressed_written": 4,
+      "raw_written": 5,
+      "discarded": 77,
+      "active_slots": 216,
+      "free_slots_after": 216,
+      "registry_occupied_after": 0,
+      "registry_count_after": 0,
+      "registry_lock_after": 0,
+      "completion_cookies_pending_after": [
+        0,
+        0
+      ],
+      "writer_idle_after": {
+        "xmp_file_pointer": 0,
+        "movie_writing": 0
+      },
+      "codec_stalls": 0,
+      "stale_commits": 0,
+      "native_bulk_bytes": 67108864,
+      "extra_count_flushes": 0,
+      "extra_pressure_flushes": 0,
+      "completion_budget_after_us": 467583,
+      "slot_plans_refused": 0
+    },
+    {
+      "evidence": "reslab3k-stop-03.json",
+      "clip": "A001_122",
+      "boot": 11595327,
+      "raw_geometry": [
+        3024,
+        2010
+      ],
+      "bit_depth": 12,
+      "fps": [
+        100000,
+        1000
+      ],
+      "active_at_end_of_window": false,
+      "stop_reason": "mem, raw2",
+      "arrivals": 86,
+      "requested": 11,
+      "finished": 11,
+      "compressed_written": 4,
+      "raw_written": 7,
+      "discarded": 75,
+      "active_slots": 216,
+      "free_slots_after": 216,
+      "registry_occupied_after": 0,
+      "registry_count_after": 0,
+      "registry_lock_after": 0,
+      "completion_cookies_pending_after": [
+        0,
+        0
+      ],
+      "writer_idle_after": {
+        "xmp_file_pointer": 0,
+        "movie_writing": 0
+      },
+      "codec_stalls": 0,
+      "stale_commits": 0,
+      "native_bulk_bytes": 67108864,
+      "extra_count_flushes": 0,
+      "extra_pressure_flushes": 0,
+      "completion_budget_after_us": 487069,
+      "slot_plans_refused": 0
+    },
+    {
+      "evidence": "reslab3k-stop-04.json",
+      "clip": "A001_123",
+      "boot": 11595327,
+      "raw_geometry": [
+        3024,
+        2010
+      ],
+      "bit_depth": 12,
+      "fps": [
+        100000,
+        1000
+      ],
+      "active_at_end_of_window": false,
+      "stop_reason": "mem, raw2",
+      "arrivals": 86,
+      "requested": 10,
+      "finished": 10,
+      "compressed_written": 5,
+      "raw_written": 5,
+      "discarded": 76,
+      "active_slots": 220,
+      "free_slots_after": 220,
+      "registry_occupied_after": 0,
+      "registry_count_after": 0,
+      "registry_lock_after": 0,
+      "completion_cookies_pending_after": [
+        0,
+        0
+      ],
+      "writer_idle_after": {
+        "xmp_file_pointer": 0,
+        "movie_writing": 0
+      },
+      "codec_stalls": 0,
+      "stale_commits": 0,
+      "native_bulk_bytes": 67108864,
+      "extra_count_flushes": 0,
+      "extra_pressure_flushes": 0,
+      "completion_budget_after_us": 487069,
+      "slot_plans_refused": 0
+    },
+    {
+      "evidence": "reslab3k-stop-05.json",
+      "clip": "A001_124",
+      "boot": 11595327,
+      "raw_geometry": [
+        3024,
+        2010
+      ],
+      "bit_depth": 12,
+      "fps": [
+        100000,
+        1000
+      ],
+      "active_at_end_of_window": false,
+      "stop_reason": "mem, raw2",
+      "arrivals": 86,
+      "requested": 9,
+      "finished": 9,
+      "compressed_written": 4,
+      "raw_written": 5,
+      "discarded": 77,
+      "active_slots": 220,
+      "free_slots_after": 220,
+      "registry_occupied_after": 0,
+      "registry_count_after": 0,
+      "registry_lock_after": 0,
+      "completion_cookies_pending_after": [
+        0,
+        0
+      ],
+      "writer_idle_after": {
+        "xmp_file_pointer": 0,
+        "movie_writing": 0
+      },
+      "codec_stalls": 0,
+      "stale_commits": 0,
+      "native_bulk_bytes": 67108864,
+      "extra_count_flushes": 0,
+      "extra_pressure_flushes": 0,
+      "completion_budget_after_us": 487069,
+      "slot_plans_refused": 0
+    },
+    {
+      "evidence": "reslab3k-stop-06.json",
+      "clip": "A001_125",
+      "boot": 11595327,
+      "raw_geometry": [
+        3024,
+        2010
+      ],
+      "bit_depth": 12,
+      "fps": [
+        100000,
+        1000
+      ],
+      "active_at_end_of_window": false,
+      "stop_reason": "mem, raw2",
+      "arrivals": 86,
+      "requested": 8,
+      "finished": 8,
+      "compressed_written": 4,
+      "raw_written": 4,
+      "discarded": 78,
+      "active_slots": 220,
+      "free_slots_after": 220,
+      "registry_occupied_after": 0,
+      "registry_count_after": 0,
+      "registry_lock_after": 0,
+      "completion_cookies_pending_after": [
+        0,
+        0
+      ],
+      "writer_idle_after": {
+        "xmp_file_pointer": 0,
+        "movie_writing": 0
+      },
+      "codec_stalls": 0,
+      "stale_commits": 0,
+      "native_bulk_bytes": 67108864,
+      "extra_count_flushes": 0,
+      "extra_pressure_flushes": 0,
+      "completion_budget_after_us": 487069,
+      "slot_plans_refused": 0
+    },
+    {
+      "evidence": "reslab3k-stop-07.json",
+      "clip": "A001_126",
+      "boot": 11595327,
+      "raw_geometry": [
+        3024,
+        2010
+      ],
+      "bit_depth": 12,
+      "fps": [
+        100000,
+        1000
+      ],
+      "active_at_end_of_window": false,
+      "stop_reason": "mem, raw2",
+      "arrivals": 86,
+      "requested": 9,
+      "finished": 9,
+      "compressed_written": 4,
+      "raw_written": 5,
+      "discarded": 77,
+      "active_slots": 220,
+      "free_slots_after": 220,
+      "registry_occupied_after": 0,
+      "registry_count_after": 0,
+      "registry_lock_after": 0,
+      "completion_cookies_pending_after": [
+        0,
+        0
+      ],
+      "writer_idle_after": {
+        "xmp_file_pointer": 0,
+        "movie_writing": 0
+      },
+      "codec_stalls": 0,
+      "stale_commits": 0,
+      "native_bulk_bytes": 67108864,
+      "extra_count_flushes": 0,
+      "extra_pressure_flushes": 0,
+      "completion_budget_after_us": 487069,
+      "slot_plans_refused": 0
+    },
+    {
+      "evidence": "reslab3k-stop-08.json",
+      "clip": "A001_127",
+      "boot": 11595327,
+      "raw_geometry": [
+        3024,
+        2010
+      ],
+      "bit_depth": 12,
+      "fps": [
+        100000,
+        1000
+      ],
+      "active_at_end_of_window": false,
+      "stop_reason": "mem, raw2",
+      "arrivals": 86,
+      "requested": 8,
+      "finished": 8,
+      "compressed_written": 4,
+      "raw_written": 4,
+      "discarded": 78,
+      "active_slots": 220,
+      "free_slots_after": 220,
+      "registry_occupied_after": 0,
+      "registry_count_after": 0,
+      "registry_lock_after": 0,
+      "completion_cookies_pending_after": [
+        0,
+        0
+      ],
+      "writer_idle_after": {
+        "xmp_file_pointer": 0,
+        "movie_writing": 0
+      },
+      "codec_stalls": 0,
+      "stale_commits": 0,
+      "native_bulk_bytes": 67108864,
+      "extra_count_flushes": 0,
+      "extra_pressure_flushes": 0,
+      "completion_budget_after_us": 487069,
+      "slot_plans_refused": 0
+    },
+    {
+      "evidence": "reslab3k-stop-09.json",
+      "clip": "A001_128",
+      "boot": 11595327,
+      "raw_geometry": [
+        3024,
+        2010
+      ],
+      "bit_depth": 12,
+      "fps": [
+        100000,
+        1000
+      ],
+      "active_at_end_of_window": false,
+      "stop_reason": "mem, raw2",
+      "arrivals": 86,
+      "requested": 9,
+      "finished": 9,
+      "compressed_written": 4,
+      "raw_written": 5,
+      "discarded": 77,
+      "active_slots": 220,
+      "free_slots_after": 220,
+      "registry_occupied_after": 0,
+      "registry_count_after": 0,
+      "registry_lock_after": 0,
+      "completion_cookies_pending_after": [
+        0,
+        0
+      ],
+      "writer_idle_after": {
+        "xmp_file_pointer": 0,
+        "movie_writing": 0
+      },
+      "codec_stalls": 0,
+      "stale_commits": 0,
+      "native_bulk_bytes": 67108864,
+      "extra_count_flushes": 0,
+      "extra_pressure_flushes": 0,
+      "completion_budget_after_us": 487069,
+      "slot_plans_refused": 0
+    },
+    {
+      "evidence": "reslab3k-stop-10.json",
+      "clip": "A001_129",
+      "boot": 11595327,
+      "raw_geometry": [
+        3024,
+        2010
+      ],
+      "bit_depth": 12,
+      "fps": [
+        100000,
+        1000
+      ],
+      "active_at_end_of_window": false,
+      "stop_reason": "mem, raw2",
+      "arrivals": 86,
+      "requested": 9,
+      "finished": 9,
+      "compressed_written": 4,
+      "raw_written": 5,
+      "discarded": 77,
+      "active_slots": 220,
+      "free_slots_after": 220,
+      "registry_occupied_after": 0,
+      "registry_count_after": 0,
+      "registry_lock_after": 0,
+      "completion_cookies_pending_after": [
+        0,
+        0
+      ],
+      "writer_idle_after": {
+        "xmp_file_pointer": 0,
+        "movie_writing": 0
+      },
+      "codec_stalls": 0,
+      "stale_commits": 0,
+      "native_bulk_bytes": 67108864,
+      "extra_count_flushes": 0,
+      "extra_pressure_flushes": 0,
+      "completion_budget_after_us": 487069,
+      "slot_plans_refused": 0
+    }
+  ],
+  "ten_auto_stops": {
+    "count": 10,
+    "same_boot": true,
+    "arrivals": 860,
+    "finished": 91,
+    "discarded": 769,
+    "all_tracked_ownership_released": true
+  },
+  "last_take_incident": {
+    "evidence": "fhd60-after-ten-stops.json",
+    "recovery_evidence": "fhd60-manual-stop-recovered.json",
+    "measurement": {
+      "evidence": "fhd60-manual-stop-recovered.json",
+      "clip": "A001_130",
+      "boot": 11595327,
+      "raw_geometry": [
+        1936,
+        1090
+      ],
+      "bit_depth": 12,
+      "fps": [
+        60000,
+        1001
+      ],
+      "active_at_end_of_window": null,
+      "stop_reason": "button",
+      "arrivals": 16911,
+      "requested": 16911,
+      "finished": 16911,
+      "compressed_written": 12730,
+      "raw_written": 4181,
+      "discarded": 0,
+      "active_slots": 428,
+      "free_slots_after": 428,
+      "registry_occupied_after": 0,
+      "registry_count_after": 0,
+      "registry_lock_after": 0,
+      "completion_cookies_pending_after": [
+        0,
+        0
+      ],
+      "writer_idle_after": {
+        "xmp_file_pointer": 0,
+        "movie_writing": 0
+      },
+      "codec_stalls": 18,
+      "stale_commits": 0,
+      "native_bulk_bytes": 67108864,
+      "extra_count_flushes": 0,
+      "extra_pressure_flushes": 0,
+      "completion_budget_after_us": 487069,
+      "slot_plans_refused": 0
+    },
+    "intended_window_seconds": 25,
+    "actual_duration_seconds": null,
+    "actual_capture_facts": {
+      "raw_geometry": [
+        1936,
+        1090
+      ],
+      "fps": [
+        60000,
+        1001
+      ],
+      "bits": 12
+    },
+    "host_stop_key_sent": false,
+    "user_observed": "Still recording; seconds indicator very laggy; live picture normal.",
+    "manual_stop_confirmed_by_user": true,
+    "write_lamp_off_and_menus_normal_confirmed_by_user": true,
+    "usb_after_manual_stop": "timeout; recovered after USB replug without reboot",
+    "post_take_slot_recovery": "verified in same boot before file reads or reboot",
+    "files_and_final_counts": "A001_130; native req=fin=16911; take_frames=16911; no recorded discards",
+    "record_log_batch_detail": "truncated with non-text suffix; header counts corroborated by state"
+  },
+  "dng_samples": {
+    "count": 4,
+    "reports": [
+      {
+        "clip": "A001_118",
+        "requested": 349,
+        "finished": 349,
+        "sample_only": true,
+        "frames": [
+          {
+            "file": "000001.DNG",
+            "bytes": 3244544,
+            "ifd_at": 8,
+            "compression": 1,
+            "decoded": [
+              1090,
+              1936
+            ],
+            "raw_mean": 331.23,
+            "number": 1,
+            "main_ifd": {
+              "NewSubfileType": 0,
+              "ImageWidth": 1936,
+              "ImageLength": 1090,
+              "BitsPerSample": 12,
+              "Compression": 1,
+              "StripOffsets": 78848,
+              "StripByteCounts": 3165372,
+              "BlackLevel": [
+                "262052/1024",
+                "262052/1024",
+                "262052/1024",
+                "262052/1024"
+              ],
+              "WhiteLevel": 4095,
+              "DefaultCropOrigin": [
+                8,
+                5
+              ],
+              "DefaultCropSize": [
+                1920,
+                1080
+              ],
+              "BaselineExposure": "2378/1024",
+              "FrameRate": "30000/1001"
+            },
+            "sha256": "87320d89a9bea3cc71c0e92d21572af28e6120c1edaad209683c0d77c1f3c9f9"
+          },
+          {
+            "file": "000175.DNG",
+            "bytes": 1032192,
+            "ifd_at": 1031168,
+            "compression": 7,
+            "tiles": 12,
+            "soi_ok": 12,
+            "eoi_ok": 12,
+            "zero_pad": 262,
+            "decoded": [
+              1090,
+              1936
+            ],
+            "raw_mean": 328.6,
+            "number": 175,
+            "main_ifd": {
+              "NewSubfileType": 0,
+              "ImageWidth": 1936,
+              "ImageLength": 1090,
+              "BitsPerSample": 12,
+              "Compression": 7,
+              "BlackLevel": [
+                "261994/1024",
+                "261994/1024",
+                "261994/1024",
+                "261994/1024"
+              ],
+              "WhiteLevel": 4095,
+              "DefaultCropOrigin": [
+                8,
+                5
+              ],
+              "DefaultCropSize": [
+                1920,
+                1080
+              ],
+              "BaselineExposure": "2378/1024",
+              "FrameRate": "30000/1001"
+            },
+            "sha256": "e1fa018726c1296bdfa5eca5a78956ac52793855b5f607119d502459af8f671f"
+          },
+          {
+            "file": "000349.DNG",
+            "bytes": 1021952,
+            "ifd_at": 1020928,
+            "compression": 7,
+            "tiles": 12,
+            "soi_ok": 12,
+            "eoi_ok": 12,
+            "zero_pad": 943,
+            "decoded": [
+              1090,
+              1936
+            ],
+            "raw_mean": 326.33,
+            "number": 349,
+            "main_ifd": {
+              "NewSubfileType": 0,
+              "ImageWidth": 1936,
+              "ImageLength": 1090,
+              "BitsPerSample": 12,
+              "Compression": 7,
+              "BlackLevel": [
+                "262037/1024",
+                "262037/1024",
+                "262037/1024",
+                "262037/1024"
+              ],
+              "WhiteLevel": 4095,
+              "DefaultCropOrigin": [
+                8,
+                5
+              ],
+              "DefaultCropSize": [
+                1920,
+                1080
+              ],
+              "BaselineExposure": "2378/1024",
+              "FrameRate": "30000/1001"
+            },
+            "sha256": "bd94e97066b871c5f1664e1cb0c90d41b183ffbdbac594d02845e33be8a83485"
+          }
+        ]
+      },
+      {
+        "clip": "A001_130",
+        "requested": 16911,
+        "finished": 16911,
+        "sample_only": true,
+        "frames": [
+          {
+            "file": "000001.DNG",
+            "bytes": 3244544,
+            "ifd_at": 8,
+            "compression": 1,
+            "decoded": [
+              1090,
+              1936
+            ],
+            "raw_mean": 353.48,
+            "number": 1,
+            "main_ifd": {
+              "NewSubfileType": 0,
+              "ImageWidth": 1936,
+              "ImageLength": 1090,
+              "BitsPerSample": 12,
+              "Compression": 1,
+              "StripOffsets": 78848,
+              "StripByteCounts": 3165372,
+              "BlackLevel": [
+                "261993/1024",
+                "261993/1024",
+                "261993/1024",
+                "261993/1024"
+              ],
+              "WhiteLevel": 4095,
+              "DefaultCropOrigin": [
+                8,
+                5
+              ],
+              "DefaultCropSize": [
+                1920,
+                1080
+              ],
+              "BaselineExposure": "2378/1024",
+              "FrameRate": "60000/1001"
+            },
+            "sha256": "53a9bf0bbac4c44231cfb39ace90d6065625b9ed06373d61af370d727cbbfafa"
+          }
+        ]
+      }
+    ],
+    "incomplete": "A001_130 frame 8456 read timed out; middle and final frame not decoded"
+  },
+  "file_read_incident": {
+    "evidence": "fhd60-manual-stop-recovered-frames/008456.read.log",
+    "getfile_echo_result": "LIBUSB_ERROR_TIMEOUT; uncertain read outcome",
+    "separate_from_recording_test": true,
+    "cleanup_risk": "getfile.py ERR exit precedes heap-buffer finally; subsequent sample overwrote shared parameters",
+    "leaked_bytes": null,
+    "recovery": "one idle-guarded normal reboot, reboot-02-recovery.json"
+  },
+  "limits": [
+    "Tracked descriptors, registry and completion cookies are not a whole-heap leak audit.",
+    "A completed writer queue does not imply every captured frame was retained.",
+    "No root cause established for lag or USB timeouts; STOPFX causality not isolated.",
+    "No controlled same-scene A/B against the earlier early-flush build.",
+    "Only four DNG samples decoded; the long take middle and end remain unverified.",
+    "No exact wall-clock recording duration or all-frame timestamp continuity established.",
+    "The file-transfer timeout may leave an allocation; its address/size cannot now be safely established."
+  ],
+  "final_camera_state": {
+    "source": "recovery-boot-reconnected.json",
+    "recovery_reboot_source": "reboot-02-recovery.json",
+    "boot": 11589302,
+    "cine_standby": true,
+    "recording": false,
+    "writer_idle": {
+      "xmp_file_pointer": 0,
+      "movie_writing": 0
+    },
+    "usb": "responding",
+    "lossless_on": true,
+    "expanded_candidate_still_installed": true,
+    "stopfx_loaded": true,
+    "positions_free": 96,
+    "positions_capacity": 96,
+    "take_frames_since_boot": 0,
+    "card_free_bytes": 53927739392,
+    "additional_recording_after_recovery": false,
+    "merge_artifact_promoted": false,
+    "final_card_full_readback": "not repeated after read timeout; initial deployment readback was complete"
+  }
+}

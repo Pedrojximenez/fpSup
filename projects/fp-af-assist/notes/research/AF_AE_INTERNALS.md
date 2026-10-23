@@ -285,7 +285,9 @@ ctx 建構子 `FUN_c022bfe8`;`ctx+0x21f4` 是指標(→`&DAT_c32915b0`),state �
 A=`FUN_c0331140`(propObj vtbl+0x68,經 `FUN_c03627f8`):state==5 才回背隙脈衝,否則 0;28mm state=0xb → **A=0**。B=`FUN_c0332878`(motor vtbl+0xf0),state≠5 路徑 `*(FUN_c035b310(*(obj+0x1c))+0x24)<<1`=`*0xc347df60(304)<<1`=**608**。**焦點位置索引的步幅/pps 表**在 **`0xc346d138`** = `523,558,617,703,820,512,523,558,617,703…`(**617 是表裡一格,不是 base step**);motor block base≈0xc347df3c(+0x24=304)。
 
 **⑥ 掃描速度公式:用 base 91,不是 617。** 信心:公式/step 源 HIGH。
-`DriveScan::v2 @c0238a28`:`speed = param_2×2000 / ((A+1)·B·(C+1))`。實際 **step=91**(`FUN_c029fe38=((608×15)/10+5)/10=91`)、**A+1=1**、**B=2**(`FUN_c02a5420`,非 608)、**C=live fps 暫存器**(`FUN_c0126010`=`_DAT_30100048`)。→ `91000/(C+1)`,C+1≈7 → ≈13,000 pps,被 **movie cap 12000**(lens_data+0x80=`0xc3464a00`,getter `FUN_c033de90`)封頂。step 源=Hybrid `FUN_c0269108`(scanDescriptor+0xc)。
+`DriveScan::v2 @c0238a28` 的 request 算式為 `param_2×2000 / ((A+1)·B·(C+1))`。歷史 28mm 參數：**step=91**(`FUN_c029fe38=((608×15)/10+5)/10=91`)、**A+1=1**、**B=2**(`FUN_c02a5420`,非 608)；step 源=Hybrid `FUN_c0269108`(scanDescriptor+0xc)。`C` 由 `FUN_c0126010` 讀取時序欄位；不可把它的裸值直接稱為實際 fps。
+
+**2026-10-21 ROM／dump 重審更正：撤回「約 13,000 pps，被 movie cap 12,000 封頂」。** 這裡產生的是仍需換算的 request；Scan vtable `+0x18` → `C0238B58 → C035FE88 → C0332520 → C033EF90 → C033ED98`，後者依時序與 sync data 換算、夾在最低與**一般最高**額度。movie getter `C033DE90` 用於 `C033EC80` 的零 request 分支；鏡頭端是否另限速未驗證。28mm dump 的一般最高／影片欄位確為 37,000／12,000，但不證明當時掃描實速。詳見 [鏡頭提速與安全邊界](FP_LENS_MOTOR_SPEED_SAFETY_2026-10-21.md)。
 
 **⑦ posGain 的 dist = 原始脈衝/位置單位(不是 8.8 定點）。** 信心 HIGH。
 階梯 `FUN_c0277c48`:`dist<150→0xd8;<1000→0x110;<1500→0xd8;else→0xa0/0x70`。dist 源 `JudgeSubjectMoveByPeakData @c02766a8`;修正 `corr=(dist×gain)>>8`,**直接加到脈衝位置**(`SAF_EstimateCore_NearAfAfterSearchPeak @c0277ce8`)。dist=1500、gain=160 → 937 脈衝(對 ~11128 行程合理);8.8 定點只 3.7 脈衝(荒謬)→ **150/1000/1500 是脈衝量級**。

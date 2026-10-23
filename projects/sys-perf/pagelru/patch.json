@@ -1,0 +1,106 @@
+{
+ "firmware": "Ver.5.02, out/seg0_c0000000.bin sha256 aaa5208a028d9c4a",
+ "body": {
+  "source": "pagelru.S",
+  "file": "pagelru.bin",
+  "bytes": 712,
+  "sha256": "5cf34d19f7dc6302bad99abfe853f83bda83304b74ab5ecd4532fd3f63ca6bc4",
+  "isa": "ARM, position independent, integer only",
+  "alignment": 8,
+  "entries": {
+   "pl_ctl": 0,
+   "pl_load": 244,
+   "pl_unload": 340
+  },
+  "control": {
+   "magic": 0,
+   "enable": 4,
+   "capacity": 8,
+   "count": 12,
+   "hits": 16,
+   "kept": 20,
+   "evictions": 24,
+   "bypass": 28,
+   "why": 32,
+   "flushed": 36,
+   "slots": 40
+  },
+  "control_note": "ships enable=0 (stock). capacity 0..4 (default 2). why: 1 disabled 2 recording 3 null 4 no tree 5 refcount!=1 6 QS_ layout 7 already held 8 capacity 0"
+ },
+ "veneers": {
+  "bytes": 16,
+  "placement": "cave.claim(\"pagelru.veneer\", 16); within +-16 MiB of C05DD5CA/C05DD670 (Thumb BLX range); cave arena C072E064..C072EFB4 is",
+  "layout": [
+   {
+    "name": "load",
+    "offset": 0,
+    "words": [
+     "E51FF004",
+     "<body+pl_load>"
+    ]
+   },
+   {
+    "name": "unload",
+    "offset": 8,
+    "words": [
+     "E51FF004",
+     "<body+pl_unload>"
+    ]
+   }
+  ]
+ },
+ "sites": [
+  {
+   "name": "load",
+   "address": "0XC05DD5CA",
+   "isa": "Thumb",
+   "orig_halfwords": [
+    "F7FB",
+    "FD91"
+   ],
+   "orig_word": "FD91F7FB",
+   "orig_insn": "bl 0xc05d90f0",
+   "orig_check": true,
+   "new_insn": "blx <veneer.load> (Thumb -> ARM)",
+   "veneer_target": "<body+pl_load> = +244",
+   "power_off_restore": "declare as a 4-byte section with orig_word"
+  },
+  {
+   "name": "unload",
+   "address": "0XC05DD670",
+   "isa": "Thumb",
+   "orig_halfwords": [
+    "F7FB",
+    "FD96"
+   ],
+   "orig_word": "FD96F7FB",
+   "orig_insn": "bl 0xc05d91a0",
+   "orig_check": true,
+   "new_insn": "blx <veneer.unload> (Thumb -> ARM)",
+   "veneer_target": "<body+pl_unload> = +340",
+   "power_off_restore": "declare as a 4-byte section with orig_word"
+  }
+ ],
+ "arm_order": [
+  "write body + veneers, read back",
+  "C000E91C() then C000EABC()",
+  "patch unload site first, then load site (each: write, read back, C000E91C + C000EABC)",
+  "set enable=1 last (data word)"
+ ],
+ "disarm_order": [
+  "set enable=0: the next screen switch releases every held layout",
+  "then restore both sites (load site last), C000E91C + C000EABC",
+  "keep body until reboot"
+ ],
+ "firmware_calls_from_body": [
+  "C05D90F0 load (Thumb)",
+  "C05D91A0 unload (Thumb)",
+  "C00178D8 system status (ARM), byte +0x9C = is_recording"
+ ],
+ "reads": [
+  "[L+8] layout name",
+  "[L+0xC] tree",
+  "[tree+0xC] tree refcount"
+ ],
+ "conflicts_to_check": "nobody else may patch C05DD5CA / C05DD670; sups hooking C05D90F0/C05D91A0 entry (uishare/OG) still run: we call those functions, not around them"
+}

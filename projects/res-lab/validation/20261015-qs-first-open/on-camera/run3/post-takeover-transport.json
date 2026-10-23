@@ -1,0 +1,14 @@
+[
+  {
+    "request": "STATUS",
+    "response": "OK name=fpshd version=3.2.0 protocol=1 frame=64 payload=44 transport=EP01-EP82 iface=0 camera=open seq=2 ep83=host_candidate upload=UP01-probed mem=MEM1-probed quarantine=0 fault=none\n"
+  },
+  {
+    "request": "PING",
+    "response": "OK pong seq=3\n"
+  },
+  {
+    "request": "STATUS",
+    "response": "OK name=fpshd version=3.2.0 protocol=1 frame=64 payload=44 transport=EP01-EP82 iface=0 camera=open seq=3 ep83=host_candidate upload=UP01-probed mem=MEM1-probed quarantine=0 fault=none\n"
+  }
+]

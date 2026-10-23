@@ -60,6 +60,11 @@ def encode(row, pack, version=None, mincore=None, extra=()):
         mincore = max(mincore, 3)
     if 'bit_depths' in row:
         mincore = max(mincore, 4)
+    if row.get('writer') or 'rates' in row:
+        # 'rates' present, even empty, is a declaration; a v4 file has none (core
+        # 5 reads it as the rates core 4 offered)
+        mincore = max(mincore, 5)
+    rates = [dict(r) for r in row.get('rates', ())]
     if not _text_ok(lab, 8, label=True):
         raise RcdError('FIELD', f'label {lab!r}')
     # v3 (2026-10-08): the modes and their fastest rate; the core makes the entries
@@ -71,7 +76,7 @@ def encode(row, pack, version=None, mincore=None, extra=()):
         if len(m) != 5 or not 0 < m[1] <= 100000 or not 0 < m[2] < 0x10000 or not 0 <= m[3] < 0x10000:
             raise RcdError('ENTRY', repr(m))
         md += struct.pack('<5I', *m)
-    if not L.gen_entries(lab, modes, row.get('flags', 0)):
+    if not L.gen_entries(lab, modes, row.get('flags', 0), rates):
         raise RcdError('ENTRY', 'no rate fits any mode')
     cv = struct.pack('<8I', row['prev_h'], row['act'][0], row['act'][1], len(row['canvas_rec']),
                      len(row['canvas_pb']), 0, 0, 0)
@@ -123,6 +128,24 @@ def encode(row, pack, version=None, mincore=None, extra=()):
         for timing in timings:
             st += struct.pack('<6I', *timing)
         secs.append((L.SEC_CAPTURE_TIMING, 1, st))
+    if row.get('writer'):
+        # Required: an older core would record with the native writer policy.
+        wr = list(row['writer'])
+        if not 0 < len(wr) <= L.RCD_MAX_WRITER:
+            raise RcdError('WRITER')
+        sw = struct.pack('<I', len(wr))
+        for rank, crop, bits, fl in wr:
+            sw += struct.pack('<4I', rank, crop, bits, fl)
+        secs.append((L.SEC_WRITER, 1, sw))
+    if rates:
+        # Required: an older core would record these keys at their carrier rate.
+        if len(rates) > L.RCD_MAX_RATES:
+            raise RcdError('RATES')
+        sr = struct.pack('<I', len(rates))
+        for r in rates:
+            sr += struct.pack('<7I', r['rank'], r['num'], r['den'], r['cycles'], r['carrier'],
+                              r['nominal'], r['engine'])
+        secs.append((L.SEC_RATES, 1, sr))
     secs += list(extra)
     secs.append((L.SEC_PACK, 1, pack))
     table_off = L.RCD_HDR
@@ -199,7 +222,7 @@ def decode(data, image=None, stock_ids=None):
             raise RcdError('SECTION')
         if typ not in (L.SEC_MODES, L.SEC_VMODES, L.SEC_CANVAS, L.SEC_UI, L.SEC_PACK,
                        L.SEC_STANDBY, L.SEC_RATECANVAS, L.SEC_BINFILT, L.SEC_CAPTURE_TIMING,
-                       L.SEC_BITDEPTH):
+                       L.SEC_BITDEPTH, L.SEC_WRITER, L.SEC_RATES):
             if flags & 1:
                 raise RcdError('UNKNOWN')
             continue
@@ -209,6 +232,10 @@ def decode(data, image=None, stock_ids=None):
             raise RcdError('ENTRY', 'sensor timing must be required')
         if typ == L.SEC_BITDEPTH and flags != 1:
             raise RcdError('BITDEPTH', 'bit-depth policy must be required')
+        if typ == L.SEC_WRITER and flags != 1:
+            raise RcdError('WRITER', 'writer policy must be required')
+        if typ == L.SEC_RATES and flags != 1:
+            raise RcdError('RATES', 'declared rates must be required')
         secs[typ] = (off, ln)
     for t in (L.SEC_MODES, L.SEC_CANVAS, L.SEC_UI, L.SEC_PACK):
         if t not in secs:
@@ -234,8 +261,28 @@ def decode(data, image=None, stock_ids=None):
         if w(H['MINCORE']) < 4 or ln != 4 or not 0 < w(off) < 8:
             raise RcdError('BITDEPTH')
         out['bit_depths'] = tuple(d for j, d in enumerate(L.BIT_DEPTHS) if w(off) & (1 << j))
+    out['rates'] = []
+    if L.SEC_RATES in secs:
+        off, ln = secs[L.SEC_RATES]
+        nr = w(off) if ln >= 4 else 0
+        if w(H['MINCORE']) < 5 or not 0 < nr <= L.RCD_MAX_RATES or ln != 4 + L.RCD_RATE_BYTES * nr:
+            raise RcdError('RATES')
+        for i in range(nr):
+            rk, num, den, cyc, en, nom, eng = struct.unpack_from('<7I', data, off + 4 + L.RCD_RATE_BYTES * i)
+            if not 0 < num <= 1000000 or not 0 < den <= 100000 or rk in L.ALL_RANKS or \
+                    rk != num * 100 // den or cyc * num != L.CLOCK * den or en not in L.RATE_ROW or \
+                    not 1 <= nom <= 1000 or not 0x3f800000 <= eng <= 0x447a0000 or \
+                    any(r['rank'] == rk for r in out['rates']):
+                raise RcdError('RATES')
+            out['rates'].append({'rank': rk, 'num': num, 'den': den, 'cycles': cyc, 'carrier': en,
+                                 'nominal': nom, 'engine': eng})
+    elif w(H['MINCORE']) < 5:
+        # written before SEC_RATES: such a file was recorded by a core that offered
+        # its own rates -- read it as declaring those (ogc.c rate_word, the same rule)
+        out['rates'] = [dict(r) for r in L.DEFAULT_RATES]
+    ranks = L.ALL_RANKS + tuple(r['rank'] for r in out['rates'])
     out['modes'] = modes
-    out['entries'] = L.gen_entries(out['label'], modes, out['flags'])
+    out['entries'] = L.gen_entries(out['label'], modes, out['flags'], out['rates'])
     if not out['entries'] or len(out['entries']) > L.MAX_GEN:
         raise RcdError('ENTRY')
     out['capture_timing'] = []
@@ -256,6 +303,19 @@ def decode(data, image=None, stock_ids=None):
                 raise RcdError('ENTRY', 'capture engine/nominal')
             entry.update(w0=tw0, w1=tw1, engfps=eng, nominal=nominal)
             out['capture_timing'].append((rank, crop, tw0, tw1, eng, nominal))
+    out['writer'] = []
+    if L.SEC_WRITER in secs:
+        off, ln = secs[L.SEC_WRITER]
+        nw = w(off) if ln >= 4 else 0
+        if w(H['MINCORE']) < 5 or not 0 < nw <= L.RCD_MAX_WRITER or ln != 4 + 16 * nw:
+            raise RcdError('WRITER')
+        for i in range(nw):
+            rank, crop, bits, fl = struct.unpack_from('<4I', data, off + 4 + 16 * i)
+            if (rank and rank not in ranks) or crop > (1 if w(H['FLAGS']) & L.RFLAG_CROP else 0) or \
+                    not 0 < bits < 8 or not fl or fl & ~(L.WR_BATCH4M | L.WR_HDRCPU) or \
+                    any(r == rank and c == crop for r, c, _, _ in out['writer']):
+                raise RcdError('WRITER')
+            out['writer'].append((rank, crop, bits, fl))
     off, ln = secs[L.SEC_CANVAS]
     if ln < L.RCD_CANVAS_HEAD:
         raise RcdError('CANVAS')
@@ -322,7 +382,7 @@ def decode(data, image=None, stock_ids=None):
             if at + 16 > off + ln:
                 raise RcdError('ENTRY')
             rank, crop, bp, npair = w(at), w(at + 4), w(at + 8), w(at + 12)
-            if (rank and rank not in L.ALL_RANKS) or crop > 1 or npair > L.RCD_MAX_PAIRS or \
+            if (rank and rank not in ranks) or crop > 1 or npair > L.RCD_MAX_PAIRS or \
                     at + 16 + 8 * npair > off + ln:
                 raise RcdError('ENTRY')
             pairs = _pairs_ok(data, at + 16, npair)
@@ -518,11 +578,10 @@ def qs_max_record(n_max=8):
     return worst
 
 
-# ---- the virtual frame rates' menu (rows 9..12; vr_ui.py builds the pages) ---------------------
-# (resource, stock length, name): the six frame-rate list variants EXCL_FrameRate picks
-VR_CSV = ((0xC0F8E848, 257, 'B2_5_5'), (0xC0F8E94C, 257, 'B2_5_5_excl'),
-          (0xC0F8EA50, 257, 'B2_5_5_excl2'), (0xC0F8EB54, 257, 'B2_5_5_excl3'),
-          (0xC0F8EC58, 257, 'B2_5_5_excl4'), (0xC0F8ED5C, 257, 'B2_5_5_excl5'))
+# ---- the native list copies (the core greys rows per format) ------------------------------
+RATE_CSV = ((0xC0F8E848, 257, 'B2_5_5'), (0xC0F8E94C, 257, 'B2_5_5_excl'),
+            (0xC0F8EA50, 257, 'B2_5_5_excl2'), (0xC0F8EB54, 257, 'B2_5_5_excl3'),
+            (0xC0F8EC58, 257, 'B2_5_5_excl4'), (0xC0F8ED5C, 257, 'B2_5_5_excl5'))
 BIT_CSV = ((0xC0F8E6A8, 113, 'B2_5_2'), (0xC0F8E71C, 113, 'B2_5_2_excl'))
 
 
@@ -539,38 +598,14 @@ def bit_template():
     return blk.encode()
 
 
-def _csv_row(image, addr, size, row):
-    """the "a,b" of stock row `row` (1-based NO) in one variant"""
-    text = image[addr - 0xC0000000:addr - 0xC0000000 + size].decode('latin1')
-    for line in text.split('\r\n'):
-        cells = line.split(',')
-        if cells and cells[0].lstrip('\ufeff\xef\xbb\xbf') == str(row):
-            return ','.join(cells[-2:])
-    raise RcdError('UI', f'row {row} not in 0x{addr:08X}')
-
-
-def vr_template(image):
-    """Rows 9..12 (NO 10..13) in the six variant CSVs, each row selectable exactly where
-    its base stock rate is (119.88 = NO 9, 23.98 = NO 1) -- the core turns a row 0,0 when
-    the live format has no entries for it; and the K label strings, their ids handed to
-    S.VR_LABEL (STRBASE targets are S offsets, the core moves them onto S)."""
-    import vr_ui
+def rate_template():
+    """Own copies of the six frame-rate list variants, as they are: the core greys
+    the stock rows a format has no entry for and gives the stock flags back."""
     sys.path.insert(0, str(UISHARE))
     from ui import fpui, options as O
     blk = fpui.Block()
     O.hook_fv(blk)
-    for addr, size, name in VR_CSV:
-        csv = bytearray(image[addr - 0xC0000000:addr - 0xC0000000 + size])
-        for k, (rank, base, _, text, _) in enumerate(vr_ui.VRATES):
-            stock_no = 9 if base == 7 else 1
-            csv += ('%d,%s,Popup,blank,%s\r\n' %
-                    (vr_ui.FIRST_ROW + k + 1, text, _csv_row(image, addr, size, stock_no))).encode()
-        # Six variants x four CSV_ADDs exceed uishare's eight returned slots.
-        # These fixed rows need no slot: install all six complete copies in
-        # one transaction, retaining each variant's original stock rows.
-        blk.op(fpui.OP_FILE, addr, size, len(csv) - size)
-        blk.op(fpui.OP_FILE_SET, blk.fragment(bytes(csv)), len(csv))
+    for addr, size, _ in RATE_CSV:
+        blk.op(fpui.OP_FILE, addr, size, 0)
         blk.op(fpui.OP_FILE_DONE)
-    for k, (_, _, _, _, label) in enumerate(vr_ui.VRATES):
-        blk.op(fpui.OP_STRBASE, blk.string(label, fpui.NOT_STOCK), L.S['VR_LABEL'] + 4 * k)
     return blk.encode()

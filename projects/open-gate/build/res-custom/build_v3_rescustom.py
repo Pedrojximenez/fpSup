@@ -45,13 +45,17 @@ import ogc_layout as L                                   # noqa: E402
 
 CHAIN, EXCL, SHARED_UI = 1, 2, 3
 HOOK_B, HOOK_BL, HOOK_TW = 0, 1, 2
-TAB_MAGIC, TAB_VERSION, TAB_WORDS = 0x3343474F, 7, 31
-DATA_BYTES = 0x48000                # the data files, each row's menu block, the 240 B2_5 copy
+TAB_MAGIC, TAB_VERSION, TAB_WORDS = 0x3343474F, 8, 28
+DATA_BYTES = 0x48000                # the data files and each row's menu block
 FOBJ_BYTES = 0x1000                 # a file object + read-back for the BIN write (§12.4)
-PAIR_SITES = ((0xC06BDA3C, 8), (0xC06BDA48, 4),   # the resolution converter's movw/movt, mov #n
-              (0xC06BDB0C, 8), (0xC06BDB18, 4),   # the frame-rate converter (row <-> internal)
-              (0xC06CB6DC, 8), (0xC06CB6E8, 4))   # the frame-rate summary (export -> state)
-CORE_NAME, CORE_ID, VERSION = '32RESCUS.BIN', 'RCUS', 18
+PAIR_SITES = ((0xC06BDA3C, 8), (0xC06BDA48, 4))   # the resolution converter's movw/movt, mov #n
+CORE_NAME, CORE_ID, VERSION = '32RESCUS.BIN', 'RCUS', 21
+# Above 99 fps the firmware gates image channel 0's clock to 5/16 (FUN_c0189298
+# movw ip,#0x1249 at C0189440, -> 0x30110440). Claim that word EXCL and open it fully
+# (#0xFFFF, as channel 1): 12-bit 239.76p 14.7 s -> ~40 s on camera (2026-10-14).
+CLK0_SITE, CLK0_STOCK = 0xC0189440, 0x2C49F241
+if L.HOOKCNT:
+    VERSION = 22
 RCD_DIR = 'RESCUS'
 SHIFT = 0x10000000
 SPAN = 0x8000                       # the layout must fit og_pic's window
@@ -81,6 +85,9 @@ def stock(a, n):
 
 # ---- the rows -----------------------------------------------------------------
 def row_data(target, tmp):
+    if target == 'm12-240':
+        import m12_240
+        return m12_240.row_data(tmp, img())
     jose = target in JOSE
     env = dict(os.environ, OG_TARGET='og3k' if jose else target)
     for k in ('OG_V3', 'OG_CHAIN', 'OG_V3_OGV', 'OG_UISHARE'):
@@ -101,6 +108,8 @@ def row_data(target, tmp):
         raise BuildError(f'{target}: p{d["profile"]} has no mapping row')
     d['base_row'] = base
     d.setdefault('aspect', 2)               # OG3K / OG2K: 3:2 (the Jose rows say theirs)
+    # the rates beyond the stock nine this format offers (the core no longer has any of its own)
+    d.setdefault('rates', [dict(r) for r in L.DEFAULT_RATES])
     return d
 
 
@@ -136,9 +145,22 @@ def layout(origin, tmp):
                           f'#define OGC_S_COORD 0x{origin + L.SHIMS_MAX:X}')
     (d / 'ogc_layout.h').write_text(hdr)
     shutil.copy2(HERE / 'ogc_shims.S', d / 'ogc_shims.S')
+    if L.HOOKCNT:                   # hookcnt[i] at S - HOOKCNT_BACK + 4i: calls through hook i (L.HOOKS order)
+        base = armasm.symbols(d / 'ogc_shims.S')
+        stubs = ['', '.balign 4']
+        for i, (n, _, _) in enumerate(L.HOOKS):
+            # every register (ip included: canvas/ratio sites hold it live) and the flags
+            # reach the shim unchanged; the target goes down through a stack slot
+            stubs += [f'.global {n}_cnt', f'{n}_cnt:', '    sub sp, sp, #4', '    push {r0, r1}',
+                      f'    LDA r0, (S - {L.HOOKCNT_BACK} + {4 * i})', '    ldr r1, [r0]',
+                      '    add r1, r1, #1', '    str r1, [r0]',
+                      f'    LDA r0, (OGC_LAYOUT0 + 0x{base[n]:X})', '    str r0, [sp, #8]',
+                      '    pop {r0, r1, pc}']
+        with open(d / 'ogc_shims.S', 'a') as f:
+            f.write('\n'.join(stubs) + '\n')
     code = armasm.assemble(d / 'ogc_shims.S')
     syms = armasm.symbols(d / 'ogc_shims.S')
-    if len(code) > L.SHIMS_MAX:
+    if len(code) > L.SHIMS_MAX - L.RESERVED_BACK:
         raise BuildError(f'shims are {len(code)} bytes, more than {L.SHIMS_MAX}')
     pic, n = og_pic.pc_relative(code + b'\0' * (-len(code) % 4), origin, origin, origin + SPAN)
     image = pic + b'\0' * (L.SHIMS_MAX - len(pic)) + L.s_header()
@@ -224,7 +246,7 @@ def build_core(tmp, n_formats=len(FORMATS), virtual=False):
     for name, site, kind in L.HOOKS:
         if name not in syms:
             raise BuildError(f'shim {name} missing')
-        to = L.LAYOUT0 + syms[name]
+        to = L.LAYOUT0 + syms[name + '_cnt' if L.HOOKCNT else name]
         nx = L.S_COORD + L.S['NEXT'] + 4 * L.HOOK_INDEX[name]
         rp = L.LAYOUT0 + syms[name + '_replay'] if name + '_replay' in syms else 0
         sw = word(site, image)
@@ -244,32 +266,16 @@ def build_core(tmp, n_formats=len(FORMATS), virtual=False):
         claims.append((a, struct.pack('<I', sw), SHARED_UI))
     for a, n in PAIR_SITES:                 # written at entry, from where S landed (claim only)
         claims.append((a, stock(a, n), EXCL))
+    if stock(CLK0_SITE, 4) != struct.pack('<I', CLK0_STOCK):
+        raise BuildError('clk0: stock word differs')
+    claims.append((CLK0_SITE, stock(CLK0_SITE, 4), EXCL))
     spans = sorted((a, a + len(s)) for a, s, _ in claims)
     if any(e > a for (_, e), (a, _) in zip(spans, spans[1:])):
         raise BuildError('two claims overlap')
     tt = b''.join(stock(TT + 0x20 * i + 4, 8) for i in range(70))
-    # the virtual frame rates' menu (vr_ui, rcd.vr_template): the core applies it at every load
-    import vr_ui
-    vrtpl = rcd.vr_template(image)
-    page, marks = vr_ui.b25(image)
-    segs = vr_ui.segments(page, image)
-    vrpg = struct.pack(f'<{2 + vr_ui.K}I', len(page), len(segs), *marks)
-    for x in segs:                      # {stock offset, length} or {0xFFFFFFFF, length, bytes}
-        if isinstance(x, tuple):
-            vrpg += struct.pack('<2I', *x)
-        else:
-            vrpg += struct.pack('<2I', 0xFFFFFFFF, len(x)) + x + bytes(-len(x) % 4)
-    lv, lmarks = vr_ui.lv(image)
-    vrlv = struct.pack('<I', len(lv)) + b''.join(
-        struct.pack('<2I', a, len(n)) + st + n for a, st, n in lv)
-    for a, st, n in lv:
-        if len(st) != len(n) or len(n) % 4 or stock(a, len(n)) != st:
-            raise BuildError(f'LV run 0x{a:08X}')
-    vrlm = struct.pack(f'<{1 + len(lmarks)}I', len(lmarks), *lmarks)
-    vrcsv = struct.pack('<6I', *(a for a, _, _ in rcd.VR_CSV))
-    if (vr_ui.K, vr_ui.FIRST_ROW) != (L.VR_K, L.VR_ROW0) or \
-            [v[:3] for v in vr_ui.VRATES] != [tuple(v) for v in L.VRATES]:
-        raise BuildError('vr_ui and ogc_layout disagree on the virtual rates')
+    # the six frame-rate list copies (rcd.rate_template): the per-format greying
+    rate_tpl = rcd.rate_template()
+    ratecsv = struct.pack('<6I', *(a for a, _, _ in rcd.RATE_CSV))
 
     virtual_blob = b''
     if virtual:
@@ -294,12 +300,9 @@ def build_core(tmp, n_formats=len(FORMATS), virtual=False):
         tpl_off = (hook_off + len(hook_b) + 7) & ~7
         qstab_off = (tpl_off + len(tpl) + 7) & ~7
         tt_off = (qstab_off + len(qtab) + 7) & ~7
-        vrtpl_off = (tt_off + len(tt) + 7) & ~7
-        vrpg_off = (vrtpl_off + len(vrtpl) + 7) & ~7
-        vrlv_off = (vrpg_off + len(vrpg) + 7) & ~7
-        vrlm_off = (vrlv_off + len(vrlv) + 7) & ~7
-        vrcsv_off = (vrlm_off + len(vrlm) + 7) & ~7
-        files_off=(vrcsv_off+len(vrcsv)+7)&~7
+        rate_off = (tt_off + len(tt) + 7) & ~7
+        ratecsv_off = (rate_off + len(rate_tpl) + 7) & ~7
+        files_off=(ratecsv_off+len(ratecsv)+7)&~7
         bit_off=(files_off+len(file_page)+7)&~7
         virtual_off=(bit_off+len(bit_tpl)+7)&~7
         img_off = (virtual_off + len(virtual_blob) + 63) & ~63
@@ -316,17 +319,14 @@ def build_core(tmp, n_formats=len(FORMATS), virtual=False):
         tab = struct.pack(f'<{TAB_WORDS}I', TAB_MAGIC, TAB_VERSION, img_off, L.LAYOUT0,
                           len(claims), claim_off, len(hooks), hook_off, scratch_off, fobj_off,
                           tpl_off, len(tpl), qstab_off, tt_off, qsbuf_off, data_area, DATA_BYTES,
-                          vrtpl_off, len(vrtpl), vrpg_off, vrlv_off, vrlm_off, virtual_off, len(virtual_blob), virtual_state, vrcsv_off,
+                          rate_off, len(rate_tpl), virtual_off, len(virtual_blob), virtual_state, ratecsv_off,
                           files_off,len(file_page),files_state,bit_off,len(bit_tpl))
         tail = tab + rows_b + data + hook_b
         tail += b'\0' * (tpl_off - tab_off - len(tail)) + tpl
         tail += b'\0' * (qstab_off - tab_off - len(tail)) + qtab
         tail += b'\0' * (tt_off - tab_off - len(tail)) + tt
-        tail += b'\0' * (vrtpl_off - tab_off - len(tail)) + vrtpl
-        tail += b'\0' * (vrpg_off - tab_off - len(tail)) + vrpg
-        tail += b'\0' * (vrlv_off - tab_off - len(tail)) + vrlv
-        tail += b'\0' * (vrlm_off - tab_off - len(tail)) + vrlm
-        tail += b'\0' * (vrcsv_off - tab_off - len(tail)) + vrcsv
+        tail += b'\0' * (rate_off - tab_off - len(tail)) + rate_tpl
+        tail += b'\0' * (ratecsv_off - tab_off - len(tail)) + ratecsv
         tail += b'\0' * (files_off - tab_off - len(tail)) + file_page
         tail += b'\0' * (bit_off - tab_off - len(tail)) + bit_tpl
         tail += b'\0' * (virtual_off - tab_off - len(tail)) + virtual_blob
@@ -334,8 +334,7 @@ def build_core(tmp, n_formats=len(FORMATS), virtual=False):
         return tail, {'img_off': img_off, 'scratch_off': scratch_off, 'fobj_off': fobj_off,
                       'file_len': img_off + len(lay), 'tpl_off': tpl_off, 'qstab_off': qstab_off,
                       'tt_off': tt_off, 'qsbuf_off': qsbuf_off, 'data_off': data_area,
-                      'vrtpl_off': vrtpl_off, 'vrpg_off': vrpg_off, 'vrlv_off': vrlv_off,
-                      'vrlm_off': vrlm_off, 'vrcsv_off': vrcsv_off,
+                      'rate_off': rate_off, 'rate_len': len(rate_tpl), 'ratecsv_off': ratecsv_off,
                       'virtual_off': virtual_off, 'virtual_bytes': len(virtual_blob),
                       'virtual_state': virtual_state, 'virtual_runtime_bytes': virtual_bytes if virtual else 0,
                       'files_off':files_off,'files_state':files_state,'files_ui':file_page_info,

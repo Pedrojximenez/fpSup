@@ -1,0 +1,23 @@
+
+# CPU = 24.5[%] 
+# top 10 tasks 
+# ------------------------------
+# Cnt = 14297, Overlap = 0, Prefix = 1/1000000 
+#   TaskID       Time   Rate    FuncAddr    Pri  StackRem      name
+     001      2268590    75.5[%] c0001c60 (30)       3832 Byte inittsk
+     044       326303    10.9[%] c036ee50 (15)       7724 Byte CamSch
+     029        81407     2.7[%] c035c460 (11)       7056 Byte LensCycl
+     068        38075     1.3[%] c01c26f9 (12)       4768 Byte MANAGER
+     063        37474     1.2[%] c0672d89 (17)       1952 Byte FdTsk
+     094        36539     1.2[%] c036ee50 (16)       3480 Byte ExtStrb
+     092        34937     1.2[%] c036ee50 (14)       7696 Byte AeDev
+     071        33780     1.1[%] c01c40f9 (12)       8696 Byte R2YHDIS
+     095        33105     1.1[%] c036ee50 (16)       3204 Byte Level
+     039        25454     0.8[%] c036ee50 (17)      14608 Byte DrawMgr
+# Total(Sum)     3005774(   3005774) 
+
+-> succeeded
+
+-> succeeded
+
+

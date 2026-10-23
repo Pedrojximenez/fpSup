@@ -1,0 +1,35 @@
+{
+  "variant": "baseline",
+  "phase": "verified",
+  "existing_size": null,
+  "written": {
+    "\\fpSup\\32RESCUS.BIN": {
+      "bytes": 184128,
+      "sha256": "42d9869185808b2577fa421e490b25a09fbd5fe46294cdbef579e149dea1dd71"
+    },
+    "\\fpSup\\RESCUS\\OG3K.RCD": {
+      "bytes": 4244,
+      "sha256": "f61a3861dba81d12f4a9eb7a0fc8cca249859ee4bc840dcc022b134d647b89ba"
+    },
+    "\\fpSup\\RESCUS\\OG2K.RCD": {
+      "bytes": 5216,
+      "sha256": "8025ea96924b535f9b202b2f9ae65c81f7c66129bf4dfb5256c2a1d46b444ecf"
+    },
+    "\\fpSup\\RESCUS\\S16.RCD": {
+      "bytes": 7132,
+      "sha256": "3e942889e4cfb47f5c0aba2d696544abcc9a8b76fd2848bc0b7feb275195afd4"
+    },
+    "\\fpSup\\RESCUS\\OG35K.RCD": {
+      "bytes": 7788,
+      "sha256": "e5b5ba7a9535f45b597745e1bec5377dad4c4fa46aa11fb9fb6c53648f57a303"
+    },
+    "\\fpSup\\RESCUS\\OG4K.RCD": {
+      "bytes": 3900,
+      "sha256": "39a808f2189895dce66c93d283711b67327c3a2869ff25ea2b43af00492e6661"
+    }
+  },
+  "daemon": [
+    82146,
+    "OK name=fpshd version=3.2.0 protocol=1 frame=64 payload=44 transport=EP01-EP82 iface=0 camera=open seq=3372 ep83=host_candidate upload=UP01-probed mem=MEM1-probed quarantine=0 fault=none\n"
+  ]
+}

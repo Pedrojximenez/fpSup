@@ -1,0 +1,102 @@
+Composition {
+	CurrentTime = 0,
+	RenderRange = { 0, 0 },
+	GlobalRange = { 0, 0 },
+	CurrentID = 3,
+	HiQ = true,
+	PlaybackUpdateMode = 0,
+	StereoMode = false,
+	Version = "DaVinci Resolve Studio 21.0.4.0005",
+	SavedOutputs = 0,
+	HeldTools = 0,
+	DisabledTools = 0,
+	LockedTools = 0,
+	AudioOffset = 0,
+	Resumable = true,
+	OutputClips = {
+		"/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/float-transport-02/identity.0000.exr"
+	},
+	Tools = {
+		Loader1 = Loader {
+			Clips = {
+				Clip {
+					ID = "Clip1",
+					Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/float-transport-02/source.exr",
+					FormatID = "OpenEXRFormat",
+					StartFrame = -1,
+					LengthSetManually = true,
+					TrimIn = 0,
+					TrimOut = 0,
+					ExtendFirst = 0,
+					ExtendLast = 0,
+					Loop = 0,
+					AspectMode = 0,
+					Depth = 0,
+					TimeCode = 0,
+					GlobalStart = 0,
+					GlobalEnd = 0
+				}
+			},
+			Inputs = {
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				["Clip1.OpenEXRFormat.DeepOutputMode"] = Input { Disabled = true, },
+				["Clip1.OpenEXRFormat.RedName"] = Input { Value = FuID { "R" }, },
+				["Clip1.OpenEXRFormat.GreenName"] = Input { Value = FuID { "G" }, },
+				["Clip1.OpenEXRFormat.BlueName"] = Input { Value = FuID { "B" }, }
+			},
+		},
+		Saver1 = Saver {
+			Inputs = {
+				ProcessWhenBlendIs00 = Input { Value = 0, },
+				Clip = Input {
+					Value = Clip {
+						Filename = "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/float-transport-02/identity.0000.exr",
+						FormatID = "OpenEXRFormat",
+						Length = 0,
+						Saving = true,
+						LengthSetManually = true,
+						AspectMode = 0,
+						Depth = 0,
+						GlobalStart = -2000000000,
+						GlobalEnd = -2000000000
+					},
+				},
+				OutputFormat = Input { Value = FuID { "OpenEXRFormat" }, },
+				["Gamut.LogType"] = Input { Value = FuID { "Bypass" }, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				Input = Input {
+					SourceOp = "Loader1",
+					Source = "Output",
+				},
+				["OpenEXRFormat.Depth"] = Input { Value = 1, },
+				["OpenEXRFormat.Compression"] = Input { Value = 0, },
+				["OpenEXRFormat.ZipCompressionLevel"] = Input { Value = 4, },
+				["OpenEXRFormat.AlphaEnable"] = Input { Value = 0, }
+			},
+		}
+	},
+	Frames = {
+	},
+	Prefs = {
+		Comp = {
+			Paths = {
+				Map = {
+					["ResolveCaches:"] = "/Users/dido/Movies/CacheClip/FusionCache",
+				},
+			},
+			FrameFormat = {
+				GuideRatio = 1.77777777777778,
+			},
+			SpellCheck = {
+			},
+			Unsorted = {
+				GlobalEnd = 0,
+			},
+			Views = {
+				View1 = {
+				},
+			},
+		}
+	},
+}
+

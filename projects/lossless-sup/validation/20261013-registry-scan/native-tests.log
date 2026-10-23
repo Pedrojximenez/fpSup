@@ -1,0 +1,262 @@
+....................................................................................................................................................................................................................................................................................................EEEEEEEEEEEEEEEEEEEEEEEEE......................................................................................................................../Users/dido/Developer.localized/SIGMAfp_re/research/slimRAW/tiff.py:29: ResourceWarning: unclosed file <_io.BufferedReader name='/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/captures/opengate_ev_bug_20260914/dng/A001_083_FHD_f01.DNG'>
+  d = open(path,'rb').read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+................/var/folders/20/mb8w7p_x7nlfpctnt7qd77b00000gn/T/fpl-trailer-m-5lz3j1a_/ours.DNG: Unexpected end of file
+/var/folders/20/mb8w7p_x7nlfpctnt7qd77b00000gn/T/fpl-trailer-m-cj10c2mb/ours.DNG: Unexpected end of file
+.........................
+======================================================================
+ERROR: test_01_exact_private_name_and_fresh_state (native.test_native_variable.NativePortTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 82, in setUp
+    self.p = probe_class()()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 32, in probe_class
+    class PortProbe(BINDING.BindingProbe):
+AttributeError: 'NoneType' object has no attribute 'BindingProbe'
+
+======================================================================
+ERROR: test_02_absent_lookup_is_not_a_descriptor (native.test_native_variable.NativePortTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 82, in setUp
+    self.p = probe_class()()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 32, in probe_class
+    class PortProbe(BINDING.BindingProbe):
+AttributeError: 'NoneType' object has no attribute 'BindingProbe'
+
+======================================================================
+ERROR: test_03_register_defaults_off_and_borrows_stable_name (native.test_native_variable.NativePortTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 82, in setUp
+    self.p = probe_class()()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 32, in probe_class
+    class PortProbe(BINDING.BindingProbe):
+AttributeError: 'NoneType' object has no attribute 'BindingProbe'
+
+======================================================================
+ERROR: test_04_no_duplicate_registration (native.test_native_variable.NativePortTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 82, in setUp
+    self.p = probe_class()()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 32, in probe_class
+    class PortProbe(BINDING.BindingProbe):
+AttributeError: 'NoneType' object has no attribute 'BindingProbe'
+
+======================================================================
+ERROR: test_05_collision_is_never_adopted (native.test_native_variable.NativePortTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 82, in setUp
+    self.p = probe_class()()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 32, in probe_class
+    class PortProbe(BINDING.BindingProbe):
+AttributeError: 'NoneType' object has no attribute 'BindingProbe'
+
+======================================================================
+ERROR: test_06_registration_error_is_sticky (native.test_native_variable.NativePortTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 82, in setUp
+    self.p = probe_class()()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 32, in probe_class
+    class PortProbe(BINDING.BindingProbe):
+AttributeError: 'NoneType' object has no attribute 'BindingProbe'
+
+======================================================================
+ERROR: test_07_lua_failure_is_not_rolled_back_or_retried (native.test_native_variable.NativePortTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 82, in setUp
+    self.p = probe_class()()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 32, in probe_class
+    class PortProbe(BINDING.BindingProbe):
+AttributeError: 'NoneType' object has no attribute 'BindingProbe'
+
+======================================================================
+ERROR: test_08_nonboolean_value_rejected_before_native_assignment (native.test_native_variable.NativePortTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 82, in setUp
+    self.p = probe_class()()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 32, in probe_class
+    class PortProbe(BINDING.BindingProbe):
+AttributeError: 'NoneType' object has no attribute 'BindingProbe'
+
+======================================================================
+ERROR: test_09_canonical_set_executes_original_silent_array_setter (native.test_native_variable.NativePortTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 82, in setUp
+    self.p = probe_class()()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 32, in probe_class
+    class PortProbe(BINDING.BindingProbe):
+AttributeError: 'NoneType' object has no attribute 'BindingProbe'
+
+======================================================================
+ERROR: test_10_subscription_copies_pair_and_original_user_write_notifies (native.test_native_variable.NativePortTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 82, in setUp
+    self.p = probe_class()()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 32, in probe_class
+    class PortProbe(BINDING.BindingProbe):
+AttributeError: 'NoneType' object has no attribute 'BindingProbe'
+
+======================================================================
+ERROR: test_11_subscription_cannot_replace_foreign_owner (native.test_native_variable.NativePortTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 82, in setUp
+    self.p = probe_class()()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 32, in probe_class
+    class PortProbe(BINDING.BindingProbe):
+AttributeError: 'NoneType' object has no attribute 'BindingProbe'
+
+======================================================================
+ERROR: test_12_duplicate_subscribe_does_not_mutate (native.test_native_variable.NativePortTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 82, in setUp
+    self.p = probe_class()()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 32, in probe_class
+    class PortProbe(BINDING.BindingProbe):
+AttributeError: 'NoneType' object has no attribute 'BindingProbe'
+
+======================================================================
+ERROR: test_13_unsubscribe_checks_pair_pointer_and_context (native.test_native_variable.NativePortTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 82, in setUp
+    self.p = probe_class()()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 32, in probe_class
+    class PortProbe(BINDING.BindingProbe):
+AttributeError: 'NoneType' object has no attribute 'BindingProbe'
+
+======================================================================
+ERROR: test_14_serial_unsubscribe_does_not_free_descriptor_name_or_context (native.test_native_variable.NativePortTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 82, in setUp
+    self.p = probe_class()()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 32, in probe_class
+    class PortProbe(BINDING.BindingProbe):
+AttributeError: 'NoneType' object has no attribute 'BindingProbe'
+
+======================================================================
+ERROR: test_15_failed_subscribe_retains_context_until_explicit_cleanup (native.test_native_variable.NativePortTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 82, in setUp
+    self.p = probe_class()()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 32, in probe_class
+    class PortProbe(BINDING.BindingProbe):
+AttributeError: 'NoneType' object has no attribute 'BindingProbe'
+
+======================================================================
+ERROR: test_16_native_set_failure_sticky_but_serial_cancel_still_possible (native.test_native_variable.NativePortTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 82, in setUp
+    self.p = probe_class()()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 32, in probe_class
+    class PortProbe(BINDING.BindingProbe):
+AttributeError: 'NoneType' object has no attribute 'BindingProbe'
+
+======================================================================
+ERROR: test_17_read_checks_type_before_acceptance (native.test_native_variable.NativePortTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 82, in setUp
+    self.p = probe_class()()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 32, in probe_class
+    class PortProbe(BINDING.BindingProbe):
+AttributeError: 'NoneType' object has no attribute 'BindingProbe'
+
+======================================================================
+ERROR: test_18_descriptor_identity_and_borrowed_name_checked (native.test_native_variable.NativePortTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 82, in setUp
+    self.p = probe_class()()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 32, in probe_class
+    class PortProbe(BINDING.BindingProbe):
+AttributeError: 'NoneType' object has no attribute 'BindingProbe'
+
+======================================================================
+ERROR: test_19_inactive_registry_status_is_not_success (native.test_native_variable.NativePortTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 82, in setUp
+    self.p = probe_class()()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 32, in probe_class
+    class PortProbe(BINDING.BindingProbe):
+AttributeError: 'NoneType' object has no attribute 'BindingProbe'
+
+======================================================================
+ERROR: test_20_null_outputs_no_native_call (native.test_native_variable.NativePortTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 82, in setUp
+    self.p = probe_class()()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 32, in probe_class
+    class PortProbe(BINDING.BindingProbe):
+AttributeError: 'NoneType' object has no attribute 'BindingProbe'
+
+======================================================================
+ERROR: test_21_changed_subscriber_rejected_before_write (native.test_native_variable.NativePortTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 82, in setUp
+    self.p = probe_class()()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 32, in probe_class
+    class PortProbe(BINDING.BindingProbe):
+AttributeError: 'NoneType' object has no attribute 'BindingProbe'
+
+======================================================================
+ERROR: test_22_removed_subscription_rejected_on_read (native.test_native_variable.NativePortTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 82, in setUp
+    self.p = probe_class()()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 32, in probe_class
+    class PortProbe(BINDING.BindingProbe):
+AttributeError: 'NoneType' object has no attribute 'BindingProbe'
+
+======================================================================
+ERROR: test_23_unowned_subscription_rejected_before_write (native.test_native_variable.NativePortTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 82, in setUp
+    self.p = probe_class()()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 32, in probe_class
+    class PortProbe(BINDING.BindingProbe):
+AttributeError: 'NoneType' object has no attribute 'BindingProbe'
+
+======================================================================
+ERROR: test_24_only_exact_cursor_and_confirm_private_names_are_admitted (native.test_native_variable.NativePortTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 82, in setUp
+    self.p = probe_class()()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 32, in probe_class
+    class PortProbe(BINDING.BindingProbe):
+AttributeError: 'NoneType' object has no attribute 'BindingProbe'
+
+======================================================================
+ERROR: test_25_private_prefix_or_stock_names_do_not_expand_the_allowlist (native.test_native_variable.NativePortTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 82, in setUp
+    self.p = probe_class()()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_native_variable.py", line 32, in probe_class
+    class PortProbe(BINDING.BindingProbe):
+AttributeError: 'NoneType' object has no attribute 'BindingProbe'
+
+----------------------------------------------------------------------
+Ran 478 tests in 168.577s
+
+FAILED (errors=25)
+{"camera_accessed": false, "camera_capacity_proved": false, "deployable": false, "dma_drain_proved": false, "firmware_sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622", "kind": "compiled_raw_workspace_host_and_original_arm_descriptor_wrappers", "legacy_C001CFD8_nested_SP_mod8": 4, "native_instructions_executed": ["C001CFD8", "C001D3D0"], "new_wrapper_stack_alignment": 8, "passed": true, "producer_exclusion_proved": false, "skipped": 0, "source_hashes": {"raw_workspace.c": "efc71e9199ed4922df63fbebd0370758b04f1304e30596565ac158a2fc0031ec", "raw_workspace.h": "ffc9a9a9d03536a18fce4912c1643e82ba55ca4f273fb4cfc0a5f46595e1a4a3", "test_raw_workspace.py": "64ccb0467f9cc7be45609ed9e87853f1558c4554561359a039d3365303c6b637"}, "substitutes": ["memory mode", "pool selection", "physical allocation/free"], "tests_run": 40, "text_bytes": 804, "text_sha256": "b0a7e8c342a0d0a83afffc45173d786611361dab164df454e8c3f001c93ee436"}
+RAW WORKSPACE VERIFIED: 40 tests, 0 skipped

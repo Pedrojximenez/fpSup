@@ -1,0 +1,14 @@
+test_private_home_and_manager_strings_resolve_and_stay_borrowed_with_lut (test_sup_ui.LutUiTests) ... FAIL
+
+======================================================================
+FAIL: test_private_home_and_manager_strings_resolve_and_stay_borrowed_with_lut (test_sup_ui.LutUiTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lut/test_sup_ui.py", line 322, in test_private_home_and_manager_strings_resolve_and_stay_borrowed_with_lut
+    self.assertEqual(string_call(0xC05E61C8,text),1)
+AssertionError: 0 != 1
+
+----------------------------------------------------------------------
+Ran 1 test in 4.043s
+
+FAILED (failures=1)

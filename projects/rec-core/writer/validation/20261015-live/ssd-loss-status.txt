@@ -1,0 +1,179 @@
+record at 0xC072E068: state 0xC5159DE0, resident base 0xC5147A20
+  magic                                        1146241347  0x44524143
+  hold_live                                             0  0x00000000
+  rec_events                                           18  0x00000012
+  rec_admitted                                         18  0x00000012
+  rec_raw                                               0  0x00000000
+  rec_firmware_refused                                  0  0x00000000
+  rec_hold_refused                                      0  0x00000000
+  hold_init_failed                                      0  0x00000000
+  ring_busy                                             8  0x00000008
+  stops                                                18  0x00000012
+  finishes                                             18  0x00000012
+  finish_busy                                           0  0x00000000
+  last_finish                                           0  0x00000000
+  stale_promises                                       62  0x0000003E
+  rec.workspace.last_result                             0  0x00000000
+  rec.workspace.native_result                           1  0x00000001
+  rec.facts.seen.width                               3024  0x00000BD0
+  rec.facts.seen.height                              2010  0x000007DA
+  rec.facts.seen.bits                                  12  0x0000000C
+  rec.facts.seen.raster                           9117360  0x008B1EB0
+  rec_menu_off                                          0  0x00000000
+  menu.result                                           1  0x00000001
+  menu.registered                                       3  0x00000003
+  spare_bytes                                     9204736  0x008C7400
+  spare_failed                                          0  0x00000000
+  spares_freed                                         36  0x00000024
+  task_id                                             124  0x0000007C
+  lane_b_failed                                         0  0x00000000
+  lane_stop_result                                      0  0x00000000
+  hold.magic                                   1145851720  0x444C4F48
+  hold.lane                                             0  0x00000000
+  hold.arrivals                                      4124  0x0000101C
+  hold.held                                          4124  0x0000101C
+  hold.passed                                           0  0x00000000
+  hold.compressed                                    4124  0x0000101C
+  hold.refused                                          0  0x00000000
+  hold.no_benefit                                       0  0x00000000
+  hold.not_eligible                                     0  0x00000000
+  hold.faults                                           0  0x00000000
+  hold.swapped                                       4124  0x0000101C
+  hold.swap_declined                                    0  0x00000000
+  hold.swap_undone                                      0  0x00000000
+  hold.dma_failed                                       0  0x00000000
+  hold.lanes_full                                     283  0x0000011B
+  hold_b.magic                                 1145851720  0x444C4F48
+  hold_b.lane                                           0  0x00000000
+  hold_b.held                                        4124  0x0000101C
+  hold_b.compressed                                  4122  0x0000101A
+  hold_b.refused                                        2  0x00000002
+  hold_b.no_benefit                                     2  0x00000002
+  hold_b.faults                                         0  0x00000000
+  hold_b.swapped                                     4122  0x0000101A
+  hold_b.dma_failed                                     0  0x00000000
+  flush.applied                                     21107  0x00005273
+  flush.tag_failed                                      0  0x00000000
+  flush.length_mismatch                                 0  0x00000000
+  hold.stalls                                           0  0x00000000
+  hold_b.stalls                                         2  0x00000002
+  hold.job_last_us                                  34297  0x000085F9
+  hold.job_max_us                                   35624  0x00008B28
+  hold.stall_limit_us                              121563  0x0001DADB
+  hold_b.job_last_us                                34593  0x00008721
+  hold_b.job_max_us                                 35745  0x00008BA1
+  hold.job_sum_us                               142100403  0x087847B3
+  hold.job_count                                     4124  0x0000101C
+  hold_b.job_sum_us                             142037511  0x08775207
+  hold_b.job_count                                   4122  0x0000101A
+  hold.submit_sum_us                               105519  0x00019C2F
+  hold.finish_sum_us                              6301884  0x006028BC
+  hold.poll_sum                                     16495  0x0000406F
+  hold.gap_sum_us                                45909636  0x02BC8684
+  hold.cycle_sum_us                             284582968  0x10F66438
+  hold.cycle_count                                   4123  0x0000101B
+  hold_b.submit_sum_us                             103743  0x0001953F
+  hold_b.finish_sum_us                            6260683  0x005F87CB
+  hold_b.poll_sum                                   16488  0x00004068
+  hold_b.gap_sum_us                              45861302  0x02BBC9B6
+  hold_b.cycle_sum_us                           284582771  0x10F66373
+  hold_b.cycle_count                                 4123  0x0000101B
+  tile_force                                            0  0x00000000
+  hold.job.tile_width                                 512  0x00000200
+  hold.job.tile_height                                512  0x00000200
+  hold.job.tiles                                       24  0x00000018
+  play.seen                                             1  0x00000001
+  play.stock                                            1  0x00000001
+  play.decoded                                          0  0x00000000
+  play.last_us                                          0  0x00000000
+  play.max_us                                           0  0x00000000
+  play.last_buf                                3522619456  0xD1F6E840
+  play.last_cap                                   9207808  0x008C8000
+  play.last_got                                   9200640  0x008C6400
+  play.clips                                            8  0x00000008
+  play.clips_ours                                       0  0x00000000
+  play.clip_size_was                              9200640  0x008C6400
+  play.clip_size_set                                    0  0x00000000
+  play.clip_failed                                      0  0x00000000
+  play.scratch_bytes                                    0  0x00000000
+  play.scratch_failed                                   0  0x00000000
+  play.scratch_freed                                    1  0x00000001
+  play.scratch_want                               4644864  0x0046E000
+  play.clips_first_stock                                8  0x00000008
+  take_frames                                        8532  0x00002154
+  settings_on                                           1  0x00000001
+  settings_ok                                           1  0x00000001
+  saves                                                 0  0x00000000
+  save_failed                                           0  0x00000000
+  save_last                                             0  0x00000000
+  trace_n                                               0  0x00000000
+  elog_n                                                0  0x00000000
+  engine_release                                        0  0x00000000
+  hold.job.reused                                    4121  0x00001019
+  hold_b.job.reused                                  4124  0x0000101C
+  tag_tiles                                            24  0x00000018
+  tag_bytes                                          1164  0x0000048C
+  hold.require_head                                 82944  0x00014400
+  observer_slot                                         7  0x00000007
+  observer_full                                         0  0x00000000
+  observer_calls                                    24399  0x00005F4F
+  tag_mode0                                            18  0x00000012
+  tag_added                                            18  0x00000012
+  tag_add_result                                        1  0x00000001
+  tag_add_failed                                        0  0x00000000
+  tag_prepared                                         18  0x00000012
+  tag_prepare_failed                                    0  0x00000000
+  tag_prepare_result                                    0  0x00000000
+  tag_head                                          82944  0x00014400
+  tag_want                                              0  0x00000000
+  tag_pending                                           0  0x00000000
+  tag_live                                     3306709500  0xC51861FC
+  tag_index                                             0  0x00000000
+  record_diag.event_calls                           25596  0x000063FC
+  record_diag.raw_errors                                0  0x00000000
+  record_diag.capture_limits                            0  0x00000000
+  record_diag.completion_errors                         0  0x00000000
+  record_diag.lookup_missing                            0  0x00000000
+  record_diag.last_event                                0  0x00000000
+  record_diag.last_result                               0  0x00000000
+  record_diag.last_slot                                 0  0x00000000
+  record_diag.last_generation                           0  0x00000000
+  record_diag.last_state                                0  0x00000000
+  record_diag.last_handle                               0  0x00000000
+  record_diag.last_missing                              0  0x00000000
+  record_diag.discard_calls                             0  0x00000000
+  record_diag.discard_count                             0  0x00000000
+  record_diag.discard_missing                           0  0x00000000
+  record_diag.discard_raw                               0  0x00000000
+  record_diag.discard_completion                        0  0x00000000
+  record_diag.discard_teardown                          0  0x00000000
+  record_diag.discard_other                             0  0x00000000
+  record_diag.drop_next                                 0  0x00000000
+  record_diag.drop_used                                 0  0x00000000
+  record_diag.drop_overwritten                          0  0x00000000
+  record_diag.writer_calls                           8532  0x00002154
+  record_diag.writer_zero                               0  0x00000000
+  record_diag.writer_nonzero                         8532  0x00002154
+  record_diag.writer_low                          3278848  0x00320800
+  record_diag.writer_high                               0  0x00000000
+
+reading:
+  menu row: INSTALLED; takes left stock because OFF 0
+  producer 3024x2010 12-bit, raster 9,117,360 B
+  takes admitted 18, recorded RAW 0; codec task id 124; second lane ON
+  frames reaching the lossless hook 8532: held 8248, compressed 8246, passed because both lanes busy 283, not eligible 0
+  engine refused 2, no saving 2, faults 0; header DMA refused 0
+  engine jobs given up on (never finished): 2; hold_b registers 0000/04/08/0C/64/74/F8/3FC 00000000 00000000 00000004 00000000 00000002 00000001 00000000 00000000
+  zero copy: swapped 8246, declined 0, undone 0; spare 9,204,736 B, failed 0, freed 36
+  stop: stops 18, finished 18, busy 0, lanes now 0/0, result 0
+  codec job time: last 34.3 ms, longest 35.6 ms (lane B 34.6 / 35.7); given up after 122 ms
+  tile grid 512x512 (24 tiles; force 0x00000000); mean codec job 34.46 ms over 8246 jobs
+  this take 8532 frames (the first left uncompressed); clips opening on a stock frame 8
+  clips opened 8, ours 0 (frame size 9,200,640 -> 0), header unread 0; scratch 0 B, failed 0, freed 1
+  playback: frames read 1, stock 1, decoded 0 (last 0.0 ms, max 0.0 ms); last slot buffer 0xD1F6E840 capacity 9,207,808 read 9,200,640
+  before file write (not a write-success count): IFDs completed 21107, header not the take's 0, other length 0; promises a previous take left 62
+  native events: RAW errors 0, capture limits 0, completion errors 0, missing registry slots 0
+  last nonzero/missing event: event 0, result 0, slot 0, generation 0, state 0, handle 0x00000000, missing 0
+  native FIFO discarded 0: RAW error 0, completion error 0, teardown 0, other 0
+  native writer returns: calls 8532, zero 0, nonzero 8532, last 3278848 bytes (API result, not proof of durable files)
+  recent discarded files: 0 retained, 0 older records overwritten; slots are not file numbers

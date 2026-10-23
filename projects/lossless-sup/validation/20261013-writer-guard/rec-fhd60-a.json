@@ -1,0 +1,155 @@
+{
+ "label": "fhd60-a",
+ "settings": {
+  "menu SetMovRecSize": "2",
+  "menu SetMovFramerate": "5",
+  "gui geti MV_FrameRate": "OK:MV_FrameRate -> 6",
+  "gui geti MV_fpLossless": "OK:MV_fpLossless -> 1",
+  "sdcard sdmode": "sdmode  UHS-II"
+ },
+ "before": {
+  "rec.facts.seen.width": 0,
+  "rec.facts.seen.height": 0,
+  "rec.facts.seen.bits": 0,
+  "hold.held": 0,
+  "hold.passed": 0,
+  "hold.compressed": 0,
+  "hold.refused": 0,
+  "hold.no_benefit": 0,
+  "hold.faults": 0,
+  "hold.lanes_full": 0,
+  "hold_b.held": 0,
+  "hold_b.compressed": 0,
+  "hold_b.refused": 0,
+  "hold_b.no_benefit": 0,
+  "hold_b.faults": 0,
+  "flush.applied": 0,
+  "flush.trailer_failed": 0,
+  "flush.length_mismatch": 0,
+  "flush.prep.built": 0,
+  "flush.prep.reused": 0,
+  "flush.prep.fallback": 0,
+  "hold.stalls": 0,
+  "hold_b.stalls": 0,
+  "rec_events": 0,
+  "rec_admitted": 0,
+  "rec_raw": 0,
+  "rec_menu_off": 0,
+  "hold_live": 0
+ },
+ "recording_at_1s": "is_recording -> 1",
+ "ticket_polls": [
+  [
+   1.16,
+   128
+  ],
+  [
+   1.36,
+   128
+  ],
+  [
+   1.57,
+   128
+  ],
+  [
+   1.78,
+   128
+  ],
+  [
+   1.99,
+   126
+  ],
+  [
+   2.2,
+   128
+  ],
+  [
+   2.41,
+   128
+  ],
+  [
+   2.66,
+   128
+  ],
+  [
+   2.89,
+   128
+  ],
+  [
+   3.11,
+   126
+  ],
+  [
+   3.32,
+   128
+  ],
+  [
+   3.53,
+   128
+  ],
+  [
+   3.74,
+   128
+  ],
+  [
+   3.94,
+   128
+  ],
+  [
+   4.16,
+   126
+  ],
+  [
+   4.4,
+   128
+  ],
+  [
+   4.61,
+   128
+  ],
+  [
+   4.84,
+   128
+  ]
+ ],
+ "tickets_min": 126,
+ "stop_at": 5.19,
+ "finished": true,
+ "finish_wait_s": 1,
+ "after": {
+  "rec.facts.seen.width": 1008,
+  "rec.facts.seen.height": 672,
+  "rec.facts.seen.bits": 12,
+  "hold.held": 320,
+  "hold.passed": 0,
+  "hold.compressed": 320,
+  "hold.refused": 0,
+  "hold.no_benefit": 0,
+  "hold.faults": 0,
+  "hold.lanes_full": 2,
+  "hold_b.held": 193,
+  "hold_b.compressed": 193,
+  "hold_b.refused": 0,
+  "hold_b.no_benefit": 0,
+  "hold_b.faults": 0,
+  "flush.applied": 513,
+  "flush.trailer_failed": 0,
+  "flush.length_mismatch": 0,
+  "flush.prep.built": 1,
+  "flush.prep.reused": 512,
+  "flush.prep.fallback": 0,
+  "hold.stalls": 0,
+  "hold_b.stalls": 0,
+  "rec_events": 1,
+  "rec_admitted": 1,
+  "rec_raw": 0,
+  "rec_menu_off": 0,
+  "hold_live": 0
+ },
+ "tickets_after": 128,
+ "record_log": "file-size=1095168, bulk-size=67108864(61.3)\nreq_cnt=516, fin_cnt=516, key\nrequest  ,finish   ,diff,gap ,reqcnt,fincnt,diff,sdb,MB/s\n     1713,     1912, 199,1713,   129,     1, 128,859, 337\n     2775,     2970, 195, 863,   258,   130, 128,861, 344\n     3855,     4049, 194, 885,   387,   259, 128,860, 345\n     4900,     5122, 222, 851,   514,   388, 126,886, 302\n     5341,     5553, 212, 219,   516,   515,   1,1014,  10\n",
+ "req_fin": [
+  516,
+  516
+ ]
+}

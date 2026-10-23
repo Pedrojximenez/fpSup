@@ -1,0 +1,62 @@
+{
+  "scope": "Browser prototype; custom-label fix with native mouse/keyboard UI and pure model checks",
+  "moreRes": {
+    "display": "CUSTOM\n(1.71:1)",
+    "fields": [
+      "RES，CUSTOM(1.71:1)",
+      "解析寬度，2048 像素",
+      "解析高度，1200 像素",
+      "比例，1.71:1"
+    ],
+    "preset": "RES，CUSTOM(1.71:1)"
+  },
+  "options": {
+    "values": [
+      {
+        "label": "4K",
+        "selected": "false"
+      },
+      {
+        "label": "CUSTOM(1.71:1)",
+        "selected": "true"
+      }
+    ]
+  },
+  "standard": {
+    "label": "RES，4K"
+  },
+  "mainRes": {
+    "display": "CUSTOM\n(1.71:1)",
+    "label": "解析度，CUSTOM(1.71:1)，點按在下方調整，點兩下進入更多選項",
+    "values": [
+      "4K",
+      "CUSTOM(1.71:1)"
+    ]
+  },
+  "moreDc": {
+    "display": "CUSTOM\n(1.25:1)",
+    "label": "DC，CUSTOM(1.25:1)"
+  },
+  "mainBoth": {
+    "dc": "CUSTOM\n(1.25:1)",
+    "res": "CUSTOM\n(1.71:1)",
+    "selectedOption": [
+      "CUSTOM(1.71:1)"
+    ]
+  },
+  "narrow": {
+    "dc": "CUSTOM\n(1.25:1)",
+    "res": "CUSTOM\n(1.71:1)",
+    "resValueScroll": 56,
+    "resValueWidth": 56,
+    "scroll": 320,
+    "width": 320
+  },
+  "reload": {
+    "dc": "CUSTOM\n(1.25:1)",
+    "res": "CUSTOM\n(1.71:1)",
+    "savedOnLoad": null
+  },
+  "logs": [],
+  "checks": "PASS: custom RES and DC labels in both views, selected options aligned, preset selection remains usable, 320px fit, reload and no browser errors"
+}

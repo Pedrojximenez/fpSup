@@ -1,0 +1,20 @@
+f000001.DNG 3245568 root 0x8 IFD0 entries 59 tag FD4C (7, 1068, 16688) strip at 0x13800
+  rawpy (1090, 1936) mean 319.8 min 255 max 462
+f000002.DNG 996352 root 0x4130 IFD0 entries 59 tag FD4C (7, 1068, 16688) strip at 0x13800
+  compressed IFD entries 60 comp 7 tile 512 x 368 tiles 12 first 0x13800 end 0xf3400 file 0xf3400
+  IFD inside the tag value: True
+  rawpy (1090, 1936) mean 319.8 min 255 max 462
+f000050.DNG 996352 root 0x4130 IFD0 entries 59 tag FD4C (7, 1068, 16688) strip at 0x13800
+  compressed IFD entries 60 comp 7 tile 512 x 368 tiles 12 first 0x13800 end 0xf3400 file 0xf3400
+  IFD inside the tag value: True
+  rawpy (1090, 1936) mean 319.8 min 255 max 461
+f000104.DNG 996352 root 0x4130 IFD0 entries 59 tag FD4C (7, 1068, 16688) strip at 0x13800
+  compressed IFD entries 60 comp 7 tile 512 x 368 tiles 12 first 0x13800 end 0xf3400 file 0xf3400
+  IFD inside the tag value: True
+  rawpy (1090, 1936) mean 319.8 min 255 max 465
+f000002.DNG vs f000001.DNG : mean |diff| 1.55
+f000050.DNG vs f000001.DNG : mean |diff| 1.55
+f000104.DNG vs f000001.DNG : mean |diff| 1.55
+f000002.DNG [('0xc763', True, '1147391900000000'), ('0xc65d', True, '9141181707f1110f0132150036b6992e'), ('0x132', True, '323032363a31303a31352030313a3530')]
+f000050.DNG [('0xc763', True, '2948391900000000'), ('0xc65d', True, '9141181707f1110f0132150036b6c92e'), ('0x132', True, '323032363a31303a31352030313a3530')]
+f000104.DNG [('0xc763', True, '2350391900000000'), ('0xc65d', True, '9141181707f1110f0132150036b6ff2e'), ('0x132', True, '323032363a31303a31352030313a3530')]

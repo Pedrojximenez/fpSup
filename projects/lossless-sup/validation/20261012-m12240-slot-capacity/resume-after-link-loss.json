@@ -1,0 +1,12 @@
+{
+  "label": "resume-after-link-loss",
+  "commands": [
+    {
+      "time": 1791781457.133352,
+      "command": "status get app_current",
+      "reply": "ERR shl open 1003:c432 failed\n"
+    }
+  ],
+  "started_at": 1791781457.133164,
+  "error": "RuntimeError(\"uncertain/failed command status get app_current: 'ERR shl open 1003:c432 failed\\\\n'\")"
+}

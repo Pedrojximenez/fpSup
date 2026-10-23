@@ -77,7 +77,7 @@ Custom 列未成功安裝、錄影、XMP／MOV 活動、重入、無效 RCD、�
 
 已套用且作用中的 Virtual RCD 以實際 picker entries 決定 FPS 可選性。
 六份原生格率 CSV 的提供項設為可選、缺少項設為反灰；normalizer 與列表分類
-依提供項的最快原生 enum（虛擬 FPS 使用 backing enum）重算，不沿用普通 FHD 的上限。
+依提供項的最快原生 enum 重算，不沿用普通 FHD 的上限。
 尚未 Apply 的 Custom 列不放寬限制，切回普通解析度後恢復各原生分類的反灰值。
 宣告下述 bit-depth policy 的磁碟 RCD 也依實際 picker entries 決定格率，避免原生媒體／位深
 分類把 RCD 提供的格率反灰。未宣告 policy 的舊磁碟 RCD 保留既有分類限制。
@@ -144,3 +144,13 @@ RCD 並搭配 core 4（本次 payload v18）。開放選項與媒體實際能否
 
 上機與最新離線證據見 [本次驗證紀錄](../../../res-lab/validation/20261009-oncamera/RESULTS.md)。
 僅將該紀錄列出的模式、格率與錄影視為已驗證，其他模式仍需逐項測試。
+
+## 宣告格率（2026-10-20）
+
+核心只負責錄影，不改原生介面。原廠 9 個以外的格率由 RCD 的 `SEC_RATES` 宣告
+（`{rank, num, den, cycles, carrier, nominal, engine}`；預設 = 239.76／279.72 載在 119.88、17.98 載在 23.98），
+picker entry 用載體的 key，所以只在相機設定為載體格率時才會被問到。錄哪一個由服務選：
+`VRC_RATES`（列出現用格式的宣告格率、目前選擇、是否在載體上）與 `VRC_RATE_SET`（rank，0 = 原廠格率），
+選擇記在 32RESCUS.BIN 的紀錄、不寫相機設定。DNG FrameRate、最慢快門、角度換算跟著選擇走；
+`SEC_WRITER`（寫檔策略）、`SEC_CAPTURE_TIMING`（載體以別的感光元件格率錄）同為必要 section。
+格率選單、LV 格率文字等介面不在核心，封存於 [`archive/virtual-rate-20261020/`](../../archive/virtual-rate-20261020/README.md)。

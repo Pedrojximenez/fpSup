@@ -1,0 +1,22 @@
+{
+  "candidate": "combined-fix1/32RESCUS.BIN",
+  "sha256": "28e83a3db30462b4e0c52d6ab5fe6a5996162a82cdac927078db4cba5533d71a",
+  "written_to_card": false,
+  "STRBASE_count": 33,
+  "old_limit": 8,
+  "new_limit": 64,
+  "tests": {
+    "real_applier_33_labels_and_old_limit_mutation": "2/2 passed",
+    "shared_applier": "28/28 passed",
+    "LV_native_parser_layouts": "4/4 passed",
+    "saved_BIN_QS_LV_restore": "passed",
+    "old_new_string_layer_ARM_compatibility": "4/4 passed"
+  },
+  "ARM_uia_apply_stack_frame_bytes": 3208,
+  "sources": {
+    "fpSup/uishare/ui_apply.c": "ea6347b0ef8c07ccc4a3fe26d1ca56940599268ef348f58e564c0062617f9cf9",
+    "fpSup/uishare/test_ui_apply.py": "2e6b3d75a7a60d624e00528d6f5f57e5b64c83c36b7423f8fad168b67590016b",
+    "projects/open-gate/build/res-custom/test_lv_text_style.py": "1f8be9a3fe3a1cfc493bb976129b6a978dfc1b3f7e3302a3eb7a700aba34cfe3"
+  },
+  "camera_connection": "NO_DEVICE before stock comparison; no delete or write in that attempt"
+}

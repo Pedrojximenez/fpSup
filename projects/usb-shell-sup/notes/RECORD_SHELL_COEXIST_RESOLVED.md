@@ -107,3 +107,14 @@ GetCamOpPermission / SetCamOpPermission   (字串 0xC0CF4C7C / 0xC0CF4E34)
 ## 遺留(可選,非阻塞)
 - 「怪怪的」(錄影音量表無反應 / 相機回播)—— 見上,已定位。
 - record-start 的 hook（disarm worker）當時是為了「host 不用管」而設想;既然真因是 host-poll，**不需要那個 hook** — 手動/慢-poll 靜默即可。
+
+## 2026-10-14 追記：shell 載入時對高格率錄影的影響
+- 00SHELL.BIN 載入時改寫兩個程式碼字（相機 LOAD.LOG 與全區比對都看得到）：
+  - `C0033B3C`：`bl`（EB129F0D）→ `mov r0,#0`（E3A00000）；
+  - `C01E7704`（Thumb）：`beq`（D01E）→ `b`（E01E）。
+  這兩處各自的作用還沒有查。
+- 實測：shell 開著（不管 USB 有沒有通訊）時，239.76p 的 MovRec 請求速率只有約 188–204 fps（A001_320／322 的原生 rec log），
+  達不到 239.76，SSD 很快就以 vbuf 停止。HDMI 輸出開著也有類似影響。
+- 所以 240p 這類吞吐量測試一律關掉 00SHELL 和 HDMI。證據：
+  [unified-hirate](../../res-lab/validation/20261014-unified-hirate/RESULTS.md)、
+  [parity-live 全區比對](../../res-lab/validation/20261014-parity-live/RESULTS.md)。

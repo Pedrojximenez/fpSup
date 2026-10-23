@@ -1,0 +1,12 @@
+DrawController 0xc3783020
+
+slot 3 waveform drawer 0xc37b79a0: flags(+4..+7) 00010001  layout(+0xC..+0x20) [1620, 1080, 0, 0, 1620, 1080]
+  painter [+0x24] 0xc37b7dac   layout source [+0x28] 0xc37b7968
+  painter vptr 0xc2df8fd8  (known C05A3728 class)
+  fill rect +8..+0x14   x=684 y=431 w=332 h=186  colour +0x18 0x6
+  plot rect +0x1C..+0x28 x=685 y=432 w=330 h=184
+  painter +00..+3F c2df8fd8 c37cc940 000002ac 000001af 0000014c 000000ba 00000006 000002ad 000001b0 0000014a 000000b8 00000010 c37b7f2c 00000001 00000002 00000003
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/sys-perf/layercopy/live_probe2.py", line 62, in <module>
+    L = d[(0x58 + 8 * s) // 4]
+IndexError: list index out of range

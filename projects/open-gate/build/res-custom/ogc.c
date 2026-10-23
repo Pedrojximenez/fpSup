@@ -36,7 +36,7 @@ typedef uint8_t u8;
 #define OGC_TAB_OFF 0u
 #endif
 #define OGC_TAB_MAGIC 0x3343474Fu       /* "OGC3" */
-#define OGC_TAB_VERSION 7u
+#define OGC_TAB_VERSION 8u
 
 enum { HOOK_B = 0, HOOK_BL = 1, HOOK_TW = 2 };   /* TW: a Thumb site, B.W to a Thumb veneer */
 
@@ -52,12 +52,9 @@ struct ogc_tab {
     u32 tt_off;                /* the 70 timing records' stock +4..+11, for the donor claims */
     u32 qsbuf_off;             /* QS_SLOTS x 2 x QS_CAP zeroed bytes: record copies     */
     u32 data_off, data_len;    /* zeroed: the data files, then each row's menu block    */
-    u32 vrtpl_off, vrtpl_len;  /* rows 9..12 in the six frame-rate CSVs + the K label strings */
-    u32 vrpg_off;              /* {len, K label offsets, the B2_5 page (vr_ui.b25)}            */
-    u32 vrlv_off;              /* {n; {address, len, stock, new}...}: the LV standby texts     */
-    u32 vrlm_off;              /* {n; addresses}: the LV label keys (layout-major, K each)     */
+    u32 rate_off, rate_len;    /* the six frame-rate CSV copies (rcd.rate_template)            */
     u32 virtual_off, virtual_len, virtual_state; /* optional bootstrap RCD / owned runtime */
-    u32 vrcsv_off;             /* the six stock CSV addresses, in vr_template's order           */
+    u32 ratecsv_off;           /* the six stock CSV addresses, in rate_template's order         */
     u32 files_off,files_len,files_state;
     u32 bit_off, bit_len;      /* native bit-depth CSV copies, independent of FPS page */
 };
@@ -252,79 +249,14 @@ static void transact(u8 *S, int r)
 }
 
 /* Live = the chosen row is on, the setting is its stock value, CinemaDNG (§12.2). */
-/* ---- the virtual frame rates (K = 4, core-defined) --------------------------------- *
- * 239.76 / 279.72 ride on the stock 119.88 (internal 7), 17.98 / 8.99 on 23.98
- * (internal 1).  The camera's setting only ever holds those stock values; "row
- * 9 + k was chosen" is S.VRATE (its rank, fps x 100).  The converters read our tables:
- * row -> internal (C06BDB00) and the summary's export -> state (C06CB6D0); both take
- * the first pair that matches, so the chosen row's pair goes first.  A format offers
- * a virtual rate by having picker entries for it (ENT_VRATE). */
+/* ---- the frame-rate menu: the six native list variants (rate_install) ---------- *
+ * The nine stock rows (23.98 .. 119.88) of the six frame-rate CSV variants, as
+ * copies (uishare's FV table; the stock files are untouched).  A format that owns
+ * its rates (an applied memory recipe, or a file that declares its bit depths)
+ * greys exactly the rows it has no entry for; any other keeps each variant's own
+ * flags.  The camera's setting only ever holds a stock rate. */
 #define RATE_PAIRS_STOCK 0xC2E40224u    /* 10 {internal, row}: 9 rows + the hidden 15 fps */
-#define SUM_PAIRS_STOCK 0xC2E44EE4u     /* 9 {export, summary state} */
-#define RATE_MOVW 0xC06BDB0Cu
-#define RATE_MOVT 0xC06BDB10u
-#define RATE_NUM 0xC06BDB18u
-#define SUM_MOVW 0xC06CB6DCu
-#define SUM_MOVT 0xC06CB6E0u
-#define SUM_NUM 0xC06CB6E8u
 #define FR_GET 0xC005C0F0u              /* (settings) -> the frame rate, internal enum */
-
-static u32 vr_rank(u32 k) { return k == 0 ? VR_RANK0 : k == 1 ? VR_RANK1 : k == 2 ? VR_RANK2 : VR_RANK3; }
-static u32 vr_base(u32 k) { return k == 0 ? VR_BASE0 : k == 1 ? VR_BASE1 : k == 2 ? VR_BASE2 : VR_BASE3; }
-static u32 vr_tv(u32 k) { return k == 0 ? VR_TV0 : k == 1 ? VR_TV1 : k == 2 ? VR_TV2 : VR_TV3; }
-static u32 vr_export(u32 k) { return k == 0 ? VR_EXPORT0 : k == 1 ? VR_EXPORT1 : k == 2 ? VR_EXPORT2 : VR_EXPORT3; }
-static u32 vr_index(u32 rank)               /* rank -> k, K if none */
-{
-    for (u32 k = 0; k < VR_K; k++) if (vr_rank(k) == rank) return k;
-    return VR_K;
-}
-
-static void rate_pairs_build(u8 *S)
-{
-    u32 s = irq_off(), p = (u32)(uintptr_t)S + S_RPAIRS, q = (u32)(uintptr_t)S + S_SPAIRS;
-    u32 c = vr_index(SW(S, S_VRATE)), n = 0;
-    if (SW(S, S_VR_UI) && c < VR_K) {                    /* the chosen row first */
-        W(p) = vr_base(c); W(p + 4) = VR_ROW0 + c; n++;
-    }
-    for (u32 i = 0; i < 9; i++, n++) {                   /* 23.98 .. 119.88 */
-        W(p + 8 * n) = W(RATE_PAIRS_STOCK + 8 * i);
-        W(p + 8 * n + 4) = W(RATE_PAIRS_STOCK + 8 * i + 4);
-    }
-    if (SW(S, S_VR_UI)) {
-        for (u32 k = 0; k < VR_K; k++) {
-            if (k == c) continue;
-            W(p + 8 * n) = vr_base(k); W(p + 8 * n + 4) = VR_ROW0 + k; n++;
-        }
-        W(p + 8 * n) = 0; W(p + 8 * n + 4) = VR_ROW0 + VR_K; n++;    /* the hidden 15 fps */
-    } else {
-        W(p + 8 * n) = W(RATE_PAIRS_STOCK + 72); W(p + 8 * n + 4) = W(RATE_PAIRS_STOCK + 76); n++;
-    }
-    SW(S, S_RPAIRN) = n;
-    n = 0;
-    if (SW(S, S_VR_UI) && c < VR_K) {                    /* the base rate's export: our label */
-        W(q) = vr_export(c); W(q + 4) = VR_ROW0 + c; n++;
-    }
-    for (u32 i = 0; i < 9; i++, n++) {
-        W(q + 8 * n) = W(SUM_PAIRS_STOCK + 8 * i);
-        W(q + 8 * n + 4) = W(SUM_PAIRS_STOCK + 8 * i + 4);
-    }
-    if (SW(S, S_VR_UI)) { W(q + 8 * n) = 0; W(q + 8 * n + 4) = VR_ROW0 + VR_K; n++; }
-    SW(S, S_SPAIRN) = n;
-    dmb();
-    irq_restore(s);
-}
-
-/* the live row has picker entries for virtual rate `rank` */
-static int vr_offered(u8 *S, u32 rank)
-{
-    u32 cur = SW(S, S_CUR);
-    if (!SW(S, S_FLAG) || !cur || !rank) return 0;
-    for (u32 i = 0; i < SW(S, S_NENT); i++) {
-        u32 e = entp(S, i);
-        if (W(e + ENT_ROW) == cur - 1 && W(e + ENT_VRATE) == rank) return 1;
-    }
-    return 0;
-}
 
 /* The stock row (0..8) of a plain picker key's rate: key = the row's label, then
  * 23_98 / 24 / 25 / 30 / 48 / 50 / 60 / 100 / 120, nothing after; 9 = none. */
@@ -357,30 +289,23 @@ static int rate_row_ok(u8 *S, u32 j)
     u32 lab = rowp(S, cur - 1) + ROW_LABEL;
     for (u32 i = 0; i < SW(S, S_NENT); i++) {
         u32 e = entp(S, i);
-        if (W(e + ENT_ROW) == cur - 1 && !W(e + ENT_VRATE) && key_rate_row(e + ENT_KEY, lab) == j) return 1;
+        if (W(e + ENT_ROW) == cur - 1 && key_rate_row(e + ENT_KEY, lab) == j) return 1;
     }
     return 0;
 }
 
 static int ogc_virtual_active(u8 *S, u32 row);
 
-/* An applied memory recipe owns its rate availability, including the native CSV
- * variants selected by the stock medium/geometry class. Static rows retain their
- * original per-variant flags; leaving restores the firmware's own restrictions. */
-static void vrate_follow(u8 *S)
+static void rate_follow(u8 *S)
 {
-    if (SW(S, S_VRATE) && !vr_offered(S, SW(S, S_VRATE))) {
-        SW(S, S_VRATE) = 0;
-        rate_pairs_build(S);
-    }
-    if (!SW(S, S_VR_UI)) return;
+    if (!SW(S, S_RATE_UI)) return;
     u32 cur = SW(S, S_CUR);
     u32 dynamic = SW(S, S_FLAG) && cur &&
         (ogc_virtual_active(S, cur - 1) || W(rowp(S, cur - 1) + ROW_BITMASK));
-    for (u32 j = 0; j < VR_ROWS; j++) {
-        u32 on = j < VR_ROW0 ? rate_row_ok(S, j) : vr_offered(S, vr_rank(j - VR_ROW0));
-        for (u32 v = 0; v < VR_CSVS; v++) {
-            u32 at = SW(S, S_VR_EN_AT + 4 * (v * VR_ROWS + j)), st = SW(S, S_VR_EN_ON + 4 * (v * VR_ROWS + j));
+    for (u32 j = 0; j < NRATES; j++) {
+        u32 on = rate_row_ok(S, j);
+        for (u32 v = 0; v < RATE_CSVS; v++) {
+            u32 at = SW(S, S_RATE_EN_AT + 4 * (v * NRATES + j)), st = SW(S, S_RATE_EN_ON + 4 * (v * NRATES + j));
             if (!at) continue;
             B8(at) = on ? (dynamic ? '1' : (u8)st) : '0';
             B8(at + 2) = on ? (dynamic ? '2' : (u8)(st >> 16)) : '0';
@@ -391,76 +316,100 @@ static void vrate_follow(u8 *S)
 static u32 lv_reload(u8 *S);
 static int busy(void);
 
-/* FUN_c057a6f8 / FUN_c05821b8: frame-rate commit ([var+8]), before/after native.
- * FUN_c0074d78 only notifies the pipeline when the native enum changes. Our
- * 120/240/280 rows all use enum 7, so a virtual cadence change owes a reload
- * after the native callback has finished, just like same-carrier resolution. */
-u32 ogc_rcmt(u8 *S, u32 var, u32 phase)
+/* ---- the RCD-declared frame rates (SEC_RATES) ---------------------------------- *
+ * A format may declare rates beyond the stock nine: {rank (fps x 100), num/den (the
+ * exact rate, the DNG FrameRate), its 72 MHz cycles, the stock rate the camera's
+ * setting holds for it (the carrier, an internal enum), the shutter-angle fps, the
+ * engine cadence (canvas +0x30)}.  Its picker entries carry the carrier's key, so
+ * they are only ever asked for while the setting holds the carrier.  Which declared
+ * rate is recorded is S.VRATE (0 = the stock one), chosen through the service
+ * (VRC_RATE_SET) by a UI of someone else's: the core adds no menu row and never
+ * writes a setting -- the camera holds the carrier. */
+static u32 rank_of(u32 e);
+static u32 udiv(u32 n, u32 d);
+
+/* the live row's first entry for declared rate `rank`, 0 = none */
+static u32 vr_entry(u8 *S, u32 rank)
 {
-    if (phase) {
-        u32 owed = SW(S, S_RATE_LVOWED);
-        SW(S, S_RATE_LVOWED) = 0;
-        if (owed && SW(S, S_FLAG) && !busy()
-            && !(SW(S, S_VRC) && W(SW(S, S_VRC) + 8u))
-            && ((fw1)FR_GET)(((fw0)GET_OBJ)()) == owed - 1u
-            && lv_reload(S) == L_RELOADED)
-            SW(S, S_RATE_LV_RELOADS)++;
-        return 0;
-    }
-    SW(S, S_RATE_LVOWED) = 0;
-    u32 row = W(var + 8), k = row - VR_ROW0, v = 0;
-    /* without our rows, row 9 is the stock list's hidden 15 fps */
-    if (SW(S, S_VR_UI) && k < VR_K && vr_offered(S, vr_rank(k))) v = vr_rank(k);
-    SW(S, S_VR_COMMITS)++;
-    if (SW(S, S_VRATE) != v) {
-        u32 old = ((fw1)FR_GET)(((fw0)GET_OBJ)());
-        SW(S, S_VRATE) = v;
-        SW(S, S_DIRTY) = 1;
-        rate_pairs_build(S);
-        /* Read the same row->enum table the original callback will use. A
-         * different carrier already triggers the native notification. */
-        if (SW(S, S_FLAG) && SW(S, S_VR_UI)) {
-            u32 p = (u32)(uintptr_t)S + S_RPAIRS;
-            for (u32 i = 0; i < SW(S, S_RPAIRN); i++) {
-                if (W(p + 8u * i + 4u) == row) {
-                    if (W(p + 8u * i) == old) SW(S, S_RATE_LVOWED) = old + 1u;
-                    break;
-                }
-            }
-        }
+    u32 cur = SW(S, S_CUR);
+    if (!SW(S, S_FLAG) || !cur || !rank) return 0;
+    for (u32 i = 0; i < SW(S, S_NENT); i++) {
+        u32 e = entp(S, i);
+        if (W(e + ENT_ROW) == cur - 1 && W(e + ENT_VRATE) == rank) return e;
     }
     return 0;
 }
 
-/* ---- the virtual rate's shutter range and angle list (design §15) ------------------ *
- * The virtual rate is live when it is chosen, the live row offers it, and the firmware
- * still holds its base rate (`e`: the enum the site has; ~0 = ask the settings).  k or K. */
+/* the chosen declared rate's entry while the camera holds its carrier (`e`: the
+ * enum the site has; ~0 = ask the settings), else 0 */
 static u32 vr_live(u8 *S, u32 e)
 {
-    u32 rank = SW(S, S_VRATE), k = vr_index(rank);
-    if (!SW(S, S_VR_UI) || k >= VR_K || !vr_offered(S, rank)) return VR_K;
+    u32 x = vr_entry(S, SW(S, S_VRATE));
+    if (!x) return 0;
     if (e == 0xFFFFFFFFu) e = ((fw1)FR_GET)(((fw0)GET_OBJ)());
-    return e == vr_base(k) ? k : VR_K;
+    return e == W(x + ENT_CARRIER) ? x : 0;
 }
 
-/* C00C9BD0 has already written the native CinemaDNG FrameRate rational. A
- * virtual selection alone is insufficient: require the matching picked entry
- * and native carrier rational. This runs in the recorder, so never call the
- * interactive settings getter here (its virtual calls can enter locks/tasks).
- * Keep the firmware's control/timecode enums intact. */
+static u32 lv_reload(u8 *S);
+static int busy(void);
+
+/* The service: choose the declared rate recorded (0 = the stock one).  Refused
+ * unless the live row has entries for it, or while recording; owed to the BIN
+ * record; when the camera now holds the carrier of the old or the new one, the live
+ * view is rebuilt (the cadence changed under an unchanged setting). */
+static u32 ogc_rate_set(u8 *S, u32 rank)
+{
+    if (rank && !vr_entry(S, rank)) return VRC_RATE;
+    if (busy()) return VRC_BUSY;
+    u32 old = SW(S, S_VRATE);
+    if (old == rank) return VRC_OK;
+    u32 a = vr_entry(S, old), b = vr_entry(S, rank);
+    SW(S, S_VRATE) = rank;
+    SW(S, S_DIRTY) = 1;
+    SW(S, S_RATE_SETS)++;
+    u32 en = ((fw1)FR_GET)(((fw0)GET_OBJ)());
+    if (SW(S, S_FLAG) == 1u && ((a && W(a + ENT_CARRIER) == en) || (b && W(b + ENT_CARRIER) == en))
+        && lv_reload(S) == 1u)
+        SW(S, S_RATE_LV_RELOADS)++;
+    return VRC_OK;
+}
+
+/* The service: what the live row offers beyond the stock nine, and the choice. */
+static u32 ogc_rate_list(u8 *S, struct vrc_rates *out)
+{
+    if (!out || out->bytes != sizeof(*out) || out->abi != VRC_ABI) return VRC_BAD_ABI;
+    u32 n = 0, cur = SW(S, S_CUR);
+    for (u32 i = 0; SW(S, S_FLAG) && cur && i < SW(S, S_NENT) && n < VRC_MAX_RATES; i++) {
+        u32 e = entp(S, i), seen = 0;
+        if (W(e + ENT_ROW) != cur - 1 || !W(e + ENT_VRATE)) continue;
+        for (u32 k = 0; k < n; k++) if (out->rate[k].rank == W(e + ENT_VRATE)) seen = 1;
+        if (seen) continue;
+        out->rate[n].rank = W(e + ENT_VRATE);
+        out->rate[n].num = W(e + ENT_RNUM);
+        out->rate[n].den = W(e + ENT_RDEN);
+        out->rate[n].carrier = W(e + ENT_CARRIER);
+        out->rate[n].nominal = W(e + ENT_NOMINAL);
+        n++;
+    }
+    out->count = n;
+    out->chosen = SW(S, S_VRATE);
+    out->live = vr_live(S, 0xFFFFFFFFu) ? 1u : 0u;
+    return VRC_OK;
+}
+
+/* C00C9BD0 has already written the native CinemaDNG FrameRate rational.  The chosen
+ * rate's picked entry, on its carrier's rational (as a value: 24000/1001 is 23.98),
+ * gets the declared one.  This runs in the recorder: never the interactive settings
+ * getter here.  The firmware's control/timecode enums stay intact. */
+static u32 picked_entry(u8 *S, u32 wf);
 u32 ogc_recrate(u8 *S, u32 out)
 {
-    if (!out || !SW(S, S_FLAG) || !SW(S, S_PICKOK) || !SW(S, S_CUR)) return 0;
-    u32 off = SW(S, S_LAST_ENT), first = SW(S, S_ENTS);
-    if (off < first || off - first >= SW(S, S_NENT) * ENT_SIZE || ((off - first) & (ENT_SIZE - 1u))) return 0;
-    u32 e = (u32)(uintptr_t)S + off, rank = SW(S, S_VRATE);
-    if (!rank || W(e + ENT_VRATE) != rank || W(e + ENT_ROW) + 1u != SW(S, S_CUR)) return 0;
-    u32 k = vr_index(rank);
-    if (!SW(S, S_VR_UI) || k >= VR_K) return 0;
-    if (W(out) != (k < 2u ? 120000u : 24000u) || W(out + 4) != 1001u) return 0;
-    u32 nom = k == 0 ? VR_NOM0 : k == 1 ? VR_NOM1 : k == 2 ? VR_NOM2 : VR_NOM3;
-    W(out) = nom * 1000u;
-    W(out + 4) = 1001u;
+    u32 e = out ? picked_entry(S, 0) : 0;
+    if (!e || !W(e + ENT_VRATE) || !W(out + 4) || W(out) > 0x01000000u) return 0;
+    u32 got = udiv(W(out) * 100u, W(out + 4)), want = rank_of(W(e + ENT_CARRIER));
+    if (got + 1u < want || got > want + 1u) return 0;
+    W(out) = W(e + ENT_RNUM);
+    W(out + 4) = W(e + ENT_RDEN);
     return 1;
 }
 
@@ -478,49 +427,34 @@ static u32 header_phys(u32 p, u32 n)
     return 0;
 }
 
-static u32 m12_high_entry(u8 *S)
+/* The entry the picker last handed out, while it is the live row's and the
+ * picker agreed with the menu; 0 otherwise.  `wf`: it must carry these writer
+ * flags (the RCD's SEC_WRITER), and its engine rate must be the one latched. */
+static u32 picked_entry(u8 *S, u32 wf)
 {
-    if (!SW(S, S_FLAG) || !SW(S, S_PICKOK) || !SW(S, S_VR_UI) || SW(S, S_BITLATCH)) return 0;
-    u32 off = SW(S, S_LAST_ENT), first = SW(S, S_ENTS), rank = SW(S, S_VRATE);
-    u32 row = SW(S, S_CUR);
-    if ((rank != 23976u && rank != 27972u) || !row || row > SW(S, S_NROWS)) return 0;
-    if (off < first || off - first >= SW(S, S_NENT) * ENT_SIZE || ((off - first) & (ENT_SIZE - 1u))) return 0;
-    u32 e = (u32)(uintptr_t)S + off;
-    u32 r = (u32)(uintptr_t)S + SW(S, S_ROWS) + (row - 1u) * ROW_SIZE;
-    if (W(e + ENT_VRATE) != rank || W(e + ENT_ROW) + 1u != row || W(r + ROW_AW) != 992u || W(r + ROW_AH) != 662u) return 0;
-    return e;
+    u32 cur = SW(S, S_CUR), off = SW(S, S_LAST_ENT);
+    if (SW(S, S_FLAG) != 1u || !SW(S, S_PICKOK) || !cur || cur > SW(S, S_NROWS)) return 0;
+    for (u32 i = 0; i < SW(S, S_NENT); i++) {
+        u32 e = entp(S, i);
+        if (e - (u32)(uintptr_t)S != off) continue;
+        if (W(e + ENT_ROW) + 1u != cur || !W(rowp(S, cur - 1u) + ROW_ON)) return 0;
+        if ((W(e + ENT_WFLAGS) & wf) != wf || W(e + ENT_ENGFPS) != SW(S, S_FPSLATCH)) return 0;
+        if (wf && !((W(e + ENT_WFLAGS) >> 8) & bit_flag(SW(S, S_BITLATCH)))) return 0;
+        /* a declared-rate entry only while that rate is the chosen one */
+        if (W(e + ENT_VRATE) && W(e + ENT_VRATE) != SW(S, S_VRATE)) return 0;
+        return e;
+    }
+    return 0;
 }
 
-/* Header-copy eligibility follows the selected capture entry, not only the
- * menu rate. Section12 can run M12 at240/280 on an ordinary carrier (VRATE=0).
- * Keep the legacy canvas and batch selectors separate: broadening those here
- * would silently replace p13's processing fields and the native64MiB batch. */
-static u32 m12_header_entry(u8 *S)
-{
-    u32 e = m12_high_entry(S);
-    if (e) return e;
-    if (SW(S, S_FLAG) != 1u || !SW(S, S_PICKOK) || SW(S, S_BITLATCH) != BD12 || SW(S, S_VRATE)) return 0;
-    u32 row = SW(S, S_CUR), off = SW(S, S_LAST_ENT), first = SW(S, S_ENTS);
-    if (!row || row > SW(S, S_NROWS) || off < first ||
-        off - first >= SW(S, S_NENT) * ENT_SIZE || ((off - first) & (ENT_SIZE - 1u))) return 0;
-    e = (u32)(uintptr_t)S + off;
-    u32 r = rowp(S, row - 1u), v = W(e + ENT_VM);
-    if (!W(r + ROW_ON) || W(e + ENT_ROW) + 1u != row || W(e + ENT_VRATE) ||
-        W(r + ROW_AW) != 992u || W(r + ROW_AH) != 662u || v >= SW(S, S_NVM)) return 0;
-    u32 vm = vmp(S, v), nom = W(e + ENT_NOMINAL), fps = W(e + ENT_ENGFPS);
-    if (W(vm + VM_DONOR) != 12u || W(vm + VM_ID) != W(e + ENT_MODE) ||
-        fps != SW(S, S_FPSLATCH) ||
-        !((nom == 240u && fps == 0x436FC29Fu) || (nom == 280u && fps == 0x438BDC32u))) return 0;
-    return e;
-}
-
-/* 64 MiB needs about 61 M12 DNGs before committing, leaving too little of
- * the 96-descriptor pool to cover media completion latency at 280p. A 4 MiB
- * batch is the existing lossless path's lower bound. Change the native local
- * descriptor, preserving its owned work buffer and completion callback. */
+/* WR_BATCH4M: 64 MiB needs about 61 small DNGs before committing, leaving too
+ * little of the 96-descriptor pool to cover media completion latency at very
+ * high rates (M12 279.72p). A 4 MiB batch is the existing lossless path's lower
+ * bound. Change the native local descriptor, preserving its owned work buffer
+ * and completion callback.  Which entries need it is the RCD's to declare. */
 void ogc_bulk(u8 *S, u32 params)
 {
-    if (!params || (params & 3u) || !m12_high_entry(S)) return;
+    if (!params || (params & 3u) || !picked_entry(S, WR_BATCH4M)) return;
     if (W(params) != 0x4000000u || !W(params+4u) || W(params+8u) != 0x40000u || W(params+12u) != 0xC03A55D0u) return;
     W(params) = 0x400000u;
     SW(S, S_BULK_HITS)++;
@@ -532,7 +466,10 @@ u32 ogc_hdrcopy(u8 *S, u32 params, u32 frame, u32 caller)
     if (caller != 0xC038C780u) return 0;
     SW(S, S_HDR_COPY_CALLS)++;
     SW(S, S_HDR_COPY_WHY) = 1;
-    if (!params || (params & 3u) || !m12_header_entry(S)) return 0;
+    /* WR_HDRCPU: the CPU copy spends ~3 ms per frame inside MovRec; the RCD
+     * declares the entries that need it (M12 279.72p; 239.76p keeps the native
+     * DMA header, as in the sustained SSD take A001_193). */
+    if (!params || (params & 3u) || !picked_entry(S, WR_HDRCPU)) return 0;
     SW(S, S_HDR_COPY_WHY) = 2;
     u32 src = W(params), dst = W(params + 4u), n = W(params + 8u);
     SW(S, S_HDR_COPY_SRC) = src;
@@ -563,20 +500,18 @@ u32 ogc_hdrcopy(u8 *S, u32 params, u32 frame, u32 caller)
     return 1;
 }
 
-enum { VT_TV = 0, VT_ANGLIST = 1, VT_ANGTV = 2 };
+enum { VT_TV = 0, VT_ANGTV = 2 };
 
-/* VT_TV: the slowest shutter's 1/n (0 = the firmware's own); VT_ANGLIST: the
- * maximum-angle list's rate enum (15p: every angle -- an unknown enum throws);
- * VT_ANGTV: the angle-to-Tv fps x 100 */
+/* VT_TV: the slowest shutter's 1/n (0 = the firmware's own), the rate's own
+ * convention (119.88 -> 1/120): the rounded fps; VT_ANGTV: the angle-to-Tv fps x 100 */
 u32 ogc_vtv(u8 *S, u32 kind, u32 v, u32 e)
 {
-    u32 k = vr_live(S, e);
+    u32 x = vr_live(S, e);
     SW(S, S_VTV_CALLS)++;
-    if (k >= VR_K) return kind == VT_TV ? 0 : v;
+    if (!x) return kind == VT_TV ? 0 : v;
     SW(S, S_VTV_HITS)++;
-    if (kind == VT_TV) return vr_tv(k);
-    if (kind == VT_ANGLIST) return 0;
-    return vr_rank(k);
+    if (kind == VT_TV) return udiv(W(x + ENT_VRATE) + 50u, 100u);
+    return W(x + ENT_VRATE);
 }
 
 static void refresh(u8 *S)
@@ -587,7 +522,8 @@ static void refresh(u8 *S)
         r = -1;
     }
     transact(S, (r >= 0 && SW(S, S_FMTLATCH) == 0) ? r : -1);
-    vrate_follow(S);
+    if (SW(S, S_VRATE) && !vr_entry(S, SW(S, S_VRATE))) { SW(S, S_VRATE) = 0; SW(S, S_DIRTY) = 1; }
+    rate_follow(S);
     bit_follow(S);
 }
 
@@ -891,7 +827,7 @@ u32 ogc_pick(u8 *S, u32 table, u32 key)
         if (i == SW(S, S_NENT)) { pass++; i = 0xFFFFFFFFu; continue; }
         u32 e = entp(S, i), row = rowp(S, W(e + ENT_ROW));
         if (!W(row + ROW_ON)) continue;
-        /* pass 0: the entries of the virtual rate now chosen; pass 1: the plain ones */
+        /* pass 0: the entries of the declared rate now chosen; pass 1: the stock ones */
         if (W(e + ENT_VRATE) != (pass ? 0u : SW(S, S_VRATE)) || (!pass && !SW(S, S_VRATE))) continue;
         /* a format without Crop Mode records its plain entry for a CROP key */
         u32 n = crop && !(W(row + ROW_RFLAGS) & RFLAG_CROP) ? klen - 4 : klen;
@@ -950,16 +886,13 @@ static u32 limit(u32 e, u32 mx)
     return rank_of(e) > mx ? 0xFFFFFFFFu : e;      /* e within the row's fastest, or "no" */
 }
 
-/* The normalizer uses stock enums, even for a virtual rate. Derive the fastest
- * supported enum from the applied recipe's actual entries, including VR bases. */
-static u32 virtual_rate_max(u8 *S)
+/* The fastest stock enum among the rates the live format has entries for. */
+static u32 entry_rate_max(u8 *S)
 {
     u32 best = 0xFFFFFFFFu, br = 0;
-    for (u32 j = 0; j < VR_ROWS; j++) {
-        u32 on = j < VR_ROW0 ? rate_row_ok(S, j) : vr_offered(S, vr_rank(j - VR_ROW0));
-        if (!on) continue;
-        u32 en = j < VR_ROW0 ? W(RATE_PAIRS_STOCK + 8 * j) : vr_base(j - VR_ROW0);
-        u32 rk = rank_of(en);
+    for (u32 j = 0; j < NRATES; j++) {
+        if (!rate_row_ok(S, j)) continue;
+        u32 en = W(RATE_PAIRS_STOCK + 8 * j), rk = rank_of(en);
         if (rk != 0x7FFFFFFFu && rk >= br) { best = en; br = rk; }
     }
     return best;
@@ -973,7 +906,7 @@ u32 ogc_gate(u8 *S, u32 kind, u32 v)
     if (kind == G_BITCLASS && W(row + ROW_BITMASK)) return 0;
     if ((kind == G_FRMAX || kind == G_FRCLASS) &&
         (ogc_virtual_active(S, cur - 1) || W(row + ROW_BITMASK))) {
-        u32 en = virtual_rate_max(S);
+        u32 en = entry_rate_max(S);
         if (en != 0xFFFFFFFFu) {
             if (kind == G_FRMAX) return en;
             u32 best = v, br = 0, rk = rank_of(en);
@@ -984,8 +917,7 @@ u32 ogc_gate(u8 *S, u32 kind, u32 v)
             return best;
         }
     }
-    /* v3: MAXRATE is the fastest mode's rate -- a virtual rate is only made when its
-     * rank fits, and its base is always slower; the rows are greyed per entry */
+    /* v3: MAXRATE is the fastest mode's rate; the rows are greyed per entry */
     switch (kind) {
     case G_CROPST:              /* 1 = greyed (the shim returns 0) */
         return !(fl & RFLAG_CROP);
@@ -1013,6 +945,20 @@ u32 ogc_gate(u8 *S, u32 kind, u32 v)
         return fl & RFLAG_MAG8 ? 0x46F8u : v;
     }
     return v;
+}
+
+/* ---- C03A6DD8 (og3kgs): our virtual profiles are "raw movie" ------------------- *
+ * The gain dispatch asks the current LV canvas (LiveViewModeMgr +8, its +0 = the
+ * pid) for its class.  A virtual pid's number cannot carry the raw-movie class
+ * (131..190 has no empty slot), so it is answered for the live row's pids; a stock
+ * canvas (standby, playback) keeps the firmware's own answer. */
+#define LV_MGR 0xC375D840u
+static u32 var_of(u8 *S, u32 pid);
+u32 ogc_gs(u8 *S)
+{
+    if (SW(S, S_FLAG) != 1u) return 0;
+    u32 c = W(LV_MGR + 8), v = c ? var_of(S, W(c)) : 0;
+    return v && W(v + VAR_ROW) + 1u == SW(S, S_CUR) ? 1u : 0u;
 }
 
 /* ---- C043A19C: the canvas ------------------------------------------------------ */
@@ -1056,41 +1002,7 @@ static u32 apply_standby(u8 *S, u32 row, u32 canvas, u32 pid)
     return hit;
 }
 
-/* Development contrast: archived Sensor Lab r10's complete M12/12-bit/high
- * recording profile. The exact 61440-byte old card (SHA918c9b51...) is executed
- * offline for the reference; it is never installed with its obsolete cave
- * layout. Raw/crop dimensions and cadence remain owned by the current entry.
- * Restore the old preview, class and window fields together, rather than the
- * incomplete four-word matching-tap/engine30 experiment. Low rates, standby,
- * playback and other geometries keep their current r78 rules. Hardware
- * acceptance remains required; this is not a claim of the failure's cause. */
-static void m12_legacy_canvas(u8 *S, u32 canvas, u32 pid)
-{
-    u32 e = m12_high_entry(S);
-    if (!e || W(e + ENT_PID) != pid || W(e + ENT_ENGFPS) != SW(S, S_FPSLATCH)) return;
-    u32 v = vm_of(S, W(e + ENT_MODE)), rank = SW(S, S_VRATE);
-    if (!v || W(v + VM_DONOR) != 12u || W(e + ENT_W0) != (330u | (330u << 16)) ||
-        W(e + ENT_W1) != ((rank == 23976u ? 910u : 780u) | (6u << 16))) return;
-    if (W(canvas) != 1008u || W(canvas + 4) != 672u ||
-        W(canvas + 0x24) != 992u || W(canvas + 0x2C) != 662u ||
-        W(canvas + 0x5C) || W(canvas + 0xC8) || W(canvas + 0x64) != 2048u ||
-        W(canvas + 0xD4) < 1023u || W(canvas + 0xD4) > 1024u) return;
-    W(canvas + 0x0C) = 1008u;
-    W(canvas + 0x1C) = 2u;
-    W(canvas + 0x20) = 992u;
-    W(canvas + 0x60) = 2048u;
-    W(canvas + 0x88) = 4u;
-    W(canvas + 0xB0) = 1u;
-    W(canvas + 0xD0) = 1024u;
-    W(canvas + 0xD4) = 1024u;
-    W(canvas + 0xD8) = 1008u;
-    W(canvas + 0xF4) = 1008u;
-    W(canvas + 0xFC) = 0x40000000u;
-    W(canvas + 0x100) = 0x40000000u;
-    SW(S, S_M12_LEGACY_HITS)++;
-    SW(S, S_M12_LEGACY_PID) = pid;
-}
-
+#define CAP_WORDS 67u             /* FUN_c0439d18's record: 65 table words + 0x17B0, 0xFCA */
 u32 ogc_canvas(u8 *S, u32 canvas, u32 pid)
 {
     u32 base = (u32)(uintptr_t)S, cur = SW(S, S_CUR), live = SW(S, S_FLAG) && cur;
@@ -1099,6 +1011,12 @@ u32 ogc_canvas(u8 *S, u32 canvas, u32 pid)
         /* our virtual profile: declared here, whole, on its base row's gather --
          * the row's lists, then the entry's own (the virtual table) */
         if (!live || W(v + VAR_ROW) != cur - 1) return 0;
+#ifdef OGC_CAP_BACK
+        /* diagnostic: {hits, pid, record}, the record as the firmware filled it, then ours */
+        u8 *cap = S - OGC_CAP_BACK;
+        W((u32)(uintptr_t)cap) += 1; W((u32)(uintptr_t)cap + 4) = pid; W((u32)(uintptr_t)cap + 8) = canvas;
+        for (u32 k = 0; k < CAP_WORDS; k++) W((u32)(uintptr_t)cap + 0x10 + 4 * k) = W(canvas + 4 * k);
+#endif
         u32 row = rowp(S, cur - 1);
         apply_list(canvas, base + W(row + ROW_REC));
         if (W(v + VAR_LIST)) apply_list(canvas, base + W(v + VAR_LIST));
@@ -1107,7 +1025,9 @@ u32 ogc_canvas(u8 *S, u32 canvas, u32 pid)
         u32 bd = SW(S, S_BITLATCH);
         W(canvas + 0x80) = bd == BD12 ? 7u : 10u;
         W(canvas + 0x84) = bd == BD8 ? 10u : bd == BD10 ? 9u : 7u;
-        m12_legacy_canvas(S, canvas, pid);
+#ifdef OGC_CAP_BACK
+        for (u32 k = 0; k < CAP_WORDS; k++) W((u32)(uintptr_t)cap + 0x120 + 4 * k) = W(canvas + 4 * k);
+#endif
         return 1;
     }
     if (live && apply_standby(S, rowp(S, cur - 1), canvas, pid)) return 2;
@@ -1122,11 +1042,13 @@ u32 ogc_canvas(u8 *S, u32 canvas, u32 pid)
 /* ---- C0437B48: the resolution name -------------------------------------------- */
 u32 ogc_name(u8 *S, u32 out, u32 sizes, u32 caller)
 {
-    u32 w = W(sizes + 8), h = W(sizes + 0xC), r = 0xFFFFFFFFu;
+    u32 w = W(sizes + 8), h = W(sizes + 0xC), r = 0xFFFFFFFFu, cur = SW(S, S_CUR);
     if (w) {
+        /* a clip is known by its DNG size only: of rows sharing one, the live one */
         u32 pb = 0;
-        for (u32 i = 0; i < SW(S, S_NROWS); i++)
-            if (W(rowp(S, i) + ROW_AW) == w && W(rowp(S, i) + ROW_AH) == h) { pb = i + 1; break; }
+        if (cur && W(rowp(S, cur - 1) + ROW_AW) == w && W(rowp(S, cur - 1) + ROW_AH) == h) pb = cur;
+        for (u32 i = 0; !pb && i < SW(S, S_NROWS); i++)
+            if (W(rowp(S, i) + ROW_AW) == w && W(rowp(S, i) + ROW_AH) == h) pb = i + 1;
         SW(S, S_PBROW) = pb;
         if (pb) r = pb - 1;
     }
@@ -1139,25 +1061,42 @@ u32 ogc_name(u8 *S, u32 out, u32 sizes, u32 caller)
     return 1;
 }
 
-/* ---- C0437E98: the main output descriptor (og3kout) ---------------------------- */
+/* ---- C0437E98: the main output descriptor (og3kout) ---------------------------- *
+ * The stock descriptors 0 (1620x911) and 2 (320x180) are 16:9.  For a row of
+ * another aspect -- the RCD's aspect enum -- the same width gets that aspect's
+ * height (3:2: 1080 / 213; 2:1: 810 / 160).  A template is made per aspect from
+ * the stock one; 16:9 and unknown aspects keep the firmware's own. */
+static u32 udiv(u32 n, u32 d);
+static u32 aspect_ratio(u32 a, u32 *num)        /* width : height = *num : return */
+{
+    switch (a) {
+    case 2: *num = 3; return 2;             /* 3:2 */
+    case 9: *num = 2; return 1;             /* 2:1 */
+    }
+    *num = 0;
+    return 0;
+}
+
 u32 ogc_out(u8 *S, u32 obj, u32 idx)
 {
-    u32 cur = SW(S, S_CUR), pb = SW(S, S_PBROW), armed = 0;
-    if (SW(S, S_FLAG) && SW(S, S_PICKOK) && cur && W(rowp(S, cur - 1) + ROW_ASPECT) == 2) armed = 1;
-    if (pb && W(rowp(S, pb - 1) + ROW_ASPECT) == 2) armed = 1;
-    if (!armed) return 0;
-    u32 tpl, ow, oh, nh;
-    if (idx == 0) { tpl = (u32)(uintptr_t)S + S_TPL0; ow = 1620; oh = 911; nh = 1080; }
-    else if (idx == 2) { tpl = (u32)(uintptr_t)S + S_TPL2; ow = 320; oh = 180; nh = 213; }
-    else return 0;
-    if (!W(tpl)) {
+    u32 cur = SW(S, S_CUR), pb = SW(S, S_PBROW), a = 0, num, den;
+    /* the live row's aspect, else the played clip's (either one not 16:9) */
+    if (SW(S, S_FLAG) && SW(S, S_PICKOK) && cur) a = W(rowp(S, cur - 1) + ROW_ASPECT);
+    if (!aspect_ratio(a, &num) && pb) a = W(rowp(S, pb - 1) + ROW_ASPECT);
+    if (!(den = aspect_ratio(a, &num))) return 0;
+    if (idx != 0 && idx != 2) return 0;
+    u32 tpl = (u32)(uintptr_t)S + (idx ? S_TPL2 : S_TPL0);
+    if (W(tpl) != a) {
         u32 d = W(obj + idx * 8);
         if (d < 0xC0000000u || d >= 0xC4000000u) return 0;
-        if (W(d) != ow || W(d + 4) != oh) return 0;
+        u32 w = W(d);
+        if (!w || w > 4096u || W(d + 4) != (w * 9u) >> 4) return 0;     /* the stock 16:9 one */
+        u32 h = udiv(w * den, num);
         copy(tpl + 4, d, 44);
-        W(tpl + 0x08) = nh;
-        W(tpl + 0x18) = nh;
-        W(tpl) = 1;
+        W(tpl + 0x08) = h;
+        W(tpl + 0x18) = h;
+        dmb();
+        W(tpl) = a;
     }
     SW(S, S_OUT_HITS)++;
     return tpl + 4;
@@ -1266,13 +1205,10 @@ static void ogc_restore(u8 *S)
         SW(S, S_SEL) = (u32)r + 1;         /* the record already says it: not dirty */
         pairs_build(S);
         refresh(S);
-        /* and 239.76, when the record says so and the camera still holds 119.88 */
-        u32 rank = W(cfg + CFG_FLAGS) >> 8, k = vr_index(rank);
-        if ((W(cfg + CFG_FLAGS) & CFG_FLAG_VRATE) && k < VR_K && vr_offered(S, rank)
-            && ((fw1)FR_GET)(obj) == vr_base(k)) {
+        /* and the declared rate, when the record says so and the camera still holds its carrier */
+        u32 rank = W(cfg + CFG_FLAGS) >> 8, x = vr_entry(S, rank);
+        if ((W(cfg + CFG_FLAGS) & CFG_FLAG_VRATE) && x && ((fw1)FR_GET)(obj) == W(x + ENT_CARRIER))
             SW(S, S_VRATE) = rank;
-            rate_pairs_build(S);
-        }
         u32 flag = SW(S, S_FLAG);
         SW(S, S_RLOG + 0x10) = flag;
         SW(S, S_RLOG + 0x14) = flag == 1 ? lv_reload(S) : L_NOFLAG;
@@ -1412,7 +1348,7 @@ static u32 sec(u32 f, u32 typ, u32 *len)
 }
 
 
-/* ==== v3: the core times every rate (ogc_layout.RATES / VR_TIME / solve / gen_entries) ==== */
+/* ==== v3: the core times every rate (ogc_layout.RATES / solve / gen_entries) ==== */
 static u32 udiv(u32 n, u32 d)          /* the A9 has no divider; boot-time only */
 {
     u32 q = 0, r = 0;
@@ -1423,61 +1359,97 @@ static u32 udiv(u32 n, u32 d)          /* the A9 has no divider; boot-time only 
     return q;
 }
 
-/* candidate c: 0..8 the stock rates in the list's order, 9 + k the virtual rates */
+/* candidate c: 0..8, the stock rates in the list's order */
 static u32 c_cyc(u32 c)
 {
     switch (c) {
     case 0: return RATE_CYC0; case 1: return RATE_CYC1; case 2: return RATE_CYC2; case 3: return RATE_CYC3;
     case 4: return RATE_CYC4; case 5: return RATE_CYC5; case 6: return RATE_CYC6; case 7: return RATE_CYC7;
-    case 8: return RATE_CYC8; case 9: return VR_CYC0; case 10: return VR_CYC1; case 11: return VR_CYC2;
     }
-    return VR_CYC3;
+    return RATE_CYC8;
 }
 static u32 c_pal(u32 c)
 {
     switch (c) {
     case 0: return RATE_PAL0; case 1: return RATE_PAL1; case 2: return RATE_PAL2; case 3: return RATE_PAL3;
     case 4: return RATE_PAL4; case 5: return RATE_PAL5; case 6: return RATE_PAL6; case 7: return RATE_PAL7;
-    case 8: return RATE_PAL8;
     }
-    return 0;
+    return RATE_PAL8;
 }
 static u32 c_eng(u32 c)
 {
     switch (c) {
     case 0: return RATE_ENG0; case 1: return RATE_ENG1; case 2: return RATE_ENG2; case 3: return RATE_ENG3;
     case 4: return RATE_ENG4; case 5: return RATE_ENG5; case 6: return RATE_ENG6; case 7: return RATE_ENG7;
-    case 8: return RATE_ENG8; case 9: return VR_ENG0; case 10: return VR_ENG1; case 11: return VR_ENG2;
     }
-    return VR_ENG3;
+    return RATE_ENG8;
 }
 static u32 c_nom(u32 c)
 {
     switch (c) {
     case 0: return RATE_NOM0; case 1: return RATE_NOM1; case 2: return RATE_NOM2; case 3: return RATE_NOM3;
     case 4: return RATE_NOM4; case 5: return RATE_NOM5; case 6: return RATE_NOM6; case 7: return RATE_NOM7;
-    case 8: return RATE_NOM8; case 9: return VR_NOM0; case 10: return VR_NOM1; case 11: return VR_NOM2;
     }
-    return VR_NOM3;
+    return RATE_NOM8;
 }
 static u32 c_rank(u32 c)
 {
     switch (c) {
     case 0: return RATE_RANK0; case 1: return RATE_RANK1; case 2: return RATE_RANK2; case 3: return RATE_RANK3;
     case 4: return RATE_RANK4; case 5: return RATE_RANK5; case 6: return RATE_RANK6; case 7: return RATE_RANK7;
-    case 8: return RATE_RANK8; case 9: return VR_RANK0; case 10: return VR_RANK1; case 11: return VR_RANK2;
     }
-    return VR_RANK3;
+    return RATE_RANK8;
 }
-static u32 c_gen(u32 c)                 /* is this candidate made at all */
+static u32 c_enum(u32 c)
 {
-    switch (c) { case 9: return VR_GEN0; case 10: return VR_GEN1; case 11: return VR_GEN2; case 12: return VR_GEN3; }
-    return c < 9;
+    switch (c) {
+    case 0: return RATE_ENUM0; case 1: return RATE_ENUM1; case 2: return RATE_ENUM2; case 3: return RATE_ENUM3;
+    case 4: return RATE_ENUM4; case 5: return RATE_ENUM5; case 6: return RATE_ENUM6; case 7: return RATE_ENUM7;
+    }
+    return RATE_ENUM8;
 }
-static u32 c_row(u32 c)                 /* the stock row whose key it uses */
+static int is_rank(u32 rk)                /* one of the nine stock rates (fps x 100) */
 {
-    switch (c) { case 9: return VR_BASEJ0; case 10: return VR_BASEJ1; case 11: return VR_BASEJ2; case 12: return VR_BASEJ3; }
-    return c;
+    for (u32 c = 0; c < NRATES; c++) if (c_rank(c) == rk) return 1;
+    return 0;
+}
+static u32 carrier_row(u32 en)            /* the stock row (0..8) of a carrier enum; NRATES = none */
+{
+    for (u32 c = 0; c < NRATES; c++) if (c_enum(c) == en) return c;
+    return NRATES;
+}
+/* File f's declared rates: SEC_RATES, or -- a file written before it (MINCORE < 5),
+ * by a core that offered its own -- those (rcd.py decode, the same rule).
+ * Word k of rate i: rank, num, den, cycles, carrier, nominal, engine. */
+static u32 sec(u32 f, u32 typ, u32 *len);
+static u32 rate_count(u32 f)
+{
+    u32 ln, a = sec(f, SEC_RATES, &ln);
+    return a ? W(a) : W(f + RH_MINCORE) < 5u ? NDRATES : 0u;
+}
+_Static_assert(NDRATES == 3u, "legacy_word lists the three default rates");
+static u32 legacy_word(u32 i, u32 k)
+{
+    switch (i * 8u + k) {
+    case 0: return DRATE0_0; case 1: return DRATE0_1; case 2: return DRATE0_2; case 3: return DRATE0_3;
+    case 4: return DRATE0_4; case 5: return DRATE0_5; case 6: return DRATE0_6;
+    case 8: return DRATE1_0; case 9: return DRATE1_1; case 10: return DRATE1_2; case 11: return DRATE1_3;
+    case 12: return DRATE1_4; case 13: return DRATE1_5; case 14: return DRATE1_6;
+    case 16: return DRATE2_0; case 17: return DRATE2_1; case 18: return DRATE2_2; case 19: return DRATE2_3;
+    case 20: return DRATE2_4; case 21: return DRATE2_5; case 22: return DRATE2_6;
+    }
+    return 0;
+}
+static u32 rate_word(u32 f, u32 i, u32 k)
+{
+    u32 ln, a = sec(f, SEC_RATES, &ln);
+    return a ? W(a + 4 + RCD_RATE_BYTES * i + 4 * k) : legacy_word(i, k);
+}
+static int file_rank(u32 f, u32 rk)       /* a stock rate or one f declares */
+{
+    if (is_rank(rk)) return 1;
+    for (u32 i = 0; rk && i < rate_count(f); i++) if (rate_word(f, i, 0) == rk) return 1;
+    return 0;
 }
 
 /* key = label + the stock row's suffix (+ "CROP"); 0 if it does not fit 15 */
@@ -1515,34 +1487,41 @@ static u32 solve(u32 hm, u32 cyc, u32 *tail)
     return vm;
 }
 
-/* gen record: key[16], donor, w0, w1, engfps, nominal, vrate, rank, crop */
-enum { G_KEY = 0, G_DONOR = 16, G_W0 = 20, G_W1 = 24, G_ENG = 28, G_NOM = 32, G_VRATE = 36,
-       G_RANK = 40, G_CROP = 44, G_BYTES = 48 };
+/* gen record: key[16], donor, w0, w1, engfps, nominal, rank, crop, vrate, num, den, carrier */
+enum { G_KEY = 0, G_DONOR = 16, G_W0 = 20, G_W1 = 24, G_ENG = 28, G_NOM = 32,
+       G_RANK = 36, G_CROP = 40, G_VRATE = 44, G_RNUM = 48, G_RDEN = 52, G_CARRIER = 56,
+       G_BYTES = 60 };
 
 /* The i-th picker entry the core makes for file f (ogc_layout.gen_entries, same order)
  * into out; 0 = there are fewer. */
 static u32 gen_entry(u32 f, u32 i, u32 out)
 {
     u32 ln, md = sec(f, SEC_MODES, &ln), n = 0, crops = W(f + RH_FLAGS) & RFLAG_CROP ? 2u : 1u;
-    for (u32 c = 0; c < 9 + VR_K; c++) {
-        if (!c_gen(c)) continue;
-        u32 rank = c_rank(c), m = 0;
+    u32 nr = rate_count(f);
+    for (u32 c = 0; c < NRATES + nr; c++) {
+        /* the stock nine, then the declared ones (keyed as their carrier, no PAL hmax) */
+        u32 x = c >= NRATES, d = c - NRATES;
+        u32 rank = x ? rate_word(f, d, 0) : c_rank(c), row = x ? carrier_row(rate_word(f, d, 4)) : c, m = 0;
         for (u32 k = 0; k < W(md); k++)
             if (rank <= W(md + 4 + RCD_MODE_BYTES * k + 4)) { m = md + 4 + RCD_MODE_BYTES * k; break; }
-        if (!m) continue;
-        u32 hm = c_pal(c) && W(m + 12) ? W(m + 12) : W(m + 8), tail = 0, vm = solve(hm, c_cyc(c), &tail);
+        if (!m || row == NRATES) continue;
+        u32 hm = !x && c_pal(c) && W(m + 12) ? W(m + 12) : W(m + 8), tail = 0;
+        u32 vm = solve(hm, x ? rate_word(f, d, 3) : c_cyc(c), &tail);
         if (!vm) continue;
         for (u32 crop = 0; crop < crops; crop++, n++) {
             if (n != i) continue;
-            if (!key_make(out + G_KEY, f + RH_LABEL, c_row(c), crop)) return 0;
+            if (!key_make(out + G_KEY, f + RH_LABEL, row, crop)) return 0;
             W(out + G_DONOR) = W(m);
             W(out + G_W0) = hm | tail << 16;
             W(out + G_W1) = vm | W(m + 16) << 16;
-            W(out + G_ENG) = c_eng(c);
-            W(out + G_NOM) = c_nom(c);
-            W(out + G_VRATE) = c < 9 ? 0u : rank;
+            W(out + G_ENG) = x ? rate_word(f, d, 6) : c_eng(c);
+            W(out + G_NOM) = x ? rate_word(f, d, 5) : c_nom(c);
             W(out + G_RANK) = rank;
             W(out + G_CROP) = crop;
+            W(out + G_VRATE) = x ? rank : 0u;
+            W(out + G_RNUM) = x ? rate_word(f, d, 1) : 0u;
+            W(out + G_RDEN) = x ? rate_word(f, d, 2) : 0u;
+            W(out + G_CARRIER) = x ? rate_word(f, d, 4) : c_enum(c);
             /* An explicit, required RCD section can reconstruct the historical
              * sensor240/native30 experiment without changing normal entries.
              * Sensor/engine/shutter cadence is explicit; the UI/container key stays native. */
@@ -1575,6 +1554,18 @@ static u32 gen_count(u32 f)
 static u32 rc_match(u32 sel, u32 g)
 {
     return (W(sel) == 0 || W(sel) == W(g + G_RANK)) && W(sel + 4) == W(g + G_CROP);
+}
+
+/* A generated entry's writer policy: the file's first SEC_WRITER record for its
+ * rank (0 = every rank) and Crop Mode, as flags | bit mask << 8; 0 = the firmware's own. */
+static u32 writer_flags(u32 f, u32 g)
+{
+    u32 ln, a = sec(f, SEC_WRITER, &ln);
+    for (u32 i = 0; a && i < W(a); i++) {
+        u32 t = a + 4 + 16 * i;
+        if ((W(t) == 0 || W(t) == W(g + G_RANK)) && W(t + 4) == W(g + G_CROP)) return W(t + 12) | W(t + 8) << 8;
+    }
+    return 0;
 }
 
 /* rcd.decode(), the same checks in the same order: 0 = good, else WHY_*. */
@@ -1625,13 +1616,15 @@ static u32 rcd_check(u8 *S, u32 f, u32 n)
         if (off < RCD_HDR || (off & 3) || ln > n - off || (fl & ~1u)) return WHY_SECTION;
         if ((typ < SEC_VMODES || typ > SEC_PACK) && typ != SEC_STANDBY && typ != SEC_MODES
             && typ != SEC_RATECANVAS && typ != SEC_BINFILT && typ != SEC_CAPTURE_TIMING
-            && typ != SEC_BITDEPTH) {
+            && typ != SEC_BITDEPTH && typ != SEC_WRITER && typ != SEC_RATES) {
             if (fl & 1u) return WHY_UNKNOWN;
             continue;
         }
         if (seen & (1u << typ)) return WHY_SECTION;
         if (typ == SEC_CAPTURE_TIMING && fl != 1u) return WHY_ENTRY;
         if (typ == SEC_BITDEPTH && fl != 1u) return WHY_BITDEPTH;
+        if (typ == SEC_WRITER && fl != 1u) return WHY_WRITER;
+        if (typ == SEC_RATES && fl != 1u) return WHY_RATES;
         seen |= 1u << typ;
     }
     u32 need = 1u << SEC_MODES | 1u << SEC_CANVAS | 1u << SEC_UI | 1u << SEC_PACK;
@@ -1651,18 +1644,33 @@ static u32 rcd_check(u8 *S, u32 f, u32 n)
     u32 bits = sec(f, SEC_BITDEPTH, &ln);
     if (bits && (W(f + RH_MINCORE) < 4u || ln != 4u || !W(bits) || W(bits) > 7u))
         return WHY_BITDEPTH;
-    u32 md = a;
+    if ((a = sec(f, SEC_RATES, &ln)) != 0) {
+        u32 nr = ln >= 4 ? W(a) : 0;
+        if (W(f + RH_MINCORE) < 5u || !nr || nr > RCD_MAX_RATES || ln != 4u + RCD_RATE_BYTES * nr)
+            return WHY_RATES;
+        for (u32 i = 0, t = a + 4; i < nr; i++, t += RCD_RATE_BYTES) {
+            u32 rk = W(t), num = W(t + 4), den = W(t + 8), cyc = W(t + 12);
+            if (!num || num > 1000000u || !den || den > 100000u || is_rank(rk) ||
+                rk != udiv(num * 100u, den) ||
+                (uint64_t)cyc * num != (uint64_t)OGC_CLOCK * den ||
+                carrier_row(W(t + 16)) == NRATES || !W(t + 20) || W(t + 20) > 1000u ||
+                W(t + 24) < 0x3F800000u || W(t + 24) > 0x447A0000u)
+                return WHY_RATES;
+            for (u32 j = 0; j < i; j++) if (W(a + 4 + RCD_RATE_BYTES * j) == rk) return WHY_RATES;
+        }
+    }
+    u32 md = sec(f, SEC_MODES, &ln);
     if ((a = sec(f, SEC_CAPTURE_TIMING, &ln)) != 0) {
         u32 nt = ln >= 4 ? W(a) : 0;
         if (!nt || nt > MAX_GEN || ln != 4u + 24u * nt) return WHY_ENTRY;
         for (u32 i = 0, t = a + 4; i < nt; i++, t += 24) {
             u32 rank = W(t), crop = W(t + 4), m = 0, c;
-            for (c = 0; c < 9 + VR_K; c++) if (c_gen(c) && c_rank(c) == rank) break;
-            if (c == 9 + VR_K || crop > ((W(f + RH_FLAGS) & RFLAG_CROP) ? 1u : 0u)) return WHY_ENTRY;
+            for (c = 0; c < NRATES && c_rank(c) != rank; c++) {}
+            if (!file_rank(f, rank) || crop > ((W(f + RH_FLAGS) & RFLAG_CROP) ? 1u : 0u)) return WHY_ENTRY;
             for (u32 k = 0; k < nm; k++)
                 if (rank <= W(md + 4 + RCD_MODE_BYTES * k + 4)) { m = md + 4 + RCD_MODE_BYTES * k; break; }
             if (!m) return WHY_ENTRY;
-            u32 hm = c_pal(c) && W(m + 12) ? W(m + 12) : W(m + 8);
+            u32 hm = c < NRATES && c_pal(c) && W(m + 12) ? W(m + 12) : W(m + 8);
             if ((W(t + 8) & 0xFFFFu) != hm || (W(t + 8) >> 16) < MIN_TAIL ||
                 (W(t + 12) & 0xFFFFu) < 2u || (W(t + 12) >> 16) != W(m + 16) ||
                 W(t + 16) < 0x3F800000u || W(t + 16) > 0x447A0000u ||
@@ -1673,6 +1681,18 @@ static u32 rcd_check(u8 *S, u32 f, u32 n)
     }
     u32 ne = gen_count(f);
     if (!ne || ne > MAX_GEN) return WHY_ENTRY;
+    if ((a = sec(f, SEC_WRITER, &ln)) != 0) {
+        u32 nw = ln >= 4 ? W(a) : 0;
+        if (W(f + RH_MINCORE) < 5u || !nw || nw > RCD_MAX_WRITER || ln != 4u + 16u * nw) return WHY_WRITER;
+        for (u32 i = 0, t = a + 4; i < nw; i++, t += 16) {
+            u32 rk = W(t);
+            if ((rk && !file_rank(f, rk)) || W(t + 4) > ((W(f + RH_FLAGS) & RFLAG_CROP) ? 1u : 0u) || !W(t + 8) || W(t + 8) > 7u
+                || !W(t + 12) || (W(t + 12) & ~(WR_BATCH4M | WR_HDRCPU)))
+                return WHY_WRITER;
+            for (u32 j = 0; j < i; j++)
+                if (W(a + 4 + 16 * j) == rk && W(a + 8 + 16 * j) == W(t + 4)) return WHY_WRITER;
+        }
+    }
     a = sec(f, SEC_CANVAS, &ln);
     if (ln < RCD_CANVAS_HEAD) return WHY_CANVAS;
     u32 nr = W(a + 12), npb = W(a + 16);
@@ -1711,9 +1731,8 @@ static u32 rcd_check(u8 *S, u32 f, u32 n)
         if (!nl || nl > RCD_MAX_RCANVAS) return WHY_ENTRY;
         for (u32 l = 0; l < nl; l++) {
             if (at + 16 > end) return WHY_ENTRY;
-            u32 rk = W(at), bp = W(at + 8), nq = W(at + 12), known = !rk;
-            for (u32 c = 0; c < 9 + VR_K; c++) if (c_rank(c) == rk) known = 1;
-            if (!known || W(at + 4) > 1 || nq > RCD_MAX_PAIRS || at + 16 + 8 * nq > end) return WHY_ENTRY;
+            u32 rk = W(at), bp = W(at + 8), nq = W(at + 12);
+            if ((rk && !file_rank(f, rk)) || W(at + 4) > 1 || nq > RCD_MAX_PAIRS || at + 16 + 8 * nq > end) return WHY_ENTRY;
             if (!pairs_ok(at + 16, nq)) return WHY_ENTRY;
             if (!profile_ok(S, bp ? bp : pid)) return WHY_PROFILE;
             at += 16 + 8 * nq;
@@ -1957,6 +1976,10 @@ static u32 fill_s(u8 *S, u32 n)
             W(e + ENT_VM) = v;
             W(e + ENT_VAR) = vr;
             W(e + ENT_VRATE) = W(src + G_VRATE);
+            W(e + ENT_WFLAGS) = writer_flags(f, ga);
+            W(e + ENT_RNUM) = W(src + G_RNUM);
+            W(e + ENT_RDEN) = W(src + G_RDEN);
+            W(e + ENT_CARRIER) = W(src + G_CARRIER);
         }
     }
     /* each variant: its pid, its base row, its row; an entry's own list here */
@@ -2250,25 +2273,35 @@ static u32 qs_row_of_k(u8 *S, u32 k)
 
 static u32 qs_id(u32 row, u32 marker) { return W(row + ROW_QSID + 4 * (marker == 3 ? 1u : marker)); }
 
-/* og3k_ui.S ui_layout_copy (uishare qs_apply.c clone): every property gets a copy
- * of its first key at `time`; property `prop` gets `value`. */
-static u32 qs_clone(u32 old, u32 len, u32 out, u32 cap, u32 time, u32 prop, u32 has, u32 value)
+/* Append every format's state in one pass. The former per-format clone loop
+ * copied the entire growing record again for every row (up to six times).
+ * Each added key still copies the original property's first key, in row order. */
+static u32 qs_clone(u8 *S, u32 old, u32 len, u32 out, u32 cap, u32 n, u32 prop, u32 has, u32 marker)
 {
-    u32 count, src = 28, o = 28;
+    u32 rows[6], times[6], nr = 0, count, src = 28, o = 28;
     if (len < 28 || cap < 28) return 0;
+    for (u32 k = 2; k < n && k <= 7; k++) {
+        u32 row = qs_row_of_k(S, k);
+        if (!row) continue;
+        rows[nr] = row; times[nr++] = 100u * k / 3u;
+    }
+    if (!nr) return 0;
     copy8(out, old, 28);
     count = be32(old + 12);
     for (u32 p = 0; p < count; ++p) {
         if (src + 20 > len) return 0;
         u32 keys = be32(old + src);
-        if (src + 20 + 10 * keys > len || keys == 0 || o + 20 + 10 * keys + 10 > cap) return 0;
+        if (keys == 0 || keys > 255u - nr || src + 20 + 10 * keys > len ||
+            o + 20 + 10 * (keys + nr) > cap) return 0;
         copy8(out + o, old + src, 20 + 10 * keys);
-        B8(out + o + 3) = (u8)(keys + 1u);
+        put_be32(out + o, keys + nr);
         o += 20 + 10 * keys;
-        copy8(out + o, old + src + 20, 10);
-        put_be32(out + o + 2, time);
-        if (has && p == prop) put_be32(out + o + 6, value);
-        o += 10;
+        for (u32 k = 0; k < nr; k++) {
+            copy8(out + o, old + src + 20, 10);
+            put_be32(out + o + 2, times[k]);
+            if (has && p == prop) put_be32(out + o + 6, qs_id(rows[k], marker));
+            o += 10;
+        }
         src += 20 + 10 * keys;
     }
     if (src != len) return 0;
@@ -2303,8 +2336,8 @@ static u32 qs_edit(u32 edits, u32 old, u32 len, u32 out, u32 cap, u32 row)
     return o + (len - cur);
 }
 
-/* Scheme B on one record (rcd.qs_target): the new bytes in a or b, *len; 0 = leave it. */
-static u32 qs_b(u8 *S, u32 tab, u32 r, u32 old, u32 *len, u32 a, u32 b, u32 cap, u32 n)
+/* Scheme B on one record (rcd.qs_target): the new bytes in a, *len; 0 = leave it. */
+static u32 qs_b(u8 *S, u32 tab, u32 r, u32 old, u32 *len, u32 a, u32 cap, u32 n)
 {
     u32 rule = u8at(r + 10), pa = u8at(r + 11), pb = le16(r + 12);
     u32 edits = tab + le32(tab + 12) + le16(r + 14), f = fn_row(tab, n), any = 0;
@@ -2313,19 +2346,11 @@ static u32 qs_b(u8 *S, u32 tab, u32 r, u32 old, u32 *len, u32 a, u32 b, u32 cap,
     u32 l = *len, got;
     switch (rule) {
     case QS_CLONE: {
-        u32 cur = old, dst = a;
-        for (u32 k = 2; k < n && k <= 7; k++) {
-            u32 row = qs_row_of_k(S, k);
-            if (!row) continue;
-            u32 mk = pb & 0xFFu;
-            l = qs_clone(cur, l, dst, cap, 100u * k / 3u, pa ? pa - 1u : 0u, pa && mk != 0xFFu,
-                         mk != 0xFFu ? qs_id(row, mk & 3u) : 0u);
-            if (!l) return 0;
-            cur = dst;
-            dst = dst == a ? b : a;
-        }
+        u32 mk = pb & 0xFFu;
+        l = qs_clone(S, old, l, a, cap, n, pa ? pa - 1u : 0u, pa && mk != 0xFFu, mk & 3u);
+        if (!l) return 0;
         *len = l;
-        return cur;
+        return a;
     }
     case QS_END: {
         if (l < 40 || l > cap) return 0;
@@ -2403,7 +2428,7 @@ u32 ogc_qsrec(u8 *S, u32 reader)
     u32 d = SW(S, S_QS_DEPTH);
     if (d >= OGC_QS_SLOTS) { SW(S, S_QS_FULL)++; return next(reader); }
     u32 a = SW(S, S_QS_BUF) + d * 2u * OGC_QS_CAP, l = len;
-    u32 out = qs_b(S, tab, r, src, &l, a, a + OGC_QS_CAP, OGC_QS_CAP, SW(S, S_QS_N));
+    u32 out = qs_b(S, tab, r, src, &l, a, OGC_QS_CAP, SW(S, S_QS_N));
     if (!out) { SW(S, S_QS_PASS)++; return next(reader); }
     SW(S, S_QS_DEPTH) = d + 1;
     W(reader + R_BASE) = out - pos;
@@ -2450,46 +2475,10 @@ u32 ogc_qsload(u8 *S, u32 *args)
     return r;
 }
 
-/* ==== the virtual frame rates' menu (rows 9..12) ====================================== *
- * Always (the four rows exist whenever res-custom is in; a format without entries for
- * one sees it greyed).  From the build (vr_ui.py, rcd.vr_template):
- *  1. B2_5 (the movie settings page) as uishare's page copy (FSPG): the summary's K new
- *     labels, K cursor pairs, ListItem instances and the maxima -- built here, the
- *     runtime entry switched to it BEFORE the rows' own menu blocks copy the page;
- *  2. rows 9..12 in the six frame-rate CSVs and the K label strings (uia_apply);
- *  3. the LV standby texts, in place (claimed EXCL at the entry, put back at power-off);
- *  the label string ids go into the page copy and the LV keys (vrpg/vrlv marks). */
-#define B25_START 0xC1A5C590u
-#define B25_LEN 0x1CD6Bu
-#define B25_ENTRY 0x19C130u
-#define READER_ENTRIES 0xA8u
-#define READER_TABLE 0xACu
-
-static int vr_claims(const struct sl_svc *svc, u32 lv)
-{
-    u32 at = lv + 4;
-    for (u32 i = 0; i < W(lv); i++) {
-        u32 a = W(at), n = W(at + 4);
-        if (svc->claim(svc, a, n, (const void *)(uintptr_t)(at + 8), SL_EXCL) != SL_OK) return 0;
-        at += 8 + 2 * n;
-    }
-    return 1;
-}
-
-/* the runtime page entry named "B2_5" */
-static u32 b25_entry(void)
-{
-    u32 reader = uis_reader();
-    if (!reader) return 0;
-    for (u32 i = 0; i < W(reader + READER_ENTRIES) && i < 512; i++) {
-        u32 e = W(reader + READER_TABLE) + 44 * i, nm = W(e + 4);
-        if (nm && B8(nm) == 'B' && B8(nm + 1) == '2' && B8(nm + 2) == '_' && B8(nm + 3) == '5'
-            && B8(nm + 4) == 0)
-            return e;
-    }
-    return 0;
-}
-
+/* ==== the native list copies: frame rate (six variants) and bit depth (two) ========== *
+ * uishare's applier installs whole copies of the stock CSVs (the FV table answers
+ * with them; the stock files are never written); the core then knows where each
+ * row's "a,b" enable pair is, and the stock pair, to grey or give back. */
 /* the FV table's copy of a stock file: its address, *size; 0 = none */
 static u32 fv_copy(u32 stock, u32 *size)
 {
@@ -2504,8 +2493,6 @@ static u32 fv_copy(u32 stock, u32 *size)
         if (W(table + 16 + 12 * i) == stock) { *size = W(table + 24 + 12 * i); return W(table + 20 + 12 * i); }
     return 0;
 }
-
-static void put_be(u32 a, u32 v) { put_be32(a, v); }
 
 static u32 bit_install(u8 *S, u32 block, const struct ogc_tab *t)
 {
@@ -2529,72 +2516,25 @@ static u32 bit_install(u8 *S, u32 block, const struct ogc_tab *t)
     return 1;
 }
 
-static u32 vr_install(u8 *S, u32 block, const struct ogc_tab *t)
+static u32 rate_install(u8 *S, u32 block, const struct ogc_tab *t)
 {
-    u32 e = b25_entry();
-    if (!e || W(e + 8) != B25_ENTRY) return 2;                  /* someone else's B2_5 */
-    /* 1. the page copy: 128-byte FSPG header, then the page, rebuilt from the stock set
-     *    by vrpg = {len, nseg, marks[K], {stock offset, len} | {-1, len, bytes}...} */
-    u32 pg = block + t->vrpg_off, len = W(pg);
-    u32 dst = (SW(S, S_DATA) + SW(S, S_DATA_USED) + 63u) & ~63u;
-    if (dst + 128 + len + 4 > SW(S, S_DATA) + SW(S, S_DATA_CAP)) return 3;
-    u32 page = dst + 128, o = 0, sg = pg + 8 + 4 * VR_K;
-    for (u32 i = 0; i < W(pg + 4); i++) {
-        u32 so = W(sg), n = W(sg + 4);
-        if (o + n > len) return 4;
-        if (so == 0xFFFFFFFFu) { copy8(page + o, sg + 8, n); sg += 8 + ((n + 3u) & ~3u); }
-        else { if (so + n > B25_LEN) return 4; copy8(page + o, B25_START + so, n); sg += 8; }
-        o += n;
-    }
-    if (o != len) return 4;
-    W(dst + 0) = UIA_MAGIC; W(dst + 4) = UIA_VERSION; W(dst + 8) = len;
-    W(dst + 12) = len; W(dst + 16) = B25_LEN; W(dst + 20) = 1;
-    for (u32 o = 24; o < 128; o += 4) W(dst + o) = 0;
-    SW(S, S_DATA_USED) = page + len - SW(S, S_DATA);
-    /* 2. rows 9..12 in the six CSVs + the K label strings: the template's STRBASE
-     *    targets are S offsets -- moved onto S, the hash made again */
-    u32 tpl = block + t->vrtpl_off, ns = W(tpl + 16), nw = W(tpl + 20), cur = 0x20;
-    for (u32 i = 0; i < ns; i++) cur += (8 + W(tpl + cur + 4) + 1 + 3) & ~3u;
-    for (u32 i = 0; i < nw;) {
-        u32 h = W(tpl + cur + 4 * i), code = h >> 24, k = h & 0xFFFFFFu;
-        if (code == 16u && k == 2 && W(tpl + cur + 4 * i + 8) < 0x10000u)
-            W(tpl + cur + 4 * i + 8) += (u32)(uintptr_t)S;
-        i += 1 + k;
-    }
-    W(tpl + 12) = fnv(tpl + 0x20, W(tpl + 8) - 0x20);
     struct uia_outcome out;
     out.n_slots = 0;
-    u32 res = ((uia_fn)SW(S, S_UIA_FN))(tpl, t->vrtpl_len, &out);
-    if (res != UIA_OK) return 0x10 + res;
-    /* each copy's last 9 + K rows: where its "a,b" is, and the stock value */
-    for (u32 v = 0; v < VR_CSVS; v++) {
-        u32 size = 0, csv = fv_copy(W(block + t->vrcsv_off + 4 * v), &size);
-        if (!csv || size < 8) return 5;
+    if (((uia_fn)SW(S, S_UIA_FN))(block + t->rate_off, t->rate_len, &out) != UIA_OK) return 2;
+    for (u32 v = 0; v < RATE_CSVS; v++) {
+        u32 size = 0, csv = fv_copy(W(block + t->ratecsv_off + 4 * v), &size);
+        if (!csv || size < 8) return 3;
         u32 end = csv + size;
-        for (u32 k = VR_ROWS; k-- > 0;) {
+        for (u32 k = NRATES; k-- > 0;) {             /* the copy's last nine rows */
             while (end > csv && (B8(end - 1) == '\n' || B8(end - 1) == '\r' || B8(end - 1) == 0)) end--;
-            if (end - csv < 3 || B8(end - 2) != ',') return 6;
-            SW(S, S_VR_EN_AT + 4 * (v * VR_ROWS + k)) = end - 3;
-            SW(S, S_VR_EN_ON + 4 * (v * VR_ROWS + k)) = B8(end - 3) | B8(end - 1) << 16;
-            while (end > csv && B8(end - 1) != '\n') end--;       /* the line before */
+            if (end - csv < 3 || B8(end - 2) != ',') return 4;
+            SW(S, S_RATE_EN_AT + 4 * (v * NRATES + k)) = end - 3;
+            SW(S, S_RATE_EN_ON + 4 * (v * NRATES + k)) = B8(end - 3) | B8(end - 1) << 16;
+            while (end > csv && B8(end - 1) != '\n') end--;      /* the line before */
         }
     }
-    /* the label ids into the page copy and (below) the LV keys */
-    for (u32 k = 0; k < VR_K; k++) put_be(page + W(pg + 8 + 4 * k), SW(S, S_VR_LABEL + 4 * k));
-    /* 3. the LV texts, in place (claimed), then their K label keys per layout */
-    u32 lv = block + t->vrlv_off, at = lv + 4;
-    for (u32 i = 0; i < W(lv); i++) {
-        u32 a = W(at), n = W(at + 4);
-        copy(a, at + 8 + n, n);
-        at += 8 + 2 * n;
-    }
-    u32 lm = block + t->vrlm_off;
-    for (u32 i = 0; i < W(lm); i++) put_be(W(lm + 4 + 4 * i), SW(S, S_VR_LABEL + 4 * (i % VR_K)));
-    /* the switch, last: the next time Settings opens it reads our page */
-    dmb();
-    W(e + 8) = page - NBU_BASE;
-    SW(S, S_VR_UI) = 1;
-    vrate_follow(S);
+    SW(S, S_RATE_UI) = 1;
+    rate_follow(S);
     return 1;
 }
 
@@ -2700,12 +2640,13 @@ int ogc_v3_entry(u8 *block, const struct sl_svc *svc, const char *path)
         int r = svc->claim(svc, TT + 0x20 * i + 4, 8, block + t->tt_off + 8 * i, SL_EXCL);
         if (r != SL_OK) { ogc_log(svc, 'T', d << 16 | ((u32)r & 0xFFFFu)); return SL_RELEASE; }
     }
-    /* the virtual rate's LV texts, when a row offers it (claimed like everything else) */
-    u32 vr_ok = vr_claims(svc, (u32)(uintptr_t)block + t->vrlv_off);
+    /* the >99 fps clock: only when some mode is that fast (or a producer may make one) */
+    u32 want_fast = t->virtual_len != 0;
+    for (u32 r = 0; r < SW(S, S_NROWS); r++) if (W(rowp(S, r) + ROW_MAXRATE) >= 10000u) want_fast = 1;
     /* 3. veneers */
     u32 *ven = (u32 *)(block + t->scratch_off);
     for (u32 i = 0; i < t->n_hook; i++)
-        if (!(ven[i] = svc->cave_alloc(svc, t->virtual_len && i==t->n_hook-1u ? 24u : 8u))) { ogc_log(svc, 'V', i); return SL_RELEASE; }
+        if (!(ven[i] = svc->cave_alloc(svc, i == t->n_hook - 1u ? 24u : 8u))) { ogc_log(svc, 'V', i); return SL_RELEASE; }
 
     /* 4. run-time words */
     SW(S, FN_PICK) = (u32)(uintptr_t)&ogc_pick;
@@ -2718,9 +2659,6 @@ int ogc_v3_entry(u8 *block, const struct sl_svc *svc, const char *path)
     SW(S, FN_V32) = (u32)(uintptr_t)&ogc_v32;
     SW(S, FN_AC38) = (u32)(uintptr_t)&ogc_ac38;
     SW(S, FN_FPS) = (u32)(uintptr_t)&ogc_fps;
-    SW(S, FN_RECRATE) = (u32)(uintptr_t)&ogc_recrate;
-    SW(S, FN_HDRCOPY) = (u32)(uintptr_t)&ogc_hdrcopy;
-    SW(S, FN_BULK) = (u32)(uintptr_t)&ogc_bulk;
     SW(S, FN_CMT) = (u32)(uintptr_t)&ogc_cmt;
     SW(S, FN_SAVE) = (u32)(uintptr_t)&ogc_save;
     SW(S, FN_QSREC) = (u32)(uintptr_t)&ogc_qsrec;
@@ -2729,7 +2667,10 @@ int ogc_v3_entry(u8 *block, const struct sl_svc *svc, const char *path)
     SW(S, S_UIA_FN) = (u32)(uintptr_t)&uia_apply;
     SW(S, FN_GATE) = (u32)(uintptr_t)&ogc_gate;
     SW(S, FN_BIT) = (u32)(uintptr_t)&ogc_bit;
-    SW(S, FN_RCMT) = (u32)(uintptr_t)&ogc_rcmt;
+    SW(S, FN_GS) = (u32)(uintptr_t)&ogc_gs;
+    SW(S, FN_RECRATE) = (u32)(uintptr_t)&ogc_recrate;
+    SW(S, FN_HDRCOPY) = (u32)(uintptr_t)&ogc_hdrcopy;
+    SW(S, FN_BULK) = (u32)(uintptr_t)&ogc_bulk;
     SW(S, FN_VTV) = (u32)(uintptr_t)&ogc_vtv;
     SW(S, FN_VGUI) = (u32)(uintptr_t)&ogc_virtual_gui;
     SW(S, FN_BINPATH) = (u32)(uintptr_t)&ogc_binpath;
@@ -2737,10 +2678,10 @@ int ogc_v3_entry(u8 *block, const struct sl_svc *svc, const char *path)
     SW(S, S_ENABLE_FN) = (u32)(uintptr_t)&ogc_enable_set;
     for (u32 i = 0; i < SW(S, S_NENT); i++) W(entp(S, i) + ENT_KEYPTR) = entp(S, i) + ENT_KEY;
 
-    /* 5. the menu: the virtual rate's page first (the rows' blocks build on it), then
+    /* 5. the menu: the bit-depth and frame-rate list copies (the greying), then
      *    each row's Settings entry (uishare's applier, our template) */
     if (!bit_install(S, (u32)(uintptr_t)block, t)) return SL_RELEASE;
-    if (vr_ok) SW(S, S_VR_WHY) = vr_install(S, (u32)(uintptr_t)block, t);
+    SW(S, S_RATE_WHY) = rate_install(S, (u32)(uintptr_t)block, t);
     u32 on = ui_rows(S, (u32)(uintptr_t)block + t->tpl_off);
     ogc_log(svc, 'O', on);
     if (!on) return SL_RELEASE;            /* the loader puts every claimed range back */
@@ -2753,16 +2694,9 @@ int ogc_v3_entry(u8 *block, const struct sl_svc *svc, const char *path)
         W(PAIR_MOVT) = mov_imm(W(PAIR_MOVT), pa >> 16);
         W(PAIR_NUM) = (W(PAIR_NUM) & 0xFFFFFF00u) | SW(S, S_PAIRN);
     }
-    rate_pairs_build(S);
-    {
-        u32 pa = (u32)(uintptr_t)S + S_RPAIRS, qa = (u32)(uintptr_t)S + S_SPAIRS;
-        W(RATE_MOVW) = mov_imm(W(RATE_MOVW), pa & 0xFFFFu);
-        W(RATE_MOVT) = mov_imm(W(RATE_MOVT), pa >> 16);
-        W(RATE_NUM) = (W(RATE_NUM) & 0xFFFFFF00u) | SW(S, S_RPAIRN);
-        W(SUM_MOVW) = mov_imm(W(SUM_MOVW), qa & 0xFFFFu);
-        W(SUM_MOVT) = mov_imm(W(SUM_MOVT), qa >> 16);
-        W(SUM_NUM) = (W(SUM_NUM) & 0xFFFFFF00u) | SW(S, S_SPAIRN);
-    }
+    /* channel 0's >99 fps clock gate 5/16 -> full (claimed EXCL, restored at power-off),
+     * only when a format records that fast */
+    if (want_fast && W(0xC0189440u) == 0x2C49F241u) W(0xC0189440u) = 0x7CFFF64Fu;   /* movw ip,#0x1249 -> #0xffff */
     SW(S, S_QS_TAB) = (u32)(uintptr_t)block + t->qstab_off;
     SW(S, S_QS_BUF) = (u32)(uintptr_t)block + t->qsbuf_off;
     SW(S, S_QS_PRE) = W(RCACHE + 4);          /* parsed before us: let go once (ogc_qslay) */
@@ -2780,7 +2714,7 @@ int ogc_v3_entry(u8 *block, const struct sl_svc *svc, const char *path)
         W(ven[i]) = h[5 * i + 2] == HOOK_TW ? THUMB_VENEER : 0xE51FF004u;
         W(ven[i] + 4) = h[5 * i + 1] + delta;           /* an ARM shim either way */
     }
-    if (t->virtual_len) {
+    {   /* the service (Virtual RCD, the declared rates) behind the picker veneer */
         struct vrc_endpoint *e=(struct vrc_endpoint *)(uintptr_t)(ven[t->n_hook-1u]+8u);
         e->magic=VRC_MAGIC; e->abi=VRC_ABI;
         e->dispatch=&ogc_virtual_dispatch; e->context=(uintptr_t)S;

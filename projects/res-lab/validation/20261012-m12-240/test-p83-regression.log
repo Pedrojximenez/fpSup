@@ -1,0 +1,11 @@
+test_full_old_240_profile_and_280_geometry (test_sensorlab_canvas.SensorLabCanvas) ... archived r10 full65 words reproduced 23976 native configuration {'class': 2, 'field58': 4, 'flag14': 1} route {'enabled': [0, 1, 0], 'mux': [1, 4], 'main_zoom': [2048, 1024], 'secondary_zoom': [1024, 1024], 'record': 0}
+archived r10 full65 words reproduced 27972 native configuration {'class': 2, 'field58': 4, 'flag14': 1} route {'enabled': [0, 1, 0], 'mux': [1, 4], 'main_zoom': [2048, 1024], 'secondary_zoom': [1024, 1024], 'record': 0}
+ok
+test_low_rates_and_rejected_entries_keep_existing_profile (test_sensorlab_canvas.SensorLabCanvas) ... ok
+test_exact_bytes_uncached_and_original_cached_source (test_reslab_header_copy.HeaderCopyTests) ... ok
+test_local_bulk_descriptor_before_native_configuration (test_reslab_header_copy.HeaderCopyTests) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 138.899s
+
+OK

@@ -1,0 +1,62 @@
+{
+ "firmware": "Ver.5.02, out/seg0_c0000000.bin sha256 aaa5208a028d9c4a",
+ "body": {
+  "source": "lz4fast.S",
+  "file": "lz4fast.bin",
+  "bytes": 708,
+  "sha256": "322350ad9c78f40b7caa8dfb4b47b9c0611b03510b2dbdc0d4bc2ba7121adfd1",
+  "isa": "ARM, position independent, integer only (no VFP/NEON)",
+  "alignment": 8,
+  "entries": {
+   "lz_block": 16
+  },
+  "control": {
+   "enable": 0,
+   "calls": 4,
+   "out_bytes": 8
+  },
+  "control_note": "enable=0 makes lz_block jump straight to the stock C05A7630 (same args, nothing touched); calls/out_bytes are statistics"
+ },
+ "veneers": {
+  "bytes": 8,
+  "placement": "cave.claim(\"lz4fast.veneer\", 8); must be within +-32 MiB of C05A7EE0 (cave arena C072E064..C072EFB4 is)",
+  "layout": [
+   {
+    "name": "decode",
+    "offset": 0,
+    "words": [
+     "E51FF004",
+     "<body+lz_block>"
+    ]
+   }
+  ]
+ },
+ "sites": [
+  {
+   "name": "decode",
+   "address": "0XC05A7EE0",
+   "isa": "ARM",
+   "orig_word": "EBFFFDD2",
+   "orig_insn": "bl 0xc05a7630",
+   "orig_check": true,
+   "new_insn": "bl <veneer+0>",
+   "only_caller": "C05A7630 has exactly one caller (this bl) and no pointer references",
+   "regs_relied_on": "none beyond the stock ABI (r0 ctx, r1 out stream, r2 in stream, r3 FLG ptr)",
+   "power_off_restore": "declare as a 4-byte section with orig_word (SUP_BUILD_RULES \u00a74)"
+  }
+ ],
+ "arm_order": [
+  "write body + veneer, read back",
+  "C000E91C() then C000EABC()",
+  "patch site (write, read back, C000E91C + C000EABC)"
+ ],
+ "disarm_order": [
+  "restore site word, C000E91C + C000EABC",
+  "or just set enable=0 (data word, takes effect on the next call)",
+  "keep body until reboot (a decode may be inside it)"
+ ],
+ "firmware_calls_from_body": [
+  "tail jump to C05A7630 when disabled"
+ ],
+ "conflicts_to_check": "nobody else may patch C05A7EE0 or C05A7630 (integration line checks)"
+}

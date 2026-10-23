@@ -1,0 +1,47 @@
+{
+ "label": "s60-x96-2",
+ "settings": {
+  "menu SetMovRecSize": "2",
+  "menu SetMovFramerate": "5",
+  "gui geti MV_FrameRate": "OK:MV_FrameRate -> 6",
+  "gui geti MV_fpLossless": "OK:MV_fpLossless -> 1",
+  "sdcard sdmode": "sdmode  UHS-II"
+ },
+ "before": {
+  "hold.held": 87,
+  "hold.passed": 0,
+  "hold.compressed": 86,
+  "hold.refused": 1,
+  "hold.no_benefit": 1,
+  "hold.lanes_full": 2,
+  "hold_b.held": 6,
+  "hold_b.compressed": 6,
+  "hold_b.refused": 0,
+  "hold_b.no_benefit": 0,
+  "hold.job_sum_us": 1190565,
+  "hold.job_count": 86,
+  "hold_b.job_sum_us": 83383,
+  "hold_b.job_count": 6
+ },
+ "mon_start": 1.0,
+ "task_top": "\n# CPU = 33.9[%] \n# top 10 tasks \n# ------------------------------\n# Cnt = 9702, Overlap = 0, Prefix = 1/1000000 \n#   TaskID       Time   Rate    FuncAddr    Pri  StackRem      name\n     001      1326756    66.1[%] c0001c60 (30)       3832 Byte inittsk\n     044       413690    20.6[%] c036ee50 (15)       7708 Byte CamSch\n     029        53727     2.7[%] c035c460 (11)       7056 Byte LensCycl\n     063        25624     1.3[%] c0672d89 (17)       1952 Byte FdTsk\n     092        24701     1.2[%] c036ee50 (14)       7312 Byte AeDev\n     094        23695     1.2[%] c036ee50 (16)       3472 Byte ExtStrb\n     068        22164     1.1[%] c01c26f9 (12)       4768 Byte MANAGER\n     071        21795     1.1[%] c01c40f9 (12)       8696 Byte R2YHDIS\n     095        21146     1.1[%] c036ee50 (16)       3200 Byte Level\n     039        15056     0.8[%] c036ee50 (17)      15200 Byte DrawMgr\n# Total(Sum)     2005682(   2005682) \n\n-> succeeded\n",
+ "mon_end": 3.02,
+ "stop_at": 4.13,
+ "after": {
+  "hold.held": 87,
+  "hold.passed": 0,
+  "hold.compressed": 86,
+  "hold.refused": 1,
+  "hold.no_benefit": 1,
+  "hold.lanes_full": 2,
+  "hold_b.held": 6,
+  "hold_b.compressed": 6,
+  "hold_b.refused": 0,
+  "hold_b.no_benefit": 0,
+  "hold.job_sum_us": 1190565,
+  "hold.job_count": 86,
+  "hold_b.job_sum_us": 83383,
+  "hold_b.job_count": 6
+ },
+ "record_log": "\n"
+}

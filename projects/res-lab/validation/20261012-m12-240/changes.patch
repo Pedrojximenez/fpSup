@@ -1,0 +1,84 @@
+--- /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261012-m12-240/source-before/ogc.c	2026-10-12 02:26:38
++++ /Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/res-custom/ogc.c	2026-10-12 02:26:38
+@@ -491,6 +491,21 @@
+     return e;
+ }
+ 
++/* The r78/r10 development adjustments belong to the p83 processing family.
++ * A producer selecting another native base owns its complete canvas and batch
++ * behavior; matching M12 dimensions alone must not replace that declaration. */
++static u32 m12_p83_entry(u8 *S)
++{
++    u32 e = m12_high_entry(S);
++    if (!e) return 0;
++    u32 v = W(e + ENT_VAR);
++    if (v >= SW(S, S_NVAR)) return 0;
++    u32 variant = (u32)(uintptr_t)S + SW(S, S_VARS) + v * VAR_SIZE;
++    if (W(variant + VAR_PID) != W(e + ENT_PID) ||
++        W(variant + VAR_BASE) != W(OGC_MAPPING + 83u * 4u)) return 0;
++    return e;
++}
++
+ /* Header-copy eligibility follows the selected capture entry, not only the
+  * menu rate. Section12 can run M12 at240/280 on an ordinary carrier (VRATE=0).
+  * Keep the legacy canvas and batch selectors separate: broadening those here
+@@ -520,7 +535,7 @@
+  * descriptor, preserving its owned work buffer and completion callback. */
+ void ogc_bulk(u8 *S, u32 params)
+ {
+-    if (!params || (params & 3u) || !m12_high_entry(S)) return;
++    if (!params || (params & 3u) || !m12_p83_entry(S)) return;
+     if (W(params) != 0x4000000u || !W(params+4u) || W(params+8u) != 0x40000u || W(params+12u) != 0xC03A55D0u) return;
+     W(params) = 0x400000u;
+     SW(S, S_BULK_HITS)++;
+@@ -1066,7 +1081,7 @@
+  * acceptance remains required; this is not a claim of the failure's cause. */
+ static void m12_legacy_canvas(u8 *S, u32 canvas, u32 pid)
+ {
+-    u32 e = m12_high_entry(S);
++    u32 e = m12_p83_entry(S);
+     if (!e || W(e + ENT_PID) != pid || W(e + ENT_ENGFPS) != SW(S, S_FPSLATCH)) return;
+     u32 v = vm_of(S, W(e + ENT_MODE)), rank = SW(S, S_VRATE);
+     if (!v || W(v + VM_DONOR) != 12u || W(e + ENT_W0) != (330u | (330u << 16)) ||
+--- /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261012-m12-240/source-before/build_v3_rescustom.py	2026-10-12 02:26:38
++++ /Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/res-custom/build_v3_rescustom.py	2026-10-12 02:26:38
+@@ -51,7 +51,7 @@
+ PAIR_SITES = ((0xC06BDA3C, 8), (0xC06BDA48, 4),   # the resolution converter's movw/movt, mov #n
+               (0xC06BDB0C, 8), (0xC06BDB18, 4),   # the frame-rate converter (row <-> internal)
+               (0xC06CB6DC, 8), (0xC06CB6E8, 4))   # the frame-rate summary (export -> state)
+-CORE_NAME, CORE_ID, VERSION = '32RESCUS.BIN', 'RCUS', 18
++CORE_NAME, CORE_ID, VERSION = '32RESCUS.BIN', 'RCUS', 19
+ RCD_DIR = 'RESCUS'
+ SHIFT = 0x10000000
+ SPAN = 0x8000                       # the layout must fit og_pic's window
+@@ -81,6 +81,9 @@
+ 
+ # ---- the rows -----------------------------------------------------------------
+ def row_data(target, tmp):
++    if target == 'm12-240':
++        import m12_240
++        return m12_240.row_data(tmp, img())
+     jose = target in JOSE
+     env = dict(os.environ, OG_TARGET='og3k' if jose else target)
+     for k in ('OG_V3', 'OG_CHAIN', 'OG_V3_OGV', 'OG_UISHARE'):
+--- /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261012-m12-240/source-before/res-lab-README.md	2026-10-12 02:26:38
++++ /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/README.md	2026-10-12 02:30:47
+@@ -1,5 +1,18 @@
+ # Res Lab（原 Sensor Lab）— 開發狀態
+ 
++## 2026-10-12：M12 239.76p 獨立配方（離線候選）
++
++已製作 **M12240**，使用同一個 RCD／Virtual RCD 框架與 RES-CUSTOM consumer。
++M12 原廠 330／330／910×6 時序、p13、1008×672 RAW／992×662 輸出、12-bit；
++選單直接選 239.76p，DNG 標記為 `240000/1001`。幾何沿用成功片段時期 H2 的 25 組讀回。
++consumer v19 修正 p83 試驗跨配方覆蓋，使 p13 保留自己的完整畫布与原生批次。
++Res Lab producer v18、共用 loader／AutoRun 與 RCD wire／ABI 不變。
++
++[普通卡](cards/20261012-m12-240/plain/)與 [debug 卡](cards/20261012-m12-240/debug/)
++為新建的離線開發產物；尚未寫卡或上機。歷史成功片段的精確 BIN 未找回，
++本次不能稱為持續 240p 錄影修復。使用方式、精確雜湊及驗證見
++[本輪紀錄](validation/20261012-m12-240/RESULTS.md)。
++
+ ## 2026-10-12：可用位深由 RCD 宣告（離線版本）
+ 
+ RCD／producer 自己宣告允許的 8／10／12-bit；RES-Custom 只驗證、套用，

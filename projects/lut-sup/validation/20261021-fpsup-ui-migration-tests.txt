@@ -1,0 +1,26 @@
+test_header_format_asset_source_and_boot_stay_independent (test_sup_native.NativePackageTests) ... ok
+test_reject_unsupported_model_and_quantization_failures_before_output (test_sup_native.NativePackageTests) ... ok
+test_absent_ui_file_leaves_lut_service_available (test_sup_ui.LutUiTests) ... ok
+test_all_gamuts_gammas_and_strengths_through_popup_notifications (test_sup_ui.LutUiTests) ... ok
+test_exported_ui_and_no_ui_cards_share_autorun_and_lut_payload (test_sup_ui.LutUiTests) ... ok
+test_group_popup_refreshes_the_dependent_value_immediately (test_sup_ui.LutUiTests) ... ok
+test_home_installs_and_all_nine_rows_are_reachable (test_sup_ui.LutUiTests) ... ok
+test_monitor_choice_is_rejected_and_repainted_off (test_sup_ui.LutUiTests) ... ok
+test_pending_model_and_missing_asset_remain_visible (test_sup_ui.LutUiTests) ... ok
+test_power_off_restores_shared_ui_hook_words (test_sup_ui.LutUiTests) ... ok
+test_private_home_and_manager_strings_resolve_and_stay_borrowed_with_lut (test_sup_ui.LutUiTests) ... FAIL
+test_supmanager_opens_and_lists_the_lut_without_exposing_core (test_sup_ui.LutUiTests) ... ok
+test_without_manager_the_lut_settings_still_work (test_sup_ui.LutUiTests) ... ok
+
+======================================================================
+FAIL: test_private_home_and_manager_strings_resolve_and_stay_borrowed_with_lut (test_sup_ui.LutUiTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lut/test_sup_ui.py", line 257, in test_private_home_and_manager_strings_resolve_and_stay_borrowed_with_lut
+    self.assertGreater(c.call(0xC05E61E0,r0=reader,r1=text,thumb=True)[0],len(c.cstr(text)))
+AssertionError: 1 not greater than 8
+
+----------------------------------------------------------------------
+Ran 13 tests in 28.088s
+
+FAILED (failures=1)

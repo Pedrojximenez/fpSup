@@ -1,0 +1,96 @@
+{
+  "revision": 9,
+  "scope": "Offline UI prototype; mm values are approximate, not measured readout geometry",
+  "mmSource": "https://www.sigma-global.com/en/cameras/fp/?local=table&tab=support&table_id=11934",
+  "manual": {
+    "fields": [
+      "DC，CUSTOM(1:1)",
+      "裁切寬度，4000 像素",
+      "裁切高度，4000 像素",
+      "比例，1:1"
+    ],
+    "mainDc": "CUSTOM\n(1:1)",
+    "mainSize": "23.93 × 23.9 mm"
+  },
+  "presetRecognition": [
+    {
+      "fields": [
+        "DC，S35",
+        "裁切寬度，4000 像素",
+        "裁切高度，2250 像素",
+        "比例，16:9"
+      ],
+      "mainSize": "23.93 × 13.44 mm"
+    },
+    {
+      "fields": [
+        "DC，APS-C",
+        "裁切寬度，4000 像素",
+        "裁切高度，2667 像素",
+        "比例，3:2"
+      ],
+      "mainSize": "23.93 × 15.94 mm"
+    },
+    {
+      "fields": [
+        "DC，CUSTOM(2000:889)",
+        "裁切寬度，6000 像素",
+        "裁切高度，2667 像素",
+        "比例，2000:889"
+      ],
+      "mainSize": "35.9 × 15.94 mm"
+    },
+    {
+      "fields": [
+        "DC，HD",
+        "裁切寬度，6000 像素",
+        "裁切高度，3375 像素",
+        "比例，16:9"
+      ],
+      "mainSize": "35.9 × 20.17 mm"
+    },
+    {
+      "fields": [
+        "DC，OG",
+        "裁切寬度，6000 像素",
+        "裁切高度，4000 像素",
+        "比例，3:2"
+      ],
+      "mainSize": "35.9 × 23.9 mm"
+    }
+  ],
+  "custom": {
+    "fields": [
+      "DC，CUSTOM(16:9)",
+      "裁切寬度，3200 像素",
+      "裁切高度，1800 像素",
+      "比例，16:9"
+    ],
+    "mainDc": "CUSTOM\n(16:9)",
+    "mainSize": "19.15 × 10.75 mm"
+  },
+  "outputAspect": "RES\n自訂\n解析寬度\n2048\npx\n解析高度\n1200\npx\n比例\n128:75",
+  "explicitRatio": "RES\n自訂\n解析寬度\n2048\npx\n解析高度\n1152\npx\n比例\n16:9",
+  "narrow": {
+    "customBounds": {
+      "bottom": 118.625,
+      "height": 59.71875,
+      "left": 16,
+      "right": 88,
+      "top": 58.90625,
+      "width": 72,
+      "x": 16,
+      "y": 58.90625
+    },
+    "customScrollWidth": 72,
+    "customText": "CUSTOM\n(16:9)",
+    "rootWidth": 288,
+    "scrollWidth": 288
+  },
+  "restored": {
+    "dc": "DC\nCUSTOM\n(16:9)\n19.15 × 10.75 mm",
+    "noInitialSave": true,
+    "res": "RES\n自訂\n2048 × 1200"
+  },
+  "embedded": "DC\nCUSTOM\n(8:5)\n裁切寬度\n4800\npx\n裁切高度\n3000\npx\n比例\n8:5"
+}

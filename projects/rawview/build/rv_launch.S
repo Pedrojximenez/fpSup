@@ -102,7 +102,11 @@
 .equ SVC_CLAIM,    8
 .equ SVC_CHAIN,    16
 .equ SVC_CAVE,     20
+#if V4
+.equ CFG_OFF,      48               /* the FSB4 header */
+#else
 .equ CFG_OFF,      32
+#endif
 .equ CFG_MAGIC,    0x31535652       /* "RVS1" */
 .equ P_PATH,       0x1C0
 .equ P_BLOCK,      0x1CC
@@ -597,6 +601,11 @@ claims_rel: .word blob + CLAIMS_OFF - (24b + 8)
     str     r0, [r9, #P_BLOCK]      @ 設定區寫回用
     ldr     r0, [sp, #8]
     str     r0, [r9, #P_PATH]
+#if V4
+    ldr     r0, [sp, #4]
+    LDA     r1, NEXT_SVC
+    str     r0, [r9, r1]            @ stub_sv: svc->file_is before a save
+#endif
     ldr     r0, [sp, #4]            @ veneer
     mov     r1, #NVEN * 8
     ldr     ip, [r0, #SVC_CAVE]

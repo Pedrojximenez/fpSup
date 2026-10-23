@@ -1,0 +1,33 @@
+{
+  "daemon": "OK name=fpshd version=3.2.0 protocol=1 frame=64 payload=44 transport=EP01-EP82 iface=0 camera=open seq=4 ep83=host_candidate upload=UP01-probed mem=MEM1-probed quarantine=0 fault=none\n",
+  "commands": [
+    {
+      "command": "status get is_recording",
+      "reply": "is_recording -> 0\n\n"
+    },
+    {
+      "command": "status get app_current",
+      "reply": "app_current -> 5\n\n"
+    },
+    {
+      "command": "gui geti FT_Title",
+      "reply": "OK:FT_Title -> 0\n\n"
+    },
+    {
+      "command": "gui gets FT_PageText",
+      "reply": "OK:FT_PageText ->  \n\n"
+    },
+    {
+      "command": "dir \\",
+      "reply": "                                          .\n2026/10/14  05:00:52 <DIR>                .Spotlight-V100\n2026/10/15  08:24:18 <DIR>                DCIM\n2026/10/15  07:19:50 <DIR>                fpSup\n2026/10/15  02:56:52                 4096 ._fpSup\n2026/10/20  06:21:18                 4051 AutoRun.txt\n2026/10/20  00:59:46 <DIR>                CINEMA\n2026/10/15  02:56:52                 4096 ._AutoRun.txt\n2026/10/15  02:28:46 <DIR>                .Trashes\n"
+    },
+    {
+      "command": "dir \\fpSup",
+      "reply": "                                          .\n2026/10/19  23:59:36               313216 32RESCUS.BIN\n2026/10/15  02:56:52                 4096 ._32RESCUS.BIN\n2026/10/15  02:56:30 <DIR>                UI\n2026/10/15  02:56:52                 4096 ._UI\n2025/12/31  08:00:00                79864 41DSQZ.BIN\n2026/10/15  02:56:52                 4096 ._41DSQZ.BIN\n2026/10/21  18:00:28                30740 LOADER.BIN\n2026/10/15  02:56:52                 4096 ._LOADER.BIN\n2025/12/31  08:00:00                 5224 20ULWR.BIN\n2026/10/15  02:56:52                 4096 ._20ULWR.BIN\n2025/12/31  08:00:00                 4208 20GYR2.BIN\n2026/10/15  02:56:52                 4096 ._20GYR2.BIN\n2025/12/31  08:00:00                  316 05STOPFX.BIN\n2026/10/15  02:56:52                 4096 ._05STOPFX.BIN\n2026/10/19  16:06:28                38644 45RAWV.BIN\n2026/10/15  02:56:52                 4096 ._45RAWV.BIN\n2025/12/31  08:00:00                25936 40FLIP.BIN\n2026/10/15  02:56:52                 4096 ._40FLIP.BIN\n2026/10/19  13:04:42                74720 10LOSS.BIN\n2026/10/15  02:56:52                 4096 ._10LOSS.BIN\n2025/12/31  08:00:00                 4552 00SHELL.BIN\n2026/10/15  02:56:52                 4096 ._00SHELL.BIN\n2026/10/15  02:56:30 <DIR>                RESCUS\n2026/10/15  02:56:52                 4096 ._RESCUS\n2025/12/31  08:00:00                  316 30FCAP.BIN\n2026/10/15  02:56:52                 4096 ._30FCAP.BIN\n2025/12/31  08:00:00                48348 42TAPZ.BIN\n2026/10/15  02:56:52                 4096 ._42TAPZ.BIN\n2026/10/14  12:58:40                 4032 60FPPTP.BIN\n2026/10/15  07:19:50                 4096 ._60FPPTP.BIN\n2026/10/21  18:14:36                 4096 LOAD.LOG\n2026/10/20  02:59:20                 4524 SHELL.BIN\n2026/10/20  05:33:42                  736 IMXB.BIN\n2026/10/21  15:27:54                  128 PWROFF.LOG\n2026/10/21  18:00:30                 3028 SUPMGR.BIN\n"
+    },
+    {
+      "command": "dir \\fpSup\\UI",
+      "reply": "                                          .\n2025/12/31  08:00:00               347378 ALLSUPS.BIN\n2026/10/15  02:56:52                 4096 ._ALLSUPS.BIN\n2025/12/31  08:00:00                19712 4.BIN\n2026/10/15  02:56:52                 4096 ._4.BIN\n2025/12/31  08:00:00                19712 3.BIN\n2026/10/15  02:56:52                 4096 ._3.BIN\n2025/12/31  08:00:00                19712 2.BIN\n2026/10/15  02:56:52                 4096 ._2.BIN\n2025/12/31  08:00:00               114688 0.BIN\n2026/10/15  02:56:52                 4096 ._0.BIN\n2025/12/31  08:00:00                19712 1.BIN\n2026/10/15  02:56:52                 4096 ._1.BIN\n2026/10/21  18:03:36               134651 FPSUP.BIN\n2026/10/21  18:03:38               116901 SUPMGR.BIN\n"
+    }
+  ]
+}

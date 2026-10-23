@@ -1,0 +1,235 @@
+{
+  "image_sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622",
+  "function": "0xc06a5290",
+  "runs": [
+    {
+      "compressed": false,
+      "tags": [
+        {
+          "group": 0,
+          "sub": 0,
+          "tag": 256,
+          "type": 4,
+          "count": 1,
+          "raw": "90070000"
+        },
+        {
+          "group": 0,
+          "sub": 0,
+          "tag": 257,
+          "type": 4,
+          "count": 1,
+          "raw": "42040000"
+        },
+        {
+          "group": 0,
+          "sub": 0,
+          "tag": 258,
+          "type": 3,
+          "count": 1,
+          "raw": "0c00"
+        },
+        {
+          "group": 0,
+          "sub": 0,
+          "tag": 259,
+          "type": 3,
+          "count": 1,
+          "raw": "0100"
+        },
+        {
+          "group": 0,
+          "sub": 0,
+          "tag": 273,
+          "type": 4,
+          "count": 1,
+          "raw": null
+        },
+        {
+          "group": 0,
+          "sub": 0,
+          "tag": 278,
+          "type": 4,
+          "count": 1,
+          "raw": "42040000"
+        },
+        {
+          "group": 0,
+          "sub": 0,
+          "tag": 279,
+          "type": 4,
+          "count": 1,
+          "raw": "bc4c3000"
+        },
+        {
+          "group": 0,
+          "sub": 0,
+          "tag": 50717,
+          "type": 4,
+          "count": 1,
+          "raw": "ff0f0000"
+        },
+        {
+          "group": 0,
+          "sub": 0,
+          "tag": 50719,
+          "type": 4,
+          "count": 2,
+          "raw": "0000000000000000"
+        },
+        {
+          "group": 0,
+          "sub": 0,
+          "tag": 50778,
+          "type": 3,
+          "count": 1,
+          "raw": "1100"
+        },
+        {
+          "group": 0,
+          "sub": 0,
+          "tag": 50779,
+          "type": 3,
+          "count": 1,
+          "raw": "1500"
+        }
+      ],
+      "instructions": 182,
+      "call_stack_mod8": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "compressed": true,
+      "tags": [
+        {
+          "group": 0,
+          "sub": 0,
+          "tag": 256,
+          "type": 4,
+          "count": 1,
+          "raw": "90070000"
+        },
+        {
+          "group": 0,
+          "sub": 0,
+          "tag": 257,
+          "type": 4,
+          "count": 1,
+          "raw": "42040000"
+        },
+        {
+          "group": 0,
+          "sub": 0,
+          "tag": 258,
+          "type": 3,
+          "count": 1,
+          "raw": "0c00"
+        },
+        {
+          "group": 0,
+          "sub": 0,
+          "tag": 259,
+          "type": 3,
+          "count": 1,
+          "raw": "0700"
+        },
+        {
+          "group": 0,
+          "sub": 0,
+          "tag": 322,
+          "type": 4,
+          "count": 1,
+          "raw": "00010000"
+        },
+        {
+          "group": 0,
+          "sub": 0,
+          "tag": 323,
+          "type": 4,
+          "count": 1,
+          "raw": "00010000"
+        },
+        {
+          "group": 0,
+          "sub": 0,
+          "tag": 324,
+          "type": 4,
+          "count": 40,
+          "raw": null
+        },
+        {
+          "group": 0,
+          "sub": 0,
+          "tag": 325,
+          "type": 4,
+          "count": 40,
+          "raw": null
+        },
+        {
+          "group": 0,
+          "sub": 0,
+          "tag": 50717,
+          "type": 4,
+          "count": 1,
+          "raw": "ff0f0000"
+        },
+        {
+          "group": 0,
+          "sub": 0,
+          "tag": 50719,
+          "type": 4,
+          "count": 2,
+          "raw": "0000000000000000"
+        },
+        {
+          "group": 0,
+          "sub": 0,
+          "tag": 50778,
+          "type": 3,
+          "count": 1,
+          "raw": "1100"
+        },
+        {
+          "group": 0,
+          "sub": 0,
+          "tag": 50779,
+          "type": 3,
+          "count": 1,
+          "raw": "1500"
+        }
+      ],
+      "instructions": 191,
+      "call_stack_mod8": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "limitation": "setter argument trace only; no TIFF serializer, adapter hook or camera timing"
+}

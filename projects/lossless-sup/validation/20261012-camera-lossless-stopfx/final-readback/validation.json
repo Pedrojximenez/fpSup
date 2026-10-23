@@ -1,0 +1,31 @@
+{
+  "05STOPFX.BIN": {
+    "bytes": 316,
+    "sha256": "f9f26a092c5676ead5771ba8be4aac9c3734e9ed0cd144002a73b3f6b657c9d9",
+    "different_offsets": [],
+    "byte_identical": true
+  },
+  "10LOSS.BIN": {
+    "bytes": 72608,
+    "sha256": "b59b1f4105e1d63d811c69aea16e0f2acf2cefa414eabe341939674089e7471a",
+    "different_offsets": [
+      2972,
+      2976
+    ],
+    "byte_identical": false,
+    "only_valid_saved_ON_record_changed": true,
+    "settings_offset": 2964
+  },
+  "LOADER.BIN": {
+    "bytes": 29276,
+    "sha256": "2535b983a03f12b54ca107bb9d59591506b928c60ee07835676020f261e311b3",
+    "different_offsets": [],
+    "byte_identical": true
+  },
+  "AutoRun.txt": {
+    "bytes": 4666,
+    "sha256": "2e77dfe3529006d2cb95ac01e206048efe495493434c05f1ed8fad4ecd22bf96",
+    "different_offsets": [],
+    "byte_identical": true
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "status": "not accepted",
+  "reason": "shared builder changed during validation; source consistency guard rejected the run",
+  "tests": 82,
+  "skipped": 0,
+  "mutations_detected": 6,
+  "changed_sources": [
+    {
+      "path": "fpSup/fp_usb_shell/v4/build_v4.py",
+      "built_sha256": "d418e06cd729908845f43f6a09470b2d0a8bb48ecbe85262e143e4dd0a1b7e13",
+      "current_sha256": "bc37150ec0b959328c8fa4ab70d0db63c93019fba267de1f7483f790103f4b2c"
+    }
+  ]
+}

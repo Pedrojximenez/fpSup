@@ -1,0 +1,85 @@
+
+======================================================================
+FAIL: test_m12_high_rates_equal_r10_for_every_depth_and_route_record_tap (test_reslab_hirate_canvas.HighRateCanvas) (rank=23976, bit='10')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_reslab_hirate_canvas.py", line 44, in test_m12_high_rates_equal_r10_for_every_depth_and_route_record_tap
+    self.assertEqual(diff, {}, 'differs from archived r10 240 canvas')
+AssertionError: {'0xc': (2000, 1008), '0x1c': (1, 2), '0x2[206 chars]824)} != {}
++ {}
+- {'0x100': (1086324736, 1073741824),
+-  '0x1c': (1, 2),
+-  '0x20': (1984, 992),
+-  '0x60': (1023, 2048),
+-  '0x88': (0, 4),
+-  '0xc': (2000, 1008),
+-  '0xd0': (1023, 1024),
+-  '0xd4': (1023, 1024),
+-  '0xd8': (2000, 1008),
+-  '0xf4': (2016, 1008),
+-  '0xfc': (1077936128, 1073741824)} : differs from archived r10 240 canvas
+
+======================================================================
+FAIL: test_m12_high_rates_equal_r10_for_every_depth_and_route_record_tap (test_reslab_hirate_canvas.HighRateCanvas) (rank=23976, bit='8')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_reslab_hirate_canvas.py", line 44, in test_m12_high_rates_equal_r10_for_every_depth_and_route_record_tap
+    self.assertEqual(diff, {}, 'differs from archived r10 240 canvas')
+AssertionError: {'0xc': (2000, 1008), '0x1c': (1, 2), '0x2[206 chars]824)} != {}
++ {}
+- {'0x100': (1086324736, 1073741824),
+-  '0x1c': (1, 2),
+-  '0x20': (1984, 992),
+-  '0x60': (1023, 2048),
+-  '0x88': (0, 4),
+-  '0xc': (2000, 1008),
+-  '0xd0': (1023, 1024),
+-  '0xd4': (1023, 1024),
+-  '0xd8': (2000, 1008),
+-  '0xf4': (2016, 1008),
+-  '0xfc': (1077936128, 1073741824)} : differs from archived r10 240 canvas
+
+======================================================================
+FAIL: test_m12_high_rates_equal_r10_for_every_depth_and_route_record_tap (test_reslab_hirate_canvas.HighRateCanvas) (rank=27972, bit='10')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_reslab_hirate_canvas.py", line 44, in test_m12_high_rates_equal_r10_for_every_depth_and_route_record_tap
+    self.assertEqual(diff, {}, 'differs from archived r10 240 canvas')
+AssertionError: {'0xc': (2000, 1008), '0x1c': (1, 2), '0x2[206 chars]824)} != {}
++ {}
+- {'0x100': (1086324736, 1073741824),
+-  '0x1c': (1, 2),
+-  '0x20': (1984, 992),
+-  '0x60': (1023, 2048),
+-  '0x88': (0, 4),
+-  '0xc': (2000, 1008),
+-  '0xd0': (1023, 1024),
+-  '0xd4': (1023, 1024),
+-  '0xd8': (2000, 1008),
+-  '0xf4': (2016, 1008),
+-  '0xfc': (1077936128, 1073741824)} : differs from archived r10 240 canvas
+
+======================================================================
+FAIL: test_m12_high_rates_equal_r10_for_every_depth_and_route_record_tap (test_reslab_hirate_canvas.HighRateCanvas) (rank=27972, bit='8')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_reslab_hirate_canvas.py", line 44, in test_m12_high_rates_equal_r10_for_every_depth_and_route_record_tap
+    self.assertEqual(diff, {}, 'differs from archived r10 240 canvas')
+AssertionError: {'0xc': (2000, 1008), '0x1c': (1, 2), '0x2[206 chars]824)} != {}
++ {}
+- {'0x100': (1086324736, 1073741824),
+-  '0x1c': (1, 2),
+-  '0x20': (1984, 992),
+-  '0x60': (1023, 2048),
+-  '0x88': (0, 4),
+-  '0xc': (2000, 1008),
+-  '0xd0': (1023, 1024),
+-  '0xd4': (1023, 1024),
+-  '0xd8': (2000, 1008),
+-  '0xf4': (2016, 1008),
+-  '0xfc': (1077936128, 1073741824)} : differs from archived r10 240 canvas
+
+----------------------------------------------------------------------
+Ran 1 test in 43.069s
+
+FAILED (failures=4)

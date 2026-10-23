@@ -1,0 +1,34 @@
+{
+  "offline_only": true,
+  "physical_camera_access": false,
+  "deployed": false,
+  "unittest_executions": 11,
+  "suites": [
+    {
+      "log": "test-mode-final.log",
+      "tests": 6,
+      "passed": true,
+      "sha256": "3807d646f5396fba91eb7a55c861088650ca9c72d2cf43eeacbbdc2ca8319028"
+    },
+    {
+      "log": "test-p83-regression.log",
+      "tests": 4,
+      "passed": true,
+      "sha256": "e885f5563c46b448fe37acd6ccf18b8589a9eb9e16fcac06d434bac09ecb10b8"
+    },
+    {
+      "log": "test-debug-boot.log",
+      "tests": 1,
+      "passed": true,
+      "sha256": "b63ba9955d809dba84abe3801e9639bcef6e37d1b88ef6d4b163b3ffbd195a66"
+    }
+  ],
+  "entry_chain": {
+    "build_cases": 14,
+    "autorun_comparisons": 3,
+    "catalogue_refs": 8,
+    "passed": true
+  },
+  "initial_failures": "Test fixtures corrected; preserved test-mode.log and test-focused.log. Candidate artifact bytes unchanged during test repairs.",
+  "hardware_acceptance": "Not performed; sustained recording and whole-sequence integrity remain unverified."
+}

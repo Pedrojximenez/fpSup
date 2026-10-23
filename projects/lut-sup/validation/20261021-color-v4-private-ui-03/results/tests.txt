@@ -1,0 +1,35 @@
+test_all_35_models_against_float_reference_and_strengths (test_sup_native.NativeLutTests) ... ok
+test_bad_input_never_changes_destination_and_pending_models_refuse (test_sup_native.NativeLutTests) ... ok
+test_combined_shaper_domains_output_hdr_and_lookup_diagnostics (test_sup_native.NativeLutTests) ... ok
+test_fast_debug_card_and_retained_image_reinitialize_defaults (test_sup_native.NativeLutTests) ... ok
+test_full_65_grid_all_tetrahedral_orders_and_original_nodes (test_sup_native.NativeLutTests) ... ok
+test_loads_cached_with_resident_rows_and_dma_only_file_scratch (test_sup_native.NativeLutTests) ... ok
+test_missing_short_corrupt_trailing_and_corrupt_header_remain_unapplied (test_sup_native.NativeLutTests) ... ok
+test_native_row_callbacks_reach_all_groups_and_blackmagic_dependency (test_sup_native.NativeLutTests) ... ok
+test_partial_page_registration_failure_releases_all_lut_rows_and_api (test_sup_native.NativeLutTests) ... ok
+test_pure_1d_4096_entries_and_tetrahedra_all_orders (test_sup_native.NativeLutTests) ... ok
+test_released_sup_leaves_no_rows_or_service_on_conflict (test_sup_native.NativeLutTests) ... ok
+test_header_format_asset_source_and_boot_stay_independent (test_sup_native.NativePackageTests) ... ok
+test_reject_unsupported_model_and_quantization_failures_before_output (test_sup_native.NativePackageTests) ... ok
+test_absent_ui_file_leaves_lut_service_available (test_sup_ui.LutUiTests) ... ok
+test_all_gamuts_gammas_and_strengths_through_popup_notifications (test_sup_ui.LutUiTests) ... ok
+test_exported_ui_and_no_ui_cards_share_autorun_and_lut_payload (test_sup_ui.LutUiTests) ... ok
+test_group_popup_refreshes_the_dependent_value_immediately (test_sup_ui.LutUiTests) ... ok
+test_home_installs_and_all_nine_rows_are_reachable (test_sup_ui.LutUiTests) ... ok
+test_monitor_choice_is_rejected_and_repainted_off (test_sup_ui.LutUiTests) ... ok
+test_pending_model_and_missing_asset_remain_visible (test_sup_ui.LutUiTests) ... ok
+test_power_off_restores_shared_ui_hook_words (test_sup_ui.LutUiTests) ... ok
+test_private_home_and_manager_strings_resolve_and_stay_borrowed_with_lut (test_sup_ui.LutUiTests) ... FAIL
+
+======================================================================
+FAIL: test_private_home_and_manager_strings_resolve_and_stay_borrowed_with_lut (test_sup_ui.LutUiTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-color-v4-private-ui-03/source-snapshot/fpSup/lut/test_sup_ui.py", line 258, in test_private_home_and_manager_strings_resolve_and_stay_borrowed_with_lut
+    self.assertEqual(string_call(0xC05E61C8,text),1)
+AssertionError: 0 != 1
+
+----------------------------------------------------------------------
+Ran 22 tests in 76.790s
+
+FAILED (failures=1)

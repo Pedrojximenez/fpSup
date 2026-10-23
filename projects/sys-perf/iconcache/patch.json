@@ -1,0 +1,83 @@
+{
+ "firmware": "Ver.5.02, out/seg0_c0000000.bin",
+ "body": {
+  "file": "iconcache.bin",
+  "bytes": 5372,
+  "sha256": "ad2227d4ac009ded6865d4b82693474d93c4a3c319ab851f402ff443f1cacb4d",
+  "isa": "ARM, position independent, integer only (no VFP/NEON)",
+  "alignment": 8,
+  "entries": {
+   "ic_h1": 4176,
+   "ic_h2": 4612
+  },
+  "control": {
+   "magic": 0,
+   "enable": 4,
+   "arena": 8,
+   "arena_size": 12,
+   "max_entry": 16,
+   "hits": 20,
+   "misses": 24,
+   "inserts": 28,
+   "evicts": 32,
+   "skips": 36,
+   "alloc_fail": 40,
+   "pending_sp": 44,
+   "clock": 64,
+   "rejects": 72,
+   "table": 80
+  },
+  "control_note": "enable=0: both hooks only redo their two stock instructions. arena/arena_size: the installer writes an 8-aligned block (suggest 1-2 MiB of the sup block BSS, class-0 USER heap like every v3 sup block). max_entry: icons decoding larger than this are not cached."
+ },
+ "veneers": {
+  "bytes": 8,
+  "count": 2,
+  "alignment": 4,
+  "layout": "F8DF F000 (ldr.w pc,[pc,#0]) then body+entry (even = ARM)",
+  "placement": "cave_alloc / cave.claim, 4-aligned, within +-16 MiB of the sites (cave arena is)"
+ },
+ "sites": [
+  {
+   "name": "h1",
+   "address": "0xc060219c",
+   "isa": "Thumb (aligned Thumb32 word)",
+   "orig_word": "0x46586b71",
+   "orig_insns": "ldr r1,[r6,#0x34] ; mov r0,fp",
+   "new": "b.w <veneer> (thumb_bw in build.py)",
+   "entry": "ic_h1",
+   "returns_to": "miss: C06021A0 (blx r2, stock decode) / hit: C060235A (ldr.w fp,[sp,#0x48])",
+   "branch_targets_inside": "none (checked: no branch in C0601F98 lands on the word or its 2nd half)",
+   "power_off_restore": "declare/claim as a 4-byte section with orig_word (SUP_BUILD_RULES s4)"
+  },
+  {
+   "name": "h2",
+   "address": "0xc060234c",
+   "isa": "Thumb (aligned Thumb32 word)",
+   "orig_word": "0x92243204",
+   "orig_insns": "adds r2,#4 ; str r2,[sp,#0x90]",
+   "new": "b.w <veneer> (thumb_bw in build.py)",
+   "entry": "ic_h2",
+   "returns_to": "C0602350",
+   "branch_targets_inside": "none (checked: no branch in C0601F98 lands on the word or its 2nd half)",
+   "power_off_restore": "declare/claim as a 4-byte section with orig_word (SUP_BUILD_RULES s4)"
+  }
+ ],
+ "arm_order": [
+  "write body + veneers, read back",
+  "write ARENA/ARENA_SZ (EN still 0)",
+  "C000E91C then C000EABC",
+  "patch h2, then h1 (each a single aligned word; C000E91C + C000EABC after each)",
+  "enable=1"
+ ],
+ "disarm_order": [
+  "enable=0 (data, next call)",
+  "or restore h1 then h2 + cache maintenance",
+  "keep body and arena until reboot"
+ ],
+ "firmware_calls_from_body": [
+  "C001510C memcpy",
+  "the UIC alloc [r6+0] (hit path, same args as stock)"
+ ],
+ "context": "DrawMgr (UIC image node load). Table edits mask IRQ/FIQ briefly; copies run with the entry pinned. A second task loading images concurrently only loses caching (pending key is tied to the frame sp).",
+ "behaviour_difference": "only when the UIC allocator returns 0 on a hit: stock would decode into address 0; the hit path leaves [sp+0x48]=0 and the stock error path runs."
+}

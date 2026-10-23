@@ -1,0 +1,21 @@
+test_actual_rom_raw_branch_and_registers (test_prepared_header.NativeTests) ... ok
+test_actual_rom_tile_branch_and_registers (test_prepared_header.NativeTests) ... ok
+/Users/dido/Developer.localized/SIGMAfp_re/research/slimRAW/tiff.py:29: ResourceWarning: unclosed file <_io.BufferedReader name='/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/captures/opengate_ev_bug_20260914/dng/A001_083_FHD_f01.DNG'>
+  d = open(path,'rb').read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+test_completion_only_updates_two_tables_and_root (test_prepared_header.PreparedTests) ... ok
+test_geometry_and_schema_changes_require_new_plan (test_prepared_header.PreparedTests) ... ok
+test_inline_and_nested_current_frame_metadata_are_not_frozen (test_prepared_header.PreparedTests) ... ok
+test_malformed_completion_has_zero_writes_and_keeps_raw (test_prepared_header.PreparedTests) ... ok
+test_maximum_160_tile_plan_and_bounds (test_prepared_header.PreparedTests) ... ok
+test_mutation_freezing_inline_metadata_is_detected (test_prepared_header.PreparedTests) ... ok
+test_mutation_publishing_root_early_is_detected (test_prepared_header.PreparedTests) ... ok
+test_real_camera_payload_is_unchanged_and_decodes_identically (test_prepared_header.PreparedTests) ... ok
+test_same_prefix_is_initially_valid_raw (test_prepared_header.PreparedTests) ... ok
+test_single_tile_uses_inline_values (test_prepared_header.PreparedTests) ... ok
+test_unknown_inline_metadata_is_mirrored_too (test_prepared_header.PreparedTests) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 4.474s
+
+OK

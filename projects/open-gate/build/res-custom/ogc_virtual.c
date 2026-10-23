@@ -157,6 +157,9 @@ static u32 vrc_apply(u8 *S, struct vrc_state *v, u32 id)
 u32 ogc_virtual_dispatch(uintptr_t ctx,u32 op,uintptr_t arg)
 {
     u8 *S=(u8 *)ctx;
+    /* the declared rates: every consumer, with or without a dynamic row */
+    if (op==VRC_RATES) return ogc_rate_list(S,(struct vrc_rates *)arg);
+    if (op==VRC_RATE_SET) return ogc_rate_set(S,(u32)arg);
     struct vrc_state *v=(struct vrc_state *)(uintptr_t)SW(S,S_VRC);
     if (!v || v->magic!=VRC_MAGIC || v->abi!=VRC_ABI) return VRC_NOT_READY;
     if (op==VRC_SETTINGS) {

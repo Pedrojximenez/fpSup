@@ -1,0 +1,9 @@
+{
+  "status": "not accepted",
+  "tests": 114,
+  "skipped": 0,
+  "faults_detected": 12,
+  "reason": "The incomplete-active-input fault produced a validation exception rather than an assertion failure. Strengthen the native state assertion and rerun separately.",
+  "camera_operations": false,
+  "physical_card_written": false
+}

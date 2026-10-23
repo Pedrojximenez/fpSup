@@ -37,6 +37,7 @@
   [CANVAS_IS_NOT_THE_SETTINGS_BLOCK §13](projects/open-gate/notes/CANVAS_IS_NOT_THE_SETTINGS_BLOCK.md)。
   最新 Custom Sensor 狀態、歷史測試卡與未完成工作集中於
   **[projects/res-lab](projects/res-lab/README.md)**；程式仍沿用 `projects/open-gate/build/imx410_*`。
+  RES-Custom 現況與待辦：[RESCUSTOM_STATUS.md](projects/res-lab/RESCUSTOM_STATUS.md)；診斷方法：[notes/DIAGNOSTIC_METHODS.md](projects/res-lab/notes/DIAGNOSTIC_METHODS.md)（2026-10-14）。
 
 ## 這棵樹怎麼分
 
@@ -142,6 +143,7 @@ captures/    素材 —— 支持那些結論的證據
 - [`COLOR_SCIENCE.md`](research/imaging-hw/notes/COLOR_SCIENCE.md) — SIGMA fp — 色彩科學完整反編譯
 - [`HW_LOSSLESS_JPEG_CODEC.md`](research/imaging-hw/notes/HW_LOSSLESS_JPEG_CODEC.md) — SIGMA fp Ver5.02 — Hardware Lossless-JPEG codec (standalone-ca
 - [`IMAGE_CHANNELS.md`](research/imaging-hw/notes/IMAGE_CHANNELS.md) — fp 影像通道地圖 — 哪塊 buffer 能解、哪塊不能
+- [`HIGH_FRAME_RATE_PATH.md`](research/imaging-hw/notes/HIGH_FRAME_RATE_PATH.md) — >99 fps 高格率路徑、通道 0 時脈閘門 C0189440、載體格率關 LV 通道、計時 = 幀數÷載體 (2026-10-14)
 - [`RAW_COMPRESSION_RESEARCH.md`](research/imaging-hw/notes/RAW_COMPRESSION_RESEARCH.md) — SIGMA fp Ver 5.02 — 相機端 RAW 壓縮開發研究
 - [`color-firmware-20260924/`](research/imaging-hw/color-firmware-20260924/README.md) — fp 私有色彩資料:OFF 模式刻意用單位矩陣(程式+metadata 互證)、矩陣稽核;Sony 對照在 `sony_a7m3/`
 - [`colormatrix-ab-20260923/`](research/imaging-hw/colormatrix-ab-20260923/README.md) — CinemaDNG ColorMatrix1/2 A/B 探針:Resolve 解碼是否吃嵌入矩陣(含 A–D 四個 DNG)
@@ -155,10 +157,12 @@ captures/    素材 —— 支持那些結論的證據
 
 - [`PIXEL_MERGE_MEASURED.md`](research/imx410/notes/PIXEL_MERGE_MEASURED.md) — 感光元件怎麼合併像素 —— 從 RAW 反推(原廠 FHD 用滿 9 個同色感光點,OG2K build 只用 4 個,差 0.53 格)
 - [`SENSOR_MODE_METADATA.md`](research/imx410/notes/SENSOR_MODE_METADATA.md) — IMX410 70 modes:欄位、16 geometry 家族、24 register 指紋與 2K/3K/4K OG 畫質路線 — 含時序記錄的感測器視窗欄位與 mode 131/98 比對 (2026-09-15)
+- [`MODE_AND_PROFILE_LOOKUPS.md`](research/imx410/notes/MODE_AND_PROFILE_LOOKUPS.md) — mode／profile 的 9 張表與查表函式、PARAM 記錄 FUN_c0439d18、MAPPING 唯一讀者、新增 mode 要複製什麼 (2026-10-14)
 - [`FRAME_RATE_IS_VMAX.md`](research/imx410/notes/FRAME_RATE_IS_VMAX.md) — 幀率是 vmax,不是模式 (2026-09-10, USB shell 實機驗證)
 - [`ISO_DR_UNDERSTANDING.md`](research/imx410/notes/ISO_DR_UNDERSTANDING.md) — SIGMA fp — ISO / 增益 / 動態範圍:理解與實務
 - [`ISO_FIRMWARE_COMPLETE.md`](research/imx410/notes/ISO_FIRMWARE_COMPLETE.md) — SIGMA fp (Ver.5.02, Sony IMX410) — ISO / Gain Firmware, Comple
 - [`ISO_HANDLING.md`](research/imx410/notes/ISO_HANDLING.md) — SIGMA fp — ISO / 增益處理完整反編譯
+- [`IMX410_SPATIAL_HDR_TEST_PLAN.md`](research/imx410/notes/IMX410_SPATIAL_HDR_TEST_PLAN.md) — 優先 mode 102／12-bit 的 CINE A/B 增益交換、曝光對齊與交錯 HDR 測試；mode 6 待 RAW14 管線通暢後對照（尚未上機）
 - [`SENSOR_READOUT_NOISE_2026-09-11.md`](research/imx410/notes/SENSOR_READOUT_NOISE_2026-09-11.md) — 讀出雜訊、縮減方式、以及一個沒解開的矛盾
 
 ### `research/interfaces/` — 介面硬體 —— 熱靴、USB、HDMI、PTP、GIMBAL

@@ -1,0 +1,39 @@
+built into /Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/validation/20261012-early-dng-handoff/default
+{
+ "c_base": 3136,
+ "c_text": 39002,
+ "menu_off": 42176,
+ "menu_len": 30844,
+ "blob_len": 73024,
+ "state_off": 73024,
+ "state_bytes": 47260,
+ "block_bytes": 122880,
+ "entries": {
+  "fpl_card_init": 1,
+  "fpl_card_rec": 1493,
+  "fpl_card_arrive": 4891,
+  "fpl_card_stop": 7435,
+  "fpl_card_flush": 8789,
+  "fpl_card_task": 10821,
+  "fpl_card_play": 13703,
+  "fpl_card_clip": 14971,
+  "fpl_card_play_end": 15719,
+  "fpl_card_play_pool": 15507,
+  "fpl_card_written": 9497,
+  "fpl_card_event": 10291,
+  "fpl_card_discard": 10543,
+  "fpl_card_bulk": 9267
+ },
+ "symbols": {
+  "entry": 0,
+  "claims": 2948,
+  "settings": 2932,
+  "c_base": 3136,
+  "task_shim": 2808,
+  "g_card": 2820,
+  "flush_real": 2880,
+  "discard_real": 2896,
+  "stop_resume": 2876,
+  "play_next": 2908
+ }
+}

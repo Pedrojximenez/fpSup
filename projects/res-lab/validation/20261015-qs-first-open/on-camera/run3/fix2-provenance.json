@@ -1,0 +1,21 @@
+{
+  "sha256": "11eda0aa48b886693ed4075c02dad579e196509c466d3da12a903cf4e9a3574e",
+  "written_to_card": true,
+  "source_hashes": {
+    "vr_ui.py": "9e7bb136cccb6dde3431afb8b6f0dd30c67c99b70b9ecc1e0c88df8fb4718a84",
+    "ogc.c": "80b0bc32ea5804705cf38e7c699d398903fc0e8404c53d35bebef76c99cbe92e",
+    "ogc_layout.py": "b933f8bdb9de2290ae1abbc7df7929eb20e9301ce889d1b437cda69bd292dc23",
+    "test_lv_text_style.py": "662fa543c717e3ce88f9db768070653e4d06c694010ae0c5b6c074a75303f767",
+    "test_v3_rescustom.py": "585150f1adae666f59a23052463f97672c68866019571881ec3117a8cb6c0ef6"
+  },
+  "tests_completed": {
+    "style_geometry_and_budgets": "2/2 passed",
+    "native_parser_all_four_layouts": "passed",
+    "resident_draw_guard": "passed",
+    "resident_QS_no_LV_scan": "passed",
+    "saved_BIN_with_current_loader": "371 QS + 16 LV substitutions and power-off restoration passed"
+  },
+  "fix": "Separate child text objects; native FrameRate position curve; outside-LV rejection before walking resident table",
+  "deployed_sha256": "bc74bf6f6117c1395583b267c2f57394b93a340bfb7ce7bfb4b30a7b231daabd",
+  "preserved_CFG_sha256": "be62abbe2254b1c884c280a4352039f677bf7128bd81eea87dfb30990e855640"
+}

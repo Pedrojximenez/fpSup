@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="zh-Hant">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QS motion check</title>
+<style>body { margin: 16px; background: #171717; } * { box-sizing: border-box; }</style>
+<body>
+<script>
+// Local QA host substitute; session-only and never included in the shipped fragment.
+window.openai={widgetState:JSON.parse(sessionStorage.getItem('qs-preview-state')||'null'),setWidgetState(payload){
+  sessionStorage.setItem('qs-preview-state',JSON.stringify(payload)); this.widgetState=payload;
+  document.documentElement.dataset.qsSavedState=JSON.stringify(payload);
+  return Promise.resolve();
+}};
+</script>
+<!-- QS_FRAGMENT -->
+<details style="color:#ddd; margin-top:16px">
+  <summary>離線手勢回放檢查</summary>
+  <button type="button" id="qs-qa-wheel-tail">回放水平捲動與慣性尾段</button>
+  <output id="qs-qa-result"></output>
+</details>
+<script>
+// Observe real interactions; no injected controller state or simulated touch events.
+const qsQaRoot=document.getElementById('fp-touch-qs');
+let qsRefreshSample=0;
+function qsObserveRefresh() {
+  if (qsRefreshSample || !['out','in','restore'].includes(qsQaRoot.dataset.qsRefresh)) return;
+  const samples=[];
+  function frame(ms) {
+    const content=qsQaRoot.querySelector('.qs-content'),style=getComputedStyle(content);
+    samples.push({ms,phase:qsQaRoot.dataset.qsRefresh || 'idle',title:qsQaRoot.querySelector('.title').textContent,
+      opacity:Number(style.opacity),transform:style.transform,inert:content.inert});
+    if (['out','in','restore'].includes(qsQaRoot.dataset.qsRefresh)) qsRefreshSample=requestAnimationFrame(frame);
+    else { qsRefreshSample=0; qsQaRoot.dataset.qsRefreshTrace=JSON.stringify(samples); }
+  }
+  qsRefreshSample=requestAnimationFrame(frame);
+}
+document.addEventListener('pointerup',qsObserveRefresh);
+document.addEventListener('click',qsObserveRefresh);
+document.addEventListener('wheel',qsObserveRefresh);
+new MutationObserver(qsObserveRefresh).observe(qsQaRoot,{attributes:true,attributeFilter:['data-qs-refresh']});
+let qsQaContact=false,qsQaContactFrame=0,qsQaContactSamples=[];
+document.addEventListener('pointerdown',()=>{
+  qsQaContact=true; if (qsQaContactFrame) return;
+  qsQaContactSamples=[];
+  function frame(ms) {
+    const panel=qsQaRoot.querySelector('.panel'),trash=qsQaRoot.querySelector('.trash-drop');
+    qsQaContactSamples.push({ms,panelOpacity:Number(getComputedStyle(panel).opacity),panelTransform:getComputedStyle(panel).transform,
+      contentOpacity:Number(getComputedStyle(qsQaRoot.querySelector('.qs-content')).opacity),
+      trashVisible:!trash.hidden,trashOver:trash.classList.contains('is-over'),trashText:trash.textContent.trim()});
+    if (qsQaContactSamples.length>100) qsQaContactSamples.shift();
+    if (qsQaContact) qsQaContactFrame=requestAnimationFrame(frame);
+    else { qsQaContactFrame=0; qsQaRoot.dataset.qsContactTrace=JSON.stringify(qsQaContactSamples); }
+  }
+  qsQaContactFrame=requestAnimationFrame(frame);
+});
+for (const event of ['pointerup','pointercancel']) document.addEventListener(event,()=>{ qsQaContact=false; });
+document.getElementById('qs-qa-wheel-tail').addEventListener('click',async()=>{
+  const root=document.getElementById('fp-touch-qs'),viewport=root.querySelector('.grid-viewport');
+  const previous=root.querySelector('[data-action="previous"]');
+  while (!previous.disabled) previous.click();
+  const before=JSON.parse(root.dataset.qsMetrics);
+  // A reproducible event stream, not a claim of physical Mac trackpad timing.
+  const inputs=[[0,36],[8,42],[8,40],[8,32],[8,24],[8,16],[8,10],[40,1],[16,0.5],[16,0.25],[16,0.1]];
+  for (const [ms,deltaX] of inputs) {
+    if (ms) await new Promise(resolve=>setTimeout(resolve,ms));
+    viewport.dispatchEvent(new WheelEvent('wheel',{bubbles:true,cancelable:true,deltaX}));
+  }
+  await new Promise(resolve=>setTimeout(resolve,160));
+  const trace=JSON.parse(root.dataset.qsMotionTrace||'[]'),after=JSON.parse(root.dataset.qsMetrics);
+  const frames=trace.filter(p=>p.phase==='frame'),release=trace.find(p=>p.phase==='release'),last=trace[trace.length-1];
+  const checks={oneCommit:trace.filter(p=>p.phase==='commit').length===1,
+    firstFrameMoves:!!release && !!frames[0] && Math.abs(frames[0].offset-release.offset)>1,
+    monotone:frames.every((p,n)=>!n || p.scrollLeft>=frames[n-1].scrollLeft),
+    quickFinish:!!release && last.ms-release.ms<130,
+    page:root.querySelector('.page-label').textContent,scrollLeft:viewport.scrollLeft,width:viewport.clientWidth,
+    noPointerUpdates:before.pointerUpdates===after.pointerUpdates,trace};
+  root.dataset.qsQaReplay=JSON.stringify(checks);
+  document.getElementById('qs-qa-result').textContent=Object.entries(checks).filter(([key])=>key!=='trace').map(([key,value])=>`${key}: ${value}`).join(' · ');
+});
+</script>
+</body>
+</html>

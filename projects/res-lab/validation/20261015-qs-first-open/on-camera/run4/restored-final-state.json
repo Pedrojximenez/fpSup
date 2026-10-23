@@ -1,0 +1,91 @@
+{
+  "variant": "combined-fix9",
+  "identity": {
+    "base": "0x451d7380",
+    "state": "0x45213c80",
+    "nrows": 5,
+    "immutable_code_sha256": "4bff93a8c0db7da5f38bf2f515b6d9f3350afbacef455b3d0512326362aac514"
+  },
+  "daemon": [
+    43398,
+    "OK name=fpshd version=3.2.0 protocol=1 frame=64 payload=44 transport=EP01-EP82 iface=0 camera=open seq=523 ep83=host_candidate upload=UP01-probed mem=MEM1-probed quarantine=0 fault=none\n"
+  ],
+  "idle": {
+    "movie_recording": 0,
+    "xmp_file_pointer": 0,
+    "movie_writing": 0
+  },
+  "VR_UI": 1,
+  "VR_WHY": 1,
+  "manager_status": 0,
+  "modules": [
+    {
+      "file": "00SHELL",
+      "boot": 0,
+      "enabled_next_boot": 1,
+      "write_error": 0
+    },
+    {
+      "file": "05STOPFX",
+      "boot": 0,
+      "enabled_next_boot": 1,
+      "write_error": 0
+    },
+    {
+      "file": "10LOSS",
+      "boot": 0,
+      "enabled_next_boot": 1,
+      "write_error": 0
+    },
+    {
+      "file": "20RECW",
+      "boot": 0,
+      "enabled_next_boot": 1,
+      "write_error": 0
+    },
+    {
+      "file": "30FCAP",
+      "boot": 0,
+      "enabled_next_boot": 1,
+      "write_error": 0
+    },
+    {
+      "file": "32RESCUS",
+      "boot": 0,
+      "enabled_next_boot": 1,
+      "write_error": 0
+    },
+    {
+      "file": "40FLIP",
+      "boot": 0,
+      "enabled_next_boot": 1,
+      "write_error": 0
+    },
+    {
+      "file": "40GYR2",
+      "boot": 0,
+      "enabled_next_boot": 1,
+      "write_error": 0
+    },
+    {
+      "file": "41DSQZ",
+      "boot": 0,
+      "enabled_next_boot": 1,
+      "write_error": 0
+    },
+    {
+      "file": "42TAPZ",
+      "boot": 0,
+      "enabled_next_boot": 1,
+      "write_error": 0
+    },
+    {
+      "file": "45RAWV",
+      "boot": 0,
+      "enabled_next_boot": 1,
+      "write_error": 0
+    }
+  ],
+  "echo_restored": true,
+  "GUI_attributes": 0
+}

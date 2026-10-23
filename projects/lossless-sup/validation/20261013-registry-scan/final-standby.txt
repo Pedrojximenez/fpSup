@@ -1,0 +1,5 @@
+status get app_current => app_current -> 2
+status get is_recording => is_recording -> 0
+gui geti MV_fpLossless => OK:MV_fpLossless -> 1
+menu SetMovFramerate => 7
+writer idle 0 0

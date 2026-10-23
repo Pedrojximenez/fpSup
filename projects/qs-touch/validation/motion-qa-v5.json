@@ -1,0 +1,22 @@
+{
+  "scope": "Browser QA transform telemetry; not camera or physical display timing",
+  "checks": [
+    {
+      "trace": "release-trace-v5.json",
+      "releaseResetPx": 0,
+      "firstFrameTravelPx": -32.9826950901674,
+      "firstFrameDelayMs": 12.799999952316284,
+      "commitJumpPx": 0,
+      "frames": 21
+    },
+    {
+      "trace": "catalog-release-trace-v5.json",
+      "releaseResetPx": 0,
+      "firstFrameTravelPx": -29.02182674880197,
+      "firstFrameDelayMs": 11.200000047683716,
+      "commitJumpPx": 0.0,
+      "frames": 21
+    }
+  ],
+  "regrabOffsetPreserved": true
+}

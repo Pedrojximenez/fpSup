@@ -1,0 +1,34 @@
+{
+  "identity": {
+    "base": "0x451d7380",
+    "state": "0x4520eb00",
+    "nrows": 5,
+    "immutable_code_sha256": "5617a32d7ba664aba450426202ddaa206b67e1133cca04ad0d2dcac06c9413ec"
+  },
+  "initial_screen": "LV_CINE_MEDIUM",
+  "sequence": [
+    {
+      "key": "QSON",
+      "screen": "QS_CINE"
+    },
+    {
+      "key": "QSOFF",
+      "screen": "QS_CINE"
+    },
+    {
+      "key": "QSON",
+      "screen": "LV_CINE_MEDIUM"
+    },
+    {
+      "key": "QSOFF",
+      "screen": "LV_CINE_MEDIUM"
+    }
+  ],
+  "screenshot": "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261015-qs-first-open/on-camera/run3/1911-20261015-fps-fix4-after-QS.jpg",
+  "idle": {
+    "movie_recording": 0,
+    "xmp_file_pointer": 0,
+    "movie_writing": 0
+  },
+  "previous_1910_visual_approval_withdrawn": true
+}

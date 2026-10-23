@@ -30,7 +30,7 @@ import build_v3 as BV
 import elf_text
 import ogc_layout as RCD
 
-NAME, SUP_ID, VERSION, MIN_SERVICES = '50RES-Lab v0.1.0test.BIN', 'RLAB', 18, 3
+NAME, SUP_ID, VERSION, MIN_SERVICES = '50RES-Lab v0.1.0test.BIN', 'RLAB', 19, 3
 GUI_SITE, PAGE_SITE = 0xC056461C, 0xC05E82F0
 TAB_WORDS = 48
 EXPORT_CAP = 0x20000
@@ -140,8 +140,14 @@ def compile_unit(tmp, tab_off, offsets, probe='', virtual=False):
     constants = {f'H_{k}': v for k, v in RCD.RCD.items()}
     constants.update(MAGIC=RCD.RCD_MAGIC, VERSION=RCD.RCD_VERSION, HDR=RCD.RCD_HDR,
                      CORE_VERSION=RCD.CORE_VERSION,CAVE_FIRST=BV.cave.CAVE_ARENA,CAVE_END=BV.cave.CAVE_ARENA_END)
-    for k in ('SEC_MODES', 'SEC_CANVAS', 'SEC_UI', 'SEC_STANDBY', 'SEC_RATECANVAS', 'SEC_PACK', 'SEC_BINFILT', 'SEC_BITDEPTH'):
+    for k in ('SEC_MODES', 'SEC_CANVAS', 'SEC_UI', 'SEC_STANDBY', 'SEC_RATECANVAS', 'SEC_PACK', 'SEC_BINFILT', 'SEC_BITDEPTH',
+              'SEC_WRITER', 'WR_BATCH4M', 'WR_HDRCPU', 'SEC_RATES', 'RCD_RATE_BYTES'):
         constants[k] = getattr(RCD, k)
+    # the rates this producer declares beyond the stock nine: the consumer's defaults
+    constants['NRATES'] = len(RCD.DEFAULT_RATES)
+    for i, r in enumerate(RCD.DEFAULT_RATES):
+        for f in ('rank', 'num', 'den', 'cycles', 'carrier', 'nominal', 'engine'):
+            constants[f'RATE{i}_{f.upper()}'] = r[f]
     if RCD.RCD_HDR != 64 or RCD.RCD_VERSION != 3:
         raise RuntimeError('review calculator sections for the new res-custom format')
     (tree / 'rl_rcd.h').write_text(''.join(f'#define RLC_{k} {v}u\n' for k, v in constants.items()))

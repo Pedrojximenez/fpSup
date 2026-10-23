@@ -1,0 +1,95 @@
+{
+  "status": "offline algebra verified; no ISP mapping or 1D-table approximation",
+  "input": "BWG4/5 Film Gen5 code values; known source required",
+  "output": "Rec.709 D65 Gamma 2.4 normalized full",
+  "q_graph": [
+    {
+      "operation": "sRGB decode scalar curve"
+    },
+    {
+      "operation": "linear 3x3",
+      "matrix": [
+        [
+          1.862077236175537,
+          -0.6754248738288879,
+          -0.18620756268501282
+        ],
+        [
+          -0.2973127067089081,
+          1.6081607341766357,
+          -0.30971211194992065
+        ],
+        [
+          -0.12340445816516876,
+          -0.7684293985366821,
+          1.8792715072631836
+        ]
+      ]
+    },
+    {
+      "operation": "composed scalar curve",
+      "sequence": [
+        "sRGB encode",
+        "Film Gen5 decode"
+      ]
+    },
+    {
+      "operation": "linear 3x3",
+      "matrix": [
+        [
+          1.5684451404253836,
+          -0.5227164777439508,
+          -0.04572870833704068
+        ],
+        [
+          -0.0863608905060903,
+          1.3449761639749518,
+          -0.25861522743054893
+        ],
+        [
+          -0.05204255099461497,
+          -0.24914679072331947,
+          1.3011892909993064
+        ]
+      ]
+    },
+    {
+      "operation": "clip linear 0..1 then Gamma 2.4 encode"
+    }
+  ],
+  "equivalence_tests": {
+    "bypass": {
+      "uniform_log_cube": {
+        "samples": 8192,
+        "max_abs": 1.2878587085651816e-14,
+        "p99_abs": 1.249000902703301e-16,
+        "rms": 1.805528996571801e-16,
+        "max_normalized": 1.0526725483070792e-14
+      },
+      "scene_709_linear_m8_to_p3_ev": {
+        "samples": 8192,
+        "max_abs": 7.771561172376096e-16,
+        "p99_abs": 2.220446049250313e-16,
+        "rms": 5.152814594061282e-17,
+        "max_normalized": 5.297945108723783e-16
+      }
+    },
+    "Q": {
+      "uniform_log_cube": {
+        "samples": 8192,
+        "max_abs": 9.534040223968532e-15,
+        "p99_abs": 1.1102230246251565e-16,
+        "rms": 1.1296537729903358e-16,
+        "max_normalized": 8.543002368451933e-15
+      },
+      "scene_709_linear_m8_to_p3_ev": {
+        "samples": 8192,
+        "max_abs": 5.3013149425851225e-15,
+        "p99_abs": 2.220446049250313e-16,
+        "rms": 7.288220111906002e-17,
+        "max_normalized": 4.924724111392489e-15
+      }
+    }
+  },
+  "on_camera_ready": false
+}

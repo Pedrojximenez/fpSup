@@ -1,0 +1,99 @@
+{
+  "schema": 1,
+  "date": "2026-10-21",
+  "offline_only": true,
+  "rom": {
+    "input": "out/seg0_c0000000.bin",
+    "bytes": 49245696,
+    "sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622"
+  },
+  "rom_vtable_checks": {
+    "scan_drive_slot_0x18": {
+      "address": "0xc091c524",
+      "value": "0xc0238b58"
+    },
+    "controller_slot_0xbc": {
+      "address": "0xc0b8dad0",
+      "value": "0xc0332520"
+    },
+    "native_l_slot_0x18": {
+      "address": "0xc0b8ef04",
+      "value": "0xc033ec80"
+    },
+    "native_l_slot_0x1c": {
+      "address": "0xc0b8ef08",
+      "value": "0xc033ef90"
+    }
+  },
+  "captures": [
+    {
+      "input": "research/lens/captures/28mm_sigma/HEAP34.bin",
+      "sha256": "028b2be8f96259ab7bd65d3db7fd959f2db5c267ce85064f14f47fb16a6f6b9d",
+      "bytes": 1048576,
+      "name": "28mm F1.4 DG HSM | Art 019",
+      "type_code": "0x6010",
+      "native_vtable": "0xc0b8eeec",
+      "lens_data": "0xc3464980",
+      "lens_data_file_offset": "0x64980",
+      "sync_data": "0xc347df3c",
+      "sync_data_plus_0x24_raw": 304,
+      "equipment_flags": "0x4011ca0",
+      "extended_speed_supported": false,
+      "standard_speed_fields": {
+        "minimum": 200,
+        "maximum": 37000,
+        "movie": 12000
+      },
+      "extended_speed_fields": {
+        "minimum": 16777215,
+        "maximum": 16777215,
+        "movie": 16777215
+      },
+      "selected_speed_fields_pps": {
+        "minimum": 200,
+        "maximum": 37000,
+        "movie": 12000
+      },
+      "wire_speed_bits": 16,
+      "normal_maximum_divided_by_movie": 3.0833333333333335,
+      "current_attached_lens_confirmed": false,
+      "actual_motor_speed_measured": false,
+      "physical_safety_verified": false
+    },
+    {
+      "input": "research/lens/captures/40mm_lumix/HEAP34.bin",
+      "sha256": "15be6f4d94792586f442d43e5e0218ff9f074360e072901589dd7dde104db614",
+      "bytes": 1048576,
+      "name": "LUMIX S 40/F2",
+      "type_code": "0x4027",
+      "native_vtable": "0xc0b8eeec",
+      "lens_data": "0xc3464980",
+      "lens_data_file_offset": "0x64980",
+      "sync_data": "0xc347df3c",
+      "sync_data_plus_0x24_raw": 170,
+      "equipment_flags": "0x4da00420",
+      "extended_speed_supported": true,
+      "standard_speed_fields": {
+        "minimum": 480,
+        "maximum": 25920,
+        "movie": 20160
+      },
+      "extended_speed_fields": {
+        "minimum": 480,
+        "maximum": 25920,
+        "movie": 20160
+      },
+      "selected_speed_fields_pps": {
+        "minimum": 480,
+        "maximum": 25920,
+        "movie": 20160
+      },
+      "wire_speed_bits": 24,
+      "normal_maximum_divided_by_movie": 1.2857142857142858,
+      "current_attached_lens_confirmed": false,
+      "actual_motor_speed_measured": false,
+      "physical_safety_verified": false
+    }
+  ],
+  "scope": "Historical advertised speed fields and ROM control flow; no live speed, thermal, optical or stop validation."
+}

@@ -1,0 +1,40 @@
+built into /Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/validation/20261015-arrive/build-diag
+{
+ "c_base": 3056,
+ "c_text": 42504,
+ "menu_off": 45568,
+ "menu_len": 30844,
+ "blob_len": 76416,
+ "state_off": 76416,
+ "state_bytes": 216776,
+ "block_bytes": 294912,
+ "entries": {
+  "fpl_card_init": 1,
+  "fpl_card_rec": 6945,
+  "fpl_card_arrive": 9205,
+  "fpl_card_stop": 12249,
+  "fpl_card_flush": 13211,
+  "fpl_card_task": 1867,
+  "fpl_card_play": 4831,
+  "fpl_card_clip": 6105,
+  "fpl_card_play_end": 6857,
+  "fpl_card_play_pool": 6643,
+  "fpl_card_written": 17811,
+  "fpl_card_event": 17985,
+  "fpl_card_discard": 18279,
+  "fpl_card_observe": 13941,
+  "fpl_card_observer": 1521
+ },
+ "symbols": {
+  "entry": 0,
+  "claims": 2892,
+  "settings": 2876,
+  "c_base": 3056,
+  "task_shim": 2760,
+  "g_card": 2772,
+  "flush_real": 2832,
+  "discard_real": 2848,
+  "stop_resume": 2828,
+  "play_next": 2852
+ }
+}

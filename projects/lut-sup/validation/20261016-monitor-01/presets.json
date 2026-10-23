@@ -1,0 +1,344 @@
+{
+  "schema": "fpSup-monitor-presets-1",
+  "output": {
+    "space": "rec709-gamma24",
+    "white": "D65",
+    "transfer": "gamma24",
+    "range": "normalized-full",
+    "scene_to_display_after_lut": "none",
+    "identified_from_cube": false
+  },
+  "inputs": [
+    {
+      "id": "rec709-gamma24",
+      "label": "Rec.709 / Gamma 2.4",
+      "gamut": "709",
+      "transfer": "gamma24",
+      "white_xy": [
+        0.3127,
+        0.329
+      ],
+      "xyz_d65_to_linear_rgb": [
+        [
+          3.240969941904522,
+          -1.5373831775700937,
+          -0.49861076029300344
+        ],
+        [
+          -0.9692436362808796,
+          1.8759675015077202,
+          0.041555057407175626
+        ],
+        [
+          0.05563007969699365,
+          -0.20397695888897655,
+          1.0569715142428786
+        ]
+      ],
+      "input_render": "clip-linear-0-1-v1",
+      "reference_grey_linear": 0.18,
+      "code_range": "normalized-full"
+    },
+    {
+      "id": "srgb",
+      "label": "sRGB",
+      "gamut": "709",
+      "transfer": "srgb",
+      "white_xy": [
+        0.3127,
+        0.329
+      ],
+      "xyz_d65_to_linear_rgb": [
+        [
+          3.240969941904522,
+          -1.5373831775700937,
+          -0.49861076029300344
+        ],
+        [
+          -0.9692436362808796,
+          1.8759675015077202,
+          0.041555057407175626
+        ],
+        [
+          0.05563007969699365,
+          -0.20397695888897655,
+          1.0569715142428786
+        ]
+      ],
+      "input_render": "clip-linear-0-1-v1",
+      "reference_grey_linear": 0.18,
+      "code_range": "normalized-full"
+    },
+    {
+      "id": "arri-logc3-ei800",
+      "label": "ARRI Wide Gamut 3 / LogC3 EI800",
+      "gamut": "awg3",
+      "transfer": "logc3-ei800",
+      "white_xy": [
+        0.3127,
+        0.329
+      ],
+      "xyz_d65_to_linear_rgb": [
+        [
+          1.7890655509740145,
+          -0.4825338637710251,
+          -0.20007579293582756
+        ],
+        [
+          -0.6398486599016594,
+          1.3963999568607055,
+          0.1944322917780538
+        ],
+        [
+          -0.04153154585267001,
+          0.08233537355382697,
+          0.8788684802928296
+        ]
+      ],
+      "input_render": "none",
+      "reference_grey_linear": 0.18,
+      "code_range": "normalized-full"
+    },
+    {
+      "id": "arri-logc4",
+      "label": "ARRI Wide Gamut 4 / LogC4",
+      "gamut": "awg4",
+      "transfer": "logc4",
+      "white_xy": [
+        0.3127,
+        0.329
+      ],
+      "xyz_d65_to_linear_rgb": [
+        [
+          1.5092154722421087,
+          -0.25059734520437993,
+          -0.16881147529407306
+        ],
+        [
+          -0.49154545166061886,
+          1.3612455459293507,
+          0.09728294201372903
+        ],
+        [
+          0.0,
+          0.0,
+          0.9182249511582473
+        ]
+      ],
+      "input_render": "none",
+      "reference_grey_linear": 0.18,
+      "code_range": "normalized-full"
+    },
+    {
+      "id": "sony-slog3-cine",
+      "label": "Sony S-Gamut3.Cine / S-Log3",
+      "gamut": "sgamut3cine",
+      "transfer": "slog3",
+      "white_xy": [
+        0.3127,
+        0.329
+      ],
+      "xyz_d65_to_linear_rgb": [
+        [
+          1.8467789692899133,
+          -0.5259861229686584,
+          -0.21054521138785126
+        ],
+        [
+          -0.44415326290314694,
+          1.2594429028081366,
+          0.1493999728884649
+        ],
+        [
+          0.04085542119620541,
+          0.01564088931040843,
+          0.8682072486989177
+        ]
+      ],
+      "input_render": "none",
+      "reference_grey_linear": 0.18,
+      "code_range": "normalized-full"
+    },
+    {
+      "id": "sony-slog3",
+      "label": "Sony S-Gamut3 / S-Log3",
+      "gamut": "sgamut3",
+      "transfer": "slog3",
+      "white_xy": [
+        0.3127,
+        0.329
+      ],
+      "xyz_d65_to_linear_rgb": [
+        [
+          1.507399899060246,
+          -0.24582213738520944,
+          -0.17161168081608957
+        ],
+        [
+          -0.5181517270834447,
+          1.355391240901892,
+          0.12587866816151483
+        ],
+        [
+          0.015511698157910342,
+          -0.00787277142687912,
+          0.9119163655748387
+        ]
+      ],
+      "input_render": "none",
+      "reference_grey_linear": 0.18,
+      "code_range": "normalized-full"
+    },
+    {
+      "id": "panasonic-vlog",
+      "label": "Panasonic V-Gamut / V-Log",
+      "gamut": "vgamut",
+      "transfer": "vlog",
+      "white_xy": [
+        0.3127,
+        0.329
+      ],
+      "xyz_d65_to_linear_rgb": [
+        [
+          1.5890117738723923,
+          -0.31320448446022,
+          -0.18096485152800626
+        ],
+        [
+          -0.5340529104491585,
+          1.3960114333501839,
+          0.10245767101658211
+        ],
+        [
+          0.011179448842978024,
+          0.0031941282408508645,
+          0.9055353562812192
+        ]
+      ],
+      "input_render": "none",
+      "reference_grey_linear": 0.18,
+      "code_range": "normalized-full"
+    },
+    {
+      "id": "blackmagic-film-gen5",
+      "label": "Blackmagic Wide Gamut / Film Gen5",
+      "gamut": "bmwg5",
+      "transfer": "film5",
+      "white_xy": [
+        0.312717,
+        0.3290312
+      ],
+      "xyz_d65_to_linear_rgb": [
+        [
+          1.8663988282957813,
+          -0.518411814632223,
+          -0.23462301589196027
+        ],
+        [
+          -0.6003552972635333,
+          1.3781775434937582,
+          0.17669743132810603
+        ],
+        [
+          0.0024435434775804846,
+          0.08641550920772326,
+          0.8367435150020086
+        ]
+      ],
+      "input_render": "none",
+      "reference_grey_linear": 0.18,
+      "code_range": "normalized-full"
+    },
+    {
+      "id": "davinci-intermediate",
+      "label": "DaVinci Wide Gamut / Intermediate",
+      "gamut": "dwg",
+      "transfer": "intermediate",
+      "white_xy": [
+        0.3127,
+        0.329
+      ],
+      "xyz_d65_to_linear_rgb": [
+        [
+          1.5166720420240434,
+          -0.28147804787896913,
+          -0.14696363323677797
+        ],
+        [
+          -0.46491710123327573,
+          1.2514237756817124,
+          0.17488460886509075
+        ],
+        [
+          0.06484904706715995,
+          0.10913934371056987,
+          0.7614146215498788
+        ]
+      ],
+      "input_render": "none",
+      "reference_grey_linear": 0.18,
+      "code_range": "normalized-full"
+    },
+    {
+      "id": "linear-709",
+      "label": "Rec.709 / Linear",
+      "gamut": "709",
+      "transfer": "linear",
+      "white_xy": [
+        0.3127,
+        0.329
+      ],
+      "xyz_d65_to_linear_rgb": [
+        [
+          3.240969941904522,
+          -1.5373831775700937,
+          -0.49861076029300344
+        ],
+        [
+          -0.9692436362808796,
+          1.8759675015077202,
+          0.041555057407175626
+        ],
+        [
+          0.05563007969699365,
+          -0.20397695888897655,
+          1.0569715142428786
+        ]
+      ],
+      "input_render": "none",
+      "reference_grey_linear": 0.18,
+      "code_range": "normalized-full"
+    },
+    {
+      "id": "linear-p3d60",
+      "label": "P3-D60 / Linear",
+      "gamut": "p3d60",
+      "transfer": "linear",
+      "white_xy": [
+        0.32168,
+        0.33767
+      ],
+      "xyz_d65_to_linear_rgb": [
+        [
+          2.428254486659577,
+          -0.8829845365909197,
+          -0.39021285358648317
+        ],
+        [
+          -0.8298796755579273,
+          1.7610102821777451,
+          0.025484207955583708
+        ],
+        [
+          0.035749687196751166,
+          -0.07725558667884624,
+          0.9579630500444216
+        ]
+      ],
+      "input_render": "none",
+      "reference_grey_linear": 0.18,
+      "code_range": "normalized-full"
+    }
+  ],
+  "camera_runtime_verified": false
+}

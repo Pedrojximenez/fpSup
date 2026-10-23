@@ -1,0 +1,18 @@
+ERROR
+
+======================================================================
+ERROR: setUpClass (test_library_native.LibraryNativeTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lut/test_library_native.py", line 78, in setUpClass
+    cls.info=P.build(cls.root/'card',card=True,debug=True,collection=cls.doc)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lut/build_sup.py", line 205, in build
+    info['source_hashes']['fpSup/lut/library.py']=sha(HERE/'library.py')
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lut/build_sup.py", line 35, in sha
+    def sha(data): return hashlib.sha256(data).hexdigest()
+TypeError: object supporting the buffer API required
+
+----------------------------------------------------------------------
+Ran 0 tests in 3.038s
+
+FAILED (errors=1)

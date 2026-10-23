@@ -1,0 +1,69 @@
+{
+  "variant": "combined-fix11",
+  "previous_variant": "combined-fix10",
+  "purpose": "Thicken the edge outward to approximately two pixels with eight black offsets per part; keep all three central white glyph records unchanged except component IDs.",
+  "edge_offsets": [
+    [
+      -2,
+      0
+    ],
+    [
+      2,
+      0
+    ],
+    [
+      0,
+      -2
+    ],
+    [
+      0,
+      2
+    ],
+    [
+      -1,
+      -1
+    ],
+    [
+      1,
+      -1
+    ],
+    [
+      -1,
+      1
+    ],
+    [
+      1,
+      1
+    ]
+  ],
+  "white_fill_unchanged_all_four_layouts": true,
+  "font_size_position_spacing_unchanged": true,
+  "LV_table_bytes": 84936,
+  "bounds": {
+    "entries": 16,
+    "record_bytes": 10240,
+    "records": 27,
+    "marks": 256,
+    "table_bytes": 90112
+  },
+  "raw_sha256": "18d0f6438ce8ef0424e4e18bda3730c5074668de85764add774744771cb67314",
+  "bytes": 271616,
+  "source_hashes": {
+    "vr_ui.py": "4b74bc5499309c7b59c5bc421918cadddb470655dd848259b97e996ae562ae33",
+    "ogc.c": "0ba91129620e7d252e34749c171530428e0d68ad7c801bb2597e78a432418b5e",
+    "test_lv_text_style.py": "35e3382f44919b82a5d0417e560e3ceb7b7f1502357a51f82a48f7b93e2932e1",
+    "test_v3_rescustom.py": "321582d0652fc7f35e8db8a9ff192c0bee8b93b175828d237313ec0b5e8387b7"
+  },
+  "written_to_card": true,
+  "visual_result": "No post-refresh capture accepted: first run stopped before keys because initial screen was QS; second stopped before keys because initial screen was LV. User requested thicker three-pixel outer edge while this version was loaded.",
+  "on_card_sha256": "2095ab1318e77c219848e885962118d187a4565cef96be04b0ba52c1fee80df5",
+  "CFG_sha256": "be62abbe2254b1c884c280a4352039f677bf7128bd81eea87dfb30990e855640",
+  "full_readback_equal": true,
+  "tests": {
+    "focused": "6 passed in 84.504s: four StyleTests including all native parser layouts, plus two core guard/resource-registration regressions",
+    "actual_BIN": "371 QS + 16 LV substitutions, resource flag=1, journal restored"
+  },
+  "recording_performed": false,
+  "QS_delay_resolved": false,
+  "superseded_by": "combined-fix12"
+}

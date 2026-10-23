@@ -1,0 +1,12 @@
+{
+  "label": "baseline-boot-connected",
+  "commands": [
+    {
+      "time": 1791806846.366876,
+      "command": "status get app_current",
+      "reply": "ERR shl claim iface 0 rc=-3(LIBUSB_ERROR_ACCESS)\n"
+    }
+  ],
+  "started_at": 1791806846.3663218,
+  "error": "RuntimeError(\"uncertain/failed command status get app_current: 'ERR shl claim iface 0 rc=-3(LIBUSB_ERROR_ACCESS)\\\\n'\")"
+}

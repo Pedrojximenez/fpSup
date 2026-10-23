@@ -1,0 +1,17 @@
+test_editing_one_cube_does_not_change_other_or_current_active (test_library_native.LibraryNativeTests) ... FAIL
+
+======================================================================
+FAIL: test_editing_one_cube_does_not_change_other_or_current_active (test_library_native.LibraryNativeTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lut/test_library_native.py", line 111, in test_editing_one_cube_does_not_change_other_or_current_active
+    self.assertEqual(c.find_row('LUT color space')[1]['A'],'Rec.709')
+AssertionError: 'P3 D65' != 'Rec.709'
+- P3 D65
++ Rec.709
+
+
+----------------------------------------------------------------------
+Ran 1 test in 4.457s
+
+FAILED (failures=1)

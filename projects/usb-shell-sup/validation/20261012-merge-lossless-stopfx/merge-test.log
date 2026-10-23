@@ -1,0 +1,168 @@
+ok   ui script parses
+ok   sha256hex matches node
+ok   Instant on by default; Fast and fpSup page opt-in
+ok   usbshell: exact frozen sup bytes
+ok   usbshell: exact released artwork 0
+ok   usbshell: exact released artwork 1
+ok   usbshell: exact released artwork 2
+ok   usbshell: exact released artwork 3
+ok   usbshell: exact released artwork 4
+ok   usbshell: released product bytes, current boot pair
+ok   usbshell: real AutoRun EOF and hash
+ok   stopfx: all development input bytes match their snapshot manifest
+ok   stopfx: exact intended payloads embedded
+ok   stopfx: released product bytes, current boot pair
+ok   stopfx: real AutoRun EOF and hash
+ok   lossless: all development input bytes match their snapshot manifest
+ok   lossless: exact intended payloads embedded
+ok   lossless: released product bytes, current boot pair
+ok   lossless: real AutoRun EOF and hash
+ok   gyro2: exact frozen sup bytes
+ok   gyro2: exact released artwork 0
+ok   gyro2: exact released artwork 1
+ok   gyro2: exact released artwork 2
+ok   gyro2: exact released artwork 3
+ok   gyro2: exact released artwork 4
+ok   gyro2: released product bytes, current boot pair
+ok   gyro2: real AutoRun EOF and hash
+ok   res-custom: all development input bytes match their snapshot manifest
+ok   res-custom: exact intended payloads embedded
+ok   res-custom: released product bytes, current boot pair
+ok   res-custom: real AutoRun EOF and hash
+ok   screenflip: exact frozen sup bytes
+ok   screenflip: exact released artwork 0
+ok   screenflip: exact released artwork 1
+ok   screenflip: exact released artwork 2
+ok   screenflip: exact released artwork 3
+ok   screenflip: exact released artwork 4
+ok   screenflip: released product bytes, current boot pair
+ok   screenflip: real AutoRun EOF and hash
+ok   desqueeze: exact frozen sup bytes
+ok   desqueeze: exact released artwork 0
+ok   desqueeze: exact released artwork 1
+ok   desqueeze: exact released artwork 2
+ok   desqueeze: exact released artwork 3
+ok   desqueeze: exact released artwork 4
+ok   desqueeze: released product bytes, current boot pair
+ok   desqueeze: real AutoRun EOF and hash
+ok   tap-to-zoom: exact frozen sup bytes
+ok   tap-to-zoom: exact released artwork 0
+ok   tap-to-zoom: exact released artwork 1
+ok   tap-to-zoom: exact released artwork 2
+ok   tap-to-zoom: exact released artwork 3
+ok   tap-to-zoom: exact released artwork 4
+ok   tap-to-zoom: released product bytes, current boot pair
+ok   tap-to-zoom: real AutoRun EOF and hash
+ok   raw-view: exact frozen sup bytes
+ok   raw-view: exact released artwork 0
+ok   raw-view: exact released artwork 1
+ok   raw-view: exact released artwork 2
+ok   raw-view: exact released artwork 3
+ok   raw-view: exact released artwork 4
+ok   raw-view: released product bytes, current boot pair
+ok   raw-view: real AutoRun EOF and hash
+ok   res-lab: all development input bytes match their snapshot manifest
+ok   res-lab: exact intended payloads embedded
+ok   res-lab: released product bytes, current boot pair
+ok   res-lab: real AutoRun EOF and hash
+ok   Manager false, Instant false, Fast false: exact boot pair in zip
+ok   Instant false, Fast false: selections retained
+ok   README records boot choices
+ok   actual VBIN length plus empty manager disabled list
+ok   management UI data and README follow checkbox
+ok   flipped boot byte blocks download
+ok   Manager false, Instant false, Fast true: exact boot pair in zip
+ok   Instant false, Fast true: selections retained
+ok   README records boot choices
+ok   actual VBIN length plus empty manager disabled list
+ok   management UI data and README follow checkbox
+ok   flipped boot byte blocks download
+ok   Manager false, Instant true, Fast false: exact boot pair in zip
+ok   Instant true, Fast false: selections retained
+ok   README records boot choices
+ok   actual VBIN length plus empty manager disabled list
+ok   management UI data and README follow checkbox
+ok   flipped boot byte blocks download
+ok   Manager false, Instant true, Fast true: exact boot pair in zip
+ok   Instant true, Fast true: selections retained
+ok   README records boot choices
+ok   actual VBIN length plus empty manager disabled list
+ok   management UI data and README follow checkbox
+ok   flipped boot byte blocks download
+ok   Manager true, Instant false, Fast false: exact boot pair in zip
+ok   Instant false, Fast false: selections retained
+ok   README records boot choices
+ok   actual VBIN length plus empty manager disabled list
+ok   management UI data and README follow checkbox
+ok   flipped boot byte blocks download
+ok   Manager true, Instant false, Fast true: exact boot pair in zip
+ok   Instant false, Fast true: selections retained
+ok   README records boot choices
+ok   actual VBIN length plus empty manager disabled list
+ok   management UI data and README follow checkbox
+ok   flipped boot byte blocks download
+ok   Manager true, Instant true, Fast false: exact boot pair in zip
+ok   Instant true, Fast false: selections retained
+ok   README records boot choices
+ok   actual VBIN length plus empty manager disabled list
+ok   management UI data and README follow checkbox
+ok   flipped boot byte blocks download
+ok   Manager true, Instant true, Fast true: exact boot pair in zip
+ok   Instant true, Fast true: selections retained
+ok   README records boot choices
+ok   actual VBIN length plus empty manager disabled list
+ok   management UI data and README follow checkbox
+ok   flipped boot byte blocks download
+ok   fpSup page can be downloaded by itself
+ok   empty card without fpSup page is refused
+ok   RES-Lab includes and runs separate RES-CUSTOM consumer
+ok   RES-Lab includes virtual core, manager and SAVE directory
+ok   RES-Lab alone does not fill the resolution list with fixed formats
+ok   RES-CUSTOM alone uses standalone core, without reserving a virtual row
+ok   RES-Lab applies without any saved RCD file
+ok   RES-Lab Instant false, Fast false: manager pair and virtual consumer
+ok   RES-Lab Instant false, Fast true: manager pair and virtual consumer
+ok   RES-Lab Instant true, Fast false: manager pair and virtual consumer
+ok   RES-Lab Instant true, Fast true: manager pair and virtual consumer
+ok   flipped virtual consumer byte blocks RES-Lab download
+ok   flipped manager UI byte blocks download
+ok   no two running sups clash
+ok   parked sups are fpSup/NAME.OFF
+ok   all 10 ticked: checks pass (off: -)
+ok   first ticked of a clashing pair runs
+ok   zip: 00SHELL.BIN runs, 05STOPFX.BIN is fpSup/05STOPFX.OFF
+ok   no OFF folder
+ok   README says how to switch
+ok   a clash is not a failed check
+ok   flipped bit in a sup fails the self-check
+ok   zip is reproducible
+ok   res-custom: all 5 data files by default
+ok   res-custom: unticked OG2K is left out
+ok   res-custom: no data file ticked is refused
+todo usbshell: no guide page yet
+ok   stopfx guide ../../guide/stopfx.html exists
+ok   lossless guide ../../guide/lossless.html exists
+ok   gyro2 guide ../../guide/gyro2.html exists
+ok   res-custom guide ../../guide/res-custom.html exists
+ok   screenflip guide ../../guide/screenflip.html exists
+ok   desqueeze guide ../../guide/desqueeze.html exists
+ok   tap-to-zoom guide ../../guide/tap-to-zoom.html exists
+ok   raw-view guide ../../guide/raw-view.html exists
+todo res-lab: no guide page yet
+todo split-record: no guide page yet
+todo hdrx: no guide page yet
+todo af: no guide page yet
+todo lut: no guide page yet
+ok   lossless: tile thanks CorNy
+ok   res-custom: tile thanks Jose Hurtado
+ok   raw-view: tile thanks Ole Berek
+ok   AutoRun has the no-delay patch, page thanks Andy_hal9000
+ok   sups in the zip are in file-name order
+ok   author/credits fields present
+ok   STOPFX credits its author Ruari
+ok   lossless: ZIP has exactly the independently selected products
+ok   stopfx: ZIP has exactly the independently selected products
+ok   ZIP README retains Ruari attribution
+ok   lossless+stopfx: ZIP has exactly the independently selected products
+ok   ZIP README retains Ruari attribution
+all passed

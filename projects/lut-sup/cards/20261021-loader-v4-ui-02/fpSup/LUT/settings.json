@@ -1,0 +1,175 @@
+{
+  "schema": "fpSup-lut4-development-1",
+  "sup": "LUT.BIN",
+  "format": "FSB4",
+  "service_version": 5,
+  "loader_service_version": 6,
+  "ui_registered_rows": 8,
+  "ui_popup_max_items": 3,
+  "cached_private_block": true,
+  "dma": "8 KiB file object + read scratch only",
+  "code_offset": 80,
+  "code_bytes": 6576,
+  "file_bytes": 7408,
+  "block_bytes": 4214016,
+  "state_offset": 7424,
+  "io_offset": 11520,
+  "asset_offset": 19712,
+  "asset_capacity": 4194304,
+  "entries": {
+    "lut4_select": 81,
+    "lut4_strength": 769,
+    "lut4_enable": 983,
+    "lut4_status": 1025,
+    "lut4_render": 1153,
+    "sup_entry": 3497
+  },
+  "source_cube": {
+    "title": "Diagnostic identity; not camera calibration",
+    "source_sha256": "57fe6949f1e37b5cd67752c824680eee7ed67c604c79a4fc322b47d68ebd82a9",
+    "size1d": 0,
+    "size3d": 2,
+    "range1d": [
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        1.0,
+        1.0,
+        1.0
+      ]
+    ],
+    "range3d": [
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        1.0,
+        1.0,
+        1.0
+      ]
+    ]
+  },
+  "selection": {
+    "color_space": "rec709",
+    "color_space_label": "Rec.709",
+    "gamma": "gamma24",
+    "gamma_label": "Gamma 2.4",
+    "numerical_reference_available": true,
+    "model": "standard primaries/Bradford/transfer; no Resolve DRT",
+    "aces_mapping": null,
+    "negative_power_extension": "signed; Resolve negative handling unverified",
+    "resolve_pixel_match_verified": false,
+    "menu_evidence": "projects/lut-sup/validation/20261016-cdng-menu-01/evidence.json"
+  },
+  "strength_percent": 100,
+  "output": "Rec.709 D65 / Gamma 2.4; normalized full",
+  "native_sample_format": "signed Q20 XYZ D65 -> signed Q20 Rec.709 Gamma2.4",
+  "native_sample_limit": 4096,
+  "xyz_input_limit": 64,
+  "selected_linear_limit": 128,
+  "lookup": "original 1D + 3D nodes quantized Q20; tetrahedral, no grid resampling",
+  "strength_steps": [
+    0,
+    25,
+    50,
+    75,
+    100
+  ],
+  "asset_checksum": "FNV-1a accidental corruption check; not authentication",
+  "live_view_backend_connected": false,
+  "on_camera_verified": false,
+  "ui_renderer_present": true,
+  "lut_ui_on_camera_verified": false,
+  "settings_persistence": "package defaults only; UI changes are volatile until next boot",
+  "requirements_remaining": [
+    "on-camera LUT UI acceptance",
+    "calibrated, owned monitoring route",
+    "native ISP + CPU residual integration and performance",
+    "settings writeback"
+  ],
+  "card": true,
+  "debug": true,
+  "splash": false,
+  "instant": false,
+  "fast": false,
+  "ui": true,
+  "files": {
+    "fpSup/LUT.BIN": {
+      "bytes": 7408,
+      "sha256": "b367b6833421b4f912786915ee58b4449bbb6ea1eb721bb574149efdb7ff1f87"
+    },
+    "fpSup/LUT/ACTIVE.LUT": {
+      "bytes": 332464,
+      "sha256": "cd60c83b56323ce5372dec042451364ebb29c4ef35cf455d41aa68e4a7094df5"
+    },
+    "fpSup/LUT/source.cube": {
+      "bytes": 114,
+      "sha256": "57fe6949f1e37b5cd67752c824680eee7ed67c604c79a4fc322b47d68ebd82a9"
+    },
+    "AutoRun.txt": {
+      "bytes": 3253,
+      "sha256": "ee256bc56848caeb6aecfb9d8114530102c67bae768a09f67757528e64af59f9"
+    },
+    "fpSup/LOADER.BIN": {
+      "bytes": 30020,
+      "sha256": "50d716bd1b477c944dc0d7dbb55c034f1841e7e16f9c391eedd23883444d3de8"
+    },
+    "fpSup/SUPMGR.BIN": {
+      "bytes": 3028,
+      "sha256": "a78856114dee6ef35a696ee596f9dce79629ba67ccbecab59700143ecb95c866"
+    },
+    "fpSup/UI/FPSUP.BIN": {
+      "bytes": 134651,
+      "sha256": "2722a09e6cfc1d10dd92989bf21e80c8cb80205779eb40b05bc6c1829dd348b5"
+    },
+    "fpSup/UI/SUPMGR.BIN": {
+      "bytes": 116901,
+      "sha256": "c7bfbfda84afba03f5ed42f942d9ea58f211faffd6e3d916bd518683a1b0bd68"
+    },
+    "fpSup/SHELL.BIN": {
+      "bytes": 4524,
+      "sha256": "d711f05cd7c163c17f484f686cd245ae15ca6eedc47a75cee7a5201e3f4c82ab"
+    }
+  },
+  "source_hashes": {
+    "fpSup/lut/native/lut4.c": "d62445fb945cf659a7e4accf0539722b0bf26f66a0019586bb901347bce23a91",
+    "fpSup/lut/native/lut4.h": "f07a15d2dcf6e5f432fc848826a8e2db03401aa8c5d830e81dcba543314664e1",
+    "fpSup/lut/build_sup.py": "9bc75335fe8e528462804c98c4f953863452d4b43cd0bcf32ab0532f9231a7d9",
+    "fpSup/lut/color.py": "76fb55133eabe4d13fe79e2670c59584ab1150d0f7f49931f8fd3c88215c69cd",
+    "fpSup/lut/cinemadng.py": "442f56ba3e1a0b83c91e32ad3191f91c74db11919b77c5723ea7578349922c0b",
+    "fpSup/fp_usb_shell/v4/sloader4.h": "53db6e3e3b3e6a1263e4f898794a783c39b569a160a3cad25bd021e55d8eac45",
+    "fpSup/fp_usb_shell/v4/build_v4.py": "bc37150ec0b959328c8fa4ab70d0db63c93019fba267de1f7483f790103f4b2c",
+    "fpSup/fp_usb_shell/v4/sloader4.c": "af07d174fa8f50bb9c2d1285b5c28f194c8003619858228c2561484554569dbd",
+    "fpSup/fp_usb_shell/v4/sloader4_entry.S": "90013526abc898eac8f7169df5373598d83ae25df1943718c26e7023af5790c4",
+    "fpSup/fp_usb_shell/v4/supmgr.c": "2355a098e10d63a8c4b8f3533d2c26ce027e08863bf37f2b5cd572d38847ad82",
+    "fpSup/fp_usb_shell/v3/build_v3.py": "027030c0ed689d3f53fe0608b2fd02085483cab9b38b0a8ccf0d36466a1e4ef6",
+    "fpSup/fp_usb_shell/build_autorun.py": "dff5adc2ac79d2276b244773cfc2c641969828b119a9c708447ee2c6bc8977ae",
+    "fpSup/fp_usb_shell/asm/loader.S": "838186545d1e4d525b569f9d1b3c37a3a8a8f7bd177a15b1d4c5d98719a55c4e",
+    "fpSup/fp_usb_shell/asm/stage2.S": "4f446ace9ffadef27c8cabe59d86c2fa08f5ec0cbf53561b44651a000be9d2e5",
+    "fpSup/fp_usb_shell/asm/store_boot.S": "f104f6a7bb222b69ab65074c9f8a054fd1552f696e8cd6f40e627216e3894135",
+    "fpSup/fp_usb_shell/asm/store_boot_slim.S": "7fb69bc5a9ea56f7a629df06f95c684b80f69b8536de4b5e6c318393a00abf9a",
+    "fpSup/fp_usb_shell/asm/lhook_stub.S": "89f76b46150b2a859d70fe915ae20f5fb5257bc72e85684cd469bcc80b3016ed",
+    "fpSup/fp_usb_shell/asm/abort.S": "46e6a31c0e7303fc59f587a63f423899740e3ef96e55a162267ecf5f5271f46f",
+    "fpSup/fp_usb_shell/asm/entries.S": "6046ce8a1a8a506784f61def3637c0fbfaaf31cb4c6c9a7f923d4497bf305c95",
+    "fpSup/fp_usb_shell/asm/splash_finish.S": "00de013ffa8ff1044655e68f952e0c03792482c4c317300ba5ab7c3730cd8b83",
+    "fpSup/fp_usb_shell/v4/fpsup_ui.c": "855a6459a7a313ccb78d4b2b316f0f9682b682024c278c4403911ea545e53c0f",
+    "fpSup/uishare/qs_apply.h": "7e814aaf2928db1d855c973f19abb47ab61207bb1f10ff0085c49ba47550e369",
+    "fpSup/uishare/ui_apply.h": "17b18c4047b039909f11e3a1a3b92a7cb6dbf8a20a50596f6644661417871b75",
+    "fpSup/uishare/ui_pool.h": "93b55987f1fb1fbd1f166da2dbcb75aea1e25eede68d0ddbb676a17a1423ebc4",
+    "fpSup/uishare/qs_layer.h": "a537696c546eda45b3e76cace02c7cabb8789e0d7d6ca36e597173bb74059888",
+    "fpSup/uishare/ui_strings_code.h": "94b85f5b4d4cec28a7c6e0061437f250cc8fbad8f810489be0e29ed47ca28469",
+    "fpSup/uishare/ui_pool.c": "b4e5ae0a562da04f04f16c37077b1dc7abe5466c6654ea46a3b0a21754e40dc4",
+    "fpSup/uishare/ui_apply.c": "ea6347b0ef8c07ccc4a3fe26d1ca56940599268ef348f58e564c0062617f9cf9",
+    "fpSup/uishare/tab/build_fp4.py": "c80ea94ac24174f7310894b2dcfd99e19612f03714c09ec8ac719ea65f64dae8",
+    "fpSup/uishare/tab/home4_page.py": "6df67100c5596d4a4296fe80ad1913b8eacfa9a2d061c26b7089f260e028a15b",
+    "fpSup/uishare/tab/manage_page.py": "e7a3691c181e5b369aa2c985084c18500686e4b63327f4224be97327ff4b0784",
+    "fpSup/uishare/tab/manager_logo.py": "9404dc83f5020ed97ec4ec293aba87dfdfa9b1142e1d3fc0484c0568a2ce767c",
+    "fpSup/uishare/tab/ft6_page.py": "5efc4fa0a162013cba3941fb7cee1a532e30ff05d95c34f85d7d08f6c9bf8532",
+    "fpSup/uishare/tab/build_ft6.py": "75f3b0168b46d443635d532ed6641d392f5eb863c807c8f88f12977eaf220f4b"
+  }
+}

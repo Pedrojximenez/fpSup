@@ -1,5 +1,7 @@
 # SIGMA fp Ver 5.02 — 相機端 RAW 壓縮開發研究
 
+> **2026-10-15 更正：** 本文「全韌體沒有 H.264／HEVC」及把整個 `0x300C` 視為無壓縮 RAW 前端的判讀已撤回。已由 MOV 初始化鏈追到 `0x300Cxxxx` 硬體 codec，另有 HEVC 候選分支；10-bit 能力仍未證實。見 [H.264 10bit 分析](FP_H264_10BIT_FEASIBILITY_2026-10-15.md)。這不表示影片 codec 可直接壓縮 Bayer。
+
 > 目標:讓 fp 在相機端把 raw(Bayer)幀無損壓縮,用於 (A) USB 即時串流降頻寬 / (B) 未來 SD 卡錄製 UHD 壓縮 RAW,PC 端還原。
 > 本文彙整 2026-08-20 的完整逆向與可行性研究。EA 為 ARM 位址(base 0xC0000000),file-offset = EA − 0xC0000000。
 > 信心標記:**[C]** 反編確認 · **[I]** 推論 · **[P]** 需上機實測。
@@ -32,8 +34,8 @@
 | **XC_HalLjpeg** | **0x300D0000**, IRQ 0x29 | **無損 JPEG**(predictor+Huffman) | **Bayer/CFA raw**,10/12/14/16-bit | 拍照 DNG(Compression=7)。**這是唯一能壓 raw 的** |
 | XC_SigproJpegComp | 0x301B0000 | 有損 baseline DCT(SOF0,Q85/90/95) | YCbCr 彩色,非 CFA | 拍照/預覽 JPEG,焊死在 ISP |
 
-- **RFC 讀出前端 0x300C 不做任何資料縮減**(只有 timing/幾何/binning/黑階;無 companding LUT、無 bit-packer、無 DPCM)。它只把原生位元深度的 Bayer 吐進 DRAM。
-- 全域**沒有**:companding / DPCM / wavelet / golomb-rice / RLE-on-raw / H.264 / HEVC。
+- **2026-10-15 撤回：** 不能把 `0x300C` 整塊判作無資料縮減的 RAW 前端；`C070B7A0` 位於 MOV codec 設定鏈，包含影片編碼的碼率、GOP、level 等設定。
+- 舊掃描未找到可直接套用於 Bayer 的其他壓縮路徑；它不能支持「全域沒有 H.264／HEVC」。H.264 硬體路徑與 HEVC 候選分支見上方更正。
 - 有一個 **CPU-only 軟體 codec 庫**(`XcImageEncoderInterface`:NoCompress / Lz4 / SRLE,blk_c05 ~c05a71a8+),但**零 MMIO、不在 Bayer 路徑、非 video-rate**,僅通用 buffer/QR 用。
 
 ---
@@ -68,7 +70,7 @@ FUN_c05a6990(out,1)   @c05a6990  -- 讀回壓縮大小(→FUN_c062fa48)
 
 ## 4. 吞吐量 — 唯一未定的變數 [C floor / I ceiling / P true]
 - **32 Mpix/s 是 watchdog timeout,不是吞吐。** `FUN_c062f6f8`:`timeout = tile對齊像素 / 32000`(min 100 ticks),只證明真實吞吐 **≥ 32**。(早期把它當定值是踩了「self-consistent wrong values」陷阱,已修正。)
-- **時脈 ≈ 300 MHz**(與 0x300C RFC 共用 domain 5 的成像時脈,常數 300000000 實測於 0x300C)[I]。
+- **時脈 ≈ 300 MHz 的舊推論依據已失效（2026-10-15）**：`C070BE68` 的 300000000 是影片 codec 的處理預算常數，不能當成 `0x300D` 時脈的量測；本段以 300 MHz 推算的上限仍是假設。
 - **~1 sample/clock,與位元深度無關**(10-bit 不比 14-bit 快;bitdepth 只改 stride 暫存器)[I]。
 - **DMA 不是瓶頸**:+0x78/+0x7c/+0x84 是 src/2nd/3rd DRAM 位址(非 burst 設定);無 burst-length 暫存器;輸入讀取 450–600 MB/s < DDR。**瓶頸是 VLC(變長碼)samples/clock,不是 DMA、不是電源切換。**
 - **每幀只 1 次 power cycle**(UHD/FHD/全幅都是單 stripe,64MiB band budget)→ 對連續使用友善。

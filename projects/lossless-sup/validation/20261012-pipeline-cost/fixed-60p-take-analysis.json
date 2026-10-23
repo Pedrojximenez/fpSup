@@ -1,0 +1,2884 @@
+{
+  "label": "fixed-60p-take",
+  "clip": [
+    "A001_161"
+  ],
+  "boot": 11595426,
+  "codecTask": 125,
+  "window": {
+    "cpu_percent": 89.6507,
+    "task_percent": {
+      "MRecMgr": 21.5507,
+      "LensCycl": 3.4634,
+      "ESCycl": 0.0648,
+      "ExtStrb": 1.2457,
+      "FPLCODE": 3.6889,
+      "SRecFile": 2.5782,
+      "ImgCtrl": 0.6476,
+      "MANAGER": 0.6896,
+      "S2R": 0.469,
+      "R2YHDIS": 1.184,
+      "AeDev": 1.4635,
+      "VDD": 0.0437,
+      "CamSch": 43.3118,
+      "Y2YVDIS": 0.5164,
+      "PicCorr": 0.0797,
+      "AtomosFr": 0.7317,
+      "AUD_INT": 0.2668,
+      "RemoCon": 0.0356,
+      "StOsdObs": 0.7354,
+      "GyroData": 0.1603,
+      "inittsk": 10.3493,
+      "Level": 1.2111,
+      "DrawMgr": 3.1417,
+      "_VSHL": 0.1692,
+      "LcdTh": 0.0187,
+      "SDePower": 0.0236,
+      "FdTsk": 1.6801,
+      "EyeDtctn": 0.049,
+      "FPFLIP": 0.1142,
+      "LensUbat": 0.0189,
+      "LcdBrTh": 0.049,
+      "EventMgr": 0.0152,
+      "ExtEvfCh": 0.0064,
+      "BtrMgr": 0.0376,
+      "TempChk": 0.0037,
+      "shell": 0.0039
+    }
+  },
+  "windowUs": [
+    1100000,
+    2100000
+  ],
+  "phases": {
+    "4": {
+      "count": 114,
+      "meanUs": 6930.105263157895,
+      "cpuMeanUs": 107.84210526315789,
+      "cpuSumUs": 12294,
+      "maxUs": 13452
+    },
+    "1": {
+      "count": 59,
+      "meanUs": 1534.7118644067796,
+      "cpuMeanUs": 22.11864406779661,
+      "cpuSumUs": 1305,
+      "maxUs": 9575
+    },
+    "2": {
+      "count": 59,
+      "meanUs": 703.6949152542373,
+      "cpuMeanUs": 674.4745762711865,
+      "cpuSumUs": 39794,
+      "maxUs": 1634
+    },
+    "3": {
+      "count": 59,
+      "meanUs": 639.1355932203389,
+      "cpuMeanUs": 16.338983050847457,
+      "cpuSumUs": 964,
+      "maxUs": 1990
+    },
+    "5": {
+      "count": 58,
+      "meanUs": 273.7413793103448,
+      "cpuMeanUs": 270.12068965517244,
+      "cpuSumUs": 15667,
+      "maxUs": 1351
+    }
+  },
+  "intervals": [
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1103009,
+      "end": 1106137,
+      "id": 30,
+      "cpuUs": 188
+    },
+    {
+      "phase": 1,
+      "lane": "hold",
+      "start": 1118766,
+      "end": 1119016,
+      "id": 30,
+      "cpuUs": 18
+    },
+    {
+      "phase": 2,
+      "lane": "hold",
+      "start": 1119019,
+      "end": 1119606,
+      "id": 30,
+      "cpuUs": 587
+    },
+    {
+      "phase": 3,
+      "lane": "hold",
+      "start": 1119612,
+      "end": 1121602,
+      "id": 30,
+      "cpuUs": 21
+    },
+    {
+      "phase": 5,
+      "lane": "hold",
+      "start": 1130018,
+      "end": 1130311,
+      "id": 32,
+      "cpuUs": 293
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1132156,
+      "end": 1142992,
+      "id": 32,
+      "cpuUs": 18
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1143061,
+      "end": 1144363,
+      "id": 32,
+      "cpuUs": 279
+    },
+    {
+      "phase": 1,
+      "lane": "hold",
+      "start": 1152064,
+      "end": 1152313,
+      "id": 32,
+      "cpuUs": 17
+    },
+    {
+      "phase": 2,
+      "lane": "hold",
+      "start": 1152317,
+      "end": 1152915,
+      "id": 32,
+      "cpuUs": 590
+    },
+    {
+      "phase": 3,
+      "lane": "hold",
+      "start": 1152921,
+      "end": 1153974,
+      "id": 32,
+      "cpuUs": 19
+    },
+    {
+      "phase": 5,
+      "lane": "hold",
+      "start": 1158671,
+      "end": 1158921,
+      "id": 34,
+      "cpuUs": 250
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1158953,
+      "end": 1168998,
+      "id": 34,
+      "cpuUs": 13
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1169051,
+      "end": 1172826,
+      "id": 34,
+      "cpuUs": 108
+    },
+    {
+      "phase": 1,
+      "lane": "hold",
+      "start": 1185503,
+      "end": 1185750,
+      "id": 34,
+      "cpuUs": 18
+    },
+    {
+      "phase": 2,
+      "lane": "hold",
+      "start": 1185753,
+      "end": 1186338,
+      "id": 34,
+      "cpuUs": 585
+    },
+    {
+      "phase": 3,
+      "lane": "hold",
+      "start": 1186344,
+      "end": 1187516,
+      "id": 34,
+      "cpuUs": 19
+    },
+    {
+      "phase": 5,
+      "lane": "hold",
+      "start": 1197049,
+      "end": 1197348,
+      "id": 36,
+      "cpuUs": 299
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1199019,
+      "end": 1211007,
+      "id": 36,
+      "cpuUs": 14
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1211051,
+      "end": 1211255,
+      "id": 36,
+      "cpuUs": 137
+    },
+    {
+      "phase": 1,
+      "lane": "hold",
+      "start": 1218896,
+      "end": 1219150,
+      "id": 36,
+      "cpuUs": 19
+    },
+    {
+      "phase": 2,
+      "lane": "hold",
+      "start": 1219154,
+      "end": 1219775,
+      "id": 36,
+      "cpuUs": 590
+    },
+    {
+      "phase": 3,
+      "lane": "hold",
+      "start": 1219782,
+      "end": 1220844,
+      "id": 36,
+      "cpuUs": 20
+    },
+    {
+      "phase": 5,
+      "lane": "hold",
+      "start": 1225471,
+      "end": 1225714,
+      "id": 38,
+      "cpuUs": 243
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1225743,
+      "end": 1235993,
+      "id": 38,
+      "cpuUs": 17
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1236019,
+      "end": 1239762,
+      "id": 38,
+      "cpuUs": 215
+    },
+    {
+      "phase": 1,
+      "lane": "hold",
+      "start": 1252349,
+      "end": 1252595,
+      "id": 38,
+      "cpuUs": 15
+    },
+    {
+      "phase": 2,
+      "lane": "hold",
+      "start": 1252598,
+      "end": 1253191,
+      "id": 38,
+      "cpuUs": 593
+    },
+    {
+      "phase": 3,
+      "lane": "hold",
+      "start": 1253198,
+      "end": 1254650,
+      "id": 38,
+      "cpuUs": 19
+    },
+    {
+      "phase": 5,
+      "lane": "hold",
+      "start": 1262493,
+      "end": 1262771,
+      "id": 40,
+      "cpuUs": 278
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1264038,
+      "end": 1276028,
+      "id": 40,
+      "cpuUs": 20
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1276062,
+      "end": 1276681,
+      "id": 40,
+      "cpuUs": 167
+    },
+    {
+      "phase": 1,
+      "lane": "hold",
+      "start": 1285771,
+      "end": 1286029,
+      "id": 40,
+      "cpuUs": 18
+    },
+    {
+      "phase": 2,
+      "lane": "hold",
+      "start": 1286033,
+      "end": 1286587,
+      "id": 40,
+      "cpuUs": 554
+    },
+    {
+      "phase": 3,
+      "lane": "hold",
+      "start": 1286593,
+      "end": 1287696,
+      "id": 40,
+      "cpuUs": 24
+    },
+    {
+      "phase": 5,
+      "lane": "hold",
+      "start": 1291838,
+      "end": 1292122,
+      "id": 42,
+      "cpuUs": 260
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1292143,
+      "end": 1302999,
+      "id": 42,
+      "cpuUs": 9
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1303024,
+      "end": 1306167,
+      "id": 42,
+      "cpuUs": 202
+    },
+    {
+      "phase": 1,
+      "lane": "hold",
+      "start": 1319084,
+      "end": 1319333,
+      "id": 42,
+      "cpuUs": 18
+    },
+    {
+      "phase": 2,
+      "lane": "hold",
+      "start": 1319337,
+      "end": 1319902,
+      "id": 42,
+      "cpuUs": 565
+    },
+    {
+      "phase": 3,
+      "lane": "hold",
+      "start": 1319908,
+      "end": 1321344,
+      "id": 42,
+      "cpuUs": 20
+    },
+    {
+      "phase": 5,
+      "lane": "hold",
+      "start": 1328775,
+      "end": 1329023,
+      "id": 44,
+      "cpuUs": 248
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1331069,
+      "end": 1342021,
+      "id": 44,
+      "cpuUs": 20
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1342084,
+      "end": 1343065,
+      "id": 44,
+      "cpuUs": 281
+    },
+    {
+      "phase": 1,
+      "lane": "hold",
+      "start": 1352265,
+      "end": 1352512,
+      "id": 44,
+      "cpuUs": 15
+    },
+    {
+      "phase": 2,
+      "lane": "hold",
+      "start": 1352515,
+      "end": 1353111,
+      "id": 44,
+      "cpuUs": 589
+    },
+    {
+      "phase": 3,
+      "lane": "hold",
+      "start": 1353116,
+      "end": 1354218,
+      "id": 44,
+      "cpuUs": 25
+    },
+    {
+      "phase": 5,
+      "lane": "hold",
+      "start": 1358481,
+      "end": 1358751,
+      "id": 46,
+      "cpuUs": 270
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1358771,
+      "end": 1369006,
+      "id": 46,
+      "cpuUs": 13
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1369043,
+      "end": 1372804,
+      "id": 46,
+      "cpuUs": 230
+    },
+    {
+      "phase": 1,
+      "lane": "hold",
+      "start": 1385628,
+      "end": 1385881,
+      "id": 46,
+      "cpuUs": 16
+    },
+    {
+      "phase": 2,
+      "lane": "hold",
+      "start": 1385884,
+      "end": 1386491,
+      "id": 46,
+      "cpuUs": 600
+    },
+    {
+      "phase": 3,
+      "lane": "hold",
+      "start": 1386498,
+      "end": 1388362,
+      "id": 46,
+      "cpuUs": 22
+    },
+    {
+      "phase": 5,
+      "lane": "hold",
+      "start": 1397076,
+      "end": 1397333,
+      "id": 48,
+      "cpuUs": 257
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1399162,
+      "end": 1410036,
+      "id": 48,
+      "cpuUs": 11
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1410101,
+      "end": 1411503,
+      "id": 48,
+      "cpuUs": 342
+    },
+    {
+      "phase": 1,
+      "lane": "hold",
+      "start": 1419019,
+      "end": 1419269,
+      "id": 48,
+      "cpuUs": 16
+    },
+    {
+      "phase": 2,
+      "lane": "hold",
+      "start": 1419286,
+      "end": 1419869,
+      "id": 48,
+      "cpuUs": 583
+    },
+    {
+      "phase": 3,
+      "lane": "hold",
+      "start": 1419875,
+      "end": 1420932,
+      "id": 48,
+      "cpuUs": 21
+    },
+    {
+      "phase": 5,
+      "lane": "hold",
+      "start": 1425674,
+      "end": 1425914,
+      "id": 50,
+      "cpuUs": 240
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1425945,
+      "end": 1436010,
+      "id": 50,
+      "cpuUs": 16
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1436047,
+      "end": 1439853,
+      "id": 50,
+      "cpuUs": 122
+    },
+    {
+      "phase": 1,
+      "lane": "hold",
+      "start": 1452457,
+      "end": 1452702,
+      "id": 50,
+      "cpuUs": 15
+    },
+    {
+      "phase": 2,
+      "lane": "hold",
+      "start": 1452706,
+      "end": 1453298,
+      "id": 50,
+      "cpuUs": 592
+    },
+    {
+      "phase": 3,
+      "lane": "hold",
+      "start": 1453303,
+      "end": 1454528,
+      "id": 50,
+      "cpuUs": 19
+    },
+    {
+      "phase": 5,
+      "lane": "hold",
+      "start": 1462563,
+      "end": 1462834,
+      "id": 52,
+      "cpuUs": 271
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1464045,
+      "end": 1476030,
+      "id": 52,
+      "cpuUs": 17
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1476061,
+      "end": 1476770,
+      "id": 52,
+      "cpuUs": 175
+    },
+    {
+      "phase": 1,
+      "lane": "hold",
+      "start": 1485744,
+      "end": 1485996,
+      "id": 52,
+      "cpuUs": 17
+    },
+    {
+      "phase": 2,
+      "lane": "hold",
+      "start": 1485999,
+      "end": 1486581,
+      "id": 52,
+      "cpuUs": 575
+    },
+    {
+      "phase": 3,
+      "lane": "hold",
+      "start": 1486587,
+      "end": 1487644,
+      "id": 52,
+      "cpuUs": 19
+    },
+    {
+      "phase": 5,
+      "lane": "hold",
+      "start": 1491848,
+      "end": 1492134,
+      "id": 54,
+      "cpuUs": 286
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1492150,
+      "end": 1503016,
+      "id": 54,
+      "cpuUs": 15
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1503040,
+      "end": 1506195,
+      "id": 54,
+      "cpuUs": 217
+    },
+    {
+      "phase": 1,
+      "lane": "hold",
+      "start": 1519239,
+      "end": 1519487,
+      "id": 54,
+      "cpuUs": 16
+    },
+    {
+      "phase": 2,
+      "lane": "hold",
+      "start": 1519490,
+      "end": 1520054,
+      "id": 54,
+      "cpuUs": 564
+    },
+    {
+      "phase": 3,
+      "lane": "hold",
+      "start": 1520060,
+      "end": 1521205,
+      "id": 54,
+      "cpuUs": 22
+    },
+    {
+      "phase": 5,
+      "lane": "hold",
+      "start": 1529067,
+      "end": 1529317,
+      "id": 56,
+      "cpuUs": 250
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1531047,
+      "end": 1543052,
+      "id": 56,
+      "cpuUs": 41
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1543095,
+      "end": 1543229,
+      "id": 56,
+      "cpuUs": 134
+    },
+    {
+      "phase": 1,
+      "lane": "hold",
+      "start": 1552486,
+      "end": 1552732,
+      "id": 56,
+      "cpuUs": 15
+    },
+    {
+      "phase": 2,
+      "lane": "hold",
+      "start": 1552735,
+      "end": 1553327,
+      "id": 56,
+      "cpuUs": 585
+    },
+    {
+      "phase": 3,
+      "lane": "hold",
+      "start": 1553334,
+      "end": 1554430,
+      "id": 56,
+      "cpuUs": 22
+    },
+    {
+      "phase": 5,
+      "lane": "hold",
+      "start": 1558508,
+      "end": 1558776,
+      "id": 58,
+      "cpuUs": 268
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1558794,
+      "end": 1569029,
+      "id": 58,
+      "cpuUs": 14
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1569057,
+      "end": 1572755,
+      "id": 58,
+      "cpuUs": 130
+    },
+    {
+      "phase": 1,
+      "lane": "hold",
+      "start": 1585887,
+      "end": 1586139,
+      "id": 58,
+      "cpuUs": 18
+    },
+    {
+      "phase": 2,
+      "lane": "hold",
+      "start": 1586143,
+      "end": 1586696,
+      "id": 58,
+      "cpuUs": 553
+    },
+    {
+      "phase": 3,
+      "lane": "hold",
+      "start": 1586704,
+      "end": 1587884,
+      "id": 58,
+      "cpuUs": 21
+    },
+    {
+      "phase": 5,
+      "lane": "hold",
+      "start": 1597070,
+      "end": 1597333,
+      "id": 60,
+      "cpuUs": 263
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1599044,
+      "end": 1610043,
+      "id": 60,
+      "cpuUs": 22
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1610106,
+      "end": 1611350,
+      "id": 60,
+      "cpuUs": 252
+    },
+    {
+      "phase": 1,
+      "lane": "hold",
+      "start": 1619188,
+      "end": 1619437,
+      "id": 60,
+      "cpuUs": 17
+    },
+    {
+      "phase": 2,
+      "lane": "hold",
+      "start": 1619441,
+      "end": 1620049,
+      "id": 60,
+      "cpuUs": 601
+    },
+    {
+      "phase": 3,
+      "lane": "hold",
+      "start": 1620056,
+      "end": 1621109,
+      "id": 60,
+      "cpuUs": 20
+    },
+    {
+      "phase": 5,
+      "lane": "hold",
+      "start": 1625793,
+      "end": 1626034,
+      "id": 62,
+      "cpuUs": 241
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1626079,
+      "end": 1637421,
+      "id": 62,
+      "cpuUs": 12
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1637445,
+      "end": 1639942,
+      "id": 62,
+      "cpuUs": 110
+    },
+    {
+      "phase": 1,
+      "lane": "hold",
+      "start": 1652641,
+      "end": 1652889,
+      "id": 62,
+      "cpuUs": 20
+    },
+    {
+      "phase": 2,
+      "lane": "hold",
+      "start": 1652893,
+      "end": 1653496,
+      "id": 62,
+      "cpuUs": 580
+    },
+    {
+      "phase": 3,
+      "lane": "hold",
+      "start": 1653502,
+      "end": 1655461,
+      "id": 62,
+      "cpuUs": 19
+    },
+    {
+      "phase": 5,
+      "lane": "hold",
+      "start": 1666083,
+      "end": 1666311,
+      "id": 64,
+      "cpuUs": 228
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1668059,
+      "end": 1679036,
+      "id": 64,
+      "cpuUs": 16
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1679068,
+      "end": 1680514,
+      "id": 64,
+      "cpuUs": 207
+    },
+    {
+      "phase": 1,
+      "lane": "hold",
+      "start": 1685929,
+      "end": 1686174,
+      "id": 64,
+      "cpuUs": 15
+    },
+    {
+      "phase": 2,
+      "lane": "hold",
+      "start": 1686178,
+      "end": 1686775,
+      "id": 64,
+      "cpuUs": 590
+    },
+    {
+      "phase": 3,
+      "lane": "hold",
+      "start": 1686781,
+      "end": 1687837,
+      "id": 64,
+      "cpuUs": 22
+    },
+    {
+      "phase": 5,
+      "lane": "hold",
+      "start": 1694849,
+      "end": 1695124,
+      "id": 66,
+      "cpuUs": 275
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1695139,
+      "end": 1706057,
+      "id": 66,
+      "cpuUs": 25
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1706089,
+      "end": 1709101,
+      "id": 66,
+      "cpuUs": 174
+    },
+    {
+      "phase": 1,
+      "lane": "hold",
+      "start": 1719445,
+      "end": 1719694,
+      "id": 66,
+      "cpuUs": 23
+    },
+    {
+      "phase": 2,
+      "lane": "hold",
+      "start": 1719696,
+      "end": 1720320,
+      "id": 66,
+      "cpuUs": 591
+    },
+    {
+      "phase": 3,
+      "lane": "hold",
+      "start": 1720327,
+      "end": 1721392,
+      "id": 66,
+      "cpuUs": 19
+    },
+    {
+      "phase": 5,
+      "lane": "hold",
+      "start": 1723363,
+      "end": 1723610,
+      "id": 68,
+      "cpuUs": 247
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1723628,
+      "end": 1734042,
+      "id": 68,
+      "cpuUs": 17
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1734074,
+      "end": 1737882,
+      "id": 68,
+      "cpuUs": 104
+    },
+    {
+      "phase": 1,
+      "lane": "hold",
+      "start": 1738804,
+      "end": 1748379,
+      "id": 68,
+      "cpuUs": 33
+    },
+    {
+      "phase": 2,
+      "lane": "hold",
+      "start": 1748385,
+      "end": 1749875,
+      "id": 68,
+      "cpuUs": 1389
+    },
+    {
+      "phase": 3,
+      "lane": "hold",
+      "start": 1749880,
+      "end": 1749889,
+      "id": 68,
+      "cpuUs": 9
+    },
+    {
+      "phase": 5,
+      "lane": "hold",
+      "start": 1752074,
+      "end": 1752303,
+      "id": 69,
+      "cpuUs": 229
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1754227,
+      "end": 1767047,
+      "id": 69,
+      "cpuUs": 15
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1767079,
+      "end": 1767989,
+      "id": 69,
+      "cpuUs": 152
+    },
+    {
+      "phase": 1,
+      "lane": "hold",
+      "start": 1781454,
+      "end": 1781841,
+      "id": 69,
+      "cpuUs": 39
+    },
+    {
+      "phase": 2,
+      "lane": "hold",
+      "start": 1781846,
+      "end": 1783480,
+      "id": 69,
+      "cpuUs": 989
+    },
+    {
+      "phase": 3,
+      "lane": "hold",
+      "start": 1783487,
+      "end": 1783497,
+      "id": 69,
+      "cpuUs": 10
+    },
+    {
+      "phase": 5,
+      "lane": "hold",
+      "start": 1786066,
+      "end": 1786311,
+      "id": 71,
+      "cpuUs": 230
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1788098,
+      "end": 1800207,
+      "id": 71,
+      "cpuUs": 11
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1800233,
+      "end": 1800811,
+      "id": 71,
+      "cpuUs": 208
+    },
+    {
+      "phase": 1,
+      "lane": "hold",
+      "start": 1802936,
+      "end": 1803183,
+      "id": 71,
+      "cpuUs": 18
+    },
+    {
+      "phase": 2,
+      "lane": "hold",
+      "start": 1803186,
+      "end": 1803753,
+      "id": 71,
+      "cpuUs": 567
+    },
+    {
+      "phase": 3,
+      "lane": "hold",
+      "start": 1803759,
+      "end": 1803767,
+      "id": 71,
+      "cpuUs": 8
+    },
+    {
+      "phase": 5,
+      "lane": "hold",
+      "start": 1815495,
+      "end": 1815741,
+      "id": 73,
+      "cpuUs": 246
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1815776,
+      "end": 1826079,
+      "id": 73,
+      "cpuUs": 37
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1826120,
+      "end": 1829826,
+      "id": 73,
+      "cpuUs": 184
+    },
+    {
+      "phase": 1,
+      "lane": "hold",
+      "start": 1836137,
+      "end": 1836383,
+      "id": 73,
+      "cpuUs": 18
+    },
+    {
+      "phase": 2,
+      "lane": "hold",
+      "start": 1836386,
+      "end": 1836974,
+      "id": 73,
+      "cpuUs": 588
+    },
+    {
+      "phase": 3,
+      "lane": "hold",
+      "start": 1836981,
+      "end": 1836991,
+      "id": 73,
+      "cpuUs": 10
+    },
+    {
+      "phase": 5,
+      "lane": "hold",
+      "start": 1844086,
+      "end": 1844324,
+      "id": 75,
+      "cpuUs": 238
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1844354,
+      "end": 1855137,
+      "id": 75,
+      "cpuUs": 17
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1855163,
+      "end": 1858974,
+      "id": 75,
+      "cpuUs": 140
+    },
+    {
+      "phase": 1,
+      "lane": "hold",
+      "start": 1869528,
+      "end": 1869774,
+      "id": 75,
+      "cpuUs": 17
+    },
+    {
+      "phase": 2,
+      "lane": "hold",
+      "start": 1869777,
+      "end": 1870431,
+      "id": 75,
+      "cpuUs": 604
+    },
+    {
+      "phase": 3,
+      "lane": "hold",
+      "start": 1870439,
+      "end": 1870449,
+      "id": 75,
+      "cpuUs": 10
+    },
+    {
+      "phase": 5,
+      "lane": "hold",
+      "start": 1873428,
+      "end": 1873662,
+      "id": 77,
+      "cpuUs": 234
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1873682,
+      "end": 1884050,
+      "id": 77,
+      "cpuUs": 15
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1884075,
+      "end": 1887865,
+      "id": 77,
+      "cpuUs": 111
+    },
+    {
+      "phase": 1,
+      "lane": "hold",
+      "start": 1903140,
+      "end": 1903380,
+      "id": 77,
+      "cpuUs": 15
+    },
+    {
+      "phase": 2,
+      "lane": "hold",
+      "start": 1903383,
+      "end": 1903863,
+      "id": 77,
+      "cpuUs": 480
+    },
+    {
+      "phase": 3,
+      "lane": "hold",
+      "start": 1903868,
+      "end": 1903875,
+      "id": 77,
+      "cpuUs": 7
+    },
+    {
+      "phase": 5,
+      "lane": "hold",
+      "start": 1912109,
+      "end": 1912440,
+      "id": 79,
+      "cpuUs": 281
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1914108,
+      "end": 1925925,
+      "id": 79,
+      "cpuUs": 15
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1925996,
+      "end": 1926267,
+      "id": 79,
+      "cpuUs": 126
+    },
+    {
+      "phase": 1,
+      "lane": "hold",
+      "start": 1936225,
+      "end": 1936472,
+      "id": 79,
+      "cpuUs": 16
+    },
+    {
+      "phase": 2,
+      "lane": "hold",
+      "start": 1936475,
+      "end": 1937100,
+      "id": 79,
+      "cpuUs": 588
+    },
+    {
+      "phase": 3,
+      "lane": "hold",
+      "start": 1937106,
+      "end": 1937114,
+      "id": 79,
+      "cpuUs": 8
+    },
+    {
+      "phase": 5,
+      "lane": "hold",
+      "start": 1940612,
+      "end": 1940866,
+      "id": 81,
+      "cpuUs": 254
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1940888,
+      "end": 1952053,
+      "id": 81,
+      "cpuUs": 14
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1952083,
+      "end": 1954941,
+      "id": 81,
+      "cpuUs": 99
+    },
+    {
+      "phase": 1,
+      "lane": "hold",
+      "start": 1969733,
+      "end": 1969972,
+      "id": 81,
+      "cpuUs": 14
+    },
+    {
+      "phase": 2,
+      "lane": "hold",
+      "start": 1969976,
+      "end": 1970473,
+      "id": 81,
+      "cpuUs": 497
+    },
+    {
+      "phase": 3,
+      "lane": "hold",
+      "start": 1970478,
+      "end": 1970485,
+      "id": 81,
+      "cpuUs": 7
+    },
+    {
+      "phase": 5,
+      "lane": "hold",
+      "start": 1979153,
+      "end": 1979398,
+      "id": 83,
+      "cpuUs": 245
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 1981075,
+      "end": 1994527,
+      "id": 83,
+      "cpuUs": 209
+    },
+    {
+      "phase": 1,
+      "lane": "hold",
+      "start": 2018901,
+      "end": 2019192,
+      "id": 83,
+      "cpuUs": 60
+    },
+    {
+      "phase": 2,
+      "lane": "hold",
+      "start": 2019197,
+      "end": 2019818,
+      "id": 83,
+      "cpuUs": 610
+    },
+    {
+      "phase": 3,
+      "lane": "hold",
+      "start": 2019825,
+      "end": 2019834,
+      "id": 83,
+      "cpuUs": 9
+    },
+    {
+      "phase": 5,
+      "lane": "hold",
+      "start": 2022094,
+      "end": 2022360,
+      "id": 85,
+      "cpuUs": 266
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 2024136,
+      "end": 2037063,
+      "id": 85,
+      "cpuUs": 19
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 2037086,
+      "end": 2037902,
+      "id": 85,
+      "cpuUs": 90
+    },
+    {
+      "phase": 1,
+      "lane": "hold",
+      "start": 2039294,
+      "end": 2039586,
+      "id": 85,
+      "cpuUs": 33
+    },
+    {
+      "phase": 2,
+      "lane": "hold",
+      "start": 2039592,
+      "end": 2040579,
+      "id": 85,
+      "cpuUs": 987
+    },
+    {
+      "phase": 3,
+      "lane": "hold",
+      "start": 2040595,
+      "end": 2040604,
+      "id": 85,
+      "cpuUs": 9
+    },
+    {
+      "phase": 5,
+      "lane": "hold",
+      "start": 2041103,
+      "end": 2042454,
+      "id": 86,
+      "cpuUs": 1314
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 2044095,
+      "end": 2055067,
+      "id": 86,
+      "cpuUs": 20
+    },
+    {
+      "phase": 4,
+      "lane": "hold",
+      "start": 2055134,
+      "end": 2056853,
+      "id": 86,
+      "cpuUs": 126
+    },
+    {
+      "phase": 1,
+      "lane": "hold",
+      "start": 2083610,
+      "end": 2083883,
+      "id": 86,
+      "cpuUs": 29
+    },
+    {
+      "phase": 2,
+      "lane": "hold",
+      "start": 2083887,
+      "end": 2084797,
+      "id": 86,
+      "cpuUs": 786
+    },
+    {
+      "phase": 3,
+      "lane": "hold",
+      "start": 2084928,
+      "end": 2084936,
+      "id": 86,
+      "cpuUs": 8
+    },
+    {
+      "phase": 5,
+      "lane": "hold",
+      "start": 2087090,
+      "end": 2087334,
+      "id": 89,
+      "cpuUs": 244
+    },
+    {
+      "phase": 1,
+      "lane": "hold_b",
+      "start": 1102135,
+      "end": 1102382,
+      "id": 29,
+      "cpuUs": 17
+    },
+    {
+      "phase": 2,
+      "lane": "hold_b",
+      "start": 1102385,
+      "end": 1102968,
+      "id": 29,
+      "cpuUs": 583
+    },
+    {
+      "phase": 3,
+      "lane": "hold_b",
+      "start": 1102974,
+      "end": 1104068,
+      "id": 29,
+      "cpuUs": 24
+    },
+    {
+      "phase": 5,
+      "lane": "hold_b",
+      "start": 1106160,
+      "end": 1106396,
+      "id": 31,
+      "cpuUs": 236
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1106419,
+      "end": 1116985,
+      "id": 31,
+      "cpuUs": 15
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1117014,
+      "end": 1120782,
+      "id": 31,
+      "cpuUs": 151
+    },
+    {
+      "phase": 1,
+      "lane": "hold_b",
+      "start": 1121643,
+      "end": 1127410,
+      "id": 31,
+      "cpuUs": 31
+    },
+    {
+      "phase": 2,
+      "lane": "hold_b",
+      "start": 1127414,
+      "end": 1128478,
+      "id": 31,
+      "cpuUs": 974
+    },
+    {
+      "phase": 3,
+      "lane": "hold_b",
+      "start": 1128486,
+      "end": 1128498,
+      "id": 31,
+      "cpuUs": 12
+    },
+    {
+      "phase": 5,
+      "lane": "hold_b",
+      "start": 1144392,
+      "end": 1144633,
+      "id": 33,
+      "cpuUs": 241
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1144672,
+      "end": 1154993,
+      "id": 33,
+      "cpuUs": 14
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1155029,
+      "end": 1158644,
+      "id": 33,
+      "cpuUs": 287
+    },
+    {
+      "phase": 1,
+      "lane": "hold_b",
+      "start": 1168797,
+      "end": 1169060,
+      "id": 33,
+      "cpuUs": 18
+    },
+    {
+      "phase": 2,
+      "lane": "hold_b",
+      "start": 1169063,
+      "end": 1169651,
+      "id": 33,
+      "cpuUs": 588
+    },
+    {
+      "phase": 3,
+      "lane": "hold_b",
+      "start": 1169657,
+      "end": 1170731,
+      "id": 33,
+      "cpuUs": 19
+    },
+    {
+      "phase": 5,
+      "lane": "hold_b",
+      "start": 1172855,
+      "end": 1173098,
+      "id": 35,
+      "cpuUs": 243
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1173116,
+      "end": 1184053,
+      "id": 35,
+      "cpuUs": 15
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1184083,
+      "end": 1187205,
+      "id": 35,
+      "cpuUs": 98
+    },
+    {
+      "phase": 1,
+      "lane": "hold_b",
+      "start": 1187546,
+      "end": 1193913,
+      "id": 35,
+      "cpuUs": 48
+    },
+    {
+      "phase": 2,
+      "lane": "hold_b",
+      "start": 1193919,
+      "end": 1194837,
+      "id": 35,
+      "cpuUs": 918
+    },
+    {
+      "phase": 3,
+      "lane": "hold_b",
+      "start": 1194844,
+      "end": 1194856,
+      "id": 35,
+      "cpuUs": 12
+    },
+    {
+      "phase": 5,
+      "lane": "hold_b",
+      "start": 1211297,
+      "end": 1211530,
+      "id": 37,
+      "cpuUs": 233
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1211552,
+      "end": 1222015,
+      "id": 37,
+      "cpuUs": 17
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1222050,
+      "end": 1225424,
+      "id": 37,
+      "cpuUs": 144
+    },
+    {
+      "phase": 1,
+      "lane": "hold_b",
+      "start": 1235628,
+      "end": 1235878,
+      "id": 37,
+      "cpuUs": 17
+    },
+    {
+      "phase": 2,
+      "lane": "hold_b",
+      "start": 1235882,
+      "end": 1236492,
+      "id": 37,
+      "cpuUs": 574
+    },
+    {
+      "phase": 3,
+      "lane": "hold_b",
+      "start": 1236498,
+      "end": 1237601,
+      "id": 37,
+      "cpuUs": 21
+    },
+    {
+      "phase": 5,
+      "lane": "hold_b",
+      "start": 1239791,
+      "end": 1240030,
+      "id": 39,
+      "cpuUs": 239
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1240055,
+      "end": 1251002,
+      "id": 39,
+      "cpuUs": 17
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1251039,
+      "end": 1254167,
+      "id": 39,
+      "cpuUs": 108
+    },
+    {
+      "phase": 1,
+      "lane": "hold_b",
+      "start": 1254685,
+      "end": 1260488,
+      "id": 39,
+      "cpuUs": 23
+    },
+    {
+      "phase": 2,
+      "lane": "hold_b",
+      "start": 1260494,
+      "end": 1261416,
+      "id": 39,
+      "cpuUs": 922
+    },
+    {
+      "phase": 3,
+      "lane": "hold_b",
+      "start": 1261430,
+      "end": 1261452,
+      "id": 39,
+      "cpuUs": 22
+    },
+    {
+      "phase": 5,
+      "lane": "hold_b",
+      "start": 1276726,
+      "end": 1276960,
+      "id": 41,
+      "cpuUs": 234
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1276977,
+      "end": 1287265,
+      "id": 41,
+      "cpuUs": 14
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1287288,
+      "end": 1291809,
+      "id": 41,
+      "cpuUs": 288
+    },
+    {
+      "phase": 1,
+      "lane": "hold_b",
+      "start": 1302455,
+      "end": 1302710,
+      "id": 41,
+      "cpuUs": 18
+    },
+    {
+      "phase": 2,
+      "lane": "hold_b",
+      "start": 1302714,
+      "end": 1303321,
+      "id": 41,
+      "cpuUs": 572
+    },
+    {
+      "phase": 3,
+      "lane": "hold_b",
+      "start": 1303327,
+      "end": 1304947,
+      "id": 41,
+      "cpuUs": 24
+    },
+    {
+      "phase": 5,
+      "lane": "hold_b",
+      "start": 1306186,
+      "end": 1306425,
+      "id": 43,
+      "cpuUs": 239
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1306442,
+      "end": 1317003,
+      "id": 43,
+      "cpuUs": 18
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1317026,
+      "end": 1320668,
+      "id": 43,
+      "cpuUs": 104
+    },
+    {
+      "phase": 1,
+      "lane": "hold_b",
+      "start": 1321381,
+      "end": 1326865,
+      "id": 43,
+      "cpuUs": 25
+    },
+    {
+      "phase": 2,
+      "lane": "hold_b",
+      "start": 1326874,
+      "end": 1327736,
+      "id": 43,
+      "cpuUs": 862
+    },
+    {
+      "phase": 3,
+      "lane": "hold_b",
+      "start": 1327746,
+      "end": 1327761,
+      "id": 43,
+      "cpuUs": 15
+    },
+    {
+      "phase": 5,
+      "lane": "hold_b",
+      "start": 1343091,
+      "end": 1343361,
+      "id": 45,
+      "cpuUs": 270
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1343382,
+      "end": 1354013,
+      "id": 45,
+      "cpuUs": 12
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1354038,
+      "end": 1358462,
+      "id": 45,
+      "cpuUs": 310
+    },
+    {
+      "phase": 1,
+      "lane": "hold_b",
+      "start": 1369201,
+      "end": 1369449,
+      "id": 45,
+      "cpuUs": 17
+    },
+    {
+      "phase": 2,
+      "lane": "hold_b",
+      "start": 1369452,
+      "end": 1370029,
+      "id": 45,
+      "cpuUs": 577
+    },
+    {
+      "phase": 3,
+      "lane": "hold_b",
+      "start": 1370036,
+      "end": 1371115,
+      "id": 45,
+      "cpuUs": 24
+    },
+    {
+      "phase": 5,
+      "lane": "hold_b",
+      "start": 1372823,
+      "end": 1373061,
+      "id": 47,
+      "cpuUs": 238
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1373082,
+      "end": 1384024,
+      "id": 47,
+      "cpuUs": 16
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1384052,
+      "end": 1387571,
+      "id": 47,
+      "cpuUs": 81
+    },
+    {
+      "phase": 1,
+      "lane": "hold_b",
+      "start": 1388419,
+      "end": 1395057,
+      "id": 47,
+      "cpuUs": 49
+    },
+    {
+      "phase": 2,
+      "lane": "hold_b",
+      "start": 1395062,
+      "end": 1396068,
+      "id": 47,
+      "cpuUs": 946
+    },
+    {
+      "phase": 3,
+      "lane": "hold_b",
+      "start": 1396093,
+      "end": 1396114,
+      "id": 47,
+      "cpuUs": 21
+    },
+    {
+      "phase": 5,
+      "lane": "hold_b",
+      "start": 1411530,
+      "end": 1411786,
+      "id": 49,
+      "cpuUs": 256
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1411810,
+      "end": 1422028,
+      "id": 49,
+      "cpuUs": 16
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1422061,
+      "end": 1425626,
+      "id": 49,
+      "cpuUs": 127
+    },
+    {
+      "phase": 1,
+      "lane": "hold_b",
+      "start": 1435799,
+      "end": 1436055,
+      "id": 49,
+      "cpuUs": 18
+    },
+    {
+      "phase": 2,
+      "lane": "hold_b",
+      "start": 1436058,
+      "end": 1436629,
+      "id": 49,
+      "cpuUs": 571
+    },
+    {
+      "phase": 3,
+      "lane": "hold_b",
+      "start": 1436635,
+      "end": 1437689,
+      "id": 49,
+      "cpuUs": 21
+    },
+    {
+      "phase": 5,
+      "lane": "hold_b",
+      "start": 1439882,
+      "end": 1440152,
+      "id": 51,
+      "cpuUs": 242
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1440177,
+      "end": 1451025,
+      "id": 51,
+      "cpuUs": 14
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1451059,
+      "end": 1454302,
+      "id": 51,
+      "cpuUs": 107
+    },
+    {
+      "phase": 1,
+      "lane": "hold_b",
+      "start": 1454558,
+      "end": 1460616,
+      "id": 51,
+      "cpuUs": 71
+    },
+    {
+      "phase": 2,
+      "lane": "hold_b",
+      "start": 1460624,
+      "end": 1461563,
+      "id": 51,
+      "cpuUs": 908
+    },
+    {
+      "phase": 3,
+      "lane": "hold_b",
+      "start": 1461571,
+      "end": 1461582,
+      "id": 51,
+      "cpuUs": 11
+    },
+    {
+      "phase": 5,
+      "lane": "hold_b",
+      "start": 1476810,
+      "end": 1477059,
+      "id": 53,
+      "cpuUs": 249
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1477079,
+      "end": 1488114,
+      "id": 53,
+      "cpuUs": 18
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1488139,
+      "end": 1491824,
+      "id": 53,
+      "cpuUs": 142
+    },
+    {
+      "phase": 1,
+      "lane": "hold_b",
+      "start": 1502483,
+      "end": 1502732,
+      "id": 53,
+      "cpuUs": 18
+    },
+    {
+      "phase": 2,
+      "lane": "hold_b",
+      "start": 1502735,
+      "end": 1503364,
+      "id": 53,
+      "cpuUs": 594
+    },
+    {
+      "phase": 3,
+      "lane": "hold_b",
+      "start": 1503370,
+      "end": 1504450,
+      "id": 53,
+      "cpuUs": 20
+    },
+    {
+      "phase": 5,
+      "lane": "hold_b",
+      "start": 1506217,
+      "end": 1506453,
+      "id": 55,
+      "cpuUs": 236
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1506473,
+      "end": 1517020,
+      "id": 55,
+      "cpuUs": 13
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1517046,
+      "end": 1520784,
+      "id": 55,
+      "cpuUs": 91
+    },
+    {
+      "phase": 1,
+      "lane": "hold_b",
+      "start": 1521266,
+      "end": 1526895,
+      "id": 55,
+      "cpuUs": 22
+    },
+    {
+      "phase": 2,
+      "lane": "hold_b",
+      "start": 1526901,
+      "end": 1527817,
+      "id": 55,
+      "cpuUs": 859
+    },
+    {
+      "phase": 3,
+      "lane": "hold_b",
+      "start": 1527826,
+      "end": 1527839,
+      "id": 55,
+      "cpuUs": 13
+    },
+    {
+      "phase": 5,
+      "lane": "hold_b",
+      "start": 1543270,
+      "end": 1543500,
+      "id": 57,
+      "cpuUs": 230
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1543528,
+      "end": 1554103,
+      "id": 57,
+      "cpuUs": 11
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1554127,
+      "end": 1558489,
+      "id": 57,
+      "cpuUs": 1188
+    },
+    {
+      "phase": 1,
+      "lane": "hold_b",
+      "start": 1569399,
+      "end": 1569645,
+      "id": 57,
+      "cpuUs": 17
+    },
+    {
+      "phase": 2,
+      "lane": "hold_b",
+      "start": 1569648,
+      "end": 1570203,
+      "id": 57,
+      "cpuUs": 555
+    },
+    {
+      "phase": 3,
+      "lane": "hold_b",
+      "start": 1570209,
+      "end": 1571307,
+      "id": 57,
+      "cpuUs": 46
+    },
+    {
+      "phase": 5,
+      "lane": "hold_b",
+      "start": 1572779,
+      "end": 1573010,
+      "id": 59,
+      "cpuUs": 231
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1573041,
+      "end": 1585023,
+      "id": 59,
+      "cpuUs": 17
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1585050,
+      "end": 1587481,
+      "id": 59,
+      "cpuUs": 146
+    },
+    {
+      "phase": 1,
+      "lane": "hold_b",
+      "start": 1587914,
+      "end": 1594326,
+      "id": 59,
+      "cpuUs": 24
+    },
+    {
+      "phase": 2,
+      "lane": "hold_b",
+      "start": 1594330,
+      "end": 1595302,
+      "id": 59,
+      "cpuUs": 938
+    },
+    {
+      "phase": 3,
+      "lane": "hold_b",
+      "start": 1595312,
+      "end": 1595326,
+      "id": 59,
+      "cpuUs": 14
+    },
+    {
+      "phase": 5,
+      "lane": "hold_b",
+      "start": 1611397,
+      "end": 1611632,
+      "id": 61,
+      "cpuUs": 235
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1611656,
+      "end": 1622042,
+      "id": 61,
+      "cpuUs": 16
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1622080,
+      "end": 1625752,
+      "id": 61,
+      "cpuUs": 148
+    },
+    {
+      "phase": 1,
+      "lane": "hold_b",
+      "start": 1635937,
+      "end": 1636182,
+      "id": 61,
+      "cpuUs": 18
+    },
+    {
+      "phase": 2,
+      "lane": "hold_b",
+      "start": 1636186,
+      "end": 1636769,
+      "id": 61,
+      "cpuUs": 583
+    },
+    {
+      "phase": 3,
+      "lane": "hold_b",
+      "start": 1636776,
+      "end": 1637870,
+      "id": 61,
+      "cpuUs": 22
+    },
+    {
+      "phase": 5,
+      "lane": "hold_b",
+      "start": 1639967,
+      "end": 1640220,
+      "id": 63,
+      "cpuUs": 253
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1640236,
+      "end": 1651148,
+      "id": 63,
+      "cpuUs": 15
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1651178,
+      "end": 1654630,
+      "id": 63,
+      "cpuUs": 116
+    },
+    {
+      "phase": 1,
+      "lane": "hold_b",
+      "start": 1655511,
+      "end": 1663076,
+      "id": 63,
+      "cpuUs": 25
+    },
+    {
+      "phase": 2,
+      "lane": "hold_b",
+      "start": 1663082,
+      "end": 1663992,
+      "id": 63,
+      "cpuUs": 910
+    },
+    {
+      "phase": 3,
+      "lane": "hold_b",
+      "start": 1664011,
+      "end": 1664065,
+      "id": 63,
+      "cpuUs": 20
+    },
+    {
+      "phase": 5,
+      "lane": "hold_b",
+      "start": 1680543,
+      "end": 1680818,
+      "id": 65,
+      "cpuUs": 275
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1680841,
+      "end": 1692349,
+      "id": 65,
+      "cpuUs": 10
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1692425,
+      "end": 1694820,
+      "id": 65,
+      "cpuUs": 258
+    },
+    {
+      "phase": 1,
+      "lane": "hold_b",
+      "start": 1702711,
+      "end": 1702961,
+      "id": 65,
+      "cpuUs": 20
+    },
+    {
+      "phase": 2,
+      "lane": "hold_b",
+      "start": 1702965,
+      "end": 1703545,
+      "id": 65,
+      "cpuUs": 580
+    },
+    {
+      "phase": 3,
+      "lane": "hold_b",
+      "start": 1703551,
+      "end": 1704629,
+      "id": 65,
+      "cpuUs": 23
+    },
+    {
+      "phase": 5,
+      "lane": "hold_b",
+      "start": 1709127,
+      "end": 1709405,
+      "id": 67,
+      "cpuUs": 278
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1709425,
+      "end": 1720033,
+      "id": 67,
+      "cpuUs": 13
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1720056,
+      "end": 1723339,
+      "id": 67,
+      "cpuUs": 140
+    },
+    {
+      "phase": 1,
+      "lane": "hold_b",
+      "start": 1736038,
+      "end": 1736285,
+      "id": 67,
+      "cpuUs": 17
+    },
+    {
+      "phase": 2,
+      "lane": "hold_b",
+      "start": 1736288,
+      "end": 1736869,
+      "id": 67,
+      "cpuUs": 581
+    },
+    {
+      "phase": 3,
+      "lane": "hold_b",
+      "start": 1736876,
+      "end": 1738745,
+      "id": 67,
+      "cpuUs": 22
+    },
+    {
+      "phase": 5,
+      "lane": "hold_b",
+      "start": 1768025,
+      "end": 1768269,
+      "id": 70,
+      "cpuUs": 244
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1768288,
+      "end": 1779045,
+      "id": 70,
+      "cpuUs": 14
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1779089,
+      "end": 1782956,
+      "id": 70,
+      "cpuUs": 418
+    },
+    {
+      "phase": 1,
+      "lane": "hold_b",
+      "start": 1783541,
+      "end": 1783850,
+      "id": 70,
+      "cpuUs": 17
+    },
+    {
+      "phase": 2,
+      "lane": "hold_b",
+      "start": 1783853,
+      "end": 1784646,
+      "id": 70,
+      "cpuUs": 616
+    },
+    {
+      "phase": 3,
+      "lane": "hold_b",
+      "start": 1784651,
+      "end": 1784659,
+      "id": 70,
+      "cpuUs": 8
+    },
+    {
+      "phase": 5,
+      "lane": "hold_b",
+      "start": 1800829,
+      "end": 1801061,
+      "id": 72,
+      "cpuUs": 232
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1801082,
+      "end": 1813050,
+      "id": 72,
+      "cpuUs": 14
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1813119,
+      "end": 1815452,
+      "id": 72,
+      "cpuUs": 298
+    },
+    {
+      "phase": 1,
+      "lane": "hold_b",
+      "start": 1819253,
+      "end": 1819502,
+      "id": 72,
+      "cpuUs": 16
+    },
+    {
+      "phase": 2,
+      "lane": "hold_b",
+      "start": 1819505,
+      "end": 1820140,
+      "id": 72,
+      "cpuUs": 620
+    },
+    {
+      "phase": 3,
+      "lane": "hold_b",
+      "start": 1820145,
+      "end": 1820153,
+      "id": 72,
+      "cpuUs": 8
+    },
+    {
+      "phase": 5,
+      "lane": "hold_b",
+      "start": 1829881,
+      "end": 1830115,
+      "id": 74,
+      "cpuUs": 234
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1830139,
+      "end": 1842562,
+      "id": 74,
+      "cpuUs": 37
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1842601,
+      "end": 1844056,
+      "id": 74,
+      "cpuUs": 201
+    },
+    {
+      "phase": 1,
+      "lane": "hold_b",
+      "start": 1852769,
+      "end": 1853019,
+      "id": 74,
+      "cpuUs": 16
+    },
+    {
+      "phase": 2,
+      "lane": "hold_b",
+      "start": 1853022,
+      "end": 1853612,
+      "id": 74,
+      "cpuUs": 582
+    },
+    {
+      "phase": 3,
+      "lane": "hold_b",
+      "start": 1853618,
+      "end": 1853625,
+      "id": 74,
+      "cpuUs": 7
+    },
+    {
+      "phase": 5,
+      "lane": "hold_b",
+      "start": 1859003,
+      "end": 1859345,
+      "id": 76,
+      "cpuUs": 293
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1859364,
+      "end": 1870064,
+      "id": 76,
+      "cpuUs": 12
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1870089,
+      "end": 1873405,
+      "id": 76,
+      "cpuUs": 231
+    },
+    {
+      "phase": 1,
+      "lane": "hold_b",
+      "start": 1886227,
+      "end": 1886476,
+      "id": 76,
+      "cpuUs": 17
+    },
+    {
+      "phase": 2,
+      "lane": "hold_b",
+      "start": 1886479,
+      "end": 1887050,
+      "id": 76,
+      "cpuUs": 571
+    },
+    {
+      "phase": 3,
+      "lane": "hold_b",
+      "start": 1887056,
+      "end": 1887063,
+      "id": 76,
+      "cpuUs": 7
+    },
+    {
+      "phase": 5,
+      "lane": "hold_b",
+      "start": 1887881,
+      "end": 1888095,
+      "id": 78,
+      "cpuUs": 214
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1888108,
+      "end": 1900099,
+      "id": 78,
+      "cpuUs": 10
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1900297,
+      "end": 1902454,
+      "id": 78,
+      "cpuUs": 182
+    },
+    {
+      "phase": 1,
+      "lane": "hold_b",
+      "start": 1903907,
+      "end": 1910982,
+      "id": 78,
+      "cpuUs": 18
+    },
+    {
+      "phase": 2,
+      "lane": "hold_b",
+      "start": 1910989,
+      "end": 1911900,
+      "id": 78,
+      "cpuUs": 911
+    },
+    {
+      "phase": 3,
+      "lane": "hold_b",
+      "start": 1911907,
+      "end": 1911917,
+      "id": 78,
+      "cpuUs": 10
+    },
+    {
+      "phase": 5,
+      "lane": "hold_b",
+      "start": 1926297,
+      "end": 1926523,
+      "id": 80,
+      "cpuUs": 226
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1926549,
+      "end": 1937050,
+      "id": 80,
+      "cpuUs": 15
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1937078,
+      "end": 1940588,
+      "id": 80,
+      "cpuUs": 265
+    },
+    {
+      "phase": 1,
+      "lane": "hold_b",
+      "start": 1953017,
+      "end": 1953286,
+      "id": 80,
+      "cpuUs": 29
+    },
+    {
+      "phase": 2,
+      "lane": "hold_b",
+      "start": 1953290,
+      "end": 1953873,
+      "id": 80,
+      "cpuUs": 583
+    },
+    {
+      "phase": 3,
+      "lane": "hold_b",
+      "start": 1953879,
+      "end": 1953886,
+      "id": 80,
+      "cpuUs": 7
+    },
+    {
+      "phase": 5,
+      "lane": "hold_b",
+      "start": 1954956,
+      "end": 1955249,
+      "id": 82,
+      "cpuUs": 286
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1955264,
+      "end": 1967056,
+      "id": 82,
+      "cpuUs": 9
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1967084,
+      "end": 1969630,
+      "id": 82,
+      "cpuUs": 212
+    },
+    {
+      "phase": 1,
+      "lane": "hold_b",
+      "start": 1970515,
+      "end": 1976639,
+      "id": 82,
+      "cpuUs": 21
+    },
+    {
+      "phase": 2,
+      "lane": "hold_b",
+      "start": 1976643,
+      "end": 1977614,
+      "id": 82,
+      "cpuUs": 930
+    },
+    {
+      "phase": 3,
+      "lane": "hold_b",
+      "start": 1977627,
+      "end": 1977636,
+      "id": 82,
+      "cpuUs": 9
+    },
+    {
+      "phase": 5,
+      "lane": "hold_b",
+      "start": 1994562,
+      "end": 1994848,
+      "id": 84,
+      "cpuUs": 286
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 1994892,
+      "end": 2005084,
+      "id": 84,
+      "cpuUs": 25
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 2005168,
+      "end": 2010748,
+      "id": 84,
+      "cpuUs": 169
+    },
+    {
+      "phase": 1,
+      "lane": "hold_b",
+      "start": 2019890,
+      "end": 2020138,
+      "id": 84,
+      "cpuUs": 15
+    },
+    {
+      "phase": 2,
+      "lane": "hold_b",
+      "start": 2020141,
+      "end": 2020691,
+      "id": 84,
+      "cpuUs": 550
+    },
+    {
+      "phase": 3,
+      "lane": "hold_b",
+      "start": 2020698,
+      "end": 2020705,
+      "id": 84,
+      "cpuUs": 7
+    },
+    {
+      "phase": 5,
+      "lane": "hold_b",
+      "start": 2056897,
+      "end": 2057143,
+      "id": 87,
+      "cpuUs": 246
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 2057176,
+      "end": 2069116,
+      "id": 87,
+      "cpuUs": 19
+    },
+    {
+      "phase": 4,
+      "lane": "hold_b",
+      "start": 2069143,
+      "end": 2072359,
+      "id": 87,
+      "cpuUs": 136
+    },
+    {
+      "phase": 1,
+      "lane": "hold_b",
+      "start": 2084981,
+      "end": 2085257,
+      "id": 87,
+      "cpuUs": 25
+    },
+    {
+      "phase": 2,
+      "lane": "hold_b",
+      "start": 2085261,
+      "end": 2085945,
+      "id": 87,
+      "cpuUs": 684
+    },
+    {
+      "phase": 3,
+      "lane": "hold_b",
+      "start": 2085952,
+      "end": 2085959,
+      "id": 87,
+      "cpuUs": 7
+    }
+  ]
+}

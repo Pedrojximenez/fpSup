@@ -1,0 +1,59 @@
+{
+ "compressed": 103,
+ "refused": 0,
+ "held": 103,
+ "preopened": 103,
+ "preopen_failed": 0,
+ "engine_release": 0,
+ "enable_now": 0,
+ "tag_failed": 0,
+ "jobs": 103,
+ "submit_us": [
+  8.6,
+  3.1,
+  1.1,
+  7.9,
+  3.4
+ ],
+ "finish_us": [
+  20.2,
+  4.3,
+  43.6,
+  4.0,
+  19.8
+ ],
+ "hooks_cumulative": {
+  "rec": [
+   4,
+   15553
+  ],
+  "arrive": [
+   104,
+   58038
+  ],
+  "stop": [
+   24,
+   780
+  ],
+  "flush": [
+   104,
+   1493
+  ],
+  "observe": [
+   106,
+   505
+  ],
+  "written": [
+   104,
+   176
+  ],
+  "event": [
+   312,
+   495
+  ],
+  "discard": [
+   0,
+   0
+  ]
+ }
+}

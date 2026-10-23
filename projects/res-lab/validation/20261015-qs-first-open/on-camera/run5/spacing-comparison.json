@@ -1,0 +1,305 @@
+{
+  "latest_displayed_rate": "59.94",
+  "layout": "medium CINE LV",
+  "method": "min RGB > 200, half-open white-ink bounding boxes in original JPEG; blank columns between integer ink and decimal point",
+  "caveat": "Earlier custom picture is 29.97; latest custom and original stock 59.94 are the same-rate gap comparison. Full font/style equality is not implied.",
+  "stock_style_equality_claimed": false,
+  "measurements": {
+    "stock_5994": {
+      "image": "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/screenshots/1904-20261015-combined-before-fix.jpg",
+      "integer": [
+        [
+          37,
+          642,
+          53,
+          669
+        ],
+        [
+          60,
+          641,
+          76,
+          669
+        ]
+      ],
+      "decimal_point": [
+        82,
+        666,
+        85,
+        668
+      ],
+      "blank_columns": 6,
+      "all_white_runs": [
+        [
+          37,
+          642,
+          53,
+          669
+        ],
+        [
+          60,
+          641,
+          76,
+          669
+        ],
+        [
+          82,
+          666,
+          85,
+          668
+        ],
+        [
+          90,
+          650,
+          101,
+          669
+        ],
+        [
+          104,
+          651,
+          116,
+          668
+        ],
+        [
+          125,
+          650,
+          136,
+          668
+        ],
+        [
+          141,
+          650,
+          153,
+          668
+        ],
+        [
+          156,
+          650,
+          169,
+          668
+        ]
+      ]
+    },
+    "stock_2997": {
+      "image": "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261015-qs-first-open/on-camera/run4/stock-footer-first-QS/1935-20261015-stock-footer-QS-first-B.jpg",
+      "integer": [
+        [
+          38,
+          641,
+          53,
+          668
+        ],
+        [
+          60,
+          641,
+          76,
+          669
+        ]
+      ],
+      "decimal_point": [
+        83,
+        666,
+        85,
+        668
+      ],
+      "blank_columns": 7,
+      "all_white_runs": [
+        [
+          38,
+          641,
+          53,
+          668
+        ],
+        [
+          60,
+          641,
+          76,
+          669
+        ],
+        [
+          83,
+          666,
+          85,
+          668
+        ],
+        [
+          90,
+          650,
+          101,
+          669
+        ],
+        [
+          107,
+          651,
+          117,
+          668
+        ],
+        [
+          127,
+          650,
+          138,
+          668
+        ],
+        [
+          143,
+          650,
+          155,
+          668
+        ],
+        [
+          158,
+          650,
+          171,
+          668
+        ]
+      ]
+    },
+    "earlier_2997": {
+      "image": "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261015-qs-first-open/on-camera/run4/fix9-final-black-edge/1931-20261015-fps-final-latin-black-edge-B.jpg",
+      "integer": [
+        [
+          37,
+          643,
+          49,
+          668
+        ],
+        [
+          51,
+          643,
+          63,
+          668
+        ]
+      ],
+      "decimal_point": [
+        84,
+        667,
+        85,
+        669
+      ],
+      "blank_columns": 21,
+      "all_white_runs": [
+        [
+          37,
+          643,
+          49,
+          668
+        ],
+        [
+          51,
+          643,
+          63,
+          668
+        ],
+        [
+          84,
+          667,
+          85,
+          669
+        ],
+        [
+          87,
+          652,
+          95,
+          669
+        ],
+        [
+          97,
+          652,
+          105,
+          669
+        ],
+        [
+          124,
+          652,
+          132,
+          669
+        ],
+        [
+          134,
+          652,
+          144,
+          669
+        ],
+        [
+          146,
+          652,
+          156,
+          670
+        ]
+      ]
+    },
+    "after_5994": {
+      "image": "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261015-qs-first-open/on-camera/run5/post-refresh/1941-20261015-fps-spacing-after-QS-B.jpg",
+      "integer": [
+        [
+          36,
+          643,
+          48,
+          669
+        ],
+        [
+          50,
+          643,
+          62,
+          668
+        ]
+      ],
+      "decimal_point": [
+        69,
+        667,
+        70,
+        669
+      ],
+      "blank_columns": 7,
+      "all_white_runs": [
+        [
+          36,
+          643,
+          48,
+          669
+        ],
+        [
+          50,
+          643,
+          62,
+          668
+        ],
+        [
+          69,
+          667,
+          70,
+          669
+        ],
+        [
+          72,
+          652,
+          80,
+          669
+        ],
+        [
+          81,
+          652,
+          90,
+          669
+        ],
+        [
+          100,
+          652,
+          108,
+          669
+        ],
+        [
+          110,
+          652,
+          120,
+          669
+        ],
+        [
+          122,
+          652,
+          132,
+          670
+        ]
+      ]
+    }
+  }
+}

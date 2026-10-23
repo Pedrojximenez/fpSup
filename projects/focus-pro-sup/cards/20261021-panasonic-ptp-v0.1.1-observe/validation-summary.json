@@ -1,0 +1,22 @@
+{
+  "sup_version": "0.1.1-experimental",
+  "sup_sha256": "05e339660158be642eacb75c786c9056a74b76adfedf6b641eb6f1fe26189f53",
+  "tests_total": 60,
+  "arm_tests_including_mutations": 38,
+  "arm_mutation_cases": 8,
+  "host_tests": 16,
+  "new_sup_host_integration": 3,
+  "old_sup_compatibility_integration": 3,
+  "all_successful": true,
+  "skipped": 0,
+  "autorun_and_loader_identical_to_010": true,
+  "diagnostic_schema": 2,
+  "lidar_af_enabled": false,
+  "numeric_units_confirmed": false,
+  "previous_native_focus_regression_resolved": false,
+  "camera_operated": false,
+  "physical_card_written": false,
+  "source_program_validation": "dji_focus_pro/analysis/df101fh/numeric_ptp_validation_20261021.json",
+  "diagnostics_sha256": "8501e03bd8920861a2e4df01d517c769d2e71e877b7c1fa305eeaa601556dc32",
+  "simulation_note": "USB/session/lens/RTOS/cache/file external effects are stubbed; emulated snapshots are not captures."
+}

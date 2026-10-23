@@ -1,0 +1,419 @@
+{
+  "output": "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain",
+  "build_matrix": [
+    {
+      "directory": "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/og3k-standalone-release",
+      "entries": [
+        "0xC0731600"
+      ],
+      "sections": 88,
+      "bin_sha256": "849417162f62064359c50a95104fcc38fcceb94c1e76f5d7589b563df16a02a5",
+      "autorun_sha256": "6658b9674c9a77888139d8b07d3a949e082f7fcd5286d34b4698cd64b8dc19b1",
+      "name": "og3k-standalone-release",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/build_og3k_gyro.py",
+        "--out",
+        "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/og3k-standalone-release",
+        "--no-gyro",
+        "--release"
+      ],
+      "target": "og3k",
+      "fmt_guard": true
+    },
+    {
+      "directory": "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/og3k-standalone-debug",
+      "entries": [
+        "0x00000828",
+        "0xC0731600"
+      ],
+      "sections": 98,
+      "bin_sha256": "b5fbed986ace8ca7f8ed53e702b6199651e08aec8287720f4b4eb423b9b307f2",
+      "autorun_sha256": "6658b9674c9a77888139d8b07d3a949e082f7fcd5286d34b4698cd64b8dc19b1",
+      "name": "og3k-standalone-debug",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/build_og3k_gyro.py",
+        "--out",
+        "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/og3k-standalone-debug",
+        "--no-gyro"
+      ],
+      "target": "og3k",
+      "fmt_guard": true
+    },
+    {
+      "directory": "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/og3k-combined-release",
+      "entries": [
+        "0x00003FDC",
+        "0xC0731600"
+      ],
+      "sections": 96,
+      "bin_sha256": "2f57f68b13ef19098d68043a211076ac92cf5bcb853e11be1ef5f27f97f5dd71",
+      "autorun_sha256": "6658b9674c9a77888139d8b07d3a949e082f7fcd5286d34b4698cd64b8dc19b1",
+      "name": "og3k-combined-release",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/build_og3k_gyro.py",
+        "--out",
+        "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/og3k-combined-release",
+        "--reference",
+        "--four-box-bar",
+        "--release"
+      ],
+      "target": "og3k",
+      "fmt_guard": true
+    },
+    {
+      "directory": "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/og3k-guard-off-standalone",
+      "entries": [],
+      "sections": 84,
+      "bin_sha256": "0794974283cf514202d03fd0297304f4f7d6689dc44698ba2f28119990cb73cf",
+      "autorun_sha256": "6658b9674c9a77888139d8b07d3a949e082f7fcd5286d34b4698cd64b8dc19b1",
+      "name": "og3k-guard-off-standalone",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/build_og3k_gyro.py",
+        "--out",
+        "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/og3k-guard-off-standalone",
+        "--no-gyro",
+        "--release"
+      ],
+      "target": "og3k",
+      "fmt_guard": false
+    },
+    {
+      "directory": "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/og3k-combined-debug",
+      "entries": [
+        "0x00000830",
+        "0x00004F3C",
+        "0xC0731600"
+      ],
+      "sections": 99,
+      "bin_sha256": "f453ba308e068632a437bb2f396fa0d964fc3244bb154f5bf9cfc5690c5d0aa0",
+      "autorun_sha256": "6658b9674c9a77888139d8b07d3a949e082f7fcd5286d34b4698cd64b8dc19b1",
+      "name": "og3k-combined-debug",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/build_og3k_gyro.py",
+        "--out",
+        "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/og3k-combined-debug",
+        "--reference",
+        "--four-box-bar"
+      ],
+      "target": "og3k",
+      "fmt_guard": true
+    },
+    {
+      "directory": "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/og3k-combined-fast-debug",
+      "entries": [
+        "0x00000970",
+        "0x0000507C",
+        "0xC0731600"
+      ],
+      "sections": 100,
+      "bin_sha256": "b9b710da0f1d2275984791db944bf1cf96b2214fb9fc5cb4171ec8ae2d22073c",
+      "autorun_sha256": "6c6b566e9d8866be193aaefe6dd58ffb06f41ad9a658dce6152241eca050ce4a",
+      "name": "og3k-combined-fast-debug",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/build_og3k_gyro.py",
+        "--out",
+        "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/og3k-combined-fast-debug",
+        "--dev-card",
+        "--four-box-bar",
+        "--fast"
+      ],
+      "target": "og3k",
+      "fmt_guard": true
+    },
+    {
+      "directory": "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/og3k-guard-off-combined",
+      "entries": [
+        "0x00000810",
+        "0x00004BD0"
+      ],
+      "sections": 95,
+      "bin_sha256": "5cb9b6e051c34f95405f8683e4fc3e6aa23e08bc58af5c6375ea5ba7ae34decb",
+      "autorun_sha256": "6658b9674c9a77888139d8b07d3a949e082f7fcd5286d34b4698cd64b8dc19b1",
+      "name": "og3k-guard-off-combined",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/build_og3k_gyro.py",
+        "--out",
+        "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/og3k-guard-off-combined",
+        "--reference",
+        "--four-box-bar"
+      ],
+      "target": "og3k",
+      "fmt_guard": false
+    },
+    {
+      "directory": "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/og2k-standalone-release",
+      "entries": [
+        "0xC0731600"
+      ],
+      "sections": 88,
+      "bin_sha256": "102d7aeb342ddaec57921b0fdc39081d90a71c7aceb4e0b2b649dbfe969997fc",
+      "autorun_sha256": "6658b9674c9a77888139d8b07d3a949e082f7fcd5286d34b4698cd64b8dc19b1",
+      "name": "og2k-standalone-release",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/build_og3k_gyro.py",
+        "--out",
+        "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/og2k-standalone-release",
+        "--no-gyro",
+        "--release"
+      ],
+      "target": "og2k",
+      "fmt_guard": true
+    },
+    {
+      "directory": "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/og2k-standalone-debug",
+      "entries": [
+        "0x00000828",
+        "0xC0731600"
+      ],
+      "sections": 98,
+      "bin_sha256": "3511dd8d776253756003769ec07daabeb19831f2c875e65b5fb44ad8b630c488",
+      "autorun_sha256": "6658b9674c9a77888139d8b07d3a949e082f7fcd5286d34b4698cd64b8dc19b1",
+      "name": "og2k-standalone-debug",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/build_og3k_gyro.py",
+        "--out",
+        "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/og2k-standalone-debug",
+        "--no-gyro"
+      ],
+      "target": "og2k",
+      "fmt_guard": true
+    },
+    {
+      "directory": "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/og2k-combined-release",
+      "entries": [
+        "0x0000442C",
+        "0xC0731600"
+      ],
+      "sections": 96,
+      "bin_sha256": "4c3943b66ad49d15b28860deaecefb69d0c5271261e60fe05c3152e35a6b0fec",
+      "autorun_sha256": "6658b9674c9a77888139d8b07d3a949e082f7fcd5286d34b4698cd64b8dc19b1",
+      "name": "og2k-combined-release",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/build_og3k_gyro.py",
+        "--out",
+        "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/og2k-combined-release",
+        "--reference",
+        "--four-box-bar",
+        "--release"
+      ],
+      "target": "og2k",
+      "fmt_guard": true
+    },
+    {
+      "directory": "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/og2k-combined-debug",
+      "entries": [
+        "0x00000830",
+        "0x0000538C",
+        "0xC0731600"
+      ],
+      "sections": 99,
+      "bin_sha256": "32e06acc05e3de96ccc6556fc915fdee0557ad46eb5089a3ef9d41e3c83ebfa2",
+      "autorun_sha256": "6658b9674c9a77888139d8b07d3a949e082f7fcd5286d34b4698cd64b8dc19b1",
+      "name": "og2k-combined-debug",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/build_og3k_gyro.py",
+        "--out",
+        "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/og2k-combined-debug",
+        "--reference",
+        "--four-box-bar"
+      ],
+      "target": "og2k",
+      "fmt_guard": true
+    },
+    {
+      "directory": "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/og2k-combined-fast-debug",
+      "entries": [
+        "0x00000970",
+        "0x000054CC",
+        "0xC0731600"
+      ],
+      "sections": 100,
+      "bin_sha256": "c3416c4ec437b92e5c8a7214844bd2435f315edec0a888f46ead8ba1aa11ddb3",
+      "autorun_sha256": "6c6b566e9d8866be193aaefe6dd58ffb06f41ad9a658dce6152241eca050ce4a",
+      "name": "og2k-combined-fast-debug",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/build_og3k_gyro.py",
+        "--out",
+        "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/og2k-combined-fast-debug",
+        "--dev-card",
+        "--four-box-bar",
+        "--fast"
+      ],
+      "target": "og2k",
+      "fmt_guard": true
+    },
+    {
+      "directory": "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/og2k-guard-off-standalone",
+      "entries": [],
+      "sections": 84,
+      "bin_sha256": "1e83f211fb5ff8b56a0b8addbf72fd752da179cbdf7d059166b7bbbfca3dbf08",
+      "autorun_sha256": "6658b9674c9a77888139d8b07d3a949e082f7fcd5286d34b4698cd64b8dc19b1",
+      "name": "og2k-guard-off-standalone",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/build_og3k_gyro.py",
+        "--out",
+        "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/og2k-guard-off-standalone",
+        "--no-gyro",
+        "--release"
+      ],
+      "target": "og2k",
+      "fmt_guard": false
+    },
+    {
+      "directory": "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/og2k-guard-off-combined",
+      "entries": [
+        "0x00000810",
+        "0x00005020"
+      ],
+      "sections": 95,
+      "bin_sha256": "031a268d31bcf54f2d6e8c4fe5088850d64fe2c1ad34fc0e088ed50c0c68639e",
+      "autorun_sha256": "6658b9674c9a77888139d8b07d3a949e082f7fcd5286d34b4698cd64b8dc19b1",
+      "name": "og2k-guard-off-combined",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/build_og3k_gyro.py",
+        "--out",
+        "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/og2k-guard-off-combined",
+        "--reference",
+        "--four-box-bar"
+      ],
+      "target": "og2k",
+      "fmt_guard": false
+    }
+  ],
+  "failures": [],
+  "autorun_independence": [
+    {
+      "name": "plain",
+      "directories": [
+        "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/autorun-plain-entry0",
+        "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/autorun-plain-entry1"
+      ]
+    },
+    {
+      "name": "debug",
+      "directories": [
+        "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/autorun-debug-entry0",
+        "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/autorun-debug-entry1"
+      ]
+    },
+    {
+      "name": "fast-debug",
+      "directories": [
+        "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/autorun-fast-debug-entry0",
+        "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/autorun-fast-debug-entry1"
+      ]
+    }
+  ],
+  "catalogue_references": [
+    {
+      "directory": "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/catalogue-og3k-frozen-plain",
+      "entries": [
+        "0x000039CC"
+      ],
+      "sections": 87,
+      "bin_sha256": "b41d7828ac2f92e1db449262f65727121abad92957f71a5560a848320b417004",
+      "autorun_sha256": "6658b9674c9a77888139d8b07d3a949e082f7fcd5286d34b4698cd64b8dc19b1",
+      "name": "catalogue-og3k-frozen-plain",
+      "input": "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/fpsup-og3k-v0.2.4a"
+    },
+    {
+      "directory": "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/catalogue-og3k-frozen-shell",
+      "entries": [
+        "0x000007F0",
+        "0x00004934"
+      ],
+      "sections": 91,
+      "bin_sha256": "5bc96558718d413750988336064879354377f75ae79819d3434bdfd904c834e8",
+      "autorun_sha256": "6658b9674c9a77888139d8b07d3a949e082f7fcd5286d34b4698cd64b8dc19b1",
+      "name": "catalogue-og3k-frozen-shell",
+      "input": "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/fpsup-og3k-v0.2.4a"
+    },
+    {
+      "directory": "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/catalogue-og3k-source-plain",
+      "entries": [
+        "0x00003FDC",
+        "0xC0731600"
+      ],
+      "sections": 96,
+      "bin_sha256": "2f57f68b13ef19098d68043a211076ac92cf5bcb853e11be1ef5f27f97f5dd71",
+      "autorun_sha256": "6658b9674c9a77888139d8b07d3a949e082f7fcd5286d34b4698cd64b8dc19b1",
+      "name": "catalogue-og3k-source-plain",
+      "input": "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/og3k-standalone-release"
+    },
+    {
+      "directory": "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/catalogue-og3k-source-shell",
+      "entries": [
+        "0x00000830",
+        "0x00004F3C",
+        "0xC0731600"
+      ],
+      "sections": 99,
+      "bin_sha256": "f453ba308e068632a437bb2f396fa0d964fc3244bb154f5bf9cfc5690c5d0aa0",
+      "autorun_sha256": "6658b9674c9a77888139d8b07d3a949e082f7fcd5286d34b4698cd64b8dc19b1",
+      "name": "catalogue-og3k-source-shell",
+      "input": "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/og3k-standalone-release"
+    },
+    {
+      "directory": "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/catalogue-og2k-frozen-plain",
+      "entries": [
+        "0x00003E1C"
+      ],
+      "sections": 87,
+      "bin_sha256": "29668ed06c57aed2a8f94208f7217a3076b2447259eaec672bb8b84d9accc4c3",
+      "autorun_sha256": "6658b9674c9a77888139d8b07d3a949e082f7fcd5286d34b4698cd64b8dc19b1",
+      "name": "catalogue-og2k-frozen-plain",
+      "input": "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/fpsup-og2k-v0.1.1a"
+    },
+    {
+      "directory": "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/catalogue-og2k-frozen-shell",
+      "entries": [
+        "0x000007F0",
+        "0x00004D84"
+      ],
+      "sections": 91,
+      "bin_sha256": "824f6e5299050bd45a4a60374f08a13920046040d6b3bd4e21b333743530efb6",
+      "autorun_sha256": "6658b9674c9a77888139d8b07d3a949e082f7fcd5286d34b4698cd64b8dc19b1",
+      "name": "catalogue-og2k-frozen-shell",
+      "input": "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/fpsup-og2k-v0.1.1a"
+    },
+    {
+      "directory": "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/catalogue-og2k-source-plain",
+      "entries": [
+        "0x0000442C",
+        "0xC0731600"
+      ],
+      "sections": 96,
+      "bin_sha256": "4c3943b66ad49d15b28860deaecefb69d0c5271261e60fe05c3152e35a6b0fec",
+      "autorun_sha256": "6658b9674c9a77888139d8b07d3a949e082f7fcd5286d34b4698cd64b8dc19b1",
+      "name": "catalogue-og2k-source-plain",
+      "input": "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/og2k-standalone-release"
+    },
+    {
+      "directory": "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/catalogue-og2k-source-shell",
+      "entries": [
+        "0x00000830",
+        "0x0000538C",
+        "0xC0731600"
+      ],
+      "sections": 99,
+      "bin_sha256": "32e06acc05e3de96ccc6556fc915fdee0557ad46eb5089a3ef9d41e3c83ebfa2",
+      "autorun_sha256": "6658b9674c9a77888139d8b07d3a949e082f7fcd5286d34b4698cd64b8dc19b1",
+      "name": "catalogue-og2k-source-shell",
+      "input": "projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/og2k-standalone-release"
+    }
+  ]
+}

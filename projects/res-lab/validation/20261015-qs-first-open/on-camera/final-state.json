@@ -1,0 +1,50 @@
+{
+  "files": {
+    "\\AutoRun.txt": {
+      "bytes": 3561,
+      "sha256": "889800fa363c75bfe0d9da43da82312276388a8929748ce05221ce0da931bb4c",
+      "matches_before": true
+    },
+    "\\fpSup\\00SHELL.BIN": {
+      "bytes": 4496,
+      "sha256": "a5a1dbff913bc9d6fa2e39a94a361c62780d01852aee15b8cbd8f428415fd6d3",
+      "matches_before": true
+    },
+    "\\fpSup\\10LOSS.BIN": {
+      "bytes": 74720,
+      "sha256": "ed6acb71570109399b01df03c4e902b24ed02be7c92392a32df832c8986065a2",
+      "matches_before": true
+    },
+    "\\fpSup\\LOADER.BIN": {
+      "bytes": 8248,
+      "sha256": "3c9a6b36687dfc21d4764d61ff190b1222efd9a84f5aa4277fb52527eb751534",
+      "matches_before": true
+    },
+    "\\fpSup\\30FCAP.BIN": {
+      "bytes": 316,
+      "sha256": "d2b22eda13f5ba6f4bd5ca2c9d3dff1918186f5e6fcdc757920402d8e445df96",
+      "matches_before": true
+    },
+    "\\fpSup\\40GYR2.BIN": {
+      "bytes": 4040,
+      "sha256": "2cbfe477bf8b11cc0e4fed37df177f6f5d561bf31243e2b00687eed15aa9a7d3",
+      "matches_before": true
+    },
+    "\\fpSup\\20RECW.BIN": {
+      "bytes": 4876,
+      "sha256": "dad442fab5be2f01fe31cfd5e79d33cf0dc883d3afb00520b43e9ce24d7d9602",
+      "matches_before": true
+    }
+  },
+  "original_files_unchanged": true,
+  "phase": "checking",
+  "daemon": [
+    28383,
+    "OK name=fpshd version=3.2.0 protocol=1 frame=64 payload=44 transport=EP01-EP82 iface=0 camera=open seq=250 ep83=host_candidate upload=UP01-probed mem=MEM1-probed quarantine=0 fault=none\n"
+  ],
+  "idle": {
+    "movie_recording": 0,
+    "xmp_file_pointer": 0,
+    "movie_writing": 0
+  }
+}

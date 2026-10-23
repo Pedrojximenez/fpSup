@@ -1,0 +1,188 @@
+{
+  "scope": "registry scan end follows active slots; slot formula with RAM cap and count-closed batches",
+  "candidate": {
+    "path": "candidate/10LOSS.BIN",
+    "sha256": "28773635a23059a077545030f1268b11ada30dea0d16df94ec8d82c5bd75d558",
+    "bytes": 81760
+  },
+  "card_before_sha256": "3e96ed0cf0185fe4d0ab163217874e261e8215f6ac52f3af848eb90e7ff07fa6",
+  "card_before_note": "fe35400b plus saved LOSS setting bytes",
+  "offline": {
+    "slot_capacity": 5,
+    "exact_bin": 18,
+    "lossless_emulation": 60,
+    "stopfx_integration": 6,
+    "native_total": 478,
+    "native_unrelated_errors": "25 in test_native_variable (BINDING probe import)"
+  },
+  "boot": 11850934,
+  "mode": "M12240 1008x672 12-bit",
+  "takes": {
+    "base-60p": "A001_169",
+    "cand-60p": "A001_170",
+    "cand-120p": "A001_171",
+    "off-120p": "A001_172"
+  },
+  "window_cpu": {
+    "base-60p": {
+      "cpu": 65.32,
+      "CamSch": 29.57,
+      "MRecMgr": 14.37,
+      "DrawMgr": 1.53,
+      "SRecFile": 3.03,
+      "SRecRaw": 0.0,
+      "FPLCODE": 3.24
+    },
+    "cand-60p": {
+      "cpu": 64.93,
+      "CamSch": 29.3,
+      "MRecMgr": 14.3,
+      "DrawMgr": 1.19,
+      "SRecFile": 3.03,
+      "SRecRaw": 0.0,
+      "FPLCODE": 3.59
+    },
+    "cand-120p": {
+      "cpu": 94.86,
+      "CamSch": 31.05,
+      "MRecMgr": 23.93,
+      "DrawMgr": 1.64,
+      "SRecFile": 4.98,
+      "SRecRaw": 0.0,
+      "FPLCODE": 6.71
+    },
+    "off-120p": {
+      "cpu": 86.92,
+      "CamSch": 32.39,
+      "MRecMgr": 21.46,
+      "DrawMgr": 1.33,
+      "SRecFile": 4.62,
+      "SRecRaw": 0.0,
+      "FPLCODE": 0.56
+    }
+  },
+  "findings": [
+    "registry scan length not a measurable cost at M12240 59.94p",
+    "119.88p completed and stopped cleanly once",
+    "every M12240 frame no_benefit; LOSS cost at 119.88p is futile compression"
+  ],
+  "camera_end_state": "CINE standby, 119.88p, LOSS ON, writer idle, candidate BIN on card",
+  "files": {
+    "README.md": {
+      "bytes": 3696,
+      "sha256": "50152368f2086ba613e731c031a03b62f3bf51cf6d0cc0ab61dcce9524358158"
+    },
+    "analyze_phases.py": {
+      "bytes": 2931,
+      "sha256": "885101ba744eeb7c86a4c891a4ced863a3f8c77236eb9ada9dc8cefc0b8c2c80"
+    },
+    "analyze_task_rings.py": {
+      "bytes": 3082,
+      "sha256": "04f192b1cf42aa99fa0121b0161689c934eaedc2ab52c1d3af2692084df7b428"
+    },
+    "base-60p-ring.bin": {
+      "bytes": 341740,
+      "sha256": "f33d46d8cdef6411196c5be4591c4ffea47fa52033f719ad0cc381a1d8d82f7c"
+    },
+    "baseline-rebuild.log": {
+      "bytes": 1028,
+      "sha256": "d138df1269349cc0df38c5bb25750d5dc7eb73c18039ff3436eab2d911d47177"
+    },
+    "camera_ui.py": {
+      "bytes": 3888,
+      "sha256": "82f70e86e134e28c494eea8fba01565b284d311cc92daf08cd3a5e145c97eca9"
+    },
+    "cand-120p-ring.bin": {
+      "bytes": 392224,
+      "sha256": "5999afe36d5281bf5c4031c6c3628bf45aff903237782f5c26c8df52be929f43"
+    },
+    "cand-60p-ring.bin": {
+      "bytes": 344092,
+      "sha256": "f6b586465d27b428e1850739574f963deb4f28d8e4074c9f96f078020007cfb4"
+    },
+    "candidate-build.log": {
+      "bytes": 1021,
+      "sha256": "1580332b72b8b8fa9d0a5b1634b5e115d1754115c0bb92f74978f85e7e370c32"
+    },
+    "candidate-exact-tests.log": {
+      "bytes": 118,
+      "sha256": "909cea077ea63c6f8384008631aa353064b75c7ab32e5802b509183223082f2c"
+    },
+    "deploy_candidate.py": {
+      "bytes": 3972,
+      "sha256": "f9ff528cb0c3fdda2bf6b703062a2ae2c6a096263ace1dea48bd6c595284ec29"
+    },
+    "deploy_verified.py": {
+      "bytes": 3441,
+      "sha256": "02fa90144c6c1e775650a7a66d94d7ff9f2805397ddfc588c4bd8915ce606ccf"
+    },
+    "integration-tests.log": {
+      "bytes": 105,
+      "sha256": "c562feee12b940e48c8df242ae4daf584b521b14ab16b7a2b1c5ea8cffc13b1b"
+    },
+    "lossless-emulation-tests.log": {
+      "bytes": 160,
+      "sha256": "d1174b535f404346eb998e63d4d63cd9022d0e3aeecc3380bda51f9abb568014"
+    },
+    "native-tests.log": {
+      "bytes": 18663,
+      "sha256": "6d719794f0c99529e5483f8ef74156b8591b3afc51190950a5e6748befd677e7"
+    },
+    "off-120p-ring.bin": {
+      "bytes": 370496,
+      "sha256": "c5a81f4898b0562f958858687c125ea95bbf1936addb871d5422d6ccfb5a67bc"
+    },
+    "profile_protected_trial.py": {
+      "bytes": 11202,
+      "sha256": "a5fc2d35a9020f0bc1069acfbe0d6a2ce8b59f5f533ef38a09097dd8acce5033"
+    },
+    "read_file_once.py": {
+      "bytes": 615,
+      "sha256": "3cfbc9e331df8ee1119302e52e9f6eaf99abc5ec8855a24e6faf872c7e468754"
+    },
+    "read_task_ring.py": {
+      "bytes": 1665,
+      "sha256": "dda1a72e3258f6e7330d1e1a499f686ad78a764d97a9a98d45cb47bd05c13327"
+    },
+    "reboot_once.py": {
+      "bytes": 1167,
+      "sha256": "3c045c07d927ba4305275f6821da0c30a10c5fa829a0ab50d817c94d63cf8093"
+    },
+    "slot-capacity-tests.log": {
+      "bytes": 103,
+      "sha256": "f76bf4497958a3cb668b80bc01ac87d489caa8fb536f1c6290fe33280e7159f6"
+    },
+    "ui-loss-off-popup.fetch.log": {
+      "bytes": 669,
+      "sha256": "d60221cc000aa715bddeecf1f9197a41033485e3670802b4ccb6de5e7823cf6d"
+    },
+    "ui-loss-off-popup2.fetch.log": {
+      "bytes": 670,
+      "sha256": "660e626ee91bddc84764e3fc985bfdfcebab0cc9b3f15161a7dc33aaacc0c47d"
+    },
+    "ui-loss-popup.fetch.log": {
+      "bytes": 665,
+      "sha256": "3e6b2d8e5c55dcc352af87940691e1b661e35537153fb17c4ec77812dcaaeb40"
+    },
+    "ui-loss-row.fetch.log": {
+      "bytes": 663,
+      "sha256": "5d411f542df81783be010ec7c9b363a4623461da8a59015fedebfa11957d11d2"
+    },
+    "ui-restore-1.fetch.log": {
+      "bytes": 664,
+      "sha256": "65f31497734008cc49a52dada359c5a6832b94c00df34a7db1a9584463de206e"
+    },
+    "ui-restore-2.fetch.log": {
+      "bytes": 664,
+      "sha256": "1cdf107c1cdab65172d2852dbe0d950b68f024a60fbff032d5c7b97f92e43160"
+    },
+    "window-cpu.json": {
+      "bytes": 1698,
+      "sha256": "f1ecb15943d6a672176e2e1e7bd75c258faeb83742d7d6c45a7df9063d5fd8d4"
+    },
+    "window_cpu.py": {
+      "bytes": 1933,
+      "sha256": "b3a1d8505dc67176256c37e56c8956909661b14dedd17c15e01c45c31a2e876e"
+    }
+  }
+}

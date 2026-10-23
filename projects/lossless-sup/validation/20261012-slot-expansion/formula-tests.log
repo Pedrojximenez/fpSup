@@ -1,0 +1,9 @@
+test_raw_fallback_never_needs_more_positions_than_minimum_compressed_size (native.test_slot_capacity.CapacityTests) ... ok
+test_small_frames_report_capacity_shortage_instead_of_lowering_batch (native.test_slot_capacity.CapacityTests) ... ok
+test_two_full_batches_plus_fractional_fps_and_latency (native.test_slot_capacity.CapacityTests) ... ok
+test_unknown_or_unbounded_input_is_refused (native.test_slot_capacity.CapacityTests) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.369s
+
+OK

@@ -1,0 +1,27 @@
+  local   /Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/validation/20261012-pipeline-cost/fixed-profile/10LOSS.BIN  79648 bytes
+  remote  \fpSup\10LOSS.BIN  mode 0x7
+  buffer  0x45062FC0, file object 0x450766E0
+  proof   region takes writes and still holds them a second later
+  replacing 79904 -> 79648 B: delete \fpSup\10LOSS.BIN first
+
+  stage  79648 bytes in 0.001s (87.9 MB/s)      
+
+  verify 79648 bytes in 0.000s (166.6 MB/s)      
+
+  stage  79648 bytes in 0.02s (4.6 MB/s), MEM1, read back whole          
+
+  code   304/304 B  1.8 KiB/s 
+  verify 304/304 B  599 KiB/s 
+  verify 304 bytes in 0.0s (244 KiB/s)      
+
+  code   304 bytes in 0.3s (0.9 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/putfile.py", line 1148, in <module>
+    sys.exit(main())
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/putfile.py", line 1120, in main
+    replace_if_shorter(a.remote, len(data))
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/putfile.py", line 1056, in replace_if_shorter
+    if not delete_file(remote):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/putfile.py", line 1026, in delete_file
+    raise RuntimeError(f'fl del {remote}: unexpected reply {out!r}')
+RuntimeError: fl del \fpSup\10LOSS.BIN: unexpected reply 'ERR shl frame0 rc=-7(LIBUSB_ERROR_TIMEOUT) moved=0/64\n'

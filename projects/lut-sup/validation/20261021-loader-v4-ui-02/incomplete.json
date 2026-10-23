@@ -1,0 +1,29 @@
+{
+  "status": "not accepted",
+  "reason": "shared build sources changed during validation; source consistency guard rejected the run",
+  "tests": 82,
+  "skipped": 0,
+  "mutations_detected": 6,
+  "changed_sources": [
+    {
+      "path": "fpSup/fp_usb_shell/v4/build_v4.py",
+      "built_sha256": "bc37150ec0b959328c8fa4ab70d0db63c93019fba267de1f7483f790103f4b2c",
+      "current_sha256": "1d18c902582933bb1f9671fc2f4f2558a8e94d8251e6221964a4eb4b23f86116"
+    },
+    {
+      "path": "fpSup/fp_usb_shell/v4/fpsup_ui.c",
+      "built_sha256": "855a6459a7a313ccb78d4b2b316f0f9682b682024c278c4403911ea545e53c0f",
+      "current_sha256": "e28283abb3524d31813a5e24fb2e59c35f968cd970d0357623ccd8f82fa9bea3"
+    },
+    {
+      "path": "fpSup/uishare/ui_pool.c",
+      "built_sha256": "b4e5ae0a562da04f04f16c37077b1dc7abe5466c6654ea46a3b0a21754e40dc4",
+      "current_sha256": "4ecb12d15a2eeebb2e052d3dbde104f5bc1fded3e99e3388f77e3bb8626b4cf3"
+    },
+    {
+      "path": "fpSup/uishare/tab/build_fp4.py",
+      "built_sha256": "c80ea94ac24174f7310894b2dcfd99e19612f03714c09ec8ac719ea65f64dae8",
+      "current_sha256": "d1a06bb8a5ba7d34eba7224c2ca26ce4a20ff22465a6477b046bc3f19f6ee4e9"
+    }
+  ]
+}

@@ -1,0 +1,146 @@
+{
+  "scope": "offline static audit; no camera contact or deployment",
+  "image": "/Users/dido/Developer.localized/SIGMAfp_re/out/seg0_c0000000.bin",
+  "bytes": 49245696,
+  "sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622",
+  "known_seg0_sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622",
+  "verified_known_image": true,
+  "checks": [
+    {
+      "name": "host_gctl_address",
+      "address": "0xC066D41C",
+      "expected_hex": "4cf21012c2f20012",
+      "actual_hex": "4cf21012c2f20012",
+      "matches": true,
+      "meaning_if_matched": "Constructs GCTL address 0x2100C110."
+    },
+    {
+      "name": "host_role",
+      "address": "0xC066D452",
+      "expected_hex": "41f20000c1f270701060",
+      "actual_hex": "41f20000c1f270701060",
+      "matches": true,
+      "meaning_if_matched": "Writes GCTL=0x17701000; PRTCAPDIR[13:12]=1 (host)."
+    },
+    {
+      "name": "device_gctl_address_low",
+      "address": "0xC01E3178",
+      "expected_hex": "4cf21015",
+      "actual_hex": "4cf21015",
+      "matches": true,
+      "meaning_if_matched": "Low half of gadget GCTL address is 0xC110."
+    },
+    {
+      "name": "device_gctl_address_high",
+      "address": "0xC01E3180",
+      "expected_hex": "c2f20015",
+      "actual_hex": "c2f20015",
+      "matches": true,
+      "meaning_if_matched": "High half of gadget GCTL address is 0x2100."
+    },
+    {
+      "name": "device_role",
+      "address": "0xC01E31B6",
+      "expected_hex": "4ff400564ff440572c6824ea070030432860",
+      "actual_hex": "4ff400564ff440572c6824ea070030432860",
+      "matches": true,
+      "meaning_if_matched": "Gadget init's conditional role-change path clears 0x3000 and sets 0x2000 (device)."
+    },
+    {
+      "name": "host_enabled_slots",
+      "address": "0xC066EE96",
+      "expected_hex": "0121caf85810",
+      "actual_hex": "0121caf85810",
+      "matches": true,
+      "meaning_if_matched": "Writes 1 to xHCI CONFIG at 0x21000058 (MaxSlotsEn). This is not hardware MaxSlots."
+    },
+    {
+      "name": "device_state_slot_bound",
+      "address": "0xC066E56A",
+      "expected_hex": "621e002a01dd002107e0",
+      "actual_hex": "621e002a01dd002107e0",
+      "matches": true,
+      "meaning_if_matched": "For valid positive IDs, software state lookup accepts only Slot ID 1; stride is 0xE58."
+    },
+    {
+      "name": "descriptor_slot_bound",
+      "address": "0xC066E59A",
+      "expected_hex": "621e002a01dd002107e0",
+      "actual_hex": "621e002a01dd002107e0",
+      "matches": true,
+      "meaning_if_matched": "For valid positive IDs, descriptor lookup accepts only Slot ID 1; stride is 0x25C."
+    },
+    {
+      "name": "device_context_slot_bound",
+      "address": "0xC067079C",
+      "expected_hex": "0cb1012c01d9002117e0",
+      "actual_hex": "0cb1012c01d9002117e0",
+      "matches": true,
+      "meaning_if_matched": "DMA device-context helper rejects zero and Slot IDs above 1."
+    },
+    {
+      "name": "input_context_slot_bound",
+      "address": "0xC06707EC",
+      "expected_hex": "0cb1012c01d9002118e0",
+      "actual_hex": "0cb1012c01d9002118e0",
+      "matches": true,
+      "meaning_if_matched": "DMA input-context helper also rejects zero and Slot IDs above 1."
+    },
+    {
+      "name": "hub_class_rejection",
+      "address": "0xC01F4B48",
+      "expected_hex": "22689278092a03d10620fff799ff02e0",
+      "actual_hex": "22689278092a03d10620fff799ff02e0",
+      "matches": true,
+      "meaning_if_matched": "After class driver rejects a device, bDeviceClass=9 selects error event 6."
+    },
+    {
+      "name": "host_class_callbacks",
+      "address": "0xC2E351E8",
+      "expected_hex": "012967c0192c67c0292c67c0392c67c0",
+      "actual_hex": "012967c0192c67c0292c67c0392c67c0",
+      "matches": true,
+      "meaning_if_matched": "Class callback table points to MSC selection C0672900 and C0672C18/28/38."
+    }
+  ],
+  "assessment": {
+    "requested_use": "SSD recording plus computer USB shell through a normal USB hub",
+    "ordinary_hub_sufficient": false,
+    "reason": "SSD uses fp as USB host; the existing shell uses fp as a USB device. Both select the same controller's GCTL role field. A normal hub does not bridge two hosts.",
+    "stock_host_software_slots": 1,
+    "hardware_max_slots": null,
+    "hardware_max_slots_status": "Not measured. HCSPARAMS1 at 0x21000004, bits 7:0. Do not confuse with CONFIG.MaxSlotsEn=1.",
+    "hub_patch_alone_preserves_existing_shell": false,
+    "development_route": "Keep fp in host mode; add multi-device host state, hub class management and downstream routing; connect a USB-device bridge to the PC and implement a host-side shell transport. The PC-facing bridge needs its own independent USB connection/controller.",
+    "driver_requirements": [
+      "Own additional device/input contexts, control buffers and transfer rings; do not just relax Slot ID bounds.",
+      "Implement hub descriptors, port power/reset/status changes and child attach/detach.",
+      "Supply child speed, route string, root-port and applicable transaction-translator context.",
+      "Account for separate USB2 and SuperSpeed hub devices in a mixed-speed USB3 hub.",
+      "Serialize native shell execution and establish DMA ownership/completion; retain uncertain-command outcomes across reconnects.",
+      "Validate concurrent SSD recording, bridge traffic, unplug and power transitions before claiming support."
+    ],
+    "not_proven": [
+      "fp silicon MaxSlots capacity or complete board USB topology",
+      "A second independent controller routed to the external USB-C connector",
+      "Concurrent host/device operation on fp's external connector",
+      "A working hub driver, bridge transport or deployable build"
+    ]
+  },
+  "local_sources": [
+    "out/decomp/full/blk_c01.c: FUN_c01e3170, FUN_c01f46a8, FUN_c01f4b20",
+    "out/decomp/full/blk_c06.c: FUN_c066d418, FUN_c066edf0 (use ROM instructions), FUN_c066e560, FUN_c066e590, FUN_c066f210, FUN_c0670790, FUN_c06707e0, FUN_c0672900",
+    "fpSup/fp_usb_shell/camera/worker.S: PTP gadget bulk transport and native shell dispatcher",
+    "fpSup/fp_usb_shell/host/fpshd.c: interface 0, EP01 OUT and EP82 IN"
+  ],
+  "primary_references": [
+    {
+      "url": "https://github.com/torvalds/linux/blob/master/drivers/usb/dwc3/core.h",
+      "scope": "DWC3_GCTL_PRTCAPDIR and HOST=1, DEVICE=2 role definitions"
+    },
+    {
+      "url": "https://www.intel.com/content/dam/www/public/us/en/documents/technical-specifications/extensible-host-controler-interface-usb-xhci.pdf",
+      "scope": "xHCI 1.22 sections 5.3.3 (hardware MaxSlots), 5.4.7 (enabled slots), 6.2.2 (Slot Context)"
+    }
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "schema": "fpSup-monitor-1",
+  "cube": {
+    "title": "",
+    "source_sha256": "29212a71808ab22f2819b904b3730fa4231b5841d883e43ec17610096dc38879",
+    "size1d": 0,
+    "size3d": 33,
+    "range1d": [
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        1.0,
+        1.0,
+        1.0
+      ]
+    ],
+    "range3d": [
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        1.0,
+        1.0,
+        1.0
+      ]
+    ]
+  },
+  "input_space": {
+    "id": "arri-logc3-ei800",
+    "label": "ARRI Wide Gamut 3 / LogC3 EI800",
+    "gamut": "awg3",
+    "transfer": "logc3-ei800",
+    "white_xy": [
+      0.3127,
+      0.329
+    ],
+    "xyz_d65_to_linear_rgb": [
+      [
+        1.7890655509740145,
+        -0.4825338637710251,
+        -0.20007579293582756
+      ],
+      [
+        -0.6398486599016594,
+        1.3963999568607055,
+        0.1944322917780538
+      ],
+      [
+        -0.04153154585267001,
+        0.08233537355382697,
+        0.8788684802928296
+      ]
+    ],
+    "input_render": "none",
+    "reference_grey_linear": 0.18,
+    "code_range": "normalized-full"
+  },
+  "output": {
+    "space": "rec709-gamma24",
+    "white": "D65",
+    "transfer": "gamma24",
+    "range": "normalized-full",
+    "scene_to_display_after_lut": "none",
+    "identified_from_cube": false
+  },
+  "strength": 1.0,
+  "strength_space": "rec709-gamma24",
+  "baseline": "clip-linear-rec709-gamma24-v1",
+  "exposure_ev": 0.0,
+  "exposure_reference": "scene-linear 18% grey = 0.18; not sensor saturation",
+  "transfer_parameters": {
+    "logc3_ei800": {
+      "cut": 0.010591,
+      "a": 5.555556,
+      "b": 0.052272,
+      "c": 0.24719,
+      "d": 0.385537,
+      "e": 5.367655,
+      "f": 0.092809
+    },
+    "logc4": {
+      "a": 2231.8263090676883,
+      "b": 0.9071358748778103,
+      "c": 0.09286412512218964,
+      "s": 0.1135972086105891,
+      "t": -0.01805699611991131
+    },
+    "film5": {
+      "a": 0.08692876065491224,
+      "b": 0.005494072432257808,
+      "c": 0.5300133392291939,
+      "d": 8.283605932402494,
+      "e": 0.09246575342465753,
+      "cut": 0.005
+    }
+  },
+  "fp_input_calibration_verified": false,
+  "on_camera_ready": false,
+  "compiled": {
+    "input_space": "arri-logc3-ei800",
+    "size": 33,
+    "domain": [
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        1.0,
+        1.0,
+        1.0
+      ]
+    ],
+    "table_order": "blue outer, green middle, red inner, RGB channel",
+    "interpolation": "tetrahedral",
+    "error": {
+      "samples": 9217,
+      "rgb_mae": 3.817767364250821e-09,
+      "p95_max_channel": 2.091389403879872e-08,
+      "max_channel": 2.9019022296239427e-08,
+      "metric": "709 gamma2.4 code error, not DeltaE",
+      "includes_float32_nodes": true,
+      "measured_on_camera": false
+    },
+    "strength_baked": true,
+    "exposure_baked": false,
+    "upstream": "fp calibration/WB/exposure -> selected input matrix/transfer",
+    "outside_domain": "report before lookup clamp",
+    "hardware_approximation_verified": false
+  },
+  "assets": {
+    "source.cube": {
+      "bytes": 970314,
+      "sha256": "29212a71808ab22f2819b904b3730fa4231b5841d883e43ec17610096dc38879"
+    },
+    "monitor.cube": {
+      "bytes": 548628,
+      "sha256": "2c650ad2c329075d036fee75f31858e7c0a28ff2f6f799e9324c115a372336db"
+    },
+    "monitor.f32le": {
+      "bytes": 431244,
+      "sha256": "997d813b64ba2cc995e28cc538bcc592d7505081806a84eb04d9852ce008e6b9"
+    }
+  }
+}

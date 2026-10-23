@@ -1,0 +1,16 @@
+  remote  \fpSup\10LOSS.BIN  79904 bytes, mode 0x1
+  buffer  from the firmware, file object 0x45062FC0
+  reply   getfile: read
+  buffer  0x53B00980 (84000 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 79904 of 79904
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/validation/20261012-pipeline-cost/deploy-fixed/before-10LOSS.BIN
+
+  code   412/412 B  2.5 KiB/s 
+  verify 412/412 B  372 KiB/s 
+  verify 412 bytes in 0.0s (211 KiB/s)      
+
+  code   412 bytes in 0.4s (0.9 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+
+  direct 79904 bytes in 0.001s (121.6 MB/s)      

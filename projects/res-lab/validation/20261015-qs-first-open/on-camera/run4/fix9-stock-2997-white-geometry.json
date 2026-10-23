@@ -1,0 +1,160 @@
+{
+  "scope": "Same displayed rate 29.97 and medium CINE layout, white mask min(RGB)>200 within x0..189,y630..681. JPEG-derived geometry, not a font identity test.",
+  "stock_match": false,
+  "comparisons": {
+    "stock_2997": {
+      "image": "projects/res-lab/validation/20261015-qs-first-open/on-camera/run4/stock-footer-first-QS/1935-20261015-stock-footer-QS-first-B.jpg",
+      "white_glyph_components": [
+        {
+          "bbox": [
+            38,
+            641,
+            53,
+            668
+          ],
+          "white_pixels": 146
+        },
+        {
+          "bbox": [
+            60,
+            641,
+            76,
+            669
+          ],
+          "white_pixels": 199
+        },
+        {
+          "bbox": [
+            83,
+            666,
+            85,
+            668
+          ],
+          "white_pixels": 4
+        },
+        {
+          "bbox": [
+            90,
+            650,
+            101,
+            669
+          ],
+          "white_pixels": 88
+        },
+        {
+          "bbox": [
+            107,
+            651,
+            117,
+            668
+          ],
+          "white_pixels": 42
+        },
+        {
+          "bbox": [
+            127,
+            650,
+            138,
+            668
+          ],
+          "white_pixels": 70
+        },
+        {
+          "bbox": [
+            143,
+            650,
+            155,
+            668
+          ],
+          "white_pixels": 79
+        },
+        {
+          "bbox": [
+            158,
+            650,
+            171,
+            668
+          ],
+          "white_pixels": 92
+        }
+      ]
+    },
+    "fix9_2997": {
+      "image": "projects/res-lab/validation/20261015-qs-first-open/on-camera/run4/fix9-final-black-edge/1931-20261015-fps-final-latin-black-edge-B.jpg",
+      "white_glyph_components": [
+        {
+          "bbox": [
+            37,
+            643,
+            49,
+            668
+          ],
+          "white_pixels": 109
+        },
+        {
+          "bbox": [
+            51,
+            643,
+            63,
+            668
+          ],
+          "white_pixels": 112
+        },
+        {
+          "bbox": [
+            87,
+            652,
+            95,
+            664
+          ],
+          "white_pixels": 37
+        },
+        {
+          "bbox": [
+            87,
+            665,
+            94,
+            669
+          ],
+          "white_pixels": 10
+        },
+        {
+          "bbox": [
+            97,
+            652,
+            105,
+            669
+          ],
+          "white_pixels": 35
+        },
+        {
+          "bbox": [
+            124,
+            652,
+            132,
+            669
+          ],
+          "white_pixels": 43
+        },
+        {
+          "bbox": [
+            134,
+            652,
+            144,
+            669
+          ],
+          "white_pixels": 55
+        },
+        {
+          "bbox": [
+            146,
+            652,
+            156,
+            670
+          ],
+          "white_pixels": 58
+        }
+      ]
+    }
+  }
+}

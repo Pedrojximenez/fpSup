@@ -1,0 +1,17 @@
+{
+  "phase": "LUT installed and complete readback verified; hardware UI trial pending",
+  "existing_loader_and_ui_preserved": true,
+  "warm_restart": {
+    "tool": "fpSup/fp_usb_shell/fastreboot.py now",
+    "native_command": "poff 2",
+    "result": "camera display normal (user confirmed); shell did not reconnect",
+    "mac_usb": "SIGMA fp 1003:c432, device fingerprint reports 06/01/01 stock interface",
+    "subsequent_power_commands_sent": false,
+    "hypothesis": "warm wake did not reload development shell; not evidence of LUT execution or LUT failure"
+  },
+  "awaiting": "user physical OFF/ON to reload development shell",
+  "recording_started": false,
+  "camera_settings_persisted": false,
+  "ui_acceptance": "not yet tested",
+  "live_view_backend": "not connected; enable must return -13 and remain Off"
+}

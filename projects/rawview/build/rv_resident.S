@@ -200,7 +200,13 @@
  *     原地寫回 P_PATH(同 lossless:open 7 → seek 32 → 寫 32 B → seek → 讀回比對;不符就標成沒存,下次關機重寫)。 */
 .equ P_PATH,   0x1C0                 /* 本 sup 的檔案路徑(加載器的字串,整個開機有效) */
 .equ P_BLOCK,  0x1CC                 /* 塊基底 = 檔案在記憶體的原樣 */
+#if V4
+.equ CFG_OFF,  48                    /* the FSB4 header, then the record */
+.equ SVC_FILE_IS, 52
+.equ F_DCACHE_R, 0xC000E91C
+#else
 .equ CFG_OFF,  32                    /* 設定區:{'RVS1', flag, lat, con, sat, 0, 0, 0} */
+#endif
 .equ CFG_MAGIC, 0x31535652           /* "RVS1" */
 .equ FOBJ_REL, 0x80000 - 0x3E200     /* 檔案物件:T0 + 0x80000(開機時的 LOG 暫存,之後空著) */
 .equ F_CTOR,   0xC0365E90
@@ -773,8 +779,29 @@ stub_sv:
     str     r0, [r7, #12]
     ldr     r0, [r5, #P_SAT]
     str     r0, [r7, #16]
+#if V4
+    /* Loader v4: write only into a file that is still this sup -- mode 7
+     * creates a missing one (sup-writeback-must-not-create) -- and only once
+     * the record is in memory: this block runs at the cached alias. */
+    ldr     r0, sv_svc
+    cmp     r0, #0
+    beq     8f
+    ldr     r1, [r5, #P_PATH]
+    ldr     r2, [r5, #P_BLOCK]      /* the file as loaded: its 48-byte header */
+    mov     r3, #48
+    ldr     ip, [r0, #SVC_FILE_IS]
+    blx     ip
+    cmp     r0, #0
+    bne     8f
+    ldr     ip, =F_DCACHE_R
+    blx     ip
+#endif
     ldr     r6, =FOBJ_REL
     add     r6, r5, r6              /* r6 = 檔案物件 */
+#if V4
+    cmp     r6, #0xC0000000         /* the object and the read-back at the uncached */
+    subhs   r6, r6, #0x80000000     /* alias: what the card driver writes is what we read */
+#endif
     mov     r0, r6
     mov     r1, #1                  /* SD */
     ldr     ip, =F_CTOR
@@ -840,8 +867,16 @@ stub_sv:
     mov     r1, #2
     ldr     ip, =F_DTOR
     blx     ip
+#if V4
+    b       9f
+8:  mov     r0, #0                  /* not ours / not saved: mark it, retry next power-off */
+    str     r0, [r7]
+#endif
 9:  pop     {r0-r3, r5-r7, pc}
 sv_next: .word SV_ORIG
+#if V4
+sv_svc:  .word 0                    /* the service table (launcher: NEXT_SVC) */
+#endif
 
 #else
 stub_sv:

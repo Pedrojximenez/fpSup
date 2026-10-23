@@ -1,0 +1,154 @@
+ok   ui script parses
+ok   sha256hex matches node
+ok   Instant on by default; Fast and fpSup page opt-in
+ok   usbshell: exact frozen sup bytes
+ok   usbshell: exact released artwork 0
+ok   usbshell: exact released artwork 1
+ok   usbshell: exact released artwork 2
+ok   usbshell: exact released artwork 3
+ok   usbshell: exact released artwork 4
+ok   usbshell: released product bytes, current boot pair
+ok   usbshell: real AutoRun EOF and hash
+ok   lossless: exact frozen sup bytes
+ok   lossless: exact released artwork 0
+ok   lossless: exact released artwork 1
+ok   lossless: exact released artwork 2
+ok   lossless: exact released artwork 3
+ok   lossless: exact released artwork 4
+ok   lossless: released product bytes, current boot pair
+ok   lossless: real AutoRun EOF and hash
+ok   gyro2: exact frozen sup bytes
+ok   gyro2: exact released artwork 0
+ok   gyro2: exact released artwork 1
+ok   gyro2: exact released artwork 2
+ok   gyro2: exact released artwork 3
+ok   gyro2: exact released artwork 4
+ok   gyro2: released product bytes, current boot pair
+ok   gyro2: real AutoRun EOF and hash
+ok   res-custom: exact frozen sup bytes
+ok   res-custom: exact frozen fpSup/RESCUS/OG35K.RCD
+ok   res-custom: exact frozen fpSup/RESCUS/OG3K.RCD
+ok   res-custom: exact frozen fpSup/RESCUS/S16.RCD
+ok   res-custom: exact released artwork 0
+ok   res-custom: exact released artwork 1
+ok   res-custom: exact released artwork 2
+ok   res-custom: exact released artwork 3
+ok   res-custom: exact released artwork 4
+ok   res-custom: released product bytes, current boot pair
+ok   res-custom: real AutoRun EOF and hash
+ok   screenflip: exact frozen sup bytes
+ok   screenflip: exact released artwork 0
+ok   screenflip: exact released artwork 1
+ok   screenflip: exact released artwork 2
+ok   screenflip: exact released artwork 3
+ok   screenflip: exact released artwork 4
+ok   screenflip: released product bytes, current boot pair
+ok   screenflip: real AutoRun EOF and hash
+ok   desqueeze: exact frozen sup bytes
+ok   desqueeze: exact released artwork 0
+ok   desqueeze: exact released artwork 1
+ok   desqueeze: exact released artwork 2
+ok   desqueeze: exact released artwork 3
+ok   desqueeze: exact released artwork 4
+ok   desqueeze: released product bytes, current boot pair
+ok   desqueeze: real AutoRun EOF and hash
+ok   tap-to-zoom: exact frozen sup bytes
+ok   tap-to-zoom: exact released artwork 0
+ok   tap-to-zoom: exact released artwork 1
+ok   tap-to-zoom: exact released artwork 2
+ok   tap-to-zoom: exact released artwork 3
+ok   tap-to-zoom: exact released artwork 4
+ok   tap-to-zoom: released product bytes, current boot pair
+ok   tap-to-zoom: real AutoRun EOF and hash
+ok   raw-view: exact frozen sup bytes
+ok   raw-view: exact released artwork 0
+ok   raw-view: exact released artwork 1
+ok   raw-view: exact released artwork 2
+ok   raw-view: exact released artwork 3
+ok   raw-view: exact released artwork 4
+ok   raw-view: released product bytes, current boot pair
+ok   raw-view: real AutoRun EOF and hash
+ok   Manager false, Instant false, Fast false: exact boot pair in zip
+ok   Instant false, Fast false: selections retained
+ok   README records boot choices
+ok   actual VBIN length plus empty manager disabled list
+ok   management UI data and README follow checkbox
+ok   flipped boot byte blocks download
+ok   Manager false, Instant false, Fast true: exact boot pair in zip
+ok   Instant false, Fast true: selections retained
+ok   README records boot choices
+ok   actual VBIN length plus empty manager disabled list
+ok   management UI data and README follow checkbox
+ok   flipped boot byte blocks download
+ok   Manager false, Instant true, Fast false: exact boot pair in zip
+ok   Instant true, Fast false: selections retained
+ok   README records boot choices
+ok   actual VBIN length plus empty manager disabled list
+ok   management UI data and README follow checkbox
+ok   flipped boot byte blocks download
+ok   Manager false, Instant true, Fast true: exact boot pair in zip
+ok   Instant true, Fast true: selections retained
+ok   README records boot choices
+ok   actual VBIN length plus empty manager disabled list
+ok   management UI data and README follow checkbox
+ok   flipped boot byte blocks download
+ok   Manager true, Instant false, Fast false: exact boot pair in zip
+ok   Instant false, Fast false: selections retained
+ok   README records boot choices
+ok   actual VBIN length plus empty manager disabled list
+ok   management UI data and README follow checkbox
+ok   flipped boot byte blocks download
+ok   Manager true, Instant false, Fast true: exact boot pair in zip
+ok   Instant false, Fast true: selections retained
+ok   README records boot choices
+ok   actual VBIN length plus empty manager disabled list
+ok   management UI data and README follow checkbox
+ok   flipped boot byte blocks download
+ok   Manager true, Instant true, Fast false: exact boot pair in zip
+ok   Instant true, Fast false: selections retained
+ok   README records boot choices
+ok   actual VBIN length plus empty manager disabled list
+ok   management UI data and README follow checkbox
+ok   flipped boot byte blocks download
+ok   Manager true, Instant true, Fast true: exact boot pair in zip
+ok   Instant true, Fast true: selections retained
+ok   README records boot choices
+ok   actual VBIN length plus empty manager disabled list
+ok   management UI data and README follow checkbox
+ok   flipped boot byte blocks download
+ok   fpSup page can be downloaded by itself
+ok   empty card without fpSup page is refused
+ok   flipped manager UI byte blocks download
+ok   no two running sups clash
+ok   parked sups are fpSup/NAME.OFF
+ok   all 8 ticked: checks pass (off: -)
+ok   first ticked of a clashing pair runs
+ok   zip: 00SHELL.BIN runs, 10LOSS.BIN is fpSup/10LOSS.OFF
+ok   no OFF folder
+ok   README says how to switch
+ok   a clash is not a failed check
+ok   flipped bit in a sup fails the self-check
+ok   zip is reproducible
+ok   res-custom: all 3 data files by default
+ok   res-custom: unticked OG3.5K is left out
+ok   res-custom: no data file ticked is refused
+todo usbshell: no guide page yet
+ok   lossless guide ../../guide/lossless.html exists
+ok   gyro2 guide ../../guide/gyro2.html exists
+ok   res-custom guide ../../guide/res-custom.html exists
+ok   screenflip guide ../../guide/screenflip.html exists
+ok   desqueeze guide ../../guide/desqueeze.html exists
+ok   tap-to-zoom guide ../../guide/tap-to-zoom.html exists
+ok   raw-view guide ../../guide/raw-view.html exists
+todo split-record: no guide page yet
+todo hdrx: no guide page yet
+todo af: no guide page yet
+todo lut: no guide page yet
+todo res-lab: no guide page yet
+ok   lossless: tile thanks CorNy
+ok   res-custom: tile thanks Jose Hurtado
+ok   raw-view: tile thanks Ole Berek
+ok   AutoRun has the no-delay patch, page thanks Andy_hal9000
+ok   sups in the zip are in file-name order
+ok   author/credits fields present
+all passed

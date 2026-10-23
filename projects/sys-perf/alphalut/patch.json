@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "code": "alphalut.bin",
+  "code_size": 472,
+  "code_sha256": "657f92453b5b69f3f786772f87cce86f3a43a8b97e6b93db7f9800511692aadb",
+  "code_isa": "ARM",
+  "alignment": 8,
+  "symbols": {
+    "al_ctl": 0,
+    "al_unpremul": 64
+  },
+  "control": {
+    "+00": "'ALUT'",
+    "+04": "version",
+    "+08": "enable (default 1; 0 = stock)",
+    "+0C": "calls",
+    "+10": "NEON 8-px blocks",
+    "+14": "all-zero blocks skipped",
+    "+18": "fallbacks to stock (w<=0, h<=0, or disabled)"
+  },
+  "publish_before_arm": [
+    "C000E91C (D-cache clean+inv)",
+    "C000EABC (I-cache inv)"
+  ],
+  "veneer": {
+    "size": 8,
+    "words": [
+      "0xE51FF004 (ldr pc,[pc,#-4])",
+      "load_base + al_unpremul"
+    ],
+    "range": "within +-32 MiB of 0xc0561734"
+  },
+  "patches": [
+    {
+      "addr": "0xc0561734",
+      "stock": "0xeb00091b",
+      "new": "bl veneer (0xEB000000 | ((veneer - (0xC0561734 + 8)) >> 2 & 0xFFFFFF))",
+      "kind": "code word (ARM bl); needs D-clean + I-inv after writing",
+      "what": "UIC drawer C0561198: un-premultiply of the round's dirty-rect union"
+    }
+  ],
+  "callers_of_stock": [
+    "C0561734 (only one; scan of ARM BL, Thumb BL/BLX and literal pointers)"
+  ],
+  "sibling_not_patched": "C0563D50 (premultiply, table C0D0D784, called once from C0560F08); not hot in the profile",
+  "calling_convention": "r0 = layer buffer (u16), r1 = rect {x, y, w, h} (s32), r2 = stride (pixels)",
+  "vfp": "d0-d15 only; saves d8-d15; TK-OS saves d0-d15 + FPSCR per task/IRQ, never d16-d31",
+  "context": "DrawMgr task (DrawThread -> UIC drawer C0561198)",
+  "unpatch": "write the stock word back, D-clean + I-inv; keep the code block allocated"
+}

@@ -1,0 +1,22 @@
+{
+  "label": "boot-01",
+  "commands": [
+    {
+      "time": 1791762182.829416,
+      "command": "status get app_current",
+      "reply": "app_current -> 2\n\n"
+    },
+    {
+      "time": 1791762182.8301098,
+      "command": "status get is_recording",
+      "reply": "is_recording -> 0\n\n"
+    },
+    {
+      "time": 1791762182.83109,
+      "command": "status get is_recording",
+      "reply": "is_recording -> 0\n\n"
+    }
+  ],
+  "started_at": 1791762182.8185039,
+  "error": "RuntimeError('missing LOSS record')"
+}

@@ -1,0 +1,14 @@
+test_recording_blocks_file_loads_and_settings_writes (test_library_native.LibraryNativeTests) ... FAIL
+
+======================================================================
+FAIL: test_recording_blocks_file_loads_and_settings_writes (test_library_native.LibraryNativeTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lut/test_library_native.py", line 211, in test_recording_blocks_file_loads_and_settings_writes
+    self.assertEqual(c.status()['last'],-17);self.assertEqual(c.bin_writes,0)
+AssertionError: 0 != -17
+
+----------------------------------------------------------------------
+Ran 1 test in 4.638s
+
+FAILED (failures=1)

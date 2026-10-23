@@ -1,0 +1,938 @@
+{
+  "scope": "Browser prototype, native Mac mouse pointer gestures; no camera or physical touch validation",
+  "pull": [
+    {
+      "contentOpacity": 1,
+      "ms": 16117.594,
+      "panelOpacity": 0,
+      "panelTransform": "matrix(1, 0, 0, 1, 0, -480)",
+      "trashOver": false,
+      "trashText": "垃圾桶",
+      "trashVisible": false
+    },
+    {
+      "contentOpacity": 1,
+      "ms": 16131.4,
+      "panelOpacity": 0,
+      "panelTransform": "matrix(1, 0, 0, 1, 0, -480)",
+      "trashOver": false,
+      "trashText": "垃圾桶",
+      "trashVisible": false
+    },
+    {
+      "contentOpacity": 1,
+      "ms": 16148,
+      "panelOpacity": 0.0479167,
+      "panelTransform": "matrix(1, 0, 0, 1, 0, -457)",
+      "trashOver": false,
+      "trashText": "垃圾桶",
+      "trashVisible": false
+    },
+    {
+      "contentOpacity": 1,
+      "ms": 16164.8,
+      "panelOpacity": 0.0958333,
+      "panelTransform": "matrix(1, 0, 0, 1, 0, -434)",
+      "trashOver": false,
+      "trashText": "垃圾桶",
+      "trashVisible": false
+    },
+    {
+      "contentOpacity": 1,
+      "ms": 16181.4,
+      "panelOpacity": 0.141667,
+      "panelTransform": "matrix(1, 0, 0, 1, 0, -412)",
+      "trashOver": false,
+      "trashText": "垃圾桶",
+      "trashVisible": false
+    },
+    {
+      "contentOpacity": 1,
+      "ms": 16198.1,
+      "panelOpacity": 0.189583,
+      "panelTransform": "matrix(1, 0, 0, 1, 0, -389)",
+      "trashOver": false,
+      "trashText": "垃圾桶",
+      "trashVisible": false
+    },
+    {
+      "contentOpacity": 1,
+      "ms": 16214.4,
+      "panelOpacity": 0.2375,
+      "panelTransform": "matrix(1, 0, 0, 1, 0, -366)",
+      "trashOver": false,
+      "trashText": "垃圾桶",
+      "trashVisible": false
+    },
+    {
+      "contentOpacity": 1,
+      "ms": 16230.6,
+      "panelOpacity": 0.285417,
+      "panelTransform": "matrix(1, 0, 0, 1, 0, -343)",
+      "trashOver": false,
+      "trashText": "垃圾桶",
+      "trashVisible": false
+    },
+    {
+      "contentOpacity": 1,
+      "ms": 16248,
+      "panelOpacity": 0.33125,
+      "panelTransform": "matrix(1, 0, 0, 1, 0, -321)",
+      "trashOver": false,
+      "trashText": "垃圾桶",
+      "trashVisible": false
+    },
+    {
+      "contentOpacity": 1,
+      "ms": 16264.8,
+      "panelOpacity": 0.379167,
+      "panelTransform": "matrix(1, 0, 0, 1, 0, -298)",
+      "trashOver": false,
+      "trashText": "垃圾桶",
+      "trashVisible": false
+    }
+  ],
+  "removal": {
+    "contact": [
+      {
+        "contentOpacity": 1,
+        "ms": 29625.8,
+        "panelOpacity": 1,
+        "panelTransform": "matrix(1, 0, 0, 1, 0, 0)",
+        "trashOver": false,
+        "trashText": "垃圾桶",
+        "trashVisible": true
+      },
+      {
+        "contentOpacity": 1,
+        "ms": 29642.5,
+        "panelOpacity": 1,
+        "panelTransform": "matrix(1, 0, 0, 1, 0, 0)",
+        "trashOver": false,
+        "trashText": "垃圾桶",
+        "trashVisible": true
+      },
+      {
+        "contentOpacity": 1,
+        "ms": 29659.2,
+        "panelOpacity": 1,
+        "panelTransform": "matrix(1, 0, 0, 1, 0, 0)",
+        "trashOver": false,
+        "trashText": "垃圾桶",
+        "trashVisible": true
+      },
+      {
+        "contentOpacity": 1,
+        "ms": 29675.9,
+        "panelOpacity": 1,
+        "panelTransform": "matrix(1, 0, 0, 1, 0, 0)",
+        "trashOver": false,
+        "trashText": "垃圾桶",
+        "trashVisible": true
+      },
+      {
+        "contentOpacity": 1,
+        "ms": 29692.5,
+        "panelOpacity": 1,
+        "panelTransform": "matrix(1, 0, 0, 1, 0, 0)",
+        "trashOver": false,
+        "trashText": "垃圾桶",
+        "trashVisible": true
+      },
+      {
+        "contentOpacity": 1,
+        "ms": 29708.9,
+        "panelOpacity": 1,
+        "panelTransform": "matrix(1, 0, 0, 1, 0, 0)",
+        "trashOver": false,
+        "trashText": "垃圾桶",
+        "trashVisible": true
+      },
+      {
+        "contentOpacity": 1,
+        "ms": 29725.9,
+        "panelOpacity": 1,
+        "panelTransform": "matrix(1, 0, 0, 1, 0, 0)",
+        "trashOver": false,
+        "trashText": "垃圾桶",
+        "trashVisible": true
+      },
+      {
+        "contentOpacity": 1,
+        "ms": 29742.6,
+        "panelOpacity": 1,
+        "panelTransform": "matrix(1, 0, 0, 1, 0, 0)",
+        "trashOver": false,
+        "trashText": "垃圾桶",
+        "trashVisible": true
+      },
+      {
+        "contentOpacity": 1,
+        "ms": 29759.3,
+        "panelOpacity": 1,
+        "panelTransform": "matrix(1, 0, 0, 1, 0, 0)",
+        "trashOver": false,
+        "trashText": "垃圾桶",
+        "trashVisible": true
+      },
+      {
+        "contentOpacity": 1,
+        "ms": 29775.9,
+        "panelOpacity": 1,
+        "panelTransform": "matrix(1, 0, 0, 1, 0, 0)",
+        "trashOver": false,
+        "trashText": "垃圾桶",
+        "trashVisible": true
+      },
+      {
+        "contentOpacity": 1,
+        "ms": 29792,
+        "panelOpacity": 1,
+        "panelTransform": "matrix(1, 0, 0, 1, 0, 0)",
+        "trashOver": false,
+        "trashText": "垃圾桶",
+        "trashVisible": false
+      }
+    ],
+    "hover": {
+      "bounds": {
+        "bottom": 635.2951359989346,
+        "left": 381.09090909090907,
+        "right": 642.9090909090909,
+        "top": 559.7317974498119
+      },
+      "id": 0,
+      "over": true,
+      "x": 512,
+      "y": 597.2410027632587
+    },
+    "order": [
+      1,
+      2,
+      4,
+      5,
+      6,
+      20,
+      3,
+      7,
+      10,
+      11
+    ],
+    "removed": "0",
+    "saved": {
+      "modelContent": {
+        "backgroundPercent": 47,
+        "qsItems": [
+          "快門角度",
+          "光圈",
+          "解析度",
+          "格率",
+          "錄影格式",
+          "裁切範圍",
+          "白平衡",
+          "音訊增益",
+          "假色",
+          "波形"
+        ],
+        "recording": {
+          "dc": {
+            "height": 4000,
+            "preset": "OG",
+            "ratio": "3:2",
+            "width": 6000
+          },
+          "format": "CDNG 12bit",
+          "fps": "29.97p",
+          "res": {
+            "height": 2048,
+            "preset": "3K",
+            "ratio": "3:2",
+            "width": 3072
+          }
+        },
+        "selectedItem": "裁切範圍"
+      },
+      "privateContent": {
+        "backgroundAlpha4": 7,
+        "order": [
+          1,
+          2,
+          4,
+          5,
+          6,
+          20,
+          3,
+          7,
+          10,
+          11
+        ],
+        "page": 0,
+        "recording": {
+          "dc": {
+            "height": 4000,
+            "preset": "OG",
+            "ratio": "3:2",
+            "width": 6000
+          },
+          "format": "CDNG 12bit",
+          "res": {
+            "height": 2048,
+            "preset": "3K",
+            "ratio": "3:2",
+            "width": 3072
+          }
+        },
+        "selected": 20,
+        "values": [
+          "800",
+          "180°",
+          "F2.8",
+          "5600 K",
+          "3K",
+          "29.97p",
+          "CDNG 12bit",
+          "−12 dB",
+          "關",
+          "開",
+          "關",
+          "關",
+          "MF",
+          "單點",
+          "OFF",
+          "3",
+          "關",
+          "關",
+          "自動",
+          "關",
+          "OG"
+        ],
+        "version": 5
+      }
+    },
+    "trashHidden": true
+  },
+  "catalogFade": {
+    "page": "2 / 2",
+    "trace": [
+      {
+        "inert": true,
+        "ms": 46305.9,
+        "opacity": 0.526518,
+        "phase": "out",
+        "title": "添加項目",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "inert": true,
+        "ms": 46322,
+        "opacity": 0.478189,
+        "phase": "out",
+        "title": "添加項目",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "inert": true,
+        "ms": 46339.3,
+        "opacity": 0.352687,
+        "phase": "out",
+        "title": "添加項目",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "inert": true,
+        "ms": 46356.3,
+        "opacity": 0.18076,
+        "phase": "out",
+        "title": "添加項目",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "inert": true,
+        "ms": 46372.9,
+        "opacity": 0,
+        "phase": "in",
+        "title": "添加項目",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "inert": true,
+        "ms": 46389.6,
+        "opacity": 0.606189,
+        "phase": "in",
+        "title": "添加項目",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "inert": true,
+        "ms": 46406.3,
+        "opacity": 0.857622,
+        "phase": "in",
+        "title": "添加項目",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "inert": true,
+        "ms": 46423,
+        "opacity": 0.947088,
+        "phase": "in",
+        "title": "添加項目",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "inert": true,
+        "ms": 46439.7,
+        "opacity": 0.983974,
+        "phase": "in",
+        "title": "添加項目",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "inert": true,
+        "ms": 46456.3,
+        "opacity": 0.997803,
+        "phase": "in",
+        "title": "添加項目",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "inert": false,
+        "ms": 46473.1,
+        "opacity": 1,
+        "phase": "idle",
+        "title": "添加項目",
+        "transform": "none"
+      }
+    ]
+  },
+  "readd": {
+    "iso": "ISO，800，點按在下方調整",
+    "order": [
+      1,
+      2,
+      4,
+      5,
+      6,
+      20,
+      3,
+      7,
+      10,
+      11,
+      0
+    ],
+    "page": "2 / 2"
+  },
+  "mainFade": {
+    "page": "1 / 2",
+    "scrollLeft": 0,
+    "trace": [
+      {
+        "inert": true,
+        "ms": 55897.5,
+        "opacity": 0.556818,
+        "phase": "out",
+        "title": "QS",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "inert": true,
+        "ms": 55914.1,
+        "opacity": 0.502678,
+        "phase": "out",
+        "title": "QS",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "inert": true,
+        "ms": 55930.8,
+        "opacity": 0.373713,
+        "phase": "out",
+        "title": "QS",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "inert": true,
+        "ms": 55947.5,
+        "opacity": 0.195671,
+        "phase": "out",
+        "title": "QS",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "inert": true,
+        "ms": 55964.2,
+        "opacity": 0,
+        "phase": "in",
+        "title": "QS",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "inert": true,
+        "ms": 55980.8,
+        "opacity": 0.603179,
+        "phase": "in",
+        "title": "QS",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "inert": true,
+        "ms": 55996.6,
+        "opacity": 0.848933,
+        "phase": "in",
+        "title": "QS",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "inert": true,
+        "ms": 56014.3,
+        "opacity": 0.947028,
+        "phase": "in",
+        "title": "QS",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "inert": true,
+        "ms": 56030.9,
+        "opacity": 0.983813,
+        "phase": "in",
+        "title": "QS",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "inert": true,
+        "ms": 56047.6,
+        "opacity": 0.997796,
+        "phase": "in",
+        "title": "QS",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "inert": false,
+        "ms": 56064.3,
+        "opacity": 1,
+        "phase": "idle",
+        "title": "QS",
+        "transform": "none"
+      }
+    ],
+    "transform": ""
+  },
+  "dragAway": {
+    "contact": [
+      {
+        "contentOpacity": 1,
+        "ms": 93577.6,
+        "panelOpacity": 1,
+        "panelTransform": "matrix(1, 0, 0, 1, 0, 0)",
+        "trashOver": false,
+        "trashText": "垃圾桶",
+        "trashVisible": true
+      },
+      {
+        "contentOpacity": 1,
+        "ms": 93595.3,
+        "panelOpacity": 1,
+        "panelTransform": "matrix(1, 0, 0, 1, 0, 0)",
+        "trashOver": false,
+        "trashText": "垃圾桶",
+        "trashVisible": true
+      },
+      {
+        "contentOpacity": 1,
+        "ms": 93611.1,
+        "panelOpacity": 1,
+        "panelTransform": "matrix(1, 0, 0, 1, 0, 0)",
+        "trashOver": false,
+        "trashText": "垃圾桶",
+        "trashVisible": true
+      },
+      {
+        "contentOpacity": 1,
+        "ms": 93628.6,
+        "panelOpacity": 1,
+        "panelTransform": "matrix(1, 0, 0, 1, 0, 0)",
+        "trashOver": false,
+        "trashText": "垃圾桶",
+        "trashVisible": true
+      },
+      {
+        "contentOpacity": 1,
+        "ms": 93645.3,
+        "panelOpacity": 1,
+        "panelTransform": "matrix(1, 0, 0, 1, 0, 0)",
+        "trashOver": false,
+        "trashText": "垃圾桶",
+        "trashVisible": true
+      },
+      {
+        "contentOpacity": 1,
+        "ms": 93661.9,
+        "panelOpacity": 1,
+        "panelTransform": "matrix(1, 0, 0, 1, 0, 0)",
+        "trashOver": false,
+        "trashText": "垃圾桶",
+        "trashVisible": true
+      },
+      {
+        "contentOpacity": 1,
+        "ms": 93678.2,
+        "panelOpacity": 1,
+        "panelTransform": "matrix(1, 0, 0, 1, 0, 0)",
+        "trashOver": false,
+        "trashText": "垃圾桶",
+        "trashVisible": true
+      },
+      {
+        "contentOpacity": 1,
+        "ms": 93695.3,
+        "panelOpacity": 1,
+        "panelTransform": "matrix(1, 0, 0, 1, 0, 0)",
+        "trashOver": true,
+        "trashText": "放開移除",
+        "trashVisible": true
+      },
+      {
+        "contentOpacity": 1,
+        "ms": 93712,
+        "panelOpacity": 1,
+        "panelTransform": "matrix(1, 0, 0, 1, 0, 0)",
+        "trashOver": false,
+        "trashText": "垃圾桶",
+        "trashVisible": false
+      }
+    ],
+    "hover": {
+      "bounds": {
+        "bottom": 635.2951359989346,
+        "left": 381.09090909090907,
+        "right": 642.9090909090909,
+        "top": 559.7317974498119
+      },
+      "id": 4,
+      "over": false,
+      "x": 512,
+      "y": 671.3512001864367
+    },
+    "resPresent": true,
+    "trashHidden": true
+  },
+  "reload": {
+    "order": [
+      1,
+      2,
+      5,
+      6,
+      20,
+      3,
+      4,
+      7,
+      10,
+      11,
+      0
+    ],
+    "saveOnLoad": null
+  },
+  "wheel": {
+    "page": "2 / 2",
+    "trace": [
+      {
+        "inert": true,
+        "ms": 945,
+        "opacity": 0.179786,
+        "phase": "out",
+        "title": "QS",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "inert": true,
+        "ms": 961.7,
+        "opacity": 0.133016,
+        "phase": "out",
+        "title": "QS",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "inert": true,
+        "ms": 978,
+        "opacity": 0.0704487,
+        "phase": "out",
+        "title": "QS",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "inert": true,
+        "ms": 994.7,
+        "opacity": 0,
+        "phase": "in",
+        "title": "QS",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "inert": true,
+        "ms": 1011.7,
+        "opacity": 0.613508,
+        "phase": "in",
+        "title": "QS",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "inert": true,
+        "ms": 1028.3,
+        "opacity": 0.859194,
+        "phase": "in",
+        "title": "QS",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "inert": true,
+        "ms": 1045,
+        "opacity": 0.947717,
+        "phase": "in",
+        "title": "QS",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "inert": true,
+        "ms": 1061.7,
+        "opacity": 0.984232,
+        "phase": "in",
+        "title": "QS",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "inert": true,
+        "ms": 1078.4,
+        "opacity": 0.997919,
+        "phase": "in",
+        "title": "QS",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "inert": false,
+        "ms": 1095.1,
+        "opacity": 1,
+        "phase": "idle",
+        "title": "QS",
+        "transform": "none"
+      }
+    ]
+  },
+  "pageCollapse": {
+    "order": [
+      1,
+      2,
+      5,
+      6,
+      20,
+      3,
+      4,
+      7
+    ],
+    "page": "1 / 1",
+    "saved": {
+      "modelContent": {
+        "backgroundPercent": 47,
+        "qsItems": [
+          "快門角度",
+          "光圈",
+          "格率",
+          "錄影格式",
+          "裁切範圍",
+          "白平衡",
+          "解析度",
+          "音訊增益"
+        ],
+        "recording": {
+          "dc": {
+            "height": 4000,
+            "preset": "OG",
+            "ratio": "3:2",
+            "width": 6000
+          },
+          "format": "CDNG 12bit",
+          "fps": "29.97p",
+          "res": {
+            "height": 2048,
+            "preset": "3K",
+            "ratio": "3:2",
+            "width": 3072
+          }
+        },
+        "selectedItem": "音訊增益"
+      },
+      "privateContent": {
+        "backgroundAlpha4": 7,
+        "order": [
+          1,
+          2,
+          5,
+          6,
+          20,
+          3,
+          4,
+          7
+        ],
+        "page": 0,
+        "recording": {
+          "dc": {
+            "height": 4000,
+            "preset": "OG",
+            "ratio": "3:2",
+            "width": 6000
+          },
+          "format": "CDNG 12bit",
+          "res": {
+            "height": 2048,
+            "preset": "3K",
+            "ratio": "3:2",
+            "width": 3072
+          }
+        },
+        "selected": 7,
+        "values": [
+          "800",
+          "180°",
+          "F2.8",
+          "5600 K",
+          "3K",
+          "29.97p",
+          "CDNG 12bit",
+          "−12 dB",
+          "關",
+          "開",
+          "關",
+          "關",
+          "MF",
+          "單點",
+          "OFF",
+          "3",
+          "關",
+          "關",
+          "自動",
+          "關",
+          "OG"
+        ],
+        "version": 5
+      }
+    },
+    "selected": "7",
+    "trashHidden": true
+  },
+  "narrow": {
+    "order": [
+      2,
+      5,
+      6,
+      20,
+      3,
+      4,
+      7
+    ],
+    "scroll": 320,
+    "shutterHidden": true,
+    "trashHidden": true,
+    "width": 320
+  },
+  "lastGuard": {
+    "disabled": true,
+    "order": [
+      6
+    ],
+    "text": "至少保留一項"
+  },
+  "finalReload": {
+    "inert": false,
+    "opacity": "1",
+    "order": [
+      6
+    ],
+    "saveOnLoad": null
+  },
+  "logs": [],
+  "wheelBack": {
+    "inert": false,
+    "page": "1 / 2",
+    "trace": [
+      {
+        "inert": true,
+        "ms": 5882.3,
+        "opacity": 0.180552,
+        "phase": "out",
+        "title": "QS",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "inert": true,
+        "ms": 5898.2,
+        "opacity": 0.136892,
+        "phase": "out",
+        "title": "QS",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "inert": true,
+        "ms": 5915.8,
+        "opacity": 0.06985,
+        "phase": "out",
+        "title": "QS",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "inert": true,
+        "ms": 5932.4,
+        "opacity": 0,
+        "phase": "in",
+        "title": "QS",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "inert": true,
+        "ms": 5949.1,
+        "opacity": 0.605935,
+        "phase": "in",
+        "title": "QS",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "inert": true,
+        "ms": 5965.8,
+        "opacity": 0.857539,
+        "phase": "in",
+        "title": "QS",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "inert": true,
+        "ms": 5982.5,
+        "opacity": 0.947055,
+        "phase": "in",
+        "title": "QS",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "inert": true,
+        "ms": 5999.2,
+        "opacity": 0.98396,
+        "phase": "in",
+        "title": "QS",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "inert": true,
+        "ms": 6015.7,
+        "opacity": 0.997759,
+        "phase": "in",
+        "title": "QS",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "inert": false,
+        "ms": 6032.1,
+        "opacity": 1,
+        "phase": "idle",
+        "title": "QS",
+        "transform": "none"
+      }
+    ]
+  },
+  "checks": "PASS: trash drop/hover, drag away, add back and settings retained, empty-page collapse, 320px deletion, last-item guard and reload; pull opacity, stationary-page fade out/in for pointer/catalog/native Mac wheel and reverse"
+}

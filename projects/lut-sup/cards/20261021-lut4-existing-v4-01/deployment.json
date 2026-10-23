@@ -1,0 +1,37 @@
+{
+  "schema": "lut4-existing-v4-deployment-1",
+  "state": "offline preparation complete; camera testing not started",
+  "source_package": "projects/lut-sup/cards/20261021-loader-v4-ui-04",
+  "installation_order": [
+    {
+      "path": "fpSup/LUT/ACTIVE.LUT",
+      "remote": "\\fpSup\\LUT\\ACTIVE.LUT",
+      "bytes": 332464,
+      "sha256": "cd60c83b56323ce5372dec042451364ebb29c4ef35cf455d41aa68e4a7094df5"
+    },
+    {
+      "path": "fpSup/LUT.BIN",
+      "remote": "\\fpSup\\LUT.BIN",
+      "bytes": 7408,
+      "sha256": "b367b6833421b4f912786915ee58b4449bbb6ea1eb721bb574149efdb7ff1f87"
+    }
+  ],
+  "preserve": [
+    "AutoRun.txt",
+    "fpSup/LOADER.BIN",
+    "fpSup/SUPMGR.BIN",
+    "fpSup/SHELL.BIN",
+    "fpSup/UI/*",
+    "all existing supers and camera media"
+  ],
+  "compatibility_evidence": "../../validation/20261021-lut4-camera-01/existing-loader-offline.json",
+  "reference_camera_backup": "../../validation/20261021-lut4-camera-01/before-manifest.json",
+  "input_default": "Rec.709 / Gamma 2.4",
+  "output": "Rec.709 D65 / Gamma 2.4",
+  "diagnostic_identity_cube": true,
+  "live_view_backend_connected": false,
+  "monitor_remains_off": true,
+  "before_install": "fresh standby, connection, card and echo-owner checks; the user is currently using the camera",
+  "readback_required": "exact directory lengths and complete byte equality for both files before restarting",
+  "runtime_hash_pairing": false
+}

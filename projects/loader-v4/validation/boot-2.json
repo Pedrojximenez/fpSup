@@ -1,0 +1,147 @@
+{
+ "magic": "MRKD",
+ "count": 5,
+ "stamps": [
+  2359244,
+  2371376,
+  2408007,
+  2875507,
+  3101799
+ ],
+ "load_start": 3175855,
+ "load_done": 3285074,
+ "events": [
+  [
+   525364,
+   "INIT: S DISP DEV ON"
+  ],
+  [
+   742530,
+   "INIT: E DISP DEV ON"
+  ],
+  [
+   989636,
+   "UI: in notified"
+  ],
+  [
+   1198630,
+   "INIT: OPENING DISP"
+  ],
+  [
+   1202658,
+   "UI: HdmiEdidFixed"
+  ],
+  [
+   1228644,
+   "INIT: REQ START LV"
+  ],
+  [
+   1571217,
+   "DISP: 49801000,49BFD000,00000000,30000000,"
+  ],
+  [
+   1571252,
+   "DISP: 49801000,49BFD000,00000000,30000003,"
+  ],
+  [
+   1618982,
+   "DISP: 49801000,49BFD000,00000000,30000000,"
+  ],
+  [
+   1619018,
+   "DISP: 49801000,49BFD000,00000000,30000003,"
+  ],
+  [
+   1630938,
+   "INIT: IMG DISP START"
+  ],
+  [
+   1914044,
+   "INIT: NORMAL OSD DISP"
+  ],
+  [
+   1968650,
+   "UI: 2315,MfSwitch"
+  ],
+  [
+   1972931,
+   "UI: 2425,CancelFocus"
+  ],
+  [
+   1986604,
+   "UI: LvStarted"
+  ],
+  [
+   2038399,
+   "DISP: 49801000,49BFD000,00000000,30000000,"
+  ],
+  [
+   2038435,
+   "DISP: 49801000,49BFD000,00000000,30000003,"
+  ],
+  [
+   2223851,
+   "UI: LvStarted"
+  ],
+  [
+   2226866,
+   "UI: in notify"
+  ],
+  [
+   2227042,
+   "UI: HdmiConnect"
+  ],
+  [
+   2227099,
+   "UI: in notified"
+  ],
+  [
+   2227136,
+   "UI: HdmiEdidFixed"
+  ],
+  [
+   2233802,
+   "UI: in notified"
+  ],
+  [
+   2279502,
+   "UI: LvStarted"
+  ],
+  [
+   2288638,
+   "DISP: 49801000,49BFD000,00000000,30000000,"
+  ],
+  [
+   2288675,
+   "DISP: 49801000,49BFD000,00000000,30000003,"
+  ],
+  [
+   2359244,
+   "S0 AutoRun start (after the stamp routine is installed)"
+  ],
+  [
+   2371376,
+   "S1 second stamp (S1-S0 = one marker)"
+  ],
+  [
+   2408007,
+   "S2 before the first splash display"
+  ],
+  [
+   2875507,
+   "S3 after the last splash display"
+  ],
+  [
+   3101799,
+   "S4 before the store bootstrap (Fast Start 3)"
+  ],
+  [
+   3175855,
+   "loader entered (LOAD_START_US)"
+  ],
+  [
+   3285074,
+   "loader done (LOAD_DONE_US)"
+  ]
+ ]
+}

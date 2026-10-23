@@ -1,0 +1,39 @@
+built into /Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/validation/20261013-hs-compress/cand
+{
+ "c_base": 4024,
+ "c_text": 44310,
+ "menu_off": 48384,
+ "menu_len": 30844,
+ "blob_len": 79232,
+ "state_off": 79232,
+ "state_bytes": 4866624,
+ "block_bytes": 4947968,
+ "entries": {
+  "fpl_card_init": 1,
+  "fpl_card_rec": 3361,
+  "fpl_card_arrive": 8153,
+  "fpl_card_stop": 10819,
+  "fpl_card_flush": 11903,
+  "fpl_card_task": 13123,
+  "fpl_card_play": 16029,
+  "fpl_card_clip": 17311,
+  "fpl_card_play_end": 18069,
+  "fpl_card_play_pool": 17853,
+  "fpl_card_written": 12459,
+  "fpl_card_event": 12579,
+  "fpl_card_discard": 12835,
+  "fpl_card_slots_prepare": 18189
+ },
+ "symbols": {
+  "entry": 0,
+  "claims": 2732,
+  "settings": 2716,
+  "c_base": 4024,
+  "task_shim": 2604,
+  "g_card": 2616,
+  "flush_real": 2672,
+  "discard_real": 2688,
+  "stop_resume": 2668,
+  "play_next": 2692
+ }
+}

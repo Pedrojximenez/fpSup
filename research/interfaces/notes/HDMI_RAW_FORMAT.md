@@ -239,7 +239,9 @@ CinemaDNG 與 HDMI RAW 都走 **mode 0 = 12-bit**。
 
 SIG 硬體區塊位址（`FUN_c01597B8` 的暫存器 dump）：
 `SIG0_RAWOUT = 0x301128C0`、`SIG1_RAWOUT = 0x30113890`、`SIG0_RAWBLT = 0x30112800`、
-`SIG0_RAWSHAD_LINEAR = 0x30112940`、`SIG1_RAW_ZOOM = 0x30113380`；輸出序列器 `SIGSEQ0/1 = 0x30200000 / 0x30200100`。
+`SIG0_RAWSHAD_LINEAR = 0x301129A0`、`SIG1_RAW_ZOOM = 0x30113380`；輸出序列器 `SIGSEQ0/1 = 0x30200000 / 0x30200100`。
+（2026-10-23 訂正：`0x30112940` 是 `SIG0_NLmeans`。這份診斷清單不代表 HDMI RAW
+啟用所有區塊；28 個 RAW profile 的原生配置驗證與證據界限見 [`HDMI_RAW.md §6`](HDMI_RAW.md#6-hdmi-raw-是否經-isp2026-10-23-離線驗證)。）
 
 ---
 

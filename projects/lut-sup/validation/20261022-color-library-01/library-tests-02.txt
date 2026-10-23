@@ -1,0 +1,28 @@
+test_author_comments_survive_normal_cube_parser_and_prefill (test_library.LibraryTests) ... ok
+test_author_invalid_conflicting_or_non709_output_is_rejected (test_library.LibraryTests) ... ok
+test_binary_identity_flags_checksum_and_original_source (test_library.LibraryTests) ... ok
+test_changed_source_is_not_silently_bound_to_old_settings (test_library.LibraryTests) ... ok
+test_disable_active_becomes_off_without_selecting_another (test_library.LibraryTests) ... ok
+test_filename_is_label_not_inferred_input (test_library.LibraryTests) ... ok
+test_manifest_roundtrip_and_bound_are_explicit (test_library.LibraryTests) ... ok
+test_pending_model_is_recorded_without_substitution (test_library.LibraryTests) ... ok
+test_recover_rejects_corrupt_record_and_preserves_manifest (test_library.LibraryTests) ... ok
+test_recover_saved_settings_by_content_after_rename (test_library.LibraryTests) ... ok
+test_same_filename_different_contents_is_not_a_shared_setting (test_library.LibraryTests) ... ok
+test_unrelated_comment_quotes_are_not_metadata (test_library.LibraryTests) ... ok
+test_user_overrides_are_per_cube_and_preserved_on_rename (test_library.LibraryTests) ... ok
+test_disable_active_and_empty_enable_list_stay_off_after_reload (test_library_native.LibraryNativeTests) ... ok
+test_editing_one_cube_does_not_change_other_or_current_active (test_library_native.LibraryNativeTests) ... ok
+test_input_and_strength_save_across_boot_with_no_source_cube_write (test_library_native.LibraryNativeTests) ... ok
+test_missing_or_replaced_bin_is_not_created_or_overwritten (test_library_native.LibraryNativeTests) ... ok
+test_one_entry_overview_and_only_enabled_items_in_picker (test_library_native.LibraryNativeTests) ... ok
+test_readback_failure_rolls_back_ram_and_does_not_replay (test_library_native.LibraryNativeTests) ... ok
+test_recording_blocks_file_loads_and_settings_writes (test_library_native.LibraryNativeTests) ... ok
+test_selecting_restores_cube_settings_and_uses_its_original_nodes (test_library_native.LibraryNativeTests) ... ok
+test_unmarked_filename_needs_configuration_and_cannot_be_used (test_library_native.LibraryNativeTests) ... ok
+test_wrong_asset_identity_does_not_replace_selected_lut (test_library_native.LibraryNativeTests) ... ok
+
+----------------------------------------------------------------------
+Ran 23 tests in 23.267s
+
+OK

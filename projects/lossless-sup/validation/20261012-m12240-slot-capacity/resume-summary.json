@@ -1,0 +1,108 @@
+{
+  "boot": 12689955,
+  "running_code_identity": "resume-running-code.json",
+  "new_boot_at_start": true,
+  "old_239p_statistics_unavailable_after_reboot": true,
+  "successful_takes": [
+    {
+      "source": "resume-m12240-30p-on.json",
+      "clip": "A001_135",
+      "fps": [
+        30000,
+        1001
+      ],
+      "arrivals": 169,
+      "requested": 169,
+      "finished": 169,
+      "compressed": 0,
+      "raw": 169,
+      "discarded": 0,
+      "positions": 832,
+      "free_after": 832,
+      "registry_occupied": 0,
+      "registry_count": 0,
+      "registry_lock": 0,
+      "cookies_pending": [
+        0,
+        0
+      ],
+      "writer_idle": {
+        "xmp_file_pointer": 0,
+        "movie_writing": 0
+      },
+      "codec_stalls": 0,
+      "native_bulk_bytes": 67108864,
+      "extra_count_flushes": 0,
+      "extra_pressure_flushes": 0,
+      "completion_budget_us": 264157
+    },
+    {
+      "source": "resume-m12240-60p-on.json",
+      "clip": "A001_136",
+      "fps": [
+        60000,
+        1001
+      ],
+      "arrivals": 279,
+      "requested": 279,
+      "finished": 279,
+      "compressed": 0,
+      "raw": 279,
+      "discarded": 0,
+      "positions": 844,
+      "free_after": 844,
+      "registry_occupied": 0,
+      "registry_count": 0,
+      "registry_lock": 0,
+      "cookies_pending": [
+        0,
+        0
+      ],
+      "writer_idle": {
+        "xmp_file_pointer": 0,
+        "movie_writing": 0
+      },
+      "codec_stalls": 0,
+      "native_bulk_bytes": 67108864,
+      "extra_count_flushes": 0,
+      "extra_pressure_flushes": 0,
+      "completion_budget_us": 469659
+    }
+  ],
+  "samples": {
+    "source": "resume-m12240-30p-on-frames/validation.json",
+    "clip": "A001_135",
+    "numbers": [
+      1,
+      169
+    ],
+    "decoded": true,
+    "compression": 1,
+    "sample_only": true
+  },
+  "119p": {
+    "source": "resume-m12240-120p-on.json",
+    "native_fps_row": 8,
+    "native_carrier": 7,
+    "actual_rec_facts": null,
+    "planned_window_seconds": 4,
+    "actual_duration_seconds": null,
+    "start_key_pair_acked": true,
+    "end_window_status_timeout": true,
+    "followup_timeout": "resume-120p-recovery.json",
+    "physical_stop_unresponsive": true,
+    "last_successful_query": "resume-120p-after-physical-stop.json",
+    "last_recording": 1,
+    "writer_lamp_user_report": "lit or flashing",
+    "remote_stop_sent": false,
+    "remote_stop_guard_failed": "resume-120p-single-remote-stop.json",
+    "user_manually_powered_off": true,
+    "normal_stop_verified": false,
+    "allocation_release_verified": false,
+    "file_completion_verified": false
+  },
+  "further_240p_trial": false,
+  "camera_end_state": "powered_off_by_user; awaiting restart for standby and file inspection",
+  "stable_release": false,
+  "merge_promoted": false
+}

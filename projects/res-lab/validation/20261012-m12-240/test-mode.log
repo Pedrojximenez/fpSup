@@ -1,0 +1,36 @@
+test_data_matches_independent_archived_pairs_and_stock_timing (__main__.M12Tests) ... FAIL
+test_disk_entry_full_canvas_real_metadata_and_shutdown (__main__.M12Tests) ... ok
+test_exact_v18_baseline_exposes_recipe_override (__main__.M12Tests) ... ok
+test_native_callbacks_roundtrip_120_240_and_decline_280 (__main__.M12Tests) ... FAIL
+test_same_data_through_generic_virtual_service (__main__.M12Tests) ... ok
+test_hook_is_journalled_restored_and_missing_hook_is_detected (test_reslab_record_rate.RecordRateTests) ... ok
+test_record_header_does_not_enter_interactive_settings (test_reslab_record_rate.RecordRateTests) ... ok
+test_selected_sensor_cadence_reaches_dng_rational (test_reslab_record_rate.RecordRateTests) ... ok
+test_unpicked_inactive_and_changed_carrier_keep_native_rate (test_reslab_record_rate.RecordRateTests) ... ok
+
+======================================================================
+FAIL: test_data_matches_independent_archived_pairs_and_stock_timing (__main__.M12Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_m12_240.py", line 110, in test_data_matches_independent_archived_pairs_and_stock_timing
+    self.assertNotIn('capture_timing',self.row)
+AssertionError: 'capture_timing' unexpectedly found in {'label': 'M12240', 'stock_value': 2, 'aspect': 2, 'clamp': 0, 'flags': 0, 'maxrate': 23976, 'profile': 13, 'enum': 1295069760, 'bit_depths': (12,), 'modes': [(12, 23976, 330, 0, 6)], 'entries': [{'key': 'M1224023_98', 'donor': 12, 'w0': 21627210, 'w1': 402316, 'engfps': 1103101952, 'nominal': 24, 'vrate': 0, 'rank': 2398, 'crop': 0}, {'key': 'M1224024', 'donor': 12, 'w0': 19661130, 'w1': 402307, 'engfps': 1103101952, 'nominal': 24, 'vrate': 0, 'rank': 2400, 'crop': 0}, {'key': 'M1224025', 'donor': 12, 'w0': 27525450, 'w1': 401943, 'engfps': 1103626240, 'nominal': 25, 'vrate': 0, 'rank': 2500, 'crop': 0}, {'key': 'M1224030', 'donor': 12, 'w0': 21627210, 'w1': 400496, 'engfps': 1106247680, 'nominal': 30, 'vrate': 0, 'rank': 2997, 'crop': 0}, {'key': 'M1224048', 'donor': 12, 'w0': 31457610, 'w1': 397761, 'engfps': 1111490560, 'nominal': 48, 'vrate': 0, 'rank': 4800, 'crop': 0}, {'key': 'M1224050', 'donor': 12, 'w0': 35389770, 'w1': 397579, 'engfps': 1112014848, 'nominal': 50, 'vrate': 0, 'rank': 5000, 'crop': 0}, {'key': 'M1224060', 'donor': 12, 'w0': 21627210, 'w1': 396856, 'engfps': 1114636288, 'nominal': 60, 'vrate': 0, 'rank': 5994, 'crop': 0}, {'key': 'M12240100', 'donor': 12, 'w0': 17695050, 'w1': 395398, 'engfps': 1112014848, 'nominal': 100, 'vrate': 0, 'rank': 10000, 'crop': 0}, {'key': 'M12240120', 'donor': 12, 'w0': 21627210, 'w1': 395036, 'engfps': 1114636288, 'nominal': 120, 'vrate': 0, 'rank': 11988, 'crop': 0}, {'key': 'M12240120', 'donor': 12, 'w0': 21627210, 'w1': 394126, 'engfps': 1131397791, 'nominal': 240, 'vrate': 23976, 'rank': 23976, 'crop': 0}, {'key': 'M1224023_98', 'donor': 12, 'w0': 28836170, 'w1': 405349, 'engfps': 1099946796, 'nominal': 18, 'vrate': 1798, 'rank': 1798, 'crop': 0}], 'capture_timing': [], 'prev_h': 1334, 'act': (992, 662), 'canvas_rec': [(0, 1008), (4, 672), (12, 1008), (16, 672), (32, 992), (36, 992), (40, 662), (44, 662), (96, 2048), (100, 2048), (128, 7), (132, 7), (144, 1), (192, 0), (208, 1024), (212, 1024), (216, 1008), (220, 1008), (224, 672), (228, 672), (244, 1008), (248, 672), (252, 1073741824), (256, 1073741824)], 'canvas_pb': [(0, 1008), (4, 672), (12, 1008), (16, 672), (36, 992), (44, 662), (220, 1008), (228, 672)], 'row_text': 'M12240 992x662', 'summary': 'M12240', 'pack': (640, 6496), 'standby': [], 'rate_canvas': [{'rank': 10000, 'crop': 0, 'base_profile': 13, 'pairs': [(176, 1)]}, {'rank': 11988, 'crop': 0, 'base_profile': 13, 'pairs': [(176, 1)]}, {'rank': 23976, 'crop': 0, 'base_profile': 13, 'pairs': [(176, 1)]}, {'rank': 0, 'crop': 0, 'base_profile': 13, 'pairs': [(176, 0)]}], 'overrides': []}
+
+======================================================================
+FAIL: test_native_callbacks_roundtrip_120_240_and_decline_280 (__main__.M12Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_m12_240.py", line 139, in test_native_callbacks_roundtrip_120_240_and_decline_280
+    s=cam.s()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/v3/test_v3.py", line 262, in call
+    raise self.error
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/v3/test_v3.py", line 140, in _safe_hook
+    self._hook(mu, addr, size, data)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_virtual_rcd.py", line 94, in _hook
+    raise AssertionError(f'unmodeled firmware execution {addr:#x}')
+AssertionError: unmodeled firmware execution 0xc057a6fc
+
+----------------------------------------------------------------------
+Ran 9 tests in 257.981s
+
+FAILED (failures=2)

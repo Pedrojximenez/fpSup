@@ -1,0 +1,1279 @@
+class,astro_table,fp_ref,addr,astro,fp,zcam,status
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0000,00,,04,fp-never z-diff
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0001,29,29,29,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0005,02,02,02,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0016,07,0F,07,fp-diff
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,001C,05,05,05,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0042,22,22,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0043,02,02,02,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0058,70,20,70,fp-diff
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,007E,60,60,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,007F,FC,FC,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0081,68,68,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0083,10,10,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0084,10,10,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0085,14,14,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0086,14,14,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0089,66,66,66,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,008C,00,00,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,00C5,00,00,00,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,00C6,00,00,00,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,00CA,01,01,01,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,00CE,00,,00,fp-never
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,00DB,BC,,,fp-never z-never
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,00DC,01,,,fp-never z-never
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,00E9,80,,80,fp-never
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,03E1,01,,,fp-never z-never
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,03E2,0F,,,fp-never z-never
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0403,22,22,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,041B,03,03,03,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,042A,58,58,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,042D,98,98,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0430,89,89,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0441,89,89,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,044D,00,00,00,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0453,30,30,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0482,03,03,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0484,05,05,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0487,60,60,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0489,68,68,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,048B,58,58,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,04DC,6A,6A,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,04DF,6C,6C,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,04E1,6A,6A,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,04E4,40,40,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,04E6,00,00,00,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,04F1,00,00,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0511,84,84,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0525,11,11,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0569,09,09,09,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0571,22,22,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0575,10,10,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0576,10,10,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0577,14,14,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0578,14,14,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,057A,00,00,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0585,7B,7B,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0590,01,01,01,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0591,03,03,03,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0592,01,01,01,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0593,03,03,03,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0594,01,01,01,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0595,03,03,03,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,059A,02,02,02,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,059B,02,02,02,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,059C,02,02,02,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,059D,02,02,02,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,05D8,74,74,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,06D0,01,01,01,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,06D3,01,01,01,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,06D6,01,01,01,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,06D9,00,00,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0716,01,01,01,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0717,02,02,02,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,071E,01,01,01,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0720,01,01,01,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0722,00,00,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0723,00,00,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0724,00,00,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0725,00,00,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0726,00,00,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0727,01,01,01,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0728,3B,3B,3B,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,072A,E5,E5,E5,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,072B,07,07,07,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,072C,02,02,02,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0734,01,01,01,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0735,01,01,01,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0737,00,00,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0738,00,00,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0739,00,00,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,073A,00,00,,z-not-written
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0790,01,01,01,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0792,10,10,10,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0793,01,01,01,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0794,01,01,01,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0795,01,01,01,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0796,19,19,19,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0797,10,10,10,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,0798,2C,2C,2C,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,079A,25,25,25,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,079C,3B,3B,3B,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,079E,08,08,08,same
+14bit 1x1,zwo_reglist_fullsize,fp mode 0,079F,10,10,10,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0001,29,29,29,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0016,02,0F,07,fp-diff z-diff
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,001C,05,05,05,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0042,22,22,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0058,70,20,70,fp-diff
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0062,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0067,0B,0B,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0068,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,006A,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,006F,36,36,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0070,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,007E,60,60,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,007F,FC,FC,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0081,68,68,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0083,10,10,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0084,10,10,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0085,14,14,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0086,14,14,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0089,66,66,66,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,008A,22,22,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,008C,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0094,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,00C5,00,00,00,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,00C6,00,00,00,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,00CA,01,01,01,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,00E9,80,,80,fp-never
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0240,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0242,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0244,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0278,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0279,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,027B,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0403,22,22,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,041B,03,03,03,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0429,31,31,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,042A,58,58,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,042D,98,98,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0430,89,89,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0433,23,23,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0434,1F,1F,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0435,23,23,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0436,1F,1F,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0437,23,23,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0438,1F,1F,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0439,23,23,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,043A,1F,1F,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,043B,23,23,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,043C,1F,1F,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,043D,23,23,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,043E,1F,1F,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0441,89,89,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0444,3C,3C,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,044D,00,00,00,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0453,30,30,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0482,03,03,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0484,05,05,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0487,60,60,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0489,68,68,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,048A,31,31,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,048B,58,58,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,04DB,3A,3A,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,04DC,6A,6A,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,04DE,38,38,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,04DF,6C,6C,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,04E0,3A,3A,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,04E1,6A,6A,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,04E2,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,04E4,40,40,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,04E6,00,00,00,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,04F1,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0505,3F,3F,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,050A,3F,3F,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,050D,3F,3F,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,050F,3F,3F,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0511,84,84,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0516,23,23,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0517,21,21,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0518,23,23,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0519,21,21,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0520,2A,2A,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0521,28,28,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0522,2A,2A,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0523,28,28,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0524,01,01,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0525,11,11,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,052E,01,01,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,052F,23,23,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0530,19,19,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0531,23,23,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0532,19,19,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0569,09,09,09,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,056C,06,06,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0571,22,22,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0575,10,10,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0576,10,10,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0577,14,14,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0578,14,14,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,057A,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0583,05,05,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0584,13,13,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0585,7B,7B,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0590,01,01,01,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0591,03,03,03,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0592,01,01,01,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0593,03,03,03,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0594,01,01,01,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0595,03,03,03,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,059A,02,02,02,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,059B,02,02,02,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,059C,02,02,02,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,059D,02,02,02,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,05D8,74,74,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,06D0,01,01,01,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,06D3,01,01,01,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,06D6,01,01,01,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,06D9,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0716,01,01,01,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0717,02,02,02,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,071E,01,01,01,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0720,01,01,01,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0722,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0723,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0724,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0725,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0726,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0727,01,01,01,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0728,3B,3B,3B,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0729,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,072A,E5,E5,E5,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,072B,07,07,07,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,072C,02,02,02,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0734,01,01,01,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0735,01,01,01,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0736,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0737,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0738,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0739,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,073A,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,078D,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0790,01,01,01,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0792,10,10,10,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0793,01,01,01,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0794,01,01,01,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0795,01,01,01,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0796,19,19,19,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0797,10,10,10,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,0798,2C,2C,2C,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,079A,25,25,25,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,079C,3B,3B,3B,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,079E,08,08,08,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,079F,10,10,10,same
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,08B6,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@340c140,fp mode 0,08B7,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0001,29,29,29,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0016,02,0F,07,fp-diff z-diff
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,001C,05,05,05,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0042,22,22,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0058,70,20,70,fp-diff
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0062,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0067,0B,0B,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0068,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,006A,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,006F,36,36,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0070,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,007E,60,60,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,007F,FC,FC,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0081,68,68,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0083,10,10,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0084,10,10,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0085,14,14,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0086,14,14,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0089,66,66,66,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,008A,22,22,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,008C,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0094,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,00C5,00,00,00,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,00C6,00,00,00,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,00CA,01,01,01,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,00E9,80,,80,fp-never
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0240,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0242,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0244,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0278,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0279,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,027B,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0403,22,22,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,041B,03,03,03,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0429,31,31,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,042A,58,58,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,042D,98,98,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0430,89,89,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0433,23,23,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0434,1F,1F,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0435,23,23,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0436,1F,1F,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0437,23,23,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0438,1F,1F,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0439,23,23,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,043A,1F,1F,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,043B,23,23,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,043C,1F,1F,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,043D,23,23,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,043E,1F,1F,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0441,89,89,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0444,3C,3C,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,044D,00,00,00,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0453,30,30,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0482,03,03,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0484,05,05,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0487,60,60,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0489,68,68,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,048A,31,31,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,048B,58,58,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,04DB,3A,3A,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,04DC,6A,6A,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,04DE,38,38,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,04DF,6C,6C,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,04E0,3A,3A,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,04E1,6A,6A,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,04E2,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,04E4,40,40,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,04E6,00,00,00,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,04F1,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0505,3F,3F,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,050A,3F,3F,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,050D,3F,3F,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,050F,3F,3F,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0511,84,84,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0516,23,23,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0517,21,21,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0518,23,23,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0519,21,21,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0520,2A,2A,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0521,28,28,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0522,2A,2A,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0523,28,28,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0524,01,01,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0525,11,11,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,052E,01,01,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,052F,23,23,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0530,19,19,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0531,23,23,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0532,19,19,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0569,09,09,09,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,056C,06,06,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0571,22,22,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0575,10,10,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0576,10,10,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0577,14,14,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0578,14,14,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,057A,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0583,05,05,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0584,13,13,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0585,7B,7B,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0590,01,01,01,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0591,03,03,03,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0592,01,01,01,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0593,03,03,03,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0594,01,01,01,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0595,03,03,03,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,059A,02,02,02,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,059B,02,02,02,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,059C,02,02,02,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,059D,02,02,02,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,05D8,74,74,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,06D0,01,01,01,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,06D3,01,01,01,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,06D6,01,01,01,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,06D9,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0716,01,01,01,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0717,02,02,02,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,071E,01,01,01,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0720,01,01,01,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0722,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0723,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0724,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0725,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0726,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0727,01,01,01,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0728,3B,3B,3B,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0729,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,072A,E5,E5,E5,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,072B,07,07,07,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,072C,02,02,02,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0734,01,01,01,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0735,01,01,01,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0736,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0737,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0738,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0739,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,073A,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,078D,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0790,01,01,01,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0792,10,10,10,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0793,01,01,01,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0794,01,01,01,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0795,01,01,01,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0796,19,19,19,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0797,10,10,10,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,0798,2C,2C,2C,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,079A,25,25,25,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,079C,3B,3B,3B,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,079E,08,08,08,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,079F,10,10,10,same
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,08B6,00,00,,z-not-written
+14bit 1x1,toup_14bit_1x1@3490580,fp mode 0,08B7,00,00,,z-not-written
+14bit 1x1,qhy_init,fp mode 0,0000,04,,04,fp-never
+14bit 1x1,qhy_init,fp mode 0,0001,29,29,29,same
+14bit 1x1,qhy_init,fp mode 0,0005,02,02,02,same
+14bit 1x1,qhy_init,fp mode 0,0016,07,0F,07,fp-diff
+14bit 1x1,qhy_init,fp mode 0,001C,05,05,05,same
+14bit 1x1,qhy_init,fp mode 0,0043,02,02,02,same
+14bit 1x1,qhy_init,fp mode 0,0058,70,20,70,fp-diff
+14bit 1x1,qhy_init,fp mode 0,0089,66,66,66,same
+14bit 1x1,qhy_init,fp mode 0,00C5,00,00,00,same
+14bit 1x1,qhy_init,fp mode 0,00C6,00,00,00,same
+14bit 1x1,qhy_init,fp mode 0,00CA,01,01,01,same
+14bit 1x1,qhy_init,fp mode 0,00CE,00,,00,fp-never
+14bit 1x1,qhy_init,fp mode 0,00D9,60,,60,fp-never
+14bit 1x1,qhy_init,fp mode 0,00E9,80,,80,fp-never
+14bit 1x1,qhy_init,fp mode 0,041B,03,03,03,same
+14bit 1x1,qhy_init,fp mode 0,044D,00,00,00,same
+14bit 1x1,qhy_init,fp mode 0,04E6,00,00,00,same
+14bit 1x1,qhy_init,fp mode 0,0569,09,09,09,same
+14bit 1x1,qhy_init,fp mode 0,0590,01,01,01,same
+14bit 1x1,qhy_init,fp mode 0,0591,03,03,03,same
+14bit 1x1,qhy_init,fp mode 0,0592,01,01,01,same
+14bit 1x1,qhy_init,fp mode 0,0593,03,03,03,same
+14bit 1x1,qhy_init,fp mode 0,0594,01,01,01,same
+14bit 1x1,qhy_init,fp mode 0,0595,03,03,03,same
+14bit 1x1,qhy_init,fp mode 0,059A,02,02,02,same
+14bit 1x1,qhy_init,fp mode 0,059B,02,02,02,same
+14bit 1x1,qhy_init,fp mode 0,059C,02,02,02,same
+14bit 1x1,qhy_init,fp mode 0,059D,02,02,02,same
+14bit 1x1,qhy_init,fp mode 0,06D0,01,01,01,same
+14bit 1x1,qhy_init,fp mode 0,06D3,01,01,01,same
+14bit 1x1,qhy_init,fp mode 0,06D6,01,01,01,same
+14bit 1x1,qhy_init,fp mode 0,0716,01,01,01,same
+14bit 1x1,qhy_init,fp mode 0,0717,02,02,02,same
+14bit 1x1,qhy_init,fp mode 0,071E,01,01,01,same
+14bit 1x1,qhy_init,fp mode 0,0720,01,01,01,same
+14bit 1x1,qhy_init,fp mode 0,0727,01,01,01,same
+14bit 1x1,qhy_init,fp mode 0,0728,3B,3B,3B,same
+14bit 1x1,qhy_init,fp mode 0,072A,E5,E5,E5,same
+14bit 1x1,qhy_init,fp mode 0,072B,07,07,07,same
+14bit 1x1,qhy_init,fp mode 0,072C,02,02,02,same
+14bit 1x1,qhy_init,fp mode 0,0734,01,01,01,same
+14bit 1x1,qhy_init,fp mode 0,0735,01,01,01,same
+14bit 1x1,qhy_init,fp mode 0,0790,01,01,01,same
+14bit 1x1,qhy_init,fp mode 0,0792,10,10,10,same
+14bit 1x1,qhy_init,fp mode 0,0793,01,01,01,same
+14bit 1x1,qhy_init,fp mode 0,0794,01,01,01,same
+14bit 1x1,qhy_init,fp mode 0,0795,01,01,01,same
+14bit 1x1,qhy_init,fp mode 0,0796,19,19,19,same
+14bit 1x1,qhy_init,fp mode 0,0797,10,10,10,same
+14bit 1x1,qhy_init,fp mode 0,0798,2C,2C,2C,same
+14bit 1x1,qhy_init,fp mode 0,079A,25,25,25,same
+14bit 1x1,qhy_init,fp mode 0,079C,3B,3B,3B,same
+14bit 1x1,qhy_init,fp mode 0,079E,08,08,08,same
+14bit 1x1,qhy_init,fp mode 0,079F,10,10,10,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0000,00,,04,fp-never z-diff
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0001,2A,2A,2A,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0005,02,02,02,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0016,07,0F,07,fp-diff
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,001C,05,05,05,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0042,88,88,88,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0043,02,02,02,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0058,70,20,70,fp-diff
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,007E,46,46,46,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,007F,C0,C0,C0,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0081,4E,4E,4E,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0083,23,23,23,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0084,23,23,23,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0085,19,19,19,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0086,19,19,19,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0089,EE,EE,EE,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,008C,33,33,33,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,00C5,00,00,00,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,00C6,00,00,00,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,00CA,01,01,01,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,00CE,00,,00,fp-never
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,00DB,BC,,,fp-never z-never
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,00DC,01,,,fp-never z-never
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,00E9,80,,80,fp-never
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,03E1,01,,,fp-never z-never
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,03E2,0F,,,fp-never z-never
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0403,88,88,88,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,041B,03,03,03,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,042A,3E,3E,3E,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,042D,7E,7E,7E,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0430,6F,6F,6F,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0441,7D,7D,7D,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,044D,00,00,00,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0453,00,00,00,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0482,07,07,07,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0484,0B,0B,0B,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0487,46,46,46,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0489,4E,4E,4E,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,048B,3E,3E,3E,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,04DC,5C,5C,5C,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,04DF,5E,5E,5E,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,04E1,5C,5C,5C,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,04E4,3A,3A,3A,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,04E6,00,00,00,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,04F1,70,70,70,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0511,6A,6A,6A,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0525,10,10,10,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0569,09,09,09,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0571,AA,AA,AA,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0575,12,12,12,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0576,12,12,12,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0577,19,19,19,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0578,19,19,19,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,057A,33,33,33,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0585,6C,6C,6C,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0590,01,01,01,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0591,03,03,03,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0592,01,01,01,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0593,03,03,03,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0594,01,01,01,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0595,03,03,03,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,059A,02,02,02,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,059B,02,02,02,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,059C,02,02,02,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,059D,02,02,02,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,05D8,5E,5E,5E,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,06D0,01,01,01,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,06D3,01,01,01,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,06D6,01,01,01,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,06D9,02,02,02,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0716,01,01,01,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0717,02,02,02,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,071E,01,01,01,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0720,01,01,01,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0722,00,00,,z-not-written
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0723,00,00,,z-not-written
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0724,00,00,,z-not-written
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0725,00,00,,z-not-written
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0726,00,00,,z-not-written
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0727,01,01,01,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0728,3B,3B,3B,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,072A,E5,E5,E5,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,072B,07,07,07,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,072C,02,02,02,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0734,01,01,01,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0735,01,01,01,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0737,00,00,,z-not-written
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0738,00,00,,z-not-written
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0739,00,00,,z-not-written
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,073A,00,00,,z-not-written
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0790,01,01,01,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0792,10,10,10,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0793,01,01,01,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0794,01,01,01,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0795,01,01,01,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0796,19,19,19,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0797,10,10,10,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,0798,2C,2C,2C,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,079A,25,25,25,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,079C,3B,3B,3B,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,079E,08,08,08,same
+12bit 1x1 normal,zwo_reg_full_12bit,fp mode 97,079F,10,10,10,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0000,00,,04,fp-never z-diff
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0001,39,39,39,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0005,03,03,03,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0016,07,14,07,fp-diff
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,001C,03,03,03,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0042,88,88,88,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0043,02,02,02,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0058,70,70,70,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,007E,46,46,46,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,007F,C0,C0,C0,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0081,4E,4E,4E,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0083,23,23,23,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0084,23,23,23,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0085,19,19,19,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0086,19,19,19,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0089,EE,EE,EE,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,008C,33,33,33,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,00C5,00,00,00,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,00C6,00,00,00,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,00CA,01,01,01,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,00CE,00,,00,fp-never
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,00DB,BC,,,fp-never z-never
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,00DC,01,,,fp-never z-never
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,00E9,80,,80,fp-never
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,03E1,01,,,fp-never z-never
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,03E2,0F,,,fp-never z-never
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0403,88,88,88,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,041B,03,03,03,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,042A,3E,3E,3E,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,042D,7E,7E,7E,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0430,6F,6F,6F,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0441,7D,7D,7D,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,044D,00,00,00,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0453,00,00,00,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0482,07,07,07,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0484,0B,0B,0B,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0487,46,46,46,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0489,4E,4E,4E,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,048B,3E,3E,3E,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,04DC,5C,5C,5C,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,04DF,5E,5E,5E,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,04E1,5C,5C,5C,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,04E4,3A,3A,3A,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,04E6,00,00,00,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,04F1,70,70,70,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0511,6A,6A,6A,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0525,10,10,10,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0569,09,09,09,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0571,AA,AA,AA,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0575,12,12,12,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0576,12,12,12,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0577,19,19,19,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0578,19,19,19,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,057A,33,33,33,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0585,6C,6C,6C,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0590,01,01,01,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0591,03,03,03,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0592,01,01,01,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0593,03,03,03,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0594,01,01,01,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0595,03,03,03,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,059A,02,02,02,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,059B,02,02,02,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,059C,02,02,02,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,059D,02,02,02,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,05D8,5E,5E,5E,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,06D0,01,01,01,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,06D3,01,01,01,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,06D6,01,01,01,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,06D9,02,02,02,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0716,01,01,01,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0717,04,04,04,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,071E,05,05,05,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0720,05,05,05,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0722,02,02,02,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0723,02,02,02,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0724,02,02,02,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0725,02,02,02,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0726,01,01,01,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0727,01,01,01,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0728,3D,3D,3D,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,072A,F0,F0,F0,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,072B,03,03,03,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,072C,04,04,04,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0734,05,05,05,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0735,05,05,05,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0737,02,02,02,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0738,02,02,02,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0739,02,02,02,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,073A,02,02,02,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0790,00,00,,z-not-written
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0792,22,22,22,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0793,02,02,02,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0794,05,05,05,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0795,01,01,01,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0796,19,19,19,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0797,10,10,10,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,0798,2C,2C,2C,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,079A,25,25,25,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,079C,3D,3D,3D,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,079E,08,08,08,same
+12bit 2x2 normal,zwo_reglist_bin2,fp mode 98,079F,10,10,10,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0001,39,39,39,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0016,07,14,07,fp-diff
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,001C,03,03,03,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0042,88,88,88,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0058,70,70,70,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0062,00,00,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0067,0B,0B,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0068,00,00,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,006A,00,00,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,006F,36,36,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0070,00,00,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,007E,46,46,46,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,007F,C0,C0,C0,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0081,4E,4E,4E,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0083,23,23,23,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0084,23,23,23,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0085,19,19,19,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0086,19,19,19,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0089,EE,EE,EE,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,008A,22,22,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,008C,33,33,33,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0094,00,00,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,00C5,00,00,00,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,00C6,00,00,00,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,00CA,01,01,01,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,00E9,80,,80,fp-never
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0240,00,00,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0242,00,00,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0244,00,00,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0278,00,00,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0279,00,00,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,027B,00,00,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0403,88,88,88,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,041B,03,03,03,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0429,31,31,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,042A,3E,3E,3E,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,042D,7E,7E,7E,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0430,6F,6F,6F,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0433,23,23,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0434,1F,1F,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0435,23,23,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0436,1F,1F,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0437,23,23,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0438,1F,1F,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0439,23,23,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,043A,1F,1F,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,043B,23,23,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,043C,1F,1F,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,043D,23,23,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,043E,1F,1F,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0441,7D,7D,7D,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0444,3C,3C,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,044D,00,00,00,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0453,00,00,00,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0482,07,07,07,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0484,0B,0B,0B,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0487,46,46,46,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0489,4E,4E,4E,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,048A,31,31,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,048B,3E,3E,3E,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,04DB,3A,3A,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,04DC,5C,5C,5C,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,04DE,38,38,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,04DF,5E,5E,5E,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,04E0,3A,3A,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,04E1,5C,5C,5C,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,04E2,00,00,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,04E4,3A,3A,3A,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,04E6,00,00,00,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,04F1,70,70,70,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0505,3F,3F,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,050A,3F,3F,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,050D,3F,3F,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,050F,3F,3F,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0511,6A,6A,6A,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0516,23,23,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0517,21,21,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0518,23,23,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0519,21,21,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0520,2A,2A,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0521,28,28,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0522,2A,2A,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0523,28,28,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0524,01,01,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0525,10,10,10,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,052E,01,01,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,052F,23,23,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0530,19,19,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0531,23,23,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0532,19,19,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0569,09,09,09,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,056C,06,06,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0571,AA,AA,AA,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0575,12,12,12,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0576,12,12,12,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0577,19,19,19,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0578,19,19,19,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,057A,33,33,33,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0583,05,05,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0584,13,13,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0585,6C,6C,6C,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0590,01,01,01,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0591,03,03,03,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0592,01,01,01,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0593,03,03,03,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0594,01,01,01,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0595,03,03,03,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,059A,02,02,02,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,059B,02,02,02,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,059C,02,02,02,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,059D,02,02,02,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,05D8,5E,5E,5E,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,06D0,01,01,01,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,06D3,01,01,01,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,06D6,01,01,01,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,06D9,02,02,02,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0716,01,01,01,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0717,04,04,04,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,071E,05,05,05,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0720,05,05,05,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0722,02,02,02,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0723,02,02,02,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0724,02,02,02,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0725,02,02,02,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0726,01,01,01,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0727,01,01,01,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0728,3D,3D,3D,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0729,00,00,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,072A,F0,F0,F0,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,072B,03,03,03,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,072C,04,04,04,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0734,05,05,05,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0735,05,05,05,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0736,00,00,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0737,02,02,02,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0738,02,02,02,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0739,02,02,02,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,073A,02,02,02,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,078D,00,00,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0790,00,00,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0792,22,22,22,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0793,02,02,02,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0794,05,05,05,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0795,01,01,01,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0796,19,19,19,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0797,10,10,10,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,0798,2C,2C,2C,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,079A,25,25,25,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,079C,3D,3D,3D,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,079E,08,08,08,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,079F,10,10,10,same
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,08B6,00,00,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@340c640,fp mode 98,08B7,00,00,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0001,39,39,39,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0016,07,14,07,fp-diff
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,001C,03,03,03,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0042,88,88,88,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0058,70,70,70,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0062,00,00,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0067,0B,0B,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0068,00,00,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,006A,00,00,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,006F,36,36,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0070,00,00,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,007E,46,46,46,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,007F,C0,C0,C0,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0081,4E,4E,4E,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0083,23,23,23,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0084,23,23,23,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0085,19,19,19,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0086,19,19,19,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0089,EE,EE,EE,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,008A,22,22,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,008C,33,33,33,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0094,00,00,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,00C5,00,00,00,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,00C6,00,00,00,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,00CA,01,01,01,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,00E9,80,,80,fp-never
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0240,00,00,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0242,00,00,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0244,00,00,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0278,00,00,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0279,00,00,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,027B,00,00,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0403,88,88,88,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,041B,03,03,03,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0429,31,31,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,042A,3E,3E,3E,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,042D,7E,7E,7E,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0430,6F,6F,6F,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0433,23,23,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0434,1F,1F,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0435,23,23,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0436,1F,1F,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0437,23,23,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0438,1F,1F,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0439,23,23,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,043A,1F,1F,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,043B,23,23,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,043C,1F,1F,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,043D,23,23,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,043E,1F,1F,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0441,7D,7D,7D,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0444,3C,3C,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,044D,00,00,00,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0453,00,00,00,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0482,07,07,07,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0484,0B,0B,0B,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0487,46,46,46,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0489,4E,4E,4E,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,048A,31,31,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,048B,3E,3E,3E,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,04DB,3A,3A,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,04DC,5C,5C,5C,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,04DE,38,38,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,04DF,5E,5E,5E,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,04E0,3A,3A,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,04E1,5C,5C,5C,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,04E2,00,00,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,04E4,3A,3A,3A,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,04E6,00,00,00,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,04F1,70,70,70,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0505,3F,3F,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,050A,3F,3F,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,050D,3F,3F,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,050F,3F,3F,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0511,6A,6A,6A,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0516,23,23,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0517,21,21,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0518,23,23,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0519,21,21,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0520,2A,2A,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0521,28,28,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0522,2A,2A,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0523,28,28,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0524,01,01,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0525,10,10,10,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,052E,01,01,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,052F,23,23,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0530,19,19,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0531,23,23,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0532,19,19,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0569,09,09,09,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,056C,06,06,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0571,AA,AA,AA,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0575,12,12,12,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0576,12,12,12,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0577,19,19,19,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0578,19,19,19,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,057A,33,33,33,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0583,05,05,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0584,13,13,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0585,6C,6C,6C,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0590,01,01,01,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0591,03,03,03,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0592,01,01,01,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0593,03,03,03,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0594,01,01,01,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0595,03,03,03,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,059A,02,02,02,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,059B,02,02,02,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,059C,02,02,02,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,059D,02,02,02,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,05D8,5E,5E,5E,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,06D0,01,01,01,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,06D3,01,01,01,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,06D6,01,01,01,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,06D9,02,02,02,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0716,01,01,01,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0717,04,04,04,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,071E,05,05,05,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0720,05,05,05,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0722,02,02,02,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0723,02,02,02,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0724,02,02,02,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0725,02,02,02,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0726,01,01,01,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0727,01,01,01,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0728,3D,3D,3D,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0729,00,00,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,072A,F0,F0,F0,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,072B,03,03,03,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,072C,04,04,04,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0734,05,05,05,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0735,05,05,05,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0736,00,00,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0737,02,02,02,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0738,02,02,02,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0739,02,02,02,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,073A,02,02,02,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,078D,00,00,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0790,00,00,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0792,22,22,22,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0793,02,02,02,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0794,05,05,05,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0795,01,01,01,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0796,19,19,19,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0797,10,10,10,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,0798,2C,2C,2C,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,079A,25,25,25,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,079C,3D,3D,3D,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,079E,08,08,08,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,079F,10,10,10,same
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,08B6,00,00,,z-not-written
+12bit 2x2 normal,toup_12bit_2x2@3490a80,fp mode 98,08B7,00,00,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0001,2F,2F,2F,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0016,07,32,07,fp-diff
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,001C,02,02,02,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0042,88,88,88,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0058,70,70,70,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0062,00,00,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0067,0B,0B,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0068,00,00,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,006A,00,00,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,006F,36,36,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0070,00,00,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,007E,46,46,46,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,007F,C0,C0,C0,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0081,4E,4E,4E,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0083,23,23,23,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0084,23,23,23,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0085,19,19,19,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0086,19,19,19,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0089,EE,EE,EE,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,008A,22,22,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,008C,33,33,33,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0094,00,00,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,00C5,00,00,00,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,00C6,00,00,00,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,00CA,01,01,01,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,00E9,80,,80,fp-never
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0240,00,00,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0242,00,00,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0244,00,00,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0278,00,00,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0279,00,00,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,027B,00,00,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0403,88,88,88,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,041B,03,03,03,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0429,31,31,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,042A,3E,3E,3E,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,042D,7E,7E,7E,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0430,6F,6F,6F,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0433,23,23,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0434,1F,1F,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0435,23,23,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0436,1F,1F,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0437,23,23,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0438,1F,1F,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0439,23,23,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,043A,1F,1F,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,043B,23,23,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,043C,1F,1F,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,043D,23,23,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,043E,1F,1F,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0441,7D,7D,7D,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0444,3C,3C,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,044D,00,00,00,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0453,00,00,00,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0482,07,07,07,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0484,0B,0B,0B,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0487,46,46,46,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0489,4E,4E,4E,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,048A,31,31,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,048B,3E,3E,3E,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,04DB,3A,3A,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,04DC,5C,5C,5C,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,04DE,38,38,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,04DF,5E,5E,5E,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,04E0,3A,3A,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,04E1,5C,5C,5C,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,04E2,00,00,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,04E4,3A,3A,3A,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,04E6,00,00,00,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,04F1,70,70,70,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0505,3F,3F,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,050A,3F,3F,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,050D,3F,3F,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,050F,3F,3F,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0511,6A,6A,6A,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0516,23,23,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0517,21,21,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0518,23,23,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0519,21,21,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0520,2A,2A,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0521,28,28,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0522,2A,2A,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0523,28,28,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0524,01,01,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0525,10,10,10,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,052E,01,01,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,052F,23,23,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0530,19,19,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0531,23,23,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0532,19,19,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0569,09,09,09,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,056C,06,06,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0571,AA,AA,AA,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0575,12,12,12,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0576,12,12,12,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0577,19,19,19,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0578,19,19,19,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,057A,33,33,33,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0583,05,05,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0584,13,13,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0585,6C,6C,6C,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0590,01,01,01,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0591,03,03,03,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0592,01,01,01,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0593,03,03,03,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0594,01,01,01,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0595,03,03,03,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,059A,02,02,02,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,059B,02,02,02,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,059C,02,02,02,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,059D,02,02,02,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,05D8,5E,5E,5E,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,06D0,01,01,01,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,06D3,01,01,01,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,06D6,01,01,01,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,06D9,02,02,02,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0716,01,01,01,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0717,06,06,06,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,071E,03,03,03,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0720,01,01,01,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0722,02,02,02,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0723,02,02,02,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0724,04,04,04,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0725,04,04,04,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0726,00,00,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0727,01,01,01,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0728,3F,3F,3F,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0729,00,00,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,072A,A0,A0,A0,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,072B,02,02,02,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,072C,06,06,06,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0734,03,03,03,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0735,01,01,01,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0736,00,00,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0737,02,02,02,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0738,02,02,02,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0739,04,04,04,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,073A,04,04,04,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,078D,00,00,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0790,01,01,01,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0792,30,30,30,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0793,03,03,03,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0794,01,01,01,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0795,01,01,01,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0796,19,19,19,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0797,10,10,10,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,0798,2C,2C,2C,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,079A,25,25,25,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,079C,3D,3D,3D,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,079E,08,08,08,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,079F,10,10,10,same
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,08B6,00,00,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@340c3c0,fp mode 139,08B7,00,00,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0001,2F,2F,2F,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0016,07,32,07,fp-diff
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,001C,02,02,02,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0042,88,88,88,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0058,70,70,70,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0062,00,00,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0067,0B,0B,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0068,00,00,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,006A,00,00,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,006F,36,36,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0070,00,00,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,007E,46,46,46,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,007F,C0,C0,C0,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0081,4E,4E,4E,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0083,23,23,23,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0084,23,23,23,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0085,19,19,19,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0086,19,19,19,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0089,EE,EE,EE,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,008A,22,22,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,008C,33,33,33,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0094,00,00,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,00C5,00,00,00,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,00C6,00,00,00,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,00CA,01,01,01,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,00E9,80,,80,fp-never
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0240,00,00,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0242,00,00,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0244,00,00,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0278,00,00,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0279,00,00,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,027B,00,00,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0403,88,88,88,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,041B,03,03,03,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0429,31,31,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,042A,3E,3E,3E,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,042D,7E,7E,7E,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0430,6F,6F,6F,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0433,23,23,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0434,1F,1F,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0435,23,23,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0436,1F,1F,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0437,23,23,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0438,1F,1F,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0439,23,23,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,043A,1F,1F,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,043B,23,23,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,043C,1F,1F,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,043D,23,23,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,043E,1F,1F,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0441,7D,7D,7D,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0444,3C,3C,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,044D,00,00,00,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0453,00,00,00,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0482,07,07,07,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0484,0B,0B,0B,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0487,46,46,46,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0489,4E,4E,4E,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,048A,31,31,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,048B,3E,3E,3E,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,04DB,3A,3A,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,04DC,5C,5C,5C,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,04DE,38,38,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,04DF,5E,5E,5E,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,04E0,3A,3A,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,04E1,5C,5C,5C,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,04E2,00,00,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,04E4,3A,3A,3A,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,04E6,00,00,00,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,04F1,70,70,70,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0505,3F,3F,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,050A,3F,3F,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,050D,3F,3F,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,050F,3F,3F,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0511,6A,6A,6A,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0516,23,23,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0517,21,21,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0518,23,23,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0519,21,21,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0520,2A,2A,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0521,28,28,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0522,2A,2A,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0523,28,28,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0524,01,01,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0525,10,10,10,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,052E,01,01,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,052F,23,23,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0530,19,19,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0531,23,23,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0532,19,19,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0569,09,09,09,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,056C,06,06,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0571,AA,AA,AA,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0575,12,12,12,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0576,12,12,12,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0577,19,19,19,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0578,19,19,19,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,057A,33,33,33,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0583,05,05,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0584,13,13,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0585,6C,6C,6C,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0590,01,01,01,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0591,03,03,03,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0592,01,01,01,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0593,03,03,03,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0594,01,01,01,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0595,03,03,03,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,059A,02,02,02,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,059B,02,02,02,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,059C,02,02,02,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,059D,02,02,02,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,05D8,5E,5E,5E,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,06D0,01,01,01,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,06D3,01,01,01,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,06D6,01,01,01,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,06D9,02,02,02,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0716,01,01,01,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0717,06,06,06,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,071E,03,03,03,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0720,01,01,01,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0722,02,02,02,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0723,02,02,02,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0724,04,04,04,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0725,04,04,04,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0726,00,00,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0727,01,01,01,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0728,3F,3F,3F,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0729,00,00,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,072A,A0,A0,A0,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,072B,02,02,02,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,072C,06,06,06,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0734,03,03,03,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0735,01,01,01,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0736,00,00,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0737,02,02,02,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0738,02,02,02,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0739,04,04,04,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,073A,04,04,04,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,078D,00,00,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0790,01,01,01,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0792,30,30,30,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0793,03,03,03,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0794,01,01,01,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0795,01,01,01,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0796,19,19,19,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0797,10,10,10,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,0798,2C,2C,2C,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,079A,25,25,25,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,079C,3D,3D,3D,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,079E,08,08,08,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,079F,10,10,10,same
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,08B6,00,00,,z-not-written
+12bit 3x3 normal,toup_12bit_3x3@3490800,fp mode 139,08B7,00,00,,z-not-written

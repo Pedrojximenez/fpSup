@@ -1,0 +1,38 @@
+built into /Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/validation/20261013-slot-cost-60p/x96
+{
+ "c_base": 4024,
+ "c_text": 44288,
+ "menu_off": 48320,
+ "menu_len": 30844,
+ "blob_len": 79168,
+ "state_off": 79168,
+ "state_bytes": 4695488,
+ "block_bytes": 4775936,
+ "entries": {
+  "fpl_card_init": 1,
+  "fpl_card_rec": 3359,
+  "fpl_card_arrive": 8151,
+  "fpl_card_stop": 10815,
+  "fpl_card_flush": 11895,
+  "fpl_card_task": 13113,
+  "fpl_card_play": 15979,
+  "fpl_card_clip": 17261,
+  "fpl_card_play_end": 18021,
+  "fpl_card_play_pool": 17805,
+  "fpl_card_written": 12449,
+  "fpl_card_event": 12569,
+  "fpl_card_discard": 12825
+ },
+ "symbols": {
+  "entry": 0,
+  "claims": 2732,
+  "settings": 2716,
+  "c_base": 4024,
+  "task_shim": 2604,
+  "g_card": 2616,
+  "flush_real": 2672,
+  "discard_real": 2688,
+  "stop_resume": 2668,
+  "play_next": 2692
+ }
+}

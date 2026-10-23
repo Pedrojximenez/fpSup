@@ -1,0 +1,22 @@
+test_busy_or_oversized_plan_retains_previous_capacity (test_slot_expansion.ExpandedSlotsTests) ... ok
+test_claims_restore_every_added_word (test_slot_expansion.ExpandedSlotsTests) ... ok
+test_cookie_extension_tail_above_old_capacity (test_slot_expansion.ExpandedSlotsTests) ... ok
+test_cookie_hooks_preserve_registers_flags_and_both_stack_alignments (test_slot_expansion.ExpandedSlotsTests) ... ok
+test_exact_arrival_reads_raw_used_counter_and_applies_memory_gate (test_slot_expansion.ExpandedSlotsTests) ... ok
+test_exact_writer_uses_only_the_indexed_record_and_never_writes_dng_bytes (test_slot_expansion.ExpandedSlotsTests)
+Exercise the saved BIN, including id 1015 and the second lane. ... ok
+test_formula_pool_registry_over_96_and_full_recovery (test_slot_expansion.ExpandedSlotsTests) ... ok
+test_high_id_parent_released_only_after_last_child (test_slot_expansion.ExpandedSlotsTests) ... ok
+test_loading_during_native_pool_use_refuses_without_patches (test_slot_expansion.ExpandedSlotsTests) ... ok
+test_m12240_low_and_high_fps_are_admitted (test_slot_expansion.ExpandedSlotsTests) ... ok
+test_maximum_pool_and_registry_recover_above_old_768_boundary (test_slot_expansion.ExpandedSlotsTests) ... ok
+test_mutation_original_cookie_store_corrupts_next_native_field (test_slot_expansion.ExpandedSlotsTests) ... ok
+test_mutation_stock_lookup_bound_cannot_find_slot_200 (test_slot_expansion.ExpandedSlotsTests) ... ok
+test_native_byte_trigger_still_waits_for_64_mib (test_slot_expansion.ExpandedSlotsTests) ... ok
+test_native_cookie_129_and_completion_loop (test_slot_expansion.ExpandedSlotsTests) ... ok
+test_same_capacity_reuses_idle_pool_without_patching_or_republishing (test_slot_expansion.ExpandedSlotsTests) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 47.774s
+
+OK

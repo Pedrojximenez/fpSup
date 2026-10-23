@@ -1,0 +1,22 @@
+OK  \fpSup\50RESLAB.BIN            609720 B
+\fpSup\RESCUS\README.TXT: putfile.py failed:
+  local   projects/lossless-sup/validation/20261013-reslab-install/card/fpSup/RESCUS/README.TXT  391 bytes
+  remote  \fpSup\RESCUS\README.TXT  mode 0x7
+  buffer  0x45063340, file object 0x450634C8
+  proof   region takes writes and still holds them a second later
+  restored echo -> 0xC03D99A0
+  reply   ERR shl frame0 rc=-7(LIBUSB_ERROR_TIMEOUT) moved=0/64
+
+  stage  392 bytes in 0.001s (0.7 MB/s)      
+
+  verify 392 bytes in 0.000s (1.4 MB/s)      
+
+  stage  392 bytes in 0.02s (0.0 MB/s), MEM1, read back whole          
+
+  code   304/304 B  6.4 KiB/s 
+  verify 304/304 B  501 KiB/s 
+  verify 304 bytes in 0.0s (264 KiB/s)      
+
+  code   304 bytes in 0.2s (1.5 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+putfile echo reply failed; write outcome is unknown
+

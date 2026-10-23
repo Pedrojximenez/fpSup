@@ -1,0 +1,14 @@
+test_active_input_becoming_incomplete_saves_off_and_reloads_validly (test_library_native.LibraryNativeTests) ... FAIL
+
+======================================================================
+FAIL: test_active_input_becoming_incomplete_saves_off_and_reloads_validly (test_library_native.LibraryNativeTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lut/test_library_native.py", line 164, in test_active_input_becoming_incomplete_saves_off_and_reloads_validly
+    self.assertEqual(c.status()['asset'],-15)
+AssertionError: 0 != -15
+
+----------------------------------------------------------------------
+Ran 1 test in 4.487s
+
+FAILED (failures=1)

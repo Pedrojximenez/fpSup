@@ -1,0 +1,123 @@
+{
+ "name": "filldma",
+ "image_sha256": "92a8ee993f6c3d66c251e88d45a2ccd5135c6cf7342717784321c2ed506e2fb4",
+ "bin": "filldma.bin",
+ "bin_size": 780,
+ "bin_sha256": "fb1d1c721ba1702922f6437eb74ec8ac848f947285c848e9c378ffbfa3734583",
+ "load": "any 8-byte aligned block (position independent); C000E91C then C000EABC before first call",
+ "entry": {
+  "offset": "0x40",
+  "mode": "ARM",
+  "args": "r0 = layer, r1 = value (same as C0721480)",
+  "returns": "0 = filled; non-zero = not taken, nothing written, no cache op (1 disabled, 2 not 16bpp, 3 invalid, 4 small, 5 driver not inited, 6 align/range, 7 recording)",
+  "context": "task only (it sleeps on the driver semaphores); never from IRQ/cyclic",
+  "clobbers": "r0-r3, ip (AAPCS); no VFP/NEON"
+ },
+ "header": {
+  "fd_enable": "0x8",
+  "fd_thresh": "0xc",
+  "fd_rec_ok": "0x10",
+  "fd_calls": "0x14",
+  "fd_dma_ok": "0x18",
+  "fd_dma_bytes": "0x1c",
+  "fd_declined": "0x20",
+  "fd_cpu_done": "0x24",
+  "fd_last_code": "0x28",
+  "fd_last_base": "0x2c",
+  "fd_last_size": "0x30"
+ },
+ "tunables": {
+  "fd_enable": 1,
+  "fd_thresh": 16384,
+  "fd_rec_ok": 0
+ },
+ "patches": [],
+ "vtable_slots_owned_by_dispatcher": [
+  {
+   "addr": "0xc2e38e7c",
+   "orig": "0xc0721480",
+   "what": "DisplayOsdLayer_ARGB_Idx256 vt 0xC2E38E5C +0x20",
+   "note": "NOT written by filldma; the sys-perf dispatcher owns these and calls fd_layer_fill"
+  },
+  {
+   "addr": "0xc2ef62a0",
+   "orig": "0xc0721480",
+   "what": "DisplayOsdFrameBufferCore vt 0xC2EF6280 +0x20",
+   "note": "NOT written by filldma; the sys-perf dispatcher owns these and calls fd_layer_fill"
+  }
+ ],
+ "fw_checks": [
+  {
+   "addr": "0xc00db188",
+   "word": "0x4170e92d",
+   "what": "Fill DMA driver C00DB188 (Thumb push.w)"
+  },
+  {
+   "addr": "0xc00daff8",
+   "word": "0x4ff0e92d",
+   "what": "Fill DMA core C00DAFF8 (Thumb)"
+  },
+  {
+   "addr": "0xc00db7e0",
+   "word": "0x4100e92d",
+   "what": "Fill DMA IRQ 0x24 handler C00DB7E0 (sig_sem done)"
+  },
+  {
+   "addr": "0xc000eb28",
+   "word": "0xe10fc000",
+   "what": "range invalidate C000EB28 (mrs ip, cpsr)"
+  },
+  {
+   "addr": "0xc00178d8",
+   "word": "0xe92d4010",
+   "what": "system status object C00178D8"
+  },
+  {
+   "addr": "0xc0721328",
+   "word": "0xe92d4010",
+   "what": "layer getBuffer (vt+0x10) C0721328"
+  },
+  {
+   "addr": "0xc0721cc8",
+   "word": "0xe1a0c000",
+   "what": "back buffer read C0721CC8"
+  },
+  {
+   "addr": "0xc0698c08",
+   "word": "0xe1a0c000",
+   "what": "layer valid (vt+0x30) C0698C08, returns 1"
+  },
+  {
+   "addr": "0xc0721f98",
+   "word": "0xe1a0c000",
+   "what": "layer valid (vt+0x30) C0721F98, returns 1"
+  },
+  {
+   "addr": "0xc0721480",
+   "word": "0xe92d40f0",
+   "what": "stock layer fill C0721480"
+  },
+  {
+   "addr": "0xc0722490",
+   "word": "0xe92d44f0",
+   "what": "stock 16bpp whole-buffer fill C0722490"
+  }
+ ],
+ "runtime_checks": [
+  {
+   "addr": "0xc31d25b4",
+   "expect": 1,
+   "what": "driver initialised at boot (C00DBC80 via LCD init C0308078)"
+  },
+  {
+   "addr": "0xc301fec4",
+   "expect": "non-zero",
+   "what": "driver mutex semaphore id"
+  },
+  {
+   "addr": "0xc301fec0",
+   "expect": "non-zero",
+   "what": "driver done semaphore id"
+  }
+ ]
+}

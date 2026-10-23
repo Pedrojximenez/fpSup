@@ -1,0 +1,78 @@
+{
+  "scope": "offline prepared-header feasibility; native runtime integration remains unfinished",
+  "user_constraint": "No 240p or USB attempts; focus on 120p optimization",
+  "tests_passed": 13,
+  "native_builder_trace_passed": 2,
+  "prepared_raw_and_compressed_libraw_samples_equal": true,
+  "prototype": {
+    "source": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/validation/20261012-pipeline-cost/final-normal-60p-frames/000002.DNG",
+    "source_sha256": "1d7480acc232841eda1e649d146edf1ab62a78cd5181906f0a80944b188f82b6",
+    "prototype_sha256": "82a939859885ee9589d2953db4cb7a253431929c1b54693583ec7e0bee02e39d",
+    "raw_ifd": 8,
+    "compressed_ifd": 78848,
+    "header_bytes": 79872,
+    "original_header_bytes": 78848,
+    "header_growth": 1024,
+    "tiles": 12,
+    "completion_logical_word_writes": 25,
+    "all_metadata_preserved": true,
+    "payload_identical": true,
+    "decoded_samples_identical": true,
+    "camera_ready": false,
+    "installed_hook": false,
+    "scope": "host feasibility only; no native allocation, scheduling or CPU benchmark"
+  },
+  "native_hook_installed": false,
+  "new_production_bin_built": false,
+  "camera_operations": 0,
+  "cpu_benefit_measured": false,
+  "native_64_mib_target_changed": false,
+  "stopfx_changed": false,
+  "runtime_source_changed": false,
+  "files": {
+    "README.md": {
+      "bytes": 11916,
+      "sha256": "9efe43ad73c44cc74ab3d12f3b8b39e816805b0217b3f05fb2dec4afc00ecc48"
+    },
+    "native-builder-results.json": {
+      "bytes": 4359,
+      "sha256": "c0b8ad61882a420166948d42616e8d6add6a35e7060327e91382f80a4400f62c"
+    },
+    "native-builder.log": {
+      "bytes": 83,
+      "sha256": "92d1b00fbc3703eee35f6aebe415f3ffd28faf07d5eb171a4df1c85cc8e34a50"
+    },
+    "native_builder_trace.py": {
+      "bytes": 5814,
+      "sha256": "8dda40c2fb5cf311e237da46c4bb0f9cc7dc52ecbefce8c1762c18da91b88ba6"
+    },
+    "prototype-results.json": {
+      "bytes": 750,
+      "sha256": "bc68a9f13aed6596f2d8924a7f7968b85f73b7e846f4fbc85559870b503ca60a"
+    },
+    "prototype-tests.log": {
+      "bytes": 1642,
+      "sha256": "591902eaf8c4d7e64e82c0cacf0484fa3e5e1ea3cedbcf4b148c646869303118"
+    },
+    "prototype.py": {
+      "bytes": 7891,
+      "sha256": "a67b68fd1bd7bcdfe862e8306e4cf449b516431aef2448bcf6885dd6ce33a419"
+    },
+    "real-camera-prepared.DNG": {
+      "bytes": 840704,
+      "sha256": "82a939859885ee9589d2953db4cb7a253431929c1b54693583ec7e0bee02e39d"
+    },
+    "test_prepared_header.py": {
+      "bytes": 11423,
+      "sha256": "01111547ab76ca7d8bbc1e43c01a55887e72ade3a857696f6588d5e25efbc0a5"
+    }
+  },
+  "required_next_steps": [
+    "native generation and buffer ownership adapter",
+    "per-frame inline metadata binding",
+    "dynamic header/descriptor file offsets",
+    "native RAW and compressed playback validation",
+    "saved-BIN hook and lifecycle emulation",
+    "standby confirmation then bounded 119.88p measurement"
+  ]
+}

@@ -1,0 +1,23 @@
+
+======================================================================
+FAIL: test_exact_writer_uses_only_the_indexed_record_and_never_writes_dng_bytes (test_slot_expansion.ExpandedSlotsTests) (lane='hold', native_id=1015)
+Exercise the saved BIN, including id 1015 and the second lane.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/test_slot_expansion.py", line 276, in test_exact_writer_uses_only_the_indexed_record_and_never_writes_dng_bytes
+    self.assertLessEqual(set(read_addresses), allowed)
+AssertionError: {1157839808, 1157839796, 1157877596} not less than or equal to {1157877600, 1157856036, 1157877604, 1157856040, 1157877608, 1157856044, 1157877612, 1157856048, 1157856052, 1157877596}
+
+======================================================================
+FAIL: test_exact_writer_uses_only_the_indexed_record_and_never_writes_dng_bytes (test_slot_expansion.ExpandedSlotsTests) (lane='hold_b', native_id=1015)
+Exercise the saved BIN, including id 1015 and the second lane.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/test_slot_expansion.py", line 276, in test_exact_writer_uses_only_the_indexed_record_and_never_writes_dng_bytes
+    self.assertLessEqual(set(read_addresses), allowed)
+AssertionError: {1157839808, 1157877600, 1157877604, 1157877608, 1157877612, 1157839796, 1157877596} not less than or equal to {1157877600, 1157856036, 1157877604, 1157856040, 1157877608, 1157856044, 1157877612, 1157856048, 1157856052, 1157877596}
+
+----------------------------------------------------------------------
+Ran 1 test in 22.837s
+
+FAILED (failures=2)

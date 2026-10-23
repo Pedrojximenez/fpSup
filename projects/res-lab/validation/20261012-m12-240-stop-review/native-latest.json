@@ -1,0 +1,18 @@
+{
+  "camera_settings_changed": false,
+  "idle": {
+    "movie_recording": 0,
+    "xmp_file_pointer": 0,
+    "movie_writing": 0
+  },
+  "record_log": "slot=5, cnt=26/600\nsize=524288*3906772(1907GB), free=41%, exFAT, 5000Mbps\ntime       : 2026/10/12 08:20:41 \nrec factor : Nothing \nui factor  : Nothing \nbattery    : OK \ntemp(BAT)  : OK \ntemp(BODY) : OK \ntemp(LCD)  : OK \ntemp(CMOS) : OK \nfile-size=1095168, bulk-size=67108864(61.3)\nreq_cnt=94, fin_cnt=94, vbuf/94/534172, raw1\nrequest  ,finish   ,diff,gap ,reqcnt,fincnt,diff,sdb,MB/s\n     1135,     1177,  42,1135,     9,     1,   8, 11, 234\n     1183,     1188,   5,   6,    10,    10,   0,  9, 219\n     1229,     1234,   5,  41,    11,    11,   0, 10, 219\n     1234,     1239,   5,   0,    12,    12,   0, 10, 219\n     1239,     1244,   5,   0,    13,    13,   0, 10, 219\n     1244,     1249,   5,   0,    14,    14,   0, 10, 219\n     1249,     1253,   4,   0,    15,    15,   0, 11, 273\n     1254,     1259,   5,   1,    16,    16,   0, 11, 219\n     1259,     1263,   4,   0,    17,    17,   0, 11, 273\n     1263,     1268,   5,   0,    18,    18,   0, 11, 219\n     1269,     1273,   4,   1,    19,    19,   0, 11, 273\n     1273,     1278,   5,   0,    20,    20,   0, 11, 219\n     1278,     1283,   5,   0,    21,    21,   0, 11, 219\n     1534,     1559,  25, 251,    22,    22,   0, 23,  43\n     1559,     1563,   4,   0,    23,    23,   0, 24, 273\n     1564,     1568,   4,   1,    24,    24,   0, 25, 273\n     1568,     1573,   5,   0,    25,    25,   0, 26, 219\n     1573,     1578,   5,   0,    26,    26,   0, 27, 219\n     1578,     1582,   4,   0,    27,    27,   0, 28, 273\n     1582,     1586,   4,   0,    28,    28,   0, 29, 273\n     1587,     1592,   5,   1,    29,    29,   0, 30, 219\n     1592,     1597,   5,   0,    30,    30,   0, 31, 219\n     1612,     1741, 129,  15,    63,    31,  32, 32, 280\n     1743,     1747,   4,   2,    64,    64,   0, 65, 273\n     1760,     1874, 114,  13,    93,    65,  28, 66, 278\n     1874,     1879,   5,   0,    94,    94,   0, 67, 219\n",
+  "settings": {
+    "status get app_current": "app_current -> 2",
+    "sdcard slot": "slot now slot = sd0",
+    "menu SetMovRecFormat": "0",
+    "menu SetMovRecSize": "2",
+    "menu SetMovCinemaDNGQuality": "0",
+    "menu SetMovFramerate": "7",
+    "gui geti MV_fpLossless": "OK:MV_fpLossless -> 1"
+  }
+}

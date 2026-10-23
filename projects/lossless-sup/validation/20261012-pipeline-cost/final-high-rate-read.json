@@ -1,0 +1,12 @@
+{
+  "label": "final-high-rate-read",
+  "commands": [
+    {
+      "time": 1791811064.009067,
+      "command": "status get app_current",
+      "reply": "app_current -> 5\n\n"
+    }
+  ],
+  "started_at": 1791811064.00849,
+  "error": "RuntimeError('requires CINE standby')"
+}

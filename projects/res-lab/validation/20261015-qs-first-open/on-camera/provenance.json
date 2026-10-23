@@ -1,0 +1,385 @@
+{
+  "current_card_consumer": {
+    "\\fpSup\\32RESCUS.BIN": {
+      "bytes": 184064,
+      "sha256": "7e8bc253408c05fc71bd49358ebbde2a99884c4a4af269cd1d6fc130c059ae69"
+    }
+  },
+  "hardware_timing": [
+    {
+      "variant": "baseline",
+      "identity": {
+        "base": "0x451cacc0",
+        "state": "0x451f7180",
+        "nrows": 5,
+        "immutable_code_sha256": "23bbb5ce0b0378461cb3264007c8ecabe341e2b0bcb25ae76474ed5fefce8f97"
+      },
+      "before": {
+        "QS_BOOT": 0,
+        "QS_RELOADS": 0,
+        "QS_HITS": 0,
+        "QS_N": 0,
+        "QS_READY": 1
+      },
+      "endpoint": "active_screen_name",
+      "LCD_scanout_measured": false,
+      "poll_interval_seconds": 0.075,
+      "opens": [
+        {
+          "key": "QSON",
+          "ack_seconds": 4.341295917,
+          "observed_seconds": 4.3424179590000005,
+          "last_non_target_seconds": 0.0,
+          "screen": "QS_CINE",
+          "samples": [
+            [
+              4.3424179590000005,
+              "QS_CINE"
+            ]
+          ],
+          "index": 1,
+          "close": {
+            "key": "QSON",
+            "ack_seconds": 1.66514375,
+            "observed_seconds": 1.667472875,
+            "last_non_target_seconds": 0.0,
+            "screen": "LV_CINE_MEDIUM",
+            "samples": [
+              [
+                1.667472875,
+                "LV_CINE_MEDIUM"
+              ]
+            ],
+            "release_screen": "LV_CINE_MEDIUM"
+          }
+        },
+        {
+          "key": "QSON",
+          "ack_seconds": 0.5286178329999998,
+          "observed_seconds": 0.529973875,
+          "last_non_target_seconds": 0.0,
+          "screen": "QS_CINE",
+          "samples": [
+            [
+              0.529973875,
+              "QS_CINE"
+            ]
+          ],
+          "release_screen": "QS_CINE",
+          "index": 2,
+          "close": {
+            "key": "QSON",
+            "ack_seconds": 1.6656654999999998,
+            "observed_seconds": 1.6667589169999997,
+            "last_non_target_seconds": 0.0,
+            "screen": "LV_CINE_MEDIUM",
+            "samples": [
+              [
+                1.6667589169999997,
+                "LV_CINE_MEDIUM"
+              ]
+            ],
+            "release_screen": "LV_CINE_MEDIUM"
+          }
+        }
+      ],
+      "initial_screen": "LV_CINE_MEDIUM",
+      "resume_reason": "QSOFF acknowledged without changing QS screen; use QSON for next press",
+      "final_screen": "LV_CINE_MEDIUM",
+      "after": {
+        "QS_BOOT": 1,
+        "QS_RELOADS": 0,
+        "QS_HITS": 168,
+        "QS_N": 7,
+        "QS_READY": 1
+      },
+      "echo_restored": true
+    },
+    {
+      "variant": "optimized",
+      "identity": {
+        "base": "0x451cacc0",
+        "state": "0x451f7140",
+        "nrows": 5,
+        "immutable_code_sha256": "ac9a8c47b426234b8b9a63519f94ecefa92940c00e9e30a0d9faef83fc7f4bee"
+      },
+      "before": {
+        "QS_BOOT": 0,
+        "QS_RELOADS": 0,
+        "QS_HITS": 0,
+        "QS_N": 0,
+        "QS_READY": 1
+      },
+      "endpoint": "active_screen_name",
+      "LCD_scanout_measured": false,
+      "poll_interval_seconds": 0.075,
+      "opens": [
+        {
+          "key": "QSON",
+          "ack_seconds": 4.323338667000001,
+          "observed_seconds": 4.326806417,
+          "last_non_target_seconds": 0.0,
+          "screen": "QS_CINE",
+          "samples": [
+            [
+              4.326806417,
+              "QS_CINE"
+            ]
+          ],
+          "release_screen": "QS_CINE",
+          "index": 1,
+          "close": {
+            "key": "QSON",
+            "ack_seconds": 1.6698165000000005,
+            "observed_seconds": 1.6710610000000008,
+            "last_non_target_seconds": 0.0,
+            "screen": "LV_CINE_MEDIUM",
+            "samples": [
+              [
+                1.6710610000000008,
+                "LV_CINE_MEDIUM"
+              ]
+            ],
+            "release_screen": "LV_CINE_MEDIUM"
+          }
+        },
+        {
+          "key": "QSON",
+          "ack_seconds": 0.5261904159999986,
+          "observed_seconds": 0.5273581659999991,
+          "last_non_target_seconds": 0.0,
+          "screen": "QS_CINE",
+          "samples": [
+            [
+              0.5273581659999991,
+              "QS_CINE"
+            ]
+          ],
+          "release_screen": "QS_CINE",
+          "index": 2,
+          "close": {
+            "key": "QSON",
+            "ack_seconds": 1.665755665999999,
+            "observed_seconds": 1.6693575410000001,
+            "last_non_target_seconds": 0.0,
+            "screen": "LV_CINE_MEDIUM",
+            "samples": [
+              [
+                1.6693575410000001,
+                "LV_CINE_MEDIUM"
+              ]
+            ],
+            "release_screen": "LV_CINE_MEDIUM"
+          }
+        }
+      ],
+      "initial_screen": "LV_CINE_MEDIUM",
+      "final_screen": "LV_CINE_MEDIUM",
+      "after": {
+        "QS_BOOT": 1,
+        "QS_RELOADS": 0,
+        "QS_HITS": 168,
+        "QS_N": 7,
+        "QS_READY": 1
+      },
+      "echo_restored": true
+    }
+  ],
+  "combined_prepared_not_deployed": {
+    "sha256": "1597a451d3a65b8abf4d38848d8b7349ffac09b7c39005c4cb7b8e4344add719",
+    "bytes": 228928,
+    "actual_card_loader": "3c9a6b36687dfc21d4764d61ff190b1222efd9a84f5aa4277fb52527eb751534",
+    "custom_qs_rows": 5,
+    "qs_reference_records_equal": 371,
+    "lv_reference_records_equal": 12,
+    "journal_restored": true,
+    "written_to_card": false,
+    "GUI_rendered": false
+  },
+  "native_gui_profile_prepared_not_executed": true,
+  "current_live_block": {
+    "standby_guard": "not quiescent",
+    "is_recording": 0,
+    "movie_recording": 0,
+    "movie_writing": 0,
+    "xmp_file_pointer": "0xC34993F4"
+  },
+  "sources_and_artifacts": {
+    "projects/open-gate/build/res-custom/build_v3_rescustom.py": {
+      "bytes": 22494,
+      "sha256": "2e6a50291c73535edae1ee065d35cdd93dd6c347d8e2f8a56e3cafa3ddfd541c"
+    },
+    "projects/open-gate/build/res-custom/ogc.c": {
+      "bytes": 121214,
+      "sha256": "94b6c936085c60fc4f3eeb2a2a0fc3782cd55fe54a85253fb4935aac9ec1ff1a"
+    },
+    "projects/open-gate/build/res-custom/ogc_layout.py": {
+      "bytes": 38203,
+      "sha256": "42b44a91a5fcafa864971824af431c5aab281579295c8574977b3059f8ef2faf"
+    },
+    "projects/open-gate/build/res-custom/rcd.py": {
+      "bytes": 26663,
+      "sha256": "57d918ff26d37bafa02928cbd638d6125df44c681510e76853879995848881f4"
+    },
+    "projects/open-gate/build/res-custom/vr_ui.py": {
+      "bytes": 20873,
+      "sha256": "8682ed69e9d7435fa077c9b53a80f567b9d86eb3f27ec9b99ce4e92c11e9b063"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/RESULTS.md": {
+      "bytes": 5148,
+      "sha256": "d9710b9e886e8be6f9b11b42e3e5d8c3ce27ca16ab3de5da6fbabf7f88bcbb89"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/backup_current.py": {
+      "bytes": 2267,
+      "sha256": "73aaa295ea6ff8c5b317745ef257497a210452d32d0db21e9a1116b5be349237"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/baseline/32RESCUS.BIN": {
+      "bytes": 184128,
+      "sha256": "42d9869185808b2577fa421e490b25a09fbd5fe46294cdbef579e149dea1dd71"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/baseline/RESCUS/OG2K.RCD": {
+      "bytes": 5216,
+      "sha256": "8025ea96924b535f9b202b2f9ae65c81f7c66129bf4dfb5256c2a1d46b444ecf"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/baseline/RESCUS/OG35K.RCD": {
+      "bytes": 7788,
+      "sha256": "e5b5ba7a9535f45b597745e1bec5377dad4c4fa46aa11fb9fb6c53648f57a303"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/baseline/RESCUS/OG3K.RCD": {
+      "bytes": 4244,
+      "sha256": "f61a3861dba81d12f4a9eb7a0fc8cca249859ee4bc840dcc022b134d647b89ba"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/baseline/RESCUS/OG4K.RCD": {
+      "bytes": 3900,
+      "sha256": "39a808f2189895dce66c93d283711b67327c3a2869ff25ea2b43af00492e6661"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/baseline/RESCUS/S16.RCD": {
+      "bytes": 7132,
+      "sha256": "3e942889e4cfb47f5c0aba2d696544abcc9a8b76fd2848bc0b7feb275195afd4"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/baseline/build.json": {
+      "bytes": 57733,
+      "sha256": "9c7da6428bc761d1bf30984a96e4aca233358cf9a87809376b8ec26baf1534bc"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/combined/32RESCUS.BIN": {
+      "bytes": 228928,
+      "sha256": "1597a451d3a65b8abf4d38848d8b7349ffac09b7c39005c4cb7b8e4344add719"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/combined/RESCUS/OG2K.RCD": {
+      "bytes": 5216,
+      "sha256": "8025ea96924b535f9b202b2f9ae65c81f7c66129bf4dfb5256c2a1d46b444ecf"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/combined/RESCUS/OG35K.RCD": {
+      "bytes": 7788,
+      "sha256": "e5b5ba7a9535f45b597745e1bec5377dad4c4fa46aa11fb9fb6c53648f57a303"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/combined/RESCUS/OG3K.RCD": {
+      "bytes": 4244,
+      "sha256": "f61a3861dba81d12f4a9eb7a0fc8cca249859ee4bc840dcc022b134d647b89ba"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/combined/RESCUS/OG4K.RCD": {
+      "bytes": 3900,
+      "sha256": "39a808f2189895dce66c93d283711b67327c3a2869ff25ea2b43af00492e6661"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/combined/RESCUS/S16.RCD": {
+      "bytes": 7132,
+      "sha256": "3e942889e4cfb47f5c0aba2d696544abcc9a8b76fd2848bc0b7feb275195afd4"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/combined/build.json": {
+      "bytes": 57784,
+      "sha256": "d628090e5d78c0066cd1eee0a41ad9703eb4ea8be2892349394351b28b11edfd"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/combined-verification.json": {
+      "bytes": 371,
+      "sha256": "e19543bcfb364c7cbe2dcfb4b67dbf239a88db5f18beb03e995a33d456452b43"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/daemon-owner.json": {
+      "bytes": 257,
+      "sha256": "ff3be9e0632f213e1354238cd02855a77fac141b126fbeb815f24c3b815fa4aa"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/deployment-baseline.json": {
+      "bytes": 1194,
+      "sha256": "1d4ed1925b7ee3870231d06e46051e7e7b2e1db58f9f5e39165705e0e262dd7b"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/deployment-optimized.json": {
+      "bytes": 561,
+      "sha256": "fc6dce6569be6c0727d89e5e1ef675f38fa57cededc427da3e588a2c08cca281"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/experiment.py": {
+      "bytes": 11499,
+      "sha256": "a28d709f8c4e93d583488b52ea964d6b9ef97060ecb1823a5de040d12d2a5c7f"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/final-state.json": {
+      "bytes": 1581,
+      "sha256": "95a11cc431a85807bbd9247405e1c8494521ad03b9c034492b528737f52e4f61"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/native_gui_profile.py": {
+      "bytes": 3035,
+      "sha256": "0e7d688b788087f687539d1378246dde3a0d132318dd1ff7641b9d167194ef62"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/optimized/32RESCUS.BIN": {
+      "bytes": 184064,
+      "sha256": "7e8bc253408c05fc71bd49358ebbde2a99884c4a4af269cd1d6fc130c059ae69"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/optimized/RESCUS/OG2K.RCD": {
+      "bytes": 5216,
+      "sha256": "8025ea96924b535f9b202b2f9ae65c81f7c66129bf4dfb5256c2a1d46b444ecf"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/optimized/RESCUS/OG35K.RCD": {
+      "bytes": 7788,
+      "sha256": "e5b5ba7a9535f45b597745e1bec5377dad4c4fa46aa11fb9fb6c53648f57a303"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/optimized/RESCUS/OG3K.RCD": {
+      "bytes": 4244,
+      "sha256": "f61a3861dba81d12f4a9eb7a0fc8cca249859ee4bc840dcc022b134d647b89ba"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/optimized/RESCUS/OG4K.RCD": {
+      "bytes": 3900,
+      "sha256": "39a808f2189895dce66c93d283711b67327c3a2869ff25ea2b43af00492e6661"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/optimized/RESCUS/S16.RCD": {
+      "bytes": 7132,
+      "sha256": "3e942889e4cfb47f5c0aba2d696544abcc9a8b76fd2848bc0b7feb275195afd4"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/optimized/build.json": {
+      "bytes": 57733,
+      "sha256": "c9551ea4a7d208b52f62dd112135fc2b7220c64416270ff5e4d72bb4481a88a1"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/pair-verification.json": {
+      "bytes": 800,
+      "sha256": "90b691726e8c07e6b27336ffad86bf7ef048be29d49d01a0a642578019d43b3e"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/preflight.json": {
+      "bytes": 1421,
+      "sha256": "a06786587d74e802c354e6e35a55c932b44e2cb21561e6eb1c67b9afe9abb615"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/screen-snapshot-verification.json": {
+      "bytes": 599,
+      "sha256": "ac584802a819a0fb79ace7fa9b4b2e8ba640cea5bd38373025e29d82f17c3e6d"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/screen_snapshot.S": {
+      "bytes": 1384,
+      "sha256": "1631d00a7505562667f6064ba72d05bcd173bea46a4d629347b7ed58feeac2e9"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/test_screen_snapshot.py": {
+      "bytes": 2685,
+      "sha256": "08260b6eab15066d4dc9903af312f5a2207c846cc24b932e5a6b86deba203da6"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/timing-baseline.json": {
+      "bytes": 2091,
+      "sha256": "9ca8cde151edd85670828e64e11bcc43e76f749cef2761eb0975a0422eba0f1f"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/timing-optimized.json": {
+      "bytes": 2061,
+      "sha256": "4224c67278bcd270da092701e2ca9555ede62d9634b9801b55223e2d50cc5338"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/verify_combined.py": {
+      "bytes": 2678,
+      "sha256": "51f490359776221e6412e9276976fc68d88f561f077ba9770232153adbc0e9da"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/on-camera/verify_pair.py": {
+      "bytes": 2908,
+      "sha256": "e32c5dee77487e603c70101cb4df6f1f37004d44cb065899a0e332f127640160"
+    }
+  }
+}

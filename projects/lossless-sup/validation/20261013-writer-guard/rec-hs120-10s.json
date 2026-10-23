@@ -1,0 +1,247 @@
+{
+ "label": "hs120-10s",
+ "settings": {
+  "menu SetMovRecSize": "2",
+  "menu SetMovFramerate": "7",
+  "gui geti MV_FrameRate": "OK:MV_FrameRate -> 8",
+  "gui geti MV_fpLossless": "OK:MV_fpLossless -> 1",
+  "sdcard sdmode": "sdmode  UHS-II"
+ },
+ "before": {
+  "rec.facts.seen.width": 1008,
+  "rec.facts.seen.height": 672,
+  "rec.facts.seen.bits": 12,
+  "hold.held": 320,
+  "hold.passed": 0,
+  "hold.compressed": 320,
+  "hold.refused": 0,
+  "hold.no_benefit": 0,
+  "hold.faults": 0,
+  "hold.lanes_full": 2,
+  "hold_b.held": 193,
+  "hold_b.compressed": 193,
+  "hold_b.refused": 0,
+  "hold_b.no_benefit": 0,
+  "hold_b.faults": 0,
+  "flush.applied": 513,
+  "flush.trailer_failed": 0,
+  "flush.length_mismatch": 0,
+  "flush.prep.built": 1,
+  "flush.prep.reused": 512,
+  "flush.prep.fallback": 0,
+  "hold.stalls": 0,
+  "hold_b.stalls": 0,
+  "rec_events": 1,
+  "rec_admitted": 1,
+  "rec_raw": 0,
+  "rec_menu_off": 0,
+  "hold_live": 0
+ },
+ "recording_at_1s": "is_recording -> 1",
+ "ticket_polls": [
+  [
+   1.21,
+   128
+  ],
+  [
+   1.42,
+   128
+  ],
+  [
+   1.63,
+   128
+  ],
+  [
+   1.84,
+   126
+  ],
+  [
+   2.05,
+   128
+  ],
+  [
+   2.29,
+   127
+  ],
+  [
+   2.5,
+   128
+  ],
+  [
+   2.71,
+   127
+  ],
+  [
+   2.92,
+   127
+  ],
+  [
+   3.16,
+   128
+  ],
+  [
+   3.37,
+   128
+  ],
+  [
+   3.58,
+   128
+  ],
+  [
+   3.79,
+   126
+  ],
+  [
+   4.0,
+   128
+  ],
+  [
+   4.22,
+   128
+  ],
+  [
+   4.42,
+   128
+  ],
+  [
+   4.63,
+   128
+  ],
+  [
+   4.84,
+   128
+  ],
+  [
+   5.04,
+   126
+  ],
+  [
+   5.26,
+   128
+  ],
+  [
+   5.47,
+   128
+  ],
+  [
+   5.7,
+   128
+  ],
+  [
+   5.95,
+   126
+  ],
+  [
+   6.15,
+   128
+  ],
+  [
+   6.4,
+   128
+  ],
+  [
+   6.61,
+   128
+  ],
+  [
+   6.82,
+   128
+  ],
+  [
+   7.02,
+   126
+  ],
+  [
+   7.24,
+   128
+  ],
+  [
+   7.47,
+   128
+  ],
+  [
+   7.68,
+   128
+  ],
+  [
+   7.89,
+   128
+  ],
+  [
+   8.1,
+   126
+  ],
+  [
+   8.31,
+   128
+  ],
+  [
+   8.55,
+   128
+  ],
+  [
+   8.78,
+   128
+  ],
+  [
+   8.99,
+   128
+  ],
+  [
+   9.2,
+   126
+  ],
+  [
+   9.44,
+   128
+  ],
+  [
+   9.66,
+   128
+  ],
+  [
+   9.87,
+   128
+  ]
+ ],
+ "tickets_min": 126,
+ "stop_at": 10.23,
+ "finished": true,
+ "finish_wait_s": 1,
+ "after": {
+  "rec.facts.seen.width": 1008,
+  "rec.facts.seen.height": 672,
+  "rec.facts.seen.bits": 12,
+  "hold.held": 712,
+  "hold.passed": 0,
+  "hold.compressed": 712,
+  "hold.refused": 0,
+  "hold.no_benefit": 0,
+  "hold.faults": 0,
+  "hold.lanes_full": 2,
+  "hold_b.held": 431,
+  "hold_b.compressed": 431,
+  "hold_b.refused": 0,
+  "hold_b.no_benefit": 0,
+  "hold_b.faults": 0,
+  "flush.applied": 1656,
+  "flush.trailer_failed": 0,
+  "flush.length_mismatch": 0,
+  "flush.prep.built": 2,
+  "flush.prep.reused": 1654,
+  "flush.prep.fallback": 0,
+  "hold.stalls": 0,
+  "hold_b.stalls": 0,
+  "rec_events": 2,
+  "rec_admitted": 2,
+  "rec_raw": 0,
+  "rec_menu_off": 0,
+  "hold_live": 0
+ },
+ "tickets_after": 128,
+ "record_log": "file-size=1095168, bulk-size=67108864(61.3)\nreq_cnt=1146, fin_cnt=1146, key\nrequest  ,finish   ,diff,gap ,reqcnt,fincnt,diff,sdb,MB/s\n     1502,     1899, 397,1502,   129,     1, 128,835, 169\n     2561,     2760, 199, 662,   258,   130, 128,861, 337\n     3642,     3847, 205, 882,   387,   259, 128,859, 327\n     4715,     4910, 195, 868,   516,   388, 128,860, 344\n     5786,     5982, 196, 876,   645,   517, 128,860, 342\n     6851,     7044, 193, 869,   774,   646, 128,861, 347\n     7920,     8116, 196, 876,   903,   775, 128,861, 342\n     9000,     9197, 197, 884,  1032,   904, 128,860, 340\n     9932,    10118, 186, 735,  1144,  1033, 111,901, 360\n    10354,    10361,   7, 236,  1146,  1145,   1,1014, 312\n",
+ "req_fin": [
+  1146,
+  1146
+ ]
+}

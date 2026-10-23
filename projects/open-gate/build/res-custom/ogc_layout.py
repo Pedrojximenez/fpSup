@@ -12,10 +12,17 @@ nothing has to be relocated; the entry (ogc.c) only fills the run-time words
 builds S for the given format rows.  Python, C and assembly read the same
 numbers.
 """
+import os
 import struct
 
 LAYOUT0 = 0xC0730000          # the coordinate origin (og_pic.inc OG_CAVE0)
-SHIMS_MAX = 0x1400
+# Diagnostic build (env OGC_HOOKCNT=1): every hook site enters through a counting
+# stub (hookcnt[i] += 1) appended to the shims; the shims' window grows to hold them.
+HOOKCNT = os.environ.get('OGC_HOOKCNT') == '1'
+SHIMS_MAX = 0x2400 if HOOKCNT else 0x1400
+HOOKCNT_BACK = 0x100          # the counters: the shims' window's last 64 words (zero in the image)
+CAP_BACK = 0x400              # with HOOKCNT: the last virtual-profile record, before/after ogc_canvas
+RESERVED_BACK = CAP_BACK if HOOKCNT else 0   # the shims' code stays below this
 S_COORD = LAYOUT0 + SHIMS_MAX
 MAGIC, VERSION = 0x3143474F, 1    # "OGC1"
 
@@ -85,33 +92,27 @@ S = dict(
     EXCL_RECOMPUTES=0x3F8,
     SAVE_WHY=0x3FC,      # the last refused / failed BIN write: 1 file gone, 2 not this sup, 3 I/O
     NEXT=0x400,          # 64 words: each hook's way down (chain_next or replay)
-    # the virtual frame rates (K = 4: 239.76, 279.72 on 119.88; 17.98, 8.99 on 23.98)
-    RPAIRS=0x600,        # 16 {internal, row} pairs: the frame-rate converter (C06BDB0C/10/18)
-    SPAIRS=0x680,        # 12 {export, summary state} pairs: the summary converter (C06CB6DC/E0/E8)
-    VRATE=0x6E0,         # the virtual rate chosen (fps x 100) while the live row has entries for it, 0 = none
-    RPAIRN=0x6E4, SPAIRN=0x6E8,
-    VR_UI=0x6EC,         # 1: the menu rows went in
-    VR_WHY=0x6F0,        # the menu install: 1 in, else why not
-    VR_COMMITS=0x6F4,
-    RATE_LVOWED=0x6F8,   # native enum + 1: virtual cadence changed on the same carrier; reload after commit
-    RATE_LV_RELOADS=0x6FC,
-    VR_LABEL=0x700,      # K string ids: the labels (uishare string layer, STRBASE)
+    # (0x600..0x6DF: free)
+    VRATE=0x6E0,         # the RCD-declared rate chosen (fps x 100) through the service, 0 = the stock one
+    RATE_SETS=0x6E4,     # service calls that changed it
+    RATE_LV_RELOADS=0x6E8,
+    RATE_UI=0x6EC,       # 1: the six frame-rate CSV copies went in (the per-entry greying)
+    RATE_WHY=0x6F0,      # their install: 1 in, else why not
     FILE_UI=0x710,       # consumer-owned RCD selection page state
     HDR_COPY_CALLS=0x714, HDR_COPY_HITS=0x718,
     HDR_COPY_SRC=0x71C, HDR_COPY_DST=0x720, HDR_COPY_BYTES=0x724,
     HDR_COPY_WHY=0x728, HDR_COPY_FRAME=0x72C,
     BULK_HITS=0x730, BULK_LAST=0x734,
-    M12_LEGACY_HITS=0x738, M12_LEGACY_PID=0x73C,
     BIT_UI=0x740,        # bit-depth CSV copies installed, independent of virtual FPS UI
     BIT_EN_AT=0x744,     # two CSV variants x three native bit depths: enabled field
     BIT_EN_ON=0x75C,     # the corresponding original Enabled/Enabled2 values
-    # (0x774..0x7CF: free -- the former K-row EN arrays)
+    # (0x774..0x7CF: free)
     VTV_CALLS=0x7D0,     # the shutter-range / angle sites asked
-    VTV_HITS=0x7D4,      # ... and got the virtual rate's answer
-    VR_EN_AT=0x800,      # 6 CSV copies x 13 rows (9 stock + K): where each row's "a,b" is (absolute)
-    VR_EN_ON=0x940,      # ... and its stock "a,b" in that variant
+    VTV_HITS=0x7D4,      # ... and got the chosen rate's answer
     VRC=0x7DC,           # optional Virtual RCD service, owned tail state
-    BODY=0xA80,          # rows, entries, lists, overrides, vms follow (filled at entry)
+    RATE_EN_AT=0x800,    # 6 CSV copies x 9 stock rows: where each row's "a,b" is (absolute)
+    RATE_EN_ON=0x940,    # ... and its stock "a,b" in that variant
+    BODY=0xB00,          # rows, entries, lists, overrides, vms follow (filled at entry)
 )
 S_WORDS_INIT = {'FMTLATCH': 0xFFFFFFFF, 'PICKOK': 1}
 
@@ -146,8 +147,12 @@ T_ZOOM_KIND = 8               # override kind of the magnifier row (7 = the +0x1
 # ---- a picker entry: the firmware reads +0..+0xF -------------------------------
 ENT = dict(FIVE=0x00, PID=0x04, MODE=0x08, KEYPTR=0x0C, ROW=0x10, KEY=0x14,
            W0=0x24, W1=0x28, ENGFPS=0x2C, NOMINAL=0x30, VM=0x34, VAR=0x38,
-           VRATE=0x3C,       # 0, or the virtual rate this entry is for (picked only while S.VRATE == it)
-           SIZE=0x40)
+           VRATE=0x3C,       # 0, or the RCD-declared rate this entry is for (picked only while S.VRATE == it)
+           WFLAGS=0x40,      # the RCD's writer policy for this entry's rank and Crop Mode:
+                             # WR_* | bit-depth mask << 8 (SEC_BITDEPTH's encoding)
+           RNUM=0x44, RDEN=0x48,   # a declared rate's exact value (the DNG FrameRate), 0 for a stock one
+           CARRIER=0x4C,     # the stock rate (internal enum) the camera's setting holds for it
+           SIZE=0x50)
 # a variant: one virtual profile -- a row's default, or an entry's own canvas / base profile
 VAR = dict(PID=0x00, BASE=0x04, ROW=0x08, LIST=0x0C, SIZE=0x10)   # LIST: S offset, 0 = none
 # A standby group (S body): {npids, npairs, pids..., pairs...}; while a row is live, a
@@ -198,6 +203,11 @@ SEC_MODES, SEC_RATECANVAS = 9, 10       # v3: the modes; canvas pairs per rate (
 SEC_BINFILT = 11                       # {h taps, v taps, h kernel, v kernel, soft/std}
 SEC_CAPTURE_TIMING = 12                 # required: per-carrier {rank, crop, w0, w1, engine, nominal}
 SEC_BITDEPTH = 13                       # required u32 mask: bit 0 = 8, 1 = 10, 2 = 12
+SEC_WRITER = 14                         # required: {n; {rank, crop, bit mask, flags}} the recorder's policy
+WR_BATCH4M, WR_HDRCPU = 1, 2            # writer flags: 4 MiB write batch; CPU copy of the DNG header
+RCD_MAX_WRITER = 8
+SEC_RATES = 15                          # required: {n; {rank, num, den, cycles, carrier, nominal, engine}}
+RCD_RATE_BYTES, RCD_MAX_RATES = 28, 4   # rates beyond the stock nine; the camera's setting holds the carrier
 BIT_DEPTHS = (8, 10, 12)                 # native menu order, not a storage policy
 RCD_VERSIONS = (3,)                     # what this core reads (v1/v2 carried per-rate entries)
 RCD_MODE_BYTES = 20                     # donor, fastest rate (fps x 100), hmax, PAL hmax (0 = hmax), x
@@ -211,12 +221,12 @@ RCD_UI_BYTES = RCD_UI_ROW + RCD_UI_SUM
 RCD_MAX_FILE = 0x20000
 RCD_MAX_ENT, RCD_MAX_OVR, RCD_MAX_PAIRS, RCD_MAX_SECS = 32, 256, 64, 16
 RCD_MAX_NAMES = 16                      # .RCD names looked at (sorted); more are not read
-CORE_VERSION = 4                        # v4 supports RCD-owned bit-depth availability
+CORE_VERSION = 5                        # v5: RCD-declared rates (SEC_RATES), writer policy (SEC_WRITER)
 # why a file was refused (S.RCD_WHY low half)
 RCD_WHY = dict(OPEN=1, SIZE=2, ROOM=3, READ=4, MAGIC=5, VERSION=6, NEWER=7, SUM=8, SECTION=9,
                UNKNOWN=10, FIELD=11, ENTRY=12, CANVAS=13, UI=14, PACK=15, OVERRIDE=16,
                DUPLICATE=17, PROFILE=18, S_FULL=19, VMS=20, DISABLED=21, EXCESS=22, STANDBY=23,
-               BINFILT=24, BITDEPTH=25)
+               BINFILT=24, BITDEPTH=25, WRITER=26, RATES=27)
 
 # ---- firmware -----------------------------------------------------------------
 IMAGER = 0xC343B588           # XC_ImageSensorIMX410 (its +0 is the mode descriptor)
@@ -229,7 +239,8 @@ VPID0, VMID0 = 74, 230        # empty mapping slots 74..79 (class 0, like p83/p1
 
 # ---- C entry points (S.FN + 4*i) and hook slots (S.NEXT + 4*i) ----------------
 FNS = ['PICK', 'SEL', 'FMT', 'CANVAS', 'NAME', 'OUT', 'VLOOK', 'V32', 'AC38', 'FPS', 'CMT', 'SAVE',
-       'QSREC', 'QSLAY', 'QSLOAD', 'GATE', 'RCMT', 'VTV', 'VGUI', 'BINPATH', 'BINKERNEL', 'RECRATE', 'HDRCOPY', 'BULK', 'BIT']
+       'QSREC', 'QSLAY', 'QSLOAD', 'GATE', 'VGUI', 'BINPATH', 'BINKERNEL', 'BIT', 'GS',
+       'RECRATE', 'HDRCOPY', 'BULK', 'VTV']
 HOOKS = [  # name, site, kind, replay ('' = BL site through its own target / none)
     # Inner copy entry: leave Gyro2's outer C038C77C chain intact.
     ('hdrcopy', 0xC00FBB90, 'tw'),
@@ -264,39 +275,22 @@ HOOKS = [  # name, site, kind, replay ('' = BL site through its own target / non
     # list's state class (FUN_c04a1120 join), the magnifier key's MAG4 (FUN_c043b638)
     ('cropst', 0xC04A1788, 'b'), ('cropeff', 0xC00A93BC, 'b'), ('frmax', 0xC00A87E4, 'b'),
     ('frclass', 0xC04A121C, 'b'), ('mag', 0xC043B6A4, 'b'),
-    # the virtual frame rate: the two MV_FrameRate commit callbacks (Settings
-    # FUN_c057a6f8 is QS-side per res-lab's camera notes, FUN_c05821b8 the
-    # Settings menu; [r0+8] = the committed row) -- row nine = 239.76
-    ('rcmt1', 0xC057A6F8, 'b'), ('rcmt2', 0xC05821B8, 'b'),
-    # the virtual rate's shutter range and angle list (2026-10-08 RE, design §15):
-    # the slowest-Tv base value's per-fps join (MenuItemFactory vptr+0x4A0 FUN_c007f2b0,
-    # `bl c0085ac0` with r1 -> {num, den}) and its GUI copy (FUN_c0553ab8, the
-    # slowest-limit list), the shutter's display clamp (MenuItemShutterSpeed::v3,
-    # fp = the rate enum, [sp+0x28] = {num, den}), the maximum-angle list's rate
-    # (FUN_c0554758 `bl FUN_c005c0f0`: an unknown enum throws -- 0 = 15p, every angle),
-    # and the angle-to-Tv table's fps x 100 (FUN_c052dca8, r6, [sp] = the enum)
-    ('tvmin', 0xC007F5B4, 'bl'), ('tvmin2', 0xC0553CDC, 'bl'), ('tvdisp', 0xC00A075C, 'b'),
-    ('anglist', 0xC0554768, 'bl'), ('angtv', 0xC052DCFC, 'b'),
     # The stock aspect getter only accepts 1..8. Aspect 9 is 2:1, used by
     # Julien's configurator: answer it only for our live/picked or playback row.
     ('ratio', 0xC02DAFA0, 'b'),
     ('vrcgui', 0xC056461C, 'bl'),
     ('binpath', 0xC0325228, 'b'),
     ('binkernel1', 0xC032DDF0, 'bl'), ('binkernel2', 0xC032DE70, 'bl'),
-    # CinemaDNG FrameRate rational; the native setting remains a supported carrier.
-    ('recrate', 0xC00C9BD0, 'b'),
+    # A declared rate on its carrier: the CinemaDNG FrameRate rational, the slowest
+    # shutter's per-fps base value (MenuItemFactory vptr+0x4A0 FUN_c007f2b0, `bl c0085ac0`
+    # with r1 -> {num, den}) and the angle-to-Tv table's fps x 100 (FUN_c052dca8, r6)
+    ('recrate', 0xC00C9BD0, 'b'), ('tvmin', 0xC007F5B4, 'bl'), ('angtv', 0xC052DCFC, 'b'),
     ('bitclass', 0xC04A13E4, 'b'),        # native quality exclusion provider's result
     ('bitnorm', 0xC00A7FFC, 'b'),         # native quality normalizer's result
 ]
 RFLAG_CLAMP, RFLAG_MAG8, RFLAG_CROP = 1, 2, 4
-# the virtual frame rates, core-defined (rcd entries only say which ones they time):
-# rank (fps x 100), the stock internal it rides on, that rate's export (summary)
-VRATES = ((23976, 7, 10), (27972, 7, 10), (1798, 1, 1), (899, 1, 1))
-VR_K, VR_ROW0, VR_CSVS = 4, 9, 6
-VR_ROWS = VR_ROW0 + VR_K     # the frame-rate list's rows the core greys: the stock nine + K
-# the slowest shutter each allows, 1/n s (the firmware's own convention: 119.88 -> 1/120)
-VR_TV = tuple((r + 50) // 100 for r, _, _ in VRATES)
-CFG_FLAG_VRATE = 1     # the BIN record: FLAGS bit 0 + (rank << 8) of the virtual rate chosen
+RATE_CSVS = 6          # the frame-rate list's CSV variants (rcd.RATE_CSV)
+CFG_FLAG_VRATE = 1     # the BIN record: FLAGS bit 0 + (rank << 8) of the declared rate chosen
 RATE_ENUMS = (0, 1, 12, 2, 3, 13, 4, 5, 6, 7)     # the firmware's table at 0xC0735F60
 RATE_RANKS = {0: 1500, 1: 2398, 12: 2400, 2: 2500, 3: 2997, 13: 4800, 4: 5000, 5: 5994, 6: 10000, 7: 11988}
 RATE_TABLE = 0xC0735F60
@@ -325,14 +319,26 @@ RATES = ((0, '23_98', 1, 3003000, 0, 24.0, 24, 2398), (1, '24', 12, 3000000, 0, 
          (4, '48', 13, 1500000, 0, 48.0, 48, 4800), (5, '50', 4, 1440000, 1, 50.0, 50, 5000),
          (6, '60', 5, 1201200, 0, 60.0, 60, 5994), (7, '100', 6, 720000, 1, 50.0, 100, 10000),
          (8, '120', 7, 600600, 0, 60.0, 120, 11988))
-#        cycles, +0x30 (engine cadence), nominal, the stock row it rides on, generated
-VR_TIME = ((300300, 240000 / 1001, 240, 8, 1), (257400, 280000 / 1001, 280, 8, 1),
-           (4004000, 18000 / 1001, 18, 0, 1),
-           (8008000, 9000 / 1001, 9, 0, 0))     # 8.99: not until the camera says it can (user)
 
 
-ALL_RANKS = tuple(r[7] for r in RATES) + (23976, 27972, 1798, 899)
-MAX_GEN = 2 * (len(RATES) + 4)          # entries a row can make (each rate, plain and CROP)
+ALL_RANKS = tuple(r[7] for r in RATES)
+MAX_GEN = 2 * (len(RATES) + RCD_MAX_RATES)   # entries a row can make (each rate, plain and CROP)
+RATE_ROW = {r[2]: r[0] for r in RATES}       # a carrier's internal enum -> its stock row
+
+
+def rate(num, den, carrier, nominal, engine=None):
+    """A declared rate (SEC_RATES): exactly num/den fps, recorded while the camera's
+    setting holds the stock `carrier` (internal enum); `nominal` is the shutter-angle
+    fps, `engine` the canvas +0x30 cadence (default: the exact rate)."""
+    if (CLOCK * den) % num:
+        raise ValueError(f'{num}/{den} fps is no whole number of 72 MHz cycles')
+    return {'rank': num * 100 // den, 'num': num, 'den': den, 'cycles': CLOCK * den // num,
+            'carrier': carrier, 'nominal': nominal, 'engine': _f32(engine or num / den)}
+
+
+# what every format declares unless it says otherwise (the core's former four; 8.99 not
+# until the camera says it can, user 2026-10-08): 239.76 / 279.72 on 119.88, 17.98 on 23.98
+DEFAULT_RATES = (rate(240000, 1001, 7, 240), rate(280000, 1001, 7, 280), rate(18000, 1001, 1, 18))
 
 
 def solve(hm, cycles):
@@ -348,17 +354,16 @@ def solve(hm, cycles):
     return vm, tail
 
 
-def gen_entries(label, modes, flags):
+def gen_entries(label, modes, flags, rates=()):
     """The picker entries the core makes for a format (ogc.c gen_entry, same order):
-    each stock rate then each generated virtual rate, the first mode fast enough, the
-    plain key then (Crop Mode formats) its CROP twin.  modes: [(donor, maxrate, hmax,
-    pal_hmax, x)]."""
+    each stock rate then each declared one (keyed as its carrier), the first mode fast
+    enough, the plain key then (Crop Mode formats) its CROP twin.
+    modes: [(donor, maxrate, hmax, pal_hmax, x)]; rates: rate() dicts."""
     out = []
-    cand = [(suf, cyc, pal, eng, nom, rank, 0) for _, suf, _, cyc, pal, eng, nom, rank in RATES]
-    for k, (cyc, eng, nom, base, on) in enumerate(VR_TIME):
-        if on:
-            cand.append((RATES[base][1], cyc, 0, eng, nom, VRATES[k][0], VRATES[k][0]))
-    for suf, cyc, pal, eng, nom, rank, vr in cand:
+    cand = [(suf, cyc, pal, eng, nom, rank, None) for _, suf, en, cyc, pal, eng, nom, rank in RATES]
+    for r in rates:
+        cand.append((RATES[RATE_ROW[r['carrier']]][1], r['cycles'], 0, r['engine'], r['nominal'], r['rank'], r))
+    for suf, cyc, pal, eng, nom, rank, dr in cand:
         m = next((m for m in modes if rank <= m[1]), None)
         if m is None:
             continue
@@ -368,8 +373,12 @@ def gen_entries(label, modes, flags):
             continue
         for crop in ((0, 1) if flags & RFLAG_CROP else (0,)):
             out.append({'key': label + suf + ('CROP' if crop else ''), 'donor': m[0],
-                        'w0': hm | t[1] << 16, 'w1': t[0] | m[4] << 16, 'engfps': _f32(eng),
-                        'nominal': nom, 'vrate': vr, 'rank': rank, 'crop': crop})
+                        'w0': hm | t[1] << 16, 'w1': t[0] | m[4] << 16,
+                        'engfps': dr['engine'] if dr else _f32(eng),
+                        'nominal': nom, 'rank': rank, 'crop': crop,
+                        'vrate': rank if dr else 0, 'rnum': dr['num'] if dr else 0,
+                        'rden': dr['den'] if dr else 0,
+                        'carrier': dr['carrier'] if dr else RATES[[x[7] for x in RATES].index(rank)][2]})
     return out
 HOOK_INDEX = {n: i for i, (n, _, _) in enumerate(HOOKS)}
 LOOKUPS = ['lk_tim', 'lk_meta', 'lk_r28', 'lk_r38', 'lk_r14', 'lk_r68', 'lk_reg', 'lk_r10']
@@ -386,22 +395,23 @@ def header():
          'Z_FIELD': ZOOM[0], 'Z_COUNT': ZOOM[1], 'Z_STRIDE': ZOOM[2], 'VM_BUF_ZOOM': VM_BUF['ZOOM'],
          'R10_FIELD': R10[0], 'R10_COUNT': R10[1], 'R10_STRIDE': R10[2], 'T_R10': len(TABLES),
          'T_ZOOM': T_ZOOM_KIND, 'OGC_MAX_VMS': MAX_VMS, 'OGC_MAX_AVAIL': MAX_AVAIL,
+         **({'OGC_CAP_BACK': CAP_BACK} if HOOKCNT else {}),
          'OGC_S_BYTES': S_BYTES, 'OVR_BYTES': OVR_BYTES, 'OGC_VPID0': VPID0,
          'OGC_QS_SLOTS': QS_SLOTS, 'OGC_QS_CAP': QS_CAP, 'OGC_MAX_VARS': MAX_VARS,
-         'RFLAG_CLAMP': RFLAG_CLAMP, 'VR_K': VR_K, 'VR_ROWS': VR_ROWS, 'VR_ROW0': VR_ROW0, 'VR_CSVS': VR_CSVS,
-         **{f'VR_RANK{i}': r for i, (r, _, _) in enumerate(VRATES)},
-         **{f'VR_BASE{i}': b for i, (_, b, _) in enumerate(VRATES)},
-         **{f'VR_EXPORT{i}': e for i, (_, _, e) in enumerate(VRATES)},
-         **{f'VR_TV{i}': t for i, t in enumerate(VR_TV)},
-         'CFG_FLAG_VRATE': CFG_FLAG_VRATE, 'RATE_TABLE': RATE_TABLE, 'RFLAG_MAG8': RFLAG_MAG8, 'RFLAG_CROP': RFLAG_CROP,
+         'RFLAG_CLAMP': RFLAG_CLAMP, 'RATE_CSVS': RATE_CSVS, 'RATE_TABLE': RATE_TABLE,
+         'CFG_FLAG_VRATE': CFG_FLAG_VRATE, 'OGC_CLOCK': CLOCK, 'RFLAG_MAG8': RFLAG_MAG8, 'RFLAG_CROP': RFLAG_CROP,
          **{f'PREV_PID{i}': v for i, v in enumerate(PREV_GROUP_PIDS)},
          'OGC_MAX_SBY_GROUPS': MAX_SBY_GROUPS, 'OGC_MAX_SBY_PIDS': MAX_SBY_PIDS,
          'OGC_MAX_SBY_PAIRS': MAX_SBY_PAIRS, 'SEC_STANDBY': SEC_STANDBY,
          'SEC_ENTCANVAS': SEC_ENTCANVAS, 'RCD_VERSION_MIN': RCD_VERSIONS[0],
          'RCD_VERSION_MAX': RCD_VERSIONS[-1],
          'SEC_MODES': SEC_MODES, 'SEC_RATECANVAS': SEC_RATECANVAS, 'SEC_BINFILT': SEC_BINFILT,
-         'SEC_CAPTURE_TIMING': SEC_CAPTURE_TIMING,
-         'SEC_BITDEPTH': SEC_BITDEPTH,
+         'SEC_BITDEPTH': SEC_BITDEPTH, 'SEC_CAPTURE_TIMING': SEC_CAPTURE_TIMING,
+         'SEC_WRITER': SEC_WRITER, 'RCD_MAX_WRITER': RCD_MAX_WRITER, 'WR_BATCH4M': WR_BATCH4M,
+         'WR_HDRCPU': WR_HDRCPU, 'SEC_RATES': SEC_RATES, 'RCD_RATE_BYTES': RCD_RATE_BYTES,
+         'RCD_MAX_RATES': RCD_MAX_RATES, 'NDRATES': len(DEFAULT_RATES),
+         **{f'DRATE{i}_{k}': r[f] for i, r in enumerate(DEFAULT_RATES)
+            for k, f in enumerate(('rank', 'num', 'den', 'cycles', 'carrier', 'nominal', 'engine'))},
          'RCD_MODE_BYTES': RCD_MODE_BYTES,
          'RCD_MAX_MODES': RCD_MAX_MODES, 'MAX_GEN': MAX_GEN, 'NRATES': len(RATES), 'RCD_MAX_RCANVAS': RCD_MAX_RCANVAS, 'MIN_TAIL': MIN_TAIL,
          **{f'RATE_CYC{j}': r[3] for j, r in enumerate(RATES)},
@@ -409,11 +419,7 @@ def header():
          **{f'RATE_ENG{j}': _f32(r[5]) for j, r in enumerate(RATES)},
          **{f'RATE_NOM{j}': r[6] for j, r in enumerate(RATES)},
          **{f'RATE_RANK{j}': r[7] for j, r in enumerate(RATES)},
-         **{f'VR_CYC{k}': v[0] for k, v in enumerate(VR_TIME)},
-         **{f'VR_ENG{k}': _f32(v[1]) for k, v in enumerate(VR_TIME)},
-         **{f'VR_NOM{k}': v[2] for k, v in enumerate(VR_TIME)},
-         **{f'VR_BASEJ{k}': v[3] for k, v in enumerate(VR_TIME)},
-         **{f'VR_GEN{k}': v[4] for k, v in enumerate(VR_TIME)},
+         **{f'RATE_ENUM{j}': r[2] for j, r in enumerate(RATES)},
          'RCD_MAGIC': RCD_MAGIC, 'RCD_VERSION': RCD_VERSION, 'RCD_HDR': RCD_HDR,
          'RCD_SEC_BYTES': RCD_SEC_BYTES, 'SEC_ENTRIES': SEC_ENTRIES, 'SEC_VMODES': SEC_VMODES,
          'SEC_CANVAS': SEC_CANVAS, 'SEC_UI': SEC_UI, 'SEC_PACK': SEC_PACK,
@@ -463,6 +469,15 @@ def s_header():
     for i, pid in enumerate(VPID_POOL):
         put(S['POOL'] + 4 * i, pid)
     return bytes(buf)
+
+
+def writer_flags(row, e):
+    """An entry's writer policy: the row's first SEC_WRITER record for its rank
+    (0 = every rank) and Crop Mode, as ogc.c fill_s takes it."""
+    for rank, crop, bits, flags in row.get('writer', ()):
+        if (rank == 0 or rank == e['rank']) and crop == e['crop']:
+            return flags | bits << 8
+    return 0
 
 
 def standby_groups(row):
@@ -603,7 +618,6 @@ def state_blob(rows):
         put(b + ENT['FIVE'], 5)
         put(b + ENT['PID'], VPID_POOL[vr])
         put(b + ENT['VAR'], vr)
-        put(b + ENT['VRATE'], e.get('vrate', 0))
         v = vms.index((r, e['donor']))
         put(b + ENT['MODE'], VMID0 + v)
         put(b + ENT['ROW'], r)
@@ -616,6 +630,11 @@ def state_blob(rows):
         put(b + ENT['ENGFPS'], e['engfps'])
         put(b + ENT['NOMINAL'], e['nominal'])
         put(b + ENT['VM'], v)
+        put(b + ENT['VRATE'], e.get('vrate', 0))
+        put(b + ENT['WFLAGS'], writer_flags(rows[r], e))
+        put(b + ENT['RNUM'], e.get('rnum', 0))
+        put(b + ENT['RDEN'], e.get('rden', 0))
+        put(b + ENT['CARRIER'], e['carrier'])
     for v, (r, donor) in enumerate(vms):
         b = vms_off + VM['SIZE'] * v
         put(b + VM['ID'], VMID0 + v)

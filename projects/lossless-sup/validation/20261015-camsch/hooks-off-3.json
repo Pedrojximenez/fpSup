@@ -1,0 +1,76 @@
+{
+ "label": "off-3",
+ "hooks": {
+  "rec": {
+   "calls": 3,
+   "us": 331,
+   "per_call_us": 110.3,
+   "max_us": 11325,
+   "task": "RecPMgr",
+   "sp": "0xc3a3ad50"
+  },
+  "arrive": {
+   "calls": 114,
+   "us": 12983,
+   "per_call_us": 113.9,
+   "max_us": 1054,
+   "task": "MRecMgr",
+   "sp": "0xc3a42cb8"
+  },
+  "stop": {
+   "calls": 168,
+   "us": 186,
+   "per_call_us": 1.1,
+   "max_us": 24,
+   "task": "MRecMgr",
+   "sp": "0xc3a42d2c"
+  },
+  "flush": {
+   "calls": 114,
+   "us": 207,
+   "per_call_us": 1.8,
+   "max_us": 8,
+   "task": "SRecFile",
+   "sp": "0xc3a6f320"
+  },
+  "observe": {
+   "calls": 116,
+   "us": 331,
+   "per_call_us": 2.9,
+   "max_us": 20,
+   "task": "MRecMgr",
+   "sp": "0xc3a42c58"
+  },
+  "written": {
+   "calls": 114,
+   "us": 158,
+   "per_call_us": 1.4,
+   "max_us": 49,
+   "task": "SRecFile",
+   "sp": "0xc3a6f350"
+  },
+  "event": {
+   "calls": 343,
+   "us": 531,
+   "per_call_us": 1.5,
+   "max_us": 25,
+   "task": "MRecMgr",
+   "sp": "0xc3a42d60"
+  },
+  "discard": {
+   "calls": 0,
+   "us": 0,
+   "per_call_us": 0,
+   "max_us": 0,
+   "task": "?",
+   "sp": "0x0"
+  }
+ },
+ "enq_n": 114,
+ "enq_us": 12455,
+ "hold.diag_enq_n": 0,
+ "hold.diag_enq_us": 0,
+ "hold.diag_enq_max_us": 0,
+ "hold_b.diag_enq_n": 0,
+ "hold_b.diag_enq_us": 0
+}

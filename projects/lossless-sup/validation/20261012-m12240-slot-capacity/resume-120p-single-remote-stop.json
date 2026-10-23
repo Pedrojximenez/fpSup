@@ -1,0 +1,11 @@
+{
+  "commands": [
+    {
+      "time": 1791781443.47734,
+      "command": "status get is_recording",
+      "reply": "ERR shl cmd rc=-4(LIBUSB_ERROR_NO_DEVICE) moved=0/64\n"
+    }
+  ],
+  "basis": "fresh native REC=1 after physical button did not stop; no previous remote stop in this take",
+  "error": "RuntimeError('ERR shl cmd rc=-4(LIBUSB_ERROR_NO_DEVICE) moved=0/64\\n')"
+}

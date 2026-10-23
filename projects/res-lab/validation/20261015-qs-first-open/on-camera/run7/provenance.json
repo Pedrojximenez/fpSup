@@ -1,0 +1,116 @@
+{
+  "variant": "combined-fix12",
+  "previous_card_variant": "combined-fix11",
+  "white_fill_reference": "combined-fix10",
+  "purpose": "Extend only the black edge outward by approximately three pixels, keeping the central white glyph records unchanged except component IDs.",
+  "edge_offsets": [
+    [
+      -2,
+      0
+    ],
+    [
+      2,
+      0
+    ],
+    [
+      0,
+      -2
+    ],
+    [
+      0,
+      2
+    ],
+    [
+      -1,
+      -1
+    ],
+    [
+      1,
+      -1
+    ],
+    [
+      -1,
+      1
+    ],
+    [
+      1,
+      1
+    ],
+    [
+      -3,
+      0
+    ],
+    [
+      3,
+      0
+    ],
+    [
+      0,
+      -3
+    ],
+    [
+      0,
+      3
+    ],
+    [
+      -2,
+      -2
+    ],
+    [
+      2,
+      -2
+    ],
+    [
+      -2,
+      2
+    ],
+    [
+      2,
+      2
+    ]
+  ],
+  "white_fill_unchanged_all_four_layouts": true,
+  "font_size_position_spacing_unchanged": true,
+  "LV_table_bytes": 126504,
+  "bounds": {
+    "entries": 16,
+    "record_bytes": 16384,
+    "records": 51,
+    "marks": 512,
+    "table_bytes": 131072
+  },
+  "raw_sha256": "d9a8e10050184424886afaca263279967ab2cc2c89314c44038fe4402a676355",
+  "bytes": 313216,
+  "source_hashes": {
+    "vr_ui.py": "0a8597ffe37a0f6f059b319b14fe7a81da0e4b1bf7e19dc356fd5558e14267f8",
+    "ogc.c": "9915cbae02ff0091f1ee28ecca5a73fe2af2bfb3f7e242ad1b09967679954d78",
+    "test_lv_text_style.py": "610cb75dbd3885a3de24ec2f6c21e2c594516642668469d4d39ed0f4eca8320e",
+    "test_v3_rescustom.py": "a47c59b074449a487f7ff64814a18b0b55b0716a10ce490d1819d80d96f1b9ef"
+  },
+  "written_to_card": true,
+  "visual_result": "PASS: refreshed 29.97 FPS complete; temporary colour control measured 3px outward on all four bounding-box sides, then entire LV table restored to black and post-QS image 1944 confirmed.",
+  "on_card_sha256": "faa27b8f655f7a3c6b23be8c80cc288553c7993cf0f68a7a2bf95b0814c33cf7",
+  "CFG_sha256": "be62abbe2254b1c884c280a4352039f677bf7128bd81eea87dfb30990e855640",
+  "full_readback_equal": true,
+  "tests": {
+    "focused": "6 passed in 85.263s including four native layout parser paths and two core regressions",
+    "actual_BIN": "371 QS + 16 LV entries, resource flag=1, journal restored"
+  },
+  "recording_performed": false,
+  "QS_delay_resolved": false,
+  "latest_rate": "29.97",
+  "hardware_scope": "Medium CINE LV, 29.97 only; other layouts/rates not individually tested on camera.",
+  "white_geometry_evidence": "white-geometry-preserved.json",
+  "outward_evidence": "outward-edge-measurement.json",
+  "black_restoration_evidence": "edge-colour-restored-black.json",
+  "final_image": "final-black/1944-20261015-fps-outer-edge-3px-final-black-A.jpg",
+  "final_state": "final-state.json",
+  "final_daemon_pid": 44398,
+  "first_QS_timing_this_variant": null,
+  "stock_style_match": false,
+  "user_visual_acceptance": {
+    "date": "2026-10-15",
+    "statement": "\u9084\u4e0d\u932f\u5c31\u9019\u6a23",
+    "scope": "Current outward three-pixel black edge and existing text spacing; retain this style. This is not an assertion of exact stock-font equality or performance parity."
+  }
+}

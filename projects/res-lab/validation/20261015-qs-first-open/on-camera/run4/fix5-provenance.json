@@ -1,0 +1,23 @@
+{
+  "variant": "combined-fix5",
+  "raw_sha256": "781762bb45a7a5f46cd32c1112005faf1484285e1d5f8158222b1488c4ba4283",
+  "on_card_sha256": "7e80d7ba11929068920a559a4a058419fa5201edf42be0d38086b10f3eb0be9c",
+  "bytes": 230208,
+  "preserved_CFG_sha256": "be62abbe2254b1c884c280a4352039f677bf7128bd81eea87dfb30990e855640",
+  "changes": [
+    "Explicit stock Other_fontsetting for Latin digits and FPS",
+    "White fill, RRGGBBAA black 0x000000FF, 2.0 pixel outline, stroke mode 1",
+    "No loader/AutoRun or recording changes"
+  ],
+  "tests": [
+    "Four LV style/parser tests passed",
+    "Exact BIN with current loader/AutoRun: 371 QS + 16 LV replacements, reader resource flag=1, journal restoration passed"
+  ],
+  "source_hashes": {
+    "vr_ui.py": "fec7bf6aed6ccb8df1bd380c9244aa41ee04ca948d7aa67e289e432a318305bb",
+    "test_lv_text_style.py": "f4426008e53f737f7abbfa5505ea5212eec3231f0e9a857ac1154bad895529c6",
+    "ogc.c": "76a83ab88242ebcf9df7f90bbe98c49f5effdaf5217224f8a33bf5455f83fb41"
+  },
+  "written_to_card": true,
+  "visual_approval": "FAIL: no normal FPS after QS; one capture contains only tiny green integer. Explicit Other_fontsetting is unsuitable in this LV resource context."
+}

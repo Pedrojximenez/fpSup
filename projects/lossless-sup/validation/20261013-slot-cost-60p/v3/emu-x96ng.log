@@ -1,0 +1,47 @@
+EEE
+======================================================================
+ERROR: test_registry_scans_stop_at_the_active_count (__main__.ExpandedSlotsTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/test_slot_expansion.py", line 535, in test_registry_scans_stop_at_the_active_count
+    cam = self.boot(); self.assertEqual(self.prepare(cam, w, h, fps), n)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/test_slot_expansion.py", line 157, in boot
+    cam.c_entries = [self.entry(cam, n) & ~1 for n in
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/test_slot_expansion.py", line 157, in <listcomp>
+    cam.c_entries = [self.entry(cam, n) & ~1 for n in
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/test_slot_expansion.py", line 167, in entry
+    def entry(self, cam, name): return cam.blob + self.facts['c_base'] + self.facts['entries'][name]
+KeyError: 'fpl_card_cookie_get'
+
+======================================================================
+ERROR: test_claims_restore_every_added_word (__main__.ExpandedSlotsTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/test_slot_expansion.py", line 513, in test_claims_restore_every_added_word
+    cam = self.boot(); self.prepare(cam)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/test_slot_expansion.py", line 157, in boot
+    cam.c_entries = [self.entry(cam, n) & ~1 for n in
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/test_slot_expansion.py", line 157, in <listcomp>
+    cam.c_entries = [self.entry(cam, n) & ~1 for n in
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/test_slot_expansion.py", line 167, in entry
+    def entry(self, cam, name): return cam.blob + self.facts['c_base'] + self.facts['entries'][name]
+KeyError: 'fpl_card_cookie_get'
+
+======================================================================
+ERROR: test_busy_or_oversized_plan_retains_previous_capacity (__main__.ExpandedSlotsTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/test_slot_expansion.py", line 483, in test_busy_or_oversized_plan_retains_previous_capacity
+    cam = self.boot(); self.prepare(cam)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/test_slot_expansion.py", line 157, in boot
+    cam.c_entries = [self.entry(cam, n) & ~1 for n in
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/test_slot_expansion.py", line 157, in <listcomp>
+    cam.c_entries = [self.entry(cam, n) & ~1 for n in
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/test_slot_expansion.py", line 167, in entry
+    def entry(self, cam, name): return cam.blob + self.facts['c_base'] + self.facts['entries'][name]
+KeyError: 'fpl_card_cookie_get'
+
+----------------------------------------------------------------------
+Ran 3 tests in 47.481s
+
+FAILED (errors=3)

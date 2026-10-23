@@ -1,0 +1,68 @@
+{
+ "firmware": "Ver.5.02, out/seg0_c0000000.bin sha256 aaa5208a028d9c4a",
+ "changes_stock_behaviour": true,
+ "body": {
+  "source": "inputredraw.S",
+  "bytes": 368,
+  "sha256": "b85a5a9eaf0ff2848f65f0b6aaaf905da9d4c54df7afece4fc5e8d8196abca58",
+  "placement": "own allocation or the v3 sup block; position independent; ARM",
+  "entries": {
+   "ir_base": 0,
+   "ir_enq_hook": 56
+  },
+  "control": {
+   "enable": 8,
+   "rec_ok": 12,
+   "min_ms": 16,
+   "calls": 20,
+   "kicks": 24,
+   "preloads": 28,
+   "skip_rec": 32,
+   "skip_pending": 36,
+   "last_ms": 40
+  },
+  "defaults": {
+   "enable": 1,
+   "rec_ok": 0,
+   "min_ms": 16
+  }
+ },
+ "veneers": {
+  "bytes": 8,
+  "placement": "cave arena (within +-32 MiB of C06D1418)",
+  "words": [
+   "E51FF004",
+   "<body+0x38>"
+  ]
+ },
+ "sites": [
+  {
+   "name": "gui_key_enqueue",
+   "address": "0XC06D1418",
+   "isa": "ARM",
+   "orig_word": "EBFA3372",
+   "orig_insn": "bl 0xc055e1e8",
+   "new_insn": "bl <veneer>",
+   "caller": "UicContentsIfBase::v1 C06D13A0 (every key, down and up)",
+   "regs_relied_on": "none after the call (caller tests r6 next); r0/r1 passed through",
+   "power_off_restore": "declare as a 4-byte section with orig_word (SUP_BUILD_RULES §4)"
+  }
+ ],
+ "firmware_calls_from_body": [
+  "C055E1E8 enqueue (first, unchanged)",
+  "C00178D8 sysstat (+0x9C recording)",
+  "C05278F8 DrawMgr",
+  "C0527F30 force pending?",
+  "C0527E68 ReqForceDraw"
+ ],
+ "fixed_addresses": {
+  "current_time_ms": "0xC301EAE4",
+  "CYC_DRAW counters": "0xC3782F98 (+0,+4 cnt; +8,+C div)"
+ },
+ "arm_order": [
+  "write body + veneer, read back",
+  "C000E91C then C000EABC",
+  "patch C06D1418, read back, C000E91C + C000EABC"
+ ],
+ "disarm": "enable=0 (stock path from the next key); or write orig_word back + cache maintenance"
+}

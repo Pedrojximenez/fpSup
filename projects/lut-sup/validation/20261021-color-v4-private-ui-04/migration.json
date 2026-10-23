@@ -1,0 +1,313 @@
+{
+  "status": "accepted offline development package; camera monitoring pending",
+  "color_owner": "this chat / color container",
+  "raw_view": "possible future child; not moved or changed",
+  "ui_architecture": "Loader home registry + fpsup-ui private FT4S pages; no uishare runtime",
+  "ui_source_root": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-color-v4-private-ui-04/source-snapshot",
+  "source_snapshot_manifest": "source-snapshot.json",
+  "tests": 86,
+  "skipped": 0,
+  "mutations_detected": 7,
+  "numerical": {
+    "models": 35,
+    "samples_per_model": 161,
+    "comparisons": 5635,
+    "rgb_mae": 1.2566820953637038e-06,
+    "max_channel": 7.009144289204378e-05,
+    "per_model": [
+      {
+        "color": "aces",
+        "gamma": "adobe-rgb",
+        "samples": 161,
+        "rgb_mae": 1.221710235588373e-06,
+        "max_channel": 4.5413765513681315e-05
+      },
+      {
+        "color": "aces",
+        "gamma": "gamma24",
+        "samples": 161,
+        "rgb_mae": 1.3018382862889093e-06,
+        "max_channel": 5.745292534103594e-05
+      },
+      {
+        "color": "aces",
+        "gamma": "gamma26",
+        "samples": 161,
+        "rgb_mae": 1.3869100225268222e-06,
+        "max_channel": 7.009144289204378e-05
+      },
+      {
+        "color": "aces",
+        "gamma": "linear",
+        "samples": 161,
+        "rgb_mae": 5.824458253625082e-07,
+        "max_channel": 3.055903690540873e-06
+      },
+      {
+        "color": "aces",
+        "gamma": "srgb",
+        "samples": 161,
+        "rgb_mae": 1.0801597564090985e-06,
+        "max_channel": 1.2070736142323624e-05
+      },
+      {
+        "color": "adobe-rgb",
+        "gamma": "adobe-rgb",
+        "samples": 161,
+        "rgb_mae": 1.4813678930562373e-06,
+        "max_channel": 4.5413765513681315e-05
+      },
+      {
+        "color": "adobe-rgb",
+        "gamma": "gamma24",
+        "samples": 161,
+        "rgb_mae": 1.574952857623219e-06,
+        "max_channel": 5.745292534103594e-05
+      },
+      {
+        "color": "adobe-rgb",
+        "gamma": "gamma26",
+        "samples": 161,
+        "rgb_mae": 1.6561574966801974e-06,
+        "max_channel": 7.009144289204378e-05
+      },
+      {
+        "color": "adobe-rgb",
+        "gamma": "linear",
+        "samples": 161,
+        "rgb_mae": 8.110804751739804e-07,
+        "max_channel": 3.1248322807098106e-06
+      },
+      {
+        "color": "adobe-rgb",
+        "gamma": "srgb",
+        "samples": 161,
+        "rgb_mae": 1.338021277398636e-06,
+        "max_channel": 1.2043320545856995e-05
+      },
+      {
+        "color": "p3-d60",
+        "gamma": "adobe-rgb",
+        "samples": 161,
+        "rgb_mae": 1.3659886752829262e-06,
+        "max_channel": 4.5413765513677845e-05
+      },
+      {
+        "color": "p3-d60",
+        "gamma": "gamma24",
+        "samples": 161,
+        "rgb_mae": 1.4950336369795325e-06,
+        "max_channel": 5.745292534103247e-05
+      },
+      {
+        "color": "p3-d60",
+        "gamma": "gamma26",
+        "samples": 161,
+        "rgb_mae": 1.542445468475586e-06,
+        "max_channel": 7.009144289204378e-05
+      },
+      {
+        "color": "p3-d60",
+        "gamma": "linear",
+        "samples": 161,
+        "rgb_mae": 6.870764680737981e-07,
+        "max_channel": 2.921949926126821e-06
+      },
+      {
+        "color": "p3-d60",
+        "gamma": "srgb",
+        "samples": 161,
+        "rgb_mae": 1.2323591363703243e-06,
+        "max_channel": 1.2043320545856995e-05
+      },
+      {
+        "color": "p3-d65",
+        "gamma": "adobe-rgb",
+        "samples": 161,
+        "rgb_mae": 1.5009720376473864e-06,
+        "max_channel": 4.5413765513681315e-05
+      },
+      {
+        "color": "p3-d65",
+        "gamma": "gamma24",
+        "samples": 161,
+        "rgb_mae": 1.6031898499940451e-06,
+        "max_channel": 5.745292534103594e-05
+      },
+      {
+        "color": "p3-d65",
+        "gamma": "gamma26",
+        "samples": 161,
+        "rgb_mae": 1.671784954150935e-06,
+        "max_channel": 7.009144289204378e-05
+      },
+      {
+        "color": "p3-d65",
+        "gamma": "linear",
+        "samples": 161,
+        "rgb_mae": 8.915530021659254e-07,
+        "max_channel": 3.862158203138399e-06
+      },
+      {
+        "color": "p3-d65",
+        "gamma": "srgb",
+        "samples": 161,
+        "rgb_mae": 1.3423515452669068e-06,
+        "max_channel": 1.2043320545856995e-05
+      },
+      {
+        "color": "rec2020",
+        "gamma": "adobe-rgb",
+        "samples": 161,
+        "rgb_mae": 1.2247801123911312e-06,
+        "max_channel": 4.5413765513677845e-05
+      },
+      {
+        "color": "rec2020",
+        "gamma": "gamma24",
+        "samples": 161,
+        "rgb_mae": 1.2737216063597025e-06,
+        "max_channel": 5.745292534103247e-05
+      },
+      {
+        "color": "rec2020",
+        "gamma": "gamma26",
+        "samples": 161,
+        "rgb_mae": 1.4074972316580638e-06,
+        "max_channel": 7.009144289204378e-05
+      },
+      {
+        "color": "rec2020",
+        "gamma": "linear",
+        "samples": 161,
+        "rgb_mae": 5.543300921524706e-07,
+        "max_channel": 2.365378314550526e-06
+      },
+      {
+        "color": "rec2020",
+        "gamma": "srgb",
+        "samples": 161,
+        "rgb_mae": 1.063367104882215e-06,
+        "max_channel": 1.2043320545856995e-05
+      },
+      {
+        "color": "rec709",
+        "gamma": "adobe-rgb",
+        "samples": 161,
+        "rgb_mae": 1.3660340306136232e-06,
+        "max_channel": 4.5413765513677845e-05
+      },
+      {
+        "color": "rec709",
+        "gamma": "gamma24",
+        "samples": 161,
+        "rgb_mae": 1.4843205577349392e-06,
+        "max_channel": 5.745292534103247e-05
+      },
+      {
+        "color": "rec709",
+        "gamma": "gamma26",
+        "samples": 161,
+        "rgb_mae": 1.5579112925067432e-06,
+        "max_channel": 7.009144289204378e-05
+      },
+      {
+        "color": "rec709",
+        "gamma": "linear",
+        "samples": 161,
+        "rgb_mae": 7.040999560896358e-07,
+        "max_channel": 3.343953691420376e-06
+      },
+      {
+        "color": "rec709",
+        "gamma": "srgb",
+        "samples": 161,
+        "rgb_mae": 1.2340233079404064e-06,
+        "max_channel": 1.2043320545853525e-05
+      },
+      {
+        "color": "srgb",
+        "gamma": "adobe-rgb",
+        "samples": 161,
+        "rgb_mae": 1.3660340306136232e-06,
+        "max_channel": 4.5413765513677845e-05
+      },
+      {
+        "color": "srgb",
+        "gamma": "gamma24",
+        "samples": 161,
+        "rgb_mae": 1.4843205577349392e-06,
+        "max_channel": 5.745292534103247e-05
+      },
+      {
+        "color": "srgb",
+        "gamma": "gamma26",
+        "samples": 161,
+        "rgb_mae": 1.5579112925067432e-06,
+        "max_channel": 7.009144289204378e-05
+      },
+      {
+        "color": "srgb",
+        "gamma": "linear",
+        "samples": 161,
+        "rgb_mae": 7.040999560896358e-07,
+        "max_channel": 3.343953691420376e-06
+      },
+      {
+        "color": "srgb",
+        "gamma": "srgb",
+        "samples": 161,
+        "rgb_mae": 1.2340233079404064e-06,
+        "max_channel": 1.2043320545853525e-05
+      }
+    ],
+    "metric": "normalized Rec.709 Gamma2.4 channel code error; not DeltaE",
+    "includes_xyz_matrix_curve_node_and_interpolation_quantization": true,
+    "resolve_pixel_match_verified": false,
+    "camera_pixels": false
+  },
+  "compared_with": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/cards/20261021-loader-v4-ui-04",
+  "artifact_comparison": {
+    "AutoRun.txt": {
+      "changed": false,
+      "bytes": 3253,
+      "sha256": "ee256bc56848caeb6aecfb9d8114530102c67bae768a09f67757528e64af59f9"
+    },
+    "fpSup/LOADER.BIN": {
+      "changed": true,
+      "bytes": 18804,
+      "sha256": "30fc06327c0b6e5afb92bbb2f6cf013cc290159262a26946093389ad44f0f85e"
+    },
+    "fpSup/SUPMGR.BIN": {
+      "changed": true,
+      "bytes": 4788,
+      "sha256": "a2d938aeb2a450083fa14392a5dcbf9b9076ff9b4d6b5e05a11eca609a3d17ee"
+    },
+    "fpSup/LUT.BIN": {
+      "changed": false,
+      "bytes": 7408,
+      "sha256": "b367b6833421b4f912786915ee58b4449bbb6ea1eb721bb574149efdb7ff1f87"
+    },
+    "fpSup/UI/FPSUP.BIN": {
+      "changed": true,
+      "bytes": 132971,
+      "sha256": "2cef278c3958d8974f924e274b2b77b5b502bf5ab820d5903489e1d4a2857742"
+    },
+    "fpSup/UI/SUPMGR.BIN": {
+      "changed": true,
+      "bytes": 115165,
+      "sha256": "404bee427d223b6ec94a402b40a9770297fde0c972f394b91873d84b2cd21dd4"
+    }
+  },
+  "files_verified": true,
+  "build_sources_verified_against_snapshot": true,
+  "provenance_note": "Acceptance refers to the preserved source snapshot and exact card bytes, not mutable live sources.",
+  "camera_operations": false,
+  "physical_card_written": false,
+  "live_view_backend_connected": false,
+  "raw_view_modified": false,
+  "shared_loader_modified_by_this_task": false,
+  "report": "results/report.json",
+  "card": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/cards/20261021-color-v4-private-ui-04",
+  "live_build_source_differences_at_completion": []
+}

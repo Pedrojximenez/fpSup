@@ -1,0 +1,81 @@
+{
+  "scope": "RAW admission budget; keep native 64 MiB byte target and independent Ruari STOPFX",
+  "candidate_sha256": "1baa14dc4bb4275e52969fe7e891801be2dc531523afd79a2c9318e6438a940d",
+  "candidate_bytes": 79200,
+  "resident_bytes": 5976064,
+  "offline": {
+    "host_tests": 177,
+    "exact_binary_tests": 14,
+    "stopfx_load_order_tests": 2,
+    "stopfx_test_methods": 1,
+    "default_loader_tests": 2,
+    "total_test_methods": 194,
+    "all_passed": true
+  },
+  "deployment": "write ACK timeout; native completion status and full file readback confirm success; one normal reboot",
+  "boot": 13209411,
+  "live_trials": [
+    {
+      "label": "m12240-30p-memory",
+      "clip": "A001_139",
+      "fps": 29.97002997002997,
+      "requested": 136,
+      "finished": 136,
+      "compressed": 0,
+      "raw": 136,
+      "descriptors_free": 832,
+      "capacity": 832,
+      "registry_occupied": 0,
+      "bulk_bytes": 67108864,
+      "min_raw_free": 666288704,
+      "reserve_bytes": 152334336,
+      "pressure_raw": 0,
+      "unknown_raw": 0,
+      "codec_spares_released_total": 2,
+      "hold_live": 0,
+      "post_stop_raw_used": 0
+    },
+    {
+      "label": "m12240-60p-memory",
+      "clip": "A001_140",
+      "fps": 59.94005994005994,
+      "requested": 220,
+      "finished": 220,
+      "compressed": 0,
+      "raw": 220,
+      "descriptors_free": 844,
+      "capacity": 844,
+      "registry_occupied": 0,
+      "bulk_bytes": 67108864,
+      "min_raw_free": 656357888,
+      "reserve_bytes": 161165312,
+      "pressure_raw": 0,
+      "unknown_raw": 0,
+      "codec_spares_released_total": 4,
+      "hold_live": 0,
+      "post_stop_raw_used": 0
+    }
+  ],
+  "pressure_branch_camera_tested": false,
+  "119p_freeze_fixed": false,
+  "merge_updated": false,
+  "camera_end_state": {
+    "recording": false,
+    "writer_idle": true,
+    "mode": "M12240",
+    "fps": "29.97p",
+    "lossless": true,
+    "boot": 13209411
+  },
+  "samples": {
+    "clip": "A001_139",
+    "requested": 136,
+    "finished": 136,
+    "sample_only": true
+  },
+  "decoded_sample_numbers": [
+    1,
+    136
+  ],
+  "source_hashes_match": true
+}

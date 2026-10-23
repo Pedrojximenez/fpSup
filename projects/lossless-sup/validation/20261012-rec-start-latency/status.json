@@ -1,0 +1,228 @@
+{
+  "time": 1791786931.701633,
+  "state": "deployed and bounded hardware checks passed; experimental",
+  "sha256_before_native_setting_save": "68bf34f2a8bea02c438b5d7e54dec600ad382bc3226a7d3f9221a5d0f5ac26a5",
+  "bin_bytes": 79584,
+  "resident_bytes": 5976064,
+  "source_hashes_match": true,
+  "replaced_only": "\\fpSup\\10LOSS.BIN",
+  "normal_reboots": 1,
+  "stock_batch_bytes": 67108864,
+  "STOPFX": "unchanged independent sup by Ruari",
+  "offline": {
+    "host_test_methods": 180,
+    "exact_bin_arm_test_methods": 15,
+    "stopfx_both_orders_test_methods": 1,
+    "default_loader_test_methods": 2,
+    "state_memory_arm_profile": "state-memory-arm.json",
+    "old_bin_negative_regression": "expected failure, 2506 unwanted writes",
+    "mutation_checks": "reset/check omissions detected"
+  },
+  "trials": [
+    {
+      "evidence": "m12240-30p-take1.json",
+      "clip": "A001_145",
+      "actual_mode": "FHD 29.97p",
+      "raw_geometry": [
+        1936,
+        1090
+      ],
+      "requested": 109,
+      "finished": 109,
+      "compressed": 108,
+      "raw": 1,
+      "capacity": 404,
+      "recovered": 404,
+      "spares_freed_this_take": 2,
+      "timing_us": {
+        "rec_core_us": 13033,
+        "rec_slots_us": 1523,
+        "rec_holds_us": 144326,
+        "rec_total_us": 159268,
+        "rec_first_frame_us": 734266
+      }
+    },
+    {
+      "evidence": "fhd-30p-take2.json",
+      "clip": "A001_146",
+      "actual_mode": "FHD 29.97p",
+      "raw_geometry": [
+        1936,
+        1090
+      ],
+      "requested": 109,
+      "finished": 109,
+      "compressed": 108,
+      "raw": 1,
+      "capacity": 408,
+      "recovered": 408,
+      "spares_freed_this_take": 2,
+      "timing_us": {
+        "rec_core_us": 1145,
+        "rec_slots_us": 2048,
+        "rec_holds_us": 143060,
+        "rec_total_us": 149337,
+        "rec_first_frame_us": 696554
+      }
+    }
+  ],
+  "samples": {
+    "clip": "A001_146",
+    "requested": 109,
+    "finished": 109,
+    "sample_only": true,
+    "frames": [
+      {
+        "file": "000001.DNG",
+        "bytes": 3244544,
+        "ifd_at": 8,
+        "compression": 1,
+        "decoded": [
+          1090,
+          1936
+        ],
+        "raw_mean": 273.32,
+        "number": 1,
+        "main_ifd": {
+          "NewSubfileType": 0,
+          "ImageWidth": 1936,
+          "ImageLength": 1090,
+          "BitsPerSample": 12,
+          "Compression": 1,
+          "StripOffsets": 78848,
+          "StripByteCounts": 3165372,
+          "BlackLevel": [
+            "262147/1024",
+            "262147/1024",
+            "262147/1024",
+            "262147/1024"
+          ],
+          "WhiteLevel": 4095,
+          "DefaultCropOrigin": [
+            8,
+            5
+          ],
+          "DefaultCropSize": [
+            1920,
+            1080
+          ],
+          "BaselineExposure": "3072/1024",
+          "FrameRate": "30000/1001"
+        },
+        "sha256": "3275a5f21829093f7fcf98deaa06ae0338a1c7af92d8fecbcb49412da1d65fb0"
+      },
+      {
+        "file": "000002.DNG",
+        "bytes": 866304,
+        "ifd_at": 865280,
+        "compression": 7,
+        "tiles": 12,
+        "soi_ok": 12,
+        "eoi_ok": 12,
+        "zero_pad": 726,
+        "decoded": [
+          1090,
+          1936
+        ],
+        "raw_mean": 273.31,
+        "number": 2,
+        "main_ifd": {
+          "NewSubfileType": 0,
+          "ImageWidth": 1936,
+          "ImageLength": 1090,
+          "BitsPerSample": 12,
+          "Compression": 7,
+          "BlackLevel": [
+            "262115/1024",
+            "262115/1024",
+            "262115/1024",
+            "262115/1024"
+          ],
+          "WhiteLevel": 4095,
+          "DefaultCropOrigin": [
+            8,
+            5
+          ],
+          "DefaultCropSize": [
+            1920,
+            1080
+          ],
+          "BaselineExposure": "3072/1024",
+          "FrameRate": "30000/1001"
+        },
+        "sha256": "965e20f8d46fe36827a01c3ebc4fa344647d732f2551b2bce7b07b34ba1ae8eb"
+      },
+      {
+        "file": "000109.DNG",
+        "bytes": 865280,
+        "ifd_at": 864256,
+        "compression": 7,
+        "tiles": 12,
+        "soi_ok": 12,
+        "eoi_ok": 12,
+        "zero_pad": 191,
+        "decoded": [
+          1090,
+          1936
+        ],
+        "raw_mean": 273.3,
+        "number": 109,
+        "main_ifd": {
+          "NewSubfileType": 0,
+          "ImageWidth": 1936,
+          "ImageLength": 1090,
+          "BitsPerSample": 12,
+          "Compression": 7,
+          "BlackLevel": [
+            "262126/1024",
+            "262126/1024",
+            "262126/1024",
+            "262126/1024"
+          ],
+          "WhiteLevel": 4095,
+          "DefaultCropOrigin": [
+            8,
+            5
+          ],
+          "DefaultCropSize": [
+            1920,
+            1080
+          ],
+          "BaselineExposure": "3072/1024",
+          "FrameRate": "30000/1001"
+        },
+        "sha256": "423593fc8368d70ecd991085691d1d68b260b6bac905c64439aee7ac915ce077"
+      }
+    ]
+  },
+  "final_camera": {
+    "time": 1791786889.946212,
+    "standby": true,
+    "writer": [
+      0,
+      0
+    ],
+    "raw_channel": "0xc3073c3c",
+    "raw_class": 10,
+    "raw_total": 742520320,
+    "raw_used": 0,
+    "raw_peak": 289592512,
+    "boot": 12441467,
+    "lossless": "OK:MV_fpLossless -> 1"
+  },
+  "deployment": "deployment-readback-recovery.json",
+  "write_reply": "uncertain; worker completion and full readback verified, no write replay",
+  "physical_button_feedback": "pending; internal timing starts at REC hook, not physical key or LCD",
+  "evidence_notes": [
+    "m12240-30p-take1 label is historical assumption; actual mode is FHD 1936x1090 RAW",
+    "m12240-30p-first refused before any REC pulse because LOSS was OFF",
+    "Audio briefly changed during menu navigation, restored ON before both takes"
+  ],
+  "limitations": [
+    "No matched before/after physical button latency measurement",
+    "No new M12240, 119.88p or 239.76p test",
+    "Same-capacity no-rebuild path tested on exact BIN offline; active capacity changed between hardware takes as completion budget learned",
+    "Samples decoded, not every frame",
+    "Local merge/release unchanged; no commit or push"
+  ]
+}

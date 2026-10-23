@@ -1,0 +1,496 @@
+{
+  "Clip": {
+    "INPS_Name": "Filename",
+    "INPS_ID": "Clip",
+    "INPS_DataType": "Clip",
+    "INPN_Default": 0.0
+  },
+  "OutputFormat": {
+    "INPS_Name": "Output Format",
+    "INPS_ID": "OutputFormat",
+    "INPS_DataType": "FuID",
+    "INPN_Default": 0.0,
+    "INPIDT_ComboControl_ID": {
+      "1": "FusePicFormat",
+      "2": "RawFormat",
+      "3": "IPLFormat",
+      "4": "JpegFormat",
+      "5": "OpenEXRFormat",
+      "6": "PNGFormat",
+      "7": "TargaFormat",
+      "8": "BMPFormat"
+    }
+  },
+  "ProcessMode": {
+    "INPS_Name": "Process Mode",
+    "INPS_ID": "ProcessMode",
+    "INPS_DataType": "FuID",
+    "INPN_Default": 0.0,
+    "INPIDT_ComboControl_ID": {
+      "1": "FullFrames",
+      "2": "NTSC",
+      "3": "PAL",
+      "4": "PALReversed",
+      "5": "NTSCReversed",
+      "6": "Auto"
+    }
+  },
+  "Gamut.ColorSpace": {
+    "INPS_Name": "Color Space",
+    "INPS_ID": "Gamut.ColorSpace",
+    "INPS_DataType": "FuID",
+    "INPN_Default": 0.0,
+    "INPIDT_ComboControl_ID": {
+      "1": "NoChange",
+      "2": "ACES",
+      "3": "ACEScg",
+      "4": "Adobe",
+      "5": "AppleLog2",
+      "6": "Apple",
+      "7": "ARRIDCI",
+      "8": "ARRIRec709",
+      "9": "ARRIWideGamut",
+      "10": "ARRIWideGamut4",
+      "11": "Beta",
+      "12": "BMDFilm46K",
+      "13": "BMDFilm46K3",
+      "14": "BMDFilm4K",
+      "15": "BMDFilm4K3",
+      "16": "BMDFilm",
+      "17": "BMDPocket4K4",
+      "18": "BMDFilmWide4",
+      "19": "CanonCinema",
+      "20": "CIE",
+      "21": "ColorMatch",
+      "22": "DWG",
+      "23": "ECI",
+      "24": "ECIv2",
+      "25": "ExtLinDispP3",
+      "26": "Rec601",
+      "27": "Rec709Display",
+      "28": "Rec709",
+      "29": "Rec2020",
+      "30": "NTSC1953",
+      "31": "P3D60",
+      "32": "P3D65",
+      "33": "DCI",
+      "34": "PALSECAM",
+      "35": "VGamut",
+      "36": "ProPhoto",
+      "37": "RedWideGamut",
+      "38": "SimplifiedsRGB",
+      "39": "SMPTE170",
+      "40": "SMPTE240",
+      "41": "SMPTEC",
+      "42": "SGamut",
+      "43": "SGamut3Cine",
+      "44": "sRGB",
+      "45": "WideGamut",
+      "46": "XYZCIE",
+      "47": "Custom"
+    }
+  },
+  "Gamut.GammaSpace": {
+    "INPS_Name": "Gamma Space",
+    "INPS_ID": "Gamut.GammaSpace",
+    "INPS_DataType": "FuID",
+    "INPN_Default": 0.0,
+    "INPIDT_ComboControl_ID": {
+      "1": "NoChange",
+      "2": "ACES",
+      "3": "ACEScg",
+      "4": "Adobe",
+      "5": "AppleLog2",
+      "6": "Apple",
+      "7": "ARRIDCI",
+      "8": "ARRIRec709",
+      "9": "ARRIWideGamut",
+      "10": "ARRIWideGamut4",
+      "11": "Beta",
+      "12": "BMDFilm46K",
+      "13": "BMDFilm46K3",
+      "14": "BMDFilm4K",
+      "15": "BMDFilm4K3",
+      "16": "BMDFilm",
+      "17": "BMDPocket4K4",
+      "18": "BMDFilmWide4",
+      "19": "CanonCinema",
+      "20": "CIE",
+      "21": "ColorMatch",
+      "22": "DWG",
+      "23": "ECI",
+      "24": "ECIv2",
+      "25": "ExtLinDispP3",
+      "26": "Rec601",
+      "27": "Rec709Display",
+      "28": "Rec709",
+      "29": "Rec2020",
+      "30": "NTSC1953",
+      "31": "P3D60",
+      "32": "P3D65",
+      "33": "DCI",
+      "34": "PALSECAM",
+      "35": "VGamut",
+      "36": "ProPhoto",
+      "37": "RedWideGamut",
+      "38": "SimplifiedsRGB",
+      "39": "SMPTE170",
+      "40": "SMPTE240",
+      "41": "SMPTEC",
+      "42": "SGamut",
+      "43": "SGamut3Cine",
+      "44": "sRGB",
+      "45": "WideGamut",
+      "46": "XYZCIE",
+      "47": "Custom"
+    }
+  },
+  "Gamut.LogType": {
+    "INPS_Name": "Log Type",
+    "INPS_ID": "Gamut.LogType",
+    "INPS_DataType": "FuID",
+    "INPN_Default": 0.0,
+    "INPIDT_ComboControl_ID": {
+      "1": "Bypass",
+      "2": "Cineon",
+      "3": "JoshPines",
+      "4": "ACESlog",
+      "5": "AppleLog",
+      "6": "ARRILogC",
+      "7": "BMDFilm",
+      "8": "CanonLog",
+      "9": "DaVinciIntermediate",
+      "10": "NikonNLog",
+      "11": "Panalog",
+      "12": "PanasonicVLog",
+      "13": "REDLog3G10",
+      "14": "REDlogFilm",
+      "15": "SonySLog",
+      "16": "FilmStream"
+    }
+  },
+  "Input": {
+    "INPS_Name": "Input",
+    "INPS_ID": "Input",
+    "INPS_DataType": "Image",
+    "INPN_Default": 0.0
+  },
+  "OpenEXRFormat.Depth": {
+    "INPS_Name": "Depth",
+    "INPS_ID": "OpenEXRFormat.Depth",
+    "INPS_DataType": "Number",
+    "INPN_Default": 0.0
+  },
+  "OpenEXRFormat.Compression": {
+    "INPS_Name": "Compression",
+    "INPS_ID": "OpenEXRFormat.Compression",
+    "INPS_DataType": "Number",
+    "INPN_Default": 3.0,
+    "INPST_ComboControl_String": {
+      "1": "None",
+      "2": "RLE",
+      "3": "Zip (1 line)",
+      "4": "Zip (16 lines)",
+      "5": "Piz (wavelet)",
+      "6": "Pxr24",
+      "7": "B44",
+      "8": "B44A",
+      "9": "DWA (32 line)",
+      "10": "DWA (256 line)"
+    }
+  },
+  "OpenEXRFormat.ZipCompressionLevel": {
+    "INPS_Name": "Zip Compression level",
+    "INPS_ID": "OpenEXRFormat.ZipCompressionLevel",
+    "INPS_DataType": "Number",
+    "INPN_Default": 4.0
+  },
+  "OpenEXRFormat.DWACompressionLevel": {
+    "INPS_Name": "DWA Compression level",
+    "INPS_ID": "OpenEXRFormat.DWACompressionLevel",
+    "INPS_DataType": "Number",
+    "INPN_Default": 45.0
+  },
+  "OpenEXRFormat.Channels": {
+    "INPS_Name": "Channels",
+    "INPS_ID": "OpenEXRFormat.Channels",
+    "INPS_DataType": "Number",
+    "INPN_Default": 0.0
+  },
+  "OpenEXRFormat.RedEnable": {
+    "INPS_Name": "Red",
+    "INPS_ID": "OpenEXRFormat.RedEnable",
+    "INPS_DataType": "Number",
+    "INPN_Default": 1.0
+  },
+  "OpenEXRFormat.RedName": {
+    "INPS_Name": "",
+    "INPS_ID": "OpenEXRFormat.RedName",
+    "INPS_DataType": "Text",
+    "INPN_Default": 0.0
+  },
+  "OpenEXRFormat.GreenEnable": {
+    "INPS_Name": "Green",
+    "INPS_ID": "OpenEXRFormat.GreenEnable",
+    "INPS_DataType": "Number",
+    "INPN_Default": 1.0
+  },
+  "OpenEXRFormat.GreenName": {
+    "INPS_Name": "",
+    "INPS_ID": "OpenEXRFormat.GreenName",
+    "INPS_DataType": "Text",
+    "INPN_Default": 0.0
+  },
+  "OpenEXRFormat.BlueEnable": {
+    "INPS_Name": "Blue",
+    "INPS_ID": "OpenEXRFormat.BlueEnable",
+    "INPS_DataType": "Number",
+    "INPN_Default": 1.0
+  },
+  "OpenEXRFormat.BlueName": {
+    "INPS_Name": "",
+    "INPS_ID": "OpenEXRFormat.BlueName",
+    "INPS_DataType": "Text",
+    "INPN_Default": 0.0
+  },
+  "OpenEXRFormat.AlphaEnable": {
+    "INPS_Name": "Alpha",
+    "INPS_ID": "OpenEXRFormat.AlphaEnable",
+    "INPS_DataType": "Number",
+    "INPN_Default": 1.0
+  },
+  "OpenEXRFormat.AlphaName": {
+    "INPS_Name": "",
+    "INPS_ID": "OpenEXRFormat.AlphaName",
+    "INPS_DataType": "Text",
+    "INPN_Default": 0.0
+  },
+  "OpenEXRFormat.ZEnable": {
+    "INPS_Name": "Z",
+    "INPS_ID": "OpenEXRFormat.ZEnable",
+    "INPS_DataType": "Number",
+    "INPN_Default": 1.0
+  },
+  "OpenEXRFormat.ZName": {
+    "INPS_Name": "",
+    "INPS_ID": "OpenEXRFormat.ZName",
+    "INPS_DataType": "Text",
+    "INPN_Default": 0.0
+  },
+  "OpenEXRFormat.ZBackEnable": {
+    "INPS_Name": "ZBack",
+    "INPS_ID": "OpenEXRFormat.ZBackEnable",
+    "INPS_DataType": "Number",
+    "INPN_Default": 1.0
+  },
+  "OpenEXRFormat.ZBackName": {
+    "INPS_Name": "",
+    "INPS_ID": "OpenEXRFormat.ZBackName",
+    "INPS_DataType": "Text",
+    "INPN_Default": 0.0
+  },
+  "OpenEXRFormat.CovEnable": {
+    "INPS_Name": "Coverage",
+    "INPS_ID": "OpenEXRFormat.CovEnable",
+    "INPS_DataType": "Number",
+    "INPN_Default": 1.0
+  },
+  "OpenEXRFormat.CovName": {
+    "INPS_Name": "",
+    "INPS_ID": "OpenEXRFormat.CovName",
+    "INPS_DataType": "Text",
+    "INPN_Default": 0.0
+  },
+  "OpenEXRFormat.ObjIDEnable": {
+    "INPS_Name": "Object ID",
+    "INPS_ID": "OpenEXRFormat.ObjIDEnable",
+    "INPS_DataType": "Number",
+    "INPN_Default": 1.0
+  },
+  "OpenEXRFormat.ObjIDName": {
+    "INPS_Name": "",
+    "INPS_ID": "OpenEXRFormat.ObjIDName",
+    "INPS_DataType": "Text",
+    "INPN_Default": 0.0
+  },
+  "OpenEXRFormat.MatIDEnable": {
+    "INPS_Name": "Material ID",
+    "INPS_ID": "OpenEXRFormat.MatIDEnable",
+    "INPS_DataType": "Number",
+    "INPN_Default": 1.0
+  },
+  "OpenEXRFormat.MatIDName": {
+    "INPS_Name": "",
+    "INPS_ID": "OpenEXRFormat.MatIDName",
+    "INPS_DataType": "Text",
+    "INPN_Default": 0.0
+  },
+  "OpenEXRFormat.UEnable": {
+    "INPS_Name": "U",
+    "INPS_ID": "OpenEXRFormat.UEnable",
+    "INPS_DataType": "Number",
+    "INPN_Default": 1.0
+  },
+  "OpenEXRFormat.UName": {
+    "INPS_Name": "",
+    "INPS_ID": "OpenEXRFormat.UName",
+    "INPS_DataType": "Text",
+    "INPN_Default": 0.0
+  },
+  "OpenEXRFormat.VEnable": {
+    "INPS_Name": "V",
+    "INPS_ID": "OpenEXRFormat.VEnable",
+    "INPS_DataType": "Number",
+    "INPN_Default": 1.0
+  },
+  "OpenEXRFormat.VName": {
+    "INPS_Name": "",
+    "INPS_ID": "OpenEXRFormat.VName",
+    "INPS_DataType": "Text",
+    "INPN_Default": 0.0
+  },
+  "OpenEXRFormat.XNormEnable": {
+    "INPS_Name": "X Normal",
+    "INPS_ID": "OpenEXRFormat.XNormEnable",
+    "INPS_DataType": "Number",
+    "INPN_Default": 1.0
+  },
+  "OpenEXRFormat.XNormName": {
+    "INPS_Name": "",
+    "INPS_ID": "OpenEXRFormat.XNormName",
+    "INPS_DataType": "Text",
+    "INPN_Default": 0.0
+  },
+  "OpenEXRFormat.YNormEnable": {
+    "INPS_Name": "Y Normal",
+    "INPS_ID": "OpenEXRFormat.YNormEnable",
+    "INPS_DataType": "Number",
+    "INPN_Default": 1.0
+  },
+  "OpenEXRFormat.YNormName": {
+    "INPS_Name": "",
+    "INPS_ID": "OpenEXRFormat.YNormName",
+    "INPS_DataType": "Text",
+    "INPN_Default": 0.0
+  },
+  "OpenEXRFormat.ZNormEnable": {
+    "INPS_Name": "Z Normal",
+    "INPS_ID": "OpenEXRFormat.ZNormEnable",
+    "INPS_DataType": "Number",
+    "INPN_Default": 1.0
+  },
+  "OpenEXRFormat.ZNormName": {
+    "INPS_Name": "",
+    "INPS_ID": "OpenEXRFormat.ZNormName",
+    "INPS_DataType": "Text",
+    "INPN_Default": 0.0
+  },
+  "OpenEXRFormat.XVelEnable": {
+    "INPS_Name": "X Velocity",
+    "INPS_ID": "OpenEXRFormat.XVelEnable",
+    "INPS_DataType": "Number",
+    "INPN_Default": 1.0
+  },
+  "OpenEXRFormat.XVelName": {
+    "INPS_Name": "",
+    "INPS_ID": "OpenEXRFormat.XVelName",
+    "INPS_DataType": "Text",
+    "INPN_Default": 0.0
+  },
+  "OpenEXRFormat.YVelEnable": {
+    "INPS_Name": "Y Velocity",
+    "INPS_ID": "OpenEXRFormat.YVelEnable",
+    "INPS_DataType": "Number",
+    "INPN_Default": 1.0
+  },
+  "OpenEXRFormat.YVelName": {
+    "INPS_Name": "",
+    "INPS_ID": "OpenEXRFormat.YVelName",
+    "INPS_DataType": "Text",
+    "INPN_Default": 0.0
+  },
+  "OpenEXRFormat.XRevVelEnable": {
+    "INPS_Name": "X Reverse Vel",
+    "INPS_ID": "OpenEXRFormat.XRevVelEnable",
+    "INPS_DataType": "Number",
+    "INPN_Default": 1.0
+  },
+  "OpenEXRFormat.XRevVelName": {
+    "INPS_Name": "",
+    "INPS_ID": "OpenEXRFormat.XRevVelName",
+    "INPS_DataType": "Text",
+    "INPN_Default": 0.0
+  },
+  "OpenEXRFormat.YRevVelEnable": {
+    "INPS_Name": "Y Reverse Vel",
+    "INPS_ID": "OpenEXRFormat.YRevVelEnable",
+    "INPS_DataType": "Number",
+    "INPN_Default": 1.0
+  },
+  "OpenEXRFormat.YRevVelName": {
+    "INPS_Name": "",
+    "INPS_ID": "OpenEXRFormat.YRevVelName",
+    "INPS_DataType": "Text",
+    "INPN_Default": 0.0
+  },
+  "OpenEXRFormat.XPosEnable": {
+    "INPS_Name": "X Position",
+    "INPS_ID": "OpenEXRFormat.XPosEnable",
+    "INPS_DataType": "Number",
+    "INPN_Default": 1.0
+  },
+  "OpenEXRFormat.XPosName": {
+    "INPS_Name": "",
+    "INPS_ID": "OpenEXRFormat.XPosName",
+    "INPS_DataType": "Text",
+    "INPN_Default": 0.0
+  },
+  "OpenEXRFormat.YPosEnable": {
+    "INPS_Name": "Y Position",
+    "INPS_ID": "OpenEXRFormat.YPosEnable",
+    "INPS_DataType": "Number",
+    "INPN_Default": 1.0
+  },
+  "OpenEXRFormat.YPosName": {
+    "INPS_Name": "",
+    "INPS_ID": "OpenEXRFormat.YPosName",
+    "INPS_DataType": "Text",
+    "INPN_Default": 0.0
+  },
+  "OpenEXRFormat.ZPosEnable": {
+    "INPS_Name": "Z Position",
+    "INPS_ID": "OpenEXRFormat.ZPosEnable",
+    "INPS_DataType": "Number",
+    "INPN_Default": 1.0
+  },
+  "OpenEXRFormat.ZPosName": {
+    "INPS_Name": "",
+    "INPS_ID": "OpenEXRFormat.ZPosName",
+    "INPS_DataType": "Text",
+    "INPN_Default": 0.0
+  },
+  "OpenEXRFormat.XDispEnable": {
+    "INPS_Name": "X Disparity",
+    "INPS_ID": "OpenEXRFormat.XDispEnable",
+    "INPS_DataType": "Number",
+    "INPN_Default": 1.0
+  },
+  "OpenEXRFormat.XDispName": {
+    "INPS_Name": "",
+    "INPS_ID": "OpenEXRFormat.XDispName",
+    "INPS_DataType": "Text",
+    "INPN_Default": 0.0
+  },
+  "OpenEXRFormat.YDispEnable": {
+    "INPS_Name": "Y Disparity",
+    "INPS_ID": "OpenEXRFormat.YDispEnable",
+    "INPS_DataType": "Number",
+    "INPN_Default": 1.0
+  },
+  "OpenEXRFormat.YDispName": {
+    "INPS_Name": "",
+    "INPS_ID": "OpenEXRFormat.YDispName",
+    "INPS_DataType": "Text",
+    "INPN_Default": 0.0
+  }
+}

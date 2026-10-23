@@ -1,0 +1,5 @@
+Superseded offline candidate; do not deploy.
+114 normal tests passed and twelve isolated faults were detected. The final
+fault test raised a validation exception instead of an assertion failure, so
+the validation run was not accepted. Its assertion was strengthened and the
+complete run repeated separately for 20261022-color-library-03.

@@ -1,0 +1,199 @@
+test_raw_fallback_never_needs_more_positions_than_minimum_compressed_size (test_slot_capacity.CapacityTests) ... ok
+test_small_frames_report_capacity_shortage_instead_of_lowering_batch (test_slot_capacity.CapacityTests) ... ok
+test_two_full_batches_plus_fractional_fps_and_latency (test_slot_capacity.CapacityTests) ... ok
+test_unknown_or_unbounded_input_is_refused (test_slot_capacity.CapacityTests) ... ok
+test_bad_writer_returns_do_not_become_compression_samples (test_bulk_policy.BulkPolicyTests) ... ok
+test_count_includes_current_file_before_cookie_append (test_bulk_policy.BulkPolicyTests) ... ok
+test_fps_and_two_batches_leave_explicit_headroom (test_bulk_policy.BulkPolicyTests) ... ok
+test_longer_native_return_tightens_cap_and_never_reopens_it (test_bulk_policy.BulkPolicyTests) ... ok
+test_missing_or_exhausted_budget_sends_each_file (test_bulk_policy.BulkPolicyTests) ... ok
+test_mixed_output_uses_actual_raw_and_compressed_sizes (test_bulk_policy.BulkPolicyTests) ... ok
+test_mixed_stream_never_waits_for_more_than_the_frame_budget (test_bulk_policy.BulkPolicyTests) ... ok
+test_mutations_are_detected (test_bulk_policy.BulkPolicyTests) ... test_off_reset_and_null_follow_native_predicate (test_bulk_policy.BulkPolicyTests) ... ok
+test_pressure_can_send_a_single_file (test_bulk_policy.BulkPolicyTests) ... ok
+test_sample_byte_sum_cannot_wrap (test_bulk_policy.BulkPolicyTests) ... ok
+test_unknown_pool_never_allows_waiting (test_bulk_policy.BulkPolicyTests) ... ok
+test_it_builds_freestanding_for_the_camera (test_frame_hold.ArmCompileTests) ... ok
+test_every_mutation_is_caught (test_frame_hold.FlushMutationTests) ... ok
+test_a_compressed_frame_gets_its_trailer_and_a_shorter_length (test_frame_hold.FlushSiteTests) ... ok
+test_a_different_length_is_left_alone_and_the_promise_kept (test_frame_hold.FlushSiteTests) ... ok
+test_a_fast_engine_compresses_every_frame_into_its_own_file (test_frame_hold.FlushSiteTests) ... ok
+test_a_frame_of_another_format_is_not_held (test_frame_hold.FlushSiteTests) ... ok
+test_a_frame_whose_allocation_does_not_hold_its_raster_is_not_held (test_frame_hold.FlushSiteTests) ... ok
+test_a_frame_with_its_own_buffer_pointer_in_the_descriptor_is_still_held (test_frame_hold.FlushSiteTests)
+Measured on the camera: descriptor word 15 is per frame. ... ok
+test_a_header_the_trailer_refuses_is_recorded_and_not_retried (test_frame_hold.FlushSiteTests)
+The payload is already in the raster: that frame is lost either ... ok
+test_a_held_frame_is_marked_pending_before_the_engine_starts (test_frame_hold.FlushSiteTests) ... ok
+test_a_raw_frame_is_left_exactly_as_it_was (test_frame_hold.FlushSiteTests) ... ok
+test_a_result_with_no_file_saving_sends_the_frame_as_it_was (test_frame_hold.FlushSiteTests) ... ok
+test_a_slow_engine_lets_later_frames_through_raw_and_keeps_order_per_file (test_frame_hold.FlushSiteTests) ... ok
+test_a_writer_of_another_shape_is_not_touched (test_frame_hold.FlushSiteTests) ... ok
+test_an_engine_refusal_sends_the_frame_as_it_was (test_frame_hold.FlushSiteTests) ... ok
+test_an_engine_that_never_finishes_cannot_hang_stop (test_frame_hold.FlushSiteTests) ... ok
+test_an_engine_that_will_not_open_gives_the_frame_back_at_once (test_frame_hold.FlushSiteTests) ... ok
+test_an_unknown_wait_failure_gives_the_frame_back_and_admits_no_more (test_frame_hold.FlushSiteTests) ... ok
+test_another_descriptor_reusing_the_buffer_cannot_use_old_metadata (test_frame_hold.FlushSiteTests) ... ok
+test_broken_state_passes_every_frame_to_the_original (test_frame_hold.FlushSiteTests) ... ok
+test_each_compressed_frame_publishes_its_promise_for_the_flush (test_frame_hold.FlushSiteTests) ... ok
+test_every_frame_is_queued_exactly_once_over_a_long_take (test_frame_hold.FlushSiteTests) ... ok
+test_other_kinds_arguments_and_unknown_ids_pass_straight_through (test_frame_hold.FlushSiteTests) ... ok
+test_promises_are_independent_of_order (test_frame_hold.FlushSiteTests) ... ok
+test_reused_descriptor_and_buffer_cannot_apply_a_previous_generation (test_frame_hold.FlushSiteTests) ... ok
+test_stop_finishes_the_held_frame_and_the_take_can_end (test_frame_hold.FlushSiteTests) ... ok
+test_the_copy_back_goes_through_the_uncached_alias_and_publishes_behind_barriers (test_frame_hold.FlushSiteTests) ... ok
+test_the_fhd_512_bytes_are_read_in_place_up_to_the_1_kib_boundary (test_frame_hold.FlushSiteTests)
+Operator decision 2026-09-30: read in place. Measured on the camera, ... ok
+test_the_payload_is_fenced_before_the_promise_is_published (test_frame_hold.FlushSiteTests)
+The flush runs on another task: it must never see a promise whose ... ok
+test_the_promise_carries_the_grid_the_frame_was_compressed_with (test_frame_hold.FlushSiteTests) ... ok
+test_with_no_lossless_take_every_frame_passes (test_frame_hold.FlushSiteTests) ... ok
+test_without_free_promise_slots_nothing_is_held (test_frame_hold.FlushSiteTests)
+A compressed file without its trailer is garbage: never start one ... ok
+test_every_mutation_is_caught (test_frame_hold.HoldMutationTests) ... ok
+test_every_swap_mutation_is_caught (test_frame_hold.HoldMutationTests) ... ok
+test_the_real_module_passes_the_same_harness (test_frame_hold.HoldMutationTests) ... ok
+test_a_fast_engine_compresses_every_frame_into_its_own_file (test_frame_hold.HoldTests) ... ok
+test_a_frame_of_another_format_is_not_held (test_frame_hold.HoldTests) ... ok
+test_a_frame_whose_allocation_does_not_hold_its_raster_is_not_held (test_frame_hold.HoldTests) ... ok
+test_a_frame_with_its_own_buffer_pointer_in_the_descriptor_is_still_held (test_frame_hold.HoldTests)
+Measured on the camera: descriptor word 15 is per frame. ... ok
+test_a_held_frame_is_marked_pending_before_the_engine_starts (test_frame_hold.HoldTests) ... ok
+test_a_result_with_no_file_saving_sends_the_frame_as_it_was (test_frame_hold.HoldTests) ... ok
+test_a_slow_engine_lets_later_frames_through_raw_and_keeps_order_per_file (test_frame_hold.HoldTests) ... ok
+test_an_engine_refusal_sends_the_frame_as_it_was (test_frame_hold.HoldTests) ... ok
+test_an_engine_that_never_finishes_cannot_hang_stop (test_frame_hold.HoldTests) ... ok
+test_an_engine_that_will_not_open_gives_the_frame_back_at_once (test_frame_hold.HoldTests) ... ok
+test_an_unknown_wait_failure_gives_the_frame_back_and_admits_no_more (test_frame_hold.HoldTests) ... ok
+test_broken_state_passes_every_frame_to_the_original (test_frame_hold.HoldTests) ... ok
+test_each_compressed_frame_publishes_its_promise_for_the_flush (test_frame_hold.HoldTests) ... ok
+test_every_frame_is_queued_exactly_once_over_a_long_take (test_frame_hold.HoldTests) ... ok
+test_other_kinds_arguments_and_unknown_ids_pass_straight_through (test_frame_hold.HoldTests) ... ok
+test_promises_are_independent_of_order (test_frame_hold.HoldTests) ... ok
+test_stop_finishes_the_held_frame_and_the_take_can_end (test_frame_hold.HoldTests) ... ok
+test_the_copy_back_goes_through_the_uncached_alias_and_publishes_behind_barriers (test_frame_hold.HoldTests) ... ok
+test_the_fhd_512_bytes_are_read_in_place_up_to_the_1_kib_boundary (test_frame_hold.HoldTests)
+Operator decision 2026-09-30: read in place. Measured on the camera, ... ok
+test_the_payload_is_fenced_before_the_promise_is_published (test_frame_hold.HoldTests)
+The flush runs on another task: it must never see a promise whose ... ok
+test_the_promise_carries_the_grid_the_frame_was_compressed_with (test_frame_hold.HoldTests) ... ok
+test_with_no_lossless_take_every_frame_passes (test_frame_hold.HoldTests) ... ok
+test_without_free_promise_slots_nothing_is_held (test_frame_hold.HoldTests)
+A compressed file without its trailer is garbage: never start one ... ok
+test_every_mutation_is_caught (test_frame_hold.LaneMutationTests) ... ok
+test_a_completion_the_pipeline_refuses_still_gives_the_frame_back (test_frame_hold.LaneTests) ... ok
+test_a_failed_second_lane_also_fences_the_first_lane (test_frame_hold.LaneTests) ... ok
+test_a_finished_lane_is_collected_by_one_side_only (test_frame_hold.LaneTests) ... ok
+test_a_frame_given_back_at_stop_is_never_started (test_frame_hold.LaneTests) ... ok
+test_a_job_still_running_when_a_starved_task_lets_stop_give_up (test_frame_hold.LaneTests) ... ok
+test_a_job_the_engine_never_finishes_is_given_up_and_compression_goes_on (test_frame_hold.LaneTests) ... ok
+test_a_long_take_queues_every_frame_once_and_keeps_the_engine_busy (test_frame_hold.LaneTests) ... ok
+test_a_start_the_engine_refuses_gives_the_frame_back_at_the_next_arrival (test_frame_hold.LaneTests) ... ok
+test_a_wait_that_ends_before_the_job_says_it_waited_and_finishes_nothing (test_frame_hold.LaneTests) ... ok
+test_a_waiting_pass_waits_on_the_running_job_and_starts_the_next_at_once (test_frame_hold.LaneTests) ... ok
+test_an_engine_that_never_finishes_cannot_hang_stop_or_queue_twice (test_frame_hold.LaneTests) ... ok
+test_cancel_does_not_claim_transfer_on_a_refused_enqueue (test_frame_hold.LaneTests) ... ok
+test_cancel_requires_the_same_queueable_pending_native_frame (test_frame_hold.LaneTests) ... ok
+test_engine_refusals_in_both_lanes_give_every_frame_back (test_frame_hold.LaneTests) ... ok
+test_only_a_held_lane_can_be_started (test_frame_hold.LaneTests) ... ok
+test_starved_worker_stop_cancels_both_never_started_leases (test_frame_hold.LaneTests) ... ok
+test_stop_lets_the_task_run_what_is_held_and_gives_everything_back (test_frame_hold.LaneTests) ... ok
+test_the_claim_is_made_with_interrupts_off (test_frame_hold.LaneTests) ... ok
+test_the_flush_finds_a_promise_in_either_lane (test_frame_hold.LaneTests) ... ok
+test_the_next_frame_starts_in_the_same_pass_that_finds_the_engine_done (test_frame_hold.LaneTests) ... ok
+test_the_plain_pass_still_polls_one_tick (test_frame_hold.LaneTests) ... ok
+test_unknown_engine_failure_fences_both_lanes_before_the_next_kick (test_frame_hold.LaneTests) ... ok
+test_when_both_lanes_are_busy_a_frame_goes_through_as_it_is (test_frame_hold.LaneTests) ... ok
+test_with_nothing_running_a_waiting_pass_does_not_wait (test_frame_hold.LaneTests) ... ok
+test_a_clone_made_while_held_is_still_copied_back_from_the_spare (test_frame_hold.NoOutputTests) ... ok
+test_a_frame_the_swap_cannot_take_never_reaches_the_engine (test_frame_hold.NoOutputTests) ... ok
+test_an_engine_refusal_gives_the_frame_back_as_it_was (test_frame_hold.NoOutputTests) ... ok
+test_neither_output_nor_spare_is_refused (test_frame_hold.NoOutputTests) ... ok
+test_swapped_frames_are_compressed_into_the_spare (test_frame_hold.NoOutputTests) ... ok
+test_a_compressed_frame_gets_its_trailer_and_a_shorter_length (test_frame_hold.SwapFlushSiteTests) ... ok
+test_a_different_length_is_left_alone_and_the_promise_kept (test_frame_hold.SwapFlushSiteTests) ... ok
+test_a_fast_engine_compresses_every_frame_into_its_own_file (test_frame_hold.SwapFlushSiteTests) ... ok
+test_a_frame_of_another_format_is_not_held (test_frame_hold.SwapFlushSiteTests) ... ok
+test_a_frame_whose_allocation_does_not_hold_its_raster_is_not_held (test_frame_hold.SwapFlushSiteTests) ... ok
+test_a_frame_with_its_own_buffer_pointer_in_the_descriptor_is_still_held (test_frame_hold.SwapFlushSiteTests)
+Measured on the camera: descriptor word 15 is per frame. ... ok
+test_a_header_the_trailer_refuses_is_recorded_and_not_retried (test_frame_hold.SwapFlushSiteTests)
+The payload is already in the raster: that frame is lost either ... ok
+test_a_held_frame_is_marked_pending_before_the_engine_starts (test_frame_hold.SwapFlushSiteTests) ... ok
+test_a_raw_frame_is_left_exactly_as_it_was (test_frame_hold.SwapFlushSiteTests) ... ok
+test_a_result_with_no_file_saving_sends_the_frame_as_it_was (test_frame_hold.SwapFlushSiteTests) ... ok
+test_a_slow_engine_lets_later_frames_through_raw_and_keeps_order_per_file (test_frame_hold.SwapFlushSiteTests) ... ok
+test_a_writer_of_another_shape_is_not_touched (test_frame_hold.SwapFlushSiteTests) ... ok
+test_an_engine_refusal_sends_the_frame_as_it_was (test_frame_hold.SwapFlushSiteTests) ... ok
+test_an_engine_that_never_finishes_cannot_hang_stop (test_frame_hold.SwapFlushSiteTests) ... ok
+test_an_engine_that_will_not_open_gives_the_frame_back_at_once (test_frame_hold.SwapFlushSiteTests) ... ok
+test_an_unknown_wait_failure_gives_the_frame_back_and_admits_no_more (test_frame_hold.SwapFlushSiteTests) ... ok
+test_another_descriptor_reusing_the_buffer_cannot_use_old_metadata (test_frame_hold.SwapFlushSiteTests) ... ok
+test_broken_state_passes_every_frame_to_the_original (test_frame_hold.SwapFlushSiteTests) ... ok
+test_each_compressed_frame_publishes_its_promise_for_the_flush (test_frame_hold.SwapFlushSiteTests) ... ok
+test_every_frame_is_queued_exactly_once_over_a_long_take (test_frame_hold.SwapFlushSiteTests) ... ok
+test_other_kinds_arguments_and_unknown_ids_pass_straight_through (test_frame_hold.SwapFlushSiteTests) ... ok
+test_promises_are_independent_of_order (test_frame_hold.SwapFlushSiteTests) ... ok
+test_reused_descriptor_and_buffer_cannot_apply_a_previous_generation (test_frame_hold.SwapFlushSiteTests) ... ok
+test_stop_finishes_the_held_frame_and_the_take_can_end (test_frame_hold.SwapFlushSiteTests) ... ok
+test_the_copy_back_goes_through_the_uncached_alias_and_publishes_behind_barriers (test_frame_hold.SwapFlushSiteTests) ... ok
+test_the_fhd_512_bytes_are_read_in_place_up_to_the_1_kib_boundary (test_frame_hold.SwapFlushSiteTests)
+Operator decision 2026-09-30: read in place. Measured on the camera, ... ok
+test_the_payload_is_fenced_before_the_promise_is_published (test_frame_hold.SwapFlushSiteTests)
+The flush runs on another task: it must never see a promise whose ... ok
+test_the_promise_carries_the_grid_the_frame_was_compressed_with (test_frame_hold.SwapFlushSiteTests) ... ok
+test_with_no_lossless_take_every_frame_passes (test_frame_hold.SwapFlushSiteTests) ... ok
+test_without_free_promise_slots_nothing_is_held (test_frame_hold.SwapFlushSiteTests)
+A compressed file without its trailer is garbage: never start one ... ok
+test_a_clone_made_while_held_undoes_the_swap (test_frame_hold.SwapHoldTests) ... ok
+test_a_compressed_frame_is_released_owning_the_spare_and_nothing_is_copied (test_frame_hold.SwapHoldTests) ... ok
+test_a_fast_engine_compresses_every_frame_into_its_own_file (test_frame_hold.SwapHoldTests) ... ok
+test_a_frame_of_another_format_is_not_held (test_frame_hold.SwapHoldTests) ... ok
+test_a_frame_that_shares_its_allocation_is_copied_back_not_swapped (test_frame_hold.SwapHoldTests) ... ok
+test_a_frame_whose_allocation_does_not_hold_its_raster_is_not_held (test_frame_hold.SwapHoldTests) ... ok
+test_a_frame_with_its_own_buffer_pointer_in_the_descriptor_is_still_held (test_frame_hold.SwapHoldTests)
+Measured on the camera: descriptor word 15 is per frame. ... ok
+test_a_held_frame_is_marked_pending_before_the_engine_starts (test_frame_hold.SwapHoldTests) ... ok
+test_a_refused_dma_falls_back_to_the_cpu_copy (test_frame_hold.SwapHoldTests) ... ok
+test_a_refused_or_useless_result_keeps_both_buffers_where_they_were (test_frame_hold.SwapHoldTests) ... ok
+test_a_result_with_no_file_saving_sends_the_frame_as_it_was (test_frame_hold.SwapHoldTests) ... ok
+test_a_slow_engine_lets_later_frames_through_raw_and_keeps_order_per_file (test_frame_hold.SwapHoldTests) ... ok
+test_a_spare_smaller_than_the_frame_is_not_used (test_frame_hold.SwapHoldTests) ... ok
+test_an_engine_refusal_sends_the_frame_as_it_was (test_frame_hold.SwapHoldTests) ... ok
+test_an_engine_that_never_finishes_cannot_hang_stop (test_frame_hold.SwapHoldTests) ... ok
+test_an_engine_that_never_finishes_keeps_the_spare (test_frame_hold.SwapHoldTests) ... ok
+test_an_engine_that_will_not_open_gives_the_frame_back_at_once (test_frame_hold.SwapHoldTests) ... ok
+test_an_unknown_wait_failure_gives_the_frame_back_and_admits_no_more (test_frame_hold.SwapHoldTests) ... ok
+test_broken_state_passes_every_frame_to_the_original (test_frame_hold.SwapHoldTests) ... ok
+test_each_compressed_frame_publishes_its_promise_for_the_flush (test_frame_hold.SwapHoldTests) ... ok
+test_every_frame_is_queued_exactly_once_over_a_long_take (test_frame_hold.SwapHoldTests) ... ok
+test_other_kinds_arguments_and_unknown_ids_pass_straight_through (test_frame_hold.SwapHoldTests) ... ok
+test_promises_are_independent_of_order (test_frame_hold.SwapHoldTests) ... ok
+test_stop_finishes_the_held_frame_and_the_take_can_end (test_frame_hold.SwapHoldTests) ... ok
+test_the_copy_back_goes_through_the_uncached_alias_and_publishes_behind_barriers (test_frame_hold.SwapHoldTests) ... ok
+test_the_fhd_512_bytes_are_read_in_place_up_to_the_1_kib_boundary (test_frame_hold.SwapHoldTests)
+Operator decision 2026-09-30: read in place. Measured on the camera, ... ok
+test_the_header_moves_by_the_firmware_dma_on_plain_addresses (test_frame_hold.SwapHoldTests) ... ok
+test_the_header_the_firmware_put_in_the_frame_goes_with_it (test_frame_hold.SwapHoldTests) ... ok
+test_the_payload_is_fenced_before_the_promise_is_published (test_frame_hold.SwapHoldTests)
+The flush runs on another task: it must never see a promise whose ... ok
+test_the_promise_carries_the_grid_the_frame_was_compressed_with (test_frame_hold.SwapHoldTests) ... ok
+test_the_record_the_firmware_frees_and_its_raster_pointer_move_together (test_frame_hold.SwapHoldTests) ... ok
+test_with_no_lossless_take_every_frame_passes (test_frame_hold.SwapHoldTests) ... ok
+test_without_free_promise_slots_nothing_is_held (test_frame_hold.SwapHoldTests)
+A compressed file without its trailer is garbage: never start one ... ok
+
+======================================================================
+FAIL: test_mutations_are_detected (test_bulk_policy.BulkPolicyTests) (name='current')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_bulk_policy.py", line 170, in test_mutations_are_detected
+    lib = build(Path(tmp), (old, new))
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_bulk_policy.py", line 32, in build
+    raise AssertionError('mutation seam is not unique')
+AssertionError: mutation seam is not unique
+
+----------------------------------------------------------------------
+Ran 167 tests in 49.172s
+
+FAILED (failures=1)

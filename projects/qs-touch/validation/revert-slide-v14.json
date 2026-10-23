@@ -1,0 +1,487 @@
+{
+  "scope": "Browser prototype; rollback of added pull/page fades, trash retained",
+  "pull": [
+    {
+      "contentOpacity": 1,
+      "ms": 7868.3,
+      "panelOpacity": 1,
+      "panelTransform": "matrix(1, 0, 0, 1, 0, -480)",
+      "trashOver": false,
+      "trashText": "垃圾桶",
+      "trashVisible": false
+    },
+    {
+      "contentOpacity": 1,
+      "ms": 7884.9,
+      "panelOpacity": 1,
+      "panelTransform": "matrix(1, 0, 0, 1, 0, -480)",
+      "trashOver": false,
+      "trashText": "垃圾桶",
+      "trashVisible": false
+    },
+    {
+      "contentOpacity": 1,
+      "ms": 7901.4,
+      "panelOpacity": 1,
+      "panelTransform": "matrix(1, 0, 0, 1, 0, -457)",
+      "trashOver": false,
+      "trashText": "垃圾桶",
+      "trashVisible": false
+    },
+    {
+      "contentOpacity": 1,
+      "ms": 7918.4,
+      "panelOpacity": 1,
+      "panelTransform": "matrix(1, 0, 0, 1, 0, -434)",
+      "trashOver": false,
+      "trashText": "垃圾桶",
+      "trashVisible": false
+    },
+    {
+      "contentOpacity": 1,
+      "ms": 7934.9,
+      "panelOpacity": 1,
+      "panelTransform": "matrix(1, 0, 0, 1, 0, -412)",
+      "trashOver": false,
+      "trashText": "垃圾桶",
+      "trashVisible": false
+    },
+    {
+      "contentOpacity": 1,
+      "ms": 7951.7,
+      "panelOpacity": 1,
+      "panelTransform": "matrix(1, 0, 0, 1, 0, -389)",
+      "trashOver": false,
+      "trashText": "垃圾桶",
+      "trashVisible": false
+    },
+    {
+      "contentOpacity": 1,
+      "ms": 7968.3,
+      "panelOpacity": 1,
+      "panelTransform": "matrix(1, 0, 0, 1, 0, -366)",
+      "trashOver": false,
+      "trashText": "垃圾桶",
+      "trashVisible": false
+    },
+    {
+      "contentOpacity": 1,
+      "ms": 7985,
+      "panelOpacity": 1,
+      "panelTransform": "matrix(1, 0, 0, 1, 0, -343)",
+      "trashOver": false,
+      "trashText": "垃圾桶",
+      "trashVisible": false
+    },
+    {
+      "contentOpacity": 1,
+      "ms": 8001.7,
+      "panelOpacity": 1,
+      "panelTransform": "matrix(1, 0, 0, 1, 0, -321)",
+      "trashOver": false,
+      "trashText": "垃圾桶",
+      "trashVisible": false
+    },
+    {
+      "contentOpacity": 1,
+      "ms": 8017.7,
+      "panelOpacity": 1,
+      "panelTransform": "matrix(1, 0, 0, 1, 0, -298)",
+      "trashOver": false,
+      "trashText": "垃圾桶",
+      "trashVisible": false
+    }
+  ],
+  "main": {
+    "opacity": "1",
+    "page": "2 / 2",
+    "refresh": "idle",
+    "trace": [
+      {
+        "inline": "",
+        "ms": 8322.600000023842,
+        "offset": -349.99999999999994,
+        "page": 0,
+        "phase": "release",
+        "scrollLeft": 350,
+        "surface": "grid",
+        "to": 1,
+        "velocity": -8.635332252836307,
+        "x": -349.99999999999994
+      },
+      {
+        "inline": "",
+        "ms": 8322.700000047684,
+        "offset": -349.99999999999994,
+        "page": 0,
+        "phase": "contact-end",
+        "scrollLeft": 350,
+        "surface": "grid",
+        "to": 1,
+        "velocity": -8.635332252836307,
+        "x": -349.99999999999994
+      },
+      {
+        "inline": "",
+        "ms": 8334.700000047684,
+        "offset": -445.62551385647265,
+        "page": 0,
+        "phase": "frame",
+        "scrollLeft": 446,
+        "surface": "grid",
+        "to": 1,
+        "velocity": -7.436182713224213,
+        "x": -445.62551385647265
+      },
+      {
+        "inline": "",
+        "ms": 8351.800000071526,
+        "offset": -558.0513257492267,
+        "page": 0,
+        "phase": "frame",
+        "scrollLeft": 558,
+        "surface": "grid",
+        "to": 1,
+        "velocity": -5.713035052009903,
+        "x": -558.0513257492267
+      },
+      {
+        "inline": "",
+        "ms": 8369,
+        "offset": -641.0113126352155,
+        "page": 0,
+        "phase": "frame",
+        "scrollLeft": 641,
+        "surface": "grid",
+        "to": 1,
+        "velocity": -3.9898873907955954,
+        "x": -641.0113126352155
+      },
+      {
+        "inline": "",
+        "ms": 8385,
+        "offset": -692.4245973658362,
+        "page": 0,
+        "phase": "frame",
+        "scrollLeft": 692,
+        "surface": "grid",
+        "to": 1,
+        "velocity": -2.3574317117506047,
+        "x": -692.4245973658362
+      },
+      {
+        "inline": "",
+        "ms": 8401.300000071526,
+        "offset": -717.3921000959313,
+        "page": 0,
+        "phase": "frame",
+        "scrollLeft": 717,
+        "surface": "grid",
+        "to": 1,
+        "velocity": -0.7249760327054328,
+        "x": -717.3921000959313
+      },
+      {
+        "inline": "",
+        "ms": 8417.900000095367,
+        "offset": -720,
+        "page": 0,
+        "phase": "frame",
+        "scrollLeft": 720,
+        "surface": "grid",
+        "to": 1,
+        "velocity": 0,
+        "x": -720
+      },
+      {
+        "inline": "",
+        "ms": 8418.400000095367,
+        "offset": 0,
+        "page": 1,
+        "phase": "commit",
+        "scrollLeft": 720,
+        "surface": "grid",
+        "to": 1,
+        "velocity": 0,
+        "x": -720
+      }
+    ]
+  },
+  "catalog": {
+    "opacity": "1",
+    "page": "2 / 2",
+    "trace": [
+      {
+        "inline": "translate3d(-400px, 0px, 0px)",
+        "ms": 16130.400000095367,
+        "offset": -400,
+        "page": 0,
+        "phase": "release",
+        "surface": "catalog",
+        "to": 1,
+        "velocity": -3.0030030019279703,
+        "x": -400
+      },
+      {
+        "inline": "translate3d(-400px, 0px, 0px)",
+        "ms": 16130.400000095367,
+        "offset": -400,
+        "page": 0,
+        "phase": "contact-end",
+        "surface": "catalog",
+        "to": 1,
+        "velocity": -3.0030030019279703,
+        "x": -400
+      },
+      {
+        "inline": "translate3d(-437.243px, 0px, 0px)",
+        "ms": 16142,
+        "offset": -437.2434475562557,
+        "page": 0,
+        "phase": "frame",
+        "surface": "catalog",
+        "to": 1,
+        "velocity": -3.3782996707772535,
+        "x": -437.2434475562557
+      },
+      {
+        "inline": "translate3d(-491.437px, 0px, 0px)",
+        "ms": 16158.100000023842,
+        "offset": -491.4370592780374,
+        "page": 0,
+        "phase": "frame",
+        "surface": "catalog",
+        "to": 1,
+        "velocity": -3.222169412314854,
+        "x": -491.4370592780374
+      },
+      {
+        "inline": "translate3d(-542.323px, 0px, 0px)",
+        "ms": 16175.300000071526,
+        "offset": -542.3229777781681,
+        "page": 0,
+        "phase": "frame",
+        "surface": "catalog",
+        "to": 1,
+        "velocity": -2.6997398057011037,
+        "x": -542.3229777781681
+      },
+      {
+        "inline": "translate3d(-582.562px, 0px, 0px)",
+        "ms": 16191.900000095367,
+        "offset": -582.5617797078613,
+        "page": 0,
+        "phase": "frame",
+        "surface": "catalog",
+        "to": 1,
+        "velocity": -2.121846532312682,
+        "x": -582.5617797078613
+      },
+      {
+        "inline": "translate3d(-613.353px, 0px, 0px)",
+        "ms": 16208.5,
+        "offset": -613.3533210312759,
+        "page": 0,
+        "phase": "frame",
+        "surface": "catalog",
+        "to": 1,
+        "velocity": -1.6018874395534644,
+        "x": -613.3533210312759
+      },
+      {
+        "inline": "translate3d(-636.385px, 0px, 0px)",
+        "ms": 16225.200000047684,
+        "offset": -636.3847430791625,
+        "page": 0,
+        "phase": "frame",
+        "surface": "catalog",
+        "to": 1,
+        "velocity": -1.1730169628395946,
+        "x": -636.3847430791625
+      },
+      {
+        "inline": "translate3d(-652.651px, 0px, 0px)",
+        "ms": 16241.400000095367,
+        "offset": -652.6513669907933,
+        "page": 0,
+        "phase": "frame",
+        "surface": "catalog",
+        "to": 1,
+        "velocity": -0.8496818118876505,
+        "x": -652.6513669907933
+      },
+      {
+        "inline": "translate3d(-664.946px, 0px, 0px)",
+        "ms": 16258.700000047684,
+        "offset": -664.9458761782397,
+        "page": 0,
+        "phase": "frame",
+        "surface": "catalog",
+        "to": 1,
+        "velocity": -0.593421223449918,
+        "x": -664.9458761782397
+      },
+      {
+        "inline": "translate3d(-673.271px, 0px, 0px)",
+        "ms": 16275.300000071526,
+        "offset": -673.2707018586452,
+        "page": 0,
+        "phase": "frame",
+        "surface": "catalog",
+        "to": 1,
+        "velocity": -0.41344441229982754,
+        "x": -673.2707018586452
+      },
+      {
+        "inline": "translate3d(-679.042px, 0px, 0px)",
+        "ms": 16292,
+        "offset": -679.0419956398521,
+        "page": 0,
+        "phase": "frame",
+        "surface": "catalog",
+        "to": 1,
+        "velocity": -0.2851270227925215,
+        "x": -679.0419956398521
+      },
+      {
+        "inline": "translate3d(-682.868px, 0px, 0px)",
+        "ms": 16308,
+        "offset": -682.8683245916369,
+        "page": 0,
+        "phase": "frame",
+        "surface": "catalog",
+        "to": 1,
+        "velocity": -0.19814691072425708,
+        "x": -682.8683245916369
+      },
+      {
+        "inline": "translate3d(-685.694px, 0px, 0px)",
+        "ms": 16325.400000095367,
+        "offset": -685.6942148087819,
+        "page": 0,
+        "phase": "frame",
+        "surface": "catalog",
+        "to": 1,
+        "velocity": -0.13271496513646258,
+        "x": -685.6942148087819
+      },
+      {
+        "inline": "translate3d(-687.528px, 0px, 0px)",
+        "ms": 16342,
+        "offset": -687.5277213338169,
+        "page": 0,
+        "phase": "frame",
+        "surface": "catalog",
+        "to": 1,
+        "velocity": -0.089583242446969,
+        "x": -687.5277213338169
+      },
+      {
+        "inline": "translate3d(-688.762px, 0px, 0px)",
+        "ms": 16358.700000047684,
+        "offset": -688.7622817002966,
+        "page": 0,
+        "phase": "frame",
+        "surface": "catalog",
+        "to": 1,
+        "velocity": -0.06015693282548406,
+        "x": -688.7622817002966
+      },
+      {
+        "inline": "translate3d(-689.59px, 0px, 0px)",
+        "ms": 16375.300000071526,
+        "offset": -689.5895311028576,
+        "page": 0,
+        "phase": "frame",
+        "surface": "catalog",
+        "to": 1,
+        "velocity": -0.040215045476724075,
+        "x": -689.5895311028576
+      },
+      {
+        "inline": "translate3d(-690.142px, 0px, 0px)",
+        "ms": 16392.100000023842,
+        "offset": -690.141507321109,
+        "page": 0,
+        "phase": "frame",
+        "surface": "catalog",
+        "to": 1,
+        "velocity": -0.02677774108793883,
+        "x": -690.141507321109
+      },
+      {
+        "inline": "translate3d(-690.508px, 0px, 0px)",
+        "ms": 16408.700000047684,
+        "offset": -690.508436545451,
+        "page": 0,
+        "phase": "frame",
+        "surface": "catalog",
+        "to": 1,
+        "velocity": -0.01776802665117654,
+        "x": -690.508436545451
+      },
+      {
+        "inline": "translate3d(-690.75px, 0px, 0px)",
+        "ms": 16425.400000095367,
+        "offset": -690.7503703652509,
+        "page": 0,
+        "phase": "frame",
+        "surface": "catalog",
+        "to": 1,
+        "velocity": -0.011782245750625368,
+        "x": -690.7503703652509
+      },
+      {
+        "inline": "translate3d(-690.911px, 0px, 0px)",
+        "ms": 16442,
+        "offset": -690.9105898578372,
+        "page": 0,
+        "phase": "frame",
+        "surface": "catalog",
+        "to": 1,
+        "velocity": -0.007791399402350833,
+        "x": -690.9105898578372
+      },
+      {
+        "inline": "translate3d(-691.219px, 0px, 0px)",
+        "ms": 16458.800000071526,
+        "offset": -691.21875,
+        "page": 0,
+        "phase": "frame",
+        "surface": "catalog",
+        "to": 1,
+        "velocity": 0,
+        "x": -691.21875
+      },
+      {
+        "inline": "translate3d(0px, 0px, 0px)",
+        "ms": 16459,
+        "offset": 0,
+        "page": 1,
+        "phase": "commit",
+        "surface": "catalog",
+        "to": 1,
+        "velocity": 0,
+        "x": -691.21875
+      }
+    ]
+  },
+  "trash": {
+    "order": [
+      1,
+      2,
+      4,
+      5,
+      6,
+      20,
+      3,
+      7,
+      10,
+      11
+    ],
+    "removed": true,
+    "trashHidden": true
+  },
+  "logs": [],
+  "checks": "PASS: pull transform varies at constant opacity, main and catalog slide frames restored, native wheel returns to first page, trash drop still removes and saves"
+}

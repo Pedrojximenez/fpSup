@@ -1,0 +1,110 @@
+{
+  "scope": "memory capacity review; no high-FPS recording repeated",
+  "measured": "memory-usage-after-30p.json",
+  "pools": {
+    "USER": {
+      "class": 0,
+      "total": 31457536,
+      "used": 24024128,
+      "peak": 24025088,
+      "remaining": 7433408,
+      "link": ""
+    },
+    "OSD": {
+      "class": 1,
+      "total": 56623360,
+      "used": 53622080,
+      "peak": 53622016,
+      "remaining": 3001280,
+      "link": ""
+    },
+    "IMAGE": {
+      "class": 2,
+      "total": 17826048,
+      "used": 17822528,
+      "peak": 17822464,
+      "remaining": 3520,
+      "link": ""
+    },
+    "LVIEW": {
+      "class": 3,
+      "total": 50331904,
+      "used": 12515584,
+      "peak": 12515520,
+      "remaining": 37816320,
+      "link": ""
+    },
+    "MOVAUDIO": {
+      "class": 6,
+      "total": 13631744,
+      "used": 32960,
+      "peak": 8405120,
+      "remaining": 13598784,
+      "link": ""
+    },
+    "YUV": {
+      "class": 9,
+      "total": 256,
+      "used": 0,
+      "peak": 0,
+      "remaining": 256,
+      "link": "RAW"
+    },
+    "RAW": {
+      "class": 10,
+      "total": 742520320,
+      "used": 0,
+      "peak": 75126144,
+      "remaining": 742520320,
+      "link": "RAW_SUB"
+    },
+    "JPEG": {
+      "class": 11,
+      "total": 256,
+      "used": 0,
+      "peak": 0,
+      "remaining": 256,
+      "link": "RAW"
+    },
+    "FILEINF": {
+      "class": 12,
+      "total": 3145984,
+      "used": 0,
+      "peak": 119872,
+      "remaining": 3145984,
+      "link": ""
+    },
+    "RAW_SUB": {
+      "class": 14,
+      "total": 85983488,
+      "used": 0,
+      "peak": 0,
+      "remaining": 85983488,
+      "link": ""
+    }
+  },
+  "resident_bytes": 5971968,
+  "slot_capacity": 1016,
+  "frame_allocation_request": 1103360,
+  "codec_raw_reservation_request": 2299904,
+  "compressed_floor_for_slot_formula": 163520,
+  "positions_per_64MiB_batch": 411,
+  "two_batches_payload_allocation_request": 906961920,
+  "832_filled_slots_payload_allocation_request": 917995520,
+  "1016_filled_slots_payload_allocation_request": 1121013760,
+  "raw_only_two_batch_and_119p_latency_reserve": {
+    "completed_file_bytes": 1095168,
+    "batch_frames": 62,
+    "latency_us": 469659,
+    "arrival_positions": 57,
+    "positions": 188,
+    "frame_allocation_request": 207431680
+  },
+  "known_gap": "slot plan uses compressed bytes; current buffer swapping retains full RAW allocation; actual free RAW bytes are not checked by test_readiness",
+  "119p_exhaustion_proven": false,
+  "new_low_fps_trial": "memory-check-30p.json",
+  "new_low_fps_frames": 68,
+  "post_take_raw_used": 0,
+  "cached_placement_concern": "descriptor pool remains within USER NonCacheBuffer resident block; historical uncached descriptor slowdown exists, current cause not established",
+  "camera_end_state": "CINE standby; writer idle; M12240 native 29.97p; LOSS ON"
+}

@@ -1,0 +1,20 @@
+{
+  "candidate": "projects/lossless-sup/validation/20261012-slot-expansion/candidate-final/10LOSS.BIN",
+  "sha256": "39be7d3c23a6abe0e2c96045fb49b139d69c920cd1d1a526953a655fd3414300",
+  "test": "test_slot_expansion.ExpandedSlotsTests.test_m12240_low_and_high_fps_are_admitted",
+  "result": "expected failure on original 768-slot artifact",
+  "first_failing_input": {
+    "raw": [
+      1008,
+      672
+    ],
+    "bits": 12,
+    "fps": 24,
+    "budget_us": 100000
+  },
+  "expected_slots": 832,
+  "actual_prepare_return": 0,
+  "expected_prepare_return": 1,
+  "runtime_seconds": 21.745,
+  "camera_accessed_by_test": false
+}

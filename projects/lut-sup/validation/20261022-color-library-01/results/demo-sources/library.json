@@ -1,0 +1,36 @@
+{
+  "schema": "fpsup-lut-library-1",
+  "active": "4d04bbc423618455140743f2375f2a6a19e4e5189970ca5ba3abec61afde7739",
+  "luts": [
+    {
+      "id": "4d04bbc423618455140743f2375f2a6a19e4e5189970ca5ba3abec61afde7739",
+      "filename": "Demo_709.cube",
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261022-color-library-01/results/demo-sources/Demo_709.cube",
+      "enabled": true,
+      "author": {
+        "input_space": "rec709",
+        "input_gamma": "gamma24"
+      },
+      "overrides": {}
+    },
+    {
+      "id": "28d9e41526cd9a78dc5cafaf5a55b9d7cbaecc4d26c5a3277e131da10573fcb1",
+      "filename": "Demo_P3.cube",
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261022-color-library-01/results/demo-sources/Demo_P3.cube",
+      "enabled": true,
+      "author": {
+        "input_space": "p3-d65",
+        "input_gamma": "gamma26"
+      },
+      "overrides": {}
+    },
+    {
+      "id": "a3eded7aea3e40417a0cac1dd91ea3199892053c8246cb8f7ed8b5f136cf9f03",
+      "filename": "Unmarked_709.cube",
+      "source": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261022-color-library-01/results/demo-sources/Unmarked_709.cube",
+      "enabled": false,
+      "author": {},
+      "overrides": {}
+    }
+  ]
+}

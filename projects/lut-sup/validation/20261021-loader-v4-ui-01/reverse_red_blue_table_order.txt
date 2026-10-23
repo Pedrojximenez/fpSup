@@ -1,0 +1,30 @@
+test_all_35_models_against_float_reference_and_strengths (test_sup_native.NativeLutTests) ... 
+======================================================================
+FAIL: test_all_35_models_against_float_reference_and_strengths (test_sup_native.NativeLutTests) (color='aces', gamma='adobe-rgb')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lut/test_sup_native.py", line 180, in test_all_35_models_against_float_reference_and_strengths
+    np.testing.assert_allclose(actual,expected,atol=4e-5,rtol=0)
+  File "/Users/dido/Library/Python/3.9/lib/python/site-packages/numpy/testing/_private/utils.py", line 1684, in assert_allclose
+    assert_array_compare(compare, actual, desired, err_msg=str(err_msg),
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/contextlib.py", line 79, in inner
+    return func(*args, **kwds)
+  File "/Users/dido/Library/Python/3.9/lib/python/site-packages/numpy/testing/_private/utils.py", line 885, in assert_array_compare
+    raise AssertionError(msg)
+AssertionError: 
+Not equal to tolerance rtol=0, atol=4e-05
+
+Mismatched elements: 6 / 18 (33.3%)
+Max absolute difference among violations: 0.20789643
+Max relative difference among violations: 2.04806018
+ ACTUAL: array([[0.012103, 0.043228, 0.009077],
+       [0.232652, 0.458528, 0.200554],
+       [1.029999, 0.999999, 0.959998],...
+ DESIRED: array([[0.012107, 0.043239, 0.00908 ],
+       [0.232653, 0.458529, 0.200556],
+       [1.03    , 1.      , 0.96    ],...
+
+----------------------------------------------------------------------
+Ran 1 test in 3.875s
+
+FAILED (failures=1)

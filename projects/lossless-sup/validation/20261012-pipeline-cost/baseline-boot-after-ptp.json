@@ -1,0 +1,12 @@
+{
+  "label": "baseline-boot-after-ptp",
+  "commands": [
+    {
+      "time": 1791807311.4073899,
+      "command": "status get app_current",
+      "reply": "ERR shl claim iface 0 rc=-3(LIBUSB_ERROR_ACCESS)\n"
+    }
+  ],
+  "started_at": 1791807311.406838,
+  "error": "RuntimeError(\"uncertain/failed command status get app_current: 'ERR shl claim iface 0 rc=-3(LIBUSB_ERROR_ACCESS)\\\\n'\")"
+}

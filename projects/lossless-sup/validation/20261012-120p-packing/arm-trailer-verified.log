@@ -1,0 +1,35 @@
+{
+  "before": {
+    "instructions": 9479,
+    "reads": 363,
+    "writes": 237,
+    "root_write_indices": [
+      237
+    ],
+    "file_bytes": 840490,
+    "cache_used": 0,
+    "code_sha256": "4f2588f6032ac098c797d1b0c796eeebe1c185784b2a67992bfd5e17394b958c"
+  },
+  "after": {
+    "instructions": 20615,
+    "reads": 183,
+    "writes": 204,
+    "root_write_indices": [
+      204
+    ],
+    "file_bytes": 840490,
+    "cache_used": 1,
+    "code_sha256": "c4ef235fa3615ae3c24288aaf9e909e86f90dfa5976fe52966837ae88f496c1d"
+  },
+  "fallback": {
+    "instructions": 13358,
+    "reads": 366,
+    "writes": 237,
+    "root_write_indices": [
+      237
+    ],
+    "file_bytes": 840490,
+    "cache_used": 0,
+    "code_sha256": "c4ef235fa3615ae3c24288aaf9e909e86f90dfa5976fe52966837ae88f496c1d"
+  }
+}

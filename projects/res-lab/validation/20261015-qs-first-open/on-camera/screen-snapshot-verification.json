@@ -1,0 +1,38 @@
+{
+  "bytes": 268,
+  "cases": [
+    {
+      "case": "valid_c_region",
+      "passed": true
+    },
+    {
+      "case": "valid_heap",
+      "passed": true
+    },
+    {
+      "case": "valid_native_gui_heap",
+      "passed": true
+    },
+    {
+      "case": "null_app",
+      "passed": true
+    },
+    {
+      "case": "unaligned_app",
+      "passed": true
+    },
+    {
+      "case": "unknown_app_region",
+      "passed": true
+    },
+    {
+      "case": "null_screen",
+      "passed": true
+    },
+    {
+      "case": "unknown_name_region",
+      "passed": true
+    }
+  ],
+  "LCD_scanout_verified": false
+}

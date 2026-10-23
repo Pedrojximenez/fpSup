@@ -1,0 +1,13 @@
+test_missing_short_corrupt_trailing_and_corrupt_header_remain_unapplied (test_sup_native.NativeLutTests) ... 
+======================================================================
+FAIL: test_missing_short_corrupt_trailing_and_corrupt_header_remain_unapplied (test_sup_native.NativeLutTests) (case=4)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lut/test_sup_native.py", line 274, in test_missing_short_corrupt_trailing_and_corrupt_header_remain_unapplied
+    self.assertEqual(c.status()['asset'],-10 if data is None else -11)
+AssertionError: 0 != -11
+
+----------------------------------------------------------------------
+Ran 1 test in 7.443s
+
+FAILED (failures=1)

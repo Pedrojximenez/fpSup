@@ -1,0 +1,37 @@
+test_native_callbacks_roundtrip_120_240_and_decline_280 (test_m12_240.M12Tests) ... FAIL
+test_data_matches_independent_archived_pairs_and_stock_timing (test_m12_240.M12Tests) ... ok
+test_real_ui_installer_rate_and_depth_policy (test_m12_240.M12Tests) ... FAIL
+
+======================================================================
+FAIL: test_native_callbacks_roundtrip_120_240_and_decline_280 (test_m12_240.M12Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_m12_240.py", line 174, in test_native_callbacks_roundtrip_120_240_and_decline_280
+    cam,e=self.camera()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/v3/test_v3.py", line 262, in call
+    raise self.error
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/v3/test_v3.py", line 140, in _safe_hook
+    self._hook(mu, addr, size, data)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_virtual_rcd.py", line 94, in _hook
+    raise AssertionError(f'unmodeled firmware execution {addr:#x}')
+AssertionError: unmodeled firmware execution 0xc057a6fc
+
+======================================================================
+FAIL: test_real_ui_installer_rate_and_depth_policy (test_m12_240.M12Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_m12_240.py", line 149, in test_real_ui_installer_rate_and_depth_policy
+    if cam.cstr(s+cam.w(s+V.L.S['ROWS'])+i*V.L.ROW['SIZE']+V.L.ROW['LABEL'])=='M12240')
+AssertionError: Lists differ: [['0,0', '0,0', '1,2'], ['0,0', '0,0', '1,2']] != [['1,2', '0,0', '0,0'], ['1,2', '0,0', '0,0']]
+
+First differing element 0:
+['0,0', '0,0', '1,2']
+['1,2', '0,0', '0,0']
+
+- [['0,0', '0,0', '1,2'], ['0,0', '0,0', '1,2']]
++ [['1,2', '0,0', '0,0'], ['1,2', '0,0', '0,0']]
+
+----------------------------------------------------------------------
+Ran 3 tests in 68.168s
+
+FAILED (failures=2)

@@ -1,0 +1,10 @@
+test_m12240_low_fps_and_completion_latency_bound (test_slot_capacity.CapacityTests) ... ok
+test_raw_fallback_never_needs_more_positions_than_minimum_compressed_size (test_slot_capacity.CapacityTests) ... ok
+test_small_frames_report_capacity_shortage_instead_of_lowering_batch (test_slot_capacity.CapacityTests) ... ok
+test_two_full_batches_plus_fractional_fps_and_latency (test_slot_capacity.CapacityTests) ... ok
+test_unknown_or_unbounded_input_is_refused (test_slot_capacity.CapacityTests) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.376s
+
+OK

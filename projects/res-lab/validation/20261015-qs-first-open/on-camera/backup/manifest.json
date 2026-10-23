@@ -1,0 +1,55 @@
+{
+  "written_to_card": false,
+  "phase": "complete",
+  "files": {
+    "\\AutoRun.txt": {
+      "file": "AutoRun.txt",
+      "bytes": 3561,
+      "sha256": "889800fa363c75bfe0d9da43da82312276388a8929748ce05221ce0da931bb4c"
+    },
+    "\\fpSup\\LOAD.LOG": {
+      "file": "fpSup__LOAD.LOG",
+      "bytes": 4096,
+      "sha256": "87545267f215d455bfd30abf050e2d2f2a15f5eb6c1a815768c03ed3d92f88e6"
+    },
+    "\\fpSup\\00SHELL.BIN": {
+      "file": "fpSup__00SHELL.BIN",
+      "bytes": 4496,
+      "sha256": "a5a1dbff913bc9d6fa2e39a94a361c62780d01852aee15b8cbd8f428415fd6d3"
+    },
+    "\\fpSup\\10LOSS.BIN": {
+      "file": "fpSup__10LOSS.BIN",
+      "bytes": 74720,
+      "sha256": "ed6acb71570109399b01df03c4e902b24ed02be7c92392a32df832c8986065a2"
+    },
+    "\\fpSup\\LOADER.BIN": {
+      "file": "fpSup__LOADER.BIN",
+      "bytes": 8248,
+      "sha256": "3c9a6b36687dfc21d4764d61ff190b1222efd9a84f5aa4277fb52527eb751534"
+    },
+    "\\fpSup\\30FCAP.BIN": {
+      "file": "fpSup__30FCAP.BIN",
+      "bytes": 316,
+      "sha256": "d2b22eda13f5ba6f4bd5ca2c9d3dff1918186f5e6fcdc757920402d8e445df96"
+    },
+    "\\fpSup\\40GYR2.BIN": {
+      "file": "fpSup__40GYR2.BIN",
+      "bytes": 4040,
+      "sha256": "2cbfe477bf8b11cc0e4fed37df177f6f5d561bf31243e2b00687eed15aa9a7d3"
+    },
+    "\\fpSup\\20RECW.BIN": {
+      "file": "fpSup__20RECW.BIN",
+      "bytes": 4876,
+      "sha256": "dad442fab5be2f01fe31cfd5e79d33cf0dc883d3afb00520b43e9ce24d7d9602"
+    }
+  },
+  "daemon": "OK name=fpshd version=3.2.0 protocol=1 frame=64 payload=44 transport=EP01-EP82 iface=0 camera=open seq=2398 ep83=host_candidate upload=UP01-probed mem=MEM1-probed quarantine=0 fault=none\n",
+  "daemon_pid": 82146,
+  "idle": {
+    "movie_recording": 0,
+    "xmp_file_pointer": 0,
+    "movie_writing": 0
+  },
+  "root_listing": "                                          .\n2026/10/14  05:00:52 <DIR>                .Spotlight-V100\n2026/10/14  05:01:42                 3561 AutoRun.txt\n2026/10/15  00:57:16 <DIR>                CINEMA\n2026/10/14  05:01:42 <DIR>                fpSup\n",
+  "folder_listing": "                                          .\n2026/10/14  05:01:42 <DIR>                UI\n2026/10/15  05:53:52                 4096 LOAD.LOG\n2026/10/14  05:01:42                 4496 00SHELL.BIN\n2026/10/15  03:11:10                74720 10LOSS.BIN\n2026/10/14  05:01:42                 8248 LOADER.BIN\n2026/10/15  01:18:44                  316 30FCAP.BIN\n2026/10/15  05:41:32                 4040 40GYR2.BIN\n2026/10/15  05:53:38                 4876 20RECW.BIN\n"
+}

@@ -1,0 +1,42 @@
+built into /Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/validation/20261012-slot-expansion/candidate-01
+{
+ "c_base": 4368,
+ "c_text": 42736,
+ "menu_off": 47104,
+ "menu_len": 30844,
+ "blob_len": 77952,
+ "state_off": 77952,
+ "state_bytes": 3600892,
+ "block_bytes": 3682304,
+ "entries": {
+  "fpl_card_init": 1,
+  "fpl_card_rec": 2961,
+  "fpl_card_arrive": 7985,
+  "fpl_card_stop": 10665,
+  "fpl_card_flush": 11713,
+  "fpl_card_task": 17369,
+  "fpl_card_play": 20193,
+  "fpl_card_clip": 21467,
+  "fpl_card_play_end": 22219,
+  "fpl_card_play_pool": 22005,
+  "fpl_card_written": 15993,
+  "fpl_card_event": 16831,
+  "fpl_card_discard": 17085,
+  "fpl_card_bulk": 15399,
+  "fpl_card_cookie_get": 15717,
+  "fpl_card_cookie_put": 15873,
+  "fpl_card_slots_prepare": 15659
+ },
+ "symbols": {
+  "entry": 0,
+  "claims": 3244,
+  "settings": 3228,
+  "c_base": 4368,
+  "task_shim": 3088,
+  "g_card": 3100,
+  "flush_real": 3176,
+  "discard_real": 3192,
+  "stop_resume": 3172,
+  "play_next": 3204
+ }
+}

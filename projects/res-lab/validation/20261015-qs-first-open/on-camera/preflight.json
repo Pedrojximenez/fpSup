@@ -1,0 +1,15 @@
+{
+  "daemon_pid": 82146,
+  "daemon_status": "OK name=fpshd version=3.2.0 protocol=1 frame=64 payload=44 transport=EP01-EP82 iface=0 camera=open seq=2389 ep83=host_candidate upload=UP01-probed mem=MEM1-probed quarantine=0 fault=none\n",
+  "commands": {
+    "status get is_recording": "is_recording -> 0\n\n",
+    "status get app_current": "app_current -> 2\n\n",
+    "sdcard slot": "slot now slot = sd0\n\n",
+    "dir": "                                          .\n2026/10/14  05:00:52 <DIR>                .Spotlight-V100\n2026/10/14  05:01:42                 3561 AutoRun.txt\n2026/10/15  00:57:16 <DIR>                CINEMA\n2026/10/14  05:01:42 <DIR>                fpSup\n",
+    "dir \\fpSup": "                                          .\n2026/10/14  05:01:42 <DIR>                UI\n2026/10/15  05:53:52                 4096 LOAD.LOG\n2026/10/14  05:01:42                 4496 00SHELL.BIN\n2026/10/15  03:11:10                74720 10LOSS.BIN\n2026/10/14  05:01:42                 8248 LOADER.BIN\n2026/10/15  01:18:44                  316 30FCAP.BIN\n2026/10/15  05:41:32                 4040 40GYR2.BIN\n2026/10/15  05:53:38                 4876 20RECW.BIN\n",
+    "dir \\fpSup\\RESCUS": "dir: cannot access '\\\\fpSup\\\\RESCUS'\nNo such file or directory or No Media\nex) dir \\\\\nex) dir \\\\test\nex) dir \\\\test\\\\testdir\n\n",
+    "help gui": "\n",
+    "help key": "\n",
+    "help reboot": "\n"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "label": "boot-01",
+  "commands": [
+    {
+      "time": 1791769475.8119628,
+      "command": "status get app_current",
+      "reply": "ERR shl cmd rc=-4(LIBUSB_ERROR_NO_DEVICE) moved=0/64\n"
+    }
+  ],
+  "started_at": 1791769475.8118248,
+  "error": "RuntimeError(\"uncertain/failed command status get app_current: 'ERR shl cmd rc=-4(LIBUSB_ERROR_NO_DEVICE) moved=0/64\\\\n'\")"
+}

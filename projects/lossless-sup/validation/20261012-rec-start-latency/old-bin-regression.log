@@ -1,0 +1,20 @@
+test_same_capacity_reuses_idle_pool_without_patching_or_republishing (test_slot_expansion.ExpandedSlotsTests) ... FAIL
+
+======================================================================
+FAIL: test_same_capacity_reuses_idle_pool_without_patching_or_republishing (test_slot_expansion.ExpandedSlotsTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/test_slot_expansion.py", line 215, in test_same_capacity_reuses_idle_pool_without_patching_or_republishing
+    self.assertEqual(writes, [], 'same capacity must not rebuild or rewrite code')
+AssertionError: Lists differ: [1159259016, 1159254620, 1159259020, 11592[30025 chars]9316] != []
+
+First list contains 2506 additional elements.
+First extra element 0:
+1159259016
+
+Diff is 37595 characters long. Set self.maxDiff to None to see it. : same capacity must not rebuild or rewrite code
+
+----------------------------------------------------------------------
+Ran 1 test in 30.167s
+
+FAILED (failures=1)

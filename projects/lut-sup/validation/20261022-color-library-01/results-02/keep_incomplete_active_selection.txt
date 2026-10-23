@@ -1,0 +1,18 @@
+test_active_input_becoming_incomplete_saves_off_and_reloads_validly (test_library_native.LibraryNativeTests) ... ERROR
+
+======================================================================
+ERROR: test_active_input_becoming_incomplete_saves_off_and_reloads_validly (test_library_native.LibraryNativeTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lut/test_library_native.py", line 151, in test_active_input_becoming_incomplete_saves_off_and_reloads_validly
+    self.assertIsNone(L.recover(self.doc,c.written[BIN])['active'])
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lut/library.py", line 226, in recover
+    return validate(result)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lut/library.py", line 101, in validate
+    raise ValueError('active LUT must be enabled and have an explicit input space and gamma')
+ValueError: active LUT must be enabled and have an explicit input space and gamma
+
+----------------------------------------------------------------------
+Ran 1 test in 4.386s
+
+FAILED (errors=1)

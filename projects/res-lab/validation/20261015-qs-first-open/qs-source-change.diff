@@ -1,0 +1,93 @@
+--- before-QS/ogc.c
++++ after-QS/ogc.c
+@@ -2281,25 +2281,35 @@
+ 
+ static u32 qs_id(u32 row, u32 marker) { return W(row + ROW_QSID + 4 * (marker == 3 ? 1u : marker)); }
+ 
+-/* og3k_ui.S ui_layout_copy (uishare qs_apply.c clone): every property gets a copy
+- * of its first key at `time`; property `prop` gets `value`. */
+-static u32 qs_clone(u32 old, u32 len, u32 out, u32 cap, u32 time, u32 prop, u32 has, u32 value)
+-{
+-    u32 count, src = 28, o = 28;
++/* Append every format's state in one pass. The former per-format clone loop
++ * copied the entire growing record again for every row (up to six times).
++ * Each added key still copies the original property's first key, in row order. */
++static u32 qs_clone(u8 *S, u32 old, u32 len, u32 out, u32 cap, u32 n, u32 prop, u32 has, u32 marker)
++{
++    u32 rows[6], times[6], nr = 0, count, src = 28, o = 28;
+     if (len < 28 || cap < 28) return 0;
++    for (u32 k = 2; k < n && k <= 7; k++) {
++        u32 row = qs_row_of_k(S, k);
++        if (!row) continue;
++        rows[nr] = row; times[nr++] = 100u * k / 3u;
++    }
++    if (!nr) return 0;
+     copy8(out, old, 28);
+     count = be32(old + 12);
+     for (u32 p = 0; p < count; ++p) {
+         if (src + 20 > len) return 0;
+         u32 keys = be32(old + src);
+-        if (src + 20 + 10 * keys > len || keys == 0 || o + 20 + 10 * keys + 10 > cap) return 0;
++        if (keys == 0 || keys > 255u - nr || src + 20 + 10 * keys > len ||
++            o + 20 + 10 * (keys + nr) > cap) return 0;
+         copy8(out + o, old + src, 20 + 10 * keys);
+-        B8(out + o + 3) = (u8)(keys + 1u);
++        put_be32(out + o, keys + nr);
+         o += 20 + 10 * keys;
+-        copy8(out + o, old + src + 20, 10);
+-        put_be32(out + o + 2, time);
+-        if (has && p == prop) put_be32(out + o + 6, value);
+-        o += 10;
++        for (u32 k = 0; k < nr; k++) {
++            copy8(out + o, old + src + 20, 10);
++            put_be32(out + o + 2, times[k]);
++            if (has && p == prop) put_be32(out + o + 6, qs_id(rows[k], marker));
++            o += 10;
++        }
+         src += 20 + 10 * keys;
+     }
+     if (src != len) return 0;
+@@ -2334,8 +2344,8 @@
+     return o + (len - cur);
+ }
+ 
+-/* Scheme B on one record (rcd.qs_target): the new bytes in a or b, *len; 0 = leave it. */
+-static u32 qs_b(u8 *S, u32 tab, u32 r, u32 old, u32 *len, u32 a, u32 b, u32 cap, u32 n)
++/* Scheme B on one record (rcd.qs_target): the new bytes in a, *len; 0 = leave it. */
++static u32 qs_b(u8 *S, u32 tab, u32 r, u32 old, u32 *len, u32 a, u32 cap, u32 n)
+ {
+     u32 rule = u8at(r + 10), pa = u8at(r + 11), pb = le16(r + 12);
+     u32 edits = tab + le32(tab + 12) + le16(r + 14), f = fn_row(tab, n), any = 0;
+@@ -2344,19 +2354,11 @@
+     u32 l = *len, got;
+     switch (rule) {
+     case QS_CLONE: {
+-        u32 cur = old, dst = a;
+-        for (u32 k = 2; k < n && k <= 7; k++) {
+-            u32 row = qs_row_of_k(S, k);
+-            if (!row) continue;
+-            u32 mk = pb & 0xFFu;
+-            l = qs_clone(cur, l, dst, cap, 100u * k / 3u, pa ? pa - 1u : 0u, pa && mk != 0xFFu,
+-                         mk != 0xFFu ? qs_id(row, mk & 3u) : 0u);
+-            if (!l) return 0;
+-            cur = dst;
+-            dst = dst == a ? b : a;
+-        }
++        u32 mk = pb & 0xFFu;
++        l = qs_clone(S, old, l, a, cap, n, pa ? pa - 1u : 0u, pa && mk != 0xFFu, mk & 3u);
++        if (!l) return 0;
+         *len = l;
+-        return cur;
++        return a;
+     }
+     case QS_END: {
+         if (l < 40 || l > cap) return 0;
+@@ -2479,7 +2481,7 @@
+     u32 d = SW(S, S_QS_DEPTH);
+     if (d >= OGC_QS_SLOTS) { SW(S, S_QS_FULL)++; return next(reader); }
+     u32 a = SW(S, S_QS_BUF) + d * 2u * OGC_QS_CAP, l = len;
+-    u32 out = qs_b(S, tab, r, src, &l, a, a + OGC_QS_CAP, OGC_QS_CAP, SW(S, S_QS_N));
++    u32 out = qs_b(S, tab, r, src, &l, a, OGC_QS_CAP, SW(S, S_QS_N));
+     if (!out) { SW(S, S_QS_PASS)++; return next(reader); }
+     SW(S, S_QS_DEPTH) = d + 1;
+     W(reader + R_BASE) = out - pos;

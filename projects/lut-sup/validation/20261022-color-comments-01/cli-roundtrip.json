@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "cube_comments_updated": true,
+  "body_bytes_unchanged": true,
+  "fresh_import_uses_comments": true,
+  "recover_uses_cube_comments_over_bin_cache": true,
+  "commands": [
+    "library-import",
+    "library-set",
+    "library-recover --sources"
+  ],
+  "camera_operations": false
+}

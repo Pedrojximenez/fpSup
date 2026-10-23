@@ -1,0 +1,531 @@
+{
+  "schema": "fpSup-lut-library-validation-1",
+  "tests": 119,
+  "skipped": 0,
+  "mutations": [
+    {
+      "name": "allow_preview_without_backend",
+      "compiled": true,
+      "detected": true,
+      "test": "test_loads_cached_with_resident_rows_and_dma_only_file_scratch",
+      "source_sha256": "6039fda1fa66c65ca1d761a84aabcdd997f4abbf990ca114bf0a051cd09c3810"
+    },
+    {
+      "name": "skip_asset_checksum",
+      "compiled": true,
+      "detected": true,
+      "test": "test_missing_short_corrupt_trailing_and_corrupt_header_remain_unapplied",
+      "source_sha256": "27f3665d81ff8bcfb86064603c7c6185b2072f8835ffc6bb742a2ce55dcadd84"
+    },
+    {
+      "name": "execute_pending_model",
+      "compiled": true,
+      "detected": true,
+      "test": "test_bad_input_never_changes_destination_and_pending_models_refuse",
+      "source_sha256": "9024c26437a77f6cdd7acca0d15e350115d2e3062ba0352abd59289e28d9b5af"
+    },
+    {
+      "name": "accept_out_of_contract_xyz",
+      "compiled": true,
+      "detected": true,
+      "test": "test_bad_input_never_changes_destination_and_pending_models_refuse",
+      "source_sha256": "59baf7b3c45b215b210f2a2096bdf4af394d8681c0670bd57174c770c4266033"
+    },
+    {
+      "name": "reverse_red_blue_table_order",
+      "compiled": true,
+      "detected": true,
+      "test": "test_all_35_models_against_float_reference_and_strengths",
+      "source_sha256": "aa889d04d8d986588c0dc259303b620663a27a689ca9e5741bc82c4506dd2787"
+    },
+    {
+      "name": "skip_dependent_ui_refresh",
+      "compiled": true,
+      "detected": true,
+      "test": "test_group_popup_refreshes_the_dependent_value_immediately",
+      "source_sha256": "3a2dda3d54952f1830f106f48fa71d04722c7eb57b86d96cc771b51b9a589f5c"
+    },
+    {
+      "name": "skip_private_string_borrow",
+      "compiled": true,
+      "detected": true,
+      "test": "LutUiTests.test_private_home_and_manager_strings_resolve_and_stay_borrowed_with_lut",
+      "source_sha256": "342d9bd4ddc628f2e58f57cea8e87ca70aad5f50ad82127822b7512637c838a9",
+      "original_source_sha256": "5dee11c203bedd7147020f3034a75f383c29b5406701ba67d77da9fdaa5a2a43"
+    },
+    {
+      "name": "ignore_existing_file_guard",
+      "compiled": true,
+      "detected": true,
+      "test": "test_missing_or_replaced_bin_is_not_created_or_overwritten",
+      "source_sha256": "ffc746c054d9e6662639887cb6ed383d36f81e4f7dc6f96ad125ede5ef032ee8"
+    },
+    {
+      "name": "ignore_write_readback",
+      "compiled": true,
+      "detected": true,
+      "test": "test_readback_failure_rolls_back_ram_and_does_not_replay",
+      "source_sha256": "f2ba9ad1de2b9ef5985419b9e4ef81208e07428d49c8cdd9138e02480491df7b"
+    },
+    {
+      "name": "ignore_asset_source_identity",
+      "compiled": true,
+      "detected": true,
+      "test": "test_wrong_asset_identity_does_not_replace_selected_lut",
+      "source_sha256": "b83f21406a0696acad2b1a3124d0156a46393c88bda7d3f3ae9b09208545e0f4"
+    },
+    {
+      "name": "ignore_recording_guard",
+      "compiled": true,
+      "detected": true,
+      "test": "test_recording_blocks_file_loads_and_settings_writes",
+      "source_sha256": "c45b357b9c708249c97d84b33f2ae953905e6d32fa3e116f5bef087e289f4984"
+    },
+    {
+      "name": "write_first_cube_instead_of_selected",
+      "compiled": true,
+      "detected": true,
+      "test": "test_editing_one_cube_does_not_change_other_or_current_active",
+      "source_sha256": "343690b009a436ee6563af49810aa031041c347e1c7b13c8f6a6b4f7a83df8f2"
+    },
+    {
+      "name": "keep_incomplete_active_selection",
+      "compiled": true,
+      "detected": true,
+      "test": "test_active_input_becoming_incomplete_saves_off_and_reloads_validly",
+      "source_sha256": "faf2aebbe1a17d3e12b5476609ac278e34bb19a9d1e7b09670ca5c9b4dc54cb1"
+    },
+    {
+      "name": "ignore_cube_source_guard",
+      "compiled": true,
+      "detected": true,
+      "test": "test_cube_missing_replaced_body_or_header_is_not_written",
+      "source_sha256": "72c494dd8f6b32e7aca3b773a2870d6064a5fd10c61638a5817a81fdb14d881b"
+    },
+    {
+      "name": "ignore_cube_body_checksum",
+      "compiled": true,
+      "detected": true,
+      "test": "test_cube_missing_replaced_body_or_header_is_not_written",
+      "source_sha256": "ebe5fb88d65b74364ea30c55cc7577b1d0da96e8ea8f8fa420f05d0ce01f876c"
+    },
+    {
+      "name": "ignore_cube_comment_readback",
+      "compiled": true,
+      "detected": true,
+      "test": "test_cube_readback_failure_keeps_ram_and_refuses_replay",
+      "source_sha256": "665df536828a0152f8f26950efd324ee306ed82649b3d9d3cdecef5f0b23a718"
+    },
+    {
+      "name": "ignore_saved_cube_comments",
+      "compiled": true,
+      "detected": true,
+      "test": "test_input_writes_cube_comments_and_fresh_import_uses_them",
+      "source_sha256": "a9cc35ffac05621974542634ba3649528f45aa5a7b19fb5bb106d525fe974e11"
+    }
+  ],
+  "numerical": {
+    "models": 35,
+    "samples_per_model": 161,
+    "comparisons": 5635,
+    "rgb_mae": 1.2566820953637038e-06,
+    "max_channel": 7.009144289204378e-05,
+    "per_model": [
+      {
+        "color": "aces",
+        "gamma": "adobe-rgb",
+        "samples": 161,
+        "rgb_mae": 1.221710235588373e-06,
+        "max_channel": 4.5413765513681315e-05
+      },
+      {
+        "color": "aces",
+        "gamma": "gamma24",
+        "samples": 161,
+        "rgb_mae": 1.3018382862889093e-06,
+        "max_channel": 5.745292534103594e-05
+      },
+      {
+        "color": "aces",
+        "gamma": "gamma26",
+        "samples": 161,
+        "rgb_mae": 1.3869100225268222e-06,
+        "max_channel": 7.009144289204378e-05
+      },
+      {
+        "color": "aces",
+        "gamma": "linear",
+        "samples": 161,
+        "rgb_mae": 5.824458253625082e-07,
+        "max_channel": 3.055903690540873e-06
+      },
+      {
+        "color": "aces",
+        "gamma": "srgb",
+        "samples": 161,
+        "rgb_mae": 1.0801597564090985e-06,
+        "max_channel": 1.2070736142323624e-05
+      },
+      {
+        "color": "adobe-rgb",
+        "gamma": "adobe-rgb",
+        "samples": 161,
+        "rgb_mae": 1.4813678930562373e-06,
+        "max_channel": 4.5413765513681315e-05
+      },
+      {
+        "color": "adobe-rgb",
+        "gamma": "gamma24",
+        "samples": 161,
+        "rgb_mae": 1.574952857623219e-06,
+        "max_channel": 5.745292534103594e-05
+      },
+      {
+        "color": "adobe-rgb",
+        "gamma": "gamma26",
+        "samples": 161,
+        "rgb_mae": 1.6561574966801974e-06,
+        "max_channel": 7.009144289204378e-05
+      },
+      {
+        "color": "adobe-rgb",
+        "gamma": "linear",
+        "samples": 161,
+        "rgb_mae": 8.110804751739804e-07,
+        "max_channel": 3.1248322807098106e-06
+      },
+      {
+        "color": "adobe-rgb",
+        "gamma": "srgb",
+        "samples": 161,
+        "rgb_mae": 1.338021277398636e-06,
+        "max_channel": 1.2043320545856995e-05
+      },
+      {
+        "color": "p3-d60",
+        "gamma": "adobe-rgb",
+        "samples": 161,
+        "rgb_mae": 1.3659886752829262e-06,
+        "max_channel": 4.5413765513677845e-05
+      },
+      {
+        "color": "p3-d60",
+        "gamma": "gamma24",
+        "samples": 161,
+        "rgb_mae": 1.4950336369795325e-06,
+        "max_channel": 5.745292534103247e-05
+      },
+      {
+        "color": "p3-d60",
+        "gamma": "gamma26",
+        "samples": 161,
+        "rgb_mae": 1.542445468475586e-06,
+        "max_channel": 7.009144289204378e-05
+      },
+      {
+        "color": "p3-d60",
+        "gamma": "linear",
+        "samples": 161,
+        "rgb_mae": 6.870764680737981e-07,
+        "max_channel": 2.921949926126821e-06
+      },
+      {
+        "color": "p3-d60",
+        "gamma": "srgb",
+        "samples": 161,
+        "rgb_mae": 1.2323591363703243e-06,
+        "max_channel": 1.2043320545856995e-05
+      },
+      {
+        "color": "p3-d65",
+        "gamma": "adobe-rgb",
+        "samples": 161,
+        "rgb_mae": 1.5009720376473864e-06,
+        "max_channel": 4.5413765513681315e-05
+      },
+      {
+        "color": "p3-d65",
+        "gamma": "gamma24",
+        "samples": 161,
+        "rgb_mae": 1.6031898499940451e-06,
+        "max_channel": 5.745292534103594e-05
+      },
+      {
+        "color": "p3-d65",
+        "gamma": "gamma26",
+        "samples": 161,
+        "rgb_mae": 1.671784954150935e-06,
+        "max_channel": 7.009144289204378e-05
+      },
+      {
+        "color": "p3-d65",
+        "gamma": "linear",
+        "samples": 161,
+        "rgb_mae": 8.915530021659254e-07,
+        "max_channel": 3.862158203138399e-06
+      },
+      {
+        "color": "p3-d65",
+        "gamma": "srgb",
+        "samples": 161,
+        "rgb_mae": 1.3423515452669068e-06,
+        "max_channel": 1.2043320545856995e-05
+      },
+      {
+        "color": "rec2020",
+        "gamma": "adobe-rgb",
+        "samples": 161,
+        "rgb_mae": 1.2247801123911312e-06,
+        "max_channel": 4.5413765513677845e-05
+      },
+      {
+        "color": "rec2020",
+        "gamma": "gamma24",
+        "samples": 161,
+        "rgb_mae": 1.2737216063597025e-06,
+        "max_channel": 5.745292534103247e-05
+      },
+      {
+        "color": "rec2020",
+        "gamma": "gamma26",
+        "samples": 161,
+        "rgb_mae": 1.4074972316580638e-06,
+        "max_channel": 7.009144289204378e-05
+      },
+      {
+        "color": "rec2020",
+        "gamma": "linear",
+        "samples": 161,
+        "rgb_mae": 5.543300921524706e-07,
+        "max_channel": 2.365378314550526e-06
+      },
+      {
+        "color": "rec2020",
+        "gamma": "srgb",
+        "samples": 161,
+        "rgb_mae": 1.063367104882215e-06,
+        "max_channel": 1.2043320545856995e-05
+      },
+      {
+        "color": "rec709",
+        "gamma": "adobe-rgb",
+        "samples": 161,
+        "rgb_mae": 1.3660340306136232e-06,
+        "max_channel": 4.5413765513677845e-05
+      },
+      {
+        "color": "rec709",
+        "gamma": "gamma24",
+        "samples": 161,
+        "rgb_mae": 1.4843205577349392e-06,
+        "max_channel": 5.745292534103247e-05
+      },
+      {
+        "color": "rec709",
+        "gamma": "gamma26",
+        "samples": 161,
+        "rgb_mae": 1.5579112925067432e-06,
+        "max_channel": 7.009144289204378e-05
+      },
+      {
+        "color": "rec709",
+        "gamma": "linear",
+        "samples": 161,
+        "rgb_mae": 7.040999560896358e-07,
+        "max_channel": 3.343953691420376e-06
+      },
+      {
+        "color": "rec709",
+        "gamma": "srgb",
+        "samples": 161,
+        "rgb_mae": 1.2340233079404064e-06,
+        "max_channel": 1.2043320545853525e-05
+      },
+      {
+        "color": "srgb",
+        "gamma": "adobe-rgb",
+        "samples": 161,
+        "rgb_mae": 1.3660340306136232e-06,
+        "max_channel": 4.5413765513677845e-05
+      },
+      {
+        "color": "srgb",
+        "gamma": "gamma24",
+        "samples": 161,
+        "rgb_mae": 1.4843205577349392e-06,
+        "max_channel": 5.745292534103247e-05
+      },
+      {
+        "color": "srgb",
+        "gamma": "gamma26",
+        "samples": 161,
+        "rgb_mae": 1.5579112925067432e-06,
+        "max_channel": 7.009144289204378e-05
+      },
+      {
+        "color": "srgb",
+        "gamma": "linear",
+        "samples": 161,
+        "rgb_mae": 7.040999560896358e-07,
+        "max_channel": 3.343953691420376e-06
+      },
+      {
+        "color": "srgb",
+        "gamma": "srgb",
+        "samples": 161,
+        "rgb_mae": 1.2340233079404064e-06,
+        "max_channel": 1.2043320545853525e-05
+      }
+    ],
+    "metric": "normalized Rec.709 Gamma2.4 channel code error; not DeltaE",
+    "includes_xyz_matrix_curve_node_and_interpolation_quantization": true,
+    "resolve_pixel_match_verified": false,
+    "camera_pixels": false,
+    "separate_reference_payload_sha256": "066afa6643e6a03ef3046a374ce183870425f1b484be8c3d4c8a62b26dd66abd",
+    "exported_demo_library_is_not_numerical_fixture": true
+  },
+  "exact_card": {
+    "loaded": [
+      "LUT.BIN",
+      "SHELL.BIN",
+      "SUPMGR.BIN"
+    ],
+    "home_rows": 2,
+    "color_rows": 3,
+    "enabled_picker": [
+      "Off",
+      "Demo_709.cube",
+      "Demo_P3.cube"
+    ],
+    "private_pages": [
+      "FT_COLOR",
+      "FT_LUTMGR",
+      "FT_LUTSET",
+      "FT_LUTSEL"
+    ],
+    "monitoring_enable": -13,
+    "monitoring_after_attempt": "Off",
+    "per_cube_saved_and_reloaded": true,
+    "disabled_cube_excluded": true,
+    "cube_comment_writeback_and_body_preservation": true,
+    "recording_and_source_guards_verified_by_native_tests": true,
+    "unchanged_shared_files": {
+      "AutoRun.txt": true,
+      "fpSup/LOADER.BIN": true,
+      "fpSup/SUPMGR.BIN": true,
+      "fpSup/UI/FPSUP.BIN": true,
+      "fpSup/UI/SUPMGR.BIN": true
+    },
+    "power_off_shared_hooks_restored": true,
+    "file_calls_simulated": true,
+    "native_gui_display_simulated": true
+  },
+  "library": {
+    "active": "ba096fc0cbf8b4c42d4ec6f48ac9e71ae9179bc3a0c36e2f77f0e841fbc7ae61",
+    "luts": [
+      {
+        "id": "ba096fc0cbf8b4c42d4ec6f48ac9e71ae9179bc3a0c36e2f77f0e841fbc7ae61",
+        "filename": "Demo_709.cube",
+        "enabled": true,
+        "active": true,
+        "input_space": "rec709",
+        "input_gamma": "gamma24",
+        "strength_percent": 100,
+        "configured": true,
+        "model_available": true
+      },
+      {
+        "id": "d25ed4344beb3f9be7d17472485cd86eb8fb5e5caca6a4d2e3a6db39d5ea511a",
+        "filename": "Demo_P3.cube",
+        "enabled": true,
+        "active": false,
+        "input_space": "p3-d65",
+        "input_gamma": "gamma26",
+        "strength_percent": 100,
+        "configured": true,
+        "model_available": true
+      },
+      {
+        "id": "a3eded7aea3e40417a0cac1dd91ea3199892053c8246cb8f7ed8b5f136cf9f03",
+        "filename": "Unmarked_709.cube",
+        "enabled": false,
+        "active": false,
+        "input_space": null,
+        "input_gamma": null,
+        "strength_percent": 100,
+        "configured": false,
+        "model_available": false
+      }
+    ]
+  },
+  "card_dir": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/cards/20261022-color-comments-01",
+  "resident_bytes": 4228224,
+  "file_hashes": {
+    "AutoRun.txt": "ee256bc56848caeb6aecfb9d8114530102c67bae768a09f67757528e64af59f9",
+    "fpSup/LOADER.BIN": "30fc06327c0b6e5afb92bbb2f6cf013cc290159262a26946093389ad44f0f85e",
+    "fpSup/LUT.BIN": "3c2c40b271f7050bc46503fd70cd5bd22ab9de28d001e25bbdbb1c2a7368de7b",
+    "fpSup/SUPMGR.BIN": "a2d938aeb2a450083fa14392a5dcbf9b9076ff9b4d6b5e05a11eca609a3d17ee",
+    "fpSup/SHELL.BIN": "d711f05cd7c163c17f484f686cd245ae15ca6eedc47a75cee7a5201e3f4c82ab",
+    "fpSup/UI/FPSUP.BIN": "2cef278c3958d8974f924e274b2b77b5b502bf5ab820d5903489e1d4a2857742",
+    "fpSup/UI/SUPMGR.BIN": "404bee427d223b6ec94a402b40a9770297fde0c972f394b91873d84b2cd21dd4",
+    "fpSup/UI/COLOR.BIN": "f04e19a56936a7d6ad4cf85ceb5cf870fcca286307280acf685b1cf1a38ca20d",
+    "fpSup/LUT/settings.json": "6da5770146572130c63a5e6a73bf7ad1c7dc1631645c2a4fe9189e64f926fb1e",
+    "fpSup/LUT/menu.json": "9b8aba4eaefffe9ed486f1290fa3a84fa3f77fd459ec6b2091308e9a9e5e1c80",
+    "fpSup/LUT/SOURCES/ba096fc0cbf8b4c42d4ec6f48ac9e71ae9179bc3a0c36e2f77f0e841fbc7ae61.cube": "44d508bada3e661afbc4849aec583ddd5a2ded8eccb6c4d96f83a02e99cddc8c",
+    "fpSup/LUT/SOURCES/a3eded7aea3e40417a0cac1dd91ea3199892053c8246cb8f7ed8b5f136cf9f03.cube": "08c167de62ad176439f917bb895d4d62fd0004f865e5f351c0b378e91e105cd5",
+    "fpSup/LUT/SOURCES/d25ed4344beb3f9be7d17472485cd86eb8fb5e5caca6a4d2e3a6db39d5ea511a.cube": "eeebea8cbd4e11aefe918f008cd9b178904778509a6689be219f416f09209aa7",
+    "fpSup/LUT/DATA/ba096fc0cbf8b4c4.LUT": "3ab8df0f1ec963feb5c50abe724a412394cf9d323fa09958e665c23ce5907f8c",
+    "fpSup/LUT/DATA/a3eded7aea3e4041.LUT": "66317fd618b2167c61dc746f7144e93a2c1fe44db103503b641b3c1b8cc95cf7",
+    "fpSup/LUT/DATA/d25ed4344beb3f9b.LUT": "a2b80152f50eefa6d818b794934f5ac89a888ed9304cb515aeaaa968c0969fda"
+  },
+  "build_source_hashes": {
+    "fpSup/lut/native/lut4.c": "b3ba55946e95b4474e2e0cb89961faf415cd2f0650bf4413f9d8fd44697aa6a6",
+    "fpSup/lut/native/lut4.h": "f9de8b046d3b714a735c8c7f8c0712db179a16fdfafbba73b38e414fbea3be73",
+    "fpSup/lut/native/color_ui.c": "c9e27997754b50fbade0921a7e0af21394c51ceaa0f6de48817c6a1dfaf91d22",
+    "fpSup/lut/native/library4.c": "ceb21d64d17b40643fca9b5928a8aa1849f0fe1b8c371a3500eb3f9f6c669fad",
+    "fpSup/lut/native/library4.h": "fb6138a38be445ba2c54d0ee5df2ff5df289b55bdf3c9581bfd37e2977510129",
+    "fpSup/lut/native/cube4.c": "5e10974f357e9e051e0cc76172e6e372dabca0ae80279a43bbb9c2e34c07366f",
+    "fpSup/lut/cube_metadata.py": "dcd74ab7d6a2f2c3efc80fa2cc5b6e104ee62a947853f5decc590ee0ed59c307",
+    "fpSup/lut/color_ui.py": "873e303bc748224116a3bdfc2b838cf8a71d03449663441b1e2d1fb0b594b0fb",
+    "fpSup/fpsup-ui/fpsup_ui.c": "5dee11c203bedd7147020f3034a75f383c29b5406701ba67d77da9fdaa5a2a43",
+    "fpSup/lut/build_sup.py": "8da702fe5be93414463013bfcfc7c657dec5600ce9a71cb359db5e8b036ee0bb",
+    "fpSup/lut/color.py": "76fb55133eabe4d13fe79e2670c59584ab1150d0f7f49931f8fd3c88215c69cd",
+    "fpSup/lut/cinemadng.py": "442f56ba3e1a0b83c91e32ad3191f91c74db11919b77c5723ea7578349922c0b",
+    "fpSup/loader-v4/sloader4.h": "38c22a9160d0677231c3ca2756f89cd0b2d7fe36bbf1d53b71d198f688618071",
+    "fpSup/loader-v4/build_v4.py": "2b646bf30b9769a1f3a78b9d534ec1a7080a5687d04b3bb19ed1c8af0ac08b33",
+    "fpSup/lut/library.py": "78d9242bd0e836565cf2ec673993863877d669827b14986d6fcdb127c22cde23",
+    "fpSup/loader-v4/sloader4.c": "5a690e1111190270c9382dc37f102e6b4a6e87b15bd1d368e34c729a986c8712",
+    "fpSup/loader-v4/sloader4_entry.S": "90013526abc898eac8f7169df5373598d83ae25df1943718c26e7023af5790c4",
+    "fpSup/loader-v4/supmgr.c": "67a51fd8e3f9e663ffe5bee3eb85cfd85baee5362ccd697d66cc5d4e4cd286d3",
+    "fpSup/fp_usb_shell/v3/build_v3.py": "027030c0ed689d3f53fe0608b2fd02085483cab9b38b0a8ccf0d36466a1e4ef6",
+    "fpSup/fp_usb_shell/build_autorun.py": "dff5adc2ac79d2276b244773cfc2c641969828b119a9c708447ee2c6bc8977ae",
+    "fpSup/fp_usb_shell/asm/loader.S": "838186545d1e4d525b569f9d1b3c37a3a8a8f7bd177a15b1d4c5d98719a55c4e",
+    "fpSup/fp_usb_shell/asm/stage2.S": "4f446ace9ffadef27c8cabe59d86c2fa08f5ec0cbf53561b44651a000be9d2e5",
+    "fpSup/fp_usb_shell/asm/store_boot.S": "f104f6a7bb222b69ab65074c9f8a054fd1552f696e8cd6f40e627216e3894135",
+    "fpSup/fp_usb_shell/asm/store_boot_slim.S": "7fb69bc5a9ea56f7a629df06f95c684b80f69b8536de4b5e6c318393a00abf9a",
+    "fpSup/fp_usb_shell/asm/lhook_stub.S": "89f76b46150b2a859d70fe915ae20f5fb5257bc72e85684cd469bcc80b3016ed",
+    "fpSup/fp_usb_shell/asm/abort.S": "46e6a31c0e7303fc59f587a63f423899740e3ef96e55a162267ecf5f5271f46f",
+    "fpSup/fp_usb_shell/asm/entries.S": "6046ce8a1a8a506784f61def3637c0fbfaaf31cb4c6c9a7f923d4497bf305c95",
+    "fpSup/fp_usb_shell/asm/splash_finish.S": "00de013ffa8ff1044655e68f952e0c03792482c4c317300ba5ab7c3730cd8b83",
+    "fpSup/loader-v4/fpsup_home.c": "643c9f493d28ae00268e1a165c19679e860a95592ccdb9b891be9a890547b093",
+    "fpSup/uishare/tab/build_fp4.py": "279457be2732159824d56018d5c5d4328f19825b12c666694e57e87b3c9a35d6",
+    "fpSup/uishare/tab/home4_page.py": "9f0bbf5745b556c0dc34a2e8d26774084d1e76e4c2b76e0f37177fd6f29b2db7",
+    "fpSup/uishare/tab/manage_page.py": "e7a3691c181e5b369aa2c985084c18500686e4b63327f4224be97327ff4b0784",
+    "fpSup/uishare/tab/manager_logo.py": "9404dc83f5020ed97ec4ec293aba87dfdfa9b1142e1d3fc0484c0568a2ce767c",
+    "fpSup/uishare/tab/ft6_page.py": "5efc4fa0a162013cba3941fb7cee1a532e30ff05d95c34f85d7d08f6c9bf8532",
+    "fpSup/uishare/tab/build_ft6.py": "75f3b0168b46d443635d532ed6641d392f5eb863c807c8f88f12977eaf220f4b"
+  },
+  "validation_source_hashes": {
+    "projects/lut-sup/probes/validate_library4.py": "176490ed075b6d45122facc53637130783666e1702eb47af0886927f9d9a7858",
+    "projects/lut-sup/probes/validate_sup4.py": "e0d3b14a9d2fa3803aec5f205139adcb24e61524e0a352e19cc95fef7a55687a",
+    "fpSup/lut/test_library.py": "ed37c87f3189c8a04fe2d64938590e7b75adeff651578d15f8ae1b79edb54d47",
+    "fpSup/lut/test_library_native.py": "6fdc82e504a37bd25ad0c2e641e885b603f92bb96d4978f385402bc707184a3d",
+    "fpSup/lut/fplut.py": "a8a0332fd9eeafb5bf68058480bcb4a0890d6dee2ae42a0d7df597bfef1175a7"
+  },
+  "camera_operations": false,
+  "physical_card_written": false,
+  "on_camera_verified": false,
+  "live_view_backend_connected": false,
+  "realtime_performance_verified": false,
+  "resolve_cinemadng_pixel_match_verified": false
+}

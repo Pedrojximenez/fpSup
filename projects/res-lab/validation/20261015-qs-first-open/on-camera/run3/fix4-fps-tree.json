@@ -1,0 +1,172 @@
+{
+  "snapshot": [
+    1,
+    3331322648,
+    3332552740,
+    3343422328,
+    3344502820,
+    926,
+    6,
+    374,
+    3344503140,
+    0,
+    3331921592,
+    3227338465,
+    3344503400,
+    3,
+    3331922264,
+    3227509425,
+    3344503972,
+    8,
+    3331922264,
+    3227509425,
+    3344504544,
+    9,
+    3331922264,
+    3227509425,
+    3344505116,
+    4,
+    3331921640,
+    3227392737,
+    3344509504,
+    5,
+    3331922024,
+    3227408409,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "valid": 1,
+  "identity": {
+    "base": "0x451d7380",
+    "state": "0x4520eb00",
+    "nrows": 5,
+    "immutable_code_sha256": "5617a32d7ba664aba450426202ddaa206b67e1133cca04ad0d2dcac06c9413ec"
+  },
+  "components": [
+    {
+      "pointer": "0xc7591164",
+      "component_id": 0,
+      "descriptor": "0xc69916b8",
+      "name_getter": "0xc05d46e1",
+      "getter_code": [
+        "addw r0, pc, #0x308",
+        "bx lr",
+        "movs r0, r0",
+        "cmp r0, #1",
+        "beq #0xc05d46fa",
+        "it hs",
+        "movhs r0, #0",
+        "it hi"
+      ],
+      "native_component_type": "objectBase"
+    },
+    {
+      "pointer": "0xc7591268",
+      "component_id": 3,
+      "descriptor": "0xc6991958",
+      "name_getter": "0xc05fe2b1",
+      "getter_code": [
+        "addw r0, pc, #0x278",
+        "bx lr",
+        "movs r0, r0",
+        "cmp r0, #1",
+        "beq #0xc05fe2ca",
+        "it hs",
+        "movhs r0, #0",
+        "it hi"
+      ],
+      "native_component_type": "drawText"
+    },
+    {
+      "pointer": "0xc75914a4",
+      "component_id": 8,
+      "descriptor": "0xc6991958",
+      "name_getter": "0xc05fe2b1",
+      "getter_code": [
+        "addw r0, pc, #0x278",
+        "bx lr",
+        "movs r0, r0",
+        "cmp r0, #1",
+        "beq #0xc05fe2ca",
+        "it hs",
+        "movhs r0, #0",
+        "it hi"
+      ],
+      "native_component_type": "drawText"
+    },
+    {
+      "pointer": "0xc75916e0",
+      "component_id": 9,
+      "descriptor": "0xc6991958",
+      "name_getter": "0xc05fe2b1",
+      "getter_code": [
+        "addw r0, pc, #0x278",
+        "bx lr",
+        "movs r0, r0",
+        "cmp r0, #1",
+        "beq #0xc05fe2ca",
+        "it hs",
+        "movhs r0, #0",
+        "it hi"
+      ],
+      "native_component_type": "drawText"
+    },
+    {
+      "pointer": "0xc759191c",
+      "component_id": 4,
+      "descriptor": "0xc69916e8",
+      "name_getter": "0xc05e1ae1",
+      "getter_code": [
+        "addw r0, pc, #0x2c4",
+        "bx lr",
+        "movs r0, r0",
+        "cbz r0, #0xc05e1aee",
+        "movs r0, #0",
+        "bx lr",
+        "addw r0, pc, #0x2c8",
+        "bx lr"
+      ],
+      "native_component_type": "animationClip"
+    },
+    {
+      "pointer": "0xc7592a40",
+      "component_id": 5,
+      "descriptor": "0xc6991868",
+      "name_getter": "0xc05e5819",
+      "getter_code": [
+        "addw r0, pc, #0x168",
+        "bx lr",
+        "movs r0, r0",
+        "cmp r0, #1",
+        "beq #0xc05e5832",
+        "it hs",
+        "movhs r0, #0",
+        "it hi"
+      ],
+      "native_component_type": "appVariableChangeEvent"
+    }
+  ],
+  "writes": "Owned code, owned parameters, echo restored; tree read only."
+}

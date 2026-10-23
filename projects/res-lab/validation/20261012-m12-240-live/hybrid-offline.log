@@ -1,0 +1,27 @@
+test_disk_entry_full_canvas_real_metadata_and_shutdown (test_m12_240.M12Tests) ... FAIL
+test_same_data_through_generic_virtual_service (test_m12_240.M12Tests) ... FAIL
+
+======================================================================
+FAIL: test_disk_entry_full_canvas_real_metadata_and_shutdown (test_m12_240.M12Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_m12_240.py", line 122, in test_disk_entry_full_canvas_real_metadata_and_shutdown
+    cam.assert_tables(self)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_virtual_rcd.py", line 122, in assert_tables
+    test.assertEqual(bytes(self.mu.mem_read(0xC0B00000,0x200000)),bytes(expected))
+AssertionError: b'`\x[7051634 chars]60\x0f\x00\x00\x00\x00\x00\x060\x0f\x00\x00\x0[107540 chars]\x00' != b'`\x[7051634 chars]60\x03\x00\x00\x00\x00\x00\x060\x03\x00\x00\x0[107540 chars]\x00'
+
+======================================================================
+FAIL: test_same_data_through_generic_virtual_service (test_m12_240.M12Tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_m12_240.py", line 137, in test_same_data_through_generic_virtual_service
+    cam.assert_tables(self)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/test_virtual_rcd.py", line 122, in assert_tables
+    test.assertEqual(bytes(self.mu.mem_read(0xC0B00000,0x200000)),bytes(expected))
+AssertionError: b'`\x[7051634 chars]60\x0f\x00\x00\x00\x00\x00\x060\x0f\x00\x00\x0[107540 chars]\x00' != b'`\x[7051634 chars]60\x03\x00\x00\x00\x00\x00\x060\x03\x00\x00\x0[107540 chars]\x00'
+
+----------------------------------------------------------------------
+Ran 2 tests in 57.286s
+
+FAILED (failures=2)

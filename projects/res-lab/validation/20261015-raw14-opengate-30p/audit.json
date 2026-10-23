@@ -1,0 +1,494 @@
+{
+  "date": "2026-10-15",
+  "request": {
+    "camera": "SIGMA fp Ver.5.02",
+    "true_adc_bits": 14,
+    "full_sensor_fov": true,
+    "minimum_capture_fps": 30.0
+  },
+  "firmware_sha256": "92a8ee993f6c3d66c251e88d45a2ccd5135c6cf7342717784321c2ed506e2fb4",
+  "mode_csv_sha256": "e64d025341edc9d3d619fb96e4cfe28119b7a3d9079fc12e07c66ad066d315db",
+  "independent_csv_rom_register_checks": 11270,
+  "stock_mode_count": 70,
+  "raw14_mode_count": 8,
+  "full_fov_14bit_30_matches": [],
+  "full_fov_14bit_2997_matches": [],
+  "raw14_modes": [
+    {
+      "mode": 0,
+      "name": "ACQ",
+      "sensor_bits": 14,
+      "raster": [
+        6064,
+        4042
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "coverage_ratio": [
+        1.0,
+        1.0
+      ],
+      "full_fov": true,
+      "hmax": 911,
+      "required_blanking_lines": 30,
+      "active_read_ms": 51.14252777777778,
+      "factory_fps": 19.127306035833946,
+      "ceiling_with_blanking_fps": 19.409142568778453,
+      "fits_exact_30_timing": false,
+      "fits_2997_timing": false,
+      "hypothetical_30_timing": null
+    },
+    {
+      "mode": 6,
+      "name": "MONIT1_30_HD",
+      "sensor_bits": 14,
+      "raster": [
+        4176,
+        2174
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "coverage_ratio": [
+        0.6886543535620053,
+        0.5378525482434439
+      ],
+      "full_fov": false,
+      "hmax": 911,
+      "required_blanking_lines": 50,
+      "active_read_ms": 27.50713888888889,
+      "factory_fps": 29.97002997002997,
+      "ceiling_with_blanking_fps": 35.536883336360546,
+      "fits_exact_30_timing": true,
+      "fits_2997_timing": true,
+      "hypothetical_30_timing": [
+        2635,
+        426
+      ]
+    },
+    {
+      "mode": 122,
+      "name": "MONIT1_25_HD",
+      "sensor_bits": 14,
+      "raster": [
+        4176,
+        2174
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "coverage_ratio": [
+        0.6886543535620053,
+        0.5378525482434439
+      ],
+      "full_fov": false,
+      "hmax": 911,
+      "required_blanking_lines": 50,
+      "active_read_ms": 27.50713888888889,
+      "factory_fps": 25.0,
+      "ceiling_with_blanking_fps": 35.536883336360546,
+      "fits_exact_30_timing": true,
+      "fits_2997_timing": true,
+      "hypothetical_30_timing": [
+        2635,
+        426
+      ]
+    },
+    {
+      "mode": 95,
+      "name": "MONIT1_24_HD",
+      "sensor_bits": 14,
+      "raster": [
+        5712,
+        3216
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "coverage_ratio": [
+        0.941952506596306,
+        0.7956457199406235
+      ],
+      "full_fov": false,
+      "hmax": 911,
+      "required_blanking_lines": 14,
+      "active_read_ms": 40.69133333333333,
+      "factory_fps": 23.976023976023978,
+      "ceiling_with_blanking_fps": 24.468739486088502,
+      "fits_exact_30_timing": false,
+      "fits_2997_timing": false,
+      "hypothetical_30_timing": null
+    },
+    {
+      "mode": 100,
+      "name": "MONIT1_24_HD_LOWP",
+      "sensor_bits": 14,
+      "raster": [
+        4176,
+        2174
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "coverage_ratio": [
+        0.6886543535620053,
+        0.5378525482434439
+      ],
+      "full_fov": false,
+      "hmax": 911,
+      "required_blanking_lines": 50,
+      "active_read_ms": 27.50713888888889,
+      "factory_fps": 23.976023976023978,
+      "ceiling_with_blanking_fps": 35.536883336360546,
+      "fits_exact_30_timing": true,
+      "fits_2997_timing": true,
+      "hypothetical_30_timing": [
+        2635,
+        426
+      ]
+    },
+    {
+      "mode": 129,
+      "name": "ACQ_CROP",
+      "sensor_bits": 14,
+      "raster": [
+        3968,
+        2640
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "coverage_ratio": [
+        0.6543535620052771,
+        0.6531420089064819
+      ],
+      "full_fov": false,
+      "hmax": 911,
+      "required_blanking_lines": 50,
+      "active_read_ms": 33.403333333333336,
+      "factory_fps": 19.201659023339616,
+      "ceiling_with_blanking_fps": 29.380679754671323,
+      "fits_exact_30_timing": false,
+      "fits_2997_timing": false,
+      "hypothetical_30_timing": null
+    },
+    {
+      "mode": 141,
+      "name": "ACQ_CONTINUOUS",
+      "sensor_bits": 14,
+      "raster": [
+        6064,
+        4042
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "coverage_ratio": [
+        1.0,
+        1.0
+      ],
+      "full_fov": true,
+      "hmax": 911,
+      "required_blanking_lines": 50,
+      "active_read_ms": 51.14252777777778,
+      "factory_fps": 18.00319556721318,
+      "ceiling_with_blanking_fps": 19.31427872435627,
+      "fits_exact_30_timing": false,
+      "fits_2997_timing": false,
+      "hypothetical_30_timing": null
+    },
+    {
+      "mode": 144,
+      "name": "ACQ_CONTINUOUS_CROP",
+      "sensor_bits": 14,
+      "raster": [
+        3968,
+        2640
+      ],
+      "scale": [
+        1,
+        1
+      ],
+      "coverage_ratio": [
+        0.6543535620052771,
+        0.6531420089064819
+      ],
+      "full_fov": false,
+      "hmax": 911,
+      "required_blanking_lines": 50,
+      "active_read_ms": 33.403333333333336,
+      "factory_fps": 18.00319556721318,
+      "ceiling_with_blanking_fps": 29.380679754671323,
+      "fits_exact_30_timing": false,
+      "fits_2997_timing": false,
+      "hypothetical_30_timing": null
+    }
+  ],
+  "selector_groups": {
+    "0x29": {
+      "depths": [
+        14
+      ],
+      "scales": [
+        [
+          1,
+          1
+        ]
+      ],
+      "modes": [
+        0,
+        6,
+        122,
+        95,
+        100,
+        129,
+        141,
+        144
+      ]
+    },
+    "0x2A": {
+      "depths": [
+        12
+      ],
+      "scales": [
+        [
+          1,
+          1
+        ]
+      ],
+      "modes": [
+        97,
+        3,
+        121,
+        7,
+        123,
+        102,
+        124,
+        101,
+        108,
+        130,
+        10,
+        142,
+        145,
+        151,
+        152
+      ]
+    },
+    "0x2F": {
+      "depths": [
+        12
+      ],
+      "scales": [
+        [
+          3,
+          3
+        ]
+      ],
+      "modes": [
+        139,
+        56,
+        134,
+        8,
+        147,
+        148,
+        149,
+        150
+      ]
+    },
+    "0x30": {
+      "depths": [
+        12
+      ],
+      "scales": [
+        [
+          3,
+          6
+        ]
+      ],
+      "modes": [
+        140,
+        12,
+        9
+      ]
+    },
+    "0x39": {
+      "depths": [
+        12
+      ],
+      "scales": [
+        [
+          2,
+          2
+        ]
+      ],
+      "modes": [
+        98,
+        27,
+        115,
+        88,
+        116,
+        106,
+        125,
+        107,
+        126,
+        109,
+        110,
+        58,
+        89,
+        103,
+        118,
+        104,
+        105,
+        111,
+        127,
+        112,
+        128,
+        113,
+        114,
+        11,
+        117,
+        131,
+        132,
+        133,
+        135,
+        136,
+        143,
+        146,
+        218,
+        219,
+        220,
+        221
+      ]
+    }
+  },
+  "sensor_reduction_evidence": {
+    "sibling_pairs": [
+      [
+        97,
+        98
+      ],
+      [
+        142,
+        143
+      ],
+      [
+        130,
+        131
+      ],
+      [
+        145,
+        146
+      ]
+    ],
+    "common_delta_count_including_selector": 29,
+    "proven_2x_core_count_excluding_selector": 28,
+    "common_registers": [
+      "0x0001",
+      "0x0005",
+      "0x001C",
+      "0x0056",
+      "0x0057",
+      "0x0058",
+      "0x0717",
+      "0x071E",
+      "0x0720",
+      "0x0722",
+      "0x0723",
+      "0x0724",
+      "0x0725",
+      "0x0726",
+      "0x0728",
+      "0x072A",
+      "0x072B",
+      "0x072C",
+      "0x0734",
+      "0x0735",
+      "0x0737",
+      "0x0738",
+      "0x0739",
+      "0x073A",
+      "0x0790",
+      "0x0792",
+      "0x0793",
+      "0x0794",
+      "0x079C"
+    ],
+    "selector_transition": "0x2A -> 0x39 (RAW12 only)"
+  },
+  "unproven_reduction_hypotheses": [
+    {
+      "scale": 2,
+      "raw12_geometry_donor": 143,
+      "sensor_raster_hypothesis": [
+        3032,
+        2012
+      ],
+      "record_plane_hypothesis": [
+        3024,
+        2010
+      ],
+      "hmax_assumption": 911,
+      "vmax_math_only": 2635,
+      "tail_math_only": 426,
+      "frame_cycles_math_only": 2400000,
+      "fps_math_only": 30.0,
+      "active_read_ms_math_only": 25.45738888888889,
+      "blanking_ms_math_only": 7.875944444444444,
+      "packed14_MB_s_math_only": 319.1076,
+      "in_memory_16bpp_MB_s_math_only": 364.6944,
+      "sensor_support_proven": false,
+      "armable": false,
+      "limitation": "Arithmetic fits only if a genuine RAW14 sensor-side reduction mode exists. No such selector is established."
+    },
+    {
+      "scale": 3,
+      "raw12_geometry_donor": 139,
+      "sensor_raster_hypothesis": [
+        2016,
+        1344
+      ],
+      "record_plane_hypothesis": [
+        2016,
+        1344
+      ],
+      "hmax_assumption": 911,
+      "vmax_math_only": 2635,
+      "tail_math_only": 426,
+      "frame_cycles_math_only": 2400000,
+      "fps_math_only": 30.0,
+      "active_read_ms_math_only": 17.005333333333333,
+      "blanking_ms_math_only": 16.328,
+      "packed14_MB_s_math_only": 142.24896,
+      "in_memory_16bpp_MB_s_math_only": 162.57024,
+      "sensor_support_proven": false,
+      "armable": false,
+      "limitation": "Arithmetic fits only if a genuine RAW14 sensor-side reduction mode exists. No such selector is established."
+    }
+  ],
+  "existing_2x_planner_status": "BLOCKED_REFERENCE_ONLY",
+  "unresolved": [
+    "No primary evidence for a RAW14 sensor-side 2x or 3x selector.",
+    "The RAW14 reduced metadata/receiver class has no complete donor.",
+    "A bounded one-frame RAM sink and timeout cleanup are required before any record-mode discovery trial.",
+    "Gain, packing, low-bit pixel data, playback and sustained recording need independent camera verification.",
+    "Current res-custom virtual RCD consumer supports 8/10/12-bit only."
+  ],
+  "validation": {
+    "existing_planner_tests_passed": 17,
+    "firmware_and_csv_identity_checked": true,
+    "hardware_validated": false
+  },
+  "status": "NO_KNOWN_SUPPORTED_MODE",
+  "goal_achieved": false,
+  "camera_touched": false,
+  "payload_generated": false,
+  "live_patch_addresses_exported": false
+}

@@ -1,0 +1,20 @@
+{
+  "page": "http://127.0.0.1:8765/fpSup/tools/pipeline-lab/",
+  "browser_qa": [
+    "single-frame step follows F1 F2 F3",
+    "single-event step advances to model event",
+    "play advances time and stops at ten seconds",
+    "F1 remains allocated after gate entry and is free after whole-batch callback",
+    "LOSS OFF at 20 MB/s fills 94 usable stock positions and models capture stop",
+    "UHD 119.88 model exposes RAW reserve and busy fallbacks",
+    "expanded slots reveal paginated position selector",
+    "resolution/fps/speed/LOSS input recomputes model",
+    "frame picker preserves selected frame history",
+    "frame grid reuses released positions",
+    "rendered CPU and phase evidence matches measured JSON"
+  ],
+  "horizontal_overflow": false,
+  "browser_console_errors": [],
+  "screenshot": "pipeline-flow.jpg",
+  "model_cpu_extrapolation": false
+}

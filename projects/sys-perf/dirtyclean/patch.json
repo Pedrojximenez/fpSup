@@ -1,0 +1,126 @@
+{
+ "firmware": "Ver.5.02, out/seg0_c0000000.bin sha256 aaa5208a028d9c4a",
+ "body": {
+  "source": "dirtyclean.S",
+  "bytes": 1120,
+  "sha256": "d66ce9ddf5375fc691e0a88178691ee2d5810093d5df82f369d625a11ad995cc",
+  "placement": "own allocation (allocator class 0 or the v3 sup block); position independent; ARM",
+  "entries": {
+   "dc_ctl": 0,
+   "dc_clean": 168,
+   "dc_clear_hook": 64,
+   "dc_copy_hook": 116
+  },
+  "control": {
+   "C_EN": 4,
+   "C_CLEAR": 8,
+   "C_COPY": 12,
+   "C_CALLS": 16,
+   "C_FAST": 20,
+   "C_FALL": 24,
+   "C_LINES": 28,
+   "C_WHY": 32,
+   "C_FULLS": 36
+  },
+  "init_before_arming": {
+   "C_EN": 1,
+   "C_CLEAR": 0,
+   "C_COPY": 15
+  }
+ },
+ "veneers": {
+  "bytes": 24,
+  "placement": "cave.claim(\"dirtyclean.veneers\", 24); must be within +-32 MiB of C0528954 (cave arena C072E064..C072EFB4 is)",
+  "layout": [
+   {
+    "name": "copy",
+    "offset": 0,
+    "words": [
+     "E51FF004",
+     "<body+0x74>"
+    ]
+   },
+   {
+    "name": "clear",
+    "offset": 8,
+    "words": [
+     "E51FF004",
+     "<body+0x40>"
+    ]
+   },
+   {
+    "name": "clean",
+    "offset": 16,
+    "words": [
+     "E51FF004",
+     "<body+0xa8>"
+    ]
+   }
+  ]
+ },
+ "sites": [
+  {
+   "name": "copy",
+   "address": "0XC0528AE0",
+   "isa": "ARM",
+   "orig_word": "EB00002E",
+   "orig_insn": "bl 0xc0528ba0",
+   "orig_check": true,
+   "new_insn": "bl <veneer+0>",
+   "regs_relied_on": "r6 = slot",
+   "power_off_restore": "declare as a 4-byte section with orig_word (SUP_BUILD_RULES §4)"
+  },
+  {
+   "name": "clear",
+   "address": "0XC05287F4",
+   "isa": "ARM",
+   "orig_word": "EB0000D1",
+   "orig_insn": "bl 0xc0528b40",
+   "orig_check": true,
+   "new_insn": "bl <veneer+8>",
+   "regs_relied_on": "r5 = slot",
+   "power_off_restore": "declare as a 4-byte section with orig_word (SUP_BUILD_RULES §4)"
+  },
+  {
+   "name": "clean",
+   "address": "0XC0528954",
+   "isa": "ARM",
+   "orig_word": "EBEB97F0",
+   "orig_insn": "bl 0xc000e91c",
+   "orig_check": true,
+   "new_insn": "bl <veneer+16>",
+   "regs_relied_on": "r4 = DrawController, [sp+0x18..0x1B] drew",
+   "power_off_restore": "declare as a 4-byte section with orig_word (SUP_BUILD_RULES §4)"
+  }
+ ],
+ "arm_order": [
+  "write body + veneers, read back",
+  "write control init (C_COPY=0xF)",
+  "C000E91C() then C000EABC()",
+  "patch copy, clear, then clean site (each: write, read back, C000E91C + C000EABC)"
+ ],
+ "disarm_order": [
+  "restore clean site first, then clear and copy",
+  "C000E91C + C000EABC",
+  "keep body until reboot (DrawThread may be inside it)"
+ ],
+ "firmware_calls_from_body": [
+  "layer vtable +0x10 getBuffer (C0721328)",
+  "layer vtable +0x28 (C0721638)",
+  "C0721110 bytes(pixels, fmt)",
+  "tail: C000E91C / C0528B40 / C0528BA0"
+ ],
+ "fixed_addresses_read": {
+  "UIC manager records": "0xC37B7048 + 0x18 (UIC object = C055F0F0() = 0xC37B7034+0x14), 10 x 0x20 (+4 base, +8 x,y,w,h, +0x18 mode)",
+  "UIC drawer vptrs": [
+   "0xC0D17780",
+   "0xC2E45DF8"
+  ],
+  "SurfacePixel vptrs": [
+   "0xC2EF6280",
+   "0xC2E38E5C"
+  ],
+  "return site checked": "0xC0528958"
+ },
+ "filldma_interface": "If a fill of a layer goes to the Fill DMA (projects/sys-perf/filldma): (1) clean+invalidate the target range BEFORE starting the DMA; (2) reach it through C0528B40 (so dc_clear_hook marks the slot) or set the slot bit in C_CLEAR yourself; dirtyclean then cleans the whole back buffer for that slot, and never invalidates anything."
+}

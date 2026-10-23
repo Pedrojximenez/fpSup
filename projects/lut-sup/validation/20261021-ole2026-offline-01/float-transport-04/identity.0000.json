@@ -1,0 +1,32 @@
+{
+  "plugin": "ofx.com.blackmagicdesign.resolvefx.ColorSpaceTransformV2",
+  "resolve_version": "21.0.4.5",
+  "nodes": [],
+  "source_sha256": "95d6276d85938074fa246722dc9a07b84d74ade3a8dfd8f6ca31b13f5a027a36",
+  "output_sha256": "77c7528c8bed1f95534b0c2110d6c4e1047daf75156bdc18f3da2f933d8dc464",
+  "composition_sha256": "cf3d1430c331e646ac28fb9432bacd21627672131e9ededcde9b8c59ef552887",
+  "exr": {
+    "width": 4,
+    "height": 2,
+    "channels": {
+      "B": {
+        "type": 2,
+        "linear": 0,
+        "x_sampling": 1,
+        "y_sampling": 1
+      },
+      "G": {
+        "type": 2,
+        "linear": 0,
+        "x_sampling": 1,
+        "y_sampling": 1
+      },
+      "R": {
+        "type": 2,
+        "linear": 0,
+        "x_sampling": 1,
+        "y_sampling": 1
+      }
+    }
+  }
+}

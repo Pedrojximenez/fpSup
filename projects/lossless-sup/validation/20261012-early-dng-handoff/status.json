@@ -1,0 +1,176 @@
+{
+  "state": "deployed; 29.97p short takes passed; 59.94p lag diagnosed at CPU/task level, not fixed",
+  "scope": "DNG packaging before enqueue; bounded direct native-id length lookup",
+  "artifacts": {
+    "expanded": {
+      "sha256": "1df6ac89a36b6260000c793fcf9c2856236f1df629d839c3949ebae42136ddad",
+      "file_bytes": 79456,
+      "resident_bytes": 4644864,
+      "source_hashes_match": true
+    },
+    "default": {
+      "sha256": "7b623dae63b11706403fad434cadf368efadebd3f52b82e29e6309dacaad5b32",
+      "file_bytes": 73056,
+      "resident_bytes": 122880,
+      "source_hashes_match": true
+    }
+  },
+  "layout": {
+    "before": {
+      "hold_bytes": 687312,
+      "record_bytes": 676,
+      "two_lane_bytes": 1374624
+    },
+    "after": {
+      "hold_bytes": 21460,
+      "record_bytes": 20,
+      "two_lane_bytes": 42920
+    }
+  },
+  "native_batch_bytes": 67108864,
+  "STOPFX": "independent, unchanged, author Ruari",
+  "offline_tests": {
+    "host": 177,
+    "saved_expanded_bin_arm": 16,
+    "loader_and_hooks": 52,
+    "integration": 6,
+    "wrong_stride_mutation": "expected failure: indexed-read addresses outside selected record",
+    "final_unmodified_bin_recheck": "passed"
+  },
+  "camera_tested": true,
+  "written_to_card": true,
+  "autorun_update_required": false,
+  "hardware_remaining": "High-FPS load/latency fix and long-run validation remain. Manual-stop release verified for two lagging 59.94p takes; forced-power-loss scenarios not verified.",
+  "emulator_note": "Unicorn 2.1.4 global MEM_READ hook changes Thumb IT execution in isolated helper; record-scoped tracing used instead",
+  "deployment": {
+    "verification": "complete exact-length readback; write ACK timed out, not replayed",
+    "record": "deployment-readback-recovery.json",
+    "boot": 12117900,
+    "STOPFX": "backed up, not changed; loaded hook verified",
+    "warm_reboots": 1
+  },
+  "camera_trials": [
+    {
+      "label": "fhd-30p-take1",
+      "clip": "A001_151",
+      "fps": "30000/1001",
+      "requested": 108,
+      "finished": 108,
+      "compressed": 107,
+      "capacity": 404,
+      "descriptors_free": 404,
+      "registry_occupied": 0,
+      "spares_freed_cumulative": 2,
+      "rec_total_us": 18482,
+      "rec_holds_us": 4248,
+      "rec_first_frame_us": 591604,
+      "bulk_bytes": 67108864,
+      "pack_failed": 0,
+      "invalid_length": 0,
+      "writer_idle": {
+        "xmp_file_pointer": 0,
+        "movie_writing": 0
+      }
+    },
+    {
+      "label": "fhd-30p-take2",
+      "clip": "A001_152",
+      "fps": "30000/1001",
+      "requested": 112,
+      "finished": 112,
+      "compressed": 111,
+      "capacity": 408,
+      "descriptors_free": 408,
+      "registry_occupied": 0,
+      "spares_freed_cumulative": 4,
+      "rec_total_us": 11288,
+      "rec_holds_us": 7011,
+      "rec_first_frame_us": 561458,
+      "bulk_bytes": 67108864,
+      "pack_failed": 0,
+      "invalid_length": 0,
+      "writer_idle": {
+        "xmp_file_pointer": 0,
+        "movie_writing": 0
+      }
+    },
+    {
+      "label": "fhd-60p-take1",
+      "requested_fps": "60000/1001",
+      "native_fps_enum": 5,
+      "gui_row": 6,
+      "take_window_seconds": 6,
+      "outcome": "end-window status query timed out; automatic stop pulse not sent; user reports severe lag and long press finally stopped",
+      "camera_state": "recovered same boot; 2231/2231 finished, 428/428 free, writer idle",
+      "completed": true
+    }
+  ],
+  "dng_samples": {
+    "clip": "A001_151",
+    "frames": [
+      1,
+      2,
+      108
+    ],
+    "all_decoded": true,
+    "compression": [
+      1,
+      7,
+      7
+    ],
+    "dimensions": [
+      1936,
+      1090
+    ],
+    "crop": [
+      1920,
+      1080
+    ],
+    "sample_only": true
+  },
+  "last_update": 1791795642.891837,
+  "lag_diagnosis": {
+    "conclusion": "LOSS ON saturates recording-time CPU and delays lower-priority UI/USB tasks; exact function-level cost inside MRecMgr remains unmeasured",
+    "comparison": "lag-cpu-comparison.json",
+    "window_us": [
+      1100000,
+      2100000
+    ],
+    "cpu_percent": {
+      "off": 83.1752,
+      "on": 97.29
+    },
+    "record_manager_percent": {
+      "off": 13.374,
+      "on": 26.201
+    },
+    "loss_task_percent": {
+      "off": 0.8006,
+      "on": 7.8943
+    },
+    "draw_max_dispatch_gap_us": {
+      "off": 56919,
+      "on": 249030
+    },
+    "protected_on_raw_min_free_bytes": 439914560,
+    "protected_on_memory_pressure_fallbacks": 0,
+    "native_batch_bytes": 67108864,
+    "capacity": 428,
+    "protected_trials": {
+      "on": "A001_157",
+      "off": "A001_158"
+    },
+    "instrumentation": "native bounded task monitor; _VSHL priority 10 in both short comparisons, restored to 28 after each; no other priority changes",
+    "limitations": [
+      "one protected short trial per setting",
+      "task-attributed CPU includes native profiler overhead and may include interrupt time",
+      "unprotected ON post-stop 26.0% summary is standby, not recording",
+      "no function-level allocation of MRecMgr increase",
+      "no general high-FPS stability claim"
+    ],
+    "profiler_cleanup": "lag-profiler-cleanup.json; allocation pointer/size zero, monitor inactive",
+    "final_camera": "lag-final-standby.json; CINE standby, 29.97p, LOSS ON saved, writer idle, 428/428 free",
+    "production_bin_changed_this_diagnosis": false,
+    "STOPFX": "independent, unchanged; Ruari"
+  }
+}

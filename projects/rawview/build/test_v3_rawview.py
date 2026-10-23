@@ -123,6 +123,11 @@ class RawCamera(T.Camera):
 @unittest.skipIf(T.Uc is None or not T.IMAGE.exists() or not SEG1.exists(),
                  'needs unicorn and the images')
 class RawViewV3Tests(unittest.TestCase):
+    HL = B.SL_HEADER_LEN                                  # the header before the record
+
+    def log(self, cam):
+        return cam.log()
+
     @classmethod
     def setUpClass(cls):
         cls.sup, cls.facts, cls.rows = V.build()
@@ -143,7 +148,7 @@ class RawViewV3Tests(unittest.TestCase):
         return cam
 
     def outcome(self, cam, name=V.NAME):
-        return {t: c for c, _, _, t in cam.log() if c in ('LOADED', 'RELEASED')}.get(name)
+        return {t: c for c, _, _, t in self.log(cam) if c in ('LOADED', 'RELEASED')}.get(name)
 
     def resident(self, cam):
         """Site A -> veneer -> stub_gs; the resident starts stub_gs before it."""
@@ -157,7 +162,7 @@ class RawViewV3Tests(unittest.TestCase):
     def with_cfg(self, *words):
         cfg = struct.pack('<8I', *(list(words) + [0] * (8 - len(words))))
         s = bytearray(self.sup)
-        s[32:64] = cfg
+        s[self.HL:self.HL + 32] = cfg
         return bytes(s)
 
     # ---- loaded -----------------------------------------------------------
@@ -220,7 +225,7 @@ class RawViewV3Tests(unittest.TestCase):
         stale = {SITE_A: 0xEB0DEAD0, SV: 0xEB0DEAD0, 0xC06C07D8: 0xE3A02011}
         cam = self.boot(stale=stale)
         self.assertEqual(self.outcome(cam), 'LOADED')
-        repaired = {a for c, a, _, t in cam.log() if c == 'REPAIRED'}
+        repaired = {a for c, a, _, t in self.log(cam) if c == 'REPAIRED'}
         self.assertTrue(set(stale) <= repaired, repaired)
         res = self.resident(cam)
         self.assertEqual(cam.w(res + self.facts['res_syms']['sv_next']), SV_ORIG)
@@ -289,9 +294,9 @@ class RawViewV3Tests(unittest.TestCase):
     def test_save_writes_the_record_into_its_own_file(self):
         cam = self.boot()
         got = self.save(cam, 1, 1, 1, 1)
-        self.assertEqual(got[:32], self.sup[:32])               # the header unchanged
-        self.assertEqual(got[64:], self.sup[64:])               # and the rest
-        self.assertEqual(struct.unpack('<8I', got[32:64]),
+        self.assertEqual(got[:self.HL], self.sup[:self.HL])     # the header unchanged
+        self.assertEqual(got[self.HL + 32:], self.sup[self.HL + 32:])   # and the rest
+        self.assertEqual(struct.unpack('<8I', got[self.HL:self.HL + 32]),
                          (V.CFG_MAGIC, 1, 1, 1, 1, 0, 0, 0))
         self.assertIn('F_READ', cam.calls)                      # read back
         self.assertEqual(cam.opened, [PATH])
@@ -306,7 +311,7 @@ class RawViewV3Tests(unittest.TestCase):
         self.assertEqual(got, self.sup)
         cam.seek_ok = 1
         got = self.save(cam, 1, 1, 1, 1)                        # same values: written now
-        self.assertEqual(struct.unpack('<5I', got[32:52]), (V.CFG_MAGIC, 1, 1, 1, 1))
+        self.assertEqual(struct.unpack('<5I', got[self.HL:self.HL + 20]), (V.CFG_MAGIC, 1, 1, 1, 1))
 
     def test_a_write_that_did_not_take_is_retried_next_time(self):
         """Read back catches a write that says done but is not on the card."""
@@ -317,7 +322,7 @@ class RawViewV3Tests(unittest.TestCase):
         cam.write_ok = 'ok'
         got = self.save(cam, 1, 1, 1, 1)
         self.assertIn('F_WRITE', cam.calls)
-        self.assertEqual(struct.unpack('<5I', got[32:52]), (V.CFG_MAGIC, 1, 1, 1, 1))
+        self.assertEqual(struct.unpack('<5I', got[self.HL:self.HL + 20]), (V.CFG_MAGIC, 1, 1, 1, 1))
 
     def test_a_write_that_reports_failure_is_retried_next_time(self):
         """The write's own result counts even when the bytes look right."""
@@ -333,7 +338,7 @@ class RawViewV3Tests(unittest.TestCase):
         self.assertIsNone(self.save(cam, 1, 0, 0, 0, group=2))
         self.assertEqual(cam.opened, [])
         got = self.save(cam, 1, 1, 0, 1, color=3)
-        self.assertEqual(struct.unpack('<5I', got[32:52]), (V.CFG_MAGIC, 0, 1, 0, 1))
+        self.assertEqual(struct.unpack('<5I', got[self.HL:self.HL + 20]), (V.CFG_MAGIC, 0, 1, 0, 1))
 
     def test_saved_record_restores_at_next_boot(self):
         cam = self.boot()

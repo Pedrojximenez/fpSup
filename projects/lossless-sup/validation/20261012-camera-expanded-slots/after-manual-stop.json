@@ -1,0 +1,12 @@
+{
+  "label": "after-manual-stop",
+  "commands": [
+    {
+      "time": 1791770595.435908,
+      "command": "status get app_current",
+      "reply": "ERR shl frame0 rc=-7(LIBUSB_ERROR_TIMEOUT) moved=0/64\n"
+    }
+  ],
+  "started_at": 1791770590.3453429,
+  "error": "RuntimeError(\"uncertain/failed command status get app_current: 'ERR shl frame0 rc=-7(LIBUSB_ERROR_TIMEOUT) moved=0/64\\\\n'\")"
+}

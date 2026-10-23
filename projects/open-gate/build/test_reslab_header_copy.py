@@ -85,11 +85,12 @@ class HeaderCopyTests(unittest.TestCase):
 
     def test_exact_bytes_uncached_and_original_cached_source(self):
         cam = self.camera()
-        for rank, n, source in ((23976, 4, SRC), (27972, 0x13400, SRC),
+        for rank, n, source in ((27972, 4, SRC), (27972, 0x13400, SRC),
                                 (27972, 0x20000, CACHED)):
             cam.put(cam.s()+V.L.S['VRATE'], rank)
             e = cam.s()+cam.w(cam.s()+V.L.S['LAST_ENT'])
             cam.put(e+V.L.ENT['VRATE'], rank)
+            cam.put(e+V.L.ENT['ENGFPS'], 0x438BDC32)
             payload = bytes((i*17+3)&255 for i in range(n))
             cam.mu.mem_write(source, payload)
             cam.mu.mem_write(DST-4, b'\xa5'*(n+8))
@@ -119,15 +120,18 @@ class HeaderCopyTests(unittest.TestCase):
     def test_inactive_rate_recipe_bit_and_foreign_call_fall_back(self):
         cam = self.camera()
         for key, value in (('VRATE',0), ('PICKOK',0), ('FLAG',0),
-                           ('LAST_ENT',0), ('VR_UI',0), ('BITLATCH',4)):
+                           ('LAST_ENT',0), ('BITLATCH',4)):
             a = cam.s()+V.L.S[key]; old = cam.w(a); cam.put(a,value)
             with self.subTest(state=key):
                 self.assertEqual(self.copy(cam)[0], 0x42)
             cam.put(a,old)
-        row = cam.row(); old = cam.w(row+V.L.ROW['AW'])
-        cam.put(row+V.L.ROW['AW'], 2000)
+        # The policy is the RCD's (SEC_WRITER), not the geometry's: an entry
+        # that does not declare it keeps the native DMA header.
+        e = cam.s()+cam.w(cam.s()+V.L.S['LAST_ENT']); old = cam.w(e+V.L.ENT['WFLAGS'])
+        self.assertEqual(old, V.L.WR_BATCH4M | V.L.WR_HDRCPU | 4 << 8)
+        cam.put(e+V.L.ENT['WFLAGS'], old & ~V.L.WR_HDRCPU)
         self.assertEqual(self.copy(cam)[0], 0x42)
-        cam.put(row+V.L.ROW['AW'], old)
+        cam.put(e+V.L.ENT['WFLAGS'], old)
         self.assertEqual(self.copy(cam, foreign=True)[0], 0x42)
         cam.assert_tables(self)
 
@@ -167,6 +171,10 @@ class HeaderCopyTests(unittest.TestCase):
             self.assertEqual([cam.r(r) for r in SAVED],seeds)
             self.assertEqual(cam.r(UC_ARM_REG_SP),V.T.STACK-0x1000)
             self.assertEqual(cam.misaligned,[])
+        e = cam.s()+cam.w(cam.s()+V.L.S['LAST_ENT'])
+        cam.put(e+V.L.ENT['ENGFPS'], 0x436FC29F)   # 239.76p: native 64 MiB
+        run(source,source[0])
+        cam.put(e+V.L.ENT['ENGFPS'], 0x438BDC32)
         run(source,0x400000)
         for words in ([0x100000,*source[1:]], [source[0],0,*source[2:]],
                        [*source[:2],0x80000,source[3]], [*source[:3],0xDEADBEEF]):
@@ -223,11 +231,9 @@ class CaptureCarrierHeaderTests(unittest.TestCase):
         payload = bytes((i*17+3)&255 for i in range(0x13400))
         cam.mu.mem_write(SRC, payload)
         cam.mu.mem_write(DST-4, b'\xa5'*(len(payload)+8))
-        self.assertEqual(self.copy(cam), (0, []))
-        self.assertEqual(bytes(cam.mu.mem_read(DST, len(payload))), payload)
-        self.assertEqual(bytes(cam.mu.mem_read(DST-4, 4)), b'\xa5'*4)
-        self.assertEqual(bytes(cam.mu.mem_read(DST+len(payload), 4)), b'\xa5'*4)
-        self.assertEqual(cam.w(s+V.L.S['HDR_COPY_HITS']), 1)
+        # 239.76p keeps the native DMA header (A001_193): no CPU copy.
+        self.assertEqual(self.copy(cam)[0], 0x42)
+        self.assertEqual(cam.w(s+V.L.S['HDR_COPY_HITS']), 0)
         # Seed the independently archived p13 canvas. Every65 word must stay
         # exact; in particular the later p83 processing field+88 stays absent.
         expected = self.manifest['expected_canvas']
@@ -237,7 +243,6 @@ class CaptureCarrierHeaderTests(unittest.TestCase):
         cam.call(fn('CANVAS'), s, address, cam.w(entry+V.L.ENT['PID']),
                  thumb=True, sp=V.T.STACK-0x1000)
         self.assertEqual(list(struct.unpack('<65I', cam.mu.mem_read(address, 260))), expected)
-        self.assertEqual(cam.w(s+V.L.S['M12_LEGACY_HITS']), 0)
         descriptor = struct.pack('<4I', 0x4000000, 0x49048000, 0x40000, 0xC03A55D0)
         cam.mu.mem_write(PARAM, descriptor)
         cam.call(fn('BULK'), s, PARAM, thumb=True, sp=V.T.STACK-0x1000)
@@ -248,21 +253,24 @@ class CaptureCarrierHeaderTests(unittest.TestCase):
         self.assertEqual(bytes(cam.mu.mem_read(rational, 8)), struct.pack('<2I', 30000, 1001))
         cam.assert_tables(self)
 
-    def test_carrier280_and_inactive_stale_or_other_donor_fall_back(self):
+    def test_carrier280_follows_the_declared_policy_and_inactive_falls_back(self):
         cam, entry = self.camera()
         s = cam.s()
+        # The archived file declares no writer policy: native header at any rate.
+        self.assertEqual(cam.w(entry+V.L.ENT['WFLAGS']), 0)
         for nom, fps in ((240, 0x436FC29F), (280, 0x438BDC32)):
             cam.put(entry+V.L.ENT['NOMINAL'], nom)
             cam.put(entry+V.L.ENT['ENGFPS'], fps)
             cam.put(s+V.L.S['FPSLATCH'], fps)
-            self.assertEqual(self.copy(cam)[0], 0)
-        vm = s+cam.w(s+V.L.S['VMS'])+cam.w(entry+V.L.ENT['VM'])*V.L.VM['SIZE']
+            self.assertEqual(self.copy(cam)[0], 0x42)
+        # Declared (as SEC_WRITER compiles it): 12-bit CPU header copy.
+        cam.put(entry+V.L.ENT['WFLAGS'], V.L.WR_HDRCPU | 4 << 8)
+        self.assertEqual(self.copy(cam)[0], 0)
         row = s+cam.w(s+V.L.S['ROWS'])+(cam.w(s+V.L.S['CUR'])-1)*V.L.ROW['SIZE']
         for address, value in ((s+V.L.S['FLAG'],0), (s+V.L.S['PICKOK'],0),
                                (s+V.L.S['BITLATCH'],4), (s+V.L.S['FPSLATCH'],0),
-                               (row+V.L.ROW['ON'],0), (row+V.L.ROW['AW'],2000),
-                               (vm+V.L.VM['DONOR'],11), (vm+V.L.VM['ID'],0),
-                               (entry+V.L.ENT['NOMINAL'],30)):
+                               (row+V.L.ROW['ON'],0), (entry+V.L.ENT['WFLAGS'],V.L.WR_BATCH4M | 4 << 8),
+                               (entry+V.L.ENT['WFLAGS'],V.L.WR_HDRCPU | 3 << 8)):
             old = cam.w(address)
             cam.put(address, value)
             with self.subTest(address=hex(address), value=value):

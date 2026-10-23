@@ -1,0 +1,34 @@
+{
+  "status get is_recording": "is_recording -> 0\n\n",
+  "before": [
+    1167819456,
+    923136,
+    1,
+    0,
+    0,
+    10853,
+    0,
+    32768,
+    3315303104,
+    3316220608,
+    64,
+    0
+  ],
+  "analyzer tskmon_start 1 0 1000000 52": "-> succeeded\n\n",
+  "analyzer tskmon_stop": "-> succeeded\n\n",
+  "analyzer tskmon_out": "\n# ------------------------------\n# Cnt = 0, Overlap = 5, Prefix = 1/1000000, MAX_PRI 32\n#     Time     Task      Pri  FuncAdr   StackRem  state  tskwait  wid\n2534753615      124       28   4515306c   007728      0       0  000\n\n# ------------------------------\n# SplitCnt = 0, Overlap = 0, Prefix = 1/1000000 \n#     Time     Task       Line   Function\n\n-> succeeded\n",
+  "after": [
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    5,
+    1,
+    3305268864,
+    3305268892,
+    0,
+    0
+  ]
+}

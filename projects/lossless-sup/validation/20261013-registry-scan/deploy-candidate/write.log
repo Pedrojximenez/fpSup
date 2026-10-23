@@ -1,0 +1,19 @@
+  local   /Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/validation/20261013-registry-scan/candidate/10LOSS.BIN  81760 bytes
+  remote  \fpSup\10LOSS.BIN  mode 0x7
+  buffer  0x45062FC0, file object 0x45076F20
+  proof   region takes writes and still holds them a second later
+  restored echo -> 0xC03D99A0
+  reply   ERR shl frame0 rc=-7(LIBUSB_ERROR_TIMEOUT) moved=0/64
+
+  stage  81760 bytes in 0.001s (55.1 MB/s)      
+
+  verify 81760 bytes in 0.001s (80.2 MB/s)      
+
+  stage  81760 bytes in 0.03s (2.6 MB/s), MEM1, read back whole          
+
+  code   304/304 B  5.3 KiB/s 
+  verify 304/304 B  536 KiB/s 
+  verify 304 bytes in 0.0s (267 KiB/s)      
+
+  code   304 bytes in 0.4s (0.7 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+putfile echo reply failed; write outcome is unknown

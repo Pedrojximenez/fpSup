@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "code": "waveform.bin",
+  "code_size": 1032,
+  "code_sha256": "d92af7dc300b5ace89dce6c08dec2390b129258164f4a8d93d99fe2e0d0d037c",
+  "code_isa": "ARM (entry addresses even, no Thumb bit)",
+  "alignment": 8,
+  "symbols": {
+    "wf_end": 1032,
+    "wf_ctl": 0,
+    "wf_method": 16,
+    "wf_sample": 216,
+    "wf_draw": 500
+  },
+  "control": {
+    "base": "load_base + 0x0",
+    "+0": "'WAVE'",
+    "+4": "enable (ships 1; 0 = stock)",
+    "+8": "fast calls",
+    "+12": "fallbacks (V outside 1..256 or H > 330)"
+  },
+  "publish_before_arm": [
+    "C000E91C (D-cache clean+inv)",
+    "C000EABC (I-cache inv)"
+  ],
+  "patches": [
+    {
+      "addr": "0xc2df8f4c",
+      "stock": "0xc05a3728",
+      "new": "load_base + 0x10",
+      "symbol": "wf_method",
+      "kind": "data word (function pointer)",
+      "what": "waveform drawer vtable 1 (LCD?)"
+    },
+    {
+      "addr": "0xc2df8fe4",
+      "stock": "0xc05a3728",
+      "new": "load_base + 0x10",
+      "symbol": "wf_method",
+      "kind": "data word (function pointer)",
+      "what": "waveform drawer vtable 2"
+    },
+    {
+      "addr": "0xc2df9220",
+      "stock": "0xc05a3728",
+      "new": "load_base + 0x10",
+      "symbol": "wf_method",
+      "kind": "data word (function pointer)",
+      "what": "waveform drawer vtable 3"
+    }
+  ],
+  "calling_convention": "stock method: r0 this, r1 draw ctx, r2 image descriptor; returns 0x528 like stock; called through the vtable",
+  "calls": [
+    "C0529D98 setup",
+    "C001510C memcpy",
+    "C0023030 addr map",
+    "C0529D10 point (per plot)",
+    "C05A3728 (fallback, tail call)"
+  ],
+  "vfp": "s0-s3 / q0 only (d0-d1), same as stock; d16-d31 never touched",
+  "stack": "method 16+0x528 (= stock); sample 40 (stock 24); draw 36+2320 (stock 28+0x408); sp parity at every callee equals stock",
+  "context": "DrawMgr task. Not interrupt-safe; not needed.",
+  "assumption": "thresholds [this+0x34..0x70] do not change while one frame is drawn (level is memoised per call; stock re-reads them per plot)",
+  "unpatch": "write each stock value back; leave the code block allocated until power-off"
+}

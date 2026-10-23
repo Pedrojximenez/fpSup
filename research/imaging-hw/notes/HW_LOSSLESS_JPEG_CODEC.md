@@ -1,5 +1,7 @@
 # SIGMA fp Ver5.02 — Hardware Lossless-JPEG codec (standalone-callable) — RE 2026-08-20
 
+> **2026-10-15 correction:** The global absence claim for H.264/HEVC and the identification of all of `0x300C` as a non-compressing RAW front end are withdrawn. The MOV initialization chain reaches a hardware codec at `0x300Cxxxx`, with an additional HEVC candidate branch. Neither 10-bit support nor direct Bayer input follows from this. See [H.264 10bit hardware analysis](FP_H264_10BIT_FEASIBILITY_2026-10-15.md).
+
 Goal that motivated this: compress raw CinemaDNG frames ON-CAMERA (before USB push) to cut link/storage
 rate, losslessly. Confirmed feasible. EAs are ARM (base 0xC0000000); file-offset in MAIN = EA − 0xC0000000.
 Confidence: [C] confirmed in disasm, [I] inferred, [P] needs live probe.
@@ -131,8 +133,8 @@ conclusion or Path B feasibility.
   controlled via FUN_c042e920 @c042e920), stills/preview ONLY (callers XC_StillCreateJpeg @c037d8f0,
   XC_SensorAdjustmentCaptureConcrete @c0522428), NEVER on per-frame video path. Submit needs live 0x4c
   plane descriptors + DSP session (msg-queue DAT_c2f14d1c / event-flag DAT_c2f14c88, FUN_c01af740).
-- NO H.264/HEVC/any video-rate entropy coder exists in firmware [C-absence]. Movie path = XC_MovSigYuvOutParam
-  (blk_c0b c0b9c578) emits YUV; during video the SIGPRO manager FUN_c0423c48 is the live ISP (contention).
+- The former global claim that no H.264/HEVC codec exists is **withdrawn (2026-10-15)**. The MOV SDK reaches the
+  `0x300Cxxxx` video codec. This does not establish a Bayer compression path; see the analysis linked above.
 
 ### What IS ready (blocker is ONLY the compressor)
 - Compressed-CinemaDNG WRITER already exists: single Compression-tag writer FUN_c06a5290 @c06a5290 (IFD0) +
@@ -198,9 +200,9 @@ Earlier sections treated 32 Mpix/s (from timeout pixels/32000) as the engine's r
 "8× too slow / stills-class / lossless UHD-to-SD infeasible". THAT WAS WRONG — 32 Mpix/s is a watchdog timeout
 (~9× safety margin), proving only real throughput ≥ 32. (Classic "self-consistent wrong values" trap.)
 Corrected engine spec (agent RE):
-- Clock ≈ **300 MHz** [I] — shares power/clock domain 5 with the 0x300C RFC readout engine (only imaging-clock
-  constant 300000000 is measured for 0x300C @reg 0x300c0208; 0x300D carries no freq constant, same domain via
-  FUN_c062fee8→FUN_c07095a8(5,1)).
+- Clock ≈ **300 MHz** [I; supporting interpretation withdrawn 2026-10-15] — the 300000000 constant in
+  `C070BE68` is a video-codec processing-budget constant, not a measured `0x300D` clock. The original inference
+  used the shared domain via `FUN_c062fee8 → FUN_c07095a8(5,1)`.
 - **~1 pixel/clock** [I] — timeout formula is bit-depth-independent (10-bit NOT faster than 14-bit); bitdepth
   only scales output-packing stride regs +0x6C/+0x70. Classic 1-sample/clock predictor+Huffman.
 - ⇒ theoretical ceiling **~300 Mpix/s** [I]; best estimate **~150–300 Mpix/s**; firm floor 32 [C]; true
@@ -224,12 +226,11 @@ count. Repeat for a few sizes to separate fixed overhead from per-pixel rate →
 whether lossless UHD video-rate is real. Contention-safe (engine idle when not shooting stills).
 
 ## ADVERSARIAL HARDENING (2026-08-20) — confirmed
-- **Only TWO compression engines exist** (swept all 35 MMIO blocks in 0x30xxxxxx): 0x300D lossless-JPEG
-  (HAL "RawCD"=Raw Compress/Decompress, programmer FUN_c062fff8) and 0x301B lossy DCT. RFC readout 0x300C
-  does NO data reduction (only timing/geom/blacklevel; master setup FUN_c070b7a0, rate FUN_c070be68 writes
-  clock divisor 0x300c0208 from 300MHz const) — no companding LUT / bit-packer / DPCM. Global negative for
-  compand/dpcm/wavelet/golomb/RLE-on-raw and H.264/HEVC. A CPU-only Lz4/SRLE software lib exists
-  (XcImageEncoderInterface, blk_c05 ~c05a71a8+) but zero MMIO, off Bayer path, not video-rate. [C]
+- **The old two-engine inventory was incomplete (corrected 2026-10-15).** In addition to `0x300D` lossless-JPEG
+  and `0x301B` lossy JPEG, the MOV SDK configures a video codec at `0x300Cxxxx`. `C070B7A0` configures its
+  encoding parameters, and `300C0208` contains GOP and processing-budget fields; it was incorrectly described
+  here as a sensor clock divisor. HEVC has a candidate driver branch. Direct Bayer input and 10-bit video
+  capability remain unverified. The CPU-only Lz4/SRLE library is a separate, off-Bayer-path implementation.
 - **0x300D cold-standalone-callable confirmed** — wrappers self-satisfy all prereqs: event flag DAT_c2f2e60c
   lazy-created by RAWCD(); power domain 5 + clock + IRQ0x29 brought up inside FUN_c062fee8 (FUN_c0708c60(1),
   FUN_c06304f0 0x30000814|=0x2008, FUN_c07095a8(5,1), one-time IRQ guard _DAT_c37cf878, FUN_c0630480(1)); mode

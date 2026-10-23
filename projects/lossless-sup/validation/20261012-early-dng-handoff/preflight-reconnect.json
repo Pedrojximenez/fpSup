@@ -1,0 +1,50 @@
+{
+  "time": 1791792275.064307,
+  "commands": [
+    {
+      "command": "status get is_recording",
+      "reply": "is_recording -> 0\n\n"
+    },
+    {
+      "command": "status get app_current",
+      "reply": "app_current -> 2\n\n"
+    },
+    {
+      "command": "menu SetMovRecFormat",
+      "reply": "0\n\n"
+    },
+    {
+      "command": "menu SetMovRecSize",
+      "reply": "2\n\n"
+    },
+    {
+      "command": "menu SetMovCinemaDNGQuality",
+      "reply": "0\n\n"
+    },
+    {
+      "command": "menu SetMovFramerate",
+      "reply": "3\n\n"
+    },
+    {
+      "command": "gui geti MV_FrameRate",
+      "reply": "OK:MV_FrameRate -> 3\n\n"
+    },
+    {
+      "command": "gui geti MV_fpLossless",
+      "reply": "OK:MV_fpLossless -> 1\n\n"
+    },
+    {
+      "command": "dir \\fpSup",
+      "reply": "                                          .\n2026/10/12  14:28:46               187520 32RESCUS.BIN\n2026/10/10  11:39:20                 4096 ._32RESCUS.BIN\n2026/10/10  11:38:46 <DIR>                UI\n2026/10/10  11:39:20                 4096 ._UI\n2026/10/11  23:09:24                29276 LOADER.BIN\n2026/10/10  11:39:20                 4096 ._LOADER.BIN\n2025/12/31  08:00:00                 4208 20GYR2.BIN\n2026/10/10  11:39:20                 4096 ._20GYR2.BIN\n2026/10/11  11:29:04                38644 45RAWV.BIN\n2026/10/10  11:39:20                 4096 ._45RAWV.BIN\n2025/12/31  08:00:00                25936 40FLIP.BIN\n2026/10/10  11:39:20                 4096 ._40FLIP.BIN\n2026/10/12  14:33:38                79584 10LOSS.BIN\n2026/10/10  11:39:22                 4096 ._10LOSS.BIN\n2025/12/31  08:00:00                 4552 00SHELL.BIN\n2026/10/10  11:39:22                 4096 ._00SHELL.BIN\n2026/10/10  11:38:46 <DIR>                RESCUS\n2026/10/10  11:39:22                 4096 ._RESCUS\n2025/12/31  08:00:00               609720 50RESLAB.BIN\n2026/10/10  11:39:22                 4096 ._50RESLAB.BIN\n2026/10/12  16:01:12                 4096 LOAD.LOG\n2026/10/12  07:40:38                  316 05STOPFX.BIN\n"
+    },
+    {
+      "command": "sdcard size 1",
+      "reply": "size total = 128295370752 byte(119GiB), free = 47706406912 byte(44GiB), 37%\n(AU) total = 128295370752 byte(119GiB), free = 47706406912 byte(44GiB), 37%\nCluster=128KiB, AU=0.125MiB, AU=363971/978816\n"
+    }
+  ],
+  "idle": [
+    0,
+    0
+  ],
+  "boot": 13144576
+}

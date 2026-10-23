@@ -1,0 +1,11 @@
+{
+  "bounded_cave_reads_words": 64,
+  "cases": [
+    "first record",
+    "record spans chunk boundary",
+    "last complete record",
+    "incomplete read raises error"
+  ],
+  "passed": true,
+  "binary_changed": false
+}

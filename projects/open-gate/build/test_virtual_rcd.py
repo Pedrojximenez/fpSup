@@ -30,7 +30,7 @@ class Cam(RL.Cam,RC.Cam):
     def __init__(self,files,dirs,f,fmt=0,res=2,fr=12,**kw):
         self.cf=f['rescustom']; self.core_block=None; self.pending=[]
         self.uia=[]; self.csv_rows=2; self.uia_fail=set(); self.next_id=RC.STRID0
-        self.vr_ids=[]; self.fv=[]; self.fv_next=RC.VR_RAM+0x10000
+        self.vr_ids=[]; self.lv_ids=[]; self.fv=[]; self.fv_next=RC.VR_RAM+0x10000
         self.fmt,self.res,self.fr,self.crop=fmt,res,fr,0
         self.sensor=[];self.emitted=[];self.recomputes=[]
         self.qs_seen=[];self.lay_calls=[];self.load_calls=[];self.v_calls=[];self.load_ret=0

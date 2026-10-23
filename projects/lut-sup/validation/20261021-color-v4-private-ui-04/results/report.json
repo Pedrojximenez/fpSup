@@ -1,0 +1,545 @@
+{
+  "schema": "fpSup-lut4-validation-2",
+  "tests": 86,
+  "skipped": 0,
+  "mutations": [
+    {
+      "name": "allow_preview_without_backend",
+      "compiled": true,
+      "detected": true,
+      "test": "test_loads_cached_with_resident_rows_and_dma_only_file_scratch",
+      "source_sha256": "bc6bd94de2f53b18137cffb64e851b9c9385876716884150b9bb6375112f8131"
+    },
+    {
+      "name": "skip_asset_checksum",
+      "compiled": true,
+      "detected": true,
+      "test": "test_missing_short_corrupt_trailing_and_corrupt_header_remain_unapplied",
+      "source_sha256": "3f13d78bc8276d5f2e0f912408c16df5af3ca5be8d2bd01808773703ac323838"
+    },
+    {
+      "name": "execute_pending_model",
+      "compiled": true,
+      "detected": true,
+      "test": "test_bad_input_never_changes_destination_and_pending_models_refuse",
+      "source_sha256": "d6d2e876b22b6330aa22a401442abe244a6011e13a4275221e156418190e0cd7"
+    },
+    {
+      "name": "accept_out_of_contract_xyz",
+      "compiled": true,
+      "detected": true,
+      "test": "test_bad_input_never_changes_destination_and_pending_models_refuse",
+      "source_sha256": "00cc5f950469a45dce8d354dbc994987012cd83df9f3ca4ef0067b5fcb3074d3"
+    },
+    {
+      "name": "reverse_red_blue_table_order",
+      "compiled": true,
+      "detected": true,
+      "test": "test_all_35_models_against_float_reference_and_strengths",
+      "source_sha256": "38f6e01c5919ce44466801a5a2c02c649a66f42467328e51dc97ebe32de9cd42"
+    },
+    {
+      "name": "skip_dependent_ui_refresh",
+      "compiled": true,
+      "detected": true,
+      "test": "test_group_popup_refreshes_the_dependent_value_immediately",
+      "source_sha256": "a72ae813645ac6c2429f1eed36e7ad4e3cdcf50a807aba857297acc9118060c1"
+    },
+    {
+      "name": "skip_private_string_borrow",
+      "compiled": true,
+      "detected": true,
+      "test": "LutUiTests.test_private_home_and_manager_strings_resolve_and_stay_borrowed_with_lut",
+      "source_sha256": "342d9bd4ddc628f2e58f57cea8e87ca70aad5f50ad82127822b7512637c838a9",
+      "original_source_sha256": "5dee11c203bedd7147020f3034a75f383c29b5406701ba67d77da9fdaa5a2a43"
+    }
+  ],
+  "numerical": {
+    "models": 35,
+    "samples_per_model": 161,
+    "comparisons": 5635,
+    "rgb_mae": 1.2566820953637038e-06,
+    "max_channel": 7.009144289204378e-05,
+    "per_model": [
+      {
+        "color": "aces",
+        "gamma": "adobe-rgb",
+        "samples": 161,
+        "rgb_mae": 1.221710235588373e-06,
+        "max_channel": 4.5413765513681315e-05
+      },
+      {
+        "color": "aces",
+        "gamma": "gamma24",
+        "samples": 161,
+        "rgb_mae": 1.3018382862889093e-06,
+        "max_channel": 5.745292534103594e-05
+      },
+      {
+        "color": "aces",
+        "gamma": "gamma26",
+        "samples": 161,
+        "rgb_mae": 1.3869100225268222e-06,
+        "max_channel": 7.009144289204378e-05
+      },
+      {
+        "color": "aces",
+        "gamma": "linear",
+        "samples": 161,
+        "rgb_mae": 5.824458253625082e-07,
+        "max_channel": 3.055903690540873e-06
+      },
+      {
+        "color": "aces",
+        "gamma": "srgb",
+        "samples": 161,
+        "rgb_mae": 1.0801597564090985e-06,
+        "max_channel": 1.2070736142323624e-05
+      },
+      {
+        "color": "adobe-rgb",
+        "gamma": "adobe-rgb",
+        "samples": 161,
+        "rgb_mae": 1.4813678930562373e-06,
+        "max_channel": 4.5413765513681315e-05
+      },
+      {
+        "color": "adobe-rgb",
+        "gamma": "gamma24",
+        "samples": 161,
+        "rgb_mae": 1.574952857623219e-06,
+        "max_channel": 5.745292534103594e-05
+      },
+      {
+        "color": "adobe-rgb",
+        "gamma": "gamma26",
+        "samples": 161,
+        "rgb_mae": 1.6561574966801974e-06,
+        "max_channel": 7.009144289204378e-05
+      },
+      {
+        "color": "adobe-rgb",
+        "gamma": "linear",
+        "samples": 161,
+        "rgb_mae": 8.110804751739804e-07,
+        "max_channel": 3.1248322807098106e-06
+      },
+      {
+        "color": "adobe-rgb",
+        "gamma": "srgb",
+        "samples": 161,
+        "rgb_mae": 1.338021277398636e-06,
+        "max_channel": 1.2043320545856995e-05
+      },
+      {
+        "color": "p3-d60",
+        "gamma": "adobe-rgb",
+        "samples": 161,
+        "rgb_mae": 1.3659886752829262e-06,
+        "max_channel": 4.5413765513677845e-05
+      },
+      {
+        "color": "p3-d60",
+        "gamma": "gamma24",
+        "samples": 161,
+        "rgb_mae": 1.4950336369795325e-06,
+        "max_channel": 5.745292534103247e-05
+      },
+      {
+        "color": "p3-d60",
+        "gamma": "gamma26",
+        "samples": 161,
+        "rgb_mae": 1.542445468475586e-06,
+        "max_channel": 7.009144289204378e-05
+      },
+      {
+        "color": "p3-d60",
+        "gamma": "linear",
+        "samples": 161,
+        "rgb_mae": 6.870764680737981e-07,
+        "max_channel": 2.921949926126821e-06
+      },
+      {
+        "color": "p3-d60",
+        "gamma": "srgb",
+        "samples": 161,
+        "rgb_mae": 1.2323591363703243e-06,
+        "max_channel": 1.2043320545856995e-05
+      },
+      {
+        "color": "p3-d65",
+        "gamma": "adobe-rgb",
+        "samples": 161,
+        "rgb_mae": 1.5009720376473864e-06,
+        "max_channel": 4.5413765513681315e-05
+      },
+      {
+        "color": "p3-d65",
+        "gamma": "gamma24",
+        "samples": 161,
+        "rgb_mae": 1.6031898499940451e-06,
+        "max_channel": 5.745292534103594e-05
+      },
+      {
+        "color": "p3-d65",
+        "gamma": "gamma26",
+        "samples": 161,
+        "rgb_mae": 1.671784954150935e-06,
+        "max_channel": 7.009144289204378e-05
+      },
+      {
+        "color": "p3-d65",
+        "gamma": "linear",
+        "samples": 161,
+        "rgb_mae": 8.915530021659254e-07,
+        "max_channel": 3.862158203138399e-06
+      },
+      {
+        "color": "p3-d65",
+        "gamma": "srgb",
+        "samples": 161,
+        "rgb_mae": 1.3423515452669068e-06,
+        "max_channel": 1.2043320545856995e-05
+      },
+      {
+        "color": "rec2020",
+        "gamma": "adobe-rgb",
+        "samples": 161,
+        "rgb_mae": 1.2247801123911312e-06,
+        "max_channel": 4.5413765513677845e-05
+      },
+      {
+        "color": "rec2020",
+        "gamma": "gamma24",
+        "samples": 161,
+        "rgb_mae": 1.2737216063597025e-06,
+        "max_channel": 5.745292534103247e-05
+      },
+      {
+        "color": "rec2020",
+        "gamma": "gamma26",
+        "samples": 161,
+        "rgb_mae": 1.4074972316580638e-06,
+        "max_channel": 7.009144289204378e-05
+      },
+      {
+        "color": "rec2020",
+        "gamma": "linear",
+        "samples": 161,
+        "rgb_mae": 5.543300921524706e-07,
+        "max_channel": 2.365378314550526e-06
+      },
+      {
+        "color": "rec2020",
+        "gamma": "srgb",
+        "samples": 161,
+        "rgb_mae": 1.063367104882215e-06,
+        "max_channel": 1.2043320545856995e-05
+      },
+      {
+        "color": "rec709",
+        "gamma": "adobe-rgb",
+        "samples": 161,
+        "rgb_mae": 1.3660340306136232e-06,
+        "max_channel": 4.5413765513677845e-05
+      },
+      {
+        "color": "rec709",
+        "gamma": "gamma24",
+        "samples": 161,
+        "rgb_mae": 1.4843205577349392e-06,
+        "max_channel": 5.745292534103247e-05
+      },
+      {
+        "color": "rec709",
+        "gamma": "gamma26",
+        "samples": 161,
+        "rgb_mae": 1.5579112925067432e-06,
+        "max_channel": 7.009144289204378e-05
+      },
+      {
+        "color": "rec709",
+        "gamma": "linear",
+        "samples": 161,
+        "rgb_mae": 7.040999560896358e-07,
+        "max_channel": 3.343953691420376e-06
+      },
+      {
+        "color": "rec709",
+        "gamma": "srgb",
+        "samples": 161,
+        "rgb_mae": 1.2340233079404064e-06,
+        "max_channel": 1.2043320545853525e-05
+      },
+      {
+        "color": "srgb",
+        "gamma": "adobe-rgb",
+        "samples": 161,
+        "rgb_mae": 1.3660340306136232e-06,
+        "max_channel": 4.5413765513677845e-05
+      },
+      {
+        "color": "srgb",
+        "gamma": "gamma24",
+        "samples": 161,
+        "rgb_mae": 1.4843205577349392e-06,
+        "max_channel": 5.745292534103247e-05
+      },
+      {
+        "color": "srgb",
+        "gamma": "gamma26",
+        "samples": 161,
+        "rgb_mae": 1.5579112925067432e-06,
+        "max_channel": 7.009144289204378e-05
+      },
+      {
+        "color": "srgb",
+        "gamma": "linear",
+        "samples": 161,
+        "rgb_mae": 7.040999560896358e-07,
+        "max_channel": 3.343953691420376e-06
+      },
+      {
+        "color": "srgb",
+        "gamma": "srgb",
+        "samples": 161,
+        "rgb_mae": 1.2340233079404064e-06,
+        "max_channel": 1.2043320545853525e-05
+      }
+    ],
+    "metric": "normalized Rec.709 Gamma2.4 channel code error; not DeltaE",
+    "includes_xyz_matrix_curve_node_and_interpolation_quantization": true,
+    "resolve_pixel_match_verified": false,
+    "camera_pixels": false
+  },
+  "card_dir": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/cards/20261021-color-v4-private-ui-04",
+  "exact_card_loaded": [
+    "LUT.BIN",
+    "SHELL.BIN",
+    "SUPMGR.BIN"
+  ],
+  "exact_card_ui": {
+    "install_log": [
+      [
+        0,
+        0,
+        "LOADER.BIN"
+      ],
+      [
+        256,
+        9,
+        "LOADER.BIN"
+      ]
+    ],
+    "registered_rows": 9,
+    "initial_row_values": {
+      "SupManager": {
+        "N": "SupManager",
+        "A": " ",
+        "Ia": " ",
+        "Ib": " ",
+        "Ic": " ",
+        "Visible": 1,
+        "Lock": 0,
+        "Default": 0,
+        "Choice": 255,
+        "Max": 0,
+        "PopH": 81,
+        "Jump": 1
+      },
+      "LUT color family": {
+        "N": "LUT color family",
+        "A": "Rec.709 / sRGB",
+        "Ia": "ACES / Adobe / BMD",
+        "Ib": "P3 D60 / P3 D65 / 2020",
+        "Ic": "Rec.709 / sRGB",
+        "Visible": 1,
+        "Lock": 0,
+        "Default": 2,
+        "Choice": 255,
+        "Max": 2,
+        "PopH": 243,
+        "Jump": 0
+      },
+      "LUT color space": {
+        "N": "LUT color space",
+        "A": "Rec.709",
+        "Ia": "Rec.709",
+        "Ib": "sRGB",
+        "Ic": " ",
+        "Visible": 1,
+        "Lock": 0,
+        "Default": 0,
+        "Choice": 255,
+        "Max": 1,
+        "PopH": 162,
+        "Jump": 0
+      },
+      "LUT file / status": {
+        "N": "LUT file / status",
+        "A": "ACTIVE.LUT; LV pending",
+        "Ia": "ACTIVE.LUT; LV pending",
+        "Ib": " ",
+        "Ic": " ",
+        "Visible": 1,
+        "Lock": 0,
+        "Default": 0,
+        "Choice": 255,
+        "Max": 0,
+        "PopH": 81,
+        "Jump": 0
+      },
+      "LUT gamma family": {
+        "N": "LUT gamma family",
+        "A": "Adobe / 2.4 / 2.6",
+        "Ia": "Adobe / 2.4 / 2.6",
+        "Ib": "Linear / Rec.709 / sRGB",
+        "Ic": " ",
+        "Visible": 1,
+        "Lock": 0,
+        "Default": 0,
+        "Choice": 255,
+        "Max": 1,
+        "PopH": 162,
+        "Jump": 0
+      },
+      "LUT gamma value": {
+        "N": "LUT gamma value",
+        "A": "Gamma 2.4",
+        "Ia": "Adobe RGB",
+        "Ib": "Gamma 2.4",
+        "Ic": "Gamma 2.6",
+        "Visible": 1,
+        "Lock": 0,
+        "Default": 1,
+        "Choice": 255,
+        "Max": 2,
+        "PopH": 243,
+        "Jump": 0
+      },
+      "LUT monitoring": {
+        "N": "LUT monitoring",
+        "A": "Off",
+        "Ia": "Off",
+        "Ib": "On",
+        "Ic": " ",
+        "Visible": 1,
+        "Lock": 0,
+        "Default": 0,
+        "Choice": 255,
+        "Max": 1,
+        "PopH": 162,
+        "Jump": 0
+      },
+      "LUT strength range": {
+        "N": "LUT strength range",
+        "A": "75 / 100%",
+        "Ia": "0 / 25 / 50%",
+        "Ib": "75 / 100%",
+        "Ic": " ",
+        "Visible": 1,
+        "Lock": 0,
+        "Default": 1,
+        "Choice": 255,
+        "Max": 1,
+        "PopH": 162,
+        "Jump": 0
+      },
+      "LUT strength value": {
+        "N": "LUT strength value",
+        "A": "100%",
+        "Ia": "75%",
+        "Ib": "100%",
+        "Ic": " ",
+        "Visible": 1,
+        "Lock": 0,
+        "Default": 1,
+        "Choice": 255,
+        "Max": 1,
+        "PopH": 162,
+        "Jump": 0
+      }
+    },
+    "monitor_enable_result": -13,
+    "monitor_after_enable_attempt": "Off",
+    "page_renderer": "real ARM core / fpsup-ui private FT4S data with simulated native GUI app",
+    "on_camera_verified": false
+  },
+  "native_status": {
+    "version": 1,
+    "asset": 0,
+    "model": 0,
+    "backend": 0,
+    "color": 6,
+    "gamma": 1,
+    "strength": 100,
+    "samples": 0,
+    "outside1": 0,
+    "outside3": 0,
+    "last": -13
+  },
+  "resident_bytes": 4214016,
+  "file_hashes": {
+    "AutoRun.txt": "ee256bc56848caeb6aecfb9d8114530102c67bae768a09f67757528e64af59f9",
+    "fpSup/LOADER.BIN": "30fc06327c0b6e5afb92bbb2f6cf013cc290159262a26946093389ad44f0f85e",
+    "fpSup/LUT.BIN": "b367b6833421b4f912786915ee58b4449bbb6ea1eb721bb574149efdb7ff1f87",
+    "fpSup/SUPMGR.BIN": "a2d938aeb2a450083fa14392a5dcbf9b9076ff9b4d6b5e05a11eca609a3d17ee",
+    "fpSup/SHELL.BIN": "d711f05cd7c163c17f484f686cd245ae15ca6eedc47a75cee7a5201e3f4c82ab",
+    "fpSup/UI/FPSUP.BIN": "2cef278c3958d8974f924e274b2b77b5b502bf5ab820d5903489e1d4a2857742",
+    "fpSup/UI/SUPMGR.BIN": "404bee427d223b6ec94a402b40a9770297fde0c972f394b91873d84b2cd21dd4",
+    "fpSup/LUT/settings.json": "30e20cc786dbc3b2987376794f44b969537117ffa46678add4d3d76844f100c9",
+    "fpSup/LUT/menu.json": "9b8aba4eaefffe9ed486f1290fa3a84fa3f77fd459ec6b2091308e9a9e5e1c80",
+    "fpSup/LUT/source.cube": "57fe6949f1e37b5cd67752c824680eee7ed67c604c79a4fc322b47d68ebd82a9",
+    "fpSup/LUT/ACTIVE.LUT": "cd60c83b56323ce5372dec042451364ebb29c4ef35cf455d41aa68e4a7094df5"
+  },
+  "source_hashes": {
+    "fpSup/lut/native/lut4.c": "d62445fb945cf659a7e4accf0539722b0bf26f66a0019586bb901347bce23a91",
+    "fpSup/lut/native/lut4.h": "f07a15d2dcf6e5f432fc848826a8e2db03401aa8c5d830e81dcba543314664e1",
+    "fpSup/lut/build_sup.py": "55065298a986f4b2295d6ccfef4eff9b61bdce8c42221b007bff19178c432835",
+    "fpSup/lut/test_sup_native.py": "c1969889d73907cd6f6263c516f8d2f0b5fba115fdd396d9c0bc8063749373e1",
+    "fpSup/lut/test_sup_ui.py": "c5dde6535dbadbd15b853503bd5cfdd772e26acc040a760e70822f46323c10f3",
+    "fpSup/uishare/tab/test_fp4.py": "a967d9eda4cab02325dabc6f91c964b150384cb5332a55bd43d67dc04ea94cee",
+    "fpSup/lut/color.py": "76fb55133eabe4d13fe79e2670c59584ab1150d0f7f49931f8fd3c88215c69cd",
+    "fpSup/lut/cinemadng.py": "442f56ba3e1a0b83c91e32ad3191f91c74db11919b77c5723ea7578349922c0b",
+    "fpSup/lut/monitor.py": "fde5f810259a003bbe17d13b6dcc9e1381997d6874885bd0fc925c561a7673e5",
+    "projects/lut-sup/probes/validate_sup4.py": "cb07317c646e8364d2a67bf943cae175bdedbb299fd0b4bcaab3cd132f97f0d7"
+  },
+  "build_source_hashes": {
+    "fpSup/lut/native/lut4.c": "d62445fb945cf659a7e4accf0539722b0bf26f66a0019586bb901347bce23a91",
+    "fpSup/lut/native/lut4.h": "f07a15d2dcf6e5f432fc848826a8e2db03401aa8c5d830e81dcba543314664e1",
+    "fpSup/lut/build_sup.py": "55065298a986f4b2295d6ccfef4eff9b61bdce8c42221b007bff19178c432835",
+    "fpSup/lut/color.py": "76fb55133eabe4d13fe79e2670c59584ab1150d0f7f49931f8fd3c88215c69cd",
+    "fpSup/lut/cinemadng.py": "442f56ba3e1a0b83c91e32ad3191f91c74db11919b77c5723ea7578349922c0b",
+    "fpSup/fp_usb_shell/v4/sloader4.h": "38c22a9160d0677231c3ca2756f89cd0b2d7fe36bbf1d53b71d198f688618071",
+    "fpSup/fp_usb_shell/v4/build_v4.py": "527a0e28bbecc35be4a7ac1435c59e374c725a813b24a82fe4d69608fd3b99ef",
+    "fpSup/fp_usb_shell/v4/sloader4.c": "5a690e1111190270c9382dc37f102e6b4a6e87b15bd1d368e34c729a986c8712",
+    "fpSup/fp_usb_shell/v4/sloader4_entry.S": "90013526abc898eac8f7169df5373598d83ae25df1943718c26e7023af5790c4",
+    "fpSup/fp_usb_shell/v4/supmgr.c": "67a51fd8e3f9e663ffe5bee3eb85cfd85baee5362ccd697d66cc5d4e4cd286d3",
+    "fpSup/fpsup-ui/fpsup_ui.c": "5dee11c203bedd7147020f3034a75f383c29b5406701ba67d77da9fdaa5a2a43",
+    "fpSup/fp_usb_shell/v3/build_v3.py": "027030c0ed689d3f53fe0608b2fd02085483cab9b38b0a8ccf0d36466a1e4ef6",
+    "fpSup/fp_usb_shell/build_autorun.py": "dff5adc2ac79d2276b244773cfc2c641969828b119a9c708447ee2c6bc8977ae",
+    "fpSup/fp_usb_shell/asm/loader.S": "838186545d1e4d525b569f9d1b3c37a3a8a8f7bd177a15b1d4c5d98719a55c4e",
+    "fpSup/fp_usb_shell/asm/stage2.S": "4f446ace9ffadef27c8cabe59d86c2fa08f5ec0cbf53561b44651a000be9d2e5",
+    "fpSup/fp_usb_shell/asm/store_boot.S": "f104f6a7bb222b69ab65074c9f8a054fd1552f696e8cd6f40e627216e3894135",
+    "fpSup/fp_usb_shell/asm/store_boot_slim.S": "7fb69bc5a9ea56f7a629df06f95c684b80f69b8536de4b5e6c318393a00abf9a",
+    "fpSup/fp_usb_shell/asm/lhook_stub.S": "89f76b46150b2a859d70fe915ae20f5fb5257bc72e85684cd469bcc80b3016ed",
+    "fpSup/fp_usb_shell/asm/abort.S": "46e6a31c0e7303fc59f587a63f423899740e3ef96e55a162267ecf5f5271f46f",
+    "fpSup/fp_usb_shell/asm/entries.S": "6046ce8a1a8a506784f61def3637c0fbfaaf31cb4c6c9a7f923d4497bf305c95",
+    "fpSup/fp_usb_shell/asm/splash_finish.S": "00de013ffa8ff1044655e68f952e0c03792482c4c317300ba5ab7c3730cd8b83",
+    "fpSup/fp_usb_shell/v4/fpsup_home.c": "643c9f493d28ae00268e1a165c19679e860a95592ccdb9b891be9a890547b093",
+    "fpSup/uishare/tab/build_fp4.py": "279457be2732159824d56018d5c5d4328f19825b12c666694e57e87b3c9a35d6",
+    "fpSup/uishare/tab/home4_page.py": "6df67100c5596d4a4296fe80ad1913b8eacfa9a2d061c26b7089f260e028a15b",
+    "fpSup/uishare/tab/manage_page.py": "e7a3691c181e5b369aa2c985084c18500686e4b63327f4224be97327ff4b0784",
+    "fpSup/uishare/tab/manager_logo.py": "9404dc83f5020ed97ec4ec293aba87dfdfa9b1142e1d3fc0484c0568a2ce767c",
+    "fpSup/uishare/tab/ft6_page.py": "5efc4fa0a162013cba3941fb7cee1a532e30ff05d95c34f85d7d08f6c9bf8532",
+    "fpSup/uishare/tab/build_ft6.py": "75f3b0168b46d443635d532ed6641d392f5eb863c807c8f88f12977eaf220f4b"
+  },
+  "camera_operations": false,
+  "physical_card_written": false,
+  "on_camera_verified": false,
+  "live_view_backend_connected": false,
+  "ui_renderer_present": true,
+  "lut_ui_on_camera_verified": false,
+  "realtime_performance_verified": false,
+  "resolve_cinemadng_pixel_match_verified": false
+}

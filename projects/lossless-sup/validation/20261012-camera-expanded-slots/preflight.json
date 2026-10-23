@@ -1,0 +1,22 @@
+{
+  "time": 1791769339.670472,
+  "commands": {
+    "status get is_recording": "is_recording -> 0\n\n",
+    "status get app_current": "app_current -> 2\n\n",
+    "menu SetMovRecFormat": "0\n\n",
+    "menu SetMovRecSize": "2\n\n",
+    "menu SetMovCinemaDNGQuality": "0\n\n",
+    "menu SetMovFramerate": "7\n\n",
+    "gui geti MV_fpLossless": "OK:MV_fpLossless -> 1\n\n",
+    "sdcard size 1": "size total = 128295370752 byte(119GiB), free = 86699016192 byte(80GiB), 67%\n(AU) total = 128295370752 byte(119GiB), free = 86699016192 byte(80GiB), 67%\nCluster=128KiB, AU=0.125MiB, AU=661461/978816\n",
+    "dir \\fpSup": "                                          .\n2026/10/12  07:43:52               187520 32RESCUS.BIN\n2026/10/10  11:39:20                 4096 ._32RESCUS.BIN\n2026/10/10  11:38:46 <DIR>                UI\n2026/10/10  11:39:20                 4096 ._UI\n2026/10/11  23:09:24                29276 LOADER.BIN\n2026/10/10  11:39:20                 4096 ._LOADER.BIN\n2025/12/31  08:00:00                 4208 20GYR2.BIN\n2026/10/10  11:39:20                 4096 ._20GYR2.BIN\n2026/10/11  11:29:04                38644 45RAWV.BIN\n2026/10/10  11:39:20                 4096 ._45RAWV.BIN\n2025/12/31  08:00:00                25936 40FLIP.BIN\n2026/10/10  11:39:20                 4096 ._40FLIP.BIN\n2026/10/12  07:54:28                72608 10LOSS.BIN\n2026/10/10  11:39:22                 4096 ._10LOSS.BIN\n2025/12/31  08:00:00                 4552 00SHELL.BIN\n2026/10/10  11:39:22                 4096 ._00SHELL.BIN\n2026/10/10  11:38:46 <DIR>                RESCUS\n2026/10/10  11:39:22                 4096 ._RESCUS\n2025/12/31  08:00:00               609720 50RESLAB.BIN\n2026/10/10  11:39:22                 4096 ._50RESLAB.BIN\n2026/10/12  07:44:04                 4096 LOAD.LOG\n2026/10/12  07:40:38                  316 05STOPFX.BIN\n",
+    "dir": "                                          .\n2026/10/07  10:20:36 <DIR>                .Spotlight-V100\n2026/10/10  11:59:52 <DIR>                CINEMA\n2026/10/10  11:38:46 <DIR>                fpSup\n2026/10/10  11:39:22                 4096 ._fpSup\n2025/12/31  08:00:00                 4666 AutoRun.txt\n2026/10/10  11:39:22                 4096 ._AutoRun.txt\n2026/10/07  15:00:02 <DIR>                .Trashes\n2026/10/10  18:14:18 <DIR>                DCIM\n2026/10/10  11:39:46 <DIR>                .fseventsd\n"
+  },
+  "idle": {
+    "0xc358e140": 0,
+    "0xc35a952c": 0,
+    "0xc072f6f8": 8235717,
+    "0xc0377118": 3925868896,
+    "0xc063f828": 3159290094
+  }
+}

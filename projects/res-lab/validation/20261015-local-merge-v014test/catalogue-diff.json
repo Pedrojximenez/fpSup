@@ -1,0 +1,109 @@
+{
+  "product_changes": [
+    "res-custom"
+  ],
+  "previous_release_unchanged": true,
+  "all_autoruns_unchanged": true,
+  "default_boot_pair_unchanged": true,
+  "other_products_unchanged": true,
+  "pending_unchanged": true,
+  "embedded_product_sha256": "d9a8e10050184424886afaca263279967ab2cc2c89314c44038fe4402a676355",
+  "embedded_product_bytes": 313216,
+  "version": "0.1.4test",
+  "index_sha256": "bc985fea5c66b80fdabe596e5e92d0fd2d08b70d4a9b83d9c1f1d636d853e70c",
+  "boot_pairs": {
+    "i0f0": {
+      "AutoRun.txt": {
+        "size": 3561,
+        "sha256": "889800fa363c75bfe0d9da43da82312276388a8929748ce05221ce0da931bb4c"
+      },
+      "fpSup/LOADER.BIN": {
+        "size": 8248,
+        "sha256": "3c9a6b36687dfc21d4764d61ff190b1222efd9a84f5aa4277fb52527eb751534"
+      }
+    },
+    "i0f1": {
+      "AutoRun.txt": {
+        "size": 4666,
+        "sha256": "2e77dfe3529006d2cb95ac01e206048efe495493434c05f1ed8fad4ecd22bf96"
+      },
+      "fpSup/LOADER.BIN": {
+        "size": 8568,
+        "sha256": "33ab64ba9e45ff75c6b1ab3eaf6df7839db4a86998857327eca667c2b6df5030"
+      }
+    },
+    "i1f0": {
+      "AutoRun.txt": {
+        "size": 3561,
+        "sha256": "889800fa363c75bfe0d9da43da82312276388a8929748ce05221ce0da931bb4c"
+      },
+      "fpSup/LOADER.BIN": {
+        "size": 8528,
+        "sha256": "ab34813df3c9a662d54085cddc8373adb584ee8664ff60d0c4371456eaa55cd1"
+      }
+    },
+    "i1f1": {
+      "AutoRun.txt": {
+        "size": 4666,
+        "sha256": "2e77dfe3529006d2cb95ac01e206048efe495493434c05f1ed8fad4ecd22bf96"
+      },
+      "fpSup/LOADER.BIN": {
+        "size": 8848,
+        "sha256": "f9f041babf0613f05265f9fda283caf3855f075c8b65c45c690a37d2f8dfbb32"
+      }
+    },
+    "m1i0f0": {
+      "AutoRun.txt": {
+        "size": 3561,
+        "sha256": "889800fa363c75bfe0d9da43da82312276388a8929748ce05221ce0da931bb4c"
+      },
+      "fpSup/LOADER.BIN": {
+        "size": 28676,
+        "sha256": "f1c92fa02d1cd0297bc7920b5cdf3ba574419a81be97d64b17a1dc7b7c3919a6"
+      }
+    },
+    "m1i0f1": {
+      "AutoRun.txt": {
+        "size": 4666,
+        "sha256": "2e77dfe3529006d2cb95ac01e206048efe495493434c05f1ed8fad4ecd22bf96"
+      },
+      "fpSup/LOADER.BIN": {
+        "size": 28996,
+        "sha256": "2501dc5def3994aab8cb426891eb2e3e6d6d4deb5df2a8a6fda319e4444124e8"
+      }
+    },
+    "m1i1f0": {
+      "AutoRun.txt": {
+        "size": 3561,
+        "sha256": "889800fa363c75bfe0d9da43da82312276388a8929748ce05221ce0da931bb4c"
+      },
+      "fpSup/LOADER.BIN": {
+        "size": 28956,
+        "sha256": "8284f7a6c8fabf24127554b9510fe67e50035de5a5ae4603226ba841a81d0119"
+      }
+    },
+    "m1i1f1": {
+      "AutoRun.txt": {
+        "size": 4666,
+        "sha256": "2e77dfe3529006d2cb95ac01e206048efe495493434c05f1ed8fad4ecd22bf96"
+      },
+      "fpSup/LOADER.BIN": {
+        "size": 29276,
+        "sha256": "8c407fc89a5f3f05493297bb0ee49458e6f05d9f6d0a557fcaea7dbe44549302"
+      }
+    }
+  },
+  "rebuilt_manager_variants": [
+    "m1i0f0",
+    "m1i0f1",
+    "m1i1f0",
+    "m1i1f1"
+  ],
+  "manager_reason": "Maintained builder picks up the already-required ui_apply.c string base limit 64 (previously 8), also used by accepted FPS BIN; management UI rebuilt from that same source.",
+  "boot_source_changes": {
+    "uishare/ui_apply.c": {
+      "before": "4b6bad26312cfe102477f159cab5e7e34198176c1a9bcacf300b19d7c6fe432d",
+      "after": "ea6347b0ef8c07ccc4a3fe26d1ca56940599268ef348f58e564c0062617f9cf9"
+    }
+  }
+}

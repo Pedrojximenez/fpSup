@@ -1,0 +1,122 @@
+{
+  "version": 2,
+  "code": "neonblit.bin",
+  "code_size": 3052,
+  "code_sha256": "4124dffd526c64e94a5db36f94ef56f7ff96fe4dc790c19659a5b151e1e6cfab",
+  "code_isa": "ARM (entry addresses even, no Thumb bit)",
+  "alignment": 8,
+  "symbols": {
+    "nb_p32_blend": 0,
+    "nb_p32_opaque": 2292,
+    "nb_565_opaque": 2544,
+    "nb_lut8_blend": 680,
+    "nb_a4_blend": 1452,
+    "nb_layer_fill": 2820
+  },
+  "publish_before_arm": [
+    "C000E91C (D-cache clean+inv)",
+    "C000EABC (I-cache inv)"
+  ],
+  "patches": [
+    {
+      "addr": "0xc2eb3f5c",
+      "stock": "0xc06fb9a9",
+      "new": "load_base + 0x0",
+      "symbol": "nb_p32_blend",
+      "kind": "data word (function pointer)",
+      "what": "idx0 RGBA8888-pre source-over (fmt 0x10021, 0x10028...)"
+    },
+    {
+      "addr": "0xc2eb3f60",
+      "stock": "0xc06fbba9",
+      "new": "load_base + 0x8f4",
+      "symbol": "nb_p32_opaque",
+      "kind": "data word (function pointer)",
+      "what": "idx1 RGBA8888 opaque (fmt 0x10022; opaque runs of 0x10021)"
+    },
+    {
+      "addr": "0xc2eb3f64",
+      "stock": "0xc06fc039",
+      "new": "load_base + 0x9f0",
+      "symbol": "nb_565_opaque",
+      "kind": "data word (function pointer)",
+      "what": "idx2 RGB565 (fmt 0x10013)"
+    },
+    {
+      "addr": "0xc2eb3f68",
+      "stock": "0xc06fbc09",
+      "new": "load_base + 0x2a8",
+      "symbol": "nb_lut8_blend",
+      "kind": "data word (function pointer)",
+      "what": "idx3 8bpp LUT (fmt 0x1000C)"
+    },
+    {
+      "addr": "0xc2eb3f74",
+      "stock": "0xc06fbc09",
+      "new": "load_base + 0x2a8",
+      "symbol": "nb_lut8_blend",
+      "kind": "data word (function pointer)",
+      "what": "idx6 8bpp LUT (fmt 0x1000F)"
+    },
+    {
+      "addr": "0xc2eb3f78",
+      "stock": "0xc06fbcd9",
+      "new": "load_base + 0x5ac",
+      "symbol": "nb_a4_blend",
+      "kind": "data word (function pointer)",
+      "what": "idx7 ARGB4444 source-over (fmt 0x10011; font_M_* glyphs)"
+    },
+    {
+      "addr": "0xc2eb3f88",
+      "stock": "0xc06fbc09",
+      "new": "load_base + 0x2a8",
+      "symbol": "nb_lut8_blend",
+      "kind": "data word (function pointer)",
+      "what": "idx11 LUT, colour transform"
+    },
+    {
+      "addr": "0xc2eb3f8c",
+      "stock": "0xc06fbc09",
+      "new": "load_base + 0x2a8",
+      "symbol": "nb_lut8_blend",
+      "kind": "data word (function pointer)",
+      "what": "idx12 LUT, colour transform"
+    },
+    {
+      "addr": "0xc2eb3f90",
+      "stock": "0xc06fbc09",
+      "new": "load_base + 0x2a8",
+      "symbol": "nb_lut8_blend",
+      "kind": "data word (function pointer)",
+      "what": "idx13 LUT, colour transform"
+    },
+    {
+      "addr": "0xc2eb3f94",
+      "stock": "0xc06fbc09",
+      "new": "load_base + 0x2a8",
+      "symbol": "nb_lut8_blend",
+      "kind": "data word (function pointer)",
+      "what": "idx14 LUT, colour transform"
+    },
+    {
+      "addr": "0xc2e38e7c",
+      "stock": "0xc0721480",
+      "new": "load_base + 0xb04",
+      "symbol": "nb_layer_fill",
+      "kind": "data word (function pointer)",
+      "what": "layer vtable fill slot (vtable A)"
+    },
+    {
+      "addr": "0xc2ef62a0",
+      "stock": "0xc0721480",
+      "new": "load_base + 0xb04",
+      "symbol": "nb_layer_fill",
+      "kind": "data word (function pointer)",
+      "what": "layer vtable fill slot (vtable B)"
+    }
+  ],
+  "calling_convention": "stock span: r0 dst row, r1 src desc ([+0x24] ptr, [+0x1c] stride), r2 width, r3 params ([+4] LUT, [+8] dst stride, [+0xc] rows); fill: r0 layer, r1 value; called with blx from Thumb/ARM",
+  "vfp": "uses d0-d13 only; saves d8-d13; TK-OS saves d0-d15+FPSCR per task and per IRQ (C0000D24 / C0000E78) and never d16-d31, so d16-d31 are never touched",
+  "context": "DrawMgr task (DrawThread -> UIC). Not interrupt-safe by design; not needed.",
+  "unpatch": "write each stock value back; do not free the code block while a draw may be inside it (leave it allocated until power-off)"
+}

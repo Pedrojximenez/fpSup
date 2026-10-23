@@ -1,0 +1,41 @@
+{
+  "status": "complete for synthetic CST, monitoring reference and interpolation experiment",
+  "camera_io": false,
+  "camera_ready": false,
+  "sup_or_loader_modified": false,
+  "tests": {
+    "passed": 90,
+    "skipped": 0,
+    "elapsed_seconds": 79.926,
+    "log": "../tests-final.txt",
+    "sha256": "05599e97e13e0086f45f5cc20e19b261ad5a1e9dae70a44f53c41f58bc9a25d2"
+  },
+  "actual_resolve": {
+    "version": "21.0.4.5",
+    "host": "Fusion timeline ResolveFX CST",
+    "project": "LUT_Ole2026_Offline_20261021",
+    "project_saved": true,
+    "project_closed": true,
+    "bwg_interface_label": "Blackmagic Design Wide Gamut Gen 4 / 5",
+    "bwg_internal_id": "BMD4KBCASTFILM_COLORSPACE",
+    "ui_evidence_sha256": "cc413bb33c7c3dcc2289a7e2e6c98a8f51a20264b118a89abc3bc42c1a58d879"
+  },
+  "chain_samples": 2048,
+  "chain_max_abs_error": 5.8342121433963e-07,
+  "factorized_samples_per_branch": 16384,
+  "factorized_max_abs_error": 1.2878587085651816e-14,
+  "baked_cubes_meet_one_10bit_code_gate": false,
+  "report_sha256": "9e6373edcde2a5940300cc176cc636811e3567780605c399643cab492a91077a",
+  "model_and_test_sha256": {
+    "fpSup/lut/ole2026.py": "2bdce87592a217f903c5c82c8f6ae211f2778b1c86c8e9194bf31ba4e07322f1",
+    "fpSup/lut/test_ole2026.py": "193dea4f31758c57f01c6bb530734a615253547aabc2881a477ec7fb2ef5285e"
+  },
+  "limits": [
+    "Camera RAW P3 decode pixel match",
+    "source DNG profile and highlight recovery",
+    "unknown author nodes 04/06 and project CM",
+    "author final DaVinci DRT",
+    "paired Pyxis color accuracy",
+    "live camera tap and ISP/residual implementation"
+  ]
+}

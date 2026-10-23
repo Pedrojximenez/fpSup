@@ -1,0 +1,16 @@
+{
+  "variant": "combined-fix3",
+  "phase": "verified",
+  "existing_size": 231040,
+  "written": {
+    "\\fpSup\\32RESCUS.BIN": {
+      "bytes": 231040,
+      "sha256": "b4fa4613514da3f1abc204e23c766ad35f91b5e434799432407343755b0d84a1"
+    }
+  },
+  "daemon": [
+    39219,
+    "OK name=fpshd version=3.2.0 protocol=1 frame=64 payload=44 transport=EP01-EP82 iface=0 camera=open seq=555 ep83=host_candidate upload=UP01-probed mem=MEM1-probed quarantine=0 fault=none\n"
+  ],
+  "preserved_cfg_sha256": "be62abbe2254b1c884c280a4352039f677bf7128bd81eea87dfb30990e855640"
+}

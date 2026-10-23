@@ -1,0 +1,43 @@
+{
+  "daemon": [
+    42872,
+    "OK name=fpshd version=3.2.0 protocol=1 frame=64 payload=44 transport=EP01-EP82 iface=0 camera=open seq=2266 ep83=host_candidate upload=UP01-probed mem=MEM1-probed quarantine=0 fault=none\n"
+  ],
+  "identity": {
+    "base": "0x451d7380",
+    "state": "0x45213c80",
+    "nrows": 5,
+    "immutable_code_sha256": "4bff93a8c0db7da5f38bf2f515b6d9f3350afbacef455b3d0512326362aac514"
+  },
+  "initial_screen": "LV_CINE_MEDIUM",
+  "sequence": [
+    {
+      "key": "QSON",
+      "screen": "QS_CINE"
+    },
+    {
+      "key": "QSOFF",
+      "screen": "QS_CINE"
+    },
+    {
+      "key": "QSON",
+      "screen": "LV_CINE_MEDIUM"
+    },
+    {
+      "key": "QSOFF",
+      "screen": "LV_CINE_MEDIUM"
+    }
+  ],
+  "screenshots": [
+    "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261015-qs-first-open/on-camera/run4/fix9-repeat-black-edge/1932-20261015-fps-black-edge-repeat-QS-A.jpg",
+    "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261015-qs-first-open/on-camera/run4/fix9-repeat-black-edge/1933-20261015-fps-black-edge-repeat-QS-B.jpg"
+  ],
+  "settings_changed": false,
+  "final_screen": "LV_CINE_MEDIUM",
+  "final_idle": {
+    "movie_recording": 0,
+    "xmp_file_pointer": 0,
+    "movie_writing": 0
+  },
+  "echo_restored": true
+}

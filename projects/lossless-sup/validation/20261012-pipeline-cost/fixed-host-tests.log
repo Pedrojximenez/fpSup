@@ -1,0 +1,17 @@
+................................../Users/dido/Developer.localized/SIGMAfp_re/research/slimRAW/tiff.py:29: ResourceWarning: unclosed file <_io.BufferedReader name='/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/captures/opengate_ev_bug_20260914/dng/A001_083_FHD_f01.DNG'>
+  d = open(path,'rb').read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+./var/folders/20/mb8w7p_x7nlfpctnt7qd77b00000gn/T/fpl-trailer-m-04rwy3m3/ours.DNG: Unexpected end of file
+...F....
+======================================================================
+FAIL: test_every_access_is_aligned_inside_and_the_root_pointer_is_written_last (native.test_trailer.TrailerTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_trailer.py", line 135, in test_every_access_is_aligned_inside_and_the_root_pointer_is_written_last
+    self.assertEqual(res[8], res[6] - 3, 'the root pointer was touched before the end')
+AssertionError: 406 != 403 : the root pointer was touched before the end
+
+----------------------------------------------------------------------
+Ran 43 tests in 59.884s
+
+FAILED (failures=1)

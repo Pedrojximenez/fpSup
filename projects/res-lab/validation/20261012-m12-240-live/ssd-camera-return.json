@@ -1,0 +1,119 @@
+{
+  "camera_mutations": false,
+  "phase": "read_completed",
+  "idle": {
+    "movie_recording": 0,
+    "xmp_file_pointer": 0,
+    "movie_writing": 0
+  },
+  "record_log": "slot=5, cnt=6/600\nsize=524288*3906772(1907GB), free=41%, exFAT, 5000Mbps\ntime       : 2026/10/12 07:20:43 \nrec factor : Nothing \nui factor  : Nothing \nbattery    : OK \ntemp(BAT)  : OK \ntemp(BODY) : OK \ntemp(LCD)  : OK \ntemp(CMOS) : OK \nfile-size=1095168, bulk-size=67108864(61.3)\nreq_cnt=222, fin_cnt=222, vbuf/222/534738, raw1\nrequest  ,finish   ,diff,gap ,reqcnt,fincnt,diff,sdb,MB/s\n      916,     1079, 163, 916,    43,     1,  42, 10, 288\n     1102,     1266, 164,  23,    86,    43,  43,  7, 293\n     1283,     1445, 162,  17,   128,    86,  42,  6, 290\n     1474,     1640, 166,  29,   171,   129,  42,  2, 283\n     1664,     1825, 161,  24,   214,   171,  43, 43, 299\n     1831,     2019, 188,   6,   222,   215,   7, 44,  46\n",
+  "slot": "slot now slot = sd0\n\n",
+  "snapshot": {
+    "consumer_base": "0x451d4780",
+    "consumer_state": "0x45201980",
+    "consumer_version": 19,
+    "loaded_core_sha256": "840489efcf8add94463e8e50f0d68ccf7d629487deaeedd01900e4e51bcadef3",
+    "state": {
+      "FLAG": 1,
+      "CUR": 2,
+      "SEL": 2,
+      "FMTLATCH": 0,
+      "BITLATCH": 0,
+      "PICKOK": 1,
+      "FPSLATCH": 1131397791,
+      "VRATE": 23976,
+      "VR_UI": 1,
+      "VR_WHY": 1,
+      "NROWS": 3,
+      "ROWS": 2688,
+      "NENT": 25,
+      "ENTS": 3036,
+      "NVM": 4,
+      "VMS": 5632,
+      "NVAR": 8,
+      "VARS": 4636,
+      "LAST_ENT": 3932,
+      "VRC": 1160088384,
+      "RATE_LVOWED": 0,
+      "RATE_LV_RELOADS": 1,
+      "M12_LEGACY_HITS": 0,
+      "BULK_HITS": 0,
+      "HDR_COPY_HITS": 684
+    },
+    "rows": [
+      {
+        "index": 0,
+        "label": "H2S240",
+        "ON": 1,
+        "AW": 992,
+        "AH": 662,
+        "STOCK": 2,
+        "MROW": 2,
+        "BASE": 6,
+        "BITMASK": 0
+      },
+      {
+        "index": 1,
+        "label": "M12240",
+        "ON": 1,
+        "AW": 992,
+        "AH": 662,
+        "STOCK": 2,
+        "MROW": 3,
+        "BASE": 6,
+        "BITMASK": 4
+      },
+      {
+        "index": 2,
+        "label": "VRC000",
+        "ON": 1,
+        "AW": 3008,
+        "AH": 2000,
+        "STOCK": 2,
+        "MROW": 4,
+        "BASE": 42,
+        "BITMASK": 7
+      }
+    ],
+    "screen": "LV_CINE_MEDIUM",
+    "frame_rate_getter": "7",
+    "quality_getter": "0",
+    "lossless": 0,
+    "picked_entry": {
+      "FIVE": 5,
+      "PID": 79,
+      "MODE": 231,
+      "KEYPTR": 1159735536,
+      "ROW": 1,
+      "W0": 21627210,
+      "W1": 394126,
+      "ENGFPS": 1131397791,
+      "NOMINAL": 240,
+      "VM": 1,
+      "VAR": 5,
+      "VRATE": 23976,
+      "key": "M12240120"
+    },
+    "donor": 12,
+    "variant": [
+      79,
+      6,
+      1,
+      5468
+    ],
+    "sensor_timing_fps": 239.76023976023976,
+    "engine_fps": 239.76023864746094
+  },
+  "header_diagnostics": {
+    "HDR_COPY_CALLS": 1100,
+    "HDR_COPY_HITS": 684,
+    "HDR_COPY_SRC": 1400899712,
+    "HDR_COPY_DST": 1497883648,
+    "HDR_COPY_BYTES": 78848,
+    "HDR_COPY_WHY": 0,
+    "HDR_COPY_FRAME": 3277193500,
+    "BULK_HITS": 0,
+    "BULK_LAST": 0,
+    "M12_LEGACY_HITS": 0
+  }
+}

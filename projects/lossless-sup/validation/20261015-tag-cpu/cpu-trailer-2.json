@@ -1,0 +1,56 @@
+{
+ "label": "trailer-2",
+ "window": [
+  0.4,
+  1.0,
+  1.4
+ ],
+ "settings": {
+  "menu SetMovRecSize": "2",
+  "menu SetMovFramerate": "5",
+  "gui geti MV_FrameRate": "OK:MV_FrameRate -> 6",
+  "gui geti MV_fpLossless": "OK:MV_fpLossless -> 1",
+  "sdcard sdmode": "sdmode  UHS-II"
+ },
+ "before": {
+  "hold.held": 47,
+  "hold.passed": 0,
+  "hold.compressed": 47,
+  "hold.refused": 0,
+  "hold.no_benefit": 0,
+  "hold.lanes_full": 0,
+  "hold_b.held": 7,
+  "hold_b.compressed": 7,
+  "hold_b.refused": 0,
+  "hold_b.no_benefit": 0,
+  "flush.applied": 54,
+  "hold.job_sum_us": 646856,
+  "hold.job_count": 47,
+  "hold_b.job_sum_us": 96133,
+  "hold_b.job_count": 7,
+  "take_frames": 55
+ },
+ "mon_start": 0.41,
+ "task_top": "\n# CPU = 40.5[%] \n# top 10 tasks \n# ------------------------------\n# Cnt = 5382, Overlap = 0, Prefix = 1/1000000 \n#   TaskID       Time   Rate    FuncAddr    Pri  StackRem      name\n     001       599328    59.5[%] c0001c60 (30)       3832 Byte inittsk\n     044       138523    13.8[%] c036ee50 (15)       7680 Byte CamSch\n     045        49578     4.9[%] c036ee50 (15)      13300 Byte MRecMgr\n     061        36282     3.6[%] c036ee50 (06)      12732 Byte SRecFile\n     029        28519     2.8[%] c035c460 (11)       7056 Byte LensCycl\n     039        25277     2.5[%] c036ee50 (17)      13648 Byte DrawMgr\n     124        19079     1.9[%] c514844c (12)       7708 Byte FPLCODE\n     063        18844     1.9[%] c0672d89 (17)       1952 Byte FdTsk\n     092        13500     1.3[%] c036ee50 (14)       7780 Byte AeDev\n     094        12863     1.3[%] c036ee50 (16)       3528 Byte ExtStrb\n# Total(Sum)     1007273(   1007273) \n\n-> succeeded\n",
+ "mon_end": 1.43,
+ "stop_at": 1.57,
+ "after": {
+  "hold.held": 42,
+  "hold.passed": 0,
+  "hold.compressed": 42,
+  "hold.refused": 0,
+  "hold.no_benefit": 0,
+  "hold.lanes_full": 0,
+  "hold_b.held": 13,
+  "hold_b.compressed": 13,
+  "hold_b.refused": 0,
+  "hold_b.no_benefit": 0,
+  "flush.applied": 109,
+  "hold.job_sum_us": 576750,
+  "hold.job_count": 42,
+  "hold_b.job_sum_us": 177841,
+  "hold_b.job_count": 13,
+  "take_frames": 56
+ },
+ "record_log": "file-size=3244544, bulk-size=67108864(20.7)\nreq_cnt=56, fin_cnt=56, key\nrequest  ,finish   ,diff,gap ,reqcnt,fincnt,diff,sdb,MB/s\n     1311,     1915, 604,1311,    55,     1,  54, 39, 111\n     2068,     2084,  16, 153,    56,    56,   0, 40, 202\n"
+}

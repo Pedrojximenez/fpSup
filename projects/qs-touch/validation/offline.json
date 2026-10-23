@@ -1,0 +1,50 @@
+{
+  "scope": "offline only; no ARM execution, camera I/O or deployment",
+  "checks": [
+    {
+      "name": "host_compile_sanitizers",
+      "passed": true,
+      "output": ""
+    },
+    {
+      "name": "interaction_invariants",
+      "passed": true,
+      "output": "PASS: edge gestures, in-place selection, horizontal swipes/bounds/cancel/axis, long-press reorder priority, add, restore, time wrap, 5000 invariant sequences"
+    },
+    {
+      "name": "appearance_compile_sanitizers",
+      "passed": true,
+      "output": ""
+    },
+    {
+      "name": "appearance_invariants",
+      "passed": true,
+      "output": "PASS: 16 alpha levels, off skips fill, opaque avoids blend, invalid values rejected"
+    },
+    {
+      "name": "arm_compile_only",
+      "passed": true,
+      "output": ""
+    },
+    {
+      "name": "appearance_arm_compile_only",
+      "passed": true,
+      "output": ""
+    },
+    {
+      "name": "preview_javascript_syntax",
+      "passed": true,
+      "output": ""
+    },
+    {
+      "name": "page_motion_invariants",
+      "passed": true,
+      "output": "PASS: continuous release position/velocity, frame-rate independence, reversal, bounded settling, recent velocity\nPASS: half-page distance, flick/reversal, boundaries, immediate ease-out, monotone deceleration, snap within 110ms"
+    },
+    {
+      "name": "recording_model_invariants",
+      "passed": true,
+      "output": "PASS: formats, independent axes, cinema aspect, DC and RES CUSTOM labels/options, preset recognition, mm, migration and RES/DC bounds"
+    }
+  ]
+}

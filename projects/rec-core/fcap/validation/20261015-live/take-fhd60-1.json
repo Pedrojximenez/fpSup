@@ -1,0 +1,54 @@
+{
+ "label": "fhd60-1",
+ "secs": 8.0,
+ "site_word": "0x2A282002",
+ "settings": {
+  "menu SetMovRecSize": "2",
+  "gui geti MV_FrameRate": "OK:MV_FrameRate -> 6",
+  "gui geti MV_fpLossless": "OK:MV_fpLossless -> 1",
+  "sdcard sdmode": "sdmode  UHS-II"
+ },
+ "before": {
+  "rec_admitted": 0,
+  "stops": 0,
+  "finishes": 0,
+  "hold.passed": 0,
+  "hold.compressed": 0,
+  "hold.refused": 0,
+  "hold.lanes_full": 0,
+  "hold_b.compressed": 0,
+  "hold_b.refused": 0,
+  "flush.applied": 0,
+  "flush.tag_failed": 0
+ },
+ "stop_at": 8.13,
+ "early_stop": false,
+ "after": {
+  "rec_admitted": 1,
+  "stops": 1,
+  "finishes": 1,
+  "hold.passed": 0,
+  "hold.compressed": 445,
+  "hold.refused": 0,
+  "hold.lanes_full": 0,
+  "hold_b.compressed": 4,
+  "hold_b.refused": 0,
+  "flush.applied": 449,
+  "flush.tag_failed": 0
+ },
+ "record_log": "file-size=3245568, bulk-size=67108864(20.7)\nreq_cnt=450, fin_cnt=450, key\nrequest  ,finish   ,diff,gap ,reqcnt,fincnt,diff,sdb,MB/s\n     1077,     1501, 424,1077,    41,     1,  40, 28, 158\n     1761,     2164, 403, 260,    82,    42,  40, 29, 166\n     2445,     2857, 412, 281,   123,    83,  40, 28, 162\n     3129,     3545, 416, 272,   164,   124,  40, 28, 161\n     3813,     4216, 403, 268,   205,   165,  40, 29, 166\n     4497,     4903, 406, 281,   246,   206,  40, 29, 165\n     5181,     5581, 400, 278,   287,   247,  40, 29, 167\n     5865,     6252, 387, 284,   328,   288,  40, 30, 173\n     6549,     6969, 420, 297,   369,   329,  40, 28, 159\n     7232,     7620, 388, 263,   410,   370,  40, 30, 172\n     7884,     8309, 425, 264,   449,   411,  38, 55, 157\n     8473,     8489,  16, 164,   450,   450,   0, 56, 202\n",
+ "batch_frames": [
+  41,
+  41,
+  41,
+  41,
+  41,
+  41,
+  41,
+  41,
+  41,
+  41,
+  39,
+  1
+ ]
+}

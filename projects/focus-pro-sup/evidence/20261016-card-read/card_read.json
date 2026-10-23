@@ -1,0 +1,164 @@
+{
+  "read_at": "2026-10-16T00:34:06.371148+08:00",
+  "mount_point": "/Volumes/fpSup",
+  "card_written_by_agent": false,
+  "files": [
+    {
+      "file": "AutoRun.txt",
+      "size": 4666,
+      "sha256": "2e77dfe3529006d2cb95ac01e206048efe495493434c05f1ed8fad4ecd22bf96"
+    },
+    {
+      "file": "fpSup/LOADER.BIN",
+      "size": 29276,
+      "sha256": "52b9d159fcd6c03334997a53f2628b4c0caaeed0ebb9decbd366e331ad886d3f"
+    },
+    {
+      "file": "fpSup/LOAD.LOG",
+      "size": 4096,
+      "sha256": "1ae6559da71bf1e1dadd250296e113697902e28d7c18f0a30daeb19b577f2007"
+    },
+    {
+      "file": "fpSup/60FPPTP.BIN",
+      "size": 4032,
+      "sha256": "63022ae62afabb8286657fca084346755eddcde711c3563fa8f7dc8eb5eed03c"
+    }
+  ],
+  "loader_envelope_bytes": 29148,
+  "disabled_ids": [
+    "4C454853",
+    "5A504154",
+    "5A515344"
+  ],
+  "modules": [
+    {
+      "name": "00SHELL.BIN",
+      "size": 4552,
+      "sha256": "b1c2823ed0ef46de67ddbac7bb71ba3c34617f0a25d93dfcf76b14e8224f742b",
+      "id_hex": "4C454853",
+      "id_ascii": "SHEL",
+      "disabled": true,
+      "version": 1,
+      "min_svc": 1
+    },
+    {
+      "name": "05STOPFX.BIN",
+      "size": 316,
+      "sha256": "f9f26a092c5676ead5771ba8be4aac9c3734e9ed0cd144002a73b3f6b657c9d9",
+      "id_hex": "58465453",
+      "id_ascii": "STFX",
+      "disabled": false,
+      "version": 1,
+      "min_svc": 1
+    },
+    {
+      "name": "10LOSS.BIN",
+      "size": 74720,
+      "sha256": "ed6f283cfb8a04805041abb76353b45e85695d816072fe818861c990d4588dc8",
+      "id_hex": "53534F4C",
+      "id_ascii": "LOSS",
+      "disabled": false,
+      "version": 1,
+      "min_svc": 2
+    },
+    {
+      "name": "20GYR2.BIN",
+      "size": 4208,
+      "sha256": "cbf91f8c36efb6481329000b6736cda26eb0781fe9c8acfa1cd5f7c073a0f8d5",
+      "id_hex": "32525947",
+      "id_ascii": "GYR2",
+      "disabled": false,
+      "version": 4,
+      "min_svc": 1
+    },
+    {
+      "name": "20ULWR.BIN",
+      "size": 5224,
+      "sha256": "db37011bcbb0efdb562fc0d3c9d55a94b43947c9897c88f6d861629197e7e9fd",
+      "id_hex": "52574C55",
+      "id_ascii": "ULWR",
+      "disabled": false,
+      "version": 1,
+      "min_svc": 1
+    },
+    {
+      "name": "30FCAP.BIN",
+      "size": 316,
+      "sha256": "d2b22eda13f5ba6f4bd5ca2c9d3dff1918186f5e6fcdc757920402d8e445df96",
+      "id_hex": "50414346",
+      "id_ascii": "FCAP",
+      "disabled": false,
+      "version": 1,
+      "min_svc": 1
+    },
+    {
+      "name": "32RESCUS.BIN",
+      "size": 313216,
+      "sha256": "d9a8e10050184424886afaca263279967ab2cc2c89314c44038fe4402a676355",
+      "id_hex": "53554352",
+      "id_ascii": "RCUS",
+      "disabled": false,
+      "version": 21,
+      "min_svc": 3
+    },
+    {
+      "name": "40FLIP.BIN",
+      "size": 25936,
+      "sha256": "cc3d4c0502755185e2bca0c8f8e8fb45351b0d70c50b6cc72c0a85a89f746913",
+      "id_hex": "50494C46",
+      "id_ascii": "FLIP",
+      "disabled": false,
+      "version": 1,
+      "min_svc": 2
+    },
+    {
+      "name": "41DSQZ.BIN",
+      "size": 79864,
+      "sha256": "cddf6da4b3dac81ac158e5a04dcc8b9ec4e9579dc5ca1fe0773366d4c1883448",
+      "id_hex": "5A515344",
+      "id_ascii": "DSQZ",
+      "disabled": true,
+      "version": 1,
+      "min_svc": 1
+    },
+    {
+      "name": "42TAPZ.BIN",
+      "size": 48348,
+      "sha256": "7eb0be22dbc5eca86876e05fcfe039268a40cfb89f24a8933138d5ba0fe8156a",
+      "id_hex": "5A504154",
+      "id_ascii": "TAPZ",
+      "disabled": true,
+      "version": 10,
+      "min_svc": 1
+    },
+    {
+      "name": "45RAWV.BIN",
+      "size": 38644,
+      "sha256": "701532fe8bcb2a7c374b891bff83f80105d36b579b5c1dc95fc4130cfddcf71c",
+      "id_hex": "56574152",
+      "id_ascii": "RAWV",
+      "disabled": false,
+      "version": 1,
+      "min_svc": 2
+    },
+    {
+      "name": "60FPPTP.BIN",
+      "size": 4032,
+      "sha256": "63022ae62afabb8286657fca084346755eddcde711c3563fa8f7dc8eb5eed03c",
+      "id_hex": "50435046",
+      "id_ascii": "FPCP",
+      "disabled": false,
+      "version": 256,
+      "min_svc": 1
+    }
+  ],
+  "load_log_records": 96,
+  "log_saturated": true,
+  "last_log_record": "12 C06BDB18 E3A0200E ",
+  "focuspro_log_records": [],
+  "limitations": [
+    "LOAD.LOG is saturated; no Focus Pro load outcome is retained.",
+    "Card bytes and enabled status do not prove runtime installation.",
+    "The FPCP USB transaction ring is RAM-only in this SUP and is not on the card."
+  ]
+}

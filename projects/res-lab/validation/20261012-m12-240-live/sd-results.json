@@ -1,0 +1,26 @@
+[
+  {
+    "trial": "m12240-120-control-a",
+    "clip": "A001_094",
+    "requested": 416,
+    "finished": 416,
+    "stop_sent": true,
+    "automatic_stop": false,
+    "rational": "120000/1001",
+    "p13_legacy_hits_delta": 0,
+    "bulk_hits_delta": 0,
+    "header_hits_delta": 0
+  },
+  {
+    "trial": "m12240-240-short-a",
+    "clip": "A001_095",
+    "requested": 94,
+    "finished": 94,
+    "stop_sent": false,
+    "automatic_stop": true,
+    "rational": "240000/1001",
+    "p13_legacy_hits_delta": 0,
+    "bulk_hits_delta": 0,
+    "header_hits_delta": 94
+  }
+]

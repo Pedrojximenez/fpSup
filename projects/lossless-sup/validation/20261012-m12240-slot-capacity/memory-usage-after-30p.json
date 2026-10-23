@@ -1,0 +1,35 @@
+{
+  "commands": [
+    {
+      "time": 1791782001.82238,
+      "command": "status get is_recording",
+      "reply": "is_recording -> 0\n\n"
+    },
+    {
+      "time": 1791782001.824608,
+      "command": "memmgr bufuse",
+      "reply": "mem mode = MOVIE_REC_DNG (3) \nUSER         (00): [total:  31457536][used:  24024128][used(max):  24025088][remaining:   7433408][link:            ]\nOSD          (01): [total:  56623360][used:  53622080][used(max):  53622016][remaining:   3001280][link:            ]\nIMAGE        (02): [total:  17826048][used:  17822528][used(max):  17822464][remaining:      3520][link:            ]\nLVIEW        (03): [total:  50331904][used:  12515584][used(max):  12515520][remaining:  37816320][link:            ]\nMOVAUDIO     (06): [total:  13631744][used:     32960][used(max):   8405120][remaining:  13598784][link:            ]\nYUV          (09): [total:       256][used:         0][used(max):         0][remaining:       256][link:RAW         ]\nRAW          (10): [total: 742520320][used:         0][used(max):  75126144][remaining: 742520320][link:RAW_SUB     ]\nJPEG         (11): [total:       256][used:         0][used(max):         0][remaining:       256][link:RAW         ]\nFILEINF      (12): [total:   3145984][used:         0][used(max):    119872][remaining:   3145984][link:            ]\nRAW_SUB      (14): [total:  85983488][used:         0][used(max):         0][remaining:  85983488][link:            ]\n"
+    },
+    {
+      "time": 1791782001.825126,
+      "command": "memmgr heapmem",
+      "reply": "free 6291440 : max_free 6291440 \n\n"
+    },
+    {
+      "time": 1791782001.825832,
+      "command": "rec log-out",
+      "reply": "slot=1, cnt=3/600\nsize=131072*978816(119GB), free=40%, exFAT, UHS-II\ntime       : 2026/10/12 13:13:37 \nrec factor : Nothing \nui factor  : Button \nbattery    : OK \ntemp(BAT)  : OK \ntemp(BODY) : OK \ntemp(LCD)  : OK \ntemp(CMOS) : OK \nfile-size=1095168, bulk-size=67108864(61.3)\nreq_cnt=68, fin_cnt=68, key\nrequest  ,finish   ,diff,gap ,reqcnt,fincnt,diff,sdb,MB/s\n     2566,     2830, 264,2566,    57,     1,  56,766, 236\n     2899,     2984,  85,  69,    67,    57,  10,820, 141\n     3132,     3348, 216, 148,    68,    68,   0,820,   5\n"
+    },
+    {
+      "time": 1791782001.826221,
+      "command": "status get is_recording",
+      "reply": "is_recording -> 0\n\n"
+    }
+  ],
+  "writer": {
+    "xmp": 0,
+    "movie": 0
+  },
+  "boot": 12760957,
+  "completed_at": 1791782001.826401
+}

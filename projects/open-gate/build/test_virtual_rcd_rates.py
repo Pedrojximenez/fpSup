@@ -33,16 +33,15 @@ class RealUICam(V.Cam):
         return out
 
     def rate_csvs(self):
-        return self.csvs(V.RC.rcd.VR_CSV)
+        return self.csvs(V.RC.rcd.RATE_CSV)
 
     def bit_csvs(self):
         return [[','.join(row.split(',')[-2:]) for row in lines[1:]]
                 for lines in self.csvs(V.RC.rcd.BIT_CSV)]
 
-    def rate_commit(self, row, site):
-        var = V.RC.KEYBUF + 0x900
-        self.put(var + 8, row)
-        self.call(site, r0=var)
+    def choose_rate(self, rank):
+        """the service's VRC_RATE_SET, as a UI sup of someone else's calls it"""
+        return self.dispatch(6, rank)
 
 
 class RateUITests(unittest.TestCase):
@@ -66,28 +65,27 @@ class RateUITests(unittest.TestCase):
         for a,v in V.T.B.loader_words((self.out/'AutoRun.txt').read_bytes()).items():
             cam.put(a,v)
         # Native callback bodies are UI boundaries, as in the maintained core fixture.
-        for a in (0xc057a6fc, 0xc05821bc, V.RC.CMT_SET+4, V.RC.CMT_QS+4):
+        for a in (V.RC.CMT_SET+4, V.RC.CMT_QS+4):
             cam.mu.mem_write(a, struct.pack('<I', V.RC.POP4567))
             cam.test_code.add(a)
         cam.boot()
         self.assertIsNotNone(cam.core_block)
         self.assertIsNotNone(cam.block)
-        self.assertEqual(cam.w(cam.s()+V.L.S['VR_UI']), 1)
-        self.assertEqual(cam.w(cam.s()+V.L.S['VR_WHY']), 1)
+        self.assertEqual(cam.w(cam.s()+V.L.S['RATE_UI']), 1)
+        self.assertEqual(cam.w(cam.s()+V.L.S['RATE_WHY']), 1)
         self.assertEqual(cam.w(cam.s()+V.L.S['UI_OK']), 0x3f)
         cam.written_baseline = dict(cam.written)
         cam.prepare()
         return cam
 
     def check_csvs(self, cam, offered, dynamic=False):
-        for lines, (stock,size,_) in zip(cam.rate_csvs(), V.RC.rcd.VR_CSV):
-            self.assertEqual(len(lines), 14)
-            self.assertEqual([int(line.split(',')[0]) for line in lines[1:]], list(range(1,14)))
-            self.assertEqual([lines[10].split(',')[1],lines[11].split(',')[1]],
-                             ['239.76 fps','279.72 fps'])
+        stock_text = lambda a, n: cam.img[a-0xC0000000:a-0xC0000000+n].decode('utf-8-sig').splitlines()
+        for lines, (stock,size,_) in zip(cam.rate_csvs(), V.RC.rcd.RATE_CSV):
+            # the copy: the stock nine, no row of the core's own
+            self.assertEqual(len(lines), 10)
+            self.assertEqual([int(line.split(',')[0]) for line in lines[1:]], list(range(1,10)))
             for j,line in enumerate(lines[1:]):
-                stock_no = j+1 if j<9 else (9 if V.L.VRATES[j-9][1]==7 else 1)
-                expected = ('1,2' if dynamic else V.RC.rcd._csv_row(cam.img,stock,size,stock_no)) if j in offered else '0,0'
+                expected = ('1,2' if dynamic else ','.join(stock_text(stock,size)[j+1].split(',')[-2:])) if j in offered else '0,0'
                 self.assertEqual(','.join(line.split(',')[-2:]),expected,(stock,j))
 
     def check_native_limits(self, cam, fastest, rate_class):
@@ -100,7 +98,7 @@ class RateUITests(unittest.TestCase):
         self.assertEqual(gates['frmax'],dict.fromkeys((7,6,5,3,2),fastest))
         self.assertEqual(gates['frclass'],dict.fromkeys((0,5,3,1,4,2),rate_class))
 
-    def test_real_installer_dynamic_high_rates_and_stock_restore(self):
+    def test_real_installer_dynamic_declared_rates_and_stock_restore(self):
         cam = self.boot()
         self.check_csvs(cam,set(range(9)))
         for mid in (12,9):
@@ -109,10 +107,11 @@ class RateUITests(unittest.TestCase):
             cam.geometry(mid,2000,660)
             self.assertEqual(cam.apply(),0)
             self.check_native_limits(cam,7,0)
-            self.check_csvs(cam,set(range(12)),dynamic=True)
-            for site in (0xc057a6f8,0xc05821b8):
-                for row,rank,numerator in ((9,23976,240000),(10,27972,280000)):
-                    cam.rate_commit(row,site)
+            self.check_csvs(cam,set(range(9)),dynamic=True)
+            for site in ('service', 'again'):
+                for rank,numerator in ((23976,240000),(27972,280000)):
+                    cam.fr=12
+                    self.assertEqual(cam.choose_rate(rank),0)
                     cam.fr=7
                     self.assertEqual(cam.w(cam.s()+V.L.S['VRATE']),rank)
                     cam.mu.mem_write(V.RC.KEYBUF,b'VRC000120\0'.ljust(16,b'\0'))
@@ -130,14 +129,14 @@ class RateUITests(unittest.TestCase):
                     cam.call(fn,cam.s(),canvas,cam.w(e+4),thumb=True,sp=V.T.STACK-0x1000)
                     self.assertEqual(cam.w(canvas+0xb0),1)
                     self.assertEqual((cam.w(canvas+0x24),cam.w(canvas+0x2c)),(2000,660))
-                    print('M%d %s %.2fp: native commit, timing, canvas passed'%(mid,hex(site),rank/100),flush=True)
+                    print('M%d %s %.2fp: service, timing, canvas passed'%(mid,site,rank/100),flush=True)
         cam.fr=12
         cam.put(cam.s()+V.L.S['VRATE'],0)
         cam.geometry(98,3008,2000)
         self.assertEqual(cam.apply(),0)
         self.check_native_limits(cam,5,3)
-        self.check_csvs(cam,set(range(7))|{11},dynamic=True)
-        cam.rate_commit(9,0xc057a6f8)
+        self.check_csvs(cam,set(range(7)),dynamic=True)
+        self.assertEqual(cam.choose_rate(23976),7)       # VRC_RATE: M98 does not reach 239.76
         self.assertEqual(cam.w(cam.s()+V.L.S['VRATE']),0)
         # Core transition back to native FHD restores each stock exclusion variant.
         var=V.RC.KEYBUF+0x800;cam.put(var+8,1)

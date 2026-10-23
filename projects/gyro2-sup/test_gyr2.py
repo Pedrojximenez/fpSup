@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Gyro2 (stage P1) under unicorn: the real loader v3 (fpSup's sloader, as the
-AutoRun spells it) loads 20GYR2.BIN from a card, then the hooked DMA call is
+AutoRun spells it) loads 40GYR2.BIN from a card, then the tag observer is
 run against real fp CinemaDNG headers placed in a template buffer.
 
     python3 -B -m unittest test_gyr2
@@ -29,13 +29,17 @@ try:
 except ImportError:                        # pragma: no cover
     pass
 
-SITE, DMA, AFTER = 0xC038C77C, 0xC00FBB90, 0xC038C780
+SITE, SITE_STOCK = 0xC038C77C, 0xFAF5BD03         # the header DMA: not ours any more
+TEMPLATE_PTR, TEMPLATE_LEN = 0xC358DBA8, 0xC358DBA4
 ACCEL_SITE = 0xC050D4C8
 VD_SITE, VD_STOCK = 0xC0125480, 0x341DF2CC          # Thumb: movt r4, #0xC31D
 MODE_FN, F_TIMING, F_GEOM = 0xC032C720, 0xC0320FC8, 0xC0321028
-LENS_FOCAL, LENS_AXIS, LENS_NODES = 0xC307CDF0, 0xC307CE2C, 0xC307D270
+F_SUBJECT, F_ATTACH, F_RATE, F_ADD_TAG = 0xC00577F0, 0xC00D2958, 0xC00C9BD0, 0xC00BA378
+STOP = 0xC072EF00                  # a return address nothing else uses
+LENS_FOCAL = 0xC307CDF0
 MAGIC = b'FSG2'
-GAP = 64
+GTAG_BYTES = 4096                  # the tag the observer adds (what it sizes for 23.976p and slower)
+EV_RESERVE = 24 * 10 + 6 * 8
 
 CAPTURES = ROOT / 'projects'
 SAMPLES = {
@@ -67,36 +71,41 @@ def header_of(path):
     raise ValueError('no StripOffsets')
 
 
-def expected_tail(hdr):
-    """Independent decode: (aligned offset of the 0x200 area's trailing zeros, their length)."""
-    def entries(off):
-        n = struct.unpack_from('<H', hdr, off)[0]
-        return {t: (ty, c, v) for t, ty, c, v in
-                (struct.unpack_from('<HHII', hdr, off + 2 + 12 * k) for k in range(n))}
-    root = entries(struct.unpack_from('<I', hdr, 4)[0])
-    exif = entries(root[0x8769][2])
-    _, mn_len, mn_off = exif[0x927C]
-    assert hdr[mn_off:mn_off + 8] == b'SIGMA\0\0\0'
-    mn = entries(mn_off + 10)
-    _, a_len, a_off = mn[0x200]
-    end = a_off + a_len
-    assert end <= mn_off + mn_len
-    i = end
-    while i > a_off and hdr[i - 1] == 0:
-        i -= 1
-    start = (i + 3) & ~3
-    return start, end - start
+def with_gtag(hdr, n=GTAG_BYTES, shift=2):
+    """The template as the firmware builds it with our observer: the
+    MakerNote's last entry (0x0200) becomes our tag, its value appended past
+    the header, `shift` bytes off a word boundary.  Returns (template,
+    the block's offset)."""
+    hdr = bytearray(hdr)
+    mn_off, _ = F.maker_note(bytes(hdr))
+    cnt = struct.unpack_from('<H', hdr, mn_off + 10)[0]
+    e = mn_off + 12 + 12 * (cnt - 1)
+    assert struct.unpack_from('<H', hdr, e)[0] == 0x200
+    at = len(hdr) + shift
+    struct.pack_into('<HHII', hdr, e, F.GTAG, 7, n, at)
+    hdr += b'\0' * (shift + n)
+    hdr += b'\0' * (-len(hdr) % 0x400)
+    return bytes(hdr), (at + 3) & ~3
+
+
+def capacity(n=GTAG_BYTES, shift=2):
+    room = n - ((-(shift)) % 4 if shift % 4 else 0)
+    return (room - 60 - EV_RESERVE) // 6
 
 
 class Cam(V.Camera):
-    """test_v3's camera plus the DMA the hook forwards to."""
+    """test_v3's camera plus the firmware routines Gyro2 calls."""
 
     def __init__(self, *a, **k):
         super().__init__(*a, **k)
-        self.mu.mem_write(DMA, b'\x70\x47')            # bx lr (Thumb), as test_v3 does for its stubs
-        for a_ in (MODE_FN, F_TIMING, F_GEOM):
+        for a_ in (MODE_FN, F_TIMING, F_GEOM, F_SUBJECT, F_ATTACH, F_RATE, F_ADD_TAG):
             self.mu.mem_write(a_, struct.pack('<I', 0xE12FFF1E))
-        self.dmas = []
+        # The Subject: nine slots, the stock six observers in the first six.
+        self.subject = self._alloc(0x28)
+        self.mu.mem_write(self.subject, struct.pack('<10I', *([0xC3498D5C] * 6 + [0] * 4)))
+        self.attached = []
+        self.rate = (24000, 1001)
+        self.added = []
         # The mode the accessors report: 106, hmax 380 clocks x 2000 lines at
         # 72 MHz = 10.555556 ms; 3000 wide, 2 x 2 binning = the whole sensor.
         self.mode = 106
@@ -105,6 +114,7 @@ class Cam(V.Camera):
         self.mu.mem_write(self.t_row, struct.pack('<IH', 0, 380))
         self.mu.mem_write(self.g_row, struct.pack('<III', 0, 3000, 2000))
         self.mu.mem_write(self.g_row + 0x44, struct.pack('<II', 2, 2))
+        self.mu.mem_write(LENS_FOCAL, struct.pack('<I', 394))
         self.mode_calls = []
 
     def _hook(self, mu, addr, size, data):
@@ -114,12 +124,24 @@ class Cam(V.Camera):
         if addr in (F_TIMING, F_GEOM):
             self.mode_calls.append((addr, self.r(V.UC_ARM_REG_R1)))
             return self._ret(self.t_row if addr == F_TIMING else self.g_row)
-        if addr == DMA:
-            r0 = self.r(UC_ARM_REG_R0)
-            src, dst, n, flags = struct.unpack('<4I', mu.mem_read(r0, 16))
-            self.dmas.append((r0, src, dst, n, flags, self.r(UC_ARM_REG_LR)))
-            mu.mem_write(dst, bytes(mu.mem_read(src, n)))
+        if addr == F_SUBJECT:
+            return self._ret(self.subject)
+        if addr == F_ATTACH:
+            subj, obs = self.r(UC_ARM_REG_R0), self.r(V.UC_ARM_REG_R1)
+            self.attached.append((subj, obs))
+            slots = list(struct.unpack('<9I', mu.mem_read(subj, 36)))
+            assert 0 in slots, 'a full Subject asserts on the camera'
+            self.put(subj + 4 * slots.index(0), obs)
             return self._ret(0)
+        if addr == F_RATE:
+            mu.mem_write(self.r(UC_ARM_REG_R0), struct.pack('<2I', *self.rate))
+            return self._ret(0)
+        if addr == F_ADD_TAG:
+            sp = self.r(UC_ARM_REG_SP)
+            count, src = struct.unpack('<2I', mu.mem_read(sp, 8))
+            self.added.append((self.r(UC_ARM_REG_R0), self.r(V.UC_ARM_REG_R1), self.r(V.UC_ARM_REG_R2),
+                               self.r(V.UC_ARM_REG_R3), count, bytes(mu.mem_read(src, count)), sp & 7))
+            return self._ret(1)
         return super()._hook(mu, addr, size, data)
 
 
@@ -147,37 +169,27 @@ class Load(unittest.TestCase):
         cam.boot()
         return cam
 
-    def test_loads_and_hooks_the_dma_call_through_a_veneer(self):
-        cam = self.boot(('20GYR2.BIN', sup_bytes()))
+    def test_loads_and_leaves_the_header_dma_alone(self):
+        cam = self.boot(('40GYR2.BIN', sup_bytes()))
         names = [e for e in cam.log() if e[0] in ('LOADED', 'RELEASED')]
         self.assertEqual(names[-1][0], 'LOADED', cam.log())
-        site = cam.w(SITE)
-        self.assertEqual(site >> 24, 0xEB, f'{site:#x} is not BL')
-        off = (site & 0xFFFFFF) << 2
-        veneer = (SITE + 8 + (off - (1 << 26) if off & (1 << 25) else off)) & 0xFFFFFFFF
-        self.assertTrue(V.cave.CAVE_ARENA <= veneer < V.cave.CAVE_ARENA_END)
-        self.assertEqual(cam.w(veneer), 0xE51FF004)
-        hook = cam.w(veneer + 4)
-        self.assertTrue(V.HEAP <= hook < V.HEAP + V.HEAP_SIZE, f'{hook:#x}')
-        # the layer below is the firmware's own DMA, as a Thumb target
-        self.assertIn((SITE, 4, struct.pack('<I', 0xFAF5BD03)), cam.journal())
+        self.assertEqual(cam.w(SITE), SITE_STOCK, 'frames are written from the tag observer')
+        self.assertNotIn(SITE, [a for a, _, _ in cam.journal()])
 
-    def test_stacks_on_an_earlier_chain_layer(self):
+    def test_another_layer_at_the_header_dma_is_no_concern(self):
         other = 0xEB000000 | (((0xC072EF00 - (SITE + 8)) >> 2) & 0xFFFFFF)   # BL somewhere
-        first = V.test_sup('ZZZ1', [(SITE, 0xFAF5BD03, 1, other)])
-        cam = self.boot(('10OTHER.BIN', first), ('20GYR2.BIN', sup_bytes()))
+        first = V.test_sup('ZZZ1', [(SITE, SITE_STOCK, 2, other)])          # even EXCL
+        cam = self.boot(('10OTHER.BIN', first), ('40GYR2.BIN', sup_bytes()))
         kinds = [e[0] for e in cam.log()]
         self.assertEqual(kinds.count('LOADED'), 2, cam.log())
         self.assertNotIn('RELEASED', kinds)
-        self.assertNotEqual(cam.w(SITE), other, 'Gyro2 should be the outer layer')
-        # run the hook with a bad template: it must forward to the layer below
-        state = run_frame(cam, b'\0' * 0x400, count=1)
-        self.assertEqual(state['pc_after'], 0xC072EF00)
+        self.assertEqual(cam.w(SITE), other)
+        self.assertEqual(len(cam.attached), 1)
 
     def test_the_accel_site_stacks_on_an_earlier_layer(self):
         other = 0xEB000000 | (((0xC072EF00 - (ACCEL_SITE + 8)) >> 2) & 0xFFFFFF)
         first = V.test_sup('ZZZ3', [(ACCEL_SITE, 0xE3A02000, 1, other)])
-        cam = self.boot(('10OTHER.BIN', first), ('20GYR2.BIN', sup_bytes()))
+        cam = self.boot(('10OTHER.BIN', first), ('40GYR2.BIN', sup_bytes()))
         kinds = [e[0] for e in cam.log()]
         self.assertEqual(kinds.count('LOADED'), 2, cam.log())
         self.assertNotEqual(cam.w(ACCEL_SITE), other)
@@ -186,14 +198,14 @@ class Load(unittest.TestCase):
         self.assertEqual(f['r2'], 0xDEAD, 'and that layer, not us, replays mov r2, #0')
 
     def test_alone_at_the_accel_site_it_replays_the_displaced_instruction(self):
-        cam = self.boot(('20GYR2.BIN', sup_bytes()))
+        cam = self.boot(('40GYR2.BIN', sup_bytes()))
         f = fire_accel(cam, (1, 2, 3))
         self.assertEqual(f['pc'], ACCEL_SITE + 4, 'back to the driver')
         self.assertEqual(f['r2'], 0, 'mov r2, #0, as the stock site did')
         self.assertTrue(f['regs_ok'])
 
     def test_the_vd_interrupt_is_hooked_through_an_arm_veneer(self):
-        cam = self.boot(('20GYR2.BIN', sup_bytes()))
+        cam = self.boot(('40GYR2.BIN', sup_bytes()))
         veneer = thumb_blx_target(VD_SITE, cam.w(VD_SITE))
         self.assertEqual(veneer % 4, 0)
         self.assertTrue(V.cave.CAVE_ARENA <= veneer < V.cave.CAVE_ARENA_END, f'{veneer:#x}')
@@ -202,7 +214,7 @@ class Load(unittest.TestCase):
         self.assertEqual(cam.w(0xC01255C8), 0x351DF2CC, 'IRQ 0x7f is left alone')
 
     def test_the_vd_hook_replays_its_movt_and_keeps_every_register(self):
-        cam = self.boot(('20GYR2.BIN', sup_bytes()))
+        cam = self.boot(('40GYR2.BIN', sup_bytes()))
         f = fire_sync(cam, VD_SITE, UC_ARM_REG_R4, 0x89C0)
         self.assertEqual(f['pc'], VD_SITE + 4, 'back in the handler')
         self.assertTrue(f['thumb'], 'and in Thumb state')
@@ -211,43 +223,84 @@ class Load(unittest.TestCase):
 
     def test_an_owner_of_the_vd_site_makes_it_back_off_and_write_nothing(self):
         owner = V.test_sup('ZZZ5', [(VD_SITE, VD_STOCK, 2, 0)])      # EXCL, claim only
-        cam = self.boot(('10OWNER.BIN', owner), ('20GYR2.BIN', sup_bytes()))
+        cam = self.boot(('10OWNER.BIN', owner), ('40GYR2.BIN', sup_bytes()))
         self.assertIn('RELEASED', [e[0] for e in cam.log()])
         self.assertEqual(cam.w(VD_SITE), VD_STOCK)
-        self.assertEqual(cam.w(SITE), 0xFAF5BD03, 'frames without a time are no use: nothing hooked')
+        self.assertEqual(cam.attached, [], 'frames without a time are no use: nothing attached')
         self.assertEqual(cam.w(ACCEL_SITE), 0xE3A02000)
-
-    def test_an_exclusive_owner_makes_it_back_off_and_write_nothing(self):
-        owner = V.test_sup('ZZZ2', [(SITE, 0xFAF5BD03, 2, 0)])          # EXCL, claim only
-        cam = self.boot(('10OWNER.BIN', owner), ('20GYR2.BIN', sup_bytes()))
-        self.assertEqual(cam.w(SITE), 0xFAF5BD03)
-        self.assertIn('RELEASED', [e[0] for e in cam.log()])
 
     def test_loads_beside_the_v3_lossless_sup_without_sharing_a_site(self):
         loss = ROOT / 'projects/usb-shell-sup/cards/20261006-v3-step2-lossless/fpSup/10LOSS.BIN'
         if not loss.exists():
             self.skipTest('no v3 lossless card on this machine')
-        cam = self.boot(('10LOSS.BIN', loss.read_bytes()), ('20GYR2.BIN', sup_bytes()))
+        cam = self.boot(('10LOSS.BIN', loss.read_bytes()), ('40GYR2.BIN', sup_bytes()))
         loaded = [e[3] for e in cam.log() if e[0] == 'LOADED']
-        self.assertEqual(loaded, ['10LOSS.BIN', '20GYR2.BIN'])
+        self.assertEqual(loaded, ['10LOSS.BIN', '40GYR2.BIN'])
         sites = [a for a, _, _ in cam.journal()]
-        self.assertEqual(sites.count(SITE), 1, 'only Gyro2 claims the header DMA')
+        self.assertNotIn(SITE, sites)
         # lossless takes the frame at the save call after the header copy
         self.assertIn(0xC038BFF0, sites)
-        self.assertEqual(cam.w(SITE) >> 24, 0xEB)
+        self.assertEqual(len(cam.attached), 1)
 
     def test_an_exclusive_owner_of_the_accel_site_also_makes_it_back_off(self):
         owner = V.test_sup('ZZZ4', [(ACCEL_SITE, 0xE3A02000, 2, 0)])    # EXCL, claim only
-        cam = self.boot(('10OWNER.BIN', owner), ('20GYR2.BIN', sup_bytes()))
+        cam = self.boot(('10OWNER.BIN', owner), ('40GYR2.BIN', sup_bytes()))
         self.assertEqual(cam.w(ACCEL_SITE), 0xE3A02000)
-        self.assertEqual(cam.w(SITE), 0xFAF5BD03, 'the header site was claimed first, but not written')
+        self.assertEqual(cam.attached, [])
         self.assertIn('RELEASED', [e[0] for e in cam.log()])
 
+    def test_the_tag_observer_is_attached_to_the_subject(self):
+        cam = self.boot(('40GYR2.BIN', sup_bytes()))
+        self.assertEqual(len(cam.attached), 1)
+        subj, obs = cam.attached[0]
+        self.assertEqual(subj, cam.subject)
+        self.assertEqual(cam.w(cam.subject + 24), obs, 'in the first free slot')
+        loaded = [e for e in cam.log() if e[0] == 'LOADED']
+        blk = loaded[-1][1]
+        self.assertTrue(blk <= obs < blk + 0x2000, 'the observer lives in our resident block')
+        handler = cam.w(cam.w(obs) + 12)
+        self.assertEqual(handler, blk + V.B.SL_HEADER_LEN + SYM['tag_observer'])
+
+    def test_a_full_subject_makes_it_back_off_and_write_nothing(self):
+        files, dirs = V.card(('40GYR2.BIN', sup_bytes()))
+        cam = Cam(files, dirs)
+        cam.mu.mem_write(cam.subject, struct.pack('<9I', *([0xC3498D5C] * 9)))
+        cam.boot()
+        self.assertEqual(cam.attached, [])
+        self.assertIn('RELEASED', [e[0] for e in cam.log()])
+        self.assertEqual(cam.w(ACCEL_SITE), 0xE3A02000)
+        self.assertEqual(cam.w(VD_SITE), VD_STOCK)
+
+    def test_a_cinemadng_take_start_adds_our_tag_sized_for_its_rate(self):
+        cam = self.boot(('40GYR2.BIN', sup_bytes()))
+        for rate, n in (((24000, 1001), 105 * 24 + 351), ((30000, 1001), 84 * 24 + 351),
+                        ((120000, 1001), 21 * 24 + 351), ((280000, 1001), 9 * 24 + 351),
+                        ((18000, 1000), 139 * 24 + 351), ((10000, 1000), 4096), ((0, 0), 4096), ((0, 1001), 4096), ((24000, 0), 4096)):
+            cam.rate = rate
+            f = notify(cam, 0, 3)
+            self.assertEqual((f['pc'], f['r0']), (STOP, 1), 'returns 1: 0 would detach it')
+            self.assertTrue(f['regs_ok'])
+            self.assertEqual(len(f['added']), 1, rate)
+            b, ifd, tag, typ, count, data, sp7 = f['added'][0]
+            self.assertEqual((b, ifd, tag, typ, count), (0xB0B0B0B0, 5, F.GTAG, 7, n), rate)
+            self.assertEqual(data, b'\0' * n, 'it starts as zeros')
+            self.assertEqual(sp7, 0, 'the stack is 8-aligned at the call')
+            self.assertGreaterEqual((n - 3 - 60 - EV_RESERVE) // 6, min(4 * -(-2500 * rate[1] // rate[0]) if rate[0] else 0, 624))
+
+    def test_other_notifies_add_nothing(self):
+        cam = self.boot(('40GYR2.BIN', sup_bytes()))
+        for mode, typ, builder in ((0, 4, 0xB0B0B0B0), (0, 5, 0xB0B0B0B0), (3, 3, 0xB0B0B0B0),
+                                   (2, 3, 0xB0B0B0B0), (1, 3, 0xB0B0B0B0), (5, 3, 0xB0B0B0B0),
+                                   (6, 3, 0xB0B0B0B0), (0, 3, 0)):
+            f = notify(cam, mode, typ, builder)
+            self.assertEqual((f['pc'], f['r0'], f['added']), (STOP, 1, []), (mode, typ, builder))
+            self.assertTrue(f['regs_ok'])
+
     def test_a_stale_hook_from_a_missed_power_off_is_repaired_then_rehooked(self):
-        stale = {SITE: 0xEB000001}
-        cam = self.boot(('20GYR2.BIN', sup_bytes()), stale=stale)
-        self.assertEqual(cam.w(SITE) >> 24, 0xEB)
-        self.assertNotEqual(cam.w(SITE), 0xEB000001)
+        stale = {ACCEL_SITE: 0xEB000001}
+        cam = self.boot(('40GYR2.BIN', sup_bytes()), stale=stale)
+        self.assertEqual(cam.w(ACCEL_SITE) >> 24, 0xEB)
+        self.assertNotEqual(cam.w(ACCEL_SITE), 0xEB000001)
         self.assertIn('REPAIRED', [e[0] for e in cam.log()])
 
 
@@ -358,49 +411,76 @@ def fire_sync(cam, site, reg, low):
             'reg': got[reg], 'thumb': bool(mu.reg_read(V.UC_ARM_REG_CPSR) & 0x20)}
 
 
+def notify(cam, mode, typ, builder=0xB0B0B0B0):
+    """The Subject calling our handler as FUN_c0055fe0 does: (obs, DataPool)."""
+    mu = cam.mu
+    obs = cam.attached[0][1] if cam.attached else cam.w(cam.subject + 24)
+    pools = cam.__dict__.setdefault('pools', {})
+    if (mode, typ, builder) not in pools:           # one DataPool per event, made once
+        ev = cam._alloc(12)
+        mu.mem_write(ev, struct.pack('<3I', mode, typ, 0))
+        code = cam._alloc(16)                       # two getters: ldr r0, [pc]; bx lr; .word v
+        mu.mem_write(code, struct.pack('<4I', 0xE59F0000, 0xE12FFF1E, ev, 0))
+        get_b = cam._alloc(12)
+        mu.mem_write(get_b, struct.pack('<3I', 0xE59F0000, 0xE12FFF1E, builder))
+        vt = cam._alloc(0x60)
+        mu.mem_write(vt, b'\0' * 0x60)
+        cam.put(vt + 0x40, code)
+        cam.put(vt + 0x2C, get_b)
+        dp = cam._alloc(8)
+        cam.put(dp, vt)
+        pools[(mode, typ, builder)] = dp
+    dp = pools[(mode, typ, builder)]
+    mu.reg_write(UC_ARM_REG_R0, obs)
+    mu.reg_write(V.UC_ARM_REG_R1, dp)
+    sent = {UC_ARM_REG_R4: 0x44, UC_ARM_REG_R5: 0x55, UC_ARM_REG_R6: 0x66, UC_ARM_REG_R7: 0x77,
+            UC_ARM_REG_R8: 0x88, UC_ARM_REG_R9: 0x99, UC_ARM_REG_R10: 0xAA, UC_ARM_REG_R11: 0xBB}
+    for r, v in sent.items():
+        mu.reg_write(r, v)
+    sp = V.STACK - 0x2800
+    mu.reg_write(UC_ARM_REG_SP, sp)
+    mu.reg_write(UC_ARM_REG_LR, STOP)
+    before = len(cam.added)
+    stop = {}
+
+    def until(mu_, addr, size, _):
+        if addr == STOP:
+            stop['pc'] = addr
+            mu_.emu_stop()
+    h = mu.hook_add(V.UC_HOOK_CODE, until)
+    try:
+        mu.emu_start(cam.w(cam.w(obs) + 12), 0, count=5_000_000)
+    finally:
+        mu.hook_del(h)
+        if cam.error:
+            raise cam.error
+    ok = all(mu.reg_read(r) == v for r, v in sent.items()) and mu.reg_read(UC_ARM_REG_SP) == sp
+    return {'r0': mu.reg_read(UC_ARM_REG_R0), 'pc': stop.get('pc'), 'regs_ok': ok, 'added': cam.added[before:]}
+
+
+
 def run_frame(cam, template_or_buf, count, src=None, dst=None, n=None):
-    """Execute the site with the registers the firmware has there."""
+    """A frame as the firmware gives it to us now: the template where the MovRec
+    singleton keeps it, then the frame's notify (mode 3).  count == 3 -- the old
+    tag counter's first value -- is a take's first frame: the mode-2 notify of
+    the serialized template comes first.  The DMA after is the firmware's, so
+    'frame' is the template as it would copy it."""
     mu = cam.mu
     if src is None:
         n = len(template_or_buf)
         src = cam._alloc(n, 32)
         mu.mem_write(src, bytes(template_or_buf))
-        dst = cam._alloc(n, 32)
-    req = getattr(cam, '_req', None) or cam._alloc(0x1200)
-    tag = getattr(cam, '_tag', None) or cam._alloc(0x200)
-    cam._req, cam._tag = req, tag
-    cam.put(tag + 0x174, count)
-    desc = V.STACK - 0x3000
-    mu.mem_write(desc, struct.pack('<4I', src, dst, n, 0x01000000))
-    sentinels = {UC_ARM_REG_R4: 0x44440004, UC_ARM_REG_R7: 0x77770007, UC_ARM_REG_R8: 0x88880008,
-                 UC_ARM_REG_R9: 0x99990009, UC_ARM_REG_R10: 0xAAAA000A, UC_ARM_REG_R11: 0xBBBB000B}
-    for reg, v in sentinels.items():
-        mu.reg_write(reg, v)
-    mu.reg_write(UC_ARM_REG_R5, req)
-    mu.reg_write(UC_ARM_REG_R6, tag)
-    mu.reg_write(UC_ARM_REG_R0, desc)
-    sp = V.STACK - 0x2000
-    mu.reg_write(UC_ARM_REG_SP, sp)
-    before = len(cam.dmas)
-    stop = {}
-
-    def until(mu_, addr, size, _):
-        if addr in (AFTER, 0xC072EF00):
-            stop['pc'] = addr
-            mu_.emu_stop()
-    h = mu.hook_add(V.UC_HOOK_CODE, until)
-    try:
-        mu.emu_start(SITE, 0, count=5_000_000)
-    finally:
-        mu.hook_del(h)
-        if cam.error:
-            raise cam.error
-    regs_ok = all(mu.reg_read(r) == v for r, v in sentinels.items()) and \
-        mu.reg_read(UC_ARM_REG_R5) == req and mu.reg_read(UC_ARM_REG_R6) == tag
-    return {'src': src, 'dst': dst, 'n': n, 'desc': desc, 'dmas': cam.dmas[before:],
-            'pc_after': stop.get('pc'), 'sp': mu.reg_read(UC_ARM_REG_SP), 'sp0': sp,
-            'regs_ok': regs_ok, 'tmpl': bytes(mu.mem_read(src, n)),
-            'frame': bytes(mu.mem_read(dst, n))}
+    cam.put(TEMPLATE_PTR, src)
+    cam.put(TEMPLATE_LEN, n)
+    ok = True
+    if count == 3:
+        f = notify(cam, 2, 3)
+        ok = f['regs_ok'] and f['pc'] == STOP and f['r0'] == 1
+    f = notify(cam, 3, 3)
+    ok = ok and f['regs_ok'] and f['r0'] == 1
+    t = bytes(mu.mem_read(src, n))
+    return {'src': src, 'dst': None, 'n': n, 'pc_after': f['pc'], 'regs_ok': ok,
+            'sp': 0 if ok else 1, 'sp0': 0, 'tmpl': t, 'frame': t}
 
 
 @unittest.skipIf(V.Uc is None or not V.IMAGE.exists(), 'needs unicorn and the image')
@@ -413,11 +493,11 @@ class Frames(unittest.TestCase):
     US = 400                                   # per record, near enough
 
     def camera(self):
-        files, dirs = V.card(('20GYR2.BIN', sup_bytes()))
+        files, dirs = V.card(('40GYR2.BIN', sup_bytes()))
         cam = Cam(files, dirs)
         cam.boot()
         cam.ring = Ring(cam)
-        loaded = [e for e in cam.log() if e[0] == 'LOADED' and e[3] == '20GYR2.BIN']
+        loaded = [e for e in cam.log() if e[0] == 'LOADED' and e[3] == '40GYR2.BIN']
         cam.block = loaded[0][1]
         cam.vars = cam.block + V.B.SL_HEADER_LEN + SYM['vars']
         cam.k0 = None
@@ -444,11 +524,11 @@ class Frames(unittest.TestCase):
             return run_frame(cam, hdr, count=count)
         return run_frame(cam, None, count=count, src=prev['src'], dst=prev['dst'], n=prev['n'])
 
-    def sample_hdr(self, key='fhd'):
+    def sample_hdr(self, key='fhd', **k):
         p = find_sample(SAMPLES[key])
         if p is None:
             self.skipTest(f'sample {key} not on this machine')
-        return header_of(p)
+        return with_gtag(header_of(p), **k)[0]
 
     def take(self, cam, hdr, frames, per_frame=83, history=600, accel=True):
         self.flow(cam, history, accel=accel)
@@ -477,7 +557,7 @@ class Frames(unittest.TestCase):
         for key in SAMPLES:
             with self.subTest(key):
                 hdr = self.sample_hdr(key)
-                toff, _ = expected_tail(hdr)
+                at = with_gtag(header_of(find_sample(SAMPLES[key])))[1]
                 cam = self.camera()
                 frames = self.take(cam, hdr, frames=5)
                 recs = [F.read_frame(s['frame']) for s in frames]
@@ -489,14 +569,17 @@ class Frames(unittest.TestCase):
                 first_k = cam.ring.k - len(flat)
                 self.assertEqual(flat, [sample(first_k + j) for j in range(len(flat))])
                 for i, (s, r) in enumerate(zip(frames, recs)):
-                    self.assertEqual(r['at'], toff + GAP)
-                    self.assertEqual(s['pc_after'], AFTER)
-                    self.assertEqual(len(s['dmas']), 1)
+                    self.assertEqual(r['at'], at)
+                    self.assertEqual(r['at'] % 4, 0)
+                    self.assertEqual(r['writer'], G.VERSION)
+                    self.assertEqual(s['pc_after'], STOP)
                     self.assertTrue(s['regs_ok'])
                     self.assertEqual(s['sp'], s['sp0'])
                     self.assertEqual(s['frame'], s['tmpl'])
-                    self.assertEqual(r['flags'], F.F_FIRST | F.F_LENS if i == 0 else 0)
-                    self.assertEqual((r['readout_ns'], r['mode_id'], r['crop_w'], r['crop_h']), (10555556, 106, 6000, 4000))
+                    self.assertEqual(r['flags'], F.F_FIRST if i == 0 else 0)
+                    self.assertEqual((r['fmt'], r['mode_id'], r['hmax'], r['read_w'], r['lines'], r['bin_h'], r['bin_v']),
+                                     (2, 106, 380, 3000, 2000, 2, 2))
+                    self.assertEqual(r['calib_focal'], 394)
                     self.assertEqual(r['frame_seq'], i)
 
     def test_each_block_ends_on_the_newest_record_even_between_drains(self):
@@ -521,12 +604,23 @@ class Frames(unittest.TestCase):
         self.flow(cam, 2500)                            # MovRec held up a second
         s = self.frame(cam, 5, prev=a[0])
         r = F.read_frame(s['frame'])
+        c = capacity()
         self.assertFalse(r['flags'] & F.F_LOST)
-        self.assertTrue(r['flags'] & F.F_TRUNC)         # more than the tail holds: the newest
-        self.assertEqual(r['base_idx'] + r['n_samples'], 333 + 2500)
-        self.assertEqual(r['samples'][-1], sample(cam.ring.k - 1))
+        # more than the tag holds: the oldest now, the rest with the next frames
+        self.assertEqual((r['base_idx'], r['n_samples'], r['frame_mark']), (333, c, 2500))
+        self.assertEqual(r['samples'][0], sample(cam.ring.k - 2500), 'from the buffer, intact')
         self.assertEqual(r['frame_seq'], 2, 'not a new take')
-        self.assertEqual(r['samples'][0], sample(cam.ring.k - r['n_samples']), 'from the buffer, intact')
+        recs, n = [r], 3
+        while recs[-1]['base_idx'] + recs[-1]['n_samples'] < 333 + 2500 + 83 * (n - 3):
+            self.flow(cam, 83)
+            recs.append(F.read_frame(self.frame(cam, 3 + n, prev=a[0])['frame']))
+            n += 1
+        self.assertEqual(len(recs), 5, 'caught up at capacity - 83 a frame')
+        for x, y in zip(recs, recs[1:]):
+            self.assertEqual(y['base_idx'], x['base_idx'] + x['n_samples'])
+        self.assertTrue(all(not x['flags'] & F.F_LOST for x in recs))
+        self.assertEqual(recs[-1]['frame_mark'], recs[-1]['n_samples'])
+        self.assertEqual(recs[-1]['samples'][-1], sample(cam.ring.k - 1))
 
     def test_a_stall_longer_than_the_buffer_is_lost(self):
         hdr = self.sample_hdr()
@@ -536,8 +630,11 @@ class Frames(unittest.TestCase):
         s = self.frame(cam, 4, prev=a[0])
         r = F.read_frame(s['frame'])
         self.assertTrue(r['flags'] & F.F_LOST)
-        self.assertEqual(r['base_idx'] + r['n_samples'], 250 + 8192 + 2000)
-        self.assertEqual(r['samples'][-1], sample(cam.ring.k - 1))
+        # from the oldest the buffer still holds safely: W less the margin
+        self.assertEqual(r['base_idx'] + r['frame_mark'], 250 + 8192 + 2000)
+        oldest = self.var(cam, 56) - (8192 - 1024)
+        self.assertEqual(r['base_idx'], oldest - self.var(cam, 92))
+        self.assertEqual(r['samples'][0], sample(cam.k0 + oldest))
 
     def test_with_the_level_silent_frames_read_the_ring_until_it_runs_out(self):
         hdr = self.sample_hdr()
@@ -597,19 +694,6 @@ class Frames(unittest.TestCase):
         self.assertEqual([self.var(cam, o) for o in (128, 132, 136)], before)
         self.assertEqual(self.var(cam, 124), seq + 2, 'odd while writing, even after')
         self.assertNotEqual(self.var(cam, 56), before[0])
-
-    def test_vendor_bytes_in_our_place_are_not_written_over(self):
-        hdr = self.sample_hdr()
-        cam = self.camera()
-        a = self.take(cam, hdr, frames=1)
-        woff = self.var(cam, 16)
-        junk = b'VEND' + bytes(range(1, 61))
-        cam.mu.mem_write(a[0]['src'] + woff, junk)      # the template changed under us
-        self.flow(cam, 83)
-        s = self.frame(cam, 4, prev=a[0])
-        self.assertEqual(s['frame'][woff:woff + 64], junk)
-        r = F.read_frame(s['frame'])
-        self.assertGreater(r['at'], woff, 'placed after the new bytes')
 
     def test_vd_lands_in_its_frame_with_its_time(self):
         hdr = self.sample_hdr()
@@ -675,7 +759,7 @@ class Frames(unittest.TestCase):
         self.flow(cam, 1000)
         s = self.frame(cam, 3, prev=a[0])               # the counter restarts
         r = F.read_frame(s['frame'])
-        self.assertEqual((r['frame_seq'], r['base_idx'], r['n_samples'], r['flags']), (0, 0, 250, F.F_FIRST | F.F_LENS))
+        self.assertEqual((r['frame_seq'], r['base_idx'], r['n_samples'], r['flags']), (0, 0, 250, F.F_FIRST))
         self.assertEqual(r['samples'][-1], sample(cam.ring.k - 1))
         self.assertNotEqual(r['clip_id'], F.read_frame(a[0]['frame'])['clip_id'])
 
@@ -701,30 +785,112 @@ class Frames(unittest.TestCase):
     def test_garbage_templates_are_skipped_but_still_copied(self):
         cam = self.camera()
         self.flow(cam, 600)
-        for i, junk in enumerate((b'\0' * 0x400, b'MM\0\x2a' + b'\0' * 0x3FC)):
-            s = run_frame(cam, junk, count=3 + i)
-            self.assertEqual(len(s['dmas']), 1)
-            self.assertEqual(s['frame'], junk)
+        for junk in (b'\0' * 0x400, b'MM\0\x2a' + b'\0' * 0x3FC):
+            for count in (3, 4):                    # a take on it, two frames
+                s = run_frame(cam, junk, count=count)
+                self.assertTrue(s['regs_ok'])
+                self.assertEqual(s['frame'], junk)
+        self.assertEqual(self.var(cam, 36), 4, 'all four skipped')
+        hdr = self.sample_hdr()
+        a = run_frame(cam, hdr, count=4)            # a template take_start never saw
+        self.assertEqual(a['frame'], hdr, 'is not written either')
+        self.flow(cam, 83)
+        s = run_frame(cam, hdr, count=3)            # its own take
+        r = F.read_frame(s['frame'])
+        self.assertEqual((r['frame_seq'], r['n_samples']), (0, 250))
+
+    def test_the_take_start_finds_the_tag_and_frames_never_parse(self):
+        hdr = self.sample_hdr()
+        at = with_gtag(header_of(find_sample(SAMPLES['fhd'])))[1]
+        cam = self.camera()
+        self.flow(cam, 600)
+        a = run_frame(cam, hdr, count=3)
+        self.assertEqual(self.var(cam, 16), at, 'V_WOFF: found at the mode-2 notify')
+        # break the header's IFD0 after the take started: frames do not look at it
+        cam.mu.mem_write(a['src'] + 8, b'\xFF\xFF')
+        self.flow(cam, 83)
+        s = self.frame(cam, 4, prev=a)
+        blk = s['frame'][at:at + 12]
+        self.assertEqual(blk[:6], b'FSG2\x02\x02')
+        payload = s['frame'][at + 12:at + 12 + struct.unpack_from('<I', blk, 8)[0]]
+        self.assertEqual(F.decode_kind2(payload)['frame_seq'], 1)
+
+    def test_a_template_the_take_did_not_start_on_is_not_written(self):
+        hdr = self.sample_hdr()
+        cam = self.camera()
+        self.flow(cam, 600)
+        run_frame(cam, hdr, count=3)                # the take, on its template
+        self.flow(cam, 83)
+        other = run_frame(cam, hdr, count=4)        # the same bytes somewhere else
+        self.assertEqual(other['frame'], hdr)
+        self.assertTrue(other['regs_ok'])
+
+    def test_only_cinemadng_frames_are_written(self):
+        hdr = self.sample_hdr()
+        cam = self.camera()
+        self.flow(cam, 600)
+        a = run_frame(cam, hdr, count=3)
+        before = bytes(cam.mu.mem_read(a['src'], a['n']))
+        self.flow(cam, 83)
+        for mode, typ in ((3, 4), (3, 5), (2, 4), (5, 3), (6, 3)):
+            f = notify(cam, mode, typ)
+            self.assertEqual((f['pc'], f['r0']), (STOP, 1))
+            self.assertTrue(f['regs_ok'])
+        self.assertEqual(bytes(cam.mu.mem_read(a['src'], a['n'])), before)
+        self.assertEqual(self.var(cam, 32), 1, "one frame written: the take's first")
+
+    def test_a_small_tag_carries_the_oldest_and_catches_up(self):
+        # 120p: 21 records a frame, a tag of 4 frames' worth (84)
+        n = 60 + EV_RESERVE + 6 * 84 + 2
+        hdr = self.sample_hdr(n=n)
+        self.assertEqual(capacity(n), 84)
+        cam = self.camera()
+        frames = self.take(cam, hdr, frames=6, per_frame=21)
+        recs = [F.read_frame(s['frame']) for s in frames]
+        self.assertEqual([r['n_samples'] for r in recs], [84, 84, 84, 61, 21, 21])
+        self.assertEqual([r['base_idx'] for r in recs], [0, 84, 168, 252, 313, 334])
+        self.assertEqual([r['base_idx'] + r['frame_mark'] for r in recs], [250 + 21 * k for k in range(6)])
+        self.assertTrue(all(r['flags'] & F.F_LOST == 0 for r in recs))
+        flat = [x for r in recs for x in r['samples']]
+        self.assertEqual(flat, [sample(cam.ring.k - len(flat) + j) for j in range(len(flat))])
+        self.assertTrue(all(len(s['frame']) == len(hdr) for s in frames))
+
+    def test_without_our_tag_nothing_is_written_but_the_frame_is_copied(self):
+        plain = header_of(find_sample(SAMPLES['fhd'])) if find_sample(SAMPLES['fhd']) else None
+        if plain is None:
+            self.skipTest('sample fhd not on this machine')
+        cam = self.camera()
+        a = self.take(cam, plain, frames=2)
+        for s in a:
+            self.assertEqual(s['frame'], plain)
             self.assertTrue(s['regs_ok'])
+        self.assertEqual(self.var(cam, 36), 2, 'counted as skipped')
+        # the stream goes on: a take with the tag starts afresh
         hdr = self.sample_hdr()
         self.flow(cam, 83)
-        s = run_frame(cam, hdr, count=5)
-        r = F.read_frame(s['frame'])
-        self.assertEqual((r['base_idx'], r['n_samples']), (250, 83), 'the stream went on under the skipped frame')
+        r = F.read_frame(self.frame(cam, 3, hdr=hdr)['frame'])
+        self.assertEqual((r['frame_seq'], r['n_samples']), (0, 250))
 
-    def test_a_short_tail_keeps_the_newest_records(self):
-        hdr = bytearray(self.sample_hdr())
-        toff, tlen = expected_tail(bytes(hdr))
-        keep = GAP + 64 + 192 + 6 * (100 + 84) + 3       # 184 samples; 100 beside the lens table (192: EV_RESERVE)
-        hdr[toff:toff + tlen - keep] = b'\x33' * (tlen - keep)
-        end = toff + tlen
-        hdr[end:end + 1024] = b'\0' * 1024
+    def test_a_block_left_half_written_has_no_magic(self):
+        hdr = self.sample_hdr()
         cam = self.camera()
-        frames = self.take(cam, bytes(hdr), frames=2, per_frame=130)
-        r0, r1 = (F.read_frame(s['frame']) for s in frames)
-        self.assertEqual((r0['n_samples'], r0['base_idx'], r0['flags'] & F.F_TRUNC), (100, 150, F.F_TRUNC))
-        self.assertEqual((r1['n_samples'], r1['base_idx'], r1['flags']), (130, 250, 0))
-        self.assertEqual(r1['samples'][-1], sample(cam.ring.k - 1))
+        a = self.take(cam, hdr, frames=1)
+        at = with_gtag(header_of(find_sample(SAMPLES['fhd'])))[1]
+        cam.mu.mem_write(a[0]['src'] + at, b'FSG2')
+        self.flow(cam, 83)
+        seen = {}
+
+        def on_write(mu_, access, addr, size, value, _):
+            if addr == a[0]['src'] + at + 4 and 'magic' not in seen:   # the first header word
+                seen['magic'] = bytes(mu_.mem_read(a[0]['src'] + at, 4))
+        from unicorn import UC_HOOK_MEM_WRITE
+        h = cam.mu.hook_add(UC_HOOK_MEM_WRITE, on_write)
+        try:
+            s = self.frame(cam, 4, prev=a[0])
+        finally:
+            cam.mu.hook_del(h)
+        self.assertEqual(s['frame'][at:at + 4], b'FSG2', 'and set again at the end')
+        self.assertEqual(seen.get('magic'), b'\0\0\0\0', 'the magic is cleared before the block is rewritten')
 
     def test_the_mode_is_read_once_a_take(self):
         hdr = self.sample_hdr()
@@ -732,15 +898,17 @@ class Frames(unittest.TestCase):
         self.take(cam, hdr, frames=3)
         self.assertEqual(cam.mode_calls, ['mode', (F_TIMING, 106), (F_GEOM, 106)])
 
-    def test_the_lens_table_is_the_cameras_bytes(self):
+    def test_each_frame_carries_the_calibrated_focal_length(self):
         hdr = self.sample_hdr()
         cam = self.camera()
-        cam.mu.mem_write(LENS_FOCAL, struct.pack('<I', 394))
-        cam.mu.mem_write(LENS_AXIS, struct.pack('<5I', 0, 18641, 37283, 49637, 55924))
-        nodes = [1.0 + k * 1e-3 for k in range(60)]
-        cam.mu.mem_write(LENS_NODES, struct.pack('<60d', *nodes))
-        r = F.read_frame(self.take(cam, hdr, frames=1)[0]['frame'])
-        self.assertEqual(r['lens'], (394, (0, 18641, 37283, 49637, 55924), tuple(nodes)))
+        a = self.take(cam, hdr, frames=1)
+        self.assertEqual(F.read_frame(a[0]['frame'])['calib_focal'], 394)
+        cam.mu.mem_write(LENS_FOCAL, struct.pack('<I', 700))          # zoomed
+        self.flow(cam, 83)
+        self.assertEqual(F.read_frame(self.frame(cam, 4, prev=a[0])['frame'])['calib_focal'], 700)
+        cam.mu.mem_write(LENS_FOCAL, struct.pack('<I', 0x12345))      # not a focal length
+        self.flow(cam, 83)
+        self.assertEqual(F.read_frame(self.frame(cam, 5, prev=a[0])['frame'])['calib_focal'], 0)
 
     def test_an_unreadable_ring_writes_an_empty_lost_block(self):
         hdr = self.sample_hdr()
@@ -749,7 +917,7 @@ class Frames(unittest.TestCase):
         s = run_frame(cam, hdr, count=3)
         r = F.read_frame(s['frame'])
         self.assertEqual((r['n_samples'], r['flags'] & F.F_LOST), (0, F.F_LOST))
-        self.assertEqual(len(s['dmas']), 1)
+        self.assertTrue(s['regs_ok'])
 
     def test_the_drain_takes_a_head_parked_at_the_ring_end(self):
         hdr = self.sample_hdr()

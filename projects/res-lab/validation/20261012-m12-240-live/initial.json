@@ -1,0 +1,14 @@
+{
+  "daemon_pid": 89864,
+  "daemon_executable": "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/fp_usb_shell/fpshd",
+  "host_status": "OK name=fpshd version=3.2.0 protocol=1 frame=64 payload=44 transport=EP01-EP82 iface=0 camera=open seq=13327 ep83=host_candidate upload=UP01-probed mem=MEM1-probed quarantine=0 fault=none",
+  "native": {
+    "status get is_recording": "is_recording -> 0\n\n",
+    "status get app_current": "app_current -> 2\n\n",
+    "menu SetMovFramerate": "3\n\n",
+    "menu SetMovCinemaDNGQuality": "0\n\n",
+    "menu SetAudioRecSupport": "1\n\n",
+    "gui geti MV_fpLossless": "OK:MV_fpLossless -> 0\n\n",
+    "sdcard slot": "slot now slot = sd0\n\n"
+  }
+}

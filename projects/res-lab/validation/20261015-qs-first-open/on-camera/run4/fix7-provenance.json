@@ -1,0 +1,16 @@
+{
+  "variant": "combined-fix7",
+  "raw_sha256": "ec4b506d4fea0d7bc0a0c55710fa542218024a8f52fcf9c82fb721701f012e6b",
+  "on_card_sha256": "f3b75bc23281dd719b25805c5895fc6c2787ce6e07f84d2016f22092eab48544",
+  "bytes": 231168,
+  "changes": "One drawText per sibling object, original Footer child budget +2, full native X curves and white fill/black 2px outline in stock mode 0.",
+  "tests": "5 focused tests passed; exact BIN 371 QS + 16 LV replacements, reader resource flag and journal restoration passed.",
+  "written_to_card": true,
+  "visual_approval": "FAIL after confirmed QS cycle; missing normal FPS, tiny green glyphs",
+  "source_hashes": {
+    "vr_ui.py": "55df524cf07723c1d5aba6784a21f9ed23a53f09ad79e86f4c5b5e2dc29215a4",
+    "ogc.c": "76a83ab88242ebcf9df7f90bbe98c49f5effdaf5217224f8a33bf5455f83fb41",
+    "test_lv_text_style.py": "86ba1eecf853165cd6a956b2ee4d93f1a4a4117903fe4671d136d63ad9501a8b",
+    "test_v3_rescustom.py": "e02b53251b153496bfc10dce049b9c37bd125643e8221fd2ac1056c56ca1643c"
+  }
+}

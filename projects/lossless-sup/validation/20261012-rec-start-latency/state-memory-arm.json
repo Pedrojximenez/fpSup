@@ -1,0 +1,31 @@
+{
+  "hold_bytes": 687312,
+  "two_lane_bytes": 1374624,
+  "source": "same production CFLAGS and state_memory.h; firmware scheduling/cache latency not simulated",
+  "operations": {
+    "old_clear": {
+      "transactions": 687312,
+      "widths": {
+        "(17, 1)": 687312
+      }
+    },
+    "old_check": {
+      "transactions": 687312,
+      "widths": {
+        "(16, 1)": 687312
+      }
+    },
+    "new_clear": {
+      "transactions": 171828,
+      "widths": {
+        "(17, 4)": 171828
+      }
+    },
+    "new_check": {
+      "transactions": 171828,
+      "widths": {
+        "(16, 4)": 171828
+      }
+    }
+  }
+}

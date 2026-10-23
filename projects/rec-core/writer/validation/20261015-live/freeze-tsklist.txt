@@ -1,0 +1,125 @@
+id        |name    |task    |stat|pri |stksz   |wait|wid 
+  1(0x001)| inittsk|c0001c60| RDY|  30|    1000| ---|   0
+  2(0x002)| CamMain|c00207f8| WAI|  20|    8000| FLG| 123
+  3(0x003)| XC_PWRS|c0122b59| WAI|   8|     800| FLG|   9
+  4(0x004)|ThPoIntr|c036f938| WAI|   4|    1000| SLP|   0
+  5(0x005)| BootGui|c036efe8| WAI|  25|    4000| SLP|   0
+  6(0x006)|  Sdcard|c036ee50| WAI|  16|    2500| MBX|   1
+  7(0x007)|  SdHost|c036ee50| WAI|  16|    2500| MBX|   2
+  8(0x008)|  DevOpe|c02dc0a8| WAI|  14|     500|RMBF|   1
+  9(0x009)|KeyInter|c036efe8| WAI|   4|    1000| SLP|   0
+ 10(0x00A)| DialDet|c036efe8| WAI|  16|     200| FLG|  30
+ 11(0x00B)|    Poff|c036ee50| DMT|  16|    2000| ---|   0
+ 12(0x00C)| AfIfMgr|c036ee50| WAI|  14|    2000| FLG|  32
+ 13(0x00D)|HalAudio|c036efe8| WAI|   8|     800| SLP|   0
+ 14(0x00E)| AUD_INT|c00d41a1| WAI|   7|     400| SEM|  29
+ 15(0x00F)| LcdBrTh|c036efe8| WAI|  10|     800| SLP|   0
+ 16(0x010)|   BUF_G|c00e1e01| DMT|  17|     700| ---|   0
+ 17(0x011)|LedBlink|c036ee50| WAI|  11|    1000| FLG|  42
+ 18(0x012)|  BtrMgr|c036ee50| WAI|  16|    1000| FLG|  43
+ 19(0x013)| usbctrl|c036ee50| WAI|  12|    4000| FLG|  44
+ 20(0x014)|UsbTypeC|c01f4f59| WAI|  10|    1000| FLG|  45
+ 21(0x015)|LensConn|c0350a00| DMT|  10|    3000| ---|   0
+ 22(0x016)|DetachSw|c03520f8| WAI|  10|    2000| SEM|  19
+ 23(0x017)|LensFwRc|c0352410| DMT|  10|    2000| ---|   0
+ 24(0x018)|LensUbat|c0352758| WAI|  16|    1000| DLY|   0
+ 25(0x019)|LensFocs|c03405c0| WAI|  10|    2000| MBX|   3
+ 26(0x01A)|LensMcFc|c03420e0| DMT|  12|    2000| ---|   0
+ 27(0x01B)|LensIris|c03461a0| WAI|  10|    2000| SEM|  26
+ 28(0x01C)|LensMcIr|c0347408| WAI|  10|    2000| SEM|  27
+ 29(0x01D)|LensCycl|c035c460| WAI|  11|    2000| FLG|  18
+ 30(0x01E)|LensMcSy|c034e278| WAI|  11|    2000| FLG|  24
+ 31(0x01F)|   LcdTh|c02e6748| WAI|   8|    2000| MBX|   4
+ 32(0x020)| HdmiInt|c00ebc99| WAI|  12|     C00| SEM|  45
+ 33(0x021)|HdmiScdc|c00ef3b9| DMT|  12|     C00| ---|   0
+ 34(0x022)|  CecRcv|c00f69a9| DMT|  11|     900| ---|   0
+ 35(0x023)|CecRcvPr|c00f69b9| DMT|  12|    1400| ---|   0
+ 36(0x024)| CecInit|c00f68d1| DMT|  12|     800| ---|   0
+ 37(0x025)|  CecInt|c00f6b69| DMT|  12|    1400| ---|   0
+ 38(0x026)| CecDetP|c00f69c9| DMT|  12|     800| ---|   0
+ 39(0x027)| DrawMgr|c036ee50| WAI|  17|    4000| FLG|  50
+ 40(0x028)|DispSatu|c036efe8| WAI|  20|     800| SLP|   0
+ 41(0x029)|      TP|c036ee50| WAI|   9|    1000| FLG|  52
+ 42(0x02A)|EventMgr|c036ee50| WAI|  13|    2800| FLG|  53
+ 43(0x02B)| RecPMgr|c036ee50| WAI|  16|    4000| MBX|   6
+ 44(0x02C)|  CamSch|c036ee50| WAI|  15|    4000| FLG|  55
+ 45(0x02D)| MRecMgr|c036ee50| WAI|  15|    4000| MBX|   7
+ 46(0x02E)| MR_main|c070fd41| DMT|  10|    2300| ---|   0
+ 47(0x02F)|MR_write|c07107c9| DMT|  11|    4300| ---|   0
+ 48(0x030)| MP_main|c0711509| DMT|  10|    2300| ---|   0
+ 49(0x031)|  MP_dec|c0714fc1| DMT|   8|    2300| ---|   0
+ 50(0x032)|MP_resiz|c0715a89| DMT|   7|    2300| ---|   0
+ 51(0x033)| MP_disp|c0715d41| DMT|   6|    2300| ---|   0
+ 52(0x034)| MP_read|c0716b31| DMT|  11|    2300| ---|   0
+ 53(0x035)|MP_index|c0716dd1| DMT|   9|    2300| ---|   0
+ 54(0x036)| SRecRaw|c036ee50| WAI|  15|    5000| MBX|  16
+ 55(0x037)| SRecMgr|c036ee50| WAI|   9|    4000| MBX|  17
+ 56(0x038)|QrReadTh|c036efe8| WAI|  26|    2000| SLP|   0
+ 57(0x039)| SRecYuv|c036ee50| WAI|  16|    4000| MBX|  18
+ 58(0x03A)|StCreUvc|c036efe8| WAI|  15|    1000| SLP|   0
+ 59(0x03B)|StCreUvc|c036efe8| WAI|  15|    1000| SLP|   0
+ 60(0x03C)|SRecJpeg|c036ee50| WAI|  16|    4000| MBX|  19
+ 61(0x03D)|SRecFile|c036ee50| WAI|   6|    4000| MBX|  20
+ 62(0x03E)|EyeDtctn|c036ee50| WAI|  17|    1000| MBX|  21
+ 63(0x03F)|   FdTsk|c0672d89| WAI|  17|    1400| FLG|  66
+ 64(0x040)|Tracking|c036ee50| WAI|  17|    2000| MBX|  22
+ 65(0x041)| UserTim|c036ee50| WAI|  16|     400| FLG|  68
+ 66(0x042)|  AsyncH|c036efe8| WAI|  16|    2000| SLP|   0
+ 67(0x043)|   shell|c03da118| WAI|  25|    4000| FLG|  10
+ 68(0x044)| MANAGER|c01c26f9| WAI|  12|    1400| SEM|  93
+ 69(0x045)|     S2R|c01c2c79| WAI|  12|    1400| FLG|  76
+ 70(0x046)|     R2V|c01c37b9| DMT|  12|    1400| ---|   0
+ 71(0x047)| R2YHDIS|c01c40f9| WAI|  12|    2400| SEM| 121
+ 72(0x048)| Y2YVDIS|c01c49d1| WAI|  12|    2400| FLG|  76
+ 73(0x049)|     VDD|c0130409| WAI|  10|     300| FLG|  79
+ 74(0x04A)|     EIS|c01c25f1| WAI|  11|     C00| FLG|  76
+ 75(0x04B)|  REGSET|c01c6a99| DMT|  11|     500| ---|   0
+ 76(0x04C)|  JPGMNG|c01af951| WAI|  10|     300|RMBF|  15
+ 77(0x04D)|    JPG1|c01afb29| WAI|  11|    1700|RMBF|  18
+ 78(0x04E)|    JPG2|c01afea9| WAI|  11|    1700|RMBF|  19
+ 79(0x04F)|   JPG12|c01b0229| DMT|  11|    1700| ---|   0
+ 80(0x050)|  EISDET|c01a4899| DMT|  12|    1000| ---|   0
+ 81(0x051)|  EisDet|c0629529| DMT|  12|    1000| ---|   0
+ 82(0x052)| Y2YTMAP|c01c56a1| DMT|  12|    1400| ---|   0
+ 83(0x053)|   S2R_2|c01c3431| DMT|  12|    1400| ---|   0
+ 84(0x054)|   R2Y_2|c01c37b9| DMT|  12|    1400| ---|   0
+ 85(0x055)| Y2YTMP2|c01c56a1| DMT|  12|    1400| ---|   0
+ 86(0x056)| SIGCSYN|c0130491| DMT|  10|     300| ---|   0
+ 87(0x057)|  MOVHDR|c01c5e01| DMT|  11|    1000| ---|   0
+ 88(0x058)| ImgCtrl|c036ee50| WAI|   7|    2000| MBX|  24
+ 89(0x059)| ImgCorr|c036ee50| WAI|  16|    2000| FLG| 100
+ 90(0x05A)| PicCorr|c036ee50| WAI|  13|    2000| MBX|  25
+ 91(0x05B)|  AeIris|c036ee50| WAI|  14|    1000| FLG| 102
+ 92(0x05C)|   AeDev|c036ee50| WAI|  14|    2000| FLG| 103
+ 93(0x05D)|    Strb|c036ee50| WAI|  10|    1000| FLG| 105
+ 94(0x05E)| ExtStrb|c036ee50| WAI|  16|    1000| MBX|  26
+ 95(0x05F)|   Level|c036ee50| WAI|  16|    1000| FLG| 107
+ 96(0x060)|ExtEvfCh|c00fce51| WAI|  16|    1000| DLY|   0
+ 97(0x061)|   LcdTh|c00f81c1| WAI|  14|     800| SEM| 155
+ 98(0x062)|AtomosFr|c00ed2e1| WAI|  14|     800| SEM| 156
+ 99(0x063)|  GpsMgr|c036ee50| DMT|  18|    1000| ---|   0
+100(0x064)|GyroData|c036ee50| WAI|  20|    2000| SEM| 158
+101(0x065)|  PlyMgr|c036ee50| WAI|  16|    4000| FLG| 113
+102(0x066)| CinemaG|c036efe8| WAI|  16|    3000| SLP|   0
+103(0x067)| CgraphP|c036efe8| WAI|  16|    3000| SLP|   0
+104(0x068)| RemoDev|c036efe8| WAI|  16|     400| FLG| 114
+105(0x069)| RemoCon|c036efe8| WAI|  16|     400| FLG| 117
+106(0x06A)| TempChk|c036efe8| WAI|  16|    2000| DLY|   0
+107(0x06B)|  KeyMon|c036ee50| WAI|  16|     400| FLG| 119
+108(0x06C)|   AfMgr|c036ee50| WAI|  14|    4000| FLG| 122
+110(0x06E)|SDePower|c0663af9| WAI|  16|    4000| SLP|   0
+111(0x06F)| PlaySub|c036ee50| WAI|  22|    4000| FLG| 128
+112(0x070)|    CPly|c036efe8| WAI|  13|    2000| SLP|   0
+113(0x071)|  PFileR|c036ee50| WAI|  10|    2000| FLG| 131
+114(0x072)|CPlyDPOS|c036efe8| WAI|  18|    2000| SLP|   0
+115(0x073)| CPlyTag|c036efe8| WAI|  14|    2000| SLP|   0
+116(0x074)|CPlyYuvC|c036efe8| WAI|  13|    2000| SLP|   0
+118(0x076)|  ESCycl|c036ee50| WAI|  16|    1000| FLG| 142
+120(0x078)|   error|c01e7a19| WAI|  10|     800| FLG| 144
+121(0x079)|   error|c01e7bd1| WAI|  17|     800|RMBF|  29
+122(0x07A)| usbTask|c0033b80| WAI|  12|    4000| SEM|  42
+123(0x07B)|   _VSHL|45146c6c| RUN|  28|    2000| ---|   0
+124(0x07C)| FPLCODE|c51484e8| WAI|  12|    2000| DLY|   0
+125(0x07D)|   RECWR|c51bc964| WAI|   6|    2000| FLG| 145
+130(0x082)|DispFace|c036efe8| WAI|  10|    1000| SLP|   0
+131(0x083)|StOsdObs|c036efe8| WAI|  16|     800| FLG| 153

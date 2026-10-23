@@ -1,0 +1,206 @@
+{
+  "color_spaces": [
+    {
+      "id": "aces",
+      "label": "ACES",
+      "standard_gamut": "aces-ap0",
+      "gamma_ids": [
+        "adobe-rgb",
+        "gamma24",
+        "gamma26",
+        "linear",
+        "rec709",
+        "srgb"
+      ],
+      "numerical_gamma_ids": [
+        "adobe-rgb",
+        "gamma24",
+        "gamma26",
+        "linear",
+        "srgb"
+      ]
+    },
+    {
+      "id": "adobe-rgb",
+      "label": "Adobe RGB",
+      "standard_gamut": "adobe-rgb",
+      "gamma_ids": [
+        "adobe-rgb",
+        "gamma24",
+        "gamma26",
+        "linear",
+        "rec709",
+        "srgb"
+      ],
+      "numerical_gamma_ids": [
+        "adobe-rgb",
+        "gamma24",
+        "gamma26",
+        "linear",
+        "srgb"
+      ]
+    },
+    {
+      "id": "blackmagic-design",
+      "label": "Blackmagic Design",
+      "standard_gamut": null,
+      "gamma_ids": [
+        "blackmagic-film",
+        "blackmagic-extended-video"
+      ],
+      "numerical_gamma_ids": []
+    },
+    {
+      "id": "p3-d60",
+      "label": "P3 D60",
+      "standard_gamut": "p3d60",
+      "gamma_ids": [
+        "adobe-rgb",
+        "gamma24",
+        "gamma26",
+        "linear",
+        "rec709",
+        "srgb"
+      ],
+      "numerical_gamma_ids": [
+        "adobe-rgb",
+        "gamma24",
+        "gamma26",
+        "linear",
+        "srgb"
+      ]
+    },
+    {
+      "id": "p3-d65",
+      "label": "P3 D65",
+      "standard_gamut": "p3d65",
+      "gamma_ids": [
+        "adobe-rgb",
+        "gamma24",
+        "gamma26",
+        "linear",
+        "rec709",
+        "srgb"
+      ],
+      "numerical_gamma_ids": [
+        "adobe-rgb",
+        "gamma24",
+        "gamma26",
+        "linear",
+        "srgb"
+      ]
+    },
+    {
+      "id": "rec2020",
+      "label": "Rec.2020",
+      "standard_gamut": "2020",
+      "gamma_ids": [
+        "adobe-rgb",
+        "gamma24",
+        "gamma26",
+        "linear",
+        "rec709",
+        "srgb"
+      ],
+      "numerical_gamma_ids": [
+        "adobe-rgb",
+        "gamma24",
+        "gamma26",
+        "linear",
+        "srgb"
+      ]
+    },
+    {
+      "id": "rec709",
+      "label": "Rec.709",
+      "standard_gamut": "709",
+      "gamma_ids": [
+        "adobe-rgb",
+        "gamma24",
+        "gamma26",
+        "linear",
+        "rec709",
+        "srgb"
+      ],
+      "numerical_gamma_ids": [
+        "adobe-rgb",
+        "gamma24",
+        "gamma26",
+        "linear",
+        "srgb"
+      ]
+    },
+    {
+      "id": "srgb",
+      "label": "sRGB",
+      "standard_gamut": "709",
+      "gamma_ids": [
+        "adobe-rgb",
+        "gamma24",
+        "gamma26",
+        "linear",
+        "rec709",
+        "srgb"
+      ],
+      "numerical_gamma_ids": [
+        "adobe-rgb",
+        "gamma24",
+        "gamma26",
+        "linear",
+        "srgb"
+      ]
+    }
+  ],
+  "common_gammas": [
+    {
+      "id": "adobe-rgb",
+      "label": "Adobe RGB",
+      "numerical_curve_available": true
+    },
+    {
+      "id": "gamma24",
+      "label": "Gamma 2.4",
+      "numerical_curve_available": true
+    },
+    {
+      "id": "gamma26",
+      "label": "Gamma 2.6",
+      "numerical_curve_available": true
+    },
+    {
+      "id": "linear",
+      "label": "Linear",
+      "numerical_curve_available": true
+    },
+    {
+      "id": "rec709",
+      "label": "Rec.709",
+      "numerical_curve_available": false
+    },
+    {
+      "id": "srgb",
+      "label": "sRGB",
+      "numerical_curve_available": true
+    }
+  ],
+  "blackmagic_gammas": [
+    {
+      "id": "blackmagic-film",
+      "label": "Blackmagic Design Film",
+      "numerical_curve_available": false
+    },
+    {
+      "id": "blackmagic-extended-video",
+      "label": "Blackmagic Design Extended Video",
+      "numerical_curve_available": false
+    }
+  ],
+  "menu_evidence": "projects/lut-sup/validation/20261016-cdng-menu-01/evidence.json",
+  "menu_option_enabled_state_verified": false,
+  "resolve_pixel_match_verified": false,
+  "pending_models": [
+    "Resolve CinemaDNG Rec.709 gamma",
+    "CinemaDNG Blackmagic Design / Film",
+    "CinemaDNG Blackmagic Design / Extended Video"
+  ]
+}

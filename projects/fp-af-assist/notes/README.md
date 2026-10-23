@@ -1,6 +1,6 @@
 # fp-af-assist 筆記總索引
 
-更新：2026-09-28。AF 相關筆記正文集中於本專案；57 份外部筆記已搬入。旧位置只留轉向入口，其中兩個行號引用使用相對連結。程式、原始 captures、tool-sources、校驗清單及不可變封存仍在原位。
+更新：2026-10-21。AF 相關筆記正文集中於本專案；57 份外部筆記已搬入。旧位置只留轉向入口，其中兩個行號引用使用相對連結。程式、原始 captures、tool-sources、校驗清單及不可變封存仍在原位。
 
 產品交付目標為 **CINE 錄影時的機內連續對焦**；目前 P0 開發交付先建立 **多接點 hook＋USB 持續資料平台**，降低反覆實驗成本。後續新增計畫、研究或測試結論請直接寫在本專案；舊版本的假設、指令及歷史成績不自動成為目前實作狀態。
 
@@ -49,8 +49,9 @@
 - [USB_ROUTING_REPAIR_AUDIT_2026-09-16.md](USB_ROUTING_REPAIR_AUDIT_2026-09-16.md) — USB routing repair audit — single native owner, not ACK recovery
 - [VALIDATION_2026-09-16.md](VALIDATION_2026-09-16.md) — fp AF Assist：驗證紀錄
 
-## AF／face／AAT／PDAF 研究（36 份）
+## AF／face／AAT／PDAF 研究（37 份）
 
+- [FP_LENS_MOTOR_SPEED_SAFETY_2026-10-21.md](research/FP_LENS_MOTOR_SPEED_SAFETY_2026-10-21.md) — 全離線：兩顆鏡頭速度額度、ROM 控速／clamp 與協定位寬；更正掃描 movie cap，未驗證提速安全
 - [AF_AE_INTERNALS.md](research/AF_AE_INTERNALS.md) — SIGMA fp — AF/AE 內部演算法完整反編譯(六題彙整 + ⑦驅動細節十題 + ⑧CAF 觸發模型 + ⑨驅動/框/PTP 補充 + ⑩YLevel網格/低對比/waypoint)
 - [AF_COMPLETE.md](research/AF_COMPLETE.md) — SIGMA fp — 對焦系統完整說明(方法、細節、用到的鏡頭資料)
 - [AF_DESIGN_REFERENCE.md](research/AF_DESIGN_REFERENCE.md) — SIGMA fp CDAF 演算法設計拆解 — 給「自製自動對焦」的參考

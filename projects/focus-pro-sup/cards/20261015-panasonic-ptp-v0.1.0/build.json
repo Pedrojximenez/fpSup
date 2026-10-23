@@ -1,0 +1,228 @@
+{
+  "name": "60FPPTP.BIN",
+  "version": "0.1.0-experimental",
+  "firmware": "SIGMA fp 5.02",
+  "sup_id": "FPCP",
+  "file_size": 4032,
+  "block_size": 6848,
+  "sha256": "63022ae62afabb8286657fca084346755eddcde711c3563fa8f7dc8eb5eed03c",
+  "c_base": 232,
+  "state_off": 4032,
+  "state_bytes": 2772,
+  "meta_off": 3956,
+  "symbols": {
+    "entry": 0,
+    "$a": 0,
+    "state_off": 204,
+    "g_state": 192,
+    "c_base": 232,
+    "dispatch_off": 216,
+    "w_dispatch": 196,
+    "identity_off": 220,
+    "w_identity": 200,
+    "meta_off": 208,
+    "init_off": 212,
+    "ptp_shim": 84,
+    "native_parser": 140,
+    "parser_address": 224,
+    "identity_shim": 152,
+    "$d": 192
+  },
+  "functions": {
+    "fpc_dispatch": 1,
+    "status_data": 1181,
+    "send_data": 995,
+    "receive_data": 1349,
+    "focus": 1573,
+    "fpc_identity": 2295,
+    "fpc_init": 2519
+  },
+  "layout": {
+    "magic": 0,
+    "installed": 4,
+    "blob": 8,
+    "meta": 12,
+    "svc": 16,
+    "requests": 20,
+    "received_data": 24,
+    "rejected": 28,
+    "submitted": 32,
+    "replayed": 36,
+    "io_failed": 40,
+    "extended_session": 44,
+    "poisoned": 48,
+    "identity_calls": 52,
+    "last_tid": 56,
+    "last_mode": 60,
+    "last_response": 64,
+    "last_motion_valid": 68,
+    "pending": 72,
+    "last_target": 76,
+    "next_record": 80,
+    "records": 84,
+    "tx": 1236
+  },
+  "claims": [
+    {
+      "address": "0xc04db8b4",
+      "length": 4,
+      "stock_hex": "b10300eb",
+      "kind": "EXCL"
+    },
+    {
+      "address": "0xc0032014",
+      "length": 4,
+      "stock_hex": "b50100eb",
+      "kind": "EXCL"
+    },
+    {
+      "address": "0xc0cf3740",
+      "length": 4,
+      "stock_hex": "03060101",
+      "kind": "EXCL"
+    },
+    {
+      "address": "0xc0033b3c",
+      "length": 4,
+      "stock_hex": "0d9f12eb",
+      "kind": "EXCL"
+    },
+    {
+      "address": "0xc01e7704",
+      "length": 4,
+      "stock_hex": "1ed02846",
+      "kind": "EXCL"
+    },
+    {
+      "address": "0xc2efad70",
+      "length": 8,
+      "stock_hex": "6b29feff00010000",
+      "kind": "EXCL"
+    }
+  ],
+  "guards": [
+    {
+      "address": "0xc04dc780",
+      "stock_hex": "f04f2de9c0d04de200b0a0e1be12cde1"
+    },
+    {
+      "address": "0xc04e8360",
+      "stock_hex": "f0442de90060a0e10170a0e102a0a0e1"
+    },
+    {
+      "address": "0xc04dc0f8",
+      "stock_hex": "f04d2de90cd04de200008de504108de5"
+    },
+    {
+      "address": "0xc04e8f70",
+      "stock_hex": "f04d2de920d04de200a0a0e10160a0e1"
+    },
+    {
+      "address": "0xc04dbe90",
+      "stock_hex": "70412de90040a0e10060a0e3fc1705e3"
+    },
+    {
+      "address": "0xc04dbf28",
+      "stock_hex": "70412de90050a0e10160a0e10040a0e3"
+    },
+    {
+      "address": "0xc036d888",
+      "stock_hex": "30402de90cd04de20050a0e10140a0e1"
+    },
+    {
+      "address": "0xc035f560",
+      "stock_hex": "04e02de5f9ffffeb020050e30100a003"
+    },
+    {
+      "address": "0xc00178d8",
+      "stock_hex": "10402de9344803e303434ce3c80700e3"
+    },
+    {
+      "address": "0xc035fd48",
+      "stock_hex": "04e02de5f50000eb020100eb04f09de4"
+    },
+    {
+      "address": "0xc02dffb0",
+      "stock_hex": "30402de967ff01eb9aff01eb0040a0e1"
+    },
+    {
+      "address": "0xc02dffd0",
+      "stock_hex": "30402de963ff01eb92ff01eb0040a0e1"
+    },
+    {
+      "address": "0xc035fd68",
+      "stock_hex": "04e02de5ed0000eb140100eb04f09de4"
+    },
+    {
+      "address": "0xc035fd58",
+      "stock_hex": "04e02de5f10000eb080100eb04f09de4"
+    },
+    {
+      "address": "0xc035fe28",
+      "stock_hex": "10402de90040a0e1bc0000eb0410a0e1"
+    },
+    {
+      "address": "0xc035ffc0",
+      "stock_hex": "70402de90040a0e10150a0e10260a0e1"
+    },
+    {
+      "address": "0xc00326f0",
+      "stock_hex": "f04c2de970bd0ae3b45b08e30070a0e1"
+    },
+    {
+      "address": "0xc00338a8",
+      "stock_hex": "0dc0a0e10c002de9f0502de90060a0e1"
+    }
+  ],
+  "firmware_images": {
+    "out/seg0_c0000000.bin": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622",
+    "out/seg1_c2ef6e00.bin": "0dcaca8f5441fe4ddc6ed801cb888e325df4e76006e4f53a1c3219809b22ce7b"
+  },
+  "usb_personality": {
+    "vid": "0x04da",
+    "pid": "0x2382",
+    "product": "DC-S1H",
+    "note": "Reference profile; PTP DeviceInfo identifies the fp prototype"
+  },
+  "extended_identity_fixture_hex": "010001000100e10710000000000000000000000000000000",
+  "supported": [
+    "standard native PTP sessions and BatteryLevel",
+    "Panasonic reference handshake",
+    "standby native-L relative focus modes 1..4",
+    "read-only 0x95f0 diagnostic ring"
+  ],
+  "unsupported": [
+    "0x03010031 numeric control",
+    "LiDAR autofocus",
+    "focus during recording",
+    "Panasonic FOV/status/property/record emulation"
+  ],
+  "offline_only": true,
+  "camera_tested": false,
+  "sources": {
+    "fpSup/focuspro/native/focuspro.c": "4a0f3484922b85783287e40b29d8f5ab262b950f550ea9fb85a6896c24e16488",
+    "fpSup/focuspro/native/entry.S": "d1e3f36410534a8630a8cf4b70d3ceef3fe0d9eb033bd5a71a834a04a65bcd5f",
+    "fpSup/focuspro/build.py": "2dcb9c56b127045f4de1b59599878450856b4adbadb4fa02d42feced60e5b90c",
+    "fpSup/fp_usb_shell/v3/build_v3.py": "027030c0ed689d3f53fe0608b2fd02085483cab9b38b0a8ccf0d36466a1e4ef6",
+    "fpSup/fp_usb_shell/v3/sloader.c": "2e5c3326c282d22625875435e6010a75740e5dee2e853bb306d7a8c806a985e1",
+    "fpSup/fp_usb_shell/v3/sloader_entry.S": "b4fa97b67c5ecf2451337c3364a20b96e2f009bd820399ead4af4fcffe1b7b2a",
+    "fpSup/fp_usb_shell/v3/sloader.h": "433c38dd6dce0250e13db5b9235664786d13f83c55707243436d6afc6122eb4a",
+    "fpSup/fp_usb_shell/build_autorun.py": "f9832d428cecad23be3c055d48f5733d3bb32b53c2348854ef2de872b09e6590",
+    "fpSup/fp_usb_shell/asm/loader.S": "14eb66a80d6222f2b4b7b497877e6e553a2f45dfee376da41d8193527cf41a17",
+    "fpSup/fp_usb_shell/asm/stage2.S": "4f446ace9ffadef27c8cabe59d86c2fa08f5ec0cbf53561b44651a000be9d2e5"
+  },
+  "boot": {
+    "stub": 224,
+    "c_text": 6694,
+    "bytes": 7936,
+    "sl_boot": 225,
+    "core_entry": 1016,
+    "sections": 2,
+    "instant": false,
+    "fast": false
+  },
+  "boot_files": {
+    "AutoRun.txt": "cec232c10cf0f01338d743fd5b144a782852e8e6716f65b9758ce627c5a92b5c",
+    "fpSup/LOADER.BIN": "67d3d79fc40681bd7c6c3e93dd81c04f3f763089b7f98b96198b7ad5855df818"
+  }
+}

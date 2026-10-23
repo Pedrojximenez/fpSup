@@ -589,6 +589,11 @@ class NbuProbe:
         return self.words(self.CTX + index * 4, count)
 
     def error_flag(self) -> int:
+        """Historical name for reader +1c, a resource-registration dirty flag.
+
+        Successful C05E69AE resource registration sets this word to one. It
+        must not be used as a fatal record-parser status on a booted camera.
+        """
         return self.ctx(7)[0]
 
 

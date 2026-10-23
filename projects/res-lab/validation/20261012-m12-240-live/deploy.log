@@ -1,0 +1,339 @@
+  code   412/412 B  6.6 KiB/s   verify 412/412 B  701 KiB/s   verify 412 bytes in 0.0s (212 KiB/s)      
+  code   412 bytes in 0.1s (3.3 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  tagged 4666/4666 B  2629 KiB/s   tagged 4666 bytes in 0.0s (935 KiB/s)      
+  code   412/412 B  111.9 KiB/s   verify 412/412 B  584 KiB/s   verify 412 bytes in 0.0s (220 KiB/s)      
+  code   412 bytes in 0.0s (45.1 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  tagged 16380/29276 B  1918 KiB/s   tagged 29276/29276 B  1888 KiB/s   tagged 29276 bytes in 0.0s (1774 KiB/s)      
+  code   412/412 B  102.3 KiB/s   verify 412/412 B  581 KiB/s   verify 412 bytes in 0.0s (231 KiB/s)      
+  code   412 bytes in 0.0s (43.2 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  tagged 16380/185792 B  1724 KiB/s   tagged 32760/185792 B  1929 KiB/s   tagged 49140/185792 B  1966 KiB/s   tagged 65520/185792 B  2060 KiB/s   tagged 81900/185792 B  2076 KiB/s   tagged 98280/185792 B  2074 KiB/s   tagged 114660/185792 B  2167 KiB/s   tagged 131040/185792 B  2084 KiB/s   tagged 147420/185792 B  2156 KiB/s   tagged 163800/185792 B  2103 KiB/s   tagged 180180/185792 B  2136 KiB/s   tagged 185792/185792 B  2159 KiB/s   tagged 185792 bytes in 0.1s (2141 KiB/s)      
+  code   412/412 B  60.7 KiB/s   verify 412/412 B  634 KiB/s   verify 412 bytes in 0.0s (295 KiB/s)      
+  code   412 bytes in 0.0s (41.4 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  tagged 16380/609720 B  1795 KiB/s   tagged 32760/609720 B  2367 KiB/s   tagged 49140/609720 B  2159 KiB/s   tagged 65520/609720 B  2314 KiB/s   tagged 81900/609720 B  2281 KiB/s   tagged 98280/609720 B  2242 KiB/s   tagged 114660/609720 B  2244 KiB/s   tagged 131040/609720 B  2202 KiB/s   tagged 147420/609720 B  2291 KiB/s   tagged 163800/609720 B  2191 KiB/s   tagged 180180/609720 B  2243 KiB/s   tagged 196560/609720 B  2188 KiB/s   tagged 212940/609720 B  2223 KiB/s   tagged 229320/609720 B  2225 KiB/s   tagged 245700/609720 B  2194 KiB/s   tagged 262080/609720 B  2200 KiB/s   tagged 278460/609720 B  2193 KiB/s   tagged 294840/609720 B  2229 KiB/s   tagged 311220/609720 B  2195 KiB/s   tagged 327600/609720 B  2218 KiB/s   tagged 343980/609720 B  2206 KiB/s   tagged 360360/609720 B  2205 KiB/s   tagged 376740/609720 B  2215 KiB/s   tagged 393120/609720 B  2192 KiB/s   tagged 409500/609720 B  2225 KiB/s   tagged 425880/609720 B  2195 KiB/s   tagged 442260/609720 B  2209 KiB/s   tagged 458640/609720 B  2179 KiB/s   tagged 475020/609720 B  2198 KiB/s   tagged 491400/609720 B  2205 KiB/s   tagged 507780/609720 B  2204 KiB/s   tagged 524160/609720 B  2230 KiB/s   tagged 540540/609720 B  2196 KiB/s   tagged 556920/609720 B  2216 KiB/s   tagged 573300/609720 B  2200 KiB/s   tagged 589680/609720 B  2212 KiB/s   tagged 606060/609720 B  2216 KiB/s   tagged 609720/609720 B  2208 KiB/s   tagged 609720 bytes in 0.3s (2199 KiB/s)      
+  remote  \AutoRun.txt  4666 bytes, mode 0x1
+  buffer  from the firmware, file object 0x44FA7700
+  reply   getfile: read
+  buffer  0x53B00980 (8762 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 4666 of 4666
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261012-m12-240-live/deployment/pre-AutoRun.txt
+  remote  \fpSup\LOADER.BIN  29276 bytes, mode 0x1
+  buffer  from the firmware, file object 0x44FA7700
+  reply   getfile: read
+  buffer  0x53B00980 (33372 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 29276 of 29276
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261012-m12-240-live/deployment/pre-fpSup__LOADER.BIN
+  remote  \fpSup\32RESCUS.BIN  185792 bytes, mode 0x1
+  buffer  from the firmware, file object 0x44FA7700
+  reply   getfile: read
+  buffer  0x53B00980 (189888 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 185792 of 185792
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261012-m12-240-live/deployment/pre-fpSup__32RESCUS.BIN
+  remote  \fpSup\50RESLAB.BIN  609720 bytes, mode 0x1
+  buffer  from the firmware, file object 0x44FA7700
+  reply   getfile: read
+  buffer  0x53B00980 (613816 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 609720 of 609720
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261012-m12-240-live/deployment/pre-fpSup__50RESLAB.BIN
+screen: LV_CINE_MEDIUM
+  code   412/412 B  95.1 KiB/s   verify 412/412 B  614 KiB/s   verify 412 bytes in 0.0s (312 KiB/s)      
+  code   412 bytes in 0.0s (62.1 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  tagged 16380/483201 B  2225 KiB/s   tagged 32760/483201 B  2315 KiB/s   tagged 49140/483201 B  2271 KiB/s   tagged 65520/483201 B  2496 KiB/s   tagged 81900/483201 B  2278 KiB/s   tagged 98280/483201 B  2306 KiB/s   tagged 114660/483201 B  2222 KiB/s   tagged 131040/483201 B  2236 KiB/s   tagged 147420/483201 B  2262 KiB/s   tagged 163800/483201 B  2246 KiB/s   tagged 180180/483201 B  2316 KiB/s   tagged 196560/483201 B  2201 KiB/s   tagged 212940/483201 B  2256 KiB/s   tagged 229320/483201 B  2181 KiB/s   tagged 245700/483201 B  2221 KiB/s   tagged 262080/483201 B  2208 KiB/s   tagged 278460/483201 B  2210 KiB/s   tagged 294840/483201 B  2214 KiB/s   tagged 311220/483201 B  2196 KiB/s   tagged 327600/483201 B  2232 KiB/s   tagged 343980/483201 B  2207 KiB/s   tagged 360360/483201 B  2214 KiB/s   tagged 376740/483201 B  2192 KiB/s   tagged 393120/483201 B  2212 KiB/s   tagged 409500/483201 B  2215 KiB/s   tagged 425880/483201 B  2205 KiB/s   tagged 442260/483201 B  2192 KiB/s   tagged 458640/483201 B  2186 KiB/s   tagged 475020/483201 B  2213 KiB/s   tagged 483201/483201 B  2197 KiB/s   tagged 483201 bytes in 0.2s (2188 KiB/s)      
+  remote  \DCIM\100SIGMA\SS__1689.JPG  483201 bytes, mode 0x1
+  buffer  from the firmware, file object 0x44FA7700
+  reply   getfile: read
+  buffer  0x53B00980 (487297 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 483201 of 483201
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/screenshots/1689-m12240-before-write.jpg
+Screenshot: /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261009-oncamera/screenshots/1689-m12240-before-write.jpg
+  stage  187520 bytes in 0.001s (139.1 MB/s)      
+  verify 187520 bytes in 0.001s (177.4 MB/s)      
+  stage  187520 bytes in 0.02s (9.6 MB/s), MEM1, read back whole          
+  code   304/304 B  78.2 KiB/s   verify 304/304 B  405 KiB/s   verify 304 bytes in 0.0s (209 KiB/s)      
+  code   304 bytes in 0.0s (47.4 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  code   412/412 B  101.2 KiB/s   verify 412/412 B  676 KiB/s   verify 412 bytes in 0.0s (292 KiB/s)      
+  code   412 bytes in 0.0s (60.6 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  tagged 16380/187520 B  2797 KiB/s   tagged 32760/187520 B  2106 KiB/s   tagged 49140/187520 B  2134 KiB/s   tagged 65520/187520 B  1931 KiB/s   tagged 81900/187520 B  2073 KiB/s   tagged 98280/187520 B  2101 KiB/s   tagged 114660/187520 B  2107 KiB/s   tagged 131040/187520 B  2223 KiB/s   tagged 147420/187520 B  844 KiB/s   tagged 163800/187520 B  902 KiB/s   tagged 180180/187520 B  946 KiB/s   tagged 187520/187520 B  970 KiB/s   tagged 187520 bytes in 0.2s (965 KiB/s)      
+  stage  7136 bytes in 0.001s (12.7 MB/s)      
+  verify 7136 bytes in 0.000s (31.2 MB/s)      
+  stage  7136 bytes in 0.00s (6.0 MB/s), MEM1, read back whole          
+  code   304/304 B  47.0 KiB/s   verify 304/304 B  541 KiB/s   verify 304 bytes in 0.0s (244 KiB/s)      
+  code   304 bytes in 0.0s (34.2 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  code   412/412 B  101.1 KiB/s   verify 412/412 B  467 KiB/s   verify 412 bytes in 0.0s (227 KiB/s)      
+  code   412 bytes in 0.0s (58.9 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  tagged 7136/7136 B  1335 KiB/s   tagged 7136 bytes in 0.0s (1130 KiB/s)      
+  code   412/412 B  105.9 KiB/s   verify 412/412 B  647 KiB/s   verify 412 bytes in 0.0s (334 KiB/s)      
+  code   412 bytes in 0.0s (66.2 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  tagged 4666/4666 B  1687 KiB/s   tagged 4666 bytes in 0.0s (1334 KiB/s)      
+  code   412/412 B  104.3 KiB/s   verify 412/412 B  197 KiB/s   verify 412 bytes in 0.0s (150 KiB/s)      
+  code   412 bytes in 0.1s (3.5 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  tagged 16380/29276 B  2257 KiB/s   tagged 29276/29276 B  2598 KiB/s   tagged 29276 bytes in 0.0s (2067 KiB/s)      
+  code   412/412 B  75.6 KiB/s   verify 412/412 B  662 KiB/s   verify 412 bytes in 0.0s (274 KiB/s)      
+  code   412 bytes in 0.0s (50.6 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  tagged 4208/4208 B  734 KiB/s   tagged 4208 bytes in 0.0s (604 KiB/s)      
+  code   412/412 B  95.2 KiB/s   verify 412/412 B  621 KiB/s   verify 412 bytes in 0.0s (258 KiB/s)      
+  code   412 bytes in 0.0s (59.5 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  tagged 16380/38644 B  2160 KiB/s   tagged 32760/38644 B  2224 KiB/s   tagged 38644/38644 B  2070 KiB/s   tagged 38644 bytes in 0.0s (1981 KiB/s)      
+  code   412/412 B  101.7 KiB/s   verify 412/412 B  630 KiB/s   verify 412 bytes in 0.0s (330 KiB/s)      
+  code   412 bytes in 0.0s (64.4 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  tagged 16380/25936 B  3388 KiB/s   tagged 25936/25936 B  218 KiB/s   tagged 25936 bytes in 0.1s (216 KiB/s)      
+  code   412/412 B  111.9 KiB/s   verify 412/412 B  815 KiB/s   verify 412 bytes in 0.0s (101 KiB/s)      
+  code   412 bytes in 0.0s (47.7 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  tagged 16380/70944 B  3128 KiB/s   tagged 32760/70944 B  2135 KiB/s   tagged 49140/70944 B  2361 KiB/s   tagged 65520/70944 B  2091 KiB/s   tagged 70944/70944 B  2097 KiB/s   tagged 70944 bytes in 0.0s (2045 KiB/s)      
+  code   412/412 B  90.7 KiB/s   verify 412/412 B  597 KiB/s   verify 412 bytes in 0.0s (274 KiB/s)      
+  code   412 bytes in 0.0s (55.3 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  tagged 4552/4552 B  1539 KiB/s   tagged 4552 bytes in 0.0s (1181 KiB/s)      
+  code   412/412 B  64.9 KiB/s   verify 412/412 B  599 KiB/s   verify 412 bytes in 0.0s (280 KiB/s)      
+  code   412 bytes in 0.0s (43.2 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  tagged 16380/609720 B  1988 KiB/s   tagged 32760/609720 B  2417 KiB/s   tagged 49140/609720 B  2019 KiB/s   tagged 65520/609720 B  2192 KiB/s   tagged 81900/609720 B  2065 KiB/s   tagged 98280/609720 B  2150 KiB/s   tagged 114660/609720 B  2185 KiB/s   tagged 131040/609720 B  2155 KiB/s   tagged 147420/609720 B  2244 KiB/s   tagged 163800/609720 B  2146 KiB/s   tagged 180180/609720 B  2217 KiB/s   tagged 196560/609720 B  2192 KiB/s   tagged 212940/609720 B  2218 KiB/s   tagged 229320/609720 B  2170 KiB/s   tagged 245700/609720 B  2177 KiB/s   tagged 262080/609720 B  2180 KiB/s   tagged 278460/609720 B  2169 KiB/s   tagged 294840/609720 B  2210 KiB/s   tagged 311220/609720 B  2147 KiB/s   tagged 327600/609720 B  2186 KiB/s   tagged 343980/609720 B  2167 KiB/s   tagged 360360/609720 B  2184 KiB/s   tagged 376740/609720 B  2187 KiB/s   tagged 393120/609720 B  2174 KiB/s   tagged 409500/609720 B  2204 KiB/s   tagged 425880/609720 B  2186 KiB/s   tagged 442260/609720 B  2207 KiB/s   tagged 458640/609720 B  2178 KiB/s   tagged 475020/609720 B  2193 KiB/s   tagged 491400/609720 B  2177 KiB/s   tagged 507780/609720 B  2183 KiB/s   tagged 524160/609720 B  2183 KiB/s   tagged 540540/609720 B  2175 KiB/s   tagged 556920/609720 B  2197 KiB/s   tagged 573300/609720 B  2170 KiB/s   tagged 589680/609720 B  2189 KiB/s   tagged 606060/609720 B  2171 KiB/s   tagged 609720/609720 B  2166 KiB/s   tagged 609720 bytes in 0.3s (2151 KiB/s)      
+  code   412/412 B  112.2 KiB/s   verify 412/412 B  140 KiB/s   verify 412 bytes in 0.0s (105 KiB/s)      
+  code   412 bytes in 0.0s (48.8 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  tagged 7132/7132 B  1707 KiB/s   tagged 7132 bytes in 0.0s (1406 KiB/s)      
+  code   412/412 B  74.6 KiB/s   verify 412/412 B  460 KiB/s   verify 412 bytes in 0.0s (227 KiB/s)      
+  code   412 bytes in 0.0s (48.5 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  tagged 3900/3900 B  1595 KiB/s   tagged 3900 bytes in 0.0s (1236 KiB/s)      
+  code   412/412 B  93.0 KiB/s   verify 412/412 B  692 KiB/s   verify 412 bytes in 0.0s (339 KiB/s)      
+  code   412 bytes in 0.0s (62.2 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  tagged 4180/4180 B  1614 KiB/s   tagged 4180 bytes in 0.0s (1176 KiB/s)      
+  code   412/412 B  72.2 KiB/s   verify 412/412 B  486 KiB/s   verify 412 bytes in 0.0s (258 KiB/s)      
+  code   412 bytes in 0.0s (48.9 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  tagged 5216/5216 B  914 KiB/s   tagged 5216 bytes in 0.0s (767 KiB/s)      
+  code   412/412 B  95.6 KiB/s   verify 412/412 B  543 KiB/s   verify 412 bytes in 0.0s (302 KiB/s)      
+  code   412 bytes in 0.0s (59.8 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  tagged 7788/7788 B  1680 KiB/s   tagged 7788 bytes in 0.0s (1318 KiB/s)      
+  code   412/412 B  55.4 KiB/s   verify 412/412 B  720 KiB/s   verify 412 bytes in 0.0s (336 KiB/s)      
+  code   412 bytes in 0.0s (42.1 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  tagged 16380/48068 B  143 KiB/s   tagged 32760/48068 B  264 KiB/s   tagged 48068/48068 B  370 KiB/s   tagged 48068 bytes in 0.1s (368 KiB/s)      
+  code   412/412 B  106.5 KiB/s   verify 412/412 B  676 KiB/s   verify 412 bytes in 0.0s (339 KiB/s)      
+  code   412 bytes in 0.0s (68.6 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  tagged 7060/7060 B  2788 KiB/s   tagged 7060 bytes in 0.0s (2042 KiB/s)      
+  local   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261012-m12-240-live/hybrid-reference/fpSup/32RESCUS.BIN  187520 bytes
+  remote  \fpSup\32RESCUS.BIN  mode 0x7
+  buffer  0x44FA7700, file object 0x44FD5380
+  proof   region takes writes and still holds them a second later
+  restored echo -> 0xC03D99A0
+  reply   putfile: written
+  status  2 — written
+  open    1     write  1   (both are flags, not counts)
+  dir     187520 B verified
+  remote  \fpSup\32RESCUS.BIN  187520 bytes, mode 0x1
+  buffer  from the firmware, file object 0x44FA7700
+  reply   getfile: read
+  buffer  0x53B00980 (191616 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 187520 of 187520
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261012-m12-240-live/deployment/installed-32RESCUS.BIN
+  local   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261012-m12-240-live/hybrid-reference/fpSup/RESCUS/M12240.RCD  7136 bytes
+  remote  \fpSup\RESCUS\M12240.RCD  mode 0x7
+  buffer  0x44FA7700, file object 0x44FA92E0
+  proof   region takes writes and still holds them a second later
+  restored echo -> 0xC03D99A0
+  reply   putfile: written
+  status  2 — written
+  open    1     write  1   (both are flags, not counts)
+  dir     7136 B verified
+  remote  \fpSup\RESCUS\M12240.RCD  7136 bytes, mode 0x1
+  buffer  from the firmware, file object 0x44FA7700
+  reply   getfile: read
+  buffer  0x53B00980 (11232 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 7136 of 7136
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261012-m12-240-live/deployment/installed-M12240.RCD
+  remote  \AutoRun.txt  4666 bytes, mode 0x1
+  buffer  from the firmware, file object 0x44FA7700
+  reply   getfile: read
+  buffer  0x53B00980 (8762 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 4666 of 4666
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261012-m12-240-live/deployment/after-AutoRun.txt
+  remote  \fpSup\LOADER.BIN  29276 bytes, mode 0x1
+  buffer  from the firmware, file object 0x44FA7700
+  reply   getfile: read
+  buffer  0x53B00980 (33372 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 29276 of 29276
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261012-m12-240-live/deployment/after-fpSup__LOADER.BIN
+  remote  \fpSup\20GYR2.BIN  4208 bytes, mode 0x1
+  buffer  from the firmware, file object 0x44FA7700
+  reply   getfile: read
+  buffer  0x53B00980 (8304 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 4208 of 4208
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261012-m12-240-live/deployment/after-fpSup__20GYR2.BIN
+  remote  \fpSup\45RAWV.BIN  38644 bytes, mode 0x1
+  buffer  from the firmware, file object 0x44FA7700
+  reply   getfile: read
+  buffer  0x53B00980 (42740 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 38644 of 38644
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261012-m12-240-live/deployment/after-fpSup__45RAWV.BIN
+  remote  \fpSup\40FLIP.BIN  25936 bytes, mode 0x1
+  buffer  from the firmware, file object 0x44FA7700
+  reply   getfile: read
+  buffer  0x53B00980 (30032 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 25936 of 25936
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261012-m12-240-live/deployment/after-fpSup__40FLIP.BIN
+  remote  \fpSup\10LOSS.BIN  70944 bytes, mode 0x1
+  buffer  from the firmware, file object 0x44FA7700
+  reply   getfile: read
+  buffer  0x53B00980 (75040 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 70944 of 70944
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261012-m12-240-live/deployment/after-fpSup__10LOSS.BIN
+  remote  \fpSup\00SHELL.BIN  4552 bytes, mode 0x1
+  buffer  from the firmware, file object 0x44FA7700
+  reply   getfile: read
+  buffer  0x53B00980 (8648 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 4552 of 4552
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261012-m12-240-live/deployment/after-fpSup__00SHELL.BIN
+  remote  \fpSup\50RESLAB.BIN  609720 bytes, mode 0x1
+  buffer  from the firmware, file object 0x44FA7700
+  reply   getfile: read
+  buffer  0x53B00980 (613816 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 609720 of 609720
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261012-m12-240-live/deployment/after-fpSup__50RESLAB.BIN
+  remote  \fpSup\RESCUS\S16.RCD  7132 bytes, mode 0x1
+  buffer  from the firmware, file object 0x44FA7700
+  reply   getfile: read
+  buffer  0x53B00980 (11228 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 7132 of 7132
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261012-m12-240-live/deployment/after-fpSup__RESCUS__S16.RCD
+  remote  \fpSup\RESCUS\OG4K.RCD  3900 bytes, mode 0x1
+  buffer  from the firmware, file object 0x44FA7700
+  reply   getfile: read
+  buffer  0x53B00980 (7996 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 3900 of 3900
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261012-m12-240-live/deployment/after-fpSup__RESCUS__OG4K.RCD
+  remote  \fpSup\RESCUS\OG3K.RCD  4180 bytes, mode 0x1
+  buffer  from the firmware, file object 0x44FA7700
+  reply   getfile: read
+  buffer  0x53B00980 (8276 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 4180 of 4180
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261012-m12-240-live/deployment/after-fpSup__RESCUS__OG3K.RCD
+  remote  \fpSup\RESCUS\OG2K.RCD  5216 bytes, mode 0x1
+  buffer  from the firmware, file object 0x44FA7700
+  reply   getfile: read
+  buffer  0x53B00980 (9312 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 5216 of 5216
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261012-m12-240-live/deployment/after-fpSup__RESCUS__OG2K.RCD
+  remote  \fpSup\RESCUS\OG35K.RCD  7788 bytes, mode 0x1
+  buffer  from the firmware, file object 0x44FA7700
+  reply   getfile: read
+  buffer  0x53B00980 (11884 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 7788 of 7788
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261012-m12-240-live/deployment/after-fpSup__RESCUS__OG35K.RCD
+  remote  \fpSup\RESCUS\HS.RCD  48068 bytes, mode 0x1
+  buffer  from the firmware, file object 0x44FA7700
+  reply   getfile: read
+  buffer  0x53B00980 (52164 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 48068 of 48068
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261012-m12-240-live/deployment/after-fpSup__RESCUS__HS.RCD
+  remote  \fpSup\RESCUS\H2S240.RCD  7060 bytes, mode 0x1
+  buffer  from the firmware, file object 0x44FA7700
+  reply   getfile: read
+  buffer  0x53B00980 (11156 bytes asked for)
+  status  2 — read
+  open    1   read 1   actual 7060 of 7060
+  buffer  handed back
+  saved   /Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261012-m12-240-live/deployment/after-fpSup__RESCUS__H2S240.RCD
+{
+  "phase": "verified_card_update",
+  "writes": [
+    "\\fpSup\\32RESCUS.BIN",
+    "\\fpSup\\RESCUS\\M12240.RCD"
+  ],
+  "cfg_preserved": true,
+  "autorun_loader_producer_retained": true,
+  "rebooted": false,
+  "idle": {
+    "movie_recording": 0,
+    "xmp_file_pointer": 0,
+    "movie_writing": 0
+  },
+  "standby_before": {
+    "source": "native_LCD",
+    "path": "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261012-m12-240-live/deployment/m12240-before-write.jpg",
+    "sha256": "fe930d12772fa0065055f0c28e05c1d336e977746d571cabeeb6f856c444d2dd",
+    "standby_pixels": 301,
+    "rec_pixels": 0,
+    "standby_visible": true,
+    "idle_before": {
+      "native_rec": 0,
+      "selector": 17,
+      "movie_recording": 0,
+      "xmp_file_pointer": 0,
+      "movie_writing": 0
+    },
+    "idle_after": {
+      "native_rec": 0,
+      "selector": 17,
+      "movie_recording": 0,
+      "xmp_file_pointer": 0,
+      "movie_writing": 0
+    }
+  },
+  "current_write": "\\fpSup\\RESCUS\\M12240.RCD",
+  "verified": {
+    "\\fpSup\\32RESCUS.BIN": {
+      "bytes": 187520,
+      "sha256": "7a1ca8757169585952031032e31a1cd4ada7d2e96255f72ff6c718021c0bbb71",
+      "full_readback": true
+    },
+    "\\fpSup\\RESCUS\\M12240.RCD": {
+      "bytes": 7136,
+      "sha256": "971fe0f3c78966f2f8ca8c4246260612ff2852a9481eedfcf6d48b35a674490e",
+      "full_readback": true
+    }
+  },
+  "unchanged": {
+    "\\AutoRun.txt": "2e77dfe3529006d2cb95ac01e206048efe495493434c05f1ed8fad4ecd22bf96",
+    "\\fpSup\\LOADER.BIN": "2535b983a03f12b54ca107bb9d59591506b928c60ee07835676020f261e311b3",
+    "\\fpSup\\20GYR2.BIN": "cbf91f8c36efb6481329000b6736cda26eb0781fe9c8acfa1cd5f7c073a0f8d5",
+    "\\fpSup\\45RAWV.BIN": "701532fe8bcb2a7c374b891bff83f80105d36b579b5c1dc95fc4130cfddcf71c",
+    "\\fpSup\\40FLIP.BIN": "cc3d4c0502755185e2bca0c8f8e8fb45351b0d70c50b6cc72c0a85a89f746913",
+    "\\fpSup\\10LOSS.BIN": "ad984ce65a025d7acfbf968d0a7c3e43ef94bc89085af6b3a522374e7e9f8137",
+    "\\fpSup\\00SHELL.BIN": "b1c2823ed0ef46de67ddbac7bb71ba3c34617f0a25d93dfcf76b14e8224f742b",
+    "\\fpSup\\50RESLAB.BIN": "dad8226db751fe10c2cac1f2f21269cc746957c7aacc5b19bec83dd027da155f",
+    "\\fpSup\\RESCUS\\S16.RCD": "48740fbbd3dbcb3bf823d1ecdc8a9104e476efd61642142a3a4b221f598f5b15",
+    "\\fpSup\\RESCUS\\OG4K.RCD": "d3711c12c5b03234927f951c27826d9a095c4ed99d941cc54dcd3c88226689db",
+    "\\fpSup\\RESCUS\\OG3K.RCD": "5b3c7d266e68a89460bfeba96ee67a1e18a29e4ba14fbd7a4bdad127dce2f2ae",
+    "\\fpSup\\RESCUS\\OG2K.RCD": "7beef10339d41f8cd39ecc9014cb32fd39b994457e61622b9638e33452dd218a",
+    "\\fpSup\\RESCUS\\OG35K.RCD": "0d81f785bce9665937433bbdd06314c06523092876323dc0ce56bdab215e1cc7",
+    "\\fpSup\\RESCUS\\HS.RCD": "98b67a53c8996ad297a7f513c506f06b64b03bbd188ba036c43902955c2ca3a5",
+    "\\fpSup\\RESCUS\\H2S240.RCD": "835d214cf4c0b17d26f075e6ce3f749fe346ac88fb7c9ab4b9fe3642f15cbc99"
+  }
+}

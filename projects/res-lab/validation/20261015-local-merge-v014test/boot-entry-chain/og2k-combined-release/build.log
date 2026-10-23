@@ -1,0 +1,123 @@
+splash : FPSUPUI/  193536 bytes; hardware untested; keep beside AutoRun.txt and fpSup.BIN
+binary : fpSup.BIN  17292 bytes, 88 section(s), entry 0xC0731600
+worker : none -- no task either, the loader runs in the callback
+start  : echo handler 0xC0BAC2F8 -> 0xC072DE64 (loader)
+patches: 0 firmware (-), 0 screen
+wrote  : /var/folders/20/mb8w7p_x7nlfpctnt7qd77b00000gn/T/og3k-pzg_h7m8/og3k_ui_source/AutoRun.txt  168 lines  sha256=6658b9674c9a7788
+clean  : 112 commands, no dumps and no diagnostics
+{
+  "status": "OG2K release test candidate; no camera result is recorded in this manifest for OG2K",
+  "ui_records": 360,
+  "ui_code_bytes": 6344,
+  "ui_pack_bytes": 4704,
+  "vshl_used_bytes": 17292,
+  "output": "/var/folders/20/mb8w7p_x7nlfpctnt7qd77b00000gn/T/og3k-pzg_h7m8/og3k_ui_source"
+}
+splash : FPSUPUI/  193536 bytes; hardware untested; keep beside AutoRun.txt and fpSup.BIN
+binary : fpSup.BIN  32204 bytes, 96 section(s), entry 0x00007D78
+worker : none -- no task either, the loader runs in the callback
+start  : echo handler 0xC0BAC2F8 -> 0xC072DE64 (loader)
+patches: 0 firmware (-), 0 screen
+wrote  : projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/og2k-combined-release/AutoRun.txt  168 lines  sha256=6658b9674c9a7788
+clean  : 112 commands, no dumps and no diagnostics
+
+        0xC0058310      4  hook site mode
+        0xC005BE58      4  extra og3k_72_C005BE58.bin
+        0xC005C020      4  extra og3k_71_C005C020.bin
+        0xC02092CC      4  extra og3k_78_C02092CC.bin
+        0xC0218AEC      4  extra og3k_79_C0218AEC.bin
+        0xC0219260      4  extra og3k_80_C0219260.bin
+        0xC0306EA0      4  extra og3k_73_C0306EA0.bin
+        0xC0306EEC      4  extra og3k_74_C0306EEC.bin
+        0xC03790B8      4  hook site start
+        0xC038C484      4  hook site stop
+        0xC03A6DD8      4  extra og3k_77_C03A6DD8.bin
+        0xC03AA568      4  extra og3k_81_C03AA568.bin
+        0xC0437AF8      4  extra og3k_33_C0437AF8.bin
+        0xC0437B48      4  extra og3k_70_C0437B48.bin
+        0xC0437E98      4  extra og3k_75_C0437E98.bin
+        0xC043A19C      4  extra og3k_69_C043A19C.bin
+        0xC043BE68      4  extra og3k_76_C043BE68.bin
+        0xC043CCF8      4  extra og3k_82_C043CCF8.bin
+        0xC043D258      4  extra og3k_00_C043D258.bin
+        0xC050D4C8      4  hook site accel
+        0xC05D90F0      4  extra og3k_86_C05D90F0.bin
+        0xC05E5B58      4  extra og3k_83_C05E5B58.bin
+        0xC05E6400      4  extra og3k_85_C05E6400.bin
+        0xC05E84D8      4  extra og3k_84_C05E84D8.bin
+        0xC0730700      4  extra og3k_59_C0730700.bin
+        0xC0730800    308  extra og3k_38_C0730800.bin
+        0xC0730A00    368  extra og3k_39_C0730A00.bin
+        0xC0730C00      8  extra og3k_34_C0730C00.bin
+        0xC0731000    432  extra og3k_37_C0731000.bin
+        0xC0731400    268  extra og3k_48_C0731400.bin
+        0xC0731600    496  extra og3k_49_C0731600.bin
+        0xC0731800    304  extra og3k_41_C0731800.bin
+        0xC0731A00    168  extra og3k_40_C0731A00.bin
+        0xC0731B00     56  extra og3k_42_C0731B00.bin
+        0xC0731B40     56  extra og3k_43_C0731B40.bin
+        0xC0731C00     12  extra og3k_50_C0731C00.bin
+        0xC0731C14      4  extra og3k_51_C0731C14.bin
+        0xC0731C20     32  extra og3k_54_C0731C20.bin
+        0xC0731C40      4  extra og3k_53_C0731C40.bin
+        0xC0731C44      4  extra og3k_52_C0731C44.bin
+        0xC0731D00    468  extra og3k_44_C0731D00.bin
+        0xC0732000      4  extra og3k_55_C0732000.bin
+        0xC0732030      4  extra og3k_56_C0732030.bin
+        0xC0732060      4  extra og3k_57_C0732060.bin
+        0xC0732070      4  extra og3k_58_C0732070.bin
+        0xC0732100     40  extra og3k_64_C0732100.bin
+        0xC0732200    132  extra og3k_46_C0732200.bin
+        0xC0732380      8  extra og3k_61_C0732380.bin
+        0xC0732390      4  extra og3k_62_C0732390.bin
+        0xC0732400    572  extra og3k_45_C0732400.bin
+        0xC0732700     72  extra og3k_67_C0732700.bin
+        0xC07327C8     48  extra og3k_68_C07327C8.bin
+        0xC07328C0      4  extra og3k_60_C07328C0.bin
+        0xC0732900     76  extra og3k_47_C0732900.bin
+        0xC0732A00     20  extra og3k_63_C0732A00.bin
+        0xC0732C84   6344  extra og3k_65_C0732C84.bin
+        0xC0793060   4704  extra og3k_66_C0793060.bin
+        0xC0BD9A2C      4  extra og3k_01_C0BD9A2C.bin
+        0xC0BD9A30      4  extra og3k_05_C0BD9A30.bin
+        0xC0BD9A34      4  extra og3k_09_C0BD9A34.bin
+        0xC0BD9A38      4  extra og3k_13_C0BD9A38.bin
+        0xC0BD9A40      4  extra og3k_17_C0BD9A40.bin
+        0xC0BD9A48      4  extra og3k_21_C0BD9A48.bin
+        0xC0BD9CC8      4  extra og3k_25_C0BD9CC8.bin
+        0xC0BD9CCC      4  extra og3k_29_C0BD9CCC.bin
+        0xC0BD9EF4      4  extra og3k_03_C0BD9EF4.bin
+        0xC0BD9EF8      4  extra og3k_07_C0BD9EF8.bin
+        0xC0BD9EFC      4  extra og3k_11_C0BD9EFC.bin
+        0xC0BD9F00      4  extra og3k_15_C0BD9F00.bin
+        0xC0BD9F08      4  extra og3k_19_C0BD9F08.bin
+        0xC0BD9F10      4  extra og3k_23_C0BD9F10.bin
+        0xC0BDA190      4  extra og3k_27_C0BDA190.bin
+        0xC0BDA194      4  extra og3k_31_C0BDA194.bin
+        0xC0BE167C      4  extra og3k_02_C0BE167C.bin
+        0xC0BE1680      4  extra og3k_06_C0BE1680.bin
+        0xC0BE1684      4  extra og3k_10_C0BE1684.bin
+        0xC0BE1688      4  extra og3k_14_C0BE1688.bin
+        0xC0BE1690      4  extra og3k_18_C0BE1690.bin
+        0xC0BE1698      4  extra og3k_22_C0BE1698.bin
+        0xC0BE1918      4  extra og3k_26_C0BE1918.bin
+        0xC0BE191C      4  extra og3k_30_C0BE191C.bin
+        0xC0BE1B44      4  extra og3k_04_C0BE1B44.bin
+        0xC0BE1B48      4  extra og3k_08_C0BE1B48.bin
+        0xC0BE1B4C      4  extra og3k_12_C0BE1B4C.bin
+        0xC0BE1B50      4  extra og3k_16_C0BE1B50.bin
+        0xC0BE1B58      4  extra og3k_20_C0BE1B58.bin
+        0xC0BE1B60      4  extra og3k_24_C0BE1B60.bin
+        0xC0BE1DE0      4  extra og3k_28_C0BE1DE0.bin
+        0xC0BE1DE4      4  extra og3k_32_C0BE1DE4.bin
+        0xC0F8E7EC     92  extra og3k_36_C0F8E7EC.bin
+        0xC1A709BC      4  extra og3k_35_C1A709BC.bin
+
+  projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/og2k-combined-release/AutoRun.txt  129 commands
+  projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/og2k-combined-release/fpSup.BIN  32204 bytes
+  OG3K 3834 筆 → 87 個區段   + gyro logger   (release,無 shell)
+  AutoRun 116 條指令   fpSup.BIN 32,204B   96 個區段
+  計畫回讀:✓ 全部重現
+  MANIFEST.txt / README.md NOT written: they are OG3K's text.
+  Carry OG2K's forward from the previous release and edit them.
+  → projects/res-lab/validation/20261015-local-merge-v014test/boot-entry-chain/og2k-combined-release

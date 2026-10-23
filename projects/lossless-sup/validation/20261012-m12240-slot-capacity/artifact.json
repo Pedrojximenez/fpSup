@@ -1,0 +1,27 @@
+{
+  "candidate": "candidate/10LOSS.BIN",
+  "sha256": "f1952f9503a96d7a9eee47bab8881599d3aeedb0ac1cb8a51b2e3d930ac1ee6d",
+  "bytes": 78176,
+  "slot_capacity": 1016,
+  "resident_bytes": 5971968,
+  "resident_growth_bytes": 1425408,
+  "previous_code_identity_verified_except_saved_settings": true,
+  "settings_offset": 3260,
+  "original_failure_reproduced": "original-reproduction.json",
+  "exact_arm_tests": 13,
+  "formula_tests": 5,
+  "formula_combinations": 360,
+  "stopfx_integration_tests": 1,
+  "stopfx_load_orders": 2,
+  "default_loader_tests": 2,
+  "default_build_sha256": "b4b59934bb8f0c66c6f4a53b4bbc36d569d2da17c09c69538b95cb3ae9643e62",
+  "default_merge_unchanged": true,
+  "production_changes": [
+    "native/slot_capacity.h",
+    "native/slot_patches.h",
+    "slot_patches.py",
+    "build_v3_lossless.py"
+  ],
+  "native_byte_trigger_bytes": 67108864,
+  "stopfx_changed": false
+}

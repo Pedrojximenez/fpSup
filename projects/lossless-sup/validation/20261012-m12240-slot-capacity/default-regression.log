@@ -1,0 +1,39 @@
+built into /Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/validation/20261012-m12240-slot-capacity/default-regression
+{
+ "c_base": 3136,
+ "c_text": 38614,
+ "menu_off": 41792,
+ "menu_len": 30844,
+ "blob_len": 72640,
+ "state_off": 72640,
+ "state_bytes": 215168,
+ "block_bytes": 290816,
+ "entries": {
+  "fpl_card_init": 1,
+  "fpl_card_rec": 1523,
+  "fpl_card_arrive": 4837,
+  "fpl_card_stop": 7517,
+  "fpl_card_flush": 8927,
+  "fpl_card_task": 14007,
+  "fpl_card_play": 16831,
+  "fpl_card_clip": 18105,
+  "fpl_card_play_end": 18857,
+  "fpl_card_play_pool": 18643,
+  "fpl_card_written": 12671,
+  "fpl_card_event": 13469,
+  "fpl_card_discard": 13723,
+  "fpl_card_bulk": 12439
+ },
+ "symbols": {
+  "entry": 0,
+  "claims": 2948,
+  "settings": 2932,
+  "c_base": 3136,
+  "task_shim": 2808,
+  "g_card": 2820,
+  "flush_real": 2880,
+  "discard_real": 2896,
+  "stop_resume": 2876,
+  "play_next": 2908
+ }
+}

@@ -1,0 +1,11 @@
+{
+  "source": "resume-m12240-120p-on.json",
+  "commands": [
+    {
+      "time": 1791781336.8180711,
+      "command": "status get is_recording",
+      "reply": "ERR shl frame0 rc=-7(LIBUSB_ERROR_TIMEOUT) moved=0/64\n"
+    }
+  ],
+  "error": "RuntimeError('ERR shl frame0 rc=-7(LIBUSB_ERROR_TIMEOUT) moved=0/64\\n')"
+}

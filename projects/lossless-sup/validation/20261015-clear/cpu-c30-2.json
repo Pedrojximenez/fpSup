@@ -1,0 +1,60 @@
+{
+ "label": "c30-2",
+ "window": [
+  1.0,
+  2.0,
+  4.0
+ ],
+ "settings": {
+  "menu SetMovRecSize": "2",
+  "menu SetMovFramerate": "3",
+  "gui geti MV_FrameRate": "OK:MV_FrameRate -> 3",
+  "gui geti MV_fpLossless": "OK:MV_fpLossless -> 1",
+  "sdcard sdmode": "sdmode  UHS-II"
+ },
+ "before": {
+  "hold.held": 102,
+  "hold.passed": 0,
+  "hold.compressed": 102,
+  "hold.refused": 0,
+  "hold.no_benefit": 0,
+  "hold.lanes_full": 0,
+  "hold_b.held": 0,
+  "hold_b.compressed": 0,
+  "hold_b.refused": 0,
+  "hold_b.no_benefit": 0,
+  "flush.applied": 102,
+  "flush.tag_failed": 0,
+  "hold.job_sum_us": 1374652,
+  "hold.job_count": 102,
+  "hold_b.job_sum_us": 0,
+  "hold_b.job_count": 0,
+  "take_frames": 103,
+  "tag_prepared": 1
+ },
+ "mon_start": 1.01,
+ "task_top": "\n# CPU = 20.2[%] \n# top 10 tasks \n# ------------------------------\n# Cnt = 9112, Overlap = 0, Prefix = 1/1000000 \n#   TaskID       Time   Rate    FuncAddr    Pri  StackRem      name\n     001      1599610    79.8[%] c0001c60 (30)       3832 Byte inittsk\n     044       117000     5.8[%] c036ee50 (15)       7704 Byte CamSch\n     045        48577     2.4[%] c036ee50 (15)      14672 Byte MRecMgr\n     068        31728     1.6[%] c01c26f9 (12)       4768 Byte MANAGER\n     029        26986     1.3[%] c035c460 (11)       7056 Byte LensCycl\n     094        25537     1.3[%] c036ee50 (16)       3524 Byte ExtStrb\n     063        24703     1.2[%] c0672d89 (17)       1960 Byte FdTsk\n     061        21201     1.1[%] c036ee50 (06)      12732 Byte SRecFile\n     039        21143     1.1[%] c036ee50 (17)      13808 Byte DrawMgr\n     095        14985     0.7[%] c036ee50 (16)       3204 Byte Level\n# Total(Sum)     2003530(   2003530) \n\n-> succeeded\n",
+ "mon_end": 3.01,
+ "stop_at": 4.13,
+ "after": {
+  "hold.held": 102,
+  "hold.passed": 0,
+  "hold.compressed": 102,
+  "hold.refused": 0,
+  "hold.no_benefit": 0,
+  "hold.lanes_full": 0,
+  "hold_b.held": 0,
+  "hold_b.compressed": 0,
+  "hold_b.refused": 0,
+  "hold_b.no_benefit": 0,
+  "flush.applied": 204,
+  "flush.tag_failed": 0,
+  "hold.job_sum_us": 1374642,
+  "hold.job_count": 102,
+  "hold_b.job_sum_us": 0,
+  "hold_b.job_count": 0,
+  "take_frames": 103,
+  "tag_prepared": 2
+ },
+ "record_log": "file-size=3245568, bulk-size=67108864(20.7)\nreq_cnt=103, fin_cnt=103, key\nrequest  ,finish   ,diff,gap ,reqcnt,fincnt,diff,sdb,MB/s\n     1806,     2217, 411,1806,    41,     1,  40, 41, 163\n     3174,     3592, 418, 957,    82,    42,  40, 41, 160\n     3841,     4082, 241, 249,   102,    83,  19, 74, 269\n     4235,     4250,  15, 153,   103,   103,   0, 75, 216\n"
+}

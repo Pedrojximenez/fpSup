@@ -1,0 +1,77 @@
+{
+  "variant": "combined-fix6",
+  "identity": {
+    "base": "0x451d7380",
+    "state": "0x4520eb80",
+    "nrows": 5,
+    "immutable_code_sha256": "5617a32d7ba664aba450426202ddaa206b67e1133cca04ad0d2dcac06c9413ec"
+  },
+  "resident_only": true,
+  "card_modified": false,
+  "field": "outline-mode 1 stroke -> 0 bold (stock default)",
+  "table": "0x451ead0c",
+  "bytes_before_sha256": "bd2d47bbc08452acbdce013da9f1ea00ba269dcd69fa52d399f5b2a1cae2b2d2",
+  "words": [
+    {
+      "address": "0x451ed1cc",
+      "before": "0x1",
+      "after": "0x0"
+    },
+    {
+      "address": "0x451ed220",
+      "before": "0x58420100",
+      "after": "0x58420000"
+    },
+    {
+      "address": "0x451ed274",
+      "before": "0x42010000",
+      "after": "0x42000000"
+    },
+    {
+      "address": "0x451efc4c",
+      "before": "0xc4201",
+      "after": "0xc4200"
+    },
+    {
+      "address": "0x451efca0",
+      "before": "0xa2420100",
+      "after": "0xa2420000"
+    },
+    {
+      "address": "0x451efcf4",
+      "before": "0x42010000",
+      "after": "0x42000000"
+    },
+    {
+      "address": "0x451f2628",
+      "before": "0x1",
+      "after": "0x0"
+    },
+    {
+      "address": "0x451f267c",
+      "before": "0x58420100",
+      "after": "0x58420000"
+    },
+    {
+      "address": "0x451f26d0",
+      "before": "0x42010000",
+      "after": "0x42000000"
+    },
+    {
+      "address": "0x451f5170",
+      "before": "0x1",
+      "after": "0x0"
+    },
+    {
+      "address": "0x451f51c4",
+      "before": "0x38420100",
+      "after": "0x38420000"
+    },
+    {
+      "address": "0x451f5218",
+      "before": "0x42010000",
+      "after": "0x42000000"
+    }
+  ],
+  "bytes_after_sha256": "1565c19ce13135c06e62f7155faded7ec521bd2a5209ca47714b695ebb37c368"
+}

@@ -1,0 +1,86 @@
+{
+  "base-60p": {
+    "full": {
+      "cpu": 61.59,
+      "CamSch": 26.08,
+      "MRecMgr": 11.06,
+      "DrawMgr": 3.44,
+      "SRecFile": 2.09,
+      "SRecRaw": 1.43,
+      "FPLCODE": 2.71,
+      "camera_summary_cpu": 61.6
+    },
+    "window_1.1_2.1s": {
+      "cpu": 65.32,
+      "CamSch": 29.57,
+      "MRecMgr": 14.37,
+      "DrawMgr": 1.53,
+      "SRecFile": 3.03,
+      "SRecRaw": 0.0,
+      "FPLCODE": 3.24
+    }
+  },
+  "cand-60p": {
+    "full": {
+      "cpu": 62.08,
+      "CamSch": 25.93,
+      "MRecMgr": 11.39,
+      "DrawMgr": 3.44,
+      "SRecFile": 2.15,
+      "SRecRaw": 1.43,
+      "FPLCODE": 2.96,
+      "camera_summary_cpu": 62.0
+    },
+    "window_1.1_2.1s": {
+      "cpu": 64.93,
+      "CamSch": 29.3,
+      "MRecMgr": 14.3,
+      "DrawMgr": 1.19,
+      "SRecFile": 3.03,
+      "SRecRaw": 0.0,
+      "FPLCODE": 3.59
+    }
+  },
+  "cand-120p": {
+    "full": {
+      "cpu": 85.44,
+      "CamSch": 28.57,
+      "MRecMgr": 18.24,
+      "DrawMgr": 3.34,
+      "SRecFile": 3.68,
+      "SRecRaw": 1.44,
+      "FPLCODE": 5.27,
+      "camera_summary_cpu": 85.4
+    },
+    "window_1.1_2.1s": {
+      "cpu": 94.86,
+      "CamSch": 31.05,
+      "MRecMgr": 23.93,
+      "DrawMgr": 1.64,
+      "SRecFile": 4.98,
+      "SRecRaw": 0.0,
+      "FPLCODE": 6.71
+    }
+  },
+  "off-120p": {
+    "full": {
+      "cpu": 79.62,
+      "CamSch": 29.22,
+      "MRecMgr": 17.13,
+      "DrawMgr": 3.33,
+      "SRecFile": 3.36,
+      "SRecRaw": 1.42,
+      "FPLCODE": 0.51,
+      "camera_summary_cpu": 79.6
+    },
+    "window_1.1_2.1s": {
+      "cpu": 86.92,
+      "CamSch": 32.39,
+      "MRecMgr": 21.46,
+      "DrawMgr": 1.33,
+      "SRecFile": 4.62,
+      "SRecRaw": 0.0,
+      "FPLCODE": 0.56
+    }
+  }
+}

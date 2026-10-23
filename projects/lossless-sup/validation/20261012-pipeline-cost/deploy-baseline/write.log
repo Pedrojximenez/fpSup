@@ -1,0 +1,21 @@
+  local   /Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/validation/20261012-pipeline-cost/baseline-profile/10LOSS.BIN  79904 bytes
+  remote  \fpSup\10LOSS.BIN  mode 0x7
+  buffer  0x45062FC0, file object 0x450767E0
+  proof   region takes writes and still holds them a second later
+  restored echo -> 0xC03D99A0
+  reply   putfile: written
+  status  2 — written
+  open    1     write  1   (both are flags, not counts)
+  dir     79904 B verified
+
+  stage  79904 bytes in 0.001s (67.6 MB/s)      
+
+  verify 79904 bytes in 0.001s (133.2 MB/s)      
+
+  stage  79904 bytes in 0.02s (4.5 MB/s), MEM1, read back whole          
+
+  code   304/304 B  4.8 KiB/s 
+  verify 304/304 B  600 KiB/s 
+  verify 304 bytes in 0.0s (69 KiB/s)      
+
+  code   304 bytes in 0.1s (2.4 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          

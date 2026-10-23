@@ -1,5 +1,79 @@
 # Res Lab（原 Sensor Lab）— 開發狀態
 
+**RES-Custom 現況、全部 SSD 測試資料與待優化清單：[RESCUSTOM_STATUS.md](RESCUSTOM_STATUS.md)；診斷工具與教訓：[notes/DIAGNOSTIC_METHODS.md](notes/DIAGNOSTIC_METHODS.md)（2026-10-14）。**
+
+## 2026-10-15：FPS 黑框向外加厚至約 3 px，保留白字與間距
+
+目前卡上為 `combined-fix12`，黑框往外加厚約 3 px，白字本身、字級與 fix10 調好的間距保持不變。
+先開關 QS 再實拍，1943 對比色確認四側外擴 3 px；已完整還原黑色，1944 顯示完整 `29.97 FPS`。字形仍有差異，尚未驗收為與原廠完全一致。
+舊圖 1910 是更新前的原廠畫面，先前據此宣稱 59.94 外觀通過的判定已撤回。
+設定區保留、完整卡檔讀回與十一個模組載入均確認，最後回到非錄影 CINE 待機。
+
+使用者已確認保留此樣式（「還不錯就這樣」）。已依要求加入本地 Merge，版號
+`v0.1.4test`，使用 `combined-fix12` 的預設設定原始 BIN；
+[封裝與合併驗證](validation/20261015-local-merge-v014test/RESULTS.md) 已完成，未公開推送。
+
+首次 QS **仍未解決**；最後正式量測是 fix4 的 **6.1161 秒**，不是 fix12 的新測速。
+後來接回的卡與先前 4.34／4.33／4.02 秒的卡不同，不能用跨卡數字推論改善。
+最新實拍範圍為 29.97／中尺寸 CINE LV，其他格率／版面尚未逐一上機驗收。
+成品、實拍與範圍見 [最新外描邊](validation/20261015-qs-first-open/on-camera/run7/RESULTS.md)、
+[先前間距調整](validation/20261015-qs-first-open/on-camera/run5/RESULTS.md)、
+[先前描邊與原廠對照](validation/20261015-qs-first-open/on-camera/run4/RESULTS.md)、
+[上機歷史](validation/20261015-qs-first-open/on-camera/RESULTS.md)。
+最初獨立 [FPS 文字候選](validation/20261015-fps-text-style/RESULTS.md) 與
+[QS-only 候選](validation/20261015-qs-first-open/RESULTS.md) 的凍結成品保留，不代表目前卡上版本。
+
+## 2026-10-14：10-bit 239.76p SSD 連續 90.9 秒（手動停止），統一公式高格率修正
+
+HS280／239.76p／10-bit、只留 RES-Custom、無 shell、無 HDMI：A001_325 21,799 幀、WAV 90.92 s，
+每秒 238–245 張到使用者按停止，全部檔頭正常；使用者在 LCD 未見卡頓或切畫面。
+12-bit 同條件 A001_324 3,509 幀／14.67 s 後自動停止，仍是剩餘限制。
+修正內容：consumer v20 讓 239.76p 回到原廠 DMA 表頭與 64MiB 批次（CPU 複製與 4MiB 只留給 280p）；
+producer v19 在 239.76／279.72 寫入「預覽走錄影路徑」的完整畫布（與 r10、原廠 120p 一致，8/10/12-bit 都適用）。
+shell 與 HDMI 會讓 MovRec 交給 writer 的速度降到約 188 fps，240p 測試須關閉；SD 無法驗收 240p。
+重開後 240 選擇會回到 119.88（待修）。證據見 [統一公式高格率](validation/20261014-unified-hirate/RESULTS.md)、
+[240 原廠 DMA](validation/20261013-m12-240-native-dma/RESULTS.md)。
+
+## 2026-10-12：新版緩存規則下的 M12240 秒停診斷
+
+已核對實機新版LOSS／STOPFX與consumer19，M12240／239.76p／LOSS ON的批次策略確實啟用。
+最新SSD94／94 vbuf；本輪普通SD A001_116與原生DEBUG A001_117均104／104 vbuf，
+停後皆96/96、registry0，沒有看到累計殘留。DEBUG全環證據顯示停止前15筆完成通知，
+管理工作僅處理10筆，另5筆仍在等待；prepare／event8／event9均由同一管理工作處理。
+提早結算有效，未解決寫出完成至RAW回收的延遲。產品BIN未修改，持續240p仍未修复。
+首張writer返回0.530ms，完成310.951ms、RAW歸還361.047ms，不能用API返回替代整段回收等待；
+DEBUG毫秒值不能當普通模式效能基準。兩段RAW fallback100%、codec stall0。
+Logger已完整還原，舊／新原生環、精確身份与結果見
+[新版規則秒停檢查](validation/20261012-m12-240-stop-review/RESULTS.md)。
+
+## 2026-10-12：M12240 上機 SD／SSD 試錄，持續 240p 未修復
+
+consumer v19／M12240 已寫入實機並完整讀回；保留現有 loader、AutoRun、producer17及其他 Sup。
+原生清單啟用後，119.88p／12-bit 對照 A001_094 完成416／416幀並按鍵正常停止。
+239.76p A001_095 仍在94／94幀自動 vbuf 停止；CPU header-copy實際94 hits，
+p83畫布／4MiB batch hits皆0。六個首／中／末RAW樣本解析及LibRaw解碼通過，
+240段FrameRate已為`240000/1001`。這是標記與配方身份通過，不能稱為持續錄影修復。
+使用者SSD試錄五段各94、94、1、179、222幀，WAV皆不足1秒；
+最後一段原生日誌確認222／222、vbuf／raw1。全590原檔逐張LibRaw核對，
+189張可解碼、401張因TIFF起點偏移19456／65536 bytes被拒絕，錯位前全零。
+返回相機仍精確consumer19／M12240，CPU header-copy hits增加590，
+p83／4MiB hits仍0；不能只用SD速度解釋，檔頭路徑命中也未修復SSD錯位。
+本輪未擷取連續LCD／HDMI，完整画面／FOV仍未驗收。
+部署、精確檔案與實機證據見 [本輪上機紀錄](validation/20261012-m12-240-live/RESULTS.md)。
+
+## 2026-10-12：M12 239.76p 獨立配方（離線候選）
+
+已製作 **M12240**，使用同一個 RCD／Virtual RCD 框架與 RES-CUSTOM consumer。
+M12 原廠 330／330／910×6 時序、p13、1008×672 RAW／992×662 輸出、12-bit；
+選單直接選 239.76p，DNG 標記為 `240000/1001`。幾何沿用成功片段時期 H2 的 25 組讀回。
+consumer v19 修正 p83 試驗跨配方覆蓋，使 p13 保留自己的完整畫布与原生批次。
+Res Lab producer v18、共用 loader／AutoRun 與 RCD wire／ABI 不變。
+
+[普通卡](cards/20261012-m12-240/plain/)與 [debug 卡](cards/20261012-m12-240/debug/)
+為新建的離線開發產物；尚未寫卡或上機。歷史成功片段的精確 BIN 未找回，
+本次不能稱為持續 240p 錄影修復。使用方式、精確雜湊及驗證見
+[本輪紀錄](validation/20261012-m12-240/RESULTS.md)。
+
 ## 2026-10-12：可用位深由 RCD 宣告（離線版本）
 
 RCD／producer 自己宣告允許的 8／10／12-bit；RES-Custom 只驗證、套用，

@@ -1,0 +1,88 @@
+{
+  "clip": "A001_102",
+  "requested": 9,
+  "finished": 9,
+  "sample_only": true,
+  "frames": [
+    {
+      "file": "000001.DNG",
+      "bytes": 9196544,
+      "ifd_at": 8,
+      "compression": 1,
+      "decoded": [
+        2010,
+        3024
+      ],
+      "raw_mean": 268.49,
+      "number": 1,
+      "main_ifd": {
+        "NewSubfileType": 0,
+        "ImageWidth": 3024,
+        "ImageLength": 2010,
+        "BitsPerSample": 12,
+        "Compression": 1,
+        "StripOffsets": 78848,
+        "StripByteCounts": 9117360,
+        "BlackLevel": [
+          "262032/1024",
+          "262032/1024",
+          "262032/1024",
+          "262032/1024"
+        ],
+        "WhiteLevel": 4095,
+        "DefaultCropOrigin": [
+          8,
+          5
+        ],
+        "DefaultCropSize": [
+          3008,
+          2000
+        ],
+        "BaselineExposure": "2378/1024",
+        "FrameRate": "100000/1000"
+      },
+      "sha256": "bcc27064fccae89aacf97f6d13251db7a8c755f7ba28d0f12c0e6ae5c704d3ba"
+    },
+    {
+      "file": "000002.DNG",
+      "bytes": 2477056,
+      "ifd_at": 2476032,
+      "compression": 7,
+      "tiles": 24,
+      "soi_ok": 24,
+      "eoi_ok": 24,
+      "zero_pad": 693,
+      "decoded": [
+        2010,
+        3024
+      ],
+      "raw_mean": 268.48,
+      "number": 2,
+      "main_ifd": {
+        "NewSubfileType": 0,
+        "ImageWidth": 3024,
+        "ImageLength": 2010,
+        "BitsPerSample": 12,
+        "Compression": 7,
+        "BlackLevel": [
+          "261999/1024",
+          "261999/1024",
+          "261999/1024",
+          "261999/1024"
+        ],
+        "WhiteLevel": 4095,
+        "DefaultCropOrigin": [
+          8,
+          5
+        ],
+        "DefaultCropSize": [
+          3008,
+          2000
+        ],
+        "BaselineExposure": "2378/1024",
+        "FrameRate": "100000/1000"
+      },
+      "sha256": "75e165c9d74a422cb0aeefe6094614052a596846757203b65e3d95c3010e095a"
+    }
+  ]
+}

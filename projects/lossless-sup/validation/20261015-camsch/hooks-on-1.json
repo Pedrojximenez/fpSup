@@ -1,0 +1,76 @@
+{
+ "label": "on-1",
+ "hooks": {
+  "rec": {
+   "calls": 4,
+   "us": 13515,
+   "per_call_us": 3378.8,
+   "max_us": 13479,
+   "task": "?",
+   "sp": "0xc3a3ad50"
+  },
+  "arrive": {
+   "calls": 207,
+   "us": 118398,
+   "per_call_us": 572.0,
+   "max_us": 1266,
+   "task": "?",
+   "sp": "0xc3a42cb8"
+  },
+  "stop": {
+   "calls": 44,
+   "us": 1363,
+   "per_call_us": 31.0,
+   "max_us": 1316,
+   "task": "?",
+   "sp": "0xc3a42d2c"
+  },
+  "flush": {
+   "calls": 207,
+   "us": 3321,
+   "per_call_us": 16.0,
+   "max_us": 71,
+   "task": "?",
+   "sp": "0xc3a6f320"
+  },
+  "observe": {
+   "calls": 209,
+   "us": 13069,
+   "per_call_us": 62.5,
+   "max_us": 348,
+   "task": "?",
+   "sp": "0xc3a42c58"
+  },
+  "written": {
+   "calls": 207,
+   "us": 308,
+   "per_call_us": 1.5,
+   "max_us": 5,
+   "task": "?",
+   "sp": "0xc3a6f350"
+  },
+  "event": {
+   "calls": 621,
+   "us": 1359,
+   "per_call_us": 2.2,
+   "max_us": 200,
+   "task": "?",
+   "sp": "0xc3a42d60"
+  },
+  "discard": {
+   "calls": 0,
+   "us": 0,
+   "per_call_us": 0,
+   "max_us": 0,
+   "task": "?",
+   "sp": "0x0"
+  }
+ },
+ "enq_n": 1,
+ "enq_us": 1197,
+ "hold.diag_enq_n": 197,
+ "hold.diag_enq_us": 59578,
+ "hold.diag_enq_max_us": 980,
+ "hold_b.diag_enq_n": 9,
+ "hold_b.diag_enq_us": 683
+}

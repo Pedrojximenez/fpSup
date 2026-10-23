@@ -1,0 +1,67 @@
+{
+  "phase": "verified_card_update",
+  "writes": [
+    "\\fpSup\\32RESCUS.BIN",
+    "\\fpSup\\RESCUS\\M12240.RCD"
+  ],
+  "cfg_preserved": true,
+  "autorun_loader_producer_retained": true,
+  "rebooted": false,
+  "idle": {
+    "movie_recording": 0,
+    "xmp_file_pointer": 0,
+    "movie_writing": 0
+  },
+  "standby_before": {
+    "source": "native_LCD",
+    "path": "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261012-m12-240-live/deployment/m12240-before-write.jpg",
+    "sha256": "fe930d12772fa0065055f0c28e05c1d336e977746d571cabeeb6f856c444d2dd",
+    "standby_pixels": 301,
+    "rec_pixels": 0,
+    "standby_visible": true,
+    "idle_before": {
+      "native_rec": 0,
+      "selector": 17,
+      "movie_recording": 0,
+      "xmp_file_pointer": 0,
+      "movie_writing": 0
+    },
+    "idle_after": {
+      "native_rec": 0,
+      "selector": 17,
+      "movie_recording": 0,
+      "xmp_file_pointer": 0,
+      "movie_writing": 0
+    }
+  },
+  "current_write": "\\fpSup\\RESCUS\\M12240.RCD",
+  "verified": {
+    "\\fpSup\\32RESCUS.BIN": {
+      "bytes": 187520,
+      "sha256": "7a1ca8757169585952031032e31a1cd4ada7d2e96255f72ff6c718021c0bbb71",
+      "full_readback": true
+    },
+    "\\fpSup\\RESCUS\\M12240.RCD": {
+      "bytes": 7136,
+      "sha256": "971fe0f3c78966f2f8ca8c4246260612ff2852a9481eedfcf6d48b35a674490e",
+      "full_readback": true
+    }
+  },
+  "unchanged": {
+    "\\AutoRun.txt": "2e77dfe3529006d2cb95ac01e206048efe495493434c05f1ed8fad4ecd22bf96",
+    "\\fpSup\\LOADER.BIN": "2535b983a03f12b54ca107bb9d59591506b928c60ee07835676020f261e311b3",
+    "\\fpSup\\20GYR2.BIN": "cbf91f8c36efb6481329000b6736cda26eb0781fe9c8acfa1cd5f7c073a0f8d5",
+    "\\fpSup\\45RAWV.BIN": "701532fe8bcb2a7c374b891bff83f80105d36b579b5c1dc95fc4130cfddcf71c",
+    "\\fpSup\\40FLIP.BIN": "cc3d4c0502755185e2bca0c8f8e8fb45351b0d70c50b6cc72c0a85a89f746913",
+    "\\fpSup\\10LOSS.BIN": "ad984ce65a025d7acfbf968d0a7c3e43ef94bc89085af6b3a522374e7e9f8137",
+    "\\fpSup\\00SHELL.BIN": "b1c2823ed0ef46de67ddbac7bb71ba3c34617f0a25d93dfcf76b14e8224f742b",
+    "\\fpSup\\50RESLAB.BIN": "dad8226db751fe10c2cac1f2f21269cc746957c7aacc5b19bec83dd027da155f",
+    "\\fpSup\\RESCUS\\S16.RCD": "48740fbbd3dbcb3bf823d1ecdc8a9104e476efd61642142a3a4b221f598f5b15",
+    "\\fpSup\\RESCUS\\OG4K.RCD": "d3711c12c5b03234927f951c27826d9a095c4ed99d941cc54dcd3c88226689db",
+    "\\fpSup\\RESCUS\\OG3K.RCD": "5b3c7d266e68a89460bfeba96ee67a1e18a29e4ba14fbd7a4bdad127dce2f2ae",
+    "\\fpSup\\RESCUS\\OG2K.RCD": "7beef10339d41f8cd39ecc9014cb32fd39b994457e61622b9638e33452dd218a",
+    "\\fpSup\\RESCUS\\OG35K.RCD": "0d81f785bce9665937433bbdd06314c06523092876323dc0ce56bdab215e1cc7",
+    "\\fpSup\\RESCUS\\HS.RCD": "98b67a53c8996ad297a7f513c506f06b64b03bbd188ba036c43902955c2ca3a5",
+    "\\fpSup\\RESCUS\\H2S240.RCD": "835d214cf4c0b17d26f075e6ce3f749fe346ac88fb7c9ab4b9fe3642f15cbc99"
+  }
+}

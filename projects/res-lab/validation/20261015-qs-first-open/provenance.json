@@ -1,0 +1,144 @@
+{
+  "kind": "offline-QS-only-candidate",
+  "fps_base": "projects/res-lab/validation/20261015-fps-text-style/source-before",
+  "fps_base_comment": "pre-style sources overlaid on local res-custom copy; QS clone change only in ogc.c",
+  "sources": {
+    "projects/res-lab/validation/20261015-qs-first-open/legacy-fps-root/projects/open-gate/build/res-custom/build_v3_rescustom.py": {
+      "bytes": 22454,
+      "sha256": "8cb92f924b759577cc776b4b4e9c7f58b3d8a3a81f2c1c89096ff076049f6782"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/legacy-fps-root/projects/open-gate/build/res-custom/jose_extract.py": {
+      "bytes": 7685,
+      "sha256": "c6b8e04cd62e182a21b26f139368ec62e80816f8f02f85c37d4e52ccc0b2664e"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/legacy-fps-root/projects/open-gate/build/res-custom/jose_formats.py": {
+      "bytes": 16313,
+      "sha256": "afbf0b0f130595f20a1074cb4596450e181b5bcbe9112746cbd18162fc00e88f"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/legacy-fps-root/projects/open-gate/build/res-custom/m12_240.py": {
+      "bytes": 2983,
+      "sha256": "3440a6f2a54f088189f48452f9bc93aa30ed802ca7f774e38308c07c2e35e339"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/legacy-fps-root/projects/open-gate/build/res-custom/ogc.c": {
+      "bytes": 118016,
+      "sha256": "c82f2fa38a7c48f0843fb5231c50d839d1e2d840a1ec92398d513ef3592e128d"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/legacy-fps-root/projects/open-gate/build/res-custom/ogc_binfilt.c": {
+      "bytes": 1565,
+      "sha256": "4590c05f2884a1315b274a15c2db79ee697f4b0785945f6ed74d6b060319ef8e"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/legacy-fps-root/projects/open-gate/build/res-custom/ogc_files.c": {
+      "bytes": 13391,
+      "sha256": "bc00ff2abeab775f53f0e816eef700db7d621c9bbc4851348038ca671c2b5e90"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/legacy-fps-root/projects/open-gate/build/res-custom/ogc_layout.py": {
+      "bytes": 38034,
+      "sha256": "4ed0779fa6585639d4ae50564fbc107b4fa1e857ea1e185cceb6f08abe4459d1"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/legacy-fps-root/projects/open-gate/build/res-custom/ogc_rowdata.py": {
+      "bytes": 6513,
+      "sha256": "a871b333718606798224152fa3419afc95e3c0c0c0dfc4594e00de672c015990"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/legacy-fps-root/projects/open-gate/build/res-custom/ogc_shims.S": {
+      "bytes": 21237,
+      "sha256": "498d8977b9ab80fbd8a06369f08ea0ae41593b1b0f4155970e2e8f4478b04ca6"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/legacy-fps-root/projects/open-gate/build/res-custom/ogc_virtual.c": {
+      "bytes": 9642,
+      "sha256": "1e212e1a5a936360785169dce31bfa893ff2143c5f50f2dfe1a3cc73ae202444"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/legacy-fps-root/projects/open-gate/build/res-custom/rc_files_page.py": {
+      "bytes": 3637,
+      "sha256": "9d6af9f8637135641ba384d70ff13ac3b745c7a35dc6047d2886f13b0eeda2b5"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/legacy-fps-root/projects/open-gate/build/res-custom/rcd.py": {
+      "bytes": 26249,
+      "sha256": "c2808fb9e8d5e419f06e17fe4a34844c60872775c51bc529d205fc9875304c3c"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/legacy-fps-root/projects/open-gate/build/res-custom/test_rcd_bitdepth.py": {
+      "bytes": 12844,
+      "sha256": "95183fd038719a87b83eb797aa4beeac97de624a7a5dc20c99c9dfa8b429bc95"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/legacy-fps-root/projects/open-gate/build/res-custom/test_v3_rescustom.py": {
+      "bytes": 124457,
+      "sha256": "a024f16b31dd570a54075382652bc464e431c4f64010ddb237de04329ac61ab2"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/legacy-fps-root/projects/open-gate/build/res-custom/virtual_rcd.h": {
+      "bytes": 2467,
+      "sha256": "78bb3f320d4af4610efbd6fca27d33d329e762b30cd301c06acfdf96f3739a17"
+    },
+    "projects/res-lab/validation/20261015-qs-first-open/legacy-fps-root/projects/open-gate/build/res-custom/vr_ui.py": {
+      "bytes": 16127,
+      "sha256": "272c891fcf9f7b9830e250b65fa83ad3814fcdb116438f86a6778dd481e1165f"
+    },
+    "projects/open-gate/build/res-custom/ogc.c": {
+      "bytes": 121214,
+      "sha256": "94b6c936085c60fc4f3eeb2a2a0fc3782cd55fe54a85253fb4935aac9ec1ff1a"
+    }
+  },
+  "artifacts": {
+    "qs-only/32RESCUS.BIN": {
+      "bytes": 187520,
+      "sha256": "ef4580991a7487d0ad1472ad028f107862cff6bac33309a5b71f1fe4e6070b5f"
+    },
+    "qs-only/RESCUS/OG2K.RCD": {
+      "bytes": 5216,
+      "sha256": "8025ea96924b535f9b202b2f9ae65c81f7c66129bf4dfb5256c2a1d46b444ecf"
+    },
+    "qs-only/RESCUS/OG35K.RCD": {
+      "bytes": 7788,
+      "sha256": "e5b5ba7a9535f45b597745e1bec5377dad4c4fa46aa11fb9fb6c53648f57a303"
+    },
+    "qs-only/RESCUS/OG3K.RCD": {
+      "bytes": 4244,
+      "sha256": "f61a3861dba81d12f4a9eb7a0fc8cca249859ee4bc840dcc022b134d647b89ba"
+    },
+    "qs-only/RESCUS/OG4K.RCD": {
+      "bytes": 3900,
+      "sha256": "39a808f2189895dce66c93d283711b67327c3a2869ff25ea2b43af00492e6661"
+    },
+    "qs-only/RESCUS/S16.RCD": {
+      "bytes": 7132,
+      "sha256": "3e942889e4cfb47f5c0aba2d696544abcc9a8b76fd2848bc0b7feb275195afd4"
+    },
+    "qs-only/build.json": {
+      "bytes": 57741,
+      "sha256": "30eacb5446103aa63cccc9ed4bb0c15e36688270bcea8cf5aa370666bb064324"
+    }
+  },
+  "maintained_focused_tests": {
+    "passed": 5,
+    "seconds": 36.34
+  },
+  "legacy_fps_focused_tests": {
+    "passed": 5,
+    "seconds": 36.131
+  },
+  "test_names": [
+    "test_quick_set_n3_is_the_proven_recipe",
+    "test_quick_set_scheme_b_for_two_and_six_formats",
+    "test_quick_set_passes_what_is_not_its_own",
+    "test_packs_are_registered_once_per_context_and_a_failed_one_drops_its_row",
+    "test_the_boot_reparse_happens_once_after_another_layout"
+  ],
+  "candidate_check": {
+    "artifact": "qs-only/32RESCUS.BIN",
+    "sha256": "ef4580991a7487d0ad1472ad028f107862cff6bac33309a5b71f1fe4e6070b5f",
+    "bytes": 187520,
+    "loaded": true,
+    "custom_qs_rows": 6,
+    "recipe_records": 371,
+    "reference_bytes_equal": true,
+    "reader_base_and_cursor_restored": true,
+    "hooks_restored": true,
+    "legacy_lv_journal_restored": true,
+    "fps_style": "pre-20261015-text-style",
+    "camera_latency_measured": false
+  },
+  "prior_fps_candidate_unchanged": {
+    "bytes": 232512,
+    "sha256": "22655ada516e0ec652501e5a6caceaf35bbdbf4d376372657b3f6139c935c965"
+  },
+  "on_camera_test": false,
+  "card_deployment": false
+}

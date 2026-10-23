@@ -1,0 +1,24 @@
+{
+  "backup_complete": true,
+  "consumer_installed": true,
+  "consumer_version": 19,
+  "hybrid_offline_passed": true,
+  "boot_code_verified": true,
+  "ui_precondition_notes": [
+    "Initial RC_Focus constant belonged to old page; new row3 focus is33634. No enable action occurred before corrected focus.",
+    "RC_File is published on rc_post, not rc_hint. The native LCD proved M12240 popup before confirmation."
+  ],
+  "scripts": {
+    "backup.py": "4388b91c428e504d5eea8658b5fab094814edb21aab608a0edc7e52876e35416",
+    "deploy.py": "8659fafcda60cfb2e5fcb2beb9e0135d3feb28a4886f416ba3a4f26fee0435ae",
+    "camera.py": "3d7327a117b3370d94ea1328f9f4ce69a1634273ed2d8f831ba4843d6167dddc",
+    "reboot.py": "d8d84d31f358ce874f942ab7d5b83e2dffc54087e40e6be06f7cbfed122a6863",
+    "record_mode.py": "d8b16120bbe9c4a3497760e79c613d68a72605d67b7bac56748b66420eb0667c",
+    "test_hybrid.py": "5d0b11399d1476aa14e0566e3238192f62f9de4d27b572a31e55160a32be9fcc",
+    "prepare_hybrid.py": "aa5d183ddf7960c4fbf65cef8287185971e06ea999bdae29c13a93ba4c54df57"
+  },
+  "no_recording_on_failed_preflights": true,
+  "additional_notes": [
+    "The native Resolution committed value does not follow the popup highlight; no MOV key was sent."
+  ]
+}

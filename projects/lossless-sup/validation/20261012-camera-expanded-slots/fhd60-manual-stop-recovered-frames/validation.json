@@ -1,0 +1,47 @@
+{
+  "clip": "A001_130",
+  "requested": 16911,
+  "finished": 16911,
+  "sample_only": true,
+  "frames": [
+    {
+      "file": "000001.DNG",
+      "bytes": 3244544,
+      "ifd_at": 8,
+      "compression": 1,
+      "decoded": [
+        1090,
+        1936
+      ],
+      "raw_mean": 353.48,
+      "number": 1,
+      "main_ifd": {
+        "NewSubfileType": 0,
+        "ImageWidth": 1936,
+        "ImageLength": 1090,
+        "BitsPerSample": 12,
+        "Compression": 1,
+        "StripOffsets": 78848,
+        "StripByteCounts": 3165372,
+        "BlackLevel": [
+          "261993/1024",
+          "261993/1024",
+          "261993/1024",
+          "261993/1024"
+        ],
+        "WhiteLevel": 4095,
+        "DefaultCropOrigin": [
+          8,
+          5
+        ],
+        "DefaultCropSize": [
+          1920,
+          1080
+        ],
+        "BaselineExposure": "2378/1024",
+        "FrameRate": "60000/1001"
+      },
+      "sha256": "53a9bf0bbac4c44231cfb39ace90d6065625b9ed06373d61af370d727cbbfafa"
+    }
+  ]
+}

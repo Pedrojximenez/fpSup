@@ -1,0 +1,14 @@
+test_readback_failure_rolls_back_ram_and_does_not_replay (test_library_native.LibraryNativeTests) ... FAIL
+
+======================================================================
+FAIL: test_readback_failure_rolls_back_ram_and_does_not_replay (test_library_native.LibraryNativeTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lut/test_library_native.py", line 201, in test_readback_failure_rolls_back_ram_and_does_not_replay
+    self.assertEqual(c.status()['last'],-16);self.assertEqual(c.status()['strength'],100)
+AssertionError: 0 != -16
+
+----------------------------------------------------------------------
+Ran 1 test in 4.551s
+
+FAILED (failures=1)

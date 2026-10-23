@@ -16,7 +16,7 @@
 
 # 實拍原始資料(HDMI 錄影、暗場、RAW 序列…)動輒數十 GB,留在本機。
 # 已經收進 repo 的舊 captures 不受影響;新的不再自動加入。
-projects/*/captures/
+projects/**/captures/
 research/**/captures/
 *.mkv
 *.rgb
@@ -27,3 +27,15 @@ research/**/captures/
 
 # LiDAR 不是 fp,另外處理
 projects/fp-lidar-direct/
+
+# 指向本機路徑的原始碼副本(驗證時的快照),只在本機有意義
+**/source-snapshot/
+**/legacy-fps-root/
+projects/qs-touch/site/
+
+# 從韌體產生的東西:交叉索引快取、反編譯片段
+.fpxref.pkl
+research/imaging-hw/h264-10bit-audit-20261015/*evidence.c
+
+# 壓縮後仍超過 GitHub 100 MB 上限
+research/imaging-hw/color-characterisation/exports/output - 00000002.tif

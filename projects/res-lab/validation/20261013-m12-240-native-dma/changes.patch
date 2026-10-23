@@ -1,0 +1,66 @@
+--- res-lab/validation/20261013-m12-240-native-dma/source-before/ogc.c	2026-10-13 23:30:20
++++ open-gate/build/res-custom/ogc.c	2026-10-13 23:30:32
+@@ -547,7 +547,11 @@
+     if (caller != 0xC038C780u) return 0;
+     SW(S, S_HDR_COPY_CALLS)++;
+     SW(S, S_HDR_COPY_WHY) = 1;
+-    if (!params || (params & 3u) || !m12_header_entry(S)) return 0;
++    /* 239.76p keeps the native DMA header, as in the sustained SSD take
++     * A001_193. The CPU copy spends ~3 ms per frame inside MovRec, so only the
++     * 280p engine rate (never sustained natively) still uses it. */
++    u32 he = (params && !(params & 3u)) ? m12_header_entry(S) : 0;
++    if (!he || W(he + ENT_ENGFPS) != 0x438BDC32u) return 0;
+     SW(S, S_HDR_COPY_WHY) = 2;
+     u32 src = W(params), dst = W(params + 4u), n = W(params + 8u);
+     SW(S, S_HDR_COPY_SRC) = src;
+--- res-lab/validation/20261013-m12-240-native-dma/source-before/build_v3_rescustom.py	2026-10-13 23:30:20
++++ open-gate/build/res-custom/build_v3_rescustom.py	2026-10-13 23:30:27
+@@ -51,7 +51,7 @@
+ PAIR_SITES = ((0xC06BDA3C, 8), (0xC06BDA48, 4),   # the resolution converter's movw/movt, mov #n
+               (0xC06BDB0C, 8), (0xC06BDB18, 4),   # the frame-rate converter (row <-> internal)
+               (0xC06CB6DC, 8), (0xC06CB6E8, 4))   # the frame-rate summary (export -> state)
+-CORE_NAME, CORE_ID, VERSION = '32RESCUS.BIN', 'RCUS', 19
++CORE_NAME, CORE_ID, VERSION = '32RESCUS.BIN', 'RCUS', 20
+ RCD_DIR = 'RESCUS'
+ SHIFT = 0x10000000
+ SPAN = 0x8000                       # the layout must fit og_pic's window
+--- res-lab/validation/20261013-m12-240-native-dma/source-before/test_reslab_header_copy.py	2026-10-13 23:30:20
++++ open-gate/build/test_reslab_header_copy.py	2026-10-13 23:30:41
+@@ -85,11 +85,12 @@
+ 
+     def test_exact_bytes_uncached_and_original_cached_source(self):
+         cam = self.camera()
+-        for rank, n, source in ((23976, 4, SRC), (27972, 0x13400, SRC),
++        for rank, n, source in ((27972, 4, SRC), (27972, 0x13400, SRC),
+                                 (27972, 0x20000, CACHED)):
+             cam.put(cam.s()+V.L.S['VRATE'], rank)
+             e = cam.s()+cam.w(cam.s()+V.L.S['LAST_ENT'])
+             cam.put(e+V.L.ENT['VRATE'], rank)
++            cam.put(e+V.L.ENT['ENGFPS'], 0x438BDC32)
+             payload = bytes((i*17+3)&255 for i in range(n))
+             cam.mu.mem_write(source, payload)
+             cam.mu.mem_write(DST-4, b'\xa5'*(n+8))
+@@ -223,11 +224,9 @@
+         payload = bytes((i*17+3)&255 for i in range(0x13400))
+         cam.mu.mem_write(SRC, payload)
+         cam.mu.mem_write(DST-4, b'\xa5'*(len(payload)+8))
+-        self.assertEqual(self.copy(cam), (0, []))
+-        self.assertEqual(bytes(cam.mu.mem_read(DST, len(payload))), payload)
+-        self.assertEqual(bytes(cam.mu.mem_read(DST-4, 4)), b'\xa5'*4)
+-        self.assertEqual(bytes(cam.mu.mem_read(DST+len(payload), 4)), b'\xa5'*4)
+-        self.assertEqual(cam.w(s+V.L.S['HDR_COPY_HITS']), 1)
++        # 239.76p keeps the native DMA header (A001_193): no CPU copy.
++        self.assertEqual(self.copy(cam)[0], 0x42)
++        self.assertEqual(cam.w(s+V.L.S['HDR_COPY_HITS']), 0)
+         # Seed the independently archived p13 canvas. Every65 word must stay
+         # exact; in particular the later p83 processing field+88 stays absent.
+         expected = self.manifest['expected_canvas']
+@@ -255,7 +254,7 @@
+             cam.put(entry+V.L.ENT['NOMINAL'], nom)
+             cam.put(entry+V.L.ENT['ENGFPS'], fps)
+             cam.put(s+V.L.S['FPSLATCH'], fps)
+-            self.assertEqual(self.copy(cam)[0], 0)
++            self.assertEqual(self.copy(cam)[0], 0x42 if nom == 240 else 0)
+         vm = s+cam.w(s+V.L.S['VMS'])+cam.w(entry+V.L.ENT['VM'])*V.L.VM['SIZE']
+         row = s+cam.w(s+V.L.S['ROWS'])+(cam.w(s+V.L.S['CUR'])-1)*V.L.ROW['SIZE']
+         for address, value in ((s+V.L.S['FLAG'],0), (s+V.L.S['PICKOK'],0),

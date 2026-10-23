@@ -1,0 +1,144 @@
+{
+ "magic": "MRKD",
+ "count": 6,
+ "stamps": [
+  2271176,
+  2279504,
+  2321609,
+  3112961,
+  3290826,
+  3595835
+ ],
+ "load_start": 3370331,
+ "load_done": 3471793,
+ "events": [
+  [
+   525357,
+   "INIT: S DISP DEV ON"
+  ],
+  [
+   742542,
+   "INIT: E DISP DEV ON"
+  ],
+  [
+   989641,
+   "UI: in notified"
+  ],
+  [
+   1198638,
+   "INIT: OPENING DISP"
+  ],
+  [
+   1206432,
+   "UI: HdmiEdidFixed"
+  ],
+  [
+   1232869,
+   "INIT: REQ START LV"
+  ],
+  [
+   1575856,
+   "DISP: 49801000,49BFD000,00000000,30000000,"
+  ],
+  [
+   1575882,
+   "DISP: 49801000,49BFD000,00000000,30000003,"
+  ],
+  [
+   1584964,
+   "INIT: IMG DISP START"
+  ],
+  [
+   1836837,
+   "INIT: NORMAL OSD DISP"
+  ],
+  [
+   1857438,
+   "UI: 2315,MfSwitch"
+  ],
+  [
+   1861207,
+   "UI: 2425,CancelFocus"
+  ],
+  [
+   1909576,
+   "DISP: 49801000,49BFD000,00000000,30000000,"
+  ],
+  [
+   1909625,
+   "DISP: 49801000,49BFD000,00000000,30000003,"
+  ],
+  [
+   1925487,
+   "UI: LvStarted"
+  ],
+  [
+   2162602,
+   "UI: LvStarted"
+  ],
+  [
+   2165911,
+   "UI: in notify"
+  ],
+  [
+   2166090,
+   "UI: HdmiConnect"
+  ],
+  [
+   2166146,
+   "UI: in notified"
+  ],
+  [
+   2166184,
+   "UI: HdmiEdidFixed"
+  ],
+  [
+   2172992,
+   "UI: in notified"
+  ],
+  [
+   2217419,
+   "UI: LvStarted"
+  ],
+  [
+   2226548,
+   "DISP: 49801000,49BFD000,00000000,30000000,"
+  ],
+  [
+   2226594,
+   "DISP: 49801000,49BFD000,00000000,30000003,"
+  ],
+  [
+   2271176,
+   "S0 AutoRun start (after the stamp routine is installed)"
+  ],
+  [
+   2279504,
+   "S1 second stamp (S1-S0 = one marker)"
+  ],
+  [
+   2321609,
+   "S2 before the first splash display"
+  ],
+  [
+   3112961,
+   "S3 after the last splash display"
+  ],
+  [
+   3290826,
+   "S4 before the store bootstrap (Fast Start 3)"
+  ],
+  [
+   3370331,
+   "loader entered (LOAD_START_US)"
+  ],
+  [
+   3471793,
+   "loader done (LOAD_DONE_US)"
+  ],
+  [
+   3595835,
+   "S5"
+  ]
+ ]
+}

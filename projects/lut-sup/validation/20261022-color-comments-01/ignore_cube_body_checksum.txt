@@ -1,0 +1,13 @@
+test_cube_missing_replaced_body_or_header_is_not_written (test_library_native.LibraryNativeTests) ... 
+======================================================================
+FAIL: test_cube_missing_replaced_body_or_header_is_not_written (test_library_native.LibraryNativeTests) (kind='body')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lut/test_library_native.py", line 277, in test_cube_missing_replaced_body_or_header_is_not_written
+    self.assertEqual(c.status()['last'],-16);self.assertEqual(c.cube_writes,0)
+AssertionError: 0 != -16
+
+----------------------------------------------------------------------
+Ran 1 test in 6.946s
+
+FAILED (failures=1)

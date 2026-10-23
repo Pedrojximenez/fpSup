@@ -1,0 +1,37 @@
+{
+  "daemon": [
+    44398,
+    "OK name=fpshd version=3.2.0 protocol=1 frame=64 payload=44 transport=EP01-EP82 iface=0 camera=open seq=7 ep83=host_candidate upload=UP01-probed mem=MEM1-probed quarantine=0 fault=none\n"
+  ],
+  "identity": {
+    "base": "0x451d7380",
+    "state": "0x45223000",
+    "nrows": 5,
+    "immutable_code_sha256": "3720296a6593e53909fa53dbcef615b36cb6db0b32faf394f7a34291cbd0afe5"
+  },
+  "initial_screen": "LV_CINE_MEDIUM",
+  "sequence": [
+    {
+      "key": "QSON",
+      "screen": "QS_CINE"
+    },
+    {
+      "key": "QSOFF",
+      "screen": "QS_CINE"
+    },
+    {
+      "key": "QSON",
+      "screen": "LV_CINE_MEDIUM"
+    },
+    {
+      "key": "QSOFF",
+      "screen": "LV_CINE_MEDIUM"
+    }
+  ],
+  "screenshots": [
+    "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261015-qs-first-open/on-camera/run7/post-refresh/1942-20261015-fps-outer-edge-3px-after-QS-A.jpg"
+  ],
+  "settings_changed": false,
+  "run_completed": false,
+  "stop_reason": "Host runner reused target for the destination file, causing the second-capture screen assertion to compare a screen name to a Path. This was not evidence of an unexpected camera transition. Renamed destination and completed later colour/final-black runs."
+}

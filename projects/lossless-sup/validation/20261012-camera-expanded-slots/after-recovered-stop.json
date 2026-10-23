@@ -1,0 +1,12 @@
+{
+  "label": "after-recovered-stop",
+  "commands": [
+    {
+      "time": 1791770336.890124,
+      "command": "status get app_current",
+      "reply": "ERR shl cmd rc=-7(LIBUSB_ERROR_TIMEOUT) moved=0/64\n"
+    }
+  ],
+  "started_at": 1791770331.8789618,
+  "error": "RuntimeError(\"uncertain/failed command status get app_current: 'ERR shl cmd rc=-7(LIBUSB_ERROR_TIMEOUT) moved=0/64\\\\n'\")"
+}

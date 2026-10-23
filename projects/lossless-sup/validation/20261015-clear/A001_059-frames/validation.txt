@@ -1,0 +1,22 @@
+f000001.DNG 3245568 root 0x8 IFD0 entries 59 tag FD4C (7, 1068, 16688) strip at 0x13800
+  rawpy (1090, 1936) mean 322.4 min 254 max 527
+f000002.DNG 1143808 root 0x4130 IFD0 entries 59 tag FD4C (7, 1068, 16688) strip at 0x13800
+  compressed IFD entries 60 comp 7 tile 512 x 368 tiles 12 first 0x13800 end 0x117400 file 0x117400
+  IFD inside the tag value: True
+  rawpy (1090, 1936) mean 322.4 min 255 max 530
+f000435.DNG 1143808 root 0x4130 IFD0 entries 59 tag FD4C (7, 1068, 16688) strip at 0x13800
+  compressed IFD entries 60 comp 7 tile 512 x 368 tiles 12 first 0x13800 end 0x117400 file 0x117400
+  IFD inside the tag value: True
+  rawpy (1090, 1936) mean 322.4 min 255 max 532
+f000868.DNG 1145856 root 0x4130 IFD0 entries 59 tag FD4C (7, 1068, 16688) strip at 0x13800
+  compressed IFD entries 60 comp 7 tile 512 x 368 tiles 12 first 0x13800 end 0x117c00 file 0x117c00
+  IFD inside the tag value: True
+  rawpy (1090, 1936) mean 323.0 min 255 max 528
+f000869.DNG 1145856 root 0x4130 IFD0 entries 59 tag FD4C (7, 1068, 16688) strip at 0x13800
+  compressed IFD entries 60 comp 7 tile 512 x 368 tiles 12 first 0x13800 end 0x117c00 file 0x117c00
+  IFD inside the tag value: True
+  rawpy (1090, 1936) mean 323.0 min 255 max 528
+f000002.DNG vs f000001.DNG : mean |diff| 1.57
+f000435.DNG vs f000001.DNG : mean |diff| 1.57
+f000868.DNG vs f000001.DNG : mean |diff| 1.68
+f000869.DNG vs f000001.DNG : mean |diff| 1.68

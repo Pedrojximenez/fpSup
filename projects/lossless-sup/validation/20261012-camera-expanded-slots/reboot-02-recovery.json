@@ -1,0 +1,21 @@
+{
+  "reason": "One normal recovery reboot after completed evidence capture and uncertain getfile buffer cleanup",
+  "commands": [
+    {
+      "time": 1791771039.613585,
+      "command": "status get is_recording",
+      "reply": "is_recording -> 0\n\n"
+    },
+    {
+      "time": 1791771040.261846,
+      "command": "reboot",
+      "reply": "ERR shl frame0 rc=-1(LIBUSB_ERROR_IO) moved=0/64\n"
+    }
+  ],
+  "idle": {
+    "xmp_file_pointer": 0,
+    "movie_writing": 0
+  },
+  "boot_before": 11595327,
+  "sent_at": 1791771039.614805
+}

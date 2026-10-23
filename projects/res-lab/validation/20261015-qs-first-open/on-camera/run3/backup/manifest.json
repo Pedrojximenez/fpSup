@@ -1,0 +1,90 @@
+{
+  "phase": "complete",
+  "reason": "card contents changed after USB reconnect",
+  "files": {
+    "\\AutoRun.txt": {
+      "file": "AutoRun.txt",
+      "bytes": 4666,
+      "sha256": "2e77dfe3529006d2cb95ac01e206048efe495493434c05f1ed8fad4ecd22bf96"
+    },
+    "\\fpSup\\32RESCUS.BIN": {
+      "file": "fpSup__32RESCUS.BIN",
+      "bytes": 228928,
+      "sha256": "9a765ad083d137a58693f4e1d05a8dde9fccf0ed9e9d57e7a975c9e401c9395e"
+    },
+    "\\fpSup\\20RECW.BIN": {
+      "file": "fpSup__20RECW.BIN",
+      "bytes": 5228,
+      "sha256": "0107f8d6918a709e2f5c49861bf783bbab49985be35b818918d0d1d6a65f78f5"
+    },
+    "\\fpSup\\40GYR2.BIN": {
+      "file": "fpSup__40GYR2.BIN",
+      "bytes": 4040,
+      "sha256": "2cbfe477bf8b11cc0e4fed37df177f6f5d561bf31243e2b00687eed15aa9a7d3"
+    },
+    "\\fpSup\\41DSQZ.BIN": {
+      "file": "fpSup__41DSQZ.BIN",
+      "bytes": 79864,
+      "sha256": "cddf6da4b3dac81ac158e5a04dcc8b9ec4e9579dc5ca1fe0773366d4c1883448"
+    },
+    "\\fpSup\\LOADER.BIN": {
+      "file": "fpSup__LOADER.BIN",
+      "bytes": 29276,
+      "sha256": "b7b4fc3026e46f6f3eac8a97c463a7d192e53c389b45dbcf459cf9680306f19f"
+    },
+    "\\fpSup\\05STOPFX.BIN": {
+      "file": "fpSup__05STOPFX.BIN",
+      "bytes": 316,
+      "sha256": "f9f26a092c5676ead5771ba8be4aac9c3734e9ed0cd144002a73b3f6b657c9d9"
+    },
+    "\\fpSup\\45RAWV.BIN": {
+      "file": "fpSup__45RAWV.BIN",
+      "bytes": 38644,
+      "sha256": "701532fe8bcb2a7c374b891bff83f80105d36b579b5c1dc95fc4130cfddcf71c"
+    },
+    "\\fpSup\\40FLIP.BIN": {
+      "file": "fpSup__40FLIP.BIN",
+      "bytes": 25936,
+      "sha256": "cc3d4c0502755185e2bca0c8f8e8fb45351b0d70c50b6cc72c0a85a89f746913"
+    },
+    "\\fpSup\\10LOSS.BIN": {
+      "file": "fpSup__10LOSS.BIN",
+      "bytes": 74720,
+      "sha256": "ed6acb71570109399b01df03c4e902b24ed02be7c92392a32df832c8986065a2"
+    },
+    "\\fpSup\\00SHELL.BIN": {
+      "file": "fpSup__00SHELL.BIN",
+      "bytes": 4552,
+      "sha256": "b1c2823ed0ef46de67ddbac7bb71ba3c34617f0a25d93dfcf76b14e8224f742b"
+    },
+    "\\fpSup\\30FCAP.BIN": {
+      "file": "fpSup__30FCAP.BIN",
+      "bytes": 316,
+      "sha256": "d2b22eda13f5ba6f4bd5ca2c9d3dff1918186f5e6fcdc757920402d8e445df96"
+    },
+    "\\fpSup\\42TAPZ.BIN": {
+      "file": "fpSup__42TAPZ.BIN",
+      "bytes": 48348,
+      "sha256": "7eb0be22dbc5eca86876e05fcfe039268a40cfb89f24a8933138d5ba0fe8156a"
+    },
+    "\\fpSup\\LOAD.LOG": {
+      "file": "fpSup__LOAD.LOG",
+      "bytes": 4096,
+      "sha256": "659b1091b16f6c6a06f52f7d80ab4d48eec3a4d1c2945167a6843a9eb5b009ff"
+    },
+    "\\fpSup\\UI\\ALLSUPS.BIN": {
+      "file": "fpSup__UI__ALLSUPS.BIN",
+      "bytes": 347378,
+      "sha256": "4d07c1f262ca88432ab7a2b5bc806de9ad02629221d6042aa7e3f1b67ca7c516"
+    }
+  },
+  "daemon": [
+    37859,
+    "OK name=fpshd version=3.2.0 protocol=1 frame=64 payload=44 transport=EP01-EP82 iface=0 camera=open seq=494 ep83=host_candidate upload=UP01-probed mem=MEM1-probed quarantine=0 fault=none\n"
+  ],
+  "root_listing": "                                          .\n2026/10/14  05:00:52 <DIR>                .Spotlight-V100\n2026/10/15  08:24:18 <DIR>                DCIM\n2025/12/31  08:00:00                 4666 AutoRun.txt\n2026/10/15  00:57:16 <DIR>                CINEMA\n2026/10/14  16:24:40 <DIR>                fpSup\n2026/10/14  16:25:08 <DIR>                .fseventsd\n2026/10/14  16:25:04                 4096 ._fpSup\n2026/10/14  16:25:04                 4096 ._AutoRun.txt\n",
+  "fpSup_listing": "                                          .\n2026/10/15  08:31:14               228928 32RESCUS.BIN\n2026/10/14  16:24:36 <DIR>                UI\n2026/10/14  16:25:04                 4096 ._UI\n2026/10/14  15:25:32                 5228 20RECW.BIN\n2026/10/14  13:41:32                 4040 40GYR2.BIN\n2025/12/31  08:00:00                79864 41DSQZ.BIN\n2026/10/14  16:25:04                 4096 ._41DSQZ.BIN\n2026/10/15  08:28:30                29276 LOADER.BIN\n2026/10/14  16:25:04                 4096 ._LOADER.BIN\n2025/12/31  08:00:00                  316 05STOPFX.BIN\n2026/10/14  16:25:04                 4096 ._05STOPFX.BIN\n2025/12/31  08:00:00                38644 45RAWV.BIN\n2026/10/14  16:25:04                 4096 ._45RAWV.BIN\n2025/12/31  08:00:00                25936 40FLIP.BIN\n2026/10/14  16:25:04                 4096 ._40FLIP.BIN\n2026/10/14  11:11:10                74720 10LOSS.BIN\n2025/12/31  08:00:00                 4552 00SHELL.BIN\n2026/10/14  16:25:04                 4096 ._00SHELL.BIN\n2026/10/14  09:18:44                  316 30FCAP.BIN\n2025/12/31  08:00:00                48348 42TAPZ.BIN\n2026/10/14  16:25:04                 4096 ._42TAPZ.BIN\n2026/10/15  08:31:38                 4096 LOAD.LOG\n",
+  "UI_listing": "                                          .\n2025/12/31  08:00:00               347378 ALLSUPS.BIN\n2026/10/14  16:25:04                 4096 ._ALLSUPS.BIN\n2025/12/31  08:00:00                19712 4.BIN\n2026/10/14  16:25:04                 4096 ._4.BIN\n2025/12/31  08:00:00                19712 3.BIN\n2026/10/14  16:25:04                 4096 ._3.BIN\n2025/12/31  08:00:00                19712 2.BIN\n2026/10/14  16:25:04                 4096 ._2.BIN\n2025/12/31  08:00:00               114688 0.BIN\n2026/10/14  16:25:04                 4096 ._0.BIN\n2025/12/31  08:00:00                19712 1.BIN\n2026/10/14  16:25:04                 4096 ._1.BIN\n",
+  "RESCUS_exists": false,
+  "directory_detection_note": "Match the directory entry, excluding the filename 32RESCUS.BIN."
+}

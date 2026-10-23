@@ -35,7 +35,7 @@ PDAF 重審的結果是「fp 的可用性仍未證實，現有原廠路徑也沒
 
 分類的重要更正：Blackmagic 官方在 Camera 10.2.2（2026-08-10）為 **Cinema Camera 6K 全片幅**宣告新增 phase detection AF，不能混成 Pocket 6K 或舊版對比 AF。[官方版本說明](https://www.blackmagicdesign.com/mx/developer/partial/camera/sdk-and-software)。Panasonic S5 與 S1H 的官方資料明確描述 Contrast AF + DFD，這支持方法對照，沒有證明 fp 也能達到相同速度。[S5](https://na.panasonic.com/news/new-hybrid-full-frame-mirrorless-camera-the-lumix-s5)、[S1H](https://na.panasonic.com/news/panasonic-launches-a-new-full-frame-mirrorless-camera-the-lumix-s1h-with-cinema-quality-video-and-the-worlds-first-6k-24p-321-recording-capability)。
 
-本地完整證據：[PDAF 重審](/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/research/CROSSCAM_PDAF_FEASIBILITY_2026-09-27.md)、[Z CAM 程式研究](/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/research/ZCAM_AF_REFERENCE_2026-09-27.md)、[Panasonic／Leica／BMCC 分類](/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/research/NON_PDAF_CAMERA_REFERENCE_2026-09-27.md)。
+本地完整證據：[PDAF 重審](/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/research/CROSSCAM_PDAF_FEASIBILITY_2026-09-27.md)、[Z CAM 程式研究](../../../zcam_e2f6/notes/ZCAM_AF_REFERENCE_2026-09-27.fp-af-assist.md)、[Panasonic／Leica／BMCC 分類](/Users/dido/Developer.localized/SIGMAfp_re/projects/fp-af-assist/notes/research/NON_PDAF_CAMERA_REFERENCE_2026-09-27.md)。
 
 本次 Z CAM 的實際程式分析帶來三個可測問題：
 

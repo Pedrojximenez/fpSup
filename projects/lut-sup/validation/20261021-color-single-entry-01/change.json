@@ -1,0 +1,26 @@
+{
+  "unchanged_shared_files": [
+    "AutoRun.txt",
+    "fpSup/LOADER.BIN",
+    "fpSup/SUPMGR.BIN",
+    "fpSup/SHELL.BIN",
+    "fpSup/UI/FPSUP.BIN",
+    "fpSup/UI/SUPMGR.BIN",
+    "fpSup/LUT/ACTIVE.LUT"
+  ],
+  "changed_or_added": {
+    "fpSup/LUT.BIN": {
+      "bytes": 11368,
+      "sha256": "504ab045cb16a4962d52aebb860816de5fe3f4e0227500505683c4d9ca21697c"
+    },
+    "fpSup/UI/COLOR.BIN": {
+      "bytes": 115015,
+      "sha256": "e867454dd2caa7cac7157615da57e5bd45c128345ebe42312077ac950dfe6f14"
+    }
+  },
+  "home_entry": "Color",
+  "private_page": "FT_COLOR",
+  "required_services": "v6 file_read/borrow with private FT4S UI",
+  "camera_operations": false,
+  "explanations": "Documentation/chat only; no in-camera help page"
+}

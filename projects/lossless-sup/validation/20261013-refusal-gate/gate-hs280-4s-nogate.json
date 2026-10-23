@@ -1,0 +1,139 @@
+{
+  "label": "hs280-4s-nogate",
+  "seconds": 4.0,
+  "commands": [
+    [
+      1791862848.191152,
+      "status get app_current",
+      "app_current -> 2\n\n"
+    ],
+    [
+      1791862848.191814,
+      "status get is_recording",
+      "is_recording -> 0\n\n"
+    ],
+    [
+      1791862848.193632,
+      "menu SetMovRecSize",
+      "2\n\n"
+    ],
+    [
+      1791862848.1942039,
+      "menu SetMovCinemaDNGQuality",
+      "0\n\n"
+    ],
+    [
+      1791862848.194616,
+      "menu SetMovFramerate",
+      "7\n\n"
+    ],
+    [
+      1791862848.1949599,
+      "gui geti MV_FrameRate",
+      "OK:MV_FrameRate -> 8\n\n"
+    ],
+    [
+      1791862848.195286,
+      "gui geti MV_fpLossless",
+      "OK:MV_fpLossless -> 1\n\n"
+    ],
+    [
+      1791862848.245759,
+      "key MOVON",
+      "\n"
+    ],
+    [
+      1791862848.370765,
+      "key MOVOFF",
+      "\n"
+    ],
+    [
+      1791862852.493014,
+      "status get is_recording",
+      "is_recording -> 1\n\n"
+    ],
+    [
+      1791862852.502096,
+      "key MOVON",
+      "\n"
+    ],
+    [
+      1791862852.626948,
+      "key MOVOFF",
+      "\n"
+    ],
+    [
+      1791862854.133394,
+      "status get is_recording",
+      "is_recording -> 0\n\n"
+    ],
+    [
+      1791862884.329194,
+      "status get is_recording",
+      "is_recording -> 0\n\n"
+    ]
+  ],
+  "settings": {
+    "menu SetMovRecSize": "2",
+    "menu SetMovCinemaDNGQuality": "0",
+    "menu SetMovFramerate": "7",
+    "gui geti MV_FrameRate": "OK:MV_FrameRate -> 8",
+    "gui geti MV_fpLossless": "OK:MV_fpLossless -> 1"
+  },
+  "boot": 11589381,
+  "before": {
+    "take_frames": 104,
+    "record_diag.writer_calls": 104,
+    "slots.cookies[0].pending": 0,
+    "hold.held": 54,
+    "hold.compressed": 54,
+    "hold.refused": 0,
+    "hold.no_benefit": 0,
+    "hold.faults": 0,
+    "hold.dma_failed": 0,
+    "hold.stalls": 0,
+    "hold.job_last_us": 13952,
+    "hold.job_max_us": 15117,
+    "hold.job_count": 54,
+    "hold.job_sum_us": 746459,
+    "hold_b.held": 49,
+    "hold_b.compressed": 49,
+    "hold_b.refused": 0,
+    "hold_b.no_benefit": 0,
+    "hold_b.faults": 0,
+    "hold_b.dma_failed": 0,
+    "hold_b.stalls": 0,
+    "hold_b.job_last_us": 13624,
+    "hold_b.job_max_us": 14644,
+    "hold_b.job_count": 49,
+    "hold_b.job_sum_us": 678709,
+    "hold.arrivals": 54,
+    "hold.passed": 0,
+    "hold.not_eligible": 0,
+    "hold.lanes_full": 0,
+    "hold.refused_by": 0,
+    "hold.job.tile_width": 512,
+    "hold.job.tile_height": 368,
+    "hold.job.tiles": 12,
+    "rec_hold_refused": 0,
+    "hold_init_failed": 0,
+    "hold_live": 0,
+    "rec_events": 1,
+    "rec_admitted": 1,
+    "rec_raw": 0,
+    "stops": 1,
+    "gate.streak": 0,
+    "gate.closed": 0,
+    "gate.since_probe": 0,
+    "gate.closes": 0,
+    "gate.reopens": 0,
+    "gate.probes": 0,
+    "gate.skipped": 0
+  },
+  "start": 1791862848.210988,
+  "gate_disabled_at": 0.27025485038757324,
+  "gate_limit_now": 0,
+  "frames_when_disabled": 0,
+  "recording_at_stop": true,
+  "stop": 1791862852.494297
+}

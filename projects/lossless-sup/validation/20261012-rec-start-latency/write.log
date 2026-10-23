@@ -1,0 +1,19 @@
+  local   /Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/validation/20261012-rec-start-latency/candidate/10LOSS.BIN  79584 bytes
+  remote  \fpSup\10LOSS.BIN  mode 0x7
+  buffer  0x45063380, file object 0x45076A60
+  proof   region takes writes and still holds them a second later
+  restored echo -> 0xC03D99A0
+  reply   ERR shl frame0 rc=-7(LIBUSB_ERROR_TIMEOUT) moved=0/64
+
+  stage  79584 bytes in 0.001s (70.7 MB/s)      
+
+  verify 79584 bytes in 0.001s (137.9 MB/s)      
+
+  stage  79584 bytes in 0.02s (4.5 MB/s), MEM1, read back whole          
+
+  code   304/304 B  1.1 KiB/s 
+  verify 304/304 B  471 KiB/s 
+  verify 304 bytes in 0.0s (229 KiB/s)      
+
+  code   304 bytes in 0.4s (0.7 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+putfile echo reply failed; write outcome is unknown

@@ -1,0 +1,47 @@
+{
+ "label": "timed-fhd60",
+ "settings": {
+  "menu SetMovRecSize": "2",
+  "menu SetMovFramerate": "5",
+  "gui geti MV_FrameRate": "OK:MV_FrameRate -> 6",
+  "gui geti MV_fpLossless": "OK:MV_fpLossless -> 1",
+  "sdcard sdmode": "sdmode  UHS-II"
+ },
+ "before": {
+  "hold.held": 0,
+  "hold.passed": 0,
+  "hold.compressed": 0,
+  "hold.refused": 0,
+  "hold.no_benefit": 0,
+  "hold.lanes_full": 0,
+  "hold_b.held": 0,
+  "hold_b.compressed": 0,
+  "hold_b.refused": 0,
+  "hold_b.no_benefit": 0,
+  "hold.job_sum_us": 0,
+  "hold.job_count": 0,
+  "hold_b.job_sum_us": 0,
+  "hold_b.job_count": 0
+ },
+ "mon_start": 1.01,
+ "task_top": "\n# CPU = 91.6[%] \n# top 10 tasks \n# ------------------------------\n# Cnt = 8949, Overlap = 0, Prefix = 1/1000000 \n#   TaskID       Time   Rate    FuncAddr    Pri  StackRem      name\n     044       917925    45.4[%] c036ee50 (15)       7680 Byte CamSch\n     045       305184    15.1[%] c036ee50 (15)      13300 Byte MRecMgr\n     061       201867    10.0[%] c036ee50 (06)      12732 Byte SRecFile\n     001       170715     8.4[%] c0001c60 (30)       3832 Byte inittsk\n     124       119584     5.9[%] 4515499c (12)       7708 Byte FPLCODE\n     029        48317     2.4[%] c035c460 (11)       7056 Byte LensCycl\n     039        37497     1.9[%] c036ee50 (17)      13792 Byte DrawMgr\n     092        28225     1.4[%] c036ee50 (14)       7440 Byte AeDev\n     063        26034     1.3[%] c0672d89 (17)       1932 Byte FdTsk\n     071        24183     1.2[%] c01c40f9 (12)       8664 Byte R2YHDIS\n# Total(Sum)     2023387(   2023387) \n\n-> succeeded\n",
+ "mon_end": 3.1,
+ "stop_at": 4.27,
+ "after": {
+  "hold.held": 115,
+  "hold.passed": 0,
+  "hold.compressed": 115,
+  "hold.refused": 0,
+  "hold.no_benefit": 0,
+  "hold.lanes_full": 2,
+  "hold_b.held": 81,
+  "hold_b.compressed": 81,
+  "hold_b.refused": 0,
+  "hold_b.no_benefit": 0,
+  "hold.job_sum_us": 1651744,
+  "hold.job_count": 115,
+  "hold_b.job_sum_us": 1169637,
+  "hold_b.job_count": 81
+ },
+ "record_log": "file-size=3244544, bulk-size=67108864(20.7)\nreq_cnt=199, fin_cnt=199, key\nrequest  ,finish   ,diff,gap ,reqcnt,fincnt,diff,sdb,MB/s\n      572,      607,  35, 572,     8,     1,   7, 83, 741\n      717,      954, 237, 110,    17,     8,   9, 69, 136\n      976,     1019,  43,  22,    26,    17,   9, 74, 754\n     1040,     1074,  34,  21,    34,    27,   7, 80, 763\n     1113,     1153,  40,  39,    41,    34,   7, 82, 648\n     1256,     1293,  37, 103,    50,    41,   9, 81, 876\n     1419,     1461,  42, 126,    60,    50,  10, 79, 849\n     1565,     1606,  41, 104,    69,    60,   9, 80, 791\n     1712,     1747,  35, 106,    78,    69,   9, 81, 927\n     1872,     1913,  41, 125,    88,    79,   9, 80, 791\n     2017,     2053,  36, 104,    97,    88,   9, 81, 901\n     2181,     2220,  39, 128,   107,    97,  10, 79, 915\n     2324,     2366,  42, 104,   116,   107,   9, 80, 772\n     2472,     2506,  34, 106,   125,   116,   9, 81, 954\n     2625,     2667,  42, 119,   135,   125,  10, 80, 849\n     2779,     2817,  38, 112,   144,   135,   9, 80, 853\n     2924,     2963,  39, 107,   153,   144,   9, 80, 831\n     3077,     3112,  35, 114,   163,   154,   9, 81, 927\n     3230,     3269,  39, 118,   172,   163,   9, 80, 831\n     3392,     3431,  39, 123,   182,   172,  10, 79, 915\n     3535,     3570,  35, 104,   191,   182,   9, 81, 927\n     3630,     3690,  60,  60,   197,   191,   6, 85, 378\n     3917,     3931,  14, 227,   199,   198,   1, 88, 463\n"
+}

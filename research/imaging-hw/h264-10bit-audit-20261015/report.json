@@ -1,0 +1,687 @@
+{
+  "date": "2026-10-15",
+  "scope": "offline static analysis and existing MOV parsing",
+  "firmware": {
+    "path": "out/seg0_c0000000.bin",
+    "size": 49245696,
+    "sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622"
+  },
+  "functions": [
+    {
+      "address": "0xc0388680",
+      "name": "FUN_c0388680",
+      "source": "out/decomp/full/blk_c03.c",
+      "line": 92277
+    },
+    {
+      "address": "0xc0389ca8",
+      "name": "FUN_c0389ca8",
+      "source": "out/decomp/full/blk_c03.c",
+      "line": 93273
+    },
+    {
+      "address": "0xc038a3e8",
+      "name": "movRec",
+      "source": "out/decomp/full/blk_c03.c",
+      "line": 93664
+    },
+    {
+      "address": "0xc06b07a0",
+      "name": "FUN_c06b07a0",
+      "source": "out/decomp/full/blk_c06.c",
+      "line": 142716
+    },
+    {
+      "address": "0xc06b0ae0",
+      "name": "FUN_c06b0ae0",
+      "source": "out/decomp/full/blk_c06.c",
+      "line": 142887
+    },
+    {
+      "address": "0xc0708978",
+      "name": "FUN_c0708978",
+      "source": "out/decomp/full/blk_c07.c",
+      "line": 7175
+    },
+    {
+      "address": "0xc0708d28",
+      "name": "FUN_c0708d28",
+      "source": "out/decomp/full/blk_c07.c",
+      "line": 7433
+    },
+    {
+      "address": "0xc0708f98",
+      "name": "FUN_c0708f98",
+      "source": "out/decomp/full/blk_c07.c",
+      "line": 7520
+    },
+    {
+      "address": "0xc0709a80",
+      "name": "FUN_c0709a80",
+      "source": "out/decomp/full/blk_c07.c",
+      "line": 8096
+    },
+    {
+      "address": "0xc0709e50",
+      "name": "FUN_c0709e50",
+      "source": "out/decomp/full/blk_c07.c",
+      "line": 8268
+    },
+    {
+      "address": "0xc070a7e8",
+      "name": "FUN_c070a7e8",
+      "source": "out/decomp/full/blk_c07.c",
+      "line": 8780
+    },
+    {
+      "address": "0xc070a870",
+      "name": "FUN_c070a870",
+      "source": "out/decomp/full/blk_c07.c",
+      "line": 8799
+    },
+    {
+      "address": "0xc070a890",
+      "name": "FUN_c070a890",
+      "source": "out/decomp/full/blk_c07.c",
+      "line": 8809
+    },
+    {
+      "address": "0xc070a8b0",
+      "name": "FUN_c070a8b0",
+      "source": "out/decomp/full/blk_c07.c",
+      "line": 8819
+    },
+    {
+      "address": "0xc070ab40",
+      "name": "FUN_c070ab40",
+      "source": "out/decomp/full/blk_c07.c",
+      "line": 8989
+    },
+    {
+      "address": "0xc070b330",
+      "name": "FUN_c070b330",
+      "source": "out/decomp/full/blk_c07.c",
+      "line": 9415
+    },
+    {
+      "address": "0xc070b3e8",
+      "name": "FUN_c070b3e8",
+      "source": "out/decomp/full/blk_c07.c",
+      "line": 9445
+    },
+    {
+      "address": "0xc070b7a0",
+      "name": "FUN_c070b7a0",
+      "source": "out/decomp/full/blk_c07.c",
+      "line": 9700
+    },
+    {
+      "address": "0xc070c098",
+      "name": "FUN_c070c098",
+      "source": "out/decomp/full/blk_c07.c",
+      "line": 10098
+    },
+    {
+      "address": "0xc070c578",
+      "name": "FUN_c070c578",
+      "source": "out/decomp/full/blk_c07.c",
+      "line": 10268
+    },
+    {
+      "address": "0xc070c930",
+      "name": "FUN_c070c930",
+      "source": "out/decomp/full/blk_c07.c",
+      "line": 10469
+    },
+    {
+      "address": "0xc070cab0",
+      "name": "FUN_c070cab0",
+      "source": "out/decomp/full/blk_c07.c",
+      "line": 10537
+    },
+    {
+      "address": "0xc070caf0",
+      "name": "FUN_c070caf0",
+      "source": "out/decomp/full/blk_c07.c",
+      "line": 10551
+    },
+    {
+      "address": "0xc070d638",
+      "name": "FUN_c070d638",
+      "source": "out/decomp/full/blk_c07.c",
+      "line": 11186
+    },
+    {
+      "address": "0xc070d7c8",
+      "name": "FUN_c070d7c8",
+      "source": "out/decomp/full/blk_c07.c",
+      "line": 11297
+    },
+    {
+      "address": "0xc070d858",
+      "name": "FUN_c070d858",
+      "source": "out/decomp/full/blk_c07.c",
+      "line": 11340
+    },
+    {
+      "address": "0xc070e8d8",
+      "name": "FUN_c070e8d8",
+      "source": "out/decomp/full/blk_c07.c",
+      "line": 12540
+    },
+    {
+      "address": "0xc070eed0",
+      "name": "FUN_c070eed0",
+      "source": "out/decomp/full/blk_c07.c",
+      "line": 12759
+    },
+    {
+      "address": "0xc070f6d0",
+      "name": "FUN_c070f6d0",
+      "source": "out/decomp/full/blk_c07.c",
+      "line": 13179
+    },
+    {
+      "address": "0xc07101c0",
+      "name": "FUN_c07101c0",
+      "source": "out/decomp/full/blk_c07.c",
+      "line": 13898
+    },
+    {
+      "address": "0xc071f3e8",
+      "name": "FUN_c071f3e8",
+      "source": "out/decomp/full/blk_c07.c",
+      "line": 26840
+    },
+    {
+      "address": "0xc071fcd8",
+      "name": "FUN_c071fcd8",
+      "source": "out/decomp/full/blk_c07.c",
+      "line": 27274
+    },
+    {
+      "address": "0xc07254e0",
+      "name": "FUN_c07254e0",
+      "source": "out/decomp/full/blk_c07.c",
+      "line": 31897
+    },
+    {
+      "address": "0xc0725800",
+      "name": "FUN_c0725800",
+      "source": "out/decomp/full/blk_c07.c",
+      "line": 32153
+    },
+    {
+      "address": "0xc0725860",
+      "name": "FUN_c0725860",
+      "source": "out/decomp/full/blk_c07.c",
+      "line": 32176
+    },
+    {
+      "address": "0xc0725b30",
+      "name": "FUN_c0725b30",
+      "source": "out/decomp/full/blk_c07.c",
+      "line": 32466
+    }
+  ],
+  "codec_control_images": [
+    {
+      "address": "0xc2eb4390",
+      "size": 196608,
+      "sha256": "1ba39bfb19a952f982e9ff82f5f67377705611f538aba015621c68c3c7695c98",
+      "purpose": "normal codec control image copied by C070A870"
+    },
+    {
+      "address": "0xc2ee4390",
+      "size": 65536,
+      "sha256": "d67b1d059b070c1ac1177dd571003f5ee8d778221de02000ebaba27c844845ba",
+      "purpose": "alternate control image copied by C070A890"
+    }
+  ],
+  "movie_mode_table": {
+    "address": "0xc0b9ba08",
+    "row_bytes": 36,
+    "rows": [
+      {
+        "address": "0xc0b9ba08",
+        "words": [
+          3840,
+          2160,
+          0,
+          4,
+          4,
+          5,
+          0,
+          0,
+          438500
+        ]
+      },
+      {
+        "address": "0xc0b9ba2c",
+        "words": [
+          3840,
+          2160,
+          0,
+          3,
+          3,
+          5,
+          0,
+          0,
+          438500
+        ]
+      },
+      {
+        "address": "0xc0b9ba50",
+        "words": [
+          3840,
+          2160,
+          0,
+          2,
+          2,
+          5,
+          0,
+          0,
+          438500
+        ]
+      },
+      {
+        "address": "0xc0b9ba74",
+        "words": [
+          3840,
+          2160,
+          0,
+          1,
+          1,
+          5,
+          0,
+          0,
+          438500
+        ]
+      },
+      {
+        "address": "0xc0b9ba98",
+        "words": [
+          1920,
+          1080,
+          1,
+          10,
+          10,
+          5,
+          0,
+          0,
+          438500
+        ]
+      },
+      {
+        "address": "0xc0b9babc",
+        "words": [
+          1920,
+          1080,
+          1,
+          9,
+          9,
+          5,
+          0,
+          0,
+          438500
+        ]
+      },
+      {
+        "address": "0xc0b9bae0",
+        "words": [
+          1920,
+          1080,
+          1,
+          8,
+          8,
+          5,
+          0,
+          0,
+          238500
+        ]
+      },
+      {
+        "address": "0xc0b9bb04",
+        "words": [
+          1920,
+          1080,
+          1,
+          7,
+          7,
+          5,
+          0,
+          0,
+          238500
+        ]
+      },
+      {
+        "address": "0xc0b9bb28",
+        "words": [
+          1920,
+          1080,
+          1,
+          6,
+          6,
+          5,
+          0,
+          0,
+          238500
+        ]
+      },
+      {
+        "address": "0xc0b9bb4c",
+        "words": [
+          1920,
+          1080,
+          1,
+          4,
+          4,
+          5,
+          0,
+          0,
+          138500
+        ]
+      },
+      {
+        "address": "0xc0b9bb70",
+        "words": [
+          1920,
+          1080,
+          1,
+          3,
+          3,
+          5,
+          0,
+          0,
+          138500
+        ]
+      },
+      {
+        "address": "0xc0b9bb94",
+        "words": [
+          1920,
+          1080,
+          1,
+          2,
+          2,
+          5,
+          0,
+          0,
+          138500
+        ]
+      },
+      {
+        "address": "0xc0b9bbb8",
+        "words": [
+          1920,
+          1080,
+          1,
+          1,
+          1,
+          5,
+          0,
+          0,
+          138500
+        ]
+      },
+      {
+        "address": "0xc0b9bbdc",
+        "words": [
+          3840,
+          2160,
+          0,
+          4,
+          4,
+          0,
+          0,
+          0,
+          118500
+        ]
+      },
+      {
+        "address": "0xc0b9bc00",
+        "words": [
+          3840,
+          2160,
+          0,
+          3,
+          3,
+          1,
+          0,
+          0,
+          118500
+        ]
+      },
+      {
+        "address": "0xc0b9bc24",
+        "words": [
+          3840,
+          2160,
+          0,
+          2,
+          2,
+          2,
+          0,
+          0,
+          118500
+        ]
+      },
+      {
+        "address": "0xc0b9bc48",
+        "words": [
+          3840,
+          2160,
+          0,
+          1,
+          1,
+          2,
+          0,
+          0,
+          118500
+        ]
+      },
+      {
+        "address": "0xc0b9bc6c",
+        "words": [
+          1920,
+          1080,
+          1,
+          10,
+          10,
+          0,
+          0,
+          0,
+          98500
+        ]
+      },
+      {
+        "address": "0xc0b9bc90",
+        "words": [
+          1920,
+          1080,
+          1,
+          9,
+          9,
+          1,
+          0,
+          0,
+          98500
+        ]
+      },
+      {
+        "address": "0xc0b9bcb4",
+        "words": [
+          1920,
+          1080,
+          1,
+          8,
+          8,
+          0,
+          0,
+          0,
+          68500
+        ]
+      },
+      {
+        "address": "0xc0b9bcd8",
+        "words": [
+          1920,
+          1080,
+          1,
+          7,
+          7,
+          1,
+          0,
+          0,
+          68500
+        ]
+      },
+      {
+        "address": "0xc0b9bcfc",
+        "words": [
+          1920,
+          1080,
+          1,
+          6,
+          6,
+          2,
+          0,
+          0,
+          68500
+        ]
+      },
+      {
+        "address": "0xc0b9bd20",
+        "words": [
+          1920,
+          1080,
+          1,
+          4,
+          4,
+          0,
+          0,
+          0,
+          58500
+        ]
+      },
+      {
+        "address": "0xc0b9bd44",
+        "words": [
+          1920,
+          1080,
+          1,
+          3,
+          3,
+          1,
+          0,
+          0,
+          58500
+        ]
+      },
+      {
+        "address": "0xc0b9bd68",
+        "words": [
+          1920,
+          1080,
+          1,
+          2,
+          2,
+          2,
+          0,
+          0,
+          58500
+        ]
+      },
+      {
+        "address": "0xc0b9bd8c",
+        "words": [
+          1920,
+          1080,
+          1,
+          1,
+          1,
+          2,
+          0,
+          0,
+          58500
+        ]
+      }
+    ]
+  },
+  "saved_movies": [
+    {
+      "path": "projects/rawview/captures/2026-09-24-movcheck/A001_037.MOV",
+      "sha256": "61fded947bd6cb17bce69100e4858cb63c883503b43ea898bbdca0fd08a7c9f5",
+      "avcC_offset": "0x244",
+      "sps": [
+        {
+          "profile_idc": 100,
+          "constraint_byte": 0,
+          "level_idc": 51,
+          "seq_parameter_set_id": 0,
+          "chroma_format_idc": 1,
+          "luma_bit_depth": 8,
+          "chroma_bit_depth": 8,
+          "nal_hex": "67640033ac248c0780227e5c05b808080a000007d20001d4c1080000"
+        }
+      ],
+      "ffprobe": [
+        {
+          "codec_name": "h264",
+          "profile": "High",
+          "width": 1920,
+          "height": 1080,
+          "pix_fmt": "yuvj420p",
+          "level": 51,
+          "r_frame_rate": "30000/1001",
+          "bits_per_raw_sample": "8"
+        }
+      ]
+    },
+    {
+      "path": "projects/rawview/captures/2026-09-24-movcheck/A001_040.MOV",
+      "sha256": "909067a5769b338abb75ac531f71eb1b65d69e000369ebde82b955545f6682b4",
+      "avcC_offset": "0x244",
+      "sps": [
+        {
+          "profile_idc": 100,
+          "constraint_byte": 0,
+          "level_idc": 51,
+          "seq_parameter_set_id": 0,
+          "chroma_format_idc": 1,
+          "luma_bit_depth": 8,
+          "chroma_bit_depth": 8,
+          "nal_hex": "67640033ac248c0780227e5c05b808080a000007d20001d4c1080000"
+        }
+      ],
+      "ffprobe": [
+        {
+          "codec_name": "h264",
+          "profile": "High",
+          "width": 1920,
+          "height": 1080,
+          "pix_fmt": "yuvj420p",
+          "level": 51,
+          "r_frame_rate": "30000/1001",
+          "bits_per_raw_sample": "8"
+        }
+      ]
+    }
+  ],
+  "hevc_candidate": {
+    "selector": "mode 8..11 sets 0x300c03f8 bit 0 at C0709A80",
+    "max_luma_picture_sizes": [
+      36864,
+      122880,
+      245760,
+      552960,
+      983040,
+      2228224,
+      8912896
+    ],
+    "source": "C070C930; constants equal HEVC level limits",
+    "external_comparison": "https://github.com/FFmpeg/FFmpeg/blob/master/libavcodec/h265_profile_level.c",
+    "limitation": "generic driver path; working silicon, Main10 support and precision unverified"
+  },
+  "h264_10bit_verdict": "no verified enable path; physical impossibility not established"
+}

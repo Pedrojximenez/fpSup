@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/validation/20261012-120p-packing/arm_trailer.py", line 123, in <module>
+    old = compile_source(HERE / 'before/trailer.c', 'arm-before')
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/validation/20261012-120p-packing/arm_trailer.py", line 43, in compile_source
+    return elf.load_text(obj)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/research/ui/tools/arm_text/elf_text.py", line 170, in load_text
+    _require(sec.info != text_index, ".text relocation is unsupported; this helper is not a linker")
+  File "/Users/dido/Developer.localized/SIGMAfp_re/research/ui/tools/arm_text/elf_text.py", line 41, in _require
+    raise ELFError(message)
+checked_trailer_text.ELFError: .text relocation is unsupported; this helper is not a linker

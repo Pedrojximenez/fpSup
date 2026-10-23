@@ -1,0 +1,144 @@
+{
+  "date": "2026-10-12",
+  "status": "offline_validated_hardware_pending",
+  "request": "依公式增加影格位置，保留原廠 64 MiB 批次寫入，LOSS 與 Ruari STOPFX 維持獨立。",
+  "artifact": {
+    "path": "candidate-final/10LOSS.BIN",
+    "bytes": 78112,
+    "sha256": "39be7d3c23a6abe0e2c96045fb49b139d69c920cd1d1a526953a655fd3414300",
+    "resident_block_bytes": 4546560,
+    "build_option": "--expand-slots",
+    "source_hashes_verified": true
+  },
+  "formula": {
+    "batch_bytes": 67108864,
+    "file_floor": "0x13400 + ceil(width * height * (lossless ? 1 : bit_depth) / 8)",
+    "slots": "max(96, round_up_4(2 * ceil(64 MiB / file_floor) + ceil(ceil(fps_num/fps_den) * completion_budget_us / 1000000) + 4 + 2))",
+    "initial_completion_budget_us": 100000,
+    "max_slots": 768,
+    "too_large": "refuse; never reduce byte target",
+    "examples": [
+      {
+        "width": 1936,
+        "height": 1090,
+        "fps_num": 30000,
+        "fps_den": 1001,
+        "file_floor_bytes": 342628,
+        "batch_frames": 196,
+        "arrival_slots": 3,
+        "slots": 404,
+        "active_descriptor_bytes": 1778768
+      },
+      {
+        "width": 1936,
+        "height": 1090,
+        "fps_num": 60000,
+        "fps_den": 1001,
+        "file_floor_bytes": 342628,
+        "batch_frames": 196,
+        "arrival_slots": 6,
+        "slots": 404,
+        "active_descriptor_bytes": 1778768
+      },
+      {
+        "width": 3024,
+        "height": 2010,
+        "fps_num": 100,
+        "fps_den": 1,
+        "file_floor_bytes": 838628,
+        "batch_frames": 81,
+        "arrival_slots": 10,
+        "slots": 180,
+        "active_descriptor_bytes": 794960
+      },
+      {
+        "width": 3840,
+        "height": 2160,
+        "fps_num": 30,
+        "fps_den": 1,
+        "file_floor_bytes": 1115648,
+        "batch_frames": 61,
+        "arrival_slots": 3,
+        "slots": 132,
+        "active_descriptor_bytes": 584144
+      }
+    ]
+  },
+  "implementation": {
+    "firmware_claims": 93,
+    "added_firmware_claims": 78,
+    "native_pool_stride": "0x1128",
+    "native_registry_capacity": 768,
+    "completion_cookie_capacity_per_volume": 768,
+    "supported_simultaneous_cookie_volumes": 2,
+    "compression_metadata_capacity_per_lane": 768,
+    "original_empty_pool_retained": true,
+    "new_raw_image_buffer_allocated": false,
+    "resize_only_when_idle_before_rec_dispatch": true,
+    "latency_budget_growth": "observed batch completion return increases next take budget only",
+    "default_builder_and_merge": "earlier revision retained; explicit option selects expansion"
+  },
+  "verification": {
+    "exact_candidate": {
+      "tests": 10,
+      "result": "passed",
+      "includes": [
+        "404 native allocations and lookups; all returned exactly once",
+        "idle resize to 180; busy/oversized refusal preserves accepted plan",
+        "197 synthetic native cookie appends through old 96/128 limits; all completions returned",
+        "native byte threshold waits below 64 MiB and sends at threshold",
+        "hook registers/flags and 4/8-byte stack cases",
+        "active native pool causes load refusal with original words intact",
+        "all 93 patched words restored at power off",
+        "mutations: restore stock lookup bound or cookie store; defect assertions fail"
+      ]
+    },
+    "test_isolation": {
+      "tests": 1,
+      "result": "baseline build and loader still work after expanded tests"
+    },
+    "stopfx": {
+      "author": "Ruari",
+      "sha256": "f9f26a092c5676ead5771ba8be4aac9c3734e9ed0cd144002a73b3f6b657c9d9",
+      "tests": 1,
+      "scenarios": 2,
+      "result": "both load orders, high IDs 200-202 native queue release, full pool recovery, separate journal restoration"
+    },
+    "legacy_arm_regression": {
+      "tests": 60,
+      "result": "passed"
+    },
+    "host": {
+      "capacity_groups": 4,
+      "capacity_combinations": 288,
+      "frame_hold_tests": 151,
+      "bulk_policy_tests": 12,
+      "result": "passed across the recorded runs",
+      "initial_failure": "Combined 167-test run found a duplicate mutation string after the new branch. Narrowed the seam to the legacy branch and reran all 12 bulk-policy tests successfully. The other 155 tests passed in the combined run."
+    },
+    "runner": "/usr/bin/python3 + Unicorn 2.1.4; sandbox mem_map SIGILL reproduced before any ARM execution; offline JIT runs succeeded outside sandbox; no camera transport"
+  },
+  "limitations": [
+    "Not deployed or tested on camera; previous hardware evidence applies only to the earlier revision.",
+    "100 ms is a planning assumption, not a measured worst-case latency.",
+    "Descriptor positions do not create RAW payload memory or guarantee recording throughput.",
+    "Firmware locks, media transfer, payload destruction and OS services are explicit emulator substitutes.",
+    "Unsupported/invalid plans refuse rather than silently shrink 64 MiB batches."
+  ],
+  "camera_accessed": false,
+  "written_to_card": false,
+  "published": false,
+  "merge_artifact_unchanged": {
+    "lossless_sha256": "a24e1dde7e973c423f32c3b1c30a42acd039fa2fddebc83c27674e911de3ba9f",
+    "stopfx_sha256": "f9f26a092c5676ead5771ba8be4aac9c3734e9ed0cd144002a73b3f6b657c9d9"
+  },
+  "logs": {
+    "exact-candidate-final.log": "1e4fe8f5320600726e0e135bf7ac779c838192f1b1167ab5702572548b714ff6",
+    "stopfx-integration-final.log": "9221385ad567f33c05106d4a544e4e79c19e31a37abf18c28a788b668f8382f8",
+    "legacy-arm-regression.log": "d76d567bbea600dafbfccd1ba0c33e75a6456179e670232c426ec0a37e92a504",
+    "host-regression.log": "b1000cd8f2978f2700d6b16029df932b280601eda6cdf6ee4a540118a6d9d6f4",
+    "bulk-policy-final.log": "f29bb89347dba9f4611c56bc852ea3d96c4a631e6e4c7e59095ce03c7bd64ef2",
+    "formula-tests.log": "07d101586aa54af4e8fe4d20007492f4d0a8632b1308276a8181dc90047cbe60",
+    "status-dry-run.log": "bd8d12993a94fbfc97b72c04aa9d16244403f36d903b15d87db69f1c3f9e0871"
+  }
+}

@@ -899,3 +899,44 @@ v3 Merge 的 final boot_card() 使用共用 stage2 和同一個 v3 C returning e
 瞬間預設開啟、快速獨立勾選。每種設定內嵌完整 AutoRun／LOADER.BIN 配對，
 切換啟動選項不改產品與資料 bytes；下載核對 hash 並在 README 記錄選項。
 详见 [啟動選項驗證](../validation/20261011-boot-options/RESULTS.md)。
+
+## 2026-10-15：Panasonic PTP 相容 SUP 離線原型
+
+使用者要求嘗試製作 SUP。新增 `fpSup/focuspro/`，沿用當前 `v3/build_v3.py`
+的 `make_sup()` 與 `boot_card()`，未修改共用載入器或既存產品。
+`60FPPTP.BIN`（FPCP，0.1.0 experimental，4,032 bytes）只接原廠 USB PTP
+收包 callsite 與 USB 身分 setter；PTP／shell 互斥，常駐 code/state 自有 FSB1 block。
+六筆 EXCL claim 含兩個 callsite、PTP 介面／接收器所有權及 `C2EFAD70..77`
+身分資料；後者的原字取自正確 `seg1_c2ef6e00.bin`，不可從 MAIN 的 packed bytes 取。
+
+開發卡在 `projects/focus-pro-sup/cards/20261015-panasonic-ptp-v0.1.0/`：
+普通啟動、不帶 shell、Fast 或其他產品。32 項實際 loader／stage2／SUP 的
+ARM 模擬通過，含 6 項破壞 transaction、去重、錄影 gate、publication、claim
+及 data journal 的反例；與 payload 改變前的 AutoRun／LOADER 逐位元組相同。
+只建置與離線驗證，未寫卡、操作相機、commit/push 或發布。
+
+協議依據是 DJI RS 4 GB83 的 LUMIX driver，Grip 的實際使用分支尚未核對。
+此版僅 Panasonic 參照握手及待機原生 L 鏡頭相對拉焦；32 位數值控制、LiDAR AF、
+錄影中對焦與完整 Panasonic 狀態／錄影不支援。USB／native session／鏡頭效果
+在測試中為明確 stub，不是硬體完成證據。詳見
+[產品說明](../../../fpSup/focuspro/README.md) 與開發卡的 `validation.json`／`validation.log`。
+
+2026-10-16 讀卡補充：使用者回報原廠可電控對焦、套用原型後失效。依授權讀取
+`/Volumes/fpSup`，FPCP 與交付版雜湊相同且未停用；SHEL／TAPZ／DSQZ 已停用。
+此為 12 個產品的合併卡，`LOAD.LOG` 已滿 96 筆，無 FPCP 結果，不能判定載入成敗。
+原檔副本與結果在 `projects/focus-pro-sup/evidence/20261016-card-read/`，未寫卡。
+新增主機端 `focuspro/diagnostics.py` 讀取既有 `95F0`；13 項主機與 3 項交付 SUP
+ARM 整合測試通過，命令白名單移除的反例被檢出。USB 實讀尚未進行，SUP／AutoRun／
+LOADER 未重建或修改；後續根因須實際交易紀錄，LiDAR 本體燈號不能代替相機握手證據。
+
+2026-10-21：新增 `focuspro` 0.1.1-experimental 數值觀測版，成品在
+`projects/focus-pro-sup/cards/20261021-panasonic-ptp-v0.1.1-observe/`。
+`60FPPTP.BIN` 4,216 bytes，SHA-256
+`05e339660158be642eacb75c786c9056a74b76adfedf6b641eb6f1fe26189f53`。
+AutoRun／LOADER 與 0.1.0 逐位元組相同；只更新產品 BIN，六筆 claim／entry／
+publication／journal 契約不變。新增 numeric u32 與 FOV setting u16 的格式驗證及紀錄，
+仍回不支援，不以未知單位提交鏡頭；FPCP 診斷升 v2，主機工具支援 v1／v2。
+確切成品 38 項 ARM 檢查（含 8 項反例）、16 項主機、3 項新版及 3 項原 0.1.0
+整合檢查通過，無跳過。只離線建置，未寫卡／操作相機／發布；原先拉焦回歸與 LiDAR AF
+仍未解決。新 `df101fh/0505` 已直接驗證數值→Panasonic PTP 路徑；先前依公開索引把
+`df101fw` 確稱 Grip 的來源名稱已降為待核對，詳見 `dji_focus_pro/USB_PROTOCOL.md` 第 17 節。

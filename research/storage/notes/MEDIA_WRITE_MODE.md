@@ -1,5 +1,9 @@
 # USB Storage → Write Mode(Standard / Custom)
 
+> **2026-10-14 補完:** 實際作用已追到 —— `settings+0x9C = (MediaSelect==0) ? 1 : (WriteMode==1)`,
+> 只在錄影初始化 C03A50F8 讀一次;SD 永遠聚合 64 MiB,SSD 只有 Custom 聚合、Standard 逐幀同步寫。
+> 完整寫入路徑見 [WRITE_PATH_AFTER_BULK.md](WRITE_PATH_AFTER_BULK.md)。9/24 ledger 的 vtable 偏移錯 4 bytes。
+
 2026-09-15。使用者在選單裡看到 SSD 寫入模式有兩檔,問它的作用。以下全部從
 `out/MAIN_c0000000.bin` 靜態讀出。**它實際改變寫入行為的那段程式碼還沒讀到**,
 見最後一節。

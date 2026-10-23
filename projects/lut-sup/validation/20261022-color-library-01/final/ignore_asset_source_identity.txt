@@ -1,0 +1,14 @@
+test_wrong_asset_identity_does_not_replace_selected_lut (test_library_native.LibraryNativeTests) ... FAIL
+
+======================================================================
+FAIL: test_wrong_asset_identity_does_not_replace_selected_lut (test_library_native.LibraryNativeTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lut/test_library_native.py", line 205, in test_wrong_asset_identity_does_not_replace_selected_lut
+    self.assertEqual(c.status()['last'],-11)
+AssertionError: 0 != -11
+
+----------------------------------------------------------------------
+Ran 1 test in 4.725s
+
+FAILED (failures=1)

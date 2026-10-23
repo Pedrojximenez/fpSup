@@ -1,0 +1,181 @@
+
+/* c070a870..c070a88e Thumb ROM bytes */
+c070a870 10b5       push       {r4, lr}
+c070a872 0446       mov        r4, r0
+c070a874 4ff44030   mov.w      r0, #0x30000
+c070a878 44f29031   movw       r1, #0x4390
+c070a87c 0246       mov        r2, r0
+c070a87e ccf2eb21   movt       r1, #0xc2eb
+c070a882 2046       mov        r0, r4
+c070a884 0af542e4   blx        #0xc001510c
+c070a888 0021       movs       r1, #0
+c070a88a 0846       mov        r0, r1
+c070a88c 10bd       pop        {r4, pc}
+
+/* c070c578..c070c5c8 Thumb ROM bytes */
+c070c578 2de91001   push.w     {r4, r8}
+c070c57c 0446       mov        r4, r0
+c070c57e 0021       movs       r1, #0
+c070c580 40f20c28   movw       r8, #0x20c
+c070c584 c3f20c08   movt       r8, #0x300c
+c070c588 d8f80010   ldr.w      r1, [r8]
+c070c58c 4ff6fc72   movw       r2, #0xfffc
+c070c590 1140       ands       r1, r2
+c070c592 621e       subs       r2, r4, #1
+c070c594 04d3       blo        #0xc070c5a0
+c070c596 04d0       beq        #0xc070c5a2
+c070c598 022a       cmp        r2, #2
+c070c59a 05d3       blo        #0xc070c5a8
+c070c59c 07d0       beq        #0xc070c5ae
+c070c59e 08e0       b          #0xc070c5b2
+c070c5a0 07e0       b          #0xc070c5b2
+c070c5a2 41f00101   orr        r1, r1, #1
+c070c5a6 04e0       b          #0xc070c5b2
+c070c5a8 41f00201   orr        r1, r1, #2
+c070c5ac 01e0       b          #0xc070c5b2
+c070c5ae 41f00301   orr        r1, r1, #3
+c070c5b2 40f20c28   movw       r8, #0x20c
+c070c5b6 c3f20c08   movt       r8, #0x300c
+c070c5ba c8f80010   str.w      r1, [r8]
+c070c5be 0022       movs       r2, #0
+c070c5c0 1046       mov        r0, r2
+c070c5c2 bde81001   pop.w      {r4, r8}
+c070c5c6 7047       bx         lr
+
+/* c0709a80..c0709b80 Thumb ROM bytes */
+c0709a80 2de9f04d   push.w     {r4, r5, r6, r7, r8, sl, fp, lr}
+c0709a84 8ab0       sub        sp, #0x28
+c0709a86 0090       str        r0, [sp]
+c0709a88 0e46       mov        r6, r1
+c0709a8a 1746       mov        r7, r2
+c0709a8c 46f2dc0a   movw       sl, #0x60dc
+c0709a90 9b46       mov        fp, r3
+c0709a92 40f28c24   movw       r4, #0x28c
+c0709a96 ccf28d3a   movt       sl, #0xc38d
+c0709a9a 42f21025   movw       r5, #0x2210
+c0709a9e c3f20c04   movt       r4, #0x300c
+c0709aa2 c3f20005   movt       r5, #0x3000
+c0709aa6 44f28431   movw       r1, #0x4384
+c0709aaa ccf2eb21   movt       r1, #0xc2eb
+c0709aae 07aa       add        r2, sp, #0x1c
+c0709ab0 91e80b00   ldm.w      r1, {r0, r1, r3}
+c0709ab4 82e80b00   stm.w      r2, {r0, r1, r3}
+c0709ab8 01a8       add        r0, sp, #4
+c0709aba 1822       movs       r2, #0x18
+c0709abc 0021       movs       r1, #0
+c0709abe 0bf5cce2   blx        #0xc0015058
+c0709ac2 daf80000   ldr.w      r0, [sl]
+c0709ac6 07a9       add        r1, sp, #0x1c
+c0709ac8 eff69ce0   blx        #0xc01f8c04
+c0709acc 78b1       cbz        r0, #0xc0709aee
+c0709ace 0121       movs       r1, #1
+c0709ad0 0391       str        r1, [sp, #0xc]
+c0709ad2 0221       movs       r1, #2
+c0709ad4 0491       str        r1, [sp, #0x10]
+c0709ad6 01a8       add        r0, sp, #4
+c0709ad8 eef608e7   blx        #0xc01f88ec
+c0709adc 011e       subs       r1, r0, #0
+c0709ade caf80010   str.w      r1, [sl]
+c0709ae2 02dc       bgt        #0xc0709aea
+c0709ae4 6ff00100   mvn        r0, #1
+c0709ae8 47e0       b          #0xc0709b7a
+c0709aea fef735fd   bl         #0xc0708558
+c0709aee 0120       movs       r0, #1
+c0709af0 00f07afe   bl         #0xc070a7e8
+c0709af4 4ff6ff70   movw       r0, #0xffff
+c0709af8 01f042fd   bl         #0xc070b580
+c0709afc 0098       ldr        r0, [sp]
+c0709afe a0f10801   sub.w      r1, r0, #8
+c0709b02 0329       cmp        r1, #3
+c0709b04 05d8       bhi        #0xc0709b12
+c0709b06 d4f86c11   ldr.w      r1, [r4, #0x16c]
+c0709b0a 41f00101   orr        r1, r1, #1
+c0709b0e c4f86c11   str.w      r1, [r4, #0x16c]
+c0709b12 bbf1000f   cmp.w      fp, #0
+c0709b16 04d0       beq        #0xc0709b22
+c0709b18 0027       movs       r7, #0
+c0709b1a 3046       mov        r0, r6
+c0709b1c 00f0b8fe   bl         #0xc070a890
+c0709b20 02e0       b          #0xc0709b28
+c0709b22 3046       mov        r0, r6
+c0709b24 00f0a4fe   bl         #0xc070a870
+c0709b28 d4f86c11   ldr.w      r1, [r4, #0x16c]
+c0709b2c 0129       cmp        r1, #1
+c0709b2e 14d0       beq        #0xc0709b5a
+c0709b30 2968       ldr        r1, [r5]
+c0709b32 11f4807f   tst.w      r1, #0x100
+c0709b36 0bd1       bne        #0xc0709b50
+c0709b38 2968       ldr        r1, [r5]
+c0709b3a 11f4805f   tst.w      r1, #0x1000
+c0709b3e 07d1       bne        #0xc0709b50
+c0709b40 2968       ldr        r1, [r5]
+c0709b42 11f0805f   tst.w      r1, #0x10000000
+c0709b46 03d1       bne        #0xc0709b50
+c0709b48 2968       ldr        r1, [r5]
+c0709b4a 11f4803f   tst.w      r1, #0x10000
+c0709b4e 04d1       bne        #0xc0709b5a
+c0709b50 4ff40041   mov.w      r1, #0x8000
+c0709b54 2160       str        r1, [r4]
+c0709b56 0021       movs       r1, #0
+c0709b58 2160       str        r1, [r4]
+c0709b5a 0520       movs       r0, #5
+c0709b5c 00f0e4fe   bl         #0xc070a928
+c0709b60 4ff6ff70   movw       r0, #0xffff
+c0709b64 03f0c8fc   bl         #0xc070d4f8
+c0709b68 5a46       mov        r2, fp
+c0709b6a 3946       mov        r1, r7
+c0709b6c 3046       mov        r0, r6
+c0709b6e 00f09ffe   bl         #0xc070a8b0
+c0709b72 0420       movs       r0, #4
+c0709b74 00f0d8fe   bl         #0xc070a928
+c0709b78 0020       movs       r0, #0
+c0709b7a 0ab0       add        sp, #0x28
+c0709b7c bde8f08d   pop.w      {r4, r5, r6, r7, r8, sl, fp, pc}
+
+/* c070ab40..c070ab88 Thumb ROM bytes */
+c070ab40 2de91001   push.w     {r4, r8}
+c070ab44 0446       mov        r4, r0
+c070ab46 0021       movs       r1, #0
+c070ab48 40f2c028   movw       r8, #0x2c0
+c070ab4c c3f20c08   movt       r8, #0x300c
+c070ab50 d8f80010   ldr.w      r1, [r8]
+c070ab54 4ff6e772   movw       r2, #0xffe7
+c070ab58 1140       ands       r1, r2
+c070ab5a 04b9       cbnz       r4, #0xc070ab5e
+c070ab5c 08e0       b          #0xc070ab70
+c070ab5e 012c       cmp        r4, #1
+c070ab60 02d1       bne        #0xc070ab68
+c070ab62 41f00801   orr        r1, r1, #8
+c070ab66 03e0       b          #0xc070ab70
+c070ab68 022c       cmp        r4, #2
+c070ab6a 01d1       bne        #0xc070ab70
+c070ab6c 41f01001   orr        r1, r1, #0x10
+c070ab70 40f2c028   movw       r8, #0x2c0
+c070ab74 c3f20c08   movt       r8, #0x300c
+c070ab78 c8f80010   str.w      r1, [r8]
+c070ab7c 0022       movs       r2, #0
+c070ab7e 1046       mov        r0, r2
+c070ab80 bde81001   pop.w      {r4, r8}
+c070ab84 7047       bx         lr
+c070ab86 00bf       nop        
+
+/* c070cab0..c070caec Thumb ROM bytes */
+c070cab0 2de91001   push.w     {r4, r8}
+c070cab4 0446       mov        r4, r0
+c070cab6 012c       cmp        r4, #1
+c070cab8 0ad1       bne        #0xc070cad0
+c070caba 40f20c28   movw       r8, #0x20c
+c070cabe c3f20c08   movt       r8, #0x300c
+c070cac2 d8f80010   ldr.w      r1, [r8]
+c070cac6 41f48051   orr        r1, r1, #0x1000
+c070caca c8f80010   str.w      r1, [r8]
+c070cace 07e0       b          #0xc070cae0
+c070cad0 40f20c28   movw       r8, #0x20c
+c070cad4 c3f20c08   movt       r8, #0x300c
+c070cad8 d8f80010   ldr.w      r1, [r8]
+c070cadc c8f80010   str.w      r1, [r8]
+c070cae0 0021       movs       r1, #0
+c070cae2 0846       mov        r0, r1
+c070cae4 bde81001   pop.w      {r4, r8}
+c070cae8 7047       bx         lr
+c070caea 00bf       nop        

@@ -358,14 +358,16 @@ out_replay:
     LDA     ip, 0xC0437E9C
     bx      ip
 
-/* ---- C03A6DD8 gain dispatch: "raw movie" while an OG is live (og3kgs) -------- */
+/* ---- C03A6DD8 gain dispatch: "raw movie" for our own canvases (og3kgs) ------- *
+ * () -> the current LV canvas's raw-movie class bit.  Ours: 1; else the firmware's. */
 .global gs
 gs:
-    LDA     ip, (S + S_FLAG)
-    ldr     ip, [ip]
-    cmp     ip, #1
-    moveq   r0, #1
-    bxeq    lr
+    push    {r0, r1, r2, r3, r4, lr}
+    CALLC   FN_GS
+    cmp     r0, #0
+    pop     {r0, r1, r2, r3, r4, lr}
+    movne   r0, #1
+    bxne    lr
     PASS    NX_GS
 .global gs_replay
 gs_replay:
@@ -523,35 +525,6 @@ v32_replay:
 .endm
 COMMIT cmt_set, NX_CMT_SET, 0xC057A6A4
 COMMIT cmt_qs,  NX_CMT_QS,  0xC05824D4
-/* MV_FrameRate: publish the virtual rank before native row conversion, then
- * rebuild a same-carrier cadence after native commit. Preserve native r0 and
- * every callee-saved register; r5 keeps var across both calls. */
-.macro RATE_COMMIT name, nx, back
-.global \name
-\name:
-    push    {r0, r1, r2, r3, r4, r5, ip, lr}
-    mov     r5, r0
-    mov     r1, r5
-    mov     r2, #0
-    CALLC   FN_RCMT
-    ldm     sp, {r0, r1, r2, r3}
-    LDA     ip, (S + \nx)
-    ldr     ip, [ip]
-    blx     ip
-    str     r0, [sp]
-    mov     r1, r5
-    mov     r2, #1
-    CALLC   FN_RCMT
-    pop     {r0, r1, r2, r3, r4, r5, ip, pc}
-.global \name\()_replay
-\name\()_replay:
-    push    {r4, r5, r6, r7, lr}
-    LDA     ip, \back
-    bx      ip
-.endm
-RATE_COMMIT rcmt1, NX_RCMT1, 0xC057A6FC
-RATE_COMMIT rcmt2, NX_RCMT2, 0xC05821BC
-
 /* ---- C0088C60 (bl FUN_c0088660): the settings save; then ours ---------------- */
 .global save
 save:
@@ -702,9 +675,9 @@ mag_replay:
     LDA     ip, 0xC043B6A8
     bx      ip
 
-/* ---- the virtual rate's shutter range and angle list: S.FN VTV(kind, v, enum) ------
- * kind 0 (Tv): 1/n of the slowest shutter or 0; kind 1: the angle list's rate enum;
- * kind 2: the angle-to-Tv fps x 100.  enum ~0 = the C side asks the settings. */
+/* ---- a declared rate's shutter range and angle: S.FN VTV(kind, v, enum) -------------
+ * kind 0 (Tv): 1/n of the slowest shutter or 0; kind 2: the angle-to-Tv fps x 100.
+ * enum ~0 = the C side asks the settings. */
 /* C007F5B4 / C0553CDC `bl c0085ac0` (r0 -> the running min, r1 -> {num, den} per fps) */
 .macro TVMIN name, nx
 .global \name
@@ -723,40 +696,6 @@ mag_replay:
     PASS    \nx
 .endm
 TVMIN tvmin, NX_TVMIN
-TVMIN tvmin2, NX_TVMIN2
-
-/* C00A075C `ldr lr, [sp, #0x34]`: fp = the rate enum, [sp+0x28] = the display clamp */
-.global tvdisp
-tvdisp:
-    push    {r0, r1, r2, r3, r4, lr}
-    mov     r1, #0
-    mov     r2, #0
-    mov     r3, fp
-    CALLC   FN_VTV
-    cmp     r0, #0
-    movne   r1, #1
-    strne   r1, [sp, #(24 + 0x28)]
-    strne   r0, [sp, #(24 + 0x2C)]
-    pop     {r0, r1, r2, r3, r4, lr}
-    PASS    NX_TVDISP
-.global tvdisp_replay
-tvdisp_replay:
-    ldr     lr, [sp, #0x34]
-    LDA     ip, 0xC00A0760
-    bx      ip
-
-/* C0554768 `bl FUN_c005c0f0` (the maximum-angle list's rate): the getter, then ours */
-.global anglist
-anglist:
-    push    {r4, lr}
-    LDA     ip, (S + NX_ANGLIST)
-    ldr     ip, [ip]
-    blx     ip
-    mov     r2, r0
-    mov     r3, r0
-    mov     r1, #1
-    CALLC   FN_VTV
-    pop     {r4, pc}
 
 /* C052DCFC `movw r2, #0x2400`: r6 = fps x 100, [sp] = the rate enum */
 .global angtv

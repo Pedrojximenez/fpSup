@@ -1,0 +1,20 @@
+
+# CPU = 65.5[%] 
+# top 8 tasks 
+# ------------------------------
+# Cnt = 13376, Overlap = 0, Prefix = 1/1000000 
+#   TaskID       Time   Rate    FuncAddr    Pri  StackRem      name
+     001       692966    34.5[%] c0001c60 (30)       3832 Byte inittsk
+     044       629762    31.3[%] c036ee50 (15)       7640 Byte CamSch
+     045       130473     6.5[%] c036ee50 (15)      13352 Byte MRecMgr
+     029       108347     5.4[%] c035c460 (11)       7056 Byte LensCycl
+     090       107125     5.3[%] c036ee50 (13)       7620 Byte PicCorr
+     092        56068     2.8[%] c036ee50 (14)       7148 Byte AeDev
+     039        47802     2.4[%] c036ee50 (17)      13644 Byte DrawMgr
+     061        33760     1.7[%] c036ee50 (06)      12696 Byte SRecFile
+# Total(Sum)     2009566(   2009566) 
+
+-> succeeded
+
+was is_recording -> 1
+req_cnt=138, fin_cnt=138, key

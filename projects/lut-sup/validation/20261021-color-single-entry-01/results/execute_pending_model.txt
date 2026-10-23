@@ -1,0 +1,14 @@
+test_bad_input_never_changes_destination_and_pending_models_refuse (test_sup_native.NativeLutTests) ... FAIL
+
+======================================================================
+FAIL: test_bad_input_never_changes_destination_and_pending_models_refuse (test_sup_native.NativeLutTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lut/test_sup_native.py", line 261, in test_bad_input_never_changes_destination_and_pending_models_refuse
+    self.assertEqual(c.invoke(6,source,dest,1),-12)
+AssertionError: 0 != -12
+
+----------------------------------------------------------------------
+Ran 1 test in 4.199s
+
+FAILED (failures=1)

@@ -1,0 +1,24 @@
+tables: {'zwo_reglist_common': 40, 'zwo_reglist_bin2': 64, 'zwo_reg_full_12bit': 64, 'zwo_reglist_fullsize': 63, 'toup_14bit_1x1@340c140': 153, 'toup_12bit_3x3@340c3c0': 153, 'toup_12bit_2x2@340c640': 153, 'toup_misc@340c8c0': 11, 'toup_misc@340c95c': 4, 'toup_misc@340c9a0': 4, 'toup_misc@3490520': 17, 'toup_14bit_1x1@3490580': 153, 'toup_12bit_3x3@3490800': 153, 'toup_12bit_2x2@3490a80': 153, 'toup_misc@3490d10': 4, 'toup_misc@3490d70': 9, 'qhy_init': 61, 'qhy_set_SHR(06=hi,05=lo)': 2, 'qhy_set_BLKLEVEL(5D=hi,5C=lo)': 2, 'qhy_set_BLKLEVEL_dup': 2, 'qhy_set_APGC_N(3E=hi,3D=lo)': 2, 'qhy_set_APGC_S(40=hi,3F=lo)': 2, 'qhy_set_HCG(05E1)': 2, 'qhy_set_0003': 2, 'qhy_set_window(22/23 start, 24/25=(rows-52)/2)': 4, 'qhy_cmdB0_sleep_wake': 20}
+14bit 1x1 {'fp-never z-diff': 1, 'same': 188, 'fp-diff': 6, 'z-not-written': 253, 'fp-never': 8, 'fp-never z-never': 4, 'fp-diff z-diff': 2}
+    zwo_reglist_fullsize 0000 astro 00 fp  z 04 fp-never z-diff
+    zwo_reglist_fullsize 0016 astro 07 fp 0F z 07 fp-diff
+    zwo_reglist_fullsize 0058 astro 70 fp 20 z 70 fp-diff
+    toup_14bit_1x1@340c140 0016 astro 02 fp 0F z 07 fp-diff z-diff
+    toup_14bit_1x1@340c140 0058 astro 70 fp 20 z 70 fp-diff
+    toup_14bit_1x1@3490580 0016 astro 02 fp 0F z 07 fp-diff z-diff
+    toup_14bit_1x1@3490580 0058 astro 70 fp 20 z 70 fp-diff
+    qhy_init 0016 astro 07 fp 0F z 07 fp-diff
+    qhy_init 0058 astro 70 fp 20 z 70 fp-diff
+12bit 1x1 normal {'fp-never z-diff': 1, 'same': 84, 'fp-diff': 2, 'fp-never': 2, 'fp-never z-never': 4, 'z-not-written': 9}
+    zwo_reg_full_12bit 0000 astro 00 fp  z 04 fp-never z-diff
+    zwo_reg_full_12bit 0016 astro 07 fp 0F z 07 fp-diff
+    zwo_reg_full_12bit 0058 astro 70 fp 20 z 70 fp-diff
+12bit 2x2 normal {'fp-never z-diff': 1, 'same': 275, 'fp-diff': 3, 'fp-never': 4, 'fp-never z-never': 4, 'z-not-written': 121}
+    zwo_reglist_bin2 0000 astro 00 fp  z 04 fp-never z-diff
+    zwo_reglist_bin2 0016 astro 07 fp 14 z 07 fp-diff
+    toup_12bit_2x2@340c640 0016 astro 07 fp 14 z 07 fp-diff
+    toup_12bit_2x2@3490a80 0016 astro 07 fp 14 z 07 fp-diff
+12bit 3x3 normal {'same': 182, 'fp-diff': 2, 'z-not-written': 120, 'fp-never': 2}
+    toup_12bit_3x3@340c3c0 0016 astro 07 fp 32 z 07 fp-diff
+    toup_12bit_3x3@3490800 0016 astro 07 fp 32 z 07 fp-diff
+astro-only regs: 0002 005C 005D 005E 005F 00DB 00DC 03E1 03E2 04D1 04D2 04DD 04F0 05A2 05D6

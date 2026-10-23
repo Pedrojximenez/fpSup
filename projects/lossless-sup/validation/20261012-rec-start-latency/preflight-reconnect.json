@@ -1,0 +1,15 @@
+{
+  "time": 1791786347.660266,
+  "commands": {
+    "status get is_recording": "is_recording -> 0\n\n",
+    "status get app_current": "app_current -> 2\n\n",
+    "menu SetMovRecSize": "2\n\n",
+    "menu SetMovFramerate": "3\n\n",
+    "gui geti MV_fpLossless": "OK:MV_fpLossless -> 1\n\n"
+  },
+  "writer": [
+    0,
+    0
+  ],
+  "boot": 12661098
+}

@@ -1,0 +1,25 @@
+{
+  "rows": [
+    {
+      "variant": "combined",
+      "QSON_reply_seconds": 4.022509208,
+      "Update_ms": 3924,
+      "Render_ms": 96,
+      "first_image_timestamp_us": 60453873,
+      "sample_count": 1
+    },
+    {
+      "variant": "without_RES_Custom",
+      "QSON_reply_seconds": 3.155364542,
+      "Update_ms": 3055,
+      "Render_ms": 98,
+      "first_image_timestamp_us": 42695260,
+      "sample_count": 1
+    }
+  ],
+  "same_card_other_modules_preserved": false,
+  "not_unmodified_stock_firmware": true,
+  "caveat": "One first-open sample per version; native GUI flags enabled in both. LCD scanout not measured.",
+  "valid_AB_comparison": false,
+  "reason": "Reconnect changed card contents: AutoRun 3561 -> 4666, LOADER 8248 -> 29276, additional modules, RCUS disabled in FSDS. 3.155s is a newer-card baseline only; do not subtract from earlier 4.022s."
+}

@@ -1,0 +1,62 @@
+{
+  "card": "reconnected card (AutoRun 4666 B, loader 29276 B)",
+  "disabled_first_QS_s": 3.155364542,
+  "enabled_fix1_first_QS_s": 6.4729639169999995,
+  "enabled_fix1": {
+    "Update_ms": 6375,
+    "Render_ms": 95
+  },
+  "fix1_FPS_visual_pass": false,
+  "failure": "Only integer at x=0; decimal and FPS absent. User confirmed position is wrong. Captures 1906/1907.",
+  "fix2_deployed": true,
+  "fix2_bytes": 231040,
+  "fix2_on_card_sha256": "bc74bf6f6117c1395583b267c2f57394b93a340bfb7ce7bfb4b30a7b231daabd",
+  "fix2_GUI_and_QS": "Verified after authorized takeover: integer position corrected, decimal/FPS absent; first QS 6.12191475 s.",
+  "not_recorded": true,
+  "other_module_state_for_fix1": "All eleven loaded; SupManager status=0; module-status.json",
+  "cross_card_comparison_valid": false,
+  "fix3_deployed": true,
+  "fix3_GUI_visual_pass": false,
+  "fix3_GUI_failure": "Entire FPS disappeared in child-object layout after all nine records parsed; screenshot 1909.",
+  "fix3_first_QS_s": 6.10062575,
+  "current_daemon_pid": 44398,
+  "fix4_status": "Deployed and full file readback verified; rebooted and immutable running code verified.",
+  "active_variant": "combined-fix12",
+  "active_bytes": 313216,
+  "active_on_card_sha256": "faa27b8f655f7a3c6b23be8c80cc288553c7993cf0f68a7a2bf95b0814c33cf7",
+  "active_CFG_sha256": "be62abbe2254b1c884c280a4352039f677bf7128bd81eea87dfb30990e855640",
+  "fix4_GUI_5994_pass": false,
+  "fix4_GUI_proof": [
+    "1910-20261015-fps-fix4-5994.jpg",
+    "fix4-visual-comparison.json",
+    "fix4-fps-tree.json"
+  ],
+  "fix4_first_QS_s": 6.116090167,
+  "QS_delay_resolved": false,
+  "other_module_state": "All eleven loaded and enabled, manager status 0, no write errors; run7/final-state.json.",
+  "final_state": "Non-recording CINE standby at final check; echo and GUI diagnostic flags restored.",
+  "hardware_scope": "29.97 medium CINE LV; four layout parser paths and white geometry/curves checked offline.",
+  "visual_approval_withdrawn": true,
+  "correction": "1910 predates QS refresh; 1911 after QS shows narrow text, excessive spacing and no black outline. See run4.",
+  "latest_results": "../run7/RESULTS.md",
+  "latest_visual": "../run7/final-black/1944-20261015-fps-outer-edge-3px-final-black-A.jpg",
+  "stock_style_match": false,
+  "fix9_status": "Written, full readback equal, rebooted, immutable running code verified, complete post-QS 29.97 FPS.",
+  "fix9_first_QS_s": null,
+  "footer_capture_caveat": "Entire or partial native bottom row can be absent; reproduced with RES-Custom removed. Actual LCD vs screenshot cause unresolved.",
+  "fix10_status": "Written, complete readback equal, rebooted, immutable running code verified; full post-QS 59.94 FPS with reduced integer/fraction gap.",
+  "fix10_first_QS_s": null,
+  "latest_spacing": {
+    "pixels": 7,
+    "stock_5994_reference_pixels": 6,
+    "full_style_match": false
+  },
+  "latest_outer_edge": {
+    "outward_px": 3,
+    "white_fill_unchanged": true,
+    "spacing_reference": "combined-fix10",
+    "black_restored": true
+  },
+  "fix12_status": "Written, full readback equal, booted, running code verified, 3px outward control and final black refresh captured.",
+  "fix12_first_QS_s": null
+}

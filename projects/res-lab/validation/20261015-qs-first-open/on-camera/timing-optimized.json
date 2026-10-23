@@ -1,0 +1,89 @@
+{
+  "variant": "optimized",
+  "identity": {
+    "base": "0x451cacc0",
+    "state": "0x451f7140",
+    "nrows": 5,
+    "immutable_code_sha256": "ac9a8c47b426234b8b9a63519f94ecefa92940c00e9e30a0d9faef83fc7f4bee"
+  },
+  "before": {
+    "QS_BOOT": 0,
+    "QS_RELOADS": 0,
+    "QS_HITS": 0,
+    "QS_N": 0,
+    "QS_READY": 1
+  },
+  "endpoint": "active_screen_name",
+  "LCD_scanout_measured": false,
+  "poll_interval_seconds": 0.075,
+  "opens": [
+    {
+      "key": "QSON",
+      "ack_seconds": 4.323338667000001,
+      "observed_seconds": 4.326806417,
+      "last_non_target_seconds": 0.0,
+      "screen": "QS_CINE",
+      "samples": [
+        [
+          4.326806417,
+          "QS_CINE"
+        ]
+      ],
+      "release_screen": "QS_CINE",
+      "index": 1,
+      "close": {
+        "key": "QSON",
+        "ack_seconds": 1.6698165000000005,
+        "observed_seconds": 1.6710610000000008,
+        "last_non_target_seconds": 0.0,
+        "screen": "LV_CINE_MEDIUM",
+        "samples": [
+          [
+            1.6710610000000008,
+            "LV_CINE_MEDIUM"
+          ]
+        ],
+        "release_screen": "LV_CINE_MEDIUM"
+      }
+    },
+    {
+      "key": "QSON",
+      "ack_seconds": 0.5261904159999986,
+      "observed_seconds": 0.5273581659999991,
+      "last_non_target_seconds": 0.0,
+      "screen": "QS_CINE",
+      "samples": [
+        [
+          0.5273581659999991,
+          "QS_CINE"
+        ]
+      ],
+      "release_screen": "QS_CINE",
+      "index": 2,
+      "close": {
+        "key": "QSON",
+        "ack_seconds": 1.665755665999999,
+        "observed_seconds": 1.6693575410000001,
+        "last_non_target_seconds": 0.0,
+        "screen": "LV_CINE_MEDIUM",
+        "samples": [
+          [
+            1.6693575410000001,
+            "LV_CINE_MEDIUM"
+          ]
+        ],
+        "release_screen": "LV_CINE_MEDIUM"
+      }
+    }
+  ],
+  "initial_screen": "LV_CINE_MEDIUM",
+  "final_screen": "LV_CINE_MEDIUM",
+  "after": {
+    "QS_BOOT": 1,
+    "QS_RELOADS": 0,
+    "QS_HITS": 168,
+    "QS_N": 7,
+    "QS_READY": 1
+  },
+  "echo_restored": true
+}

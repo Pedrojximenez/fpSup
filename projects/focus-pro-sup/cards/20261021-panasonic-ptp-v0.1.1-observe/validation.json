@@ -1,0 +1,32 @@
+{
+  "tests_run": 38,
+  "successful": true,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "mutation_cases": 8,
+  "sup_sha256": "05e339660158be642eacb75c786c9056a74b76adfedf6b641eb6f1fe26189f53",
+  "autorun_sha256": "cec232c10cf0f01338d743fd5b144a782852e8e6716f65b9758ce627c5a92b5c",
+  "loader_sha256": "67d3d79fc40681bd7c6c3e93dd81c04f3f763089b7f98b96198b7ad5855df818",
+  "unicorn_version": "2.1.4",
+  "cpu": "Cortex-A9",
+  "native_effects_stubbed": [
+    "USB I/O",
+    "native PTP session side effects",
+    "lens getters/event flags/drive acceptance",
+    "file/directory/allocator/RTOS/cache operations"
+  ],
+  "actual_code_executed": [
+    "shared loader/stage2",
+    "Loader v3 sloader",
+    "60FPPTP entry and veneers",
+    "PTP parsing/identity/focus guards and dispatch"
+  ],
+  "camera_operated": false,
+  "physical_focus_verified": false,
+  "test_source_sha256": "5e4fca9c6c8d243188722c80b93a24669da21d5b4313cb1601971be5daee24e3",
+  "firmware_images": {
+    "out/seg0_c0000000.bin": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622",
+    "out/seg1_c2ef6e00.bin": "0dcaca8f5441fe4ddc6ed801cb888e325df4e76006e4f53a1c3219809b22ce7b"
+  }
+}

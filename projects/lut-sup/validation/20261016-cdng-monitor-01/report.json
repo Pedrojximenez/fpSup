@@ -1,0 +1,111 @@
+{
+  "schema": "fpSup-monitor-validation-2",
+  "test_exit": 0,
+  "fixed_output": {
+    "space": "rec709-gamma24",
+    "white": "D65",
+    "transfer": "gamma24",
+    "range": "normalized-full",
+    "scene_to_display_after_lut": "none",
+    "identified_from_cube": false
+  },
+  "cinemadng_color_spaces": 8,
+  "common_gammas": 6,
+  "blackmagic_gammas": 2,
+  "standard_numerical_pairs": 35,
+  "menu_evidence": "projects/lut-sup/validation/20261016-cdng-menu-01/evidence.json",
+  "menu_evidence_sha256": "cfed85e1e95801e224819de0f0c7d61f8c43c74247314cbf7dea8de8c0470878",
+  "resolve_cinemadng_pixel_match_verified": false,
+  "arri_regression_scope": "generic numerical reference; not a CinemaDNG menu option",
+  "original_cube_sha256": "29212a71808ab22f2819b904b3730fa4231b5841d883e43ec17610096dc38879",
+  "archived_reference_samples": 14648,
+  "archived_reference_max_channel_error": 3.0090513414293696e-14,
+  "archived_reference_mean_error": 7.492799527183521e-17,
+  "compiled_error": {
+    "samples": 9217,
+    "rgb_mae": 3.817767364250821e-09,
+    "p95_max_channel": 2.091389403879872e-08,
+    "max_channel": 2.9019022296239427e-08,
+    "metric": "709 gamma2.4 code error, not DeltaE",
+    "includes_float32_nodes": true,
+    "measured_on_camera": false
+  },
+  "scene_pipeline_diagnostics": {
+    "baseline": "clip-linear-rec709-gamma24-v1",
+    "strength_space": "rec709-gamma24",
+    "baseline_linear_709": {
+      "min_rgb": [
+        -34.04089713012687,
+        -18.45342184910468,
+        -13.684377028774149
+      ],
+      "max_rgb": [
+        89.10318341068476,
+        73.5157081296626,
+        68.74666330933206
+      ],
+      "samples": 14648,
+      "below_channels": 20646,
+      "above_channels": 15488,
+      "outside_samples": 14144
+    },
+    "lut_evaluated": true,
+    "lut_lookups": {
+      "cube_lookup": {
+        "samples": 14648,
+        "below_channels": 1771,
+        "above_channels": 0,
+        "outside_samples": 1672
+      }
+    },
+    "input_linear_before_render": {
+      "min_rgb": [
+        -0.017290418255276167,
+        -0.01729041825527466,
+        -0.01729041825527189
+      ],
+      "max_rgb": [
+        55.07957669881319,
+        55.07957669881319,
+        55.07957669881319
+      ],
+      "samples": 14648,
+      "below_channels": 8269,
+      "above_channels": 16779,
+      "outside_samples": 13154
+    },
+    "output_before_display_clip": {
+      "min_rgb": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "max_rgb": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "samples": 14648,
+      "below_channels": 0,
+      "above_channels": 0,
+      "outside_samples": 0
+    },
+    "source_space": "xyz-d65"
+  },
+  "source_hashes": {
+    "color.py": "76fb55133eabe4d13fe79e2670c59584ab1150d0f7f49931f8fd3c88215c69cd",
+    "cinemadng.py": "442f56ba3e1a0b83c91e32ad3191f91c74db11919b77c5723ea7578349922c0b",
+    "monitor.py": "fde5f810259a003bbe17d13b6dcc9e1381997d6874885bd0fc925c561a7673e5",
+    "cube.py": "b2815d028695ec1d06a75b45d1c9b0e32aae1af9c22f6afe4f67082babad1d81",
+    "fplut.py": "4ec3f1430a4c8d6a9e8ed1e08e883e4926434a15afdebb76cbd5b42ea117a152",
+    "test_monitor.py": "9d207c39946d6be76cb97254d0a36fa631f7ffbe1c3c312a218739571a286b9b",
+    "test_cinemadng.py": "d83d1fda6c5038321e74caf0f64c732d6cde8f4492c6e8067a80650a20483232",
+    "validate_monitor.py": "9c78a92019d38ece10d007f192e941b683c70030ba25a8921bbcf7686b3a5f1b"
+  },
+  "archived_input_sha256": "bc697bc4ab28ed988ba16dedeea2997e791cf7db57283662d6fc83c7cc7ab3a9",
+  "archived_target_sha256": "e091fad0ee7abffbb5736a7bbb9cfd1475dd128a94113175403d45b0dafbb7f7",
+  "camera_operations": false,
+  "fp_input_calibration_verified": false,
+  "native_preview_runtime_verified": false,
+  "lcd_fidelity_verified": false
+}

@@ -1,0 +1,13 @@
+test_missing_or_replaced_bin_is_not_created_or_overwritten (test_library_native.LibraryNativeTests) ... 
+======================================================================
+FAIL: test_missing_or_replaced_bin_is_not_created_or_overwritten (test_library_native.LibraryNativeTests) (missing=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lut/test_library_native.py", line 182, in test_missing_or_replaced_bin_is_not_created_or_overwritten
+    self.assertEqual(c.bin_open_writes,0)
+AssertionError: 1 != 0
+
+----------------------------------------------------------------------
+Ran 1 test in 4.498s
+
+FAILED (failures=1)

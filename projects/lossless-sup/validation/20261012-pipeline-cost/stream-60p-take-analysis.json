@@ -1,0 +1,55 @@
+{
+  "label": "stream-60p-take",
+  "clip": [
+    "A001_162"
+  ],
+  "boot": 12057892,
+  "codecTask": 125,
+  "window": {
+    "cpu_percent": 89.8194,
+    "task_percent": {
+      "MRecMgr": 21.9126,
+      "FPFLIP": 0.1068,
+      "inittsk": 10.1806,
+      "LensCycl": 3.4019,
+      "ImgCtrl": 0.4728,
+      "MANAGER": 0.7629,
+      "S2R": 0.4882,
+      "R2YHDIS": 1.4381,
+      "AeDev": 1.5024,
+      "CamSch": 43.5996,
+      "VDD": 0.0547,
+      "Y2YVDIS": 0.6622,
+      "PicCorr": 0.0867,
+      "FPLCODE": 4.4574,
+      "FdTsk": 1.5504,
+      "EyeDtctn": 0.0452,
+      "GyroData": 0.1539,
+      "_VSHL": 0.1456,
+      "AtomosFr": 0.9461,
+      "Level": 1.1342,
+      "SRecFile": 3.0711,
+      "AUD_INT": 0.2608,
+      "LcdTh": 0.0145,
+      "StOsdObs": 0.5786,
+      "DrawMgr": 1.4294,
+      "LcdBrTh": 0.0551,
+      "RemoCon": 0.0305,
+      "LensUbat": 0.0162,
+      "ESCycl": 0.0527,
+      "ExtStrb": 1.0749,
+      "SDePower": 0.0314,
+      "ExtEvfCh": 0.0047,
+      "TempChk": 0.0031,
+      "EventMgr": 0.0133,
+      "BtrMgr": 0.0636,
+      "shell": 0.0046
+    }
+  },
+  "windowUs": [
+    1100000,
+    2100000
+  ],
+  "phases": {},
+  "intervals": []
+}

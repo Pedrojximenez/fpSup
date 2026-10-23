@@ -1,0 +1,21 @@
+test_group_popup_refreshes_the_dependent_value_immediately (test_sup_ui.LutUiTests) ... FAIL
+
+======================================================================
+FAIL: test_group_popup_refreshes_the_dependent_value_immediately (test_sup_ui.LutUiTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lut/test_sup_ui.py", line 137, in test_group_popup_refreshes_the_dependent_value_immediately
+    self.assertEqual((value['A'],value['Ia'],value['Ib'],value['Ic'],value['Max']),
+AssertionError: Tuples differ: ('Rec.709', 'Rec.709', 'sRGB', ' ', 1) != ('P3 D60', 'P3 D60', 'P3 D65', 'Rec.2020', 2)
+
+First differing element 0:
+'Rec.709'
+'P3 D60'
+
+- ('Rec.709', 'Rec.709', 'sRGB', ' ', 1)
++ ('P3 D60', 'P3 D60', 'P3 D65', 'Rec.2020', 2)
+
+----------------------------------------------------------------------
+Ran 1 test in 4.841s
+
+FAILED (failures=1)

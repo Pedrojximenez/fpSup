@@ -1,0 +1,28 @@
+{
+  "daemon": [
+    39219,
+    "OK name=fpshd version=3.2.0 protocol=1 frame=64 payload=44 transport=EP01-EP82 iface=0 camera=open seq=313 ep83=host_candidate upload=UP01-probed mem=MEM1-probed quarantine=0 fault=none\n"
+  ],
+  "idle": {
+    "movie_recording": 0,
+    "xmp_file_pointer": 0,
+    "movie_writing": 0
+  },
+  "identity": {
+    "base": "0x451d7380",
+    "state": "0x4520ef00",
+    "nrows": 5,
+    "immutable_code_sha256": "948e6ac3e7a7d680d21a918a5d0990874f6f730301293bb6c9d668771707497f"
+  },
+  "facts": {
+    "VR_UI": 1,
+    "VR_WHY": 1,
+    "LV_RECORDS": 1159638284,
+    "LV_MIN": 3252725886,
+    "LV_MAX": 3254746227,
+    "QS_HITS": 0
+  },
+  "screen": "LV_CINE_MEDIUM",
+  "screenshot": "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261015-qs-first-open/on-camera/run3/1908-20261015-fps-fix2-5994.jpg",
+  "camera_rebooted_for_takeover": false
+}

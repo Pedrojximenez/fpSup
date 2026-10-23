@@ -1,0 +1,17 @@
+{
+  "sha256": "ff847d991fc7ff6d80eb6e9290d42f23f8b34553a389cbf230104ae822ed36e6",
+  "bytes": 231040,
+  "written_to_card": true,
+  "deployed_sha256": "b4fa4613514da3f1abc204e23c766ad35f91b5e434799432407343755b0d84a1",
+  "source_hashes": {
+    "ogc.c": "76a83ab88242ebcf9df7f90bbe98c49f5effdaf5217224f8a33bf5455f83fb41",
+    "ogc_layout.py": "b933f8bdb9de2290ae1abbc7df7929eb20e9301ce889d1b437cda69bd292dc23",
+    "vr_ui.py": "9e7bb136cccb6dde3431afb8b6f0dd30c67c99b70b9ecc1e0c88df8fb4718a84",
+    "test_v3_rescustom.py": "e02b53251b153496bfc10dce049b9c37bd125643e8221fd2ac1056c56ca1643c"
+  },
+  "regression": "Reader +0x1c is set after native successful resource registration, not fatal failure. Remove premature stop between resident records.",
+  "focused_tests": "Three passed; the new regression fails on the prior source (only first drawable parsed), then passes after correction.",
+  "saved_BIN_verification": "371 QS records, 16 LV substitutions with reader +1c=1, journal restoration passed",
+  "hardware_visual_result": "FAIL: entire FPS absent in child-object layout; screenshot 1909",
+  "first_QS_seconds": 6.10062575
+}

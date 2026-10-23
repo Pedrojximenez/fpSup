@@ -1,0 +1,20 @@
+{
+  "reason": "Load verified 1016-position LOSS correction for M12240",
+  "commands": [
+    {
+      "time": 1791772317.1392791,
+      "command": "status get is_recording",
+      "reply": "is_recording -> 0\n\n"
+    },
+    {
+      "time": 1791772317.5128052,
+      "command": "reboot",
+      "reply": "ERR shl frame0 rc=-1(LIBUSB_ERROR_IO) moved=0/64\n"
+    }
+  ],
+  "idle": [
+    0,
+    0
+  ],
+  "boot_before": 11939454
+}

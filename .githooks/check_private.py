@@ -81,7 +81,8 @@ def code_bytes(data, idx):
             continue
         j = np.searchsorted(idx, k)
         j[j >= len(idx)] = 0
-        best = max(best, int((idx[j] == k).sum()))
+        # distinct windows only: a log repeating one shell string must not add up
+        best = max(best, len(np.unique(k[idx[j] == k])))
     return best * 4
 
 

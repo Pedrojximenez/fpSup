@@ -1,0 +1,1095 @@
+{
+  "status": "offline-reference-complete; camera-not-tested",
+  "camera_io": false,
+  "research_only": true,
+  "not_author_complete_workflow": true,
+  "missing": [
+    "Camera RAW P3 decode pixel match",
+    "source DNG profile and highlight recovery",
+    "unknown author nodes 04/06 and project CM",
+    "author final DaVinci DRT",
+    "paired Pyxis color accuracy",
+    "live camera tap and ISP/residual implementation"
+  ],
+  "sources": {
+    "post": "https://www.facebook.com/groups/1124721801045663/permalink/3067172403467250/",
+    "transcription": "research/imaging-hw/notes/FP_OLE_BEREK_GEN5_WORKFLOW_AUDIT_2026-09-27.md",
+    "gen5": "bmcc6k/analysis-20260924/bmcc6k-liveview-rec709-20260924/reference/gen5_technical.txt"
+  },
+  "legacy_candidate": {
+    "status": "experimental-legacy-gen1-candidate",
+    "resolve_pixel_match_verified": false,
+    "sensor_calibration_verified": false,
+    "camera_backend_verified": false,
+    "raw_menu_registration": false,
+    "gen1_primaries_xy": [
+      [
+        0.91726,
+        0.25024
+      ],
+      [
+        0.28333,
+        1.70723
+      ],
+      [
+        0.08557,
+        -0.07078
+      ]
+    ],
+    "gen1_white_xy": [
+      0.31354,
+      0.33048
+    ],
+    "gen1_source": "bmd_gen1/notes/BMD_FILM_GEN1_GAMUT.md",
+    "negative_extension": "local sRGB linear toe; current Resolve pending",
+    "nodes": [
+      {
+        "input": "P3-D60/Linear",
+        "output": "BWG4/5/Film5",
+        "cat": true
+      },
+      {
+        "input": "Gen1/sRGB (reinterpret)",
+        "output": "sRGB/sRGB",
+        "cat": false
+      },
+      {
+        "input": "BWG4/5/Film5 (reinterpret)",
+        "output": "DWG/DI",
+        "cat": false
+      }
+    ],
+    "tone_mapping": "none",
+    "gamut_mapping": "none",
+    "ootf": false,
+    "q_matrix": [
+      [
+        1.862003588098945,
+        -0.6754192805001776,
+        -0.18620950545559403
+      ],
+      [
+        -0.2972991957378698,
+        1.6081564797064185,
+        -0.3096897110002277
+      ],
+      [
+        -0.1234024873211085,
+        -0.7684288260728765,
+        1.8791608627002863
+      ]
+    ],
+    "node01_matrix": [
+      [
+        0.8061785237833626,
+        0.11337051456320993,
+        0.08045096165342724
+      ],
+      [
+        0.024465123950749224,
+        0.8024657443705119,
+        0.17306913167873897
+      ],
+      [
+        0.0217405335412152,
+        0.09856467239962452,
+        0.8796947940591605
+      ]
+    ],
+    "node03_matrix": [
+      [
+        0.8488014507069424,
+        0.11261994338775758,
+        0.03855698168468714
+      ],
+      [
+        0.04823299149496066,
+        0.9244808653567563,
+        0.027260344357569438
+      ],
+      [
+        0.04616340897048573,
+        0.039230374003449274,
+        0.9144135526117635
+      ]
+    ],
+    "q_factorization": [
+      "sRGB decode",
+      "3x3 Gen1 to sRGB, CAT off",
+      "sRGB encode"
+    ],
+    "output": {
+      "gamut": "Rec.709 D65",
+      "gamma": "2.4",
+      "range": "normalized-full",
+      "display_model": "clip-linear-0-1-v1",
+      "matches_author_final_drt": false
+    }
+  },
+  "matrix_reference": {
+    "resolve_version": "21.0.4.5",
+    "plugin": "ofx.com.blackmagicdesign.resolvefx.ColorSpaceTransformV2",
+    "source": "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-04",
+    "method": "three unit-basis pixels per linear CST, black checked",
+    "matrices": {
+      "p3_to_bwg": [
+        [
+          0.805903434753418,
+          0.11200810968875885,
+          0.08208855241537094
+        ],
+        [
+          0.02469547837972641,
+          0.8013892769813538,
+          0.17391519248485565
+        ],
+        [
+          0.0218366589397192,
+          0.10131163150072098,
+          0.876851499080658
+        ]
+      ],
+      "gen1_to_srgb": [
+        [
+          1.862077236175537,
+          -0.6754248738288879,
+          -0.18620756268501282
+        ],
+        [
+          -0.2973127067089081,
+          1.6081607341766357,
+          -0.30971211194992065
+        ],
+        [
+          -0.12340445816516876,
+          -0.7684293985366821,
+          1.8792715072631836
+        ]
+      ],
+      "bwg_to_dwg": [
+        [
+          0.8488126397132874,
+          0.11262231320142746,
+          0.03856504335999489
+        ],
+        [
+          0.048233628273010254,
+          0.9245003461837769,
+          0.027266046032309532
+        ],
+        [
+          0.04616401717066765,
+          0.03923119977116585,
+          0.9146047830581665
+        ]
+      ],
+      "dwg_to_709": [
+        [
+          1.8986148834228516,
+          -0.7921761870384216,
+          -0.10643871873617172
+        ],
+        [
+          -0.16894878447055817,
+          1.4889757633209229,
+          -0.3200269639492035
+        ],
+        [
+          -0.1215391606092453,
+          -0.31567585468292236,
+          1.437214970588684
+        ]
+      ]
+    },
+    "held_out_linear_tests": {
+      "matrix_node01": {
+        "samples": 1020,
+        "max_abs": 2.3363309118451525e-06,
+        "p99_abs": 9.392791429618782e-07,
+        "rms": 2.0737336920364112e-07,
+        "max_normalized": 1.2457813056160798e-07
+      },
+      "gen1_709_linear": {
+        "samples": 1020,
+        "max_abs": 3.8770727570636154e-06,
+        "p99_abs": 1.989914837174921e-06,
+        "rms": 4.4436209153719703e-07,
+        "max_normalized": 2.8773255419267956e-07
+      },
+      "matrix_node03": {
+        "samples": 1020,
+        "max_abs": 2.005231642954186e-06,
+        "p99_abs": 9.25443953079252e-07,
+        "rms": 2.0409795933264642e-07,
+        "max_normalized": 9.842357642485581e-08
+      },
+      "matrix_monitor": {
+        "samples": 1020,
+        "max_abs": 5.248357815901272e-06,
+        "p99_abs": 2.5161660381911567e-06,
+        "rms": 4.877500513989458e-07,
+        "max_normalized": 2.7792078175148574e-07
+      }
+    },
+    "manifest_sha256": "ec1a22e3c6216ca3fa1042e265f6d2d4290c53da8abdfbdd2b887ee4c257c13d"
+  },
+  "resolve_comparison": {
+    "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-05": {
+      "float32_identity_exact": true,
+      "measured_model": {
+        "node01": {
+          "samples": 1024,
+          "max_abs": 6.724453704975986e-08,
+          "p99_abs": 4.961328533448214e-08,
+          "rms": 2.4126349034971058e-08,
+          "max_normalized": 4.1338543345268206e-08
+        },
+        "node02": {
+          "samples": 1024,
+          "max_abs": 7.00067343029076e-06,
+          "p99_abs": 3.801143519517325e-06,
+          "rms": 8.097731832461051e-07,
+          "max_normalized": 5.383277877822978e-06
+        },
+        "node03": {
+          "samples": 1024,
+          "max_abs": 2.4241338780761623e-07,
+          "p99_abs": 1.5006134518769087e-07,
+          "rms": 5.210303026211668e-08,
+          "max_normalized": 1.0584788801775382e-07
+        },
+        "chain": {
+          "samples": 1024,
+          "max_abs": 5.8342121433963e-07,
+          "p99_abs": 3.1710990293309904e-07,
+          "rms": 1.302712842282788e-07,
+          "max_normalized": 4.585091542697077e-07
+        },
+        "bypass": {
+          "samples": 1024,
+          "max_abs": 1.554651676283214e-07,
+          "p99_abs": 1.02364558689505e-07,
+          "rms": 3.6796433846353134e-08,
+          "max_normalized": 8.558919250729724e-08
+        }
+      },
+      "legacy_candidate": {
+        "node01": {
+          "samples": 1024,
+          "max_abs": 0.0023828211310862324,
+          "p99_abs": 0.0023439388307017815,
+          "rms": 0.000770783624706133,
+          "max_normalized": 0.0016958760426075586
+        },
+        "node02": {
+          "samples": 1024,
+          "max_abs": 0.0008952640265386044,
+          "p99_abs": 0.0005487191257930712,
+          "rms": 0.00013092270418257255,
+          "max_normalized": 0.0008872743221711262
+        },
+        "node03": {
+          "samples": 1024,
+          "max_abs": 2.7478594049029637e-05,
+          "p99_abs": 2.2108986997320112e-05,
+          "rms": 1.1432497409946196e-05,
+          "max_normalized": 2.6482729644096337e-05
+        },
+        "chain": {
+          "samples": 1024,
+          "max_abs": 0.027838150005379904,
+          "p99_abs": 0.008808214741377031,
+          "rms": 0.0018408557332840428,
+          "max_normalized": 0.026949353921832765
+        },
+        "bypass": {
+          "samples": 1024,
+          "max_abs": 0.0019985567220625056,
+          "p99_abs": 0.00196487727289596,
+          "rms": 0.0006088085155036543,
+          "max_normalized": 0.0014531750890946979
+        }
+      },
+      "custom_display": {
+        "monitor_bypass_linear709_code": {
+          "samples": 1024,
+          "max_abs": 1.7236886868499113e-05,
+          "p99_abs": 2.2837824344479327e-07,
+          "rms": 3.8920102433915006e-07,
+          "max_normalized": 9.7395644079446e-06
+        },
+        "monitor_q_linear709_code": {
+          "samples": 1024,
+          "max_abs": 1.3323684464494612e-05,
+          "p99_abs": 2.417010672672857e-07,
+          "rms": 2.998373929501147e-07,
+          "max_normalized": 8.727884285284096e-06
+        }
+      },
+      "files_sha256": {
+        "code.exr": "bc96bbb9132e941b6fea744d9358735b841648c8c22fb257003d2ec991d03b24",
+        "linear.exr": "f5d4bf883d1c692f7552481ebff205a2c7aba14af45eb20c82718bb93ac58597",
+        "vendor/BMD46KFILMV3_xyz.0000.exr": "f326b8f3b02f9d888131aaee79653eed10e4db508845bcea71e14e98969b32bf",
+        "vendor/BMD46KFILM_xyz.0000.exr": "d202bb6b86865d1784a310e0608adabc06c66794aa2c90d65ef1b26ce8244626",
+        "vendor/BMD46KVIDEOV3_xyz.0000.exr": "5eb4127e0351edde2e0090efbd2f5be48e3127f700989026bdc2f9754bb329c3",
+        "vendor/BMD4KBCASTFILM_xyz.0000.exr": "fc6273193950e0b09eecd431d8e82352d0bd234ce7f2fd59572b8015e14ed971",
+        "vendor/BMD4KBCASTVIDEO_xyz.0000.exr": "229b8a29050d496cf10cc204d5083b6e60172c71925cae370afcef6bbb8b7d9e",
+        "vendor/BMD4KFILMV3_xyz.0000.exr": "736fbcf45c785ff9dd6d483c5300d88d21d144f46509431ace706ae23259df27",
+        "vendor/BMD4KFILM_xyz.0000.exr": "2e5bd44c9fa5b0f0179aa929652bd6a283cbbbea92f7274912194888b0a74d3d",
+        "vendor/BMD4KVIDEOV3_xyz.0000.exr": "b0961ba80d675436fbab074104cd27e718eee9b56ca42b73c98d6620c8ee415a",
+        "vendor/BMDFILM_xyz.0000.exr": "7299f27e12a0eb61670c242c8435bc41d12a36ff2a3fdecb62aa311b21e26f15",
+        "vendor/BMDPOCKET4KFILM_xyz.0000.exr": "fc6273193950e0b09eecd431d8e82352d0bd234ce7f2fd59572b8015e14ed971",
+        "vendor/BMDVIDEOV5_xyz.0000.exr": "e12c0dbc1f3e7dee5b69da42558888168b51e67271797b5e79452f0e98d33cdf",
+        "vendor/bypass.0000.exr": "61bed5ca459c8f2b836ef5cdadf0e7f2d2ba4817175872e6a359f8ffbe03bfa8",
+        "vendor/chain.0000.exr": "e9f86da8d5a255db5441a707781a4f2185e0a48b40bd995d76df8459826a950d",
+        "vendor/film5_decode.0000.exr": "3dd6641378eb0a5329fb2f190a61de3b49a90fc027c27a0daf45e1df23d82a33",
+        "vendor/film5_encode.0000.exr": "44ec7be4a156b5383a4a23215e425cac2bde15bf50734294f4020c6e1833d34a",
+        "vendor/gen1_709_linear.0000.exr": "e26163ef800232954294231faf2f0c5c14235d442c7d53c06c11b360cace12a8",
+        "vendor/identity_code.0000.exr": "e457676c7105cd2eb6ac55df891cdc1b0d0914e7df2fb7f69a9ea7e897b9e4ec",
+        "vendor/identity_linear.0000.exr": "a7c423b4276a349e6ac60273e8d2744c81608068ce0c1cc8c7023d32a3f05ac5",
+        "vendor/manifest.json": "8f461edb6334a7d443a154ae92ab33320a53150d092b97fcd80cb094e9236468",
+        "vendor/matrix_monitor.0000.exr": "cbab0408ae99bcaad82ca98544c3b152ef70b9893278dfa0dc5d21e9cd2bc5a1",
+        "vendor/matrix_node01.0000.exr": "00dde441ddf607741986ef80ca9266277f04fba5baae54300d73a3bc0d2868bf",
+        "vendor/matrix_node03.0000.exr": "597dabc833b63a3e44427b6041eb7e360ac2c96450eb0c3dfa1e76d7fb7113ca",
+        "vendor/monitor_bypass_linear709_code.0000.exr": "531755298c1fe80b01faf010e56dd19a66be8b9bbe8b8f6cc1b48ba51c142876",
+        "vendor/monitor_q_linear709_code.0000.exr": "1fed140a9bb32c808b80fdd4780e20b27145cc6e505cef3a0de3b9169800bed8",
+        "vendor/node01.0000.exr": "cf16f66d869bf6f4d813e317d96067dc651ede3085119c6dcdbb470bc31a7706",
+        "vendor/node02.0000.exr": "48ceba30b3fd6447540408a53d3ab964621cb9ead47ebe5ff82c5dc6018326c9",
+        "vendor/node03.0000.exr": "6bf8ee6a350e949a0a55459aa6ea79514f13a6a2e5e66ec1ac218b21e43af320",
+        "vendor/reference.comp": "461538fc8b81da35cc0c33fe00ddac28d3b43acb2550d6a1d8b33be4e0348cbf",
+        "vendor/srgb_decode.0000.exr": "d6df748df5bed20693737a0efdc6bb02fdd40d951177d64afc74d86facc5f6ad",
+        "vendor/srgb_encode.0000.exr": "acaaa4c66ad4dc594506e802b698243ee658d48f3945e1e15a77708a5312aca8"
+      }
+    },
+    "/Users/dido/Developer.localized/SIGMAfp_re/projects/lut-sup/validation/20261021-ole2026-offline-01/cst-reference-04": {
+      "float32_identity_exact": true,
+      "measured_model": {
+        "node01": {
+          "samples": 1024,
+          "max_abs": 7.380443833859829e-08,
+          "p99_abs": 5.0127601954885744e-08,
+          "rms": 2.4100464911732152e-08,
+          "max_normalized": 4.161334335728859e-08
+        },
+        "node02": {
+          "samples": 1024,
+          "max_abs": 6.751944209959504e-06,
+          "p99_abs": 3.6835284507841226e-06,
+          "rms": 7.970068271960678e-07,
+          "max_normalized": 3.917885916727031e-06
+        },
+        "node03": {
+          "samples": 1024,
+          "max_abs": 2.4207320392655163e-07,
+          "p99_abs": 1.602273018441735e-07,
+          "rms": 5.414707628335654e-08,
+          "max_normalized": 1.0442974715989805e-07
+        },
+        "chain": {
+          "samples": 1024,
+          "max_abs": 5.714856211314068e-07,
+          "p99_abs": 3.087645071014194e-07,
+          "rms": 1.2885228301334928e-07,
+          "max_normalized": 5.346853748715843e-07
+        },
+        "bypass": {
+          "samples": 1024,
+          "max_abs": 1.3787839747703146e-07,
+          "p99_abs": 1.0431079721873181e-07,
+          "rms": 3.69300640377518e-08,
+          "max_normalized": 7.623386105138187e-08
+        }
+      },
+      "legacy_candidate": {
+        "node01": {
+          "samples": 1024,
+          "max_abs": 0.002382163221945288,
+          "p99_abs": 0.00233839865289928,
+          "rms": 0.0007588232720616497,
+          "max_normalized": 0.0016958760426075586
+        },
+        "node02": {
+          "samples": 1024,
+          "max_abs": 0.00086447693628533,
+          "p99_abs": 0.0005260311897583666,
+          "rms": 0.0001339969411626476,
+          "max_normalized": 0.0005782368782717287
+        },
+        "node03": {
+          "samples": 1024,
+          "max_abs": 2.7315654422988e-05,
+          "p99_abs": 2.2100896898477052e-05,
+          "rms": 1.1634332470311375e-05,
+          "max_normalized": 2.392330856246592e-05
+        },
+        "chain": {
+          "samples": 1024,
+          "max_abs": 0.02654054648868749,
+          "p99_abs": 0.010348335959987548,
+          "rms": 0.0019576640618809535,
+          "max_normalized": 0.025038311572338712
+        },
+        "bypass": {
+          "samples": 1024,
+          "max_abs": 0.001997131991686718,
+          "p99_abs": 0.0019622154684275903,
+          "rms": 0.0006000127926667972,
+          "max_normalized": 0.0014531750890946979
+        }
+      },
+      "custom_display": {
+        "monitor_bypass_linear709_code": {
+          "samples": 1024,
+          "max_abs": 0.0004416649945852835,
+          "p99_abs": 1.5037493705516422e-07,
+          "rms": 7.983643317428667e-06,
+          "max_normalized": 0.00035924817962755605
+        },
+        "monitor_q_linear709_code": {
+          "samples": 1024,
+          "max_abs": 7.944728866993156e-05,
+          "p99_abs": 2.467681692586154e-07,
+          "rms": 1.7094350588053551e-06,
+          "max_normalized": 6.51685200980169e-05
+        }
+      },
+      "files_sha256": {
+        "code.exr": "d304851ca38cdc0b2c878152aaa277def3b7874114e7af6b0e756f4298a9fbb4",
+        "linear.exr": "f13f28859845c9571e5bccdc82bb1763f4158ebe0d79b38d306b9efd63dcdf97",
+        "vendor/BMD46KFILMV3_xyz.0000.exr": "de775c2f73359c5e7fe86767442a31939f3f3854f6c6f45014be7c6d6142c6e6",
+        "vendor/BMD46KFILM_xyz.0000.exr": "58780adb9c1deaea0e470836534d86564b2810914af05a87094760278fbbbb39",
+        "vendor/BMD46KVIDEOV3_xyz.0000.exr": "6d1040d8f2815bd23d697060da006ef78a7c1c613165b955375722bcaa02a6ed",
+        "vendor/BMD4KBCASTFILM_xyz.0000.exr": "a8065b4fb453ad6882cb325dd13537ad86a8ec2e9cd62ce5827c5279d9c571ea",
+        "vendor/BMD4KBCASTVIDEO_xyz.0000.exr": "efb3d7c09145d7770632d19d38f307d0db365f54c65f7ef4a48dfe3d0caebf7e",
+        "vendor/BMD4KFILMV3_xyz.0000.exr": "309f5e3b19b87a83b99f6435cbe563bd43c775483c86e7f72953b2a51f7c7d00",
+        "vendor/BMD4KFILM_xyz.0000.exr": "f5220d0f24ece93eb4263ba5699be7f0fe7b363dafe3bb5d64ad72ba81b3d308",
+        "vendor/BMD4KVIDEOV3_xyz.0000.exr": "d32497ccf10ea32b878e7f5c4e021c3e2fb17748da2666315094e6b990fac39b",
+        "vendor/BMDFILM_xyz.0000.exr": "b9f05991570467f4ac4a154e7ea4f94bab478d49f7ba884680d060aa9ad0df09",
+        "vendor/BMDPOCKET4KFILM_xyz.0000.exr": "a8065b4fb453ad6882cb325dd13537ad86a8ec2e9cd62ce5827c5279d9c571ea",
+        "vendor/BMDVIDEOV5_xyz.0000.exr": "8b580b4f3c01b55ec7d318e0b0eb278255b28e814e38474f1704227f83474a3b",
+        "vendor/bypass.0000.exr": "d1068b20bfeaad2c6212f3eaf1d9419d7ac40ead85b46b99c5ae7cfad3b2807e",
+        "vendor/chain.0000.exr": "c8a6129d6c7c1c4a27e7a7ba0a2a0a895ed4034936fac4dba590dd4158992bd7",
+        "vendor/film5_decode.0000.exr": "547c0b22fa598e8732e979743723e471d32927a35a610a38095f5c103d932df2",
+        "vendor/film5_encode.0000.exr": "33b30553a618e83ecb3de61b56f89f4eec308c8d12cbe68785216ead790cc663",
+        "vendor/gen1_709_linear.0000.exr": "59734c83a9409d4cc65d157af25e3c2658887d64542a7899175e9fd026f68f21",
+        "vendor/identity_code.0000.exr": "c9271c3db82f99a402505d58f6a0f91906c77036c8cf1a5114ef9eec05049b9b",
+        "vendor/identity_linear.0000.exr": "2a4332edfc1876cc2efed4f72ddbe9097f031cb5e3a7c8b045a34bd6ee0c29fa",
+        "vendor/manifest.json": "ec1a22e3c6216ca3fa1042e265f6d2d4290c53da8abdfbdd2b887ee4c257c13d",
+        "vendor/matrix_monitor.0000.exr": "3adadb6746ea7cc2a223d3aabbd9132bdde96237327d932e3491e28076ece7f6",
+        "vendor/matrix_node01.0000.exr": "f1027368f04718b77345c4380ccbeaa2d4d1ade20344374aa7c645a351440419",
+        "vendor/matrix_node03.0000.exr": "e9428dddae0f9406dd4feadd1dbf8ca856c9b6b918f31e5fd23eb5553ba85199",
+        "vendor/monitor_bypass_linear709_code.0000.exr": "0d8b3a9fe3df5e48f85f05dc8f066e7467e6cd5ccf0ec69ce4292bf2cdde84e8",
+        "vendor/monitor_q_linear709_code.0000.exr": "ad30be31df94593f59159836ba0b7aeaabe578053ba7b46c4a4072359dd29955",
+        "vendor/node01.0000.exr": "383252fad8a2044a2553a1afee611bdccea83c312b345be48614e5924e36bbb6",
+        "vendor/node02.0000.exr": "8daeb83cafc85b27ba5742b3ce3f9b49b0a73b87eed64ed844907d9ff68f13b9",
+        "vendor/node03.0000.exr": "b21992d4d4a8076ee420164e7ac5ae1686da511607bd8b62780f083d779f8da1",
+        "vendor/reference.comp": "dfb42abaa311844be3b68d8fc9b00641dceb9c2df90831c70dd44770e2675087",
+        "vendor/srgb_decode.0000.exr": "a43e02bd9830a1bf5fddc461fa140b8380ef2462b81a425eebe9c0ad64398e0b",
+        "vendor/srgb_encode.0000.exr": "f2752d494c69e247e1312d94742684030d5bfbf65b7b125f74490b09ab8a4f0e"
+      }
+    }
+  },
+  "cubes": {
+    "bypass_BWGFilm5_to_709Gamma24_clip_33": {
+      "file": "bypass_BWGFilm5_to_709Gamma24_clip_33.cube",
+      "bytes": 332591,
+      "sha256": "5cd9aad8b82708e239c92a1a542c81e5e68226b3d1079d50ebb0c0bcebe4f207",
+      "input": "BWG4/5 Film Gen5, normalized full, domain 0..1",
+      "output": "Rec.709 D65 Gamma 2.4 normalized full",
+      "display": "clip-linear-0-1-v1; no author DaVinci DRT",
+      "validation": {
+        "uniform_log_cube": {
+          "samples": 8192,
+          "max_abs": 0.8793565372599872,
+          "p99_abs": 0.14439363493853108,
+          "rms": 0.035287773106375306,
+          "max_normalized": 0.8793565372599872
+        },
+        "scene_709_linear_m8_to_p3_ev": {
+          "samples": 8192,
+          "max_abs": 0.30339109124530267,
+          "p99_abs": 0.04937473094805715,
+          "rms": 0.012298257499748888,
+          "max_normalized": 0.19130512046502215
+        }
+      },
+      "max_10bit_code_error": 899.5817376169668,
+      "target_max_error": 0.0009775171065493646,
+      "passes_one_10bit_code_gate": false,
+      "deployment_approved": false,
+      "status": "research interpolation fixture"
+    },
+    "bypass_BWGFilm5_to_709Gamma24_clip_65": {
+      "file": "bypass_BWGFilm5_to_709Gamma24_clip_65.cube",
+      "bytes": 2566163,
+      "sha256": "388f39169beed567cf1c42739bae15432f12ddbf6f7d953dac23b19bd4ab3b7e",
+      "input": "BWG4/5 Film Gen5, normalized full, domain 0..1",
+      "output": "Rec.709 D65 Gamma 2.4 normalized full",
+      "display": "clip-linear-0-1-v1; no author DaVinci DRT",
+      "validation": {
+        "uniform_log_cube": {
+          "samples": 8192,
+          "max_abs": 0.7587130745199744,
+          "p99_abs": 0.052828303002277505,
+          "rms": 0.024066339759866186,
+          "max_normalized": 0.7587130745199744
+        },
+        "scene_709_linear_m8_to_p3_ev": {
+          "samples": 8192,
+          "max_abs": 0.1877820327296738,
+          "p99_abs": 0.015900050712384116,
+          "rms": 0.003915701167467796,
+          "max_normalized": 0.12867774354212844
+        }
+      },
+      "max_10bit_code_error": 776.1634752339338,
+      "target_max_error": 0.0009775171065493646,
+      "passes_one_10bit_code_gate": false,
+      "deployment_approved": false,
+      "status": "research interpolation fixture"
+    },
+    "Q_BWGFilm5_to_709Gamma24_clip_33": {
+      "file": "Q_BWGFilm5_to_709Gamma24_clip_33.cube",
+      "bytes": 274270,
+      "sha256": "24204d1f94330d130bc2de6e5eb674217c8133af3b9eb277090cbcf08628501f",
+      "input": "BWG4/5 Film Gen5, normalized full, domain 0..1",
+      "output": "Rec.709 D65 Gamma 2.4 normalized full",
+      "display": "clip-linear-0-1-v1; no author DaVinci DRT",
+      "validation": {
+        "uniform_log_cube": {
+          "samples": 8192,
+          "max_abs": 0.8904050510375221,
+          "p99_abs": 0.24757639748584742,
+          "rms": 0.0513019935336429,
+          "max_normalized": 0.8904050510375221
+        },
+        "scene_709_linear_m8_to_p3_ev": {
+          "samples": 8192,
+          "max_abs": 0.6388565046596215,
+          "p99_abs": 0.1873879782224843,
+          "rms": 0.041086142248684863,
+          "max_normalized": 0.6388565046596215
+        }
+      },
+      "max_10bit_code_error": 910.8843672113851,
+      "target_max_error": 0.0009775171065493646,
+      "passes_one_10bit_code_gate": false,
+      "deployment_approved": false,
+      "status": "research interpolation fixture"
+    },
+    "Q_BWGFilm5_to_709Gamma24_clip_65": {
+      "file": "Q_BWGFilm5_to_709Gamma24_clip_65.cube",
+      "bytes": 2095344,
+      "sha256": "f2e519e09044891fa397749f841b00029dc7f446b1fafe1861e2767327a46956",
+      "input": "BWG4/5 Film Gen5, normalized full, domain 0..1",
+      "output": "Rec.709 D65 Gamma 2.4 normalized full",
+      "display": "clip-linear-0-1-v1; no author DaVinci DRT",
+      "validation": {
+        "uniform_log_cube": {
+          "samples": 8192,
+          "max_abs": 0.8102217858917271,
+          "p99_abs": 0.05349958550610365,
+          "rms": 0.031259691308118294,
+          "max_normalized": 0.8102217858917271
+        },
+        "scene_709_linear_m8_to_p3_ev": {
+          "samples": 8192,
+          "max_abs": 0.38115232308276187,
+          "p99_abs": 0.08684173103551394,
+          "rms": 0.018845615369693015,
+          "max_normalized": 0.38115232308276187
+        }
+      },
+      "max_10bit_code_error": 828.8568869672368,
+      "target_max_error": 0.0009775171065493646,
+      "passes_one_10bit_code_gate": false,
+      "deployment_approved": false,
+      "status": "research interpolation fixture"
+    }
+  },
+  "factorized_graph": {
+    "status": "offline algebra verified; no ISP mapping or 1D-table approximation",
+    "input": "BWG4/5 Film Gen5 code values; known source required",
+    "output": "Rec.709 D65 Gamma 2.4 normalized full",
+    "q_graph": [
+      {
+        "operation": "sRGB decode scalar curve"
+      },
+      {
+        "operation": "linear 3x3",
+        "matrix": [
+          [
+            1.862077236175537,
+            -0.6754248738288879,
+            -0.18620756268501282
+          ],
+          [
+            -0.2973127067089081,
+            1.6081607341766357,
+            -0.30971211194992065
+          ],
+          [
+            -0.12340445816516876,
+            -0.7684293985366821,
+            1.8792715072631836
+          ]
+        ]
+      },
+      {
+        "operation": "composed scalar curve",
+        "sequence": [
+          "sRGB encode",
+          "Film Gen5 decode"
+        ]
+      },
+      {
+        "operation": "linear 3x3",
+        "matrix": [
+          [
+            1.5684451404253836,
+            -0.5227164777439508,
+            -0.04572870833704068
+          ],
+          [
+            -0.0863608905060903,
+            1.3449761639749518,
+            -0.25861522743054893
+          ],
+          [
+            -0.05204255099461497,
+            -0.24914679072331947,
+            1.3011892909993064
+          ]
+        ]
+      },
+      {
+        "operation": "clip linear 0..1 then Gamma 2.4 encode"
+      }
+    ],
+    "equivalence_tests": {
+      "bypass": {
+        "uniform_log_cube": {
+          "samples": 8192,
+          "max_abs": 1.2878587085651816e-14,
+          "p99_abs": 1.249000902703301e-16,
+          "rms": 1.805528996571801e-16,
+          "max_normalized": 1.0526725483070792e-14
+        },
+        "scene_709_linear_m8_to_p3_ev": {
+          "samples": 8192,
+          "max_abs": 7.771561172376096e-16,
+          "p99_abs": 2.220446049250313e-16,
+          "rms": 5.152814594061282e-17,
+          "max_normalized": 5.297945108723783e-16
+        }
+      },
+      "Q": {
+        "uniform_log_cube": {
+          "samples": 8192,
+          "max_abs": 9.534040223968532e-15,
+          "p99_abs": 1.1102230246251565e-16,
+          "rms": 1.1296537729903358e-16,
+          "max_normalized": 8.543002368451933e-15
+        },
+        "scene_709_linear_m8_to_p3_ev": {
+          "samples": 8192,
+          "max_abs": 5.3013149425851225e-15,
+          "p99_abs": 2.220446049250313e-16,
+          "rms": 7.288220111906002e-17,
+          "max_normalized": 4.924724111392489e-15
+        }
+      }
+    },
+    "on_camera_ready": false
+  },
+  "exposure": {
+    "bypass": {
+      "ev": [
+        -2,
+        0,
+        2
+      ],
+      "p3_linear_samples": [
+        [
+          0.22,
+          0.18,
+          0.12
+        ],
+        [
+          0.4,
+          0.24,
+          0.18
+        ],
+        [
+          0.12,
+          0.3,
+          0.2
+        ],
+        [
+          0.1,
+          0.14,
+          0.5
+        ],
+        [
+          0.4,
+          0.08,
+          0.04
+        ],
+        [
+          0.08,
+          0.4,
+          0.06
+        ],
+        [
+          0.05,
+          0.08,
+          0.4
+        ],
+        [
+          0.18,
+          0.18,
+          0.18
+        ]
+      ],
+      "xy": [
+        [
+          [
+            0.3601261825667623,
+            0.37115889633968224
+          ],
+          [
+            0.38534742365015495,
+            0.3553214198629288
+          ],
+          [
+            0.2713678937465847,
+            0.38532286167338264
+          ],
+          [
+            0.2115330279057936,
+            0.18276087370279032
+          ],
+          [
+            0.5349088596118314,
+            0.3575010271264098
+          ],
+          [
+            0.2886378037041634,
+            0.5577786752298147
+          ],
+          [
+            0.19319875558625607,
+            0.15284738621220637
+          ],
+          [
+            0.3127000289622058,
+            0.32900002974225795
+          ]
+        ],
+        [
+          [
+            0.36012618256676243,
+            0.37115889633968224
+          ],
+          [
+            0.3853474236501549,
+            0.35532141986292887
+          ],
+          [
+            0.27136789374658465,
+            0.38532286167338253
+          ],
+          [
+            0.21153302790579365,
+            0.18276087370279032
+          ],
+          [
+            0.5349088596118313,
+            0.35750102712640974
+          ],
+          [
+            0.28863780370416336,
+            0.5577786752298148
+          ],
+          [
+            0.19319875558625602,
+            0.1528473862122063
+          ],
+          [
+            0.3127000289622057,
+            0.32900002974225795
+          ]
+        ],
+        [
+          [
+            0.3601261825667623,
+            0.37115889633968224
+          ],
+          [
+            0.38534742365015495,
+            0.3553214198629288
+          ],
+          [
+            0.2713678937465847,
+            0.38532286167338264
+          ],
+          [
+            0.21153302790579356,
+            0.18276087370279023
+          ],
+          [
+            0.5349088596118313,
+            0.35750102712640974
+          ],
+          [
+            0.28863780370416336,
+            0.5577786752298147
+          ],
+          [
+            0.19319875558625604,
+            0.1528473862122063
+          ],
+          [
+            0.3127000289622057,
+            0.3290000297422581
+          ]
+        ]
+      ],
+      "delta_xy_from_ev0": [
+        [
+          1.1102230246251565e-16,
+          7.850462293418876e-17,
+          1.2412670766236366e-16,
+          5.551115123125783e-17,
+          1.2412670766236366e-16,
+          1.2412670766236366e-16,
+          7.850462293418876e-17,
+          5.551115123125783e-17
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          1.1102230246251565e-16,
+          7.850462293418876e-17,
+          1.2412670766236366e-16,
+          1.1775693440128312e-16,
+          0.0,
+          1.1102230246251565e-16,
+          2.7755575615628914e-17,
+          1.6653345369377348e-16
+        ]
+      ],
+      "max_delta_xy": 1.6653345369377348e-16
+    },
+    "Q": {
+      "ev": [
+        -2,
+        0,
+        2
+      ],
+      "p3_linear_samples": [
+        [
+          0.22,
+          0.18,
+          0.12
+        ],
+        [
+          0.4,
+          0.24,
+          0.18
+        ],
+        [
+          0.12,
+          0.3,
+          0.2
+        ],
+        [
+          0.1,
+          0.14,
+          0.5
+        ],
+        [
+          0.4,
+          0.08,
+          0.04
+        ],
+        [
+          0.08,
+          0.4,
+          0.06
+        ],
+        [
+          0.05,
+          0.08,
+          0.4
+        ],
+        [
+          0.18,
+          0.18,
+          0.18
+        ]
+      ],
+      "xy": [
+        [
+          [
+            0.4116406969130045,
+            0.41382476871763463
+          ],
+          [
+            0.46328374329854183,
+            0.3696606736931761
+          ],
+          [
+            0.2363810625786974,
+            0.48985896093739567
+          ],
+          [
+            0.1472147401430925,
+            0.06150127008531512
+          ],
+          [
+            0.6714714249213722,
+            0.34041049439535115
+          ],
+          [
+            0.2538970959018359,
+            0.8501466992246404
+          ],
+          [
+            0.12839539426703486,
+            0.024228502529394434
+          ],
+          [
+            0.31462224673270667,
+            0.3329952813570165
+          ]
+        ],
+        [
+          [
+            0.41132692071041105,
+            0.4123623475193024
+          ],
+          [
+            0.4645716841208473,
+            0.3692377590255556
+          ],
+          [
+            0.2398264016116293,
+            0.4902411755646368
+          ],
+          [
+            0.14846768040874003,
+            0.06080118840371153
+          ],
+          [
+            0.6664657360814719,
+            0.33811355161012085
+          ],
+          [
+            0.25241640794232795,
+            0.7985512236766602
+          ],
+          [
+            0.13113825011370275,
+            0.024496498761924033
+          ],
+          [
+            0.3150754155969465,
+            0.3339384471251087
+          ]
+        ],
+        [
+          [
+            0.41153343420124644,
+            0.4122017106628391
+          ],
+          [
+            0.46569195347053816,
+            0.36944113566178727
+          ],
+          [
+            0.24154138916421278,
+            0.49145762065998166
+          ],
+          [
+            0.14892209337159734,
+            0.06035048822843594
+          ],
+          [
+            0.6660415360486254,
+            0.33708197843237425
+          ],
+          [
+            0.2528282809428167,
+            0.7872948332776971
+          ],
+          [
+            0.13200879891215264,
+            0.024087047960306942
+          ],
+          [
+            0.3156471389834778,
+            0.33512871438589803
+          ]
+        ]
+      ],
+      "delta_xy_from_ev0": [
+        [
+          0.001495704271119606,
+          0.0013555989000620745,
+          0.003466475021274666,
+          0.0014352608369902103,
+          0.005507528204242326,
+          0.05161671758118343,
+          0.002755917302142844,
+          0.001046386011764935
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0002616333723962295,
+          0.0011385804635692808,
+          0.0021025986244418656,
+          0.0006400170222784755,
+          0.0011153873268569924,
+          0.011263923125731995,
+          0.0009620317923163571,
+          0.001320455899609597
+        ]
+      ],
+      "max_delta_xy": 0.05161671758118343
+    }
+  },
+  "cube_production_gate_passed": false,
+  "tests": {
+    "matrix_normalized_error_limit": 3e-06,
+    "chain_normalized_error_limit": 3e-06,
+    "chain_max_abs_error_limit": 1e-06,
+    "node02_normalized_error_limit": 1e-05,
+    "monitoring_max_error_limit": 0.0004887585532746823,
+    "cube_max_error_limit": 0.0009775171065493646
+  },
+  "code_sha256": {
+    "fpSup/lut/ole2026.py": "2bdce87592a217f903c5c82c8f6ae211f2778b1c86c8e9194bf31ba4e07322f1",
+    "projects/lut-sup/probes/validate_ole2026_offline.py": "e8547f534c292d34967a891e5450ae3c35ae5f0acc0557e8c253ff6d55c2ea58",
+    "projects/lut-sup/probes/resolve_cst_reference.py": "cfc6315cc2149c95c4fbea0f25e87c4b96bff26447c701217c1b990b1c22aad8",
+    "projects/lut-sup/probes/ole2026_resolve_suite.py": "39cc21f389ebdf415d462fa6f3fedba37c9961044fd586fa018a4ee606b02245"
+  },
+  "comparison_png_sha256": "7c63f3bd992e795c727c386610778a2924dc377a7b10c61d1a0742855324f950"
+}

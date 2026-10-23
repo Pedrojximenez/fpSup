@@ -1,0 +1,197 @@
+{
+  "verdict": "M12240 29.97p and 59.94p start/stop pass with RAW fallback; 119.88p controls unresponsive and user powered off",
+  "artifact": {
+    "candidate": "candidate/10LOSS.BIN",
+    "sha256": "f1952f9503a96d7a9eee47bab8881599d3aeedb0ac1cb8a51b2e3d930ac1ee6d",
+    "bytes": 78176,
+    "slot_capacity": 1016,
+    "resident_bytes": 5971968,
+    "resident_growth_bytes": 1425408,
+    "previous_code_identity_verified_except_saved_settings": true,
+    "settings_offset": 3260,
+    "original_failure_reproduced": "original-reproduction.json",
+    "exact_arm_tests": 13,
+    "formula_tests": 5,
+    "formula_combinations": 360,
+    "stopfx_integration_tests": 1,
+    "stopfx_load_orders": 2,
+    "default_loader_tests": 2,
+    "default_build_sha256": "b4b59934bb8f0c66c6f4a53b4bbc36d569d2da17c09c69538b95cb3ae9643e62",
+    "default_merge_unchanged": true,
+    "production_changes": [
+      "native/slot_capacity.h",
+      "native/slot_patches.h",
+      "slot_patches.py",
+      "build_v3_lossless.py"
+    ],
+    "native_byte_trigger_bytes": 67108864,
+    "stopfx_changed": false
+  },
+  "deployment": {
+    "time": 1791772282.8724082,
+    "full_readback_verified": true,
+    "bytes": 78176,
+    "sha256": "f1952f9503a96d7a9eee47bab8881599d3aeedb0ac1cb8a51b2e3d930ac1ee6d",
+    "write_executions": 1,
+    "write_ack": "timeout; native status2/open1/write1, full card bytes match",
+    "boot": 11939454,
+    "original_failure": "deployment.json",
+    "parameter_evidence": "write-timeout-state.json",
+    "only_replaced": "\\fpSup\\10LOSS.BIN"
+  },
+  "low_fps": {
+    "source": "m12240-30p-on.json",
+    "clip": "A001_133",
+    "raw_geometry": [
+      1008,
+      672
+    ],
+    "fps": [
+      30000,
+      1001
+    ],
+    "bits": 12,
+    "requested": 219,
+    "finished": 219,
+    "raw_written": 219,
+    "compressed_written": 0,
+    "discarded": 0,
+    "positions": 832,
+    "free_after": 832,
+    "cleaned_up": true,
+    "native_bulk_bytes": 67108864,
+    "extra_count_flushes": 0,
+    "extra_pressure_flushes": 0,
+    "completed_at": 1791772867.894709
+  },
+  "high_fps": {
+    "source": "m12240-240p-on.json",
+    "selected_fps": "239.76p in native UI; REC capture facts not yet read",
+    "intended_window_seconds": 2,
+    "actual_duration_seconds": null,
+    "remote_stop_pressed_once": true,
+    "recording_after_10_second_stop_wait": true,
+    "last_read": {
+      "time": 1791773308.7981598,
+      "command": "status get is_recording",
+      "reply": "is_recording -> 1\n\n"
+    },
+    "manual_stop_requested": false,
+    "post_take_recovery": "previous live statistics lost at new boot; standby verified before resumed trials",
+    "no_further_record_toggle": true
+  },
+  "dng_samples": "not retrieved in this run; waiting for confirmed stopped/idle state",
+  "merge_promoted": false,
+  "resumed_hardware_tests": {
+    "boot": 12689955,
+    "running_code_identity": "resume-running-code.json",
+    "new_boot_at_start": true,
+    "old_239p_statistics_unavailable_after_reboot": true,
+    "successful_takes": [
+      {
+        "source": "resume-m12240-30p-on.json",
+        "clip": "A001_135",
+        "fps": [
+          30000,
+          1001
+        ],
+        "arrivals": 169,
+        "requested": 169,
+        "finished": 169,
+        "compressed": 0,
+        "raw": 169,
+        "discarded": 0,
+        "positions": 832,
+        "free_after": 832,
+        "registry_occupied": 0,
+        "registry_count": 0,
+        "registry_lock": 0,
+        "cookies_pending": [
+          0,
+          0
+        ],
+        "writer_idle": {
+          "xmp_file_pointer": 0,
+          "movie_writing": 0
+        },
+        "codec_stalls": 0,
+        "native_bulk_bytes": 67108864,
+        "extra_count_flushes": 0,
+        "extra_pressure_flushes": 0,
+        "completion_budget_us": 264157
+      },
+      {
+        "source": "resume-m12240-60p-on.json",
+        "clip": "A001_136",
+        "fps": [
+          60000,
+          1001
+        ],
+        "arrivals": 279,
+        "requested": 279,
+        "finished": 279,
+        "compressed": 0,
+        "raw": 279,
+        "discarded": 0,
+        "positions": 844,
+        "free_after": 844,
+        "registry_occupied": 0,
+        "registry_count": 0,
+        "registry_lock": 0,
+        "cookies_pending": [
+          0,
+          0
+        ],
+        "writer_idle": {
+          "xmp_file_pointer": 0,
+          "movie_writing": 0
+        },
+        "codec_stalls": 0,
+        "native_bulk_bytes": 67108864,
+        "extra_count_flushes": 0,
+        "extra_pressure_flushes": 0,
+        "completion_budget_us": 469659
+      }
+    ],
+    "samples": {
+      "source": "resume-m12240-30p-on-frames/validation.json",
+      "clip": "A001_135",
+      "numbers": [
+        1,
+        169
+      ],
+      "decoded": true,
+      "compression": 1,
+      "sample_only": true
+    },
+    "119p": {
+      "source": "resume-m12240-120p-on.json",
+      "native_fps_row": 8,
+      "native_carrier": 7,
+      "actual_rec_facts": null,
+      "planned_window_seconds": 4,
+      "actual_duration_seconds": null,
+      "start_key_pair_acked": true,
+      "end_window_status_timeout": true,
+      "followup_timeout": "resume-120p-recovery.json",
+      "physical_stop_unresponsive": true,
+      "last_successful_query": "resume-120p-after-physical-stop.json",
+      "last_recording": 1,
+      "writer_lamp_user_report": "lit or flashing",
+      "remote_stop_sent": false,
+      "remote_stop_guard_failed": "resume-120p-single-remote-stop.json",
+      "user_manually_powered_off": true,
+      "normal_stop_verified": false,
+      "allocation_release_verified": false,
+      "file_completion_verified": false
+    },
+    "further_240p_trial": false,
+    "camera_end_state": "after user power cycle, standby verified in boot12760957; one 29.97p memory check completed; RAW used0, writer idle; no further high-FPS trial",
+    "stable_release": false,
+    "merge_promoted": false
+  },
+  "memory_audit": "memory-audit.json",
+  "memory_audit_report": "MEMORY_AUDIT.md",
+  "memory_capacity_guaranteed": false,
+  "119p_memory_exhaustion_proven": false
+}

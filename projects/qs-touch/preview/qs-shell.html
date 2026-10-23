@@ -1,0 +1,194 @@
+<div id="fp-touch-qs" class="viz-dotted-background">
+  <style>
+    #fp-touch-qs { padding: 12px 0; }
+    #fp-touch-qs .camera {
+      /* Native fp reference: dark translucent cells, white labels, cyan cursor. */
+      --fp-bg: #25292b; --fp-panel: #17191a; --fp-tile: #25292b;
+      --fp-text: #f4f4f4; --fp-sub: #a9abad; --fp-line: #777b7c;
+      --fp-selected: #4cbbd1; --fp-selected-text: #111719;
+      --fp-danger: #ff8585; --fp-danger-bg: #48262b;
+      color-scheme: dark; container-type: inline-size; max-width: 720px; margin: auto;
+      color: var(--fp-text); font-family: Arial, "Noto Sans TC", sans-serif;
+    }
+    #fp-touch-qs .screen { position: relative; aspect-ratio: 3 / 2; overflow: hidden;
+      background: var(--fp-bg); touch-action: none; user-select: none; -webkit-user-select: none; }
+    #fp-touch-qs button { font: inherit; color: inherit; border: 0; background: none; }
+    #fp-touch-qs button:focus-visible { outline: 2px solid var(--fp-selected); outline-offset: -3px; }
+    #fp-touch-qs button:disabled { opacity: .4; }
+    #fp-touch-qs .monitor { position: absolute; inset: 0; pointer-events: none; }
+    #fp-touch-qs .live-scene { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+    #fp-touch-qs .live-scene img { position: absolute; width: 160%; height: 160%; left: -30%; top: -30%; object-fit: cover; }
+    #fp-touch-qs .screen.qs-open .monitor { visibility: hidden; }
+    #fp-touch-qs .monitor-top, #fp-touch-qs .monitor-bottom { position: absolute; left: 3%; right: 3%;
+      display: flex; justify-content: space-between; gap: 8px; font-size: clamp(11px,2.3cqw,17px); }
+    #fp-touch-qs .monitor-top { top: 8%; } #fp-touch-qs .monitor-bottom { bottom: 4%; }
+    #fp-touch-qs .focus { position: absolute; left: 43%; top: 40%; width: 14%; height: 20%; border: 1px solid var(--fp-sub); }
+    #fp-touch-qs .edge { position: absolute; inset: 0 0 auto; height: 7%; width: 100%; z-index: 1; }
+    #fp-touch-qs .edge::after, #fp-touch-qs .handle::after { content: ''; position: absolute;
+      width: 12%; height: 3px; border-radius: 3px; left: 44%; background: var(--fp-sub); }
+    #fp-touch-qs .edge::after { top: 8px; }
+    #fp-touch-qs .panel { position: absolute; inset: 0; background: transparent; z-index: 2;
+      transform: translate3d(0,-100%,0); visibility: hidden; }
+    #fp-touch-qs .backdrop { position: absolute; inset: 0; pointer-events: none; }
+    #fp-touch-qs .qs-content { position: absolute; inset: 0; }
+    #fp-touch-qs .panel.settle { transition: transform 100ms cubic-bezier(.2,.75,.2,1); }
+    #fp-touch-qs .header { position: absolute; inset: 0 2% auto; height: 16.1%; display: flex;
+      align-items: center; justify-content: space-between; gap: 3px; }
+    #fp-touch-qs .title { margin: 0; font-size: clamp(13px,2.8cqw,22px); font-weight: 400; }
+    #fp-touch-qs .header-actions, #fp-touch-qs .pager { display: flex; align-items: center; gap: 2px; }
+    #fp-touch-qs .action { min-height: 40px; min-width: 40px; padding: 0 8px; font-size: clamp(11px,2.1cqw,16px); }
+    #fp-touch-qs .action.primary { color: var(--fp-selected); }
+    #fp-touch-qs .action[aria-pressed="true"] { color: var(--fp-selected); }
+    #fp-touch-qs .background-button { white-space: nowrap; }
+    #fp-touch-qs .page-label { color: var(--fp-sub); font-size: clamp(11px,2cqw,15px); white-space: nowrap; }
+    #fp-touch-qs .grid-viewport { position: absolute; inset: 16.1% 0 21.7%; overflow-x: auto; overflow-y: hidden;
+      overscroll-behavior-x: contain; overflow-anchor: none; scroll-snap-type: none; scrollbar-width: none; }
+    #fp-touch-qs .grid-viewport::-webkit-scrollbar { display: none; }
+    #fp-touch-qs .grid { position: relative; width: 100%; height: 100%; display: flex; background: transparent; }
+    #fp-touch-qs .qs-page { position: relative; flex: 0 0 100%; min-width: 0; height: 100%; scroll-snap-align: start; scroll-snap-stop: always; }
+    #fp-touch-qs .screen.qs-edit .grid-viewport { overflow-x: hidden; scroll-snap-type: none; }
+    #fp-touch-qs .row-divider { position: absolute; top: 47.2%; left: 0; right: 0;
+      height: 2px; background: var(--fp-line); pointer-events: none; }
+    #fp-touch-qs .tile { position: absolute; left: 0; top: 0; width: 25%; height: 50%; border-radius: 0;
+      padding: 8px 5px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; gap: 7px; overflow: hidden; }
+    #fp-touch-qs .screen.qs-edit .tile { transition: transform 90ms ease; }
+    #fp-touch-qs .tile.selected, #fp-touch-qs .tile.pressed { box-shadow: inset 0 0 0 3px var(--fp-selected); background: transparent; }
+    #fp-touch-qs .tile.selected::before { content: '‹'; position: absolute; left: 5px; top: 53%; color: var(--fp-selected); font-size: 21px; }
+    #fp-touch-qs .tile.selected::after { content: '›'; position: absolute; right: 5px; top: 53%; color: var(--fp-selected); font-size: 21px; }
+    #fp-touch-qs .tile.dragging { opacity: .2; }
+    #fp-touch-qs .tile.editing { box-shadow: inset 0 0 0 1px var(--fp-line); }
+    #fp-touch-qs .tile.editing::before { content: '⠿'; position: absolute; top: 4px; right: 5px; left: auto; color: var(--fp-sub); font-size: 15px; }
+    #fp-touch-qs .tile.editing::after { content: none; }
+    #fp-touch-qs .label { font-size: clamp(11px,2.8cqw,22px); white-space: nowrap; }
+    #fp-touch-qs .value { font-size: clamp(18px,4.8cqw,37px); font-weight: 500; line-height: 1.05; white-space: nowrap; }
+    #fp-touch-qs .subvalue { color: var(--fp-sub); font-size: clamp(11px,2.5cqw,19px); min-height: 1em; }
+    #fp-touch-qs .label, #fp-touch-qs .value, #fp-touch-qs .subvalue, #fp-touch-qs .title,
+    #fp-touch-qs .page-label, #fp-touch-qs .action, #fp-touch-qs .inline-options button,
+    #fp-touch-qs .background-controls { text-shadow: 1px 1px 0 #000, -1px -1px 0 #000; }
+    #fp-touch-qs .value.changed { color: var(--fp-selected); }
+    #fp-touch-qs .tile.recording-value .value { font-size: clamp(15px,3.3cqw,26px); white-space: normal; }
+    #fp-touch-qs .dimension-grid { position: absolute; inset: 16.1% 0 21.7%; display: grid;
+      grid-template-columns: repeat(4,minmax(0,1fr)); grid-template-rows: 50%; }
+    #fp-touch-qs .dimension-grid .tile { position: relative; width: 100%; height: 100%; }
+    #fp-touch-qs .dimension-grid .value { font-size: clamp(18px,4.2cqw,32px); }
+    #fp-touch-qs .tile.crop-custom .value { white-space: pre-line; font-size: clamp(13px,3.1cqw,24px); }
+    #fp-touch-qs .adjustbar { position: absolute; inset: 78.3% 0 3.5%; background: transparent;
+      border-top: 2px solid var(--fp-line); display: flex; align-items: center; justify-content: center; gap: 2px; padding: 0 2%; }
+    #fp-touch-qs .adjustbar .step { flex: 0 0 44px; min-height: 44px; color: var(--fp-selected); font-size: 24px; }
+    #fp-touch-qs .more-options { flex: 0 0 auto; min-height: 44px; padding: 0 8px; color: var(--fp-selected);
+      font-size: clamp(11px,2cqw,15px); }
+    #fp-touch-qs .dimension-controls { flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px; }
+    #fp-touch-qs .dimension-controls input[type="number"] { width: 6em; min-width: 0; height: 44px;
+      color: var(--fp-text); background: var(--fp-panel); border: 1px solid var(--fp-line); padding: 4px; font: inherit; font-size: 16px; }
+    #fp-touch-qs .dimension-controls input[type="range"] { flex: 1; min-width: 0; height: 44px; accent-color: var(--fp-selected); }
+    #fp-touch-qs .inline-options { flex: 1; min-width: 0; position: relative; overflow: hidden; touch-action: none; }
+    #fp-touch-qs .option-track { width: 100%; display: flex; transform: translate3d(-33.333333%,0,0); }
+    #fp-touch-qs .inline-options::after { content: ''; position: absolute; top: 0; bottom: 0; left: 33.333333%; width: 33.333333%;
+      box-shadow: inset 0 0 0 2px var(--fp-selected); pointer-events: none; }
+    #fp-touch-qs .inline-options button { box-sizing: border-box; flex: 0 0 33.333333%; min-width: 0; min-height: 44px; padding: 4px;
+      font-size: clamp(11px,2.7cqw,21px); overflow-wrap: anywhere; }
+    #fp-touch-qs .inline-options button[aria-pressed="true"] { color: var(--fp-selected); }
+    #fp-touch-qs .inline-options button.option-empty { visibility: hidden; }
+    #fp-touch-qs .edit-caption { color: var(--fp-sub); font-size: clamp(11px,2.2cqw,16px); }
+    #fp-touch-qs .trash-drop { display: flex; align-items: center; justify-content: center; gap: 8px;
+      min-width: 180px; min-height: 52px; padding: 6px 18px; border: 1px solid var(--fp-line);
+      color: var(--fp-text); background: var(--fp-panel); font-size: clamp(13px,2.5cqw,19px); }
+    #fp-touch-qs .trash-drop.is-over { color: var(--fp-danger); border-color: var(--fp-danger); background: var(--fp-danger-bg); }
+    #fp-touch-qs .ghost.trash-hover { box-shadow: inset 0 0 0 2px var(--fp-danger); opacity: .55; }
+    #fp-touch-qs .background-controls { display: flex; align-items: center; gap: 10px; width: 100%; font-size: clamp(11px,2.2cqw,16px); }
+    #fp-touch-qs .background-controls input { min-width: 0; flex: 1; height: 44px; accent-color: var(--fp-selected); }
+    #fp-touch-qs .background-controls output { min-width: 3em; font-variant-numeric: tabular-nums; }
+    #fp-touch-qs .background-controls .action { flex-shrink: 0; }
+    #fp-touch-qs .handle { position: absolute; bottom: 0; left: 25%; width: 50%; height: 3.5%; min-height: 8px; }
+    #fp-touch-qs .handle::after { bottom: 5px; width: 24%; left: 38%; }
+    #fp-touch-qs .catalog-viewport { position: absolute; inset: 16.1% 2% 8%; overflow: hidden; z-index: 4; }
+    #fp-touch-qs .catalog { position: absolute; inset: 0; background: transparent; }
+    #fp-touch-qs .catalog-page { position: absolute; inset: 0; display: grid;
+      grid-template-columns: repeat(3,minmax(0,1fr)); align-content: start; gap: 5px; }
+    #fp-touch-qs .catalog button { min-height: 44px; padding: 7px 3px; background: var(--fp-tile); font-size: clamp(11px,2.2cqw,16px); }
+    #fp-touch-qs .ghost { position: absolute; left: 0; top: 0; width: 25%; height: 31%; background: var(--fp-panel); z-index: 8;
+      box-shadow: inset 0 0 0 2px var(--fp-selected);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; pointer-events: none; }
+    #fp-touch-qs .hardware { display: flex; justify-content: flex-end; padding-top: 10px; }
+    #fp-touch-qs .hardware button { background: var(--fp-tile); min-width: 62px; min-height: 44px; font-size: 14px; }
+    #fp-touch-qs [hidden] { display: none !important; }
+    #fp-touch-qs .accessible { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+    @container (max-width: 440px) {
+      #fp-touch-qs .action { min-height: 28px; min-width: 28px; padding: 0 4px; }
+      #fp-touch-qs .tile { padding: 4px 2px; gap: 4px; }
+      #fp-touch-qs .subvalue { display: none; }
+      #fp-touch-qs .tile.selected::before, #fp-touch-qs .tile.selected::after { display: none; }
+      #fp-touch-qs .adjustbar .step { flex-basis: 32px; min-height: 32px; font-size: 18px; }
+      #fp-touch-qs .inline-options button { min-height: 32px; padding: 3px 1px; }
+      #fp-touch-qs .more-options { min-height: 32px; padding: 0 4px; }
+      #fp-touch-qs .trash-drop { min-width: 144px; min-height: 32px; padding: 4px 12px; }
+      #fp-touch-qs .screen.qs-dimensions .adjustbar { inset: auto 0 8px; height: 48px; }
+    }
+    @media (prefers-reduced-motion: reduce) { #fp-touch-qs .panel.settle, #fp-touch-qs .screen.qs-edit .tile { transition: none; } }
+  </style>
+  <div class="camera">
+    <div class="screen" role="group" aria-label="SIGMA fp 原廠風格觸控 QS 原型">
+      <div class="live-scene" aria-hidden="true"><img src="__QS_SCENE__" alt="" decoding="async"></div>
+      <div class="monitor" aria-hidden="true">
+        <div class="monitor-top"><span>CINE</span><span>STBY · 3K · 29.97p</span></div>
+        <div class="focus"></div>
+        <div class="monitor-bottom"><span>ISO 800</span><span>180°</span><span>F2.8</span><span>5600 K</span></div>
+      </div>
+      <button class="edge cursor-interaction" type="button" aria-label="從頂端下拉開啟 QS"></button>
+      <div class="panel" inert>
+        <div class="backdrop" aria-hidden="true"></div>
+        <div class="qs-content">
+        <div class="header">
+          <h3 class="title">QS</h3>
+          <div class="pager">
+            <button class="action cursor-interaction" data-action="previous" type="button" aria-label="上一頁">‹</button>
+            <span class="page-label">1 / 2</span>
+            <button class="action cursor-interaction" data-action="next" type="button" aria-label="下一頁">›</button>
+          </div>
+          <div class="header-actions">
+            <button class="action background-button cursor-interaction" data-action="background" type="button" aria-pressed="false" aria-label="調整 QS 背景">背景 47%</button>
+            <button class="action cursor-interaction" data-action="add" type="button" aria-label="添加 QS 項目">＋</button>
+            <button class="action cursor-interaction" data-action="back" hidden type="button">返回</button>
+          </div>
+        </div>
+        <div class="grid-viewport" role="group" aria-label="QS 項目，可左右滑動翻頁、上滑收起"><div class="grid"></div></div>
+        <div class="dimension-grid" role="group" aria-label="QS 自訂尺寸，可上滑返回 QS" hidden>
+          <button class="tile cursor-interaction" data-action="dimension-preset" type="button"><span class="label">DC</span><span class="value"></span><span class="subvalue"></span></button>
+          <button class="tile cursor-interaction" data-action="dimension-width" type="button"><span class="label">裁切寬度</span><span class="value"></span><span class="subvalue">px</span></button>
+          <button class="tile cursor-interaction" data-action="dimension-height" type="button"><span class="label">裁切高度</span><span class="value"></span><span class="subvalue">px</span></button>
+          <button class="tile cursor-interaction" data-action="dimension-ratio" type="button"><span class="label">比例</span><span class="value"></span><span class="subvalue"></span></button>
+        </div>
+        <div class="row-divider" aria-hidden="true"></div>
+        <div class="adjustbar" role="group" aria-label="同頁調整列">
+          <button class="step cursor-interaction" data-action="decrease" type="button" aria-label="上一個數值">‹</button>
+          <div class="inline-options cursor-interaction" role="group" aria-label="左右拖曳調整數值"><div class="option-track"></div></div>
+          <div class="dimension-controls" hidden>
+            <input type="number" min="1" max="16384" step="1" aria-label="自訂寬度像素">
+            <input class="cursor-interaction" type="range" min="1" max="16384" step="1" aria-label="拖曳調整自訂寬度">
+          </div>
+          <button class="step cursor-interaction" data-action="increase" type="button" aria-label="下一個數值">›</button>
+          <button class="more-options cursor-interaction" data-action="more-options" type="button" hidden>更多選項</button>
+          <span class="edit-caption" hidden>拖曳排序　放開即儲存</span>
+          <button class="trash-drop cursor-interaction" data-action="trash" type="button" hidden>
+            <i data-lucide="trash-2" aria-hidden="true"></i><span>垃圾桶</span>
+          </button>
+          <div class="background-controls" hidden>
+            <label for="fp-qs-opacity">背景</label>
+            <input id="fp-qs-opacity" class="cursor-interaction" type="range" min="0" max="15" step="1" value="7" aria-label="QS 背景不透明度">
+            <output for="fp-qs-opacity">47%</output>
+            <button class="action cursor-interaction" data-action="background-off" type="button">關閉</button>
+          </div>
+        </div>
+        <button class="handle cursor-interaction" data-action="close" type="button" aria-label="上推收起 QS"></button>
+        <div class="catalog-viewport" hidden><div class="catalog" role="group" aria-label="添加 QS 項目"></div></div>
+        </div>
+      </div>
+      <div class="ghost" hidden aria-hidden="true"></div>
+    </div>
+    <div class="hardware"><button type="button" class="cursor-interaction" data-action="qs" aria-label="QS 實體鍵：開啟或收起面板">QS</button></div>
+    <div class="accessible" aria-live="polite"></div>
+  </div>
+  <!-- QS_CONTROLLER -->
+</div>

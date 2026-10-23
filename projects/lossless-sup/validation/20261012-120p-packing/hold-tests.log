@@ -1,0 +1,15 @@
+....................................................................................................................................................................
+======================================================================
+FAIL: test_every_mutation_is_caught (native.test_frame_hold.FlushMutationTests) (mutation='does not finish the DNG before publication')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_frame_hold.py", line 924, in test_every_mutation_is_caught
+    lib = build(tmp, seam, f'f{index}.dylib')
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_frame_hold.py", line 53, in build
+    raise AssertionError('mutation seam not found once: ' + old[:60])
+AssertionError: mutation seam not found once:     wr32(read, write, file + 4, plan.ifd_at);
+
+----------------------------------------------------------------------
+Ran 165 tests in 56.031s
+
+FAILED (failures=1)

@@ -3,7 +3,62 @@
 2026-10-09。需求：用戶可選 `.cube`，相機 Live View 預覽，將 LUT 和設定存入 CinemaDNG；
 希望擴充 MOV、STILL DNG 與 JPG。**目前有離線基準與原生色彩路徑實測，機內 LUT 產品尚未完成。**
 
+2026-10-21 Ole2026 離線工作：已實作並用 Resolve Studio 21.0.4.5 實際 CST 浮點輸出核對
+三節點子鏈，2,048 筆樣本最大 code 誤差 5.84e-7。另完成固定 Rec.709／Gamma 2.4 監看與
+曲線／矩陣拆分；直接合成的 33³／65³ 硬裁切 cube 未過精度門檻，僅保留研究檔，沒有裝入卡片。
+這不是 Camera RAW、作者最終 DRT 或 Pyxis 色準驗證；沒有相機 I/O，也沒有變更既有 sup。
+[實作與重跑方式](../../fpSup/lut/README.md#ole2026-離線-cst-驗證2026-10-21)、
+[最終數值報告](validation/20261021-ole2026-offline-01/final/report.json)、
+[合成樣本比較圖](validation/20261021-ole2026-offline-01/final/comparison.png)。
+
 ## 使用者範圍
+
+2026-10-21 使用者確認本對話負責 **color 容器**；RAW View 未來可能納入。
+LUT 與後續 RAW View 若觸及相同色彩／UI 位置，由 color 統一協調；目前沒有搬移或改動 RAW View。
+[容器責任與整合邊界](../../fpSup/projects/color-sup.md)。Loader v4 只管理 fpSup 首頁；
+私有頁面改用 `fpsup-ui`，不依賴已廢棄的 uishare 執行層。
+
+使用者試機後要求首頁不展開全部設定：目前只登記一個 `Color >` 入口，管理清單、選擇與逐份設定放私有頁面，
+MENU 逐層返回 fpSup。機內不新增說明頁；[各項設定說明](../../fpSup/lut/README.md#color-設定說明)整理在文件與對話。
+私有頁面需要 loader v6 的 `file_read`／`borrow`，本版 LUT 的最低服務需求改為 v6。
+
+現行共用來源為 [`fpSup/loader-v4`](../../fpSup/loader-v4/README.md) 與
+[`fpSup/fpsup-ui`](../../fpSup/fpsup-ui/README.md)；LUT 建置與測試使用新路徑，舊成品與驗證快照保持原樣。
+[搬移後驗證](validation/20261021-layout-update-01/report.json)：24 項原生／UI 測試通過，所有 AutoRun／BIN／LUT 資料與已驗證開發包相同。
+
+先前通過離線驗證的單份 UI 開發包為
+[`20261021-color-single-entry-01`](cards/20261021-color-single-entry-01/)，
+其[來源與實際成品驗證](validation/20261021-color-single-entry-01/results/report.json)包含
+88 項測試、7 個可偵測故障副本；首頁只有 Color 入口，八項設定在私有子頁。
+新版尚未再寫卡或實機驗收，Live View 後端仍未接通。
+先前 [`20261021-color-v4-private-ui-04`](cards/20261021-color-v4-private-ui-04/) 與
+[86 項驗證](validation/20261021-color-v4-private-ui-04/migration.json)保留作為改版前基準。
+
+2026-10-22 依使用者要求增加 **逐份 cube 設定與啟用清單**：Color 內只有 Active LUT、LUT manager、
+監看開關；管理頁可逐份 Enable／Disable／Settings，目前使用清單只列已啟用者，一次選一份或 Off。
+依使用者最新要求，色域／Gamma 直接更新該 `.cube` 的註解；啟用／目前選擇／強度才存現存 LUT.BIN。
+錄影中、來源缺失／被替換、資料變更或讀回失敗會拒絕寫入。只改已準備的純註解區塊，數值與其他作者內容不變。
+內容 SHA-256 排除管理的色彩註解，所以改名／修改這些註解不會變成新 LUT；檔名只作標籤。
+作者可在 cube 以自訂 `# FPSUP_INPUT_COLOR_SPACE`／`# FPSUP_INPUT_GAMMA` 註解提供設定，
+使用者改後就替換它，下次匯入／開機仍以該 cube 的值為準；無標示則未設定。固定輸出仍為 Rec.709／Gamma 2.4。
+本開發版明確限制 32 份；需先在主機準備原生素材，還不是相機直接掃描文字 cube。
+[設定、作者約定及重建前取回機內設定的方法](../../fpSup/lut/README.md#每份-lut啟用清單與作者標示2026-10-22)。
+
+最新註解寫回開發包為 [`20261022-color-comments-01`](cards/20261022-color-comments-01/)，
+[成品驗證](validation/20261022-color-comments-01/report.json)含 119 項通過、無跳過與 17 個故障副本偵測。
+已核對實際 ARM 成品的註解寫回、重啟讀回、可攜重新匯入及來源資料 bytes 不變；
+AutoRun 與共用 LOADER／SUPMGR／UI 不變，沒有操作相機或寫卡，監看仍未接通。
+
+先前 BIN 保存版的離線開發包為 [`20261022-color-library-03`](cards/20261022-color-library-03/)，
+[最終驗證](validation/20261022-color-library-01/final/report.json)包含 114 項通過、無跳過與 13 個故障副本偵測。
+實際成品的切換、個別設定保存／重載與 MENU 路徑通過模擬；AutoRun、共用 loader／SupManager／UI 與單一入口包一致。
+另用同版核心的獨立素材核對 35 × 161 筆，最大通道 code 差 7.01e-5，不是示範 LUT 清單本身的畫面精度。
+未寫卡、未驗機內 UI 或 SD 掉電行為，Live View 仍未接通；示範包內三份小型 LUT 只是診斷素材。
+
+2026-10-15 使用者收斂監看需求：**機內 `.cube` 只接受 Rec.709 輸出**。
+使用者為每份 LUT 指定預期的輸入色域／gamma，相機先完成輸入轉換，再執行 LUT；
+選單只提供輸入設定，輸出固定為 Rec.709。LUT 輸出後接 LCD 適配，場景到顯示的轉換由
+LUT 或其輸入預設完成，不在 LUT 後重複套用。這是產品契約，`.cube` 格點本身無法可靠驗證輸出色域。
 
 使用者指出 fp 機內有多個可利用的處理區塊；不能用「未找到單一 3D LUT 名稱」否決整個功能。
 機內實作同時考慮 ISP 與 display 端，評估原生矩陣、gamma、CUVAREA、CUVCONT 等組合。
@@ -65,6 +120,74 @@ flag/eff 均為 1；未知 hook 防護在任何 setter 之前停止，未覆寫�
 
 **尚未將新 `.cube` 套入 Live View，也未測 LUT 的機內 CDNG metadata、MOV、STILL/JPG 烘入。**
 這輪建立 unified color sup 的原生 backend 候選與配置基準；不能視為 full 3D LUT、像素算式、HDR/REC 路由或吞吐已驗收。
+
+## 2026-10-16 監看輸入轉換基準
+
+已按使用者提供的 CinemaDNG 選單修正 [`fpSup/lut`](../../fpSup/lut/README.md#選擇監看-lut-輸入)：
+色域為 ACES、Adobe RGB、Blackmagic Design、P3 D60、P3 D65、Rec.2020、Rec.709、sRGB，共 8 項。
+非 Blackmagic 共用 Adobe RGB、Gamma 2.4、Gamma 2.6、Linear、Rec.709、sRGB 六項 Gamma；
+Blackmagic 另用 Blackmagic Design Film／Extended Video。兩欄獨立保存，跨組搭配會拒絕。
+[三張原圖及 hash](validation/20261016-cdng-menu-01/evidence.json)是選單依據；畫面版本與啟用狀態未另驗。
+
+桌面流程：明確來源 RGB／XYZ → 曝光尺度 → 所選線性色域矩陣 → 所選 Gamma → 原始 cube
+→ 固定 Rec.709 D65／Gamma 2.4 監看。已實作 7 色域 × 5 曲線 = 35 組標準數學參考；
+ACES 採 AP0／D60，並未隱含 ACES 顯示渲染。全部模型尚待與 Resolve 成對顯影核對，
+不能把標準原色／曲線吻合當成 CinemaDNG 解碼已等價。
+Resolve 的 Rec.709 Gamma 精確公式、Blackmagic 的兩組 CinemaDNG 色彩模型仍待確認，
+選單保留但拒絕產生數值結果；不以 BT.709 OETF 或 Film Gen5 代替。
+ARRI／Sony 等數學參考僅保留作通用計算回歸，已移出 CinemaDNG 產品選單。
+
+`monitor-presets` 提供 UI 輸入清單；`monitor-preview` 產生有 sRGB ICC 的預覽，
+`monitor-render` 保存未裁切的浮點 709 結果與 lookup 範圍報告，`monitor-prepare` 保存原始 cube、
+設定、轉換矩陣／曲線描述及選定 LUT 輸入域的 float32 查表。監看指令不提供輸出空間選項。
+0% 與完整 LUT 結果在同一 709／Gamma 2.4 空間混合；基準為明訂的線性裁切＋Gamma 2.4，
+不是原廠 fp／Resolve／ARRI 的顯示渲染。
+
+機內 backend 依序接 fp 校準／WB／曝光、所選輸入矩陣／transfer、查表與 LCD 適配。
+曝光留在表前，強度可烘入同輸入域的查表。將整條跨色域流程預合成到 DWG 格點的實驗，
+在極端飽和色上即使 65³ 仍有大誤差，因此保留解析式前轉換及原始 LUT 域。
+shaper／格點重採樣／強度合成的誤差逐包報告，不自動當作硬體可精確表示。
+
+[更新後驗證報告](validation/20261016-cdng-monitor-01/report.json)保存選單與 35 組數學參考狀態。
+通用計算回歸對照既有 14,648 筆 ARRI Classic 參考資料，最大 RGB code 差 3.01e-14；
+同輸入域 33³ float32 表的 9,217 筆獨立樣本最大差 2.90e-8。
+53 項選單／色彩／LUT／預覽／殘差測試通過；先前另有 5 項既有 ARM CEQ 模擬回歸通過，native 程式未變更。
+這輪沒有新的相機操作或卡片產物；fp live frame 的輸入校準、owner 交接、原生係數／曲線近似與
+機內 UI 仍按下方「尚待完成」接入，不能將桌面參考數值視為相機畫面誤差。
+
+## 2026-10-21 Loader v4 開發 sup
+
+使用者要求開始製作 sup、參考 Loader v4。程式與 builder 在
+[`fpSup/lut`](../../fpSup/lut/README.md#loader-v4-開發-sup2026-10-21)：FSB4、最低服務 v5、
+快取常駐記憶體與 `page_add()`，沿用現有 v4 builder，沒有改共用載入器。
+`LUT.BIN` 只放原生程式／設定，`LUT/ACTIVE.LUT` 獨立保存準備後的矩陣／Gamma／完整 LUT 節點，
+`LUT/source.cube` 保留原檔。更換素材不要求更新 AutoRun。
+
+本版實作檔案驗證、8 色域與相依 Gamma 選擇、五段強度、8 列設定註冊，及實際 ARM Q20
+XYZ→輸入色域／Gamma→1D＋四面體 3D→Rec.709 強度混合。只接受呼叫者自己擁有的分離樣本，
+沒有影像 hook 或原廠 ring 寫入。監看啟用回報 `NO_BACKEND`；校準後的 Live View 路由、
+原生硬體主要處理＋CPU 殘差、設定寫回與實際效能仍未完成。
+本版尚未上機；不能把「Loader 載入成功／數值核心可跑」當成「機內監看已套用」。
+
+[第一份開發包](cards/20261021-loader-v4-01/)與[當時驗證](validation/20261021-loader-v4-01/report.json)保持原樣：
+66 項通過、無跳過，5 個突變全部被抓到；涵蓋 65³、4096 點 1D、shaper／domain、所有四面體順序、
+8 列群組回呼、滿額／衝突清理、Fast／除錯卡與保留映像後的初始化。
+35 模型的 5,635 筆 ARM／float64 比較最大 code 差 7.01e-5，不能視為相機色差。
+實際輸出的 LUT／LOADER／SHELL／SUPMGR 檔已另跑一次載入、拒絕監看啟用與關機流程，並核對 hash。
+
+接續使用者更新 Loader v4 進度，現在 `--card` 預設包含共用 fpSup／SupManager 畫面，
+8 列 LUT 設定加管理入口共 9 列，沿用首頁排序和兩頁配置。色域群組切換會立即更新相依欄位；
+Blackmagic 使用自己的兩個 Gamma，未核實模型維持 pending。監看 On 仍明確拒絕並重繪 Off。
+沒有修改共用 v4 程式，也沒有相機操作。
+
+[含 UI 的新開發包](cards/20261021-loader-v4-ui-04/)與[新驗證](validation/20261021-loader-v4-ui-04/report.json)：
+82 項通過、無跳過，6 個突變全部偵測；新增 10 項 LUT／UI ARM 整合和 6 項共用頁面檢查，
+包含所有色域／Gamma／強度、分頁、管理頁、缺檔處理、立即更新及關機還原。
+測試使用實際 ARM 核心／回呼／UI 資料與模擬原生 GUI，另以原生 interpreter／matcher 核對頁面與 MENU 路徑。
+實際輸出的完整開發包也再載入驗證並保存 hash；數值核心與第一份開發包相同。
+此包固定在驗證報告的來源版本；[驗證結束後的共用來源變動](validation/20261021-loader-v4-ui-04/post-validation-source-state.json)
+另行記錄，不改動已驗證的成品。先前來源變動或建置未完成的嘗試以 `incomplete.json` 標記，未列入驗收。
+**LUT 設定畫面仍待上機驗收，Live View 後端仍未接通。**
 
 ## 2026-10-09 補充：色彩資源與方法清單
 
@@ -283,6 +406,21 @@ fp 的 OFF 預覽尚不能當成 LogC3；須先確認 fp 輸入色域與 transfe
 ## 機內產品行為（目標，尚未實作）
 
 LUT 選單：開關、檔案、強度、輸入色域／gamma、監看套用、CDNG 保存。
+每份 LUT 分別保存輸入設定；輸出固定 Rec.709，不提供輸出色域／gamma 選單。
+監看實作基線採 Rec.709 D65／Gamma 2.4，內部 RGB 以 full-range 正規化值表示，
+顯示介面的量化及 range 轉換放在最後。輸入預設須明訂原色、白點、gamma、曝光尺度，
+以及是否含場景到顯示的轉換；不能只更換 gamma 名稱。
+
+```text
+fp 線性影像 → fp 校準／白平衡／曝光尺度
+  → 所選 LUT 輸入色域及 gamma → 原始 .cube
+  → Rec.709 監看 RGB → LCD 適配
+```
+
+強度在共同的 Rec.709 監看空間混合：0% 為基準監看畫面，100% 為完整 LUT 結果。
+跨編碼 LUT 不直接混合輸入 Log 與輸出 Rec.709 數值。
+離線 `Cube.apply` 的既有數值混合不代替這層監看強度處理。
+
 MOV／JPG 套用另有控制，允許監看外觀與寫檔各自設定。
 選錯 domain／不支援的 LUT 必須明示，不能顯示「已套用」卻退化成另一個 look。
 
@@ -297,8 +435,8 @@ RAW View 的「輸入校準」與本產品的「使用者 look」分開；不以
    若只能近似，保留完整 LUT，顯示其實測誤差，不將近似宣稱為精確 `.cube` 支援。
 2. **Live View 路由。** 確認 LV／MOV／STILL context；比較 LCD-only、HDMI、待機、REC、回放。
    監看開關不能改到 RAW，且要釐清 OSD／AF／曝光統計是否被影響。
-3. **卡片讀檔與原生 UI。** 沿用共用 loader、owned resident heap 與現行 UI 流程；
-   LUT 大表作獨立素材讀入，不擠進有限的 AutoRun/BIN 或共用 scratch。
+3. **讀檔與 UI 上機驗收。** 獨立素材讀入、owned resident heap、失敗狀態及共用 v4 UI 已通過離線驗證。
+   接續驗收實卡讀檔、LUT 設定畫面與原廠 GUI 互動；加入多檔選擇與設定寫回。
    失敗時保持原廠路徑並顯示狀態，不在 entry 內永久工作。
 4. **相機 DNG writer。** 把選中 LUT／設定快照接到 header writer；本次 append-IFD 工具是離線格式基準，
    不是每幀存完再讀回重寫的機內方案。驗證 8/10/12-bit、lossless、STILL DNG、檔案長度與回放。

@@ -1,0 +1,21 @@
+test_bad_tid_duplicate_data_and_invalid_lengths_refused (test_diagnostics.Tests) ... ok
+test_busy_interface_is_not_detached_or_used (test_diagnostics.Tests) ... ok
+test_device_identity_bounds (test_diagnostics.Tests) ... ok
+test_fragmented_and_coalesced_containers (test_diagnostics.Tests) ... ok
+test_motion_and_unexpected_parameters_never_sent (test_diagnostics.Tests) ... ok
+test_payload_and_container_decode_identically (test_diagnostics.Tests) ... ok
+test_reader_verifies_identity_and_closes_only_own_session (test_diagnostics.Tests) ... ok
+test_ring_wrap_and_identified_rejections (test_diagnostics.Tests) ... ok
+test_timeout_during_capture_does_not_issue_close (test_diagnostics.Tests) ... ok
+test_uncertain_timeout_is_not_retried_or_closed (test_diagnostics.Tests) ... ok
+test_usb_interface_selection_and_release (test_diagnostics.Tests) ... ok
+test_v1_does_not_invent_numeric_zero_value (test_diagnostics.Tests) ... ok
+test_v2_numeric_and_setting_values_preserve_bits_without_units (test_diagnostics.Tests) ... ok
+test_v2_rejects_impossible_setting_width (test_diagnostics.Tests) ... ok
+test_wrong_camera_never_receives_vendor_query (test_diagnostics.Tests) ... ok
+test_wrong_format_and_inconsistent_slots_refused (test_diagnostics.Tests) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.001s
+
+OK

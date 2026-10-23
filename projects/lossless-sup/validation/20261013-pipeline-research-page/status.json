@@ -1,0 +1,42 @@
+{
+  "scope": "local fpSup research page integration",
+  "languages": [
+    "en",
+    "cn",
+    "zh"
+  ],
+  "research_entry_verified": true,
+  "navigation_and_language_persistence_verified": true,
+  "localized_static_and_dynamic_content": true,
+  "time_and_frame_selection_preserved_on_language_change": true,
+  "playback_pause_verified": true,
+  "raw_bypass_and_invalid_input_verified": true,
+  "expanded_slot_heading_verified": true,
+  "mobile_viewport_checked": {
+    "width": 360,
+    "horizontal_overflow": false
+  },
+  "browser_console_errors": [],
+  "existing_queue_model_tests_passed": true,
+  "static_checks": {
+    "static_translation_keys": 75,
+    "local_links_checked": 12,
+    "measured_data_matches_source": true,
+    "page_inside_fpSup": true
+  },
+  "published": false,
+  "camera_operations": 0,
+  "screenshots": [
+    "research-zh.jpg",
+    "pipeline-zh.jpg"
+  ],
+  "files": {
+    "fpSup/research.html": "3258b9667b660e5deab01e08e03b7ff2c3a7875a2c64c939ae7d663683d77171",
+    "fpSup/assets/lang.js": "b1da0075889b039a6846d0d96ac68e126ec8fdfd31dace63b172f8b149b9c53a",
+    "fpSup/tools/pipeline-lab/index.html": "d6d25d7294a472b1b26b60b709945a15ba5f1ec78e0dbce7cd9e4a5e5389f5ab",
+    "fpSup/tools/pipeline-lab/i18n.js": "4a83e8aecae7a453f71d2214f89de2e5264420e8b4fb10a326346ea682c8e83f",
+    "fpSup/tools/pipeline-lab/ui.js": "64640a14f3ddfe6f804bb465354ef3529ab64881e6ce49bb88f3b92d4ccb5300",
+    "fpSup/tools/pipeline-lab/flow.js": "44aa46ec4ec9d69ad7b75676748b760e121cce2c22d97350b8d6320180531ceb",
+    "fpSup/tools/pipeline-lab/measurements.json": "d0ace0c82f607ed69ea3cfbe010393407df808ca51849600a234fcc4a08bfe70"
+  }
+}

@@ -1,0 +1,16 @@
+test_busy_or_oversized_plan_retains_previous_capacity (test_slot_expansion.ExpandedSlotsTests) ... ok
+test_claims_restore_every_added_word (test_slot_expansion.ExpandedSlotsTests) ... ok
+test_cookie_hooks_preserve_registers_flags_and_both_stack_alignments (test_slot_expansion.ExpandedSlotsTests) ... ok
+test_formula_pool_registry_over_96_and_full_recovery (test_slot_expansion.ExpandedSlotsTests) ... ok
+test_high_id_parent_released_only_after_last_child (test_slot_expansion.ExpandedSlotsTests) ... ok
+test_loading_during_native_pool_use_refuses_without_patches (test_slot_expansion.ExpandedSlotsTests) ... ok
+test_mutation_original_cookie_store_corrupts_next_native_field (test_slot_expansion.ExpandedSlotsTests) ... ok
+test_mutation_stock_lookup_bound_cannot_find_slot_200 (test_slot_expansion.ExpandedSlotsTests) ... ok
+test_native_byte_trigger_still_waits_for_64_mib (test_slot_expansion.ExpandedSlotsTests) ... ok
+test_native_cookie_129_and_completion_loop (test_slot_expansion.ExpandedSlotsTests) ... ok
+test_loads_claims_every_site_and_the_engine_then_arms (test_v3_lossless.LosslessV3Tests) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 49.767s
+
+OK

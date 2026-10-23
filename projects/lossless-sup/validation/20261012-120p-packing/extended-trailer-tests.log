@@ -1,0 +1,22 @@
+/Users/dido/Developer.localized/SIGMAfp_re/research/slimRAW/tiff.py:29: ResourceWarning: unclosed file <_io.BufferedReader name='/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/captures/opengate_ev_bug_20260914/dng/A001_083_FHD_f01.DNG'>
+  d = open(path,'rb').read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+E..
+======================================================================
+ERROR: test_every_supported_tile_table_length_has_exact_bytes (native.test_trailer.CachedTrailerTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lossless/native/test_trailer.py", line 284, in test_every_supported_tile_table_length_has_exact_bytes
+    reference, _ = trailing_ifd.assemble(self.header, payload, counts, 512, 368)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/tools/trailing_ifd.py", line 120, in assemble
+    built = build(original_header, tile_byte_counts, tile_w, tile_h)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/tools/trailing_ifd.py", line 54, in build
+    require(len(tile_byte_counts) == TILE_COUNT,
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/lossless-sup/tools/tiff_guard.py", line 16, in require
+    raise Rejected(message)
+tiff_guard.Rejected: expected 12 tiles, got 1
+
+----------------------------------------------------------------------
+Ran 3 tests in 10.480s
+
+FAILED (errors=1)

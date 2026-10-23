@@ -1,0 +1,106 @@
+{
+  "deployment": "verified; consumer19 and M12240 only, existing loader/prod17 retained",
+  "control_11988": {
+    "clip": "A001_094",
+    "requested": 416,
+    "finished": 416,
+    "stop": "button",
+    "passed_start_stop": true
+  },
+  "trial_23976": {
+    "clip": "A001_095",
+    "requested": 94,
+    "finished": 94,
+    "stop": "automatic vbuf",
+    "sustained_recording_passed": false
+  },
+  "raw_sample_checks": {
+    "samples": 6,
+    "parsed": 6,
+    "libraw_decoded": 6,
+    "whole_sequence_verified": false
+  },
+  "ssd_trial": {
+    "user_report": "SSD 測試完成，秒停",
+    "sustained_recording_passed": false,
+    "file_integrity_passed": false,
+    "takes": [
+      {
+        "clip": "A001_286",
+        "frames": 94,
+        "wave_seconds": 0.4431041666666667,
+        "tiff_offsets": {
+          "0": 44,
+          "19456": 18,
+          "65536": 32
+        },
+        "libraw_decoded": 44,
+        "libraw_rejected": 50
+      },
+      {
+        "clip": "A001_287",
+        "frames": 94,
+        "wave_seconds": 0.4431041666666667,
+        "tiff_offsets": {
+          "0": 29,
+          "19456": 22,
+          "65536": 43
+        },
+        "libraw_decoded": 29,
+        "libraw_rejected": 65
+      },
+      {
+        "clip": "A001_288",
+        "frames": 1,
+        "wave_seconds": 0.03777083333333333,
+        "tiff_offsets": {
+          "0": 1
+        },
+        "libraw_decoded": 1,
+        "libraw_rejected": 0
+      },
+      {
+        "clip": "A001_289",
+        "frames": 179,
+        "wave_seconds": 0.7631041666666667,
+        "tiff_offsets": {
+          "0": 55,
+          "19456": 44,
+          "65536": 80
+        },
+        "libraw_decoded": 55,
+        "libraw_rejected": 124
+      },
+      {
+        "clip": "A001_290",
+        "frames": 222,
+        "wave_seconds": 0.9551041666666666,
+        "tiff_offsets": {
+          "0": 60,
+          "19456": 55,
+          "65536": 107
+        },
+        "libraw_decoded": 60,
+        "libraw_rejected": 162
+      }
+    ],
+    "all_original_hashes_rechecked": true,
+    "total_files": 590,
+    "decoded": 189,
+    "rejected": 401,
+    "last_native_log": {
+      "matched_clip": "A001_290",
+      "requested": 222,
+      "finished": 222,
+      "stop": "vbuf/222/534738, raw1",
+      "usb_volume_slot": 5,
+      "bulk_size": 67108864
+    },
+    "camera_return_immutable_core_verified": true,
+    "cpu_header_copy_hits_since_sd_trial": 590,
+    "manual_between_take_changes": "awaiting user clarification; current identity independently verified"
+  },
+  "camera_last_verified": "After SSD return: exact consumer19 / M12240 / 239.76p / 12-bit / Lossless0, REC0 and movie/XMP/writer busy0; no record keys or reboot after user SSD trials",
+  "daemon_pid": 14207,
+  "published": false
+}

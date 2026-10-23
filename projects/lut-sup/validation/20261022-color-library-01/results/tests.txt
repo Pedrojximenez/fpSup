@@ -1,0 +1,66 @@
+test_author_comments_survive_normal_cube_parser_and_prefill (test_library.LibraryTests) ... ok
+test_author_invalid_conflicting_or_non709_output_is_rejected (test_library.LibraryTests) ... ok
+test_binary_identity_flags_checksum_and_original_source (test_library.LibraryTests) ... ok
+test_changed_source_is_not_silently_bound_to_old_settings (test_library.LibraryTests) ... ok
+test_disable_active_becomes_off_without_selecting_another (test_library.LibraryTests) ... ok
+test_filename_is_label_not_inferred_input (test_library.LibraryTests) ... ok
+test_manifest_roundtrip_and_bound_are_explicit (test_library.LibraryTests) ... ok
+test_pending_model_is_recorded_without_substitution (test_library.LibraryTests) ... ok
+test_recover_rejects_corrupt_record_and_preserves_manifest (test_library.LibraryTests) ... ok
+test_recover_saved_settings_by_content_after_rename (test_library.LibraryTests) ... ok
+test_same_filename_different_contents_is_not_a_shared_setting (test_library.LibraryTests) ... ok
+test_unrelated_comment_quotes_are_not_metadata (test_library.LibraryTests) ... ok
+test_user_overrides_are_per_cube_and_preserved_on_rename (test_library.LibraryTests) ... ok
+test_disable_active_and_empty_enable_list_stay_off_after_reload (test_library_native.LibraryNativeTests) ... ok
+test_editing_one_cube_does_not_change_other_or_current_active (test_library_native.LibraryNativeTests) ... ok
+test_full_library_last_page_and_chunked_write_are_reachable (test_library_native.LibraryNativeTests) ... ok
+test_input_and_strength_save_across_boot_with_no_source_cube_write (test_library_native.LibraryNativeTests) ... ok
+test_missing_or_replaced_bin_is_not_created_or_overwritten (test_library_native.LibraryNativeTests) ... ok
+test_one_entry_overview_and_only_enabled_items_in_picker (test_library_native.LibraryNativeTests) ... ok
+test_private_child_menu_routes_use_native_matcher (test_library_native.LibraryNativeTests) ... ok
+test_readback_failure_rolls_back_ram_and_does_not_replay (test_library_native.LibraryNativeTests) ... ok
+test_recording_blocks_file_loads_and_settings_writes (test_library_native.LibraryNativeTests) ... ok
+test_selecting_restores_cube_settings_and_uses_its_original_nodes (test_library_native.LibraryNativeTests) ... ok
+test_unmarked_filename_needs_configuration_and_cannot_be_used (test_library_native.LibraryNativeTests) ... ok
+test_wrong_asset_identity_does_not_replace_selected_lut (test_library_native.LibraryNativeTests) ... ok
+test_all_35_models_against_float_reference_and_strengths (test_sup_native.NativeLutTests) ... ok
+test_bad_input_never_changes_destination_and_pending_models_refuse (test_sup_native.NativeLutTests) ... ok
+test_combined_shaper_domains_output_hdr_and_lookup_diagnostics (test_sup_native.NativeLutTests) ... ok
+test_fast_debug_card_and_retained_image_reinitialize_defaults (test_sup_native.NativeLutTests) ... ok
+test_full_65_grid_all_tetrahedral_orders_and_original_nodes (test_sup_native.NativeLutTests) ... ok
+test_full_home_registry_releases_color_entry_and_api (test_sup_native.NativeLutTests) ... ok
+test_loads_cached_with_resident_rows_and_dma_only_file_scratch (test_sup_native.NativeLutTests) ... ok
+test_missing_short_corrupt_trailing_and_corrupt_header_remain_unapplied (test_sup_native.NativeLutTests) ... ok
+test_native_controls_reach_all_models_and_strengths_without_ui (test_sup_native.NativeLutTests) ... ok
+test_pure_1d_4096_entries_and_tetrahedra_all_orders (test_sup_native.NativeLutTests) ... ok
+test_released_sup_leaves_no_rows_or_service_on_conflict (test_sup_native.NativeLutTests) ... ok
+test_header_format_asset_source_and_boot_stay_independent (test_sup_native.NativePackageTests) ... ok
+test_reject_unsupported_model_and_quantization_failures_before_output (test_sup_native.NativePackageTests) ... ok
+test_absent_ui_file_leaves_lut_service_available (test_sup_ui.LutUiTests) ... ok
+test_all_gamuts_gammas_and_strengths_through_popup_notifications (test_sup_ui.LutUiTests) ... ok
+test_exported_ui_and_no_ui_cards_share_autorun_and_lut_payload (test_sup_ui.LutUiTests) ... ok
+test_group_popup_refreshes_the_dependent_value_immediately (test_sup_ui.LutUiTests) ... ok
+test_home_has_only_color_entry_and_all_settings_are_private (test_sup_ui.LutUiTests) ... ok
+test_missing_private_page_keeps_one_entry_and_native_api (test_sup_ui.LutUiTests) ... ok
+test_monitor_choice_is_rejected_and_repainted_off (test_sup_ui.LutUiTests) ... ok
+test_pending_model_and_missing_asset_remain_visible (test_sup_ui.LutUiTests) ... ok
+test_power_off_restores_shared_ui_hook_words (test_sup_ui.LutUiTests) ... ok
+test_private_home_and_manager_strings_resolve_and_stay_borrowed_with_lut (test_sup_ui.LutUiTests) ... ok
+test_private_menu_returns_to_fpsup_through_stock_matcher (test_sup_ui.LutUiTests) ... ERROR
+
+======================================================================
+ERROR: test_private_menu_returns_to_fpsup_through_stock_matcher (test_sup_ui.LutUiTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/lut/test_sup_ui.py", line 248, in test_private_menu_returns_to_fpsup_through_stock_matcher
+    shape=C.P.check_page(page,*C.P.stock_pool())
+  File "/Users/dido/Developer.localized/SIGMAfp_re/fpSup/uishare/tab/ft6_page.py", line 657, in check_page
+    check(hn == ho, f'allocation header: {hn} vs stock {ho}')
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/open-gate/build/sl_b25_page.py", line 116, in check
+    raise BuildError(msg)
+sl_b25_page.BuildError: allocation header: {'objects': 0, 'components': {'animationClip': 19, 'drawText': 0, 'appVariableEvent': -1, 'drawImage': 0, 'timerEvent': 0, 'controlValue': 0, 'controlFocus': 0, 'appVariableChangeEvent': 0, 'controlAppVariable': -9, 'controlTimer': 0, 'objectBase': 0, 'fill': 0, 'keyEvent': 0, 'controlAnimation': 0, 'controlValueEvent': 0, 'appStateEvent': 0, 'controlAppState': 0, 'focusEvent': 0, 'drawRect': 0, 'screenEvent': 0, 'changePropertyByControl': 0}} vs stock {'objects': 0, 'components': {'animationClip': 19, 'drawText': 0, 'appVariableEvent': 0, 'drawImage': 0, 'timerEvent': 0, 'controlValue': 0, 'controlFocus': 0, 'appVariableChangeEvent': 0, 'controlAppVariable': 0, 'controlTimer': 0, 'objectBase': 0, 'fill': 0, 'keyEvent': 0, 'controlAnimation': 0, 'controlValueEvent': 0, 'appStateEvent': 0, 'controlAppState': 0, 'focusEvent': 0, 'drawRect': 0, 'screenEvent': 0, 'changePropertyByControl': 0}}
+
+----------------------------------------------------------------------
+Ran 49 tests in 98.149s
+
+FAILED (errors=1)

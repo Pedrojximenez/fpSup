@@ -1,0 +1,22 @@
+{
+  "source": "recovery-boot-reconnected.json",
+  "recovery_reboot_source": "reboot-02-recovery.json",
+  "boot": 11589302,
+  "cine_standby": true,
+  "recording": false,
+  "writer_idle": {
+    "xmp_file_pointer": 0,
+    "movie_writing": 0
+  },
+  "usb": "responding",
+  "lossless_on": true,
+  "expanded_candidate_still_installed": true,
+  "stopfx_loaded": true,
+  "positions_free": 96,
+  "positions_capacity": 96,
+  "take_frames_since_boot": 0,
+  "card_free_bytes": 53927739392,
+  "additional_recording_after_recovery": false,
+  "merge_artifact_promoted": false,
+  "final_card_full_readback": "not repeated after read timeout; initial deployment readback was complete"
+}

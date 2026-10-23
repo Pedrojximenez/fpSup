@@ -1,0 +1,24 @@
+{
+  "time": 1791772171.260065,
+  "commands": [
+    {
+      "command": "status get is_recording",
+      "reply": "is_recording -> 0\n\n",
+      "time": 1791772171.261085
+    },
+    {
+      "command": "dir \\fpSup",
+      "reply": "                                          .\n2026/10/12  10:19:10               187520 32RESCUS.BIN\n2026/10/10  11:39:20                 4096 ._32RESCUS.BIN\n2026/10/10  11:38:46 <DIR>                UI\n2026/10/10  11:39:20                 4096 ._UI\n2026/10/11  23:09:24                29276 LOADER.BIN\n2026/10/10  11:39:20                 4096 ._LOADER.BIN\n2025/12/31  08:00:00                 4208 20GYR2.BIN\n2026/10/10  11:39:20                 4096 ._20GYR2.BIN\n2026/10/11  11:29:04                38644 45RAWV.BIN\n2026/10/10  11:39:20                 4096 ._45RAWV.BIN\n2025/12/31  08:00:00                25936 40FLIP.BIN\n2026/10/10  11:39:20                 4096 ._40FLIP.BIN\n2026/10/12  09:48:58                78112 10LOSS.BIN\n2026/10/10  11:39:22                 4096 ._10LOSS.BIN\n2025/12/31  08:00:00                 4552 00SHELL.BIN\n2026/10/10  11:39:22                 4096 ._00SHELL.BIN\n2026/10/10  11:38:46 <DIR>                RESCUS\n2026/10/10  11:39:22                 4096 ._RESCUS\n2025/12/31  08:00:00               609720 50RESLAB.BIN\n2026/10/10  11:39:22                 4096 ._50RESLAB.BIN\n2026/10/12  10:20:08                 4096 LOAD.LOG\n2026/10/12  07:40:38                  316 05STOPFX.BIN\n",
+      "time": 1791772171.266335
+    },
+    {
+      "command": "status get is_recording",
+      "reply": "is_recording -> 0\n\n",
+      "time": 1791772172.850085
+    }
+  ],
+  "only_replaced": "\\fpSup\\10LOSS.BIN",
+  "backup_sha256": "e91acb08d2a6469a31bd19be2426cb935ab686307b8611144b3a5ac49e87ec64",
+  "backup_bytes": 78112,
+  "error": "AssertionError('STOP: uncertain transfer; preserve camera parameters and write.log')"
+}

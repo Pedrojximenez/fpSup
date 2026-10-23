@@ -13,7 +13,9 @@
 #define VRC_MAX_PROVIDERS 16u
 #define VRC_MAX_PACKS 32u
 #define VRC_ASSET_BYTES 0x400000u
-enum { VRC_REGISTER=1, VRC_APPLY=2, VRC_STATUS=3, VRC_SETTINGS=4 };
+enum { VRC_REGISTER=1, VRC_APPLY=2, VRC_STATUS=3, VRC_SETTINGS=4,
+       VRC_RATES=5,      /* arg: struct vrc_rates *, filled: the live format's declared rates */
+       VRC_RATE_SET=6 }; /* arg: rank (fps x 100) of one of them, 0 = the stock rate */
 enum { VRC_OK=0, VRC_BAD_ABI=1, VRC_BAD_PROVIDER=2, VRC_FULL=3,
        VRC_BUSY=4, VRC_BUILD=5, VRC_BAD_RCD=6, VRC_RATE=7, VRC_FORMAT=8,
        VRC_NOT_READY=9, VRC_REENTER=10 };
@@ -31,6 +33,14 @@ struct vrc_provider {
     uint32_t reserved;
 };
 struct vrc_status { uint32_t bytes, abi, provider, generation, result, detail, providers, asset_bytes; };
+/* The rates a format declares beyond the stock nine (RCD SEC_RATES). Each is
+ * recorded while the camera's frame-rate setting holds its carrier (a stock
+ * internal enum); `chosen` is the one picked (0 = the stock rate), `live` 1 while
+ * the setting holds the chosen one's carrier.  The choice lives in the consumer's
+ * BIN record, never in the camera's settings. */
+#define VRC_MAX_RATES 8u
+struct vrc_rate { uint32_t rank, num, den, carrier, nominal; };
+struct vrc_rates { uint32_t bytes, abi, count, chosen, live; struct vrc_rate rate[VRC_MAX_RATES]; };
 typedef uint32_t (*vrc_dispatch_fn)(uintptr_t, uint32_t, uintptr_t);
 struct vrc_endpoint { uint32_t magic, abi; vrc_dispatch_fn dispatch; uintptr_t context; };
 /* Only the loader's published, bounded cave arena is inspected. A stock or

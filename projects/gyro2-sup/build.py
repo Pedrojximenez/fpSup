@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build Gyro2 as a loader v3 sup.
 
-    python3 -B build.py            -> build/20GYR2.BIN
+    python3 -B build.py            -> build/40GYR2.BIN
 
 Uses fpSup's v3 helpers read-only (make_sup, the reference image) and its
 assembler; nothing in fpSup is written.
@@ -18,11 +18,10 @@ import build_v3 as B                       # noqa: E402
 from armasm import assemble                # noqa: E402
 
 SRC = HERE / 'src' / 'gyr2.S'
-OUT = HERE / 'build' / '20GYR2.BIN'
+OUT = HERE / 'build' / '40GYR2.BIN'
 SUP_ID = 'GYR2'
-VERSION = 0x00000004                       # two buffers: level drains, frames slice
+VERSION = 0x00000006                       # frames written from the tag observer, no DMA patch
 
-SITE = 0xC038C77C
 ACCEL_SITE = 0xC050D4C8
 
 
@@ -41,19 +40,13 @@ def build(src=SRC):
     """(file bytes, info).  `src`: another copy of the source (mutation tests)."""
     code = assemble(src)
     image = B.IMAGE.read_bytes()
-    stock = B.stock(SITE, 4, image)
-    if equ('SITE', src) != SITE:
-        raise BuildError('SITE in the source and the build disagree')
-    # The claim hands the loader the stock word from this file: it must be
-    # the reference image's, or a warm restart could "repair" to a wrong word.
-    marker = struct.pack('<I', 0xFAF5BD03)
-    if stock != marker:
-        raise BuildError(f'the image has {stock.hex()} at {SITE:#x}, not blx #0xC00FBB90')
-    if code.count(marker) != 1:
-        raise BuildError('the stock word must appear exactly once (site_stock)')
+    # The header DMA (0xC038C77C) is not patched any more: the frames are
+    # written from the firmware's own tag-observer notify.
     accel = struct.pack('<I', 0xE3A02000)
     if B.stock(ACCEL_SITE, 4, image) != accel:
         raise BuildError(f'the image has {B.stock(ACCEL_SITE, 4, image).hex()} at {ACCEL_SITE:#x}, not mov r2, #0')
+    if equ('WRITER', src) != VERSION:
+        raise BuildError('WRITER in the source is not the build VERSION')
     if equ('ACCEL_SITE', src) != ACCEL_SITE:
         raise BuildError('ACCEL_SITE in the source and the build disagree')
     # Position independence: no word in the code may point into the code as
@@ -67,6 +60,7 @@ def build(src=SRC):
         bss = equ('GLOG_N', src) * 6 + equ('ELOG_N', src) * 12
         try:
             bss += equ('VLOG_N', src) * 8           # the Vd ring
+            bss += equ('GTAG_MAX', src)            # zeros for the tag observer
         except BuildError:
             pass
     except BuildError:                       # an older stage (P0-P3): no buffers
@@ -79,7 +73,7 @@ def build(src=SRC):
 def main():
     import argparse, hashlib, json
     ap = argparse.ArgumentParser()
-    ap.add_argument('--out', type=pathlib.Path, help='write DIR/20GYR2.BIN and DIR/build.json (for fpSup/tools/release_v3.py)')
+    ap.add_argument('--out', type=pathlib.Path, help='write DIR/40GYR2.BIN and DIR/build.json (for fpSup/tools/release_v3.py)')
     a = ap.parse_args()
     sup, info = build()
     out = a.out / OUT.name if a.out else OUT

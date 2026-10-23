@@ -1,0 +1,10 @@
+  tagged 16380/53912 B  3847 KiB/s   tagged 32760/53912 B  3924 KiB/s   tagged 49140/53912 B  3968 KiB/s   tagged 53912/53912 B  3876 KiB/s   tagged 53912 bytes in 0.0s (3591 KiB/s)      
+screen: B2_5
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261012-m12-240-live/record_mode.py", line 62, in <module>
+    if __name__=='__main__':main()
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261012-m12-240-live/record_mode.py", line 33, in main
+    proof['idle_before']=C.idle();r=C.snapshot();proof['before']=r;proof['mode_checks']=check(r,rank)
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/res-lab/validation/20261012-m12-240-live/record_mode.py", line 12, in check
+    s=r['state'];cur=s['CUR'];assert s['FLAG']==1 and cur and s['PICKOK']==1
+AssertionError
