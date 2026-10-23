@@ -1,0 +1,121 @@
++-o Root  <class IORegistryEntry, id 0x100000100, retain 36>
+  +-o J314cAP  <class IOPlatformExpertDevice, id 0x10000027b, registered, matched, active, busy 0 (124536 ms), retain 40>
+    +-o AppleARMPE  <class AppleARMPE, id 0x100000281, registered, matched, active, busy 0 (99053 ms), retain 49>
+    | +-o arm-io  <class IOPlatformDevice, id 0x1000002be, registered, matched, active, busy 0 (96564 ms), retain 172>
+    | | +-o AppleT600xIO  <class AppleT600xIO, id 0x1000002d6, registered, matched, active, busy 0 (96521 ms), retain 170>
+    | |   +-o usb-drd2@2280000  <class AppleARMIODevice, id 0x10000038b, registered, matched, active, busy 0 (24138 ms), retain 14>
+    | |   | +-o AppleT6000USBXHCI@02000000  <class AppleT6000USBXHCI, id 0x100000545, registered, matched, active, busy 0 (118003556 ms), retain 151>
+    | |   | | +-o usb-drd2-port-ss@02200000  <class AppleT8103USB30XHCIPort, id 0x1000009cf, registered, matched, active, busy 0 (23396 ms), retain 107>
+    | |   | |   +-o SIGMA fp@02200000  <class IOUSBHostDevice, id 0x100020be1, registered, matched, active, busy 0 (11 ms), retain 36>
+    | |   | |     | {
+    | |   | |     |   "kUSBSerialNumberString" = "<redacted>"
+    | |   | |     |   "bDeviceClass" = 0
+    | |   | |     |   "UsbLinkSpeed" = 5000000000
+    | |   | |     |   "bDeviceSubClass" = 0
+    | |   | |     |   "iSerialNumber" = 3
+    | |   | |     |   "IOServiceDEXTEntitlements" = (("com.apple.developer.driverkit.transport.usb"))
+    | |   | |     |   "iProduct" = 2
+    | |   | |     |   "USB Serial Number" = "<redacted>"
+    | |   | |     |   "USB Vendor Name" = "SIGMA"
+    | |   | |     |   "USBSpeed" = 4
+    | |   | |     |   "IOPowerManagement" = {"PowerOverrideOn"=Yes,"DevicePowerState"=2,"CurrentPowerState"=2,"CapabilityFlags"=32768,"MaxPowerState"=2,"DriverPowerState"=0}
+    | |   | |     |   "bNumConfigurations" = 1
+    | |   | |     |   "kUSBProductString" = "SIGMA fp"
+    | |   | |     |   "IOBusyInterest" = "IOCommand is not serializable"
+    | |   | |     |   "kUSBVendorString" = "SIGMA"
+    | |   | |     |   "USB Product Name" = "SIGMA fp"
+    | |   | |     |   "iManufacturer" = 1
+    | |   | |     |   "idVendor" = 4099
+    | |   | |     |   "Device Speed" = 3
+    | |   | |     |   "kUSBCurrentConfiguration" = 1
+    | |   | |     |   "idProduct" = 50226
+    | |   | |     |   "bcdDevice" = 256
+    | |   | |     |   "UsbDeviceSignature" = <031032c430303030303030303931343131383137000000060101>
+    | |   | |     |   "kUSBContainerID" = "a691c403-cb1e-6d40-862c-4b8547112c5a"
+    | |   | |     |   "sessionID" = 6618485488843
+    | |   | |     |   "USB Address" = 1
+    | |   | |     |   "IOCFPlugInTypes" = {"9dc7b780-9ec0-11d4-a54f-000a27052861"="IOUSBHostFamily.kext/Contents/PlugIns/IOUSBLib.bundle"}
+    | |   | |     |   "USBPortType" = 5
+    | |   | |     |   "UsbDeviceFunction" = 0
+    | |   | |     |   "bDeviceProtocol" = 0
+    | |   | |     |   "locationID" = 35651584
+    | |   | |     |   "kUSBAddress" = 1
+    | |   | |     |   "bcdUSB" = 800
+    | |   | |     |   "IOGeneralInterest" = "IOCommand is not serializable"
+    | |   | |     |   "bMaxPacketSize0" = 9
+    | |   | |     | }
+    | |   | |     | 
+    | |   | |     +-o AppleUSBHostCompositeDevice  <class AppleUSBHostCompositeDevice, id 0x100020be5, !registered, !matched, active, busy 0, retain 4>
+    | |   | |     |   {
+    | |   | |     |     "IOProbeScore" = 50000
+    | |   | |     |     "CFBundleIdentifier" = "com.apple.driver.usb.AppleUSBHostCompositeDevice"
+    | |   | |     |     "IOProviderClass" = "IOUSBHostDevice"
+    | |   | |     |     "IOClass" = "AppleUSBHostCompositeDevice"
+    | |   | |     |     "IOPersonalityPublisher" = "com.apple.driver.usb.AppleUSBHostCompositeDevice"
+    | |   | |     |     "bDeviceSubClass" = 0
+    | |   | |     |     "CFBundleIdentifierKernel" = "com.apple.driver.usb.AppleUSBHostCompositeDevice"
+    | |   | |     |     "IOMatchedAtBoot" = Yes
+    | |   | |     |     "IOMatchCategory" = "IODefaultMatchCategory"
+    | |   | |     |     "IOPrimaryDriverTerminateOptions" = Yes
+    | |   | |     |     "bDeviceClass" = 0
+    | |   | |     |   }
+    | |   | |     |   
+    | |   | |     +-o IOUSBHostInterface@0  <class IOUSBHostInterface, id 0x100020be6, registered, matched, active, busy 0 (6 ms), retain 16>
+    | |   | |     | | {
+    | |   | |     | |   "USBSpeed" = 4
+    | |   | |     | |   "iInterface" = 0
+    | |   | |     | |   "bInterfaceProtocol" = 1
+    | |   | |     | |   "bAlternateSetting" = 0
+    | |   | |     | |   "idProduct" = 50226
+    | |   | |     | |   "bcdDevice" = 256
+    | |   | |     | |   "USB Product Name" = "SIGMA fp"
+    | |   | |     | |   "locationID" = 35651584
+    | |   | |     | |   "bInterfaceClass" = 6
+    | |   | |     | |   "bInterfaceSubClass" = 1
+    | |   | |     | |   "IOCFPlugInTypes" = {"2d9786c6-9ef3-11d4-ad51-000a27052861"="IOUSBHostFamily.kext/Contents/PlugIns/IOUSBLib.bundle"}
+    | |   | |     | |   "UsbExclusiveOwner" = "pid 58457, ptpcamerad"
+    | |   | |     | |   "USBPortType" = 5
+    | |   | |     | |   "bConfigurationValue" = 1
+    | |   | |     | |   "bInterfaceNumber" = 0
+    | |   | |     | |   "USB Vendor Name" = "SIGMA"
+    | |   | |     | |   "IOServiceDEXTEntitlements" = (("com.apple.developer.driverkit.transport.usb"))
+    | |   | |     | |   "idVendor" = 4099
+    | |   | |     | |   "bNumEndpoints" = 3
+    | |   | |     | |   "USB Serial Number" = "<redacted>"
+    | |   | |     | | }
+    | |   | |     | | 
+    | |   | |     | +-o ptpcamerad  <class AppleUSBHostInterfaceUserClient, id 0x100020bf2, !registered, !matched, active, busy 0, retain 6>
+    | |   | |     | |   {
+    | |   | |     | |     "UsbUserClientBufferStatistics" = {"IOMemoryDescriptor"=6,"IOBufferMemoryDescriptor"=0,"IOSubMemoryDescriptor"=0}
+    | |   | |     | |     "IOUserClientCreator" = "pid 58457, ptpcamerad"
+    | |   | |     | |     "UsbUserClientBufferAllocations" = {"Bytes"=0,"Descriptors"=0}
+    | |   | |     | |     "IOUserClientDefaultLocking" = Yes
+    | |   | |     | |   }
+    | |   | |     | |   
+    | |   | |     | +-o fpshd  <class AppleUSBHostInterfaceUserClient, id 0x100020c0a, !registered, !matched, active, busy 0, retain 6>
+    | |   | |     |     {
+    | |   | |     |       "UsbUserClientBufferStatistics" = {"IOMemoryDescriptor"=0,"IOBufferMemoryDescriptor"=0,"IOSubMemoryDescriptor"=0}
+    | |   | |     |       "IOUserClientCreator" = "pid 60279, fpshd"
+    | |   | |     |       "UsbUserClientBufferAllocations" = {"Bytes"=0,"Descriptors"=0}
+    | |   | |     |       "IOUserClientDefaultLocking" = Yes
+    | |   | |     |     }
+    | |   | |     |     
+    | |   | |     +-o ChatGPT  <class AppleUSBHostDeviceUserClient, id 0x100020be7, !registered, !matched, active, busy 0, retain 7>
+    | |   | |     |   {
+    | |   | |     |     "IOUserClientCreator" = "pid 67779, ChatGPT"
+    | |   | |     |     "IOUserClientDefaultLocking" = Yes
+    | |   | |     |   }
+    | |   | |     |   
+    | |   | |     +-o Google Chrome  <class AppleUSBHostDeviceUserClient, id 0x100020be9, !registered, !matched, active, busy 0, retain 7>
+    | |   | |     |   {
+    | |   | |     |     "IOUserClientCreator" = "pid 1674, Google Chrome"
+    | |   | |     |     "IOUserClientDefaultLocking" = Yes
+    | |   | |     |   }
+    | |   | |     |   
+    | |   | |     +-o fpshd  <class AppleUSBHostDeviceUserClient, id 0x100020bfd, !registered, !matched, active, busy 0, retain 6>
+    | |   | |         {
+    | |   | |           "IOUserClientCreator" = "pid 60279, fpshd"
+    | |   | |           "IOUserClientDefaultLocking" = Yes
+    | |   | |         }
+    | |   | |         
+
