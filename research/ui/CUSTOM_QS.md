@@ -552,3 +552,138 @@ FMT 也一樣（holder 341；群組 `19_MV_RecordingFormat` 的兩個 interval�
   但同時也**沒有任何一格**能直接用轉盤改原廠解析度（原廠解析度只能從 B2_5 改，或由我們的回呼寫 donor）。
 - **`entry+08` 換頁的快取時機**（§11-1）仍是第一個要上機確認的。
 - **STILL / STILLlike** 不受影響（只換 QS_CINE）。
+
+## 13. Julien 的自製瓷磚：重核與移植取捨（2026-10-23）
+
+本節只做資料解析與 Thumb 靜態反組譯，沒有執行上游或相機程式。網站可讀的 README 以 R168 為推薦版本；
+本地快照另有 R179/R181 測試版，本節不把其存在等同已通過實機驗證。
+來源固定為 `projects/julien-acquaviva/README.md` 所列 commit
+`3d60d0f7d3ecbc09843d87a80e35e6adf735abe2` 的 R168，不使用會移動的 main 當作二進位身分。
+
+### 13.1 從成品學到的機制
+
+**保留原廠功能 ID，分別替換編輯器、圖磚內容與調值行為。** 不是新增任意 QS enum。
+編輯器的 `.cvm` CSV 是一層；真正顯示的 QS NBU 與值繪製是另一層，只改前者不會完成圖磚。
+
+重新核對 R168：FRM1 共 1,013 筆補丁，全部 before-image 與本地 5.02 韌體相符；
+其中 201 筆起點落在 `QS_CINE` 範圍。6 個被修改的 `Y2_3_*` 編輯器 CSV 都保持原有 ID 集合與 KEY，
+IMAGE 改動的 ID 為 15、17、20、21、39、48；FPS 原本的 ID 22 不需更名。
+這些是資料／相容性證據，補丁數量不是效能測量。
+
+結合 CSV 與文字解析器的靜態控制流程，可補齊 §4.2 原先只列圖像名的名稱對照：
+
+| 原廠 UI ID | 原功能 | 新名稱 | 編輯器文字 KEY |
+|---|---|---|---|
+| 15 | HDR | RS（Rolling Shutter） | 1106 |
+| 17 | DC Crop | CROP | 1107 |
+| 20 | FORMAT | SENSOR | 1114（SLIKE 為 1115） |
+| 21 | RES | RATIO | 1116（SLIKE 為 1117） |
+| 22 | FPS | FPS | 1118 |
+| 39 | 電子防震 | OUTPUT | 1136 |
+| 48 | 耳機音量 | DATA | 1929 |
+
+上表的新名稱對照來自**靜態解析**，不是本輪相機操作結果。`C05EC4B4` 的 BL 目標是 `C07A4766`，
+再呼叫 `C0731284`；字串與指標表位於 `C0731778..C07317F0`，含 Sensor、Crop、Ratio、Output、Data、Rolling Shutter。
+處理器檢查 CINE 狀態與編輯器頁名 `Y2_3` 前綴；未處理的情境回原廠文字解析。
+其中條件式 `EORS` 會重新設定旗標，分析 table lookup 時要追這個條件，不能只看到 r4 就直接索引。
+
+圖磚值繪製的五個既有接點 `C05FCE58/C05FD360/C05FD4D0/C05FD4E8/C05FD8E0` 在 R168 仍被修改。
+這說明動態數值另有繪製路徑；不能將編輯器字串改名當成完整操作實作。
+
+### 13.2 對目前 FORMAT／DC／RES／FPS 原型的使用方式
+
+三套編號要分開：瀏覽器原型 stable ID、原廠 QS UI ID、原廠設定 internal ID。
+例如原型 FORMAT=6、DC=20、RES=4、FPS=5；相應的原廠 UI ID 是 20、17、21、22。
+原型 id 20 是 DC，原廠 id 20 卻是 FORMAT，不能直接拿原型數字寫進 `MV_QSMENU_QSn`。
+
+目前適合沿用 §12 的增量方式：先複製原廠 QS 頁，保留原生鍵盤／轉盤、GUI id 159 與必要物件，
+先替換 RES 值顯示與 holder，再逐項接 FPS、FORMAT、DC。新尺寸／比例文字用字串變數更新；
+格式索引、任意裁切尺寸與版面放在私有模型，透過已驗證的能力表轉成原廠合法 donor 值。
+原廠 8 格的 RES 值都要跟著換；只有當前格成功不代表換位置後也成功。
+
+Julien 的產品借走 HDR／耳機音量等功能；我們的添加清單仍需要原本功能，所以不直接照抄他的全套槽位映射。
+私有目錄可分開保存多頁與自訂項目的穩定身分，原生 ID 僅作接點，不承擔所有自訂項目編號。
+FORMAT 的 MOV／CDNG 8/10/12/14bit 顯示選項也不能當作五種組合都已在相機驗證可用。
+
+單一半透明背景可參考上游的 uniform shade；alpha=0 時省去背景繪製、拖曳跟手、左右翻頁、長按排序與垃圾桶
+是我們另外的互動／呈現工作。上游 README 的 50% shade 及本輪靜態補丁**沒有證明這些手勢或效能**。
+`entry+08` 的 QS 快取生命週期、QS 頁字串綁定與實際更新成本仍須依 §11 差分驗證；§12 的零新增程式 hook 是設計估計。
+
+### 13.3 可重跑的離線證據
+
+```sh
+python3 -B projects/qs-touch/tools/inspect_julien_qs.py
+```
+
+使用 NBR 目錄內的精確檔案長度讀 CSV（相鄰檔案不保證以 NUL 結束），驗證每筆補丁 before-image、
+編輯器 ID／KEY 不變及圖像替換集合。輸出為 `projects/qs-touch/validation/julien-qs-r168-static.json`。
+此工具不執行 ARM、不建立 USB 連線，也不修改上游 BIN 或韌體映像；名稱解析控制流程另由靜態反組譯核對。
+
+## 14. 完整自製瓷磚與上游更新核對（2026-10-23）
+
+### 14.1 使用者指定的目標
+
+使用者要**新增完全由我們製作的瓷磚，再用它替換部分既有瓷磚**。
+首批沿用目前範圍 FORMAT／DC／RES／FPS。自有元件有獨立的物件 ID、標籤、值繪製、私有變數、
+調整事件與更多選項，不以更改原廠瓷磚名稱／圖像作為完成標準。
+
+原廠入口與新瓷磚身分分開保存：原廠 UI ID 可以作相容接點，自訂瓷磚的穩定身分在私有目錄中。
+映射例為 `fp.format ← 原廠 FORMAT 20`、`fp.dc ← 原廠 DC Crop 17`、
+`fp.res ← 原廠 RES 21`、`fp.fps ← 原廠 FPS 22`；這是**接點設計**，不是新增 enum 到原廠設定。
+既有瓷磚仍須在未被替換的功能與版面位置正常運作。
+
+具體資源方向：
+
+1. 私有 QS 頁新增我們的瓷磚子樹，以原生 objectBase／drawText／事件等基本元件組成；
+   基本元件的序列化格式沿用同頁已驗證樣板，圖磚內容、物件 ID 與行為由我們產生。
+2. 每個顯示位置依使用者的功能選擇，切換到對應的自製子樹；被替換的原廠內容與調值事件要一起停用，
+   避免同一次操作同時送往兩套設定。原廠 GUI 所需的生命週期骨架先保留。
+3. 所有自訂項目透過私有變數與調整回呼工作；原廠合法設定只經明確的 adapter 接入。
+   FORMAT 的位深、DC／RES 尺寸、FPS 限制共享資料模型，元件不自行猜測硬體能力。
+4. 原生 QS 的八個位置都需要支援自製子樹，移動位置不改瓷磚身分。更多項目與翻頁由私有版面管理。
+
+這個方案可沿用 §12 的頁替換與變數研究，但 §12 的「新增文字物件、藏舊值」只適合作為早期接點驗證，
+不等於完成上述獨立瓷磚。後續第一版離線資源／輸入替換見 §15，尚未接上相機。
+
+### 14.2 上游是否有更新
+
+本次直接讀取 GitHub API 的 repository／main commit／branches／releases／recursive tree，
+不是依賴搜尋快取判斷。main 仍是 `3d60d0f7d3ecbc09843d87a80e35e6adf735abe2`，
+僅有 main 分支；35 個上游檔案逐一以 Git blob SHA-1 核對，與本地 `projects/julien-acquaviva/upstream/` 全部相同。
+因此不需要覆寫本地快照，也沒有下載或執行新版卡檔。
+
+最新測試版為 R181，R168 仍是上游推薦正式版；R181 說明集中於快門角度及機內回放。
+重新比較 R168／R181 中起點落在 `QS_CINE` 範圍的補丁，兩者都是 201 筆，
+目的位址／長度／前後位元組／種類逐筆相同。此比較不涵蓋全部繪製 hooks，不能推論所有執行期行為相同。
+當前完整 tree 沒有 `.c/.h/.S/.cpp/.rs` 實作檔，沒有新增可直接移植的 QS 元件原始碼。
+
+核對結果保存於 `projects/julien-acquaviva/upstream-status.json`。
+
+來源：
+- <https://api.github.com/repos/julienacquaviva/sigma-fp-supmod/commits/main>
+- <https://api.github.com/repos/julienacquaviva/sigma-fp-supmod/branches?per_page=100>
+- <https://api.github.com/repos/julienacquaviva/sigma-fp-supmod/releases?per_page=20>
+- <https://api.github.com/repos/julienacquaviva/sigma-fp-supmod/git/trees/3d60d0f7d3ecbc09843d87a80e35e6adf735abe2?recursive=1>
+
+## 15. 四個獨立瓷磚的第一版離線實作（2026-10-23）
+
+已實作 `projects/qs-touch/native/build_tiles.py` 與 `core/qs_tiles.c/.h`。
+四種自有瓷磚各在八個位置建立新物件（32 個實例），以原生基本元件產生自己的標題／值／補充文字，
+另有共用的四個 Index、四個 More 與一個 Footer，共新增 41 個物件。
+不是對原廠瓷磚的 XCI 改名；原廠物件保留作 GUI 相容骨架與未替換功能的內容。
+
+轉盤的 16 個對應動作改接私有 holder。FORMAT／RES／FPS 的 AEL 動作整段替換；
+DC 新增受私有變數控制的 AEL 事件。資料更新只形成私有意圖，未連到任何原廠設定 setter。
+可攜核心發布 64 個變數，分開原廠 UI ID 與觸控 stable ID；檢查焦點、範圍、過期 revision，
+More 計數器去重／回繞，先發布上限再發布索引，並拒絕發布期間的同步回入。
+
+最終離線產物為 `projects/qs-touch/build/native-tiles-v1-final/`。
+9 項資源測試通過且零跳過：含原廠 NBU 記錄解析器逐筆讀完整頁、結構／配額／物件 ID、
+其餘原廠記錄位元組不變、私有輸入接點、字串重定位、還原成原廠動作會被檢出的破壞測試。
+C 核心通過主機 ASan／UBSan 測試、64 變數型別／名稱對照與 ARM freestanding 編譯。
+資源、ARM 物件與本次來源雜湊記錄在 `verification.json`。
+
+原廠解析器模擬仍有明確的 OS／配置／建構服務替代，未執行繪圖或變數回呼；
+C 核心只有主機執行與 ARM 編譯，未在相機執行。此處沒有頁載入 installer、私有變數 adapter、
+觸控事件轉接、更多選項的原生內容或錄影服務整合，亦沒有輸出 AutoRun 或相機可用卡檔。
+特別是非同步變數通知的回授抑制與舊佇列處理，仍須在 UI 執行緒 adapter 實作驗證，不能由同步核心測試代替。

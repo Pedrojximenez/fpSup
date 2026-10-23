@@ -1,0 +1,428 @@
+<title>IMX410 Lab 模擬器</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
+<style>
+/* layout: control rail (left) + readout sheet (right) — a sensor datasheet you can drive; stacks on phones */
+:root {
+  --bg: #eef1f4; --panel: #fbfcfd; --ink: #18212b; --mute: #5d6a78; --line: #d4dbe3;
+  --accent: #2b55c9; --accent-soft: #dfe6fa; --sensor: #2a3442; --pass: #1d7f52; --warn: #a86a12; --fail: #b8352a;
+  --pass-bg: #e2f2ea; --warn-bg: #f7ecd9; --fail-bg: #f8e1de;
+  --f-ui: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --f-head: "IBM Plex Sans Condensed", "Noto Sans TC", system-ui, sans-serif;
+  --f-num: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #12171d; --panel: #1a2129; --ink: #e3e8ee; --mute: #93a0ae; --line: #2c3641;
+  --accent: #7f9cf0; --accent-soft: #24304d; --sensor: #0b0f14; --pass: #5cc290; --warn: #e0a54a; --fail: #ef7c70;
+  --pass-bg: #173226; --warn-bg: #352a17; --fail-bg: #3a1d1a; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #12171d; --panel: #1a2129; --ink: #e3e8ee; --mute: #93a0ae; --line: #2c3641;
+  --accent: #7f9cf0; --accent-soft: #24304d; --sensor: #0b0f14; --pass: #5cc290; --warn: #e0a54a; --fail: #ef7c70;
+  --pass-bg: #173226; --warn-bg: #352a17; --fail-bg: #3a1d1a; color-scheme: dark }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-ui); font-size: 14px; line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 20px 40px; }
+.wrap { max-width: 1240px; margin: 0 auto; display: grid; gap: 20px; }
+header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; }
+h1 { font-family: var(--f-head); font-weight: 600; font-size: 1.6rem; margin: 0; letter-spacing: .01em; text-wrap: balance; }
+header p { margin: 0; color: var(--mute); max-width: 70ch; }
+.grid { display: grid; grid-template-columns: minmax(280px, 340px) minmax(0, 1fr); gap: 20px; align-items: start; }
+@media (max-width: 860px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 16px; display: grid; gap: 16px; min-width: 0; }
+.lbl { font-size: .75rem; letter-spacing: .08em; color: var(--mute); text-transform: uppercase; font-family: var(--f-head); font-weight: 500; }
+fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: 8px; min-width: 0; }
+legend { padding: 0; margin-bottom: 6px; }
+.seg { display: flex; flex-wrap: wrap; gap: 6px; }
+.seg button { font: inherit; font-family: var(--f-num); font-size: .85rem; padding: 6px 10px; border-radius: 6px; border: 1px solid var(--line);
+  background: transparent; color: var(--ink); cursor: pointer; min-width: 44px; }
+.seg button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--panel); }
+.seg button.off { color: var(--mute); border-style: dashed; }
+.seg button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.merge { display: grid; grid-template-columns: auto repeat(4, minmax(0, 1fr)); gap: 4px; font-family: var(--f-num); font-size: .8rem; }
+.merge .hd { color: var(--mute); text-align: center; align-self: center; }
+.merge button { font: inherit; padding: 6px 0; border-radius: 5px; border: 1px solid var(--line); background: transparent; color: var(--ink); cursor: pointer; }
+.merge button.no { color: var(--mute); border-style: dashed; opacity: .55; }
+.merge button[aria-pressed="true"] { background: var(--accent); color: var(--panel); border-color: var(--accent); opacity: 1; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+label.f { display: grid; gap: 3px; font-size: .8rem; color: var(--mute); }
+input[type=number], select { font: inherit; font-family: var(--f-num); color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; width: 100%; min-width: 0; }
+input[type=range] { width: 100%; accent-color: var(--accent); }
+.hint { font-size: .78rem; color: var(--mute); margin: 0; }
+.status { border-radius: 8px; padding: 12px 14px; display: grid; gap: 4px; }
+.status.ok { background: var(--pass-bg); } .status.ok b { color: var(--pass); }
+.status.warn { background: var(--warn-bg); } .status.warn b { color: var(--warn); }
+.status.bad { background: var(--fail-bg); } .status.bad b { color: var(--fail); }
+.status b { font-family: var(--f-head); font-size: 1.05rem; font-weight: 600; }
+.status span { font-size: .85rem; }
+.nums { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.nums div { background: var(--panel); padding: 10px 12px; display: grid; gap: 2px; }
+.nums .v { font-family: var(--f-num); font-size: 1.25rem; font-variant-numeric: tabular-nums; }
+.nums .u { font-size: .75rem; color: var(--mute); }
+.two { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 16px; }
+@media (max-width: 1000px) { .two { grid-template-columns: minmax(0, 1fr); } }
+canvas { width: 100%; max-width: 100%; height: auto; display: block; border-radius: 6px; }
+.regs { font-family: var(--f-num); font-size: .78rem; overflow-x: auto; max-height: 300px; overflow-y: auto; border: 1px solid var(--line); border-radius: 6px; }
+table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 4px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th { color: var(--mute); font-weight: 500; font-size: .72rem; letter-spacing: .05em; position: sticky; top: 0; background: var(--panel); }
+.mx { overflow-x: auto; }
+.mx table { font-size: .8rem; }
+.mx td.c { font-family: var(--f-num); }
+.chip { display: inline-block; font-family: var(--f-num); font-size: .72rem; padding: 1px 6px; border-radius: 10px; margin: 1px 2px 1px 0; cursor: pointer; border: 1px solid transparent; }
+.chip.p { background: var(--pass-bg); color: var(--pass); } .chip.e { background: var(--warn-bg); color: var(--warn); } .chip.u { background: var(--accent-soft); color: var(--accent); }
+.chip.x { color: var(--mute); cursor: default; }
+.chip.sel { border-color: var(--ink); }
+.legend { display: flex; flex-wrap: wrap; gap: 12px; font-size: .78rem; color: var(--mute); }
+h2 { font-family: var(--f-head); font-size: 1.05rem; font-weight: 600; margin: 0; }
+.notes { margin: 0; padding-left: 18px; color: var(--mute); font-size: .82rem; display: grid; gap: 2px; }
+.shot { display: grid; gap: 8px; }
+.shot figure { margin: 0; display: grid; gap: 4px; }
+.shot figure img { width: 100%; max-width: 560px; border-radius: 6px; border: 1px solid var(--line); background: var(--sensor); }
+.shot figcaption { font-size: .78rem; color: var(--mute); }
+.strip { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; }
+.strip button { flex: 0 0 auto; padding: 0; border: 2px solid transparent; border-radius: 5px; background: none; cursor: pointer; display: grid; gap: 2px; }
+.strip button[aria-pressed="true"] { border-color: var(--accent); }
+.strip img { height: 64px; width: auto; display: block; border-radius: 3px; }
+.strip span { font-family: var(--f-num); font-size: .66rem; color: var(--mute); padding: 0 2px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>IMX410 Lab 模擬器</h1>
+    <p>選 AD、合併、寬度預設、裁切與輸出，頁面照生成器的 <code>plan()</code> 規則算出時序與感光元件寫入，並對照實機驗證結果。純模擬，不碰相機。</p>
+  </header>
+
+  <div class="grid">
+    <div class="panel" id="controls">
+      <fieldset><legend class="lbl">AD 等級 / 位元深度</legend>
+        <div class="seg" id="ad"></div>
+        <p class="hint">11-bit 就是「快速 AD」：11-bit 取樣，仍包成 12-bit 輸出。</p>
+      </fieldset>
+      <fieldset><legend class="lbl">像素合併（水平 × 垂直）</legend>
+        <div class="merge" id="merge"></div>
+      </fieldset>
+      <fieldset><legend class="lbl">寬度預設（格式碼 0001）</legend>
+        <div class="seg" id="fmt"></div>
+      </fieldset>
+      <fieldset><legend class="lbl">裁切（感光元件像素）</legend>
+        <div class="row2">
+          <label class="f">寬 <input type="number" id="cw" step="12"></label>
+          <label class="f">高 <input type="number" id="ch" step="4"></label>
+        </div>
+        <input type="range" id="chr" min="120" max="4040" step="4" aria-label="裁切高度">
+        <div class="seg" id="cropq"></div>
+      </fieldset>
+      <fieldset><legend class="lbl">輸出（RWZM 之後）</legend>
+        <div class="row2">
+          <label class="f">寬 <input type="number" id="ow" step="16"></label>
+          <label class="f">高 <input type="number" id="oh" step="2"></label>
+        </div>
+        <div class="seg"><button type="button" id="ofit">跟裁切 1:1</button></div>
+      </fieldset>
+      <fieldset><legend class="lbl">幀率</legend>
+        <div class="seg" id="fpsq"></div>
+        <label class="f">自訂 fps <input type="number" id="fps" step="0.001" min="0" placeholder="空白 = 最高"></label>
+      </fieldset>
+    </div>
+
+    <div class="panel" id="out">
+      <div id="status" class="status"></div>
+      <div class="nums" id="nums"></div>
+      <div class="shot" id="shot"></div>
+      <div class="two">
+        <div style="display:grid;gap:8px;min-width:0">
+          <span class="lbl">感光元件上的讀出範圍</span>
+          <canvas id="cv" width="760" height="520" aria-label="感光元件讀出範圍示意"></canvas>
+          <div class="legend"><span>灰框 = 6064 × 4040 有效區</span><span>藍 = 格式碼的讀出寬 × 視窗高</span><span>實線 = 你的裁切</span></div>
+        </div>
+        <div style="display:grid;gap:8px;min-width:0;align-content:start">
+          <span class="lbl">感光元件寫入（類別群組 + 格式碼 + 視窗）</span>
+          <div class="regs"><table><thead><tr><th>位址</th><th>值</th><th>用途</th></tr></thead><tbody id="regs"></tbody></table></div>
+          <ul class="notes" id="notes"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div style="display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline">
+      <h2>能力矩陣</h2>
+      <div class="legend"><span class="chip p">類別 已驗 n/m</span><span class="chip e">實驗（未完成驗證）</span><span class="chip u">尚未上機</span><span class="chip x">✗ 已實測不可行</span></div>
+    </div>
+    <p class="hint">點一格就套用到上面。數字是該類別在驗證庫裡光照＋暗場通過的組數。</p>
+    <div class="mx"><table id="mx"></table></div>
+  </div>
+</div>
+
+<script id="labdata" type="application/json">__DATA__</script>
+<script>
+(function () {
+'use strict';
+const D = JSON.parse(document.getElementById('labdata').textContent);
+const CLK = D.clk, VMAX_MAX = D.vmax_max, SENSOR_H = D.sensor_h, WIN_TOP = D.win[0], WIN_BOTTOM = D.win[1];
+const CL = D.classes, BY = Object.fromEntries(CL.map(c => [c.key, c]));
+const MERGES = [[1,1],[2,1],[3,1],[1,2],[2,2],[3,2],[1,3],[2,3],[3,3],[1,6],[3,6]];
+const ADS = [['14', '14-bit'], ['12', '12-bit'], ['11', '11-bit 快速']];
+const NOTE_FMT = { 0x29: '14-bit 6064', 0x2B: '14-bit 4176', 0x2A: '6064', 0x18: '5073', 0x2C: '4176', 0x03: '4016', 0x39: '2×2 (3032)', 0x3B: 'h2 (3032)', 0x2F: 'h3 (2016)', 0x30: '3×6 (2016)' };
+
+function why(ad, mh, mv) {          // measured-infeasible cells (IMX410_RULES §67, SMC_VERIFY r22)
+  if (ad === '14' && mh > 1) return '14-bit 只有格式碼 29 / 2B 帶得出影像（§67 掃描），水平合併的格式碼都不行。';
+  if (mv === 6 && mh !== 3) return 'v÷6 一定要配 h3 的格式碼 30；只寫 07xx 的 v6 組不會除以 6（§67）。';
+  if (ad === '14' && mv === 6) return '14-bit 沒有 3×6。';
+  return '這個組合還沒有類別。';
+}
+function classesFor(ad, mh, mv) { return CL.filter(c => c.ad === ad && c.mh === mh && c.mv === mv); }
+function fmtW(c) { return Math.max(...Object.keys(c.fmt).map(Number)); }
+function fmtCode(c) { return c.fmt[String(fmtW(c))]; }
+
+function fpsG(f) { if (!f) return '0'; return String(Number(f.toPrecision(6))); }
+function cfgId(key, cw, ch, ow, oh, fps) { return `${key}:${cw}x${ch}>${ow}x${oh}@${fpsG(fps)}`; }
+function fullRows(c) { return c.rows_full || Math.floor(SENSOR_H / c.mv / 2) * 2; }
+
+// port of readout_cfg.plan (2026-10-23)
+function plan(key, cw, ch, ow, oh, fps) {
+  const r = BY[key];
+  let sw = cw / r.mh; const sh = ch / r.mv;
+  const ws = Object.keys(r.fmt).map(Number);
+  let fmt = ws.filter(w => w >= sw - 1e-6).sort((a, b) => a - b)[0];
+  if (fmt === undefined && Math.max(...ws) >= sw * 0.995) { fmt = Math.max(...ws); sw = fmt; }
+  if (fmt === undefined) throw new Error(`裁切寬 ${cw} 超過這個類別的讀出寬 ${Math.max(...ws) * r.mh}`);
+  const full_h = SENSOR_H / r.mv, windowed = sh < full_h - 2;
+  if (ow > sw + 1e-6 || (windowed && oh > sh + 1e-6)) throw new Error('RWZM 不能放大：輸出不能比裁切（合併後）大。');
+  if (windowed && r.centre === null) throw new Error('這個類別的垂直視窗還沒測過，只能全高。');
+  const H = Math.ceil(sh / 2), hm = r.hmin;
+  const rows_out = windowed ? 2 * H : (r.rows_full || Math.round(full_h));
+  if (oh > rows_out) throw new Error(`輸出 ${oh} 列 > 讀出實際給的 ${rows_out} 列。`);
+  const lines = (windowed ? rows_out : Math.round(full_h)) + r.over;
+  let b = r.v016, vmin = lines + 2 * b + 12, vmax;
+  if (fps) {
+    vmax = Math.round(CLK / (hm * fps));
+    if (vmax < vmin && r.v016_min !== null) { b = r.v016_min; vmin = lines + 2 * b + 12; }
+    if (vmax < vmin) throw new Error(`${fps} fps 需要 VMAX ${vmax}，低於最小值 ${vmin}（最高 ${(CLK / (hm * vmin)).toFixed(2)} fps）。`);
+    if (vmax > VMAX_MAX) throw new Error(`${fps} fps 需要 VMAX ${vmax} > ${VMAX_MAX}（SoC 欄位 14 bit）；要用多幀曝光。`);
+  } else vmax = vmin;
+  const sensor = [];
+  (r.extra || []).forEach(x => sensor.push(x));
+  sensor.push([0x0001, r.fmt[String(fmt)], 'fmt']);
+  let st = null;
+  if (windowed) {
+    const raw = r.centre - H * r.mv;
+    const cand = [-2, -1, 0, 1, 2].map(k => raw + k).filter(x => ((x % 4) + 4) % 4 === 1);
+    st = cand.sort((a, b2) => Math.abs(a - raw) - Math.abs(b2 - raw) || a - b2)[0];
+    if (st < WIN_TOP || st + 2 * H * r.mv > WIN_BOTTOM) throw new Error(`視窗列 ${st}..${st + 2 * H * r.mv} 超出可讀範圍 ${WIN_TOP}..${WIN_BOTTOM}。`);
+    sensor.push([0x0003, 1, 'win'], [0x0022, st & 0xFF, 'win'], [0x0023, st >> 8, 'win'], [0x0024, H & 0xFF, 'win'], [0x0025, H >> 8, 'win']);
+  } else sensor.push([0x0003, 0, 'win']);
+  if (b !== r.v016) sensor.push([0x0016, b, 'blank']);
+  return { key, r, fmt, sw, sh, windowed, H, st, hm, vmax, vmin, lines, rows_out, sensor,
+    rx_w: Math.ceil(sw / 12) * 12, raster_w: Math.min(fmt, Math.ceil(sw / 16) * 16),
+    fps: CLK / (hm * vmax), fps_max: CLK / (hm * vmin), rolling_ms: hm * lines / CLK * 1e3, id: cfgId(key, cw, ch, ow, oh, fps || 0) };
+}
+
+function classStats(key) {
+  let lp = 0, ln = 0, dp = 0, dn = 0;
+  for (const [id, v] of Object.entries(D.results)) {
+    if (id.split(':')[0] !== key) continue;
+    if ('light' in v) { ln++; if (v.light) lp++; }
+    if ('dark' in v) { dn++; if (v.dark) dp++; }
+  }
+  return { lp, ln, dp, dn };
+}
+
+// ---- state
+const S = { raw: true, ad: '12', mh: 1, mv: 1, key: '12', cw: 6048, ch: 4040, ow: 6048, oh: 4040, fps: 0 };
+const $ = id => document.getElementById(id);
+try { const s = JSON.parse(localStorage.getItem('imx410sim') || 'null'); if (s && BY[s.key]) Object.assign(S, s); } catch (e) {}
+
+function pickClass() {
+  const cs = classesFor(S.ad, S.mh, S.mv);
+  if (!cs.length) { S.key = null; return; }
+  if (!cs.some(c => c.key === S.key)) S.key = cs.slice().sort((a, b) => fmtW(b) - fmtW(a) || (a.exp ? 1 : 0) - (b.exp ? 1 : 0))[0].key;
+}
+function fullCrop() {
+  const c = BY[S.key]; if (!c) return;
+  const w = fmtW(c);
+  S.cw = Math.floor(w / 16) * 16 * c.mh; S.ch = 4040;
+  S.ow = Math.floor(w / 16) * 16; S.oh = fullRows(c);
+}
+
+function renderControls() {
+  $('ad').innerHTML = ADS.map(([v, t]) => `<button type="button" data-v="${v}" aria-pressed="${S.ad === v}">${t}</button>`).join('');
+  let m = '<span class="hd"></span>' + [1, 2, 3].map(h => `<span class="hd">h${h}</span>`).join('') + '<span class="hd"></span>';
+  for (const v of [1, 2, 3, 6]) {
+    m += `<span class="hd">v${v}</span>`;
+    for (const h of [1, 2, 3]) {
+      const ok = classesFor(S.ad, h, v).length > 0;
+      const pressed = S.mh === h && S.mv === v;
+      m += `<button type="button" data-h="${h}" data-v="${v}" class="${ok ? '' : 'no'}" aria-pressed="${pressed}" title="${ok ? `${h}×${v}` : why(S.ad, h, v)}">${h}×${v}</button>`;
+    }
+    m += '<span></span>';
+  }
+  $('merge').innerHTML = m;
+  const cs = classesFor(S.ad, S.mh, S.mv).sort((a, b) => fmtW(b) - fmtW(a));
+  $('fmt').innerHTML = cs.length ? cs.map(c => {
+    const code = fmtCode(c), w = fmtW(c);
+    return `<button type="button" data-k="${c.key}" aria-pressed="${S.key === c.key}" class="${c.exp ? 'off' : ''}" title="${c.name}">${code.toString(16).toUpperCase().padStart(2, '0')} · ${w}</button>`;
+  }).join('') : `<span class="hint">${why(S.ad, S.mh, S.mv)}</span>`;
+  const c = BY[S.key];
+  const qs = c ? [['全片幅', fmtW(c) * c.mh, 4040], ['DCI 4K', 4096, 2160], ['UHD', 3840, 2160], ['FHD 窗', 1920, 1080], ['低列 480', Math.floor(fmtW(c) / 16) * 16 * c.mh, 480]] : [];
+  $('cropq').innerHTML = qs.map(([t, w, h]) => `<button type="button" data-w="${w}" data-h="${h}">${t}</button>`).join('');
+  $('fpsq').innerHTML = [['最高', 0], ['23.976', 23.976], ['29.97', 29.97], ['59.94', 59.94], ['119.88', 119.88]].map(([t, f]) =>
+    `<button type="button" data-f="${f}" aria-pressed="${S.fps === f}">${t}</button>`).join('');
+  $('cw').value = S.cw; $('ch').value = S.ch; $('chr').value = S.ch; $('ow').value = S.ow; $('oh').value = S.oh;
+  $('fps').value = [0, 23.976, 29.97, 59.94, 119.88].includes(S.fps) ? '' : S.fps;
+}
+
+function hex(n, w) { return n.toString(16).toUpperCase().padStart(w, '0'); }
+const REGNOTE = r => {
+  const a = r[0];
+  if (a === 0x0001) return '格式碼：' + (NOTE_FMT[r[1]] || '');
+  if (a === 0x0003) return r[1] ? '感光元件視窗 開' : '視窗關（全高）';
+  if (a === 0x0022 || a === 0x0023) return '視窗起始列';
+  if (a === 0x0024 || a === 0x0025) return '視窗高 H';
+  if (a === 0x0016) return '垂直消隱';
+  if (a === 0x0058) return '合併基準（0x70）';
+  if (a >= 0x0716 && a <= 0x079F) return '垂直合併群組 (Family B)';
+  if ([0x0242, 0x0278, 0x0279, 0x027B, 0x08B6, 0x08B7].includes(a)) return '同色配對（v2）';
+  if (a === 0x0005 || a === 0x001C) return '讀出控制';
+  return '';
+};
+
+function render() {
+  renderControls();
+  const st = $('status'), c = BY[S.key];
+  let p = null, err = null;
+  if (!c) err = why(S.ad, S.mh, S.mv);
+  else { try { p = plan(S.key, S.cw, S.ch, S.ow, S.oh, S.fps || null); } catch (e) { err = e.message; } }
+  const notes = [];
+  if (c) {
+    if (c.lowgain) notes.push('h3 只在低增益線性（增益碼 ≥ ~3700 會吃掉弱訊號），輸出約 1×1 的 0.22 倍。');
+    if (c.exp) notes.push('實驗類別：寬度預設，尚未併入生成器自動選擇。');
+    if (c.y0 && c.y0 !== 20 && c.y0 !== 40) notes.push(`影像從第 ${c.y0} 列開始（量到的幾何修正）。`);
+    if (c.mv > 1) notes.push(`全高時讀出給 ${fullRows(c)} 列（實測）。`);
+    if (c.ad === '11') notes.push('快速 AD 的線時間下限跟寬度有關：≈ max(330, 0.0665·W)。');
+    notes.push('來源：' + c.ev);
+  }
+  if (err) {
+    st.className = 'status bad'; st.innerHTML = `<b>不可行</b><span>${err}</span>`;
+    $('nums').innerHTML = ''; $('regs').innerHTML = '';
+  } else {
+    const res = D.results[p.id], cs = classStats(S.key);
+    let cls = 'warn', head = '規則允許，這一組沒上機驗過', sub = `類別 ${S.key}：光照 ${cs.lp}/${cs.ln}、暗場 ${cs.dp}/${cs.dn} 通過。`;
+    if (res && res.light && res.dark !== false) { cls = 'ok'; head = res.dark ? '這一組光照＋暗場都驗過' : '這一組光照驗過'; }
+    else if (res && (res.light === false || res.dark === false)) { cls = 'bad'; head = '這一組上機失敗過'; }
+    else if (!cs.ln) { head = '規則允許，但類別還沒上機'; }
+    st.className = 'status ' + cls; st.innerHTML = `<b>${head}</b><span>${sub}</span><span style="font-family:var(--f-num);font-size:.75rem;color:var(--mute)">${p.id}</span>`;
+    const N = (v, u, t) => `<div><span class="lbl">${t}</span><span class="v">${v}</span><span class="u">${u}</span></div>`;
+    $('nums').innerHTML = N(p.fps.toFixed(3), `最高 ${p.fps_max.toFixed(2)}`, '幀率 fps') + N(p.rolling_ms.toFixed(2), 'ms', '捲簾') +
+      N(p.hm, `${(p.hm / CLK * 1e6).toFixed(2)} µs / 列`, 'HMAX') + N(p.vmax, `最小 ${p.vmin}`, 'VMAX') +
+      N(`${p.raster_w}×${p.rows_out}`, `讀出 ${c.bits}-bit · ${c.mh}×${c.mv}`, '感光元件輸出') +
+      N(`${S.ow}×${S.oh}`, `RWZM ${(p.sw / S.ow).toFixed(3)} × ${(p.windowed ? p.sh / S.oh : p.rows_out / S.oh).toFixed(3)}`, '錄出') +
+      N(p.lines, '接收端列數', 'Lines') + N(p.windowed ? `${p.st}` : '關', p.windowed ? `H = ${p.H}` : '全高', '視窗起點');
+    $('regs').innerHTML = p.sensor.map(r => `<tr><td>${hex(r[0], 4)}</td><td>${hex(r[1], 2)}</td><td>${REGNOTE(r)}</td></tr>`).join('');
+  }
+  $('notes').innerHTML = notes.map(n => `<li>${n}</li>`).join('');
+  renderShots(p, c);
+  draw(p, c);
+  renderMatrix();
+  try { localStorage.setItem('imx410sim', JSON.stringify(S)); } catch (e) {}
+}
+
+function css(v) { return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
+function draw(p, c) {
+  const cv = $('cv'), g = cv.getContext('2d');
+  const W = cv.width, Hh = cv.height, pad = 30, sx = (W - 2 * pad) / 6064, sy = (Hh - 2 * pad) / 4040, s = Math.min(sx, sy);
+  const ox = (W - 6064 * s) / 2, oy = (Hh - 4040 * s) / 2;
+  g.clearRect(0, 0, W, Hh);
+  g.fillStyle = css('--sensor'); g.fillRect(ox, oy, 6064 * s, 4040 * s);
+  g.strokeStyle = css('--mute'); g.lineWidth = 1; g.strokeRect(ox + .5, oy + .5, 6064 * s, 4040 * s);
+  g.fillStyle = css('--mute'); g.font = '12px ' + css('--f-num');
+  g.fillText('6064', ox, oy - 8); g.save(); g.translate(ox - 8, oy + 4040 * s); g.rotate(-Math.PI / 2); g.fillText('4040', 0, 0); g.restore();
+  if (!c || !p) return;
+  const fw = p.fmt * c.mh, fx = (6064 - fw) / 2;
+  const top = p.windowed ? p.st - 40 : 0, hh = p.windowed ? 2 * p.H * c.mv : 4040;
+  g.fillStyle = css('--accent-soft'); g.globalAlpha = .55; g.fillRect(ox + fx * s, oy + Math.max(0, top) * s, fw * s, Math.min(4040, hh) * s); g.globalAlpha = 1;
+  const cw = S.cw, chh = Math.min(S.ch, hh), cx = (6064 - cw) / 2, cy = Math.max(0, top) + (Math.min(4040, hh) - chh) / 2;
+  g.strokeStyle = css('--accent'); g.lineWidth = 2; g.strokeRect(ox + cx * s, oy + cy * s, cw * s, chh * s);
+  g.fillStyle = css('--accent'); g.fillText(`${cw} × ${S.ch}`, ox + cx * s + 6, oy + cy * s + 16);
+  // merge cell inset: one output pixel = mh x mv same-colour sensor pixels
+  const cell = 12, bx = W - pad - 4 * cell * 3 - 6, by = Hh - pad - 4 * cell * 2 - 6;
+  const col = [['#c84a3c', '#3f9a4c'], ['#3f9a4c', '#3a64c9']];
+  for (let y = 0; y < 6; y++) for (let x = 0; x < 6; x++) {
+    g.fillStyle = col[y % 2][x % 2]; g.globalAlpha = (Math.floor(x / 2) < c.mh && Math.floor(y / 2) < Math.min(c.mv, 3) && x % 2 === 0 && y % 2 === 0) ? 1 : .3;
+    g.fillRect(bx + x * cell, by + y * cell, cell - 1, cell - 1);
+  }
+  g.globalAlpha = 1; g.fillStyle = css('--mute'); g.fillText(`${c.mh}×${c.mv} 同色合併`, bx, by - 6);
+}
+
+// frames the validator actually captured (preview JPEGs: superpixel demosaic, grey world -- not a colour reference)
+function parseId(id) {
+  const m = id.match(/^([^:]+):(\d+)x(\d+)>(\d+)x(\d+)@([\d.]+)$/);
+  return m && { key: m[1], cw: +m[2], ch: +m[3], ow: +m[4], oh: +m[5], fps: +m[6] };
+}
+function renderShots(p, c) {
+  const el = $('shot');
+  if (!c) { el.innerHTML = ''; return; }
+  const own = p && D.shots[p.id];
+  const ids = Object.keys(D.shots).filter(id => id.split(':')[0] === c.key);
+  const cls = (D.class_shots || {})[c.key] || [];
+  // previews are stored at the crop's sensor aspect (merges undone); 'raw' stretches them to the readout's own
+  // raster (ow : oh), which is what the sensor actually delivers -- a 1x2 frame is half as tall
+  const ar = (w, hh) => S.raw ? ` style="aspect-ratio:${w}/${hh};object-fit:fill"` : '';
+  let h = `<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><span class="lbl">實拍畫面</span><div class="seg" id="arsel"><button type="button" data-raw="1" aria-pressed="${S.raw}">感光元件輸出比例</button><button type="button" data-raw="0" aria-pressed="${!S.raw}">還原成畫面比例</button></div></div>`;
+  if (c.mh !== c.mv) h += `<p class="hint">${c.mh}×${c.mv} 的輸出像素不是正方形：一個輸出像素 = 水平 ${c.mh} × 垂直 ${c.mv} 個感光元件像素，所以原始輸出${c.mv > c.mh ? '被垂直壓扁' : '被水平壓扁'} ${Math.max(c.mh, c.mv) / Math.min(c.mh, c.mv)} 倍，錄影端（RWZM/ISP）要拉回來。</p>`;
+  if (own) {
+    const fig = (src, t) => `<figure><img src="${src}" alt="${p.id} ${t}" loading="lazy"${ar(S.ow, S.oh)}><figcaption>${t} · ${p.id}</figcaption></figure>`;
+    h += (own.l ? fig(own.l, '光照驗證拍到的畫面') : '') + (own.d ? fig(own.d, '暗場驗證（鏡頭蓋）') : '');
+  } else {
+    h += `<p class="hint">${ids.length || cls.length ? '這一組沒有留下畫面。' : '這個類別還沒有留下畫面。'}早期通過的組原始幀已被驗證器刪除，會再重拍補上。</p>`;
+  }
+  if (!own && cls.length) h += cls.map(e => `<figure><img src="${e.src}" alt="${c.key} ${e.label}" loading="lazy"${ar(fmtW(c), e.rows)}><figcaption>其他實驗拍的：${e.label} · ${c.key} 全寬 × ${e.rows} 列（同類別，不是這一組設定）</figcaption></figure>`).join('');
+  if (ids.length) h += '<div class="strip">' + ids.map(id => {
+    const s = D.shots[id], q = parseId(id);
+    return `<button type="button" data-id="${id}" aria-pressed="${p && p.id === id}" title="${id}"><img src="${s.l || s.d}" alt="" loading="lazy"><span>${q.cw}×${q.ch}${q.fps ? ' @' + q.fps : ''}${s.l ? '' : ' 暗'}</span></button>`;
+  }).join('') + '</div>';
+  el.innerHTML = h;
+}
+
+function renderMatrix() {
+  let h = '<thead><tr><th>合併</th>' + ADS.map(a => `<th>${a[1]}</th>`).join('') + '</tr></thead><tbody>';
+  for (const [mh, mv] of MERGES) {
+    h += `<tr><td class="c">${mh}×${mv}</td>`;
+    for (const [ad] of ADS) {
+      const cs = classesFor(ad, mh, mv).sort((a, b) => fmtW(b) - fmtW(a));
+      if (!cs.length) { h += `<td><span class="chip x" title="${why(ad, mh, mv)}">✗</span></td>`; continue; }
+      h += '<td>' + cs.map(c => {
+        const t = classStats(c.key), n = t.lp + t.dp, m = t.ln + t.dn;
+        const k = !m ? 'u' : (c.exp ? 'e' : 'p');
+        return `<span class="chip ${k}${c.key === S.key ? ' sel' : ''}" data-k="${c.key}" title="${c.name}">${fmtW(c)} ${m ? n + '/' + m : '—'}</span>`;
+      }).join('') + '</td>';
+    }
+    h += '</tr>';
+  }
+  $('mx').innerHTML = h + '</tbody>';
+}
+
+// ---- events
+document.addEventListener('click', e => {
+  const b = e.target.closest('button, .chip'); if (!b) return;
+  const par = b.parentElement && b.parentElement.id;
+  if (par === 'ad') { S.ad = b.dataset.v; pickClass(); fullCrop(); }
+  else if (par === 'merge') { S.mh = +b.dataset.h; S.mv = +b.dataset.v; pickClass(); fullCrop(); }
+  else if (par === 'fmt') { S.key = b.dataset.k; fullCrop(); }
+  else if (par === 'cropq') { const c = BY[S.key]; S.cw = +b.dataset.w; S.ch = +b.dataset.h; S.ow = Math.floor(S.cw / c.mh / 16) * 16; S.oh = S.ch >= 4040 ? fullRows(c) : Math.floor(S.ch / c.mv / 2) * 2; }
+  else if (par === 'fpsq') { S.fps = +b.dataset.f; }
+  else if (b.id === 'ofit') { const c = BY[S.key]; if (c) { S.ow = Math.floor(S.cw / c.mh / 16) * 16; S.oh = S.ch >= 4040 ? fullRows(c) : Math.floor(S.ch / c.mv / 2) * 2; } }
+  else if (par === 'arsel') { S.raw = b.dataset.raw === '1'; }
+  else if (b.dataset.id) { const q = parseId(b.dataset.id); Object.assign(S, q); const c = BY[q.key]; Object.assign(S, { ad: c.ad, mh: c.mh, mv: c.mv }); }
+  else if (b.classList.contains('chip') && b.dataset.k) { const c = BY[b.dataset.k]; Object.assign(S, { ad: c.ad, mh: c.mh, mv: c.mv, key: c.key }); fullCrop(); }
+  else return;
+  render();
+});
+const num = (id, k) => $(id).addEventListener('change', () => { const v = parseFloat($(id).value); S[k] = isFinite(v) ? v : 0; render(); });
+num('cw', 'cw'); num('ch', 'ch'); num('ow', 'ow'); num('oh', 'oh'); num('fps', 'fps');
+$('chr').addEventListener('input', () => { S.ch = +$('chr').value; const c = BY[S.key]; if (c) S.oh = Math.min(S.oh, S.ch >= 4040 ? fullRows(c) : Math.floor(S.ch / c.mv / 2) * 2); render(); });
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', render);
+new MutationObserver(render).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+pickClass(); render();
+})();
+</script>

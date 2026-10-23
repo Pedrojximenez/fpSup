@@ -58,10 +58,38 @@ def call(fn, *args):
     return v
 
 
+_STOP = {}
+
+
+def safe_stop(tmo_ms=500):
+    """Stop BUFA0 right after a completion, as the firmware does (sensor_read/bufa_stop.S); one camera-side call,
+    since a USB round trip is longer than the blanking gap. Returns tk_wai_flg's result (nonzero = no frame came
+    within tmo_ms, so no DMA was in flight; stopped anyway)."""
+    import cave
+    if 'at' not in _STOP:
+        from armasm import assemble
+        code = assemble(HERE / 'sensor_read' / 'bufa_stop.S')
+        at = cave.claim('imxl.bufastop', 112)
+        if len(code) > 112:
+            raise SystemExit(f'bufa_stop is {len(code)} B, claim is 112')
+        P().put(at, code + bytes(-len(code) % 4), 'bstop ')
+        call(F_DCACHE)
+        _STOP['at'] = at
+    if not P().mem_get(0x30182000)[0] & 0x1F:               # BUFA0 not running: no DMA to cut, no frame to wait for
+        call(F_STARTSTOP, 100)
+        print('  safe stop: BUFA0 idle')
+        return None
+    r = call(_STOP['at'], P().mem_get(FLG_ID)[0], tmo_ms)
+    print(f'  safe stop: wait -> {r}')
+    return r
+
+
 def startstop(n):
     """c06316b8(n) without the risk of blocking the shell: it opens with wai_sem(BUFA_MUTEX, 1, forever),
     and when liveview holds that mutex (seen 2026-10-20 at the restore stop) the shell task never comes
     back -- not even poff gets through. Probe the mutex with a 500 ms timeout and give it straight back."""
+    if n == 100:                            # stop: c06316b8(100) takes no mutex, but cutting a frame's DMA in half
+        return safe_stop()                  # froze the camera ~1 in 100 (freeze_iso B, 2026-10-23)
     sid = P().mem_get(BUFA_MUTEX)[0]
     if sid is None:
         raise SystemExit('could not read the BUFA mutex id')
@@ -82,6 +110,10 @@ def peek():
 
 
 def wr(addr, val, verify=True):
+    # SoC VMAX (high half of 0x30100020, minus 1) is a 14-bit field: 16385 wrapped and wedged the shell (longexp
+    # 2026-10-23), h3shs r2 asked 16624 -- refuse it here so no tool can send it
+    if addr == 0x30100020 and (val >> 16) + 1 > 16384:
+        raise SystemExit(f'VMAX {(val >> 16) + 1} > 16384 refused (14-bit SoC field)')
     for _ in range(6):
         P().mem_set(addr, val)
         if not verify or P().mem_get(addr)[0] == val:
@@ -145,7 +177,15 @@ BUS_BUILD = HERE / 'buslog' / 'build' / 'build.json'
 
 def bus_state():
     """The logger's state (cached alias), from this boot's LOAD.LOG."""
-    import re, subprocess
+    import re, subprocess, cave
+    cache = HERE / 'captures' / '.bus_state.json'            # one LOAD.LOG read per boot (0.8 s each, twice a config)
+    boot = cave.boot_id()
+    try:
+        c = json.loads(cache.read_text())
+        if c['boot'] == boot and P().mem_get(c['st'])[0] == 0x42584D49:
+            return c['st']
+    except Exception:                                        # noqa: BLE001 -- no cache, or a stale one
+        pass
     log = HERE / 'captures' / '.LOAD.LOG'
     log.parent.mkdir(exist_ok=True)
     subprocess.run([sys.executable, '-B', str(SHELL / 'getfile.py'), r'\fpSup\LOAD.LOG', str(log),
@@ -156,6 +196,7 @@ def bus_state():
             st = int(m.group(1), 16) + json.loads(BUS_BUILD.read_text())['state_off']
             if P().mem_get(st)[0] != 0x42584D49:
                 raise SystemExit(f'no IMXB state at 0x{st:08X}')
+            cache.write_text(json.dumps(dict(boot=boot, st=st)))
             return st
     raise SystemExit('IMXB.BIN is not loaded this boot')
 

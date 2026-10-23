@@ -17,7 +17,7 @@ def cov(meas, pred, rng=60):
     b=max(res,key=res.get); return res[0], b, res[b]
 for name in sys.argv[1:]:
     r=C.BY_KEY[name]; w=max(r['fmt'])
-    p=C.plan(name, w*r['mh'] if r['mh']>1 else w, 4040, (w//16)*16, int(4040/r['mv'])//2*2)
+    p=C.plan(name, w*r['mh'] if r['mh']>1 else w, 4040, (w//16)*16, C.full_rows(name))
     a,rows,how=smc.create(p)
     R68=bytes(rows['R68']); u=lambda o: struct.unpack_from('<I',R68,o)[0]
     tid,flag,crop,types,offs=u(4),u(8),(u(0x10),u(0x14),u(0x18),u(0x1C)),(u(0x20),u(0x24)),(u(0x28),u(0x2C))

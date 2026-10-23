@@ -4,9 +4,15 @@
 **(1) RAW 可用的完整解析度×幀率矩陣**、**(2) 連結層其實有讀 EDID**、**(3) 線上像素容器是編譯期固定值**。
 全部從 Ver.5.02 主映像（`out/seg0_c0000000.bin`, base `0xC0000000`）反編譯 + 直接讀資料表得出，並做了交叉驗證。
 
+> **2026-10-23 介面重查：** 原生 RAW 設定鏈與 res-custom 的共用邊界已補在
+> [HDMI_RAW.md §6–7](HDMI_RAW.md#7-能否與-res-custom-共用介面2026-10-23)。
+> 下表涉及線上 packing／guard／光柵利用率的項目應視為待驗證推論；
+> framebuffer 儲存公式與 BRAW metadata 不能單獨證明線上位元佈局或可用的剩餘容量。
+> `TSBMDAJA @ C00EC948` 也確認有 ATS/BMD/AJA 廠商辨識，撤回早期「無廠牌辨識」結論。
+
 > ⚠️ **本文修正 `HDMI_RAW.md` §2 的一項結論**：該文說「相機不讀 EDID / 無 sink capability 讀取」。
-> 實際上韌體**有完整的 CEA-861 EDID 解析與能力比對**（見 §3）。原結論「無 vendor handshake、無廠牌辨識」仍然成立，
-> 但「不看接了什麼」是錯的——相機會依 sink 宣告的 VIC 清單決定能不能送某個模式。
+> 實際上韌體**有完整的 CEA-861 EDID 解析與能力比對**（見 §3），也有廠商辨識。
+> 相機會依 sink 宣告的 VIC 清單決定能不能送某個模式；RAW 私有交握的全貌仍未確認。
 
 > ⚠️ **本文也修正 `../../../projects/hdmi-recorder/notes/RECORDER_SPEC.md` §3.4**：該文說「色彩格式完全不在韌體」。
 > 實際上在 TX 暫存器 `0x30190004`，只是被設成單一編譯期常數（見 §4）。原結論（4:2:2 直通即可）不受影響。
@@ -24,11 +30,11 @@
 | 14 個 HDMI 模式 ↔ CEA VIC / HDMI_VIC 對照 | ✅ 韌體確定，**兩條獨立證據鏈互證** | §3.1、§9.0(b) |
 | 相機會讀 EDID 並依 sink 能力挑模式 | ✅ 韌體確定（**修正舊筆記**） | §3.2 |
 | 線上 colour format = 編譯期常數 3，RAW 不改 | ✅ 韌體確定（**修正舊筆記**） | §4 |
-| RAW 酬載 = 12-bit 緊密打包，2 px → 3 B | ✅ 韌體確定 | §5 |
+| RAW 酬載 = 12-bit 緊密打包，2 px → 3 B | 推論；精確線上 packing 尚未驗證 | §5、§6 |
 | TX 為 HDMI 1.4 級，天花板 297 MHz / 8.91 Gb/s | ✅ 韌體確定（無 SCDC/scrambling/HDCP） | §8.1–8.2 |
-| HDMI framebuffer = 2 B/px → 光柵利用率 75% | ✅ 韌體 + **BRAW metadata 獨立印證** | §9.0(a)、§11.3 |
-| 線上 Bayer 幀 = **3856 × 2176**（8 px 護欄） | ✅ BRAW `crop_origin`/`crop_size` 推得 | §11.3 |
-| 光柵閒置 ≈ 521 行 / 4.0 MB per frame | ✅ 由上兩項推得 | §11.3 |
+| HDMI framebuffer = 2 B/px → 光柵利用率 75% | 儲存／容量推論，非線上實測 | §9.0(a)、§11.3 |
+| 線上 Bayer 幀 = **3856 × 2176**（8 px 護欄） | BRAW metadata 推論；非 HDMI capture 證據 | §11.3 |
+| 光柵閒置 ≈ 521 行 / 4.0 MB per frame | 依未驗證 packing 推得，不能視為可用空間 | §11.3 |
 | TickTimer 實為 64-bit（`FUN_c002B4E0`） | ✅ 韌體確定 | §10.4 |
 | 音訊 = 48k / 2ch / **16-bit 位元透明** | ✅ **實測**（OR = `0xFFFF00`） | §11.2 |
 | 音訊低 4 bit 可安全夾帶 48 kB/s | ✅ **實測**（熵 + 噪訊底） | §12 |
@@ -44,7 +50,7 @@
 
 RAW over HDMI = **完全標準的 CEA-861 / HDMI 1.4 4K×2K 視訊時序**（依錄影機 EDID 挑選），
 **線上像素容器（colour format）是編譯期常數，RAW 與一般影像完全相同**，
-差別只在 framebuffer 內容換成 **緊密打包的 12-bit Bayer（2 px → 3 bytes）**。
+RAW 使用不同的 Bayer buffer 路徑；**精確線上 packing 尚未逐位元驗證**。
 → 對錄影機而言就是「一條普通的 UHD/FHD/DCI4K 訊號，但像素值不是影像」。
 
 ---
@@ -327,7 +333,10 @@ SCDC + scrambling 在 TMDS character rate > 340 MHz 時是**強制**的 → 沒�
 並存進 bitmask bit 0x80000 / 0x100000——但 `FUN_c00DEA98` 的 mode_id→code 對照表中**沒有任何 id 映到這兩個 bit**。
 能力讀得到、卻沒有對應模式可送 → 再次確認 TX 卡在 HDMI 1.4。
 
-### 8.3 RAW 酬載 vs 通道容量：頻寬不是瓶頸
+### 8.3 RAW 酬載 vs 通道容量估算（非 packing 驗證）
+
+> **2026-10-23 限定：** 以下是通道容量算術與早期假設，未證明 RAW 如何佔用每個 wire pixel。
+> 不能依50%／75%比例推導任意 Bayer 尺寸可傳輸，或推導外錄機能解碼該尺寸。
 
 **TMDS 的物理事實：1× 時脈下每個 pixel period 固定 24 bit**（3 channel × 8 bit）。
 不論 RGB 4:4:4 8-bit、YCbCr 4:4:4 8-bit、還是 **YCbCr 4:2:2 12-bit**，都是 24 bit/px——

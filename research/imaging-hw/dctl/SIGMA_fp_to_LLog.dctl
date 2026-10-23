@@ -1,0 +1,33 @@
+// SIGMA fp CinemaDNG -> Leica L-Log (BT.2020 gamut), per L-Log Reference Manual V1.9.
+// Input  : Rec.2020 scene-linear (Camera RAW decode: Color Space = Rec.2020, Gamma = Linear)
+//          or DaVinci Wide Gamut / DaVinci Intermediate (color-managed timeline).
+// Output : L-Log, full data range (0..1 = 0..1023). 18% grey -> 0.4350 (445/1023).
+// The DNG ColorMatrix decides camera -> 2020; pick it with tools/cdng_profile.py.
+DEFINE_UI_PARAMS(p_In, Input, DCTLUI_COMBO_BOX, 0, { IN_2020LIN, IN_DWGDI }, { Rec.2020 Linear, DaVinci WG / Intermediate })
+DEFINE_UI_PARAMS(p_Exp, Exposure (stops), DCTLUI_SLIDER_FLOAT, 0.0, -4.0, 4.0, 0.05)
+
+// DaVinci Wide Gamut -> BT.2020 (both D65)
+__CONSTANT__ float DWG2020[9] = { 1.13030218f,-0.02039285f,-0.10990933f,
+                                  -0.02554706f, 1.31084932f,-0.28530226f,
+                                  -0.09259861f,-0.16465302f, 1.25725163f };
+
+__DEVICE__ float di2lin(float v) {
+    if (v <= 0.02740668f) return v / 10.44426855f;
+    return _exp2f(v / 0.07329248f - 7.0f) - 0.0075f;
+}
+// L-Log: a=8 b=0.09 c=0.27 d=1.3 e=0.0115 f=0.6
+__DEVICE__ float llog(float x) {
+    if (x <= 0.006f) return 8.0f * x + 0.09f;
+    return 0.27f * _log10f(1.3f * x + 0.0115f) + 0.6f;
+}
+__DEVICE__ float3 transform(int p_Width, int p_Height, int p_X, int p_Y, float p_R, float p_G, float p_B) {
+    float r = p_R, g = p_G, b = p_B;
+    if (p_In == IN_DWGDI) {
+        float lr = di2lin(r), lg = di2lin(g), lb = di2lin(b);
+        r = DWG2020[0]*lr + DWG2020[1]*lg + DWG2020[2]*lb;
+        g = DWG2020[3]*lr + DWG2020[4]*lg + DWG2020[5]*lb;
+        b = DWG2020[6]*lr + DWG2020[7]*lg + DWG2020[8]*lb;
+    }
+    float k = _exp2f(p_Exp);
+    return make_float3(llog(r * k), llog(g * k), llog(b * k));
+}

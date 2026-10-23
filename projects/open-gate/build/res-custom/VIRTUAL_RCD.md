@@ -3,6 +3,11 @@
 2026-10-09。Res Lab 是第一個產生器，res-custom 是唯一的套用者。
 Julien style 尚未接入；以後的新工具沿用本契約，不增加專用套用入口或常駐解析度列。
 
+> **2026-10-23 HDMI RAW 共用介面研究，未實作：** 現版 ABI2 的 `format` 是內錄格式，
+> 套用仍限 CinemaDNG；不能以現有 RCD 宣稱支援 HDMI RAW。後續可共用本服務架構，
+> 但須協商輸出 target、擴充 required RCD section 並提供 HDMI 專用套用器。
+> [流程與28模式離線證據](../../../../research/interfaces/notes/HDMI_RAW.md#7-能否與-res-custom-共用介面2026-10-23)。
+
 ## 使用流程
 
 `32RESCUS.BIN` 先由共用 Loader v3 安裝，`50RESLAB.BIN` 再註冊產生器。

@@ -43,7 +43,7 @@ def capture_one(spec, out):
         meta = dict(kind='stock', mode=mode, top=top)
     else:
         r = C.BY_KEY[name]; w = max(r['fmt'])
-        p = C.plan(name, w * r['mh'] if r['mh'] > 1 else w, 4040, (w // 16) * 16, int(4040 / r['mv']) // 2 * 2)
+        p = C.plan(name, w * r['mh'] if r['mh'] > 1 else w, 4040, (w // 16) * 16, C.full_rows(r['key']))
         a, rows, how = smc.create(p)
         rows = {t: bytes(v) for t, v in rows.items()}
         rows['R10'] = struct.pack('<II', V.R10[a['cls']], 10)

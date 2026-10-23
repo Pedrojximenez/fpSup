@@ -1,0 +1,190 @@
+{
+  "scope": "Static data inspection; no camera or firmware execution",
+  "upstream": "https://github.com/julienacquaviva/sigma-fp-supmod",
+  "snapshot_commit": "3d60d0f7d3ecbc09843d87a80e35e6adf735abe2",
+  "release": "R168",
+  "source_sha256": "f4cddac261c47021ce666449cdab3deb6c12f1467b019113b6d70909b854fd98",
+  "stock_sha256": "92a8ee993f6c3d66c251e88d45a2ccd5135c6cf7342717784321c2ed506e2fb4",
+  "patch_count": 1013,
+  "all_before_images_match": true,
+  "qs_cine_patch_count": 201,
+  "editor_csv_changes": [
+    {
+      "path": "../MenuY12/data/Y2_3_CINE_angle_W91C1.cvm",
+      "row_count": 32,
+      "changes": [
+        {
+          "ui_id": 48,
+          "key": "1929",
+          "before_image": "menu_headPhone",
+          "after_image": "set_cropZoom_2_5"
+        }
+      ]
+    },
+    {
+      "path": "../MenuY12/data/Y2_3_SLIKE.cvm",
+      "row_count": 42,
+      "changes": [
+        {
+          "ui_id": 15,
+          "key": "1106",
+          "before_image": "menu_hdr",
+          "after_image": "qs_flash_2"
+        },
+        {
+          "ui_id": 17,
+          "key": "1107",
+          "before_image": "menu_crop",
+          "after_image": "set_cropZoom_1_00"
+        },
+        {
+          "ui_id": 20,
+          "key": "1115",
+          "before_image": "menu_cine_format",
+          "after_image": "qs_formatQuality_6_S"
+        },
+        {
+          "ui_id": 21,
+          "key": "1117",
+          "before_image": "menu_cine_resolution",
+          "after_image": "set_cropZoom_1_83"
+        },
+        {
+          "ui_id": 39,
+          "key": "1136",
+          "before_image": "menu_electronicStabilizer",
+          "after_image": "set_cropZoom_1_91"
+        },
+        {
+          "ui_id": 48,
+          "key": "1929",
+          "before_image": "menu_headPhone",
+          "after_image": "set_cropZoom_2_5"
+        }
+      ]
+    },
+    {
+      "path": "../MenuY12/data/Y2_3_SLIKE_W91C1.cvm",
+      "row_count": 42,
+      "changes": [
+        {
+          "ui_id": 48,
+          "key": "1929",
+          "before_image": "menu_headPhone",
+          "after_image": "set_cropZoom_2_5"
+        }
+      ]
+    },
+    {
+      "path": "../MenuY12/data/Y2_3_CINE_angle.cvm",
+      "row_count": 32,
+      "changes": [
+        {
+          "ui_id": 15,
+          "key": "1106",
+          "before_image": "menu_hdr",
+          "after_image": "qs_flash_2"
+        },
+        {
+          "ui_id": 17,
+          "key": "1107",
+          "before_image": "menu_crop",
+          "after_image": "set_cropZoom_1_00"
+        },
+        {
+          "ui_id": 20,
+          "key": "1114",
+          "before_image": "menu_cine_format",
+          "after_image": "qs_formatQuality_6_S"
+        },
+        {
+          "ui_id": 21,
+          "key": "1116",
+          "before_image": "menu_cine_resolution",
+          "after_image": "set_cropZoom_1_83"
+        },
+        {
+          "ui_id": 39,
+          "key": "1136",
+          "before_image": "menu_electronicStabilizer",
+          "after_image": "set_cropZoom_1_91"
+        },
+        {
+          "ui_id": 48,
+          "key": "1929",
+          "before_image": "menu_headPhone",
+          "after_image": "set_cropZoom_2_5"
+        }
+      ]
+    },
+    {
+      "path": "../MenuY12/data/Y2_3_CINE.cvm",
+      "row_count": 32,
+      "changes": [
+        {
+          "ui_id": 15,
+          "key": "1106",
+          "before_image": "menu_hdr",
+          "after_image": "qs_flash_2"
+        },
+        {
+          "ui_id": 17,
+          "key": "1107",
+          "before_image": "menu_crop",
+          "after_image": "set_cropZoom_1_00"
+        },
+        {
+          "ui_id": 20,
+          "key": "1114",
+          "before_image": "menu_cine_format",
+          "after_image": "qs_formatQuality_6_S"
+        },
+        {
+          "ui_id": 21,
+          "key": "1116",
+          "before_image": "menu_cine_resolution",
+          "after_image": "set_cropZoom_1_83"
+        },
+        {
+          "ui_id": 39,
+          "key": "1136",
+          "before_image": "menu_electronicStabilizer",
+          "after_image": "set_cropZoom_1_91"
+        },
+        {
+          "ui_id": 48,
+          "key": "1929",
+          "before_image": "menu_headPhone",
+          "after_image": "set_cropZoom_2_5"
+        }
+      ]
+    },
+    {
+      "path": "../MenuY12/data/Y2_3_CINE_W91C1.cvm",
+      "row_count": 32,
+      "changes": [
+        {
+          "ui_id": 48,
+          "key": "1929",
+          "before_image": "menu_headPhone",
+          "after_image": "set_cropZoom_2_5"
+        }
+      ]
+    }
+  ],
+  "ui_hook_sites": [
+    "0xC05EC4B4",
+    "0xC05FCE58",
+    "0xC05FD360",
+    "0xC05FD4D0",
+    "0xC05FD4E8",
+    "0xC05FD8E0",
+    "0xC05E5B58",
+    "0xC05E6400"
+  ],
+  "limits": [
+    "CSV data confirms retained IDs, not runtime setter behaviour",
+    "Patch counts do not measure rendering performance",
+    "No touchscreen or paging behaviour is established by this inspection"
+  ]
+}

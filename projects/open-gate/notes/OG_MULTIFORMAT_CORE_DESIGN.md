@@ -20,6 +20,13 @@ Apply 先在自有 scratch 編譯、核對 FPS 與容量，停止 live view 後�
 記憶體配方不從上次的列名稱自動恢復，需再次 Apply。
 本輪只完成本機來源與離線驗證，未操作相機、寫卡或發布。
 
+**2026-10-23 HDMI RAW 介面研究（尚未接入）：** 可以保留同一解析度列與 producer，
+由 consumer 依輸出目標編譯。HDMI 需要自己的 picker／display 身分、format11 與
+RAW buffer 路由，現有 CDNG 位深、gain、writer／rate 政策不能直接搬過去。
+28 模式的原生離線驗證與相容設計見
+[HDMI_RAW.md §7](../../../research/interfaces/notes/HDMI_RAW.md#7-能否與-res-custom-共用介面2026-10-23)。
+目前 ABI2 與 RCD 的產品行為未變，任意尺寸外錄仍未驗證。
+
 2026-10-07,**只是設計**,沒有實作、沒上機。使用者決定(向 Jose 要不到原始碼):
 保留我們的原始碼核心,做一個類似 Jose registry/slot 的「一個核心 + 每格式一列」。
 格式:OG3K、OG2K、S16、OG3.5K、OG4K。前文:`projects/jose-hurtado/notes/JOSE_VS_OURS.md`(他的資料逐欄讀出)、

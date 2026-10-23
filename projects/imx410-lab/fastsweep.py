@@ -52,7 +52,11 @@ class Session:
         if mode == 10:
             B.switch('key OKON'); B.switch('key OKOFF')                  # into magnify = mode 10
             self.entered = True
-            time.sleep(1.5)
+            t0 = time.time()                                             # poll instead of a fixed 1.5 s
+            time.sleep(0.3)
+            while f',{mode:04d},' not in B.P().sh('imager mode_now') and time.time() - t0 < 3.0:
+                time.sleep(0.1)
+            time.sleep(0.3)                                              # the switch's tail (receiver, DCLP)
         cur = B.P().sh('imager mode_now')
         if f',{mode:04d},' not in cur:
             raise SystemExit(f'not mode {mode}: {cur.strip()[-120:]}')

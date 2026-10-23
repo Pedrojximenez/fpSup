@@ -29,20 +29,41 @@ BLACK_REF = {19: 7.4, 21: 6.0, 23: 2.3, 17: 0.0, 16: 0.0, 18: 0.0, 20: 0.0, 22: 
 STOCK_BLACK = {'14': (0.7, -1.3), '12': (1.9, 1.8), '12fast': (3.9, 5.2), '12fastW': (3.9, 5.2), '2x2': (6.1, 1.2),
                '2x2fast': (3.5, 7.3), '3x3': (1.9, 0.7), '3x3fast': (3.9, 5.2), '3x6': (1.1, 1.2), '3x6fast': (1.9, 2.2)}
 BLACK_TOL = (2.0, 3.0)
+# stock binned classes at full height (sensor window OFF, 0003=0; SMC_VERIFY round 17): the image-vs-OB offset sits ~2-3 DN
+# below the windowed stock reference (2x2 4.2 vs 6.1 at 0x400, 2x2fast 4.5 vs 7.3 at 3900) -- own reference
+STOCK_BLACK_FULL = {'2x2': (4.2, 1.0), '2x2fast': (2.2, 4.5), '3x3': (1.1, 0.9), '3x3fast': (2.5, 4.5), '3x6': (1.0, 1.4),
+                    '3x6fast': (1.8, 2.0)}
+# matrix classes (§67): their own reference = mean image-vs-OB offset at 0x400 / 3900 over the 7-8 dark configs of
+# smc_m1 (2026-10-23, lens capped; spread within a class <= 1.1 DN). 12h3 / f12h3 / 14v2 / 14v3: none yet (bound)
+STOCK_BLACK.update({'12v2': (4.1, 0.5), '12v3': (1.2, 1.0), '12h2': (1.1, 1.4), '12h2v3': (1.1, 1.2), '12h3v2': (3.4, 0.1),
+                    'f12v2': (1.8, 5.2), 'f12v3': (2.2, 5.7), 'f12h2': (2.4, 4.9), 'f12h2v3': (2.3, 5.2), 'f12h3v2': (2.8, 3.7),
+                    '14v2': (0.3, -1.3), '14v3': (0.4, -1.3)})   # 14-bit: SMC_VERIFY round 19 (= stock 14 class 0.7/-1.3)
 
 
 MATRIX_BLACK_BOUND = (4.0, 10.0)   # matrix classes (§67) have no stock mode: until their own reference exists, bound the
                                    # offset at the widest stock class values (2x2 6.1 at 0x400, 2x2fast 7.3 at 3900) + tol
 
 
-def black_judge(key, gains):
+def _black_base(key):
+    """width presets are judged against the class they were cut from (2026-10-23 [I]: the format word sets the width
+    only, so the black offset should match): 12w18 -> 12, f12w18 -> 12fast (fast 1x1), f12v2w2C -> f12v2, 14v3w2B -> 14v3"""
+    import re as _re
+    b = _re.sub(r'w(18|03|2C|2B)$', '', key)
+    return '12fast' if b == 'f12' else b
+
+
+def black_judge(key, gains, full=False):
+    if key not in STOCK_BLACK and _black_base(key) in STOCK_BLACK:
+        r = black_judge(_black_base(key), gains, full)
+        r['ref_from'] = _black_base(key)
+        return r
     if key not in STOCK_BLACK:
         got = (gains.get(1024, gains.get('1024')), gains.get(3900, gains.get('3900')))
         if None in got:
             return dict(PASS=False, why='missing gain frame')
         return dict(g1024=got[0], g3900=got[1], ref='bound', bound=list(MATRIX_BLACK_BOUND),
                     PASS=all(abs(g) <= b for g, b in zip(got, MATRIX_BLACK_BOUND)))
-    ref = STOCK_BLACK[key]
+    ref = STOCK_BLACK_FULL[key] if full and key in STOCK_BLACK_FULL else STOCK_BLACK[key]
     got = (gains.get(1024, gains.get('1024')), gains.get(3900, gains.get('3900')))
     if None in got:
         return dict(PASS=False, why='missing gain frame')
@@ -137,14 +158,14 @@ def matrix_set():
     (3408 / 2160 sensor rows), all at max fps; full frame at 23.976 / 29.97 / 59.94 where the plan allows it"""
     out = []
     for r in C.READOUTS:
-        if not r.get('new'):
+        if not (r.get('new') or r.get('exp')):       # + width presets (user 2026-10-23: the whole matrix)
             continue
         w = max(r['fmt'])
         cw_full = w * r['mh'] if r['mh'] > 1 else w
         for frac in (1.0, 0.75, 0.5):
             cw = int(cw_full * frac) // (12 * r['mh']) * (12 * r['mh'])
             ow = (cw // r['mh']) // 16 * 16
-            oh = int(4040 / r['mv']) // 2 * 2
+            oh = C.full_rows(r['key'])
             out.append((r['key'], (cw, 4040), (ow, oh), None))
         for ch in (3408, 2160):                     # vertical windows (§64 rule; not yet measured for these classes)
             ow = (cw_full // r['mh']) // 16 * 16
@@ -156,15 +177,74 @@ def matrix_set():
         for fps in (23.976, 29.97, 59.94):
             ow = (cw_full // r['mh']) // 16 * 16
             try:
-                C.plan(r['key'], cw_full, 4040, ow, int(4040 / r['mv']) // 2 * 2, fps)
+                C.plan(r['key'], cw_full, 4040, ow, C.full_rows(r['key']), fps)
             except ValueError:
                 continue
-            out.append((r['key'], (cw_full, 4040), (ow, int(4040 / r['mv']) // 2 * 2), fps))
+            out.append((r['key'], (cw_full, 4040), (ow, C.full_rows(r['key'])), fps))
+    return out
+
+
+def full_set():
+    """the complete pass (user 2026-10-23: rerun everything, then rebuild the page from it): matrix_set's shapes for
+    EVERY class (full height at 3 widths, 3408 / 2160 windows, 23.976 / 29.97 / 59.94), plus CORE and fps_set, one per id"""
+    saved = [(r, r.get('exp')) for r in C.READOUTS]
+    try:
+        for r, _ in saved:
+            r['exp'] = True
+        cfgs = matrix_set()
+    finally:
+        for r, e in saved:
+            if e is None:
+                r.pop('exp', None)
+            else:
+                r['exp'] = e
+    seen, out = set(), []
+    for c in cfgs + [x if len(x) == 4 else (*x, None) for x in list(CORE) + fps_set()]:
+        pid = C.plan(c[0], *c[1], *c[2], c[3])['id']
+        if pid not in seen:
+            seen.add(pid); out.append(c)
+    return out
+
+
+def reshoot_set(out):
+    """representative frames for the simulator page (user 2026-10-23: the passing configs' frames had been deleted):
+    every class at full width x full height, plus the 3408 / 2160 windows where the plan allows; configs that already
+    kept a preview.jpg are left out. Run with --force (they passed before)."""
+    res = []
+    for r in C.READOUTS:
+        w = max(r['fmt']); cw = w * r['mh']; ow = w // 16 * 16
+        cand = [((cw, 4040), (ow, C.full_rows(r['key'])))]
+        cand += [((cw, ch), (ow, int(ch / r['mv']) // 2 * 2)) for ch in (3408, 2160)]
+        for crop, outsz in cand:
+            try:
+                pid = C.plan(r['key'], *crop, *outsz)['id']
+            except ValueError:
+                continue
+            if not (out / pid.replace(':', '_').replace('>', '_') / 'preview.jpg').exists():
+                res.append((r['key'], crop, outsz, None))
+    return res
+
+
+def stockfull_set():
+    """stock binned classes at their measured full height (round 14: 2x2 2014, 3x3 1344, 3x6 672), full width, at max fps
+    and 29.97 / 59.94 where the plan allows it"""
+    out = []
+    for key in ('2x2', '2x2fast', '3x3', '3x3fast', '3x6', '3x6fast'):
+        r = C.BY_KEY[key]; w = max(r['fmt'])
+        cw = w * r['mh']
+        for fps in (None, 29.97, 59.94):
+            try:
+                C.plan(key, cw, 4040, w // 16 * 16, C.full_rows(key), fps)
+            except ValueError:
+                continue
+            out.append((key, (cw, 4040), (w // 16 * 16, C.full_rows(key)), fps))
     return out
 
 
 def run_one(key, crop, outsz, base_out, dark, fps=None):
     import bufa_probe as B, resweep as R, vmode, hsburst
+    import fastsweep as F
+    F.cached_assemble()                     # callfn re-ran clang on every firmware call: 2.7 s a config (10-23 profile)
     p = C.plan(key, *crop, *outsz, fps)
     a, rows, how = smc.create(p)
     rows = {t: bytes(v) for t, v in rows.items()}
@@ -195,7 +275,14 @@ def run_one(key, crop, outsz, base_out, dark, fps=None):
             for line in B.P().sh('imager mode_now').splitlines():
                 if line.startswith('frame_count'):
                     return [int(x.split(':')[1]) for x in line.split(',')]
-        c0 = counts(); time.sleep(1.0); c1 = counts()
+        c0 = counts(); time.sleep(0.5); c1 = counts()      # display transfers run at ~30/s: >5 in 0.5 s
+        def settle(n=4, floor=0.1, cap=2.0):
+            """wait until the sensor has started n more frames (a gain / SHS / VMAX change lands within 2), instead of
+            a fixed 0.3-0.4 s: short at high fps, still enough at long VMAX"""
+            t0 = time.time(); f0 = counts()[0]
+            time.sleep(floor)
+            while counts()[0] - f0 < n and time.time() - t0 < cap:
+                time.sleep(0.01)
         res['checks']['live_view'] = dict(frames=c1[0] - c0[0], transfers=c1[1] - c0[1], PASS=(c1[1] - c0[1]) > 5)
         ok = s.grab(d / 'f')
         res['checks']['frame'] = dict(PASS=bool(ok))   # smc_m1: 10 configs never completed a frame and still "passed"
@@ -204,6 +291,17 @@ def run_one(key, crop, outsz, base_out, dark, fps=None):
         if ok:
             fr, m = R.decode(d / 'f')
             img = fr[0][top + 2:top + p['out_h'] - 2, 16:-16]; ob = fr[0][4:max(top - 4, 6), 16:-16]
+            try:                                    # small JPEG kept after the raw frames are deleted (simulator page)
+                import preview
+                preview.make(fr[0], top, p['out_h'], p['crop'][0] / p['crop'][1], d / ('preview_dark.jpg' if dark else 'preview.jpg'), ob=ob)
+            except Exception:                       # noqa: BLE001 -- a preview never fails a config
+                pass
+            try:                                    # keep the first frame zstd-compressed (~8-17 MB): the caller deletes
+                import subprocess as _sp            # only *.raw, so passing configs no longer lose every frame
+                _sp.run(['zstd', '-9', '-q', '-f', str(d / 'f' / 'frame.raw'), '-o',      # (user 2026-10-23: 527 lost)
+                         str(d / 'f' / ('frame_dark.raw.zst' if dark else 'frame.raw.zst'))], timeout=60)
+            except Exception:                       # noqa: BLE001
+                pass
             if not dark:                            # matrix classes: y0 was measured with 0018 (dark rows) on, which the
                 rs_ = fr[0][:, 16:-16].std(1)      # REG table cannot carry. Texture, not level (h3 had a dark scene
                 thr = 2 * float(np.median(rs_[1:6])) + 3.0   # top); and the first COMPLETE row pair: in f12v2 row 18 was
@@ -215,6 +313,11 @@ def run_one(key, crop, outsz, base_out, dark, fps=None):
                 # config) -- y0 = 20 skips that unstable pair, so first_pair = y0 - 2 is expected, not a failure
                 res['checks']['top'] = dict(first_pair=lit, y0=top, warn=bool(lit > top),
                                             PASS=(lit >= top - 2) if p.get('new') else True)
+                # rows the sensor did not deliver (round 12/14: planned rows past the readout read 1 or 0) or flat
+                # rows (no texture at all) -- the dark rows check only, so a light-only round missed them
+                rp_ = img.mean(1); rsd = img.std(1)
+                blank = int(((rp_ < ob.mean() - 60) | (rsd < 0.5)).sum())
+                res['checks']['rows'] = dict(blank_rows=blank, PASS=blank == 0)
             if dark:
                 rowp = img.mean(1); colp = img.mean(0)
                 # image - OB black depends on the AD class (stock fast modes: +6..8 DN, others ~0..2; SMC_VERIFY round 1):
@@ -230,7 +333,7 @@ def run_one(key, crop, outsz, base_out, dark, fps=None):
                 hg = {}
                 for code in (0x400, 3900):
                     B.bus_subs(st, [(0x0005, 4), (0x0006, 0), (0x003D, code & 0xFF), (0x003E, code >> 8), (0x003F, code & 0xFF), (0x0040, code >> 8)])
-                    time.sleep(0.4)
+                    settle()
                     if s.grab(d / f'g{code}'):
                         if p['bits'] == 14:
                             m2 = json.loads((d / f'g{code}' / 'frame.json').read_text()); m2['bits'] = 14
@@ -239,7 +342,7 @@ def run_one(key, crop, outsz, base_out, dark, fps=None):
                         hg[code] = float(np.mean([f[top + 2:top + p['out_h'] - 2, 16:-16].mean() - f[4:max(top - 4, 6), 16:-16].mean() for f in f2]))
                 B.bus_subs(st, [])
                 res['gain_offsets'] = hg
-                res['checks']['black_gain'] = black_judge(key, hg)
+                res['checks']['black_gain'] = black_judge(key, hg, full=(0x0003, 1) not in p['sensor'])
                 res['checks']['rows'] = rows_ok(img, float(ob.mean()))
                 # the AE-gain check stays for structure only (row/column/even-odd); its level is judged by black_gain
                 res['checks']['black']['PASS'] = rowp.std() < 1.5 and abs(rowp[0::2].mean() - rowp[1::2].mean()) < 1.5
@@ -268,7 +371,7 @@ def run_one(key, crop, outsz, base_out, dark, fps=None):
                 code = 0x400
                 for _ in range(4):
                     B.bus_subs(st, [(0x0005, 4), (0x0006, 0), (0x003D, code & 0xFF), (0x003E, code >> 8), (0x003F, code & 0xFF), (0x0040, code >> 8)])
-                    time.sleep(0.3)
+                    settle()
                     if not s.grab(d / 'gainprobe'):
                         break
                     sg = sig(d / 'gainprobe')
@@ -286,7 +389,7 @@ def run_one(key, crop, outsz, base_out, dark, fps=None):
                 n0 = max(1, int(np.ceil((vp - 8) / per)))
                 vms = [int(np.ceil(n * per)) + 8 for n in (n0 + 2, n0 + 1, n0)]
                 for vm in vms:
-                    B.wr(VREG, ((vm - 1) << 16) | (v0 & 0xFFFF)); time.sleep(0.3)
+                    B.wr(VREG, ((vm - 1) << 16) | (v0 & 0xFFFF)); settle()
                     if s.grab(d / f'v{vm}'):
                         pts.append((vm, sig(d / f'v{vm}') / (vm - 8)))
                 # zero-exposure baseline: SHS just below VMAX/2 (exposure ~4 lines) -> the image-vs-OB offset itself
@@ -294,7 +397,7 @@ def run_one(key, crop, outsz, base_out, dark, fps=None):
                 B.wr(VREG, ((vb_ - 1) << 16) | (v0 & 0xFFFF))
                 shs0 = vb_ // 2 - 2
                 B.bus_subs(st, [(0x0005, shs0 & 0xFF), (0x0006, shs0 >> 8), (0x003D, code & 0xFF), (0x003E, code >> 8), (0x003F, code & 0xFF), (0x0040, code >> 8)])
-                time.sleep(0.3)
+                settle()
                 b1 = sig(d / 'base') if s.grab(d / 'base') else None
                 b2 = sig(d / 'base2') if s.grab(d / 'base2') else None
                 base = None if b1 is None or b2 is None else (b1 + b2) / 2
@@ -329,16 +432,21 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('out'); ap.add_argument('--set', default='core'); ap.add_argument('--dark', action='store_true')
     ap.add_argument('--only', default='')
+    ap.add_argument('--db', default=str(DB))           # a fresh pass keeps its own results (full_v1)
     ap.add_argument('--fresh', action='store_true'); ap.add_argument('--force', action='store_true')   # poff before every config (matrix r2: wedges at configs 3 and 7)
     a = ap.parse_args()
     out = pathlib.Path(a.out); out.mkdir(parents=True, exist_ok=True)
     cfgs = {'core': CORE, 'sweep': sweep_set, 'fps': fps_set, 'matrix': matrix_set,
+            'stockfull': stockfull_set,
+            'fmtexp': lambda: [(r['key'], (max(r['fmt']) * r['mh'], 4040), (max(r['fmt']) // 16 * 16, C.full_rows(r['key'])), None) for r in C.EXPERIMENTAL],
+            'reshoot': lambda: reshoot_set(pathlib.Path(a.out)), 'full': full_set,
             'matrixfull': lambda: [c for c in matrix_set() if c[1][1] == 4040 and c[3] is None and c[2][0] >= (max(C.BY_KEY[c[0]]['fmt']) // 16 * 16) - 16]}[a.set]
     cfgs = cfgs() if callable(cfgs) else cfgs
     cfgs = [c if len(c) == 4 else (*c, None) for c in cfgs]
     if a.only:
         cfgs = [c for c in cfgs if c[0] in a.only.split(',')]
-    db = json.loads(DB.read_text()) if DB.exists() else {}
+    dbp = pathlib.Path(a.db)
+    db = json.loads(dbp.read_text()) if dbp.exists() else {}
     tag = 'dark' if a.dark else 'light'
     print(f'{len(cfgs)} configs ({tag})', flush=True)
 
@@ -387,7 +495,7 @@ def main():
             (out / f"{pid.replace(':', '_').replace('>', '_')}.stderr").write_text(r.stdout + '\n----\n' + r.stderr)   # full trace for the post-mortem
             db.setdefault(pid, {})[tag] = dict(PASS=False, error=(r.stderr.strip().splitlines() or ['?'])[-1][:200])
             print(f'ERROR {pid}: {db[pid][tag]["error"]}', flush=True)
-        DB.write_text(json.dumps(db, indent=1, default=float))
+        dbp.write_text(json.dumps(db, indent=1, default=float))
 
 
 if __name__ == '__main__':

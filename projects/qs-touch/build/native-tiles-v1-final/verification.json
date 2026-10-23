@@ -1,0 +1,39 @@
+{
+  "scope": "Offline resource and C intent controller; no camera or installation",
+  "checks": [
+    {
+      "name": "C sanitizers, routing, feedback and 64-variable contract",
+      "passed": true
+    },
+    {
+      "name": "ARM freestanding compile only",
+      "passed": true
+    },
+    {
+      "name": "Private resource invariants, mutations and original NBU parser",
+      "passed": true,
+      "skipped": 0
+    }
+  ],
+  "tests_run": 9,
+  "test_output": "test_all_four_are_independent_objects_in_every_slot (test_tiles.TilesTests) ... ok\ntest_graph_allocations_and_local_numbers (test_tiles.TilesTests) ... ok\ntest_mutation_native_action_leak_is_detected (test_tiles.TilesTests) ... ok\ntest_mutation_object_budget_is_detected (test_tiles.TilesTests) ... ok\ntest_original_parser_reads_every_record (test_tiles.TilesTests) ... ok\ntest_other_native_records_are_unchanged (test_tiles.TilesTests) ... ok\ntest_private_holders_have_one_own_value_and_read_only_cap_binding (test_tiles.TilesTests) ... ok\ntest_private_refs_and_declared_variables (test_tiles.TilesTests) ... ok\ntest_replaced_inputs_never_use_the_stock_setter_or_menu_jump (test_tiles.TilesTests) ... ok\n\n----------------------------------------------------------------------\nRan 9 tests in 29.418s\n\nOK\n",
+  "artifacts": {
+    "QS_CINE.fpqs.page": "aa422202d41d546c4ff985fadab10f654d06e1bc8b9bc94b60daa2a89fbad440",
+    "QS_CINE.fpqs.strings": "f93009906f5a7f76a59ffa3871d9e05b5016462480058c384702d3fe9632dec8",
+    "qs_tiles.arm.o": "8e99098253f698cbcfbc0c420d31b2b466e5eff6f22b6a194833c28015e40608",
+    "manifest.json": "5ce0be75aa1653ed95f59d5b962c4b3eb1558f506895bb0a4444f87cef4d63d4"
+  },
+  "source_hashes": {
+    "projects/qs-touch/native/verify_tiles.py": "90efe28fcc11add77a901e8956b2f9f213a47c81c1b8a03d04f1ff9f4809f5b4",
+    "projects/qs-touch/native/build_tiles.py": "92717b25adb825c9a3d5f9b42836a29eef09466995a47af683720a0b666b2def",
+    "projects/qs-touch/native/test_tiles.py": "0b4589556742dc1b37322d61486b9e986bbc72e82b405d718b5b877b5a6f2e33",
+    "projects/qs-touch/core/qs_tiles.c": "2fc832f865637a4dca69e29b4b77ada37f436c3371fb776c98090b533303fee2",
+    "projects/qs-touch/core/qs_tiles.h": "ab93bcc3ecfeb2055144999a8f4810a5c2c9c985113f58eb59ff263840aadd65",
+    "projects/qs-touch/tests/test_qs_tiles.c": "061159bb2c871b0bf50221e599ecb6d2c744683728552922eb1b9aa677ac452a"
+  },
+  "limitations": [
+    "Native OS, painting, variable callbacks, touch input and recording service are not executed",
+    "No page installer or camera-ready card is produced",
+    "ARM compile is not execution of the C controller on the camera"
+  ]
+}

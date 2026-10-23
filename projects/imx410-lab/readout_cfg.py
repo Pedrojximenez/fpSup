@@ -64,6 +64,8 @@ _OVER = {(2, 1): 54, (3, 1): 34, (1, 2): 26, (3, 2): 26, (1, 3): 43, (2, 3): 43,
 _V016 = {1: 35, 2: 35, 3: 50, 6: 35}
 
 
+_ROWS_FULL = {2: 2014}   # full-height image rows from y0 when fewer than 4040/mv: every V2 class (12v2, f12v2, 12h3v2) sent
+                         # only 2014 image rows from y0 = 20, the last 6 receiver rows read 1 (smc_m1 dark, 2026-10-23)
 _Y0 = {(1, 2): 20, (1, 3): 20, (2, 1): 40, (3, 1): 20, (2, 3): 20, (3, 2): 20}   # first COMPLETE row pair (full frames)   # first image row, even; h2 / h2v3 re-measured
 # measured by the firmware switch without 0018 (smc_m1, 2026-10-23): first lit row 17/18 for every vertical or mixed
 # merge, 40 for h2 (3B); h3 (2F, v1): rows 16-19 read below black (199), texture from row 20 (the 640 was a dark scene top)
@@ -75,7 +77,7 @@ def _cell(key, mh, mv, ad, fmt, extra, ev):
     return dict(key=key, name=f'{bits}-bit{" fast" if ad == "fast" else ""} {mh}x{mv}', mh=mh, mv=mv, bits=bits, ad=ad,
                 donor=6 if ad == '14' else 10, fmt=fmt, hmin=h, hdef=h, over=_OVER[(mh, mv)], centre=2080, v016=_V016[mv],
                 v016_min=None, fast_set=ad == 'fast', extra=FULL + extra, new=True,
-                y0=_Y0[(mh, mv)],
+                y0=_Y0[(mh, mv)], rows_full=_ROWS_FULL.get(mv),
                 cls=16 if ad == '14' else 17, ev=ev)
 
 
@@ -98,7 +100,60 @@ READOUTS += [
 # the 07xx v6 set alone does not divide by 6); 14-bit with any non-stock 0001 word (only 29/2B carry a 14-bit image)
 READOUTS += [
 ]
+# sensor-side horizontal crop presets (format words with a narrower output, §43/§45; user 2026-10-23: they are width
+# crops): EXPERIMENTAL, not in any validation set until measured (fmtw.py). Same Family A as 12 / 12fast, 1x1, cls 17.
+EXPERIMENTAL = []
+for _w, _code, _nm in ((5073, 0x18, 'w18'), (4016, 0x03, 'w03'), (4176, 0x2C, 'w2C')):
+    for _fast in (False, True):
+        _b = dict(next(r for r in READOUTS if r['key'] == ('12fast' if _fast else '12')))
+        _b.update(key=('f12' if _fast else '12') + _nm, fmt={_w: _code}, cls=17, exp=True,
+                  hmin=max(330, -(-_w * 665 // 100000) * 10) if _fast else 445, hdef=max(330, -(-_w * 665 // 100000) * 10) if _fast else 445,   # fmtw: fast floor ~0.0665*W up to the measured 10s, AD floor 330
+                  name=f'12-bit{" fast" if _fast else ""} 1x1 width {_w} ({_code:02X}) [exp]')
+        if not (_fast and _code == 0x2C):              # f12w2C == the stock-derived 12fast class
+            EXPERIMENTAL.append(_b)
+# width presets with vertical merges, fast AD (user 2026-10-23: do they stack?): the format word only sets the width,
+# the V2 (+pairing) / V3 group sets the vertical merge -- same extra regs as f12v2 / f12v3
+for _vk in ('f12v2', 'f12v3'):
+    _v = next(r for r in READOUTS if r['key'] == _vk)
+    for _w, _code, _nm in ((5073, 0x18, 'w18'), (4016, 0x03, 'w03'), (4176, 0x2C, 'w2C')):
+        _b = dict(_v)
+        _h = max(330, -(-_w * 665 // 100000) * 10)
+        _b.update(key=_vk + _nm, fmt={_w: _code}, exp=True, new=True, hmin=_h, hdef=_h,
+                  name=f'{_v["name"]} width {_w} ({_code:02X}) [exp]')
+        EXPERIMENTAL.append(_b)
+# full matrix (user 2026-10-23: every bit depth x crop x merge x format x AD). 11-bit == the fast AD (§21/Z CAM), so
+# bit depth and AD are one axis: 14 / 12 normal / 11 fast. Missing cells: normal-AD width presets with V2/V3 (the fast
+# ones stack, round 22) and 14-bit 2B (the only other 14-bit word, §67 scan) at 1x1 / V2 / V3. 03 + merge stays out.
+for _vk in ('12v2', '12v3'):
+    _v = next(r for r in READOUTS if r['key'] == _vk)
+    for _w, _code, _nm in ((5073, 0x18, 'w18'), (4176, 0x2C, 'w2C')):
+        _b = dict(_v)
+        _b.update(key=_vk + _nm, fmt={_w: _code}, exp=True, new=True, name=f'{_v["name"]} width {_w} ({_code:02X}) [exp]')
+        EXPERIMENTAL.append(_b)
+for _vk in ('14', '14v2', '14v3'):
+    _b = dict(next(r for r in READOUTS if r['key'] == _vk))
+    _b.update(key=_vk + 'w2B', fmt={4176: 0x2B}, exp=True, cls=16, name=f'{_b["name"]} width 4176 (2B) [exp]')
+    if _vk == '14':
+        _b.update(new=False)
+    EXPERIMENTAL.append(_b)
+# measured geometry (fmtexp, 2026-10-23): 18 / 03 at 1x1 move the image up 6 rows (textured 34..4075, y0 34); 18 with
+# V3 ends 6 rows early (17..1371 -> 1352 from 20); 03 with V2/V3 loses the OB rows (texture from row 1) -> dropped;
+# 2C needs nothing (1x1 / V2 / V3 pass as planned)
+_GEOM = {'12w18': dict(y0=34), 'f12w18': dict(y0=34), 'f12v3w18': dict(rows_full=1352), '12v3w18': dict(rows_full=1352),  # [I] same as fast
+         '12w03': dict(y0=34), 'f12w03': dict(y0=34)}
+for _r in EXPERIMENTAL:
+    _r.update(_GEOM.get(_r['key'], {}))
+EXPERIMENTAL = [r for r in EXPERIMENTAL if r['key'] not in ('f12v2w03', 'f12v3w03')]
+READOUTS += EXPERIMENTAL
 BY_KEY = {r['key']: r for r in READOUTS}
+# full-height image rows from y0, measured (rowrange search, lens open, window kept, 2026-10-23): every stock binned
+# readout delivers exactly 4032 sensor rows of image (2x2 / V2 rows 18..2033, 3x3 14..1357, 3x6 8..679 = 4032/vbin);
+# 1x1 delivers 4042 (40..4081). Planning more rows than this gave rows that read 1 (2x2: 2020 -> 6, 3x3: 1347 -> 3,
+# 3x6: 673 -> 1). 12v3 (Family B V3 on 2A) textures 17..1377 -- 1358 from y0, kept at the validated 1347 for now.
+for _r in READOUTS:
+    if _r['mv'] in (2, 3, 6) and not _r.get('rows_full'):
+        # new V3 classes (Family B on 2A / 3B): textured 17..1377 -> 1358 from y0 = 20 (14v3 assumed the same [I])
+        _r['rows_full'] = 1358 if (_r.get('new') and _r['mv'] == 3) else {2: 2014, 3: 1344, 6: 672}[_r['mv']]
 VMAX_MAX = 16384                                    # SoC 0x30100020 field is 14 bits: 16384 OK, 16385 wrapped and
                                                     # wedged the shell (longexp 2026-10-23) -- never write above
 SENSOR_H = 4040                                     # active rows
@@ -110,6 +165,12 @@ def validated():
         return json.loads(RESULTS.read_text())
     except (OSError, ValueError):
         return {}
+
+
+def full_rows(key):
+    """output rows of a full-height plan on readout `key` (even)"""
+    r = BY_KEY[key]
+    return r.get('rows_full') or int(SENSOR_H / r['mv']) // 2 * 2
 
 
 def config_id(key, cw, ch, ow, oh, fps):
@@ -126,18 +187,22 @@ def plan(key, cw, ch, ow, oh, fps=None, v016=None, hmax=None, hdr=0):
         fmt = max(r['fmt']); sw = fmt
     if fmt is None:
         raise ValueError(f'crop {cw} wider than {key} formats')
-    if ow > sw + 1e-6 or oh > sh + 1e-6:
-        raise ValueError('RWZM cannot upscale')
     full_h = SENSOR_H / r['mv']
     windowed = sh < full_h - 2
+    # full height: the readout delivers rows_full rows, which can be more than 4040/v (1x1 4042, new V3 1358 = 4074
+    # sensor rows) -- checked against rows_out below; a window is bounded by its crop
+    if ow > sw + 1e-6 or (windowed and oh > sh + 1e-6):
+        raise ValueError('RWZM cannot upscale')
     if windowed and r['centre'] is None:
         raise ValueError(f'{key}: vertical window not tested -- full height only')
     H = math.ceil(sh / 2)
     hm = hmax or r['hmin']
     if hm < r['hmin']:
         raise ValueError(f'HMAX {hm} below the floor {r["hmin"]}')
-    rows_out = 2 * H if windowed else int(round(full_h))
-    lines = rows_out + r['over']
+    rows_out = 2 * H if windowed else (r.get('rows_full') or int(round(full_h)))
+    if oh > rows_out:
+        raise ValueError(f'{key}: {oh} output rows > {rows_out} the readout delivers')
+    lines = (rows_out if windowed else int(round(full_h))) + r['over']   # the sensor still sends the empty rows below rows_full
     b = r['v016'] if v016 is None else v016
     if b < r['v016'] and (r['v016_min'] is None or b < r['v016_min']):
         raise ValueError(f'0016={b} below the tested minimum for {key}')

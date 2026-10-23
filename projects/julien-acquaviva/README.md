@@ -1,5 +1,10 @@
 # Julien R168 → res-custom
 
+2026-10-23 重新核對上游：main 仍為 `3d60d0f7d3ecbc09843d87a80e35e6adf735abe2`，
+本地 `upstream/` 的 35 個檔案均與 GitHub tree 相同，沒有新內容需要覆寫。
+最新測試版仍為 R181，推薦正式版仍為 R168；沒有新增公開的 QS 實作原始碼。
+詳見 [upstream-status.json](upstream-status.json) 與 [完整自製瓷磚方向](../../research/ui/CUSTOM_QS.md#14-完整自製瓷磚與上游更新核對2026-10-23)。
+
 已提取 **1,552 個有效設定**（4 種 DATA 目標 × 3 比例 × 19 個 crop × 可用幀率），
 轉為 **984 個固定畫幅 RCD3 資料檔**。來源是 Julien 的 R168；R181 是測試版，未作為此次來源。
 產物屬於離線開發版，尚未上機驗證。

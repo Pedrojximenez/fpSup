@@ -28,7 +28,7 @@ MATRIX = []                                            # every new readout class
 for _r in C.READOUTS:
     if _r.get('new'):
         _w = max(_r['fmt'])
-        MATRIX.append((_r['key'], (_w * _r['mh'] if _r['mh'] > 1 else _w, 4040), (_w, int(4040 / _r['mv']) // 2 * 2), None))
+        MATRIX.append((_r['key'], (_w * _r['mh'] if _r['mh'] > 1 else _w, 4040), (_w, C.full_rows(_r['key'])), None))
 
 
 HDR_H1 = ['12', '14', '12fastW', '12v2', '12v3', '14v2', '14v3', 'f12v2', 'f12v3']   # 1x1 / vertical merges (§30)
@@ -39,11 +39,11 @@ def hdr_set():
     out = []
     for key in HDR_H1 + HDR_PROBE:                      # full frame, 0738 = 0x20
         r = C.BY_KEY[key]; w = max(r['fmt']); cw = w * r['mh'] if r['mh'] > 1 else w
-        out.append((key, (cw, 4040), ((cw // r['mh']) // 16 * 16, int(4040 / r['mv']) // 2 * 2), None, 0x20))
+        out.append((key, (cw, 4040), ((cw // r['mh']) // 16 * 16, C.full_rows(key)), None, 0x20))
     for key in HDR_H1:                                  # crops: 3/4 width, windows 3408 / 2160 rows
         r = C.BY_KEY[key]; w = max(r['fmt'])
         cw = int(w * 0.75) // 12 * 12
-        out.append((key, (cw, 4040), (cw // 16 * 16, int(4040 / r['mv']) // 2 * 2), None, 0x20))
+        out.append((key, (cw, 4040), (cw // 16 * 16, C.full_rows(key)), None, 0x20))
         for ch in (3408, 2160):
             out.append((key, (w, ch), (w // 16 * 16, int(ch / r['mv']) // 2 * 2), None, 0x20))
     return sorted(out, key=lambda c: C.BY_KEY[c[0]]['bits'] == 14)   # 14-bit last: the V2 base entry wedged twice

@@ -39,3 +39,13 @@ research/imaging-hw/h264-10bit-audit-20261015/*evidence.c
 
 # 壓縮後仍超過 GitHub 100 MB 上限
 research/imaging-hw/color-characterisation/exports/output - 00000002.tif
+
+# 原廠字串池的複本(在韌體程式碼區),build 時重新產生
+*.fpqs.strings
+
+# SIGMA 官網的檔案(3D 模型、型錄)與官網韌體偵測，留在本機
+research/fp2/official-downloads/
+research/fp2/check_fw*
+
+# 從別台相機(BF)韌體萃取的暫存器表，留在 sigma_bf/
+projects/imx410-lab/offline/bf_imx410_modes.csv

@@ -5,13 +5,19 @@
 
 信心:**[C]** 反編/實機交叉驗證 · **[I]** 推論 · **[?]** 未解。
 
+> **2026-10-23 更新：** 共用 res-custom 介面可行，但「加一筆表就能 OG6K 外錄」
+> 並不成立。28 模式原生離線測試找到 RAM entry 的顯示身分分類、HDMI format11、
+> RAW display／gain 路由等必要適配；精確結果與分階段設計見
+> [HDMI_RAW.md §7](../../../research/interfaces/notes/HDMI_RAW.md#7-能否與-res-custom-共用介面2026-10-23)。
+> 下文保留2026-09-17的調查；任意尺寸的 packing／metadata／接收器支援仍未驗證。
+
 ---
 
 ## 0. 一句話
 
-**HDMI RAW 有專屬的 26 筆格式表 `0xC0BE5450`,表型、`mode` 欄位空間都和我們
-已經在操作的 CinemaDNG 選擇器表完全一樣。** 要讓 OG6K 走 HDMI RAW,就是在
-那張表註冊一筆 —— 和我們對三張 CinemaDNG 表做過的事同構。
+**HDMI RAW 有專屬的28筆格式表 `0xC0BE5450`，entry外形與感測器mode空間可和
+CinemaDNG 的虛擬化機制對照。** 但新增虛擬 entry 還須處理下游身分、格式、
+RAW buffer 與 HDMI／接收器契約；同樣16-byte外形不能證明任意 OG 尺寸可外錄。
 
 ---
 

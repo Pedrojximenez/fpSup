@@ -41,6 +41,8 @@ def level(d, top, bits):
 def one(base, out):
     d0 = out / base; d0.mkdir(parents=True, exist_ok=True)
     import struct, vmode
+    vmode.KEEP_WINDOW = True       # r1-r3 ran without it: vmode rewrote the donor window, the source of the 'bottom 487 rows
+                                   # clipped' (SMC_VERIFY round 13) -- good_rows() stays as a guard
     donor = R.BASES[base][0]
     top = struct.unpack_from('<H', vmode.donor_rows(donor)['TIM'], 0xE)[0]     # first image row of the donor
     b = R.Base(d0, base); s = b.s; s.pair = True
@@ -96,9 +98,12 @@ def one(base, out):
             idx = np.nonzero(bright)[0]
             per = np.diff(idx).tolist()
             ratio = float(np.median(lv[bright]) / L) if bright.any() else 0.0
+            # empty frames read OB 0 and a flat image pedestal (~256 above OB) -- longexp5: judging their image-minus-OB
+            # against 0 failed every n although period and ratio were right; empty = OB ~ 0 is the test
+            obs_ = np.array(res['accum'][n]['obs'])
             res['accum'][n].update(period=per, ratio=round(ratio, 3),
                                    PASS=bool(len(idx) >= 2 and all(p == n + 1 for p in per) and abs(ratio - (n + 1)) < 0.1 * (n + 1)
-                                             and np.all(np.abs(lv[~bright]) < 0.1 * L + 2)))
+                                             and np.all(obs_[~bright] < 5)))
             print('accum judge', n, res['accum'][n]['period'], res['accum'][n]['ratio'], res['accum'][n]['PASS'], flush=True)
         # 3. shutter inside an accumulated exposure
         res['shs_scan'] = {}
