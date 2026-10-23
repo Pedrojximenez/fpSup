@@ -241,7 +241,7 @@ function classStats(key) {
 }
 
 // ---- state
-const S = { ad: '12', mh: 1, mv: 1, key: '12', cw: 6048, ch: 4040, ow: 6048, oh: 4040, fps: 0 };
+const S = { raw: true, ad: '12', mh: 1, mv: 1, key: '12', cw: 6048, ch: 4040, ow: 6048, oh: 4040, fps: 0 };
 const $ = id => document.getElementById(id);
 try { const s = JSON.parse(localStorage.getItem('imx410sim') || 'null'); if (s && BY[s.key]) Object.assign(S, s); } catch (e) {}
 
@@ -377,14 +377,18 @@ function renderShots(p, c) {
   const own = p && D.shots[p.id];
   const ids = Object.keys(D.shots).filter(id => id.split(':')[0] === c.key);
   const cls = (D.class_shots || {})[c.key] || [];
-  let h = '<span class="lbl">實拍畫面</span>';
+  // previews are stored at the crop's sensor aspect (merges undone); 'raw' stretches them to the readout's own
+  // raster (ow : oh), which is what the sensor actually delivers -- a 1x2 frame is half as tall
+  const ar = (w, hh) => S.raw ? ` style="aspect-ratio:${w}/${hh};object-fit:fill"` : '';
+  let h = `<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><span class="lbl">實拍畫面</span><div class="seg" id="arsel"><button type="button" data-raw="1" aria-pressed="${S.raw}">感光元件輸出比例</button><button type="button" data-raw="0" aria-pressed="${!S.raw}">還原成畫面比例</button></div></div>`;
+  if (c.mh !== c.mv) h += `<p class="hint">${c.mh}×${c.mv} 的輸出像素不是正方形：一個輸出像素 = 水平 ${c.mh} × 垂直 ${c.mv} 個感光元件像素，所以原始輸出${c.mv > c.mh ? '被垂直壓扁' : '被水平壓扁'} ${Math.max(c.mh, c.mv) / Math.min(c.mh, c.mv)} 倍，錄影端（RWZM/ISP）要拉回來。</p>`;
   if (own) {
-    const fig = (src, t) => `<figure><img src="${src}" alt="${p.id} ${t}" loading="lazy"><figcaption>${t} · ${p.id}</figcaption></figure>`;
+    const fig = (src, t) => `<figure><img src="${src}" alt="${p.id} ${t}" loading="lazy"${ar(S.ow, S.oh)}><figcaption>${t} · ${p.id}</figcaption></figure>`;
     h += (own.l ? fig(own.l, '光照驗證拍到的畫面') : '') + (own.d ? fig(own.d, '暗場驗證（鏡頭蓋）') : '');
   } else {
     h += `<p class="hint">${ids.length || cls.length ? '這一組沒有留下畫面。' : '這個類別還沒有留下畫面。'}早期通過的組原始幀已被驗證器刪除，會再重拍補上。</p>`;
   }
-  if (!own && cls.length) h += cls.map(e => `<figure><img src="${e.src}" alt="${c.key} ${e.label}" loading="lazy"><figcaption>其他實驗拍的：${e.label} · ${c.key} 全寬 × ${e.rows} 列（同類別，不是這一組設定）</figcaption></figure>`).join('');
+  if (!own && cls.length) h += cls.map(e => `<figure><img src="${e.src}" alt="${c.key} ${e.label}" loading="lazy"${ar(fmtW(c), e.rows)}><figcaption>其他實驗拍的：${e.label} · ${c.key} 全寬 × ${e.rows} 列（同類別，不是這一組設定）</figcaption></figure>`).join('');
   if (ids.length) h += '<div class="strip">' + ids.map(id => {
     const s = D.shots[id], q = parseId(id);
     return `<button type="button" data-id="${id}" aria-pressed="${p && p.id === id}" title="${id}"><img src="${s.l || s.d}" alt="" loading="lazy"><span>${q.cw}×${q.ch}${q.fps ? ' @' + q.fps : ''}${s.l ? '' : ' 暗'}</span></button>`;
@@ -420,6 +424,7 @@ document.addEventListener('click', e => {
   else if (par === 'cropq') { const c = BY[S.key]; S.cw = +b.dataset.w; S.ch = +b.dataset.h; S.ow = Math.floor(S.cw / c.mh / 16) * 16; S.oh = S.ch >= 4040 ? fullRows(c) : Math.floor(S.ch / c.mv / 2) * 2; }
   else if (par === 'fpsq') { S.fps = +b.dataset.f; }
   else if (b.id === 'ofit') { const c = BY[S.key]; if (c) { S.ow = Math.floor(S.cw / c.mh / 16) * 16; S.oh = S.ch >= 4040 ? fullRows(c) : Math.floor(S.ch / c.mv / 2) * 2; } }
+  else if (par === 'arsel') { S.raw = b.dataset.raw === '1'; }
   else if (b.dataset.id) { const q = parseId(b.dataset.id); Object.assign(S, q); const c = BY[q.key]; Object.assign(S, { ad: c.ad, mh: c.mh, mv: c.mv }); }
   else if (b.classList.contains('chip') && b.dataset.k) { const c = BY[b.dataset.k]; Object.assign(S, { ad: c.ad, mh: c.mh, mv: c.mv, key: c.key }); fullCrop(); }
   else return;
