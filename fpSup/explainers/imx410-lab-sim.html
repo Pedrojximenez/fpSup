@@ -11,6 +11,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
 <style>
 .back { flex-basis: 100%; color: var(--accent); text-decoration: none; font-size: .85rem; }
+.status-note { margin: 0 0 16px; font-size: .9rem; line-height: 1.6; }
+.status-note summary { cursor: pointer; }
+.status-note ul { margin: 8px 0 0; padding-left: 1.2em; }
+.status-note li { margin: 4px 0; }
 /* layout: control rail (left) + readout sheet (right) — a sensor datasheet you can drive; stacks on phones */
 :root {
   --bg: #eef1f4; --panel: #fbfcfd; --ink: #18212b; --mute: #5d6a78; --line: #d4dbe3;
@@ -103,6 +107,18 @@ h2 { font-family: var(--f-head); font-size: 1.05rem; font-weight: 600; margin: 0
     <h1>IMX410 Lab 模擬器</h1>
     <p>選 AD、合併、寬度預設、裁切與輸出，頁面照生成器的 <code>plan()</code> 規則算出時序與感光元件寫入，並對照實機驗證結果。純模擬，不碰相機。</p>
   </header>
+
+  <details class="panel status-note" open>
+    <summary><b>驗證狀態（2026-10-25）</b>：產生器 641 組，640 組光照＋暗場都上機驗證過</summary>
+    <ul>
+      <li>每組都在相機上切換模式後實際抓幀：列數、第一列、空白列、整張畫面的暗帶、右邊假欄、線性、Bayer 相位、顏色比例、列相位、連拍；暗場另驗黑位。拍攝條件 ISO 800、快門 1/30。唯一沒過的是 3×3 800×160（畫面太小量不出列相位）。</li>
+      <li><b>寬度</b>：1×1 的寬度預設實際只送「標稱寬 − 16」欄（4176 → 4160、4016 → 4000、5073 → 5056），頁面已照實際寬度計算。</li>
+      <li><b>水平 3:1（垂直不合併）不可用</b>：紅、藍沒有訊號，只剩綠色。3×3、3×2 正常。</li>
+      <li><b>垂直 3:1（1×3 等）</b>：感光元件會插入 14 列沒曝光的列。全高改成輸出 1330 列；開視窗時往上多讀 16 列再丟掉。兩者輸出都已驗證乾淨。原因還不知道，這是繞過去的做法。</li>
+      <li><b>14-bit 低捲簾</b>：1×3 視窗 6064×720 捲簾 9.41 ms、最高 93 fps；6064×1136 14.44 ms；全高 6064×1330 16.80 ms。感光元件層已驗證，還沒實際錄影。</li>
+      <li>「已驗」只代表感光元件送出的 Bayer 幀正確；錄成 CinemaDNG 要經過 Res-Custom2 與 ISP，那一段另外驗證。</li>
+    </ul>
+  </details>
 
   <div class="grid">
     <div class="panel" id="controls">
