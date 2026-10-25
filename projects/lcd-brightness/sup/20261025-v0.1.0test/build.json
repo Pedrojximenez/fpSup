@@ -1,0 +1,45 @@
+{
+  "product": "LCD Backlight",
+  "format": "Loader v4 FSB4",
+  "sup_id": "BKLT",
+  "version": 1,
+  "facts": {
+    "file": "Backlight_v0.1.0test.BIN",
+    "bytes": 1228,
+    "block_bytes": 1484,
+    "entry_off": 49,
+    "initial_level": 20,
+    "range": [
+      18,
+      31
+    ],
+    "firmware": [
+      {
+        "path": "out/seg0_c0000000.bin",
+        "base": "0xc0000000",
+        "size": 49245696,
+        "sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622"
+      },
+      {
+        "path": "out/seg1_c2ef6e00.bin",
+        "base": "0xc2ef6e00",
+        "size": 236032,
+        "sha256": "0dcaca8f5441fe4ddc6ed801cb888e325df4e76006e4f53a1c3219809b22ce7b"
+      }
+    ]
+  },
+  "sha256": "04f264484c0c155261601cb1690a93c1250ea780fd1551b2e1b3b006087d728e",
+  "sources": {
+    "fpSup/backlight/build.py": "001cd806f6ad6080bf8642b250223ed4b0ba5c2193a44a5252ffcfc3c1cbb551",
+    "fpSup/backlight/backlight.c": "3cd0f32e5f836483218c11d546e9225cbb823f47abdea96b499555cfb2e40c7f",
+    "fpSup/loader-v4/build_v4.py": "ed836563f4df920d0f4ceb951a498251e7f1d4b9d09357fba68b1cb743b879de",
+    "fpSup/loader-v4/sloader4.h": "d05b9039fdf71f79513fbc53f6ef8d4c92042189fe7555c12195143df9429535",
+    "fpSup/loader-v4/names_v4.py": "4125c793653de10a77aa711b6d49c79c5b733ae3af726742a5b98b336364ef00",
+    "projects/lcd-brightness/firmware.py": "e68761e75311e333ebd11be5127adb213a8a125aa51b714ee4f6086b6c14cf84"
+  },
+  "camera_tested": false,
+  "written_to_card": false,
+  "measured_nits": null,
+  "settings_saved_to_card": false,
+  "requires_autorun_update_on_existing_v4": false
+}

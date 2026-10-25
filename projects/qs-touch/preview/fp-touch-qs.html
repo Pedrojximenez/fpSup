@@ -32,6 +32,7 @@
     #fp-touch-qs .backdrop { position: absolute; inset: 0; pointer-events: none; }
     #fp-touch-qs .qs-content { position: absolute; inset: 0; }
     #fp-touch-qs .panel.settle { transition: transform 100ms cubic-bezier(.2,.75,.2,1); }
+    #fp-touch-qs[data-motion="none"] .camera * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
     #fp-touch-qs .header { position: absolute; inset: 0 2% auto; height: 16.1%; display: flex;
       align-items: center; justify-content: space-between; gap: 3px; }
     #fp-touch-qs .title { margin: 0; font-size: clamp(13px,2.8cqw,22px); font-weight: 400; }
@@ -392,6 +393,8 @@ const qsRecording = (()=>{
   const pageLabel = root.querySelector('.page-label'), edgeButton = root.querySelector('.edge');
   const actions = Object.fromEntries(Array.from(root.querySelectorAll('[data-action]')).map(b=>[b.dataset.action,b]));
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const NO_ANIMATION = true;
+  root.dataset.motion='none';
   const metrics = {pointerUpdates:0,boundsReads:0,draws:0,valueWrites:0,optionNodes:5,wheelEvents:0,scrollEvents:0};
   const tileParts = [], flashTimers = new Map();
   const items = [
@@ -468,7 +471,7 @@ const qsRecording = (()=>{
   }
   function transitionDimensions(refresh,direction=1,fromY=0,fromOpacity=1) {
     cancelDimensionTransition();
-    if (reducedMotion.matches) { refresh(); return; }
+    if (NO_ANIMATION || reducedMotion.matches) { refresh(); return; }
     const transition={animation:null}; dimensionTransition=transition;
     qsContent.inert=true; panel.setAttribute('aria-busy','true'); root.dataset.qsRefresh='out';
     transition.animation=qsContent.animate([{transform:`translateY(${fromY}px)`,opacity:fromOpacity},{transform:`translateY(${fromY+direction*18}px)`,opacity:0}],
@@ -493,7 +496,7 @@ const qsRecording = (()=>{
   }
   function restoreUpContent(fromY,fromOpacity) {
     cancelDimensionTransition();
-    if (reducedMotion.matches) return;
+    if (NO_ANIMATION || reducedMotion.matches) return;
     const transition={animation:qsContent.animate([{transform:`translateY(${fromY}px)`,opacity:fromOpacity},{transform:'translateY(0)',opacity:1}],
       {duration:100,easing:'cubic-bezier(.2,.75,.2,1)',fill:'forwards'})};
     dimensionTransition=transition; qsContent.inert=true; root.dataset.qsRefresh='restore';
@@ -579,6 +582,7 @@ const qsRecording = (()=>{
     backgroundAlpha4=alpha; applyBackground();
   }
   function present(amount,settle) {
+    if (NO_ANIMATION) { amount=['open','edit','catalog'].includes(mode) ? 682 : 0; settle=false; }
     reveal = Math.max(0,Math.min(682,amount)); panel.classList.toggle('settle',!!settle);
     panel.style.visibility = 'visible'; panel.style.transform = `translate3d(0,${(reveal/682-1)*100}%,0)`;
     panel.inert = reveal === 0; edgeButton.disabled = reveal > 0;
@@ -687,7 +691,7 @@ const qsRecording = (()=>{
       }
     }
     Array.from(catalog.children).forEach((group,n)=>{
-      group.hidden=n!==catalogPage && !(revealAdjacent && Math.abs(n-catalogPage)<=1);
+      group.hidden=n!==catalogPage && !(!NO_ANIMATION && revealAdjacent && Math.abs(n-catalogPage)<=1);
       group.inert=n!==catalogPage; group.setAttribute('aria-hidden',String(n!==catalogPage));
       group.style.transform=`translate3d(${(n-catalogPage)*100}%,0,0)`;
     });
@@ -712,8 +716,10 @@ const qsRecording = (()=>{
     else if ([4,6,20].includes(id)) recording=qsRecording.select(recording,id===4 ? 'res' : id===6 ? 'format' : 'dc',value);
     else values[id]=value;
     syncRecording(); draw();
-    tileParts[id].value.classList.add('changed'); clearTimeout(flashTimers.get(id));
-    flashTimers.set(id,setTimeout(()=>tileParts[id].value.classList.remove('changed'),240));
+    if (!NO_ANIMATION) {
+      tileParts[id].value.classList.add('changed'); clearTimeout(flashTimers.get(id));
+      flashTimers.set(id,setTimeout(()=>tileParts[id].value.classList.remove('changed'),240));
+    }
     if (announce) say(`${controlName()} ${value}`);
     if (commit) persist(); snapshotMetrics();
   }
@@ -731,6 +737,7 @@ const qsRecording = (()=>{
     gridViewport.scrollLeft=page*gridWidth;
   }
   function paintPage(surface,x,width) {
+    if (NO_ANIMATION) { x=0; }
     if (surface==='catalog') catalog.style.transform=`translate3d(${x}px,0,0)`;
     else gridViewport.scrollLeft=page*width-x;
   }
@@ -760,7 +767,7 @@ const qsRecording = (()=>{
     if (!wheel || active || mode!=='open' || editing) return;
     // Check on the next frame, without waiting for scrollend or OS momentum to expire.
     if (now-wheel.lastMs<16) { wheelFrame=requestAnimationFrame(releaseWheel); return; }
-    const offset=page*wheel.width-gridViewport.scrollLeft;
+    const offset=NO_ANIMATION ? wheel.offset : page*wheel.width-gridViewport.scrollLeft;
     const velocity=qsMotionVelocity(wheel.samples,wheel.eventMs);
     const to=qsPagerDestination(wheel.origin,offset,velocity,wheel.width,pageCount('grid'));
     wheel.snapping=true;
@@ -780,7 +787,7 @@ const qsRecording = (()=>{
     const fresh=!previous || now-previous.lastMs>160 || (direction!==previous.direction && Math.abs(delta)>4);
     if (fresh) {
       stopWheel();
-      gridWheel={origin:page,width,direction,lastMs:now,eventMs:e.timeStamp,samples:[],snapping:false,committed:false};
+      gridWheel={origin:page,width,direction,lastMs:now,eventMs:e.timeStamp,samples:[],snapping:false,committed:false,logical:page*width,offset:0};
       qsMotionSample(gridWheel.samples,page*width-gridViewport.scrollLeft,e.timeStamp-16);
       if (checkMotion) motionTrace=[];
     }
@@ -791,9 +798,11 @@ const qsRecording = (()=>{
     if (pageMotion?.surface==='grid') cancelSettle(false);
     wheel.snapping=false;
     const min=Math.max(0,wheel.origin-1)*width,max=Math.min(pageCount('grid')-1,wheel.origin+1)*width;
-    gridViewport.scrollLeft=Math.max(min,Math.min(max,gridViewport.scrollLeft+delta));
+    if (NO_ANIMATION) {
+      wheel.logical=Math.max(min,Math.min(max,wheel.logical+delta)); wheel.offset=page*width-wheel.logical;
+    } else gridViewport.scrollLeft=Math.max(min,Math.min(max,gridViewport.scrollLeft+delta));
     gridScrolling=true;
-    qsMotionSample(wheel.samples,page*width-gridViewport.scrollLeft,e.timeStamp);
+    qsMotionSample(wheel.samples,NO_ANIMATION ? wheel.offset : page*width-gridViewport.scrollLeft,e.timeStamp);
     if (checkMotion) traceMotion('wheel-input',{surface:'grid',origin:page,width,x:page*width-gridViewport.scrollLeft,velocity:qsMotionVelocity(wheel.samples),to:page});
     if (!wheelFrame) wheelFrame=requestAnimationFrame(releaseWheel);
   },{passive:false});
@@ -846,7 +855,7 @@ const qsRecording = (()=>{
     if (surface==='grid') gridViewport.style.scrollSnapType='none';
     paintPage(surface,x,width);
     traceMotion('release',state);
-    if (state.done || reducedMotion.matches) { state.x=state.target; finishPageMotion(state); return; }
+    if (NO_ANIMATION || state.done || reducedMotion.matches) { state.x=state.target; finishPageMotion(state); return; }
     function frame(now) {
       if (pageMotion!==state) return;
       (surface==='grid' ? qsPagerStep : qsMotionStep)(state,now-state.lastMs); state.lastMs=now;
@@ -862,7 +871,7 @@ const qsRecording = (()=>{
   function settleValues(offset=0) {
     if (valueAnimation) { valueAnimation.cancel(); valueAnimation=null; }
     optionTrack.style.transform='';
-    if (reducedMotion.matches || Math.abs(offset)<0.5) return;
+    if (NO_ANIMATION || reducedMotion.matches || Math.abs(offset)<0.5) return;
     const animation=optionTrack.animate([{transform:valueTransform(offset)},{transform:valueTransform(0)}],
       {duration:110,easing:'cubic-bezier(.2,.75,.2,1)'});
     valueAnimation=animation;
@@ -1022,7 +1031,7 @@ const qsRecording = (()=>{
     }
     if (active.kind==='up') {
       active.upY=Math.min(0,py); active.upOpacity=Math.max(0.15,1+active.upY/active.bounds.height);
-      if (active.upBack) { qsContent.style.transform=`translate3d(0,${active.upY}px,0)`; qsContent.style.opacity=active.upOpacity; }
+      if (active.upBack) { if (!NO_ANIMATION) { qsContent.style.transform=`translate3d(0,${active.upY}px,0)`; qsContent.style.opacity=active.upOpacity; } }
       else present(682+Math.min(0,dy),false);
     } else if (active.kind === 'value') {
       if (!active.valueLocked && Math.abs(dx)>12 && Math.abs(dx)*2>Math.abs(dy)*3) active.valueLocked=true;
@@ -1033,7 +1042,7 @@ const qsRecording = (()=>{
         let offset=px+(next-active.valueIndex)*pitch;
         if (next===0 && offset>0) offset=Math.min(pitch/4,offset/4);
         if (next===list.length-1 && offset<0) offset=Math.max(-pitch/4,offset/4);
-        active.valueOffset=offset; optionTrack.style.transform=valueTransform(offset);
+        active.valueOffset=offset; optionTrack.style.transform=NO_ANIMATION ? '' : valueTransform(offset);
       }
     } else if (active.kind === 'edge') {
       if (mode === 'closed' && Math.abs(dx)>12 && Math.abs(dx)>Math.abs(dy)) active.kind='blocked';
@@ -1090,7 +1099,7 @@ const qsRecording = (()=>{
     }
     let more=false;
     if (a.kind === 'value') { if (!a.moved && a.valueTap!=null) setValue(a.valueTap,false,false); }
-    else if (a.kind === 'edge') { if (reveal>=180) open(); else { mode='closed'; present(0,true); } }
+    else if (a.kind === 'edge') { if ((NO_ANIMATION ? dy : reveal)>=180) open(); else { mode='closed'; present(0,true); } }
     else if (a.kind === 'handle') present(682,true);
     else if (a.kind==='dimension') {
       if (!a.moved && a.dimensionField) selectDimensionField(a.dimensionField);

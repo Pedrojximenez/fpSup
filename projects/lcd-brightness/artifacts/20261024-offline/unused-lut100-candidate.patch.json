@@ -1,0 +1,61 @@
+{
+  "schema": "fp-lcd-brightness-offline-plan-v1",
+  "status": "offline_candidate_not_hardware_validated",
+  "firmware": [
+    {
+      "path": "out/seg0_c0000000.bin",
+      "base": "0xc0000000",
+      "size": 49245696,
+      "sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622"
+    },
+    {
+      "path": "out/seg1_c2ef6e00.bin",
+      "base": "0xc2ef6e00",
+      "size": 236032,
+      "sha256": "0dcaca8f5441fe4ddc6ed801cb888e325df4e76006e4f53a1c3219809b22ce7b"
+    }
+  ],
+  "guard": {
+    "address": "0xc2efed84",
+    "size": 42,
+    "before_hex": "8585858585ffffffffffffffffff484848484848485d5d5d5d5d595900000000002f7705194182d7ffff",
+    "after_hex": "8585858585ffffffffffffffffff484848484848485d5d5d5d5d595900000000002f7a05194182d7ffff"
+  },
+  "edits": [
+    {
+      "address": "0xc2efeda6",
+      "width": 1,
+      "before": 119,
+      "after": 122
+    }
+  ],
+  "stock_maximum_command_bytes": [
+    255,
+    255,
+    72,
+    89,
+    119,
+    255
+  ],
+  "candidate_maximum_command_bytes": [
+    255,
+    255,
+    72,
+    89,
+    122,
+    255
+  ],
+  "reference": "unused LUT entry for fine 100; rejected by the unmodified native driver",
+  "rollback": "restore the exact 42-byte before-image only if the entire after-image matches",
+  "deployment": "not included; no AutoRun, sup, device write, or camera operation",
+  "measured_nits": null,
+  "nits_gain_percent": null,
+  "limits": [
+    "Command data are not calibrated luminance, PWM duty, or LED current.",
+    "Panel register meanings and physical effect of this change are unverified.",
+    "Candidate exceeds the native accepted maximum; its hardware suitability is unknown.",
+    "No native instruction/guard patch is emitted; the table candidate is experimental.",
+    "A table edit alone may not refresh an already cached maximum setting.",
+    "Automatic-mode scheduling and display-state transitions are not simulated."
+  ]
+}

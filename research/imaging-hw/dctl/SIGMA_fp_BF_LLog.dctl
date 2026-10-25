@@ -1,0 +1,39 @@
+// SIGMA fp CinemaDNG -> L-Log the way the SIGMA BF builds it in camera (same IMX410).
+// Input : white-balanced camera RGB. Prepare the frames with
+//         tools/cdng_profile.py SRC OUT --matrix native, then Camera RAW decode
+//         Color Space = Rec.2020, Gamma = Linear (the "Rec.2020" label is only a carrier).
+// Chain (BF firmware, R2Y in L-Log): CC1 3x3 -> 14-bit clip -> L-Log curve
+//         -> Multi-Axis chroma gain on BT.2020 YCbCr. Output: L-Log full range, 0..1 = 0..1023.
+// CC1 and the curve are exact firmware values; the chroma gain unit (320 = x1.25?) is unverified.
+DEFINE_UI_PARAMS(p_Exp, Exposure (stops), DCTLUI_SLIDER_FLOAT, 0.0, -4.0, 4.0, 0.05)
+DEFINE_UI_PARAMS(p_Chroma, BF chroma gain, DCTLUI_SLIDER_FLOAT, 1.25, 0.5, 2.0, 0.01)
+DEFINE_UI_PARAMS(p_Clip, Clip like the ISP, DCTLUI_CHECK_BOX, 1)
+
+// BF L-Log CC1 (firmware 0xD5C258, /256; rows sum to 256)
+__CONSTANT__ float CC1[9] = { 249.0f/256.0f,   6.0f/256.0f,   1.0f/256.0f,
+                               16.0f/256.0f, 285.0f/256.0f, -45.0f/256.0f,
+                               31.0f/256.0f, -65.0f/256.0f, 290.0f/256.0f };
+
+// L-Log: a=8 b=0.09 c=0.27 d=1.3 e=0.0115 f=0.6; ISP full scale 16383 = LSR 23.3
+__DEVICE__ float llog(float x) {
+    if (x <= 0.006f) return 8.0f * x + 0.09f;
+    return 0.27f * _log10f(1.3f * x + 0.0115f) + 0.6f;
+}
+__DEVICE__ float isp_clip(float x) { return _fminf(_fmaxf(x, 0.0f), 23.3f); }
+
+__DEVICE__ float3 transform(int p_Width, int p_Height, int p_X, int p_Y, float p_R, float p_G, float p_B) {
+    float k = _exp2f(p_Exp);
+    float r = p_R * k, g = p_G * k, b = p_B * k;
+    float cr = CC1[0]*r + CC1[1]*g + CC1[2]*b;
+    float cg = CC1[3]*r + CC1[4]*g + CC1[5]*b;
+    float cb = CC1[6]*r + CC1[7]*g + CC1[8]*b;
+    if (p_Clip) { cr = isp_clip(cr); cg = isp_clip(cg); cb = isp_clip(cb); }
+    float lr = llog(cr), lg = llog(cg), lb = llog(cb);
+    // BT.2020 luma (YC matrix set 2 in L-Log); scale chroma only
+    float y = 0.2627f*lr + 0.6780f*lg + 0.0593f*lb;
+    lr = y + p_Chroma * (lr - y);
+    lg = y + p_Chroma * (lg - y);
+    lb = y + p_Chroma * (lb - y);
+    if (p_Clip) { lr = _saturatef(lr); lg = _saturatef(lg); lb = _saturatef(lb); }
+    return make_float3(lr, lg, lb);
+}

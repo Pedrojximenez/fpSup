@@ -1,0 +1,2601 @@
+{
+  "source": "/Users/dido/Developer.localized/SIGMAfp_re/dji_focus_pro/analysis/df101fh/df101fh_0505_v00.01.13.33_20240702_verified.bin",
+  "sha256": "4e2dec7e7bcbc4bcbf91d63c7f45a04b7c72098e31bcc56b3181a3e0b1c3676e",
+  "device_access": false,
+  "network_access": false,
+  "usb_capture": false,
+  "product_mapping_verified": false,
+  "synthetic_pid": true,
+  "classification": [
+    {
+      "vid": "0x1003",
+      "pid": "0x1234",
+      "accepted": 1,
+      "kind": 8,
+      "selected_ops_hex": "317909602142096009790960e5780960cd7709609d770960c17809609d78096043720d6000000000",
+      "ioctl": "0x600d7243",
+      "logger_calls": 2
+    },
+    {
+      "vid": "0x1003",
+      "pid": "0x5678",
+      "accepted": 1,
+      "kind": 8,
+      "selected_ops_hex": "317909602142096009790960e5780960cd7709609d770960c17809609d78096043720d6000000000",
+      "ioctl": "0x600d7243",
+      "logger_calls": 2
+    },
+    {
+      "vid": "0x4da",
+      "pid": "0x1234",
+      "accepted": 1,
+      "kind": 4,
+      "selected_ops_hex": "3960096021420960c167096015600960195f0960e95e0960f15f096055710d600562096000000000",
+      "ioctl": "0x60096205",
+      "logger_calls": 2
+    },
+    {
+      "vid": "0xffff",
+      "pid": "0x1234",
+      "accepted": 0,
+      "kind": 0,
+      "selected_ops_hex": "29440960214209606d6f0d60656f0d60716f0d60756f0d60796f0d60696f0d60d541096000000000",
+      "ioctl": "0x600941d5",
+      "logger_calls": 2
+    }
+  ],
+  "vid_table": [
+    {
+      "runtime_address": "0x20201620",
+      "kind": 1,
+      "pairs": [
+        {
+          "vid": "0x54c",
+          "pid": "0xffff"
+        }
+      ]
+    },
+    {
+      "runtime_address": "0x20201628",
+      "kind": 2,
+      "pairs": [
+        {
+          "vid": "0x4b0",
+          "pid": "0xffff"
+        }
+      ]
+    },
+    {
+      "runtime_address": "0x20201630",
+      "kind": 3,
+      "pairs": [
+        {
+          "vid": "0x4a9",
+          "pid": "0xffff"
+        }
+      ]
+    },
+    {
+      "runtime_address": "0x20201638",
+      "kind": 4,
+      "pairs": [
+        {
+          "vid": "0x4da",
+          "pid": "0xffff"
+        }
+      ]
+    },
+    {
+      "runtime_address": "0x20201640",
+      "kind": 5,
+      "pairs": [
+        {
+          "vid": "0x4cb",
+          "pid": "0xffff"
+        }
+      ]
+    },
+    {
+      "runtime_address": "0x20201648",
+      "kind": 6,
+      "pairs": [
+        {
+          "vid": "0x1edb",
+          "pid": "0xffff"
+        }
+      ]
+    },
+    {
+      "runtime_address": "0x20201650",
+      "kind": 7,
+      "pairs": [
+        {
+          "vid": "0x7b4",
+          "pid": "0xffff"
+        }
+      ]
+    },
+    {
+      "runtime_address": "0x20201658",
+      "kind": 8,
+      "pairs": [
+        {
+          "vid": "0x1003",
+          "pid": "0xffff"
+        }
+      ]
+    },
+    {
+      "runtime_address": "0x20201660",
+      "kind": 9,
+      "pairs": [
+        {
+          "vid": "0x1a98",
+          "pid": "0xffff"
+        }
+      ]
+    }
+  ],
+  "command_binding": {
+    "address": "0x600309a4",
+    "words": [
+      1031,
+      262191,
+      1611214561,
+      0,
+      0
+    ]
+  },
+  "cases": [
+    {
+      "name": "sigma_ready",
+      "selection": {
+        "vid": "0x1003",
+        "pid": "0x1234",
+        "accepted": 1,
+        "kind": 8,
+        "selected_ops_hex": "317909602142096009790960e5780960cd7709609d770960c17809609d78096043720d6000000000",
+        "ioctl": "0x600d7243",
+        "logger_calls": 2
+      },
+      "ready_fixture": 1,
+      "ops_pointer_fixture": "0x20201670",
+      "queue_return_fixture": 0,
+      "action_hex": "12000000e8030000",
+      "queue_calls": 2,
+      "dispatcher_calls": [
+        {
+          "entry": "0x600d7242",
+          "selector": 32,
+          "value": 1000
+        }
+      ],
+      "dispatcher_returns": [
+        3
+      ],
+      "boundary_calls": [],
+      "packets": null,
+      "stopped_at": "next_queue_receive"
+    },
+    {
+      "name": "panasonic_ready",
+      "selection": {
+        "vid": "0x4da",
+        "pid": "0x1234",
+        "accepted": 1,
+        "kind": 4,
+        "selected_ops_hex": "3960096021420960c167096015600960195f0960e95e0960f15f096055710d600562096000000000",
+        "ioctl": "0x60096205",
+        "logger_calls": 2
+      },
+      "ready_fixture": 1,
+      "ops_pointer_fixture": "0x20201670",
+      "queue_return_fixture": 0,
+      "action_hex": "12000000e8030000",
+      "queue_calls": 1,
+      "dispatcher_calls": [
+        {
+          "entry": "0x60096204",
+          "selector": 32,
+          "value": 1000
+        }
+      ],
+      "dispatcher_returns": [],
+      "boundary_calls": [
+        "clock=1000000",
+        "0x6009416c",
+        "0x3ac2c"
+      ],
+      "packets": {
+        "command": "10000000010016943412000031000103",
+        "data": "1800000002001694341200003100010304000000e8030000"
+      },
+      "stopped_at": "before_usb_scheduler"
+    },
+    {
+      "name": "panasonic_not_ready",
+      "selection": {
+        "vid": "0x4da",
+        "pid": "0x1234",
+        "accepted": 1,
+        "kind": 4,
+        "selected_ops_hex": "3960096021420960c167096015600960195f0960e95e0960f15f096055710d600562096000000000",
+        "ioctl": "0x60096205",
+        "logger_calls": 2
+      },
+      "ready_fixture": 0,
+      "ops_pointer_fixture": "0x20201670",
+      "queue_return_fixture": 0,
+      "action_hex": "12000000e8030000",
+      "queue_calls": 2,
+      "dispatcher_calls": [],
+      "dispatcher_returns": [],
+      "boundary_calls": [],
+      "packets": null,
+      "stopped_at": "next_queue_receive"
+    },
+    {
+      "name": "no_ops",
+      "selection": {
+        "vid": "0x4da",
+        "pid": "0x1234",
+        "accepted": 1,
+        "kind": 4,
+        "selected_ops_hex": "3960096021420960c167096015600960195f0960e95e0960f15f096055710d600562096000000000",
+        "ioctl": "0x60096205",
+        "logger_calls": 2
+      },
+      "ready_fixture": 1,
+      "ops_pointer_fixture": null,
+      "queue_return_fixture": 0,
+      "action_hex": "12000000e8030000",
+      "queue_calls": 2,
+      "dispatcher_calls": [],
+      "dispatcher_returns": [],
+      "boundary_calls": [
+        "0x600e3278"
+      ],
+      "packets": null,
+      "stopped_at": "next_queue_receive"
+    },
+    {
+      "name": "queue_failure",
+      "selection": {
+        "vid": "0x4da",
+        "pid": "0x1234",
+        "accepted": 1,
+        "kind": 4,
+        "selected_ops_hex": "3960096021420960c167096015600960195f0960e95e0960f15f096055710d600562096000000000",
+        "ioctl": "0x60096205",
+        "logger_calls": 2
+      },
+      "ready_fixture": 1,
+      "ops_pointer_fixture": "0x20201670",
+      "queue_return_fixture": -1,
+      "action_hex": "12000000e8030000",
+      "queue_calls": 2,
+      "dispatcher_calls": [],
+      "dispatcher_returns": [],
+      "boundary_calls": [
+        "0x600e3278"
+      ],
+      "packets": null,
+      "stopped_at": "next_queue_receive"
+    }
+  ],
+  "executed_instructions": [
+    {
+      "address": "0x1bf8",
+      "file_offset": 12768,
+      "hex": "0a44"
+    },
+    {
+      "address": "0x1bfa",
+      "file_offset": 12770,
+      "hex": "9142"
+    },
+    {
+      "address": "0x1bfc",
+      "file_offset": 12772,
+      "hex": "00f1ff33"
+    },
+    {
+      "address": "0x1c00",
+      "file_offset": 12776,
+      "hex": "00d1"
+    },
+    {
+      "address": "0x1c04",
+      "file_offset": 12780,
+      "hex": "10b5"
+    },
+    {
+      "address": "0x1c06",
+      "file_offset": 12782,
+      "hex": "11f8014b"
+    },
+    {
+      "address": "0x1c0a",
+      "file_offset": 12786,
+      "hex": "03f8014f"
+    },
+    {
+      "address": "0x1c0e",
+      "file_offset": 12790,
+      "hex": "9142"
+    },
+    {
+      "address": "0x1c10",
+      "file_offset": 12792,
+      "hex": "f9d1"
+    },
+    {
+      "address": "0x1c12",
+      "file_offset": 12794,
+      "hex": "10bd"
+    },
+    {
+      "address": "0x1c14",
+      "file_offset": 12796,
+      "hex": "9a42"
+    },
+    {
+      "address": "0x1c16",
+      "file_offset": 12798,
+      "hex": "08b5"
+    },
+    {
+      "address": "0x1c18",
+      "file_offset": 12800,
+      "hex": "01d9"
+    },
+    {
+      "address": "0x1c1e",
+      "file_offset": 12806,
+      "hex": "8142"
+    },
+    {
+      "address": "0x1c20",
+      "file_offset": 12808,
+      "hex": "04d8"
+    },
+    {
+      "address": "0x1c2c",
+      "file_offset": 12820,
+      "hex": "8318"
+    },
+    {
+      "address": "0x1c2e",
+      "file_offset": 12822,
+      "hex": "9942"
+    },
+    {
+      "address": "0x1c30",
+      "file_offset": 12824,
+      "hex": "f3d3"
+    },
+    {
+      "address": "0x1c32",
+      "file_offset": 12826,
+      "hex": "bde80840"
+    },
+    {
+      "address": "0x1c36",
+      "file_offset": 12830,
+      "hex": "fff7dfbf"
+    },
+    {
+      "address": "0x1c84",
+      "file_offset": 12908,
+      "hex": "0244"
+    },
+    {
+      "address": "0x1c86",
+      "file_offset": 12910,
+      "hex": "0346"
+    },
+    {
+      "address": "0x1c88",
+      "file_offset": 12912,
+      "hex": "9342"
+    },
+    {
+      "address": "0x1c8a",
+      "file_offset": 12914,
+      "hex": "00d1"
+    },
+    {
+      "address": "0x1c8c",
+      "file_offset": 12916,
+      "hex": "7047"
+    },
+    {
+      "address": "0x1c8e",
+      "file_offset": 12918,
+      "hex": "03f8011b"
+    },
+    {
+      "address": "0x1c92",
+      "file_offset": 12922,
+      "hex": "f9e7"
+    },
+    {
+      "address": "0x60093890",
+      "file_offset": 407696,
+      "hex": "7fb5"
+    },
+    {
+      "address": "0x60093892",
+      "file_offset": 407698,
+      "hex": "654c"
+    },
+    {
+      "address": "0x60093894",
+      "file_offset": 407700,
+      "hex": "0023"
+    },
+    {
+      "address": "0x60093896",
+      "file_offset": 407702,
+      "hex": "654e"
+    },
+    {
+      "address": "0x60093898",
+      "file_offset": 407704,
+      "hex": "04f65c35"
+    },
+    {
+      "address": "0x6009389c",
+      "file_offset": 407708,
+      "hex": "cde90233"
+    },
+    {
+      "address": "0x600938a0",
+      "file_offset": 407712,
+      "hex": "4ff0ff32"
+    },
+    {
+      "address": "0x600938a4",
+      "file_offset": 407716,
+      "hex": "4ff0ff33"
+    },
+    {
+      "address": "0x600938a8",
+      "file_offset": 407720,
+      "hex": "02a9"
+    },
+    {
+      "address": "0x600938aa",
+      "file_offset": 407722,
+      "hex": "2846"
+    },
+    {
+      "address": "0x600938ac",
+      "file_offset": 407724,
+      "hex": "4ff0b8fd"
+    },
+    {
+      "address": "0x600938b0",
+      "file_offset": 407728,
+      "hex": "38b1"
+    },
+    {
+      "address": "0x600938b2",
+      "file_offset": 407730,
+      "hex": "5f49"
+    },
+    {
+      "address": "0x600938b4",
+      "file_offset": 407732,
+      "hex": "7123"
+    },
+    {
+      "address": "0x600938b6",
+      "file_offset": 407734,
+      "hex": "5f4a"
+    },
+    {
+      "address": "0x600938b8",
+      "file_offset": 407736,
+      "hex": "c978"
+    },
+    {
+      "address": "0x600938ba",
+      "file_offset": 407738,
+      "hex": "5f48"
+    },
+    {
+      "address": "0x600938bc",
+      "file_offset": 407740,
+      "hex": "4ff0dcfc"
+    },
+    {
+      "address": "0x600938c0",
+      "file_offset": 407744,
+      "hex": "eee7"
+    },
+    {
+      "address": "0x600938c2",
+      "file_offset": 407746,
+      "hex": "6368"
+    },
+    {
+      "address": "0x600938c4",
+      "file_offset": 407748,
+      "hex": "2bb9"
+    },
+    {
+      "address": "0x600938c6",
+      "file_offset": 407750,
+      "hex": "5a49"
+    },
+    {
+      "address": "0x600938c8",
+      "file_offset": 407752,
+      "hex": "a723"
+    },
+    {
+      "address": "0x600938ca",
+      "file_offset": 407754,
+      "hex": "5a4a"
+    },
+    {
+      "address": "0x600938cc",
+      "file_offset": 407756,
+      "hex": "8978"
+    },
+    {
+      "address": "0x600938ce",
+      "file_offset": 407758,
+      "hex": "5b48"
+    },
+    {
+      "address": "0x600938d0",
+      "file_offset": 407760,
+      "hex": "f4e7"
+    },
+    {
+      "address": "0x600938d2",
+      "file_offset": 407762,
+      "hex": "3268"
+    },
+    {
+      "address": "0x600938d4",
+      "file_offset": 407764,
+      "hex": "1278"
+    },
+    {
+      "address": "0x600938d6",
+      "file_offset": 407766,
+      "hex": "002a"
+    },
+    {
+      "address": "0x600938d8",
+      "file_offset": 407768,
+      "hex": "e2d0"
+    },
+    {
+      "address": "0x600938da",
+      "file_offset": 407770,
+      "hex": "029a"
+    },
+    {
+      "address": "0x600938dc",
+      "file_offset": 407772,
+      "hex": "013a"
+    },
+    {
+      "address": "0x600938de",
+      "file_offset": 407774,
+      "hex": "132a"
+    },
+    {
+      "address": "0x600938e0",
+      "file_offset": 407776,
+      "hex": "ded8"
+    },
+    {
+      "address": "0x600938e2",
+      "file_offset": 407778,
+      "hex": "01a1"
+    },
+    {
+      "address": "0x600938e4",
+      "file_offset": 407780,
+      "hex": "51f822f0"
+    },
+    {
+      "address": "0x60093a0c",
+      "file_offset": 408076,
+      "hex": "1b6a"
+    },
+    {
+      "address": "0x60093a0e",
+      "file_offset": 408078,
+      "hex": "2021"
+    },
+    {
+      "address": "0x60093a10",
+      "file_offset": 408080,
+      "hex": "039a"
+    },
+    {
+      "address": "0x60093a12",
+      "file_offset": 408082,
+      "hex": "0020"
+    },
+    {
+      "address": "0x60093a14",
+      "file_offset": 408084,
+      "hex": "9847"
+    },
+    {
+      "address": "0x60093a16",
+      "file_offset": 408086,
+      "hex": "43e7"
+    },
+    {
+      "address": "0x600940a8",
+      "file_offset": 409768,
+      "hex": "10b5"
+    },
+    {
+      "address": "0x600940aa",
+      "file_offset": 409770,
+      "hex": "4ff4f040"
+    },
+    {
+      "address": "0x600940ae",
+      "file_offset": 409774,
+      "hex": "86b0"
+    },
+    {
+      "address": "0x600940b0",
+      "file_offset": 409776,
+      "hex": "d2b2"
+    },
+    {
+      "address": "0x600940b2",
+      "file_offset": 409778,
+      "hex": "0590"
+    },
+    {
+      "address": "0x600940b4",
+      "file_offset": 409780,
+      "hex": "42f20100"
+    },
+    {
+      "address": "0x600940b8",
+      "file_offset": 409784,
+      "hex": "adf81200"
+    },
+    {
+      "address": "0x600940bc",
+      "file_offset": 409788,
+      "hex": "032a"
+    },
+    {
+      "address": "0x600940be",
+      "file_offset": 409790,
+      "hex": "34d8"
+    },
+    {
+      "address": "0x600940c0",
+      "file_offset": 409792,
+      "hex": "dfe802f0"
+    },
+    {
+      "address": "0x600940c8",
+      "file_offset": 409800,
+      "hex": "0022"
+    },
+    {
+      "address": "0x600940ca",
+      "file_offset": 409802,
+      "hex": "cde90122"
+    },
+    {
+      "address": "0x600940ce",
+      "file_offset": 409806,
+      "hex": "09aa"
+    },
+    {
+      "address": "0x600940d0",
+      "file_offset": 409808,
+      "hex": "0092"
+    },
+    {
+      "address": "0x600940d2",
+      "file_offset": 409810,
+      "hex": "0122"
+    },
+    {
+      "address": "0x600940d4",
+      "file_offset": 409812,
+      "hex": "0df11200"
+    },
+    {
+      "address": "0x600940d8",
+      "file_offset": 409816,
+      "hex": "06f0eafd"
+    },
+    {
+      "address": "0x600942dc",
+      "file_offset": 410332,
+      "hex": "30b5"
+    },
+    {
+      "address": "0x600942de",
+      "file_offset": 410334,
+      "hex": "224c"
+    },
+    {
+      "address": "0x600942e0",
+      "file_offset": 410336,
+      "hex": "85b0"
+    },
+    {
+      "address": "0x600942e2",
+      "file_offset": 410338,
+      "hex": "2249"
+    },
+    {
+      "address": "0x600942e4",
+      "file_offset": 410340,
+      "hex": "2061"
+    },
+    {
+      "address": "0x600942e6",
+      "file_offset": 410342,
+      "hex": "0390"
+    },
+    {
+      "address": "0x600942e8",
+      "file_offset": 410344,
+      "hex": "237d"
+    },
+    {
+      "address": "0x600942ea",
+      "file_offset": 410346,
+      "hex": "214a"
+    },
+    {
+      "address": "0x600942ec",
+      "file_offset": 410348,
+      "hex": "0293"
+    },
+    {
+      "address": "0x600942ee",
+      "file_offset": 410350,
+      "hex": "e389"
+    },
+    {
+      "address": "0x600942f0",
+      "file_offset": 410352,
+      "hex": "4978"
+    },
+    {
+      "address": "0x600942f2",
+      "file_offset": 410354,
+      "hex": "0193"
+    },
+    {
+      "address": "0x600942f4",
+      "file_offset": 410356,
+      "hex": "a389"
+    },
+    {
+      "address": "0x600942f6",
+      "file_offset": 410358,
+      "hex": "1f48"
+    },
+    {
+      "address": "0x600942f8",
+      "file_offset": 410360,
+      "hex": "0093"
+    },
+    {
+      "address": "0x600942fa",
+      "file_offset": 410362,
+      "hex": "40f21d13"
+    },
+    {
+      "address": "0x600942fe",
+      "file_offset": 410366,
+      "hex": "4ef0bbff"
+    },
+    {
+      "address": "0x60094302",
+      "file_offset": 410370,
+      "hex": "237d"
+    },
+    {
+      "address": "0x60094304",
+      "file_offset": 410372,
+      "hex": "013b"
+    },
+    {
+      "address": "0x60094306",
+      "file_offset": 410374,
+      "hex": "082b"
+    },
+    {
+      "address": "0x60094308",
+      "file_offset": 410376,
+      "hex": "10d8"
+    },
+    {
+      "address": "0x6009430a",
+      "file_offset": 410378,
+      "hex": "dfe803f0"
+    },
+    {
+      "address": "0x6009431c",
+      "file_offset": 410396,
+      "hex": "0fcd"
+    },
+    {
+      "address": "0x6009431e",
+      "file_offset": 410398,
+      "hex": "0fc4"
+    },
+    {
+      "address": "0x60094320",
+      "file_offset": 410400,
+      "hex": "0fcd"
+    },
+    {
+      "address": "0x60094322",
+      "file_offset": 410402,
+      "hex": "0fc4"
+    },
+    {
+      "address": "0x60094324",
+      "file_offset": 410404,
+      "hex": "95e80300"
+    },
+    {
+      "address": "0x60094328",
+      "file_offset": 410408,
+      "hex": "84e80300"
+    },
+    {
+      "address": "0x6009432c",
+      "file_offset": 410412,
+      "hex": "144a"
+    },
+    {
+      "address": "0x6009432e",
+      "file_offset": 410414,
+      "hex": "124b"
+    },
+    {
+      "address": "0x60094330",
+      "file_offset": 410416,
+      "hex": "5a60"
+    },
+    {
+      "address": "0x60094332",
+      "file_offset": 410418,
+      "hex": "05b0"
+    },
+    {
+      "address": "0x60094334",
+      "file_offset": 410420,
+      "hex": "30bd"
+    },
+    {
+      "address": "0x60094342",
+      "file_offset": 410434,
+      "hex": "0d4c"
+    },
+    {
+      "address": "0x60094344",
+      "file_offset": 410436,
+      "hex": "114d"
+    },
+    {
+      "address": "0x60094346",
+      "file_offset": 410438,
+      "hex": "e9e7"
+    },
+    {
+      "address": "0x6009435a",
+      "file_offset": 410458,
+      "hex": "074c"
+    },
+    {
+      "address": "0x6009435c",
+      "file_offset": 410460,
+      "hex": "0f4d"
+    },
+    {
+      "address": "0x6009435e",
+      "file_offset": 410462,
+      "hex": "dde7"
+    },
+    {
+      "address": "0x600943a4",
+      "file_offset": 410532,
+      "hex": "1a4b"
+    },
+    {
+      "address": "0x600943a6",
+      "file_offset": 410534,
+      "hex": "1b4a"
+    },
+    {
+      "address": "0x600943a8",
+      "file_offset": 410536,
+      "hex": "f0b5"
+    },
+    {
+      "address": "0x600943aa",
+      "file_offset": 410538,
+      "hex": "0d46"
+    },
+    {
+      "address": "0x600943ac",
+      "file_offset": 410540,
+      "hex": "85b0"
+    },
+    {
+      "address": "0x600943ae",
+      "file_offset": 410542,
+      "hex": "5978"
+    },
+    {
+      "address": "0x600943b0",
+      "file_offset": 410544,
+      "hex": "0446"
+    },
+    {
+      "address": "0x600943b2",
+      "file_offset": 410546,
+      "hex": "4ff4ac73"
+    },
+    {
+      "address": "0x600943b6",
+      "file_offset": 410550,
+      "hex": "0391"
+    },
+    {
+      "address": "0x600943b8",
+      "file_offset": 410552,
+      "hex": "cde90005"
+    },
+    {
+      "address": "0x600943bc",
+      "file_offset": 410556,
+      "hex": "1648"
+    },
+    {
+      "address": "0x600943be",
+      "file_offset": 410558,
+      "hex": "4ef05bff"
+    },
+    {
+      "address": "0x600943c2",
+      "file_offset": 410562,
+      "hex": "164b"
+    },
+    {
+      "address": "0x600943c4",
+      "file_offset": 410564,
+      "hex": "0020"
+    },
+    {
+      "address": "0x600943c6",
+      "file_offset": 410566,
+      "hex": "4ff6ff7c"
+    },
+    {
+      "address": "0x600943ca",
+      "file_offset": 410570,
+      "hex": "0399"
+    },
+    {
+      "address": "0x600943cc",
+      "file_offset": 410572,
+      "hex": "1f78"
+    },
+    {
+      "address": "0x600943ce",
+      "file_offset": 410574,
+      "hex": "ff2f"
+    },
+    {
+      "address": "0x600943d0",
+      "file_offset": 410576,
+      "hex": "06d0"
+    },
+    {
+      "address": "0x600943d2",
+      "file_offset": 410578,
+      "hex": "5a68"
+    },
+    {
+      "address": "0x600943d4",
+      "file_offset": 410580,
+      "hex": "1688"
+    },
+    {
+      "address": "0x600943d6",
+      "file_offset": 410582,
+      "hex": "5eb9"
+    },
+    {
+      "address": "0x600943d8",
+      "file_offset": 410584,
+      "hex": "0130"
+    },
+    {
+      "address": "0x600943da",
+      "file_offset": 410586,
+      "hex": "0833"
+    },
+    {
+      "address": "0x600943dc",
+      "file_offset": 410588,
+      "hex": "0a28"
+    },
+    {
+      "address": "0x600943de",
+      "file_offset": 410590,
+      "hex": "f5d1"
+    },
+    {
+      "address": "0x600943e0",
+      "file_offset": 410592,
+      "hex": "0f48"
+    },
+    {
+      "address": "0x600943e2",
+      "file_offset": 410594,
+      "hex": "40f26913"
+    },
+    {
+      "address": "0x600943e6",
+      "file_offset": 410598,
+      "hex": "0b4a"
+    },
+    {
+      "address": "0x600943e8",
+      "file_offset": 410600,
+      "hex": "4ef046ff"
+    },
+    {
+      "address": "0x600943ec",
+      "file_offset": 410604,
+      "hex": "0020"
+    },
+    {
+      "address": "0x600943ee",
+      "file_offset": 410606,
+      "hex": "09e0"
+    },
+    {
+      "address": "0x600943f0",
+      "file_offset": 410608,
+      "hex": "a642"
+    },
+    {
+      "address": "0x600943f2",
+      "file_offset": 410610,
+      "hex": "0bd1"
+    },
+    {
+      "address": "0x600943f4",
+      "file_offset": 410612,
+      "hex": "5688"
+    },
+    {
+      "address": "0x600943f6",
+      "file_offset": 410614,
+      "hex": "ae42"
+    },
+    {
+      "address": "0x600943f8",
+      "file_offset": 410616,
+      "hex": "06d1"
+    },
+    {
+      "address": "0x600943fa",
+      "file_offset": 410618,
+      "hex": "0a4b"
+    },
+    {
+      "address": "0x600943fc",
+      "file_offset": 410620,
+      "hex": "0120"
+    },
+    {
+      "address": "0x600943fe",
+      "file_offset": 410622,
+      "hex": "dd81"
+    },
+    {
+      "address": "0x60094400",
+      "file_offset": 410624,
+      "hex": "9c81"
+    },
+    {
+      "address": "0x60094402",
+      "file_offset": 410626,
+      "hex": "1f75"
+    },
+    {
+      "address": "0x60094404",
+      "file_offset": 410628,
+      "hex": "05b0"
+    },
+    {
+      "address": "0x60094406",
+      "file_offset": 410630,
+      "hex": "f0bd"
+    },
+    {
+      "address": "0x60094408",
+      "file_offset": 410632,
+      "hex": "6645"
+    },
+    {
+      "address": "0x6009440a",
+      "file_offset": 410634,
+      "hex": "f6d0"
+    },
+    {
+      "address": "0x6009440c",
+      "file_offset": 410636,
+      "hex": "0432"
+    },
+    {
+      "address": "0x6009440e",
+      "file_offset": 410638,
+      "hex": "e1e7"
+    },
+    {
+      "address": "0x60096204",
+      "file_offset": 418308,
+      "hex": "0eb4"
+    },
+    {
+      "address": "0x60096206",
+      "file_offset": 418310,
+      "hex": "70b5"
+    },
+    {
+      "address": "0x60096208",
+      "file_offset": 418312,
+      "hex": "85b0"
+    },
+    {
+      "address": "0x6009620a",
+      "file_offset": 418314,
+      "hex": "0446"
+    },
+    {
+      "address": "0x6009620c",
+      "file_offset": 418316,
+      "hex": "09ab"
+    },
+    {
+      "address": "0x6009620e",
+      "file_offset": 418318,
+      "hex": "33f8045b"
+    },
+    {
+      "address": "0x60096212",
+      "file_offset": 418322,
+      "hex": "0093"
+    },
+    {
+      "address": "0x60096214",
+      "file_offset": 418324,
+      "hex": "eb1e"
+    },
+    {
+      "address": "0x60096216",
+      "file_offset": 418326,
+      "hex": "1d2b"
+    },
+    {
+      "address": "0x60096218",
+      "file_offset": 418328,
+      "hex": "15d8"
+    },
+    {
+      "address": "0x6009621a",
+      "file_offset": 418330,
+      "hex": "dfe803f0"
+    },
+    {
+      "address": "0x600963a0",
+      "file_offset": 418720,
+      "hex": "009b"
+    },
+    {
+      "address": "0x600963a2",
+      "file_offset": 418722,
+      "hex": "1a1d"
+    },
+    {
+      "address": "0x600963a4",
+      "file_offset": 418724,
+      "hex": "1c68"
+    },
+    {
+      "address": "0x600963a6",
+      "file_offset": 418726,
+      "hex": "0092"
+    },
+    {
+      "address": "0x600963a8",
+      "file_offset": 418728,
+      "hex": "40f0cffd"
+    },
+    {
+      "address": "0x600963ac",
+      "file_offset": 418732,
+      "hex": "114b"
+    },
+    {
+      "address": "0x600963ae",
+      "file_offset": 418734,
+      "hex": "124a"
+    },
+    {
+      "address": "0x600963b0",
+      "file_offset": 418736,
+      "hex": "0394"
+    },
+    {
+      "address": "0x600963b2",
+      "file_offset": 418738,
+      "hex": "c3e90001"
+    },
+    {
+      "address": "0x600963b6",
+      "file_offset": 418742,
+      "hex": "0423"
+    },
+    {
+      "address": "0x600963b8",
+      "file_offset": 418744,
+      "hex": "4ff0ff30"
+    },
+    {
+      "address": "0x600963bc",
+      "file_offset": 418748,
+      "hex": "cde90123"
+    },
+    {
+      "address": "0x600963c0",
+      "file_offset": 418752,
+      "hex": "fdf7d4fe"
+    },
+    {
+      "address": "0x600963c4",
+      "file_offset": 418756,
+      "hex": "20b9"
+    },
+    {
+      "address": "0x600963c6",
+      "file_offset": 418758,
+      "hex": "01a9"
+    },
+    {
+      "address": "0x600963c8",
+      "file_offset": 418760,
+      "hex": "0448"
+    },
+    {
+      "address": "0x600963ca",
+      "file_offset": 418762,
+      "hex": "01f0f3ff"
+    },
+    {
+      "address": "0x600983b4",
+      "file_offset": 426932,
+      "hex": "30b5"
+    },
+    {
+      "address": "0x600983b6",
+      "file_offset": 426934,
+      "hex": "8fb0"
+    },
+    {
+      "address": "0x600983b8",
+      "file_offset": 426936,
+      "hex": "0446"
+    },
+    {
+      "address": "0x600983ba",
+      "file_offset": 426938,
+      "hex": "0d46"
+    },
+    {
+      "address": "0x600983bc",
+      "file_offset": 426940,
+      "hex": "0c4b"
+    },
+    {
+      "address": "0x600983be",
+      "file_offset": 426942,
+      "hex": "05a8"
+    },
+    {
+      "address": "0x600983c0",
+      "file_offset": 426944,
+      "hex": "49f21642"
+    },
+    {
+      "address": "0x600983c4",
+      "file_offset": 426948,
+      "hex": "0221"
+    },
+    {
+      "address": "0x600983c6",
+      "file_offset": 426950,
+      "hex": "3ef0e0ff"
+    },
+    {
+      "address": "0x600983ca",
+      "file_offset": 426954,
+      "hex": "0023"
+    },
+    {
+      "address": "0x600983cc",
+      "file_offset": 426956,
+      "hex": "0c22"
+    },
+    {
+      "address": "0x600983ce",
+      "file_offset": 426958,
+      "hex": "05a9"
+    },
+    {
+      "address": "0x600983d0",
+      "file_offset": 426960,
+      "hex": "0093"
+    },
+    {
+      "address": "0x600983d2",
+      "file_offset": 426962,
+      "hex": "2046"
+    },
+    {
+      "address": "0x600983d4",
+      "file_offset": 426964,
+      "hex": "cde90123"
+    },
+    {
+      "address": "0x600983d8",
+      "file_offset": 426968,
+      "hex": "2b46"
+    },
+    {
+      "address": "0x600983da",
+      "file_offset": 426970,
+      "hex": "0122"
+    },
+    {
+      "address": "0x600983dc",
+      "file_offset": 426972,
+      "hex": "fbf764fe"
+    },
+    {
+      "address": "0x6009acb0",
+      "file_offset": 437424,
+      "hex": "f0b5"
+    },
+    {
+      "address": "0x6009acb2",
+      "file_offset": 437426,
+      "hex": "8fb0"
+    },
+    {
+      "address": "0x6009acb4",
+      "file_offset": 437428,
+      "hex": "00af"
+    },
+    {
+      "address": "0x6009acb6",
+      "file_offset": 437430,
+      "hex": "f860"
+    },
+    {
+      "address": "0x6009acb8",
+      "file_offset": 437432,
+      "hex": "b960"
+    },
+    {
+      "address": "0x6009acba",
+      "file_offset": 437434,
+      "hex": "3b60"
+    },
+    {
+      "address": "0x6009acbc",
+      "file_offset": 437436,
+      "hex": "1346"
+    },
+    {
+      "address": "0x6009acbe",
+      "file_offset": 437438,
+      "hex": "fb80"
+    },
+    {
+      "address": "0x6009acc0",
+      "file_offset": 437440,
+      "hex": "854b"
+    },
+    {
+      "address": "0x6009acc2",
+      "file_offset": 437442,
+      "hex": "7b63"
+    },
+    {
+      "address": "0x6009acc4",
+      "file_offset": 437444,
+      "hex": "7b6b"
+    },
+    {
+      "address": "0x6009acc6",
+      "file_offset": 437446,
+      "hex": "03f5e043"
+    },
+    {
+      "address": "0x6009acca",
+      "file_offset": 437450,
+      "hex": "d3f83839"
+    },
+    {
+      "address": "0x6009acce",
+      "file_offset": 437454,
+      "hex": "fb60"
+    },
+    {
+      "address": "0x6009acd0",
+      "file_offset": 437456,
+      "hex": "fb68"
+    },
+    {
+      "address": "0x6009acd2",
+      "file_offset": 437458,
+      "hex": "002b"
+    },
+    {
+      "address": "0x6009acd4",
+      "file_offset": 437460,
+      "hex": "01d1"
+    },
+    {
+      "address": "0x6009acda",
+      "file_offset": 437466,
+      "hex": "7b6b"
+    },
+    {
+      "address": "0x6009acdc",
+      "file_offset": 437468,
+      "hex": "03f5e043"
+    },
+    {
+      "address": "0x6009ace0",
+      "file_offset": 437472,
+      "hex": "93f83039"
+    },
+    {
+      "address": "0x6009ace4",
+      "file_offset": 437476,
+      "hex": "002b"
+    },
+    {
+      "address": "0x6009ace6",
+      "file_offset": 437478,
+      "hex": "04d0"
+    },
+    {
+      "address": "0x6009acf2",
+      "file_offset": 437490,
+      "hex": "7b6b"
+    },
+    {
+      "address": "0x6009acf4",
+      "file_offset": 437492,
+      "hex": "d033"
+    },
+    {
+      "address": "0x6009acf6",
+      "file_offset": 437494,
+      "hex": "3b63"
+    },
+    {
+      "address": "0x6009acf8",
+      "file_offset": 437496,
+      "hex": "7b6b"
+    },
+    {
+      "address": "0x6009acfa",
+      "file_offset": 437498,
+      "hex": "4433"
+    },
+    {
+      "address": "0x6009acfc",
+      "file_offset": 437500,
+      "hex": "fb62"
+    },
+    {
+      "address": "0x6009acfe",
+      "file_offset": 437502,
+      "hex": "7b6b"
+    },
+    {
+      "address": "0x6009ad00",
+      "file_offset": 437504,
+      "hex": "1b68"
+    },
+    {
+      "address": "0x6009ad02",
+      "file_offset": 437506,
+      "hex": "591c"
+    },
+    {
+      "address": "0x6009ad04",
+      "file_offset": 437508,
+      "hex": "7a6b"
+    },
+    {
+      "address": "0x6009ad06",
+      "file_offset": 437510,
+      "hex": "1160"
+    },
+    {
+      "address": "0x6009ad08",
+      "file_offset": 437512,
+      "hex": "ba68"
+    },
+    {
+      "address": "0x6009ad0a",
+      "file_offset": 437514,
+      "hex": "9360"
+    },
+    {
+      "address": "0x6009ad0c",
+      "file_offset": 437516,
+      "hex": "7b6b"
+    },
+    {
+      "address": "0x6009ad0e",
+      "file_offset": 437518,
+      "hex": "5a68"
+    },
+    {
+      "address": "0x6009ad10",
+      "file_offset": 437520,
+      "hex": "bb68"
+    },
+    {
+      "address": "0x6009ad12",
+      "file_offset": 437522,
+      "hex": "5a60"
+    },
+    {
+      "address": "0x6009ad14",
+      "file_offset": 437524,
+      "hex": "7b6b"
+    },
+    {
+      "address": "0x6009ad16",
+      "file_offset": 437526,
+      "hex": "724a"
+    },
+    {
+      "address": "0x6009ad18",
+      "file_offset": 437528,
+      "hex": "1a63"
+    },
+    {
+      "address": "0x6009ad1a",
+      "file_offset": 437530,
+      "hex": "7b6b"
+    },
+    {
+      "address": "0x6009ad1c",
+      "file_offset": 437532,
+      "hex": "7a6b"
+    },
+    {
+      "address": "0x6009ad1e",
+      "file_offset": 437534,
+      "hex": "5a63"
+    },
+    {
+      "address": "0x6009ad20",
+      "file_offset": 437536,
+      "hex": "7b6b"
+    },
+    {
+      "address": "0x6009ad22",
+      "file_offset": 437538,
+      "hex": "03f5e043"
+    },
+    {
+      "address": "0x6009ad26",
+      "file_offset": 437542,
+      "hex": "0122"
+    },
+    {
+      "address": "0x6009ad28",
+      "file_offset": 437544,
+      "hex": "83f83029"
+    },
+    {
+      "address": "0x6009ad2c",
+      "file_offset": 437548,
+      "hex": "7b6b"
+    },
+    {
+      "address": "0x6009ad2e",
+      "file_offset": 437550,
+      "hex": "03f5e043"
+    },
+    {
+      "address": "0x6009ad32",
+      "file_offset": 437554,
+      "hex": "1a46"
+    },
+    {
+      "address": "0x6009ad34",
+      "file_offset": 437556,
+      "hex": "0023"
+    },
+    {
+      "address": "0x6009ad36",
+      "file_offset": 437558,
+      "hex": "c2f81839"
+    },
+    {
+      "address": "0x6009ad3a",
+      "file_offset": 437562,
+      "hex": "7b6b"
+    },
+    {
+      "address": "0x6009ad3c",
+      "file_offset": 437564,
+      "hex": "03f5e043"
+    },
+    {
+      "address": "0x6009ad40",
+      "file_offset": 437568,
+      "hex": "1a46"
+    },
+    {
+      "address": "0x6009ad42",
+      "file_offset": 437570,
+      "hex": "0023"
+    },
+    {
+      "address": "0x6009ad44",
+      "file_offset": 437572,
+      "hex": "c2f81c39"
+    },
+    {
+      "address": "0x6009ad48",
+      "file_offset": 437576,
+      "hex": "7b6b"
+    },
+    {
+      "address": "0x6009ad4a",
+      "file_offset": 437578,
+      "hex": "03f5e043"
+    },
+    {
+      "address": "0x6009ad4e",
+      "file_offset": 437582,
+      "hex": "1a46"
+    },
+    {
+      "address": "0x6009ad50",
+      "file_offset": 437584,
+      "hex": "0023"
+    },
+    {
+      "address": "0x6009ad52",
+      "file_offset": 437586,
+      "hex": "c2f82039"
+    },
+    {
+      "address": "0x6009ad56",
+      "file_offset": 437590,
+      "hex": "7b6b"
+    },
+    {
+      "address": "0x6009ad58",
+      "file_offset": 437592,
+      "hex": "03f5e043"
+    },
+    {
+      "address": "0x6009ad5c",
+      "file_offset": 437596,
+      "hex": "0122"
+    },
+    {
+      "address": "0x6009ad5e",
+      "file_offset": 437598,
+      "hex": "83f82829"
+    },
+    {
+      "address": "0x6009ad62",
+      "file_offset": 437602,
+      "hex": "fb88"
+    },
+    {
+      "address": "0x6009ad64",
+      "file_offset": 437604,
+      "hex": "dab2"
+    },
+    {
+      "address": "0x6009ad66",
+      "file_offset": 437606,
+      "hex": "7b6b"
+    },
+    {
+      "address": "0x6009ad68",
+      "file_offset": 437608,
+      "hex": "03f5e043"
+    },
+    {
+      "address": "0x6009ad6c",
+      "file_offset": 437612,
+      "hex": "83f82a29"
+    },
+    {
+      "address": "0x6009ad70",
+      "file_offset": 437616,
+      "hex": "bb68"
+    },
+    {
+      "address": "0x6009ad72",
+      "file_offset": 437618,
+      "hex": "93f82030"
+    },
+    {
+      "address": "0x6009ad76",
+      "file_offset": 437622,
+      "hex": "0333"
+    },
+    {
+      "address": "0x6009ad78",
+      "file_offset": 437624,
+      "hex": "9a00"
+    },
+    {
+      "address": "0x6009ad7a",
+      "file_offset": 437626,
+      "hex": "fb6a"
+    },
+    {
+      "address": "0x6009ad7c",
+      "file_offset": 437628,
+      "hex": "1a60"
+    },
+    {
+      "address": "0x6009ad7e",
+      "file_offset": 437630,
+      "hex": "fb6a"
+    },
+    {
+      "address": "0x6009ad80",
+      "file_offset": 437632,
+      "hex": "0122"
+    },
+    {
+      "address": "0x6009ad82",
+      "file_offset": 437634,
+      "hex": "9a80"
+    },
+    {
+      "address": "0x6009ad84",
+      "file_offset": 437636,
+      "hex": "bb68"
+    },
+    {
+      "address": "0x6009ad86",
+      "file_offset": 437638,
+      "hex": "1a88"
+    },
+    {
+      "address": "0x6009ad88",
+      "file_offset": 437640,
+      "hex": "fb6a"
+    },
+    {
+      "address": "0x6009ad8a",
+      "file_offset": 437642,
+      "hex": "da80"
+    },
+    {
+      "address": "0x6009ad8c",
+      "file_offset": 437644,
+      "hex": "bb68"
+    },
+    {
+      "address": "0x6009ad8e",
+      "file_offset": 437646,
+      "hex": "9a68"
+    },
+    {
+      "address": "0x6009ad90",
+      "file_offset": 437648,
+      "hex": "fb6a"
+    },
+    {
+      "address": "0x6009ad92",
+      "file_offset": 437650,
+      "hex": "9a60"
+    },
+    {
+      "address": "0x6009ad94",
+      "file_offset": 437652,
+      "hex": "bb68"
+    },
+    {
+      "address": "0x6009ad96",
+      "file_offset": 437654,
+      "hex": "da68"
+    },
+    {
+      "address": "0x6009ad98",
+      "file_offset": 437656,
+      "hex": "fb6a"
+    },
+    {
+      "address": "0x6009ad9a",
+      "file_offset": 437658,
+      "hex": "da60"
+    },
+    {
+      "address": "0x6009ad9c",
+      "file_offset": 437660,
+      "hex": "bb68"
+    },
+    {
+      "address": "0x6009ad9e",
+      "file_offset": 437662,
+      "hex": "1a69"
+    },
+    {
+      "address": "0x6009ada0",
+      "file_offset": 437664,
+      "hex": "fb6a"
+    },
+    {
+      "address": "0x6009ada2",
+      "file_offset": 437666,
+      "hex": "1a61"
+    },
+    {
+      "address": "0x6009ada4",
+      "file_offset": 437668,
+      "hex": "bb68"
+    },
+    {
+      "address": "0x6009ada6",
+      "file_offset": 437670,
+      "hex": "5a69"
+    },
+    {
+      "address": "0x6009ada8",
+      "file_offset": 437672,
+      "hex": "fb6a"
+    },
+    {
+      "address": "0x6009adaa",
+      "file_offset": 437674,
+      "hex": "5a61"
+    },
+    {
+      "address": "0x6009adac",
+      "file_offset": 437676,
+      "hex": "bb68"
+    },
+    {
+      "address": "0x6009adae",
+      "file_offset": 437678,
+      "hex": "9a69"
+    },
+    {
+      "address": "0x6009adb0",
+      "file_offset": 437680,
+      "hex": "fb6a"
+    },
+    {
+      "address": "0x6009adb2",
+      "file_offset": 437682,
+      "hex": "9a61"
+    },
+    {
+      "address": "0x6009adb4",
+      "file_offset": 437684,
+      "hex": "bb68"
+    },
+    {
+      "address": "0x6009adb6",
+      "file_offset": 437686,
+      "hex": "da69"
+    },
+    {
+      "address": "0x6009adb8",
+      "file_offset": 437688,
+      "hex": "fb6a"
+    },
+    {
+      "address": "0x6009adba",
+      "file_offset": 437690,
+      "hex": "da61"
+    },
+    {
+      "address": "0x6009adbc",
+      "file_offset": 437692,
+      "hex": "fb88"
+    },
+    {
+      "address": "0x6009adbe",
+      "file_offset": 437694,
+      "hex": "dbb2"
+    },
+    {
+      "address": "0x6009adc0",
+      "file_offset": 437696,
+      "hex": "032b"
+    },
+    {
+      "address": "0x6009adc2",
+      "file_offset": 437698,
+      "hex": "00f28680"
+    },
+    {
+      "address": "0x6009adc6",
+      "file_offset": 437702,
+      "hex": "01a2"
+    },
+    {
+      "address": "0x6009adc8",
+      "file_offset": 437704,
+      "hex": "52f823f0"
+    },
+    {
+      "address": "0x6009addc",
+      "file_offset": 437724,
+      "hex": "7b6b"
+    },
+    {
+      "address": "0x6009adde",
+      "file_offset": 437726,
+      "hex": "03f5e043"
+    },
+    {
+      "address": "0x6009ade2",
+      "file_offset": 437730,
+      "hex": "0022"
+    },
+    {
+      "address": "0x6009ade4",
+      "file_offset": 437732,
+      "hex": "83f82929"
+    },
+    {
+      "address": "0x6009ade8",
+      "file_offset": 437736,
+      "hex": "3b68"
+    },
+    {
+      "address": "0x6009adea",
+      "file_offset": 437738,
+      "hex": "002b"
+    },
+    {
+      "address": "0x6009adec",
+      "file_offset": 437740,
+      "hex": "01d1"
+    },
+    {
+      "address": "0x6009adf2",
+      "file_offset": 437746,
+      "hex": "3b6d"
+    },
+    {
+      "address": "0x6009adf4",
+      "file_offset": 437748,
+      "hex": "1b68"
+    },
+    {
+      "address": "0x6009adf6",
+      "file_offset": 437750,
+      "hex": "03f10c02"
+    },
+    {
+      "address": "0x6009adfa",
+      "file_offset": 437754,
+      "hex": "3b6b"
+    },
+    {
+      "address": "0x6009adfc",
+      "file_offset": 437756,
+      "hex": "1a60"
+    },
+    {
+      "address": "0x6009adfe",
+      "file_offset": 437758,
+      "hex": "3b6b"
+    },
+    {
+      "address": "0x6009ae00",
+      "file_offset": 437760,
+      "hex": "0222"
+    },
+    {
+      "address": "0x6009ae02",
+      "file_offset": 437762,
+      "hex": "9a80"
+    },
+    {
+      "address": "0x6009ae04",
+      "file_offset": 437764,
+      "hex": "bb68"
+    },
+    {
+      "address": "0x6009ae06",
+      "file_offset": 437766,
+      "hex": "1a88"
+    },
+    {
+      "address": "0x6009ae08",
+      "file_offset": 437768,
+      "hex": "3b6b"
+    },
+    {
+      "address": "0x6009ae0a",
+      "file_offset": 437770,
+      "hex": "da80"
+    },
+    {
+      "address": "0x6009ae0c",
+      "file_offset": 437772,
+      "hex": "bb68"
+    },
+    {
+      "address": "0x6009ae0e",
+      "file_offset": 437774,
+      "hex": "9a68"
+    },
+    {
+      "address": "0x6009ae10",
+      "file_offset": 437776,
+      "hex": "3b6b"
+    },
+    {
+      "address": "0x6009ae12",
+      "file_offset": 437778,
+      "hex": "9a60"
+    },
+    {
+      "address": "0x6009ae14",
+      "file_offset": 437780,
+      "hex": "bb68"
+    },
+    {
+      "address": "0x6009ae16",
+      "file_offset": 437782,
+      "hex": "da68"
+    },
+    {
+      "address": "0x6009ae18",
+      "file_offset": 437784,
+      "hex": "3b6b"
+    },
+    {
+      "address": "0x6009ae1a",
+      "file_offset": 437786,
+      "hex": "da60"
+    },
+    {
+      "address": "0x6009ae1c",
+      "file_offset": 437788,
+      "hex": "bb68"
+    },
+    {
+      "address": "0x6009ae1e",
+      "file_offset": 437790,
+      "hex": "1a69"
+    },
+    {
+      "address": "0x6009ae20",
+      "file_offset": 437792,
+      "hex": "3b6b"
+    },
+    {
+      "address": "0x6009ae22",
+      "file_offset": 437794,
+      "hex": "1a61"
+    },
+    {
+      "address": "0x6009ae24",
+      "file_offset": 437796,
+      "hex": "bb68"
+    },
+    {
+      "address": "0x6009ae26",
+      "file_offset": 437798,
+      "hex": "5a69"
+    },
+    {
+      "address": "0x6009ae28",
+      "file_offset": 437800,
+      "hex": "3b6b"
+    },
+    {
+      "address": "0x6009ae2a",
+      "file_offset": 437802,
+      "hex": "5a61"
+    },
+    {
+      "address": "0x6009ae2c",
+      "file_offset": 437804,
+      "hex": "bb68"
+    },
+    {
+      "address": "0x6009ae2e",
+      "file_offset": 437806,
+      "hex": "9a69"
+    },
+    {
+      "address": "0x6009ae30",
+      "file_offset": 437808,
+      "hex": "3b6b"
+    },
+    {
+      "address": "0x6009ae32",
+      "file_offset": 437810,
+      "hex": "9a61"
+    },
+    {
+      "address": "0x6009ae34",
+      "file_offset": 437812,
+      "hex": "bb68"
+    },
+    {
+      "address": "0x6009ae36",
+      "file_offset": 437814,
+      "hex": "da69"
+    },
+    {
+      "address": "0x6009ae38",
+      "file_offset": 437816,
+      "hex": "3b6b"
+    },
+    {
+      "address": "0x6009ae3a",
+      "file_offset": 437818,
+      "hex": "da61"
+    },
+    {
+      "address": "0x6009ae3c",
+      "file_offset": 437820,
+      "hex": "3b6b"
+    },
+    {
+      "address": "0x6009ae3e",
+      "file_offset": 437822,
+      "hex": "1b68"
+    },
+    {
+      "address": "0x6009ae40",
+      "file_offset": 437824,
+      "hex": "7a6b"
+    },
+    {
+      "address": "0x6009ae42",
+      "file_offset": 437826,
+      "hex": "02f5e042"
+    },
+    {
+      "address": "0x6009ae46",
+      "file_offset": 437830,
+      "hex": "c2f81c39"
+    },
+    {
+      "address": "0x6009ae4a",
+      "file_offset": 437834,
+      "hex": "4ff0ff33"
+    },
+    {
+      "address": "0x6009ae4e",
+      "file_offset": 437838,
+      "hex": "b3f1ff3f"
+    },
+    {
+      "address": "0x6009ae52",
+      "file_offset": 437842,
+      "hex": "0ad0"
+    },
+    {
+      "address": "0x6009ae6a",
+      "file_offset": 437866,
+      "hex": "3b6b"
+    },
+    {
+      "address": "0x6009ae6c",
+      "file_offset": 437868,
+      "hex": "03f10c02"
+    },
+    {
+      "address": "0x6009ae70",
+      "file_offset": 437872,
+      "hex": "3b6d"
+    },
+    {
+      "address": "0x6009ae72",
+      "file_offset": 437874,
+      "hex": "1b68"
+    },
+    {
+      "address": "0x6009ae74",
+      "file_offset": 437876,
+      "hex": "ba62"
+    },
+    {
+      "address": "0x6009ae76",
+      "file_offset": 437878,
+      "hex": "3a68"
+    },
+    {
+      "address": "0x6009ae78",
+      "file_offset": 437880,
+      "hex": "7a62"
+    },
+    {
+      "address": "0x6009ae7a",
+      "file_offset": 437882,
+      "hex": "3b62"
+    },
+    {
+      "address": "0x6009ae7c",
+      "file_offset": 437884,
+      "hex": "4ff0ff33"
+    },
+    {
+      "address": "0x6009ae80",
+      "file_offset": 437888,
+      "hex": "3a6a"
+    },
+    {
+      "address": "0x6009ae82",
+      "file_offset": 437890,
+      "hex": "796a"
+    },
+    {
+      "address": "0x6009ae84",
+      "file_offset": 437892,
+      "hex": "b86a"
+    },
+    {
+      "address": "0x6009ae86",
+      "file_offset": 437894,
+      "hex": "48f03ffe"
+    },
+    {
+      "address": "0x6009ae8a",
+      "file_offset": 437898,
+      "hex": "7b6b"
+    },
+    {
+      "address": "0x6009ae8c",
+      "file_offset": 437900,
+      "hex": "03f5e043"
+    },
+    {
+      "address": "0x6009ae90",
+      "file_offset": 437904,
+      "hex": "1a46"
+    },
+    {
+      "address": "0x6009ae92",
+      "file_offset": 437906,
+      "hex": "3b6b"
+    },
+    {
+      "address": "0x6009ae94",
+      "file_offset": 437908,
+      "hex": "c2f81839"
+    },
+    {
+      "address": "0x6009ae98",
+      "file_offset": 437912,
+      "hex": "25e0"
+    },
+    {
+      "address": "0x6009aee6",
+      "file_offset": 437990,
+      "hex": "724b"
+    },
+    {
+      "address": "0x6009aee8",
+      "file_offset": 437992,
+      "hex": "03f5e043"
+    },
+    {
+      "address": "0x6009aeec",
+      "file_offset": 437996,
+      "hex": "d3f87069"
+    },
+    {
+      "address": "0x6009aef0",
+      "file_offset": 438000,
+      "hex": "4ff00000"
+    },
+    {
+      "address": "0x6009aef4",
+      "file_offset": 438004,
+      "hex": "4ff00001"
+    },
+    {
+      "address": "0x6009aef8",
+      "file_offset": 438008,
+      "hex": "0246"
+    },
+    {
+      "address": "0x6009aefa",
+      "file_offset": 438010,
+      "hex": "0b46"
+    },
+    {
+      "address": "0x6009aefc",
+      "file_offset": 438012,
+      "hex": "3046"
+    },
+    {
+      "address": "0x6009aefe",
+      "file_offset": 438014,
+      "hex": "3ef0cbfd"
+    },
+    {
+      "address": "0x6009af02",
+      "file_offset": 438018,
+      "hex": "786b"
+    },
+    {
+      "address": "0x6009af04",
+      "file_offset": 438020,
+      "hex": "fff786fb"
+    },
+    {
+      "address": "0x600d7242",
+      "file_offset": 684610,
+      "hex": "0eb4"
+    },
+    {
+      "address": "0x600d7244",
+      "file_offset": 684612,
+      "hex": "33b5"
+    },
+    {
+      "address": "0x600d7246",
+      "file_offset": 684614,
+      "hex": "05ab"
+    },
+    {
+      "address": "0x600d7248",
+      "file_offset": 684616,
+      "hex": "0446"
+    },
+    {
+      "address": "0x600d724a",
+      "file_offset": 684618,
+      "hex": "33f8045b"
+    },
+    {
+      "address": "0x600d724e",
+      "file_offset": 684622,
+      "hex": "0193"
+    },
+    {
+      "address": "0x600d7250",
+      "file_offset": 684624,
+      "hex": "eb1e"
+    },
+    {
+      "address": "0x600d7252",
+      "file_offset": 684626,
+      "hex": "122b"
+    },
+    {
+      "address": "0x600d7254",
+      "file_offset": 684628,
+      "hex": "10d8"
+    },
+    {
+      "address": "0x600d7278",
+      "file_offset": 684664,
+      "hex": "0324"
+    },
+    {
+      "address": "0x600d727a",
+      "file_offset": 684666,
+      "hex": "07e0"
+    },
+    {
+      "address": "0x600d728c",
+      "file_offset": 684684,
+      "hex": "2046"
+    },
+    {
+      "address": "0x600d728e",
+      "file_offset": 684686,
+      "hex": "02b0"
+    },
+    {
+      "address": "0x600d7290",
+      "file_offset": 684688,
+      "hex": "bde83040"
+    },
+    {
+      "address": "0x600d7294",
+      "file_offset": 684692,
+      "hex": "03b0"
+    },
+    {
+      "address": "0x600d7296",
+      "file_offset": 684694,
+      "hex": "7047"
+    },
+    {
+      "address": "0x600d738a",
+      "file_offset": 684938,
+      "hex": "0cb4"
+    },
+    {
+      "address": "0x600d738c",
+      "file_offset": 684940,
+      "hex": "f7b5"
+    },
+    {
+      "address": "0x600d738e",
+      "file_offset": 684942,
+      "hex": "0e46"
+    },
+    {
+      "address": "0x600d7390",
+      "file_offset": 684944,
+      "hex": "08ac"
+    },
+    {
+      "address": "0x600d7392",
+      "file_offset": 684946,
+      "hex": "2422"
+    },
+    {
+      "address": "0x600d7394",
+      "file_offset": 684948,
+      "hex": "0021"
+    },
+    {
+      "address": "0x600d7396",
+      "file_offset": 684950,
+      "hex": "0546"
+    },
+    {
+      "address": "0x600d7398",
+      "file_offset": 684952,
+      "hex": "34f8047b"
+    },
+    {
+      "address": "0x600d739c",
+      "file_offset": 684956,
+      "hex": "0cf038f8"
+    },
+    {
+      "address": "0x600d73a0",
+      "file_offset": 684960,
+      "hex": "731e"
+    },
+    {
+      "address": "0x600d73a2",
+      "file_offset": 684962,
+      "hex": "2f80"
+    },
+    {
+      "address": "0x600d73a4",
+      "file_offset": 684964,
+      "hex": "04eb8606"
+    },
+    {
+      "address": "0x600d73a8",
+      "file_offset": 684968,
+      "hex": "85f82030"
+    },
+    {
+      "address": "0x600d73ac",
+      "file_offset": 684972,
+      "hex": "0835"
+    },
+    {
+      "address": "0x600d73ae",
+      "file_offset": 684974,
+      "hex": "0194"
+    },
+    {
+      "address": "0x600d73b0",
+      "file_offset": 684976,
+      "hex": "54f8043b"
+    },
+    {
+      "address": "0x600d73b4",
+      "file_offset": 684980,
+      "hex": "b442"
+    },
+    {
+      "address": "0x600d73b6",
+      "file_offset": 684982,
+      "hex": "45f8043f"
+    },
+    {
+      "address": "0x600d73ba",
+      "file_offset": 684986,
+      "hex": "f9d1"
+    },
+    {
+      "address": "0x600d73bc",
+      "file_offset": 684988,
+      "hex": "03b0"
+    },
+    {
+      "address": "0x600d73be",
+      "file_offset": 684990,
+      "hex": "bde8f040"
+    },
+    {
+      "address": "0x600d73c2",
+      "file_offset": 684994,
+      "hex": "02b0"
+    },
+    {
+      "address": "0x600d73c4",
+      "file_offset": 684996,
+      "hex": "7047"
+    },
+    {
+      "address": "0x600d9a98",
+      "file_offset": 694936,
+      "hex": "09f032bf"
+    },
+    {
+      "address": "0x600e3410",
+      "file_offset": 734224,
+      "hex": "5ff800f0"
+    },
+    {
+      "address": "0x600e3900",
+      "file_offset": 735488,
+      "hex": "5ff800f0"
+    },
+    {
+      "address": "0x600e3b08",
+      "file_offset": 736008,
+      "hex": "5ff800f0"
+    }
+  ],
+  "fixtures": [
+    "Original VID classification/ops copy, then explicit task ops pointer fixture",
+    "Camera-ready byte fixture; no camera initialization/session/USB enumeration",
+    "One queue action 0x12/value1000 or queue failure; stop before second receive",
+    "Clock, locks, logger, OS semaphore substituted; transport stops before USB scheduler"
+  ],
+  "conclusion": "Reference SIGMA selection returns 3 for numeric selector0x20 before any PTP call; Panasonic selection assembles9416/03010031. Task consumes but does not dispatch when ready=0 or ops=null.",
+  "limits": [
+    "Not a real Grip USB capture or verified physical firmware mapping",
+    "No proof of the origin/unit/validity of numeric input or liveview/depth data",
+    "Not all SIGMA control is unsupported; this result is limited to numeric selector0x20",
+    "Changing VID alone does not implement a complete compatible camera handshake"
+  ]
+}

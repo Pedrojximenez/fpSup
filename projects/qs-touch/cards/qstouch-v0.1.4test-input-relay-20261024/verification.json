@@ -1,0 +1,68 @@
+{
+  "checks": [
+    {
+      "name": "Exact AutoRun / Loader v4 / SUP ARM execution",
+      "passed": true,
+      "output": "test_claim_conflict_releases_sup_without_private_ui (__main__.SupTests) ... ok\ntest_inactive_touch_passthrough_and_owned_contact_drain (__main__.SupTests) ... ok\ntest_long_press_reorders_on_release_without_motion_frames (__main__.SupTests) ... ok\ntest_missing_gui_keeps_pointer_lifetime_but_does_not_arm (__main__.SupTests) ... ok\ntest_multi_contact_cancels_without_applying_and_stable_moves_do_not_repaint (__main__.SupTests) ... ok\ntest_native_focus_has_a_visible_private_initial_target (__main__.SupTests) ... ok\ntest_native_silent_post_requires_relay_and_preserves_all_packet_bits (__main__.SupTests) ... ok\ntest_old_queued_packets_do_not_change_a_reopened_page (__main__.SupTests) ... ok\ntest_power_off_restores_touch_word_after_idle_and_interaction (__main__.SupTests) ... ok\ntest_private_page_has_no_animation_or_stock_settings (__main__.SupTests) ... ok\ntest_private_paint_order_places_tiles_above_native_frame_and_fill (__main__.SupTests) ... ok\ntest_real_boot_installs_a_resident_sup_and_borrowed_ui (__main__.SupTests) ... ok\ntest_select_adjust_double_tap_and_inline_option_grid (__main__.SupTests) ... ok\ntest_swipe_up_and_back_target_return_to_parent (__main__.SupTests) ... ok\ntest_unknown_touch_owner_is_not_overwritten (__main__.SupTests) ... ok\n\n----------------------------------------------------------------------\nRan 15 tests in 44.419s\n\nOK\n"
+    },
+    {
+      "name": "Original native NBU interpreter parses private page",
+      "passed": true,
+      "records": 1850,
+      "page_sha256": "d5acd4256d011633e04f4e60e223a5192076bddf429d651e73ffe9a216888573",
+      "objects": 324,
+      "own_objects": 13,
+      "animation_requests": 0,
+      "passive_native_animation_data": true
+    },
+    {
+      "name": "Mutation missing_slot_journal",
+      "passed": true,
+      "detected": true,
+      "test": "SupTests.test_power_off_restores_touch_word_after_idle_and_interaction",
+      "output": "test_power_off_restores_touch_word_after_idle_and_interaction (__main__.SupTests) ... \n======================================================================\nFAIL: test_power_off_restores_touch_word_after_idle_and_interaction (__main__.SupTests) (interact=False)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/dido/Developer.localized/SIGMAfp_re/projects/qs-touch/sup/test_sup.py\", line 280, in test_power_off_restores_touch_word_after_idle_and_interaction\n    self.assertEqual(cam.w(SLOT),STOCK)\nAssertionError: 3305272105 != 3226546592\n\n======================================================================\nFAIL: test_power_off_restores_touch_word_after_idle_and_interaction (__main__.SupTests) (interact=True)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/dido/Developer.localized/SIGMAfp_re/projects/qs-touch/sup/test_sup.py\", line 280, in test_power_off_restores_touch_word_after_idle_and_interaction\n    self.assertEqual(cam.w(SLOT),STOCK)\nAssertionError: 3305272105 != 3226546592\n\n----------------------------------------------------------------------\nRan 1 test in 6.873s\n\nFAILED (failures=2)\n"
+    },
+    {
+      "name": "Mutation unknown_owner_overwrite",
+      "passed": true,
+      "detected": true,
+      "test": "SupTests.test_unknown_touch_owner_is_not_overwritten",
+      "output": "test_unknown_touch_owner_is_not_overwritten (__main__.SupTests) ... FAIL\n\n======================================================================\nFAIL: test_unknown_touch_owner_is_not_overwritten (__main__.SupTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/dido/Developer.localized/SIGMAfp_re/projects/qs-touch/sup/test_sup.py\", line 247, in test_unknown_touch_owner_is_not_overwritten\n    self.assertNotIn('QSTOUCH.BIN',T.blocks(cam))\nAssertionError: 'QSTOUCH.BIN' unexpectedly found in {'QSTOUCH.BIN': 3305271872, 'SUPMGR.BIN': 3305402304}\n\n----------------------------------------------------------------------\nRan 1 test in 3.287s\n\nFAILED (failures=1)\n"
+    },
+    {
+      "name": "Mutation stale_queued_input",
+      "passed": true,
+      "detected": true,
+      "test": "SupTests.test_old_queued_packets_do_not_change_a_reopened_page",
+      "output": "test_old_queued_packets_do_not_change_a_reopened_page (__main__.SupTests) ... FAIL\n\n======================================================================\nFAIL: test_old_queued_packets_do_not_change_a_reopened_page (__main__.SupTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/dido/Developer.localized/SIGMAfp_re/projects/qs-touch/sup/test_sup.py\", line 262, in test_old_queued_packets_do_not_change_a_reopened_page\n    self.assertEqual(cam.vars['QST_V0'][1],'MOV')\nAssertionError: 'CDNG 8bit' != 'MOV'\n- CDNG 8bit\n+ MOV\n\n\n----------------------------------------------------------------------\nRan 1 test in 3.441s\n\nFAILED (failures=1)\n"
+    },
+    {
+      "name": "Mutation watching_silent_raw_input",
+      "passed": true,
+      "detected": true,
+      "test": "SupTests.test_select_adjust_double_tap_and_inline_option_grid",
+      "output": "test_select_adjust_double_tap_and_inline_option_grid (__main__.SupTests) ... FAIL\n\n======================================================================\nFAIL: test_select_adjust_double_tap_and_inline_option_grid (__main__.SupTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/dido/Developer.localized/SIGMAfp_re/projects/qs-touch/sup/test_sup.py\", line 202, in test_select_adjust_double_tap_and_inline_option_grid\n    cam.tap(300,150)\n  File \"/Users/dido/Developer.localized/SIGMAfp_re/projects/qs-touch/sup/test_sup.py\", line 160, in tap\n    def tap(self,x,y):self.touch(x,y);self.touch()\n  File \"/Users/dido/Developer.localized/SIGMAfp_re/projects/qs-touch/sup/test_sup.py\", line 157, in touch\n    for value in queued:self.deliver_touch(value)\n  File \"/Users/dido/Developer.localized/SIGMAfp_re/projects/qs-touch/sup/test_sup.py\", line 137, in deliver_touch\n    self.notify(route['destination'], value)\n  File \"/Users/dido/Developer.localized/SIGMAfp_re/projects/qs-touch/sup/test_sup.py\", line 126, in notify\n    assert len(callbacks)==1, f'{var} must have exactly one operation subscriber: {callbacks}'\nAssertionError: QST_Input must have exactly one operation subscriber: []\n\n----------------------------------------------------------------------\nRan 1 test in 3.396s\n\nFAILED (failures=1)\n"
+    }
+  ],
+  "skipped": 0,
+  "firmware_sha256": "92a8ee993f6c3d66c251e88d45a2ccd5135c6cf7342717784321c2ed506e2fb4",
+  "harness_source_hashes": {
+    "projects/qs-touch/sup/verify.py": "311ac8b3cc8b2ab3b3992ce43f9eb86ee9ddd31bda2e7537068d5133ab2623de",
+    "projects/qs-touch/sup/test_sup.py": "53165edf121de19df8a210d3058bc2d4dd24d96aed308bf818fdc0400f35edee",
+    "projects/qs-touch/sup/test_native_input.py": "a9000f318dd89368480738ed29743a4bb4d2fafcd26509bf555f327b416a82e2",
+    "projects/qs-touch/sup/README.md": "f2b167c5127cb2eb269f81d111c9a07b7b83c18a982041c9350077a3a756a524",
+    "fpSup/loader-v4/test_ui_v4.py": "6ad4dfe035ee447afe729854847230e30de75688edd4057b021b222c8b47290b",
+    "fpSup/loader-v4/test_boot_card_v4.py": "c4e8908c99d5608624562b432c6310d823f21746e9513a5acf6970d52d4c0a07",
+    "fpSup/loader-v4/test_v4.py": "e430d69529e233df9a765103e2b5d078fd98f39b26f0e4079b4f1e5198a794a4",
+    "projects/open-gate/build/res-qs/qs_probe.py": "3d144c69075e0ee89b16ede8c98d1bb144da36ea3ca0a00d9150de9a731e6b1a",
+    "research/ui/tools/native_control_probe/test_native_permission_binding.py": "d33118f6c2d21c4863c87e4bd89106b3ac946e8139b7dbe46145df0b906c5ff2",
+    "research/ui/tools/native_variable_probe/registry_probe.py": "10e85a61bca9a6074ecad4b115154ba0de45c294f5aad18564603b3cdf09f764",
+    "research/ui/tools/native_variable_probe/binding_probe.py": "f81d514da9301ecb04e5f61755251639727dcbed2009b21b05b381a87c51eef8"
+  },
+  "limitations": [
+    "GUI registry, post queue, screen manager, clock, file/heap/OS services are substitutes",
+    "Native record parsing substitutes construction/OS services and does not paint",
+    "Native relay test executes silent/notifying setters and controlAppVariable; page event scheduling remains explicit",
+    "No physical touch, camera connection, recording settings, timing or hardware cache verification"
+  ]
+}

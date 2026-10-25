@@ -1,0 +1,33 @@
+{
+  "code_identical_to_13_test_focus_build": true,
+  "native_records": 1848,
+  "resource_and_boot_tests": "test_real_boot_installs_a_resident_sup_and_borrowed_ui (__main__.SupTests) ... ok\ntest_private_page_has_no_animation_or_stock_settings (__main__.SupTests) ... ok\ntest_native_focus_has_a_visible_private_initial_target (__main__.SupTests) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 3.994s\n\nOK\n",
+  "passed": true,
+  "scope": "Resource ordering change only; gesture code and prior mutation results unchanged",
+  "files": {
+    "fpSup/QSTOUCH.BIN": {
+      "bytes": 126040,
+      "sha256": "a03edba0a3d0584384f396cb4e72430a401a996dcca6cafb1c152104fd6be23c"
+    },
+    "AutoRun.txt": {
+      "bytes": 3253,
+      "sha256": "ee256bc56848caeb6aecfb9d8114530102c67bae768a09f67757528e64af59f9"
+    },
+    "fpSup/LOADER.BIN": {
+      "bytes": 18908,
+      "sha256": "c7453c524d6c9f169b12a581dfa7239bb271880354bf19720768d465e533f3cf"
+    },
+    "fpSup/SUPMGR.BIN": {
+      "bytes": 4812,
+      "sha256": "d3b2c7fd672ba8322c1ed22d35001108e28586e30ad3a17377dc9cb94cd66219"
+    },
+    "fpSup/UI/FPSUP.BIN": {
+      "bytes": 132971,
+      "sha256": "2cef278c3958d8974f924e274b2b77b5b502bf5ab820d5903489e1d4a2857742"
+    },
+    "fpSup/UI/SUPMGR.BIN": {
+      "bytes": 115165,
+      "sha256": "404bee427d223b6ec94a402b40a9770297fde0c972f394b91873d84b2cd21dd4"
+    }
+  }
+}

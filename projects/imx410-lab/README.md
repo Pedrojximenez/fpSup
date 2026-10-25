@@ -1,4 +1,4 @@
-> 現況與筆記入口：[notes/INDEX.md](notes/INDEX.md)（2026-10-22）。以下為早期 IMXL 錄影攔截設計的說明。
+> 現況與筆記入口：[notes/INDEX.md](notes/INDEX.md)（2026-10-25 更新：640 組驗證、可用模式清單、V3 / 寬度 / h3 修正）。以下為早期 IMXL 錄影攔截設計的說明。
 >
 > ⚠ 2026-10-23（isp-lab 告知，已確認）：`sup/ix_wr.c:282` 的 `ix_room` 位址檢查會溢位。`0xC0000000u - k->addr` 在 addr ≥ 0xC0000000 時繞回成大數，結果放行寫入快取別名。test_card.py 會通過，只是因為測試塊太小。IMXL 沒上過機，也沒修；要復用請改用 isp-lab 修好的分叉（projects/isp-lab/sup/）。
 

@@ -1,0 +1,12 @@
+{
+  "scope": "Synthetic private GUI events on hardware, not physical touch",
+  "before": {
+    "gui geti QST_X": "OK:QST_X -> 0",
+    "gui gets QST_Footer": "OK:QST_Footer -> MOV"
+  },
+  "epoch": 2,
+  "after": {
+    "gui geti QST_X": "OK:QST_X -> 0",
+    "gui gets QST_Footer": "OK:QST_Footer -> MOV"
+  }
+}

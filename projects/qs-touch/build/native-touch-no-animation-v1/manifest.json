@@ -1,0 +1,1943 @@
+{
+  "tiles": [
+    {
+      "key": "Format",
+      "cell": 1,
+      "object": 11695,
+      "parent": 7856
+    },
+    {
+      "key": "DC",
+      "cell": 1,
+      "object": 11696,
+      "parent": 7856
+    },
+    {
+      "key": "Res",
+      "cell": 1,
+      "object": 11697,
+      "parent": 7856
+    },
+    {
+      "key": "FPS",
+      "cell": 1,
+      "object": 11698,
+      "parent": 7856
+    },
+    {
+      "key": "Format",
+      "cell": 2,
+      "object": 11699,
+      "parent": 9599
+    },
+    {
+      "key": "DC",
+      "cell": 2,
+      "object": 11700,
+      "parent": 9599
+    },
+    {
+      "key": "Res",
+      "cell": 2,
+      "object": 11701,
+      "parent": 9599
+    },
+    {
+      "key": "FPS",
+      "cell": 2,
+      "object": 11702,
+      "parent": 9599
+    },
+    {
+      "key": "Format",
+      "cell": 3,
+      "object": 11703,
+      "parent": 9639
+    },
+    {
+      "key": "DC",
+      "cell": 3,
+      "object": 11704,
+      "parent": 9639
+    },
+    {
+      "key": "Res",
+      "cell": 3,
+      "object": 11705,
+      "parent": 9639
+    },
+    {
+      "key": "FPS",
+      "cell": 3,
+      "object": 11706,
+      "parent": 9639
+    },
+    {
+      "key": "Format",
+      "cell": 4,
+      "object": 11707,
+      "parent": 9679
+    },
+    {
+      "key": "DC",
+      "cell": 4,
+      "object": 11708,
+      "parent": 9679
+    },
+    {
+      "key": "Res",
+      "cell": 4,
+      "object": 11709,
+      "parent": 9679
+    },
+    {
+      "key": "FPS",
+      "cell": 4,
+      "object": 11710,
+      "parent": 9679
+    },
+    {
+      "key": "Format",
+      "cell": 5,
+      "object": 11711,
+      "parent": 9719
+    },
+    {
+      "key": "DC",
+      "cell": 5,
+      "object": 11712,
+      "parent": 9719
+    },
+    {
+      "key": "Res",
+      "cell": 5,
+      "object": 11713,
+      "parent": 9719
+    },
+    {
+      "key": "FPS",
+      "cell": 5,
+      "object": 11714,
+      "parent": 9719
+    },
+    {
+      "key": "Format",
+      "cell": 6,
+      "object": 11715,
+      "parent": 9759
+    },
+    {
+      "key": "DC",
+      "cell": 6,
+      "object": 11716,
+      "parent": 9759
+    },
+    {
+      "key": "Res",
+      "cell": 6,
+      "object": 11717,
+      "parent": 9759
+    },
+    {
+      "key": "FPS",
+      "cell": 6,
+      "object": 11718,
+      "parent": 9759
+    },
+    {
+      "key": "Format",
+      "cell": 7,
+      "object": 11719,
+      "parent": 9799
+    },
+    {
+      "key": "DC",
+      "cell": 7,
+      "object": 11720,
+      "parent": 9799
+    },
+    {
+      "key": "Res",
+      "cell": 7,
+      "object": 11721,
+      "parent": 9799
+    },
+    {
+      "key": "FPS",
+      "cell": 7,
+      "object": 11722,
+      "parent": 9799
+    },
+    {
+      "key": "Format",
+      "cell": 8,
+      "object": 11723,
+      "parent": 9839
+    },
+    {
+      "key": "DC",
+      "cell": 8,
+      "object": 11724,
+      "parent": 9839
+    },
+    {
+      "key": "Res",
+      "cell": 8,
+      "object": 11725,
+      "parent": 9839
+    },
+    {
+      "key": "FPS",
+      "cell": 8,
+      "object": 11726,
+      "parent": 9839
+    }
+  ],
+  "dials": [
+    {
+      "owner": 253,
+      "event": "19",
+      "target": 11687,
+      "formula": "dst + 1"
+    },
+    {
+      "owner": 253,
+      "event": "16",
+      "target": 11688,
+      "formula": "dst + 1"
+    },
+    {
+      "owner": 253,
+      "event": "20",
+      "target": 11689,
+      "formula": "dst + 1"
+    },
+    {
+      "owner": 253,
+      "event": "21",
+      "target": 11690,
+      "formula": "dst + 1"
+    },
+    {
+      "owner": 255,
+      "event": "19",
+      "target": 11687,
+      "formula": "dst - 1"
+    },
+    {
+      "owner": 255,
+      "event": "16",
+      "target": 11688,
+      "formula": "dst - 1"
+    },
+    {
+      "owner": 255,
+      "event": "20",
+      "target": 11689,
+      "formula": "dst - 1"
+    },
+    {
+      "owner": 255,
+      "event": "21",
+      "target": 11690,
+      "formula": "dst - 1"
+    },
+    {
+      "owner": 256,
+      "event": "19",
+      "target": 11687,
+      "formula": "dst - 1"
+    },
+    {
+      "owner": 256,
+      "event": "16",
+      "target": 11688,
+      "formula": "dst - 1"
+    },
+    {
+      "owner": 256,
+      "event": "20",
+      "target": 11689,
+      "formula": "dst - 1"
+    },
+    {
+      "owner": 256,
+      "event": "21",
+      "target": 11690,
+      "formula": "dst - 1"
+    },
+    {
+      "owner": 257,
+      "event": "19",
+      "target": 11687,
+      "formula": "dst + 1"
+    },
+    {
+      "owner": 257,
+      "event": "16",
+      "target": 11688,
+      "formula": "dst + 1"
+    },
+    {
+      "owner": 257,
+      "event": "20",
+      "target": 11689,
+      "formula": "dst + 1"
+    },
+    {
+      "owner": 257,
+      "event": "21",
+      "target": 11690,
+      "formula": "dst + 1"
+    }
+  ],
+  "more": [
+    {
+      "owner": 8514,
+      "event": "19",
+      "target": 11691
+    },
+    {
+      "owner": 8514,
+      "event": "20",
+      "target": 11693
+    },
+    {
+      "owner": 8514,
+      "event": "21",
+      "target": 11694
+    },
+    {
+      "owner": 8514,
+      "event": "FPQS_DC_MoreKey",
+      "target": 11692
+    }
+  ],
+  "legacy_gates": [
+    {
+      "object": 7858,
+      "variable": "FPQS_Legacy1"
+    },
+    {
+      "object": 7859,
+      "variable": "FPQS_Legacy1"
+    },
+    {
+      "object": 9600,
+      "variable": "FPQS_Legacy2"
+    },
+    {
+      "object": 9601,
+      "variable": "FPQS_Legacy2"
+    },
+    {
+      "object": 9640,
+      "variable": "FPQS_Legacy3"
+    },
+    {
+      "object": 9641,
+      "variable": "FPQS_Legacy3"
+    },
+    {
+      "object": 9680,
+      "variable": "FPQS_Legacy4"
+    },
+    {
+      "object": 9681,
+      "variable": "FPQS_Legacy4"
+    },
+    {
+      "object": 9720,
+      "variable": "FPQS_Legacy5"
+    },
+    {
+      "object": 9721,
+      "variable": "FPQS_Legacy5"
+    },
+    {
+      "object": 9760,
+      "variable": "FPQS_Legacy6"
+    },
+    {
+      "object": 9761,
+      "variable": "FPQS_Legacy6"
+    },
+    {
+      "object": 9800,
+      "variable": "FPQS_Legacy7"
+    },
+    {
+      "object": 9801,
+      "variable": "FPQS_Legacy7"
+    },
+    {
+      "object": 9840,
+      "variable": "FPQS_Legacy8"
+    },
+    {
+      "object": 9841,
+      "variable": "FPQS_Legacy8"
+    },
+    {
+      "object": 339,
+      "variable": "FPQS_LegacyFooter"
+    },
+    {
+      "object": 10060,
+      "variable": "FPQS_TouchLegacyCursor"
+    }
+  ],
+  "touch": {
+    "animation": false,
+    "native_geometry": {
+      "width": 1024,
+      "height": 682,
+      "row_y": [
+        77,
+        308
+      ],
+      "cell": [
+        256,
+        223
+      ],
+      "footer_y": 608
+    },
+    "input": "normalized DOWN/MOVE/UP/CANCEL, one contact; not native raw flag decoding",
+    "page_change": "request to the layout owner; no automatic source-page installation",
+    "details": "MORE emits a private intent; native detail contents require their own adapter"
+  },
+  "new_objects": 44,
+  "holders": {
+    "Format": 11687,
+    "DC": 11688,
+    "Res": 11689,
+    "FPS": 11690
+  },
+  "more_holders": {
+    "Format": 11691,
+    "DC": 11692,
+    "Res": 11693,
+    "FPS": 11694
+  },
+  "variables": {
+    "FPQS_FormatIndex": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_FormatMax": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_DCIndex": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_DCMax": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_ResIndex": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_ResMax": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_FPSIndex": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_FPSMax": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_FormatMore": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_DCMore": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_ResMore": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_FPSMore": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_Legacy1": {
+      "type": "integer",
+      "default": 1
+    },
+    "FPQS_FormatOn1": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_FormatText": {
+      "type": "string",
+      "default": " "
+    },
+    "FPQS_FormatDetail": {
+      "type": "string",
+      "default": " "
+    },
+    "FPQS_DCOn1": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_DCText": {
+      "type": "string",
+      "default": " "
+    },
+    "FPQS_DCDetail": {
+      "type": "string",
+      "default": " "
+    },
+    "FPQS_ResOn1": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_ResText": {
+      "type": "string",
+      "default": " "
+    },
+    "FPQS_ResDetail": {
+      "type": "string",
+      "default": " "
+    },
+    "FPQS_FPSOn1": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_FPSText": {
+      "type": "string",
+      "default": " "
+    },
+    "FPQS_FPSDetail": {
+      "type": "string",
+      "default": " "
+    },
+    "FPQS_Legacy2": {
+      "type": "integer",
+      "default": 1
+    },
+    "FPQS_FormatOn2": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_DCOn2": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_ResOn2": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_FPSOn2": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_Legacy3": {
+      "type": "integer",
+      "default": 1
+    },
+    "FPQS_FormatOn3": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_DCOn3": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_ResOn3": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_FPSOn3": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_Legacy4": {
+      "type": "integer",
+      "default": 1
+    },
+    "FPQS_FormatOn4": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_DCOn4": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_ResOn4": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_FPSOn4": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_Legacy5": {
+      "type": "integer",
+      "default": 1
+    },
+    "FPQS_FormatOn5": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_DCOn5": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_ResOn5": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_FPSOn5": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_Legacy6": {
+      "type": "integer",
+      "default": 1
+    },
+    "FPQS_FormatOn6": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_DCOn6": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_ResOn6": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_FPSOn6": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_Legacy7": {
+      "type": "integer",
+      "default": 1
+    },
+    "FPQS_FormatOn7": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_DCOn7": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_ResOn7": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_FPSOn7": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_Legacy8": {
+      "type": "integer",
+      "default": 1
+    },
+    "FPQS_FormatOn8": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_DCOn8": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_ResOn8": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_FPSOn8": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_LegacyFooter": {
+      "type": "integer",
+      "default": 1
+    },
+    "FPQS_FooterOn": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_FooterText": {
+      "type": "string",
+      "default": " "
+    },
+    "FPQS_DCMoreKeyOn": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_PanelOn": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_TouchLegacyCursor": {
+      "type": "integer",
+      "default": 1
+    },
+    "FPQS_TouchLegacyFooter": {
+      "type": "integer",
+      "default": 1
+    },
+    "FPQS_TouchFocusOn": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_TouchFocusX": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_TouchFocusY": {
+      "type": "integer",
+      "default": 77
+    },
+    "FPQS_TouchFooterOn": {
+      "type": "integer",
+      "default": 0
+    },
+    "FPQS_TouchFooterText": {
+      "type": "string",
+      "default": " "
+    },
+    "FPQS_TouchPageText": {
+      "type": "string",
+      "default": "1/1"
+    }
+  },
+  "marks": [
+    [
+      66413,
+      "FPQS_PanelOn"
+    ],
+    [
+      66459,
+      "FPQS_TouchFocus"
+    ],
+    [
+      66619,
+      "FPQS_TouchFocusOn"
+    ],
+    [
+      66677,
+      "FPQS_TouchFocusX"
+    ],
+    [
+      66739,
+      "FPQS_TouchFocusY"
+    ],
+    [
+      66789,
+      "FPQS_TouchPages"
+    ],
+    [
+      66881,
+      "1/1"
+    ],
+    [
+      67062,
+      "FPQS_TouchPageText"
+    ],
+    [
+      74886,
+      "FPQS_TouchLegacyCursor"
+    ],
+    [
+      77575,
+      "FPQS_Format_1"
+    ],
+    [
+      77667,
+      "FORMAT"
+    ],
+    [
+      77840,
+      " "
+    ],
+    [
+      78013,
+      " "
+    ],
+    [
+      78194,
+      "FPQS_FormatOn1"
+    ],
+    [
+      78252,
+      "FPQS_FormatText"
+    ],
+    [
+      78310,
+      "FPQS_FormatDetail"
+    ],
+    [
+      78356,
+      "FPQS_DC_1"
+    ],
+    [
+      78448,
+      "DC"
+    ],
+    [
+      78621,
+      " "
+    ],
+    [
+      78794,
+      " "
+    ],
+    [
+      78975,
+      "FPQS_DCOn1"
+    ],
+    [
+      79033,
+      "FPQS_DCText"
+    ],
+    [
+      79091,
+      "FPQS_DCDetail"
+    ],
+    [
+      79137,
+      "FPQS_Res_1"
+    ],
+    [
+      79229,
+      "RES"
+    ],
+    [
+      79402,
+      " "
+    ],
+    [
+      79575,
+      " "
+    ],
+    [
+      79756,
+      "FPQS_ResOn1"
+    ],
+    [
+      79814,
+      "FPQS_ResText"
+    ],
+    [
+      79872,
+      "FPQS_ResDetail"
+    ],
+    [
+      79918,
+      "FPQS_FPS_1"
+    ],
+    [
+      80010,
+      "FPS"
+    ],
+    [
+      80183,
+      " "
+    ],
+    [
+      80356,
+      " "
+    ],
+    [
+      80537,
+      "FPQS_FPSOn1"
+    ],
+    [
+      80595,
+      "FPQS_FPSText"
+    ],
+    [
+      80653,
+      "FPQS_FPSDetail"
+    ],
+    [
+      82252,
+      "FPQS_Legacy1"
+    ],
+    [
+      88872,
+      "FPQS_Legacy1"
+    ],
+    [
+      175260,
+      "FPQS_Format_2"
+    ],
+    [
+      175352,
+      "FORMAT"
+    ],
+    [
+      175525,
+      " "
+    ],
+    [
+      175698,
+      " "
+    ],
+    [
+      175879,
+      "FPQS_FormatOn2"
+    ],
+    [
+      175937,
+      "FPQS_FormatText"
+    ],
+    [
+      175995,
+      "FPQS_FormatDetail"
+    ],
+    [
+      176041,
+      "FPQS_DC_2"
+    ],
+    [
+      176133,
+      "DC"
+    ],
+    [
+      176306,
+      " "
+    ],
+    [
+      176479,
+      " "
+    ],
+    [
+      176660,
+      "FPQS_DCOn2"
+    ],
+    [
+      176718,
+      "FPQS_DCText"
+    ],
+    [
+      176776,
+      "FPQS_DCDetail"
+    ],
+    [
+      176822,
+      "FPQS_Res_2"
+    ],
+    [
+      176914,
+      "RES"
+    ],
+    [
+      177087,
+      " "
+    ],
+    [
+      177260,
+      " "
+    ],
+    [
+      177441,
+      "FPQS_ResOn2"
+    ],
+    [
+      177499,
+      "FPQS_ResText"
+    ],
+    [
+      177557,
+      "FPQS_ResDetail"
+    ],
+    [
+      177603,
+      "FPQS_FPS_2"
+    ],
+    [
+      177695,
+      "FPS"
+    ],
+    [
+      177868,
+      " "
+    ],
+    [
+      178041,
+      " "
+    ],
+    [
+      178222,
+      "FPQS_FPSOn2"
+    ],
+    [
+      178280,
+      "FPQS_FPSText"
+    ],
+    [
+      178338,
+      "FPQS_FPSDetail"
+    ],
+    [
+      179937,
+      "FPQS_Legacy2"
+    ],
+    [
+      186557,
+      "FPQS_Legacy2"
+    ],
+    [
+      272945,
+      "FPQS_Format_3"
+    ],
+    [
+      273037,
+      "FORMAT"
+    ],
+    [
+      273210,
+      " "
+    ],
+    [
+      273383,
+      " "
+    ],
+    [
+      273564,
+      "FPQS_FormatOn3"
+    ],
+    [
+      273622,
+      "FPQS_FormatText"
+    ],
+    [
+      273680,
+      "FPQS_FormatDetail"
+    ],
+    [
+      273726,
+      "FPQS_DC_3"
+    ],
+    [
+      273818,
+      "DC"
+    ],
+    [
+      273991,
+      " "
+    ],
+    [
+      274164,
+      " "
+    ],
+    [
+      274345,
+      "FPQS_DCOn3"
+    ],
+    [
+      274403,
+      "FPQS_DCText"
+    ],
+    [
+      274461,
+      "FPQS_DCDetail"
+    ],
+    [
+      274507,
+      "FPQS_Res_3"
+    ],
+    [
+      274599,
+      "RES"
+    ],
+    [
+      274772,
+      " "
+    ],
+    [
+      274945,
+      " "
+    ],
+    [
+      275126,
+      "FPQS_ResOn3"
+    ],
+    [
+      275184,
+      "FPQS_ResText"
+    ],
+    [
+      275242,
+      "FPQS_ResDetail"
+    ],
+    [
+      275288,
+      "FPQS_FPS_3"
+    ],
+    [
+      275380,
+      "FPS"
+    ],
+    [
+      275553,
+      " "
+    ],
+    [
+      275726,
+      " "
+    ],
+    [
+      275907,
+      "FPQS_FPSOn3"
+    ],
+    [
+      275965,
+      "FPQS_FPSText"
+    ],
+    [
+      276023,
+      "FPQS_FPSDetail"
+    ],
+    [
+      277622,
+      "FPQS_Legacy3"
+    ],
+    [
+      284242,
+      "FPQS_Legacy3"
+    ],
+    [
+      370630,
+      "FPQS_Format_4"
+    ],
+    [
+      370722,
+      "FORMAT"
+    ],
+    [
+      370895,
+      " "
+    ],
+    [
+      371068,
+      " "
+    ],
+    [
+      371249,
+      "FPQS_FormatOn4"
+    ],
+    [
+      371307,
+      "FPQS_FormatText"
+    ],
+    [
+      371365,
+      "FPQS_FormatDetail"
+    ],
+    [
+      371411,
+      "FPQS_DC_4"
+    ],
+    [
+      371503,
+      "DC"
+    ],
+    [
+      371676,
+      " "
+    ],
+    [
+      371849,
+      " "
+    ],
+    [
+      372030,
+      "FPQS_DCOn4"
+    ],
+    [
+      372088,
+      "FPQS_DCText"
+    ],
+    [
+      372146,
+      "FPQS_DCDetail"
+    ],
+    [
+      372192,
+      "FPQS_Res_4"
+    ],
+    [
+      372284,
+      "RES"
+    ],
+    [
+      372457,
+      " "
+    ],
+    [
+      372630,
+      " "
+    ],
+    [
+      372811,
+      "FPQS_ResOn4"
+    ],
+    [
+      372869,
+      "FPQS_ResText"
+    ],
+    [
+      372927,
+      "FPQS_ResDetail"
+    ],
+    [
+      372973,
+      "FPQS_FPS_4"
+    ],
+    [
+      373065,
+      "FPS"
+    ],
+    [
+      373238,
+      " "
+    ],
+    [
+      373411,
+      " "
+    ],
+    [
+      373592,
+      "FPQS_FPSOn4"
+    ],
+    [
+      373650,
+      "FPQS_FPSText"
+    ],
+    [
+      373708,
+      "FPQS_FPSDetail"
+    ],
+    [
+      375307,
+      "FPQS_Legacy4"
+    ],
+    [
+      381927,
+      "FPQS_Legacy4"
+    ],
+    [
+      468315,
+      "FPQS_Format_5"
+    ],
+    [
+      468407,
+      "FORMAT"
+    ],
+    [
+      468580,
+      " "
+    ],
+    [
+      468753,
+      " "
+    ],
+    [
+      468934,
+      "FPQS_FormatOn5"
+    ],
+    [
+      468992,
+      "FPQS_FormatText"
+    ],
+    [
+      469050,
+      "FPQS_FormatDetail"
+    ],
+    [
+      469096,
+      "FPQS_DC_5"
+    ],
+    [
+      469188,
+      "DC"
+    ],
+    [
+      469361,
+      " "
+    ],
+    [
+      469534,
+      " "
+    ],
+    [
+      469715,
+      "FPQS_DCOn5"
+    ],
+    [
+      469773,
+      "FPQS_DCText"
+    ],
+    [
+      469831,
+      "FPQS_DCDetail"
+    ],
+    [
+      469877,
+      "FPQS_Res_5"
+    ],
+    [
+      469969,
+      "RES"
+    ],
+    [
+      470142,
+      " "
+    ],
+    [
+      470315,
+      " "
+    ],
+    [
+      470496,
+      "FPQS_ResOn5"
+    ],
+    [
+      470554,
+      "FPQS_ResText"
+    ],
+    [
+      470612,
+      "FPQS_ResDetail"
+    ],
+    [
+      470658,
+      "FPQS_FPS_5"
+    ],
+    [
+      470750,
+      "FPS"
+    ],
+    [
+      470923,
+      " "
+    ],
+    [
+      471096,
+      " "
+    ],
+    [
+      471277,
+      "FPQS_FPSOn5"
+    ],
+    [
+      471335,
+      "FPQS_FPSText"
+    ],
+    [
+      471393,
+      "FPQS_FPSDetail"
+    ],
+    [
+      472992,
+      "FPQS_Legacy5"
+    ],
+    [
+      479612,
+      "FPQS_Legacy5"
+    ],
+    [
+      566000,
+      "FPQS_Format_6"
+    ],
+    [
+      566092,
+      "FORMAT"
+    ],
+    [
+      566265,
+      " "
+    ],
+    [
+      566438,
+      " "
+    ],
+    [
+      566619,
+      "FPQS_FormatOn6"
+    ],
+    [
+      566677,
+      "FPQS_FormatText"
+    ],
+    [
+      566735,
+      "FPQS_FormatDetail"
+    ],
+    [
+      566781,
+      "FPQS_DC_6"
+    ],
+    [
+      566873,
+      "DC"
+    ],
+    [
+      567046,
+      " "
+    ],
+    [
+      567219,
+      " "
+    ],
+    [
+      567400,
+      "FPQS_DCOn6"
+    ],
+    [
+      567458,
+      "FPQS_DCText"
+    ],
+    [
+      567516,
+      "FPQS_DCDetail"
+    ],
+    [
+      567562,
+      "FPQS_Res_6"
+    ],
+    [
+      567654,
+      "RES"
+    ],
+    [
+      567827,
+      " "
+    ],
+    [
+      568000,
+      " "
+    ],
+    [
+      568181,
+      "FPQS_ResOn6"
+    ],
+    [
+      568239,
+      "FPQS_ResText"
+    ],
+    [
+      568297,
+      "FPQS_ResDetail"
+    ],
+    [
+      568343,
+      "FPQS_FPS_6"
+    ],
+    [
+      568435,
+      "FPS"
+    ],
+    [
+      568608,
+      " "
+    ],
+    [
+      568781,
+      " "
+    ],
+    [
+      568962,
+      "FPQS_FPSOn6"
+    ],
+    [
+      569020,
+      "FPQS_FPSText"
+    ],
+    [
+      569078,
+      "FPQS_FPSDetail"
+    ],
+    [
+      570677,
+      "FPQS_Legacy6"
+    ],
+    [
+      577297,
+      "FPQS_Legacy6"
+    ],
+    [
+      663685,
+      "FPQS_Format_7"
+    ],
+    [
+      663777,
+      "FORMAT"
+    ],
+    [
+      663950,
+      " "
+    ],
+    [
+      664123,
+      " "
+    ],
+    [
+      664304,
+      "FPQS_FormatOn7"
+    ],
+    [
+      664362,
+      "FPQS_FormatText"
+    ],
+    [
+      664420,
+      "FPQS_FormatDetail"
+    ],
+    [
+      664466,
+      "FPQS_DC_7"
+    ],
+    [
+      664558,
+      "DC"
+    ],
+    [
+      664731,
+      " "
+    ],
+    [
+      664904,
+      " "
+    ],
+    [
+      665085,
+      "FPQS_DCOn7"
+    ],
+    [
+      665143,
+      "FPQS_DCText"
+    ],
+    [
+      665201,
+      "FPQS_DCDetail"
+    ],
+    [
+      665247,
+      "FPQS_Res_7"
+    ],
+    [
+      665339,
+      "RES"
+    ],
+    [
+      665512,
+      " "
+    ],
+    [
+      665685,
+      " "
+    ],
+    [
+      665866,
+      "FPQS_ResOn7"
+    ],
+    [
+      665924,
+      "FPQS_ResText"
+    ],
+    [
+      665982,
+      "FPQS_ResDetail"
+    ],
+    [
+      666028,
+      "FPQS_FPS_7"
+    ],
+    [
+      666120,
+      "FPS"
+    ],
+    [
+      666293,
+      " "
+    ],
+    [
+      666466,
+      " "
+    ],
+    [
+      666647,
+      "FPQS_FPSOn7"
+    ],
+    [
+      666705,
+      "FPQS_FPSText"
+    ],
+    [
+      666763,
+      "FPQS_FPSDetail"
+    ],
+    [
+      668362,
+      "FPQS_Legacy7"
+    ],
+    [
+      674982,
+      "FPQS_Legacy7"
+    ],
+    [
+      761370,
+      "FPQS_Format_8"
+    ],
+    [
+      761462,
+      "FORMAT"
+    ],
+    [
+      761635,
+      " "
+    ],
+    [
+      761808,
+      " "
+    ],
+    [
+      761989,
+      "FPQS_FormatOn8"
+    ],
+    [
+      762047,
+      "FPQS_FormatText"
+    ],
+    [
+      762105,
+      "FPQS_FormatDetail"
+    ],
+    [
+      762151,
+      "FPQS_DC_8"
+    ],
+    [
+      762243,
+      "DC"
+    ],
+    [
+      762416,
+      " "
+    ],
+    [
+      762589,
+      " "
+    ],
+    [
+      762770,
+      "FPQS_DCOn8"
+    ],
+    [
+      762828,
+      "FPQS_DCText"
+    ],
+    [
+      762886,
+      "FPQS_DCDetail"
+    ],
+    [
+      762932,
+      "FPQS_Res_8"
+    ],
+    [
+      763024,
+      "RES"
+    ],
+    [
+      763197,
+      " "
+    ],
+    [
+      763370,
+      " "
+    ],
+    [
+      763551,
+      "FPQS_ResOn8"
+    ],
+    [
+      763609,
+      "FPQS_ResText"
+    ],
+    [
+      763667,
+      "FPQS_ResDetail"
+    ],
+    [
+      763713,
+      "FPQS_FPS_8"
+    ],
+    [
+      763805,
+      "FPS"
+    ],
+    [
+      763978,
+      " "
+    ],
+    [
+      764151,
+      " "
+    ],
+    [
+      764332,
+      "FPQS_FPSOn8"
+    ],
+    [
+      764390,
+      "FPQS_FPSText"
+    ],
+    [
+      764448,
+      "FPQS_FPSDetail"
+    ],
+    [
+      766047,
+      "FPQS_Legacy8"
+    ],
+    [
+      772667,
+      "FPQS_Legacy8"
+    ],
+    [
+      859416,
+      "dst + 1"
+    ],
+    [
+      859701,
+      "dst + 1"
+    ],
+    [
+      859796,
+      "dst + 1"
+    ],
+    [
+      859891,
+      "dst + 1"
+    ],
+    [
+      868414,
+      "dst - 1"
+    ],
+    [
+      868711,
+      "dst - 1"
+    ],
+    [
+      868810,
+      "dst - 1"
+    ],
+    [
+      868909,
+      "dst - 1"
+    ],
+    [
+      877532,
+      "dst - 1"
+    ],
+    [
+      877829,
+      "dst - 1"
+    ],
+    [
+      877928,
+      "dst - 1"
+    ],
+    [
+      878027,
+      "dst - 1"
+    ],
+    [
+      886650,
+      "dst + 1"
+    ],
+    [
+      886947,
+      "dst + 1"
+    ],
+    [
+      887046,
+      "dst + 1"
+    ],
+    [
+      887145,
+      "dst + 1"
+    ],
+    [
+      895899,
+      "FPQS_FormatIndex"
+    ],
+    [
+      896051,
+      "FPQS_FormatIndex"
+    ],
+    [
+      896109,
+      "FPQS_FormatMax"
+    ],
+    [
+      896155,
+      "FPQS_DCIndex"
+    ],
+    [
+      896307,
+      "FPQS_DCIndex"
+    ],
+    [
+      896365,
+      "FPQS_DCMax"
+    ],
+    [
+      896411,
+      "FPQS_ResIndex"
+    ],
+    [
+      896563,
+      "FPQS_ResIndex"
+    ],
+    [
+      896621,
+      "FPQS_ResMax"
+    ],
+    [
+      896667,
+      "FPQS_FPSIndex"
+    ],
+    [
+      896819,
+      "FPQS_FPSIndex"
+    ],
+    [
+      896877,
+      "FPQS_FPSMax"
+    ],
+    [
+      896923,
+      "FPQS_FormatMore"
+    ],
+    [
+      897075,
+      "FPQS_FormatMore"
+    ],
+    [
+      897121,
+      "FPQS_DCMore"
+    ],
+    [
+      897273,
+      "FPQS_DCMore"
+    ],
+    [
+      897319,
+      "FPQS_ResMore"
+    ],
+    [
+      897471,
+      "FPQS_ResMore"
+    ],
+    [
+      897517,
+      "FPQS_FPSMore"
+    ],
+    [
+      897669,
+      "FPQS_FPSMore"
+    ],
+    [
+      897715,
+      "FPQS_Footer"
+    ],
+    [
+      897807,
+      " "
+    ],
+    [
+      897988,
+      "FPQS_FooterOn"
+    ],
+    [
+      898046,
+      "FPQS_FooterText"
+    ],
+    [
+      898104,
+      "FPQS_TouchLegacyFooter"
+    ],
+    [
+      898150,
+      "FPQS_TouchFooter"
+    ],
+    [
+      898242,
+      "-"
+    ],
+    [
+      898415,
+      " "
+    ],
+    [
+      898588,
+      "+"
+    ],
+    [
+      898761,
+      "MORE"
+    ],
+    [
+      898942,
+      "FPQS_TouchFooterOn"
+    ],
+    [
+      899000,
+      "FPQS_TouchFooterText"
+    ],
+    [
+      906484,
+      "FPQS_LegacyFooter"
+    ],
+    [
+      1209118,
+      "dst + 1"
+    ],
+    [
+      1209221,
+      "dst + 1"
+    ],
+    [
+      1209324,
+      "dst + 1"
+    ],
+    [
+      1212891,
+      "FPQS_DC_MoreKey"
+    ],
+    [
+      1212969,
+      "dst + 1"
+    ],
+    [
+      1213014,
+      "FPQS_DCMoreKeyOn"
+    ]
+  ],
+  "source_sha256": "a2a474aa2e1d7354cb0920c5b81443c2fe1ee8855a5562a6c86c6700bea50d5d",
+  "page_sha256": "c7b280db81f46669d53f523fe3d2974f8cdd6892c4d1a8e2200087208585b16e",
+  "bytes": 1224026,
+  "status": "offline touch resource and normalized-event controller; no camera installation",
+  "install_precondition": "register and initialize all declared variables before publishing the page",
+  "limits": [
+    "Native parser validation does not execute bindings, painting, touch or settings services",
+    "Do not install without a UI-thread lifecycle and recording-service adapter"
+  ]
+}

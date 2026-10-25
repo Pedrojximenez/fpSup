@@ -28,6 +28,10 @@ import elf_text                              # noqa: E402
 
 SUP_ID, VERSION, NAME = 'ISPL', 1, 'ISP Lab'
 OUT = HERE / 'build' / 'ISPL.BIN'
+# The control-only build (10-23 route, RESEARCH_PLAN §7): the control task alone -- no writer hook,
+# no writer task, no claim; stock writes the card.  A separate file and id so both never meet.
+CTL_ID, CTL_NAME = 'ISPC', 'ISP Lab ctl'
+CTL_OUT = HERE / 'build' / 'ISPC.BIN'
 SL_EXCL = 2
 SITES = {0xC063F140: '2de9f04584b00446', 0xC063F220: '2de9f04107460d46',
          0xC03A549C: '0d30dbe5000053e3'}
@@ -98,17 +102,20 @@ def check_sites():
             raise BuildError(f'0x{a:08X} is not the stock prologue in the reference image')
 
 
-def v4_file(v3, block_size):
+def v4_file(v3, block_size, sup_id=SUP_ID, name=NAME):
     """A v3 patch_sup file as a v4 sup (build_v4.shell_sup's conversion), run cached."""
     hdr = struct.unpack_from('<8I', v3)
     body = v3[B.SL_HEADER_LEN:]
     shift = B4.SL4_HEADER_LEN - B.SL_HEADER_LEN
-    return B4.make_sup(body, hdr[4] + shift, SUP_ID, version=hdr[6], flags=B4.SL_F_CACHED_OK,
-                       min_svc=B4.SL4_SVC_VERSION, name=NAME, block_size=block_size + shift), shift
+    return B4.make_sup(body, hdr[4] + shift, sup_id, version=hdr[6], flags=B4.SL_F_CACHED_OK,
+                       min_svc=B4.SL4_SVC_VERSION, name=name, block_size=block_size + shift), shift
 
 
-def build(defines=()):
+def build(defines=(), ctl_only=False):
     """defines: test mutants only (test_card.py); a release build passes none."""
+    sup_id, name = (CTL_ID, CTL_NAME) if ctl_only else (SUP_ID, NAME)
+    if ctl_only:
+        defines = tuple(defines) + ('ISPL_CTL_ONLY',)
     check_sites()
     with tempfile.TemporaryDirectory() as tmp:
         tree = pathlib.Path(tmp)
@@ -120,18 +127,19 @@ def build(defines=()):
     if any(not text.functions[f] & 1 for f in ENTRIES.values()):
         raise BuildError('an entry is not Thumb')
     src = HERE / 'ix_card.S'
-    defs = lambda rel: [f'STATE_REL=0x{rel:X}'] + [f'{k}=0x{text.functions[v]:X}' for k, v in ENTRIES.items()]
+    defs = lambda rel: ([f'STATE_REL=0x{rel:X}'] + [f'{k}=0x{text.functions[v]:X}' for k, v in ENTRIES.items()]
+                        + list(defines))
     c_base = symbols(src, defs(0))['c_base']
     inner = lambda rel: (lambda code: code[:c_base] + text.code)(assemble(src, defs(rel)))
-    rows = [(a, bytes(8), SL_EXCL, 'claim') for a in SITES]
-    probe, shift = v4_file(B.patch_sup(SUP_ID, rows, inner(0), inner_entry=0, version=VERSION), 0)
+    rows = [] if ctl_only else [(a, bytes(8), SL_EXCL, 'claim') for a in SITES]
+    probe, shift = v4_file(B.patch_sup(sup_id, rows, inner(0), inner_entry=0, version=VERSION), 0, sup_id, name)
     file_len = len(probe)
     inner_at = probe.index(inner(0)[:64])          # the inner blob ends the body
     state_at = (file_len + 63) & ~63
     block = state_at + state_bytes
-    v3 = B.patch_sup(SUP_ID, rows, inner(state_at - inner_at), inner_entry=0, version=VERSION,
+    v3 = B.patch_sup(sup_id, rows, inner(state_at - inner_at), inner_entry=0, version=VERSION,
                      block_size=block - shift)
-    sup, _ = v4_file(v3, block - shift)
+    sup, _ = v4_file(v3, block - shift, sup_id, name)
     if len(sup) != file_len or sup.index(inner(state_at - inner_at)[:64]) != inner_at:
         raise BuildError('layout moved between passes')
     if struct.unpack_from('<I', sup, 12)[0] != block:
@@ -147,13 +155,15 @@ def main():
     import argparse
     ap = argparse.ArgumentParser()
     ap.add_argument('--out', type=pathlib.Path)
-    out = ap.parse_args().out
-    out = out / OUT.name if out else OUT
-    sup, info = build()
+    ap.add_argument('--ctl-only', action='store_true', help='ISPC.BIN: the control task alone')
+    a = ap.parse_args()
+    default = CTL_OUT if a.ctl_only else OUT
+    out = a.out / default.name if a.out else default
+    sup, info = build(ctl_only=a.ctl_only)
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_bytes(sup)
-    (out.parent / 'build.json').write_text(json.dumps(info, indent=1))
-    print(f'{OUT.name}: {info["file_len"]} B, block {info["block_size"]} B, C {info["c_text"]} B, '
+    (out.parent / ('build-ctl.json' if a.ctl_only else 'build.json')).write_text(json.dumps(info, indent=1))
+    print(f'{out.name}: {info["file_len"]} B, block {info["block_size"]} B, C {info["c_text"]} B, '
           f'state {info["state_bytes"]} B (cap at +{info["cap_off"]}), sha256 {info["sha256"][:16]}')
 
 

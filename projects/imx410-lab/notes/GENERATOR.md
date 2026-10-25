@@ -1,5 +1,11 @@
 # Sensor mode creator：參數與規則（2026-10-23）
 
+> **2026-10-25 規則變更（以 readout_cfg.py 為準，細節 IMX410_RULES §72–§76）**：
+> 1. 1×1 寬度預設的實際行寬 = 格式寬 − 16（`line_width` / `max_width`）；最寬時 x0 = 0。4176 → 4160、4016 → 4000、5073 → 5056。
+> 2. h3（3×1）移出：R、B 沒有訊號。本文件裡 h3 的「只限低增益」作廢。
+> 3. 新 V3 類別：全高輸出 = rows_full − 28（`V3_FULL_SKIP`，1358 → 1330）；開視窗多讀 16 列（`V3_MARGIN`），`plan()['y_skip']` 傳給 attrs 的 y0。
+> 4. 驗證狀態：產生器 641 組、640 組光照＋暗場過（SMC_VERIFY 第 26 輪）；可用清單 `export/modes_verified.json`。本文件下方舊的驗證數字以這裡為準。
+
 程式：`readout_cfg.py`（讀出類別 + `plan()`）→ `smc.py`（產生 8 張表）→ `smc_validate.py`（韌體切換驗證）。
 規則出處：IMX410_RULES（§ 號）、MODE_TABLE_RULES、`offline/mode_rules.py`。
 

@@ -114,6 +114,7 @@ cached:                                 @ from here every adr is the cached one
     blx     ip                          @ wr_card_init(w, task, veneers, ctl)
     cmp     r0, #0
     bne     out
+#ifndef ISPL_CTL_ONLY                   /* the control-only build arms no writer hook */
     LDA     r0, SITE140                 @ armed last
     LDA     r1, LDRW_PC0
     adr     r2, hook140
@@ -128,6 +129,7 @@ cached:                                 @ from here every adr is the cached one
     adr     r2, hook549c
     str     r2, [r0, #4]                @ the address before the instruction
     str     r1, [r0]
+#endif
     mov     r0, r5
     ldr     ip, [r5, #SVC_PUBLISH]
     blx     ip

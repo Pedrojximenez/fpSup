@@ -1,0 +1,139 @@
+{
+  "scope": "Exploratory residual-payload comparison on 3 adjacent frames from one existing clip; no full archive or real-time claim.",
+  "limitations": [
+    "One low-signal clip only; unknown ISO and scene content. Not a representative video dataset.",
+    "Prediction residual payloads only. Initial reference frames, DNG headers, audio and archival metadata excluded.",
+    "No JXL, JPEG-LS, FFV1 or optimized Rice/rANS codec measured.",
+    "MC uses green SAD, 32x32 phase-plane blocks and integer +/-4 phase-grid samples only.",
+    "Adaptive payload includes mode/length and selected motion-vector byte counts, but is not a serialized end-to-end archive.",
+    "Intra MED prediction can reference earlier decoded samples outside the selected tile; no independent tile decoding claim.",
+    "Entropy roundtrip and residual inverse are checked separately; no original-DNG byte reconstruction claim."
+  ],
+  "inputs": [
+    {
+      "file": "/Users/dido/Developer.localized/SIGMAfp_re/projects/rec-core/writer/validation/20261015-live/frames-A001_070/000008.DNG",
+      "sha256": "c7c3db303f212ccd58376c74fa64607bb1b4f9259e25d1632475b9e0ac5227ea",
+      "raw_sha256_le16": "97f6d00bcd59ca75e8ab33b37f1dfcbfa2f2cea3628db45aaf15df4833455268",
+      "shape": [
+        1090,
+        1936
+      ],
+      "bps": 12,
+      "cfa": [
+        0,
+        1,
+        1,
+        2
+      ],
+      "mean": 319.2274779172037,
+      "min": 257,
+      "max": 481,
+      "source_bytes": 995328,
+      "jpeg_payload_bytes": 912512,
+      "tile_storage_bytes": 913408
+    },
+    {
+      "file": "/Users/dido/Developer.localized/SIGMAfp_re/projects/rec-core/writer/validation/20261015-live/frames-A001_070/000009.DNG",
+      "sha256": "d0b9459128c318c3c43b1e94ff45c0dfb99a85416358820673bb9952afc9acd8",
+      "raw_sha256_le16": "bf5a8c2ff2c68e3cc51f75fa8cce27497e91a20df77504d80c122799fe6d632e",
+      "shape": [
+        1090,
+        1936
+      ],
+      "bps": 12,
+      "cfa": [
+        0,
+        1,
+        1,
+        2
+      ],
+      "mean": 319.24015372659034,
+      "min": 257,
+      "max": 479,
+      "source_bytes": 995328,
+      "jpeg_payload_bytes": 912759,
+      "tile_storage_bytes": 913408
+    },
+    {
+      "file": "/Users/dido/Developer.localized/SIGMAfp_re/projects/rec-core/writer/validation/20261015-live/frames-A001_070/000010.DNG",
+      "sha256": "8b8075efca9ab9e5f771e48ea8af0f71c65ef8a58ca18dffc9e9c275ed95ca52",
+      "raw_sha256_le16": "a84aeb7603062bba4bee246efa92fc02d8855f51e892fea88b1f1b2a36b79fdb",
+      "shape": [
+        1090,
+        1936
+      ],
+      "bps": 12,
+      "cfa": [
+        0,
+        1,
+        1,
+        2
+      ],
+      "mean": 319.24657242778073,
+      "min": 257,
+      "max": 480,
+      "source_bytes": 995328,
+      "jpeg_payload_bytes": 913130,
+      "tile_storage_bytes": 913408
+    }
+  ],
+  "zstd_level": 3,
+  "representation": "4 phase planes, signed residual zigzag uint16, byte shuffle",
+  "frames": [
+    {
+      "number": 9,
+      "mean_abs_frame_delta": 1.5416592425506104,
+      "unchanged_samples_pct": 22.031190765031468,
+      "packed12_bytes": 3165360,
+      "camera_ljpeg_payload_bytes": 912759,
+      "motion_search_seconds": 0.12891883286647499,
+      "motion_nonzero_blocks": 336,
+      "motion_vector_bytes": 1116,
+      "payload_bytes": {
+        "intra_med_zstd": 954578,
+        "previous_frame_delta_zstd": 974746,
+        "integer_motion_zstd": 976505,
+        "tiled_intra_med_zstd": 945409,
+        "tiled_adaptive_zstd": 944894
+      },
+      "adaptive_modes": {
+        "intra_med_zstd": 478,
+        "previous_frame_delta_zstd": 60,
+        "integer_motion_zstd": 20
+      },
+      "all_residual_roundtrips_exact": true
+    },
+    {
+      "number": 10,
+      "mean_abs_frame_delta": 1.5424117635908712,
+      "unchanged_samples_pct": 22.02062324664493,
+      "packed12_bytes": 3165360,
+      "camera_ljpeg_payload_bytes": 913130,
+      "motion_search_seconds": 0.12028704187832773,
+      "motion_nonzero_blocks": 334,
+      "motion_vector_bytes": 1116,
+      "payload_bytes": {
+        "intra_med_zstd": 955019,
+        "previous_frame_delta_zstd": 975123,
+        "previous_2_mean_zstd": 930890,
+        "integer_motion_zstd": 976445,
+        "tiled_intra_med_zstd": 945552,
+        "tiled_adaptive_zstd": 920250
+      },
+      "adaptive_modes": {
+        "previous_2_mean_zstd": 541,
+        "previous_frame_delta_zstd": 9,
+        "intra_med_zstd": 5,
+        "integer_motion_zstd": 3
+      },
+      "all_residual_roundtrips_exact": true
+    }
+  ],
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "platform": "macOS-27.0-arm64-arm-64bit"
+  },
+  "probe_sha256": "ff3aa17fc0134f1ca91ed65e83a929ae9d8b6037ef2dd711f394a42905880b6e",
+  "run_command": "/Users/dido/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 -B research/slimRAW/benchmarks/20261024-temporal-probe/probe.py"
+}

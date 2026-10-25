@@ -1,0 +1,812 @@
+{
+  "schema": "fp-backlight-current-candidates-v1",
+  "scope": "13 offline candidates; not a recommendation to apply maximum current",
+  "candidates": [
+    {
+      "schema": "fp-backlight-current-offline-plan-v1",
+      "status": "offline_experiment_not_hardware_validated",
+      "firmware": [
+        {
+          "path": "out/seg0_c0000000.bin",
+          "base": "0xc0000000",
+          "size": 49245696,
+          "sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622"
+        },
+        {
+          "path": "out/seg1_c2ef6e00.bin",
+          "base": "0xc2ef6e00",
+          "size": 236032,
+          "sha256": "0dcaca8f5441fe4ddc6ed801cb888e325df4e76006e4f53a1c3219809b22ce7b"
+        }
+      ],
+      "dim7": 19,
+      "stock_init_dim7": 18,
+      "register": 4,
+      "register_before": 178,
+      "register_after": 179,
+      "current_fraction_of_resistor_defined_full_scale": 0.625,
+      "current_ratio_to_stock_init": 1.0526315789473684,
+      "current_gain_percent_to_stock_init": 5.263157894736836,
+      "measured_nits": null,
+      "nits_gain_percent": null,
+      "guards": [
+        {
+          "address": "0xc072c73c",
+          "size": 104,
+          "before_hex": "010000002800000002000000f9000000030000007500000004000000b20000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "after_hex": "010000002800000002000000f9000000030000007500000004000000b30000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "value_address": "0xc072c758"
+        },
+        {
+          "address": "0xc072c7a4",
+          "size": 104,
+          "before_hex": "010000002800000002000000f9000000030000002500000004000000b20000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "after_hex": "010000002800000002000000f9000000030000002500000004000000b30000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "value_address": "0xc072c7c0"
+        }
+      ],
+      "source": {
+        "url": "https://www.richtek.com/assets/product_file/RT5035C=RT5035D/DS5035CD-01.pdf",
+        "pages": [
+          21,
+          28,
+          32
+        ]
+      },
+      "scope": "local image/table experiment only; no card, native call or device write",
+      "limitations": [
+        "Stock 18 is proven for both normal init tables, not a live register measurement.",
+        "The native power-test initialization can separately set 31.",
+        "CH7 wiring is inferred from the LCD power callback and EN7 register definition.",
+        "LED current ratio is not a measured luminance ratio.",
+        "Actual current requires the camera's unknown FB7 external sense resistance.",
+        "Panel/LED ratings, power, temperature, and long-term suitability are unverified.",
+        "VOUT8 upper bits, OVP, enables and all other init entries are preserved."
+      ]
+    },
+    {
+      "schema": "fp-backlight-current-offline-plan-v1",
+      "status": "offline_experiment_not_hardware_validated",
+      "firmware": [
+        {
+          "path": "out/seg0_c0000000.bin",
+          "base": "0xc0000000",
+          "size": 49245696,
+          "sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622"
+        },
+        {
+          "path": "out/seg1_c2ef6e00.bin",
+          "base": "0xc2ef6e00",
+          "size": 236032,
+          "sha256": "0dcaca8f5441fe4ddc6ed801cb888e325df4e76006e4f53a1c3219809b22ce7b"
+        }
+      ],
+      "dim7": 20,
+      "stock_init_dim7": 18,
+      "register": 4,
+      "register_before": 178,
+      "register_after": 180,
+      "current_fraction_of_resistor_defined_full_scale": 0.65625,
+      "current_ratio_to_stock_init": 1.105263157894737,
+      "current_gain_percent_to_stock_init": 10.526315789473696,
+      "measured_nits": null,
+      "nits_gain_percent": null,
+      "guards": [
+        {
+          "address": "0xc072c73c",
+          "size": 104,
+          "before_hex": "010000002800000002000000f9000000030000007500000004000000b20000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "after_hex": "010000002800000002000000f9000000030000007500000004000000b40000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "value_address": "0xc072c758"
+        },
+        {
+          "address": "0xc072c7a4",
+          "size": 104,
+          "before_hex": "010000002800000002000000f9000000030000002500000004000000b20000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "after_hex": "010000002800000002000000f9000000030000002500000004000000b40000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "value_address": "0xc072c7c0"
+        }
+      ],
+      "source": {
+        "url": "https://www.richtek.com/assets/product_file/RT5035C=RT5035D/DS5035CD-01.pdf",
+        "pages": [
+          21,
+          28,
+          32
+        ]
+      },
+      "scope": "local image/table experiment only; no card, native call or device write",
+      "limitations": [
+        "Stock 18 is proven for both normal init tables, not a live register measurement.",
+        "The native power-test initialization can separately set 31.",
+        "CH7 wiring is inferred from the LCD power callback and EN7 register definition.",
+        "LED current ratio is not a measured luminance ratio.",
+        "Actual current requires the camera's unknown FB7 external sense resistance.",
+        "Panel/LED ratings, power, temperature, and long-term suitability are unverified.",
+        "VOUT8 upper bits, OVP, enables and all other init entries are preserved."
+      ]
+    },
+    {
+      "schema": "fp-backlight-current-offline-plan-v1",
+      "status": "offline_experiment_not_hardware_validated",
+      "firmware": [
+        {
+          "path": "out/seg0_c0000000.bin",
+          "base": "0xc0000000",
+          "size": 49245696,
+          "sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622"
+        },
+        {
+          "path": "out/seg1_c2ef6e00.bin",
+          "base": "0xc2ef6e00",
+          "size": 236032,
+          "sha256": "0dcaca8f5441fe4ddc6ed801cb888e325df4e76006e4f53a1c3219809b22ce7b"
+        }
+      ],
+      "dim7": 21,
+      "stock_init_dim7": 18,
+      "register": 4,
+      "register_before": 178,
+      "register_after": 181,
+      "current_fraction_of_resistor_defined_full_scale": 0.6875,
+      "current_ratio_to_stock_init": 1.1578947368421053,
+      "current_gain_percent_to_stock_init": 15.789473684210531,
+      "measured_nits": null,
+      "nits_gain_percent": null,
+      "guards": [
+        {
+          "address": "0xc072c73c",
+          "size": 104,
+          "before_hex": "010000002800000002000000f9000000030000007500000004000000b20000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "after_hex": "010000002800000002000000f9000000030000007500000004000000b50000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "value_address": "0xc072c758"
+        },
+        {
+          "address": "0xc072c7a4",
+          "size": 104,
+          "before_hex": "010000002800000002000000f9000000030000002500000004000000b20000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "after_hex": "010000002800000002000000f9000000030000002500000004000000b50000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "value_address": "0xc072c7c0"
+        }
+      ],
+      "source": {
+        "url": "https://www.richtek.com/assets/product_file/RT5035C=RT5035D/DS5035CD-01.pdf",
+        "pages": [
+          21,
+          28,
+          32
+        ]
+      },
+      "scope": "local image/table experiment only; no card, native call or device write",
+      "limitations": [
+        "Stock 18 is proven for both normal init tables, not a live register measurement.",
+        "The native power-test initialization can separately set 31.",
+        "CH7 wiring is inferred from the LCD power callback and EN7 register definition.",
+        "LED current ratio is not a measured luminance ratio.",
+        "Actual current requires the camera's unknown FB7 external sense resistance.",
+        "Panel/LED ratings, power, temperature, and long-term suitability are unverified.",
+        "VOUT8 upper bits, OVP, enables and all other init entries are preserved."
+      ]
+    },
+    {
+      "schema": "fp-backlight-current-offline-plan-v1",
+      "status": "offline_experiment_not_hardware_validated",
+      "firmware": [
+        {
+          "path": "out/seg0_c0000000.bin",
+          "base": "0xc0000000",
+          "size": 49245696,
+          "sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622"
+        },
+        {
+          "path": "out/seg1_c2ef6e00.bin",
+          "base": "0xc2ef6e00",
+          "size": 236032,
+          "sha256": "0dcaca8f5441fe4ddc6ed801cb888e325df4e76006e4f53a1c3219809b22ce7b"
+        }
+      ],
+      "dim7": 22,
+      "stock_init_dim7": 18,
+      "register": 4,
+      "register_before": 178,
+      "register_after": 182,
+      "current_fraction_of_resistor_defined_full_scale": 0.71875,
+      "current_ratio_to_stock_init": 1.2105263157894737,
+      "current_gain_percent_to_stock_init": 21.052631578947366,
+      "measured_nits": null,
+      "nits_gain_percent": null,
+      "guards": [
+        {
+          "address": "0xc072c73c",
+          "size": 104,
+          "before_hex": "010000002800000002000000f9000000030000007500000004000000b20000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "after_hex": "010000002800000002000000f9000000030000007500000004000000b60000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "value_address": "0xc072c758"
+        },
+        {
+          "address": "0xc072c7a4",
+          "size": 104,
+          "before_hex": "010000002800000002000000f9000000030000002500000004000000b20000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "after_hex": "010000002800000002000000f9000000030000002500000004000000b60000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "value_address": "0xc072c7c0"
+        }
+      ],
+      "source": {
+        "url": "https://www.richtek.com/assets/product_file/RT5035C=RT5035D/DS5035CD-01.pdf",
+        "pages": [
+          21,
+          28,
+          32
+        ]
+      },
+      "scope": "local image/table experiment only; no card, native call or device write",
+      "limitations": [
+        "Stock 18 is proven for both normal init tables, not a live register measurement.",
+        "The native power-test initialization can separately set 31.",
+        "CH7 wiring is inferred from the LCD power callback and EN7 register definition.",
+        "LED current ratio is not a measured luminance ratio.",
+        "Actual current requires the camera's unknown FB7 external sense resistance.",
+        "Panel/LED ratings, power, temperature, and long-term suitability are unverified.",
+        "VOUT8 upper bits, OVP, enables and all other init entries are preserved."
+      ]
+    },
+    {
+      "schema": "fp-backlight-current-offline-plan-v1",
+      "status": "offline_experiment_not_hardware_validated",
+      "firmware": [
+        {
+          "path": "out/seg0_c0000000.bin",
+          "base": "0xc0000000",
+          "size": 49245696,
+          "sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622"
+        },
+        {
+          "path": "out/seg1_c2ef6e00.bin",
+          "base": "0xc2ef6e00",
+          "size": 236032,
+          "sha256": "0dcaca8f5441fe4ddc6ed801cb888e325df4e76006e4f53a1c3219809b22ce7b"
+        }
+      ],
+      "dim7": 23,
+      "stock_init_dim7": 18,
+      "register": 4,
+      "register_before": 178,
+      "register_after": 183,
+      "current_fraction_of_resistor_defined_full_scale": 0.75,
+      "current_ratio_to_stock_init": 1.263157894736842,
+      "current_gain_percent_to_stock_init": 26.315789473684205,
+      "measured_nits": null,
+      "nits_gain_percent": null,
+      "guards": [
+        {
+          "address": "0xc072c73c",
+          "size": 104,
+          "before_hex": "010000002800000002000000f9000000030000007500000004000000b20000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "after_hex": "010000002800000002000000f9000000030000007500000004000000b70000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "value_address": "0xc072c758"
+        },
+        {
+          "address": "0xc072c7a4",
+          "size": 104,
+          "before_hex": "010000002800000002000000f9000000030000002500000004000000b20000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "after_hex": "010000002800000002000000f9000000030000002500000004000000b70000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "value_address": "0xc072c7c0"
+        }
+      ],
+      "source": {
+        "url": "https://www.richtek.com/assets/product_file/RT5035C=RT5035D/DS5035CD-01.pdf",
+        "pages": [
+          21,
+          28,
+          32
+        ]
+      },
+      "scope": "local image/table experiment only; no card, native call or device write",
+      "limitations": [
+        "Stock 18 is proven for both normal init tables, not a live register measurement.",
+        "The native power-test initialization can separately set 31.",
+        "CH7 wiring is inferred from the LCD power callback and EN7 register definition.",
+        "LED current ratio is not a measured luminance ratio.",
+        "Actual current requires the camera's unknown FB7 external sense resistance.",
+        "Panel/LED ratings, power, temperature, and long-term suitability are unverified.",
+        "VOUT8 upper bits, OVP, enables and all other init entries are preserved."
+      ]
+    },
+    {
+      "schema": "fp-backlight-current-offline-plan-v1",
+      "status": "offline_experiment_not_hardware_validated",
+      "firmware": [
+        {
+          "path": "out/seg0_c0000000.bin",
+          "base": "0xc0000000",
+          "size": 49245696,
+          "sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622"
+        },
+        {
+          "path": "out/seg1_c2ef6e00.bin",
+          "base": "0xc2ef6e00",
+          "size": 236032,
+          "sha256": "0dcaca8f5441fe4ddc6ed801cb888e325df4e76006e4f53a1c3219809b22ce7b"
+        }
+      ],
+      "dim7": 24,
+      "stock_init_dim7": 18,
+      "register": 4,
+      "register_before": 178,
+      "register_after": 184,
+      "current_fraction_of_resistor_defined_full_scale": 0.78125,
+      "current_ratio_to_stock_init": 1.3157894736842106,
+      "current_gain_percent_to_stock_init": 31.578947368421062,
+      "measured_nits": null,
+      "nits_gain_percent": null,
+      "guards": [
+        {
+          "address": "0xc072c73c",
+          "size": 104,
+          "before_hex": "010000002800000002000000f9000000030000007500000004000000b20000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "after_hex": "010000002800000002000000f9000000030000007500000004000000b80000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "value_address": "0xc072c758"
+        },
+        {
+          "address": "0xc072c7a4",
+          "size": 104,
+          "before_hex": "010000002800000002000000f9000000030000002500000004000000b20000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "after_hex": "010000002800000002000000f9000000030000002500000004000000b80000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "value_address": "0xc072c7c0"
+        }
+      ],
+      "source": {
+        "url": "https://www.richtek.com/assets/product_file/RT5035C=RT5035D/DS5035CD-01.pdf",
+        "pages": [
+          21,
+          28,
+          32
+        ]
+      },
+      "scope": "local image/table experiment only; no card, native call or device write",
+      "limitations": [
+        "Stock 18 is proven for both normal init tables, not a live register measurement.",
+        "The native power-test initialization can separately set 31.",
+        "CH7 wiring is inferred from the LCD power callback and EN7 register definition.",
+        "LED current ratio is not a measured luminance ratio.",
+        "Actual current requires the camera's unknown FB7 external sense resistance.",
+        "Panel/LED ratings, power, temperature, and long-term suitability are unverified.",
+        "VOUT8 upper bits, OVP, enables and all other init entries are preserved."
+      ]
+    },
+    {
+      "schema": "fp-backlight-current-offline-plan-v1",
+      "status": "offline_experiment_not_hardware_validated",
+      "firmware": [
+        {
+          "path": "out/seg0_c0000000.bin",
+          "base": "0xc0000000",
+          "size": 49245696,
+          "sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622"
+        },
+        {
+          "path": "out/seg1_c2ef6e00.bin",
+          "base": "0xc2ef6e00",
+          "size": 236032,
+          "sha256": "0dcaca8f5441fe4ddc6ed801cb888e325df4e76006e4f53a1c3219809b22ce7b"
+        }
+      ],
+      "dim7": 25,
+      "stock_init_dim7": 18,
+      "register": 4,
+      "register_before": 178,
+      "register_after": 185,
+      "current_fraction_of_resistor_defined_full_scale": 0.8125,
+      "current_ratio_to_stock_init": 1.368421052631579,
+      "current_gain_percent_to_stock_init": 36.8421052631579,
+      "measured_nits": null,
+      "nits_gain_percent": null,
+      "guards": [
+        {
+          "address": "0xc072c73c",
+          "size": 104,
+          "before_hex": "010000002800000002000000f9000000030000007500000004000000b20000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "after_hex": "010000002800000002000000f9000000030000007500000004000000b90000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "value_address": "0xc072c758"
+        },
+        {
+          "address": "0xc072c7a4",
+          "size": 104,
+          "before_hex": "010000002800000002000000f9000000030000002500000004000000b20000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "after_hex": "010000002800000002000000f9000000030000002500000004000000b90000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "value_address": "0xc072c7c0"
+        }
+      ],
+      "source": {
+        "url": "https://www.richtek.com/assets/product_file/RT5035C=RT5035D/DS5035CD-01.pdf",
+        "pages": [
+          21,
+          28,
+          32
+        ]
+      },
+      "scope": "local image/table experiment only; no card, native call or device write",
+      "limitations": [
+        "Stock 18 is proven for both normal init tables, not a live register measurement.",
+        "The native power-test initialization can separately set 31.",
+        "CH7 wiring is inferred from the LCD power callback and EN7 register definition.",
+        "LED current ratio is not a measured luminance ratio.",
+        "Actual current requires the camera's unknown FB7 external sense resistance.",
+        "Panel/LED ratings, power, temperature, and long-term suitability are unverified.",
+        "VOUT8 upper bits, OVP, enables and all other init entries are preserved."
+      ]
+    },
+    {
+      "schema": "fp-backlight-current-offline-plan-v1",
+      "status": "offline_experiment_not_hardware_validated",
+      "firmware": [
+        {
+          "path": "out/seg0_c0000000.bin",
+          "base": "0xc0000000",
+          "size": 49245696,
+          "sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622"
+        },
+        {
+          "path": "out/seg1_c2ef6e00.bin",
+          "base": "0xc2ef6e00",
+          "size": 236032,
+          "sha256": "0dcaca8f5441fe4ddc6ed801cb888e325df4e76006e4f53a1c3219809b22ce7b"
+        }
+      ],
+      "dim7": 26,
+      "stock_init_dim7": 18,
+      "register": 4,
+      "register_before": 178,
+      "register_after": 186,
+      "current_fraction_of_resistor_defined_full_scale": 0.84375,
+      "current_ratio_to_stock_init": 1.4210526315789473,
+      "current_gain_percent_to_stock_init": 42.10526315789473,
+      "measured_nits": null,
+      "nits_gain_percent": null,
+      "guards": [
+        {
+          "address": "0xc072c73c",
+          "size": 104,
+          "before_hex": "010000002800000002000000f9000000030000007500000004000000b20000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "after_hex": "010000002800000002000000f9000000030000007500000004000000ba0000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "value_address": "0xc072c758"
+        },
+        {
+          "address": "0xc072c7a4",
+          "size": 104,
+          "before_hex": "010000002800000002000000f9000000030000002500000004000000b20000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "after_hex": "010000002800000002000000f9000000030000002500000004000000ba0000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "value_address": "0xc072c7c0"
+        }
+      ],
+      "source": {
+        "url": "https://www.richtek.com/assets/product_file/RT5035C=RT5035D/DS5035CD-01.pdf",
+        "pages": [
+          21,
+          28,
+          32
+        ]
+      },
+      "scope": "local image/table experiment only; no card, native call or device write",
+      "limitations": [
+        "Stock 18 is proven for both normal init tables, not a live register measurement.",
+        "The native power-test initialization can separately set 31.",
+        "CH7 wiring is inferred from the LCD power callback and EN7 register definition.",
+        "LED current ratio is not a measured luminance ratio.",
+        "Actual current requires the camera's unknown FB7 external sense resistance.",
+        "Panel/LED ratings, power, temperature, and long-term suitability are unverified.",
+        "VOUT8 upper bits, OVP, enables and all other init entries are preserved."
+      ]
+    },
+    {
+      "schema": "fp-backlight-current-offline-plan-v1",
+      "status": "offline_experiment_not_hardware_validated",
+      "firmware": [
+        {
+          "path": "out/seg0_c0000000.bin",
+          "base": "0xc0000000",
+          "size": 49245696,
+          "sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622"
+        },
+        {
+          "path": "out/seg1_c2ef6e00.bin",
+          "base": "0xc2ef6e00",
+          "size": 236032,
+          "sha256": "0dcaca8f5441fe4ddc6ed801cb888e325df4e76006e4f53a1c3219809b22ce7b"
+        }
+      ],
+      "dim7": 27,
+      "stock_init_dim7": 18,
+      "register": 4,
+      "register_before": 178,
+      "register_after": 187,
+      "current_fraction_of_resistor_defined_full_scale": 0.875,
+      "current_ratio_to_stock_init": 1.4736842105263157,
+      "current_gain_percent_to_stock_init": 47.36842105263157,
+      "measured_nits": null,
+      "nits_gain_percent": null,
+      "guards": [
+        {
+          "address": "0xc072c73c",
+          "size": 104,
+          "before_hex": "010000002800000002000000f9000000030000007500000004000000b20000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "after_hex": "010000002800000002000000f9000000030000007500000004000000bb0000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "value_address": "0xc072c758"
+        },
+        {
+          "address": "0xc072c7a4",
+          "size": 104,
+          "before_hex": "010000002800000002000000f9000000030000002500000004000000b20000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "after_hex": "010000002800000002000000f9000000030000002500000004000000bb0000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "value_address": "0xc072c7c0"
+        }
+      ],
+      "source": {
+        "url": "https://www.richtek.com/assets/product_file/RT5035C=RT5035D/DS5035CD-01.pdf",
+        "pages": [
+          21,
+          28,
+          32
+        ]
+      },
+      "scope": "local image/table experiment only; no card, native call or device write",
+      "limitations": [
+        "Stock 18 is proven for both normal init tables, not a live register measurement.",
+        "The native power-test initialization can separately set 31.",
+        "CH7 wiring is inferred from the LCD power callback and EN7 register definition.",
+        "LED current ratio is not a measured luminance ratio.",
+        "Actual current requires the camera's unknown FB7 external sense resistance.",
+        "Panel/LED ratings, power, temperature, and long-term suitability are unverified.",
+        "VOUT8 upper bits, OVP, enables and all other init entries are preserved."
+      ]
+    },
+    {
+      "schema": "fp-backlight-current-offline-plan-v1",
+      "status": "offline_experiment_not_hardware_validated",
+      "firmware": [
+        {
+          "path": "out/seg0_c0000000.bin",
+          "base": "0xc0000000",
+          "size": 49245696,
+          "sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622"
+        },
+        {
+          "path": "out/seg1_c2ef6e00.bin",
+          "base": "0xc2ef6e00",
+          "size": 236032,
+          "sha256": "0dcaca8f5441fe4ddc6ed801cb888e325df4e76006e4f53a1c3219809b22ce7b"
+        }
+      ],
+      "dim7": 28,
+      "stock_init_dim7": 18,
+      "register": 4,
+      "register_before": 178,
+      "register_after": 188,
+      "current_fraction_of_resistor_defined_full_scale": 0.90625,
+      "current_ratio_to_stock_init": 1.5263157894736843,
+      "current_gain_percent_to_stock_init": 52.63157894736843,
+      "measured_nits": null,
+      "nits_gain_percent": null,
+      "guards": [
+        {
+          "address": "0xc072c73c",
+          "size": 104,
+          "before_hex": "010000002800000002000000f9000000030000007500000004000000b20000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "after_hex": "010000002800000002000000f9000000030000007500000004000000bc0000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "value_address": "0xc072c758"
+        },
+        {
+          "address": "0xc072c7a4",
+          "size": 104,
+          "before_hex": "010000002800000002000000f9000000030000002500000004000000b20000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "after_hex": "010000002800000002000000f9000000030000002500000004000000bc0000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "value_address": "0xc072c7c0"
+        }
+      ],
+      "source": {
+        "url": "https://www.richtek.com/assets/product_file/RT5035C=RT5035D/DS5035CD-01.pdf",
+        "pages": [
+          21,
+          28,
+          32
+        ]
+      },
+      "scope": "local image/table experiment only; no card, native call or device write",
+      "limitations": [
+        "Stock 18 is proven for both normal init tables, not a live register measurement.",
+        "The native power-test initialization can separately set 31.",
+        "CH7 wiring is inferred from the LCD power callback and EN7 register definition.",
+        "LED current ratio is not a measured luminance ratio.",
+        "Actual current requires the camera's unknown FB7 external sense resistance.",
+        "Panel/LED ratings, power, temperature, and long-term suitability are unverified.",
+        "VOUT8 upper bits, OVP, enables and all other init entries are preserved."
+      ]
+    },
+    {
+      "schema": "fp-backlight-current-offline-plan-v1",
+      "status": "offline_experiment_not_hardware_validated",
+      "firmware": [
+        {
+          "path": "out/seg0_c0000000.bin",
+          "base": "0xc0000000",
+          "size": 49245696,
+          "sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622"
+        },
+        {
+          "path": "out/seg1_c2ef6e00.bin",
+          "base": "0xc2ef6e00",
+          "size": 236032,
+          "sha256": "0dcaca8f5441fe4ddc6ed801cb888e325df4e76006e4f53a1c3219809b22ce7b"
+        }
+      ],
+      "dim7": 29,
+      "stock_init_dim7": 18,
+      "register": 4,
+      "register_before": 178,
+      "register_after": 189,
+      "current_fraction_of_resistor_defined_full_scale": 0.9375,
+      "current_ratio_to_stock_init": 1.5789473684210527,
+      "current_gain_percent_to_stock_init": 57.89473684210527,
+      "measured_nits": null,
+      "nits_gain_percent": null,
+      "guards": [
+        {
+          "address": "0xc072c73c",
+          "size": 104,
+          "before_hex": "010000002800000002000000f9000000030000007500000004000000b20000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "after_hex": "010000002800000002000000f9000000030000007500000004000000bd0000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "value_address": "0xc072c758"
+        },
+        {
+          "address": "0xc072c7a4",
+          "size": 104,
+          "before_hex": "010000002800000002000000f9000000030000002500000004000000b20000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "after_hex": "010000002800000002000000f9000000030000002500000004000000bd0000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "value_address": "0xc072c7c0"
+        }
+      ],
+      "source": {
+        "url": "https://www.richtek.com/assets/product_file/RT5035C=RT5035D/DS5035CD-01.pdf",
+        "pages": [
+          21,
+          28,
+          32
+        ]
+      },
+      "scope": "local image/table experiment only; no card, native call or device write",
+      "limitations": [
+        "Stock 18 is proven for both normal init tables, not a live register measurement.",
+        "The native power-test initialization can separately set 31.",
+        "CH7 wiring is inferred from the LCD power callback and EN7 register definition.",
+        "LED current ratio is not a measured luminance ratio.",
+        "Actual current requires the camera's unknown FB7 external sense resistance.",
+        "Panel/LED ratings, power, temperature, and long-term suitability are unverified.",
+        "VOUT8 upper bits, OVP, enables and all other init entries are preserved."
+      ]
+    },
+    {
+      "schema": "fp-backlight-current-offline-plan-v1",
+      "status": "offline_experiment_not_hardware_validated",
+      "firmware": [
+        {
+          "path": "out/seg0_c0000000.bin",
+          "base": "0xc0000000",
+          "size": 49245696,
+          "sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622"
+        },
+        {
+          "path": "out/seg1_c2ef6e00.bin",
+          "base": "0xc2ef6e00",
+          "size": 236032,
+          "sha256": "0dcaca8f5441fe4ddc6ed801cb888e325df4e76006e4f53a1c3219809b22ce7b"
+        }
+      ],
+      "dim7": 30,
+      "stock_init_dim7": 18,
+      "register": 4,
+      "register_before": 178,
+      "register_after": 190,
+      "current_fraction_of_resistor_defined_full_scale": 0.96875,
+      "current_ratio_to_stock_init": 1.631578947368421,
+      "current_gain_percent_to_stock_init": 63.1578947368421,
+      "measured_nits": null,
+      "nits_gain_percent": null,
+      "guards": [
+        {
+          "address": "0xc072c73c",
+          "size": 104,
+          "before_hex": "010000002800000002000000f9000000030000007500000004000000b20000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "after_hex": "010000002800000002000000f9000000030000007500000004000000be0000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "value_address": "0xc072c758"
+        },
+        {
+          "address": "0xc072c7a4",
+          "size": 104,
+          "before_hex": "010000002800000002000000f9000000030000002500000004000000b20000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "after_hex": "010000002800000002000000f9000000030000002500000004000000be0000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "value_address": "0xc072c7c0"
+        }
+      ],
+      "source": {
+        "url": "https://www.richtek.com/assets/product_file/RT5035C=RT5035D/DS5035CD-01.pdf",
+        "pages": [
+          21,
+          28,
+          32
+        ]
+      },
+      "scope": "local image/table experiment only; no card, native call or device write",
+      "limitations": [
+        "Stock 18 is proven for both normal init tables, not a live register measurement.",
+        "The native power-test initialization can separately set 31.",
+        "CH7 wiring is inferred from the LCD power callback and EN7 register definition.",
+        "LED current ratio is not a measured luminance ratio.",
+        "Actual current requires the camera's unknown FB7 external sense resistance.",
+        "Panel/LED ratings, power, temperature, and long-term suitability are unverified.",
+        "VOUT8 upper bits, OVP, enables and all other init entries are preserved."
+      ]
+    },
+    {
+      "schema": "fp-backlight-current-offline-plan-v1",
+      "status": "offline_experiment_not_hardware_validated",
+      "firmware": [
+        {
+          "path": "out/seg0_c0000000.bin",
+          "base": "0xc0000000",
+          "size": 49245696,
+          "sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622"
+        },
+        {
+          "path": "out/seg1_c2ef6e00.bin",
+          "base": "0xc2ef6e00",
+          "size": 236032,
+          "sha256": "0dcaca8f5441fe4ddc6ed801cb888e325df4e76006e4f53a1c3219809b22ce7b"
+        }
+      ],
+      "dim7": 31,
+      "stock_init_dim7": 18,
+      "register": 4,
+      "register_before": 178,
+      "register_after": 191,
+      "current_fraction_of_resistor_defined_full_scale": 1.0,
+      "current_ratio_to_stock_init": 1.6842105263157894,
+      "current_gain_percent_to_stock_init": 68.42105263157893,
+      "measured_nits": null,
+      "nits_gain_percent": null,
+      "guards": [
+        {
+          "address": "0xc072c73c",
+          "size": 104,
+          "before_hex": "010000002800000002000000f9000000030000007500000004000000b20000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "after_hex": "010000002800000002000000f9000000030000007500000004000000bf0000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "value_address": "0xc072c758"
+        },
+        {
+          "address": "0xc072c7a4",
+          "size": 104,
+          "before_hex": "010000002800000002000000f9000000030000002500000004000000b20000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "after_hex": "010000002800000002000000f9000000030000002500000004000000bf0000000500000007000000060000003c0000000700000007000000090000007a0000000a000000aa0000000d000000000000000f00000000000000100000000c0000000e000000a9000000",
+          "value_address": "0xc072c7c0"
+        }
+      ],
+      "source": {
+        "url": "https://www.richtek.com/assets/product_file/RT5035C=RT5035D/DS5035CD-01.pdf",
+        "pages": [
+          21,
+          28,
+          32
+        ]
+      },
+      "scope": "local image/table experiment only; no card, native call or device write",
+      "limitations": [
+        "Stock 18 is proven for both normal init tables, not a live register measurement.",
+        "The native power-test initialization can separately set 31.",
+        "CH7 wiring is inferred from the LCD power callback and EN7 register definition.",
+        "LED current ratio is not a measured luminance ratio.",
+        "Actual current requires the camera's unknown FB7 external sense resistance.",
+        "Panel/LED ratings, power, temperature, and long-term suitability are unverified.",
+        "VOUT8 upper bits, OVP, enables and all other init entries are preserved."
+      ]
+    }
+  ]
+}

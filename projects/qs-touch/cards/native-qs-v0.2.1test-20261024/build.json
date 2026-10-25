@@ -1,0 +1,662 @@
+{
+  "product": "Native QS_CINE touch additions",
+  "format": "FSB4",
+  "loader_services": 6,
+  "separate_test_page": false,
+  "camera_settings_connected": true,
+  "code_at": 80,
+  "layer_at": 5568,
+  "data_at": 5920,
+  "state_off": 108544,
+  "functions": {
+    "observer": 85,
+    "native_record": 459,
+    "active": 1917,
+    "changed": 2499,
+    "input": 2005,
+    "name_of": 2557,
+    "qs_layout": 2745,
+    "bw_word": 3291,
+    "paint": 3367,
+    "qsn_apply": 5385,
+    "sup_entry": 767
+  },
+  "layer_symbols": {
+    "qs_hdr": 0,
+    "qs_layer_head_end": 176,
+    "$d": 256,
+    "$a": 260,
+    "$t": 300,
+    "qs_layer_head": 0,
+    "qs_entry_record": 180,
+    "qs_entry_layout": 220,
+    "qs_entry_load": 260,
+    "qs_replay_record": 301,
+    "qs_replay_layout": 317,
+    "qs_replay_load": 333,
+    "qs_layer_end": 348
+  },
+  "ui": {
+    "tiles": [
+      {
+        "key": "Format",
+        "cell": 1,
+        "object": 11687,
+        "parent": 7856
+      },
+      {
+        "key": "DC",
+        "cell": 1,
+        "object": 11688,
+        "parent": 7856
+      },
+      {
+        "key": "Res",
+        "cell": 1,
+        "object": 11689,
+        "parent": 7856
+      },
+      {
+        "key": "FPS",
+        "cell": 1,
+        "object": 11690,
+        "parent": 7856
+      },
+      {
+        "key": "Format",
+        "cell": 2,
+        "object": 11691,
+        "parent": 9599
+      },
+      {
+        "key": "DC",
+        "cell": 2,
+        "object": 11692,
+        "parent": 9599
+      },
+      {
+        "key": "Res",
+        "cell": 2,
+        "object": 11693,
+        "parent": 9599
+      },
+      {
+        "key": "FPS",
+        "cell": 2,
+        "object": 11694,
+        "parent": 9599
+      },
+      {
+        "key": "Format",
+        "cell": 3,
+        "object": 11695,
+        "parent": 9639
+      },
+      {
+        "key": "DC",
+        "cell": 3,
+        "object": 11696,
+        "parent": 9639
+      },
+      {
+        "key": "Res",
+        "cell": 3,
+        "object": 11697,
+        "parent": 9639
+      },
+      {
+        "key": "FPS",
+        "cell": 3,
+        "object": 11698,
+        "parent": 9639
+      },
+      {
+        "key": "Format",
+        "cell": 4,
+        "object": 11699,
+        "parent": 9679
+      },
+      {
+        "key": "DC",
+        "cell": 4,
+        "object": 11700,
+        "parent": 9679
+      },
+      {
+        "key": "Res",
+        "cell": 4,
+        "object": 11701,
+        "parent": 9679
+      },
+      {
+        "key": "FPS",
+        "cell": 4,
+        "object": 11702,
+        "parent": 9679
+      },
+      {
+        "key": "Format",
+        "cell": 5,
+        "object": 11703,
+        "parent": 9719
+      },
+      {
+        "key": "DC",
+        "cell": 5,
+        "object": 11704,
+        "parent": 9719
+      },
+      {
+        "key": "Res",
+        "cell": 5,
+        "object": 11705,
+        "parent": 9719
+      },
+      {
+        "key": "FPS",
+        "cell": 5,
+        "object": 11706,
+        "parent": 9719
+      },
+      {
+        "key": "Format",
+        "cell": 6,
+        "object": 11707,
+        "parent": 9759
+      },
+      {
+        "key": "DC",
+        "cell": 6,
+        "object": 11708,
+        "parent": 9759
+      },
+      {
+        "key": "Res",
+        "cell": 6,
+        "object": 11709,
+        "parent": 9759
+      },
+      {
+        "key": "FPS",
+        "cell": 6,
+        "object": 11710,
+        "parent": 9759
+      },
+      {
+        "key": "Format",
+        "cell": 7,
+        "object": 11711,
+        "parent": 9799
+      },
+      {
+        "key": "DC",
+        "cell": 7,
+        "object": 11712,
+        "parent": 9799
+      },
+      {
+        "key": "Res",
+        "cell": 7,
+        "object": 11713,
+        "parent": 9799
+      },
+      {
+        "key": "FPS",
+        "cell": 7,
+        "object": 11714,
+        "parent": 9799
+      },
+      {
+        "key": "Format",
+        "cell": 8,
+        "object": 11715,
+        "parent": 9839
+      },
+      {
+        "key": "DC",
+        "cell": 8,
+        "object": 11716,
+        "parent": 9839
+      },
+      {
+        "key": "Res",
+        "cell": 8,
+        "object": 11717,
+        "parent": 9839
+      },
+      {
+        "key": "FPS",
+        "cell": 8,
+        "object": 11718,
+        "parent": 9839
+      }
+    ],
+    "dials": [],
+    "more": [],
+    "legacy_gates": [
+      {
+        "object": 7858,
+        "variable": "FPQS_Legacy1"
+      },
+      {
+        "object": 7859,
+        "variable": "FPQS_Legacy1"
+      },
+      {
+        "object": 9600,
+        "variable": "FPQS_Legacy2"
+      },
+      {
+        "object": 9601,
+        "variable": "FPQS_Legacy2"
+      },
+      {
+        "object": 9640,
+        "variable": "FPQS_Legacy3"
+      },
+      {
+        "object": 9641,
+        "variable": "FPQS_Legacy3"
+      },
+      {
+        "object": 9680,
+        "variable": "FPQS_Legacy4"
+      },
+      {
+        "object": 9681,
+        "variable": "FPQS_Legacy4"
+      },
+      {
+        "object": 9720,
+        "variable": "FPQS_Legacy5"
+      },
+      {
+        "object": 9721,
+        "variable": "FPQS_Legacy5"
+      },
+      {
+        "object": 9760,
+        "variable": "FPQS_Legacy6"
+      },
+      {
+        "object": 9761,
+        "variable": "FPQS_Legacy6"
+      },
+      {
+        "object": 9800,
+        "variable": "FPQS_Legacy7"
+      },
+      {
+        "object": 9801,
+        "variable": "FPQS_Legacy7"
+      },
+      {
+        "object": 9840,
+        "variable": "FPQS_Legacy8"
+      },
+      {
+        "object": 9841,
+        "variable": "FPQS_Legacy8"
+      },
+      {
+        "object": 339,
+        "variable": "FPQS_LegacyFooter"
+      }
+    ],
+    "holders": {
+      "Format": 341,
+      "DC": 312,
+      "Res": 343,
+      "FPS": 345
+    },
+    "variables": {
+      "FPQS_Legacy1": {
+        "type": "integer",
+        "default": 1
+      },
+      "FPQS_FormatOn1": {
+        "type": "integer",
+        "default": 0
+      },
+      "FPQS_FormatText": {
+        "type": "string",
+        "default": " "
+      },
+      "FPQS_FormatDetail": {
+        "type": "string",
+        "default": " "
+      },
+      "FPQS_DCOn1": {
+        "type": "integer",
+        "default": 0
+      },
+      "FPQS_DCText": {
+        "type": "string",
+        "default": " "
+      },
+      "FPQS_DCDetail": {
+        "type": "string",
+        "default": " "
+      },
+      "FPQS_ResOn1": {
+        "type": "integer",
+        "default": 0
+      },
+      "FPQS_ResText": {
+        "type": "string",
+        "default": " "
+      },
+      "FPQS_ResDetail": {
+        "type": "string",
+        "default": " "
+      },
+      "FPQS_FPSOn1": {
+        "type": "integer",
+        "default": 0
+      },
+      "FPQS_FPSText": {
+        "type": "string",
+        "default": " "
+      },
+      "FPQS_FPSDetail": {
+        "type": "string",
+        "default": " "
+      },
+      "FPQS_Legacy2": {
+        "type": "integer",
+        "default": 1
+      },
+      "FPQS_FormatOn2": {
+        "type": "integer",
+        "default": 0
+      },
+      "FPQS_DCOn2": {
+        "type": "integer",
+        "default": 0
+      },
+      "FPQS_ResOn2": {
+        "type": "integer",
+        "default": 0
+      },
+      "FPQS_FPSOn2": {
+        "type": "integer",
+        "default": 0
+      },
+      "FPQS_Legacy3": {
+        "type": "integer",
+        "default": 1
+      },
+      "FPQS_FormatOn3": {
+        "type": "integer",
+        "default": 0
+      },
+      "FPQS_DCOn3": {
+        "type": "integer",
+        "default": 0
+      },
+      "FPQS_ResOn3": {
+        "type": "integer",
+        "default": 0
+      },
+      "FPQS_FPSOn3": {
+        "type": "integer",
+        "default": 0
+      },
+      "FPQS_Legacy4": {
+        "type": "integer",
+        "default": 1
+      },
+      "FPQS_FormatOn4": {
+        "type": "integer",
+        "default": 0
+      },
+      "FPQS_DCOn4": {
+        "type": "integer",
+        "default": 0
+      },
+      "FPQS_ResOn4": {
+        "type": "integer",
+        "default": 0
+      },
+      "FPQS_FPSOn4": {
+        "type": "integer",
+        "default": 0
+      },
+      "FPQS_Legacy5": {
+        "type": "integer",
+        "default": 1
+      },
+      "FPQS_FormatOn5": {
+        "type": "integer",
+        "default": 0
+      },
+      "FPQS_DCOn5": {
+        "type": "integer",
+        "default": 0
+      },
+      "FPQS_ResOn5": {
+        "type": "integer",
+        "default": 0
+      },
+      "FPQS_FPSOn5": {
+        "type": "integer",
+        "default": 0
+      },
+      "FPQS_Legacy6": {
+        "type": "integer",
+        "default": 1
+      },
+      "FPQS_FormatOn6": {
+        "type": "integer",
+        "default": 0
+      },
+      "FPQS_DCOn6": {
+        "type": "integer",
+        "default": 0
+      },
+      "FPQS_ResOn6": {
+        "type": "integer",
+        "default": 0
+      },
+      "FPQS_FPSOn6": {
+        "type": "integer",
+        "default": 0
+      },
+      "FPQS_Legacy7": {
+        "type": "integer",
+        "default": 1
+      },
+      "FPQS_FormatOn7": {
+        "type": "integer",
+        "default": 0
+      },
+      "FPQS_DCOn7": {
+        "type": "integer",
+        "default": 0
+      },
+      "FPQS_ResOn7": {
+        "type": "integer",
+        "default": 0
+      },
+      "FPQS_FPSOn7": {
+        "type": "integer",
+        "default": 0
+      },
+      "FPQS_Legacy8": {
+        "type": "integer",
+        "default": 1
+      },
+      "FPQS_FormatOn8": {
+        "type": "integer",
+        "default": 0
+      },
+      "FPQS_DCOn8": {
+        "type": "integer",
+        "default": 0
+      },
+      "FPQS_ResOn8": {
+        "type": "integer",
+        "default": 0
+      },
+      "FPQS_FPSOn8": {
+        "type": "integer",
+        "default": 0
+      },
+      "FPQS_LegacyFooter": {
+        "type": "integer",
+        "default": 1
+      },
+      "FPQS_FooterOn": {
+        "type": "integer",
+        "default": 0
+      },
+      "FPQS_FooterText": {
+        "type": "string",
+        "default": " "
+      }
+    },
+    "new_objects": 33,
+    "native_settings": [
+      "MV_RecordingFormat",
+      "CM_DCCrop",
+      "MV_Resolution",
+      "MV_FrameRate"
+    ],
+    "page": "QS_CINE",
+    "gui_id": 159,
+    "separate_test_page": false,
+    "camera_settings_connected": true,
+    "patches": 55,
+    "res_custom_record_overlap": false,
+    "variable_names": [
+      "FPQS_Legacy1",
+      "FPQS_FormatOn1",
+      "FPQS_FormatText",
+      "FPQS_FormatDetail",
+      "FPQS_DCOn1",
+      "FPQS_DCText",
+      "FPQS_DCDetail",
+      "FPQS_ResOn1",
+      "FPQS_ResText",
+      "FPQS_ResDetail",
+      "FPQS_FPSOn1",
+      "FPQS_FPSText",
+      "FPQS_FPSDetail",
+      "FPQS_Legacy2",
+      "FPQS_FormatOn2",
+      "FPQS_DCOn2",
+      "FPQS_ResOn2",
+      "FPQS_FPSOn2",
+      "FPQS_Legacy3",
+      "FPQS_FormatOn3",
+      "FPQS_DCOn3",
+      "FPQS_ResOn3",
+      "FPQS_FPSOn3",
+      "FPQS_Legacy4",
+      "FPQS_FormatOn4",
+      "FPQS_DCOn4",
+      "FPQS_ResOn4",
+      "FPQS_FPSOn4",
+      "FPQS_Legacy5",
+      "FPQS_FormatOn5",
+      "FPQS_DCOn5",
+      "FPQS_ResOn5",
+      "FPQS_FPSOn5",
+      "FPQS_Legacy6",
+      "FPQS_FormatOn6",
+      "FPQS_DCOn6",
+      "FPQS_ResOn6",
+      "FPQS_FPSOn6",
+      "FPQS_Legacy7",
+      "FPQS_FormatOn7",
+      "FPQS_DCOn7",
+      "FPQS_ResOn7",
+      "FPQS_FPSOn7",
+      "FPQS_Legacy8",
+      "FPQS_FormatOn8",
+      "FPQS_DCOn8",
+      "FPQS_ResOn8",
+      "FPQS_FPSOn8",
+      "FPQS_LegacyFooter",
+      "FPQS_FooterOn",
+      "FPQS_FooterText",
+      "QSN_Active",
+      "QSN_Raw",
+      "QSN_Input",
+      "QSN_Close",
+      "QSN_MV_RecordingFormat",
+      "QSN_CM_DCCrop",
+      "QSN_MV_Resolution",
+      "QSN_MV_FrameRate",
+      "QSN_MV_DNGQuality",
+      "QSN_MV_MOVQuality",
+      "QSN_QS_FocusPos",
+      "QSN_MV_QSMENU_QS1",
+      "QSN_MV_QSMENU_QS2",
+      "QSN_MV_QSMENU_QS3",
+      "QSN_MV_QSMENU_QS4",
+      "QSN_MV_QSMENU_QS5",
+      "QSN_MV_QSMENU_QS6",
+      "QSN_MV_QSMENU_QS7",
+      "QSN_MV_QSMENU_QS8"
+    ],
+    "labels": [
+      "CinemaDNG",
+      "MOV",
+      "OFF",
+      "ON",
+      "UHD",
+      "FHD",
+      "23.98p",
+      "24p",
+      "25p",
+      "29.97p",
+      "48p",
+      "50p",
+      "59.94p",
+      "100p",
+      "119.88p",
+      "RES",
+      "FPS",
+      " "
+    ]
+  },
+  "physical_card_written": false,
+  "on_camera_verified": false,
+  "files": {
+    "fpSup/ZQS.BIN": {
+      "bytes": 108528,
+      "sha256": "a8522144fb6255eaf7be114599114842685b0eb23c79fa8c57eccf0ed269cd1f"
+    },
+    "AutoRun.txt": {
+      "bytes": 3253,
+      "sha256": "ee256bc56848caeb6aecfb9d8114530102c67bae768a09f67757528e64af59f9"
+    },
+    "fpSup/LOADER.BIN": {
+      "bytes": 19456,
+      "sha256": "734a23ae32b87b7579765c539cf65665cd06f465aa6d06b1bbf8fc80266b33bb"
+    },
+    "fpSup/SUPMGR.BIN": {
+      "bytes": 4812,
+      "sha256": "d3b2c7fd672ba8322c1ed22d35001108e28586e30ad3a17377dc9cb94cd66219"
+    },
+    "fpSup/UI/FPSUP.BIN": {
+      "bytes": 140271,
+      "sha256": "451786d9760d98da4d2248fe976cfa2432d06c99302f5b284b8ded242db77f28"
+    },
+    "fpSup/UI/SUPMGR.BIN": {
+      "bytes": 115165,
+      "sha256": "940c3d90ee9b36e569cb571c0e71d21000467152797c8002b28b96ca1c12aa53"
+    }
+  },
+  "sources": {
+    "projects/qs-touch/real/build.py": "1e09cf26c9122344e50f96054c25d707e1352e29ac222ace530158aabb2ef04e",
+    "projects/qs-touch/real/page.py": "1674c04c37777e19456439e8ae05a555862f1bc38d65c79b8b89084492c9793b",
+    "projects/qs-touch/real/native.c": "505ff38602f133b461dc24ee93ffb96178263171255a0d4e37b351144a737549",
+    "projects/qs-touch/real/settings.h": "4f3916565145bda5b370ab288f28f75aa08cf7b27fb3a0dae90cea7804dfec4f",
+    "fpSup/fpsup-ui/fpsup_ui.c": "5dee11c203bedd7147020f3034a75f383c29b5406701ba67d77da9fdaa5a2a43",
+    "fpSup/uishare/qs_layer.c": "d599a38a02400fe157e8d7de8aa514fba16fc870760f4e9d4fa53cf0f8a3cec1",
+    "fpSup/uishare/qs_layer.S": "056194667edd4d823d7926721c0ebaf8a6743c2114cf45e32fd4101bb0aa87fc",
+    "projects/qs-touch/native/build_tiles.py": "92717b25adb825c9a3d5f9b42836a29eef09466995a47af683720a0b666b2def"
+  }
+}

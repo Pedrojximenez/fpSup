@@ -31,13 +31,47 @@ SENT = 0xA5A5A5A5
 def cached_assemble():
     """callfn assembles callfn.S (a clang run) on every call; once per process is enough."""
     import callfn, armasm
+    if getattr(armasm, '_memo_orig', None) is None:
+        armasm._memo_orig = armasm.assemble
+    orig = armasm._memo_orig
     memo = {}
     def asm(src, defines=()):
         k = (str(src), tuple(defines))
         if k not in memo:
-            memo[k] = armasm.assemble(src, defines)
+            memo[k] = orig(src, defines)
         return memo[k]
     callfn.assemble = asm
+    armasm.assemble = asm                    # imxl.heap / spi_read / bufa stubs import it per call: same memo
+    import cave                              # cave.claim asks the camera for the boot id over fpsh twice per claim
+    if not getattr(cave, '_boot_memo', None):    # (12 claims a config = 1.3 s); one process never spans a reboot --
+        b0 = cave.boot_id                         # a reboot fails the config and the next one is a new process
+        memo_b = {}
+        def boot_id():
+            if 'v' not in memo_b:
+                memo_b['v'] = b0()
+            return memo_b['v']
+        cave.boot_id = boot_id
+        cave._boot_memo = True
+    # callfn re-uploads its code before every call (word by word: ~18 ms). getfile/putfile share that area, so the
+    # bytes are still checked each time -- one readback, and the upload only when they differ (2026-10-24 profile)
+    if not getattr(callfn, '_own_code', False):    # callfn in its own block too (see imxl.heap): nothing else writes it
+        callfn.CODE = cave.claim('imxl.callfn.code', 160)
+        callfn.CODE_END = callfn.CODE + 160
+        callfn._own_code = True
+    if not getattr(callfn, '_put_checked', False):
+        import putfile, struct as _st
+        put0 = callfn.put
+        def put(addr, blob, label, *a, **k):
+            n = (len(blob) + 3) // 4
+            cur = putfile.mem_get(addr, n)
+            if None not in cur and _st.pack(f'<{n}I', *cur) == bytes(blob) + bytes(-len(blob) % 4):
+                return
+            return put0(addr, blob, label, *a, **k)
+        callfn.put = put
+        callfn._put_checked = True
+
+
+CAMERA_WAIT = True      # 2026-10-24: wait for the frame on the camera (bufa_grab2.S), not ~100 host polls a frame
 
 
 class Session:
@@ -52,11 +86,9 @@ class Session:
         if mode == 10:
             B.switch('key OKON'); B.switch('key OKOFF')                  # into magnify = mode 10
             self.entered = True
-            t0 = time.time()                                             # poll instead of a fixed 1.5 s
-            time.sleep(0.3)
-            while f',{mode:04d},' not in B.P().sh('imager mode_now') and time.time() - t0 < 3.0:
-                time.sleep(0.1)
-            time.sleep(0.3)                                              # the switch's tail (receiver, DCLP)
+            # fixed 1.5 s again (2026-10-24): polling mode_now and going on 0.3 s after it read 10 was followed by two
+            # allocator wedges in 14-bit full frame -- mode_now changes before the firmware's switch has finished
+            time.sleep(1.5)
         cur = B.P().sh('imager mode_now')
         if f',{mode:04d},' not in cur:
             raise SystemExit(f'not mode {mode}: {cur.strip()[-120:]}')
@@ -112,16 +144,71 @@ class Session:
                 return True
         return False
 
+    def grab_cb(self, timeout=1.0):
+        """sensor_read/bufa_grabcb.S as the BUFA0 completion callback for 3 completions: NEXT -> buf, NEXT -> scratch,
+        then the finished frame's address is checked against buf. Touches nothing the firmware waits on."""
+        import cave
+        if not getattr(self, '_gcb', None):
+            from armasm import assemble
+            code = assemble(HERE / 'sensor_read' / 'bufa_grabcb.S')
+            at = cave.claim('imxl.bufagrabcb', 128)
+            if len(code) != 120:
+                raise SystemExit(f'bufa_grabcb is {len(code)} B: data offsets below assume 120')
+            B.P().put(at, code, 'grabcb')
+            B.call(B.F_DCACHE)
+            self._gcb = at
+        at = self._gcb
+        STAGE, TARGET, SCRATCH, DONE, GOT = (at + o for o in (0x64, 0x68, 0x6C, 0x70, 0x74))
+        bw, sw = B.phys(self.buf) >> 2, B.phys(self.scratch) >> 2
+        for i in range(4):                                          # the frame's last words: proof it landed
+            B.wr(self.tail + 4 * i, SENT, verify=False)               # (done_addr comes from 0x30182184, which
+        B.wr(TARGET, bw); B.wr(SCRATCH, sw); B.wr(DONE, 0); B.wr(STAGE, 0)   # reads 0 here: no use as a check)
+        old = B.P().mem_get(B.CB_A0)[0]
+        if old:
+            raise SystemExit(f'BUFA0 callback already set (0x{old:08X}): not grabbing over it')
+        B.wr(B.CB_A0, at)
+        try:
+            t0 = time.time()
+            while time.time() - t0 < timeout and B.P().mem_get(DONE)[0] != 1:
+                pass
+        finally:
+            B.wr(B.CB_A0, 0)
+            B.wr(STAGE, 3)
+            B.wr(0x30182180, sw)                                    # whatever happened, back to scratch
+        done, tail = B.P().mem_get(DONE)[0], B.P().mem_get(self.tail)[0]
+        ok = done == 1 and tail != SENT
+        if not ok:
+            print(f'  grab_cb: done={done} tail=0x{tail:08X}')
+        return ok
+
+    def grabber(self):
+        """sensor_read/bufa_grab2.S (registers only; bufa_grab.S consumed the completion flag and wedged 14-bit sessions),
+        loaded once per Session (cave claim: same address all boot)"""
+        if not getattr(self, '_grab_at', None):
+            import cave
+            from armasm import assemble
+            code = assemble(HERE / 'sensor_read' / 'bufa_grab2.S')
+            at = cave.claim('imxl.bufagrab2', 176)
+            if len(code) > 176:
+                raise SystemExit(f'bufa_grab2 is {len(code)} B, claim is 176')
+            B.P().put(at, code + bytes(-len(code) % 4), 'bgrab ')
+            B.call(B.F_DCACHE)
+            self._grab_at = at
+        return self._grab_at
+
     def grab(self, d):
         """Steer BUFA0 to buf, let one frame complete, re-arm, take the next whole one, steer back."""
         raws = []
         for _ in range(2 if self.pair else 1):                  # pair: two consecutive whole frames (temporal noise)
-            B.wr(0x30182180, B.phys(self.buf) >> 2)
-            ok = self._trip() and self._trip()
-            B.wr(0x30182180, B.phys(self.scratch) >> 2)
+            if CAMERA_WAIT:                                     # completion callback steers one whole frame
+                ok = self.grab_cb()
+            else:
+                B.wr(0x30182180, B.phys(self.buf) >> 2)
+                ok = self._trip() and self._trip()
+                B.wr(0x30182180, B.phys(self.scratch) >> 2)
+                time.sleep(0.03)
             if not ok:
                 return False
-            time.sleep(0.03)
             B.P().mem_window(B.WIN, self.buf, self.size, 1)
             try:
                 raws.append(B.P().mem_read(self.buf, self.size, label='frame '))

@@ -35,13 +35,13 @@ projects/qs-touch/site/
 
 # 從韌體產生的東西:交叉索引快取、反編譯片段
 .fpxref.pkl
-research/imaging-hw/h264-10bit-audit-20261015/*evidence.c
+research/imaging-hw/h264-10bit-audit-*/*.c
 
 # 壓縮後仍超過 GitHub 100 MB 上限
 research/imaging-hw/color-characterisation/exports/output - 00000002.tif
 
 # 原廠字串池的複本(在韌體程式碼區),build 時重新產生
-*.fpqs.strings
+*.fpqs*.strings
 
 # SIGMA 官網的檔案(3D 模型、型錄)與官網韌體偵測，留在本機
 research/fp2/official-downloads/

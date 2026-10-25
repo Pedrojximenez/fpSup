@@ -1,0 +1,30 @@
+{
+  "time": 1792782844.8889248,
+  "daemon": "OK name=fpshd version=3.2.0 protocol=1 frame=64 payload=44 transport=EP01-EP82 iface=0 camera=open seq=360 ep83=host_candidate upload=UP01-probed mem=MEM1-probed quarantine=0 fault=none",
+  "standby": "is_recording -> 0\n\n",
+  "snapshot": {
+    "status get app_current": "app_current -> 2",
+    "gui geti MENU_Level1": "OK:MENU_Level1 -> 55",
+    "gui geti MENU_Level2": "OK:MENU_Level2 -> 140",
+    "gui geti FT_Focus": "OK:FT_Focus -> 33589",
+    "gui gets FT_N0": "OK:FT_N0 -> SupManager",
+    "gui gets FT_N1": "OK:FT_N1 -> Lossless RAW",
+    "gui gets FT_N2": "OK:FT_N2 -> Res-Custom",
+    "gui gets FT_N3": "OK:FT_N3 ->",
+    "gui gets FT_N4": "OK:FT_N4 ->",
+    "gui gets FT_N5": "OK:FT_N5 ->",
+    "screen": "LV_CINE_MEDIUM",
+    "touch_slot": "0xc05131a0",
+    "boot": 3855858
+  },
+  "manager": {
+    "gui geti SM_Focus": "OK:SM_Focus -> 3451",
+    "gui gets SM_PageText": "OK:SM_PageText -> 3 / 3",
+    "gui gets SM_N0": "OK:SM_N0 ->",
+    "gui gets SM_N1": "OK:SM_N1 ->",
+    "gui gets SM_N2": "OK:SM_N2 -> Unlocked Writer",
+    "gui gets SM_N3": "OK:SM_N3 ->",
+    "gui gets SM_N4": "OK:SM_N4 ->",
+    "gui gets SM_N5": "OK:SM_N5 ->"
+  }
+}

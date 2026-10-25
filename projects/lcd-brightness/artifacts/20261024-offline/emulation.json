@@ -1,0 +1,262 @@
+{
+  "status": "passed",
+  "tests_run": 11,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "firmware": [
+    {
+      "path": "out/seg0_c0000000.bin",
+      "base": "0xc0000000",
+      "size": 49245696,
+      "sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622"
+    },
+    {
+      "path": "out/seg1_c2ef6e00.bin",
+      "base": "0xc2ef6e00",
+      "size": 236032,
+      "sha256": "0dcaca8f5441fe4ddc6ed801cb888e325df4e76006e4f53a1c3219809b22ce7b"
+    }
+  ],
+  "python": "3.9.6",
+  "unicorn": "2.1.4",
+  "sources": {
+    "build_offline.py": "1f686ee778461543e8e523f5c8e8c7d87d90cf7fb9f396a75e92497d3b661a7f",
+    "emulate.py": "63bab457d80ace63f2d20c367364766e04cc72afc498f97f308c83c94111672e",
+    "firmware.py": "e68761e75311e333ebd11be5127adb213a8a125aa51b714ee4f6086b6c14cf84",
+    "test_brightness.py": "b4301b641abf4677d43f0035ae80bafd0507c62b50f7e1177ea528c6561bf0ae",
+    "validate_offline.py": "201d4e9983bcb77b1f2f4a1177d07929cef223b16543642aa2c902e8fb6df329"
+  },
+  "camera_access_performed": false,
+  "physical_luminance_measured": false,
+  "measured_nits": null,
+  "emulation_boundary": {
+    "executed": "original Thumb coarse/fine/HAL brightness routines and cache resets",
+    "stubbed": "c00f4560 command dispatcher; arguments and original command sequence checked",
+    "seeded": "runtime descriptor root c2eff150; ready state 2; zeroed BSS",
+    "not_executed": "complete menu, boot/init, native transport, panel electronics or automatic-mode thread",
+    "abi_checked": "r4-r11 preservation and SP restoration; no claim about stock call-site 8-byte alignment"
+  },
+  "samples": {
+    "stock_maximum": {
+      "return_u32": 0,
+      "dispatches": [
+        {
+          "words": [
+            511,
+            511,
+            328,
+            345,
+            375,
+            511
+          ],
+          "bytes": [
+            255,
+            255,
+            72,
+            89,
+            119,
+            255
+          ]
+        }
+      ],
+      "writes": [
+        [
+          3270503760,
+          4,
+          4294967197
+        ],
+        [
+          3270506516,
+          4,
+          511
+        ],
+        [
+          3270506548,
+          4,
+          511
+        ],
+        [
+          3270506580,
+          4,
+          328
+        ],
+        [
+          3270506620,
+          4,
+          345
+        ],
+        [
+          3270506612,
+          4,
+          375
+        ],
+        [
+          3270506652,
+          4,
+          511
+        ],
+        [
+          3270503756,
+          4,
+          6
+        ],
+        [
+          3270503752,
+          4,
+          0
+        ]
+      ]
+    },
+    "stock_fine99": {
+      "return_u32": 0,
+      "dispatches": [
+        {
+          "words": [
+            511,
+            511,
+            328,
+            345,
+            375,
+            511
+          ],
+          "bytes": [
+            255,
+            255,
+            72,
+            89,
+            119,
+            255
+          ]
+        }
+      ],
+      "writes": [
+        [
+          3270503756,
+          4,
+          4294967197
+        ],
+        [
+          3270503752,
+          4,
+          4294967197
+        ],
+        [
+          3270506716,
+          4,
+          511
+        ],
+        [
+          3270506748,
+          4,
+          511
+        ],
+        [
+          3270506780,
+          4,
+          328
+        ],
+        [
+          3270506820,
+          4,
+          345
+        ],
+        [
+          3270506812,
+          4,
+          375
+        ],
+        [
+          3270506852,
+          4,
+          511
+        ],
+        [
+          3270503760,
+          4,
+          99
+        ]
+      ]
+    },
+    "stock_fine100_rejected": {
+      "return_u32": 4294967295,
+      "dispatches": [],
+      "writes": []
+    },
+    "stock_hal100_false_success": {
+      "return_u32": 0,
+      "dispatches": [],
+      "writes": []
+    },
+    "candidate_maximum": {
+      "return_u32": 0,
+      "dispatches": [
+        {
+          "words": [
+            511,
+            511,
+            328,
+            345,
+            378,
+            511
+          ],
+          "bytes": [
+            255,
+            255,
+            72,
+            89,
+            122,
+            255
+          ]
+        }
+      ],
+      "writes": [
+        [
+          3270503760,
+          4,
+          4294967197
+        ],
+        [
+          3270506516,
+          4,
+          511
+        ],
+        [
+          3270506548,
+          4,
+          511
+        ],
+        [
+          3270506580,
+          4,
+          328
+        ],
+        [
+          3270506620,
+          4,
+          345
+        ],
+        [
+          3270506612,
+          4,
+          378
+        ],
+        [
+          3270506652,
+          4,
+          511
+        ],
+        [
+          3270503756,
+          4,
+          6
+        ],
+        [
+          3270503752,
+          4,
+          0
+        ]
+      ]
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "detected": true,
+  "mutation": "reintroduce extra two-way MV_Resolution holder",
+  "camera_access": false,
+  "output": "test_actual_native_variables_are_two_way_and_keep_native_subscribers (test_page.PageTests) ... FAIL\n\n======================================================================\nFAIL: test_actual_native_variables_are_two_way_and_keep_native_subscribers (test_page.PageTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/dido/Developer.localized/SIGMAfp_re/projects/qs-touch/real/test_page.py\", line 45, in test_actual_native_variables_are_two_way_and_keep_native_subscribers\n    self.assertEqual(owners,[holder])\nAssertionError: Lists differ: [11687, 343] != [343]\n\nFirst differing element 0:\n11687\n343\n\nFirst list contains 1 additional elements.\nFirst extra element 1:\n343\n\n- [11687, 343]\n+ [343]\n\n----------------------------------------------------------------------\nRan 1 test in 0.270s\n\nFAILED (failures=1)\n"
+}

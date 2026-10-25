@@ -1,6 +1,7 @@
 # SIGMA fp Ver.5.02 — RAW FRAME PUSH channel (camera-push raw over EP84 IN, SuperSpeed bulk)
 
 <!-- index-stamp -->
+> ⚠ 2026-10-24 更正(projectFP 交接 F6,Ruari/Arktri,讀韌體 [C],未上機):UVC 視訊是 **bulk 上的 MJPEG(EP 0x81)**;唯一的等時端點 **EP 0x84 是麥克風**(44.1 kHz 16-bit 立體聲)。本文中「UVC isochronous on EP 0x84 / YUY2」的說法是錯的。另有隱藏指令 `usb uvcTest`:把卡上 `\UVC0..2.JPG` 原樣串流(僅限開機後第一次 webcam 連線前;缺檔會 assert)。
 > 這份寫的是 EP 0x05 OUT / EP 0x84 IN。現行 build 用 EP 0x01 / 0x82 / 0x83(`host/fpshd.c:31-32`、`patches.py:15-20`),EP84 在現行描述元下不存在。
 > 先看 [`USB_SHELL_INDEX.md`](USB_SHELL_INDEX.md)。
 

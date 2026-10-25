@@ -1,0 +1,27 @@
+test_all_native_fine_values_and_signed_boundaries (test_brightness.BrightnessTests) ... ok
+test_all_stock_manual_indices_and_invalid_boundary (test_brightness.BrightnessTests) ... ok
+test_fine_and_coarse_invalidate_each_others_cached_mode (test_brightness.BrightnessTests) ... ok
+test_guard_restore_and_foreign_before_image (test_brightness.BrightnessTests) ... ok
+test_hal_success_does_not_prove_a_command_was_submitted (test_brightness.BrightnessTests) ... ok
+test_mutations_are_detected_without_modifying_source_images (test_brightness.BrightnessTests) ... ok
+test_patched_maximum_matches_unused_lut100_other_indices_identical (test_brightness.BrightnessTests) ... ok
+test_runtime_state_controls_submission_and_caches (test_brightness.BrightnessTests) ... ok
+test_stock_maximum_matches_fine99_exactly (test_brightness.BrightnessTests) ... ok
+test_strict_execution_rejects_unapproved_native_code (test_brightness.BrightnessTests) ... ok
+test_warm_cache_skips_second_coarse_and_fine_submission (test_brightness.BrightnessTests) ... ok
+test_all_13_higher_init_candidates_both_paths (test_pmic.PmicTests) ... ok
+test_all_32_native_current_levels_preserve_vout8 (test_pmic.PmicTests) ... ok
+test_both_original_init_paths_write_dim18 (test_pmic.PmicTests) ... ok
+test_current_ratios_are_not_nits (test_pmic.PmicTests) ... ok
+test_exact_restore_and_foreign_guard_rejection (test_pmic.PmicTests) ... ok
+test_failed_enable_read_does_not_write (test_pmic.PmicTests) ... ok
+test_failed_i2c_write_is_not_treated_as_applied (test_pmic.PmicTests) ... ok
+test_lcd_callback_only_toggles_en7_and_preserves_current (test_pmic.PmicTests) ... ok
+test_native_assert_stops_invalid_dim_before_i2c (test_pmic.PmicTests) ... ok
+test_native_power_test_path_is_a_separate_dim31_writer (test_pmic.PmicTests) ... ok
+test_strict_execution_and_mutation_detection (test_pmic.PmicTests) ... ok
+
+----------------------------------------------------------------------
+Ran 22 tests in 0.587s
+
+OK

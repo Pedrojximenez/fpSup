@@ -1,0 +1,57 @@
+{
+  "scope": "Offline normalized touch replay and native resource parse; no camera connection",
+  "checks": [
+    {
+      "name": "tiles host sanitizers and behavior",
+      "passed": true
+    },
+    {
+      "name": "tiles_touch host sanitizers and behavior",
+      "passed": true
+    },
+    {
+      "name": "ARM freestanding compile only",
+      "passed": true
+    },
+    {
+      "name": "73-variable C/resource contract",
+      "passed": true
+    },
+    {
+      "name": "Touch resource, no new animation curves, and native record parser",
+      "passed": true,
+      "skipped": 0
+    }
+  ],
+  "tests_run": 7,
+  "test_output": "test_mutation_private_dial_route_is_detected (test_touch_tiles.TouchResourceTests) ... ok\ntest_no_new_or_modified_animation_clips (test_touch_tiles.TouchResourceTests) ... ok\ntest_original_parser_reads_touch_page (test_touch_tiles.TouchResourceTests) ... ok\ntest_shape_budget_and_local_ids (test_touch_tiles.TouchResourceTests) ... ok\ntest_touch_actions_still_target_only_private_holders (test_touch_tiles.TouchResourceTests) ... ok\ntest_touch_bindings_are_read_only_and_have_exact_targets (test_touch_tiles.TouchResourceTests) ... ok\ntest_touch_geometry_matches_the_native_cells (test_touch_tiles.TouchResourceTests) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 29.683s\n\nOK\n",
+  "C_replays": {
+    "tiles": "I FPQS_FormatMax 4\nI FPQS_FormatIndex 1\nI FPQS_FormatMore 0\nT FPQS_FormatText CDNG 10bit\nT FPQS_FormatDetail CinemaDNG\nI FPQS_DCMax 4\nI FPQS_DCIndex 1\nI FPQS_DCMore 0\nT FPQS_DCText HD\nT FPQS_DCDetail 35.9 x 20.17 mm\nI FPQS_ResMax 4\nI FPQS_ResIndex 1\nI FPQS_ResMore 0\nT FPQS_ResText CUSTOM(16:9)\nT FPQS_ResDetail 4000 x 2250\nI FPQS_FPSMax 4\nI FPQS_FPSIndex 1\nI FPQS_FPSMore 0\nT FPQS_FPSText 29.97p\nT FPQS_FPSDetail Frame rate\nI FPQS_Legacy1 0\nI FPQS_FormatOn1 1\nI FPQS_DCOn1 0\nI FPQS_ResOn1 0\nI FPQS_FPSOn1 0\nI FPQS_Legacy2 0\nI FPQS_FormatOn2 0\nI FPQS_DCOn2 1\nI FPQS_ResOn2 0\nI FPQS_FPSOn2 0\nI FPQS_Legacy3 0\nI FPQS_FormatOn3 0\nI FPQS_DCOn3 0\nI FPQS_ResOn3 1\nI FPQS_FPSOn3 0\nI FPQS_Legacy4 0\nI FPQS_FormatOn4 0\nI FPQS_DCOn4 0\nI FPQS_ResOn4 0\nI FPQS_FPSOn4 1\nI FPQS_Legacy5 1\nI FPQS_FormatOn5 0\nI FPQS_DCOn5 0\nI FPQS_ResOn5 0\nI FPQS_FPSOn5 0\nI FPQS_Legacy6 0\nI FPQS_FormatOn6 1\nI FPQS_DCOn6 0\nI FPQS_ResOn6 0\nI FPQS_FPSOn6 0\nI FPQS_Legacy7 0\nI FPQS_FormatOn7 0\nI FPQS_DCOn7 0\nI FPQS_ResOn7 1\nI FPQS_FPSOn7 0\nI FPQS_Legacy8 0\nI FPQS_FormatOn8 0\nI FPQS_DCOn8 0\nI FPQS_ResOn8 0\nI FPQS_FPSOn8 1\nI FPQS_LegacyFooter 0\nI FPQS_FooterOn 1\nI FPQS_DCMoreKeyOn 1\nT FPQS_FooterText 35.9 x 20.17 mm\nPASS private tile identity, bounds, canonical feedback, stale input, more, reorder and 64-variable contract\n",
+    "tiles_touch": "I FPQS_PanelOn 1\nI FPQS_TouchLegacyCursor 0\nI FPQS_TouchFocusOn 1\nI FPQS_TouchFocusX 0\nI FPQS_TouchFocusY 77\nI FPQS_TouchFooterOn 1\nI FPQS_TouchLegacyFooter 0\nT FPQS_TouchFooterText new\nT FPQS_TouchPageText 1/2\nPASS normalized touch: snap open/close, select, double tap, step/drag, more/back, cancel, multi-contact, reorder, page readiness\n"
+  },
+  "source_hashes": {
+    "projects/qs-touch/native/verify_touch_tiles.py": "698fa224126b9f99bd9a8b73d192fb19f05401f48bb84b130ab09fc70fe0d768",
+    "projects/qs-touch/native/build_touch_tiles.py": "3d962b27e40532da38bfb9b749ab501688dd7989fd576e1742b7eb6667ae0cf8",
+    "projects/qs-touch/native/build_tiles.py": "92717b25adb825c9a3d5f9b42836a29eef09466995a47af683720a0b666b2def",
+    "projects/qs-touch/native/test_touch_tiles.py": "74252322ffae01a34fc99b5f3bd0e8ec370ff88463c77ecd2bac168cc9e305d1",
+    "projects/qs-touch/core/qs_tiles.c": "2fc832f865637a4dca69e29b4b77ada37f436c3371fb776c98090b533303fee2",
+    "projects/qs-touch/core/qs_tiles.h": "ab93bcc3ecfeb2055144999a8f4810a5c2c9c985113f58eb59ff263840aadd65",
+    "projects/qs-touch/core/qs_tiles_touch.c": "2df633959024eb3d1eb7a550329e5daf7a50b5f1f1c71a7c9840cd465cbede74",
+    "projects/qs-touch/core/qs_tiles_touch.h": "e724593d25e4f5cf109a48e600771c37429244c929c6c295a4f3d7d621427cd9",
+    "projects/qs-touch/tests/test_qs_tiles.c": "061159bb2c871b0bf50221e599ecb6d2c744683728552922eb1b9aa677ac452a",
+    "projects/qs-touch/tests/test_qs_tiles_touch.c": "9ffc334593d1a326fd83d8e3c968ee0c72f20d1dfc331df56219e6fd31fcb7a6"
+  },
+  "artifacts": {
+    "QS_CINE.fpqs-touch.strings": "9ea4d891c459820dd4b9f55fb099f9a12c0d7928f59e493c51351a649c725d18",
+    "QS_CINE.fpqs-touch.page": "c7b280db81f46669d53f523fe3d2974f8cdd6892c4d1a8e2200087208585b16e",
+    "qs_tiles_touch.arm.o": "8caf1017c39558c1a721decb8deea438c70341558409e1b9850b3891bc6bf7d0",
+    "qs_tiles.arm.o": "8e99098253f698cbcfbc0c420d31b2b466e5eff6f22b6a194833c28015e40608",
+    "manifest.json": "a3d2cd5bca9b337683cbdd122ec1989cc50076ec0b3ca70b642dd58de89b04a2"
+  },
+  "limitations": [
+    "Raw XC_TouchPanelData contact flags and single-owner interception are not implemented",
+    "No native page installer, recording service or hardware touch path is executed",
+    "The native parser has explicit OS/construction substitutes; no painting is measured",
+    "Existing stock curves are retained for compatibility; new touch objects use direct bindings only"
+  ]
+}

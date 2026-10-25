@@ -46,7 +46,7 @@
 ```
 research/<主題>/   有 —— 相機本身的事實,換個專案還是成立
 projects/<專案>/   沒有 —— 只在那件工作的脈絡裡有意義
-<他牌相機>/        bmcc6k/ bmd_gen1/ sony_a7m3/ zcam_e2f6/ —— 別台相機的韌體與反編譯,放最外層
+<他牌相機>/        bmcc6k/ bmd_gen1/ sigma_bf/ sony_a7m3/ zcam_e2f6/ —— 別台相機的韌體與反編譯,放最外層
 ```
 
 每個分類底下:
@@ -267,6 +267,14 @@ captures/    素材 —— 支持那些結論的證據
 1 份筆記 · `matrices.txt` · BMPCC／BMCC 韌體 `res*/`(`.elf`)
 
 - [`BMD_FILM_GEN1_GAMUT.md`](bmd_gen1/notes/BMD_FILM_GEN1_GAMUT.md) — 從 Resolve 本體找到的 Gen1 原色,並用 BMCC Film→Rec709 v2 LUT 驗證(差 0.004);Gen1→XYZ/709/AP0/DWG 矩陣
+
+### `sigma_bf/` — 他牌對照:SIGMA BF(IMX410)的 PDAF 與色彩(不公開)
+
+- [`README.md`](sigma_bf/README.md) — 資料夾說明
+- [`AF_ANALYSIS.md`](sigma_bf/AF_ANALYSIS.md) — ★ BF 在 IMX410 上的相位對焦:PDAF-6C/7C 模式、對 fp mode 8 的暫存器配方、SoC 相位管線、AbsDef 鏡頭表;§5.1 上機狀態
+- [`COLOR_ANALYSIS.md`](sigma_bf/COLOR_ANALYSIS.md) — BF 色彩資料對照 fp
+- [`tools/`](sigma_bf/tools/README.md) — 分析腳本
+- 上機結果在 `projects/imx410-lab/notes/IMX410_RULES.md` §69
 
 ### `sony_a7m3/` — 他牌對照:Sony ILCE-7M3(A7 III)4.04 `av-cam.bin`
 

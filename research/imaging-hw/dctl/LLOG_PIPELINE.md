@@ -11,7 +11,9 @@
 - 18% 灰 = 0.4353（10-bit 445，約 44 IRE）；黑 = 92；L-Log 白限 LSR 23.3 = 1023。H.264/H.265 用全範圍，ProRes 用視訊範圍。
 - 驗算：`SIGMA_fp_to_LLog.dctl` 的公式和手冊表 1 的 8 個點，10-bit 全部相同；12-bit 有兩點差 1（手冊自己的捨入）。把 c 改成 0.28 的突變會被抓到。
 
-**為什麼不從 BF 抄**：BF 韌體裡沒有 L-Log 的公式常數（0.27、0.0115…都搜不到）。色調表是「色彩模式 × 10 級」的 1024 點 14-bit 表（0xCC7DD0 起，選擇函式 0x2605F4；模式 12、13 走特例），但這些表的輸入不是線性，哪一張是 L-Log、輸入怎麼編碼都還沒解開。BF 聲稱支援 L-Log，就應該照 Leica 規格出，所以直接用規格。
+**和 BF 對照（2026-10-23 解開，10-24 補完）**：BF 在 L-Log 模式下關掉 Tcd 色調表，改用一條 49 點的 gamma 折線，前段的 Knee／Deknee 互逆，所以進曲線的是線性資料。
+這條折線等於 `1023·L-Log(LSR) − 92`，輸入 16383 對應 LSR 23.3，49 點都在 ±2 碼以內，所以這份 DCTL 的曲線和 BF 機內是同一條。
+色域這一段 BF 用自己的 CC1 矩陣加上 Multi-Axis 的固定色度增益，和 DNG 矩陣算出的 2020 對不上；細節在 `sigma_bf/COLOR_ANALYSIS.md`「BF 的 L-Log 實作」。
 
 ## 流程
 
@@ -47,6 +49,25 @@ python3 tools/cdng_profile.py <cDNG 資料夾> <輸出資料夾> --matrix my.jso
 
 - DCTL 的 Input 改成 **DaVinci WG / Intermediate**：先轉回線性，再轉 BT.2020（DWG → 2020 矩陣由兩組原色計算，D65），最後套 L-Log。
 - 輸出要當 L-Log 看的話，節點後面不要再讓 RCM 做輸出轉換（Output Color Space 設成跟 Timeline 一樣，或用 Color Space Transform 繞過）。
+
+## BF 模擬版：`SIGMA_fp_BF_LLog.dctl`（2026-10-24）
+
+fp 和 BF 是同一顆 IMX410，所以不經過 DNG 矩陣，直接照 BF 機內的順序算：
+
+```
+fp cDNG ──cdng_profile.py --matrix native──► 每幀 ColorMatrix = diag(AsShotNeutral)·(XYZ→2020)
+        ──Resolve Camera RAW：Rec.2020 / Linear──► 白平衡後的相機 RGB（「Rec.2020」只是載體）
+        ──SIGMA_fp_BF_LLog.dctl──► CC1 → 裁切 0..23.3 → L-Log 曲線 → BT.2020 YCbCr 色度 ×增益
+```
+
+- CC1 = `[[249,6,1],[16,285,-45],[31,-65,290]]/256`、曲線、YC 係數都是 BF 韌體原值。
+- **BF chroma gain** 預設 1.25：韌體的 Multi-Axis 色度增益是 320，假設 256 = 1.0 才得到 1.25，**這個單位沒有驗證**。
+  套用位置（L-Log 曲線之後、在 YCbCr 上）也是依 Milbeaut R2Y 的慣例推的。
+- **Clip like the ISP**：照硬體把 CC1 輸出裁到 0..23.3（14 bit），最後裁到 0..1。關掉就保留超出範圍的值。
+- 曝光一樣用灰卡定在 44%（445）。
+- 已驗：依 DNG 規範模擬解碼，`--matrix native` 的檔案解出來正好是 `相機 RGB ÷ AsShotNeutral`（白點 D65、對角矩陣、誤差 0）；
+  exiftool validate 和原檔一樣只有 4 個小警告；Python 參考算出灰 445.3、黑 92.1、白限 1023.0。
+- 沒驗：Resolve 解 cDNG 是否完全照 DNG 規範（尤其白點換算）、fp 與 BF 的濾光片是否相同。沒有 BF 實拍，所以只能說「照 BF 的算法」，不能說「和 BF 拍出來一樣」。
 
 ## 還沒驗證的地方
 

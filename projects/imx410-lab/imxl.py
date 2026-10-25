@@ -82,14 +82,28 @@ def heap(op, size=0, desc=None):
     Allocate: -> (address, descriptor words).  Free: put that allocation's
     16-byte descriptor back at +0xE0 first -- heapalloc frees whatever it names."""
     from armasm import assemble
+    import cave, struct as _st
     p = P()
-    p.put(p.CODE, assemble(SHELL / 'asm' / 'heapalloc.S', [f'P=0x{p.P:08X}']), 'heap  ')
+    # Its own code block (2026-10-24), not the shared p.CODE: callfn and this took turns writing their code there and
+    # running it through echo with no I-cache maintenance in between, so the CPU could run the OTHER one's stale
+    # instructions with this one's parameters (callfn jumping to "address" 0 = op alloc; heapalloc freeing callfn's
+    # words). Written once per boot here, re-checked each time, never overwritten by anything else.
+    code = assemble(SHELL / 'asm' / 'heapalloc.S', [f'P=0x{p.P:08X}'])
+    at = cave.claim('imxl.heap.code', 256)
+    if len(code) > 256:
+        raise SystemExit(f'heapalloc is {len(code)} B, claim is 256')
+    n = (len(code) + 3) // 4
+    cur = p.mem_get(at, n)
+    if None in cur or _st.pack(f'<{n}I', *cur) != code + bytes(-len(code) % 4):
+        p.put(at, code, 'heap  ')
+        from callfn import call as _call
+        _call(0xC000E91C, verbose=False)        # D-clean / I-invalidate before the first run of the new bytes
     orig = p.mem_get(p.ECHO_SLOT)
-    if not orig or orig[0] not in (p.ECHO_ORIG, p.CODE):
+    if not orig or orig[0] not in (p.ECHO_ORIG, p.CODE, at):
         raise SystemExit(f'echo handler is {orig}, not free to borrow')
     want = [op, HEAP_CLASS, size, 0] + list(desc or [])
     try:
-        p.mem_set(p.ECHO_SLOT, p.CODE)
+        p.mem_set(p.ECHO_SLOT, at)
         for off, val in ((0x00, op), (0x04, HEAP_CLASS), (0x08, size), (0x0C, 0)):
             p.mem_set(p.P + off, val)
         for i, val in enumerate(desc or []):

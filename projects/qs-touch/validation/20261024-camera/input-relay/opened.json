@@ -1,0 +1,43 @@
+{
+  "file": "/Users/dido/Developer.localized/SIGMAfp_re/projects/qs-touch/validation/20261024-camera/input-relay/screen-SS2103.jpg",
+  "bytes": 121764,
+  "snapshot": {
+    "status get app_current": "app_current -> 5",
+    "gui geti MENU_Level1": "OK:MENU_Level1 -> 55",
+    "gui geti MENU_Level2": "OK:MENU_Level2 -> 140",
+    "gui geti FT_Focus": "OK:FT_Focus -> 33676",
+    "gui geti QST_Active": "OK:QST_Active -> 0",
+    "gui geti QST_Touch": "OK:QST_Touch -> 6342611",
+    "gui gets QST_Status": "OK:QST_Status -> QS TOUCH TEST",
+    "gui gets QST_Footer": "OK:QST_Footer -> 23.98p",
+    "gui gets FT_N0": "OK:FT_N0 -> SupManager",
+    "gui gets FT_N1": "OK:FT_N1 -> Gyro2",
+    "gui gets FT_N2": "OK:FT_N2 -> Lossless RAW",
+    "gui gets FT_N3": "OK:FT_N3 -> QS Touch test",
+    "gui gets FT_N4": "OK:FT_N4 -> Res-Custom",
+    "gui gets FT_N5": "OK:FT_N5 ->",
+    "gui gets QST_V0": "OK:QST_V0 -> MOV",
+    "gui gets QST_V1": "OK:QST_V1 -> OG",
+    "gui gets QST_V2": "OK:QST_V2 -> 1K",
+    "gui gets QST_V3": "OK:QST_V3 -> 23.98p",
+    "gui gets QST_V4": "OK:QST_V4 ->",
+    "gui gets QST_V5": "OK:QST_V5 ->",
+    "gui gets QST_V6": "OK:QST_V6 ->",
+    "gui gets QST_V7": "OK:QST_V7 ->",
+    "screen": "FT_Y6",
+    "touch_slot": "0xc5006429",
+    "boot": 2319694,
+    "sup_state": {
+      "magic": 827609937,
+      "result": 0,
+      "installed": 1,
+      "packets": 8,
+      "consumed": 8,
+      "cancelled": 0,
+      "applied": 4,
+      "svc": 3304216704,
+      "ui": 3305144112
+    }
+  },
+  "relay_value": "OK:QST_Input -> 6342611"
+}

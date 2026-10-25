@@ -1,0 +1,15 @@
+{
+  "scope": "offline comparison of the existing shared envelope, not a camera observation",
+  "builder": "fpSup/loader-v4/build_v4.py boot_card",
+  "instant": true,
+  "fast": false,
+  "slim": true,
+  "observations": [
+    {"splash": false, "backlight_sup": false, "result": "UC_ERR_FETCH_UNMAPPED", "pc": "0xd10000d0", "lr": "0x0", "loaded": []},
+    {"splash": false, "backlight_sup": true, "result": "UC_ERR_FETCH_UNMAPPED", "pc": "0xd10000d0", "lr": "0x0", "loaded": ["Backlight_v0.1.0test.BIN"]},
+    {"splash": true, "backlight_sup": false, "result": "returned", "loaded": []},
+    {"splash": true, "backlight_sup": true, "result": "returned", "loaded": ["Backlight_v0.1.0test.BIN"]}
+  ],
+  "decision": "Use the current standard splash envelope in compatibility tests; leave the shared loader unchanged.",
+  "camera_access_performed": false
+}

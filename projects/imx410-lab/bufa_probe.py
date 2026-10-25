@@ -59,9 +59,48 @@ def call(fn, *args):
 
 
 _STOP = {}
+SAFE_STOP = True    # bisect switch (2026-10-24): does clearing/waiting the BUFA0 completion flag wedge 14-bit sessions?
 
 
 def safe_stop(tmo_ms=500):
+    """Stop BUFA0 at a frame boundary without touching anything the firmware waits on (2026-10-24): point the BUFA0
+    completion callback at sensor_read/bufa_stopcb.S, which does c06316b8(100)'s two writes from inside the completion
+    interrupt, then put the old callback back. The flag-based version (safe_stop_flag) consumed the completion flag the
+    firmware's 14-bit path waits on and wedged 14-bit sessions 4 times out of 5. Returns True if stopped in the ISR."""
+    import cave
+    if not P().mem_get(0x30182000)[0] & 0x1F:               # BUFA0 not running: no DMA to cut
+        call(F_STARTSTOP, 100)
+        print('  safe stop: BUFA0 idle')
+        return None
+    if 'cb' not in _STOP:
+        from armasm import assemble
+        code = assemble(HERE / 'sensor_read' / 'bufa_stopcb.S')
+        at = cave.claim('imxl.bufastopcb', 80)
+        if len(code) > 80:
+            raise SystemExit(f'bufa_stopcb is {len(code)} B, claim is 80')
+        P().put(at, code + bytes(-len(code) % 4), 'bstpcb')
+        call(F_DCACHE)
+        _STOP['cb'] = at
+    at = _STOP['cb']; req, done = at + 0x40, at + 0x44
+    old = P().mem_get(CB_A0)[0]
+    wr(done, 0); wr(req, 1)
+    wr(CB_A0, at)
+    try:
+        t0 = time.time()
+        while time.time() - t0 < tmo_ms / 1000:
+            if P().mem_get(done)[0] == 1:
+                break
+        ok = P().mem_get(done)[0] == 1
+    finally:
+        wr(CB_A0, old)
+        wr(req, 0)
+    if not ok:                                               # no completion within tmo: no frame in flight
+        call(F_STARTSTOP, 100)
+    print(f'  safe stop: {"in the ISR" if ok else "no completion, stopped directly"}')
+    return ok
+
+
+def safe_stop_flag(tmo_ms=500):
     """Stop BUFA0 right after a completion, as the firmware does (sensor_read/bufa_stop.S); one camera-side call,
     since a USB round trip is longer than the blanking gap. Returns tk_wai_flg's result (nonzero = no frame came
     within tmo_ms, so no DMA was in flight; stopped anyway)."""
@@ -75,10 +114,6 @@ def safe_stop(tmo_ms=500):
         P().put(at, code + bytes(-len(code) % 4), 'bstop ')
         call(F_DCACHE)
         _STOP['at'] = at
-    if not P().mem_get(0x30182000)[0] & 0x1F:               # BUFA0 not running: no DMA to cut, no frame to wait for
-        call(F_STARTSTOP, 100)
-        print('  safe stop: BUFA0 idle')
-        return None
     r = call(_STOP['at'], P().mem_get(FLG_ID)[0], tmo_ms)
     print(f'  safe stop: wait -> {r}')
     return r
@@ -88,7 +123,7 @@ def startstop(n):
     """c06316b8(n) without the risk of blocking the shell: it opens with wai_sem(BUFA_MUTEX, 1, forever),
     and when liveview holds that mutex (seen 2026-10-20 at the restore stop) the shell task never comes
     back -- not even poff gets through. Probe the mutex with a 500 ms timeout and give it straight back."""
-    if n == 100:                            # stop: c06316b8(100) takes no mutex, but cutting a frame's DMA in half
+    if n == 100 and SAFE_STOP:              # stop: c06316b8(100) takes no mutex, but cutting a frame's DMA in half
         return safe_stop()                  # froze the camera ~1 in 100 (freeze_iso B, 2026-10-23)
     sid = P().mem_get(BUFA_MUTEX)[0]
     if sid is None:

@@ -1,7 +1,7 @@
 {
   "scope": "browser prototype only; C core is tested separately",
-  "date": "2026-10-22",
-  "revision": 14,
+  "date": "2026-10-24",
+  "revision": 15,
   "prior_revision_verified": [
     "prior revision: top-edge pull opens QS; retained edge code is unchanged",
     "restores the user's nine-item order, including false color on page two",
@@ -145,13 +145,18 @@
     "no browser warnings or errors observed"
   ],
   "verified": [
-    "native coordinate pull-down varies panel translation at constant opacity 1, restoring the original opening effect",
-    "native main-grid swipe and add-catalog swipe show horizontal displacement at constant content opacity 1 and finish on page two",
-    "native Mac horizontal wheel returns the main QS to page one",
-    "retained trash target removes ISO on native coordinate drop and saves the remaining order",
+    "real Mac coordinate pull-down presents only fully hidden and fully open panel endpoints, at opacity 1",
+    "main QS pointer swipe changes page on release without intermediate scroll positions or animation frames",
+    "native horizontal wheel returns to page one with immediate commit and no animation frames",
+    "bottom strip drag changes ISO 800 to 1600 without leaving QS",
+    "double click DC refreshes inline customization immediately, with idle transition state, identity content transform and opacity 1",
+    "upward drags return from DC customization to QS, then close the panel immediately",
+    "catalog pointer swipe changes to page two without animation frames",
+    "keyboard entry into sorting followed by real coordinate drop on trash removes ISO and saves the remaining order",
+    "all camera descendants have computed animation-name none and transition-duration 0s",
     "no browser warnings or errors observed"
   ],
-  "interaction_evidence": "revert-slide-v14.json",
+  "interaction_evidence": "touch-no-animation-v15.json",
   "previous_trash_fade_evidence": "trash-fade-v13.json",
   "previous_custom_labels_evidence": "custom-labels-v12.json",
   "previous_up_and_bounds_evidence": "up-and-res-bounds-v11.json",
@@ -160,8 +165,35 @@
   "previous_recording_evidence": "recording-v8.json",
   "quick_snap_evidence": "quick-snap-v7.json",
   "previous_native_scroll_evidence": "mac-native-scroll-v6.json",
-  "motion_traces": ["release-trace-v5.json", "regrab-trace-v5.json", "catalog-release-trace-v5.json"],
-  "screenshots": ["preview-slide-trash-v14.png", "preview-trash-v13.png", "preview-trash-narrow-v13.png", "preview-custom-labels-v12.png", "preview-custom-labels-narrow-v12.png", "preview-res-limit-v11.png", "preview-up-return-narrow-v11.png", "preview-up-closed-v11.png", "preview-custom-v10.png", "preview-main-v10.png", "preview-custom-narrow-v10.png", "preview-dc-mm-v9.png", "preview-dc-ratio-v9.png", "preview-dc-custom-v8.png", "preview-recording-v8.png", "preview-quick-snap-v7.png", "preview-mac-pager-v6.png", "preview-release-v5.png", "preview-value-drag-v4.png", "preview-background-v3.png", "preview-background-off-v3.png"],
+  "motion_traces": [
+    "release-trace-v5.json",
+    "regrab-trace-v5.json",
+    "catalog-release-trace-v5.json"
+  ],
+  "screenshots": [
+    "preview-touch-no-animation-v15.png",
+    "preview-slide-trash-v14.png",
+    "preview-trash-v13.png",
+    "preview-trash-narrow-v13.png",
+    "preview-custom-labels-v12.png",
+    "preview-custom-labels-narrow-v12.png",
+    "preview-res-limit-v11.png",
+    "preview-up-return-narrow-v11.png",
+    "preview-up-closed-v11.png",
+    "preview-custom-v10.png",
+    "preview-main-v10.png",
+    "preview-custom-narrow-v10.png",
+    "preview-dc-mm-v9.png",
+    "preview-dc-ratio-v9.png",
+    "preview-dc-custom-v8.png",
+    "preview-recording-v8.png",
+    "preview-quick-snap-v7.png",
+    "preview-mac-pager-v6.png",
+    "preview-release-v5.png",
+    "preview-value-drag-v4.png",
+    "preview-background-v3.png",
+    "preview-background-off-v3.png"
+  ],
   "limitations": [
     "No camera connection, firmware installation or card write",
     "DC preset geometry, non-HD K dimensions and 1..16384 input limits are editable prototype examples, not verified hardware capabilities",
@@ -169,12 +201,21 @@
     "RAW14, bit depth/FPS combinations, pixel alignment and real sensor window support are not validated; FPS options were not expanded",
     "No measured camera input-to-display latency",
     "Browser presentation is not execution of the portable C model",
-    "C core retains legacy edit commit/cancel APIs; immediate persistence, trash removal, slide paging, decimal aspect labels, double tap, upward navigation, RES/DC bounds and customization transitions are browser presentation policies",
+    "C core retains legacy edit commit/cancel APIs; immediate persistence, trash removal, immediate paging, decimal aspect labels, double tap, upward navigation, RES/DC bounds and customization presentation are browser presentation policies",
     "Browser gesture validation used native Mac mouse events and keyboard entry into reorder before a real coordinate drag; continuous held-touch drag and multi-touch cancellation require physical-device validation",
     "No measured browser fps or input-to-display latency",
     "Browser pointercancel and multi-touch for the new value strip still need a touch-device recheck; C tests do not execute the browser controller",
     "Motion traces verify renderer writes and model commit timing, not physical display scan-out or camera performance",
     "Native input automation did not deliver wheel events inside the iframe wrapper; horizontal wheel behavior was validated in the direct preview of the same fragment",
-    "Physical Mac trackpad momentum and subjective feel require human validation; native input routing and timed synthetic replay alone are not a smoothness verdict"
-  ]
+    "Physical Mac trackpad momentum and subjective feel require human validation; native input routing and timed synthetic replay alone are not a smoothness verdict",
+    "Separate native normalized-touch C replay covers contact cancellation, multi-contact and page readiness; it does not execute the browser JavaScript or decode real camera touch flags"
+  ],
+  "previous_revert_slide_v14_verified": [
+    "native coordinate pull-down varies panel translation at constant opacity 1, restoring the original opening effect",
+    "native main-grid swipe and add-catalog swipe show horizontal displacement at constant content opacity 1 and finish on page two",
+    "native Mac horizontal wheel returns the main QS to page one",
+    "retained trash target removes ISO on native coordinate drop and saves the remaining order",
+    "no browser warnings or errors observed"
+  ],
+  "previous_revert_slide_evidence": "revert-slide-v14.json"
 }

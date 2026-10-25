@@ -82,6 +82,7 @@ typedef struct {
     int      (*flg_wait)(int id, uint32_t ptn, uint32_t mode, uint32_t *out, int tmo_ms);
     uint32_t (*shell_exec)(uint32_t ctx, char *line);           /* C03D9C20: strtoks it */
     uint32_t shell_ctx;                                         /* C3756904 */
+    uint32_t recstate;                                          /* C3757F30 */
     void     (*dly)(uint32_t ms);
     uint32_t (*tick_us)(void);                                  /* C002B6E0 */
 } wr_fw;
@@ -100,12 +101,33 @@ enum { IX_SD = 0, IX_CAPTURE = 1, IX_DISCARD = 2 };
 #define IX_MAX_CHUNK  32u
 #define IX_REC_MAGIC  0x31525849u        /* "IXR1" */
 #define IX_CAP_MAGIC  0x4C505349u        /* "ISPL": the host finds the sink by it */
-#define IX_CAP_VERSION 2u
+#define IX_CAP_VERSION 3u
 
 /* ctl: the host writes start_ms/rec_ms, then ctl = IX_CTL_ARMED (last).  The
- * control task stamps t_arm, presses REC start_ms later, presses it again
- * rec_ms after that, then IX_CTL_DONE.  Writing 0 before the start cancels. */
-enum { IX_CTL_IDLE = 0, IX_CTL_ARMED = 1, IX_CTL_REC = 2, IX_CTL_DONE = 3 };
+ * control task stamps t_arm and, start_ms later, runs the firmware's own
+ * record script (FUN_c0405ba0): recstate ena/init, key MOVON, recstate
+ * movrecstwai; rec_ms after that key MOVON + recstate movsavewai (up to three
+ * times), recstate disa.  Writing 0 before the start cancels. */
+enum { IX_CTL_IDLE = 0, IX_CTL_ARMED = 1, IX_CTL_REC = 2, IX_CTL_DONE = 3,
+       IX_CTL_FAIL_START = 4,            /* no sign the take started: no second press */
+       IX_CTL_FAIL_STOP = 5 };           /* three stop presses, no "saved"            */
+
+/* LV sampler (layout 3): the control task reads the LCD output descriptor
+ * (0xC30255B4) and the display DMA channel's slot register, and hands the slot
+ * written before the current one to the push engine (FPP1, PUSH_PROTOCOL.md)
+ * as source 1, mode 0 (skip if busy).  The engine is another sup: the host
+ * writes its entry into lv_push (Thumb: +1); 0 = sampler off.  Design:
+ * notes/PUSH_CALLERS.md §1. */
+#define IX_LV_DESC     0xC30255B4u       /* LCD descriptor: [3] w [4] h [8] n [9..] handles */
+#define IX_LV_CHSEL    0xC31DF8D8u       /* channel = this + 2 (>= 7: 8), FUN_c01d7638 */
+#define IX_LV_MAX_N    8u
+#define IX_LV_MAX_BYTES ((16u << 20) - 1024u)   /* one TRB */
+enum { IX_PUSH_SENT = 0, IX_PUSH_SKIPPED = 1 };
+typedef struct { uint32_t addr, len; } ix_seg;
+typedef struct {
+    uint32_t mode, source, frame_no, w, h, fmt, stride, flags, aux0, aux1, nseg;
+    ix_seg   seg[4];
+} ix_push_req;                           /* what the engine is handed (header fields) */
 
 /* one per block the writer took, kept or not */
 typedef struct { uint32_t seq, t_us, ncookie, bytes; } ix_logline;
@@ -138,6 +160,19 @@ typedef struct {
     uint32_t log_n;                      /* log lines written                    */
     uint32_t t_arm, t_rec, t_stop;       /* tick_us: ctl armed seen, REC pressed twice */
     uint32_t n_press;                    /* key presses issued                   */
+    uint32_t ctl_line;                   /* last shell line started (IX_SH_*)    */
+    uint32_t rs_started, rs_saved;       /* recstate +6 / +7 when checked        */
+    uint32_t install_at_arm;             /* n_install when the arm was seen      */
+    /* LV sampler: host-written */
+    uint32_t lv_push;                    /* engine entry, ix_push_req * -> IX_PUSH_* */
+    uint32_t lv_every_us;                /* one push per this interval (0: off)  */
+    uint32_t lv_lag;                     /* 1 = the last slot finished, 2 = one older (0: 1) */
+    uint32_t lv_max;                     /* stop after this many sent (0: no cap) */
+    /* LV sampler: camera-written */
+    uint32_t lv_t_last;                  /* tick_us of the last attempt          */
+    uint32_t lv_n_sent, lv_n_skip, lv_n_bad, lv_n_err;
+    uint32_t lv_last_reg;                /* raw slot index read                  */
+    uint32_t lv_last_addr;               /* the slot pushed                      */
 } ix_cap;
 
 /* Recognising the volume's driver by its saved acquire pointer. */

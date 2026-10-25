@@ -1,0 +1,21 @@
+  local   projects/qs-touch/validation/20261024-camera/exact-card/fpSup/QSTOUCH.BIN  19132 bytes
+  remote  \fpSup\QSTOUCH.BIN  mode 0x7
+  buffer  0x454E4640, file object 0x454E90FC
+  proof   region takes writes and still holds them a second later
+  restored echo -> 0xC03D99A0
+  reply   putfile: written
+  status  2 — written
+  open    1     write  1   (both are flags, not counts)
+  dir     19132 B verified
+
+  stage  19132 bytes in 0.001s (24.1 MB/s)      
+
+  verify 19132 bytes in 0.000s (51.7 MB/s)      
+
+  stage  19132 bytes in 0.02s (1.2 MB/s), MEM1, read back whole          
+
+  code   304/304 B  5.0 KiB/s 
+  verify 304/304 B  480 KiB/s 
+  verify 304 bytes in 0.0s (232 KiB/s)      
+
+  code   304 bytes in 0.1s (2.5 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          

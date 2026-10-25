@@ -54,15 +54,30 @@ def expected(vbin):
     return 0.0 if vbin % 2 else -1.0 / vbin
 
 
-def judge(img, vbin, tol=0.1):            # scene-dependent noise up to ~0.09 (stock 1x1, 3x6)
+SHORT = 1000                               # output rows: below this the halves are too few plane rows to measure
+
+
+def judge(img, vbin, tol=None):
     """G2-vs-G1 (same colour: immune to the scene's colours) on the top and bottom halves; both must agree with
-    the prediction. Cross-colour planes are reported but not judged (scene colour biases them)."""
-    h = (img.shape[0] // 4) * 2
-    halves = [measure(img[:h])['G2'], measure(img[h:2 * h])['G2']]
-    dy = [x['dy'] for x in halves]; dx = [x['dx'] for x in halves]
+    the prediction. Cross-colour planes are reported but not judged (scene colour biases them).
+    The check exists to tell the predicted offset from the wrong one (0 vs -0.5 rows, or a column swap): tol is half
+    that gap, 0.2 (3x6's -1/6: half its gap to 0). It was 0.1 (good-light noise, stock 1x1 / 3x6 up to ~0.09); in
+    full_v1 (dim room, max gain) 118 configs read 0.1-0.43 off -- narrow and short crops, 1x1 included, where no 0.5
+    offset can exist -- and none came near the wrong value.  Short frames (< SHORT rows) are measured whole, once:
+    a half of 55-400 plane rows read up to 0.43 off where the whole frame reads 0.15 (whole=True)."""
     e = expected(vbin)
-    return dict(dy=dy, dx=dx, expected=e,
-                PASS=bool(all(abs(v - e) < tol for v in dy) and all(abs(v) < tol for v in dx)))
+    t = tol if tol is not None else (0.2 if e in (0.0, -0.5) else min(0.2, abs(e) / 2))
+    if img.shape[0] < SHORT:
+        parts = [measure(img)['G2']]
+    else:
+        h = (img.shape[0] // 4) * 2
+        parts = [measure(img[:h])['G2'], measure(img[h:2 * h])['G2']]
+    dy = [x['dy'] for x in parts]; dx = [x['dx'] for x in parts]
+    r = dict(dy=dy, dx=dx, expected=e, tol=t,
+             PASS=bool(all(abs(v - e) < t for v in dy) and all(abs(v) < 0.2 for v in dx)))
+    if len(parts) == 1:
+        r['whole'] = True
+    return r
 
 
 def main():

@@ -12,23 +12,28 @@ import struct
 
 REC_MAGIC = 0x31525849          # "IXR1"
 CAP_MAGIC = 0x4C505349          # "ISPL"
-CAP_VERSION = 2
+CAP_VERSION = 3
 REC = struct.Struct('<8I')
 FIELDS = ('magic', 'seq', 'cl', 'bytes', 'ncookie', 't_us', 'copy_us', 'nseg')
 
-# ix_cap, mirrored from ix_wr.h (version 2)
+# ix_cap, mirrored from ix_wr.h (version 3: + the LV sampler)
 CAP_HEAD = ('magic', 'version', 'mode', 'nchunk')
 MAX_CHUNK = 32
 HOST = ('keep_first', 'every_us', 'log_addr', 'log_max', 'ctl', 'start_ms', 'rec_ms')
 CAP_TAIL = ('ci', 'coff', 'used', 'n_rec', 'n_full', 'n_discard', 'n_sd',
             't_first', 't_last', 'copy_us', 'copy_max_us',
-            'n_skip', 'log_n', 't_arm', 't_rec', 't_stop', 'n_press')
+            'n_skip', 'log_n', 't_arm', 't_rec', 't_stop', 'n_press',
+            'ctl_line', 'rs_started', 'rs_saved', 'install_at_arm',
+            'lv_push', 'lv_every_us', 'lv_lag', 'lv_max',               # host-written
+            'lv_t_last', 'lv_n_sent', 'lv_n_skip', 'lv_n_bad', 'lv_n_err', 'lv_last_reg', 'lv_last_addr')
 O_CHUNK = 16
 O_HOST = O_CHUNK + 8 * MAX_CHUNK
 O_TAIL = O_HOST + 4 * len(HOST)
 CAP_BYTES = O_TAIL + 4 * len(CAP_TAIL)
 OFF = {k: O_HOST + 4 * i for i, k in enumerate(HOST)} | {k: O_TAIL + 4 * i for i, k in enumerate(CAP_TAIL)}
-CTL = {'idle': 0, 'armed': 1, 'rec': 2, 'done': 3}
+CTL = {'idle': 0, 'armed': 1, 'rec': 2, 'done': 3, 'fail_start': 4, 'fail_stop': 5}
+SH_LINES = {1: 'recstate ena', 2: 'recstate init', 3: 'key MOVON', 4: 'recstate movrecstwai',
+            5: 'recstate movsavewai', 6: 'recstate disa'}
 LOG = struct.Struct('<4I')                    # ix_logline: seq, t_us, ncookie, bytes
 MODES = {'sd': 0, 'capture': 1, 'discard': 2}
 

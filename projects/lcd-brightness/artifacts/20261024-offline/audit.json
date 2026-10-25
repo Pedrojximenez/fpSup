@@ -1,0 +1,1271 @@
+{
+  "firmware": [
+    {
+      "path": "out/seg0_c0000000.bin",
+      "base": "0xc0000000",
+      "size": 49245696,
+      "sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622"
+    },
+    {
+      "path": "out/seg1_c2ef6e00.bin",
+      "base": "0xc2ef6e00",
+      "size": 236032,
+      "sha256": "0dcaca8f5441fe4ddc6ed801cb888e325df4e76006e4f53a1c3219809b22ce7b"
+    }
+  ],
+  "coarse_manual_table": [
+    {
+      "index": 0,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        5
+      ],
+      "matching_native_fine_values": [
+        1
+      ]
+    },
+    {
+      "index": 1,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        25
+      ],
+      "matching_native_fine_values": [
+        5
+      ]
+    },
+    {
+      "index": 2,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        65
+      ],
+      "matching_native_fine_values": [
+        13
+      ]
+    },
+    {
+      "index": 3,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        130
+      ],
+      "matching_native_fine_values": [
+        26
+      ]
+    },
+    {
+      "index": 4,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        215
+      ],
+      "matching_native_fine_values": [
+        43
+      ]
+    },
+    {
+      "index": 5,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        47,
+        255
+      ],
+      "matching_native_fine_values": [
+        70
+      ]
+    },
+    {
+      "index": 6,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        119,
+        255
+      ],
+      "matching_native_fine_values": [
+        99
+      ]
+    }
+  ],
+  "native_fine_table": [
+    {
+      "value": 1,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        5
+      ]
+    },
+    {
+      "value": 2,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        10
+      ]
+    },
+    {
+      "value": 3,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        15
+      ]
+    },
+    {
+      "value": 4,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        20
+      ]
+    },
+    {
+      "value": 5,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        25
+      ]
+    },
+    {
+      "value": 6,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        30
+      ]
+    },
+    {
+      "value": 7,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        35
+      ]
+    },
+    {
+      "value": 8,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        40
+      ]
+    },
+    {
+      "value": 9,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        45
+      ]
+    },
+    {
+      "value": 10,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        50
+      ]
+    },
+    {
+      "value": 11,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        55
+      ]
+    },
+    {
+      "value": 12,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        60
+      ]
+    },
+    {
+      "value": 13,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        65
+      ]
+    },
+    {
+      "value": 14,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        70
+      ]
+    },
+    {
+      "value": 15,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        75
+      ]
+    },
+    {
+      "value": 16,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        80
+      ]
+    },
+    {
+      "value": 17,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        85
+      ]
+    },
+    {
+      "value": 18,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        90
+      ]
+    },
+    {
+      "value": 19,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        95
+      ]
+    },
+    {
+      "value": 20,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        100
+      ]
+    },
+    {
+      "value": 21,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        105
+      ]
+    },
+    {
+      "value": 22,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        110
+      ]
+    },
+    {
+      "value": 23,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        115
+      ]
+    },
+    {
+      "value": 24,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        120
+      ]
+    },
+    {
+      "value": 25,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        125
+      ]
+    },
+    {
+      "value": 26,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        130
+      ]
+    },
+    {
+      "value": 27,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        135
+      ]
+    },
+    {
+      "value": 28,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        140
+      ]
+    },
+    {
+      "value": 29,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        145
+      ]
+    },
+    {
+      "value": 30,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        150
+      ]
+    },
+    {
+      "value": 31,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        155
+      ]
+    },
+    {
+      "value": 32,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        160
+      ]
+    },
+    {
+      "value": 33,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        165
+      ]
+    },
+    {
+      "value": 34,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        170
+      ]
+    },
+    {
+      "value": 35,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        175
+      ]
+    },
+    {
+      "value": 36,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        180
+      ]
+    },
+    {
+      "value": 37,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        185
+      ]
+    },
+    {
+      "value": 38,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        190
+      ]
+    },
+    {
+      "value": 39,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        195
+      ]
+    },
+    {
+      "value": 40,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        200
+      ]
+    },
+    {
+      "value": 41,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        205
+      ]
+    },
+    {
+      "value": 42,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        210
+      ]
+    },
+    {
+      "value": 43,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        215
+      ]
+    },
+    {
+      "value": 44,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        220
+      ]
+    },
+    {
+      "value": 45,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        225
+      ]
+    },
+    {
+      "value": 46,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        230
+      ]
+    },
+    {
+      "value": 47,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        235
+      ]
+    },
+    {
+      "value": 48,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        240
+      ]
+    },
+    {
+      "value": 49,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        245
+      ]
+    },
+    {
+      "value": 50,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        250
+      ]
+    },
+    {
+      "value": 51,
+      "command_bytes": [
+        133,
+        255,
+        72,
+        93,
+        0,
+        255
+      ]
+    },
+    {
+      "value": 52,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        3,
+        255
+      ]
+    },
+    {
+      "value": 53,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        5,
+        255
+      ]
+    },
+    {
+      "value": 54,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        8,
+        255
+      ]
+    },
+    {
+      "value": 55,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        10,
+        255
+      ]
+    },
+    {
+      "value": 56,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        13,
+        255
+      ]
+    },
+    {
+      "value": 57,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        15,
+        255
+      ]
+    },
+    {
+      "value": 58,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        18,
+        255
+      ]
+    },
+    {
+      "value": 59,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        20,
+        255
+      ]
+    },
+    {
+      "value": 60,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        23,
+        255
+      ]
+    },
+    {
+      "value": 61,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        25,
+        255
+      ]
+    },
+    {
+      "value": 62,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        27,
+        255
+      ]
+    },
+    {
+      "value": 63,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        30,
+        255
+      ]
+    },
+    {
+      "value": 64,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        32,
+        255
+      ]
+    },
+    {
+      "value": 65,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        35,
+        255
+      ]
+    },
+    {
+      "value": 66,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        37,
+        255
+      ]
+    },
+    {
+      "value": 67,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        40,
+        255
+      ]
+    },
+    {
+      "value": 68,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        42,
+        255
+      ]
+    },
+    {
+      "value": 69,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        45,
+        255
+      ]
+    },
+    {
+      "value": 70,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        47,
+        255
+      ]
+    },
+    {
+      "value": 71,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        50,
+        255
+      ]
+    },
+    {
+      "value": 72,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        52,
+        255
+      ]
+    },
+    {
+      "value": 73,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        55,
+        255
+      ]
+    },
+    {
+      "value": 74,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        57,
+        255
+      ]
+    },
+    {
+      "value": 75,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        60,
+        255
+      ]
+    },
+    {
+      "value": 76,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        62,
+        255
+      ]
+    },
+    {
+      "value": 77,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        65,
+        255
+      ]
+    },
+    {
+      "value": 78,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        67,
+        255
+      ]
+    },
+    {
+      "value": 79,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        70,
+        255
+      ]
+    },
+    {
+      "value": 80,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        72,
+        255
+      ]
+    },
+    {
+      "value": 81,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        74,
+        255
+      ]
+    },
+    {
+      "value": 82,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        77,
+        255
+      ]
+    },
+    {
+      "value": 83,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        79,
+        255
+      ]
+    },
+    {
+      "value": 84,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        82,
+        255
+      ]
+    },
+    {
+      "value": 85,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        85,
+        255
+      ]
+    },
+    {
+      "value": 86,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        87,
+        255
+      ]
+    },
+    {
+      "value": 87,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        89,
+        255
+      ]
+    },
+    {
+      "value": 88,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        92,
+        255
+      ]
+    },
+    {
+      "value": 89,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        94,
+        255
+      ]
+    },
+    {
+      "value": 90,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        97,
+        255
+      ]
+    },
+    {
+      "value": 91,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        99,
+        255
+      ]
+    },
+    {
+      "value": 92,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        102,
+        255
+      ]
+    },
+    {
+      "value": 93,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        104,
+        255
+      ]
+    },
+    {
+      "value": 94,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        107,
+        255
+      ]
+    },
+    {
+      "value": 95,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        110,
+        255
+      ]
+    },
+    {
+      "value": 96,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        112,
+        255
+      ]
+    },
+    {
+      "value": 97,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        114,
+        255
+      ]
+    },
+    {
+      "value": 98,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        117,
+        255
+      ]
+    },
+    {
+      "value": 99,
+      "command_bytes": [
+        255,
+        255,
+        72,
+        89,
+        119,
+        255
+      ]
+    }
+  ],
+  "candidate": {
+    "schema": "fp-lcd-brightness-offline-plan-v1",
+    "status": "offline_candidate_not_hardware_validated",
+    "firmware": [
+      {
+        "path": "out/seg0_c0000000.bin",
+        "base": "0xc0000000",
+        "size": 49245696,
+        "sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622"
+      },
+      {
+        "path": "out/seg1_c2ef6e00.bin",
+        "base": "0xc2ef6e00",
+        "size": 236032,
+        "sha256": "0dcaca8f5441fe4ddc6ed801cb888e325df4e76006e4f53a1c3219809b22ce7b"
+      }
+    ],
+    "guard": {
+      "address": "0xc2efed84",
+      "size": 42,
+      "before_hex": "8585858585ffffffffffffffffff484848484848485d5d5d5d5d595900000000002f7705194182d7ffff",
+      "after_hex": "8585858585ffffffffffffffffff484848484848485d5d5d5d5d595900000000002f7a05194182d7ffff"
+    },
+    "edits": [
+      {
+        "address": "0xc2efeda6",
+        "width": 1,
+        "before": 119,
+        "after": 122
+      }
+    ],
+    "stock_maximum_command_bytes": [
+      255,
+      255,
+      72,
+      89,
+      119,
+      255
+    ],
+    "candidate_maximum_command_bytes": [
+      255,
+      255,
+      72,
+      89,
+      122,
+      255
+    ],
+    "reference": "unused LUT entry for fine 100; rejected by the unmodified native driver",
+    "rollback": "restore the exact 42-byte before-image only if the entire after-image matches",
+    "deployment": "not included; no AutoRun, sup, device write, or camera operation",
+    "measured_nits": null,
+    "nits_gain_percent": null,
+    "limits": [
+      "Command data are not calibrated luminance, PWM duty, or LED current.",
+      "Panel register meanings and physical effect of this change are unverified.",
+      "Candidate exceeds the native accepted maximum; its hardware suitability is unknown.",
+      "No native instruction/guard patch is emitted; the table candidate is experimental.",
+      "A table edit alone may not refresh an already cached maximum setting.",
+      "Automatic-mode scheduling and display-state transitions are not simulated."
+    ]
+  },
+  "physical_luminance_measured": false,
+  "camera_access_performed": false,
+  "emulation_performed_by_this_builder": false
+}

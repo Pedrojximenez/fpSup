@@ -1,0 +1,181 @@
+{
+  "status": "offline_source_and_datasheet_analysis",
+  "date": "2026-10-25",
+  "firmware": [
+    {
+      "path": "out/seg0_c0000000.bin",
+      "base": "0xc0000000",
+      "size": 49245696,
+      "sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622"
+    },
+    {
+      "path": "out/seg1_c2ef6e00.bin",
+      "base": "0xc2ef6e00",
+      "size": 236032,
+      "sha256": "0dcaca8f5441fe4ddc6ed801cb888e325df4e76006e4f53a1c3219809b22ce7b"
+    }
+  ],
+  "camera_access_performed": false,
+  "measured_nits": null,
+  "live_dim7": null,
+  "external_sense_resistance_ohms": null,
+  "source": {
+    "url": "https://www.richtek.com/assets/product_file/RT5035C=RT5035D/DS5035CD-01.pdf",
+    "document": "DS5035C/D-01, February 2020",
+    "printed_pages": [
+      21,
+      28,
+      32
+    ],
+    "kind": "manufacturer datasheet"
+  },
+  "pmic": {
+    "model": "RT5035C",
+    "channel": 7,
+    "dim7_register": 4,
+    "dim7_mask": 31,
+    "shared_vout8_mask": 224,
+    "stock_vout8_bits": 160,
+    "enable_register": 14,
+    "enable_mask": 4,
+    "nominal_current_fraction": "(DIM7 + 1) / 32",
+    "absolute_current_formula_amps": "0.3 V / REXT_ohms * (DIM7 + 1) / 32"
+  },
+  "init_tables": [
+    {
+      "base": "0xc072c73c",
+      "size": 104,
+      "entries": [
+        {
+          "register": 1,
+          "value": 40
+        },
+        {
+          "register": 2,
+          "value": 249
+        },
+        {
+          "register": 3,
+          "value": 117
+        },
+        {
+          "register": 4,
+          "value": 178
+        },
+        {
+          "register": 5,
+          "value": 7
+        },
+        {
+          "register": 6,
+          "value": 60
+        },
+        {
+          "register": 7,
+          "value": 7
+        },
+        {
+          "register": 9,
+          "value": 122
+        },
+        {
+          "register": 10,
+          "value": 170
+        },
+        {
+          "register": 13,
+          "value": 0
+        },
+        {
+          "register": 15,
+          "value": 0
+        },
+        {
+          "register": 16,
+          "value": 12
+        },
+        {
+          "register": 14,
+          "value": 169
+        }
+      ]
+    },
+    {
+      "base": "0xc072c7a4",
+      "size": 104,
+      "entries": [
+        {
+          "register": 1,
+          "value": 40
+        },
+        {
+          "register": 2,
+          "value": 249
+        },
+        {
+          "register": 3,
+          "value": 37
+        },
+        {
+          "register": 4,
+          "value": 178
+        },
+        {
+          "register": 5,
+          "value": 7
+        },
+        {
+          "register": 6,
+          "value": 60
+        },
+        {
+          "register": 7,
+          "value": 7
+        },
+        {
+          "register": 9,
+          "value": 122
+        },
+        {
+          "register": 10,
+          "value": 170
+        },
+        {
+          "register": 13,
+          "value": 0
+        },
+        {
+          "register": 15,
+          "value": 0
+        },
+        {
+          "register": 16,
+          "value": 12
+        },
+        {
+          "register": 14,
+          "value": 169
+        }
+      ]
+    }
+  ],
+  "source_facts": [
+    "Both native initialization branches write register 4 = 0xb2, DIM7 = 18.",
+    "Native set_dim accepts 0..31 and writes register 4 = 0xa0 | dim.",
+    "LCD callback c0308520 calls PMIC EN7 control via its native vtable.",
+    "Native power-test initialization c0042f30 separately writes DIM7 = 31.",
+    "BootGui calls normal initialization c0020958; a later conditional path calls c0043040 (power test)."
+  ],
+  "inferences": [
+    "The normal init tables leave 13 higher nominal CH7 current codes (19..31).",
+    "The LCD EN7 callback strongly links CH7 to the LCD backlight; PCB wiring is not measured.",
+    "At an unchanged external resistor, DIM7 31/18 gives nominal current ratio 32/19, about 1.6842."
+  ],
+  "unresolved": [
+    "Actual running DIM7 value and any path-specific or external writes.",
+    "Panel command A3 indexed-register meanings and interaction with current dimming.",
+    "Physical REXT, LED ratings, optical gain, power, temperature and sustained behavior.",
+    "No panel command or current code establishes a measured nit value."
+  ],
+  "deployment": "No runnable camera/card artifact is emitted."
+}

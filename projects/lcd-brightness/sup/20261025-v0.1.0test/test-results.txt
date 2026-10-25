@@ -1,0 +1,19 @@
+test_bad_object_or_adapter_releases_before_i2c (test_backlight.BacklightTests) ... ok
+test_configurable_initial_range_and_same_loader (test_backlight.BacklightTests) ... ok
+test_default_exact_sup_loads_cached_with_one_row_and_confirmed_current (test_backlight.BacklightTests) ... ok
+test_disabled_sup_does_not_read_or_write_pmic (test_backlight.BacklightTests) ... ok
+test_exclusive_resource_conflict_and_page_rejection_do_not_write (test_backlight.BacklightTests) ... ok
+test_failed_write_readback_distinguishes_applied_and_unchanged (test_backlight.BacklightTests) ... ok
+test_foreign_initial_current_or_voltage_releases_without_write (test_backlight.BacklightTests) ... ok
+test_foreign_runtime_change_is_not_overwritten (test_backlight.BacklightTests) ... ok
+test_invalid_choice_is_rejected_without_io (test_backlight.BacklightTests) ... ok
+test_no_firmware_patch_and_native_next_boot_init_restores_current (test_backlight.BacklightTests) ... ok
+test_plain_debug_and_standard_instant_fast_boot_envelopes (test_backlight.BacklightTests) ... ok
+test_real_home_popup_steps_all_levels_and_returns_to_stock (test_backlight.BacklightTests) ... ok
+test_safety_assertions_kill_isolated_source_mutants (test_backlight.BacklightTests) ... ok
+test_unreadable_write_outcome_latches_unknown_and_never_retries (test_backlight.BacklightTests) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 97.762s
+
+OK

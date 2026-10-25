@@ -21,6 +21,7 @@
 #define TICK_US      0xC002B6E0u    /* free-running microseconds (loader v4)   */
 #define SHELL_EXEC   0xC03D9C20u    /* (ctx, line): tokenises and runs a shell line */
 #define SHELL_CTX    0xC3756904u    /* the console context C03D9D18 passes         */
+#define RECSTATE     0xC3757F30u    /* ShellRecOb's flags (FUN_c0407828)            */
 
 #define WR_PRI       6u             /* SRecFile's: the device semaphore and the */
                                     /* FS lock have no priority inheritance     */
@@ -77,15 +78,23 @@ int wr_card_init(wr_t *w, uint32_t task_entry, uint32_t veneers, uint32_t ctl_en
     fw.tick_us = (uint32_t (*)(void))TICK_US;
     fw.shell_exec = (uint32_t (*)(uint32_t, char *))SHELL_EXEC;
     fw.shell_ctx = SHELL_CTX;
+    fw.recstate = RECSTATE;
     uint32_t ven[6];
     for (uint32_t i = 0; i < 6; i++) ven[i] = veneers + 16u * i;
     int flag = flag_create();
     if (flag < 1) return 1;
     wr_init(w, &fw, flag, ven, WR_BLOCK, WR_SD_MAXDESC);
+#ifndef ISPL_CTL_ONLY
     w->task_id = task_create(task_entry, WR_PRI, WR_STACK, 0x4C505349u);      /* "ISPL" */
     if (w->task_id < 1) return 2;
+#else
+    (void)task_entry;                   /* no writer: stock writes the card    */
+#endif
     /* A started task cannot be deleted (no tk_ext_tsk): once the writer runs,
      * a failed control task only means no automatic REC -- the hooks go on. */
     w->ctl_task_id = task_create(ctl_entry, CTL_PRI, CTL_STACK, 0x43505349u); /* "ISPC" */
+#ifdef ISPL_CTL_ONLY
+    if (w->ctl_task_id < 1) return 3;
+#endif
     return 0;
 }

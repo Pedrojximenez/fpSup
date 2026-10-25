@@ -1,0 +1,14 @@
+{
+  "time": 1792790862.1220841,
+  "host": "OK name=fpshd version=3.2.0 protocol=1 frame=64 payload=44 transport=EP01-EP82 iface=0 camera=open seq=562 ep83=host_candidate upload=UP01-probed mem=MEM1-probed quarantine=0 fault=none",
+  "boot": 2333038,
+  "touch": 3309176789,
+  "echo": 3225262496,
+  "status get app_current": "app_current -> 5",
+  "gui geti QSN_Active": "OK:QSN_Active -> 0",
+  "gui geti QS_FocusPos": "OK:QS_FocusPos -> 0",
+  "gui geti CM_DCCrop": "OK:CM_DCCrop -> 0",
+  "gui geti MV_RecordingFormat": "OK:MV_RecordingFormat -> 0",
+  "gui geti MV_Resolution": "OK:MV_Resolution -> 0",
+  "gui geti MV_FrameRate": "OK:MV_FrameRate -> 3"
+}

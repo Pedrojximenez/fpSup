@@ -1,0 +1,21 @@
+  local   /Users/dido/Developer.localized/SIGMAfp_re/projects/qs-touch/cards/qstouch-v0.1.2test-focus-final-20261024/fpSup/QSTOUCH.BIN  126040 bytes
+  remote  \fpSup\QSTOUCH.BIN  mode 0x7
+  buffer  0x4531C480, file object 0x4533B0D8
+  proof   region takes writes and still holds them a second later
+  restored echo -> 0xC03D99A0
+  reply   putfile: written
+  status  2 — written
+  open    1     write  1   (both are flags, not counts)
+  dir     126040 B verified
+
+  stage  126040 bytes in 0.001s (111.4 MB/s)      
+
+  verify 126040 bytes in 0.001s (200.4 MB/s)      
+
+  stage  126040 bytes in 0.02s (7.7 MB/s), MEM1, read back whole          
+
+  code   304/304 B  5.6 KiB/s 
+  verify 304/304 B  604 KiB/s 
+  verify 304 bytes in 0.0s (296 KiB/s)      
+
+  code   304 bytes in 0.2s (1.4 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          

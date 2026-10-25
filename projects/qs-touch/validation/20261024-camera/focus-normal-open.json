@@ -1,0 +1,60 @@
+[
+  {
+    "key": "MENU",
+    "reply": "",
+    "screen": "MainY5",
+    "focus": "OK:FT_Focus -> 33647"
+  },
+  {
+    "key": "RIGHT",
+    "reply": "",
+    "screen": "FT_Y6",
+    "focus": "OK:FT_Focus -> 33647"
+  },
+  {
+    "key": "OK",
+    "reply": "",
+    "screen": "FT_QSTOUCH",
+    "focus": "OK:FT_Focus -> 33647"
+  },
+  {
+    "snapshot": {
+      "status get app_current": "app_current -> 5",
+      "gui geti MENU_Level1": "OK:MENU_Level1 -> 55",
+      "gui geti MENU_Level2": "OK:MENU_Level2 -> 140",
+      "gui geti FT_Focus": "OK:FT_Focus -> 33647",
+      "gui geti QST_Active": "OK:QST_Active -> 1",
+      "gui geti QST_Touch": "OK:QST_Touch -> 0",
+      "gui gets QST_Status": "OK:QST_Status -> QS TOUCH TEST",
+      "gui gets QST_Footer": "OK:QST_Footer -> MOV",
+      "gui gets FT_N0": "OK:FT_N0 -> SupManager",
+      "gui gets FT_N1": "OK:FT_N1 -> Lossless RAW",
+      "gui gets FT_N2": "OK:FT_N2 -> QS Touch test",
+      "gui gets FT_N3": "OK:FT_N3 -> Res-Custom",
+      "gui gets FT_N4": "OK:FT_N4 ->",
+      "gui gets FT_N5": "OK:FT_N5 ->",
+      "gui gets QST_V0": "OK:QST_V0 -> MOV",
+      "gui gets QST_V1": "OK:QST_V1 -> OG",
+      "gui gets QST_V2": "OK:QST_V2 -> 1K",
+      "gui gets QST_V3": "OK:QST_V3 -> 23.98p",
+      "gui gets QST_V4": "OK:QST_V4 ->",
+      "gui gets QST_V5": "OK:QST_V5 ->",
+      "gui gets QST_V6": "OK:QST_V6 ->",
+      "gui gets QST_V7": "OK:QST_V7 ->",
+      "screen": "FT_QSTOUCH",
+      "touch_slot": "0xc50058a9",
+      "boot": 2283998,
+      "sup_state": {
+        "magic": 827609937,
+        "result": 0,
+        "installed": 1,
+        "packets": 0,
+        "consumed": 0,
+        "cancelled": 0,
+        "applied": 4,
+        "svc": 3304216384,
+        "ui": 3305141168
+      }
+    }
+  }
+]

@@ -1,7 +1,8 @@
 # 自訂 QS 編輯器與 QS 畫面 —— 靜態逆向（Ver.5.02）
 
 2026-10-20，**全部離線**：只讀 `out/MAIN_c0000000.bin`、`out/decomp/full/blk_c*.c`、
-Julien R120/R168 的 `FPOG.BIN`。沒有碰相機，沒有改任何既有檔案。
+Julien R120/R168 的 `FPOG.BIN`。初期研究沒有碰相機或修改韌體。
+後續原生資源、觸控核心與可載入 SUP 的離線實作見 §15–§17。
 標記：**[驗]** = 看過反編譯/位元組/離線模擬；**[推]** = 推論，未驗證。
 
 後半（§6 起）是 2026-10-20 方向調整後的重點：**做我們自己的 QS 頁取代原廠 QS**。
@@ -687,3 +688,69 @@ C 核心通過主機 ASan／UBSan 測試、64 變數型別／名稱對照與 ARM
 C 核心只有主機執行與 ARM 編譯，未在相機執行。此處沒有頁載入 installer、私有變數 adapter、
 觸控事件轉接、更多選項的原生內容或錄影服務整合，亦沒有輸出 AutoRun 或相機可用卡檔。
 特別是非同步變數通知的回授抑制與舊佇列處理，仍須在 UI 執行緒 adapter 實作驗證，不能由同步核心測試代替。
+
+## 16. 無動畫觸控控制核心（2026-10-24）
+
+`projects/qs-touch/core/qs_tiles_touch.c/.h` 在私有瓷磚核心之上接受正規化觸控事件，
+使用原廠 1024×682 幾何命中兩排四格與底列。開關、焦點、換位都直接更新；
+底列加減／拖曳只產生設定意圖，雙點產生 MORE，左右滑動產生頁面請求。
+新增資源用直接綁定，不新增或修改動畫曲線；原廠相容骨架曲線保留。
+
+控制核心處理取消、多指、revision 改變與同步發布回入。換頁期間阻擋舊版面輸入，
+待版面管理器先安裝新 slots 並更改 revision，再以 `qtt_page_ready` 放行。
+靜止長按須由 adapter 呼叫 `qtt_tick`；MORE 只有意圖，詳細內容建立後才能啟用 `qtt_more_view`。
+原生添加清單、垃圾桶與詳細內容尚未實作，不應混同於功能較完整的瀏覽器預覽。
+
+低層 `TouchPanelIcLPM032M366__v3`（`C0445680`／`C04456E8`）資料經 `C06B5070` 轉換；
+XC manager（`C0444F08`）依設定表轉事件，觀察者 `C05131A0` 再以事件 `0x1D` 傳入 UI owner。
+`UicContentsIfBase__v2`（`C06D1550`）經 `C055DC38` 建 GUI 事件。
+這條鏈上的 DOWN／UP 對應與單一接收者攔截尚未核實，因此目前刻意不猜原始 flags。
+
+產物為 `projects/qs-touch/build/native-touch-no-animation-v1/`：44 個新物件、73 個私有變數。
+7 項資源測試零跳過，含原廠記錄解析器模擬、原生幾何、私有動作、直接綁定與曲線不變；
+主機 ASan／UBSan 回放與 ARM 編譯通過。解析器的 OS／建構替代與未執行繪圖等限制仍同 §15。
+沒有 installer、硬體觸控執行或錄影服務測試；資源、核心與來源雜湊皆記於 `verification.json`。
+
+## 17. 可載入的原生觸控 SUP（2026-10-24）
+
+`projects/qs-touch/sup/` 已把既有可攜核心接入 Loader v4、`fpsup-ui` 與原生觸控 observer，
+產出 `cards/qstouch-v0.1.0test-20261024/fpSup/QSTOUCH.BIN`（FSB4，services v6，19,132 bytes）。
+不同於 §15／§16 的未連結物件，這個檔案含 returning entry、常駐狀態、完整私有頁面、字串及回呼。
+共用 loader 未修改；頁面以 `FT_QSTOUCH` 註冊，由 fpSup 選單進入，尚未替換原廠 QS 入口。
+
+新頁面只有 13 個自製物件、102 筆記錄，八個位置共用四種身分；不再攜帶原廠 QS 子樹。
+動畫群組、clip、key 與其配置預留均為零；MOVE 沒有可見變更時只處理輸入，不重送畫面變數。
+觸控 callback 使用原廠 `C0CFCCDC → C05131A0` 的六字資料形狀；以兩組座標是否有效判定接觸，
+不把最後一字的 mapped gesture 猜成 DOWN／UP flags。
+只在本 SUP 頁面接手新接觸，整段由同一接收者處理；輸入 task 透過 GUI 佇列送私有變數，
+設定與頁面工作都在 GUI 回呼執行。開頁標記拒絕舊佇列，native screenEvent 1／2 同步頁面生命周期。
+
+觸控 slot 在 claim 前拒絕未知值，避免共用 claim 的 stale repair 覆寫不明 owner；
+SL_EXCL 阻止與 Tap to Zoom 或其他 owner 同時使用。透過 loader journal 宣告原字，
+私有程式／狀態／資源發布後才安裝 pointer，關機由共用還原處理。
+
+最終產物的 AutoRun、loader 與 SUP 真實位元組通過 12 項 ARM 測試，零跳過，含堆疊對齊、
+callee-saved registers、觸控轉接、點選／調值／選項／換位、多指與舊事件、部分失敗記憶體壽命、
+owner 衝突與關機還原。原廠 NBU 記錄解析器讀完 102 筆記錄；三個隔離破壞版本均被抓到。
+ABI 與資源來源以完整 MAIN SHA-256 固定；來源及成品雜湊在 `build.json`、`verification.json`、`SHA256SUMS`。
+
+此首版明示 TEST／UI values only，數值只在 SUP 私有模型中變更，**未連接相機錄影設定**。
+GUI 註冊、通知、screen manager、時鐘及 OS／heap／file 仍有明確替代；原廠記錄解析也沒有執行繪圖。
+沒有上機、實體觸控／LCD／快取硬體驗證、卡片 I/O、Fast provisioning、commit、push 或發布。
+
+
+### 17.1 實機失敗點與事件修正（2026-10-24）
+
+§17 首版離線結果不代表實機成功。v0.1.0 精簡頁未能保持開啟，v0.1.1 直接切頁診斷亦失敗。
+v0.1.2 保留原生選單焦點骨架後成功保持私有頁，仍有圖層覆蓋與觸控未觸發操作兩個問題。
+v0.1.4 離線候選在 `projects/qs-touch/cards/qstouch-v0.1.4test-input-relay-20261024/`；
+保留 13 個自製繪圖物件與 311 個原生焦點骨架物件，移除動畫播放請求，但被動動畫資料／預留仍在。
+
+原廠 `C0593F30` 的 GUI 佇列由 `C055F8F0` 呼叫靜默 setter `C05DC778`，
+因此直接訂閱 POST_INT 的目的變數不會觸發 C 回呼。頁面新增只對 change 觸發的
+`appVariableChangeEvent QST_Touch`，其 `controlAppVariable` 將完整整數複製到另一私有變數
+`QST_Input`，經 `C05F15E0 → C05DC7C8` 的 notifying setter 觸發 C 訂閱。
+原始 observer 依舊只排佇列。模擬測試已取消「靜默 post 直接呼叫 C」的錯誤替代，
+補上原生 setter／copy-action 執行及精確頁面轉接／繪圖順序檢查。
+
+這輪只做離線開發；尚未寫入相機，也不宣稱實體觸控已修好。原生頁面事件排程與繪圖仍須實測。

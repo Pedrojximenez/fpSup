@@ -1,0 +1,14 @@
+  local   /Users/dido/Developer.localized/SIGMAfp_re/projects/qs-touch/cards/qstouch-v0.1.4test-input-relay-20261024/fpSup/QSTOUCH.BIN  126212 bytes
+  remote  \fpSup\QSTOUCH.BIN  mode 0x7
+  buffer  0x4533CC40, file object 0x4535B944
+  proof   region takes writes and still holds them a second later
+  stage  126212 bytes in 0.001s (98.3 MB/s)      
+  verify 126212 bytes in 0.001s (206.6 MB/s)      
+  stage  126212 bytes in 0.02s (7.3 MB/s), MEM1, read back whole          
+  code   304/304 B  5.9 KiB/s   verify 304/304 B  504 KiB/s   verify 304 bytes in 0.0s (203 KiB/s)      
+  code   304 bytes in 0.1s (2.9 KiB/s), 0 batches resent, 0 chunks retried, 0 words repaired          
+  restored echo -> 0xC03D99A0
+  reply   putfile: written
+  status  2 — written
+  open    1     write  1   (both are flags, not counts)
+  dir     126212 B verified

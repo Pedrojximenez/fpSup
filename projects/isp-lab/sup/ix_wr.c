@@ -413,38 +413,128 @@ void wr_task(wr_t *w) {
 
 /* ---------------------------------------------------------------- control */
 
-static void ix_press(wr_t *w) {
-    /* the stock way (FUN_c0405ba0, the firmware's own "create N movies" script):
-     * the shell executor with a line, in the caller's task.  Down, then up. */
-    volatile uint32_t on[3], off[3];             /* no .rodata in a sup: word stores */
-    on[0] = 0x2079656Bu; on[1] = 0x4F564F4Du; on[2] = 0x0000004Eu;      /* "key MOVON"  */
-    off[0] = 0x2079656Bu; off[1] = 0x4F564F4Du; off[2] = 0x00004646u;   /* "key MOVOFF" */
-    w->fw.shell_exec(w->fw.shell_ctx, (char *)on);
-    w->fw.shell_exec(w->fw.shell_ctx, (char *)off);
-    w->cap.n_press++;
+/* One line through the stock shell executor, as FUN_c0405ba0 (the firmware's
+ * own "record N movies" script) does: no .rodata in a sup, so word stores. */
+enum { IX_SH_ENA = 1, IX_SH_INIT, IX_SH_MOVON, IX_SH_RECWAI, IX_SH_SAVEWAI, IX_SH_DISA };
+static void ix_sh(wr_t *w, uint32_t id) {
+    volatile uint32_t b[6];
+    b[0] = b[1] = b[2] = b[3] = b[4] = b[5] = 0;
+    switch (id) {
+    case IX_SH_ENA: b[0] = 0x73636572u; b[1] = 0x65746174u; b[2] = 0x616E6520u; b[3] = 0x00000000u; break;   /* "recstate ena" */
+    case IX_SH_INIT: b[0] = 0x73636572u; b[1] = 0x65746174u; b[2] = 0x696E6920u; b[3] = 0x00000074u; break;   /* "recstate init" */
+    case IX_SH_MOVON: b[0] = 0x2079656Bu; b[1] = 0x4F564F4Du; b[2] = 0x0000004Eu; break;   /* "key MOVON" */
+    case IX_SH_RECWAI: b[0] = 0x73636572u; b[1] = 0x65746174u; b[2] = 0x766F6D20u; b[3] = 0x73636572u; b[4] = 0x69617774u; b[5] = 0x00000000u; break;   /* "recstate movrecstwai" */
+    case IX_SH_SAVEWAI: b[0] = 0x73636572u; b[1] = 0x65746174u; b[2] = 0x766F6D20u; b[3] = 0x65766173u; b[4] = 0x00696177u; break;   /* "recstate movsavewai" */
+    case IX_SH_DISA: b[0] = 0x73636572u; b[1] = 0x65746174u; b[2] = 0x73696420u; b[3] = 0x00000061u; break;   /* "recstate disa" */
+    default: return;
+    }
+    w->cap.ctl_line = id;                       /* the last line started: a hang shows here */
+    w->fw.shell_exec(w->fw.shell_ctx, (char *)b);
+    if (id == IX_SH_MOVON) w->cap.n_press++;
+}
+
+/* recstate's observer (ShellRecOb, 0xC3757F30): +6 movie recording started,
+ * +7 movie saved.  "recstate init" clears them, movrecstwai / movsavewai poll
+ * them every 100 ms for up to 60 s (FUN_c0407ab8). */
+#define RS_STARTED 6u
+#define RS_SAVED   7u
+static uint32_t ix_rs(wr_t *w, uint32_t off) { return *(volatile uint8_t *)(w->fw.recstate + off); }
+
+/* The display DMA channel's slot register (FUN_c01822b8's table, channels 0..8),
+ * raw.  Measured 10-24 (validation/20261024-lvslot-01): byte2 = the slot being
+ * written, byte1 = the last one finished (always byte2 - 1), byte0 = the slot on
+ * screen (the firmware's & 0x1F/& 7, flips from byte1 to byte2). */
+static uint32_t ix_lv_reg(uint32_t ch) {
+    switch (ch) {
+    case 0: return *(volatile uint32_t *)0x301821E8u;
+    case 1: return *(volatile uint32_t *)0x301822E8u;
+    case 2: return *(volatile uint32_t *)0x301832E8u;
+    case 3: return *(volatile uint32_t *)0x301833E8u;
+    case 4: return *(volatile uint32_t *)0x301834E8u;
+    case 5: return *(volatile uint32_t *)0x301835E8u;
+    case 6: return *(volatile uint32_t *)0x301836E8u;
+    case 7: return *(volatile uint32_t *)0x301823E8u;
+    default: return *(volatile uint32_t *)0x301837E8u;
+    }
+}
+
+/* One LV sample, at most every lv_every_us.  Never waits: the engine's mode 0
+ * skips when the previous push has not finished. */
+static void ix_lv_step(wr_t *w, uint32_t now) {
+    ix_cap *c = &w->cap;
+    if (!c->lv_push || !c->lv_every_us) return;
+    if (c->lv_max && c->lv_n_sent >= c->lv_max) return;
+    if (c->lv_t_last && now - c->lv_t_last < c->lv_every_us) return;
+    c->lv_t_last = now;                         /* 0 = never: costs one early push per 71 min */
+    volatile uint32_t *d = (volatile uint32_t *)IX_LV_DESC;
+    uint32_t wd = d[3], ht = d[4], n = d[8];
+    uint32_t ch = *(volatile uint32_t *)IX_LV_CHSEL + 2u;
+    if (ch >= 7u) ch = 8u;
+    uint32_t reg = ix_lv_reg(ch);
+    c->lv_last_reg = reg;
+    if (n < 1u || n > IX_LV_MAX_N || wd < 16u || wd > 4096u || ht < 16u || ht > 4096u ||
+        wd * ht * 2u > IX_LV_MAX_BYTES) { c->lv_n_bad++; return; }
+    uint32_t lag = c->lv_lag ? c->lv_lag : 1u;
+    uint32_t done = (reg >> 8) & 0xFFu;          /* the last slot finished */
+#ifdef IX_MUTANT_LV_CURRENT
+    done = (reg >> 16) & 0xFFu;                  /* the one being written */
+#endif
+    if (lag > n || done >= n) { c->lv_n_bad++; return; }
+    uint32_t slot = done + n - (lag - 1u);       /* lag 1 = the last finished */
+    if (slot >= n) slot -= n;
+    uint32_t h = d[9u + slot];
+    uint32_t addr = 0x40000000u + 4u * h;
+    if (!h || addr < 0x40000000u || addr + wd * ht * 2u > 0x80000000u) { c->lv_n_bad++; return; }
+    volatile ix_push_req q;
+    q.mode = 0; q.source = 1; q.frame_no = slot; q.w = wd; q.h = ht;
+    q.fmt = 1; q.stride = wd * 2u;
+    q.flags = c->ctl == IX_CTL_REC ? 1u : 0u;
+    q.aux0 = reg; q.aux1 = ch; q.nseg = 1;
+    q.seg[0].addr = addr; q.seg[0].len = wd * ht * 2u;
+    q.seg[1].addr = q.seg[1].len = q.seg[2].addr = q.seg[2].len = q.seg[3].addr = q.seg[3].len = 0;
+    c->lv_last_addr = addr;
+    uint32_t r = ((uint32_t (*)(volatile ix_push_req *))c->lv_push)(&q);
+    if (r == IX_PUSH_SENT) c->lv_n_sent++;
+    else if (r == IX_PUSH_SKIPPED) c->lv_n_skip++;
+    else c->lv_n_err++;
 }
 
 void ix_ctl_step(wr_t *w) {
     ix_cap *c = &w->cap;
     uint32_t now = w->fw.tick_us();
+    ix_lv_step(w, now);
     switch (c->ctl) {
     case IX_CTL_ARMED:
-        if (!c->t_arm) { c->t_arm = now | 1u; break; }         /* 0 means "not seen" */
-        if (now - c->t_arm >= c->start_ms * 1000u) {
-            ix_press(w);
-            c->t_rec = w->fw.tick_us() | 1u;
-            c->ctl = IX_CTL_REC;
-        }
+        if (!c->t_arm) { c->t_arm = now | 1u; c->install_at_arm = w->n_install; break; }
+        if (now - c->t_arm < c->start_ms * 1000u) break;
+        ix_sh(w, IX_SH_ENA);
+        ix_sh(w, IX_SH_INIT);
+        ix_sh(w, IX_SH_MOVON);
+        ix_sh(w, IX_SH_RECWAI);
+        c->t_rec = w->fw.tick_us() | 1u;
+        c->rs_started = ix_rs(w, RS_STARTED);
+        /* Only a take that really started may get the second press: a press
+         * on a camera that did not start would START one, with nobody to stop it. */
+#ifdef IX_MUTANT_NO_START_CHECK
+        c->rs_started = 1;
+#endif
+        if (c->rs_started || w->n_install != c->install_at_arm) c->ctl = IX_CTL_REC;
+        else { ix_sh(w, IX_SH_DISA); c->ctl = IX_CTL_FAIL_START; }
         break;
     case IX_CTL_REC:
+        if (now - c->t_rec < c->rec_ms * 1000u) break;
+        for (uint32_t i = 0; i < 3; i++) {
 #ifdef IX_MUTANT_NO_STOP
-        break;
+            break;
 #endif
-        if (now - c->t_rec >= c->rec_ms * 1000u) {
-            ix_press(w);
-            c->t_stop = w->fw.tick_us() | 1u;
-            c->ctl = IX_CTL_DONE;
+            ix_sh(w, IX_SH_MOVON);
+            ix_sh(w, IX_SH_SAVEWAI);
+            c->rs_saved = ix_rs(w, RS_SAVED);
+            if (c->rs_saved) break;
         }
+        c->t_stop = w->fw.tick_us() | 1u;
+        ix_sh(w, IX_SH_DISA);
+        c->ctl = c->rs_saved ? IX_CTL_DONE : IX_CTL_FAIL_STOP;
         break;
     default:
         break;

@@ -1,0 +1,69 @@
+{
+  "status": "passed",
+  "artifact": "Backlight_v0.1.0test.BIN",
+  "sha256": "04f264484c0c155261601cb1690a93c1250ea780fd1551b2e1b3b006087d728e",
+  "tests_run": 14,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "camera_access_performed": false,
+  "measured_nits": null,
+  "sources": {
+    "backlight.c": "3cd0f32e5f836483218c11d546e9225cbb823f47abdea96b499555cfb2e40c7f",
+    "build.py": "001cd806f6ad6080bf8642b250223ed4b0ba5c2193a44a5252ffcfc3c1cbb551",
+    "test_backlight.py": "5152bc5bfd0da8f3fa4f767345cfdd4bf89ae9f1de1631975267234df445e732",
+    "validate.py": "6f8771ac65636b7af4971b2c7bcd4a6f0e7e2745906625706e394879114471f8"
+  },
+  "boundaries": [
+    "Real FSB4 sup, current Loader v4 core and actual home-page code executed.",
+    "Firmware file/directory/allocator and GUI substrate are modeled by maintained harnesses.",
+    "Native I2C adapter calls are stubbed to a dictionary, with their arguments checked.",
+    "No physical bus, electrical current, temperature, luminance or UI latency measurement.",
+    "No firmware hooks or task, and no sup settings/card write path.",
+    "Native next-boot PMIC init is executed separately; a complete hardware warm boot is unverified.",
+    "Instant/Fast tested with the current standard splash envelope; no-splash Instant baseline faults even without this sup."
+  ],
+  "default_io_trace": [
+    [
+      "read",
+      4,
+      178,
+      0
+    ],
+    [
+      "read",
+      4,
+      178,
+      0
+    ],
+    [
+      "write",
+      4,
+      180,
+      0
+    ],
+    [
+      "read",
+      4,
+      180,
+      0
+    ]
+  ],
+  "default_label": "Boost 2",
+  "header": [
+    876761926,
+    48,
+    1228,
+    1484,
+    49,
+    1414286146,
+    1,
+    6,
+    1,
+    0,
+    0,
+    1212
+  ],
+  "initial_register04": 178,
+  "applied_register04": 180
+}

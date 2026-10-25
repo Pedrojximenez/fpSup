@@ -1,0 +1,16 @@
+test_all_native_fine_values_and_signed_boundaries (test_brightness.BrightnessTests) ... ok
+test_all_stock_manual_indices_and_invalid_boundary (test_brightness.BrightnessTests) ... ok
+test_fine_and_coarse_invalidate_each_others_cached_mode (test_brightness.BrightnessTests) ... ok
+test_guard_restore_and_foreign_before_image (test_brightness.BrightnessTests) ... ok
+test_hal_success_does_not_prove_a_command_was_submitted (test_brightness.BrightnessTests) ... ok
+test_mutations_are_detected_without_modifying_source_images (test_brightness.BrightnessTests) ... ok
+test_patched_maximum_matches_unused_lut100_other_indices_identical (test_brightness.BrightnessTests) ... ok
+test_runtime_state_controls_submission_and_caches (test_brightness.BrightnessTests) ... ok
+test_stock_maximum_matches_fine99_exactly (test_brightness.BrightnessTests) ... ok
+test_strict_execution_rejects_unapproved_native_code (test_brightness.BrightnessTests) ... ok
+test_warm_cache_skips_second_coarse_and_fine_submission (test_brightness.BrightnessTests) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.213s
+
+OK

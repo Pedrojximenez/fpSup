@@ -1,0 +1,398 @@
+{
+  "status": "passed",
+  "tests_run": 22,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "firmware": [
+    {
+      "path": "out/seg0_c0000000.bin",
+      "base": "0xc0000000",
+      "size": 49245696,
+      "sha256": "aaa5208a028d9c4aebb9cc8614add723d456e96b2a95914f433079954320e622"
+    },
+    {
+      "path": "out/seg1_c2ef6e00.bin",
+      "base": "0xc2ef6e00",
+      "size": 236032,
+      "sha256": "0dcaca8f5441fe4ddc6ed801cb888e325df4e76006e4f53a1c3219809b22ce7b"
+    }
+  ],
+  "python": "3.9.6",
+  "unicorn": "2.1.4",
+  "sources": {
+    "backlight_audit.py": "7062656d15132341428b4b6f1a54a72cf98bdc3986ac69473ac6beb28a0a4dae",
+    "build_offline.py": "1f686ee778461543e8e523f5c8e8c7d87d90cf7fb9f396a75e92497d3b661a7f",
+    "emulate.py": "63bab457d80ace63f2d20c367364766e04cc72afc498f97f308c83c94111672e",
+    "firmware.py": "e68761e75311e333ebd11be5127adb213a8a125aa51b714ee4f6086b6c14cf84",
+    "pmic.py": "b8ac3da21c027bb57ce002b06f0369ad073db1d603809008721258902bf5e3b3",
+    "test_brightness.py": "b4301b641abf4677d43f0035ae80bafd0507c62b50f7e1177ea528c6561bf0ae",
+    "test_pmic.py": "5fd8fc3122dfa725d5c2ecd028b11052b789f7d006237a69fea8a221401270fe",
+    "validate_offline.py": "201d4e9983bcb77b1f2f4a1177d07929cef223b16543642aa2c902e8fb6df329"
+  },
+  "camera_access_performed": false,
+  "physical_luminance_measured": false,
+  "emulation_boundary": {
+    "executed": "native ARM PMIC init, setter, enable, masked helper, power-test init and LCD callback; prior Thumb brightness routines",
+    "stubbed": "I2C reads/writes, branch selector and LCD command dispatcher",
+    "fixtures": "native PMIC vtable; synthetic adapter pointers; dictionary registers; zeroed BSS",
+    "not_proven": "complete boot path, physical I2C, PCB wiring/current/luminance/thermal suitability or live register state",
+    "abi": "SP and r4-r11 preservation; no new injected ARM code is built"
+  },
+  "samples": {
+    "normal_init_selector0": [
+      {
+        "op": "write",
+        "register": 1,
+        "value": 40,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 2,
+        "value": 249,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 3,
+        "value": 37,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 4,
+        "value": 178,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 5,
+        "value": 7,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 6,
+        "value": 60,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 7,
+        "value": 7,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 9,
+        "value": 122,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 10,
+        "value": 170,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 13,
+        "value": 0,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 15,
+        "value": 0,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 16,
+        "value": 12,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 14,
+        "value": 169,
+        "result": 0
+      }
+    ],
+    "normal_init_selector1": [
+      {
+        "op": "write",
+        "register": 1,
+        "value": 40,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 2,
+        "value": 249,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 3,
+        "value": 117,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 4,
+        "value": 178,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 5,
+        "value": 7,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 6,
+        "value": 60,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 7,
+        "value": 7,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 9,
+        "value": 122,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 10,
+        "value": 170,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 13,
+        "value": 0,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 15,
+        "value": 0,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 16,
+        "value": 12,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 14,
+        "value": 169,
+        "result": 0
+      }
+    ],
+    "candidate_dim20_init": [
+      {
+        "op": "write",
+        "register": 1,
+        "value": 40,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 2,
+        "value": 249,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 3,
+        "value": 37,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 4,
+        "value": 180,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 5,
+        "value": 7,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 6,
+        "value": 60,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 7,
+        "value": 7,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 9,
+        "value": 122,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 10,
+        "value": 170,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 13,
+        "value": 0,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 15,
+        "value": 0,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 16,
+        "value": 12,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 14,
+        "value": 169,
+        "result": 0
+      }
+    ],
+    "native_set_dim31": [
+      {
+        "op": "write",
+        "register": 4,
+        "value": 191,
+        "result": 0
+      }
+    ],
+    "native_lcd_enable": [
+      {
+        "op": "read",
+        "register": 14,
+        "value": 169,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 14,
+        "value": 173,
+        "result": 0
+      }
+    ],
+    "native_power_test_init": [
+      {
+        "op": "write",
+        "register": 1,
+        "value": 40,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 2,
+        "value": 249,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 3,
+        "value": 37,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 4,
+        "value": 178,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 5,
+        "value": 7,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 6,
+        "value": 60,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 7,
+        "value": 7,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 9,
+        "value": 122,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 10,
+        "value": 170,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 13,
+        "value": 0,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 15,
+        "value": 0,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 16,
+        "value": 12,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 14,
+        "value": 169,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 4,
+        "value": 191,
+        "result": 0
+      },
+      {
+        "op": "write",
+        "register": 14,
+        "value": 253,
+        "result": 0
+      }
+    ]
+  }
+}

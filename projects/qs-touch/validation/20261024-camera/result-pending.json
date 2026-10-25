@@ -1,0 +1,29 @@
+{
+  "status": "hardware test paused; offline input-relay revision prepared",
+  "last_confirmed_deployed": {
+    "file": "readback-focus-QSTOUCH.BIN",
+    "bytes": 126040,
+    "sha256": "7c2ab548493110302c2e895a996e1a3cfa5aad1a4c127d6587e72d5117baf728",
+    "version": "v0.1.2 focus-final"
+  },
+  "page_opening": "FT_QSTOUCH remained active with native focus skeleton",
+  "physical_touch_verified": false,
+  "hardware_issues": [
+    "Opaque fill and native frame cover custom drawing in v0.1.2",
+    "Raw touch packets were received; queued value changes did not trigger the operation callback"
+  ],
+  "offline_root_cause": "POST_INT delivery uses C055F8F0 -> C05DC778 silent setter, so directly watching QST_Touch skips the C callback",
+  "candidate": "../../cards/qstouch-v0.1.4test-input-relay-20261024",
+  "candidate_deployed": false,
+  "current_turn_camera_operations": false,
+  "current_turn_additional_backups": false,
+  "recording_settings_connected": false,
+  "recording_commands_sent": false,
+  "tap_to_zoom": "Last confirmed paused for testing on the replacement card; no restore or reboot performed after user redirected the task to offline writing",
+  "ownership_note": "Original-card AutoRun/Loader evidence does not identify the replacement card. Do not restore original-card files onto it.",
+  "remaining": [
+    "Physical touch operation and LCD drawing",
+    "Tap to Zoom restore when ending camera testing",
+    "Idle power-off / card-swap lifecycle trials"
+  ]
+}

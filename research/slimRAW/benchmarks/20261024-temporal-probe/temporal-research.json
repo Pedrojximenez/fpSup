@@ -1,0 +1,127 @@
+{
+  "date": "2026-10-24",
+  "requirements": {
+    "platforms": [
+      "macOS",
+      "Windows"
+    ],
+    "interaction": "One compressed container, double-click to mount, expose normal DNG sequence and audio",
+    "decompression": "On-demand reads; no full-size extraction before mounting",
+    "cache": "Bounded memory cache; optional bounded disk cache, no full-clip materialization by default",
+    "compression_presets": "Multiple lossless effort presets; near-lossless/lossy are explicitly separate quality modes",
+    "priority": "Temporal RAW compression, efficient decoding and bounded random-access work"
+  },
+  "jxl_status": {
+    "fp_lj92_comparison": "Not measured. No claimed percentage improvement over fp hardware LJ92.",
+    "external_comparison": {
+      "source": "https://arxiv.org/html/2603.28105v1",
+      "table": "I",
+      "jpeg_ls_bpp": [
+        7.25,
+        7.87,
+        5.67,
+        6.54,
+        6.49,
+        8.38
+      ],
+      "jpeg_xl_bpp": [
+        7.29,
+        7.95,
+        5.6,
+        6.57,
+        6.46,
+        8.29
+      ],
+      "limitation": "JPEG-LS is not LJ92; static RAW datasets are not SIGMA fp video."
+    }
+  },
+  "temporal_studies": [
+    {
+      "title": "Real-time lossless compression of mosaic video sequences",
+      "year": 2005,
+      "url": "https://www4.comp.polyu.edu.hk/~cslzhang/paper/RTI_05_Aug.pdf",
+      "intra_bpp": [
+        4.78,
+        4.65,
+        4.38,
+        4.09
+      ],
+      "hybrid_bpp": [
+        4.48,
+        4.41,
+        4.3,
+        3.98
+      ],
+      "limitation": "8-bit clips; first Bayer sequence is simulated from full-colour footage; not evidence of 12-bit fp performance."
+    },
+    {
+      "title": "Lossless Video Coding Using Multi-Frame Motion Compensation",
+      "year": 2005,
+      "url": "https://iris.polito.it/retrieve/e384c42d-f02a-d4b2-e053-9f05fe0a1d67/13-Lossless%20video%20coding%20using%20multi-frame%20motion%20compensation.pdf",
+      "max_reported_gain_pct": 18.2,
+      "metric": "Zero-order entropy of residuals relative to single-reference motion compensation",
+      "limitation": "Not final compressed file size, and tested on green bands of conventional colour video."
+    },
+    {
+      "title": "NeuralLVC: Neural Lossless Video Compression via Masked Diffusion with Temporal Conditioning",
+      "year": 2026,
+      "url": "https://arxiv.org/html/2604.03353v1",
+      "status": "Preprint",
+      "same_domain_ablation_rate_pct": {
+        "intra_only": 49.56,
+        "diff_no_reference_conditioning": 45.91,
+        "diff_with_reference_conditioning": 29.71
+      },
+      "codec_fps": 0.06,
+      "test_hardware": "NVIDIA GH200",
+      "limitation": "Native YUV420 Xiph CIF, not Bayer RAW. Encoding and decoding are both expensive; not a ready-to-use mounted editing solution."
+    }
+  ],
+  "candidate_research_directions": [
+    "Multiple motion-compensated reference frames with deterministic integer prediction",
+    "Temporal conditional entropy model, not just subtract-and-Zstd",
+    "Noise-aware predictor that still codes every original residual sample in lossless mode",
+    "Optimize actual bit cost including vectors, reference IDs, weights, modes and restart overhead",
+    "Spend effort at encode time; keep decode transforms simple and reference dependencies bounded"
+  ],
+  "previous_probe_limit": "Three low-signal frames plus generic Zstd are a control experiment, not a bound on temporal RAW codec efficiency.",
+  "hybrid_candidate": {
+    "status": "Design candidate only; no trained model benchmarked on this Mac or Windows.",
+    "encoder": "Traditional global/block motion search and optional neural optical-flow proposals on low-resolution encoder-only proxies; refine and score on original CFA samples.",
+    "selection": "Compare actual total coded bytes: residual + motion + reference IDs + weights + modes + restart overhead. Retain intra and non-neural candidates.",
+    "bitstream": "Store explicit fixed-point motion/prediction parameters and complete lossless residuals.",
+    "decoder": "Deterministic integer reconstruction and traditional entropy decoding; neural runtime is not required for this candidate.",
+    "first_comparisons": [
+      {
+        "name": "Traditional block search / DIS",
+        "reference": "https://docs.opencv.org/4.10.0/de/d4f/classcv_1_1DISOpticalFlow.html"
+      },
+      {
+        "name": "SPyNet",
+        "reference": "https://openaccess.thecvf.com/content_cvpr_2017/papers/Ranjan_Optical_Flow_Estimation_CVPR_2017_paper.pdf"
+      },
+      {
+        "name": "RAFT-small, higher-effort comparison",
+        "reference": "https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123470392.pdf"
+      }
+    ],
+    "lossless_effort_presets": [
+      "Traditional search",
+      "Adaptive neural-assisted search",
+      "Larger multi-reference search"
+    ],
+    "acceptance_metrics": [
+      "Size relative to LJ92 on representative native RAW clips",
+      "Encoding time",
+      "Sequential decode fps",
+      "Random-frame read latency",
+      "Peak RAM and bounded cache usage",
+      "Identical decoded samples across macOS and Windows"
+    ],
+    "limitations": [
+      "Optical-flow accuracy alone does not establish a coding benefit.",
+      "Low-resolution proxies are for encoder search only; all residuals use original samples.",
+      "An encoder-only model does not capture every potential benefit of a learned decoder entropy model."
+    ]
+  }
+}

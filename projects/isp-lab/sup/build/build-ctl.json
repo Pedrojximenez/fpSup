@@ -1,0 +1,29 @@
+{
+ "file_len": 7896,
+ "block_size": 62136,
+ "inner_at": 304,
+ "c_base": 920,
+ "c_text": 6660,
+ "state_at": 7936,
+ "state_bytes": 54200,
+ "cap_off": 212,
+ "cap_bytes": 428,
+ "entries": {
+  "wr_card_init": 5959,
+  "wr_send": 685,
+  "wr_installed": 1,
+  "wr_cb_cookie": 1463,
+  "wr_cb_acquire": 1791,
+  "wr_cb_add": 1987,
+  "wr_cb_ckpt": 2201,
+  "wr_cb_rollback": 2315,
+  "wr_cb_release": 2387,
+  "wr_task": 4193,
+  "wr_take_start": 573,
+  "wr_late_frame": 599,
+  "wr_service": 2407,
+  "ix_ctl_task": 5929,
+  "ix_ctl_step": 4243
+ },
+ "sha256": "ad294a45b13cf661599ebf7d06a56aa00948886a3bccd4b0343dd999ace61fa6"
+}

@@ -5,6 +5,8 @@ resized to the crop's sensor aspect (merged readouts are anisotropic). A preview
 
     preview.py backfill DIR...     write preview.jpg next to every kept frame (frame.raw / .zst) under DIR
     preview.py classes             class-level previews from other experiments -> captures/class_shots/
+    preview.py full DIR...         preview_full.jpg next to every kept lit frame: the readout's own pixel grid (no
+                                   resize, no aspect fix), bilinear demosaic (user 2026-10-24: original-size previews)
 """
 import json, pathlib, sys
 import numpy as np
@@ -33,6 +35,62 @@ def make(frame, top, out_h, aspect, path, ob=None):
     h = max(1, round(WIDTH / aspect))
     im.resize((WIDTH, h), Image.BOX).save(path, quality=80)
     return path
+
+
+def _box(a, k):
+    """same-size 3x3 convolution, reflected edges (numpy only)"""
+    P = np.pad(a, 1, mode='reflect'); o = np.zeros_like(a)
+    for i in range(3):
+        for j in range(3):
+            if k[i][j]:
+                o += k[i][j] * P[i:i + a.shape[0], j:j + a.shape[1]]
+    return o
+
+
+def make_full(frame, top, out_h, path, ob=None, quality=80):
+    """one RGB pixel per output pixel (the frame as the sensor delivered it: a merged readout stays anisotropic),
+    bilinear demosaic; same phase / black / grey-world / gamma as make()"""
+    from PIL import Image
+    a = frame[top:top + out_h].astype(np.float32)
+    t = a[:a.shape[0] // 2 * 2, :a.shape[1] // 2 * 2]
+    if np.mean(np.abs(t[0::2, 0::2] - t[1::2, 1::2])) < np.mean(np.abs(t[0::2, 1::2] - t[1::2, 0::2])):
+        a = a[:, 1:]
+    a = a[:a.shape[0] // 2 * 2, :a.shape[1] // 2 * 2]
+    blk = float(np.mean(ob)) if ob is not None and ob.size else float(np.percentile(a, 0.5))
+    a = np.clip(a - blk, 0, None)
+    H, W = a.shape
+    mr = np.zeros((H, W), np.float32); mr[0::2, 0::2] = 1
+    mb = np.zeros((H, W), np.float32); mb[1::2, 1::2] = 1
+    mg = 1 - mr - mb
+    kg = [[0, .25, 0], [.25, 1, .25], [0, .25, 0]]
+    kc = [[.25, .5, .25], [.5, 1, .5], [.25, .5, .25]]
+    rgb = np.stack([_box(a * mr, kc), _box(a * mg, kg), _box(a * mb, kc)], -1)
+    m = rgb[::4, ::4].reshape(-1, 3).mean(0) + 1e-6
+    rgb *= m[1] / m
+    hi = float(np.percentile(rgb[::4, ::4], 99.5)) or 1.0
+    Image.fromarray((np.clip(rgb / hi, 0, 1) ** (1 / 2.2) * 255 + .5).astype(np.uint8)).save(path, quality=quality)
+    return path
+
+
+def full(dirs):
+    """preview_full.jpg for every config under DIR whose lit pair f/ is kept (skips existing ones)"""
+    import resweep as R
+    n = 0
+    for root in dirs:
+        for res in sorted(pathlib.Path(root).glob('*/result.json')):
+            d = res.parent; f = d / 'f'
+            if (d / 'preview_full.jpg').exists() or not (f / 'frame.raw.zst').exists():
+                continue
+            if (f / 'frame.raw').exists():                    # a dark pass in flight: frame.raw is its dark frame and
+                print('busy', d.name); continue               # decode() would read it before the lit .zst
+            try:
+                a = json.loads(res.read_text()).get('attrs', {})
+                top = a.get('y0', 20); oh = a.get('rows') or a.get('height')
+                fr, _ = R.decode(f)
+                make_full(fr[0], top, oh, d / 'preview_full.jpg', ob=fr[0][4:max(top - 4 - a.get('y_skip', 0), 6), 16:-16]); n += 1
+            except Exception as e:                            # noqa: BLE001
+                print('skip', d.name, e)
+    print(n, 'full-size previews')
 
 
 def from_dir(d, top, out_h, aspect, path):
@@ -103,6 +161,8 @@ if __name__ == '__main__':
     sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
     if sys.argv[1] == 'backfill':
         backfill(sys.argv[2:])
+    elif sys.argv[1] == 'full':
+        full(sys.argv[2:])
     elif sys.argv[1] == 'classes':                     # preview.py classes -> captures/class_shots/
         here = pathlib.Path(__file__).resolve().parent
         class_shots(here / 'captures', here / 'captures' / 'class_shots')

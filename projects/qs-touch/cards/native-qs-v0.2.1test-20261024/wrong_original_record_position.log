@@ -1,0 +1,14 @@
+test_sparse_arm_stream_preserves_original_coordinates (__main__.NativeSupTests) ... FAIL
+
+======================================================================
+FAIL: test_sparse_arm_stream_preserves_original_coordinates (__main__.NativeSupTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/qs-touch/real/test_sup.py", line 141, in test_sparse_arm_stream_preserves_original_coordinates
+    self.assertEqual(cam.w(READER+4),pos+len(patch['old']))
+AssertionError: 10261036 != 10259175
+
+----------------------------------------------------------------------
+Ran 1 test in 8.746s
+
+FAILED (failures=1)

@@ -47,6 +47,8 @@ document.addEventListener('pointerdown',()=>{
     const panel=qsQaRoot.querySelector('.panel'),trash=qsQaRoot.querySelector('.trash-drop');
     qsQaContactSamples.push({ms,panelOpacity:Number(getComputedStyle(panel).opacity),panelTransform:getComputedStyle(panel).transform,
       contentOpacity:Number(getComputedStyle(qsQaRoot.querySelector('.qs-content')).opacity),
+      gridScrollLeft:qsQaRoot.querySelector('.grid-viewport').scrollLeft,
+      optionTransform:getComputedStyle(qsQaRoot.querySelector('.option-track')).transform,
       trashVisible:!trash.hidden,trashOver:trash.classList.contains('is-over'),trashText:trash.textContent.trim()});
     if (qsQaContactSamples.length>100) qsQaContactSamples.shift();
     if (qsQaContact) qsQaContactFrame=requestAnimationFrame(frame);
@@ -69,8 +71,11 @@ document.getElementById('qs-qa-wheel-tail').addEventListener('click',async()=>{
   await new Promise(resolve=>setTimeout(resolve,160));
   const trace=JSON.parse(root.dataset.qsMotionTrace||'[]'),after=JSON.parse(root.dataset.qsMetrics);
   const frames=trace.filter(p=>p.phase==='frame'),release=trace.find(p=>p.phase==='release'),last=trace[trace.length-1];
+  const noAnimation=root.dataset.motion==='none';
   const checks={oneCommit:trace.filter(p=>p.phase==='commit').length===1,
-    firstFrameMoves:!!release && !!frames[0] && Math.abs(frames[0].offset-release.offset)>1,
+    presentation:noAnimation ? 'immediate' : 'animated',
+    immediateCommit:noAnimation ? !!release && frames.length===0 && last.ms-release.ms<16 : null,
+    firstFrameMoves:noAnimation ? null : !!release && !!frames[0] && Math.abs(frames[0].offset-release.offset)>1,
     monotone:frames.every((p,n)=>!n || p.scrollLeft>=frames[n-1].scrollLeft),
     quickFinish:!!release && last.ms-release.ms<130,
     page:root.querySelector('.page-label').textContent,scrollLeft:viewport.scrollLeft,width:viewport.clientWidth,

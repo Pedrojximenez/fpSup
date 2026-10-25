@@ -2,6 +2,10 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
 <style>
+.status-note { margin: 0 0 16px; font-size: .9rem; line-height: 1.6; }
+.status-note summary { cursor: pointer; }
+.status-note ul { margin: 8px 0 0; padding-left: 1.2em; }
+.status-note li { margin: 4px 0; }
 /* layout: control rail (left) + readout sheet (right) — a sensor datasheet you can drive; stacks on phones */
 :root {
   --bg: #eef1f4; --panel: #fbfcfd; --ink: #18212b; --mute: #5d6a78; --line: #d4dbe3;
@@ -92,6 +96,18 @@ h2 { font-family: var(--f-head); font-size: 1.05rem; font-weight: 600; margin: 0
     <p>選 AD、合併、寬度預設、裁切與輸出，頁面照生成器的 <code>plan()</code> 規則算出時序與感光元件寫入，並對照實機驗證結果。純模擬，不碰相機。</p>
   </header>
 
+  <details class="panel status-note" open>
+    <summary><b>驗證狀態（2026-10-25）</b>：產生器 641 組，640 組光照＋暗場都上機驗證過</summary>
+    <ul>
+      <li>每組都在相機上切換模式後實際抓幀：列數、第一列、空白列、整張畫面的暗帶、右邊假欄、線性、Bayer 相位、顏色比例、列相位、連拍；暗場另驗黑位。拍攝條件 ISO 800、快門 1/30。唯一沒過的是 3×3 800×160（畫面太小量不出列相位）。</li>
+      <li><b>寬度</b>：1×1 的寬度預設實際只送「標稱寬 − 16」欄（4176 → 4160、4016 → 4000、5073 → 5056），頁面已照實際寬度計算。</li>
+      <li><b>水平 3:1（垂直不合併）不可用</b>：紅、藍沒有訊號，只剩綠色。3×3、3×2 正常。</li>
+      <li><b>垂直 3:1（1×3 等）</b>：感光元件會插入 14 列沒曝光的列。全高改成輸出 1330 列；開視窗時往上多讀 16 列再丟掉。兩者輸出都已驗證乾淨。原因還不知道，這是繞過去的做法。</li>
+      <li><b>14-bit 低捲簾</b>：1×3 視窗 6064×720 捲簾 9.41 ms、最高 93 fps；6064×1136 14.44 ms；全高 6064×1330 16.80 ms。感光元件層已驗證，還沒實際錄影。</li>
+      <li>「已驗」只代表感光元件送出的 Bayer 幀正確；錄成 CinemaDNG 要經過 Res-Custom2 與 ISP，那一段另外驗證。</li>
+    </ul>
+  </details>
+
   <div class="grid">
     <div class="panel" id="controls">
       <fieldset><legend class="lbl">AD 等級 / 位元深度</legend>
@@ -166,14 +182,15 @@ const ADS = [['14', '14-bit'], ['12', '12-bit'], ['11', '11-bit 快速']];
 const NOTE_FMT = { 0x29: '14-bit 6064', 0x2B: '14-bit 4176', 0x2A: '6064', 0x18: '5073', 0x2C: '4176', 0x03: '4016', 0x39: '2×2 (3032)', 0x3B: 'h2 (3032)', 0x2F: 'h3 (2016)', 0x30: '3×6 (2016)' };
 
 function why(ad, mh, mv) {          // measured-infeasible cells (IMX410_RULES §67, SMC_VERIFY r22)
+  if (mh === 3 && mv === 1) return '水平 3:1、垂直不合併：實測紅藍沒有訊號（§72），目前不可用。';
   if (ad === '14' && mh > 1) return '14-bit 只有格式碼 29 / 2B 帶得出影像（§67 掃描），水平合併的格式碼都不行。';
   if (mv === 6 && mh !== 3) return 'v÷6 一定要配 h3 的格式碼 30；只寫 07xx 的 v6 組不會除以 6（§67）。';
   if (ad === '14' && mv === 6) return '14-bit 沒有 3×6。';
   return '這個組合還沒有類別。';
 }
 function classesFor(ad, mh, mv) { return CL.filter(c => c.ad === ad && c.mh === mh && c.mv === mv); }
-function fmtW(c) { return Math.max(...Object.keys(c.fmt).map(Number)); }
-function fmtCode(c) { return c.fmt[String(fmtW(c))]; }
+function fmtW(c) { const w = Math.max(...Object.keys(c.fmt).map(Number)); return (c.mh === 1 && w < 6000) ? Math.floor((w - 16) / 16) * 16 : w; }   // real line width (§72)
+function fmtCode(c) { return c.fmt[String(Math.max(...Object.keys(c.fmt).map(Number)))]; }
 
 function fpsG(f) { if (!f) return '0'; return String(Number(f.toPrecision(6))); }
 function cfgId(key, cw, ch, ow, oh, fps) { return `${key}:${cw}x${ch}>${ow}x${oh}@${fpsG(fps)}`; }
@@ -184,16 +201,22 @@ function plan(key, cw, ch, ow, oh, fps) {
   const r = BY[key];
   let sw = cw / r.mh; const sh = ch / r.mv;
   const ws = Object.keys(r.fmt).map(Number);
-  let fmt = ws.filter(w => w >= sw - 1e-6).sort((a, b) => a - b)[0];
-  if (fmt === undefined && Math.max(...ws) >= sw * 0.995) { fmt = Math.max(...ws); sw = fmt; }
+  // a 1x1 format word narrower than 6064 sends a line 16 columns shorter than its width (§72, readout_cfg.line_width)
+  const lineW = w => (r.mh === 1 && w < 6000) ? w - 16 : w;
+  let fmt = ws.filter(w => lineW(w) >= sw - 1e-6).sort((a, b) => a - b)[0];
+  if (fmt === undefined && lineW(Math.max(...ws)) >= sw * 0.995) { fmt = Math.max(...ws); sw = lineW(fmt); }
   if (fmt === undefined) throw new Error(`裁切寬 ${cw} 超過這個類別的讀出寬 ${Math.max(...ws) * r.mh}`);
   const full_h = SENSOR_H / r.mv, windowed = sh < full_h - 2;
   if (ow > sw + 1e-6 || (windowed && oh > sh + 1e-6)) throw new Error('RWZM 不能放大：輸出不能比裁切（合併後）大。');
   if (windowed && r.centre === null) throw new Error('這個類別的垂直視窗還沒測過，只能全高。');
+  if (r.mh === 3 && r.mv === 1) throw new Error('水平 3:1、垂直不合併目前不可用：實測紅、藍通道都是黑位，只剩綠色（全高也一樣）；開視窗時還有一半畫面低於黑位。格式碼 2F 要搭垂直合併組才正常（3×3、3×2 都可以）。');
   const H = Math.ceil(sh / 2), hm = r.hmin;
   const rows_out = windowed ? 2 * H : (r.rows_full || Math.round(full_h));
   if (oh > rows_out) throw new Error(`輸出 ${oh} 列 > 讀出實際給的 ${rows_out} 列。`);
-  const lines = (windowed ? rows_out : Math.round(full_h)) + r.over;
+  // new V3 windows read 16 rows more above the window; the ISP starts below them (§76: the sensor drops 14 unexposed
+  // rows there now and then). Full height instead outputs 28 rows less (rows_full already carries that).
+  const y_skip = (windowed && r.mv === 3 && r.new) ? 16 : 0;
+  const lines = (windowed ? rows_out : Math.round(full_h)) + r.over + y_skip;
   let b = r.v016, vmin = lines + 2 * b + 12, vmax;
   if (fps) {
     vmax = Math.round(CLK / (hm * fps));
@@ -210,11 +233,13 @@ function plan(key, cw, ch, ow, oh, fps) {
     const cand = [-2, -1, 0, 1, 2].map(k => raw + k).filter(x => ((x % 4) + 4) % 4 === 1);
     st = cand.sort((a, b2) => Math.abs(a - raw) - Math.abs(b2 - raw) || a - b2)[0];
     if (st < WIN_TOP || st + 2 * H * r.mv > WIN_BOTTOM) throw new Error(`視窗列 ${st}..${st + 2 * H * r.mv} 超出可讀範圍 ${WIN_TOP}..${WIN_BOTTOM}。`);
-    sensor.push([0x0003, 1, 'win'], [0x0022, st & 0xFF, 'win'], [0x0023, st >> 8, 'win'], [0x0024, H & 0xFF, 'win'], [0x0025, H >> 8, 'win']);
+    const Hr = H + y_skip / 2; st -= y_skip * r.mv;                 // V3 margin: 16 rows = 48 sensor rows above (§76)
+    if (st < WIN_TOP) throw new Error(`視窗起點 ${st} 加上 V3 多讀的 16 列後超出可讀範圍 ${WIN_TOP}。`);
+    sensor.push([0x0003, 1, 'win'], [0x0022, st & 0xFF, 'win'], [0x0023, st >> 8, 'win'], [0x0024, Hr & 0xFF, 'win'], [0x0025, Hr >> 8, 'win']);
   } else sensor.push([0x0003, 0, 'win']);
   if (b !== r.v016) sensor.push([0x0016, b, 'blank']);
-  return { key, r, fmt, sw, sh, windowed, H, st, hm, vmax, vmin, lines, rows_out, sensor,
-    rx_w: Math.ceil(sw / 12) * 12, raster_w: Math.min(fmt, Math.ceil(sw / 16) * 16),
+  return { key, r, fmt, sw, sh, windowed, H: H + y_skip / 2, st, hm, vmax, vmin, lines, rows_out, sensor, y_skip,
+    rx_w: Math.ceil(sw / 12) * 12, raster_w: Math.min(lineW(fmt) === fmt ? fmt : Math.floor(lineW(fmt) / 16) * 16, Math.ceil(sw / 16) * 16),
     fps: CLK / (hm * vmax), fps_max: CLK / (hm * vmin), rolling_ms: hm * lines / CLK * 1e3, id: cfgId(key, cw, ch, ow, oh, fps || 0) };
 }
 
@@ -309,7 +334,15 @@ function render() {
     const res = D.results[p.id], cs = classStats(S.key);
     let cls = 'warn', head = '規則允許，這一組沒上機驗過', sub = `類別 ${S.key}：光照 ${cs.lp}/${cs.ln}、暗場 ${cs.dp}/${cs.dn} 通過。`;
     if (res && res.light && res.dark !== false) { cls = 'ok'; head = res.dark ? '這一組光照＋暗場都驗過' : '這一組光照驗過'; }
-    else if (res && (res.light === false || res.dark === false)) { cls = 'bad'; head = '這一組上機失敗過'; }
+    else if (res && (res.light === false || res.dark === false)) {
+      cls = 'bad'; head = '這一組上機失敗過';
+      const W = { switch_lines: '接收列數', live_view: '即時預覽', frame: '抓不到幀', top: '第一列', rows: '空白列', cols: '右邊假欄（寬度超出這個讀出的實際寬）',
+                  linearity: '線性', bayer: 'Bayer 相位', rowphase: '列相位', burst: '連拍', black: '黑位結構', black_gain: '黑位（固定增益）',
+                  top_exposed: '頂端列沒有曝光（新 V3 開視窗，§72）', error: '執行錯誤' };
+      const w = res.why || {};
+      const t = [['光照', w.light], ['暗場', w.dark]].filter(x => x[1] && x[1].length).map(x => `${x[0]}：${x[1].map(k => W[k] || k).join('、')}`);
+      if (t.length) sub = t.join('；') + '。 ' + sub;
+    }
     else if (!cs.ln) { head = '規則允許，但類別還沒上機'; }
     st.className = 'status ' + cls; st.innerHTML = `<b>${head}</b><span>${sub}</span><span style="font-family:var(--f-num);font-size:.75rem;color:var(--mute)">${p.id}</span>`;
     const N = (v, u, t) => `<div><span class="lbl">${t}</span><span class="v">${v}</span><span class="u">${u}</span></div>`;
@@ -371,8 +404,13 @@ function renderShots(p, c) {
   let h = `<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><span class="lbl">實拍畫面</span><div class="seg" id="arsel"><button type="button" data-raw="1" aria-pressed="${S.raw}">感光元件輸出比例</button><button type="button" data-raw="0" aria-pressed="${!S.raw}">還原成畫面比例</button></div></div>`;
   if (c.mh !== c.mv) h += `<p class="hint">${c.mh}×${c.mv} 的輸出像素不是正方形：一個輸出像素 = 水平 ${c.mh} × 垂直 ${c.mv} 個感光元件像素，所以原始輸出${c.mv > c.mh ? '被垂直壓扁' : '被水平壓扁'} ${Math.max(c.mh, c.mv) / Math.min(c.mh, c.mv)} 倍，錄影端（RWZM/ISP）要拉回來。</p>`;
   if (own) {
-    const fig = (src, t) => `<figure><img src="${src}" alt="${p.id} ${t}" loading="lazy"${ar(S.ow, S.oh)}><figcaption>${t} · ${p.id}</figcaption></figure>`;
-    h += (own.l ? fig(own.l, '光照驗證拍到的畫面') : '') + (own.d ? fig(own.d, '暗場驗證（鏡頭蓋）') : '');
+    const fig = (src, t, full) => {
+      const img = `<img src="${src}" alt="${p.id} ${t}" loading="lazy"${ar(S.ow, S.oh)}>`;
+      const link = full ? ` · <a href="${full}" target="_blank" rel="noopener">原尺寸 ${S.ow}×${S.oh}（${(own.fs / 1e6).toFixed(1)} MB）</a>` : '';
+      return `<figure>${full ? `<a href="${full}" target="_blank" rel="noopener" title="開啟原尺寸">${img}</a>` : img}<figcaption>${t} · ${p.id}${link}</figcaption></figure>`;
+    };
+    h += (own.l ? fig(own.l, '光照驗證拍到的畫面', own.f) : '') + (own.d ? fig(own.d, '暗場驗證（鏡頭蓋）') : '');
+    if (own.f) h += `<p class="hint">原尺寸 = 感光元件實際送出的像素格（${S.ow}×${S.oh}），沒有縮放、也沒有把合併的比例拉回；雙線性解拜爾、灰世界白平衡，只是預覽，不是色彩參考。</p>`;
   } else {
     h += `<p class="hint">${ids.length || cls.length ? '這一組沒有留下畫面。' : '這個類別還沒有留下畫面。'}早期通過的組原始幀已被驗證器刪除，會再重拍補上。</p>`;
   }
@@ -390,7 +428,7 @@ function renderMatrix() {
     h += `<tr><td class="c">${mh}×${mv}</td>`;
     for (const [ad] of ADS) {
       const cs = classesFor(ad, mh, mv).sort((a, b) => fmtW(b) - fmtW(a));
-      if (!cs.length) { h += `<td><span class="chip x" title="${why(ad, mh, mv)}">✗</span></td>`; continue; }
+      if (!cs.length || (mh === 3 && mv === 1)) { h += `<td><span class="chip x" title="${why(ad, mh, mv)}">✗</span></td>`; continue; }
       h += '<td>' + cs.map(c => {
         const t = classStats(c.key), n = t.lp + t.dp, m = t.ln + t.dn;
         const k = !m ? 'u' : (c.exp ? 'e' : 'p');

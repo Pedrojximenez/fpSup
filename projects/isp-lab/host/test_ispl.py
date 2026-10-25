@@ -84,6 +84,7 @@ class Image(Base):
 
     def test_load_log(self):
         self.assertEqual(ispl.parse_load_log('0A C504A080 00010000 ISPL.BIN\n'), 0xC504A080)
+        self.assertEqual(ispl.parse_load_log('0A C504A080 00000000 ISPC.BIN\n', 'ISPC.BIN'), 0xC504A080)
         with self.assertRaises(SystemExit):
             ispl.parse_load_log('0A C504A080 00010000 IMXL.BIN\n')
 
@@ -147,6 +148,23 @@ class Take(Base):
         self.assertEqual(sum(n for *_, n in held), 8 << 20)
         self.assertTrue(all(n <= 1 << 20 for *_, n in held))
 
+    def test_ctl_only_lends_nothing(self):
+        api = FakeApi()
+        saved = (ispl.SUP_FILE, ispl.BUILD_JSON)
+        ispl.SUP_FILE = 'ISPC.BIN'
+        try:
+            def heap(*a):
+                raise AssertionError('the control-only take must not touch the allocator')
+            a = types.SimpleNamespace(mb=32, keep_first=4, every_ms=500, start_ms=3000, rec_ms=2000,
+                                      focus=True, focus_ms=1500)
+            ispl.cmd_take(a, api, heap, lambda s: None)
+        finally:
+            ispl.SUP_FILE, ispl.BUILD_JSON = saved
+        cap = R.parse_cap(api.get(AT, R.CAP_BYTES))
+        self.assertEqual((cap['mode'], cap['nchunk'], cap['ctl'], cap['start_ms'], cap['rec_ms']),
+                         (R.MODES['sd'], 0, R.CTL['armed'], 3000, 2000))
+        self.assertFalse(ispl.ALLOC_KEEP.exists())
+
     def test_refuses_while_recording(self):
         api = FakeApi(recording=1)
         with self.assertRaises(SystemExit):
@@ -206,6 +224,29 @@ class Pull(Base):
         log = [{'seq': s, 't_us': 0, 'ncookie': 1, 'bytes': 1} for s in (1, 2, 4)]
         cap = {'n_rec': 3, 'n_skip': 0, 'n_full': 0, 'n_discard': 0, 'n_sd': 0, 'log_n': 3, 'log_max': 9}
         self.assertEqual(ispl.check_log(log, cap)['seq_gaps'], [2])
+
+
+class OwnCallfnBlock(unittest.TestCase):
+    """IMX410_RULES §71: callfn must not run from the shared putfile.CODE."""
+    def test_flush_runs_callfn_from_its_own_claim(self):
+        import sys
+        shared = 0x4400_0000
+        ran = []
+        fake_callfn = types.SimpleNamespace(CODE=shared, CODE_END=shared + 512)
+        fake_callfn.call = lambda fn, **k: (ran.append((fn, fake_callfn.CODE)), (True, 0))[1]
+        fake_cave = types.SimpleNamespace(claim=lambda name, n: {'ispl.callfn.code': 0x4500_0000}[name])
+        saved = {m: sys.modules.get(m) for m in ('callfn', 'cave')}
+        sys.modules.update(callfn=fake_callfn, cave=fake_cave)
+        try:
+            ispl.flush(); ispl.flush()
+        finally:
+            for m, v in saved.items():
+                if v is None:
+                    sys.modules.pop(m, None)
+                else:
+                    sys.modules[m] = v
+        self.assertEqual(ran, [(ispl.F_DCACHE, 0x4500_0000)] * 2)
+        self.assertEqual(fake_callfn.CODE_END - fake_callfn.CODE, ispl.CALLFN_CLAIM[1])
 
 
 if __name__ == '__main__':

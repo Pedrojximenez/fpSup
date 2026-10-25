@@ -112,7 +112,9 @@ def attrs_from_plan(p):
     cls = r.get('cls') or {'14': 16, '12': 17, '12fast': 17, '12fastW': 17}.get(p['key'], X.CLS.get(p['key']))
     hb, vb = r['mh'], r['mv']
     x0 = BASE_X0[hb] + (p['fmt_w'] - p['raster_w']) // 2
-    y0 = r.get('y0') or BASE_Y0[cls]
+    if p.get('line_w', p['fmt_w']) < p['fmt_w']:     # short line (§72): stay inside its real columns, x0 even (phase)
+        x0 = max(0, min(x0, p['line_w'] - p['raster_w']) // 2 * 2)
+    y0 = (r.get('y0') or BASE_Y0[cls]) + p.get('y_skip', 0)   # V3 window margin rows (readout_cfg V3_MARGIN, §76)
     sens = dict(p['sensor'])
     win = sens.get(0x0003, 0)
     ws = sens.get(0x0022, 0) | sens.get(0x0023, 0) << 8
@@ -121,7 +123,7 @@ def attrs_from_plan(p):
     a = dict(cls=cls, hbin=hb, vbin=vb, vadd=VADD[vb], bits=r['bits'], width=p['raster_w'], height=p['out_h'],
              hmax=p['soc']['hmax'], tail=p['soc']['hmax'], vmax=p['soc']['vmax'], f5c=2 * v016,
              x0=x0, x1=x0 + p['raster_w'], y0=y0, y1=y0 + p['out_h'], fpsn=int(round(p['fps'])),
-             win=win, wstart=ws, wh=wh, rows=p['out_h'], acq=0, crop=0, cont=0,
+             win=win, wstart=ws, wh=wh, rows=p['out_h'], acq=0, crop=0, cont=0, y_skip=p.get('y_skip', 0),
              # R68 +0x2C defect-table y offset, matched to hot pixels of the matrix classes (G7, captures/g7):
              # v2 needs 2 (as the stock acq 2x2 modes), v3 (skip-sampled 2 of 3, y type 1) needs 66 with y0 = 20
              dyo={2: 2, 3: 66}.get(vb, 0) if r.get('new') else 0)

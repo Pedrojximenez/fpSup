@@ -1,0 +1,309 @@
+{
+  "product": "Native QS Touch SUP, UI experiment",
+  "format": "FSB4",
+  "loader_services": 6,
+  "card": true,
+  "debug": false,
+  "animation": false,
+  "camera_settings_connected": false,
+  "firmware_sha256": "92a8ee993f6c3d66c251e88d45a2ccd5135c6cf7342717784321c2ed506e2fb4",
+  "on_camera_verified": false,
+  "physical_card_written": false,
+  "code_off": 64,
+  "code_bytes": 7184,
+  "ui_off": 7248,
+  "ui_bytes": 11986,
+  "state_off": 19264,
+  "state_capacity": 4096,
+  "ui": {
+    "objects": 13,
+    "bytes": 9102,
+    "shape": {
+      "header_minus_actual": {
+        "objects": 0,
+        "groups": 0,
+        "group_slots": [
+          0,
+          0,
+          0
+        ],
+        "clips": 0,
+        "clip_properties": 0,
+        "keys": 0,
+        "components": {
+          "changePropertyByControl": 0,
+          "appStateEvent": 0,
+          "objectBase": 0,
+          "keyEvent": 0,
+          "focusEvent": 0,
+          "appVariableEvent": 0,
+          "controlAppVariable": 0,
+          "controlAppState": 0,
+          "fill": 0,
+          "list": 0,
+          "controlValueEvent": 0,
+          "appVariableChangeEvent": 0,
+          "toggleVisible": 0,
+          "controlTimer": 0,
+          "controlValue": 0,
+          "layoutFlexBox": 0,
+          "controlAnimation": 0,
+          "drawImageLayout": 0,
+          "animationClip": 0,
+          "drawImage": 0,
+          "timerEvent": 0,
+          "drawText": 0,
+          "screenEvent": 0,
+          "drawRect": 0,
+          "flexBoxItem": 0,
+          "controlFocus": 0
+        }
+      },
+      "orphans": [],
+      "bad_child_counts": [],
+      "objects": {
+        "1": {
+          "id": 1,
+          "parent_id": 0,
+          "name": "QST_ROOT",
+          "child_count": 12,
+          "address": "0xC0000100"
+        },
+        "2": {
+          "id": 2,
+          "parent_id": 1,
+          "name": "QST_BACKGROUND",
+          "child_count": 0,
+          "address": "0xC0000204"
+        },
+        "3": {
+          "id": 3,
+          "parent_id": 1,
+          "name": "QST_HEADER",
+          "child_count": 0,
+          "address": "0xC00002D2"
+        },
+        "4": {
+          "id": 4,
+          "parent_id": 1,
+          "name": "QST_CELL0",
+          "child_count": 0,
+          "address": "0xC00004BE"
+        },
+        "5": {
+          "id": 5,
+          "parent_id": 1,
+          "name": "QST_CELL1",
+          "child_count": 0,
+          "address": "0xC0000805"
+        },
+        "6": {
+          "id": 6,
+          "parent_id": 1,
+          "name": "QST_CELL2",
+          "child_count": 0,
+          "address": "0xC0000B4C"
+        },
+        "7": {
+          "id": 7,
+          "parent_id": 1,
+          "name": "QST_CELL3",
+          "child_count": 0,
+          "address": "0xC0000E93"
+        },
+        "8": {
+          "id": 8,
+          "parent_id": 1,
+          "name": "QST_CELL4",
+          "child_count": 0,
+          "address": "0xC00011DA"
+        },
+        "9": {
+          "id": 9,
+          "parent_id": 1,
+          "name": "QST_CELL5",
+          "child_count": 0,
+          "address": "0xC0001521"
+        },
+        "10": {
+          "id": 10,
+          "parent_id": 1,
+          "name": "QST_CELL6",
+          "child_count": 0,
+          "address": "0xC0001868"
+        },
+        "11": {
+          "id": 11,
+          "parent_id": 1,
+          "name": "QST_CELL7",
+          "child_count": 0,
+          "address": "0xC0001BAF"
+        },
+        "12": {
+          "id": 12,
+          "parent_id": 1,
+          "name": "QST_HIGHLIGHT",
+          "child_count": 0,
+          "address": "0xC0001EF6"
+        },
+        "13": {
+          "id": 13,
+          "parent_id": 1,
+          "name": "QST_FOOTER",
+          "child_count": 0,
+          "address": "0xC0002040"
+        }
+      }
+    },
+    "pack_info": {
+      "pack": 9354,
+      "strings": [
+        "QST_ROOT",
+        "QST_Active",
+        "1",
+        "0",
+        "QST_BACKGROUND",
+        "QST_Bg",
+        "QST_HEADER",
+        "QS TOUCH TEST",
+        "QST_Status",
+        "BACK",
+        "QST_CELL0",
+        " ",
+        "QST_N0",
+        "QST_V0",
+        "QST_D0",
+        "QST_On0",
+        "QST_CELL1",
+        "QST_N1",
+        "QST_V1",
+        "QST_D1",
+        "QST_On1",
+        "QST_CELL2",
+        "QST_N2",
+        "QST_V2",
+        "QST_D2",
+        "QST_On2",
+        "QST_CELL3",
+        "QST_N3",
+        "QST_V3",
+        "QST_D3",
+        "QST_On3",
+        "QST_CELL4",
+        "QST_N4",
+        "QST_V4",
+        "QST_D4",
+        "QST_On4",
+        "QST_CELL5",
+        "QST_N5",
+        "QST_V5",
+        "QST_D5",
+        "QST_On5",
+        "QST_CELL6",
+        "QST_N6",
+        "QST_V6",
+        "QST_D6",
+        "QST_On6",
+        "QST_CELL7",
+        "QST_N7",
+        "QST_V7",
+        "QST_D7",
+        "QST_On7",
+        "QST_HIGHLIGHT",
+        "QST_Focus",
+        "QST_X",
+        "QST_Y",
+        "QST_FOOTER",
+        "-",
+        "UI values only",
+        "+",
+        "MORE",
+        "QST_Footer"
+      ],
+      "refs": 85,
+      "file": 11986,
+      "pages": {
+        "FT_QSTOUCH": 9102
+      }
+    }
+  },
+  "functions": {
+    "__aeabi_memclr4": 69,
+    "__aeabi_memclr": 109,
+    "__aeabi_memcpy4": 149,
+    "__aeabi_memcpy": 191,
+    "touch_observer": 233,
+    "fpui_register": 4711,
+    "qt_init": 1361,
+    "choose": 1639,
+    "touch_changed": 2087,
+    "fpui_watch": 1991,
+    "active_changed": 4395,
+    "open_page": 4493,
+    "close_page": 5127,
+    "render": 5279,
+    "qtt_tick": 5043,
+    "more": 6741,
+    "qt_step": 7067,
+    "qt_request": 6889,
+    "qt_layout": 6605,
+    "sup_entry": 619
+  },
+  "files": {
+    "fpSup/QSTOUCH.BIN": {
+      "bytes": 19252,
+      "sha256": "38196f1579936b6f5ec07fd80ae2ceab5e70d43c75914a057a6445ee02d651b2"
+    },
+    "AutoRun.txt": {
+      "bytes": 3253,
+      "sha256": "ee256bc56848caeb6aecfb9d8114530102c67bae768a09f67757528e64af59f9"
+    },
+    "fpSup/LOADER.BIN": {
+      "bytes": 18792,
+      "sha256": "59c5242c7c1c135f605a3c7ac0ed80c1380374e0bb3ef55d06155833947e83d2"
+    },
+    "fpSup/SUPMGR.BIN": {
+      "bytes": 4788,
+      "sha256": "a2d938aeb2a450083fa14392a5dcbf9b9076ff9b4d6b5e05a11eca609a3d17ee"
+    },
+    "fpSup/UI/FPSUP.BIN": {
+      "bytes": 132971,
+      "sha256": "2cef278c3958d8974f924e274b2b77b5b502bf5ab820d5903489e1d4a2857742"
+    },
+    "fpSup/UI/SUPMGR.BIN": {
+      "bytes": 115165,
+      "sha256": "404bee427d223b6ec94a402b40a9770297fde0c972f394b91873d84b2cd21dd4"
+    }
+  },
+  "source_hashes": {
+    "projects/qs-touch/sup/build.py": "9ebe556142f500dfa7bde4f982948432aae9fdf3130e1385137284fac3308ec5",
+    "projects/qs-touch/sup/page.py": "05590af204456a0b75e9d4da4bdb305a6f0c7fd6e51be95431e6d4f1fcac7e74",
+    "projects/qs-touch/sup/touch_sup.c": "c1f22dac9109d90588744cc3f7035bd073d2b96dc84998c1ce5e44f6f0dbb6f3",
+    "projects/qs-touch/core/qs_tiles.c": "2fc832f865637a4dca69e29b4b77ada37f436c3371fb776c98090b533303fee2",
+    "projects/qs-touch/core/qs_tiles.h": "ab93bcc3ecfeb2055144999a8f4810a5c2c9c985113f58eb59ff263840aadd65",
+    "projects/qs-touch/core/qs_tiles_touch.c": "2df633959024eb3d1eb7a550329e5daf7a50b5f1f1c71a7c9840cd465cbede74",
+    "projects/qs-touch/core/qs_tiles_touch.h": "e724593d25e4f5cf109a48e600771c37429244c929c6c295a4f3d7d621427cd9",
+    "projects/qs-touch/native/build_tiles.py": "92717b25adb825c9a3d5f9b42836a29eef09466995a47af683720a0b666b2def",
+    "projects/open-gate/build/res-qs/qs_page.py": "c22b986eb06ef05200944788bd4b99890a5bd90c87782d96af01dc5db0247801",
+    "research/ui/tools/native_ui_audit.py": "6a31e61c29a03819cd8f3619df14fa967fdeefcbf29cc323ed5cdaf1d4b6e9af",
+    "research/ui/tools/arm_text/elf_text.py": "e31174f7f044740371bb4a30cf11d12e81512ee01d0c5a35e10cf0c5237c8015",
+    "fpSup/lossless/menu/build_menu_candidate.py": "37780ff8d5ba8945d893b0d6767aa381e77a544eb0a53bdbc555ea5368ba0624",
+    "fpSup/fpsup-ui/fpsup_ui.c": "5dee11c203bedd7147020f3034a75f383c29b5406701ba67d77da9fdaa5a2a43",
+    "fpSup/loader-v4/build_v4.py": "a1154bd9e13783110ef4a63476feed878ac6a0e0f899366e434c6c201f574c42",
+    "fpSup/loader-v4/sloader4.h": "38c22a9160d0677231c3ca2756f89cd0b2d7fe36bbf1d53b71d198f688618071",
+    "fpSup/uishare/tab/build_fp4.py": "279457be2732159824d56018d5c5d4328f19825b12c666694e57e87b3c9a35d6",
+    "fpSup/uishare/tab/build_ft6.py": "75f3b0168b46d443635d532ed6641d392f5eb863c807c8f88f12977eaf220f4b",
+    "fpSup/uishare/tab/home4_page.py": "9f0bbf5745b556c0dc34a2e8d26774084d1e76e4c2b76e0f37177fd6f29b2db7",
+    "fpSup/uishare/tab/manage_page.py": "e7a3691c181e5b369aa2c985084c18500686e4b63327f4224be97327ff4b0784",
+    "fpSup/uishare/tab/ft6_page.py": "5efc4fa0a162013cba3941fb7cee1a532e30ff05d95c34f85d7d08f6c9bf8532",
+    "fpSup/loader-v4/sloader4.c": "5a690e1111190270c9382dc37f102e6b4a6e87b15bd1d368e34c729a986c8712",
+    "fpSup/loader-v4/sloader4_entry.S": "90013526abc898eac8f7169df5373598d83ae25df1943718c26e7023af5790c4",
+    "fpSup/loader-v4/supmgr.c": "67a51fd8e3f9e663ffe5bee3eb85cfd85baee5362ccd697d66cc5d4e4cd286d3",
+    "fpSup/loader-v4/fpsup_home.c": "a90998e05f555dee9fe09b9355ad8f8772772fee1359ffa13f30e41c72ef45de",
+    "fpSup/fp_usb_shell/v3/build_v3.py": "027030c0ed689d3f53fe0608b2fd02085483cab9b38b0a8ccf0d36466a1e4ef6",
+    "fpSup/fp_usb_shell/build_autorun.py": "dff5adc2ac79d2276b244773cfc2c641969828b119a9c708447ee2c6bc8977ae",
+    "fpSup/fp_usb_shell/asm/loader.S": "838186545d1e4d525b569f9d1b3c37a3a8a8f7bd177a15b1d4c5d98719a55c4e",
+    "fpSup/fp_usb_shell/asm/stage2.S": "4f446ace9ffadef27c8cabe59d86c2fa08f5ec0cbf53561b44651a000be9d2e5",
+    "fpSup/fp_usb_shell/asm/entries.S": "6046ce8a1a8a506784f61def3637c0fbfaaf31cb4c6c9a7f923d4497bf305c95"
+  }
+}

@@ -53,7 +53,7 @@ MAXDESC = 0xC2F2E750
 STUBS = {'VOL_LOOKUP': 0xC0644B68, 'DEV_WRITE': 0xC01EB790, 'STOCK_CB': 0xC03A55D0,
          'FLG_CREATE': 0xC00169EC, 'FLG_SET': 0xC0016B9C, 'FLG_WAIT': 0xC0016C08,
          'REC_STATE': 0xC03A52D0, 'LOG_A': 0xC0019DC0, 'LOG_B': 0xC001A048,
-         'SHELL_EXEC': 0xC03D9C20}
+         'SHELL_EXEC': 0xC03D9C20, 'PUSH': 0x438F0000}     # PUSH: the engine stand-in (another sup's)
 THUMB_STUBS = {'VOL_LOOKUP', 'DEV_WRITE'}
 SD = dict(acq=0xC065F021, add=0xC065F061, ckpt=0xC065EFE1, rb=0xC065F001, rel=0xC065F269)
 SLOT = dict(cb=0x4834, acq=0x4838, add=0x483C, ckpt=0x4840, rb=0x4844, rel=0x4848)
@@ -78,6 +78,7 @@ class Cam(V4.Camera):
         self._stale = ctypes.create_string_buffer(b'\xEE' * DATA_SIZE, DATA_SIZE)
         mu.mem_map_ptr(DATA + CACHED, DATA_SIZE, UC_PROT_ALL, self._stale)
         mu.mem_map(CAP, CAP_SIZE)
+        mu.mem_map(0x30180000, 0x10000)                       # display DMA channel registers
         mu.mem_write(CAP, bytes([GUARD]) * CAP_SIZE)
         for k, a in STUBS.items():
             self.by_addr[a] = k
@@ -85,7 +86,8 @@ class Cam(V4.Camera):
         self.rnd = random.Random(seed)
         self.fail_write = fail_write
         self.disk, self.writes, self.cookies, self.shell = {}, 0, [], []
-        self.switch = self.on_cookie = None
+        self.switch = self.on_cookie = self.on_shell = None
+        self.pushes, self.push_ret = [], 0
 
     def _hook(self, mu, addr, size, _):
         name = self.by_addr.get(addr)
@@ -112,8 +114,15 @@ class Cam(V4.Camera):
             return self._ret(0)
         if name == 'SHELL_EXEC':
             assert r0 == 0xC3756904, 'not the console context'
-            self.shell.append((self.cstr(r1), self.now))
+            line = self.cstr(r1)
+            self.shell.append((line, self.now))
+            if self.on_shell: self.on_shell(line)
             return self._ret(0)
+        if name == 'PUSH':
+            f = struct.unpack('<19I', self.mu.mem_read(r0, 76))
+            self.pushes.append(dict(zip(('mode', 'source', 'frame_no', 'w', 'h', 'fmt', 'stride', 'flags',
+                                         'aux0', 'aux1', 'nseg'), f[:11]), segs=list(zip(f[11::2], f[12::2]))))
+            return self._ret(self.push_ret)
         if name in ('REC_STATE', 'LOG_A', 'LOG_B'):
             return self._ret(0)
         if name == 'DEV_WRITE':
@@ -153,21 +162,23 @@ class Cam(V4.Camera):
         self.call(self.entry['wr_service'], r0=self.state_addr, thumb=True, sp=V3.STACK - 0x9004)
 
 
-def build_sup(defines=()):
-    key = tuple(defines)
+def build_sup(defines=(), ctl_only=False):
+    key = (tuple(defines), ctl_only)
     if key not in _BUILDS:
-        _BUILDS[key] = IB.build(defines)
+        _BUILDS[key] = IB.build(defines, ctl_only=ctl_only)
     return _BUILDS[key]
 
 
 class Take:
-    def __init__(self, seed=0, frames=120, fail_write=None, sizes=None, defines=(), cached_frames=False):
-        self.sup, self.info = build_sup(defines)
-        cam = self.cam = Cam(*V4.card(('ISPL.BIN', self.sup)), seed, fail_write)
+    def __init__(self, seed=0, frames=120, fail_write=None, sizes=None, defines=(), cached_frames=False,
+                 ctl_only=False):
+        self.sup, self.info = build_sup(defines, ctl_only) if ctl_only else build_sup(defines)
+        fname = 'ISPC.BIN' if ctl_only else 'ISPL.BIN'
+        cam = self.cam = Cam(*V4.card((fname, self.sup)), seed, fail_write)
         cam.boot()
         blocks = V4.blocks(cam)
-        assert 'ISPL.BIN' in blocks, cam.loadlog()
-        block = blocks['ISPL.BIN']
+        assert fname in blocks, cam.loadlog()
+        block = blocks[fname]
         cached = block + 0x80000000 if 0x40000000 <= block < 0x80000000 else block
         inner = cached + self.info['inner_at']
         cam.state_addr = cached + self.info['state_at']
@@ -439,11 +450,31 @@ class LogTests(unittest.TestCase):
         self.assertEqual(t.cap()['log_n'], 0)
 
 
+RECSTATE = 0xC3757F30
+START = ['recstate ena', 'recstate init', 'key MOVON', 'recstate movrecstwai']
+STOP = ['key MOVON', 'recstate movsavewai']
+
+
 class ControlTests(unittest.TestCase):
-    def setup(self, start_ms=100, rec_ms=1000):
-        t = Take(0, frames=1)
+    def setup(self, start_ms=100, rec_ms=1000, starts=True, saves_on=2, ctl_only=False):
+        """starts: the first MOVON sets recstate +6.  saves_on: the n-th MOVON
+        sets +7 (None: never)."""
+        t = Take(0, frames=1, ctl_only=ctl_only)
         t.arm('discard')
         c = t.cam
+        c.mu.mem_write(RECSTATE, bytes(8))
+        presses = [0]
+
+        def on_shell(line):
+            if line == 'recstate init':
+                c.mu.mem_write(RECSTATE + 5, bytes(3))
+            if line == 'key MOVON':
+                presses[0] += 1
+                if presses[0] == 1 and starts:
+                    c.mu.mem_write(RECSTATE + 6, b'\1')
+                if presses[0] == saves_on:
+                    c.mu.mem_write(RECSTATE + 7, b'\1')
+        c.on_shell = on_shell
         c.put(t.cap_at + R.OFF['start_ms'], start_ms); c.put(t.cap_at + R.OFF['rec_ms'], rec_ms)
         c.put(t.cap_at + R.OFF['ctl'], R.CTL['armed'])          # last, as the host does
         return t
@@ -453,7 +484,10 @@ class ControlTests(unittest.TestCase):
         t.cam.call(t.cam.entry['ix_ctl_step'], r0=t.cam.state_addr, thumb=True, sp=V3.STACK - 0x9004)
         return t.cap()
 
-    def test_start_then_stop_on_time(self):
+    def lines(self, t):
+        return [l for l, _ in t.cam.shell]
+
+    def test_the_firmware_script_on_time(self):
         t = self.setup(start_ms=100, rec_ms=1000)
         base = 5_000_000
         self.assertEqual(self.step(t, base)['ctl'], R.CTL['armed'])        # t_arm stamped
@@ -461,15 +495,38 @@ class ControlTests(unittest.TestCase):
         self.assertEqual(t.cam.shell, [])
         cap = self.step(t, base + 120_000)
         self.assertEqual(cap['ctl'], R.CTL['rec'])
-        self.assertEqual([l for l, _ in t.cam.shell], ['key MOVON', 'key MOVOFF'])
+        self.assertEqual(self.lines(t), START)
+        self.assertNotIn('key MOVOFF', self.lines(t))                 # the firmware's script never sends it
         self.assertEqual(self.step(t, base + 700_000)['ctl'], R.CTL['rec'])
         cap = self.step(t, base + 1_200_000)
         self.assertEqual(cap['ctl'], R.CTL['done'])
-        self.assertEqual([l for l, _ in t.cam.shell], ['key MOVON', 'key MOVOFF'] * 2)
-        self.assertEqual(cap['n_press'], 2)
+        self.assertEqual(self.lines(t), START + STOP + ['recstate disa'])
+        self.assertEqual((cap['n_press'], cap['rs_started'], cap['rs_saved']), (2, 1, 1))
         self.assertGreaterEqual(cap['t_stop'] - cap['t_rec'], 1_000_000)
         self.step(t, base + 9_000_000)
-        self.assertEqual(len(t.cam.shell), 4, 'pressed again after done')
+        self.assertEqual(len(t.cam.shell), 7, 'ran again after done')
+
+    def test_no_start_no_second_press(self):
+        t = self.setup(starts=False, saves_on=None)
+        self.step(t, 1_000_000); cap = self.step(t, 2_000_000)
+        self.assertEqual(cap['ctl'], R.CTL['fail_start'])
+        self.assertEqual(self.lines(t), START + ['recstate disa'])
+        for now in (5_000_000, 60_000_000):
+            self.step(t, now)
+        self.assertEqual(self.lines(t).count('key MOVON'), 1, 'pressed REC on a camera that never started')
+
+    def test_stop_is_retried(self):
+        t = self.setup(saves_on=3)
+        self.step(t, 1_000_000); self.step(t, 2_000_000); cap = self.step(t, 9_000_000)
+        self.assertEqual(cap['ctl'], R.CTL['done'])
+        self.assertEqual(self.lines(t), START + STOP * 2 + ['recstate disa'])
+
+    def test_stop_gives_up_after_three(self):
+        t = self.setup(saves_on=None)
+        self.step(t, 1_000_000); self.step(t, 2_000_000); cap = self.step(t, 9_000_000)
+        self.assertEqual(cap['ctl'], R.CTL['fail_stop'])
+        self.assertEqual(self.lines(t), START + STOP * 3 + ['recstate disa'])
+        self.assertEqual(cap['ctl_line'], 6)
 
     def test_cancel_before_start(self):
         t = self.setup(start_ms=100)
@@ -490,6 +547,121 @@ class ControlTests(unittest.TestCase):
         self.step(t, base)
         self.step(t, (base + 150_000) & 0xFFFFFFFF)
         self.assertEqual(t.cap()['ctl'], R.CTL['rec'])
+
+
+LV_DESC, LV_CHSEL = 0xC30255B4, 0xC31DF8D8
+LV_REG = {0: 0x301832E8, 3: 0x301835E8}                # [LV_CHSEL] -> channel 2 / 5's slot register
+LV_W, LV_H, LV_N = 1620, 911, 4
+LV_SLOT = [0x4B000000 + i * 0x300000 for i in range(LV_N)]
+
+
+class LvTests(unittest.TestCase):
+    """The LV sampler (PUSH_CALLERS §1): the last slot the display DMA finished
+    (register byte1), every lv_every_us, handed to the engine in mode 0; nothing waits."""
+    def setup(self, every_us=250_000, lag=0, chsel=0, reg=0x20102, n=LV_N, w=LV_W, push=True, lv_max=0):
+        t = Take(0, frames=1)
+        t.arm('discard')
+        c = t.cam
+        desc = [0] * 32
+        desc[3], desc[4], desc[8] = w, LV_H, n
+        for i, a in enumerate(LV_SLOT):
+            desc[9 + i] = (a - 0x40000000) // 4
+        c.mu.mem_write(LV_DESC, struct.pack('<32I', *desc))
+        c.put(LV_CHSEL, chsel)
+        c.put(LV_REG.get(chsel, 0x301837E8), reg)
+        for k, v in (('lv_every_us', every_us), ('lv_lag', lag), ('lv_max', lv_max),
+                     ('lv_push', STUBS['PUSH'] if push else 0)):
+            c.put(t.cap_at + R.OFF[k], v)
+        return t
+
+    step = ControlTests.step
+
+    def test_pushes_the_slot_before_the_current_one(self):
+        t = self.setup(reg=0x20102)              # writing 2, finished 1, on screen 2 (measured 10-24)
+        cap = self.step(t, 1_000_000)
+        self.assertEqual(len(t.cam.pushes), 1)
+        p = t.cam.pushes[0]
+        self.assertEqual((p['mode'], p['source'], p['fmt'], p['w'], p['h'], p['stride'], p['nseg']),
+                         (0, 1, 1, LV_W, LV_H, 2 * LV_W, 1))
+        self.assertEqual(p['segs'][0], (LV_SLOT[1], 2 * LV_W * LV_H))
+        self.assertEqual((p['frame_no'], p['aux0'], p['aux1'], p['flags']), (1, 0x20102, 2, 0))
+        self.assertEqual((cap['lv_n_sent'], cap['lv_last_addr']), (1, LV_SLOT[1]))
+
+    def test_slot_zero_wraps_to_the_last(self):
+        t = self.setup(reg=0x10000, lag=2)        # finished 0, one older = 3
+        self.step(t, 1_000_000)
+        self.assertEqual(t.cam.pushes[0]['segs'][0][0], LV_SLOT[3])
+
+    def test_hdmi_channel_and_its_wider_mask(self):
+        t = self.setup(chsel=3, reg=0x20101)               # channel 5's register: finished 1
+        self.step(t, 1_000_000)
+        p = t.cam.pushes[0]
+        self.assertEqual((p['aux1'], p['segs'][0][0]), (5, LV_SLOT[1]))
+
+    def test_lag(self):
+        t = self.setup(reg=0x30203, lag=2)        # finished 2, one older = 1
+        self.step(t, 1_000_000)
+        self.assertEqual(t.cam.pushes[0]['segs'][0][0], LV_SLOT[1])
+
+    def test_interval_and_the_cap(self):
+        t = self.setup(every_us=250_000, lv_max=3)
+        for now in range(1_000_000, 3_000_000, 20_000):     # the task's 20 ms steps for 2 s
+            self.step(t, now)
+        self.assertEqual(len(t.cam.pushes), 3)
+        t = self.setup(every_us=250_000)
+        for now in range(1_000_000, 3_000_000, 20_000):
+            self.step(t, now)
+        self.assertEqual(len(t.cam.pushes), 8)
+
+    def test_busy_engine_is_counted_not_waited(self):
+        t = self.setup(every_us=20_000)
+        t.cam.push_ret = 1
+        for now in (1_000_000, 1_020_000):
+            cap = self.step(t, now)
+        self.assertEqual((cap['lv_n_sent'], cap['lv_n_skip'], cap['lv_n_err']), (0, 2, 0))
+        t.cam.push_ret = 7
+        cap = self.step(t, 1_040_000)
+        self.assertEqual(cap['lv_n_err'], 1)
+
+    def test_off_without_an_engine(self):
+        t = self.setup(push=False)
+        for now in (1_000_000, 5_000_000):
+            self.step(t, now)
+        self.assertEqual(t.cam.pushes, [])
+
+    def test_bad_descriptor_pushes_nothing(self):
+        for kw in (dict(n=0), dict(n=9), dict(w=0), dict(w=8000), dict(lag=5), dict(reg=0x50400)):
+            t = self.setup(**kw)
+            cap = self.step(t, 1_000_000)
+            self.assertEqual(t.cam.pushes, [], kw)
+            self.assertEqual(cap['lv_n_bad'], 1, kw)
+
+    def test_recording_flag(self):
+        t = self.setup()
+        t.cam.put(t.cap_at + R.OFF['rec_ms'], 3_000_000)   # 50 min; x1000 still fits u32
+        t.cam.put(t.cap_at + R.OFF['t_rec'], 1)
+        t.cam.put(t.cap_at + R.OFF['ctl'], R.CTL['rec'])
+        self.step(t, 1_000_000)
+        self.assertEqual(t.cam.pushes[0]['flags'] & 1, 1)
+        self.assertEqual(t.cam.shell, [], 'the sampler pressed something')
+
+
+class CtlOnlyTests(unittest.TestCase):
+    """ISPC.BIN: the control task alone (RESEARCH_PLAN §7 step 1)."""
+    def test_loads_without_touching_the_writer(self):
+        t = Take(0, frames=1, ctl_only=True)
+        c = t.cam
+        for a, h in IB.SITES.items():
+            self.assertEqual(bytes(c.mu.mem_read(a, 8)).hex(), h, f'0x{a:08X} hooked by the control-only build')
+        self.assertEqual(t.cap()['magic'], R.CAP_MAGIC)
+        c.power_off()
+
+    def test_runs_the_firmware_script(self):
+        t = ControlTests.setup(self, ctl_only=True)
+        ControlTests.step(self, t, 1_000_000); ControlTests.step(self, t, 2_000_000)
+        cap = ControlTests.step(self, t, 9_000_000)
+        self.assertEqual(cap['ctl'], R.CTL['done'])
+        self.assertEqual([l for l, _ in t.cam.shell], START + STOP + ['recstate disa'])
 
 
 class MutationTests(unittest.TestCase):
@@ -521,7 +693,13 @@ class MutationTests(unittest.TestCase):
         self.assertTrue(self.failing('IX_MUTANT_KEEP_ALL', 'test_first_k_then_nothing', KeepTests))
 
     def test_no_stop_is_caught(self):
-        self.assertTrue(self.failing('IX_MUTANT_NO_STOP', 'test_start_then_stop_on_time', ControlTests))
+        self.assertTrue(self.failing('IX_MUTANT_NO_STOP', 'test_the_firmware_script_on_time', ControlTests))
+
+    def test_no_start_check_is_caught(self):
+        self.assertTrue(self.failing('IX_MUTANT_NO_START_CHECK', 'test_no_start_no_second_press', ControlTests))
+
+    def test_lv_current_slot_is_caught(self):
+        self.assertTrue(self.failing('IX_MUTANT_LV_CURRENT', 'test_pushes_the_slot_before_the_current_one', LvTests))
 
 
 if __name__ == '__main__':

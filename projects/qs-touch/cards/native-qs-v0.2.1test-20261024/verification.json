@@ -1,0 +1,52 @@
+{
+  "checks": [
+    {
+      "name": "test_sup.py",
+      "passed": true,
+      "output": "test_exact_boot_adds_no_demo_page_and_keeps_real_setting_owners (__main__.NativeSupTests) ... ok\ntest_idle_and_interaction_power_off_restore_all_three_words (__main__.NativeSupTests) ... ok\ntest_inactive_touch_passes_through_and_no_demo_values_are_committed (__main__.NativeSupTests) ... ok\ntest_sparse_arm_stream_preserves_original_coordinates (__main__.NativeSupTests) ... ok\ntest_unknown_touch_owner_is_left_alone (__main__.NativeSupTests) ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 39.447s\n\nOK\n"
+    },
+    {
+      "name": "test_settings.py",
+      "passed": true,
+      "output": "test_change_reaches_original_owner_and_returns_real_readback (__main__.NativeSettingsTests) ... ok\ntest_out_of_range_and_missing_variable_never_write (__main__.NativeSettingsTests) ... ok\n\n----------------------------------------------------------------------\nRan 2 tests in 0.237s\n\nOK\n"
+    },
+    {
+      "name": "test_page.py",
+      "passed": true,
+      "output": "test_actual_native_variables_are_two_way_and_keep_native_subscribers (__main__.PageTests) ... ok\ntest_original_parser_reads_complete_reconstructed_native_qs (__main__.PageTests) ... ok\ntest_res_custom_edits_and_other_native_tiles_are_preserved (__main__.PageTests) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 30.720s\n\nOK\n"
+    },
+    {
+      "name": "missing_touch_journal",
+      "detected": true,
+      "test": "NativeSupTests.test_idle_and_interaction_power_off_restore_all_three_words",
+      "output": "test_idle_and_interaction_power_off_restore_all_three_words (__main__.NativeSupTests) ... FAIL\n\n======================================================================\nFAIL: test_idle_and_interaction_power_off_restore_all_three_words (__main__.NativeSupTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/dido/Developer.localized/SIGMAfp_re/projects/qs-touch/real/test_sup.py\", line 177, in test_idle_and_interaction_power_off_restore_all_three_words\n    self.assertEqual(cam.w(TOUCH),STOCK_TOUCH)\nAssertionError: 3305403925 != 3226546592\n\n----------------------------------------------------------------------\nRan 1 test in 5.978s\n\nFAILED (failures=1)\n"
+    },
+    {
+      "name": "unknown_touch_owner",
+      "detected": true,
+      "test": "NativeSupTests.test_unknown_touch_owner_is_left_alone",
+      "output": "test_unknown_touch_owner_is_left_alone (__main__.NativeSupTests) ... FAIL\n\n======================================================================\nFAIL: test_unknown_touch_owner_is_left_alone (__main__.NativeSupTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/dido/Developer.localized/SIGMAfp_re/projects/qs-touch/real/test_sup.py\", line 169, in test_unknown_touch_owner_is_left_alone\n    self.assertNotIn('ZQS.BIN',T.blocks(cam));self.assertEqual(cam.w(TOUCH),0x12345678)\nAssertionError: 'ZQS.BIN' unexpectedly found in {'SUPMGR.BIN': 3305273024, 'ZQS.BIN': 3305403840}\n\n----------------------------------------------------------------------\nRan 1 test in 6.350s\n\nFAILED (failures=1)\n"
+    },
+    {
+      "name": "wrong_original_record_position",
+      "detected": true,
+      "test": "NativeSupTests.test_sparse_arm_stream_preserves_original_coordinates",
+      "output": "test_sparse_arm_stream_preserves_original_coordinates (__main__.NativeSupTests) ... FAIL\n\n======================================================================\nFAIL: test_sparse_arm_stream_preserves_original_coordinates (__main__.NativeSupTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/dido/Developer.localized/SIGMAfp_re/projects/qs-touch/real/test_sup.py\", line 141, in test_sparse_arm_stream_preserves_original_coordinates\n    self.assertEqual(cam.w(READER+4),pos+len(patch['old']))\nAssertionError: 10261036 != 10259175\n\n----------------------------------------------------------------------\nRan 1 test in 8.746s\n\nFAILED (failures=1)\n"
+    }
+  ],
+  "skipped": 0,
+  "physical_touch_verified": false,
+  "camera_verified": false,
+  "limitations": [
+    "Native NBU construction, GUI scheduling, heap/OS/file services use explicit substitutes",
+    "No display painting, camera cache lifetime, physical touch, hardware timing or recording test",
+    "First native candidate has limited labels/features; see README.md"
+  ],
+  "harness_sources": {
+    "projects/qs-touch/real/verify.py": "ad54309d302d9487dbc5e3fc91046f7a47fef78f759b7b7ed45015b9478e5dea",
+    "projects/qs-touch/real/test_sup.py": "c5d2667b40e3e38338d1b8e9fcdc73bb7afd1c13be695b9f661adea841e11de5",
+    "projects/qs-touch/real/test_settings.py": "be93947f8ca176e36363234c8afcee23de11aa2bf1a7d8f90f12c2a8d6bbce41",
+    "projects/qs-touch/real/test_page.py": "6bc2bcccc784323f2ed55fafd70a9452bd9fddc469f5085a853f559cdd87b9d4",
+    "projects/qs-touch/real/README.md": "3d694af2e2e84cd99dce55f4beed4e2b371394ea78c777db9c42eac39d047ecb"
+  }
+}

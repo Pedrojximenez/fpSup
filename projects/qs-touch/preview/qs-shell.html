@@ -32,6 +32,7 @@
     #fp-touch-qs .backdrop { position: absolute; inset: 0; pointer-events: none; }
     #fp-touch-qs .qs-content { position: absolute; inset: 0; }
     #fp-touch-qs .panel.settle { transition: transform 100ms cubic-bezier(.2,.75,.2,1); }
+    #fp-touch-qs[data-motion="none"] .camera * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
     #fp-touch-qs .header { position: absolute; inset: 0 2% auto; height: 16.1%; display: flex;
       align-items: center; justify-content: space-between; gap: 3px; }
     #fp-touch-qs .title { margin: 0; font-size: clamp(13px,2.8cqw,22px); font-weight: 400; }

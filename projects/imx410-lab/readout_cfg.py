@@ -49,6 +49,15 @@ V2 = [(0x0005, 0x03), (0x001C, 0x03), (0x0717, 0x04), (0x071E, 0x05), (0x0720, 0
 V3 = [(0x0016, 0x32), (0x001C, 0x02), (0x0058, 0x70), (0x0717, 0x06), (0x071E, 0x03), (0x0722, 0x02), (0x0723, 0x02),
       (0x0724, 0x04), (0x0725, 0x04), (0x0728, 0x3F), (0x072A, 0xA0), (0x072B, 0x02), (0x072C, 0x06), (0x0734, 0x03),
       (0x0737, 0x02), (0x0738, 0x02), (0x0739, 0x04), (0x073A, 0x04), (0x0792, 0x30), (0x0793, 0x03), (0x079C, 0x3D)]   # mode 139 Family B (L4)
+V3_WIN = [(0x08B6, 0x01), (0x08B7, 0x68)]   # full_v1 (IMX410_RULES §72): a V3 WINDOW's first 14 output rows go unexposed
+                                           # whenever the frame is stretched (AE in a dim room). These two make the sensor
+                                           # skip the window's first 16 output rows (content moves up 16, measured), so the
+                                           # window is read 16 rows taller and starts 16 * mv sensor rows higher: same rows
+                                           # out, same first image row. Full height must not have them (1390 -> 1374 lines).
+V3_SKIP = 16
+V3_MARGIN = int(__import__("os").environ.get("V3_MARGIN", 16))        # >= the 14 unexposed rows, and 16 * 3 = 48 sensor rows keeps the window start = 1 mod 4
+V3_SKIP_ON = False   # withdrawn: with it the unexposed band moves INTO the frame (linearity VMAX points: rows 605-739,
+                     # 20-206, 359-479 under-exposed) -- the band is not a top-row defect but a V3-window timing fault
 V6 = [(0x0005, 0x01), (0x001C, 0x02), (0x0058, 0x70), (0x0716, 0x00), (0x0717, 0x00), (0x071E, 0x00), (0x0720, 0x00),
       (0x0727, 0x00), (0x0728, 0x00), (0x072A, 0x00), (0x072B, 0x00), (0x072C, 0x00), (0x0734, 0x00), (0x0735, 0x00),
       (0x0790, 0x00), (0x0792, 0x00), (0x0793, 0x00), (0x0794, 0x00), (0x0795, 0x00), (0x0796, 0x00), (0x0797, 0x00),
@@ -167,10 +176,31 @@ def validated():
         return {}
 
 
+V3_FULL_SKIP = 28    # §76: a new-V3 full-height frame has 14 good rows, then 14 unexposed rows the sensor inserts (every
+                     # frame, any exposure; content continues across them), then the rest -- start the ISP below both
+
+
 def full_rows(key):
     """output rows of a full-height plan on readout `key` (even)"""
     r = BY_KEY[key]
-    return r.get('rows_full') or int(SENSOR_H / r['mv']) // 2 * 2
+    n = r.get('rows_full') or int(SENSOR_H / r['mv']) // 2 * 2
+    return n - V3_FULL_SKIP if r['mv'] == 3 and r.get('new') else n
+
+
+LINE_SHORT = 16    # full_v1 (IMX410_RULES §72, xoff.py): a 1x1 format word narrower than the full 6064 sends a line
+                   # 16 columns shorter than its width (4176 -> 4160, 4016 -> 4000, 5073 -> 5057); captured from x0 = 8,
+                   # the last 24 raster columns were pad (normal AD) or garbage (fast AD). x0 = 0, 4160: no pad, same phase
+
+
+def line_width(r, fmt):
+    """columns of real image a format word's line carries"""
+    return fmt - LINE_SHORT if r['mh'] == 1 and fmt < 6000 else fmt
+
+
+def max_width(r):
+    """widest raster (multiple of 16) readout r can record"""
+    lw = line_width(r, max(r['fmt']))
+    return lw // 16 * 16
 
 
 def config_id(key, cw, ch, ow, oh, fps):
@@ -182,13 +212,18 @@ def plan(key, cw, ch, ow, oh, fps=None, v016=None, hmax=None, hdr=0):
     raise ValueError if the rules say it cannot be done."""
     r = BY_KEY[key]
     sw, sh = cw / r['mh'], ch / r['mv']                 # crop on the sensor output grid
-    fmt = min((w for w in r['fmt'] if w >= sw - 1e-6), default=None)
-    if fmt is None and max(r['fmt']) >= sw * 0.995:     # within 0.5 %: trim the crop to the format (OG on 3x3)
-        fmt = max(r['fmt']); sw = fmt
+    fmt = min((w for w in r['fmt'] if line_width(r, w) >= sw - 1e-6), default=None)
+    if fmt is None and line_width(r, max(r['fmt'])) >= sw * 0.995:   # within 0.5 %: trim the crop to the format (OG on 3x3)
+        fmt = max(r['fmt']); sw = line_width(r, fmt)
     if fmt is None:
         raise ValueError(f'crop {cw} wider than {key} formats')
     full_h = SENSOR_H / r['mv']
     windowed = sh < full_h - 2
+    if r['mh'] == 3 and r['mv'] == 1:
+        # full_v1 (IMX410_RULES §72): 12h3 / f12h3 deliver no red or blue -- R and B at black (R/G 0.0-0.26 vs 0.59 on
+        # 1x1, full height too); with the sensor window half the frame also sits up to ~120 DN below black. Format 2F
+        # (native 3x3) is fine with the V3 (3x3) and V2 (h3v2) groups; with no vertical group it is not. Not usable yet.
+        raise ValueError(f'{key}: 3:1 horizontal with no vertical merge gives no red / blue (format 2F needs a vertical group)')
     # full height: the readout delivers rows_full rows, which can be more than 4040/v (1x1 4042, new V3 1358 = 4074
     # sensor rows) -- checked against rows_out below; a window is bounded by its crop
     if ow > sw + 1e-6 or (windowed and oh > sh + 1e-6):
@@ -199,10 +234,15 @@ def plan(key, cw, ch, ow, oh, fps=None, v016=None, hmax=None, hdr=0):
     hm = hmax or r['hmin']
     if hm < r['hmin']:
         raise ValueError(f'HMAX {hm} below the floor {r["hmin"]}')
-    rows_out = 2 * H if windowed else (r.get('rows_full') or int(round(full_h)))
+    rows_out = 2 * H if windowed else full_rows(key)
     if oh > rows_out:
         raise ValueError(f'{key}: {oh} output rows > {rows_out} the readout delivers')
     lines = (rows_out if windowed else int(round(full_h))) + r['over']   # the sensor still sends the empty rows below rows_full
+    # new V3 windows: the window's first 14 output rows go unexposed now and then (a sensor-internal cycle not locked to
+    # the frame, §72/§76). Read V3_MARGIN more rows above the window and let the ISP start below them: the bad rows land
+    # in the margin, the output keeps its planned rows and first row. Costs V3_MARGIN lines (~1 % rolling).
+    y_skip = (V3_MARGIN if windowed else V3_FULL_SKIP) if r['mv'] == 3 and r.get('new') else 0
+    lines += y_skip if windowed else 0
     b = r['v016'] if v016 is None else v016
     if b < r['v016'] and (r['v016_min'] is None or b < r['v016_min']):
         raise ValueError(f'0016={b} below the tested minimum for {key}')
@@ -218,7 +258,8 @@ def plan(key, cw, ch, ow, oh, fps=None, v016=None, hmax=None, hdr=0):
     else:
         vmax = vmin
     rx_w = math.ceil(sw / 12) * 12
-    raster_w = min(fmt, math.ceil(sw / 16) * 16)              # recorded raster (BUFA/ISP widths are multiples of 16)
+    lw = line_width(r, fmt)
+    raster_w = min(fmt if lw == fmt else lw // 16 * 16, math.ceil(sw / 16) * 16)   # recorded raster (BUFA/ISP: x16)
     sensor = list(r.get('extra', [])) + [(0x0001, r['fmt'][fmt])]   # matrix classes: their register groups first
     if windowed:
         # window start is in SENSOR rows for every merge class and the window spans 2H output rows = 2H*mv sensor rows,
@@ -228,7 +269,15 @@ def plan(key, cw, ch, ow, oh, fps=None, v016=None, hmax=None, hdr=0):
         st = min((raw + k for k in range(-2, 3) if (raw + k) % 4 == 1), key=lambda x: (abs(x - raw), x))
         if st < WIN_TOP or st + 2 * H * r['mv'] > WIN_BOTTOM:
             raise ValueError(f'{key}: window rows {st}..{st + 2 * H * r["mv"]} outside the readable {WIN_TOP}..{WIN_BOTTOM}')
-        sensor += [(0x0003, 1), (0x0022, st & 0xFF), (0x0023, st >> 8), (0x0024, H & 0xFF), (0x0025, H >> 8)]
+        Hr = H + y_skip // 2; st -= y_skip * r['mv']                       # 16 rows = 48 sensor rows: still = 1 mod 4
+        if st < WIN_TOP:
+            raise ValueError(f'{key}: window rows {st}.. above the readable {WIN_TOP} (V3 margin)')
+        if r['mv'] == 3 and r.get('new') and V3_SKIP_ON:
+            Hr = H + V3_SKIP // 2; st -= V3_SKIP * r['mv']                 # 48 sensor rows: still = 1 mod 4
+            if st < WIN_TOP:
+                raise ValueError(f'{key}: window rows {st}.. above the readable {WIN_TOP} (V3 skip)')
+            sensor += V3_WIN
+        sensor += [(0x0003, 1), (0x0022, st & 0xFF), (0x0023, st >> 8), (0x0024, Hr & 0xFF), (0x0025, Hr >> 8)]
     elif not any(a == 0x0003 for a, _ in sensor):
         sensor.append((0x0003, 0))                      # full height: switch the donor's window off (HDR r1: 12 / 14
                                                         # full-height plans read only the donor's 2076 rows)
@@ -242,7 +291,7 @@ def plan(key, cw, ch, ow, oh, fps=None, v016=None, hmax=None, hdr=0):
         sensor = [(a, v) for a, v in sensor if a not in (0x0242, 0x0738)]
         sensor += [(0x0242, regs.get(0x0242, 0) | 1), (0x0738, hdr)]
     return dict(id=config_id(key, cw, ch, ow, oh, fps or 0) + (f'+hdr{hdr:02X}' if hdr else ''), key=key, hdr=hdr, name=r['name'], ev=r['ev'], donor=r['donor'], bits=r['bits'],
-                merge=f"{r['mh']}x{r['mv']}", mv=r['mv'], new=bool(r.get('new')), crop=[cw, ch], out=[ow, oh], fmt_w=fmt, raster_w=raster_w, out_h=rows_out, receiver_lines=lines,
+                merge=f"{r['mh']}x{r['mv']}", mv=r['mv'], new=bool(r.get('new')), crop=[cw, ch], out=[ow, oh], fmt_w=fmt, line_w=lw, raster_w=raster_w, out_h=rows_out, y_skip=y_skip, receiver_lines=lines,
                 rwzm=[sw / ow, sh / oh], sensor=sensor, fast_set=bool(r.get('fast_set')),
                 rows=dict(TIM_line=(fmt + 4) if r.get('fast_set') and fmt < 6000 else None,
                           R38_words=(fmt // 12 + 1) if r.get('fast_set') and fmt < 6000 else None),

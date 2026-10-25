@@ -1,0 +1,14 @@
+test_idle_and_interaction_power_off_restore_all_three_words (__main__.NativeSupTests) ... FAIL
+
+======================================================================
+FAIL: test_idle_and_interaction_power_off_restore_all_three_words (__main__.NativeSupTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dido/Developer.localized/SIGMAfp_re/projects/qs-touch/real/test_sup.py", line 177, in test_idle_and_interaction_power_off_restore_all_three_words
+    self.assertEqual(cam.w(TOUCH),STOCK_TOUCH)
+AssertionError: 3305403925 != 3226546592
+
+----------------------------------------------------------------------
+Ran 1 test in 5.978s
+
+FAILED (failures=1)

@@ -1,0 +1,14 @@
+{
+  "time": 1792790563.943722,
+  "daemon_status": "OK name=fpshd version=3.2.0 protocol=1 frame=64 payload=44 transport=EP01-EP82 iface=0 camera=open seq=779 ep83=host_candidate upload=UP01-probed mem=MEM1-probed quarantine=0 fault=none",
+  "boot": 3867155,
+  "echo": "0xc03d99a0",
+  "touch": "0xc511bc29",
+  "status get app_current": "app_current -> 5",
+  "gui geti QST_Active": "OK:QST_Active -> 0",
+  "gui geti CM_DCCrop": "OK:CM_DCCrop -> 0",
+  "gui geti MV_RecordingFormat": "OK:MV_RecordingFormat -> 0",
+  "gui geti MV_Resolution": "OK:MV_Resolution -> 0",
+  "gui geti MV_FrameRate": "OK:MV_FrameRate -> 3",
+  "dir \\fpSup": ".\n2026/10/23  11:03:04 <DIR>                UI\n2026/10/23  11:03:20                 4096 ._UI\n2026/10/24  03:39:30                33996 RAWV.BIN\n2026/10/23  11:03:20                 4096 ._RAWV.BIN\n2026/10/24  03:39:16                93036 DSQZ.BIN\n2026/10/23  11:03:20                 4096 ._DSQZ.BIN\n2026/10/24  03:39:28                31040 LOSS.BIN\n2026/10/23  11:03:20                 4096 ._LOSS.BIN\n2026/10/24  05:04:40                20416 LOADER.BIN\n2026/10/23  11:03:20                 4096 ._LOADER.BIN\n2026/10/24  03:39:36                  340 STOPFX.BIN\n2026/10/23  11:03:20                 4096 ._STOPFX.BIN\n2026/10/24  05:02:14                 5336 GYR2.BIN\n2026/10/23  11:03:20                 4096 ._GYR2.BIN\n2026/10/24  04:18:22                 4812 SUPMGR.BIN\n2026/10/23  11:03:20                 4096 ._SUPMGR.BIN\n2025/12/31  08:00:00                 4580 SHELL.BIN\n2026/10/23  11:03:20                 4096 ._SHELL.BIN\n2026/10/24  03:39:48                 5256 ULWR.BIN\n2026/10/23  11:03:20                 4096 ._ULWR.BIN\n2026/10/24  04:18:20               325760 RESCUS.BIN\n2026/10/23  11:03:20                 4096 ._RESCUS.BIN\n2026/10/23  11:03:04 <DIR>                RESCUS\n2026/10/23  11:03:20                 4096 ._RESCUS\n2026/10/24  03:39:22                21248 FLIP.BIN\n2026/10/23  11:03:20                 4096 ._FLIP.BIN\n2026/10/24  03:39:40                60268 TAPZ.BIN\n2026/10/23  11:03:20                 4096 ._TAPZ.BIN\n2026/10/24  03:39:18                  340 FCAP.BIN\n2026/10/23  11:03:20                 4096 ._FCAP.BIN\n2026/10/24  05:04:54                 4096 LOAD.LOG\n2026/10/24  04:53:26               126212 QSTOUCH.BIN"
+}

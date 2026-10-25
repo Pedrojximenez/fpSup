@@ -30,6 +30,7 @@ sys.path[:0] = [str(LAB / 'sup'), str(SHELL)]
 import ispl_records as R                                     # noqa: E402
 
 BUILD_JSON = LAB / 'sup' / 'build' / 'build.json'
+SUP_FILE = 'ISPL.BIN'
 ALLOC_KEEP = HERE / '.ispl_alloc.json'      # what we borrowed, to give it back
 MIN_CHUNK = 256 << 10
 CHUNK = 4 << 20                             # 10-23: class 0 refused 16 MiB, gave 4 (records span chunks)
@@ -37,7 +38,7 @@ LOG_BYTES = 256 << 10                       # 16384 block lines
 WIN_SLOT = 7
 WIN_W = 2048                                # covers +8 .. +8+1 KiB-rounded cap
 F_DCACHE = 0xC000E91C                       # whole L1+L2 clean+invalidate (CPU_GLOBAL_CONFIG.md)
-QUIET_AFTER_S = 10                          # after the stop, before any command
+QUIET_AFTER_S = 15                          # after the planned stop: movsavewai + the 10 s rule
 
 
 def P():
@@ -58,12 +59,20 @@ def block_addr():
     return parse_load_log(out.read_text('ascii', 'replace'))
 
 
-def parse_load_log(text):
+def parse_load_log(text, name=None):
+    name = name or SUP_FILE
     for line in text.splitlines():
-        m = re.match(r'^0A ([0-9A-F]{8}) [0-9A-F]{8} ?ISPL\.BIN', line.strip(), re.I)
+        m = re.match(r'^0A ([0-9A-F]{8}) [0-9A-F]{8} ?' + re.escape(name), line.strip(), re.I)
         if m:
             return int(m.group(1), 16)
-    raise SystemExit("ISPL.BIN is not LOADED in this boot's LOAD.LOG")
+    raise SystemExit(f"{name} is not LOADED in this boot's LOAD.LOG")
+
+
+def use_ctl_only():
+    """ISPC.BIN (RESEARCH_PLAN §7 step 1): the control task alone; stock writes the card."""
+    global BUILD_JSON, SUP_FILE
+    BUILD_JSON = LAB / 'sup' / 'build' / 'build-ctl.json'
+    SUP_FILE = 'ISPC.BIN'
 
 
 def cap_addr(block, info):
@@ -74,12 +83,28 @@ def cap_addr(block, info):
     return uncached + info['state_at'] + info['cap_off']
 
 
+CALLFN_CLAIM = ('ispl.callfn.code', 160)
+
+
+def own_callfn_block(callfn):
+    """callfn in a cave block nothing else writes (IMX410_RULES §71): in the shared
+    putfile.CODE it takes turns with getfile/putfile/heapalloc, the echo runs with no
+    I-cache maintenance, and the CPU can execute the other one's stale words."""
+    if getattr(callfn, '_own_code', False):           # imx410-lab's fastsweep may have moved it already
+        return
+    import cave
+    callfn.CODE = cave.claim(*CALLFN_CLAIM)
+    callfn.CODE_END = callfn.CODE + CALLFN_CLAIM[1]
+    callfn._own_code = True
+
+
 def flush():
     """Clean+invalidate the camera's caches: the sup's counters reach memory
     before we read them; our writes are not hidden behind its stale lines."""
     sys.path.insert(0, str(SHELL))
-    from callfn import call
-    ok, _ = call(F_DCACHE)
+    import callfn
+    own_callfn_block(callfn)
+    ok, _ = callfn.call(F_DCACHE)
     if not ok:
         raise SystemExit('cache flush did not return')
 
@@ -192,7 +217,9 @@ def summary(cap):
     lent = sum(n for _, n in cap['chunks'][:cap['nchunk']])
     lines = [f'mode {mode}  ctl {ctl}  lent {lent >> 20} MiB in {cap["nchunk"]} chunks  used {cap["used"] / 2**20:.1f} MiB',
              f'kept {cap["n_rec"]}  skipped {cap["n_skip"]}  full {cap["n_full"]}  discard {cap["n_discard"]}  '
-             f'sd {cap["n_sd"]}  log {cap["log_n"]}  presses {cap["n_press"]}']
+             f'sd {cap["n_sd"]}  log {cap["log_n"]}  presses {cap["n_press"]}',
+             f'last shell line: {R.SH_LINES.get(cap["ctl_line"], cap["ctl_line"])}  '
+             f'recstate started {cap["rs_started"]} saved {cap["rs_saved"]}']
     if cap['t_rec'] and cap['t_stop']:
         lines.append(f'REC pressed at +{(cap["t_rec"] - cap["t_arm"]) / 1e3:.0f} ms, '
                      f'stopped {(cap["t_stop"] - cap["t_rec"]) / 1e3:.0f} ms later')
@@ -203,7 +230,8 @@ def summary(cap):
 
 
 def cmd_take(a, api=None, heap=None, sleep=time.sleep):
-    api, heap = api or P(), heap or imxl_heap()
+    api = api or P()
+    heap = heap or (None if SUP_FILE == 'ISPC.BIN' else imxl_heap())
     not_recording(api)
     info = build()
     at = cap_addr(block_addr(), info)
@@ -212,6 +240,18 @@ def cmd_take(a, api=None, heap=None, sleep=time.sleep):
         raise SystemExit('already armed: pull and/or disarm first')
     if a.focus:                                             # half press: AF (S2 would toggle REC in CINE)
         api.sh('key S1ON'); sleep(a.focus_ms / 1000); api.sh('key S1OFF')
+    if SUP_FILE == 'ISPC.BIN':                              # control only: nothing lent, nothing captured
+        write_cap(api, at, 'sd', [], ctl=True, start_ms=a.start_ms, rec_ms=a.rec_ms)
+        quiet = (a.start_ms + a.rec_ms) / 1000 + QUIET_AFTER_S
+        print(f'armed (control only): REC in {a.start_ms} ms for {a.rec_ms} ms, stock writes the card. '
+              f'Silent for {quiet:.0f} s.', flush=True)
+        sleep(quiet)
+        try:
+            not_recording(api)
+        except SystemExit:
+            raise SystemExit('still recording after the planned stop: stop it on the camera (REC), wait 10 s, then `status`')
+        print(summary(read_cap(api, at)))
+        return
     held = []
     try:
         lend(LOG_BYTES, heap, held, 1)                      # the log first: small, always fits
@@ -232,7 +272,11 @@ def cmd_take(a, api=None, heap=None, sleep=time.sleep):
     print(f'armed: {sum(n for _, n in chunks) >> 20} MiB, keep first {a.keep_first} then one per {a.every_ms} ms; '
           f'REC in {a.start_ms} ms for {a.rec_ms} ms. Silent for {quiet:.0f} s.', flush=True)
     sleep(quiet)                                            # nothing is sent in here
-    not_recording(api)
+    try:
+        not_recording(api)
+    except SystemExit:
+        raise SystemExit('still recording after the planned stop: stop it on the camera (REC), '
+                         'wait 10 s, then `status` shows where the control task got to')
     print(summary(read_cap(api, at)))
 
 
@@ -326,6 +370,7 @@ def cmd_disarm(a, api=None, heap=None):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument('--ctl-only', action='store_true', help='drive ISPC.BIN (control task alone, no capture)')
     sub = ap.add_subparsers(dest='cmd', required=True)
     sub.add_parser('status').set_defaults(f=cmd_status)
     s = sub.add_parser('take'); s.set_defaults(f=cmd_take)
@@ -339,6 +384,8 @@ def main():
     s = sub.add_parser('pull'); s.set_defaults(f=cmd_pull); s.add_argument('out')
     sub.add_parser('disarm').set_defaults(f=cmd_disarm)
     a = ap.parse_args()
+    if a.ctl_only:
+        use_ctl_only()
     a.f(a)
 
 

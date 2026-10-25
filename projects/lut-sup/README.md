@@ -49,6 +49,8 @@ MENU 逐層返回 fpSup。機內不新增說明頁；[各項設定說明](../../
 已核對實際 ARM 成品的註解寫回、重啟讀回、可攜重新匯入及來源資料 bytes 不變；
 AutoRun 與共用 LOADER／SUPMGR／UI 不變，沒有操作相機或寫卡，監看仍未接通。
 
+**2026-10-24 第一次上機**（加入使用者的多 sup 卡，沿用卡上 loader）：載入、Color 入口、選擇與重開讀回、cube 註解寫回與重開讀回、啟用清單、監看拒絕、MENU 返回都通過；找到 4 個 UI 導航問題（兩個焦點掉出頁面，需 S1 退出）。[紀錄](validation/20261024-oncamera-01/README.md)。
+
 先前 BIN 保存版的離線開發包為 [`20261022-color-library-03`](cards/20261022-color-library-03/)，
 [最終驗證](validation/20261022-color-library-01/final/report.json)包含 114 項通過、無跳過與 13 個故障副本偵測。
 實際成品的切換、個別設定保存／重載與 MENU 路徑通過模擬；AutoRun、共用 loader／SupManager／UI 與單一入口包一致。
