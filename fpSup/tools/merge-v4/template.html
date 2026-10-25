@@ -1,0 +1,897 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>fpSup-Merge v4</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  /* fpSup's palette (the user 2026-10-25: black first, K4's soft glow with K2's
+     cyan): the logo's pink-red "Sup" #FB144E leads with a soft glow on what is
+     picked; the eye's cyan #01F7FB carries information (More, ready); the
+     hair's yellow #FDEE02 warns (clash, parked).  Dark first; a light system
+     setting gets the same design on white (cyan and yellow taken deeper there,
+     too light for text on white). */
+  color-scheme:dark light;
+  --paper:#0d0d0d; --panel:#151515; --ink:#ededed; --dim:#8a8a8a; --line:#252525;
+  --sig:#fb144e; --sig-soft:#261016; --glow:#fb144e40; --cream:#1b1a18;
+  --info:#01f7fb; --ok:#01f7fb; --warn:#fdee02; --warn-soft:#2d2a10; --bad:#ff6b80;
+  --radius:10px;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){
+  --paper:#f6f6f6; --panel:#ffffff; --ink:#171717; --dim:#666666; --line:#e4e4e4;
+  --sig:#d01245; --sig-soft:#fde4eb; --glow:#d0124533; --cream:#fdf3dc;
+  --info:#00737a; --ok:#00737a; --warn:#8c6a00; --warn-soft:#fff7c4; --bad:#a3001e;
+}}
+:root[data-theme="light"]{
+  --paper:#f6f6f6; --panel:#ffffff; --ink:#171717; --dim:#666666; --line:#e4e4e4;
+  --sig:#d01245; --sig-soft:#fde4eb; --glow:#d0124533; --cream:#fdf3dc;
+  --info:#00737a; --ok:#00737a; --warn:#8c6a00; --warn-soft:#fff7c4; --bad:#a3001e;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.55;
+  margin:0 auto;max-width:1040px;padding:28px 16px 56px;-webkit-font-smoothing:antialiased}
+h1{font-size:1.5rem;font-weight:600;margin:0;letter-spacing:-.01em}
+h1 small{font-family:var(--mono);font-size:.8rem;color:var(--sig);font-weight:500;margin-left:.5em}
+h2{font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.11em;color:var(--dim);
+  margin:0 0 10px;font-family:var(--mono)}
+code,.m{font-family:var(--mono);font-variant-numeric:tabular-nums}
+header{border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:22px;
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:flex-start}
+header p{color:var(--dim);font-size:.92rem;max-width:60ch;margin:.45em 0 0}
+.lang{display:flex;gap:4px}
+button{font:inherit;cursor:pointer}
+.lang button,.cats button{font-family:var(--mono);font-size:.78rem;background:transparent;color:var(--dim);
+  border:1px solid var(--line);border-radius:4px;padding:3px 9px}
+.lang button[aria-pressed="true"],.cats button[aria-pressed="true"]{color:var(--ink);border-color:var(--ink)}
+button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible,.history-list:focus-visible{outline:2px solid var(--sig);outline-offset:2px}
+.cols{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:26px;align-items:start}
+@media(max-width:760px){.cols{grid-template-columns:1fr}}
+section{margin-bottom:22px}
+section h2{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+section h2 span{text-transform:none;letter-spacing:0;font-weight:400}
+section>p.sub{color:var(--dim);font-size:.84rem;margin:-6px 0 10px}
+.boot-option{display:flex;align-items:flex-start;gap:12px;padding:10px 14px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:8px;cursor:pointer}
+.boot-option input{accent-color:var(--sig);width:16px;height:16px;margin:4px 0 0;flex:none;cursor:pointer}
+.boot-option b{font-size:.9rem}.boot-option small{display:block;color:var(--dim);font-size:.83rem;margin-top:3px}
+details.dev>summary{cursor:pointer;list-style:none;font-family:var(--mono);font-size:.72rem;
+  text-transform:uppercase;letter-spacing:.11em;color:var(--dim);font-weight:600;margin-bottom:10px}
+details.dev>summary::before{content:"▸ "}
+details.dev[open]>summary::before{content:"▾ "}
+.tile{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;background:var(--panel);
+  border:1px solid var(--line);border-radius:var(--radius);padding:12px 14px;margin-bottom:10px}
+.tile.on{border-color:var(--sig);box-shadow:0 0 0 1px var(--sig),0 0 24px var(--glow)}
+/* "Add your own .BIN" (card-composer's tile, back 2026-10-25): the last tile of
+   its section, a dashed empty slot; click or drop a file on it. */
+.tile.add{border-style:dashed;cursor:pointer;color:var(--dim);grid-template-columns:1fr;text-align:center}
+.tile.add.over{border-color:var(--sig);color:var(--ink)}
+.tile.add .plus{font-size:1.4rem;line-height:1}
+.tile .rm{grid-column:2;justify-self:start;font-family:var(--mono);font-size:.76rem;background:transparent;
+  color:var(--dim);border:1px solid var(--line);border-radius:4px;padding:1px 8px;cursor:pointer}
+.upnote{color:var(--warn);font-size:.85rem;margin:0 0 8px}
+.selall{font-family:var(--mono);font-size:.78rem;background:transparent;color:var(--ink);
+  border:1px solid var(--line);border-radius:999px;padding:4px 14px;cursor:pointer;margin-bottom:12px}
+.tile.parked{border-color:var(--line);box-shadow:inset 3px 0 0 var(--warn)}
+.tile input{margin:4px 0 0;accent-color:var(--sig);width:16px;height:16px;cursor:pointer}
+.tile label{cursor:pointer}
+.tile .name{font-weight:600}
+.tile .name .m{font-weight:400;color:var(--dim);font-size:.8rem;margin-left:.4em}
+.tile .desc{grid-column:2;color:var(--dim);font-size:.88rem}
+.tile .by{grid-column:2;font-size:.8rem;color:var(--dim);border-top:1px dashed var(--line);padding-top:5px;margin-top:3px}
+.tile .by b{color:var(--ink);font-weight:500}
+.tile .warn{grid-column:2;font-size:.82rem;color:var(--warn);display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.tile .warn button{font-family:var(--mono);font-size:.76rem;background:transparent;color:var(--warn);
+  border:1px solid var(--warn);border-radius:4px;padding:1px 8px}
+.tile .data{grid-column:2;display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 2px}
+.tile .data label{font-family:var(--mono);font-size:.76rem;border:1px solid var(--line);border-radius:4px;
+  padding:1px 8px 1px 5px;display:inline-flex;gap:5px;align-items:center;cursor:pointer}
+.tile .data label.on{border-color:var(--sig);color:var(--ink)}
+.tile .data input{width:13px;height:13px;margin:0}
+.tile .data small{font-size:.68rem;color:var(--dim);margin-left:.35em}
+.tile .guide{grid-column:2;font-family:var(--mono);font-size:.78rem;color:var(--info);text-decoration:none;
+  justify-self:start}
+.tile .guide:hover{text-decoration:underline}
+.tile .history{grid-column:2;min-width:0;margin:2px 0 0}
+.history>summary{color:var(--dim);font-size:.78rem}
+.history>summary .count{color:var(--dim)}
+.history-list{max-height:360px;overflow-y:auto;margin-top:8px;padding:0 8px 0 12px;border-left:2px solid var(--line);overscroll-behavior:contain}
+.history article{padding:10px 0;border-top:1px solid var(--line)}
+.history article:first-child{border-top:0;padding-top:0}
+.history h3{display:flex;align-items:center;flex-wrap:wrap;gap:5px 8px;font-size:.79rem;margin:0 0 5px;font-weight:500}
+.history h3 .badge{font-size:.68rem;padding:0 5px;border:1px solid var(--line);border-radius:3px;color:var(--dim)}
+.history h3 .current{color:var(--sig);border-color:var(--sig)}
+.history time{font-size:.72rem;color:var(--dim)}
+.history ul{padding-left:1.15em;margin:0 0 6px;color:var(--dim);font-size:.82rem}
+.history li{margin-bottom:4px;overflow-wrap:anywhere}
+.history p{color:var(--dim);font-size:.82rem;margin:7px 0}
+.history .source{font-size:.75rem;color:var(--info);text-decoration:none}
+.history .source:hover{text-decoration:underline}
+.tile.pending{opacity:.6;border-style:dashed}
+.tile.pending .soon{font-family:var(--mono);font-size:.72rem;border:1px solid var(--dim);color:var(--dim);
+  border-radius:3px;padding:0 6px;margin-left:.5em;font-weight:400}
+.tile .hint{grid-column:2;font-size:.8rem;color:var(--dim);font-family:var(--mono)}
+aside{position:sticky;top:16px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px}
+@media(max-width:760px){aside{position:static}}
+.tree{font-family:var(--mono);font-size:.8rem;margin:0 0 12px;padding:10px;background:var(--paper);
+  border-radius:4px;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.5}
+.tree .new{color:var(--sig)} .tree .off{color:var(--dim)}
+.dl{width:100%;background:var(--sig);color:#fff;border:0;border-radius:var(--radius);box-shadow:0 0 24px var(--glow);padding:10px;font-weight:600}
+.dl:disabled{background:var(--line);color:var(--dim);cursor:not-allowed}
+.status{font-family:var(--mono);font-size:.8rem;margin:10px 0 0}
+.status.ok{color:var(--ok)} .status.bad{color:var(--bad)}
+.status.bad::before{content:"✕ "} .status.ok::before{content:"✓ "}
+.note{color:var(--dim);font-size:.84rem;margin:12px 0 0}
+.install{margin:18px 0 0;padding-top:14px;border-top:1px solid var(--line)}
+.install ol{margin:0;padding-left:1.3em;font-size:.86rem}
+.install li{margin:0 0 7px}
+.install li::marker{font-family:var(--mono);color:var(--sig)}
+.install .thanks{margin:12px 0 0;padding:9px 11px;font-size:.84rem;background:var(--cream);
+  border-left:3px solid var(--sig);border-radius:4px}
+.install code{font-size:.8rem;background:var(--paper);padding:0 3px;border-radius:3px}
+details{margin-top:12px;font-size:.82rem}
+details summary{cursor:pointer;color:var(--dim);font-family:var(--mono)}
+details table{border-collapse:collapse;width:100%;margin-top:6px}
+details td{font-family:var(--mono);font-size:.74rem;padding:2px 4px;border-bottom:1px solid var(--line);
+  word-break:break-all;vertical-align:top}
+/* header: logo, language, community links (support rules copied from
+   assets/site.css so the page keeps working on its own) */
+header{display:block;position:relative}
+header .lang{position:absolute;top:0;right:0}
+.brand{display:flex;align-items:center;gap:22px;padding-right:130px}
+.brand .mark{width:120px;height:auto;flex:none;display:block}
+.brand>div{min-width:0}
+@media(max-width:620px){.brand{flex-direction:column;align-items:flex-start;gap:12px;padding-right:0}
+  .brand .mark{width:88px}header .lang{position:static;margin-bottom:12px;justify-content:flex-end;display:flex}}
+.lang{display:inline-flex;gap:0;border:1px solid var(--line);border-radius:3px;overflow:hidden}
+.lang button{border:0;border-radius:0}
+.lang button + button{border-left:1px solid var(--line)}
+[data-lang="en"] .zh-only{display:none!important}
+/* ---- support buttons ---------------------------------------------------- */
+.support{display:flex; gap:9px; flex-wrap:wrap; align-items:center; margin:14px 0 0}
+.support a{display:inline-flex; align-items:center; gap:7px; font-size:.86rem;
+  font-weight:500; text-decoration:none; padding:9px 15px; border-radius:4px;
+  border:1px solid var(--line); color:var(--ink); background:var(--panel);
+  transition:border-color .12s, background .12s}
+.support svg{width:16px; height:16px; flex:none; display:block}
+.support .kofi svg{fill:#FF5E5B}
+.support .discord svg{fill:#5865F2}
+.support .youtube svg{fill:#FF0000}
+.support .youtube:hover{border-color:#FF0000; background:#FF000014}
+.support .kofi:hover{border-color:#FF5E5B; background:#FF5E5B14}
+.support .discord:hover{border-color:#5865F2; background:#5865F214}
+.support a:focus-visible{outline:2px solid currentColor; outline-offset:2px}
+.support .telegram svg{fill:#26A5E4}
+.support .telegram:hover{border-color:#26A5E4; background:#26A5E414}
+/* In the hero: smaller, so the two buttons read as a shortcut rather than as the
+   point of the page. Some people arrive only wanting the Discord invite or the
+   Ko-fi link, and they should not have to scroll past the whole funnel to find it. */
+</style>
+</head>
+<body>
+<header>
+  <div class="lang" role="group" aria-label="Language / 語言 / 语言">
+    <button type="button" data-lang="en">EN</button>
+    <button type="button" data-lang="cn">中</button>
+    <button type="button" data-lang="zh">繁</button>
+  </div>
+  <div class="brand">
+    <picture>
+      <source srcset="../../assets/fpsup-logo.webp" type="image/webp">
+      <img class="mark" src="../../assets/fpsup-logo.png" width="463" height="500" alt="fpSup">
+    </picture>
+    <div>
+      <h1>fpSup-Merge <small>Loader v4</small></h1>
+      <p data-t="intro"></p>
+      <div class="support">
+
+      <a class="discord" href="https://discord.gg/WVTCcpGUYC" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
+        Discord</a>
+      <a class="telegram zh-only" href="https://t.me/+ooRvUbP-fE45ZmE1" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>Telegram 群</a>
+      <a class="youtube" href="https://www.youtube.com/@fp-sup" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>YouTube</a>
+      <a class="kofi" href="https://ko-fi.com/fpsup" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.881 8.948c-.773-4.085-4.859-4.593-4.859-4.593H.723c-.604 0-.679.798-.679.798s-.082 7.324-.022 11.822c.164 2.424 2.586 2.672 2.586 2.672s8.267-.023 11.966-.049c2.438-.426 2.683-2.566 2.658-3.734 4.352.24 7.422-2.831 6.649-6.916zm-11.062 3.511c-1.246 1.453-4.011 3.976-4.011 3.976s-.121.119-.31.023c-.076-.057-.108-.09-.108-.09-.443-.441-3.368-3.049-4.034-3.954-.709-.965-1.041-2.7-.091-3.71.951-1.01 3.005-1.086 4.363.407 0 0 1.565-1.782 3.468-.963 1.904.82 1.832 3.011.723 4.311zm6.173.478c-.928.116-1.682.028-1.682.028V7.284h1.77s1.971.551 1.971 2.638c0 1.913-.985 2.667-2.059 3.015z"/></svg>
+        <span data-t="kofi"></span></a>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="cols">
+  <main>
+    <section id="startup"></section>
+    <div id="tiles"></div>
+  </main>
+  <aside>
+    <h2 data-t="card"></h2>
+    <div class="tree" id="tree"></div>
+    <button type="button" class="dl" id="dl"></button>
+    <p class="status" id="status" role="status"></p>
+    <section class="install" id="install">
+      <h2 data-t="install"></h2>
+      <ol id="steps"></ol>
+      <p class="thanks" id="thanks"></p>
+    </section>
+  </aside>
+</div>
+
+<script id="cat" type="application/json">@@CATALOGUE@@</script>
+
+<script id="compose">
+/* Pure part: no DOM.  test_merge_v4.js runs this block under node. */
+const CAT = JSON.parse(document.getElementById('cat').textContent);
+
+function b64(s){
+  const bin = atob(s), u = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i);
+  return u;
+}
+
+function sha256hex(bytes){
+  const K = [0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,
+    0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,
+    0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,
+    0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,
+    0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,
+    0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,
+    0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,
+    0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2];
+  const H = [0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19];
+  const n = bytes.length, len = ((n + 9 + 63) >> 6) << 6, m = new Uint8Array(len);
+  m.set(bytes); m[n] = 0x80;
+  const dv = new DataView(m.buffer);
+  dv.setUint32(len - 8, Math.floor(n / 0x20000000)); dv.setUint32(len - 4, (n << 3) >>> 0);
+  const W = new Uint32Array(64), r = (x, k) => (x >>> k) | (x << (32 - k));
+  for (let o = 0; o < len; o += 64){
+    for (let i = 0; i < 16; i++) W[i] = dv.getUint32(o + 4 * i);
+    for (let i = 16; i < 64; i++){
+      const a = W[i-15], b = W[i-2];
+      W[i] = (W[i-16] + (r(a,7) ^ r(a,18) ^ (a >>> 3)) + W[i-7] + (r(b,17) ^ r(b,19) ^ (b >>> 10))) >>> 0;
+    }
+    let [a, b, c, d, e, f, g, h] = H;
+    for (let i = 0; i < 64; i++){
+      const t1 = (h + (r(e,6) ^ r(e,11) ^ r(e,25)) + ((e & f) ^ (~e & g)) + K[i] + W[i]) >>> 0;
+      const t2 = ((r(a,2) ^ r(a,13) ^ r(a,22)) + ((a & b) ^ (a & c) ^ (b & c))) >>> 0;
+      h = g; g = f; f = e; e = (d + t1) >>> 0; d = c; c = b; b = a; a = (t1 + t2) >>> 0;
+    }
+    H[0]=(H[0]+a)>>>0; H[1]=(H[1]+b)>>>0; H[2]=(H[2]+c)>>>0; H[3]=(H[3]+d)>>>0;
+    H[4]=(H[4]+e)>>>0; H[5]=(H[5]+f)>>>0; H[6]=(H[6]+g)>>>0; H[7]=(H[7]+h)>>>0;
+  }
+  return H.map(x => x.toString(16).padStart(8, '0')).join('');
+}
+
+const CRC32 = (() => { const t = new Uint32Array(256);
+  for (let n = 0; n < 256; n++){ let c = n;
+    for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1;
+    t[n] = c >>> 0; }
+  return u => { let c = 0xFFFFFFFF;
+    for (let i = 0; i < u.length; i++) c = t[(c ^ u[i]) & 0xFF] ^ (c >>> 8);
+    return (c ^ 0xFFFFFFFF) >>> 0; }; })();
+
+/* Stored (uncompressed) zip with a fixed date, so the same selection always
+   gives the same bytes. */
+function zipStore(files){
+  const enc = s => typeof s === 'string' ? new TextEncoder().encode(s) : s;
+  const TIME = 0, DATE = (2026 - 1980) << 9 | 1 << 5 | 1;
+  const parts = [], central = [];
+  let off = 0;
+  for (const f of files){
+    const name = enc(f.name), data = enc(f.data), crc = CRC32(data);
+    const h = new DataView(new ArrayBuffer(30));
+    h.setUint32(0, 0x04034B50, true); h.setUint16(4, 20, true);
+    h.setUint16(10, TIME, true); h.setUint16(12, DATE, true);
+    h.setUint32(14, crc, true); h.setUint32(18, data.length, true);
+    h.setUint32(22, data.length, true); h.setUint16(26, name.length, true);
+    parts.push(new Uint8Array(h.buffer), name, data);
+    const c = new DataView(new ArrayBuffer(46));
+    c.setUint32(0, 0x02014B50, true); c.setUint16(4, 20, true); c.setUint16(6, 20, true);
+    c.setUint16(12, TIME, true); c.setUint16(14, DATE, true);
+    c.setUint32(16, crc, true); c.setUint32(20, data.length, true);
+    c.setUint32(24, data.length, true); c.setUint16(28, name.length, true);
+    c.setUint32(42, off, true);
+    central.push(new Uint8Array(c.buffer), name);
+    off += 30 + name.length + data.length;
+  }
+  const cdLen = central.reduce((s, p) => s + p.length, 0);
+  const e = new DataView(new ArrayBuffer(22));
+  e.setUint32(0, 0x06054B50, true);
+  e.setUint16(8, files.length, true); e.setUint16(10, files.length, true);
+  e.setUint32(12, cdLen, true); e.setUint32(16, off, true);
+  const all = parts.concat(central, [new Uint8Array(e.buffer)]);
+  const out = new Uint8Array(all.reduce((s, p) => s + p.length, 0));
+  let at = 0; for (const p of all){ out.set(p, at); at += p.length; }
+  return out;
+}
+
+const byId = id => CAT.products.find(p => p.id === id);
+const clashes = (a, b) => a !== b && (byId(a).excl.includes(b) || byId(b).excl.includes(a));
+
+/* Conflicts are reported, not refused (user 2026-10-07): every ticked sup goes
+   on the card.  `picked` is in priority order; walking it, a sup runs unless it
+   clashes with one already running, and the rest go on the card as
+   fpSup/NAME.OFF: the loader lists only *.BIN, and renaming .OFF <-> .BIN in
+   the same folder switches which one runs (user 2026-10-07; the camera's
+   All Sups menu lists both kinds from the one folder). */
+function plan(picked){
+  const on = [], off = [];
+  for (const id of selected(picked)){
+    const by = on.filter(q => clashes(id, q));
+    (by.length ? off : on).push(id);
+  }
+  return {on, off, conflict: id => selected(picked).filter(q => clashes(id, q))};
+}
+
+function selected(picked){
+  const out = [...picked];
+  for (let i = 0; i < out.length; i++)
+    for (const id of (byId(out[i]).requires || [])) if (!out.includes(id)) out.push(id);
+  return out;
+}
+
+/* Explicit products default to all their data files. A dependency adds only
+   its core unless the user ticks data files; RES-Lab needs no saved RCD. */
+const DATA_OFF = {};
+const BOOT = {...CAT.boot.default};
+// Loader v4: the fpSup page carries Lossless's switch and Res-Custom's file page,
+// so every card has it (user 2026-10-24).
+const managerRequired = picked => true;
+const managerEnabled = picked => BOOT.manager || managerRequired(picked);
+const bootKey = picked => `${managerEnabled(picked) ? 'm1' : ''}i${+BOOT.instant}f${+BOOT.fast}`;
+const bootFiles = (picked = []) => CAT.boot.variants[bootKey(picked)].files
+  .concat(CAT.shared.filter(s => !['AutoRun.txt', 'fpSup/LOADER.BIN'].includes(s.path)))
+  .concat(managerEnabled(picked) ? CAT.boot.manager_files : []);
+const payloadFor = (p, picked) => p.virtual && plan(picked).on.includes('res-lab') ? p.virtual : p;
+const offName = f => f.replace(/\.BIN$/i, '.OFF');
+/* Off sups go on the card as .BIN with their sup_id on LOADER.BIN's disabled
+   list (the user 2026-10-25: all installed, the camera's SupManager switches
+   them): its last DS_BYTES are "FSDS", a count, DS_MAX ids (build_v4.with_disabled).
+   One with the same sup_id as a sup that runs cannot be listed -- the list
+   would stop both -- so it stays fpSup/NAME.OFF. */
+const DS_MAGIC = 0x53445346, DS_MAX = 30, DS_BYTES = 8 + 4 * DS_MAX;
+const sameId = (id, on) => on.some(q => q !== id && byId(q).sup_id && byId(q).sup_id === byId(id).sup_id);
+const sidWord = s => (s.charCodeAt(0) | s.charCodeAt(1) << 8 | s.charCodeAt(2) << 16 | s.charCodeAt(3) << 24) >>> 0;
+function withDisabled(loader, ids){
+  const d = loader.slice(), o = d.length - DS_BYTES, w = (at, v) => { for (let k = 0; k < 4; k++) d[at + k] = (v >>> 8 * k) & 255; };
+  if (u32le(d, o) !== DS_MAGIC) throw new Error('LOADER.BIN has no disabled list');
+  if (ids.length > DS_MAX) throw new Error('disabled list full');
+  w(o + 4, ids.length);
+  for (let i = 0; i < DS_MAX; i++) w(o + 8 + 4 * i, i < ids.length ? sidWord(ids[i]) : 0);
+  return d;
+}
+const dataExcluded = (p, picked) => DATA_OFF[p.id] ||
+  (!picked.includes(p.id) ? (p.data_files || []).map(d => d.path) : []);
+const dataChosen = (p, picked) => (p.data_files || []).filter(d => !dataExcluded(p, picked).includes(d.path));
+
+/* The card for a selection: [{name, data, sha256}] in zip order, sups in the
+   loader's name order. */
+function compose(picked){
+  const {on, off} = plan(picked);
+  const files = bootFiles(picked).map(s => ({name: s.path, data: b64(s.data), sha256: s.sha256}));
+  for (const p of CAT.products){                                   // CAT is in file order
+    const payload = payloadFor(p, picked);
+    if (on.includes(p.id)) files.push({name: 'fpSup/' + p.file, data: b64(payload.data), sha256: payload.sha256, p});
+  }
+  const listed = [];
+  for (const p of CAT.products){
+    if (!off.includes(p.id)) continue;
+    if (sameId(p.id, on)) files.push({name: 'fpSup/' + offName(p.file), data: b64(p.data), sha256: p.sha256, p, off: true});
+    else {
+      files.push({name: 'fpSup/' + p.file, data: b64(p.data), sha256: p.sha256, p, off: true, listed: true});
+      if (p.sup_id && !listed.includes(p.sup_id)) listed.push(p.sup_id);
+    }
+  }
+  if (listed.length){
+    const at = files.findIndex(f => f.name === 'fpSup/LOADER.BIN');
+    const data = withDisabled(files[at].data, listed);
+    files[at] = {...files[at], data, sha256: sha256hex(data), disabled: listed};
+  }
+  /* A sup's data files (res-custom's fpSup/RESCUS/*.RCD) stay in their own
+     folder even when the sup is parked: the loader never reads subfolders, so
+     switching sups is still moving one .BIN. */
+  for (const p of CAT.products){
+    if (!selected(picked).includes(p.id)) continue;
+    for (const d of dataChosen(p, picked))
+      files.push({name: d.path, data: b64(d.data), sha256: d.sha256, dataOf: p});
+    for (const d of (p.support_files || []))
+      files.push({name: d.path, data: b64(d.data), sha256: d.sha256, dataOf: p});
+  }
+  return {on, off, files};
+}
+
+/* Every check the download depends on.  Returns [{ok, what}].  A clash is not
+   a failure; two sups that would both run and clash would be. */
+function checks(picked){
+  const out = [], {on, files} = compose(picked);
+  out.push({ok: on.length > 0 || managerEnabled(picked), what: 'at least one sup or the fpSup page'});
+  for (const id of selected(picked)){
+    const p = byId(id);
+    if ((p.data_files || []).length && !on.includes('res-lab'))
+      out.push({ok: dataChosen(p, picked).length > 0, what: `${p.name}: at least one data file`});
+    if (on.includes(id)) for (const required of (p.requires || []))
+      out.push({ok: on.includes(required), what: `${p.name}: ${byId(required).name} runs`});
+  }
+  for (const a of on) for (const b of on)
+    if (a < b && clashes(a, b)) out.push({ok: false, what: `${byId(a).name} and ${byId(b).name} both run`});
+  for (const f of files){
+    const got = sha256hex(f.data);
+    out.push({ok: got === f.sha256, what: `${f.name} sha256 ${got.slice(0, 12)}`});
+  }
+  const names = files.map(f => f.name.toUpperCase());
+  out.push({ok: new Set(names).size === names.length, what: 'no two files share a path'});
+  const run = files.filter(f => /^fpSup\/[^/]+$/.test(f.name) && f.p && (!f.off || f.listed)).map(f => f.p.file.toUpperCase());
+  const ldr = files.find(f => f.name === 'fpSup/LOADER.BIN');
+  if (ldr && ldr.disabled){
+    const o = ldr.data.length - DS_BYTES, n = u32le(ldr.data, o + 4);
+    const got = Array.from({length: n}, (_, i) => u32le(ldr.data, o + 8 + 4 * i));
+    out.push({ok: u32le(ldr.data, o) === DS_MAGIC && got.join() === ldr.disabled.map(sidWord).join(),
+              what: `LOADER.BIN disabled list ${ldr.disabled.join(', ')}`});
+    for (const id of on) out.push({ok: !ldr.disabled.includes(byId(id).sup_id), what: `${byId(id).name} not on the disabled list`});
+  }
+  out.push({ok: new Set(run).size === run.length, what: 'no two running sups share a file name'});
+  for (const f of files.filter(f => f.p)){
+    const d = f.data;
+    const magic = String.fromCharCode(d[0], d[1], d[2], d[3]);
+    const hlen = (d[4] | d[5] << 8 | d[6] << 16 | d[7] << 24) >>> 0;
+    const flen = (d[8] | d[9] << 8 | d[10] << 16 | d[11] << 24) >>> 0;
+    out.push({ok: magic === 'FSB4' && hlen === 48 && flen === d.length, what: `${f.p.file} FSB4 header, file_len ${flen}`});
+  }
+  return out;
+}
+
+function cardName(picked){
+  const ids = CAT.products.filter(p => selected(picked).includes(p.id)).map(p => p.id);
+  const name = ids.length === 1 ? byId(ids[0]).release : 'fpsup-v4-' + (ids.join('+') || 'manager');
+  return name + (BOOT.instant ? '-IS' : '') + (BOOT.fast ? '-FS' : '');
+}
+
+function readme(picked){
+  const {on, off, files} = compose(picked);
+  const L = ['SIGMA fp -- fpSup Loader v4 card (fpSup-Merge v4)',
+    'firmware: SIGMA fp Ver.5.02 only', '',
+    'Copy everything in this folder to the root of the SD card.',
+    'The loader loads fpSup\\*.BIN in name order; it skips every folder inside fpSup.',
+    'Loader v4 does not load v3 sups (fpSup\\NN*.BIN); remove them from the card.',
+    'Diagnostics: \\fpSup\\LOAD.LOG', '',
+    'Instant Start: ' + (BOOT.instant ? 'ON (power-switch restart reuses the RAM loader)' : 'OFF'),
+    'Fast Start: ' + (BOOT.fast ? 'ON (first boot stores the loader in camera settings; cold boots use a shorter AutoRun)' : 'OFF'),
+    'fpSup page: ON (SYSTEM tab, after the last page: SupManager and the Sups\' own rows; Enable/Disable applies after restart)',
+    '', 'RUNS (fpSup\\):'];
+  if (selected(picked).includes('res-lab')) L.push('  RES-Lab includes RES-CUSTOM and the fpSup page; edits apply without SAVE.',
+    '  SAVE creates named RCD files; RES-CUSTOM manages which files appear in Resolution and QS.');
+  const who = p => [p.author && 'by ' + p.author, p.credits.length && 'thanks to ' + p.credits.join(', ')]
+    .filter(Boolean).map(x => '  -- ' + x).join('');
+  for (const p of CAT.products.filter(p => on.includes(p.id))){
+    L.push(`  ${p.file.padEnd(12)} ${p.release}${who(p)}`);
+    const ds = dataChosen(p, picked);
+    if (ds.length) L.push(`  ${''.padEnd(12)} data: ${ds.map(d => d.label + (d.author ? ' (by ' + d.author + ')' : '')).join(', ')}`);
+  }
+  if (off.length){
+    L.push('', 'ON THE CARD BUT OFF -- they clash with a sup that runs:');
+    for (const f of files.filter(f => f.off))
+      L.push(`  ${f.name.slice(6).padEnd(12)} ${f.p.release}  -- clashes with ${plan(picked).conflict(f.p.id).map(q => byId(q).file).join(', ')}`
+        + (f.listed ? '  (off in SupManager)' : '  (.OFF: the same sup_id as one that runs)') + who(f.p));
+    L.push('', 'To switch: in the camera\'s SupManager (fpSup page) turn the running one off and this',
+      'one on, then restart.  A .OFF file: rename the running one to .OFF and this one to .BIN.',
+      'Never turn on two that clash together.');
+  }
+  L.push('', 'files:');
+  for (const f of files) L.push(`  ${f.name.padEnd(20)} ${String(f.data.length).padStart(7)} B  sha256=${f.sha256}`);
+  return L.join('\r\n') + '\r\n';
+}
+
+function zipFor(picked){
+  const {files} = compose(picked);
+  const root = cardName(picked);
+  return zipStore([...files.map(f => ({name: f.name, data: f.data})),
+                   {name: 'README.txt', data: readme(picked)}]
+    .map(f => ({name: root + '/' + f.name, data: f.data})));
+}
+
+/* Your own sups (card-composer's upload tile, back 2026-10-25): a v4 .BIN
+   goes on the card as it is, under its own file name.  Its header tells the
+   page what it is -- the display name the camera shows, its sup_id -- and the
+   file name its version (Gyro2_v0.1.1.BIN, names_v4).  The same sup_id as one
+   of this page's is a clash like any other: one runs, the other is .OFF. */
+const UP_KEY = 'fpsup-merge-v4-uploads';
+const u32le = (d, o) => (d[o] | d[o + 1] << 8 | d[o + 2] << 16 | d[o + 3] << 24) >>> 0;
+const RESERVED = ['LOADER.BIN', 'SUPMGR.BIN', 'SHELL.BIN'];
+/* {sup} or {error: key} -- key of T (upV3, upBad, upSvc, upName, upTaken). */
+function parseSup(name, d){
+  if (!/^[A-Za-z0-9 ._-]{1,35}\.BIN$/i.test(name)) return {error: 'upName'};
+  const up = name.toUpperCase();
+  if (RESERVED.includes(up) || CAT.products.some(p => !p.upload && p.file.toUpperCase() === up)) return {error: 'upTaken'};
+  const magic = d.length >= 4 ? String.fromCharCode(d[0], d[1], d[2], d[3]) : '';
+  if (magic === 'FSB1') return {error: 'upV3'};
+  if (magic !== 'FSB4' || d.length < 48 || u32le(d, 4) !== 48 || u32le(d, 8) !== d.length) return {error: 'upBad'};
+  const entry = u32le(d, 16) & ~1, svc = u32le(d, 28), nameOff = u32le(d, 44);
+  if (entry < 48 || entry >= d.length) return {error: 'upBad'};
+  if (svc > (CAT.loader_svc || 7)) return {error: 'upSvc', n: svc};
+  const sid = String.fromCharCode(d[20], d[21], d[22], d[23]);
+  let display = '';
+  if (nameOff && nameOff < d.length)
+    for (let i = nameOff; i < d.length && i < nameOff + 32 && d[i]; i++) display += String.fromCharCode(d[i]);
+  if (!/^[\x20-\x7e]*$/.test(display)) display = '';
+  const v = name.match(/_v(\d[^\\/]*)\.BIN$/i);
+  return {sup: {sid, display: display || name.replace(/\.BIN$/i, ''), version: v ? v[1] : 'r' + u32le(d, 24)}};
+}
+function addUpload(name, bytes){
+  const r = parseSup(name, bytes);
+  if (r.error) return r;
+  const sha = sha256hex(bytes), id = 'up-' + sha.slice(0, 10);
+  if (byId(id)) return {id};
+  let bin = '';
+  for (let i = 0; i < bytes.length; i += 0x8000) bin += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
+  const s = r.sup;
+  CAT.products.push({id, upload: true, name: s.display, sup_id: s.sid, file: name, category: 'own',
+    data: btoa(bin), sha256: sha, size: bytes.length, version: s.version, release: name.replace(/\.BIN$/i, ''), date: '',
+    about: {en: `sup_id ${s.sid} · ${name}`, zh: `sup_id ${s.sid} · ${name}`},
+    excl: CAT.products.filter(p => p.sup_id === s.sid).map(p => p.id),
+    requires: [], links: [], credits: [], author: '', data_files: [], support_files: [], guide: ''});
+  return {id};
+}
+function saveUploads(){
+  try { localStorage.setItem(UP_KEY, JSON.stringify(CAT.products.filter(p => p.upload).map(p => ({name: p.file, data: p.data})))); }
+  catch (e) {}
+}
+function removeUpload(id){
+  const i = CAT.products.findIndex(p => p.id === id && p.upload);
+  if (i >= 0) CAT.products.splice(i, 1);
+  for (const p of CAT.products) p.excl = p.excl.filter(x => x !== id);
+  saveUploads();
+}
+(() => {                                           // what this browser kept last time
+  let saved = [];
+  try { saved = JSON.parse(localStorage.getItem(UP_KEY) || '[]'); } catch (e) { return; }
+  if (!Array.isArray(saved)) return;
+  for (const f of saved) { try { addUpload(String(f.name), b64(f.data)); } catch (e) {} }
+})();
+</script>
+
+<script id="ui">
+const T = {
+  zh: {
+    intro: 'Loader v4 測試頁。勾選想使用的功能，下載並解壓縮，再照下方安裝說明放入 SD 卡；功能的設定在 SYSTEM 最後一頁之後的 fpSup 頁。只支援 SIGMA fp Ver.5.02。',
+    card: '已選功能',
+    startup: '啟動', instant: '瞬間啟動', instantHint: '預設開啟，電源開關重啟時直接載入。',
+    fast: '快速啟動', fastHint: '勾選以加速冷開機；首次使用會把啟動程式存入相機設定區。',
+    manager: 'fpSup 管理頁', managerHint: '在相機選單開啟 Sup 設定、啟用或停用；啟用清單於重開機後生效。',
+    managerNeeded: 'Loader v4 的 Lossless 開關與 Res-Custom 檔案頁都在這一頁，所以一律附上。',
+    required: n => `自動加入：${n} 需要此項。`,
+    labNeeds: '自動帶入 RES-CUSTOM 與 fpSup 管理頁；預設不加入固定解析度，可另外勾選。',
+    kofi: '在 Ko-fi 支持我',
+    install: '安裝說明',
+    /* Andy_hal9000's tip (no per-character AutoRun delay) is the first line of
+       every v3 card's AutoRun, so the thanks is always shown -- the old page
+       showed it only with Fast Start 3 ticked. */
+    flash: '⚡ 感謝我們的閃電俠 <b>Andy_hal9000</b>:他的建議讓開機從 11.5 秒縮短到 3 秒，每張卡都用上了。',
+    steps: [
+      '相機必須是 SIGMA fp(不是 fp L),韌體剛好 <b>Ver.5.02</b>。',
+      '勾選要的功能，下載 zip 並解壓縮。',
+      '把解出來的資料夾<b>裡面的東西</b>(<code>AutoRun.txt</code>、<code>fpSup</code> 資料夾、<code>README.txt</code>)複製到 SD 卡<b>最上層</b>。<b>更新卡時先刪掉卡上整個舊的 <code>fpSup</code> 資料夾</b>(以及舊格式的 <code>fpSup.BIN</code>、<code>FPSUPUI</code>):只覆蓋的話，這次沒勾的 sup 或格式資料檔還留在卡上，仍會被載入。',
+      '開機。左上角四格全白表示載入完成。',
+    ],
+    format: ['錄影格式', '解析度、開放式取景、無損壓縮'],
+    monitor: ['監看與螢幕', '拍攝時螢幕上看到什麼'],
+    focus: ['對焦', '自動對焦'],
+    upcoming: ['開發中', '還不能選，先讓你知道接下來有什麼'],
+    own: ['自己加入的 sup', '別人給你的 v4 .BIN：放進同一張卡。只存在這個瀏覽器裡'],
+    add: '加入 .BIN', addHint: '點這裡選檔，或把檔案拖進來',
+    upFile: f => `自己加入的檔案 ${f}`, remove: '移除',
+    upErr: (f, w) => `${f} 不能加入：${w}`,
+    upV3: '這是 v3 的 sup(FSB1),Loader v4 不會載入', upBad: '不是 Loader v4 的 sup 檔(FSB4 標頭不對)',
+    upSvc: n => `需要更新的 loader(服務表 v${n})`, upName: '檔名要是 .BIN、39 個字以內、只能有英數與 - _ . 空格',
+    upTaken: '跟這頁提供的檔案同名',
+    motion: ['陀螺儀與後製', '錄影時記下的資料，給後製用'],
+    development: ['開發用', '一般拍攝不需要'],
+    dl: '下載 zip', pick: '先勾選想使用的功能',
+    by: '作者', thanks: '致謝', soon: '尚未發行', dev: '開發中', long: '長期開發', updated: '更新', formats: '要放進卡的格式', guide: '更多說明',
+    history: '版本改動', currentVersion: '目前提供', releaseNotes: '完整版本說明',
+    noHistory: '尚無版本改動紀錄。', noChanges: '此版本未另外記錄改動摘要。', originalNotes: '以下為原始英文改動紀錄。',
+    clash: n => `與 ${n} 不相容：已安裝、關閉(開機不載入，可在相機的 SupManager 打開)`,
+    clashOn: n => `與 ${n} 不相容：這個開啟,${n} 已安裝、關閉`,
+    clashSame: n => `與 ${n} 是同一個 sup(sup_id 相同):存成 .OFF,不載入`,
+    swap: '改開這個', turnOff: '改關這個', selAll: '全選', selNone: '全部取消',
+    ok: n => '已準備好，可以下載。', fail: w => `檢查失敗:${w}`, inactive: '未啟用',
+    nOff: n => `${n} 個 sup 已安裝但關閉。之後要換：在相機的 SupManager 關掉開著的那個、打開想用的，重開機(兩個不相容的別同時開)。`,
+  },
+  en: {
+    intro: 'Loader v4 test page. Choose the tools you want, download and unzip them, then follow the installation steps below; the tools\' settings are on the fpSup page, after the last SYSTEM page. SIGMA fp Ver.5.02 only.',
+    card: 'Selected tools',
+    startup: 'Start-up', instant: 'Instant Start', instantHint: 'On by default. Loads directly after a power-switch restart.',
+    fast: 'Fast Start', fastHint: 'Tick to speed up cold starts. The first boot stores the loader in camera settings.',
+    manager: 'fpSup menu page', managerHint: 'Open Sup settings and enable or disable Sups in the camera menu. Restart to apply the enable list.',
+    managerNeeded: 'Always included on Loader v4: Lossless\'s switch and Res-Custom\'s file page live on this page.',
+    required: n => `Included automatically: required by ${n}.`,
+    labNeeds: 'Includes RES-CUSTOM and the fpSup menu page. Fixed resolutions are optional and start unticked.',
+    kofi: 'supMe on Ko-fi',
+    install: 'Install',
+    flash: '⚡ Thanks to our Flash, <b>Andy_hal9000</b>, whose tip cut start-up from 11.5 s to 3 s, on every card.',
+    steps: [
+      'The camera must be a SIGMA fp (not fp L) on firmware <b>Ver.5.02</b> exactly.',
+      'Choose the tools you want, download the zip and unzip it.',
+      'Copy <b>what is inside</b> the unzipped folder (<code>AutoRun.txt</code>, the <code>fpSup</code> folder, <code>README.txt</code>) to the <b>top level</b> of the SD card. <b>When updating a card, first delete the whole old <code>fpSup</code> folder</b> (and an old-format <code>fpSup.BIN</code> or <code>FPSUPUI</code>): copying over it leaves sups and format data files you did not tick this time on the card, and they still load.',
+      'Start the camera. Four white boxes at the top left mean loading is complete.',
+    ],
+    format: ['Recording formats', 'Resolution, open gate, lossless compression'],
+    monitor: ['Monitoring & screen', 'What you see on the screen while shooting'],
+    focus: ['Focus', 'Autofocus'],
+    upcoming: ['In development', 'Not selectable yet: what is coming next'],
+    own: ['Your own sups', 'A v4 .BIN someone gave you, on the same card. Kept in this browser only'],
+    add: 'Add a .BIN', addHint: 'Click to choose a file, or drop it here',
+    upFile: f => `Your own file ${f}`, remove: 'Remove',
+    upErr: (f, w) => `${f} cannot be added: ${w}`,
+    upV3: 'a v3 sup (FSB1): Loader v4 does not load it', upBad: 'not a Loader v4 sup (no FSB4 header)',
+    upSvc: n => `needs a newer loader (service table v${n})`, upName: 'the name must be a .BIN of 39 characters at most: letters, digits, - _ . and spaces',
+    upTaken: 'a file of this page has that name',
+    motion: ['Gyro & post', 'Data recorded with the clip, for post'],
+    development: ['Development', 'Not needed for shooting'],
+    dl: 'Download zip', pick: 'Choose the tools you want',
+    by: 'By', thanks: 'Thanks to', soon: 'Not released yet', dev: 'In development', long: 'Long-term development', updated: 'updated', formats: 'Formats to put on the card', guide: 'More',
+    history: 'Version changes', currentVersion: 'Currently offered', releaseNotes: 'Full release notes',
+    noHistory: 'No version changes recorded yet.', noChanges: 'No separate change summary was recorded for this version.', originalNotes: 'Original change notes in English:',
+    clash: n => `Not compatible with ${n}: installed, off (does not load; turn it on in the camera's SupManager)`,
+    clashOn: n => `Not compatible with ${n}: this one is on, ${n} is installed and off`,
+    clashSame: n => `The same sup as ${n} (same sup_id): saved as .OFF, does not load`,
+    swap: 'Turn this one on', turnOff: 'Turn this one off', selAll: 'Select all', selNone: 'Clear all',
+    ok: n => 'Ready to download.', fail: w => `Check failed: ${w}`, inactive: 'not enabled',
+    nOff: n => `${n} sup(s) are installed but off. To switch later: in the camera's SupManager turn the running one off and the one you want on, then restart (never both of two that clash).`,
+  },
+};
+/* EN / 中 (Simplified) / 繁 (Traditional), the site's three settings under the
+   site's own key, so a choice made anywhere on fpSup carries here.  Simplified
+   is the Traditional strings through CAT.t2s (assets/lang.js's table).  English
+   is the default, as on the rest of the site. */
+const LANG_KEY = 'fpsup-lang';
+let lang = (() => { try { const v = localStorage.getItem(LANG_KEY); return ['en', 'cn', 'zh'].includes(v) ? v : 'en'; } catch (e) { return 'en'; } })();
+const toCn = s => s.replace(/[\u3400-\u9fff]/g, c => CAT.t2s[c] || c);
+const cnOf = v => typeof v === 'string' ? toCn(v)
+  : Array.isArray(v) ? v.map(cnOf)
+  : typeof v === 'function' ? (...a) => toCn(v(...a)) : v;
+T.cn = Object.fromEntries(Object.entries(T.zh).map(([k, v]) => [k, cnOf(v)]));
+const about = p => lang === 'en' ? p.about.en : lang === 'cn' ? toCn(p.about.zh) : p.about.zh;
+let picked = [];                     // priority order: earlier wins a clash
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const OPEN_HISTORY = new Set();
+
+function versionHistory(p, t){
+  const history = p.history || [];
+  const entries = history.map(h => {
+    const localized = h.changes[lang === 'en' ? 'en' : 'zh'];
+    const changes = localized || h.changes.en || [];
+    return `<article>
+      <h3>${h.label ? `<span class="m">${esc(h.label)}</span>` : ''}${h.date ? `<time datetime="${esc(h.date)}">${esc(h.date)}</time>` : ''}${h.build_label ? `<span class="badge">${esc(about({about:h.build_label}))}</span>` : ''}${h.current ? `<span class="badge current">${esc(t.currentVersion)}</span>` : ''}</h3>
+      ${!localized && changes.length && lang !== 'en' ? `<p>${esc(t.originalNotes)}</p>` : ''}
+      ${changes.length ? `<ul>${changes.map(s => `<li>${esc(lang === 'cn' ? toCn(s) : s)}</li>`).join('')}</ul>` : `<p>${esc(t.noChanges)}</p>`}
+      ${h.source && h.source_kind !== 'manifest' ? `<a class="source" href="${esc(h.source)}" target="_blank" rel="noopener">${esc(t.releaseNotes)} ↗</a>` : ''}
+    </article>`;
+  }).join('');
+  return `<details class="history" data-history="${p.id}"${OPEN_HISTORY.has(p.id) ? ' open' : ''}>
+    <summary>${esc(t.history)}${history.length ? ` <span class="count">· ${history.length}</span>` : ''}</summary>
+    ${history.length ? `<div class="history-list" tabindex="0" role="region" aria-label="${esc(p.name + ' · ' + t.history)}">${entries}</div>` : `<p>${esc(t.noHistory)}</p>`}
+  </details>`;
+}
+
+const more = (p, t) => p.guide
+  ? `<a class="guide" href="${esc(p.guide)}" target="_blank" rel="noopener">${esc(t.guide)} ↗</a>` : '';
+
+/* Authors other than the site's own, and credits.  The site's own sups carry
+   no author (user 2026-10-07: it is me, no need to say so), so most tiles
+   have no line at all. */
+function byline(p, t){
+  const parts = [];
+  if (p.author) parts.push(`${esc(t.by)} <b>${esc(p.author)}</b>`);
+  if (p.credits.length) parts.push(`${esc(t.thanks)} ${p.credits.map(c => `<b>${esc(c)}</b>`).join(', ')}`);
+  return parts.length ? `<span class="by">${parts.join(' · ')}</span>` : '';
+}
+
+function dataChips(p, t){
+  if (!(p.data_files || []).length || !selected(picked).includes(p.id)) return '';
+  const offs = dataExcluded(p, picked);
+  return `<div class="data" role="group" aria-label="${esc(t.formats)}">${p.data_files.map(d => {
+    const on = !offs.includes(d.path);
+    return `<label class="${on ? 'on' : ''}"><input type="checkbox" data-file="${esc(d.path)}" data-of="${p.id}" ${on ? 'checked' : ''}>${esc(d.label)}${d.author ? `<small>${esc(t.by)} ${esc(d.author)}</small>` : ''}</label>`;
+  }).join('')}</div>`;
+}
+
+function tile(p, t, pl){
+  const ticked = selected(picked).includes(p.id), parked = pl.off.includes(p.id);
+  const neededBy = selected(picked).filter(id => (byId(id).requires || []).includes(p.id));
+  const others = picked.filter(q => clashes(p.id, q)).map(q => byId(q).name).join(', ');
+  const potential = !ticked && CAT.products.some(q => clashes(p.id, q.id))
+    ? CAT.products.filter(q => clashes(p.id, q.id)).map(q => q.name).join(', ') : '';
+  let warn = '';
+  if (ticked && others){
+    const same = parked && sameId(p.id, pl.on);
+    warn = parked
+      ? `<span class="warn">${esc(same ? t.clashSame(others) : t.clash(others))}<button type="button" data-swap="${p.id}">${esc(t.swap)}</button></span>`
+      : `<span class="warn">${esc(t.clashOn(others))}<button type="button" data-yield="${p.id}">${esc(t.turnOff)}</button></span>`;
+  }
+  else if (potential) warn = `<span class="hint">⚠ ${esc(t.clash(potential).split(':')[0])}</span>`;
+  return `<div class="tile${ticked ? (parked ? ' parked' : ' on') : ''}">
+    <input type="checkbox" id="c-${p.id}" data-id="${p.id}" ${ticked ? 'checked' : ''} ${neededBy.length ? 'disabled' : ''}>
+    <label class="name" for="c-${p.id}">${esc(p.name)}<span class="m">${'v' + esc(p.version)}${p.build_label && p.category === 'development' ? ' · ' + esc(about({about:p.build_label})) : ''}${p.date ? ` · ${esc(t.updated)} ${esc(p.date)}` : ''}</span></label>
+    <span class="desc">${esc(about(p) || p.about.en || '')}</span>
+    ${neededBy.length ? `<span class="hint">${esc(t.required(neededBy.map(id => byId(id).name).join(', ')))}</span>` : ''}
+    ${p.id === 'res-lab' ? `<span class="hint">${esc(t.labNeeds)}</span>` : ''}
+    ${dataChips(p, t)}
+    ${warn}
+    ${more(p, t)}
+    ${p.upload ? `<button type="button" class="rm" data-rm="${p.id}">${esc(t.remove)}</button>` : versionHistory(p, t)}
+    ${byline(p, t)}
+  </div>`;
+}
+
+const selectable = () => CAT.products.filter(p => p.category !== 'development').map(p => p.id);
+let UPNOTE = '';                                    // the last upload's refusal, shown in its section
+function ownSection(t, pl){
+  const ps = CAT.products.filter(p => p.upload);
+  const n = ps.filter(p => selected(picked).includes(p.id)).length;
+  const [title, sub] = t.own;
+  return `<section><h2>${esc(title)}<span>${ps.length ? (n ? n + ' / ' : '') + ps.length : ''}</span></h2><p class="sub">${esc(sub)}</p>`
+    + (UPNOTE ? `<p class="upnote">${esc(UPNOTE)}</p>` : '')
+    + ps.map(p => tile(p, t, pl)).join('')
+    + `<label class="tile add" id="drop" tabindex="0"><input type="file" id="upfile" accept=".BIN,.bin" multiple hidden>`
+    + `<span class="plus">＋</span><b>${esc(t.add)}</b><span class="desc">${esc(t.addHint)}</span></label></section>`;
+}
+
+function pendingTile(p, t){
+  return `<div class="tile pending">
+    <input type="checkbox" disabled aria-label="${esc(t.soon)}">
+    <span class="name">${esc(p.name)}<span class="soon">${esc(p.stage === 'dev' ? t.dev : p.stage === 'long' ? t.long : t.soon)}</span></span>
+    <span class="desc">${esc(about(p) || p.about.en || '')}</span>
+    ${more(p, t)}
+    ${versionHistory(p, t)}
+    ${byline(p, t)}
+  </div>`;
+}
+
+function render(){
+  const t = T[lang], pl = plan(picked);
+  document.documentElement.lang = lang === 'zh' ? 'zh-Hant' : lang === 'cn' ? 'zh-Hans' : 'en';
+  document.documentElement.dataset.lang = lang;
+  document.querySelectorAll('[data-t]').forEach(el => { el.textContent = t[el.dataset.t]; });
+  $('#steps').innerHTML = t.steps.map(x => `<li>${x}</li>`).join('');   // our own strings, not data
+  $("#thanks").innerHTML = t.flash;
+  $('#startup').innerHTML = `<h2>${esc(t.startup)}</h2>` + ['instant', 'fast'].map(k =>
+    `<label class="boot-option"><input type="checkbox" data-boot="${k}" ${BOOT[k] ? 'checked' : ''}><span><b>${esc(t[k])}</b><small>${esc(t[k + 'Hint'])}</small></span></label>`).join('')
+    + `<label class="boot-option"><input type="checkbox" data-boot="manager" ${managerEnabled(picked) ? 'checked' : ''} ${managerRequired(picked) ? 'disabled' : ''}><span><b>${esc(t.manager)}</b><small>${esc(managerRequired(picked) ? t.managerNeeded : t.managerHint)}</small></span></label>`;
+  document.querySelectorAll('[data-lang]').forEach(b => b.setAttribute('aria-pressed', b.dataset.lang === lang));
+
+  const openDev = !!document.querySelector('details.dev[open]') || picked.some(id => byId(id).category === 'development');
+  /* Released sups by category; everything still in development in one
+     section at the bottom (user 2026-10-08), above the folded development
+     tools.  A sup released but not yet on this page (stage 'unreleased')
+     stays in its category. */
+  const rank = p => (CAT.order || []).indexOf(p.id);
+  const byRank = (a, b) => rank(a) - rank(b);
+  const upcoming = p => p.stage === 'dev' || p.stage === 'long';
+  const section = c => {
+    const ps = CAT.products.filter(p => p.category === c).sort(byRank);
+    const pend = (CAT.pending || []).filter(p => p.category === c && !upcoming(p)).sort(byRank);
+    if (!ps.length && !pend.length) return '';
+    const [title, sub] = t[c] || [c, ''];
+    const n = ps.filter(p => selected(picked).includes(p.id)).length;
+    const body = ps.map(p => tile(p, t, pl)).join('') + pend.map(p => pendingTile(p, t)).join('');
+    if (c === 'development')
+      return `<details class="dev"${openDev ? ' open' : ''}><summary>${esc(title)} — ${esc(sub)}</summary>${body}</details>`;
+    return `<section><h2>${esc(title)}<span>${ps.length ? (n ? n + ' / ' : '') + ps.length : ''}</span></h2><p class="sub">${esc(sub)}</p>${body}</section>`;
+  };
+  const soon = (CAT.pending || []).filter(upcoming).sort(byRank);
+  const [upTitle, upSub] = t.upcoming;
+  /* Select all (the user 2026-10-25): every released sup and your own, not the
+     development tools; clashing ones go on the card off (plan). */
+  const all = selectable(), allOn = all.length && all.every(id => picked.includes(id));
+  $('#tiles').innerHTML = `<button type="button" class="selall" data-selall="${allOn ? 0 : 1}">${esc(allOn ? t.selNone : t.selAll)}</button>`
+    + CAT.categories.filter(c => c !== 'development').map(section).join('')
+    + ownSection(t, pl)
+    + (soon.length ? `<section><h2>${esc(upTitle)}<span>${soon.length}</span></h2><p class="sub">${esc(upSub)}</p>${soon.map(p => pendingTile(p, t)).join('')}</section>` : '')
+    + section('development');
+
+  const {files} = compose(picked);
+  const run = files.filter(f => f.p && !f.off);
+  const off = files.filter(f => f.off);
+  const ready = selected(picked).length || managerEnabled(picked);
+  const chosenTool = p => {
+    const formats = dataChosen(p, picked).map(d => d.label);
+    return esc(p.name) + (formats.length ? '\n  ' + formats.map(esc).join(' · ') : '');
+  };
+  $('#tree').innerHTML = ready
+    ? [...run.map(f => `<span class="new">${chosenTool(f.p)}</span>`),
+       ...(managerEnabled(picked) ? [esc(t.manager)] : []),
+       ...off.map(f => `<span class="off">${chosenTool(f.p)} (${esc(t.inactive)})</span>`)].join('\n')
+    : esc(t.pick);
+
+  const st = $('#status'), dl = $('#dl');
+  dl.textContent = t.dl;
+  if (!ready){ dl.disabled = true; st.textContent = ''; st.className = 'status'; return; }
+  const res = checks(picked), bad = res.find(r => !r.ok);
+  dl.disabled = !!bad;
+  st.className = 'status ' + (bad ? 'bad' : 'ok');
+  st.textContent = (bad ? t.fail(bad.what) : t.ok(res.length)) + (pl.off.length && !bad ? '\n' + t.nOff(pl.off.length) : '');
+  st.style.whiteSpace = 'pre-line';
+}
+
+document.addEventListener('toggle', e => {
+  const id = e.target.dataset && e.target.dataset.history;
+  if (id) e.target.open ? OPEN_HISTORY.add(id) : OPEN_HISTORY.delete(id);
+}, true);
+document.addEventListener('click', e => {
+  const b = e.target.closest('button');
+  if (!b) return;
+  if (b.dataset.lang){ lang = b.dataset.lang; try { localStorage.setItem(LANG_KEY, lang); } catch (e) {} render(); }
+  else if (b.dataset.selall){
+    picked = b.dataset.selall === '1' ? [...picked, ...selectable().filter(x => !picked.includes(x))]
+      : picked.filter(x => !selectable().includes(x));     // development tools stay as they were
+    render();
+  }
+  else if (b.dataset.rm){ picked = picked.filter(x => x !== b.dataset.rm); removeUpload(b.dataset.rm); render(); }
+  else if (b.dataset.swap){ picked = [b.dataset.swap, ...picked.filter(x => x !== b.dataset.swap)]; render(); }
+  /* off: after every one it clashes with, so the first of them runs instead */
+  else if (b.dataset.yield){ picked = [...picked.filter(x => x !== b.dataset.yield), b.dataset.yield]; render(); }
+  else if (b.id === 'dl'){
+    if (checks(picked).some(r => !r.ok)) return render();
+    const blob = new Blob([zipFor(picked)], {type: 'application/zip'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob); a.download = cardName(picked) + '.zip';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  }
+});
+function addFiles(list){
+  const t = T[lang];
+  UPNOTE = '';
+  let left = list.length;
+  [...list].forEach(f => {
+    const rd = new FileReader();
+    rd.onload = () => {
+      const r = addUpload(f.name, new Uint8Array(rd.result));
+      if (r.error) UPNOTE = t.upErr(f.name, r.error === 'upSvc' ? t.upSvc(r.n) : t[r.error]);
+      else if (!picked.includes(r.id)) picked = [...picked, r.id];
+      if (!--left){ saveUploads(); render(); }
+    };
+    rd.readAsArrayBuffer(f);
+  });
+}
+['dragenter', 'dragover'].forEach(k => document.addEventListener(k, e => {
+  const d = e.target.closest && e.target.closest('#drop');
+  if (d){ e.preventDefault(); d.classList.add('over'); }
+}));
+['dragleave', 'drop'].forEach(k => document.addEventListener(k, e => {
+  const d = e.target.closest && e.target.closest('#drop');
+  if (d){ e.preventDefault(); d.classList.remove('over'); }
+}));
+document.addEventListener('drop', e => {
+  if (e.target.closest && e.target.closest('#drop')) addFiles(e.dataTransfer.files);
+});
+document.addEventListener('keydown', e => {
+  if ((e.key === 'Enter' || e.key === ' ') && e.target.id === 'drop'){ e.preventDefault(); $('#upfile').click(); }
+});
+document.addEventListener('change', e => {
+  if (e.target.id === 'upfile'){ addFiles(e.target.files); e.target.value = ''; return; }
+  const boot = e.target.dataset && e.target.dataset.boot;
+  if (['instant', 'fast', 'manager'].includes(boot)){
+    if (boot === 'manager' && managerRequired(picked)) return render();
+    BOOT[boot] = e.target.checked; return render();
+  }
+  const f = e.target.dataset && e.target.dataset.file;
+  if (f){
+    const of = e.target.dataset.of, cur = dataExcluded(byId(of), picked);
+    DATA_OFF[of] = e.target.checked ? cur.filter(x => x !== f) : [...cur, f];
+    return render();
+  }
+  const id = e.target.dataset && e.target.dataset.id;
+  if (!id) return;
+  if (!e.target.checked && selected(picked).some(q => (byId(q).requires || []).includes(id))) return render();
+  /* links: ticking a tile ticks those too; each stays free to untick */
+  const linked = e.target.checked ? (byId(id).links || []).filter(x => byId(x) && !picked.includes(x)) : [];
+  picked = e.target.checked ? [...picked, id, ...linked] : picked.filter(x => x !== id);
+  render();
+});
+render();
+</script>
+</body>
+</html>

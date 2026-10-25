@@ -331,7 +331,70 @@ def menu_return(pg, out):
                 r[:] = new
 
 
-def sup_row(pg, k):
+NATIVE_POPUP_WIDTH = 227      # v4: the stock On / Off popup (MainB2's 音訊記錄), texts right-aligned to x 965
+NATIVE_KEYS = ('0081', '0080')
+NATIVE_STATUS_RIGHT = 855     # v4: R's right edge, left of the On / Off column (965)  # v4: Enable / Disable as the stock .nloc On / Off, localized by the GUI
+
+
+TOGGLE_KEYS = (('0080', 'TOff'), ('0081', 'TOn'))     # .nloc Off / On (B2_6.cvm)
+VALUE_RIGHT = 965.0          # the stock pages' value column ends here (MainB2's 開啟 / 關閉)
+
+
+def stock_text(pg, out, beside, at, donor, key, show, right=False, size=None):
+    """A sibling of object `beside`: the stock text `key` (a .nloc key in the
+    pool, so the GUI localizes it) at `at` (x, y; right=True: x is its right
+    edge), drawn by the stock
+    drawText of stock object `donor` as it is in the image (its font setting,
+    size, colour), its opacity bound to `show`."""
+    by = F.by_object(out)
+    oid = pg.take_id()
+    head = bytearray(out[by[beside][0]])
+    put(head, 20, oid); put(head, 8, 2); put(head, 16, 0)
+    base = F.owned(out[F.comp(out, by[beside], 'objectBase', pg.pool)], oid)
+    t = F.owned(pg.raw[F.comp(pg.raw, pg.src[donor], 'drawText', pg.pool)], oid)
+    # fields in mask-bit order (ft6_page.styled_text): text = id + 1 byte (1: a
+    # .nloc key the GUI localizes, 0: a literal), then horz-align (bit 4) when
+    # there is no font / size (bits 1, 2); the record ends with its rect
+    mask, off = u32(t, 28), F.text_field(t, pg.pool, pg.schemas)[0]
+    check(mask & 0x6 == 0 and t[off + 4] == 1, 'stock drawText form (a key, no font / size)')
+    check(pg.pool.find(key) is not None, f'stock text {key} is not in the pool')
+    put(t, off, pg.pool.find(key))                      # the key; the flag stays 1
+    if right:
+        check(mask & 0x10, 'stock drawText without its horz-align field')
+        put(t, off + 5, 3)                              # right-aligned, as the stock value
+    # the stock rect (its size is what the stock text is laid out in), or `size`
+    w, h = size or struct.unpack_from('>2f', t, len(t) - 8)
+    struct.pack_into('>2f', t, len(t) - 8, w, h)
+    struct.pack_into('>4f', base, 32, at[0] - w if right else at[0], at[1], w, h)
+    at = by[beside][-1] + 1
+    out[at:at] = [head, base, t]
+    parent = u32(head, 24)
+    ph = out[F.by_object(out)[parent][0]]
+    put(ph, 16, u32(ph, 16) + 1)
+    pg.bind(out, oid, show, u32(base, 24), 'opacity', 1)
+    return oid
+
+
+def native_text(pg, owner, donor, key, w, h):
+    """The stock drawText of object `donor` for `owner`, showing the .nloc key
+    `key` (text id + flag 1: the GUI draws it in the camera's language) in a
+    w x h rect; the stock font setting, size and alignment stay."""
+    t = F.owned(pg.raw[F.comp(pg.raw, pg.src[donor], 'drawText', pg.pool)], owner)
+    off = F.text_field(t, pg.pool, pg.schemas)[0]
+    check(u32(t, 28) & 0x6 == 0 and t[off + 4] == 1, 'stock drawText form (a key, no font / size)')
+    check(pg.pool.find(key) is not None, f'stock text {key} is not in the pool')
+    put(t, off, pg.pool.find(key))
+    struct.pack_into('>2f', t, len(t) - 8, float(w), float(h))
+    return t
+
+
+def sup_row(pg, k, key_shift=0, dots=True, native=False):
+    """`key_shift` 1 (loader v4, slot 0 exists): the popup's FT_Key is 20 + k + 1, so slot 0's is not 20.
+    `dots` False (loader v4): no ... -- it means "enters a page", and these rows
+    open a popup (user 2026-10-24: "...是只能進入用的").
+    `native` (loader v4): the popup is the stock On / Off popup -- its size,
+    and Enable / Disable as the stock On / Off texts, localized (user 2026-10-24)."""
+    W = NATIVE_POPUP_WIDTH if native else POPUP_WIDTH
     out, m = pg.clone(SELECT_ROW)
     # Keep the popup, lock and paint, remove the native update routing and
     # the parent's camera/EVF exclusion objects.
@@ -394,14 +457,17 @@ def sup_row(pg, k):
     pg.bind(out, m[1515], var('Lock', k), u32(lock, 24), 'value', 1)
     rootbase = out[F.comp(out, F.by_object(out)[m[SELECT_ROW]], 'objectBase', pg.pool)]
     pg.bind(out, m[SELECT_ROW], var('Visible', k), u32(rootbase, 24), 'opacity', 1)
+    # tab-index = 0 does not keep Up/Down out of an empty row (camera,
+    # 2026-10-21); is-visible = 0 does for MainY5's closed popup.
+    pg.bind(out, m[SELECT_ROW], var('Visible', k), u32(rootbase, 24), 'is-visible', 1)
     selectbase = out[F.comp(out, F.by_object(out)[m[SELECT]], 'objectBase', pg.pool)]
     pg.bind(out, m[SELECT], var('Visible', k), u32(selectbase, 24), 'tab-index', 1)
     lb = out[F.comp(out, F.by_object(out)[m[LIST]], 'objectBase', pg.pool)]
     check(u32(lb, 28) == 0xD3, 'MainY5 popup base form')
     # Position beside this Sup, keeping both choices above the footer.
     popup_y = min(81.0 * k, CONTENT_HEIGHT - POPUP_HEIGHT)
-    struct.pack_into('>4f', lb, 32, 1024.0 - POPUP_WIDTH, popup_y - 81.0 * k,
-                     float(POPUP_WIDTH), float(POPUP_HEIGHT))
+    struct.pack_into('>4f', lb, 32, 1024.0 - W, popup_y - 81.0 * k,
+                     float(W), float(POPUP_HEIGHT))
     cv = out[F.comp(out, F.by_object(out)[m[LIST]], 'controlValue', pg.pool)]
     check(u32(cv, 28) == 0xA and len(cv) == 40, 'MainY5 List limit form')
     struct.pack_into('>f', cv, 32, 1.0)
@@ -417,20 +483,24 @@ def sup_row(pg, k):
         pg.append_action(out, m[LIST], 'controlValueEvent', event,
                          lambda ev, order, value=value: pg.write(m[LIST], ev, order, var('Selected', k), value))
     pg.append_action(out, m[LIST_ITEM], 'focusEvent', 'FocusOn',
-                     lambda ev, order: pg.write(m[LIST_ITEM], ev, order, PAGE_KEY, 20 + k))
+                     lambda ev, order: pg.write(m[LIST_ITEM], ev, order, PAGE_KEY, 20 + k + key_shift))
     pg.append_action(out, m[LIST_ITEM], 'focusEvent', 'FocusOff',
                      lambda ev, order: pg.write(m[LIST_ITEM], ev, order, PAGE_KEY, 20))
-    for old, label in zip(POPUP_TEXT[:2], ('Enable', 'Disable')):
+    text_w = 965.0 - (1024.0 - W) - 36.0 if native else W - 120   # native: right-aligned to 965
+    for old, label, key in zip(POPUP_TEXT[:2], ('Enable', 'Disable'), NATIVE_KEYS):
         by = F.by_object(out)
         ti = F.comp(out, by[m[old]], 'drawText', pg.pool)
-        tr = label_text(pg, out[ti], m[old], NAME_SIZE, 0xFFFFFFFF, POPUP_WIDTH - 120, 58)
-        pg.literal(tr, label)
+        if native:
+            tr = native_text(pg, m[old], old, key, text_w, 58)
+        else:
+            tr = label_text(pg, out[ti], m[old], NAME_SIZE, 0xFFFFFFFF, W - 120, 58)
+            pg.literal(tr, label)
         out[ti] = tr
         # Text01's stock anchor moves its label outside the narrow QR column.
         # Use this same page's plain Name frame inside the compact popup.
         bi = F.comp(out, by[m[old]], 'objectBase', pg.pool)
         b = F.owned(pg.raw[F.comp(pg.raw, pg.src[30021], 'objectBase', pg.pool)], m[old])
-        struct.pack_into('>4f', b, 32, 36.0, 10.0, float(POPUP_WIDTH - 120), 58.0)
+        struct.pack_into('>4f', b, 32, 36.0, 10.0, float(text_w), 58.0)
         foreground(b)  # keep the native cursor fill behind the choice label
         out[bi] = b
     # Resize the donor's item/background frames with the outer List.
@@ -438,13 +508,16 @@ def sup_row(pg, k):
         by = F.by_object(out)
         b = out[F.comp(out, by[m[old]], 'objectBase', pg.pool)]
         size_off = 40 if u32(b, 28) & 1 else 32
-        struct.pack_into('>2f', b, size_off, float(POPUP_WIDTH), 81.0 if old == LIST_ITEM else 79.0)
+        struct.pack_into('>2f', b, size_off, float(W), 81.0 if old == LIST_ITEM else 79.0)
         for i in by[m[old]]:
             r = out[i]
             if F.pool_name(pg, r) == 'drawRect':
-                struct.pack_into('>f', r, len(r) - 8, float(POPUP_WIDTH))
+                struct.pack_into('>f', r, len(r) - 8, float(W))
+    if not dots:                                    # 1536 = font_G_3dot
+        r = out[F.comp(out, F.by_object(out)[m[1536]], 'drawImage', pg.pool)]
+        put(r, 32, pg.pool.find('blank'))
     arrow = out[F.comp(out, F.by_object(out)[m[30019]], 'objectBase', pg.pool)]
-    struct.pack_into('>f', arrow, 32, float(POPUP_WIDTH - 52))
+    struct.pack_into('>f', arrow, 32, float(W - 52))
     pg.bind(out, m[30019], var('More', k), u32(arrow, 24), 'opacity', 1)
     selected_bg = out[F.comp(out, F.by_object(out)[m[30023]], 'drawRect', pg.pool)]
     put(selected_bg, 32, 0x666666FF)
@@ -461,28 +534,46 @@ def sup_row(pg, k):
     b = out[F.comp(out, F.by_object(out)[name], 'objectBase', pg.pool)]
     struct.pack_into('>4f', b, 32, 49.0, 16.0, 600.0, 46.0)
     # New text objects use this page's Name object and its native drawText form.
-    for part, color, x, y, w in (('G', 0x8A8A8AFF, 49, 16, 600), ('V', 0x9A9A9AFF, 49, 30, 400),
-                                  ('R', 0xFF453AFF, 460, 31, 404), ('E', 0x30D158FF, 460, 31, 404)):
+    # native (v4): the right column is the stock On / Off (below), so no green
+    # E; R (Unload on restart ...) is the name's size, ending left of it
+    # (user 2026-10-24)
+    parts = (('G', 0x8A8A8AFF, 49, 16, 600), ('V', 0x9A9A9AFF, 49, 30, 400),
+             ('R', 0xFF453AFF, 460, 31, 404), ('E', 0x30D158FF, 460, 31, 404))
+    if native:
+        # no V: v4 shows no version, and its x binding ('position' on VersionX,
+        # one per slot) cost every key on the page (a bound position re-lays out;
+        # camera A/B 2026-10-24 on the fpSup page's popups)
+        parts = parts[:1] + (('R', 0xFF453AFF, NATIVE_STATUS_RIGHT - 500, 16, 500),)
+    for part, color, x, y, w in parts:
+        big = part == 'G' or (native and part == 'R')
         by = F.by_object(out); oid = pg.take_id()
         o = bytearray(out[by[name][0]])
         put(o, 20, oid); put(o, 8, 2); put(o, 16, 0)
         b = F.owned(out[F.comp(out, by[name], 'objectBase', pg.pool)], oid)
         struct.pack_into('>4f', b, 32, float(x), float(y), float(w),
-                         46.0 if part == 'G' else 32.0 if part == 'V' else 26.0)
+                         46.0 if big else 32.0 if part == 'V' else 26.0)
         # Native text mask 0x40000003 includes horizontal alignment. Build a
         # literal text component from the language page's well-tested form.
         text = bytearray(template)
         put(text, 24, u32(tr, 24)); put(text, 32, 0); text[36] = 0
-        t = label_text(pg, text, oid, NAME_SIZE if part == 'G' else 26 if part == 'V' else DETAIL_SIZE,
-                       color, w, 46 if part == 'G' else 32 if part == 'V' else 28)
+        t = label_text(pg, text, oid, NAME_SIZE if big else 26 if part == 'V' else DETAIL_SIZE,
+                       color, w, 46 if big else 32 if part == 'V' else 28)
         if part in ('R', 'E'):
             put(t, 45, 3)
         at = F.by_object(out)[name][-1] + 1
         out[at:at] = [o, b, t]
         pg.bind(out, oid, var(part, k), u32(t, 24), 'text')
+        if native and part in ('G', 'R'):
+            # drawn only when it says something: an empty text object still costs
+            # every redraw (camera A/B 2026-10-24: Render 33 -> 24 ms with these hidden)
+            # opacity only: an is-visible text object, once hidden, is never drawn again (camera)
+            pg.bind(out, oid, var(part + 'Show', k), u32(b, 24), 'opacity', 1)
         if part == 'V':
             pg.bind_sub(out, oid, var('VersionX', k), u32(b, 24), 'position', 0)
         put(out[F.by_object(out)[m[SELECT]][0]], 16, u32(out[F.by_object(out)[m[SELECT]][0]], 16) + 1)
+    if native:                                      # the stock On / Off, localized: FT_TOff<k> / FT_TOn<k>
+        for key, group in TOGGLE_KEYS:
+            stock_text(pg, out, name, (VALUE_RIGHT, 16.0), 30021, key, var(group, k), right=True)
     def back(event):
         r = bytearray(pg.raw[F.row_actions_raw(pg, F.ROW_ITEM, 'Right')])
         put(r, 20, m[SELECT]); put(r, 24, event); put(r, 28, 1)
@@ -495,7 +586,7 @@ def sup_row(pg, k):
 
 def build_home(img, pool):
     pg = Management(img, pool)
-    manager_header(pg, 'fpSUP')
+    manager_header(pg, 'fpSUP', legacy_logo=True)
     for k, (title, request) in enumerate(HOME):
         out, _ = jump_row(pg, k, title, request, disabled=request in UNFINISHED_HOME)
         pg.add(out)
@@ -559,7 +650,13 @@ def render_group(base):
     put(base, 4, len(base))
 
 
-def manager_header(pg, title_text='SupManager'):
+V4_TITLE_Y = 18          # the v4 pages' title, 5 px lower than v3's 13 (user 2026-10-24)
+
+
+def manager_header(pg, title_text='SupManager', head_var=None, title_y=13, legacy_logo=False):
+    """`head_var` (loader v4): a grey backing behind the header, its opacity
+    that variable -- the core sets it while focus is on the hidden stock tab
+    bar (object 55), which otherwise shows no highlight at all."""
     # Keep fixed chrome outside the donor's animated category header. Its
     # focus/key controllers remain in place, but its paint is moved aside.
     for owner in (56,):
@@ -567,8 +664,16 @@ def manager_header(pg, title_text='SupManager'):
     out, group = plain_object(pg, 1, 0, 0, 1024, 99)
     foreground(out[1])
     render_group(out[1])
-    put(out[0], 16, len(LOGO.layers()) + 1)
-    for name, color, _blob in LOGO.layers():
+    logo = LOGO.layers(legacy_logo)                     # v3: its 31 layers, unchanged bytes
+    put(out[0], 16, len(logo) + 1)
+    lit = []
+    if head_var is not None:
+        # A sibling before the header group, not its child: as the group's
+        # first child it painted over the logo and title (camera, 2026-10-21).
+        lit, owner = plain_object(pg, 1, 0, 0, 1024, 99)
+        lit.append(fill_rect(pg, owner, 0x444444FF, 1024, 99)); put(lit[0], 8, 2)
+        pg.bind(lit, owner, head_var, u32(lit[1], 24), 'opacity', 1)
+    for name, color, _blob in logo:
         layer, owner = plain_object(pg, group, 28, 16, LOGO.WIDTH, LOGO.HEIGHT)
         draw = F.owned(pg.raw[F.comp(pg.raw, pg.src[19495], 'drawImage', pg.pool)], owner)
         draw[:] = draw[:28] + struct.pack('>IIII4f', 0x87, 0, 1, color,
@@ -576,11 +681,12 @@ def manager_header(pg, title_text='SupManager'):
         put(draw, 4, len(draw)); pg.private(draw, 32, name)
         layer.append(draw); put(layer[0], 8, 2)
         out += layer
-    title, _ = plain_object(pg, group, 104, 13, 800, 62, title_text, 50)
+    title, _ = plain_object(pg, group, 104, title_y, 800, 62, title_text, 50)
     out += title
+    out = lit + out
     at = next(i for i, r in enumerate(pg.seq) if u32(r, 0) == 0x10003 and u32(r, 24) == 1)
     pg.seq[at:at] = out; pg.added += out
-    put(pg.seq[pg.ob()[1][0]], 16, u32(pg.seq[pg.ob()[1][0]], 16) + 1)
+    put(pg.seq[pg.ob()[1][0]], 16, u32(pg.seq[pg.ob()[1][0]], 16) + 1 + bool(lit))
 
 
 def page_tabs(pg, out, parent):
@@ -648,10 +754,17 @@ def page_tabs(pg, out, parent):
     out[at:at] = dark_backings
 
 
-def build_manage(img, pool):
+def build_manage(img, pool, v4=False):
+    """v4: slot 0 under the title row (six sups or fewer: no paging, FT_Title
+    hides the title row), the header lights while the stock tab bar has focus
+    (FT_HeadOn); returns (page, refs, slot 0's focus id)."""
     pg = Management(img, pool)
-    manager_header(pg)
+    manager_header(pg, head_var='FT_HeadOn' if v4 else None, legacy_logo=not v4, **({'title_y': V4_TITLE_Y} if v4 else {}))
     out, m = jump_row(pg, 0, ' ', focus=FOCUS)
+    if v4:
+        title = out[F.comp(out, F.by_object(out)[m[F.KEEP_ROW]], 'objectBase', pool)]
+        for prop in ('opacity', 'is-visible'):
+            pg.bind(out, m[F.KEEP_ROW], 'FT_Title', u32(title, 24), prop, 1)
     page_tabs(pg, out, m[F.ROW_ITEM])
     # Paging is not a submenu: the native Jump donor's dots and arrow are blank.
     for old in (10062, 3457):
@@ -665,17 +778,44 @@ def build_manage(img, pool):
     for key, code in (('Left', PREVIOUS), ('Right', NEXT)):
         pg.event(out, m[F.ROW_ITEM], key, lambda event, code=code: [pg.write(m[F.ROW_ITEM], event, 1, PAGE_KEY, code)])
     menu_return(pg, out); pg.add(out)
-    for k in range(1, VISIBLE + 1):
-        out, _ = sup_row(pg, k); pg.add(out)
+    row0 = 0
+    for k in range(0 if v4 else 1, VISIBLE + 1):
+        out, rm = sup_row(pg, k, key_shift=1 if v4 else 0, dots=not v4, native=v4); pg.add(out)
+        row0 = row0 or rm[SELECT]
     pg.root_focus(FOCUS)
+    if v4:
+        # entered from the fpSup page's request: done, the core forgets the name
+        # (fpsup_home.c home_go) before that page comes back and sees GO_VAR again
+        enter_write(pg, GO_VAR, 0)
     chrome(pg, manage=True)
     colour_clips(pg)
-    return pg.finish()
+    return pg.finish() + ((row0,) if v4 else ())
+
+
+GO_VAR = 'FT_Go'          # home4_page: the fpSup page's "open this page" variable
+
+
+def enter_write(pg, name, value):
+    """The page's screen-enter event (the one that focuses from the focus
+    variable) first writes `name` = `value`."""
+    seq = pg.seq
+    at = next(i for i, r in enumerate(seq) if len(r) >= 32 and u32(r, 0) == 0x10006
+              and F.pool_name(pg, r) == 'screenEvent'
+              and any(F.pool_name(pg, a) == 'controlFocus' for a in seq[i + 1:i + 1 + u32(r, 16)]))
+    ev = seq[at]
+    acts = seq[at + 1:at + 1 + u32(ev, 16)]
+    focus = next(a for a in acts if F.pool_name(pg, a) == 'controlFocus')
+    for a in acts:
+        put(a, 28, u32(a, 28) + 1)
+    w = pg.write(u32(focus, 20), u32(focus, 24), 1, name, value)
+    seq.insert(at + 1, w)
+    pg.added.append(w)                                  # counted in the allocation header
+    put(ev, 16, u32(ev, 16) + 1)
 
 
 def build_info(name, img, pool):
     pg = Management(img, pool)
-    manager_header(pg, 'fpSUP')
+    manager_header(pg, 'fpSUP', legacy_logo=True)
     for k, title in enumerate(INFO[name]):
         out, _ = jump_row(pg, k, title, focus=var('InfoFocus', 0),
                           disabled=k in UNFINISHED_INFO.get(name, set()))

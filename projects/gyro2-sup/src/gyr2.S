@@ -207,7 +207,17 @@
 .equ V_OVT,    152                    /* and its vtable: 0, 0, 0, handler       */
 .equ V_TAGS,   168                    /* tags added (CinemaDNG take starts)     */
 .equ V_TAGN,   172                    /* the last tag's size                    */
+#ifdef GYR2_V4
+/* Loader v4: the fpSup page's Gyro2 row (src/gyr2_row4.c, user 2026-10-24) */
+.equ V_ROWOFF, 176                    /* the row: 1 = OFF (set by g2_install / the row) */
+.equ V_TAKEOFF, 180                   /* latched at the take start (mode 0)     */
+.equ VARS_BYTES, 184
+.equ HEADER_LEN, 48                   /* FSB4: entry is the file's first code   */
+.equ G2_STATE_BYTES, 256              /* struct g2                               */
+.equ G2_FOBJ_BYTES, 0x400             /* past the file: a file object + read-back */
+#else
 .equ VARS_BYTES, 176
+#endif
 
 /* ------------------------------------------------------------------ entry */
 /* r0 = block, r1 = service table.  Returns 0 = KEEP, 1 = RELEASE.
@@ -304,6 +314,28 @@ entry:
     add     r0, r7, #8
     bl      put_blx_t
 
+#ifdef GYR2_V4
+    /* The row (optional: Gyro2 runs whatever page_add says).  g2_install
+     * (g2_state, svc, block, {record, &V_ROWOFF, file object}) also sets
+     * V_ROWOFF from this file's saved record. */
+    sub     sp, sp, #16
+    ADRF    r0, g2_rec
+    str     r0, [sp]
+    add     r0, r6, #V_ROWOFF
+    str     r0, [sp, #4]
+    ADRF    r0, g2_fobj
+    str     r0, [sp, #8]
+    ADRF    r2, entry
+    sub     r2, r2, #HEADER_LEN
+    mov     r1, r5
+    mov     r3, sp
+    ADRF    ip, g2_code
+    ldr     r0, =G2_INSTALL             @ its offset in g2_code, Thumb bit set
+    add     ip, ip, r0
+    ADRF    r0, g2_state
+    blx     ip
+    add     sp, sp, #16
+#endif
     mov     r0, r5
     ldr     ip, [r5, #SVC_PUBLISH]
     blx     ip
@@ -871,6 +903,15 @@ tag_observer:
     ldr     r1, [r0, #4]                @ type: CinemaDNG only
     cmp     r1, #EV_TAKE_TYPE
     bne     9f
+#ifdef GYR2_V4
+    ldr     r1, [r0]                    @ the take start latches the row; OFF: no tag,
+    cmp     r1, #EV_BUILD               @ no block, nothing for the whole take
+    ldreq   r2, [r10, #V_ROWOFF]
+    streq   r2, [r10, #V_TAKEOFF]
+    ldr     r2, [r10, #V_TAKEOFF]
+    cmp     r2, #0
+    bne     9f
+#endif
     ldr     r1, [r0]                    @ mode
     cmp     r1, #EV_FRAME
     beq     30f
@@ -1262,9 +1303,23 @@ find_gtag:
 
     .ltorg
 
+#ifdef GYR2_V4
+/* In the file: the row's state (zero at load) and its saved record, written
+ * back by gyr2_row4.c into this file; then that unit's code. */
+.align 3
+g2_state:   .space G2_STATE_BYTES
+g2_rec:     .word 0, 0, 0, 0          /* {G2ST, 1, off, check}; zeros = never saved: ON */
+g2_name:    .asciz "Gyro2"            /* the header's display name (build.py: name_off) */
+.align 2
+g2_code:    .incbin G2_BIN
+#endif
+
 /* Past the file: the loader zeroes block_size - file_len (build.py). */
 .align 3
 gbuf:
 .set ebuf, gbuf + GLOG_BYTES
 .set vbuf, ebuf + ELOG_BYTES
 .set zbuf, vbuf + VLOG_BYTES              /* GTAG_MAX zeros, never written */
+#ifdef GYR2_V4
+.set g2_fobj, zbuf + GTAG_MAX
+#endif

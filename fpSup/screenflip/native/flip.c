@@ -1,5 +1,9 @@
 #include "flip.h"
+#ifdef FPF_V4
+#include "fpui_stock.c"    /* fpSup/fpsup-ui: the row on the stock TOOLS page */
+#else
 #include "ui_apply.h"     /* fpSup/uishare: pages composed from each sup's FPUI block */
+#endif
 
 /* Ver.5.02 facts. UI registry (fpSup/lossless/native/menu_page.c):
  *   C37B7048        the GUI object; its word +0 is the UI app
@@ -192,6 +196,12 @@ static uint32_t settings_write(struct fpf_card *c) {
     rec[0] = FPF_SETTINGS_MAGIC; rec[1] = 1u;
     rec[2] = pack(c->table, 0); rec[3] = pack(c->table, 4);
     rec[4] = record_check(rec[2], rec[3]);
+#ifdef FPF_V4
+    /* mode 7 creates a missing file: only into a file that is still this sup */
+    if (!c->svc || c->svc->file_is(c->svc, c->self_path,
+                                   (const void *)(c->base - FPF_HEADER_LEN), FPF_HEADER_LEN) != SL_OK)
+        return 0;
+#endif
     f_ctor(o);
     ok = f_open(o, c->self_path, 7u) && f_seek(o, FPF_HEADER_LEN + FPF_SETTINGS_OFF) &&
          f_write(o, rec, sizeof rec);
@@ -308,7 +318,11 @@ static uintptr_t variable(uintptr_t app, const char *NAME) {
 static uint32_t refuse(struct fpf_card *c, uint32_t why) { if (c) c->result = why; return 1; }
 static uint32_t stop(struct fpf_card *c, uint32_t why) { c->result = why; return 0; }
 
-USED uint32_t fpf_card_init(struct fpf_card *c, uintptr_t base, const char *path) {
+USED uint32_t fpf_card_init(struct fpf_card *c, uintptr_t base, const char *path
+#ifdef FPF_V4
+                            , const struct sl_svc *svc
+#endif
+                            ) {
     volatile uint32_t *w;
     const char *NAME;
     uintptr_t app;
@@ -317,6 +331,9 @@ USED uint32_t fpf_card_init(struct fpf_card *c, uintptr_t base, const char *path
         return refuse(c, FPF_INVALID);
     c->magic = CARD_MAGIC;
     c->base = base;
+#ifdef FPF_V4
+    c->svc = svc;
+#endif
     c->task_id = -1;
     c->live_key = c->edit_key = FPF_NO_KEY;
     w = c->name;                                    /* MV_fpScreenFlip; .text only */
@@ -339,7 +356,11 @@ USED uint32_t fpf_card_init(struct fpf_card *c, uintptr_t base, const char *path
     publish();
     {
         struct uia_outcome ui;
+#ifdef FPF_V4
+        c->ui_result = fpui_stock_apply(svc, (const void *)c->ui_at, c->ui_len, &ui);
+#else
         c->ui_result = uia_apply(c->ui_at, c->ui_len, &ui);
+#endif
         c->ui_op = ui.op;
         if (c->ui_result != UIA_OK) return stop(c, FPF_UI);
         c->first_id = ui.first_id;

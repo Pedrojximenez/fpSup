@@ -77,12 +77,13 @@ V4_HEADER = 'RC_Header'                # the title: "RES-CUSTOM (enabled/capacit
 
 
 def v4_texts():
-    """ogc_files.c RT_BLANK .. RT_PAGE, in that order."""
+    """ogc_files.c RT_BLANK .. RT_LOAD, in that order."""
     import build_fp4 as F4
     sm = F4.SUPMGR_TEXTS
     return (' ', sm[5], sm[6], sm[7], 'Enabled', 'Disabled', 'List full: disable one',
             'Restart to apply', 'Write failed', 'Recording busy', 'Restart to update',
-            'No RCD files', V4_PAGE)
+            'No RCD files', V4_PAGE,
+            sm[1], sm[2])          # RT_UNLOAD, RT_LOAD: the row's restart note, as SupManager's (user 2026-10-24)
 
 
 def rc_name(name):
@@ -128,8 +129,8 @@ def ft4():
     variables = v4_vars(row0)
     declared = {n for _t, n, _v in variables}
     for _o, t in refs:
-        if t.startswith(('FT_', 'RC_')) and t not in declared and not t.startswith('FT_LOGO'):
+        if t.startswith(('FT_', 'RC_')) and t not in declared and not t.startswith('FT_LOGO') and t != M.GO_VAR:
             raise ValueError(f'the page names {t}, which is not declared')
-    data, info = F4.ft4_file([(V4_PAGE, (bytes(page), refs))], ((V4_PAGE, V4_HOME, 'Return'),),
+    data, info = F4.ft4_file([(V4_PAGE, (bytes(page), refs))], ((V4_PAGE, V4_HOME, 'Return'),) + F4.open_transitions(V4_PAGE),
                              V4_MACHINE, variables, v4_texts())
     return data, dict(info, page=V4_PAGE, variables=len(variables), row0=row0)

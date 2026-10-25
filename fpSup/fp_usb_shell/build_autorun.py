@@ -54,6 +54,20 @@ ap.add_argument('--store-boot', action='store_true',
                      'itself.  Merge adds the fast start on the way out instead, '
                      'from templates built with this flag, and refuses a card '
                      'that already has it')
+ap.add_argument('--store-slim', action='store_true',
+                help='(Loader v4 cards) with --store-boot: the compact store bootstrap '
+                     '(asm/store_boot_slim.S): same check, copy and publish, with the '
+                     'cache calls as direct bl and the constants in one pool.  Off: '
+                     'output unchanged')
+ap.add_argument('--lhook-in-file', action='store_true',
+                help='(Loader v4 cards) with --loader-hook: the Fast Start 2 entry is no '
+                     'longer part of the loader the AutoRun spells out; it travels in '
+                     'the BIN and stage2 places it right after the loader in the cave '
+                     '(asm/lhook_stub.S).  Off: output unchanged')
+ap.add_argument('--slim-open', action='store_true',
+                help='(Loader v4 cards) the loader opens the card directly instead of '
+                     'trying the volume F_VOL names first and falling back -- 7 words '
+                     'fewer to spell out.  Off: output unchanged')
 ap.add_argument('--retain-ram', action='store_true',
                 help='raise the DRAM self-refresh window from 15 minutes to '
                      '11.95 hours, so the cave survives a soft power-off long '
@@ -133,6 +147,18 @@ ap.add_argument('--profile', action='store_true',
                      '`mem set` on one that spells it out, which is why it is a '
                      'flag and not the default.  Read both with '
                      '`mem get 0xC072F6F4,,8`')
+ap.add_argument('--boot-markers', action='store_true',
+                help='boot timing: a tiny stamp routine at the start of the cave arena '
+                     '(MARK_AT) appends the camera\'s own microseconds to an array at '
+                     'chosen AutoRun lines -- twice at the start (the difference is the '
+                     'cost of one marker), before the first and after the last splash '
+                     'display, before the store bootstrap and the spelled-out loader '
+                     'are called, and after the spelled-out loader returns.  Nothing '
+                     'goes after the store bootstrap: on the Fast Start 3 path that '
+                     'line stops the script.  The v4 core built with BOOT_MARKERS '
+                     'reserves the block with its first cave_alloc and tags it.  '
+                     'Requires --loader; pair with --profile for LOAD_START_US.  Off: '
+                     'the AutoRun is byte-identical to a build without the option.')
 ap.add_argument('--four-box-bar', action=argparse.BooleanOptionalAction, default=None,
                 help='(default on for every --loader card since 2026-10-04, single '
                      'ones too; --no-four-box-bar for the old text display) '
@@ -157,9 +183,18 @@ ap.add_argument('--loader-hook-banner-at', type=int, default=3_000_000,
                 help='with --loader-hook: draw the banner no earlier than this '
                      'many microseconds after power-on (default 3 s; drawn at '
                      '1.35 s it is wiped by the UI coming up)')
+ap.add_argument('--splash-hold-ms', type=int, default=None,
+                help='how long the finished splash stays (default boot_splash.HOLD_MS, v3\'s '
+                     '2000; loader v4 passes 0) -- the shared v3 bytes keep the default')
 args = ap.parse_args()
 if args.four_box_bar is None:
     args.four_box_bar = bool(args.loader and not args.boot_call)
+if args.store_slim and not (args.store_boot and args.loader):
+    ap.error('--store-slim requires --store-boot and --loader')
+if args.lhook_in_file and not args.loader_hook:
+    ap.error('--lhook-in-file requires --loader-hook')
+if args.boot_markers and not args.loader:
+    ap.error('--boot-markers requires --loader')
 if args.loader_hook and not args.loader:
     ap.error('--loader-hook requires --loader')
 if args.loader_hook_off and (not args.loader or args.loader_hook):
@@ -171,6 +206,8 @@ if args.four_box_bar and args.boot_call:
 from boot_splash import (FourBoxBar, frames as splash_frames, publish as publish_code,
                          ASSET_NAME, WIDTH as SPLASH_WIDTH, HEIGHT as SPLASH_HEIGHT,
                          HOLD_MS as SPLASH_HOLD_MS)
+if args.splash_hold_ms is not None:
+    SPLASH_HOLD_MS = args.splash_hold_ms
 splash = FourBoxBar(args.splash_dir or ASSET_NAME) if args.four_box_bar else None
 # The loader's path string, as the C preprocessor wants it: one backslash in
 # the file means two here.  Assembled into the loader rather than written in
@@ -260,6 +297,17 @@ CAVE_ARENA = LOADER_END   # where handing out begins: everything above the
                           # allocator_can_hand_out re-checks every hook's reach
                           # against the wider range.
 
+# --boot-markers: the stamp routine (asm/boot_marker.S) and its array take the
+# first MARK_BYTES of the arena.  The AutoRun writes them before anything else;
+# every boot resets the bump to the arena start, and a v4 core built with
+# BOOT_MARKERS takes exactly this block with its first cave_alloc, so nothing
+# the load hands out lands on it.  Read: `mem get 0xC072E0B4,,64`.
+MARK_AT = CAVE_ARENA
+MARK_DATA = MARK_AT + 0x50       # magic, count, stamps[MARK_SLOTS]
+MARK_SLOTS = 14
+MARK_BYTES = 0x50 + 8 + 4 * MARK_SLOTS
+MARK_MAGIC = 0x314B524D          # 'MRK1': this boot's AutoRun wrote it
+
 # Where the worker's code goes on the FALLBACK card, the one that spells the
 # whole thing out with `mem set` and hooks `bootstrap`.  It used to go at
 # 0xC072F050, in the 1704 bytes between the state block and the one-shot
@@ -279,8 +327,10 @@ HOOK   = 0xC00D0794   # gyro callback, borrowed once to create the task
 if args.read_cap is not None and (args.read_cap & 0xFFF or
                                   not 0xF000 <= args.read_cap <= 0x1F000):
     ap.error('--read-cap is whole 4 KiB pages, 0xF000..0x1F000')
-LOADER_DEFINES = [f'LOADER_BASE={CAVE_LOW}', f'POOL_DESC=0x{POOL_DESC:08X}',
-                  BIN_PATH_DEF] + (
+LOADER_AT = CAVE_LOW
+LOADER_DEFINES = [f'LOADER_BASE={LOADER_AT}', f'POOL_DESC=0x{POOL_DESC:08X}',
+                  BIN_PATH_DEF] + (['SLIM_OPEN=1'] if args.slim_open else []) + (
+                      ['NO_LHOOK=1'] if args.lhook_in_file else []) + (
                       [f'LOAD_START_US=0x{LOAD_START_US:08X}'] if args.profile else []) + (
                       [f'READ_CAP=0x{args.read_cap:X}'] if args.read_cap is not None else [])
 
@@ -619,9 +669,13 @@ if args.store_boot:
     smagic = int(hashlib.sha256(sbytes).hexdigest()[:8], 16)
     if slen > STORE_MAX:
         sys.exit(f'loader is {slen} bytes; the store holds {STORE_MAX}.')
-    ssrc = HERE / 'asm' / 'store_boot.S'
-    scode = assemble(ssrc, [f'STORE_LEN=0x{slen:X}',
-                            f'STORE_MAGIC=0x{smagic:08X}'])
+    if args.store_slim:
+        ssrc = HERE / 'asm' / 'store_boot_slim.S'
+        scode = assemble(ssrc, [f'STORE_LEN=0x{slen:X}', f'STORE_MAGIC=0x{smagic:08X}'])
+    else:
+        ssrc = HERE / 'asm' / 'store_boot.S'
+        scode = assemble(ssrc, [f'STORE_LEN=0x{slen:X}',
+                                f'STORE_MAGIC=0x{smagic:08X}'])
     swords = to_words(scode)
     send = STORE_BOOT_AT + len(scode)
     if send > CAVE_END:
@@ -761,7 +815,7 @@ if args.loader:
     # which worked, once, and only because the instruction cache still held
     # them. It goes at the bottom of the cave instead, where nothing it places
     # can reach it.
-    LOADER = CAVE_LOW
+    LOADER = LOADER_AT
     lend = LOADER + len(lcode)
     if lend > LOAD:
         sys.exit(f'loader at 0x{LOADER:08X}..0x{lend:08X} runs into the worker')
@@ -922,7 +976,7 @@ if args.loader:
     # stage2 publishes the loader into the settings block and arms the stop, so
     # it needs to know where both live and what the loader's bytes hash to.
     _sd = [f'ABORT_AT=0x{ABORT_AT:08X}', f'ECHO_SLOT=0x{ECHO_SLOT:08X}',
-           f'STORE=0x{STORE:08X}', f'LOADER_BASE=0x{CAVE_LOW:08X}',
+           f'STORE=0x{STORE:08X}', f'LOADER_BASE=0x{LOADER_AT:08X}',
            f'LOAD_DONE_US=0x{LOAD_DONE_US:08X}',
            f'CAVE_BUMP=0x{CAVE_BUMP:08X}', f'CAVE_ARENA=0x{CAVE_ARENA:08X}']
     if args.store_boot:
@@ -945,10 +999,23 @@ if args.loader:
         # The loader's +4 is the hook entry; stage2 checks the word there before
         # it arms anything, so the word has to come from the loader this build
         # actually wrote.
-        _lh_at = CAVE_LOW + 4
-        _lh_word = to_words(assemble(HERE / 'asm' / 'loader.S', LOADER_DEFINES))[1]
-        if _lh_word >> 24 != 0xEA:
-            sys.exit(f'loader +4 is 0x{_lh_word:08X}, not a branch to the hook')
+        if args.lhook_in_file:
+            # The hook entry is a section of the BIN, placed right after the
+            # loader this AutoRun spelled (or store_boot copied) -- the cave
+            # keeps both across a warm restart, and the stub calls `load`.
+            _lh_at = (LOADER_AT + len(lcode) + 7) & ~7
+            _lh_stub = assemble(HERE / 'asm' / 'lhook_stub.S',
+                                [f'STUB_AT=0x{_lh_at:08X}',
+                                 f'LOAD_AT=0x{LOADER_AT + symbols(lsrc, ldef)["load"]:08X}'])
+            if _lh_at + len(_lh_stub) > LOADER_END:
+                sys.exit(f'lhook stub 0x{_lh_at:08X}..0x{_lh_at + len(_lh_stub):08X} '
+                         f'leaves the loader region (..0x{LOADER_END:08X})')
+            _lh_word = to_words(_lh_stub)[0]
+        else:
+            _lh_at = LOADER_AT + 4
+            _lh_word = to_words(assemble(HERE / 'asm' / 'loader.S', LOADER_DEFINES))[1]
+            if _lh_word >> 24 != 0xEA:
+                sys.exit(f'loader +4 is 0x{_lh_word:08X}, not a branch to the hook')
         _lh_site = 0xC03DA420
         _lh_bl = 0xEB000000 | (((_lh_at - _lh_site - 8) >> 2) & 0xFFFFFF)
         _sd += ['LOADER_HOOK=1' if args.loader_hook else 'LOADER_HOOK_OFF=1', f'LH_ENTRY_AT=0x{_lh_at:08X}',
@@ -981,6 +1048,8 @@ if args.loader:
     # for -- it runs its script to the end -- and carrying the abort anyway is
     # 152 bytes in the cave plus a window where the echo slot points at code
     # the script is about to point away from again.  See stage2.S.
+    if args.lhook_in_file:
+        secs.append((_lh_at, _lh_stub))
     if args.store_boot:
         secs.append((ABORT_AT, assemble(HERE / 'asm' / 'abort.S',
                                         [f'ECHO_SLOT=0x{ECHO_SLOT:08X}',
@@ -1135,6 +1204,42 @@ if args.fast_echo:
     at = next((i for i, l in enumerate(lines) if l.startswith(handoff)
                and 0xC0700000 <= int(l[len(handoff) - 2:], 16) < 0xC0800000), len(lines))
     lines = ([f'mem set 0x{ECHO_SLEEP_AT:08X} 0x{ARM_NOP:08X}'] + lines[:at] + restore + lines[at:])
+if args.boot_markers:
+    # After the fast-echo pass on purpose: that pass restores the per-character
+    # delay in front of the first hand-off to cave code, and the marker calls
+    # are cave calls -- placed before it they would turn the delay back on for
+    # the whole script.
+    mcode = assemble(HERE / 'asm' / 'boot_marker.S',
+                     [f'MARK_DATA=0x{MARK_DATA:08X}', f'MARK_SLOTS={MARK_SLOTS}',
+                      'F_TICK_US=0xC002B6E0'])
+    if len(mcode) > MARK_DATA - MARK_AT:
+        sys.exit(f'boot_marker.S is {len(mcode)} bytes; the code slot holds {MARK_DATA - MARK_AT}')
+    mwords = to_words(mcode)
+    install = [f'mem set 0x{MARK_AT + 4 * i:08X} 0x{word_at(mwords, i):08X}' for i in range(len(mwords))]
+    install += [f'mem set 0x{MARK_DATA + 4:08X} 0x00000000',
+                f'mem set 0x{MARK_DATA:08X} 0x{MARK_MAGIC:08X}']
+    publish_code(install)
+    install = [l for l in install if not l.startswith('#')]
+    mark = [f'mem set 0x{ECHO_SLOT:08X} 0x{MARK_AT:08X}', 'echo']
+    slot = f'mem set 0x{ECHO_SLOT:08X} 0x'
+    i_store = next((i for i, l in enumerate(lines) if l == f'{slot}{STORE_BOOT_AT:08X}'), None)
+    i_lboot = next((i for i, l in enumerate(lines) if l == f'{slot}{lboot:08X}'), None)
+    if i_lboot is None:
+        sys.exit('--boot-markers: the loader call line is missing')
+    i_lecho = next(i for i in range(i_lboot + 1, len(lines)) if lines[i] == 'echo')
+    first_handoff = min(x for x in (i_store, i_lboot) if x is not None)
+    disp = [i for i, l in enumerate(lines[:first_handoff]) if l.startswith('display ')]
+    top = 1 if args.fast_echo else 0
+    inserts = [(i_lecho + 1, mark), (i_lboot, mark)]
+    if i_store is not None:
+        inserts.append((i_store, mark))
+    if disp:
+        inserts += [(disp[-1] + 1, mark), (disp[0], mark)]
+    inserts.append((top, install + mark + mark))
+    for at, block in sorted(inserts, key=lambda x: x[0], reverse=True):
+        lines[at:at] = block
+    print(f"markers: 0x{MARK_AT:08X} routine {len(mcode)} B, array 0x{MARK_DATA:08X} "
+          f"({MARK_SLOTS} slots); {sum(1 for l in lines if l == mark[0])} stamps")
 text = '\n'.join(lines) + '\n'
 
 # No filler after cleanup: the interpreter returns at the real EOF.

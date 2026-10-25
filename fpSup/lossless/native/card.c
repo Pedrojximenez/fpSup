@@ -33,7 +33,11 @@
 #include "rec_hook.h"
 #include "frame_hold.h"
 #include "flush_site.h"
+#ifdef FPL_V4
+#include "menu_row4.h"           /* Loader v4: a TOGGLE row on the fpSup page */
+#else
 #include "menu_page.h"
+#endif
 #include "play_decode.h"
 #include "record_diag.h"
 #include "header_tag.h"
@@ -53,7 +57,11 @@
 #define FPL_TASK_WAIT      10u
 #define FPL_SAVE_POLLS     100u           /* x 10 ms idle sleep = 1 s stable */
 #define FPL_QUIET_US       3000000u       /* no REC and no frame for this long */
+#ifdef FPL_V4
+#define FPL_HEADER_LEN     48u            /* the FSB4 header before the blob */
+#else
 #define FPL_HEADER_LEN     32u            /* the FSB1 header before the blob */
+#endif
 #define USED __attribute__((used))
 /* diagnostic only (FPL_DIAG_HOOK_TIME): every hook's C entry is wrapped to
  * count its calls and time, and to keep the stack pointer it ran on -- the
@@ -298,6 +306,9 @@ struct fpl_card {
      * discard paths without changing their decisions or doing I/O. */
     struct fpl_record_diag record_diag;
     const char *self_path;              /* this sup's file (Loader v3 r2), or 0 */
+#ifdef FPL_V4
+    const struct sl_svc *svc;           /* Loader v4: file_is before a save */
+#endif
     uint32_t settings_on;               /* the saved state, as on the card */
     uint32_t settings_ok;               /* the record was valid at boot */
     uint32_t save_pending, saves, save_failed, save_last;
@@ -372,7 +383,11 @@ static uint32_t settings_check(uint32_t on) {
 }
 
 USED uint32_t fpl_card_init(struct fpl_card *c, uintptr_t base, uint32_t block_bytes,
-                           uintptr_t task_entry, const char *path) {
+                           uintptr_t task_entry, const char *path
+#ifdef FPL_V4
+                           , const struct sl_svc *svc
+#endif
+                           ) {
     uint32_t result;
     /* the whole state inside the block the launcher was given */
     if (!c || !base || (uintptr_t)c < base || (uintptr_t)c - base > block_bytes ||
@@ -423,7 +438,11 @@ USED uint32_t fpl_card_init(struct fpl_card *c, uintptr_t base, uint32_t block_b
 #else
     (void)path;
 #endif
-#ifdef FPL_MENU_OFF
+#if defined(FPL_V4)
+    /* Loader v4: the row is on the fpSup page; the core keeps it. */
+    c->svc = svc;
+    fpl_menu_install_row(&c->menu, svc);
+#elif defined(FPL_MENU_OFF)
     /* Loader v3: the FPUI block is part of this sup's own file, which the
      * 加載器 read into this block (build_v3_lossless.py puts it after the C
      * text, at a build-time offset) -- there is no \fpSup.BIN to read. */
@@ -817,6 +836,13 @@ static uint32_t settings_write(struct fpl_card *c, uint32_t on) {
     uint32_t rec[4], back[4], got = 0, ok;
     void *o = c->fobj;
     rec[0] = FPL_SETTINGS_MAGIC; rec[1] = 1u; rec[2] = on; rec[3] = settings_check(on);
+#ifdef FPL_V4
+    /* mode 7 creates a missing file: write only into a file that is still
+     * this sup (its header as loaded), never into a renamed-away name */
+    if (!c->svc || c->svc->file_is(c->svc, c->self_path,
+                                   (const void *)(c->base - FPL_HEADER_LEN), FPL_HEADER_LEN) != SL_OK)
+        return 0;
+#endif
     card_f_ctor(o);
     ok = card_f_open(o, c->self_path, 7u) &&
          card_f_seek(o, FPL_HEADER_LEN + FPL_SETTINGS_OFF) &&

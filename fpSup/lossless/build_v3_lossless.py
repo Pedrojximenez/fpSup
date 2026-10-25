@@ -67,13 +67,15 @@ def compile_text(tmp, unit, menu_off, menu_len):
         C.CFLAGS[:] = saved
 
 
-def build_blob(tmp, menu):
+def build_blob(tmp, menu, v4=False):
+    """v4: build_v4_lossless.py's variant (card.S V4=1: no string-site claims,
+    the service table to the C init)."""
     from armasm import assemble, symbols
     tree = tmp / 'tree'
     tree.mkdir()
     unit = C.unity(tree)
     card = HERE / 'native' / 'card.S'
-    v3 = ['V3=1']
+    v3 = ['V3=1'] + (['V4=1'] if v4 else [])
     probe = v3 + ['BLOB_LEN=0x4', 'BLOCK_BYTES=0x4', 'STATE_OFF=0x4'] + \
             [f'{k}=0x1' for k in C.ENTRIES]
     probed_syms = symbols(card, probe)
@@ -128,7 +130,7 @@ def build_blob(tmp, menu):
     blob += b'\0' * (menu_off - len(blob))
     blob += menu
     blob += b'\0' * (blob_len - len(blob))
-    check_claims(launcher, syms['claims'])
+    check_claims(launcher, syms['claims'], v4)
     return blob, {'c_base': c_base, 'c_text': len(text.code), 'menu_off': menu_off,
                   'menu_len': len(menu), 'blob_len': blob_len, 'state_off': state_off,
                   'state_bytes': state, 'block_bytes': block,
@@ -139,12 +141,14 @@ def build_blob(tmp, menu):
                   'defines': defines, 'layout': layout}
 
 
-def check_claims(launcher, at):
+def check_claims(launcher, at, v4=False):
     """The claims table as assembled: the thirteen sites build_card declares,
-    each stock word the one in BOTH reference images, the kinds as decided."""
+    each stock word the one in BOTH reference images, the kinds as decided.
+    v4: the same less the three string sites (the v4 core owns them)."""
     n, = struct.unpack_from('<I', launcher, at)
     rows = [struct.unpack_from('<3I', launcher, at + 4 + 12 * i) for i in range(n)]
-    if n != len(C.SITES) or {a for a, *_ in rows} != set(C.SITES):
+    want = set(C.SITES) - (C.SHARED_SITES if v4 else set())
+    if n != len(want) or {a for a, *_ in rows} != want:
         raise C.BuildError('card.S claims are not build_card.SITES')
     main = B.IMAGE.read_bytes()
     C.check_sites()                                       # seg0, hash-pinned

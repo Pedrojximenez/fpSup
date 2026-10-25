@@ -416,6 +416,15 @@ app+888 → +60          = app 變數 registry
 - **陷阱（實機症狀，10/03）**：用**絕對位址**比對原廠字串（例：raw-view `stub_ai` 比 `0xC18E6BA0`）在別的 sup
   附加字串後會失效（UI 改用池副本）→ 一律比「目前池（`reader+0x14`）裡的位移」。
 
+## 8j. 選單裡換頁：不要直接設畫面（2026-10-25）[實機]
+
+- `gui scr set` / fpsup-ui `fpui_show`（螢幕管理器 vt+0x48）在選單裡換頁後，**快速連按會掉鍵**，直到退出選單；`gui send` 不會換頁。
+- 要走原廠狀態機：頁面動作 `controlAppState`（41 bytes 請求）＋包裡的轉換 (from, to, request)。從 C 觸發的通用做法（v4）：
+  頁上一個 `appVariableChangeEvent` 監看一個 int 變數，動作是 request（請求字串用私有字串，執行時才讀、可在 RAM 改），
+  C 先推頁面變數、最後才推那個 int 變數 → 頁面建立時變數都已生效。按鍵事件直接送 request 會比 C 推的變數早。
+- 回到原頁時頁面重建會再觸發一次變化事件 → 進場時把變數寫回 0 並清空請求字串，否則 MENU 會被送回子頁。
+- 細節、事件欄位、試過不行的：`research/ui/MENU_PAGE_SWITCH.md`；v4 實作：`fpSup/loader-v4/README.md` 末段、`fpSup/fpsup-ui/README.md`（`fpui_open`）。
+
 ## 9. 工具
 
 **讀 app 變數(只讀,mem get)**:`[C37B7048]` = app → `[app+0x888]+0x60` = registry → registry+0x14 是排序雜湊表

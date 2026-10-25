@@ -69,6 +69,10 @@ entry:
      * put back at power-off, and how the next sup's uishare finds our layer */
     adr     r4, claims
     ldr     r8, [r4], #4
+#if V4
+    cmp     r8, #0                      @ v4: none (the string sites are the core's)
+    beq     2f
+#endif
 1:  ldr     r1, [r4]                    @ address
     mov     r2, #4
     add     r3, r4, #4                  @ its stock word, from this table
@@ -84,7 +88,7 @@ entry:
     add     r4, r4, #12
     subs    r8, r8, #1
     bne     1b
-
+2:
     /* 2. the state's first four words, the shims' words */
     LDA     r4, STATE_OFF
     add     r4, r5, r4                  @ r4 = the state
@@ -111,6 +115,9 @@ entry:
     mov     r0, r4
     mov     r1, r5
     mov     r2, r7
+#if V4
+    mov     r3, r6                      @ v4: the service table, the init's fourth argument
+#endif
     LDA     ip, OFF_INIT
     add     ip, r8, ip
     blx     ip                          @ 0 keep, 1 release
@@ -146,10 +153,14 @@ settings:
  * build_v3_flip.py checks it against uishare build_section.sites(the row's
  * block) and the reference image. */
 claims:
+#if V4
+    .word 0                             @ fpsup-ui strings need no firmware word
+#else
     .word 3
     .word 0xC05E5B58,   0x3FFFF1B1,    SL_SHARED_UI   @ uishare string layers
     .word 0xC05E61C8,   0x428A6942,    SL_SHARED_UI
     .word 0xC05E61E0,   0x69406902,    SL_SHARED_UI
+#endif
 
     .align  3
 c_base:

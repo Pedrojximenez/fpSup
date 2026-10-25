@@ -8,7 +8,7 @@ The released v0.1.4test (projects/open-gate/archive/res-custom-before-generalize
 OGC_V4 / build_core(v4=True) and nothing else:
 
   * FSB4's 48-byte header, SL_F_CACHED_OK, min_svc 6; the settings record at 48;
-    the display name "Res-Custom" before the layout image (S's body stays zero);
+    the display name "RES-Custom" before the layout image (S's body stays zero);
   * the block runs at the cached alias: the file object and its scratch are at
     the uncached alias, and the D-cache is cleaned and invalidated around the
     reads of the .RCD files and the write of the record;
@@ -17,18 +17,22 @@ OGC_V4 / build_core(v4=True) and nothing else:
     claimed, the file-redirect site C05E5BEC stays SHARED_UI;
   * the file list (v3: svc->button + uishare strings) is an FT4S page,
     FT_RCFILES (rc_files_page.ft4), installed with fpsup_ui.c behind a JUMP row
-    "Res-Custom" on the fpSup page; MENU goes back to FT_Y6.
+    "RES-Custom" on the fpSup page; MENU goes back to FT_Y6.
 
-The .RCD files are the same bytes as v3's.  The file is RESCUS.BIN: v4 loads in
-name order with no number prefix (RAWV.BIN before it).  Tests: test_v4_rescustom.py.
+The .RCD files are the same bytes as v3's, in \fpSup\RESCUS\ (found next to
+its own file, whatever that is called).  The file is RES-Custom_v0.1.4.BIN
+(fpSup/loader-v4/names_v4.py, the user 2026-10-25).  Tests: test_v4_rescustom.py.
 """
 import argparse, hashlib, json, pathlib, sys, tempfile
 
 HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 import build_v3_rescustom as B                          # noqa: E402
+sys.path.insert(0, str(HERE.parents[3] / 'fpSup' / 'loader-v4'))
+import names_v4 as N                                    # noqa: E402
 
-CORE_NAME = 'RESCUS.BIN'
+CORE_NAME = N.file_name('RCUS')                         # RES-Custom_v0.1.4.BIN
+assert B.V4_DISPLAY == N.display('RCUS') and B.CORE_ID == 'RCUS'
 
 
 def build(out, formats=B.FORMATS):

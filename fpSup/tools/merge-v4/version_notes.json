@@ -1,0 +1,268 @@
+{
+ "fpsup-unlocked-writer-v0.1.0test": {
+  "en": [
+   "First release.",
+   "Test build: the code ran on the camera as a development build; these exact files have not yet."
+  ],
+  "zh": [
+   "首次發布。",
+   "測試版：程式碼以開發版上機驗證過，這份檔案本身尚未上機。"
+  ]
+ },
+ "fpsup-res-custom-v0.1.4test": {
+  "en": [
+   "Refines the lower-left FPS position, spacing, decimal digits and FPS label, with a thicker outward black edge around the white text.",
+   "Retains OG2K, OG3K, OG3.5K, OG4K and S16 with their existing bit-depth choices.",
+   "The first Quick Set opening after a restart is still slow."
+  ],
+  "zh": [
+   "調整左下角 FPS 的位置、大小數字間距、小數與 FPS 標示，白字的黑色描邊向外加厚。",
+   "保留 OG2K、OG3K、OG3.5K、OG4K、S16 及原有位深選項。",
+   "重開機後第一次開 QS 的等待問題仍未解決。"
+  ]
+ },
+ "fpsup-lossless-v0.3.0test": {
+  "en": [
+   "Uses much less of the camera’s processor while compressing.",
+   "Compressed frames keep their table in the DNG header; the header is 1 KB longer.",
+   "Long compressed takes rely on FCAP (ticked together on this page) instead of a batch-size change."
+  ],
+  "zh": [
+   "壓縮時佔用的相機處理器大幅減少。",
+   "壓縮畫格的表格改放在 DNG 檔頭內，檔頭多 1 KB。",
+   "長時間壓縮錄影改由 FCAP 處理(本頁勾選 Lossless 會一併勾上),不再調整批次大小。"
+  ]
+ },
+ "fpsup-res-custom-dev-r19": {
+  "en": [
+   "OG3.5K and OG4K can now select 12-bit. The existing 8-bit and 10-bit options remain available.",
+   "Test release; recording with these exact files has not yet been checked on the camera."
+  ],
+  "zh": [
+   "OG3.5K、OG4K 可選 12-bit，原有的 8-bit、10-bit 繼續保留。",
+   "測試版，這份檔案尚未在相機上實錄驗證。"
+  ]
+ },
+ "fpsup-res-custom-v0.1.2test": {
+  "en": [
+   "First release: OG2K, OG3K, OG3.5K, OG4K and S16 are available together in one Sup.",
+   "Choose the recording resolution from the camera menu or Quick Set."
+  ],
+  "zh": [
+   "首次發布：一個 Sup 提供 OG2K、OG3K、OG3.5K、OG4K、S16 五種格式。",
+   "可從相機選單或 Quick Set 選擇錄影解析度。"
+  ]
+ },
+ "fpsup-stopfx-test-20261012": {
+  "en": [
+   "Adds a fix by Ruari to help clear pending frames after an abnormal recording stop.",
+   "Use on its own or alongside Lossless. Test build."
+  ],
+  "zh": [
+   "新增 Ruari 的異常停錄修正，幫助相機清理暫存影格。",
+   "可單獨使用或搭配 Lossless。測試版。"
+  ]
+ },
+ "fpsup-lossless-v0.2.0test": {
+  "en": [
+   "Remembers the Lossless RAW setting after power-off.",
+   "Fixes FHD and OG2K recording stopping after about 94 frames.",
+   "Improves compression speed and reduces pauses when compression stalls."
+  ],
+  "zh": [
+   "關機後會記住 Lossless RAW 設定。",
+   "修正 FHD、OG2K 約錄到第 94 格就停止的問題。",
+   "改善壓縮速度，減少壓縮卡住時的等待。"
+  ]
+ },
+ "fpsup-lossless-v0.1.2test": {
+  "en": [
+   "Adds lossless-compressed CinemaDNG. Frames that cannot be compressed in time are saved uncompressed.",
+   "Works on the same card as RAW-View and starts faster. The setting resets to OFF at power-on."
+  ],
+  "zh": [
+   "加入無損壓縮 CinemaDNG；來不及壓縮的影格仍以未壓縮格式保存。",
+   "可與 RAW-View 同卡使用，開機更快。每次開機設定回到 OFF。"
+  ]
+ },
+ "fpsup-gyro2-v0.1.0": {
+  "en": [
+   "Records camera motion inside each CinemaDNG frame, without extra files or manual synchronisation.",
+   "Stabilise in Resolve with the Gyroflow (fpSup) plugin. Can be used with Lossless."
+  ],
+  "zh": [
+   "把相機晃動資料記在每格 CinemaDNG 裡，不需要額外檔案或手動同步。",
+   "可用 Resolve 的 Gyroflow（fpSup）插件防震，也能搭配 Lossless。"
+  ]
+ },
+ "fpsup-raw-view-v0.3.0test": {
+  "en": [
+   "Saves RAW-View settings on the card, including SA / GA, contrast and saturation.",
+   "Without this card, the camera returns to its normal colour mode.",
+   "Preserves the full saturation setting."
+  ],
+  "zh": [
+   "RAW-View 設定改存到卡片，包括 SA／GA、對比與飽和度。",
+   "移除這張卡後，相機回到正常色彩模式。",
+   "飽和度會保存完整設定值。"
+  ]
+ },
+ "fpsup-raw-view-v0.2.3test": {
+  "en": [
+   "Can share a card with Lossless and OpenGate without replacing their menu entries.",
+   "Fixes the RAW row showing -5 / +5 instead of SA / GA when used with Lossless."
+  ],
+  "zh": [
+   "可與 Lossless、OpenGate 同卡使用，不會蓋掉彼此的選單項目。",
+   "修正搭配 Lossless 時，RAW 列顯示 -5／+5 而非 SA／GA 的問題。"
+  ]
+ },
+ "fpsup-raw-view-v0.2.2test": {
+  "en": [
+   "Restores normal CinemaDNG playback brightness. RAW monitoring returns when you resume shooting."
+  ],
+  "zh": [
+   "修正 CinemaDNG 在相機上回放時亮度不正確的問題；回到拍攝時恢復 RAW 監看。"
+  ]
+ },
+ "fpsup-raw-view-v0.2.1test": {
+  "en": [
+   "Remembers RAW mode, SA / GA, contrast and saturation after normal power-off.",
+   "Smaller files make it easier to combine with other Sups; improves the display near overexposure."
+  ],
+  "zh": [
+   "正常關機後會記住 RAW 模式、SA／GA、對比與飽和度。",
+   "檔案縮小，更容易與其他 Sup 合用；改善接近過曝處的顯示。"
+  ]
+ },
+ "fpsup-raw-view-v0.2.0test": {
+  "en": [
+   "Adjusts SA brightness and changes contrast and saturation to 0 / +0.2 choices.",
+   "Crushed shadows appear black; the RAW row shows SA / GA."
+  ],
+  "zh": [
+   "調整 SA 的明暗表現，對比與飽和度改為 0／+0.2 兩種選項。",
+   "壓掉的暗部顯示純黑，RAW 列改顯示 SA／GA。"
+  ]
+ },
+ "fpsup-raw-view-v0.1.0test": {
+  "en": [
+   "Adds RAW monitoring for 12-bit CinemaDNG, with SA and GA display options.",
+   "Makes screen clipping match the recorded image, with optional colour calibration."
+  ],
+  "zh": [
+   "加入 12-bit CinemaDNG 的 RAW 監看，提供 SA、GA 兩種顯示方式。",
+   "讓螢幕與錄下影像的過曝位置對應，並可套用色彩校正。"
+  ]
+ },
+ "fpsup-screenflip-v0.1.0test": {
+  "en": [
+   "First release: rotate the screen 180°, mirror it, or use both.",
+   "Save separate settings for each STILL / CINE custom display mode; touch input follows 180° rotation."
+  ],
+  "zh": [
+   "首次發布：背螢幕可翻轉 180°、左右鏡像，或兩者同時使用。",
+   "STILL／CINE 的各自訂顯示模式分別保存設定，180° 時觸控也跟著旋轉。"
+  ]
+ },
+ "fpsup-desqueeze-v0.1.4test": {
+  "en": [
+   "v0.1.1test: works together with Tap to Zoom.",
+   "v0.1.2test: magnifier frame guides follow the selected squeeze factor.",
+   "v0.1.3test / v0.1.4test: corrects the vertical position of the frame guides."
+  ],
+  "zh": [
+   "v0.1.1test：可與 Tap to Zoom 一起使用。",
+   "v0.1.2test：放大構圖框會跟著選擇的還原比例縮放。",
+   "v0.1.3test／v0.1.4test：修正構圖框的垂直位置。"
+  ]
+ },
+ "fpsup-tap-to-zoom-v0.1.0test": {
+  "en": [
+   "First release: tap the LCD to magnify around that point.",
+   "Choose 2x, 4x or 8x with the dials; tap again to return to the full frame. Works during recording."
+  ],
+  "zh": [
+   "首次發布：輕觸 LCD，即以該點為中心放大。",
+   "轉盤可選 2x、4x、8x，再點一次恢復全畫面；錄影中也可使用。"
+  ]
+ },
+ "fpsup-usbshell-v3.4.0test": {
+  "en": [
+   "Faster memory reading and writing over USB.",
+   "Fixes commands occasionally disappearing and improves startup speed.",
+   "Can be combined with other Sups on the same card."
+  ],
+  "zh": [
+   "透過 USB 讀寫記憶體更快。",
+   "修正指令偶爾遺失的問題，並改善開機速度。",
+   "可與其他 Sup 放在同一張卡。"
+  ]
+ },
+ "fpsup-usbshell-v3.3.0": {
+  "en": [
+   "Restores the camera after normal power-off, so changes do not carry into the next startup."
+  ],
+  "zh": [
+   "正常關機時還原相機，避免修改殘留到下次開機。"
+  ]
+ },
+ "fpsup-usbshell-v3.2.0": {
+  "en": [
+   "Improves memory sharing when several tools are used together.",
+   "Records when loading finishes."
+  ],
+  "zh": [
+   "改善多項工具同時使用時的記憶體分配。",
+   "記錄載入完成時間。"
+  ]
+ },
+ "fpsup-usbshell-v3.1.1": {
+  "en": [
+   "Can coexist with other tools on the same card.",
+   "Starts faster and retains support for existing commands."
+  ],
+  "zh": [
+   "可與其他工具在同一張卡共存。",
+   "開機更快，既有指令繼續支援。"
+  ]
+ },
+ "fpsup-usbshell-v3.1.0": {
+  "en": [
+   "Adds a USB development tool for sending camera commands and reading their replies."
+  ],
+  "zh": [
+   "加入 USB 開發工具，可向相機送出指令並讀回結果。"
+  ]
+ },
+ "fpsup-res-custom-v0.1.3test": {
+  "en": [
+   "OG3.5K and OG4K can now select 12-bit. The existing 8-bit and 10-bit options remain available.",
+   "Test release; recording with these exact files has not yet been checked on the camera."
+  ],
+  "zh": [
+   "OG3.5K、OG4K 可選 12-bit，原有的 8-bit、10-bit 繼續保留。",
+   "測試版，這份檔案尚未在相機上實錄驗證。"
+  ]
+ },
+ "fpsup-lossless-v0.1.3test": {
+  "en": [
+   "Reduces memory used by the Lossless menu.",
+   "Recording and playback behaviour remains the same as v0.1.2test."
+  ],
+  "zh": [
+   "減少 Lossless 選單占用的記憶體。",
+   "錄影與回放維持 v0.1.2test 的行為。"
+  ]
+ },
+ "fpsup-raw-view-v0.2.4test": {
+  "en": [
+   "Fixes footage appearing cooler in Resolve when saturation is set to +0.2.",
+   "Saturation 0, RAW monitoring and recorded RAW pixels are unchanged."
+  ],
+  "zh": [
+   "修正飽和度設為 +0.2 時，影片在 Resolve 裡偏冷的問題。",
+   "飽和度 0、RAW 監看與錄下的 RAW 像素維持原樣。"
+  ]
+ }
+}

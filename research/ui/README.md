@@ -505,3 +505,4 @@ file and size with `dir`.  The same no-retry rule matters for `key QSON`, since
 a lost reply does not prove that the toggle was lost.  Quick Set also closes
 after an idle timeout, so open it, verify the image log changed, select the
 target tile, and capture immediately.
+- [MENU_PAGE_SWITCH.md](MENU_PAGE_SWITCH.md) — 選單裡換頁：`gui scr set` 會讓快速連按掉鍵；v4 改走原廠狀態機（變數改變事件 → controlAppState）。2026-10-25 實機。

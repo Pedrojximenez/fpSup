@@ -156,12 +156,18 @@ boot:
      *
      * Twenty-four words, and they were the last thing that made a shell card's
      * AutoRun different from a release card's. */
+#ifndef NO_LHOOK
     b       load
 
 /* +4: the loader hook's entry.  FIXED OFFSET: stage2 points 0xC03DA420 at
  * LOADER_BASE+4 and first checks that this word is this branch, so a loader
  * from another build -- whose hook may sit elsewhere -- is never armed. */
     b       lhook
+#endif
+/* NO_LHOOK (build_autorun --lhook-in-file, Loader v4 cards): `boot` IS `load`,
+ * and the hook entry travels in the BIN as asm/lhook_stub.S, which stage2
+ * places right after this loader in the cave and calls `load` from.  Eleven
+ * words the AutoRun no longer spells out. */
 
 load:
     /* r9 carries the descriptor's address all the way to the free at the end.
@@ -266,6 +272,27 @@ load:
     CALL    F_MGR
     mov     r1, #0
     CALL    F_VOL
+#ifdef SLIM_OPEN
+    /* --slim-open (Loader v4 cards only): open the card, never the volume
+     * F_VOL names.  The retry below exists only to fall back from an SSD to
+     * the card, and the card is the only place this file is ever meant to
+     * come from -- so ask for it directly.  F_MGR and F_VOL are still called:
+     * skipping them was the one change in the first native test that froze.
+     * A failed open zeroes the staging buffer's first word, so the magic
+     * check below fails on its own and no stale "VBIN" from an earlier load
+     * of the same block can be run.  Six words fewer to spell out. */
+    mov     r1, #VOL_SD
+    mov     r0, r5
+    CALL    F_CTOR
+
+    mov     r0, r5
+    adr     r1, path
+    mov     r2, #1
+    CALL    F_OPEN
+    cmp     r0, #0
+    streq   r8, [r6]                    @ r8 is still 0
+    beq     load_shut
+#else
     mov     r7, r0
 
 1:  mov     r1, r7
@@ -289,7 +316,9 @@ load:
     mov     r7, #VOL_SD
     b       1b
 
-2:  mov     r0, r5
+2:
+#endif
+    mov     r0, r5
     mov     r1, r6
     mov     r2, #MAXLEN                 @ 0x20000 = 2 ror 8, one word not two
     mov     r3, #0
@@ -360,6 +389,7 @@ load_fail:
  *
  * The caller has pushed three words, so sp may be 4 off; aligned here and put
  * back from r4, which the push saves and the callee may not destroy. */
+#ifndef NO_LHOOK
 lhook:
     push    {r0, r1, r4, lr}
     mov     r4, sp
@@ -371,6 +401,7 @@ lhook:
     movne   r0, #0
     bxne    lr
     JUMP    AR_START                    @ lr is still the firmware's
+#endif
 
 
 

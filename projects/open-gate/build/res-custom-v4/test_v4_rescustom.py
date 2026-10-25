@@ -32,9 +32,10 @@ sys.path.insert(0, str(ROOT / 'fpSup' / 'loader-v4'))
 import test_v3_rescustom as V3R                           # noqa: E402
 import build_v4 as B4                                     # noqa: E402
 import test_v4 as T4                                      # noqa: E402
+import names_v4                                           # noqa: E402
 
 L, T = V3R.L, V3R.T
-NAME = 'RESCUS.BIN'
+NAME = names_v4.file_name('RCUS')                         # RES-Custom_v0.1.5.BIN
 LINE, ALIAS = 64, 0x80000000
 STRING_SITES = (0xC05E5B58, 0xC05E61C8, 0xC05E61E0)
 CODE_NAMES = {T4.CODES['LOADED']: 'LOADED', T4.CODES['RELEASED']: 'RELEASED',
@@ -97,8 +98,19 @@ class CoreV4Tests(V3R.CoreTests):
     @classmethod
     def setUpClass(cls):
         b = built4()
+        cls._v3_built = V3R._BUILT.get('b')
         V3R._BUILT['b'] = b                     # the v3 suite's built() is this build now
-        super().setUpClass()
+        try:
+            super().setUpClass()
+        finally:
+            cls._restore_v3()
+
+    @classmethod
+    def _restore_v3(cls):                       # the v3 suite keeps its own build
+        if cls._v3_built is None:
+            V3R._BUILT.pop('b', None)
+        else:
+            V3R._BUILT['b'] = cls._v3_built
 
     def boot(self, rcds='default', fmt=V3R.CINEMADNG, res=2, record=None, core_name=None,
              stale=None, order=None, extra=(), **kw):
@@ -126,7 +138,7 @@ class CoreV4Tests(V3R.CoreTests):
         h = struct.unpack_from('<12I', self.core)
         self.assertEqual((h[0], h[1], h[2], h[7], h[8]),
                          (B4.SL4_MAGIC, 48, len(self.core), 6, B4.SL_F_CACHED_OK))
-        self.assertEqual(self.core[h[11]:h[11] + 11], b'Res-Custom\0')
+        self.assertEqual(self.core[h[11]:h[11] + 11], b'RES-Custom\0')
         self.assertLess(h[11], self.f['img_off'])
         self.assertTrue(all(b == 0 for b in self.core[48:48 + L.CFG['BYTES']]))
         self.assertEqual(h[3], self.f['block'] + (-self.f['block'] % 64))
@@ -297,14 +309,16 @@ class UiV4Tests(unittest.TestCase):
         self.assertTrue({'RC_Key', 'RC_Focus'} | {f'RC_Choice{k}' for k in range(6)} <= subs)
         self.assertTrue(any(RF.V4_MACHINE.encode() in p for p in cam.packs))   # its pack went in
         slots = [U.slot(cam, k) for k in range(6)]
-        k = next(i for i, s in enumerate(slots) if s['N'] == 'Res-Custom')
+        k = next(i for i, s in enumerate(slots) if s['N'] == 'RES-Custom')
         self.assertEqual(slots[k]['Jump'], 1)
         cam.press(41 + k)
-        self.assertEqual(cam.shown[-1][1], RF.V4_PAGE)
+        # the firmware's transition (fpui_open): the fpSup page's request names the page
+        self.assertEqual((cam.shown, U.go_text(cam), cam.vars['FT_Go'][1]), ([], RF.V4_PAGE, 1))
         # two files: no paging -- slots 0.., no title row, no tabs, focus on slot 0
         v = lambda n: cam.vars[n][1]                                       # noqa: E731
-        self.assertEqual((v('RC_N0'), v('RC_E0'), v('RC_N1'), v('RC_E1')),
-                         ('OG2K.RCD', 'Enabled', 'OG3K.RCD', 'Enabled'))
+        # the right column is the page's stock On / Off (user 2026-10-24), no Enabled
+        self.assertEqual((v('RC_N0'), v('RC_E0'), v('RC_TOn0'), v('RC_N1'), v('RC_TOn1'), v('RC_TOff1')),
+                         ('OG2K (2000x1334)', ' ', 1, 'OG3K (3008x2000)', 1, 0))   # the resolution-list names
         self.assertEqual([v(f'RC_Visible{k}') for k in range(4)], [1, 1, 0, 0])
         self.assertEqual([v(f'RC_Lock{k}') for k in range(3)], [0, 0, 1])
         self.assertEqual(v('RC_Title'), 0)
@@ -318,7 +332,7 @@ class UiV4Tests(unittest.TestCase):
     def test_disabling_a_file_writes_the_record_at_48(self):
         cam = self.boot()
         slots = [U.slot(cam, k) for k in range(6)]
-        k = next(i for i, s in enumerate(slots) if s['N'] == 'Res-Custom')
+        k = next(i for i, s in enumerate(slots) if s['N'] == 'RES-Custom')
         cam.press(41 + k)
         cam.notify('RC_Choice1', 1)                              # slot 1 = OG3K.RCD: Disable
         rec = cam.written['\\fpSup\\' + NAME][48:48 + L.CFG['BYTES']]
@@ -326,9 +340,16 @@ class UiV4Tests(unittest.TestCase):
         self.assertEqual(struct.unpack_from('<I', rec, L.CFG['NEN'])[0], 1)
         self.assertEqual(rec[L.CFG['EN']:L.CFG['EN'] + 4], b'OG2K')
         self.assertEqual(cam.written['\\fpSup\\' + NAME][:48], self.core[:48])
-        self.assertEqual((cam.vars['RC_G1'][1], cam.vars['RC_R1'][1]), ('OG3K.RCD', 'Disabled'))
+        # loaded this boot, off next: SupManager's note on the row (user 2026-10-24), no footer note
+        self.assertEqual((cam.vars['RC_G1'][1], cam.vars['RC_R1'][1], cam.vars['RC_TOff1'][1], cam.vars['RC_TOn1'][1]),
+                         ('OG3K (3008x2000)', 'Unload on restart', 1, 0))
         self.assertEqual(cam.vars['RC_Header'][1], 'RES-CUSTOM (1/6)')
-        self.assertEqual(cam.vars['RC_OK'][1], 'Restart to apply')
+        self.assertNotIn('Restart', cam.vars['RC_OK'][1])
+        self.assertEqual(cam.vars['RC_RightFooter'][1], ' ')
+        self.assertEqual(cam.vars['RC_Version'][1], ' ')                # no 5/6 bottom right: the title has it
+        self.assertEqual((cam.vars['RC_RShow1'][1], cam.vars['RC_GShow1'][1], cam.vars['RC_RShow0'][1]), (1, 1, 0))
+        cam.notify('RC_Choice1', 0)                              # back on: nothing owed
+        self.assertEqual((cam.vars['RC_R1'][1], cam.vars['RC_TOn1'][1]), (' ', 1))
 
 
     def test_every_file_disabled_keeps_only_the_row(self):
@@ -338,11 +359,13 @@ class UiV4Tests(unittest.TestCase):
         self.assertEqual(cam.w(0xC043CCF8), struct.unpack_from('<I', cam.img, 0x43CCF8)[0],
                          'no format: the picker is stock')
         slots = [U.slot(cam, k) for k in range(6)]
-        k = next(i for i, s in enumerate(slots) if s['N'] == 'Res-Custom')
+        k = next(i for i, s in enumerate(slots) if s['N'] == 'RES-Custom')
         cam.press(41 + k)
-        self.assertEqual(cam.shown[-1][1], 'FT_RCFILES')
-        self.assertEqual((cam.vars['RC_G0'][1], cam.vars['RC_R0'][1]), ('OG2K.RCD', 'Disabled'))
+        self.assertEqual((cam.shown, U.go_text(cam)), ([], 'FT_RCFILES'))
+        self.assertEqual((cam.vars['RC_G0'][1], cam.vars['RC_R0'][1], cam.vars['RC_TOff0'][1]), ('OG2K (2000x1334)', ' ', 1))
         self.assertEqual(cam.vars['RC_Header'][1], 'RES-CUSTOM (0/6)')
+        cam.notify('RC_Choice0', 0)                              # not loaded this boot, on next
+        self.assertEqual((cam.vars['RC_R0'][1], cam.vars['RC_TOn0'][1]), ('Load on restart', 1))
 
 
     def test_seven_files_page(self):
@@ -357,7 +380,7 @@ class UiV4Tests(unittest.TestCase):
             many[f'F{i}.RCD'] = V3R.rcd.encode(d, src[off:off + ln])
         cam = self.boot(rcds=many)
         slots = [U.slot(cam, k) for k in range(6)]
-        k = next(i for i, s in enumerate(slots) if s['N'] == 'Res-Custom')
+        k = next(i for i, s in enumerate(slots) if s['N'] == 'RES-Custom')
         cam.press(41 + k)
         v = lambda n: cam.vars[n][1]                                       # noqa: E731
         self.assertEqual(cam.w(self.S(cam) + L.S['NAVAIL']), 8)
@@ -366,14 +389,28 @@ class UiV4Tests(unittest.TestCase):
         self.assertEqual(v('RC_Visible0'), 0)
         self.assertEqual(v('RC_Focus'), 3451)                              # paged: the title row
         self.assertEqual([v(f'RC_TabWidth{k}') for k in (1, 2)], [512, 512])
-        self.assertEqual([v(f'RC_N{k}') for k in range(1, 6)], [f'F{i}.RCD' for i in range(5)])
+        self.assertEqual([v(f'RC_N{k}') for k in range(1, 6)], [f'F{i} (2000x1334)' for i in range(5)])
         cam.notify('RC_Key', 11)
         self.assertEqual(v('RC_PageText'), '2 / 2')
         # the first six are enabled (no list yet), F6 / F7 grey
         self.assertEqual([(v(f'RC_N{k}'), v(f'RC_G{k}')) for k in range(1, 4)],
-                         [('F5.RCD', ' '), (' ', 'F6.RCD'), (' ', 'F7.RCD')])
-        self.assertEqual([v(f'RC_R{k}') for k in range(1, 4)], [' ', 'Disabled', 'Disabled'])
+                         [('F5 (2000x1334)', ' '), (' ', 'F6 (2000x1334)'), (' ', 'F7 (2000x1334)')])
+        self.assertEqual([(v(f'RC_TOn{k}'), v(f'RC_TOff{k}')) for k in range(1, 4)], [(1, 0), (0, 1), (0, 1)])
         self.assertEqual([v(f'RC_Lock{k}') for k in range(1, 6)], [0, 0, 0, 1, 1])
+
+    def test_moving_the_cursor_posts_nothing_unchanged(self):
+        """Each post is another GUI update pass (user 2026-10-24: the cursor lagged
+        on the v4 pages): a focus move within the rows posts nothing."""
+        cam = self.boot()
+        slots = [U.slot(cam, k) for k in range(6)]
+        cam.press(41 + next(i for i, s in enumerate(slots) if s['N'] == 'RES-Custom'))
+        cam.notify('RC_Focus', 33333)
+        n = len(cam.posts)
+        for focus in (33334, 33335, 33333):
+            cam.notify('RC_Focus', focus)
+        self.assertEqual(cam.posts[n:], [])
+        cam.notify('RC_Focus', 55)
+        self.assertIn(('RC_HeadOn', 1), cam.posts[n:])
 
 
 

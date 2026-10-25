@@ -16,9 +16,11 @@ HERE = pathlib.Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
 sys.path.insert(0, str(HERE))
 import build_v3_rawview as V                             # noqa: E402
+sys.path.insert(0, str(ROOT / 'fpSup' / 'loader-v4'))
+import names_v4 as N                                     # noqa: E402
 
-NAME = 'RAWV.BIN'
-DISPLAY = b'RAW-View\0'
+NAME = N.file_name('RAWV')                               # RAW-View_v0.3.0.BIN (names_v4)
+DISPLAY = N.display('RAWV').encode() + b'\0'
 
 
 def main():

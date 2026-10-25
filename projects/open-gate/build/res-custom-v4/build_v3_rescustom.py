@@ -231,7 +231,7 @@ def build_rcd(formats, tmp):
 
 
 V4_STRING_SITES = (0xC05E5B58, 0xC05E61C8, 0xC05E61E0)   # loader v4's core owns them
-V4_DISPLAY = 'Res-Custom'
+V4_DISPLAY = 'RES-Custom'           # user 2026-10-24: RES upper case
 
 
 def build_core(tmp, n_formats=len(FORMATS), virtual=False, v4=False):

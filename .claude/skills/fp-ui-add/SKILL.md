@@ -15,6 +15,10 @@ description: SIGMA fp (Ver.5.02) 的 sup 怎麼用「添加」而不是「改原
 計畫與進度：`fpSup/uishare/MENU_MERGE_PLAN.md`（§10 狀態、上機清單）。原生 UI 規則：skill `fp-native-ui`。
 **機制本身尚未上機（2026-10-03）**；依據的原生行為（整頁改指、CSV 執行期換、FSPL 池）都已實機。
 
+> **Loader v4（2026-10-21 起）**：v4 的 sup 不用 uishare 套娃，改用 `fpSup/fpsup-ui`（每個 sup 自帶頁面包，loader 只擁有 fpSup 頁）；
+> 從 fpSup 頁開自己的頁要用 `fpui_open(svc, 頁名)`＋`build_fp4.open_transitions`＋進場寫 `FT_Go = 0`，不要 `fpui_show`
+> （會讓選單掉鍵，`research/ui/MENU_PAGE_SWITCH.md`）。sup 檔名 `<名>_v<版本>.BIN`（`loader-v4/names_v4.py`）。以下內容是 v3 的。
+
 ## 1. 先選對做法
 
 | 你要加的 | 用 | 不要 |

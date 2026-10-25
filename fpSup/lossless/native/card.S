@@ -322,6 +322,9 @@ entry:
     sub     sp, sp, #8
 #if V3
     str     r9, [sp]
+#if V4
+    str     r10, [sp, #4]               @ sixth: the service table (the row, file_is)
+#endif
 #else
     mov     ip, #0
     str     ip, [sp]
@@ -754,14 +757,23 @@ alt_pool:    .word 0xE59FF000 | (pool_resume - pool_replay - 8)
 alt_event:   .word 0xE59FF000 | (event_resume - event_replay - 8)
 alt_play:    .word 0xE59FF000 | (play_next - play_replay - 8)
 /* Lossless RAW ON/OFF as saved in this file (card.c FPL_SETTINGS_OFF): the
- * codec task rewrites these 16 bytes in place on the card. Built OFF. */
+ * codec task rewrites these 16 bytes in place on the card.  v3: built OFF.
+ * v4: built ON -- a fresh install records with Lossless (user 2026-10-24). */
     .align 2
 settings:
+#if V4
+    .word 0x54534C46, 1, 1, 0x54534C46 ^ 1 ^ 1 ^ 0xFFFFFFFF
+#else
     .word 0x54534C46, 1, 0, 0x54534C46 ^ 1 ^ 0 ^ 0xFFFFFFFF
+#endif
 /* What this sup changes: { address, stock word, kind }. The stock words are
  * checked against the reference image by build_v3_lossless.py. */
 claims:
+#if V4
+    .word 10                            @ the string sites are the v4 core's
+#else
     .word 13
+#endif
     .word SITE_REC,     STOCK_REC,     SL_CHAIN
     .word SITE_ARRIVE,  STOCK_ARRIVE,  SL_EXCL     @ replaces blx r3: not a branch
     .word SITE_STOP,    STOCK_STOP,    SL_CHAIN
@@ -772,9 +784,11 @@ claims:
     .word SITE_POOL,    STOCK_POOL,    SL_CHAIN
     .word SITE_EVENT,   STOCK_EVENT,   SL_CHAIN
     .word SITE_DISCARD, STOCK_DISCARD, SL_CHAIN
+#if !V4
     .word 0xC05E5B58,   0x3FFFF1B1,    SL_SHARED_UI   @ uishare string layers
     .word 0xC05E61C8,   0x428A6942,    SL_SHARED_UI
     .word 0xC05E61E0,   0x69406902,    SL_SHARED_UI
+#endif
 #endif
     .align  3
 c_base:

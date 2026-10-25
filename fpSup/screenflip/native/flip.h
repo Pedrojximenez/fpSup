@@ -1,6 +1,9 @@
 #ifndef FPSCREENFLIP_FLIP_H
 #define FPSCREENFLIP_FLIP_H
 #include <stdint.h>
+#ifdef FPF_V4
+#include "sloader4.h"
+#endif
 
 /* fpScreenFlip as a Loader v3 sup (\fpSup\40FLIP.BIN; projects/usb-shell-sup/
  * notes/LOADER_V3.md). THIS MODULE IS NOT CAMERA-TESTED.
@@ -56,7 +59,11 @@
 #define FPF_NO_KEY       0xFFFFFFFFu
 #define FPF_POLL_MS      50u
 #define FPF_SAVE_POLLS   20u            /* x FPF_POLL_MS = 1 s unchanged */
+#ifdef FPF_V4
+#define FPF_HEADER_LEN   48u            /* the FSB4 header before the blob */
+#else
 #define FPF_HEADER_LEN   32u            /* the FSB1 header before the blob */
+#endif
 #define FPF_SETTINGS_MAGIC 0x54534646u  /* "FFST" */
 #define FPF_SETTINGS_WORDS 5u           /* magic, version 1, slots 0..3, 4..7, check */
 
@@ -88,6 +95,9 @@ struct fpf_card {
     uint32_t result;                /* enum fpf_result, 0 = never tried */
     uintptr_t base;                 /* the blob (entry.S `entry`) */
     const char *self_path;          /* this file (v3 r2), 0 = never save */
+#ifdef FPF_V4
+    const struct sl_svc *svc;       /* Loader v4: the stock-page row, file_is */
+#endif
     uint32_t name[5];               /* "MV_fpScreenFlip": the registry and the
                                        GUI queue BORROW it */
     uint32_t registered, subscribe_result, ui_result, ui_op, first_id, row_y;
@@ -112,5 +122,10 @@ void fpf_task(struct fpf_card *c);          /* the task (entry.S task_shim): nev
 /* entry.S, after the claims: the state (in the zeroed tail of the block, its
  * first four words filled), the blob, this sup's path. Always 0 = SL_KEEP:
  * from the registration on, the registry borrows the block. */
+#ifdef FPF_V4
+uint32_t fpf_card_init(struct fpf_card *c, uintptr_t base, const char *path,
+                       const struct sl_svc *svc);
+#else
 uint32_t fpf_card_init(struct fpf_card *c, uintptr_t base, const char *path);
+#endif
 #endif

@@ -154,3 +154,20 @@ fpSup/fp_usb_shell/rec_take.sh 3   # MOVON/MOVOFF 脈衝開始 → 3 s 內**完�
 - Sensor Lab 結構：`[0xC0730388]` = struct sl_menu（`+0` result 1 = 裝好、`+16` 頁面位址、`+24` 長度）。
 - 頁面整段讀回比對：`putfile.read_direct(addr, n)`（65 MB/s），和建置的頁逐位元組比；
   只應差開機時寫入的私有字串位移。
+
+# fpSup 頁（Loader v4）導航與量測（2026-10-25 實機）
+
+- 路徑：`MENU` → SHOOT 1（MainB1，焦點在分頁列）→ `LEFT` = fpSup 頁 `FT_Y6`。**每次進頁焦點都在分頁列**（沒有列反白、標題列變灰底）；
+  此時 `RIGHT`/`LEFT` 是換頁（RIGHT 回 MainB1），要先 `DOWN` 進列，再 `RIGHT` 開子頁。2026-10-25 我在分頁列按 RIGHT 跑去 MainB1，
+  接著 MENU 直接退出選單。
+- 子頁：SupManager `FT_LIST`、RES-Custom `FT_RCFILES`、Color `FT_LUTMGR`。MENU 回 fpSup 頁、焦點回分頁列。
+- 讀變數比截圖快：`gui geti FT_Focus / SM_Focus / RC_Focus / FT_Go`（唯讀可用；不要對綁定的文字變數 `gui sets`）。
+- **量「連按會不會掉鍵」**：`fpSup/fp_usb_shell/ui_burst.py <tag> DOWN 4 0.15`（開 GUI 時間日誌、按鍵間隔 0.15 s、讀回 render 次數），
+  然後**截圖數游標停在哪一列**——render 次數不等於移動數。對照：剛開機 4 下 = 4 列；進過直接設畫面的子頁後只動 1–2 下
+  （原因與修法：`research/ui/MENU_PAGE_SWITCH.md`）。
+- **截圖資料夾太大時 `shot` 會說「no new screenshot appeared」**：`dir \DCIM\100SIGMA` 回覆上限 16 KB，約 300 個檔後看不到新檔。
+  截圖其實有存：用 `getfile.py '\DCIM\100SIGMA\SS__NNNN.JPG' out --size 300000` 先拿到「file length is N」再用 N 抓
+  （`fpSup/fp_usb_shell/ui_shot.sh N tag` 包好了；N 是上一張 +1）。
+- **別送 S1（半按快門）**：鏡頭有人手動調好對焦時會跑焦（2026-10-25 我送了一次，要通知對方）。退出選單用 MENU；
+  卡在半按（綠點、MENU 沒反應）時送 `key S1OFF`。
+- 選單快速連按的成本用 GUI 自己的時鐘量（`gui-key-cost-measurement` 記憶）：`ui_latency.py` 的 start_after_key 會隨開機時間漂移。

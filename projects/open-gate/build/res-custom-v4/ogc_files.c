@@ -16,6 +16,9 @@ struct rc_ui {
     char row_title[32];        /* rc_words writes 28 bytes */
     char pager[12];
     char slot_text[RC_VISIBLE + 1][5][32];   /* slot 0 .. 5 (v4 SupManager's page)  */
+    u32 hint_last, head_last;                /* last footer / header light posted, + 1 */
+    char menu_name[OGC_MAX_AVAIL][32];       /* each file's resolution-list text (its SEC_UI row) */
+    const struct sl_svc *svc;                /* fpui_open: the fpSup row's transition */
 #endif
 };
 
@@ -80,7 +83,22 @@ static u32 rc_refresh(u8 *S,struct rc_ui *u)
         u32 duplicate=0;
         for(u32 j=0;j<count;j++)if(same_label(f+RH_LABEL,(u32)(uintptr_t)labels+8u*j))duplicate=1;
         if(duplicate)continue;
-        labels[2*count]=W(f+RH_LABEL);labels[2*count+1]=W(f+RH_LABEL+4u);count++;
+        labels[2*count]=W(f+RH_LABEL);labels[2*count+1]=W(f+RH_LABEL+4u);
+#ifdef OGC_V4
+        /* the page shows the name the resolution list does (user 2026-10-24), not the file's */
+        /* "OG2K 2000x1334" -> "OG2K (2000x1334)": the size in brackets (user 2026-10-24) */
+        {u32 ln=0,ui=sec(f,SEC_UI,&ln),n=0,sp=0,c=0;char *to=u->menu_name[count];
+         if(ui)while(n<ln&&n<32u&&u8at(ui+n))n++;
+         for(u32 i=0;i<n;i++)if(u8at(ui+i)==' ')sp=i;
+         if(sp&&sp+1u<n&&n+3u<=31u) {
+             for(;c<sp;c++)to[c]=(char)u8at(ui+c);
+             to[c++]=' ';to[c++]='(';
+             for(u32 i=sp+1u;i<n;i++)to[c++]=(char)u8at(ui+i);
+             to[c++]=')';
+         } else for(;c<n&&c<31u;c++)to[c]=(char)u8at(ui+c);
+         to[c]=0;}
+#endif
+        count++;
     }
     /* Preserve the selected filename when the sorted catalogue grows. */
     u32 lab[2]={0,0};
@@ -249,13 +267,19 @@ enum { RP_RED, RP_GREEN, RP_NAME, RP_GREY, RP_VER };
 #define RV_TITLE        (RV_X0 + 12u)
 #define RV_ROW0         (RV_X0 + 13u)
 #define RV_HEAD         (RV_X0 + 14u)
-#define RV_HEADER       (RV_X0 + 15u)
+/* then RC_TOff0..5, RC_TOn0..5: the right column's stock On / Off (the page's
+ * localized texts; user 2026-10-24: no Enabled / Disabled words) */
+#define RV_TOFF         (RV_X0 + 15u)
+#define RV_TON          (RV_TOFF + RV_SLOTS)
+#define RV_GSHOW        (RV_TON + RV_SLOTS)      /* the grey name / red note drawn only when they say something */
+#define RV_RSHOW        (RV_GSHOW + RV_SLOTS)
+#define RV_HEADER       (RV_RSHOW + RV_SLOTS)
 #define RV_VARS         (RV_HEADER + 1u)
 #define RV_HEADER_FOCUS 3451u
 #define RV_TAB_FOCUS    55u
 /* rc_files_page.V4_TEXTS */
 enum { RT_BLANK, RT_FOOTER, RT_POPUP, RT_PAGE_HINT, RT_ENABLED, RT_DISABLED, RT_FULL, RT_RESTART,
-       RT_WRITE, RT_BUSY, RT_UPDATE, RT_NONE, RT_PAGE, RT_COUNT };
+       RT_WRITE, RT_BUSY, RT_UPDATE, RT_NONE, RT_PAGE, RT_UNLOAD, RT_LOAD, RT_COUNT };
 
 /* The callbacks get only the descriptor: the state is a word in the code
  * (writable at the cached alias), next to the one function that reaches it. */
@@ -301,8 +325,11 @@ static u32 rv_tab(struct rc_ui *u,u32 i)
 }
 static void rv_hint(struct rc_ui *u)
 {
-    u32 t=u->result==3u?RT_FULL:u->result==4u?RT_BUSY:u->result==5u?RT_WRITE:u->result==6u?RT_RESTART
-         :u->popup?RT_POPUP:u->header?RT_PAGE_HINT:RT_FOOTER;
+    /* "restart to apply" is the row's own note now (RT_UNLOAD / RT_LOAD, as SupManager's) */
+    u32 t=u->result==3u?RT_FULL:u->result==4u?RT_BUSY:u->result==5u?RT_WRITE
+         :u->popup?RT_POPUP:rv_paged(u)?RT_PAGE_HINT:RT_FOOTER;   /* paged: fixed, as SupManager's */
+    if(u->hint_last==t+1u)return;                         /* every post is another GUI update pass */
+    u->hint_last=t+1u;
     rc_str(u,RV_OK,rc_text(u,t));
 }
 
@@ -320,26 +347,34 @@ static void rv_refresh(struct rc_ui *u)
     char *p=u->pager;
     if(rv_pages(u)<=1u){p[0]=' ';p[1]=0;}
     else {at=rc_num(p,u->list_page+1u);p[at++]=' ';p[at++]='/';p[at++]=' ';at+=rc_num(p+at,rv_pages(u));p[at]=0;}
-    rc_str(u,RV_HEADER,u->title);rc_str(u,RV_VERSION,u->count);rc_str(u,RV_PAGE,u->pager);
-    rc_str(u,RV_RIGHT_FOOTER,rc_text(u,RT_UPDATE));
+    rc_str(u,RV_HEADER,u->title);rc_str(u,RV_VERSION,rc_text(u,RT_BLANK));rc_str(u,RV_PAGE,u->pager);   /* the count is in the title (user 2026-10-24) */
+    rc_str(u,RV_RIGHT_FOOTER,rc_text(u,RT_BLANK));          /* as SupManager's: no footer note */
     for(u32 i=RV_TABS_AT;i<RV_X0;i++)rc_int(u,i,rv_tab(u,i));
     rc_int(u,RV_TITLE,(u32)rv_paged(u));
     for(u32 k=0;k<RV_SLOTS;k++) {
         int f=rv_file(u,k);u32 on=f>=0&&(mask&(1u<<(u32)f)),none=!n&&!k;
+        /* loaded this boot (its format is a row now) vs next boot (on): SupManager's notes */
+        u32 now=f>=0&&row_by_label(S,(u32)(uintptr_t)S+S_AVAIL+8u*(u32)f)>=0;
         for(u32 j=0;j<5u;j++)for(u32 c=0;c<32u;c++)u->slot_text[k][j][c]=0;
         if(f>=0) {
             char *name=u->slot_text[k][on?RP_NAME:RP_GREY];
-            copy((u32)(uintptr_t)name,(u32)(uintptr_t)S+S_AVAIL+8u*(u32)f,8u);
-            u32 len=slen((u32)(uintptr_t)name);name[len++]='.';name[len++]='R';name[len++]='C';name[len]='D';
+            const char *menu=u->menu_name[f];
+            if(menu[0]) {for(u32 c=0;c<31u&&menu[c];c++)name[c]=menu[c];}   /* its resolution-list name */
+            else {
+                copy((u32)(uintptr_t)name,(u32)(uintptr_t)S+S_AVAIL+8u*(u32)f,8u);
+                u32 len=slen((u32)(uintptr_t)name);name[len++]='.';name[len++]='R';name[len++]='C';name[len]='D';
+            }
         }
         for(u32 pp=RP_RED;pp<=RP_VER;pp++) {
             const char *t=f<0?(none&&pp==RP_GREY?rc_text(u,RT_NONE):rc_text(u,RT_BLANK))
-                :pp==RP_GREEN?(on?rc_text(u,RT_ENABLED):rc_text(u,RT_BLANK))
-                :pp==RP_RED?(on?rc_text(u,RT_BLANK):rc_text(u,RT_DISABLED))
+                :pp==RP_GREEN?rc_text(u,RT_BLANK)                 /* On / Off says it (RV_TON) */
+                :pp==RP_RED?rc_text(u,now&&!on?RT_UNLOAD:!now&&on?RT_LOAD:RT_BLANK)
                 :pp==RP_VER?rc_text(u,RT_BLANK)
                 :u->slot_text[k][pp][0]?u->slot_text[k][pp]:rc_text(u,RT_BLANK);
             rc_str(u,rv_vpart(pp,k),t);
         }
+        rc_int(u,RV_TOFF+k,f>=0&&!on);rc_int(u,RV_TON+k,f>=0&&on);
+        rc_int(u,RV_GSHOW+k,(f>=0&&!on)||none);rc_int(u,RV_RSHOW+k,f>=0&&now!=on);
         rc_int(u,rv_vslot(RV_VISIBLE,k),f>=0||none);
         rc_int(u,rv_vslot(RV_LOCK,k),f<0);
         rc_int(u,rv_vslot(RV_MORE,k),0);
@@ -392,7 +427,8 @@ static u32 rv_focus(uintptr_t desc)
     struct rc_ui *u=rc_me();if(!u)return 0;
     u32 v=fpui_value(desc);
     u->header=v==RV_HEADER_FOCUS&&rv_paged(u);
-    rc_int(u,RV_HEAD,v==RV_TAB_FOCUS);                    /* light the header: no other mark there */
+    u32 on=v==RV_TAB_FOCUS;                               /* light the header: no other mark there */
+    if(u->head_last!=on+1u){u->head_last=on+1u;rc_int(u,RV_HEAD,on);}   /* only when it changes */
     rv_hint(u);return 0;
 }
 
@@ -406,7 +442,7 @@ static int ogc_files_open(void *arg)
     rv_refresh(u);
     u32 row0=fpui_first(u->ui,RV_ROW0);
     rc_int(u,RV_FOCUS,rv_paged(u)||!row0?RV_HEADER_FOCUS:row0);
-    return fpui_show(rc_text(u,RT_PAGE))?9:0;
+    return fpui_open(u->svc,rc_text(u,RT_PAGE))?9:0;
 }
 
 /* The file list page installed, watched and filled; its JUMP row on the fpSup
@@ -419,6 +455,7 @@ static u32 ogc_files_init(u8 *S,u32 blob,u32 state,const struct sl_svc *svc)
     u->magic=0x32464352u;u->S=(u32)(uintptr_t)S;u->blob=blob;u->ui=(const void *)(uintptr_t)blob;
     u->app=W(0xC37B7048u);
     if(!u->app||fpui_install(svc,u->ui))return 0;
+    u->svc=svc;
     SW(S,S_FILE_UI)=state;
     W(rc_ctx())=state;
     fpui_watch(u->ui,RV_KEY,&rv_key);
@@ -429,7 +466,7 @@ static u32 ogc_files_init(u8 *S,u32 blob,u32 state,const struct sl_svc *svc)
         fpui_watch(u->ui,rv_vslot(RV_CHOICE,k),(u32 (*)(uintptr_t))fn);
     }
     rv_refresh(u);
-    rc_words(u->row_title,0x2d736552u,0x74737543u,0x00006d6fu,0,0,0);   /* "Res-Custom" */
+    rc_words(u->row_title,0x2d534552u,0x74737543u,0x00006d6fu,0,0,0);   /* "RES-Custom" (user 2026-10-24) */
     u->row.kind=SL_ROW_JUMP;u->row.n_choices=0;u->row.title=u->row_title;u->row.value=0;
     u->row.get=0;u->row.set=0;u->row.choices=0;u->row.open=ogc_files_open;u->row.arg=S;
     return svc->page_add(svc,&u->row)>=0;

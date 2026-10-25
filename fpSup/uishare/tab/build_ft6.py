@@ -195,7 +195,7 @@ def data_file() -> tuple[bytes, dict]:
     pack = build_pack([(PAGE, y6), ('FT_LIST', lst)] + [(name, data[0]) for name, data in extra],
                       trans=TRANSITIONS + LIST_TRANSITIONS)
     logo_pack = NBR.build([NBR.Resource(name, name + '.xci', blob)
-                           for name, _color, blob in manager_logo.images()])
+                           for name, _color, blob in manager_logo.images(legacy=True)])
     rows = {n: o for n, o, _h in SL.native_rows(pack)}
     refs = [(rows[PAGE] + o, t) for o, t in refs6] + [(rows['FT_LIST'] + o, t) for o, t in refsl]
     refs += [(rows[name] + o, t) for name, (_data, refs) in extra for o, t in refs]

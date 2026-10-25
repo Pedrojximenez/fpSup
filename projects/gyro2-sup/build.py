@@ -15,7 +15,7 @@ sys.path.insert(0, str(V3))
 sys.path.insert(0, str(V3.parent))
 
 import build_v3 as B                       # noqa: E402
-from armasm import assemble                # noqa: E402
+from armasm import assemble, symbols       # noqa: E402
 
 SRC = HERE / 'src' / 'gyr2.S'
 OUT = HERE / 'build' / '40GYR2.BIN'
@@ -70,11 +70,86 @@ def build(src=SRC):
     return sup, {'code': len(code), 'file': len(sup), 'block': block or len(sup)}
 
 
+ROW4 = HERE / 'src' / 'gyr2_row4.c'
+def v4_name():
+    """The card file (fpSup/loader-v4/names_v4.py): Gyro2_v0.1.0.BIN."""
+    sys.path.insert(0, str(ROOT / 'fpSup' / 'loader-v4'))
+    import names_v4
+    return names_v4.file_name('GYR2')
+
+
+def row4_code():
+    """(Thumb code, g2_install's offset | 1) of src/gyr2_row4.c, -fropi, no data."""
+    import shutil, subprocess, tempfile
+    fpsup = ROOT / 'fpSup'
+    sys.path.insert(0, str(fpsup / 'uishare'))
+    sys.path.insert(0, str(ROOT / 'research' / 'ui' / 'tools' / 'arm_text'))
+    import build_section as US                 # noqa: E402
+    import elf_text                            # noqa: E402
+    with tempfile.TemporaryDirectory(prefix='g2row-') as t:
+        o = pathlib.Path(t) / 'row.o'
+        r = subprocess.run([shutil.which('clang') or 'clang'] + US.CFLAGS +
+                           ['-c', '-I', str(fpsup / 'loader-v4'), str(ROW4), '-o', str(o)],
+                           capture_output=True, text=True)
+        if r.returncode:
+            raise BuildError('gyr2_row4.c: ' + r.stderr)
+        text = elf_text.load_text(o)
+    fn = text.functions.get('g2_install', 0)
+    if not fn & 1:
+        raise BuildError('g2_install missing or not Thumb')
+    return text.code, fn
+
+
+def build_v4(src=SRC):
+    """Gyro2 for Loader v4 with its fpSup-page row (-DGYR2_V4): (file bytes, info).
+    The v3 build above is unchanged: every v4 line is under #ifdef GYR2_V4."""
+    import tempfile
+    sys.path.insert(0, str(ROOT / 'fpSup' / 'loader-v4'))
+    import build_v4 as B4                      # noqa: E402
+    code4, fn = row4_code()
+    with tempfile.TemporaryDirectory(prefix='g2v4-') as t:
+        blob = pathlib.Path(t) / 'row4.bin'
+        blob.write_bytes(code4)
+        defines = ['GYR2_V4', f'G2_BIN="{blob}"', f'G2_INSTALL={fn:#x}']
+        code = assemble(src, defines=defines)
+        syms = symbols(src, defines=defines)
+    image = B.IMAGE.read_bytes()
+    if B.stock(ACCEL_SITE, 4, image) != struct.pack('<I', 0xE3A02000):
+        raise BuildError('the image does not have mov r2, #0 at the accel site')
+    if equ('WRITER', src) != VERSION:
+        raise BuildError('WRITER in the source is not the build VERSION')
+    # The name is in the code (g2_name), not after it: gbuf starts where the
+    # code ends, and the loader zeroes only from the file's end.
+    file_len = B4.SL4_HEADER_LEN + len(code)
+    if file_len % 8:
+        raise BuildError('code does not end 8-aligned: gbuf would start inside the file')
+    bss = (equ('GLOG_N', src) * 6 + equ('ELOG_N', src) * 12 + equ('VLOG_N', src) * 8 +
+           equ('GTAG_MAX', src) + equ('G2_FOBJ_BYTES', src))
+    sup = B4.make_sup(code, B4.SL4_HEADER_LEN, SUP_ID, version=VERSION, min_svc=B4.SL4_SVC_VERSION,
+                      flags=B4.SL_F_CACHED_OK, block_size=file_len + 8 + bss)
+    if len(sup) != file_len:
+        raise BuildError(f'file length {len(sup)} != {file_len}: the BSS would start inside the file')
+    name_off = B4.SL4_HEADER_LEN + syms['g2_name']
+    if sup[name_off:name_off + 6] != b'Gyro2\0':
+        raise BuildError('g2_name not where the symbol says')
+    sup = sup[:44] + struct.pack('<I', name_off) + sup[48:]
+    return sup, {'code': len(code), 'row4': len(code4), 'g2_install': fn, 'file': len(sup),
+                 'block': struct.unpack_from('<I', sup, 12)[0]}
+
+
 def main():
     import argparse, hashlib, json
     ap = argparse.ArgumentParser()
     ap.add_argument('--out', type=pathlib.Path, help='write DIR/40GYR2.BIN and DIR/build.json (for fpSup/tools/release_v3.py)')
+    ap.add_argument('--v4', action='store_true', help='Loader v4 with the fpSup-page row: DIR/GYR2.BIN')
     a = ap.parse_args()
+    if a.v4:
+        sup, info = build_v4()
+        out = (a.out or OUT.parent) / v4_name()
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_bytes(sup)
+        print(f'{out}: {info}')
+        return
     sup, info = build()
     out = a.out / OUT.name if a.out else OUT
     out.parent.mkdir(parents=True, exist_ok=True)
