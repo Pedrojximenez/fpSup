@@ -1,5 +1,12 @@
 # fpSup-Merge
 
+> **Published layout (2026-10-25).** `index.html` here is a copy of
+> `../merge-v4/index.html` (Loader v4; built there). `legacy/index.html` is the
+> Loader v3 page (`../merge-v3/index.html`, paths one level deeper plus a banner)
+> and `legacy/v2/` the single-container composer that used to be `legacy/`.
+> The rest of this README describes that single-container composer
+> (`build_catalogue.py`, `template.html`, `artifact.html`).
+
 Select ordinary product cards and download the card as one zip: `AutoRun.txt`,
 `fpSup.BIN` and the `FPSUPUI` folder (the loading screen). Everything in it goes
 in the SD card root. The zip is the only download. This is the merged-card composition path;

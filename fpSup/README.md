@@ -29,9 +29,12 @@ browser — no toolchain, no camera.
 
 ### Releases
 
-Current cards contain `AutoRun.txt` and a `fpSup` folder with one file per tool.
+Current cards (Loader v4, from 2026-10-25) contain `AutoRun.txt` and a `fpSup`
+folder with one file per tool, named with its version. When updating a card,
+delete the whole old `fpSup` folder first. Loader v3 cards are made in the
+[previous fpSup-Merge](https://ijigen.github.io/fpSup/tools/card-composer/legacy/).
 Older cards contain a single payload (`fpSup.BIN`, or `VSHL.BIN` before 2026-09-19)
-and use the [previous composer](https://ijigen.github.io/fpSup/tools/card-composer/legacy/).
+and use the [single-container composer](https://ijigen.github.io/fpSup/tools/card-composer/legacy/v2/).
 Follow the guide for your card format. [Release notes](https://ijigen.github.io/fpSup/releases.html)
 list the versions below.
 
@@ -149,9 +152,11 @@ Each page says what has been proven, what is being worked on, and what is open.
 
 ### 釋出版
 
-目前的卡片是 `AutoRun.txt` 和 `fpSup` 資料夾,每個功能各有一個檔案。
-舊卡片使用單一容器 `fpSup.BIN`(2026-09-19 之前叫 `VSHL.BIN`),在
-[舊版合併器](https://ijigen.github.io/fpSup/tools/card-composer/legacy/)製作。
+目前的卡片(Loader v4,2026-10-25 起)是 `AutoRun.txt` 和 `fpSup` 資料夾,每個功能各有一個檔案,
+檔名帶版本。更新卡片前請先刪掉整個舊的 `fpSup` 資料夾。Loader v3 卡片在
+[舊版 fpSup-Merge](https://ijigen.github.io/fpSup/tools/card-composer/legacy/)製作。
+更早的卡片使用單一容器 `fpSup.BIN`(2026-09-19 之前叫 `VSHL.BIN`),在
+[單一容器合併器](https://ijigen.github.io/fpSup/tools/card-composer/legacy/v2/)製作。
 請依照所用卡片格式的指南操作;以下版本的完整說明在[版本目錄](https://ijigen.github.io/fpSup/releases.html)。
 
 | 產品 | 版本 | 做什麼 |
