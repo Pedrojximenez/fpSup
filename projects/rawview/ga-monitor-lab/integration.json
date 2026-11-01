@@ -1,0 +1,51 @@
+{
+  "firmware": "SIGMA fp 5.02",
+  "load_chain": "existing Loader v3 r2; no Loader v4 migration",
+  "modules": [
+    {
+      "file": "01RCFR.BIN",
+      "id": "RCFR",
+      "sha256": "04c807313cd20505550a053cacf8ceb07643a7d2c0cab252e0880641eea43995"
+    },
+    {
+      "file": "02RECLM.BIN",
+      "id": "RCLM",
+      "sha256": "4037abf44790b403323d1b125800dcd616e5611baced31e6f25aee32656601fd"
+    },
+    {
+      "file": "32RESCUS.BIN",
+      "id": "RCUS",
+      "sha256": "a685ba08bf3134bc58c965570147f2d1f570e7d35efa4252003e9d6cc6e3881e"
+    },
+    {
+      "file": "40FLIP.BIN",
+      "id": "FLIP",
+      "sha256": "a06f492c90e86ee08f5a3d152e8a2ce497fa5755147995c483f1bee92cae4e21"
+    },
+    {
+      "file": "40GYR2.BIN",
+      "id": "GYR2",
+      "sha256": "2cbfe477bf8b11cc0e4fed37df177f6f5d561bf31243e2b00687eed15aa9a7d3"
+    },
+    {
+      "file": "41DSQZ.BIN",
+      "id": "DSQZ",
+      "sha256": "cddf6da4b3dac81ac158e5a04dcc8b9ec4e9579dc5ca1fe0773366d4c1883448"
+    },
+    {
+      "file": "45RAWV.BIN",
+      "id": "RAWV",
+      "sha256": "e6ea96b59823f86cdf1e57c51fad1d75e86a40486a7afbf16114133ba46f4c9b"
+    }
+  ],
+  "AutoRun_SHA256": "889800fa363c75bfe0d9da43da82312276388a8929748ce05221ce0da931bb4c",
+  "desqueeze_options": [
+    "off",
+    "1.33",
+    "1.6",
+    "2"
+  ],
+  "runtime_full_coexistence_proven": false,
+  "RCLM_limit_seconds": 28800,
+  "source_repository_change_writes_SD": false
+}
