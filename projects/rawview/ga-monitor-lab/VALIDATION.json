@@ -1,0 +1,67 @@
+{
+  "candidate_SHA256": "e6ea96b59823f86cdf1e57c51fad1d75e86a40486a7afbf16114133ba46f4c9b",
+  "code_domain_points": 8171,
+  "dense_continuous_code_domain_points": 100001,
+  "analytic_derivative_min_max_below_gray": [
+    0.715977531794033,
+    2.136089872823868
+  ],
+  "dense_scene_row_points": 100001,
+  "dense_scene_interpolation_error_codes": 0.5754827587156797,
+  "GA_monotone_curves": 62,
+  "GA_points_checked": 126976,
+  "SA_points_exact_unchanged": 126976,
+  "max_runtime_reference_error_codes": 1,
+  "max_runtime_added_codes": 350,
+  "new_tone_zero_or_upper_clipping_points": 0,
+  "middle_gray_code_unchanged": 2921,
+  "date": "2026-11-01",
+  "portable_source_reproduction": "4 of 4 exact historical hashes",
+  "portable_unit_tests": 7,
+  "ARM_constructor": {
+    "records": 124,
+    "points": 253952,
+    "mismatches": 0
+  },
+  "ARM_preview_isolation": {
+    "status": "REAL_RELOCATED_ARM_PREVIEW_PATH_SEPARATED_FROM_DNG_CM_BUFFER",
+    "candidate_SHA256": "e6ea96b59823f86cdf1e57c51fad1d75e86a40486a7afbf16114133ba46f4c9b",
+    "gating_cases": 1152,
+    "active_GA_boost_cases": 12,
+    "switch_sequence_steps": 7,
+    "DNG_CM_buffer_byte_exact_vs_original_all_cases": true,
+    "all_original_params_Saturation_state_CM_tables_equal": true,
+    "all_visible_return_registers_equal": true,
+    "only_changed_runtime_data": "Display matrix copy OFF row, when effective GA",
+    "SA_inactive_and_replay_outputs_equal": true,
+    "no_compounding_on_repeated_call": true,
+    "inactive_unused_RAM_matrix_may_retain_previous_values": true,
+    "inactive_effective_matrix_pointer_restored_to_factory": true,
+    "scratch_heap_alignment_cases": 1024,
+    "SD_written": false,
+    "not_proven": [
+      "Physical camera ISP output",
+      "Recorded DNG pixels and final metadata",
+      "Hardware colour gamut clipping",
+      "Full seven-MOD hardware coexistence"
+    ]
+  },
+  "historical_r2_tests": {
+    "focused_emulator_scenarios": 10,
+    "host_tests": 10,
+    "rerun_in_this_wrapup": false
+  },
+  "latest_SD_install_receipt_summary": {
+    "installed_SHA256": "e6ea96b59823f86cdf1e57c51fad1d75e86a40486a7afbf16114133ba46f4c9b",
+    "completed_at_utc": "2026-11-01T13:23:17.675354+00:00",
+    "configuration_hashes_unchanged": 26,
+    "other_files_size_mtime_unchanged": 201,
+    "media_full_hash_performed": false
+  },
+  "hardware_latest_preference": "pending",
+  "physical_DNG_invariance_proven": false,
+  "eight_hour_recording_tested": false,
+  "shared_loader_regressions": "NOT RUN: no shared load-chain source was changed",
+  "source_publication_excludes": "Official LUT data, derivative binaries, firmware, private backups and media",
+  "ARM_negative_control": "PASS: deliberately invalid inactive-branch instruction failed as expected in private emulator memory"
+}
